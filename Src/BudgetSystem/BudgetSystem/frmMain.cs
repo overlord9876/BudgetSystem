@@ -9,9 +9,9 @@ using DevExpress.XtraBars.Ribbon;
 
 namespace BudgetSystem
 {
-    public partial class Form1 : RibbonForm
+    public partial class frmMain : RibbonForm
     {
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
