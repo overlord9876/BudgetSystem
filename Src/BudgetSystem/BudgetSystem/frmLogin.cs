@@ -23,7 +23,17 @@ namespace BudgetSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
+
+            RunInfo.Instance.Config.UserName = this.txtUserName.Text;
+            RunInfo.Instance.Config.Save();
+
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            this.txtUserName.Text = RunInfo.Instance.Config.UserName;
         }
     }
 }

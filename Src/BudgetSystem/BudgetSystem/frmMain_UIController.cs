@@ -9,13 +9,14 @@ namespace BudgetSystem
 {
     public partial class frmMain
     {
-        void InitSkins()
+        private void InitSkins()
         {
+           
             SkinHelper.InitSkinGallery(rgbStyle, true);
-            UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+           // UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
         }
 
-        public void ShowForm(Form form)
+        private void ShowForm(Form form)
         {
             form.WindowState = FormWindowState.Maximized;
             form.MdiParent = this;
@@ -23,5 +24,50 @@ namespace BudgetSystem
         }
 
 
+        private T GetExistForm<T>() where T : Form
+        {
+            foreach (Form form in this.MdiChildren)
+            {
+                if (typeof(T) == form.GetType())
+                {
+                    return (T)form;
+
+                }
+            }
+            return null;
+        }
+
+        private void RefreshData()
+        {
+            frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
+            if (form != null && form.CanRefreshData)
+            {
+                form.RefreshData();
+            }
+        }
+
+        private void btnReLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.RefreshData();
+        }
+
+        private void frmMain_MdiChildActivate(object sender, EventArgs e)
+        {
+            frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
+            if (form != null && form.CanRefreshData)
+            {
+                this.btnRefresh.Enabled = true;
+
+            }
+            else
+            {
+                this.btnRefresh.Enabled = false;
+            }
+        }
     }
 }
