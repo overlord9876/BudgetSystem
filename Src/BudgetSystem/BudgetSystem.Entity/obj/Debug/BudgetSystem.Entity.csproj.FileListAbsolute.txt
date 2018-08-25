@@ -1,4 +1,0 @@
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Entity\bin\Debug\BudgetSystem.Entity.dll
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Entity\bin\Debug\BudgetSystem.Entity.pdb
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Entity\obj\Debug\BudgetSystem.Entity.dll
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Entity\obj\Debug\BudgetSystem.Entity.pdb

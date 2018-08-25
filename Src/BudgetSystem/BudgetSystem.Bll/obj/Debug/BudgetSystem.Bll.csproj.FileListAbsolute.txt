@@ -1,4 +1,0 @@
-D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Bll\bin\Debug\BudgetSystem.Bll.dll
-D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Bll\bin\Debug\BudgetSystem.Bll.pdb
-D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Bll\obj\Debug\BudgetSystem.Bll.dll
-D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Bll\obj\Debug\BudgetSystem.Bll.pdb
