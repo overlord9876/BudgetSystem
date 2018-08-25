@@ -5,21 +5,26 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmMain : RibbonForm
+    public partial class frmBaseForm : XtraForm
     {
-        public frmMain()
+        public frmBaseForm()
         {
             InitializeComponent();
-            InitSkins();
         }
 
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        public bool CanRefreshData
         {
+            get;
+            set;
+        }
 
+        public void RefreshData()
+        { 
+        
         }
     }
 }

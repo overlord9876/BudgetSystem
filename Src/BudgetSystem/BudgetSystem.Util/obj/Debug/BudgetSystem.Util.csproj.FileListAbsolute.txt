@@ -1,0 +1,4 @@
+D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Util\bin\Debug\BudgetSystem.Util.dll
+D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Util\bin\Debug\BudgetSystem.Util.pdb
+D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Util\obj\Debug\BudgetSystem.Util.dll
+D:\Github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Util\obj\Debug\BudgetSystem.Util.pdb
