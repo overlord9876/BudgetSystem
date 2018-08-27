@@ -3,3 +3,8 @@ Src/BudgetSystem/BudgetSystem/bin/
 Src/BudgetSystem/BudgetSystem/obj/
 bin/
 Src/BudgetSystem/Localization/obj/
+*.dll
+*.pdb
+*.cache
+*.suo
+*.txt
