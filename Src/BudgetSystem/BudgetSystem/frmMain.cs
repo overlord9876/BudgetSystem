@@ -24,8 +24,7 @@ namespace BudgetSystem
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
            
-            
-            
+             
             frmBudgetQuery form = GetExistForm<frmBudgetQuery>();
             if (form == null)
             {
@@ -33,7 +32,7 @@ namespace BudgetSystem
             }
             else
             {
-                form.RefreshData();
+                FormActivited(form);
             }
             ShowForm(form);
         }
@@ -49,7 +48,7 @@ namespace BudgetSystem
             }
             else
             {
-                form.RefreshData();
+                FormActivited(form);
             }
             ShowForm(form);
         }
@@ -63,17 +62,13 @@ namespace BudgetSystem
             }
             else
             {
-                form.RefreshData();
+                FormActivited(form);
             }
             ShowForm(form);
         }
 
 
-        private void rgbStyle_GalleryItemClick(object sender, GalleryItemClickEventArgs e)
-        {
-            RunInfo.Instance.Config.SkinName = e.Item.Caption;
-            RunInfo.Instance.Config.Save();
-        }
+
 
         private void btnAddBudget_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

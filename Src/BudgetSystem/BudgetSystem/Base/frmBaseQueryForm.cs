@@ -15,6 +15,20 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.CanRefreshData = true;
+            InitModelOperate();
+            this.ModelOperatePageName = "操作页";
+            this.FormID = Guid.NewGuid().ToString("N");
+        }
+
+        public string FormID
+        {
+             get;
+             private set;
+        }
+
+        protected virtual void InitModelOperate()
+        {
+            this.ModelOperateRegistry = new List<ModelOperate>();
         }
 
 
@@ -27,6 +41,26 @@ namespace BudgetSystem
         public virtual void RefreshData()
         {
 
+        }
+
+
+        public virtual List<ModelOperate> ModelOperateRegistry
+        {
+            get;
+            protected set;
+        }
+      
+        public virtual string ModelOperatePageName
+        {
+            get;
+            protected set;
+        }
+
+
+        public virtual void OperateHandled(ModelOperate operate)
+        {
+
+            
         }
     }
 }

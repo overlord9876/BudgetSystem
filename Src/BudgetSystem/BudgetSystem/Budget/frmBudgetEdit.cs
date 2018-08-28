@@ -12,6 +12,7 @@ namespace BudgetSystem
     public partial class frmBudgetEdit : frmBaseQueryForm
     {
         public frmBudgetEdit()
+           
         {
             InitializeComponent();
         }
