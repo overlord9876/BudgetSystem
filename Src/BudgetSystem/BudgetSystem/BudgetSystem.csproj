@@ -80,8 +80,20 @@
     <Compile Include="Base\frmBudgetEditor.Designer.cs">
       <DependentUpon>frmBudgetEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmBudgetEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmBudgetEdit.Designer.cs">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="FormDataEditTypes.cs" />
+    <Compile Include="InMoney\frmInMemoryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemoryEdit.Designer.cs">
+      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMoneyQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <Compile Include="frmMain_UIController.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMemoryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMemoryEdit.Designer.cs">
+      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="RunInfo.cs" />
     <Compile Include="OutMoney\frmOutMoneyQuery.cs">
@@ -124,14 +142,23 @@
     <EmbeddedResource Include="Base\frmBudgetEditor.resx">
       <DependentUpon>frmBudgetEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemoryEdit.resx">
+      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyQuery.resx">
       <DependentUpon>frmInMoneyQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmOutMemoryEdit.resx">
+      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQuery.resx">
       <DependentUpon>frmOutMoneyQuery.cs</DependentUpon>
