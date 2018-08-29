@@ -9,19 +9,21 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetEdit : frmBaseQueryForm
+    public partial class frmPaymentNotes : frmBaseQueryForm
     {
-        public frmBudgetEdit()
-           
+        public frmPaymentNotes()
         {
             InitializeComponent();
         }
 
         public override void RefreshData()
         {
-            //创建或者添加标题需要编辑
             XtraMessageBox.Show(this.Text);
         }
 
+        private void dateEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
