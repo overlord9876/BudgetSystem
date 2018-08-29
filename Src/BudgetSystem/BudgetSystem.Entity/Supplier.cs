@@ -21,11 +21,6 @@ namespace BudgetSystem.Entity
         public string BankAccountName { get; set; }
 
         /// <summary>
-        /// 银行户名
-        /// </summary>
-        public string BankAccountName { get; set; }
-
-        /// <summary>
         /// 银行账号
         /// </summary>
         public string BankNO { get; set; }

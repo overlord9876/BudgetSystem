@@ -8,7 +8,7 @@ namespace BudgetSystem.Entity
     /// <summary>
     /// 实收账款，出纳拿着银行汇款单填写单子，之后让业务员认领。
     /// </summary>
-    public class ReceivableAccounts : IEntity
+    public class ActualReceipts : IEntity
     {
 
         /// <summary>
