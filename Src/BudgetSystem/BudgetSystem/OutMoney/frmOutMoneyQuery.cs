@@ -37,14 +37,20 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
+                frmOutMemoryEdit form = new frmOutMemoryEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("付款");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
+                frmOutMemoryEdit form = new frmOutMemoryEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("修改发票");
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
+                frmOutMemoryEdit form = new frmOutMemoryEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("查看付款详情");
             }
             else if (operate.Operate == "Test1")

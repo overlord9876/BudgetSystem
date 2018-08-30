@@ -9,15 +9,11 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetQuery : frmBaseQueryForm
+    public partial class frmUserQuery : frmBaseQueryForm
     {
-        public frmBudgetQuery()
+        public frmUserQuery()
         {
             InitializeComponent();
-
-
-
-
         }
 
         public override void RefreshData()
@@ -32,9 +28,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改", "操作", 2, 3));
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除", "操作", 3, 4));
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看", "查看", 1, 22));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Revoke, "撤回", "操作", 1, 23));
-            this.ModelOperateRegistry.Add(new ModelOperate("Test", "测试", "查看", 1, 21));
-            this.ModelOperatePageName = "预算单";
+            this.ModelOperatePageName = "用户管理";
         }
 
 
@@ -43,26 +37,15 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.ShowDialog(this);
+                XtraMessageBox.Show("新增用户");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.ShowDialog(this);
+                XtraMessageBox.Show("修改用户");
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-                XtraMessageBox.Show("Revoke");
-            }
-            else if (operate.Operate == "Test")
-            {
-                XtraMessageBox.Show("Test");
+                XtraMessageBox.Show("查看用户信息");
             }
             else
             {

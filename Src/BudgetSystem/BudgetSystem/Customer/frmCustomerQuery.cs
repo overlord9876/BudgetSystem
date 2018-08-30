@@ -37,11 +37,13 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                XtraMessageBox.Show("New");
+                frmCustomerEdit form = new frmCustomerEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                XtraMessageBox.Show("Modify");
+                frmCustomerEdit form = new frmCustomerEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {

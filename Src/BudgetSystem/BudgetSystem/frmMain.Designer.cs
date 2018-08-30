@@ -314,11 +314,12 @@
             // 
             // btnUserQuery
             // 
-            this.btnUserQuery.Caption = "查询";
+            this.btnUserQuery.Caption = "用户管理";
             this.btnUserQuery.Id = 25;
             this.btnUserQuery.ImageIndex = 40;
             this.btnUserQuery.Name = "btnUserQuery";
             this.btnUserQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnUserQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserQuery_ItemClick);
             // 
             // btnCustomerQuery
             // 
@@ -393,8 +394,6 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnbudgetQuery);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnCustomerQuery);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSupplierQuery);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "预算单管理";
             // 
@@ -409,6 +408,8 @@
             // 
             // ribbonPageGroup4
             // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnSupplierQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnUserQuery);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "系统设置";

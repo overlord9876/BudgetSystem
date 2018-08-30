@@ -154,6 +154,20 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+        private void btnUserQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmUserQuery form = GetExistForm<frmUserQuery>();
+            if (form == null)
+            {
+                form = new frmUserQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
 
     }
 }

@@ -42,6 +42,8 @@
     <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net20">
       <HintPath>..\Lib\Newtonsoft.Json.Net20.dll</HintPath>
     </Reference>
@@ -89,6 +91,12 @@
     </Compile>
     <Compile Include="Customer\frmCustomerQuery.Designer.cs">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\frmCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frmCustomerEdit.Designer.cs">
+      <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="InMoney\frmInMemoryEdit.cs">
       <SubType>Form</SubType>
@@ -159,6 +167,12 @@
     <Compile Include="UIEntity\ModelOperate.cs" />
     <Compile Include="UIEntity\OperateTypes.cs" />
     <Compile Include="UIEntity\UITypes.cs" />
+    <Compile Include="UserMgmt\frmUserQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMgmt\frmUserQuery.Designer.cs">
+      <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Base\frmBaseDialogForm.resx">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frmCustomerEdit.resx">
+      <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -216,6 +233,9 @@
     </Compile>
     <EmbeddedResource Include="Supplier\frmSupplierQuery.resx">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMgmt\frmUserQuery.resx">
+      <DependentUpon>frmUserQuery.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

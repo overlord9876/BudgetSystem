@@ -38,14 +38,20 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("新增付款凭证（开票）");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("修改付款凭证（发票）");
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
+                form.ShowDialog(this);
                 XtraMessageBox.Show("查看付款凭证（发票）");
             }
             else if (operate.Operate == "Test1")
