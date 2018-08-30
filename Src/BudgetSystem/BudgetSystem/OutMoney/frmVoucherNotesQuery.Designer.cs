@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmOutMoneyQuery
+    partial class frmVoucherNotesQuery
     {
         /// <summary>
         /// Required designer variable.

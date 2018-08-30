@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmOutMoneyQuery
+    partial class frmInvoiceQuery
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // frmOutMoneyQuery
+            // frmInvoiceQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 505);
-            this.Name = "frmOutMoneyQuery";
-            this.Text = "付款管理";
+            this.ClientSize = new System.Drawing.Size(790, 476);
+            this.Name = "frmInvoiceQuery";
+            this.Text = "开票管理";
             this.ResumeLayout(false);
 
         }

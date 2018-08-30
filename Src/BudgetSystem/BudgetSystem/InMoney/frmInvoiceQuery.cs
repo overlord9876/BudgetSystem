@@ -9,12 +9,11 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmOutMoneyQuery : frmBaseQueryForm
+    public partial class frmInvoiceQuery : frmBaseQueryForm
     {
-        public frmOutMoneyQuery()
+        public frmInvoiceQuery()
         {
             InitializeComponent();
-            this.CanRefreshData = false;
         }
 
         public override void RefreshData()
@@ -22,22 +21,24 @@ namespace BudgetSystem
             XtraMessageBox.Show(this.Text);
         }
 
-
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "付款", "操作", 1, 2));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Revoke, "撤回", "操作", 3, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看详情", "查看", 1, 22));
-            this.ModelOperatePageName = "付款管理";
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "开具发票", "操作", 1, 2));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改发票", "操作", 2, 3));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除发票", "操作", 3, 4));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "关联入帐单", "操作", 4, 4));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看发票", "查看", 1, 22));
+            this.ModelOperatePageName = "发票管理";
         }
+
 
         public override void OperateHandled(ModelOperate operate)
         {
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                XtraMessageBox.Show("付款");
+                XtraMessageBox.Show("开票");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
@@ -45,7 +46,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("查看付款详情");
+                XtraMessageBox.Show("查看发票");
             }
             else if (operate.Operate == "Test1")
             {

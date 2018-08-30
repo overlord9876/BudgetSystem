@@ -9,15 +9,11 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetQuery : frmBaseQueryForm
+    public partial class frmCustomerQuery : frmBaseQueryForm
     {
-        public frmBudgetQuery()
+        public frmCustomerQuery()
         {
             InitializeComponent();
-
-
-
-
         }
 
         public override void RefreshData()
@@ -32,9 +28,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改", "操作", 2, 3));
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除", "操作", 3, 4));
             this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看", "查看", 1, 22));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Revoke, "撤回", "操作", 1, 23));
-            this.ModelOperateRegistry.Add(new ModelOperate("Test", "测试", "查看", 1, 21));
-            this.ModelOperatePageName = "预算单";
+            this.ModelOperatePageName = "客户列表";
         }
 
 

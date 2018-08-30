@@ -10,5 +10,6 @@ namespace BudgetSystem
         Modify,
         Delete,
         View,
+        Revoke
     }
 }

@@ -51,6 +51,8 @@
             this.btnUserQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnCustomerQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnSupplierQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInvoiceQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnVoucherNotesQuery = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -103,10 +105,12 @@
             this.btnGrant,
             this.btnUserQuery,
             this.btnCustomerQuery,
-            this.btnSupplierQuery});
+            this.btnSupplierQuery,
+            this.btnInvoiceQuery,
+            this.btnVoucherNotesQuery});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 28;
+            this.ribbonControl1.MaxItemId = 30;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
@@ -320,6 +324,7 @@
             this.btnCustomerQuery.ImageIndex = 24;
             this.btnCustomerQuery.Name = "btnCustomerQuery";
             this.btnCustomerQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnCustomerQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCustomerQuery_ItemClick);
             // 
             // btnSupplierQuery
             // 
@@ -328,6 +333,25 @@
             this.btnSupplierQuery.ImageIndex = 26;
             this.btnSupplierQuery.Name = "btnSupplierQuery";
             this.btnSupplierQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSupplierQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSupplierQuery_ItemClick);
+            // 
+            // btnInvoiceQuery
+            // 
+            this.btnInvoiceQuery.Caption = "开票管理";
+            this.btnInvoiceQuery.Id = 28;
+            this.btnInvoiceQuery.ImageIndex = 45;
+            this.btnInvoiceQuery.Name = "btnInvoiceQuery";
+            this.btnInvoiceQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInvoiceQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvoiceQuery_ItemClick);
+            // 
+            // btnVoucherNotesQuery
+            // 
+            this.btnVoucherNotesQuery.Caption = "付款凭证";
+            this.btnVoucherNotesQuery.Id = 29;
+            this.btnVoucherNotesQuery.ImageIndex = 12;
+            this.btnVoucherNotesQuery.Name = "btnVoucherNotesQuery";
+            this.btnVoucherNotesQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnVoucherNotesQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVoucherNotesQuery_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -350,6 +374,8 @@
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.btnInMoneyQuery);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnOutMoneyQuery);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnInvoiceQuery);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnVoucherNotesQuery);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "收支管理";
             // 
@@ -513,6 +539,8 @@
         private DevExpress.XtraBars.BarButtonItem btnApproval;
         private DevExpress.XtraBars.BarButtonItem btnOutMoneyAdd;
         private DevExpress.XtraBars.BarButtonItem btnInMoneyAdd;
+        private DevExpress.XtraBars.BarButtonItem btnInvoiceQuery;
+        private DevExpress.XtraBars.BarButtonItem btnVoucherNotesQuery;
     }
 }
 

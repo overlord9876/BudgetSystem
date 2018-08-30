@@ -32,11 +32,11 @@
             // 
             // frmInMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 582);
+            this.ClientSize = new System.Drawing.Size(790, 476);
             this.Name = "frmInMoneyQuery";
-            this.Text = "frmInMoneyQuery";
+            this.Text = "收支管理";
             this.ResumeLayout(false);
 
         }

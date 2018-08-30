@@ -16,15 +16,13 @@ namespace BudgetSystem
             InitializeComponent();
             InitSkins();
 
-         
+
         }
 
 
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           
-             
             frmBudgetQuery form = GetExistForm<frmBudgetQuery>();
             if (form == null)
             {
@@ -37,7 +35,7 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
-      
+
 
         private void btnInMoneyQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -100,6 +98,62 @@ namespace BudgetSystem
             //3.财务审核
         }
 
-       
+        private void btnCustomerQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmCustomerQuery form = GetExistForm<frmCustomerQuery>();
+            if (form == null)
+            {
+                form = new frmCustomerQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnSupplierQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmSupplierQuery form = GetExistForm<frmSupplierQuery>();
+            if (form == null)
+            {
+                form = new frmSupplierQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnInvoiceQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmInvoiceQuery form = GetExistForm<frmInvoiceQuery>();
+            if (form == null)
+            {
+                form = new frmInvoiceQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnVoucherNotesQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmVoucherNotesQuery form = GetExistForm<frmVoucherNotesQuery>();
+            if (form == null)
+            {
+                form = new frmVoucherNotesQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+
     }
 }

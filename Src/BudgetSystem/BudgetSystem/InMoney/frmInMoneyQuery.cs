@@ -24,12 +24,11 @@ namespace BudgetSystem
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "新增1", "操作", 1, 2));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改1", "操作", 2, 3));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除1", "操作", 3, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看1", "查看", 1, 22));
-            this.ModelOperateRegistry.Add(new ModelOperate("Test", "测试1", "查看", 1, 21));
-            this.ModelOperatePageName = "预算单";
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "新增入账", "操作", 1, 2));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改入账", "操作", 2, 3));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除入账", "操作", 3, 4));
+            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看入账", "查看", 1, 22));
+            this.ModelOperatePageName = "入帐单";
         }
 
 
@@ -38,15 +37,15 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                XtraMessageBox.Show("New1");
+                XtraMessageBox.Show("新增入账");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                XtraMessageBox.Show("Modify1");
+                XtraMessageBox.Show("修改入账");
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("View1");
+                XtraMessageBox.Show("查看入账");
             }
             else if (operate.Operate == "Test1")
             {
