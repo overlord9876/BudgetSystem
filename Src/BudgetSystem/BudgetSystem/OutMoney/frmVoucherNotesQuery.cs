@@ -20,10 +20,12 @@ namespace BudgetSystem
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "新增付款凭证", "操作", 1, 2));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改付款凭证", "操作", 2, 3));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除付款凭证", "操作", 3, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看付款凭证", "查看", 1, 22));
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看付款凭证"));
+
             this.ModelOperatePageName = "付款凭证管理";
         }
 

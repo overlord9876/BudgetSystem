@@ -9,7 +9,8 @@ namespace BudgetSystem
         New,
         Modify,
         Delete,
+        Relate,
+        Revoke,
         View,
-        Revoke
     }
 }

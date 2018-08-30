@@ -9,16 +9,13 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmOutMemoryEdit : frmBaseQueryForm
+    public partial class frmOutMemoryEdit : frmBaseDialogForm
     {
         public frmOutMemoryEdit()
         {
             InitializeComponent();
         }
 
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
-        }
+
     }
 }

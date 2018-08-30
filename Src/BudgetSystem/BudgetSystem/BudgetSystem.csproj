@@ -165,6 +165,7 @@
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="UIEntity\ModelOperate.cs" />
+    <Compile Include="UIEntity\ModelOperateHelper.cs" />
     <Compile Include="UIEntity\OperateTypes.cs" />
     <Compile Include="UIEntity\UITypes.cs" />
     <Compile Include="UserMgmt\frmUserQuery.cs">

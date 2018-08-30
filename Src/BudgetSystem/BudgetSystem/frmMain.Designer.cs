@@ -38,24 +38,15 @@
             this.btnbudgetQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyQuery = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddUser = new DevExpress.XtraBars.BarButtonItem();
-            this.btnModifyUser = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDeleteUser = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddCustomer = new DevExpress.XtraBars.BarButtonItem();
-            this.btnModifyCustomer = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDeleteCustomer = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddSupplier = new DevExpress.XtraBars.BarButtonItem();
-            this.btnModfiySupplier = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDeleteSupplier = new DevExpress.XtraBars.BarButtonItem();
-            this.btnGrant = new DevExpress.XtraBars.BarButtonItem();
             this.btnUserQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnCustomerQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnSupplierQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnInvoiceQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnVoucherNotesQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnApprovalList = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMyOrder = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFlowConfig = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -93,27 +84,18 @@
             this.btnbudgetQuery,
             this.btnInMoneyQuery,
             this.btnOutMoneyQuery,
-            this.btnAddUser,
-            this.btnModifyUser,
-            this.btnDeleteUser,
-            this.btnAddCustomer,
-            this.btnModifyCustomer,
-            this.btnDeleteCustomer,
-            this.btnAddSupplier,
-            this.btnModfiySupplier,
-            this.btnDeleteSupplier,
-            this.btnGrant,
             this.btnUserQuery,
             this.btnCustomerQuery,
             this.btnSupplierQuery,
             this.btnInvoiceQuery,
             this.btnVoucherNotesQuery,
             this.btnApprovalList,
-            this.barButtonItem3,
-            this.barButtonItem4});
+            this.btnMyOrder,
+            this.barButtonItem4,
+            this.btnFlowConfig});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 33;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonControl1.MaxItemId = 34;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
@@ -123,7 +105,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1354, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -179,6 +161,11 @@
             this.imageCollection1.Images.SetKeyName(45, "Edit_32x32.png");
             this.imageCollection1.Images.SetKeyName(46, "SolidGreenDataBar_32x32.png");
             this.imageCollection1.Images.SetKeyName(47, "TableLayout_32x32.png");
+            this.imageCollection1.Images.SetKeyName(48, "AddItem_32x32.png");
+            this.imageCollection1.Images.SetKeyName(49, "Edit_32x32.png");
+            this.imageCollection1.Images.SetKeyName(50, "Delete_32x32.png");
+            this.imageCollection1.Images.SetKeyName(51, "Inbox_32x32.png");
+            this.imageCollection1.Images.SetKeyName(52, "ShowDetail_32x32.png");
             // 
             // btnRefresh
             // 
@@ -231,86 +218,6 @@
             this.btnOutMoneyQuery.Name = "btnOutMoneyQuery";
             this.btnOutMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnOutMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoneyQuery_ItemClick);
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Caption = "创建";
-            this.btnAddUser.Id = 15;
-            this.btnAddUser.ImageIndex = 44;
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnModifyUser
-            // 
-            this.btnModifyUser.Caption = "修改";
-            this.btnModifyUser.Id = 16;
-            this.btnModifyUser.ImageIndex = 45;
-            this.btnModifyUser.Name = "btnModifyUser";
-            this.btnModifyUser.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnDeleteUser
-            // 
-            this.btnDeleteUser.Caption = "删除";
-            this.btnDeleteUser.Id = 17;
-            this.btnDeleteUser.ImageIndex = 15;
-            this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnAddCustomer
-            // 
-            this.btnAddCustomer.Caption = "创建";
-            this.btnAddCustomer.Id = 18;
-            this.btnAddCustomer.ImageIndex = 0;
-            this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnModifyCustomer
-            // 
-            this.btnModifyCustomer.Caption = "修改";
-            this.btnModifyCustomer.Id = 19;
-            this.btnModifyCustomer.ImageIndex = 45;
-            this.btnModifyCustomer.Name = "btnModifyCustomer";
-            this.btnModifyCustomer.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnDeleteCustomer
-            // 
-            this.btnDeleteCustomer.Caption = "删除";
-            this.btnDeleteCustomer.Id = 20;
-            this.btnDeleteCustomer.ImageIndex = 15;
-            this.btnDeleteCustomer.Name = "btnDeleteCustomer";
-            this.btnDeleteCustomer.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnAddSupplier
-            // 
-            this.btnAddSupplier.Caption = "创建";
-            this.btnAddSupplier.Id = 21;
-            this.btnAddSupplier.ImageIndex = 0;
-            this.btnAddSupplier.Name = "btnAddSupplier";
-            this.btnAddSupplier.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnModfiySupplier
-            // 
-            this.btnModfiySupplier.Caption = "修改";
-            this.btnModfiySupplier.Id = 22;
-            this.btnModfiySupplier.ImageIndex = 45;
-            this.btnModfiySupplier.Name = "btnModfiySupplier";
-            this.btnModfiySupplier.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnDeleteSupplier
-            // 
-            this.btnDeleteSupplier.Caption = "删除";
-            this.btnDeleteSupplier.Id = 23;
-            this.btnDeleteSupplier.ImageIndex = 15;
-            this.btnDeleteSupplier.Name = "btnDeleteSupplier";
-            this.btnDeleteSupplier.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // btnGrant
-            // 
-            this.btnGrant.Caption = "授权";
-            this.btnGrant.Id = 24;
-            this.btnGrant.ImageIndex = 24;
-            this.btnGrant.Name = "btnGrant";
-            this.btnGrant.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // btnUserQuery
             // 
@@ -365,13 +272,13 @@
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barButtonItem3
+            // btnMyOrder
             // 
-            this.barButtonItem3.Caption = "我提交的单子";
-            this.barButtonItem3.Id = 31;
-            this.barButtonItem3.ImageIndex = 17;
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyOrder.Caption = "我提交的单子";
+            this.btnMyOrder.Id = 31;
+            this.btnMyOrder.ImageIndex = 17;
+            this.btnMyOrder.Name = "btnMyOrder";
+            this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // barButtonItem4
             // 
@@ -381,13 +288,21 @@
             this.barButtonItem4.Name = "barButtonItem4";
             this.barButtonItem4.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
+            // btnFlowConfig
+            // 
+            this.btnFlowConfig.Caption = "流程配置";
+            this.btnFlowConfig.Id = 33;
+            this.btnFlowConfig.ImageIndex = 52;
+            this.btnFlowConfig.Name = "btnFlowConfig";
+            this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
-            this.ribbonPageGroup4,
-            this.ribbonPageGroup5});
+            this.ribbonPageGroup5,
+            this.ribbonPageGroup4});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "业务";
             // 
@@ -411,13 +326,14 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnSupplierQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnUserQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnFlowConfig);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "系统设置";
             // 
             // ribbonPageGroup5
             // 
             this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
             this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "我的工作";
@@ -437,11 +353,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 782);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
             this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1354, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
             // 
             // documentManager1
             // 
@@ -491,13 +407,13 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 816);
+            this.ClientSize = new System.Drawing.Size(1692, 997);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -533,17 +449,7 @@
         private DevExpress.XtraBars.BarButtonItem btnbudgetQuery;
         private DevExpress.XtraBars.BarButtonItem btnInMoneyQuery;
         private DevExpress.XtraBars.BarButtonItem btnOutMoneyQuery;
-        private DevExpress.XtraBars.BarButtonItem btnAddUser;
-        private DevExpress.XtraBars.BarButtonItem btnModifyUser;
-        private DevExpress.XtraBars.BarButtonItem btnDeleteUser;
-        private DevExpress.XtraBars.BarButtonItem btnAddCustomer;
-        private DevExpress.XtraBars.BarButtonItem btnModifyCustomer;
-        private DevExpress.XtraBars.BarButtonItem btnDeleteCustomer;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem btnAddSupplier;
-        private DevExpress.XtraBars.BarButtonItem btnModfiySupplier;
-        private DevExpress.XtraBars.BarButtonItem btnDeleteSupplier;
-        private DevExpress.XtraBars.BarButtonItem btnGrant;
         private DevExpress.XtraBars.BarButtonItem btnUserQuery;
         private DevExpress.XtraBars.BarButtonItem btnCustomerQuery;
         private DevExpress.XtraBars.BarButtonItem btnSupplierQuery;
@@ -553,8 +459,9 @@
         private DevExpress.XtraBars.BarButtonItem btnInvoiceQuery;
         private DevExpress.XtraBars.BarButtonItem btnVoucherNotesQuery;
         private DevExpress.XtraBars.BarButtonItem btnApprovalList;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem btnMyOrder;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem btnFlowConfig;
     }
 }
 

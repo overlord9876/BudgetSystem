@@ -24,11 +24,13 @@ namespace BudgetSystem
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "开具发票", "操作", 1, 2));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Modify, "修改发票", "操作", 2, 3));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "删除发票", "操作", 3, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Delete, "关联入帐单", "操作", 4, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看发票", "查看", 1, 22));
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "开具发票"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改发票"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除发票"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Relate, "关联入帐单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看发票"));
+
             this.ModelOperatePageName = "发票管理";
         }
 

@@ -9,16 +9,12 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmCustomerEdit : frmBaseForm
+    public partial class frmCustomerEdit : frmBaseDialogForm
     {
         public frmCustomerEdit()
         {
             InitializeComponent();
         }
 
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
-        }
     }
 }

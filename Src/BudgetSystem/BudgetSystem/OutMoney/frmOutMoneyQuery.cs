@@ -26,9 +26,11 @@ namespace BudgetSystem
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.New, "付款", "操作", 1, 2));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.Revoke, "撤回", "操作", 3, 4));
-            this.ModelOperateRegistry.Add(new ModelOperate(OperateTypes.View, "查看详情", "查看", 1, 22));
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "付款"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "撤回"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
+
             this.ModelOperatePageName = "付款管理";
         }
 

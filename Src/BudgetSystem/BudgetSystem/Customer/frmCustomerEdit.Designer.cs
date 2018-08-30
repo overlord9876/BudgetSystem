@@ -50,9 +50,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.labelControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelControl2, 2, 0);
@@ -66,83 +66,93 @@
             this.tableLayoutPanel1.Controls.Add(this.memoEdit1, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 565);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(968, 691);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Location = new System.Drawing.Point(4, 4);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(75, 18);
+            this.labelControl1.Size = new System.Drawing.Size(90, 22);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "客户名称：";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(390, 3);
+            this.labelControl2.Location = new System.Drawing.Point(488, 4);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(120, 18);
+            this.labelControl2.Size = new System.Drawing.Size(144, 22);
             this.labelControl2.TabIndex = 0;
             this.labelControl2.Text = "所属国家或地区：";
             // 
             // textEdit1
             // 
             this.textEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit1.Location = new System.Drawing.Point(123, 3);
+            this.textEdit1.Location = new System.Drawing.Point(154, 4);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(261, 25);
+            this.textEdit1.Size = new System.Drawing.Size(326, 28);
             this.textEdit1.TabIndex = 1;
             // 
             // textEdit2
             // 
             this.textEdit2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit2.Location = new System.Drawing.Point(510, 3);
+            this.textEdit2.Location = new System.Drawing.Point(638, 4);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(261, 25);
+            this.textEdit2.Size = new System.Drawing.Size(326, 28);
             this.textEdit2.TabIndex = 1;
             // 
             // textEdit3
             // 
             this.textEdit3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit3.Location = new System.Drawing.Point(123, 33);
+            this.textEdit3.Location = new System.Drawing.Point(154, 41);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(261, 25);
+            this.textEdit3.Size = new System.Drawing.Size(326, 28);
             this.textEdit3.TabIndex = 1;
             // 
             // textEdit4
             // 
             this.textEdit4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit4.Location = new System.Drawing.Point(510, 33);
+            this.textEdit4.Location = new System.Drawing.Point(638, 41);
+            this.textEdit4.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Size = new System.Drawing.Size(261, 25);
+            this.textEdit4.Size = new System.Drawing.Size(326, 28);
             this.textEdit4.TabIndex = 1;
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(3, 33);
+            this.labelControl3.Location = new System.Drawing.Point(4, 41);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(60, 18);
+            this.labelControl3.Size = new System.Drawing.Size(72, 22);
             this.labelControl3.TabIndex = 0;
             this.labelControl3.Text = "创建人：";
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(390, 33);
+            this.labelControl4.Location = new System.Drawing.Point(488, 41);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(75, 18);
+            this.labelControl4.Size = new System.Drawing.Size(90, 22);
             this.labelControl4.TabIndex = 0;
             this.labelControl4.Text = "创建时间：";
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(3, 63);
+            this.labelControl5.Location = new System.Drawing.Point(4, 78);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(45, 18);
+            this.labelControl5.Size = new System.Drawing.Size(54, 22);
             this.labelControl5.TabIndex = 0;
             this.labelControl5.Text = "备注：";
             // 
@@ -150,18 +160,20 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.memoEdit1, 3);
             this.memoEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memoEdit1.Location = new System.Drawing.Point(123, 63);
+            this.memoEdit1.Location = new System.Drawing.Point(154, 78);
+            this.memoEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(648, 499);
+            this.memoEdit1.Size = new System.Drawing.Size(810, 609);
             this.memoEdit1.TabIndex = 2;
             // 
-            // frmCustomerQuery
+            // frmCustomerEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 565);
+            this.ClientSize = new System.Drawing.Size(968, 691);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "frmCustomerQuery";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "frmCustomerEdit";
             this.Text = "客户查询";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
