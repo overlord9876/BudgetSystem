@@ -42,6 +42,7 @@
     <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net20">
@@ -72,6 +73,12 @@
     </Compile>
     <Compile Include="Base\frmBaseQueryForm.Designer.cs">
       <DependentUpon>frmBaseQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\frmBaseQueryFormWithCondtion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseQueryFormWithCondtion.Designer.cs">
+      <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\frmBudgetQuery.cs">
       <SubType>Form</SubType>
@@ -182,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseQueryForm.resx">
       <DependentUpon>frmBaseQueryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseQueryFormWithCondtion.resx">
+      <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmBudgetQuery.resx">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>

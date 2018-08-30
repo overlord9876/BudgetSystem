@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetQuery : frmBaseQueryForm
+    public partial class frmBudgetQuery : frmBaseQueryFormWithCondtion
     {
         public frmBudgetQuery()
         {
