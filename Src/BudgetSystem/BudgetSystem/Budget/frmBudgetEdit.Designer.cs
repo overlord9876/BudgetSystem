@@ -226,7 +226,7 @@
             // 
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1878, 1124);
@@ -255,7 +255,7 @@
             this.layoutControl2.Controls.Add(this.gridControl1);
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.layoutControl2.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(919, 215, 452, 350);
             this.layoutControl2.Root = this.layoutControlGroup2;
@@ -308,7 +308,7 @@
             this.tableLayoutPanel5.Controls.Add(this.labelControl42, 0, 6);
             this.tableLayoutPanel5.Controls.Add(this.memoEdit6, 1, 6);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(12, 757);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 7;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
@@ -325,7 +325,7 @@
             // 
             this.labelControl26.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl26.Location = new System.Drawing.Point(114, 14);
-            this.labelControl26.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl26.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl26.Name = "labelControl26";
             this.labelControl26.Size = new System.Drawing.Size(36, 22);
             this.labelControl26.TabIndex = 0;
@@ -335,7 +335,7 @@
             // 
             this.labelControl27.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl27.Location = new System.Drawing.Point(378, 14);
-            this.labelControl27.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl27.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl27.Name = "labelControl27";
             this.labelControl27.Size = new System.Drawing.Size(36, 22);
             this.labelControl27.TabIndex = 0;
@@ -345,7 +345,7 @@
             // 
             this.textEdit20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit20.Location = new System.Drawing.Point(4, 61);
-            this.textEdit20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit20.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit20.Name = "textEdit20";
             this.textEdit20.Size = new System.Drawing.Size(256, 28);
             this.textEdit20.TabIndex = 1;
@@ -354,7 +354,7 @@
             // 
             this.labelControl28.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl28.Location = new System.Drawing.Point(633, 14);
-            this.labelControl28.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl28.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl28.Name = "labelControl28";
             this.labelControl28.Size = new System.Drawing.Size(54, 22);
             this.labelControl28.TabIndex = 0;
@@ -364,7 +364,7 @@
             // 
             this.labelControl29.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl29.Location = new System.Drawing.Point(888, 14);
-            this.labelControl29.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl29.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl29.Name = "labelControl29";
             this.labelControl29.Size = new System.Drawing.Size(72, 22);
             this.labelControl29.TabIndex = 0;
@@ -374,7 +374,7 @@
             // 
             this.labelControl30.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl30.Location = new System.Drawing.Point(1143, 14);
-            this.labelControl30.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl30.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl30.Name = "labelControl30";
             this.labelControl30.Size = new System.Drawing.Size(90, 22);
             this.labelControl30.TabIndex = 0;
@@ -384,7 +384,7 @@
             // 
             this.labelControl31.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl31.Location = new System.Drawing.Point(1425, 14);
-            this.labelControl31.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl31.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl31.Name = "labelControl31";
             this.labelControl31.Size = new System.Drawing.Size(54, 22);
             this.labelControl31.TabIndex = 0;
@@ -394,7 +394,7 @@
             // 
             this.labelControl32.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl32.Location = new System.Drawing.Point(1701, 14);
-            this.labelControl32.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl32.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl32.Name = "labelControl32";
             this.labelControl32.Size = new System.Drawing.Size(36, 22);
             this.labelControl32.TabIndex = 0;
@@ -404,7 +404,7 @@
             // 
             this.textEdit21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit21.Location = new System.Drawing.Point(268, 61);
-            this.textEdit21.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit21.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit21.Name = "textEdit21";
             this.textEdit21.Size = new System.Drawing.Size(256, 28);
             this.textEdit21.TabIndex = 1;
@@ -413,7 +413,7 @@
             // 
             this.textEdit22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit22.Location = new System.Drawing.Point(532, 61);
-            this.textEdit22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit22.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit22.Name = "textEdit22";
             this.textEdit22.Size = new System.Drawing.Size(256, 28);
             this.textEdit22.TabIndex = 1;
@@ -422,7 +422,7 @@
             // 
             this.textEdit23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit23.Location = new System.Drawing.Point(796, 61);
-            this.textEdit23.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit23.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit23.Name = "textEdit23";
             this.textEdit23.Size = new System.Drawing.Size(256, 28);
             this.textEdit23.TabIndex = 1;
@@ -431,7 +431,7 @@
             // 
             this.textEdit24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit24.Location = new System.Drawing.Point(1060, 61);
-            this.textEdit24.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit24.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit24.Name = "textEdit24";
             this.textEdit24.Size = new System.Drawing.Size(256, 28);
             this.textEdit24.TabIndex = 1;
@@ -440,7 +440,7 @@
             // 
             this.textEdit25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit25.Location = new System.Drawing.Point(1324, 61);
-            this.textEdit25.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit25.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit25.Name = "textEdit25";
             this.textEdit25.Size = new System.Drawing.Size(256, 28);
             this.textEdit25.TabIndex = 1;
@@ -449,7 +449,7 @@
             // 
             this.textEdit26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit26.Location = new System.Drawing.Point(1588, 61);
-            this.textEdit26.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit26.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit26.Name = "textEdit26";
             this.textEdit26.Size = new System.Drawing.Size(262, 28);
             this.textEdit26.TabIndex = 1;
@@ -459,7 +459,7 @@
             this.labelControl33.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel5.SetColumnSpan(this.labelControl33, 2);
             this.labelControl33.Location = new System.Drawing.Point(184, 114);
-            this.labelControl33.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl33.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl33.Name = "labelControl33";
             this.labelControl33.Size = new System.Drawing.Size(160, 22);
             this.labelControl33.TabIndex = 0;
@@ -470,7 +470,7 @@
             this.textEdit27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel5.SetColumnSpan(this.textEdit27, 2);
             this.textEdit27.Location = new System.Drawing.Point(4, 161);
-            this.textEdit27.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit27.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit27.Name = "textEdit27";
             this.textEdit27.Size = new System.Drawing.Size(520, 28);
             this.textEdit27.TabIndex = 1;
@@ -479,7 +479,7 @@
             // 
             this.labelControl34.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl34.Location = new System.Drawing.Point(642, 114);
-            this.labelControl34.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl34.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl34.Name = "labelControl34";
             this.labelControl34.Size = new System.Drawing.Size(36, 22);
             this.labelControl34.TabIndex = 0;
@@ -489,7 +489,7 @@
             // 
             this.textEdit28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit28.Location = new System.Drawing.Point(532, 161);
-            this.textEdit28.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit28.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit28.Name = "textEdit28";
             this.textEdit28.Size = new System.Drawing.Size(256, 28);
             this.textEdit28.TabIndex = 1;
@@ -498,7 +498,7 @@
             // 
             this.labelControl35.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl35.Location = new System.Drawing.Point(879, 114);
-            this.labelControl35.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl35.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl35.Name = "labelControl35";
             this.labelControl35.Size = new System.Drawing.Size(90, 22);
             this.labelControl35.TabIndex = 0;
@@ -508,7 +508,7 @@
             // 
             this.textEdit29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit29.Location = new System.Drawing.Point(796, 161);
-            this.textEdit29.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit29.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit29.Name = "textEdit29";
             this.textEdit29.Size = new System.Drawing.Size(256, 28);
             this.textEdit29.TabIndex = 1;
@@ -517,7 +517,7 @@
             // 
             this.labelControl36.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl36.Location = new System.Drawing.Point(1161, 114);
-            this.labelControl36.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl36.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl36.Name = "labelControl36";
             this.labelControl36.Size = new System.Drawing.Size(54, 22);
             this.labelControl36.TabIndex = 0;
@@ -527,7 +527,7 @@
             // 
             this.textEdit30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit30.Location = new System.Drawing.Point(1060, 161);
-            this.textEdit30.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit30.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit30.Name = "textEdit30";
             this.textEdit30.Size = new System.Drawing.Size(256, 28);
             this.textEdit30.TabIndex = 1;
@@ -536,7 +536,7 @@
             // 
             this.labelControl37.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl37.Location = new System.Drawing.Point(1407, 114);
-            this.labelControl37.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl37.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl37.Name = "labelControl37";
             this.labelControl37.Size = new System.Drawing.Size(90, 22);
             this.labelControl37.TabIndex = 0;
@@ -546,7 +546,7 @@
             // 
             this.textEdit31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit31.Location = new System.Drawing.Point(1324, 161);
-            this.textEdit31.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit31.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit31.Name = "textEdit31";
             this.textEdit31.Size = new System.Drawing.Size(256, 28);
             this.textEdit31.TabIndex = 1;
@@ -555,7 +555,7 @@
             // 
             this.labelControl38.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl38.Location = new System.Drawing.Point(1674, 114);
-            this.labelControl38.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl38.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl38.Name = "labelControl38";
             this.labelControl38.Size = new System.Drawing.Size(90, 22);
             this.labelControl38.TabIndex = 0;
@@ -565,7 +565,7 @@
             // 
             this.textEdit32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit32.Location = new System.Drawing.Point(1588, 161);
-            this.textEdit32.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit32.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit32.Name = "textEdit32";
             this.textEdit32.Size = new System.Drawing.Size(262, 28);
             this.textEdit32.TabIndex = 1;
@@ -575,7 +575,7 @@
             this.labelControl39.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel5.SetColumnSpan(this.labelControl39, 2);
             this.labelControl39.Location = new System.Drawing.Point(160, 214);
-            this.labelControl39.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl39.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl39.Name = "labelControl39";
             this.labelControl39.Size = new System.Drawing.Size(208, 22);
             this.labelControl39.TabIndex = 0;
@@ -586,7 +586,7 @@
             this.labelControl41.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel5.SetColumnSpan(this.labelControl41, 3);
             this.labelControl41.Location = new System.Drawing.Point(1351, 214);
-            this.labelControl41.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl41.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl41.Name = "labelControl41";
             this.labelControl41.Size = new System.Drawing.Size(208, 22);
             this.labelControl41.TabIndex = 0;
@@ -597,7 +597,7 @@
             this.labelControl40.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel5.SetColumnSpan(this.labelControl40, 2);
             this.labelControl40.Location = new System.Drawing.Point(688, 214);
-            this.labelControl40.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl40.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl40.Name = "labelControl40";
             this.labelControl40.Size = new System.Drawing.Size(208, 22);
             this.labelControl40.TabIndex = 0;
@@ -608,7 +608,7 @@
             this.textEdit33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel5.SetColumnSpan(this.textEdit33, 2);
             this.textEdit33.Location = new System.Drawing.Point(4, 261);
-            this.textEdit33.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit33.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit33.Name = "textEdit33";
             this.textEdit33.Size = new System.Drawing.Size(520, 28);
             this.textEdit33.TabIndex = 1;
@@ -618,7 +618,7 @@
             this.textEdit34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel5.SetColumnSpan(this.textEdit34, 2);
             this.textEdit34.Location = new System.Drawing.Point(532, 261);
-            this.textEdit34.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit34.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit34.Name = "textEdit34";
             this.textEdit34.Size = new System.Drawing.Size(520, 28);
             this.textEdit34.TabIndex = 1;
@@ -628,7 +628,7 @@
             this.textEdit35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel5.SetColumnSpan(this.textEdit35, 3);
             this.textEdit35.Location = new System.Drawing.Point(1060, 261);
-            this.textEdit35.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit35.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit35.Name = "textEdit35";
             this.textEdit35.Size = new System.Drawing.Size(790, 28);
             this.textEdit35.TabIndex = 1;
@@ -637,7 +637,7 @@
             // 
             this.labelControl42.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl42.Location = new System.Drawing.Point(114, 316);
-            this.labelControl42.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl42.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl42.Name = "labelControl42";
             this.labelControl42.Size = new System.Drawing.Size(36, 22);
             this.labelControl42.TabIndex = 0;
@@ -648,7 +648,7 @@
             this.tableLayoutPanel5.SetColumnSpan(this.memoEdit6, 6);
             this.memoEdit6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit6.Location = new System.Drawing.Point(268, 304);
-            this.memoEdit6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit6.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit6.Name = "memoEdit6";
             this.memoEdit6.Size = new System.Drawing.Size(1582, 47);
             this.memoEdit6.TabIndex = 2;
@@ -678,7 +678,7 @@
             this.tableLayoutPanel4.Controls.Add(this.textEdit18, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.textEdit19, 6, 1);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(12, 675);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -690,7 +690,7 @@
             // 
             this.labelControl19.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl19.Location = new System.Drawing.Point(73, 8);
-            this.labelControl19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl19.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl19.Name = "labelControl19";
             this.labelControl19.Size = new System.Drawing.Size(118, 22);
             this.labelControl19.TabIndex = 0;
@@ -700,7 +700,7 @@
             // 
             this.labelControl21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl21.Location = new System.Drawing.Point(633, 8);
-            this.labelControl21.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl21.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl21.Name = "labelControl21";
             this.labelControl21.Size = new System.Drawing.Size(54, 22);
             this.labelControl21.TabIndex = 0;
@@ -710,7 +710,7 @@
             // 
             this.textEdit13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit13.Location = new System.Drawing.Point(4, 44);
-            this.textEdit13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit13.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit13.Name = "textEdit13";
             this.textEdit13.Size = new System.Drawing.Size(256, 28);
             this.textEdit13.TabIndex = 1;
@@ -719,7 +719,7 @@
             // 
             this.labelControl20.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl20.Location = new System.Drawing.Point(337, 8);
-            this.labelControl20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl20.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl20.Name = "labelControl20";
             this.labelControl20.Size = new System.Drawing.Size(118, 22);
             this.labelControl20.TabIndex = 0;
@@ -729,7 +729,7 @@
             // 
             this.labelControl22.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl22.Location = new System.Drawing.Point(888, 8);
-            this.labelControl22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl22.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl22.Name = "labelControl22";
             this.labelControl22.Size = new System.Drawing.Size(72, 22);
             this.labelControl22.TabIndex = 0;
@@ -739,7 +739,7 @@
             // 
             this.labelControl23.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl23.Location = new System.Drawing.Point(1152, 8);
-            this.labelControl23.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl23.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl23.Name = "labelControl23";
             this.labelControl23.Size = new System.Drawing.Size(72, 22);
             this.labelControl23.TabIndex = 0;
@@ -749,7 +749,7 @@
             // 
             this.labelControl24.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl24.Location = new System.Drawing.Point(1434, 8);
-            this.labelControl24.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl24.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl24.Name = "labelControl24";
             this.labelControl24.Size = new System.Drawing.Size(36, 22);
             this.labelControl24.TabIndex = 0;
@@ -759,7 +759,7 @@
             // 
             this.labelControl25.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl25.Location = new System.Drawing.Point(1701, 8);
-            this.labelControl25.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl25.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl25.Name = "labelControl25";
             this.labelControl25.Size = new System.Drawing.Size(36, 22);
             this.labelControl25.TabIndex = 0;
@@ -769,7 +769,7 @@
             // 
             this.textEdit14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit14.Location = new System.Drawing.Point(268, 44);
-            this.textEdit14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit14.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit14.Name = "textEdit14";
             this.textEdit14.Size = new System.Drawing.Size(256, 28);
             this.textEdit14.TabIndex = 1;
@@ -778,7 +778,7 @@
             // 
             this.textEdit15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit15.Location = new System.Drawing.Point(532, 44);
-            this.textEdit15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit15.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit15.Name = "textEdit15";
             this.textEdit15.Size = new System.Drawing.Size(256, 28);
             this.textEdit15.TabIndex = 1;
@@ -787,7 +787,7 @@
             // 
             this.textEdit16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit16.Location = new System.Drawing.Point(796, 44);
-            this.textEdit16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit16.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit16.Name = "textEdit16";
             this.textEdit16.Size = new System.Drawing.Size(256, 28);
             this.textEdit16.TabIndex = 1;
@@ -796,7 +796,7 @@
             // 
             this.textEdit17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit17.Location = new System.Drawing.Point(1060, 44);
-            this.textEdit17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit17.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit17.Name = "textEdit17";
             this.textEdit17.Size = new System.Drawing.Size(256, 28);
             this.textEdit17.TabIndex = 1;
@@ -805,7 +805,7 @@
             // 
             this.textEdit18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit18.Location = new System.Drawing.Point(1324, 44);
-            this.textEdit18.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit18.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit18.Name = "textEdit18";
             this.textEdit18.Size = new System.Drawing.Size(256, 28);
             this.textEdit18.TabIndex = 1;
@@ -814,17 +814,17 @@
             // 
             this.textEdit19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit19.Location = new System.Drawing.Point(1588, 44);
-            this.textEdit19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit19.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit19.Name = "textEdit19";
             this.textEdit19.Size = new System.Drawing.Size(262, 28);
             this.textEdit19.TabIndex = 1;
             // 
             // gridControl2
             // 
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl2.Location = new System.Drawing.Point(12, 550);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.Size = new System.Drawing.Size(1854, 121);
             this.gridControl2.TabIndex = 8;
@@ -904,7 +904,7 @@
             this.tableLayoutPanel3.Controls.Add(this.checkEdit1, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.memoEdit5, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(12, 489);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -915,7 +915,7 @@
             // 
             this.labelControl18.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl18.Location = new System.Drawing.Point(43, 17);
-            this.labelControl18.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl18.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl18.Name = "labelControl18";
             this.labelControl18.Size = new System.Drawing.Size(90, 22);
             this.labelControl18.TabIndex = 3;
@@ -925,7 +925,7 @@
             // 
             this.checkEdit1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.checkEdit1.Location = new System.Drawing.Point(1708, 15);
-            this.checkEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = "是否合格供方";
             this.checkEdit1.Size = new System.Drawing.Size(142, 27);
@@ -935,7 +935,7 @@
             // 
             this.memoEdit5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit5.Location = new System.Drawing.Point(180, 4);
-            this.memoEdit5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit5.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit5.Name = "memoEdit5";
             this.memoEdit5.Size = new System.Drawing.Size(1520, 49);
             this.memoEdit5.TabIndex = 5;
@@ -965,7 +965,7 @@
             this.tableLayoutPanel2.Controls.Add(this.textEdit11, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.textEdit12, 6, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 408);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
@@ -977,7 +977,7 @@
             // 
             this.labelControl11.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl11.Location = new System.Drawing.Point(96, 4);
-            this.labelControl11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl11.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(72, 22);
             this.labelControl11.TabIndex = 0;
@@ -987,7 +987,7 @@
             // 
             this.labelControl12.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl12.Location = new System.Drawing.Point(360, 4);
-            this.labelControl12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl12.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(72, 22);
             this.labelControl12.TabIndex = 0;
@@ -997,7 +997,7 @@
             // 
             this.textEdit6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit6.Location = new System.Drawing.Point(4, 40);
-            this.textEdit6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit6.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Size = new System.Drawing.Size(256, 28);
             this.textEdit6.TabIndex = 1;
@@ -1006,7 +1006,7 @@
             // 
             this.labelControl13.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl13.Location = new System.Drawing.Point(601, 4);
-            this.labelControl13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl13.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(118, 22);
             this.labelControl13.TabIndex = 0;
@@ -1016,7 +1016,7 @@
             // 
             this.labelControl14.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl14.Location = new System.Drawing.Point(865, 4);
-            this.labelControl14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl14.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(118, 22);
             this.labelControl14.TabIndex = 0;
@@ -1026,7 +1026,7 @@
             // 
             this.labelControl15.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl15.Location = new System.Drawing.Point(1129, 4);
-            this.labelControl15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl15.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl15.Name = "labelControl15";
             this.labelControl15.Size = new System.Drawing.Size(118, 22);
             this.labelControl15.TabIndex = 0;
@@ -1036,7 +1036,7 @@
             // 
             this.labelControl16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl16.Location = new System.Drawing.Point(1416, 4);
-            this.labelControl16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl16.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl16.Name = "labelControl16";
             this.labelControl16.Size = new System.Drawing.Size(72, 22);
             this.labelControl16.TabIndex = 0;
@@ -1046,7 +1046,7 @@
             // 
             this.labelControl17.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl17.Location = new System.Drawing.Point(1692, 4);
-            this.labelControl17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl17.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl17.Name = "labelControl17";
             this.labelControl17.Size = new System.Drawing.Size(54, 22);
             this.labelControl17.TabIndex = 0;
@@ -1056,7 +1056,7 @@
             // 
             this.textEdit7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit7.Location = new System.Drawing.Point(268, 40);
-            this.textEdit7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit7.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit7.Name = "textEdit7";
             this.textEdit7.Size = new System.Drawing.Size(256, 28);
             this.textEdit7.TabIndex = 1;
@@ -1065,7 +1065,7 @@
             // 
             this.textEdit8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit8.Location = new System.Drawing.Point(532, 40);
-            this.textEdit8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit8.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit8.Name = "textEdit8";
             this.textEdit8.Size = new System.Drawing.Size(256, 28);
             this.textEdit8.TabIndex = 1;
@@ -1074,7 +1074,7 @@
             // 
             this.textEdit9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit9.Location = new System.Drawing.Point(796, 40);
-            this.textEdit9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit9.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit9.Name = "textEdit9";
             this.textEdit9.Size = new System.Drawing.Size(256, 28);
             this.textEdit9.TabIndex = 1;
@@ -1083,7 +1083,7 @@
             // 
             this.textEdit10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit10.Location = new System.Drawing.Point(1060, 40);
-            this.textEdit10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit10.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit10.Name = "textEdit10";
             this.textEdit10.Size = new System.Drawing.Size(256, 28);
             this.textEdit10.TabIndex = 1;
@@ -1092,7 +1092,7 @@
             // 
             this.textEdit11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit11.Location = new System.Drawing.Point(1324, 40);
-            this.textEdit11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit11.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit11.Name = "textEdit11";
             this.textEdit11.Size = new System.Drawing.Size(256, 28);
             this.textEdit11.TabIndex = 1;
@@ -1101,7 +1101,7 @@
             // 
             this.textEdit12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit12.Location = new System.Drawing.Point(1588, 40);
-            this.textEdit12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit12.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit12.Name = "textEdit12";
             this.textEdit12.Size = new System.Drawing.Size(262, 28);
             this.textEdit12.TabIndex = 1;
@@ -1138,7 +1138,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labelControl10, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.radioGroup2, 4, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
@@ -1153,7 +1153,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.radioGroup1, 2);
             this.radioGroup1.Location = new System.Drawing.Point(374, 186);
-            this.radioGroup1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioGroup1.Margin = new System.Windows.Forms.Padding(4);
             this.radioGroup1.Name = "radioGroup1";
             this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "一般贸易"),
@@ -1168,7 +1168,7 @@
             // 
             this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl1.Location = new System.Drawing.Point(149, 4);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(72, 22);
             this.labelControl1.TabIndex = 0;
@@ -1178,7 +1178,7 @@
             // 
             this.textEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit1.Location = new System.Drawing.Point(4, 35);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Size = new System.Drawing.Size(362, 28);
             this.textEdit1.TabIndex = 1;
@@ -1187,7 +1187,7 @@
             // 
             this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl2.Location = new System.Drawing.Point(537, 4);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(36, 22);
             this.labelControl2.TabIndex = 0;
@@ -1197,7 +1197,7 @@
             // 
             this.labelControl3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl3.Location = new System.Drawing.Point(898, 4);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(54, 22);
             this.labelControl3.TabIndex = 0;
@@ -1207,7 +1207,7 @@
             // 
             this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl4.Location = new System.Drawing.Point(1259, 4);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(72, 22);
             this.labelControl4.TabIndex = 0;
@@ -1217,7 +1217,7 @@
             // 
             this.labelControl5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl5.Location = new System.Drawing.Point(1640, 4);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(54, 22);
             this.labelControl5.TabIndex = 0;
@@ -1227,7 +1227,7 @@
             // 
             this.textEdit2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit2.Location = new System.Drawing.Point(374, 35);
-            this.textEdit2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Size = new System.Drawing.Size(362, 28);
             this.textEdit2.TabIndex = 1;
@@ -1237,7 +1237,7 @@
             this.dateEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateEdit1.EditValue = null;
             this.dateEdit1.Location = new System.Drawing.Point(1114, 35);
-            this.dateEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1251,7 +1251,7 @@
             this.dateEdit2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateEdit2.EditValue = null;
             this.dateEdit2.Location = new System.Drawing.Point(1484, 35);
-            this.dateEdit2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateEdit2.Margin = new System.Windows.Forms.Padding(4);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1264,7 +1264,7 @@
             // 
             this.labelControl6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl6.Location = new System.Drawing.Point(140, 75);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(90, 22);
             this.labelControl6.TabIndex = 3;
@@ -1274,7 +1274,7 @@
             // 
             this.labelControl7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl7.Location = new System.Drawing.Point(1241, 75);
-            this.labelControl7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl7.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(108, 22);
             this.labelControl7.TabIndex = 3;
@@ -1285,7 +1285,7 @@
             this.textEdit4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textEdit4, 2);
             this.textEdit4.Location = new System.Drawing.Point(374, 72);
-            this.textEdit4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit4.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit4.Name = "textEdit4";
             this.textEdit4.Size = new System.Drawing.Size(732, 28);
             this.textEdit4.TabIndex = 1;
@@ -1294,7 +1294,7 @@
             // 
             this.textEdit3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit3.Location = new System.Drawing.Point(744, 35);
-            this.textEdit3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit3.Name = "textEdit3";
             this.textEdit3.Size = new System.Drawing.Size(362, 28);
             this.textEdit3.TabIndex = 1;
@@ -1303,7 +1303,7 @@
             // 
             this.textEdit5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit5.Location = new System.Drawing.Point(1484, 72);
-            this.textEdit5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textEdit5.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit5.Name = "textEdit5";
             this.textEdit5.Size = new System.Drawing.Size(366, 28);
             this.textEdit5.TabIndex = 1;
@@ -1312,7 +1312,7 @@
             // 
             this.labelControl8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl8.Location = new System.Drawing.Point(108, 132);
-            this.labelControl8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl8.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(153, 22);
             this.labelControl8.TabIndex = 3;
@@ -1322,7 +1322,7 @@
             // 
             this.memoEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit1.Location = new System.Drawing.Point(374, 109);
-            this.memoEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit1.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit1.Name = "memoEdit1";
             this.memoEdit1.Size = new System.Drawing.Size(362, 69);
             this.memoEdit1.TabIndex = 4;
@@ -1331,7 +1331,7 @@
             // 
             this.memoEdit2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit2.Location = new System.Drawing.Point(744, 109);
-            this.memoEdit2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit2.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit2.Name = "memoEdit2";
             this.memoEdit2.Size = new System.Drawing.Size(362, 69);
             this.memoEdit2.TabIndex = 4;
@@ -1340,7 +1340,7 @@
             // 
             this.memoEdit3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit3.Location = new System.Drawing.Point(1114, 109);
-            this.memoEdit3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit3.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit3.Name = "memoEdit3";
             this.memoEdit3.Size = new System.Drawing.Size(362, 69);
             this.memoEdit3.TabIndex = 4;
@@ -1349,7 +1349,7 @@
             // 
             this.memoEdit4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoEdit4.Location = new System.Drawing.Point(1484, 109);
-            this.memoEdit4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.memoEdit4.Margin = new System.Windows.Forms.Padding(4);
             this.memoEdit4.Name = "memoEdit4";
             this.memoEdit4.Size = new System.Drawing.Size(366, 69);
             this.memoEdit4.TabIndex = 4;
@@ -1358,7 +1358,7 @@
             // 
             this.labelControl9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl9.Location = new System.Drawing.Point(140, 210);
-            this.labelControl9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl9.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(90, 22);
             this.labelControl9.TabIndex = 3;
@@ -1368,7 +1368,7 @@
             // 
             this.labelControl10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl10.Location = new System.Drawing.Point(1250, 210);
-            this.labelControl10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl10.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(90, 22);
             this.labelControl10.TabIndex = 3;
@@ -1377,7 +1377,7 @@
             // radioGroup2
             // 
             this.radioGroup2.Location = new System.Drawing.Point(1484, 186);
-            this.radioGroup2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioGroup2.Margin = new System.Windows.Forms.Padding(4);
             this.radioGroup2.Name = "radioGroup2";
             this.radioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "做单"),
@@ -1387,10 +1387,10 @@
             // 
             // gridControl1
             // 
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.Location = new System.Drawing.Point(12, 276);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1854, 128);
             this.gridControl1.TabIndex = 4;
@@ -1578,7 +1578,7 @@
             this.ClientSize = new System.Drawing.Size(1878, 1124);
             this.Controls.Add(this.layoutControl2);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmBudgetEdit";
             this.Text = "预算单编辑";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

@@ -25,8 +25,9 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增入账"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改入账"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改关联合同"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改入帐（未关联合同）"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账（未关联合同）"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看入账"));
  
             this.ModelOperatePageName = "入帐单";
