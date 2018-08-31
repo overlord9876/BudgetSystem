@@ -42,7 +42,7 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
+                frmBudgetEditEx form = new frmBudgetEditEx();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
