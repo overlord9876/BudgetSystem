@@ -41,15 +41,18 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                XtraMessageBox.Show("New");
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                XtraMessageBox.Show("Modify");
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("View");
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
