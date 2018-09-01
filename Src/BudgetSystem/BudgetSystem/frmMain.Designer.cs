@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.rgbStyle = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.btnReLogin = new DevExpress.XtraBars.BarButtonItem();
@@ -48,6 +47,8 @@
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.btnFlowConfig = new DevExpress.XtraBars.BarButtonItem();
             this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -56,8 +57,8 @@
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -94,10 +95,12 @@
             this.btnMyOrder,
             this.barButtonItem4,
             this.btnFlowConfig,
-            this.btnDepartment});
+            this.btnDepartment,
+            this.btnRoleManager,
+            this.btnOptionManager});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 35;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonControl1.MaxItemId = 37;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
@@ -107,7 +110,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1354, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -310,6 +313,25 @@
             this.btnDepartment.ImageIndex = 40;
             this.btnDepartment.Name = "btnDepartment";
             this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDepartment_ItemClick);
+            // 
+            // btnRoleManager
+            // 
+            this.btnRoleManager.Caption = "角色管理";
+            this.btnRoleManager.Id = 35;
+            this.btnRoleManager.ImageIndex = 37;
+            this.btnRoleManager.Name = "btnRoleManager";
+            this.btnRoleManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnRoleManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoleManager_ItemClick);
+            // 
+            // btnOptionManager
+            // 
+            this.btnOptionManager.Caption = "选择管理";
+            this.btnOptionManager.Id = 36;
+            this.btnOptionManager.ImageIndex = 35;
+            this.btnOptionManager.Name = "btnOptionManager";
+            this.btnOptionManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOptionManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOptionManager_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -349,8 +371,10 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnSupplierQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnUserQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnRoleManager);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnDepartment);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnFlowConfig);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnOptionManager);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "系统设置";
             // 
@@ -369,11 +393,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 782);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
             this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1354, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
             // 
             // documentManager1
             // 
@@ -423,13 +447,13 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 816);
+            this.ClientSize = new System.Drawing.Size(1692, 997);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -479,6 +503,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem btnFlowConfig;
         private DevExpress.XtraBars.BarButtonItem btnDepartment;
+        private DevExpress.XtraBars.BarButtonItem btnRoleManager;
+        private DevExpress.XtraBars.BarButtonItem btnOptionManager;
     }
 }
 

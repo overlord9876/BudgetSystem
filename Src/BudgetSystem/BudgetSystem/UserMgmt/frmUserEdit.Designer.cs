@@ -139,10 +139,10 @@
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(906, 139);
+            this.textEdit6.Location = new System.Drawing.Point(579, 139);
             this.textEdit6.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Size = new System.Drawing.Size(50, 28);
+            this.textEdit6.Size = new System.Drawing.Size(377, 28);
             this.textEdit6.StyleController = this.layoutControl1;
             this.textEdit6.TabIndex = 13;
             // 
@@ -151,7 +151,7 @@
             this.textEdit5.Location = new System.Drawing.Point(105, 139);
             this.textEdit5.Margin = new System.Windows.Forms.Padding(4);
             this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Size = new System.Drawing.Size(704, 28);
+            this.textEdit5.Size = new System.Drawing.Size(377, 28);
             this.textEdit5.StyleController = this.layoutControl1;
             this.textEdit5.TabIndex = 12;
             // 
@@ -253,7 +253,7 @@
             this.layoutControlItem6.CustomizationFormText = "创建时间：";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 127);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(801, 32);
+            this.layoutControlItem6.Size = new System.Drawing.Size(474, 32);
             this.layoutControlItem6.Text = "创建时间：";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(90, 22);
             // 
@@ -293,9 +293,9 @@
             // 
             this.layoutControlItem7.Control = this.textEdit6;
             this.layoutControlItem7.CustomizationFormText = "创建人";
-            this.layoutControlItem7.Location = new System.Drawing.Point(801, 127);
+            this.layoutControlItem7.Location = new System.Drawing.Point(474, 127);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(147, 32);
+            this.layoutControlItem7.Size = new System.Drawing.Size(474, 32);
             this.layoutControlItem7.Text = "创建人：";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(90, 22);
             // 

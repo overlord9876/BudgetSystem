@@ -8,20 +8,14 @@ using System.Windows.Forms;
 
 namespace BudgetSystem
 {
-    public partial class frmRoleQuery : frmBaseQueryForm
+    public partial class frmOptionQuery : frmBaseQueryForm
     {
-        public frmRoleQuery()
+        public frmOptionQuery()
         {
             InitializeComponent();
         }
 
-        protected override void InitModelOperate()
-        {
-            base.InitModelOperate();
-        }
-
-
-        public override void OperateHandled(ModelOperate operate)
+        private void frmOptionQuery_Load(object sender, EventArgs e)
         {
 
         }

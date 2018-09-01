@@ -9,9 +9,9 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmRoleQuery : frmBaseQueryForm
+    public partial class frmDepartmentQuery : frmBaseQueryForm
     {
-        public frmRoleQuery()
+        public frmDepartmentQuery()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace BudgetSystem
 
         public override void OperateHandled(ModelOperate operate)
         {
-            if (operate.Operate == OperateTypes.Modify.ToString())
+            if (operate.Operate == OperateTypes.New.ToString())
             {
                 frmDepartmentEdit form = new frmDepartmentEdit() { WorkModel = EditFormWorkModels.New };
                 form.ShowDialog(this);

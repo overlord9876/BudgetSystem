@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmRoleQuery
+    partial class frmDepartmentQuery
     {
         /// <summary>
         /// Required designer variable.
@@ -98,6 +98,7 @@
             // 
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // simpleButton2
             // 
@@ -131,6 +132,7 @@
             // 
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // gridControl1
             // 
@@ -146,6 +148,7 @@
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // layoutControlGroup1
             // 

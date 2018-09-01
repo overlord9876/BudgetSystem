@@ -129,6 +129,12 @@
     <Compile Include="Department\frmDepartmentEdit.Designer.cs">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Option\frmOptionQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Option\frmOptionQuery.Designer.cs">
+      <DependentUpon>frmOptionQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Role\frmRoleQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\frmOptionQuery.resx">
+      <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Role\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>

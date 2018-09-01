@@ -221,5 +221,50 @@ namespace BudgetSystem
             }
             ShowForm(form);
         }
+
+        private void btnDepartment_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmDepartmentQuery form = GetExistForm<frmDepartmentQuery>();
+            if (form == null)
+            {
+                form = new frmDepartmentQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnRoleManager_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmRoleQuery form = GetExistForm<frmRoleQuery>();
+            if (form == null)
+            {
+                form = new frmRoleQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnOptionManager_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmOptionQuery form = GetExistForm<frmOptionQuery>();
+            if (form == null)
+            {
+                form = new frmOptionQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmDepartmentQuery
+    partial class frmRoleQuery
     {
         /// <summary>
         /// Required designer variable.
@@ -98,6 +98,7 @@
             // 
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // simpleButton2
             // 
@@ -131,6 +132,7 @@
             // 
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // gridControl1
             // 
@@ -146,6 +148,7 @@
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // layoutControlGroup1
             // 
@@ -288,13 +291,13 @@
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
             // 
-            // frmRoleQuery
+            // frmDepartmentQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1217, 873);
             this.Controls.Add(this.layoutControl1);
-            this.Name = "frmRoleQuery";
+            this.Name = "frmDepartmentQuery";
             this.Text = "角色管理";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
