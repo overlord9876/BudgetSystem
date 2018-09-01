@@ -15,11 +15,6 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
-        public override void RefreshData()
-        {
-            LoadData();
-        }
-
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
@@ -45,7 +40,7 @@ namespace BudgetSystem
         }
 
 
-        private void LoadData()
+        public override void LoadData()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Name", typeof(string));
@@ -58,9 +53,5 @@ namespace BudgetSystem
             this.gridControl1.DataSource = dt;
         }
 
-        private void frmFlowQuery_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
     }
 }

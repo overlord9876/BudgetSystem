@@ -40,7 +40,7 @@ namespace BudgetSystem
 
         public virtual void RefreshData()
         {
-
+            this.LoadData();
         }
 
 

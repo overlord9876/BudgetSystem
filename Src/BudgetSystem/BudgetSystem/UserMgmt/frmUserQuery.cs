@@ -9,16 +9,12 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmUserQuery : frmBaseQueryFormWithCondtion
+    public partial class frmUserQuery : frmBaseQueryForm
+
     {
         public frmUserQuery()
         {
             InitializeComponent();
-        }
-
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
         }
 
         protected override void InitModelOperate()
@@ -58,6 +54,10 @@ namespace BudgetSystem
             }
         }
 
+        public override void LoadData()
+        { 
+        
+        }
 
 
 

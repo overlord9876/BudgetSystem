@@ -61,6 +61,7 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -92,10 +93,11 @@
             this.btnApprovalList,
             this.btnMyOrder,
             this.barButtonItem4,
-            this.btnFlowConfig});
+            this.btnFlowConfig,
+            this.btnDepartment});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.ribbonControl1.MaxItemId = 34;
+            this.ribbonControl1.MaxItemId = 35;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
@@ -223,7 +225,7 @@
             // 
             this.btnUserQuery.Caption = "用户管理";
             this.btnUserQuery.Id = 25;
-            this.btnUserQuery.ImageIndex = 40;
+            this.btnUserQuery.ImageIndex = 39;
             this.btnUserQuery.Name = "btnUserQuery";
             this.btnUserQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnUserQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserQuery_ItemClick);
@@ -335,6 +337,7 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnSupplierQuery);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnUserQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnDepartment);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnFlowConfig);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "系统设置";
@@ -406,6 +409,14 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // btnDepartment
+            // 
+            this.btnDepartment.Caption = "部门管理";
+            this.btnDepartment.Id = 34;
+            this.btnDepartment.ImageIndex = 40;
+            this.btnDepartment.Name = "btnDepartment";
+            this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
@@ -463,6 +474,7 @@
         private DevExpress.XtraBars.BarButtonItem btnMyOrder;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem btnFlowConfig;
+        private DevExpress.XtraBars.BarButtonItem btnDepartment;
     }
 }
 

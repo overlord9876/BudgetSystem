@@ -27,6 +27,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmBudgetQuery();
+                form.RefreshData();
             }
             else
             {
@@ -43,6 +44,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmInMoneyQuery();
+                form.RefreshData();
             }
             else
             {
@@ -57,6 +59,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmOutMoneyQuery();
+                form.RefreshData();
             }
             else
             {
@@ -104,6 +107,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmCustomerQuery();
+                form.RefreshData();
             }
             else
             {
@@ -118,6 +122,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmSupplierQuery();
+                form.RefreshData();
             }
             else
             {
@@ -132,6 +137,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmInvoiceQuery();
+                form.RefreshData();
             }
             else
             {
@@ -146,6 +152,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmVoucherNotesQuery();
+                form.RefreshData();
             }
             else
             {
@@ -160,6 +167,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmUserQuery();
+                form.RefreshData();
             }
             else
             {
@@ -173,7 +181,8 @@ namespace BudgetSystem
             frmFlowQuery form = GetExistForm<frmFlowQuery>();
             if (form == null)
             {
-                form = new frmFlowQuery();
+                form = new frmFlowQuery(); 
+                form.RefreshData();
             }
             else
             {
