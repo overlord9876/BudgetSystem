@@ -9,9 +9,9 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmCustomerQuery : frmBaseQueryForm
+    public partial class frmApprovalListQuery : frmBaseQueryForm
     {
-        public frmCustomerQuery()
+        public frmApprovalListQuery()
         {
             InitializeComponent();
         }
@@ -25,35 +25,24 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Agree));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperatePageName = "客户列表";
+            this.ModelOperatePageName = "待审流程";
         }
 
 
         public override void OperateHandled(ModelOperate operate)
         {
 
-            if (operate.Operate == OperateTypes.New.ToString())
+            if (operate.Operate == OperateTypes.Agree.ToString())
             {
-                frmCustomerEdit form = new frmCustomerEdit();
-                form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.Modify.ToString())
-            {
-                frmCustomerEdit form = new frmCustomerEdit();
+                frmApprovalEdit form = new frmApprovalEdit();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("View");
-            }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-                XtraMessageBox.Show("Revoke");
+                frmBudgetEditEx form = new frmBudgetEditEx();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == "Test")
             {

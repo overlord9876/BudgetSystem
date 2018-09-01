@@ -213,17 +213,17 @@
     <Compile Include="Supplier\frmSupplierEdit.Designer.cs">
       <DependentUpon>frmSupplierEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIEntity\EditFormWorkModels.cs" />
+    <Compile Include="UIEntity\ModelOperate.cs" />
+    <Compile Include="UIEntity\ModelOperateHelper.cs" />
+    <Compile Include="UIEntity\OperateTypes.cs" />
+    <Compile Include="UIEntity\UITypes.cs" />
     <Compile Include="Supplier\frmSupplierQuery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Supplier\frmSupplierQuery.Designer.cs">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIEntity\EditFormWorkModels.cs" />
-    <Compile Include="UIEntity\ModelOperate.cs" />
-    <Compile Include="UIEntity\ModelOperateHelper.cs" />
-    <Compile Include="UIEntity\OperateTypes.cs" />
-    <Compile Include="UIEntity\UITypes.cs" />
     <Compile Include="UserMgmt\frmUserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +235,24 @@
     </Compile>
     <Compile Include="UserMgmt\frmUserQuery.Designer.cs">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalListQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalListQuery.Designer.cs">
+      <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyFlowListQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyFlowListQuery.Designer.cs">
+      <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
+      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Base\frmBaseDialogForm.resx">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
@@ -329,6 +347,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserMgmt\frmUserQuery.resx">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
+      <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprovalEdit.resx">
+      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

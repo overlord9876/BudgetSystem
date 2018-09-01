@@ -181,7 +181,38 @@ namespace BudgetSystem
             frmFlowQuery form = GetExistForm<frmFlowQuery>();
             if (form == null)
             {
-                form = new frmFlowQuery(); 
+                form = new frmFlowQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnApprovalList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmApprovalListQuery form = GetExistForm<frmApprovalListQuery>();
+            if (form == null)
+            {
+                form = new frmApprovalListQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+
+        }
+
+        private void btnMyOrder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmMyFlowListQuery form = GetExistForm<frmMyFlowListQuery>();
+            if (form == null)
+            {
+                form = new frmMyFlowListQuery();
                 form.RefreshData();
             }
             else
