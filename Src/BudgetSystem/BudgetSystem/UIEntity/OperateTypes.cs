@@ -11,6 +11,8 @@ namespace BudgetSystem
         Delete,
         Relate,
         Revoke,
+        Disabled,
+        Enabled,
         View,
     }
 }

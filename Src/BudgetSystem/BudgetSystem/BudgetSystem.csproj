@@ -138,17 +138,17 @@
     <Compile Include="frmMain_UIController.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InMoney\frmInvoiceQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InMoney\frmInvoiceQuery.Designer.cs">
-      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="InMoney\frmInvoiceEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InMoney\frmInvoiceEdit.Designer.cs">
       <DependentUpon>frmInvoiceEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceQuery.Designer.cs">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="OutMoney\frmOutMemoryEdit.cs">
       <SubType>Form</SubType>
@@ -244,11 +244,11 @@
     <EmbeddedResource Include="InMoney\frmInMoneyQuery.resx">
       <DependentUpon>frmInMoneyQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InMoney\frmInvoiceQuery.resx">
-      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInvoiceEdit.resx">
       <DependentUpon>frmInvoiceEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInvoiceQuery.resx">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMemoryEdit.resx">
       <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>

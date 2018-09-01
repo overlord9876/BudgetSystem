@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmCustomerQuery : frmBaseQueryForm
+    public partial class frmCustomerQuery : frmBaseQueryFormWithCondtion
     {
         public frmCustomerQuery()
         {
@@ -27,7 +27,8 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "客户列表";
         }

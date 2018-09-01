@@ -9,29 +9,29 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmInvoiceQuery : frmBaseQueryForm
+    public partial class frmInvoiceQuery : frmBaseQueryFormWithCondtion
     {
         public frmInvoiceQuery()
         {
             InitializeComponent();
-        }
-
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
+            this.CanRefreshData = false;
         }
 
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "开具发票"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改发票"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除发票"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Relate, "关联入帐单"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看发票"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看付款凭证"));
 
-            this.ModelOperatePageName = "发票管理";
+            this.ModelOperatePageName = "付款凭证管理";
+        }
+
+        public override void RefreshData()
+        {
+            XtraMessageBox.Show(this.Text);
         }
 
 
@@ -40,18 +40,21 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmInvoiceEdit form = new frmInvoiceEdit();
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
                 form.ShowDialog(this);
+                XtraMessageBox.Show("新增付款凭证（开票）");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmInvoiceEdit form = new frmInvoiceEdit();
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
                 form.ShowDialog(this);
+                XtraMessageBox.Show("修改付款凭证（发票）");
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmInvoiceEdit form = new frmInvoiceEdit();
+                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
                 form.ShowDialog(this);
+                XtraMessageBox.Show("查看付款凭证（发票）");
             }
             else if (operate.Operate == "Test1")
             {

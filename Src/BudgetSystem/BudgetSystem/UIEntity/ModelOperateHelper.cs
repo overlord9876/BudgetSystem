@@ -6,12 +6,12 @@ namespace BudgetSystem
 {
     public static class ModelOperateHelper
     {
-        public static ModelOperate GetOperate(OperateTypes operate,string caption="")
+        public static ModelOperate GetOperate(OperateTypes operate, string caption = "")
         {
-            string text="";
-            string group="";
-            int order=(int)operate;
-            int imageIndex=-1;
+            string text = "";
+            string group = "";
+            int order = (int)operate;
+            int imageIndex = -1;
 
             if (operate == OperateTypes.New)
             {
@@ -49,8 +49,20 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 51;
             }
+            else if (operate == OperateTypes.Disabled)
+            {
+                text = "停用";
+                group = "操作";
+                imageIndex = 51;
+            }
+            else if (operate == OperateTypes.Enabled)
+            {
+                text = "启用";
+                group = "操作";
+                imageIndex = 51;
+            }
 
-            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption)?text:caption, group, order, imageIndex);
+            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }
 
