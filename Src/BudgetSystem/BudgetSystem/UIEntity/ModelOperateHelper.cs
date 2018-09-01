@@ -67,6 +67,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 2;
             }
+            else if (operate == OperateTypes.SplitCost)
+            {
+                text = "费用拆分";
+                group = "操作";
+                imageIndex = 2;
+            }
 
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;

@@ -17,6 +17,10 @@ namespace BudgetSystem
         /// <summary>
         /// 审核
         /// </summary>
-        Agree
+        Agree,
+        /// <summary>
+        /// 拆分费用
+        /// </summary>
+        SplitCost
     }
 }
