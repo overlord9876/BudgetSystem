@@ -16,7 +16,7 @@ namespace BudgetSystem
         }
 
 
-        public void LoadData()
+        public override void LoadData()
         {
             this.txtFlowName.Text = "预算单审批流程";
             this.txtFlowDescription.Text = "预算单审批流程";

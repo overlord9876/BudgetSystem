@@ -123,6 +123,18 @@
     <Compile Include="Flow\frmFlowQuery.Designer.cs">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Department\frmDepartmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Department\frmDepartmentEdit.Designer.cs">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Role\frmRoleQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Role\frmRoleQuery.Designer.cs">
+      <DependentUpon>frmRoleQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMemoryEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +191,12 @@
     </Compile>
     <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Department\frmDepartmentQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Department\frmDepartmentQuery.Designer.cs">
+      <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="RunInfo.cs" />
     <Compile Include="OutMoney\frmOutMoneyQuery.cs">
@@ -251,11 +269,17 @@
     <EmbeddedResource Include="Flow\frmFlowQuery.resx">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Department\frmDepartmentEdit.resx">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Role\frmRoleQuery.resx">
+      <DependentUpon>frmRoleQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMemoryEdit.resx">
       <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
@@ -291,6 +315,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Department\frmDepartmentQuery.resx">
+      <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierEdit.resx">
       <DependentUpon>frmSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>

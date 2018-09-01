@@ -14,14 +14,8 @@ namespace BudgetSystem
         public frmOutMoneyQuery()
         {
             InitializeComponent();
-            this.CanRefreshData = false;
+          
         }
-
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
-        }
-
 
         protected override void InitModelOperate()
         {

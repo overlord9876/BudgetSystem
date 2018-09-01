@@ -16,11 +16,6 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
-        public override void RefreshData()
-        {
-            XtraMessageBox.Show(this.Text);
-        }
-
         protected override void InitModelOperate()
         {
             base.InitModelOperate();

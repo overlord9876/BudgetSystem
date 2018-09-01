@@ -47,13 +47,13 @@ namespace BudgetSystem
             {
                 text = "关联";
                 group = "操作";
-                imageIndex = 51;
+                imageIndex = 28;
             }
             else if (operate == OperateTypes.Disabled)
             {
                 text = "停用";
                 group = "操作";
-                imageIndex = 51;
+                imageIndex = 53;
             }
             else if (operate == OperateTypes.Enabled)
             {

@@ -55,8 +55,19 @@ namespace BudgetSystem
         }
 
         public override void LoadData()
-        { 
-        
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name");
+            dt.Columns.Add("RealName");
+            dt.Columns.Add("Role");
+            dt.Columns.Add("Department");
+            dt.Columns.Add("State");
+
+            dt.Rows.Add("User1", "张三", "业务员", "业务部", "可用");
+            dt.Rows.Add("User2", "李四", "财务", "财务部", "可用");
+            dt.Rows.Add("User3", "王五", "财务管理员", "业务部", "可用");
+            dt.Rows.Add("User4", "赵六", "财务", "财务部", "停用");
+            this.gridControl1.DataSource = dt;
         }
 
 
