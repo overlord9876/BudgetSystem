@@ -168,6 +168,20 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+        private void btnFlowConfig_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmFlowQuery form = GetExistForm<frmFlowQuery>();
+            if (form == null)
+            {
+                form = new frmFlowQuery();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
 
     }
 }

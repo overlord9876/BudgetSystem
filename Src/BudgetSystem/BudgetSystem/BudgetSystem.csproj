@@ -111,6 +111,18 @@
     <Compile Include="Customer\frmCustomerEdit.Designer.cs">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Flow\frmFlowEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flow\frmFlowEdit.Designer.cs">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flow\frmFlowQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flow\frmFlowQuery.Designer.cs">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMemoryEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +201,7 @@
     <Compile Include="Supplier\frmSupplierQuery.Designer.cs">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\ModelOperate.cs" />
     <Compile Include="UIEntity\ModelOperateHelper.cs" />
     <Compile Include="UIEntity\OperateTypes.cs" />
@@ -231,6 +244,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerEdit.resx">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flow\frmFlowEdit.resx">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flow\frmFlowQuery.resx">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -300,6 +319,7 @@
       <Name>Localization</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

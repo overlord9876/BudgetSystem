@@ -50,8 +50,8 @@
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -295,6 +295,7 @@
             this.btnFlowConfig.ImageIndex = 52;
             this.btnFlowConfig.Name = "btnFlowConfig";
             this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnFlowConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFlowConfig_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -321,6 +322,14 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "收支管理";
             // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "我的工作";
+            // 
             // ribbonPageGroup4
             // 
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
@@ -329,14 +338,6 @@
             this.ribbonPageGroup4.ItemLinks.Add(this.btnFlowConfig);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "系统设置";
-            // 
-            // ribbonPageGroup5
-            // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
-            this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
-            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
-            this.ribbonPageGroup5.Text = "我的工作";
             // 
             // ribbonPage4
             // 
