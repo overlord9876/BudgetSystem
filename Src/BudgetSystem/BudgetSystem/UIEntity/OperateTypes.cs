@@ -14,5 +14,9 @@ namespace BudgetSystem
         Disabled,
         Enabled,
         View,
+        /// <summary>
+        /// 审核
+        /// </summary>
+        Agree
     }
 }

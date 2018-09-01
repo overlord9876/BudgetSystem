@@ -53,13 +53,19 @@ namespace BudgetSystem
             {
                 text = "停用";
                 group = "操作";
-                imageIndex = 51;
+                imageIndex = 53;
             }
             else if (operate == OperateTypes.Enabled)
             {
                 text = "启用";
                 group = "操作";
-                imageIndex = 51;
+                imageIndex = 34;
+            }
+            else if (operate == OperateTypes.Agree)
+            {
+                text = "审核";
+                group = "操作";
+                imageIndex = 2;
             }
 
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);

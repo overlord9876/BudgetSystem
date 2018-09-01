@@ -5,11 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmSupplierQuery : frmBaseQueryFormWithCondtion
+    public partial class frmSupplierQuery : frmBaseQueryForm
     {
         public frmSupplierQuery()
         {
@@ -18,58 +17,45 @@ namespace BudgetSystem
 
         public override void RefreshData()
         {
-            XtraMessageBox.Show(this.Text);
+            LoadData();
         }
 
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-
-
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-
-            this.ModelOperatePageName = "供应商列表";
+            this.ModelOperatePageName = "供应商管理";
         }
 
 
         public override void OperateHandled(ModelOperate operate)
         {
 
-            if (operate.Operate == OperateTypes.New.ToString())
+            if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmSupplierEdit form = new frmSupplierEdit();
-                form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.Modify.ToString())
-            {
-                frmSupplierEdit form = new frmSupplierEdit();
+                frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.New };
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmSupplierEdit form = new frmSupplierEdit();
+                frmFlowEdit form = new frmFlowEdit() {  WorkModel= EditFormWorkModels.View};
                 form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-                XtraMessageBox.Show("Revoke");
-            }
-            else if (operate.Operate == "Test")
-            {
-                XtraMessageBox.Show("Test");
-            }
-            else
-            {
-                XtraMessageBox.Show("未定义的操作");
             }
         }
 
 
+        private void LoadData()
+        {
+           
+        }
 
-
+        private void frmFlowQuery_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
 }

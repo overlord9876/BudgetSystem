@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.rgbStyle = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.btnReLogin = new DevExpress.XtraBars.BarButtonItem();
@@ -47,6 +46,7 @@
             this.btnMyOrder = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.btnFlowConfig = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -55,13 +55,12 @@
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -96,7 +95,7 @@
             this.btnFlowConfig,
             this.btnDepartment});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.ribbonControl1.MaxItemId = 35;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -107,7 +106,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
+            this.ribbonControl1.Size = new System.Drawing.Size(1184, 151);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -168,6 +167,7 @@
             this.imageCollection1.Images.SetKeyName(50, "Delete_32x32.png");
             this.imageCollection1.Images.SetKeyName(51, "Inbox_32x32.png");
             this.imageCollection1.Images.SetKeyName(52, "ShowDetail_32x32.png");
+            this.imageCollection1.Images.SetKeyName(53, "Stop_32x32.png");
             // 
             // btnRefresh
             // 
@@ -273,6 +273,7 @@
             this.btnApprovalList.ImageIndex = 47;
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnApprovalList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApprovalList_ItemClick);
             // 
             // btnMyOrder
             // 
@@ -281,6 +282,7 @@
             this.btnMyOrder.ImageIndex = 17;
             this.btnMyOrder.Name = "btnMyOrder";
             this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
             // 
             // barButtonItem4
             // 
@@ -298,6 +300,14 @@
             this.btnFlowConfig.Name = "btnFlowConfig";
             this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnFlowConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFlowConfig_ItemClick);
+            // 
+            // btnDepartment
+            // 
+            this.btnDepartment.Caption = "部门管理";
+            this.btnDepartment.Id = 34;
+            this.btnDepartment.ImageIndex = 40;
+            this.btnDepartment.Name = "btnDepartment";
+            this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPage1
             // 
@@ -357,11 +367,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 603);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(1);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1184, 31);
             // 
             // documentManager1
             // 
@@ -409,23 +419,15 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
-            // btnDepartment
-            // 
-            this.btnDepartment.Caption = "部门管理";
-            this.btnDepartment.Id = 34;
-            this.btnDepartment.ImageIndex = 40;
-            this.btnDepartment.Name = "btnDepartment";
-            this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1692, 997);
+            this.ClientSize = new System.Drawing.Size(1184, 634);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
