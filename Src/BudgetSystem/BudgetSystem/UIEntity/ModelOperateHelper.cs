@@ -53,7 +53,7 @@ namespace BudgetSystem
             {
                 text = "停用";
                 group = "操作";
-                imageIndex = 53;
+                imageIndex = 54;
             }
             else if (operate == OperateTypes.Enabled)
             {
