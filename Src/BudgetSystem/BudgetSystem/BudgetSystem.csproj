@@ -357,6 +357,9 @@
     <EmbeddedResource Include="UserMgmt\frmUserQuery.resx">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
+      <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
     </EmbeddedResource>

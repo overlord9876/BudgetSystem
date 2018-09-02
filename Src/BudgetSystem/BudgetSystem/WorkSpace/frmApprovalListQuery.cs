@@ -18,7 +18,19 @@ namespace BudgetSystem
 
         public override void RefreshData()
         {
-            XtraMessageBox.Show(this.Text);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ApprovalType", typeof(string));
+            dt.Columns.Add("ApprovalName", typeof(string));
+            dt.Columns.Add("Commiter", typeof(string));
+            dt.Columns.Add("CommitDate", typeof(DateTime));
+            dt.Columns.Add("CreateTime", typeof(DateTime));
+
+            dt.Rows.Add("预算单审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
+            dt.Rows.Add("合格供方审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
+            dt.Rows.Add("财务付款", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
+            dt.Rows.Add("预算单审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
+
+            this.gridControl1.DataSource = dt;
         }
 
         protected override void InitModelOperate()
