@@ -300,157 +300,173 @@
             this.layoutControl1.Controls.Add(this.textEdit2);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1030, 158, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1520, 1144);
+            this.layoutControl1.Size = new System.Drawing.Size(1216, 936);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // memoEdit5
             // 
-            this.memoEdit5.Location = new System.Drawing.Point(66, 957);
+            this.memoEdit5.Location = new System.Drawing.Point(57, 764);
+            this.memoEdit5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.memoEdit5.Name = "memoEdit5";
-            this.memoEdit5.Size = new System.Drawing.Size(1442, 175);
+            this.memoEdit5.Size = new System.Drawing.Size(1190, 139);
             this.memoEdit5.StyleController = this.layoutControl1;
             this.memoEdit5.TabIndex = 53;
             // 
             // textEdit32
             // 
-            this.textEdit32.Location = new System.Drawing.Point(440, 925);
+            this.textEdit32.Location = new System.Drawing.Point(366, 735);
+            this.textEdit32.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit32.Name = "textEdit32";
-            this.textEdit32.Size = new System.Drawing.Size(424, 28);
+            this.textEdit32.Size = new System.Drawing.Size(350, 25);
             this.textEdit32.StyleController = this.layoutControl1;
             this.textEdit32.TabIndex = 52;
             // 
             // textEdit31
             // 
-            this.textEdit31.Location = new System.Drawing.Point(12, 925);
+            this.textEdit31.Location = new System.Drawing.Point(12, 735);
+            this.textEdit31.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit31.Name = "textEdit31";
-            this.textEdit31.Size = new System.Drawing.Size(424, 28);
+            this.textEdit31.Size = new System.Drawing.Size(350, 25);
             this.textEdit31.StyleController = this.layoutControl1;
             this.textEdit31.TabIndex = 51;
             // 
             // textEdit30
             // 
-            this.textEdit30.Location = new System.Drawing.Point(868, 925);
+            this.textEdit30.Location = new System.Drawing.Point(720, 735);
+            this.textEdit30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit30.Name = "textEdit30";
-            this.textEdit30.Size = new System.Drawing.Size(640, 28);
+            this.textEdit30.Size = new System.Drawing.Size(527, 25);
             this.textEdit30.StyleController = this.layoutControl1;
             this.textEdit30.TabIndex = 50;
             // 
             // textEdit29
             // 
-            this.textEdit29.Location = new System.Drawing.Point(654, 868);
+            this.textEdit29.Location = new System.Drawing.Point(543, 685);
+            this.textEdit29.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit29.Name = "textEdit29";
-            this.textEdit29.Size = new System.Drawing.Size(210, 28);
+            this.textEdit29.Size = new System.Drawing.Size(173, 25);
             this.textEdit29.StyleController = this.layoutControl1;
             this.textEdit29.TabIndex = 49;
             // 
             // textEdit28
             // 
-            this.textEdit28.Location = new System.Drawing.Point(440, 868);
+            this.textEdit28.Location = new System.Drawing.Point(366, 685);
+            this.textEdit28.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit28.Name = "textEdit28";
-            this.textEdit28.Size = new System.Drawing.Size(210, 28);
+            this.textEdit28.Size = new System.Drawing.Size(173, 25);
             this.textEdit28.StyleController = this.layoutControl1;
             this.textEdit28.TabIndex = 48;
             // 
             // textEdit27
             // 
-            this.textEdit27.Location = new System.Drawing.Point(868, 868);
+            this.textEdit27.Location = new System.Drawing.Point(720, 685);
+            this.textEdit27.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit27.Name = "textEdit27";
-            this.textEdit27.Size = new System.Drawing.Size(210, 28);
+            this.textEdit27.Size = new System.Drawing.Size(173, 25);
             this.textEdit27.StyleController = this.layoutControl1;
             this.textEdit27.TabIndex = 47;
             // 
             // textEdit26
             // 
-            this.textEdit26.Location = new System.Drawing.Point(12, 868);
+            this.textEdit26.Location = new System.Drawing.Point(12, 685);
+            this.textEdit26.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit26.Name = "textEdit26";
-            this.textEdit26.Size = new System.Drawing.Size(424, 28);
+            this.textEdit26.Size = new System.Drawing.Size(350, 25);
             this.textEdit26.StyleController = this.layoutControl1;
             this.textEdit26.TabIndex = 46;
             // 
             // textEdit25
             // 
-            this.textEdit25.Location = new System.Drawing.Point(1082, 868);
+            this.textEdit25.Location = new System.Drawing.Point(897, 685);
+            this.textEdit25.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit25.Name = "textEdit25";
-            this.textEdit25.Size = new System.Drawing.Size(210, 28);
+            this.textEdit25.Size = new System.Drawing.Size(173, 25);
             this.textEdit25.StyleController = this.layoutControl1;
             this.textEdit25.TabIndex = 45;
             // 
             // textEdit24
             // 
-            this.textEdit24.Location = new System.Drawing.Point(1296, 868);
+            this.textEdit24.Location = new System.Drawing.Point(1074, 685);
+            this.textEdit24.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit24.Name = "textEdit24";
-            this.textEdit24.Size = new System.Drawing.Size(212, 28);
+            this.textEdit24.Size = new System.Drawing.Size(173, 25);
             this.textEdit24.StyleController = this.layoutControl1;
             this.textEdit24.TabIndex = 44;
             // 
             // textEdit23
             // 
-            this.textEdit23.Location = new System.Drawing.Point(226, 811);
+            this.textEdit23.Location = new System.Drawing.Point(189, 635);
+            this.textEdit23.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit23.Name = "textEdit23";
-            this.textEdit23.Size = new System.Drawing.Size(210, 28);
+            this.textEdit23.Size = new System.Drawing.Size(173, 25);
             this.textEdit23.StyleController = this.layoutControl1;
             this.textEdit23.TabIndex = 43;
             // 
             // textEdit22
             // 
-            this.textEdit22.Location = new System.Drawing.Point(440, 811);
+            this.textEdit22.Location = new System.Drawing.Point(366, 635);
+            this.textEdit22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit22.Name = "textEdit22";
-            this.textEdit22.Size = new System.Drawing.Size(210, 28);
+            this.textEdit22.Size = new System.Drawing.Size(173, 25);
             this.textEdit22.StyleController = this.layoutControl1;
             this.textEdit22.TabIndex = 42;
             // 
             // textEdit21
             // 
-            this.textEdit21.Location = new System.Drawing.Point(654, 811);
+            this.textEdit21.Location = new System.Drawing.Point(543, 635);
+            this.textEdit21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit21.Name = "textEdit21";
-            this.textEdit21.Size = new System.Drawing.Size(210, 28);
+            this.textEdit21.Size = new System.Drawing.Size(173, 25);
             this.textEdit21.StyleController = this.layoutControl1;
             this.textEdit21.TabIndex = 41;
             // 
             // textEdit20
             // 
-            this.textEdit20.Location = new System.Drawing.Point(12, 811);
+            this.textEdit20.Location = new System.Drawing.Point(12, 635);
+            this.textEdit20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit20.Name = "textEdit20";
-            this.textEdit20.Size = new System.Drawing.Size(210, 28);
+            this.textEdit20.Size = new System.Drawing.Size(173, 25);
             this.textEdit20.StyleController = this.layoutControl1;
             this.textEdit20.TabIndex = 40;
             // 
             // textEdit19
             // 
-            this.textEdit19.Location = new System.Drawing.Point(868, 811);
+            this.textEdit19.Location = new System.Drawing.Point(720, 635);
+            this.textEdit19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit19.Name = "textEdit19";
-            this.textEdit19.Size = new System.Drawing.Size(210, 28);
+            this.textEdit19.Size = new System.Drawing.Size(173, 25);
             this.textEdit19.StyleController = this.layoutControl1;
             this.textEdit19.TabIndex = 39;
             // 
             // textEdit18
             // 
-            this.textEdit18.Location = new System.Drawing.Point(1082, 811);
+            this.textEdit18.Location = new System.Drawing.Point(897, 635);
+            this.textEdit18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit18.Name = "textEdit18";
-            this.textEdit18.Size = new System.Drawing.Size(210, 28);
+            this.textEdit18.Size = new System.Drawing.Size(173, 25);
             this.textEdit18.StyleController = this.layoutControl1;
             this.textEdit18.TabIndex = 38;
             // 
             // textEdit17
             // 
-            this.textEdit17.Location = new System.Drawing.Point(1296, 811);
+            this.textEdit17.Location = new System.Drawing.Point(1074, 635);
+            this.textEdit17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit17.Name = "textEdit17";
-            this.textEdit17.Size = new System.Drawing.Size(212, 28);
+            this.textEdit17.Size = new System.Drawing.Size(173, 25);
             this.textEdit17.StyleController = this.layoutControl1;
             this.textEdit17.TabIndex = 37;
             // 
             // gridControl1
             // 
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl1.Location = new System.Drawing.Point(12, 299);
+            this.gridControl1.Location = new System.Drawing.Point(12, 245);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1496, 171);
+            this.gridControl1.Size = new System.Drawing.Size(1235, 116);
             this.gridControl1.TabIndex = 36;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -528,68 +544,73 @@
             // 
             // textEdit16
             // 
-            this.textEdit16.Location = new System.Drawing.Point(440, 754);
+            this.textEdit16.Location = new System.Drawing.Point(366, 585);
+            this.textEdit16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit16.Name = "textEdit16";
-            this.textEdit16.Size = new System.Drawing.Size(210, 28);
+            this.textEdit16.Size = new System.Drawing.Size(173, 25);
             this.textEdit16.StyleController = this.layoutControl1;
             this.textEdit16.TabIndex = 35;
             // 
             // textEdit15
             // 
-            this.textEdit15.Location = new System.Drawing.Point(654, 754);
+            this.textEdit15.Location = new System.Drawing.Point(543, 585);
+            this.textEdit15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit15.Name = "textEdit15";
-            this.textEdit15.Size = new System.Drawing.Size(210, 28);
+            this.textEdit15.Size = new System.Drawing.Size(173, 25);
             this.textEdit15.StyleController = this.layoutControl1;
             this.textEdit15.TabIndex = 34;
             // 
             // textEdit14
             // 
-            this.textEdit14.Location = new System.Drawing.Point(12, 754);
+            this.textEdit14.Location = new System.Drawing.Point(12, 585);
+            this.textEdit14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit14.Name = "textEdit14";
-            this.textEdit14.Size = new System.Drawing.Size(210, 28);
+            this.textEdit14.Size = new System.Drawing.Size(173, 25);
             this.textEdit14.StyleController = this.layoutControl1;
             this.textEdit14.TabIndex = 33;
             // 
             // textEdit13
             // 
-            this.textEdit13.Location = new System.Drawing.Point(868, 754);
+            this.textEdit13.Location = new System.Drawing.Point(720, 585);
+            this.textEdit13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit13.Name = "textEdit13";
-            this.textEdit13.Size = new System.Drawing.Size(210, 28);
+            this.textEdit13.Size = new System.Drawing.Size(173, 25);
             this.textEdit13.StyleController = this.layoutControl1;
             this.textEdit13.TabIndex = 32;
             // 
             // textEdit12
             // 
-            this.textEdit12.Location = new System.Drawing.Point(226, 754);
+            this.textEdit12.Location = new System.Drawing.Point(189, 585);
+            this.textEdit12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit12.Name = "textEdit12";
-            this.textEdit12.Size = new System.Drawing.Size(210, 28);
+            this.textEdit12.Size = new System.Drawing.Size(173, 25);
             this.textEdit12.StyleController = this.layoutControl1;
             this.textEdit12.TabIndex = 31;
             // 
             // textEdit11
             // 
-            this.textEdit11.Location = new System.Drawing.Point(1082, 754);
+            this.textEdit11.Location = new System.Drawing.Point(897, 585);
+            this.textEdit11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit11.Name = "textEdit11";
-            this.textEdit11.Size = new System.Drawing.Size(210, 28);
+            this.textEdit11.Size = new System.Drawing.Size(173, 25);
             this.textEdit11.StyleController = this.layoutControl1;
             this.textEdit11.TabIndex = 30;
             // 
             // textEdit10
             // 
-            this.textEdit10.Location = new System.Drawing.Point(1296, 754);
+            this.textEdit10.Location = new System.Drawing.Point(1074, 585);
+            this.textEdit10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit10.Name = "textEdit10";
-            this.textEdit10.Size = new System.Drawing.Size(212, 28);
+            this.textEdit10.Size = new System.Drawing.Size(173, 25);
             this.textEdit10.StyleController = this.layoutControl1;
             this.textEdit10.TabIndex = 29;
             // 
             // gridControl2
             // 
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl2.Location = new System.Drawing.Point(12, 563);
+            this.gridControl2.Location = new System.Drawing.Point(12, 444);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1496, 162);
+            this.gridControl2.Size = new System.Drawing.Size(1235, 116);
             this.gridControl2.TabIndex = 28;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -659,93 +680,104 @@
             // 
             // checkEdit1
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(1297, 531);
+            this.checkEdit1.Location = new System.Drawing.Point(1073, 415);
+            this.checkEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = "是否合格供应方";
-            this.checkEdit1.Size = new System.Drawing.Size(211, 27);
+            this.checkEdit1.Size = new System.Drawing.Size(174, 23);
             this.checkEdit1.StyleController = this.layoutControl1;
             this.checkEdit1.TabIndex = 27;
             // 
             // buttonEdit3
             // 
-            this.buttonEdit3.Location = new System.Drawing.Point(223, 531);
+            this.buttonEdit3.Location = new System.Drawing.Point(188, 415);
+            this.buttonEdit3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonEdit3.Name = "buttonEdit3";
             this.buttonEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit3.Size = new System.Drawing.Size(1070, 28);
+            this.buttonEdit3.Size = new System.Drawing.Size(881, 25);
             this.buttonEdit3.StyleController = this.layoutControl1;
             this.buttonEdit3.TabIndex = 26;
             // 
             // textEdit9
             // 
-            this.textEdit9.Location = new System.Drawing.Point(654, 499);
+            this.textEdit9.Location = new System.Drawing.Point(543, 386);
+            this.textEdit9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit9.Name = "textEdit9";
-            this.textEdit9.Size = new System.Drawing.Size(210, 28);
+            this.textEdit9.Size = new System.Drawing.Size(173, 25);
             this.textEdit9.StyleController = this.layoutControl1;
             this.textEdit9.TabIndex = 25;
             // 
             // textEdit8
             // 
-            this.textEdit8.Location = new System.Drawing.Point(226, 499);
+            this.textEdit8.Location = new System.Drawing.Point(189, 386);
+            this.textEdit8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit8.Name = "textEdit8";
-            this.textEdit8.Size = new System.Drawing.Size(210, 28);
+            this.textEdit8.Size = new System.Drawing.Size(173, 25);
             this.textEdit8.StyleController = this.layoutControl1;
             this.textEdit8.TabIndex = 24;
             // 
             // textEdit7
             // 
-            this.textEdit7.Location = new System.Drawing.Point(1296, 499);
+            this.textEdit7.Location = new System.Drawing.Point(1074, 386);
+            this.textEdit7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit7.Name = "textEdit7";
-            this.textEdit7.Size = new System.Drawing.Size(212, 28);
+            this.textEdit7.Size = new System.Drawing.Size(173, 25);
             this.textEdit7.StyleController = this.layoutControl1;
             this.textEdit7.TabIndex = 23;
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(440, 499);
+            this.textEdit6.Location = new System.Drawing.Point(366, 386);
+            this.textEdit6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Size = new System.Drawing.Size(210, 28);
+            this.textEdit6.Size = new System.Drawing.Size(173, 25);
             this.textEdit6.StyleController = this.layoutControl1;
             this.textEdit6.TabIndex = 22;
             // 
             // textEdit5
             // 
-            this.textEdit5.Location = new System.Drawing.Point(1082, 499);
+            this.textEdit5.Location = new System.Drawing.Point(897, 386);
+            this.textEdit5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Size = new System.Drawing.Size(210, 28);
+            this.textEdit5.Size = new System.Drawing.Size(173, 25);
             this.textEdit5.StyleController = this.layoutControl1;
             this.textEdit5.TabIndex = 21;
             // 
             // textEdit4
             // 
-            this.textEdit4.Location = new System.Drawing.Point(868, 499);
+            this.textEdit4.Location = new System.Drawing.Point(720, 386);
+            this.textEdit4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Size = new System.Drawing.Size(210, 28);
+            this.textEdit4.Size = new System.Drawing.Size(173, 25);
             this.textEdit4.StyleController = this.layoutControl1;
             this.textEdit4.TabIndex = 20;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(12, 499);
+            this.textEdit1.Location = new System.Drawing.Point(12, 386);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(210, 28);
+            this.textEdit1.Size = new System.Drawing.Size(173, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 19;
             // 
             // radioGroup2
             // 
-            this.radioGroup2.Location = new System.Drawing.Point(1123, 199);
+            this.radioGroup2.Location = new System.Drawing.Point(931, 145);
+            this.radioGroup2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioGroup2.Name = "radioGroup2";
             this.radioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "做单"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "过单")});
-            this.radioGroup2.Size = new System.Drawing.Size(385, 96);
+            this.radioGroup2.Size = new System.Drawing.Size(316, 96);
             this.radioGroup2.StyleController = this.layoutControl1;
             this.radioGroup2.TabIndex = 18;
             // 
             // radioGroup1
             // 
-            this.radioGroup1.Location = new System.Drawing.Point(223, 199);
+            this.radioGroup1.Location = new System.Drawing.Point(188, 145);
+            this.radioGroup1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioGroup1.Name = "radioGroup1";
             this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("一般贸易", "一般贸易"),
@@ -753,111 +785,122 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem("内贸", "内贸"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("来料加工", "来料加工"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("纯进口", "纯进口")});
-            this.radioGroup1.Size = new System.Drawing.Size(685, 96);
+            this.radioGroup1.Size = new System.Drawing.Size(563, 96);
             this.radioGroup1.StyleController = this.layoutControl1;
             this.radioGroup1.TabIndex = 17;
             // 
             // memoEdit4
             // 
-            this.memoEdit4.Location = new System.Drawing.Point(1212, 101);
+            this.memoEdit4.Location = new System.Drawing.Point(1004, 91);
+            this.memoEdit4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.memoEdit4.Name = "memoEdit4";
-            this.memoEdit4.Size = new System.Drawing.Size(296, 94);
+            this.memoEdit4.Size = new System.Drawing.Size(243, 50);
             this.memoEdit4.StyleController = this.layoutControl1;
             this.memoEdit4.TabIndex = 16;
             // 
             // memoEdit3
             // 
-            this.memoEdit3.Location = new System.Drawing.Point(912, 101);
+            this.memoEdit3.Location = new System.Drawing.Point(756, 91);
+            this.memoEdit3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.memoEdit3.Name = "memoEdit3";
-            this.memoEdit3.Size = new System.Drawing.Size(296, 94);
+            this.memoEdit3.Size = new System.Drawing.Size(244, 50);
             this.memoEdit3.StyleController = this.layoutControl1;
             this.memoEdit3.TabIndex = 14;
             // 
             // memoEdit2
             // 
-            this.memoEdit2.Location = new System.Drawing.Point(612, 101);
+            this.memoEdit2.Location = new System.Drawing.Point(508, 91);
+            this.memoEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.memoEdit2.Name = "memoEdit2";
-            this.memoEdit2.Size = new System.Drawing.Size(296, 94);
+            this.memoEdit2.Size = new System.Drawing.Size(244, 50);
             this.memoEdit2.StyleController = this.layoutControl1;
             this.memoEdit2.TabIndex = 13;
             // 
             // memoEdit1
             // 
-            this.memoEdit1.Location = new System.Drawing.Point(223, 101);
+            this.memoEdit1.Location = new System.Drawing.Point(188, 91);
+            this.memoEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(385, 94);
+            this.memoEdit1.Size = new System.Drawing.Size(316, 50);
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 12;
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(1124, 69);
+            this.comboBoxEdit1.Location = new System.Drawing.Point(932, 62);
+            this.comboBoxEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(384, 28);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(315, 25);
             this.comboBoxEdit1.StyleController = this.layoutControl1;
             this.comboBoxEdit1.TabIndex = 11;
             // 
             // buttonEdit2
             // 
-            this.buttonEdit2.Location = new System.Drawing.Point(223, 69);
+            this.buttonEdit2.Location = new System.Drawing.Point(188, 62);
+            this.buttonEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonEdit2.Name = "buttonEdit2";
             this.buttonEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit2.Size = new System.Drawing.Size(686, 28);
+            this.buttonEdit2.Size = new System.Drawing.Size(564, 25);
             this.buttonEdit2.StyleController = this.layoutControl1;
             this.buttonEdit2.TabIndex = 10;
             // 
             // buttonEdit1
             // 
-            this.buttonEdit1.Location = new System.Drawing.Point(12, 37);
+            this.buttonEdit1.Location = new System.Drawing.Point(12, 33);
+            this.buttonEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonEdit1.Name = "buttonEdit1";
             this.buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit1.Size = new System.Drawing.Size(296, 28);
+            this.buttonEdit1.Size = new System.Drawing.Size(244, 25);
             this.buttonEdit1.StyleController = this.layoutControl1;
             this.buttonEdit1.TabIndex = 9;
             // 
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(1212, 37);
+            this.dateEdit2.Location = new System.Drawing.Point(1004, 33);
+            this.dateEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit2.Size = new System.Drawing.Size(296, 28);
+            this.dateEdit2.Size = new System.Drawing.Size(243, 25);
             this.dateEdit2.StyleController = this.layoutControl1;
             this.dateEdit2.TabIndex = 8;
             // 
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(912, 37);
+            this.dateEdit1.Location = new System.Drawing.Point(756, 33);
+            this.dateEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit1.Size = new System.Drawing.Size(296, 28);
+            this.dateEdit1.Size = new System.Drawing.Size(244, 25);
             this.dateEdit1.StyleController = this.layoutControl1;
             this.dateEdit1.TabIndex = 7;
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(612, 37);
+            this.textEdit3.Location = new System.Drawing.Point(508, 33);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(296, 28);
+            this.textEdit3.Size = new System.Drawing.Size(244, 25);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(312, 37);
+            this.textEdit2.Location = new System.Drawing.Point(260, 33);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(296, 28);
+            this.textEdit2.Size = new System.Drawing.Size(244, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
@@ -917,7 +960,7 @@
             this.layoutControlItem22});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1520, 1144);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1259, 915);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -927,12 +970,12 @@
             this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(300, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(248, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(300, 57);
+            this.layoutControlItem2.Size = new System.Drawing.Size(248, 50);
             this.layoutControlItem2.Text = "部门";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem3
             // 
@@ -940,12 +983,12 @@
             this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem3.Control = this.textEdit3;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(600, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(496, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(300, 57);
+            this.layoutControlItem3.Size = new System.Drawing.Size(248, 50);
             this.layoutControlItem3.Text = "业务员";
             this.layoutControlItem3.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem4
             // 
@@ -953,12 +996,12 @@
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem4.Control = this.dateEdit1;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(900, 0);
+            this.layoutControlItem4.Location = new System.Drawing.Point(744, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(300, 57);
+            this.layoutControlItem4.Size = new System.Drawing.Size(248, 50);
             this.layoutControlItem4.Text = "订约日期";
             this.layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem5
             // 
@@ -966,12 +1009,12 @@
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem5.Control = this.dateEdit2;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(1200, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(992, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(300, 57);
+            this.layoutControlItem5.Size = new System.Drawing.Size(247, 50);
             this.layoutControlItem5.Text = "有效期";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem1
             // 
@@ -981,48 +1024,48 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(300, 57);
+            this.layoutControlItem1.Size = new System.Drawing.Size(248, 50);
             this.layoutControlItem1.Text = "合同编号 ";
             this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.buttonEdit2;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 57);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 50);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(901, 32);
+            this.layoutControlItem6.Size = new System.Drawing.Size(744, 29);
             this.layoutControlItem6.Text = "买方名称：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.comboBoxEdit1;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(901, 57);
+            this.layoutControlItem7.Location = new System.Drawing.Point(744, 50);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(599, 32);
+            this.layoutControlItem7.Size = new System.Drawing.Size(495, 29);
             this.layoutControlItem7.Text = "国别或地区：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.memoEdit1;
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 89);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 79);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(600, 98);
+            this.layoutControlItem8.Size = new System.Drawing.Size(496, 54);
             this.layoutControlItem8.Text = "买方名称备注1-5：";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.memoEdit2;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(600, 89);
+            this.layoutControlItem9.Location = new System.Drawing.Point(496, 79);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(300, 98);
+            this.layoutControlItem9.Size = new System.Drawing.Size(248, 54);
             this.layoutControlItem9.Text = "layoutControlItem9";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
@@ -1032,9 +1075,9 @@
             // 
             this.layoutControlItem10.Control = this.memoEdit3;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(900, 89);
+            this.layoutControlItem10.Location = new System.Drawing.Point(744, 79);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(300, 98);
+            this.layoutControlItem10.Size = new System.Drawing.Size(248, 54);
             this.layoutControlItem10.Text = "layoutControlItem10";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
@@ -1044,9 +1087,9 @@
             // 
             this.layoutControlItem12.Control = this.memoEdit4;
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem12.Location = new System.Drawing.Point(1200, 89);
+            this.layoutControlItem12.Location = new System.Drawing.Point(992, 79);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(300, 98);
+            this.layoutControlItem12.Size = new System.Drawing.Size(247, 54);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;
@@ -1056,24 +1099,24 @@
             // 
             this.layoutControlItem13.Control = this.radioGroup1;
             this.layoutControlItem13.CustomizationFormText = "layoutControlItem13";
-            this.layoutControlItem13.Location = new System.Drawing.Point(0, 187);
+            this.layoutControlItem13.Location = new System.Drawing.Point(0, 133);
             this.layoutControlItem13.MaxSize = new System.Drawing.Size(0, 100);
             this.layoutControlItem13.MinSize = new System.Drawing.Size(354, 100);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(900, 100);
+            this.layoutControlItem13.Size = new System.Drawing.Size(743, 100);
             this.layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem13.Text = "贸易方式：";
-            this.layoutControlItem13.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem14
             // 
             this.layoutControlItem14.Control = this.radioGroup2;
             this.layoutControlItem14.CustomizationFormText = "layoutControlItem14";
-            this.layoutControlItem14.Location = new System.Drawing.Point(900, 187);
+            this.layoutControlItem14.Location = new System.Drawing.Point(743, 133);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(600, 100);
+            this.layoutControlItem14.Size = new System.Drawing.Size(496, 100);
             this.layoutControlItem14.Text = "贸易性质：";
-            this.layoutControlItem14.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem15
             // 
@@ -1081,12 +1124,12 @@
             this.layoutControlItem15.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem15.Control = this.textEdit1;
             this.layoutControlItem15.CustomizationFormText = "layoutControlItem15";
-            this.layoutControlItem15.Location = new System.Drawing.Point(0, 462);
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 353);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem15.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem15.Text = "价格条款";
             this.layoutControlItem15.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem15.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem16
             // 
@@ -1094,12 +1137,12 @@
             this.layoutControlItem16.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem16.Control = this.textEdit4;
             this.layoutControlItem16.CustomizationFormText = "layoutControlItem16";
-            this.layoutControlItem16.Location = new System.Drawing.Point(856, 462);
+            this.layoutControlItem16.Location = new System.Drawing.Point(708, 353);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem16.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem16.Text = "结算方式（3）";
             this.layoutControlItem16.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem16.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem17
             // 
@@ -1107,12 +1150,12 @@
             this.layoutControlItem17.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem17.Control = this.textEdit5;
             this.layoutControlItem17.CustomizationFormText = "layoutControlItem17";
-            this.layoutControlItem17.Location = new System.Drawing.Point(1070, 462);
+            this.layoutControlItem17.Location = new System.Drawing.Point(885, 353);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem17.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem17.Text = "合同金额";
             this.layoutControlItem17.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem17.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem18
             // 
@@ -1120,12 +1163,12 @@
             this.layoutControlItem18.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem18.Control = this.textEdit6;
             this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
-            this.layoutControlItem18.Location = new System.Drawing.Point(428, 462);
+            this.layoutControlItem18.Location = new System.Drawing.Point(354, 353);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem18.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem18.Text = "结算方式（1）";
             this.layoutControlItem18.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem19
             // 
@@ -1133,12 +1176,12 @@
             this.layoutControlItem19.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem19.Control = this.textEdit7;
             this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
-            this.layoutControlItem19.Location = new System.Drawing.Point(1284, 462);
+            this.layoutControlItem19.Location = new System.Drawing.Point(1062, 353);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(216, 57);
+            this.layoutControlItem19.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem19.Text = "目的港";
             this.layoutControlItem19.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem19.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem19.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem20
             // 
@@ -1146,12 +1189,12 @@
             this.layoutControlItem20.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem20.Control = this.textEdit8;
             this.layoutControlItem20.CustomizationFormText = "layoutControlItem20";
-            this.layoutControlItem20.Location = new System.Drawing.Point(214, 462);
+            this.layoutControlItem20.Location = new System.Drawing.Point(177, 353);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem20.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem20.Text = "交货口岸";
             this.layoutControlItem20.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem20.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem21
             // 
@@ -1159,20 +1202,20 @@
             this.layoutControlItem21.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem21.Control = this.textEdit9;
             this.layoutControlItem21.CustomizationFormText = "layoutControlItem21";
-            this.layoutControlItem21.Location = new System.Drawing.Point(642, 462);
+            this.layoutControlItem21.Location = new System.Drawing.Point(531, 353);
             this.layoutControlItem21.Name = "layoutControlItem21";
-            this.layoutControlItem21.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem21.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem21.Text = "结算方式（2）";
             this.layoutControlItem21.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem21.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem21.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem23
             // 
             this.layoutControlItem23.Control = this.checkEdit1;
             this.layoutControlItem23.CustomizationFormText = "layoutControlItem23";
-            this.layoutControlItem23.Location = new System.Drawing.Point(1285, 519);
+            this.layoutControlItem23.Location = new System.Drawing.Point(1061, 403);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(215, 32);
+            this.layoutControlItem23.Size = new System.Drawing.Size(178, 29);
             this.layoutControlItem23.Text = "layoutControlItem23";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem23.TextToControlDistance = 0;
@@ -1182,11 +1225,11 @@
             // 
             this.layoutControlItem24.Control = this.gridControl2;
             this.layoutControlItem24.CustomizationFormText = "layoutControlItem24";
-            this.layoutControlItem24.Location = new System.Drawing.Point(0, 551);
+            this.layoutControlItem24.Location = new System.Drawing.Point(0, 432);
             this.layoutControlItem24.MaxSize = new System.Drawing.Size(0, 180);
             this.layoutControlItem24.MinSize = new System.Drawing.Size(104, 120);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(1500, 166);
+            this.layoutControlItem24.Size = new System.Drawing.Size(1239, 120);
             this.layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem24.Text = "layoutControlItem24";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(0, 0);
@@ -1199,12 +1242,12 @@
             this.layoutControlItem25.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem25.Control = this.textEdit10;
             this.layoutControlItem25.CustomizationFormText = "利息";
-            this.layoutControlItem25.Location = new System.Drawing.Point(1284, 717);
+            this.layoutControlItem25.Location = new System.Drawing.Point(1062, 552);
             this.layoutControlItem25.Name = "layoutControlItem25";
-            this.layoutControlItem25.Size = new System.Drawing.Size(216, 57);
+            this.layoutControlItem25.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem25.Text = "利息";
             this.layoutControlItem25.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem25.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem25.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem26
             // 
@@ -1212,12 +1255,12 @@
             this.layoutControlItem26.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem26.Control = this.textEdit11;
             this.layoutControlItem26.CustomizationFormText = "天数";
-            this.layoutControlItem26.Location = new System.Drawing.Point(1070, 717);
+            this.layoutControlItem26.Location = new System.Drawing.Point(885, 552);
             this.layoutControlItem26.Name = "layoutControlItem26";
-            this.layoutControlItem26.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem26.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem26.Text = "天数";
             this.layoutControlItem26.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem26.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem26.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem27
             // 
@@ -1225,12 +1268,12 @@
             this.layoutControlItem27.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem27.Control = this.textEdit12;
             this.layoutControlItem27.CustomizationFormText = "结算方式（2）";
-            this.layoutControlItem27.Location = new System.Drawing.Point(214, 717);
+            this.layoutControlItem27.Location = new System.Drawing.Point(177, 552);
             this.layoutControlItem27.Name = "layoutControlItem27";
-            this.layoutControlItem27.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem27.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem27.Text = "结算方式（2）";
             this.layoutControlItem27.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem27.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem27.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem28
             // 
@@ -1238,12 +1281,12 @@
             this.layoutControlItem28.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem28.Control = this.textEdit13;
             this.layoutControlItem28.CustomizationFormText = "月利率%";
-            this.layoutControlItem28.Location = new System.Drawing.Point(856, 717);
+            this.layoutControlItem28.Location = new System.Drawing.Point(708, 552);
             this.layoutControlItem28.Name = "layoutControlItem28";
-            this.layoutControlItem28.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem28.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem28.Text = "月利率%";
             this.layoutControlItem28.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem28.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem28.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem29
             // 
@@ -1251,12 +1294,12 @@
             this.layoutControlItem29.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem29.Control = this.textEdit14;
             this.layoutControlItem29.CustomizationFormText = "结算方式（1）";
-            this.layoutControlItem29.Location = new System.Drawing.Point(0, 717);
+            this.layoutControlItem29.Location = new System.Drawing.Point(0, 552);
             this.layoutControlItem29.Name = "layoutControlItem29";
-            this.layoutControlItem29.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem29.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem29.Text = "结算方式（1）";
             this.layoutControlItem29.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem29.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem29.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem30
             // 
@@ -1264,12 +1307,12 @@
             this.layoutControlItem30.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem30.Control = this.textEdit15;
             this.layoutControlItem30.CustomizationFormText = "占总额%";
-            this.layoutControlItem30.Location = new System.Drawing.Point(642, 717);
+            this.layoutControlItem30.Location = new System.Drawing.Point(531, 552);
             this.layoutControlItem30.Name = "layoutControlItem30";
-            this.layoutControlItem30.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem30.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem30.Text = "占总额%";
             this.layoutControlItem30.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem30.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem30.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem31
             // 
@@ -1277,22 +1320,22 @@
             this.layoutControlItem31.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem31.Control = this.textEdit16;
             this.layoutControlItem31.CustomizationFormText = "预付款";
-            this.layoutControlItem31.Location = new System.Drawing.Point(428, 717);
+            this.layoutControlItem31.Location = new System.Drawing.Point(354, 552);
             this.layoutControlItem31.Name = "layoutControlItem31";
-            this.layoutControlItem31.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem31.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem31.Text = "预付款";
             this.layoutControlItem31.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem31.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem31.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem32
             // 
             this.layoutControlItem32.Control = this.gridControl1;
             this.layoutControlItem32.CustomizationFormText = "layoutControlItem32";
-            this.layoutControlItem32.Location = new System.Drawing.Point(0, 287);
+            this.layoutControlItem32.Location = new System.Drawing.Point(0, 233);
             this.layoutControlItem32.MaxSize = new System.Drawing.Size(0, 180);
             this.layoutControlItem32.MinSize = new System.Drawing.Size(104, 120);
             this.layoutControlItem32.Name = "layoutControlItem32";
-            this.layoutControlItem32.Size = new System.Drawing.Size(1500, 175);
+            this.layoutControlItem32.Size = new System.Drawing.Size(1239, 120);
             this.layoutControlItem32.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem32.Text = "layoutControlItem32";
             this.layoutControlItem32.TextSize = new System.Drawing.Size(0, 0);
@@ -1305,12 +1348,12 @@
             this.layoutControlItem33.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem33.Control = this.textEdit17;
             this.layoutControlItem33.CustomizationFormText = "小计";
-            this.layoutControlItem33.Location = new System.Drawing.Point(1284, 774);
+            this.layoutControlItem33.Location = new System.Drawing.Point(1062, 602);
             this.layoutControlItem33.Name = "layoutControlItem33";
-            this.layoutControlItem33.Size = new System.Drawing.Size(216, 57);
+            this.layoutControlItem33.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem33.Text = "小计";
             this.layoutControlItem33.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem33.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem33.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem34
             // 
@@ -1318,12 +1361,12 @@
             this.layoutControlItem34.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem34.Control = this.textEdit18;
             this.layoutControlItem34.CustomizationFormText = "进料款";
-            this.layoutControlItem34.Location = new System.Drawing.Point(1070, 774);
+            this.layoutControlItem34.Location = new System.Drawing.Point(885, 602);
             this.layoutControlItem34.Name = "layoutControlItem34";
-            this.layoutControlItem34.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem34.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem34.Text = "进料款";
             this.layoutControlItem34.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem34.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem34.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem35
             // 
@@ -1331,12 +1374,12 @@
             this.layoutControlItem35.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem35.Control = this.textEdit19;
             this.layoutControlItem35.CustomizationFormText = "其它（预）";
-            this.layoutControlItem35.Location = new System.Drawing.Point(856, 774);
+            this.layoutControlItem35.Location = new System.Drawing.Point(708, 602);
             this.layoutControlItem35.Name = "layoutControlItem35";
-            this.layoutControlItem35.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem35.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem35.Text = "其它（预）";
             this.layoutControlItem35.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem35.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem35.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem36
             // 
@@ -1344,12 +1387,12 @@
             this.layoutControlItem36.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem36.Control = this.textEdit20;
             this.layoutControlItem36.CustomizationFormText = "配额";
-            this.layoutControlItem36.Location = new System.Drawing.Point(0, 774);
+            this.layoutControlItem36.Location = new System.Drawing.Point(0, 602);
             this.layoutControlItem36.Name = "layoutControlItem36";
-            this.layoutControlItem36.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem36.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem36.Text = "配额";
             this.layoutControlItem36.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem36.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem36.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem37
             // 
@@ -1357,12 +1400,12 @@
             this.layoutControlItem37.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem37.Control = this.textEdit21;
             this.layoutControlItem37.CustomizationFormText = "银行费用";
-            this.layoutControlItem37.Location = new System.Drawing.Point(642, 774);
+            this.layoutControlItem37.Location = new System.Drawing.Point(531, 602);
             this.layoutControlItem37.Name = "layoutControlItem37";
-            this.layoutControlItem37.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem37.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem37.Text = "银行费用";
             this.layoutControlItem37.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem37.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem37.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem38
             // 
@@ -1370,12 +1413,12 @@
             this.layoutControlItem38.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem38.Control = this.textEdit22;
             this.layoutControlItem38.CustomizationFormText = "运保费";
-            this.layoutControlItem38.Location = new System.Drawing.Point(428, 774);
+            this.layoutControlItem38.Location = new System.Drawing.Point(354, 602);
             this.layoutControlItem38.Name = "layoutControlItem38";
-            this.layoutControlItem38.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem38.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem38.Text = "运保费";
             this.layoutControlItem38.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem38.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem38.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem39
             // 
@@ -1383,12 +1426,12 @@
             this.layoutControlItem39.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem39.Control = this.textEdit23;
             this.layoutControlItem39.CustomizationFormText = "佣金";
-            this.layoutControlItem39.Location = new System.Drawing.Point(214, 774);
+            this.layoutControlItem39.Location = new System.Drawing.Point(177, 602);
             this.layoutControlItem39.Name = "layoutControlItem39";
-            this.layoutControlItem39.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem39.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem39.Text = "佣金";
             this.layoutControlItem39.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem39.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem39.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem40
             // 
@@ -1396,12 +1439,12 @@
             this.layoutControlItem40.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem40.Control = this.textEdit24;
             this.layoutControlItem40.CustomizationFormText = "出口退税额";
-            this.layoutControlItem40.Location = new System.Drawing.Point(1284, 831);
+            this.layoutControlItem40.Location = new System.Drawing.Point(1062, 652);
             this.layoutControlItem40.Name = "layoutControlItem40";
-            this.layoutControlItem40.Size = new System.Drawing.Size(216, 57);
+            this.layoutControlItem40.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem40.Text = "出口退税额";
             this.layoutControlItem40.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem40.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem40.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem41
             // 
@@ -1409,12 +1452,12 @@
             this.layoutControlItem41.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem41.Control = this.textEdit25;
             this.layoutControlItem41.CustomizationFormText = "出口退税%";
-            this.layoutControlItem41.Location = new System.Drawing.Point(1070, 831);
+            this.layoutControlItem41.Location = new System.Drawing.Point(885, 652);
             this.layoutControlItem41.Name = "layoutControlItem41";
-            this.layoutControlItem41.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem41.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem41.Text = "出口退税%";
             this.layoutControlItem41.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem41.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem41.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem42
             // 
@@ -1422,12 +1465,12 @@
             this.layoutControlItem42.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem42.Control = this.textEdit26;
             this.layoutControlItem42.CustomizationFormText = "净收入额";
-            this.layoutControlItem42.Location = new System.Drawing.Point(0, 831);
+            this.layoutControlItem42.Location = new System.Drawing.Point(0, 652);
             this.layoutControlItem42.Name = "layoutControlItem42";
-            this.layoutControlItem42.Size = new System.Drawing.Size(428, 57);
+            this.layoutControlItem42.Size = new System.Drawing.Size(354, 50);
             this.layoutControlItem42.Text = "净收入额";
             this.layoutControlItem42.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem42.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem42.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem43
             // 
@@ -1435,12 +1478,12 @@
             this.layoutControlItem43.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem43.Control = this.textEdit27;
             this.layoutControlItem43.CustomizationFormText = "总成本";
-            this.layoutControlItem43.Location = new System.Drawing.Point(856, 831);
+            this.layoutControlItem43.Location = new System.Drawing.Point(708, 652);
             this.layoutControlItem43.Name = "layoutControlItem43";
-            this.layoutControlItem43.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem43.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem43.Text = "总成本";
             this.layoutControlItem43.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem43.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem43.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem44
             // 
@@ -1448,12 +1491,12 @@
             this.layoutControlItem44.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem44.Control = this.textEdit28;
             this.layoutControlItem44.CustomizationFormText = "折率";
-            this.layoutControlItem44.Location = new System.Drawing.Point(428, 831);
+            this.layoutControlItem44.Location = new System.Drawing.Point(354, 652);
             this.layoutControlItem44.Name = "layoutControlItem44";
-            this.layoutControlItem44.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem44.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem44.Text = "折率";
             this.layoutControlItem44.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem44.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem44.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem45
             // 
@@ -1461,12 +1504,12 @@
             this.layoutControlItem45.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem45.Control = this.textEdit29;
             this.layoutControlItem45.CustomizationFormText = "折合人民币";
-            this.layoutControlItem45.Location = new System.Drawing.Point(642, 831);
+            this.layoutControlItem45.Location = new System.Drawing.Point(531, 652);
             this.layoutControlItem45.Name = "layoutControlItem45";
-            this.layoutControlItem45.Size = new System.Drawing.Size(214, 57);
+            this.layoutControlItem45.Size = new System.Drawing.Size(177, 50);
             this.layoutControlItem45.Text = "折合人民币";
             this.layoutControlItem45.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem45.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem45.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem46
             // 
@@ -1474,12 +1517,12 @@
             this.layoutControlItem46.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem46.Control = this.textEdit30;
             this.layoutControlItem46.CustomizationFormText = "利润";
-            this.layoutControlItem46.Location = new System.Drawing.Point(856, 888);
+            this.layoutControlItem46.Location = new System.Drawing.Point(708, 702);
             this.layoutControlItem46.Name = "layoutControlItem46";
-            this.layoutControlItem46.Size = new System.Drawing.Size(644, 57);
+            this.layoutControlItem46.Size = new System.Drawing.Size(531, 50);
             this.layoutControlItem46.Text = "利润";
             this.layoutControlItem46.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem46.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem46.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem47
             // 
@@ -1487,12 +1530,12 @@
             this.layoutControlItem47.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem47.Control = this.textEdit31;
             this.layoutControlItem47.CustomizationFormText = "退税前换汇成本（￥或$）";
-            this.layoutControlItem47.Location = new System.Drawing.Point(0, 888);
+            this.layoutControlItem47.Location = new System.Drawing.Point(0, 702);
             this.layoutControlItem47.Name = "layoutControlItem47";
-            this.layoutControlItem47.Size = new System.Drawing.Size(428, 57);
+            this.layoutControlItem47.Size = new System.Drawing.Size(354, 50);
             this.layoutControlItem47.Text = "退税前换汇成本（￥或$）";
             this.layoutControlItem47.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem47.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem47.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem48
             // 
@@ -1500,47 +1543,47 @@
             this.layoutControlItem48.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem48.Control = this.textEdit32;
             this.layoutControlItem48.CustomizationFormText = "退税后换汇成本（￥或$）";
-            this.layoutControlItem48.Location = new System.Drawing.Point(428, 888);
+            this.layoutControlItem48.Location = new System.Drawing.Point(354, 702);
             this.layoutControlItem48.Name = "layoutControlItem48";
-            this.layoutControlItem48.Size = new System.Drawing.Size(428, 57);
+            this.layoutControlItem48.Size = new System.Drawing.Size(354, 50);
             this.layoutControlItem48.Text = "退税后换汇成本（￥或$）";
             this.layoutControlItem48.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem48.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem48.TextSize = new System.Drawing.Size(173, 18);
             // 
             // layoutControlItem49
             // 
             this.layoutControlItem49.Control = this.memoEdit5;
             this.layoutControlItem49.CustomizationFormText = "备注：";
-            this.layoutControlItem49.Location = new System.Drawing.Point(0, 945);
+            this.layoutControlItem49.Location = new System.Drawing.Point(0, 752);
             this.layoutControlItem49.MaxSize = new System.Drawing.Size(0, 1000);
             this.layoutControlItem49.MinSize = new System.Drawing.Size(228, 50);
             this.layoutControlItem49.Name = "layoutControlItem49";
-            this.layoutControlItem49.Size = new System.Drawing.Size(1500, 179);
+            this.layoutControlItem49.Size = new System.Drawing.Size(1239, 143);
             this.layoutControlItem49.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem49.Text = "备注：";
             this.layoutControlItem49.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.layoutControlItem49.TextSize = new System.Drawing.Size(54, 22);
+            this.layoutControlItem49.TextSize = new System.Drawing.Size(45, 18);
             this.layoutControlItem49.TextToControlDistance = 0;
             // 
             // layoutControlItem22
             // 
             this.layoutControlItem22.Control = this.buttonEdit3;
             this.layoutControlItem22.CustomizationFormText = "layoutControlItem22";
-            this.layoutControlItem22.Location = new System.Drawing.Point(0, 519);
+            this.layoutControlItem22.Location = new System.Drawing.Point(0, 403);
             this.layoutControlItem22.Name = "layoutControlItem22";
-            this.layoutControlItem22.Size = new System.Drawing.Size(1285, 32);
+            this.layoutControlItem22.Size = new System.Drawing.Size(1061, 29);
             this.layoutControlItem22.Text = "工厂名称：";
-            this.layoutControlItem22.TextSize = new System.Drawing.Size(208, 22);
+            this.layoutControlItem22.TextSize = new System.Drawing.Size(173, 18);
             // 
             // frmBudgetEditEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1520, 1144);
+            this.ClientSize = new System.Drawing.Size(1216, 936);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmBudgetEditEx";
-            this.Text = "frmBudgetEditEx";
+            this.Text = "预算单";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit5.Properties)).EndInit();

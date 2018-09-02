@@ -40,6 +40,8 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
@@ -53,10 +55,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.textEdit3);
             this.layoutControl1.Controls.Add(this.memoEdit1);
             this.layoutControl1.Controls.Add(this.textEdit6);
             this.layoutControl1.Controls.Add(this.textEdit5);
@@ -72,15 +77,15 @@
             // 
             // memoEdit1
             // 
-            this.memoEdit1.Location = new System.Drawing.Point(105, 70);
+            this.memoEdit1.Location = new System.Drawing.Point(105, 99);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(657, 483);
+            this.memoEdit1.Size = new System.Drawing.Size(657, 454);
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 14;
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(482, 41);
+            this.textEdit6.Location = new System.Drawing.Point(482, 70);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Size = new System.Drawing.Size(280, 25);
             this.textEdit6.StyleController = this.layoutControl1;
@@ -88,7 +93,7 @@
             // 
             // textEdit5
             // 
-            this.textEdit5.Location = new System.Drawing.Point(105, 41);
+            this.textEdit5.Location = new System.Drawing.Point(105, 70);
             this.textEdit5.Name = "textEdit5";
             this.textEdit5.Size = new System.Drawing.Size(280, 25);
             this.textEdit5.StyleController = this.layoutControl1;
@@ -96,7 +101,7 @@
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(482, 12);
+            this.textEdit2.Location = new System.Drawing.Point(105, 41);
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Size = new System.Drawing.Size(280, 25);
             this.textEdit2.StyleController = this.layoutControl1;
@@ -106,7 +111,7 @@
             // 
             this.textEdit1.Location = new System.Drawing.Point(105, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(280, 25);
+            this.textEdit1.Size = new System.Drawing.Size(657, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 7;
             // 
@@ -116,11 +121,12 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3,
-            this.layoutControlItem1,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem3,
+            this.layoutControlItem1,
+            this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(774, 565);
@@ -131,7 +137,7 @@
             // 
             this.layoutControlItem3.Control = this.textEdit2;
             this.layoutControlItem3.CustomizationFormText = "银行户名：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(377, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(377, 29);
             this.layoutControlItem3.Text = "国家或地区：";
@@ -143,7 +149,7 @@
             this.layoutControlItem1.CustomizationFormText = "供应商名称：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(377, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(754, 29);
             this.layoutControlItem1.Text = "客户名称：";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -151,7 +157,7 @@
             // 
             this.layoutControlItem6.Control = this.textEdit5;
             this.layoutControlItem6.CustomizationFormText = "创建时间：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(377, 29);
             this.layoutControlItem6.Text = "创建时间：";
@@ -161,7 +167,7 @@
             // 
             this.layoutControlItem7.Control = this.textEdit6;
             this.layoutControlItem7.CustomizationFormText = "创建人";
-            this.layoutControlItem7.Location = new System.Drawing.Point(377, 29);
+            this.layoutControlItem7.Location = new System.Drawing.Point(377, 58);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Size = new System.Drawing.Size(377, 29);
             this.layoutControlItem7.Text = "创建人：";
@@ -171,11 +177,29 @@
             // 
             this.layoutControlItem8.Control = this.memoEdit1;
             this.layoutControlItem8.CustomizationFormText = "备注：";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(754, 487);
+            this.layoutControlItem8.Size = new System.Drawing.Size(754, 458);
             this.layoutControlItem8.Text = "备注：";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // textEdit3
+            // 
+            this.textEdit3.Location = new System.Drawing.Point(482, 41);
+            this.textEdit3.Name = "textEdit3";
+            this.textEdit3.Size = new System.Drawing.Size(280, 25);
+            this.textEdit3.StyleController = this.layoutControl1;
+            this.textEdit3.TabIndex = 15;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.textEdit3;
+            this.layoutControlItem2.CustomizationFormText = "港口：";
+            this.layoutControlItem2.Location = new System.Drawing.Point(377, 29);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(377, 29);
+            this.layoutControlItem2.Text = "港口：";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
             // frmCustomerEdit
             // 
@@ -183,7 +207,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 565);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmCustomerEdit";
             this.Text = "客户信息编辑";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -199,6 +223,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -217,6 +243,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraEditors.TextEdit textEdit3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
 
     }
 }

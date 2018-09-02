@@ -18,7 +18,19 @@ namespace BudgetSystem
 
         public override void RefreshData()
         {
-            XtraMessageBox.Show(this.Text);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Country", typeof(string));
+            dt.Columns.Add("Seaport", typeof(string));
+            dt.Columns.Add("State", typeof(string));
+            dt.Columns.Add("CreateUser", typeof(string));
+            dt.Columns.Add("CreateDate", typeof(DateTime));
+
+            dt.Rows.Add("CRAFT OF SCANDINAVIA AB", "瑞士", "SWE", "启用", "张三", DateTime.Now);
+            dt.Rows.Add("URDI PRY LTD CRAFTSPORTSWEAR NORTH", "瑞士", "SWE", "启用", "李四", DateTime.Now);
+            dt.Rows.Add("UNITED BRANDS", "瑞士", "SWE", "启用", "李四", DateTime.Now);
+
+            this.gridControl1.DataSource = dt;
         }
 
         protected override void InitModelOperate()
@@ -64,8 +76,6 @@ namespace BudgetSystem
                 XtraMessageBox.Show("未定义的操作");
             }
         }
-
-
 
 
     }

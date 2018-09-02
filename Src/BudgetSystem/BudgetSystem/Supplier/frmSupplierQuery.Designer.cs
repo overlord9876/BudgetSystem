@@ -45,12 +45,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(641, 517);
+            this.gridControl1.Size = new System.Drawing.Size(1097, 672);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -68,10 +68,13 @@
             this.gridColumn8});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "供应商名称";
+            this.gridColumn1.FieldName = "Name";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -79,6 +82,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "银行户名";
+            this.gridColumn2.FieldName = "BankAccountName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -86,6 +90,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "银行账号";
+            this.gridColumn3.FieldName = "BankNO";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -93,6 +98,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "开户行";
+            this.gridColumn4.FieldName = "BankName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -100,6 +106,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "是否合格供应商";
+            this.gridColumn5.FieldName = "IsQualified";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -107,6 +114,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "创建时间";
+            this.gridColumn6.FieldName = "CreateDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -114,6 +122,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "创建人";
+            this.gridColumn7.FieldName = "CreateUser";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -121,20 +130,20 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "备注";
+            this.gridColumn8.FieldName = "Description";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
             // 
-            // frmFlowQuery
+            // frmSupplierQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 517);
+            this.ClientSize = new System.Drawing.Size(1097, 672);
             this.Controls.Add(this.gridControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Name = "frmFlowQuery";
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Name = "frmSupplierQuery";
             this.Text = "供应商管理";
-            this.Load += new System.EventHandler(this.frmFlowQuery_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);

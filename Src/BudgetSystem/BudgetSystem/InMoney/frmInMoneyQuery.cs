@@ -24,7 +24,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账（未关联合同）"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看入账"));
- 
+
             this.ModelOperatePageName = "入帐单";
         }
 
@@ -42,6 +42,14 @@ namespace BudgetSystem
                 frmInMemoryEdit form = new frmInMemoryEdit();
                 form.ShowDialog(this);
             }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                XtraMessageBox.Show("删除入账（未关联合同）");
+            }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                XtraMessageBox.Show("拆分费用");
+            }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 frmInMemoryEdit form = new frmInMemoryEdit();
@@ -55,6 +63,30 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("未定义的操作1");
             }
+        }
+
+        public override void LoadData()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Customer", typeof(string));
+            dt.Columns.Add("BankVoucherNumber", typeof(string));
+            dt.Columns.Add("Currency", typeof(string));
+            dt.Columns.Add("OriginalCoin", typeof(string));
+            dt.Columns.Add("RMB", typeof(string));
+            dt.Columns.Add("BankName", typeof(string));
+            dt.Columns.Add("ExchangeRate", typeof(string));
+            dt.Columns.Add("BankCharges", typeof(string));
+            dt.Columns.Add("ReceiptDate", typeof(string));
+            dt.Columns.Add("State", typeof(string));
+            dt.Columns.Add("CreateUser", typeof(string));
+            dt.Columns.Add("CreateDate", typeof(DateTime));
+            dt.Columns.Add("Description", typeof(string));
+
+            dt.Rows.Add("CRAFT OF SCANDINAVIA AB", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
+            dt.Rows.Add("URDI PRY LTD CRAFTSPORTSWEAR NORTH", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
+            dt.Rows.Add("UNITED BRANDS", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
+
+            this.gridControl1.DataSource = dt;
         }
     }
 }
