@@ -64,23 +64,25 @@
             // 
             // splitContainerControl1
             // 
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControl1);
-            this.splitContainerControl1.Size = new System.Drawing.Size(941, 472);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1075, 607);
             // 
             // panCondition
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
+            this.panCondition.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panCondition.Size = new System.Drawing.Size(285, 463);
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(643, 472);
+            this.gridControl1.Size = new System.Drawing.Size(777, 607);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -98,10 +100,12 @@
             this.gridColumn8});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "供应商";
+            this.gridColumn1.FieldName = "Supplier";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -109,6 +113,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "付款金额";
+            this.gridColumn2.FieldName = "Payment";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -116,6 +121,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "付款申请人";
+            this.gridColumn3.FieldName = "Submitter";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -123,6 +129,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "状态";
+            this.gridColumn4.FieldName = "State";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -130,6 +137,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "财务确认人";
+            this.gridColumn5.FieldName = "Approver";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -137,6 +145,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "确认时间";
+            this.gridColumn6.FieldName = "ApproveTime";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -144,6 +153,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "付款日期";
+            this.gridColumn7.FieldName = "PaymentDate";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -151,6 +161,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "备注";
+            this.gridColumn8.FieldName = "Description";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -162,6 +173,7 @@
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(285, 463);
@@ -170,25 +182,28 @@
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(87, 62);
+            this.textEdit3.Location = new System.Drawing.Point(105, 70);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(186, 21);
+            this.textEdit3.Size = new System.Drawing.Size(168, 25);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(87, 37);
+            this.textEdit2.Location = new System.Drawing.Point(105, 41);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(186, 21);
+            this.textEdit2.Size = new System.Drawing.Size(168, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(87, 12);
+            this.textEdit1.Location = new System.Drawing.Point(105, 12);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(186, 21);
+            this.textEdit1.Size = new System.Drawing.Size(168, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -213,35 +228,36 @@
             this.layoutControlItem1.CustomizationFormText = "供应商：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem1.Text = "供应商：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "付款申请人：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem2.Text = "付款申请人：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.textEdit3;
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 393);
+            this.layoutControlItem3.Size = new System.Drawing.Size(265, 385);
             this.layoutControlItem3.Text = "财务确认人：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 472);
+            this.ClientSize = new System.Drawing.Size(1075, 607);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();

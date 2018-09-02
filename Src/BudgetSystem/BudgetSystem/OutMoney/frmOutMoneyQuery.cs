@@ -14,7 +14,7 @@ namespace BudgetSystem
         public frmOutMoneyQuery()
         {
             InitializeComponent();
-          
+
         }
 
         protected override void InitModelOperate()
@@ -57,6 +57,24 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("未定义的操作1");
             }
+        }
+
+        public override void LoadData()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Supplier", typeof(string));
+            dt.Columns.Add("Payment", typeof(string));
+            dt.Columns.Add("Submitter", typeof(string));
+            dt.Columns.Add("State", typeof(string));
+            dt.Columns.Add("Approver", typeof(string));
+            dt.Columns.Add("ApproveTime", typeof(DateTime));
+            dt.Columns.Add("PaymentDate", typeof(DateTime));
+            dt.Columns.Add("Description", typeof(string));
+
+            dt.Rows.Add("常熟市新中华时装有限公司", "50000", "张三", "审批中", "财务确认人", DateTime.Now, DateTime.Now, "");
+            dt.Rows.Add("上海丝绸进口公司淀山湖真丝针织厂", "80000", "李四", "审批中", "财务确认人", DateTime.Now, DateTime.Now, "");
+
+            this.gridControl1.DataSource = dt;
         }
     }
 }

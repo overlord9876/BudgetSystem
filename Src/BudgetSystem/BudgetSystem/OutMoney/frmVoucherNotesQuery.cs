@@ -31,7 +31,27 @@ namespace BudgetSystem
 
         public override void RefreshData()
         {
-            XtraMessageBox.Show(this.Text);
+            //            BudNo
+            //InvoiceNo
+            //InvoiceDate
+            //Payment
+            //CreateUser
+            //CtreateDate
+            //Description
+            DataTable dt = new DataTable();
+            dt.Columns.Add("BudNo", typeof(string));
+            dt.Columns.Add("InvoiceNo", typeof(string));
+            dt.Columns.Add("InvoiceDate", typeof(DateTime));
+            dt.Columns.Add("Payment", typeof(string));
+            dt.Columns.Add("CreateUser", typeof(string));
+            dt.Columns.Add("CtreateDate", typeof(DateTime));
+            dt.Columns.Add("Description", typeof(string));
+
+            dt.Rows.Add("18G-002-001", "201809130923123313231", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
+            dt.Rows.Add("18G-002-002", "201809130923123313875", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
+            dt.Rows.Add("18G-002-003", "201809130923123313980", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
+
+            this.gridControl1.DataSource = dt;
         }
 
 

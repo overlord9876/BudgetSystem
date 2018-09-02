@@ -201,7 +201,7 @@
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "录入人";
+            this.gridColumn8.Caption = "创建人";
             this.gridColumn8.FieldName = "CreateUser";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
@@ -209,7 +209,7 @@
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "录入时间";
+            this.gridColumn9.Caption = "创建时间";
             this.gridColumn9.FieldName = "CreateDate";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
