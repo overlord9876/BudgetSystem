@@ -71,7 +71,13 @@ namespace BudgetSystem
             {
                 text = "费用拆分";
                 group = "操作";
-                imageIndex = 2;
+                imageIndex = 55;
+            }
+            else if (operate == OperateTypes.Close)
+            {
+                text = "关闭审批单";
+                group = "操作";
+                imageIndex = 56;
             }
 
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);

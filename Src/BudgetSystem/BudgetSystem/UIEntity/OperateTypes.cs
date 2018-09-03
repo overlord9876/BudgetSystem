@@ -21,6 +21,11 @@ namespace BudgetSystem
         /// <summary>
         /// 拆分费用
         /// </summary>
-        SplitCost
+        SplitCost,
+        /// <summary>
+        /// 关闭审批单
+        /// </summary>
+        Close,
+
     }
 }

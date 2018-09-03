@@ -24,6 +24,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "预算单";
@@ -51,6 +52,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
                 XtraMessageBox.Show("Revoke");
+            }
+            else if (operate.Operate == OperateTypes.Close.ToString())
+            {
+                XtraMessageBox.Show("关闭流程单");
             }
             else if (operate.Operate == "Test")
             {

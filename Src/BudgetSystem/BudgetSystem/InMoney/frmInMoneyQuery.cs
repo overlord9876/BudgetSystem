@@ -20,10 +20,10 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增入账"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改关联合同"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账（未关联合同）"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "分拆至合同"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看入账"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "入帐单";
         }
@@ -44,7 +44,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-                XtraMessageBox.Show("删除入账（未关联合同）");
+                XtraMessageBox.Show("删除入账");
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
