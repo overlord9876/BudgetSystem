@@ -75,7 +75,7 @@ namespace BudgetSystem
             }
             else if (operate == OperateTypes.Close)
             {
-                text = "关闭审批单";
+                text = "关闭预算单";
                 group = "操作";
                 imageIndex = 56;
             }

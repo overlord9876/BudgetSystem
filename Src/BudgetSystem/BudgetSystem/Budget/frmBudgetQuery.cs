@@ -55,7 +55,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.Close.ToString())
             {
-                XtraMessageBox.Show("关闭流程单");
+                XtraMessageBox.Show("关闭预算单");
             }
             else if (operate.Operate == "Test")
             {
