@@ -31,7 +31,10 @@ namespace BudgetSystem
         /// <summary>
         /// 导入
         /// </summary>
-        ImportData
+        ImportData,
+
+
+        Print
 
     }
 }

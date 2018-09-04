@@ -15,7 +15,6 @@ namespace BudgetSystem
         {
             InitializeComponent();
         }
-
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
@@ -39,29 +38,22 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmInMemoryEdit form = new frmInMemoryEdit();
+                frmInMemorySplitToBudgetEdit form = new frmInMemorySplitToBudgetEdit();
+                form.ShowDialog(this);
+            }
+            else if (operate.Operate == OperateTypes.SplitCost.ToString())
+            {
+                frmInMemorySplitCostEdit form = new frmInMemorySplitCostEdit();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
                 XtraMessageBox.Show("删除入账");
             }
-            else if (operate.Operate == OperateTypes.Delete.ToString())
-            {
-                XtraMessageBox.Show("拆分费用");
-            }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 frmInMemoryEdit form = new frmInMemoryEdit();
                 form.ShowDialog(this);
-            }
-            else if (operate.Operate == "Test1")
-            {
-                XtraMessageBox.Show("Test1");
-            }
-            else
-            {
-                XtraMessageBox.Show("未定义的操作1");
             }
         }
 

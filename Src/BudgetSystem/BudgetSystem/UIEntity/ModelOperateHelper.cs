@@ -97,6 +97,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 57;
             }
+            else if (operate == OperateTypes.Print)
+            {
+                text = "打印";
+                group = "打印";
+                imageIndex = 58;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

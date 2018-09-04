@@ -27,6 +27,10 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View,"查看审批状态"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
+
+
             this.ModelOperatePageName = "预算单";
         }
 
@@ -41,12 +45,12 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
+                frmBudgetEditEx form = new frmBudgetEditEx();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
+                frmBudgetEditEx form = new frmBudgetEditEx();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
