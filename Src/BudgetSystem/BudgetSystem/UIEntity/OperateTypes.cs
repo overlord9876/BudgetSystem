@@ -26,6 +26,8 @@ namespace BudgetSystem
         /// 关闭审批单
         /// </summary>
         Close,
+        ViewMoney,
+        ViewMoneyDetail
 
     }
 }

@@ -37,7 +37,7 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Agree));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Agree, "审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "待审流程";
         }

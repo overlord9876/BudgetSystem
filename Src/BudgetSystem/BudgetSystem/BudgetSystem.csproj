@@ -45,6 +45,7 @@
     <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net20">
       <HintPath>..\Lib\Newtonsoft.Json.Net20.dll</HintPath>
     </Reference>
@@ -98,6 +99,24 @@
     <Compile Include="Budget\frmBudgetEdit.Designer.cs">
       <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmFinalAccountsQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmFinalAccountsQuery.Designer.cs">
+      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmMoneyInOutDetailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmMoneyInOutDetailEdit.Designer.cs">
+      <DependentUpon>frmMoneyInOutDetailEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmMoneyDetailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmMoneyDetailEdit.Designer.cs">
+      <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="Customer\frmCustomerQuery.cs">
       <SubType>Form</SubType>
@@ -128,6 +147,18 @@
     </Compile>
     <Compile Include="Department\frmDepartmentEdit.Designer.cs">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitCostEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitCostEdit.Designer.cs">
+      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.Designer.cs">
+      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Option\frmOptionQuery.cs">
       <SubType>Form</SubType>
@@ -281,6 +312,15 @@
     <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
       <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmFinalAccountsQuery.resx">
+      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmMoneyInOutDetailEdit.resx">
+      <DependentUpon>frmMoneyInOutDetailEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmMoneyDetailEdit.resx">
+      <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +341,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemorySplitCostEdit.resx">
+      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemorySplitToBudgetEdit.resx">
+      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>

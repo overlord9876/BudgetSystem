@@ -42,6 +42,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Relate, "业务员维护"));
             this.ModelOperatePageName = "客户列表";
         }
 
@@ -61,7 +62,12 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("View");
+                frmCustomerEdit form = new frmCustomerEdit();
+                form.ShowDialog(this);
+            }
+            else if (operate.Operate == OperateTypes.Relate.ToString())
+            {
+
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {

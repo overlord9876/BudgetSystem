@@ -9,9 +9,9 @@ using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetQuery : frmBaseQueryFormWithCondtion
+    public partial class frmFinalAccountsQuery : frmBaseQueryFormWithCondtion
     {
-        public frmBudgetQuery()
+        public frmFinalAccountsQuery()
         {
             InitializeComponent();
 
@@ -21,45 +21,24 @@ namespace BudgetSystem
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "作废"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "申请修改"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperatePageName = "预算单";
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoney));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoneyDetail));
+            this.ModelOperatePageName = "决算管理";
         }
 
 
         public override void OperateHandled(ModelOperate operate)
         {
 
-            if (operate.Operate == OperateTypes.New.ToString())
+            if (operate.Operate == OperateTypes.ViewMoney.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
+                frmMoneyInOutDetailEdit form = new frmMoneyInOutDetailEdit();
                 form.ShowDialog(this);
             }
-            else if (operate.Operate == OperateTypes.Modify.ToString())
+            else if (operate.Operate == OperateTypes.ViewMoneyDetail.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
+                frmMoneyDetailEdit form = new frmMoneyDetailEdit();
                 form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.View.ToString())
-            {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.ShowDialog(this);
-            }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-                XtraMessageBox.Show("申请修改");
-            }
-            else if (operate.Operate == OperateTypes.Close.ToString())
-            {
-                XtraMessageBox.Show("关闭预算单");
-            }
-            else if (operate.Operate == "Test")
-            {
-                XtraMessageBox.Show("Test");
             }
             else
             {
@@ -69,20 +48,6 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            //            
-            //State
-            //TotalAmount
-            //Salesman
-            //Department
-            //CreateDate
-            //SignDate
-            //Validity
-            //Purchaser
-            //TradeMode
-            //TradeNature
-            //Seaport
-            //AdvancePayment
-            //Profit
             DataTable dt = new DataTable();
             dt.Columns.Add("ContractNO", typeof(string));
             dt.Columns.Add("State", typeof(string));

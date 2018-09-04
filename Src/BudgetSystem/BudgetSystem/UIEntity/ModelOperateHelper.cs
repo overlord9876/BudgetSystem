@@ -79,7 +79,18 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 56;
             }
-
+            else if (operate == OperateTypes.ViewMoney)
+            {
+                text = "查看合同收付";
+                group = "操作";
+                imageIndex = 46;
+            }
+            else if (operate == OperateTypes.ViewMoneyDetail)
+            {
+                text = "查看合同货款往来";
+                group = "操作";
+                imageIndex = 22;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

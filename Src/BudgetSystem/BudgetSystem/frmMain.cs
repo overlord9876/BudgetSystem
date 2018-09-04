@@ -15,11 +15,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             InitSkins();
-
-
         }
-
-
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -258,6 +254,21 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmOptionQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmFinalAccountsQuery form = GetExistForm<frmFinalAccountsQuery>();
+            if (form == null)
+            {
+                form = new frmFinalAccountsQuery();
                 form.RefreshData();
             }
             else
