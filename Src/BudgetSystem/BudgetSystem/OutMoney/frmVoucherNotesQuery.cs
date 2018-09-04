@@ -21,8 +21,8 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改付款凭证"));
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "导入付款凭证"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款凭证"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看付款凭证"));
 
@@ -58,10 +58,9 @@ namespace BudgetSystem
         public override void OperateHandled(ModelOperate operate)
         {
 
-            if (operate.Operate == OperateTypes.New.ToString())
+            if (operate.Operate == OperateTypes.ImportData.ToString())
             {
-                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
-                form.ShowDialog(this);
+                XtraMessageBox.Show("导入付款凭证");
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {

@@ -91,6 +91,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 22;
             }
+            else if (operate == OperateTypes.ImportData)
+            {
+                text = "导入";
+                group = "操作";
+                imageIndex = 57;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

@@ -124,7 +124,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "付款凭证号";
+            this.gridColumn2.Caption = "凭证号";
             this.gridColumn2.FieldName = "VoucherNo";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -205,55 +205,55 @@
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(105, 128);
+            this.dateEdit2.Location = new System.Drawing.Point(90, 128);
             this.dateEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit2.Size = new System.Drawing.Size(168, 25);
+            this.dateEdit2.Size = new System.Drawing.Size(183, 25);
             this.dateEdit2.StyleController = this.layoutControl1;
             this.dateEdit2.TabIndex = 8;
             // 
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(105, 99);
+            this.dateEdit1.Location = new System.Drawing.Point(90, 99);
             this.dateEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit1.Size = new System.Drawing.Size(168, 25);
+            this.dateEdit1.Size = new System.Drawing.Size(183, 25);
             this.dateEdit1.StyleController = this.layoutControl1;
             this.dateEdit1.TabIndex = 7;
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(105, 70);
+            this.textEdit3.Location = new System.Drawing.Point(90, 70);
             this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(168, 25);
+            this.textEdit3.Size = new System.Drawing.Size(183, 25);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(105, 41);
+            this.textEdit2.Location = new System.Drawing.Point(90, 41);
             this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(183, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(105, 12);
+            this.textEdit1.Location = new System.Drawing.Point(90, 12);
             this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(183, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -282,7 +282,7 @@
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem1.Text = "预算单号：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem2
             // 
@@ -291,8 +291,8 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
-            this.layoutControlItem2.Text = "付款凭证号：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem2.Text = "凭证号：";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem3
             // 
@@ -302,7 +302,7 @@
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem3.Text = "发票号：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem4
             // 
@@ -312,7 +312,7 @@
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem4.Text = "开票日期：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem5
             // 
@@ -322,7 +322,7 @@
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(265, 327);
             this.layoutControlItem5.Text = "录入时间：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(75, 18);
             // 
             // frmInvoiceQuery
             // 

@@ -27,7 +27,11 @@ namespace BudgetSystem
         /// </summary>
         Close,
         ViewMoney,
-        ViewMoneyDetail
+        ViewMoneyDetail,
+        /// <summary>
+        /// 导入
+        /// </summary>
+        ImportData
 
     }
 }
