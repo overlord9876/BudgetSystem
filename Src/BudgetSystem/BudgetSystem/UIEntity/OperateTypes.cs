@@ -34,7 +34,9 @@ namespace BudgetSystem
         ImportData,
 
 
-        Print
+        Print,
+        Confirm,
+        GiveUp,
 
     }
 }

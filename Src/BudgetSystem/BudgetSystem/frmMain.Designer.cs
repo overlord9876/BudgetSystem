@@ -178,6 +178,8 @@
             this.imageCollection1.Images.SetKeyName(56, "None_32x32.png");
             this.imageCollection1.Images.SetKeyName(57, "ImportMap_32x32.png");
             this.imageCollection1.Images.SetKeyName(58, "Print_32x32.png");
+            this.imageCollection1.Images.SetKeyName(59, "NewTask_32x32.png");
+            this.imageCollection1.Images.SetKeyName(60, "BreakingChange_32x32.png");
             // 
             // btnRefresh
             // 
