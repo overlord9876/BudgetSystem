@@ -12,3 +12,5 @@ Src/BudgetSystem/BudgetSystem.Dal/obj/Debug/BudgetSystem.Dal.dll
 Src/BudgetSystem/BudgetSystem.Entity/obj/Debug/BudgetSystem.Entity.dll
 Src/BudgetSystem/BudgetSystem.Entity/obj/Debug/BudgetSystem.Entity.csproj.FileListAbsolute.txt
 Src/BudgetSystem/BudgetSystem.Util/obj/
+Src/BudgetSystem/packages/
+Src/BudgetSystem/BudgetSystem.Dal/obj/
