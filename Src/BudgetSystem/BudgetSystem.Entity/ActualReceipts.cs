@@ -11,6 +11,9 @@ namespace BudgetSystem.Entity
     public class ActualReceipts : IEntity
     {
 
+
+
+
         /// <summary>
         /// 凭证号
         /// </summary>

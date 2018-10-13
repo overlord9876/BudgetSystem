@@ -121,7 +121,7 @@
             this.layoutControlItem8.CustomizationFormText = "备注：";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 192);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1109, 153);
+            this.layoutControlItem8.Size = new System.Drawing.Size(1109, 106);
             this.layoutControlItem8.Text = "备注：";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(144, 22);
             // 
@@ -130,7 +130,7 @@
             this.memoEdit1.Location = new System.Drawing.Point(171, 244);
             this.memoEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(958, 149);
+            this.memoEdit1.Size = new System.Drawing.Size(958, 102);
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 14;
             // 
@@ -185,15 +185,15 @@
             // 
             // memoEdit2
             // 
-            this.memoEdit2.Location = new System.Drawing.Point(171, 513);
+            this.memoEdit2.Location = new System.Drawing.Point(171, 466);
             this.memoEdit2.Name = "memoEdit2";
-            this.memoEdit2.Size = new System.Drawing.Size(958, 129);
+            this.memoEdit2.Size = new System.Drawing.Size(958, 176);
             this.memoEdit2.StyleController = this.layoutControl1;
             this.memoEdit2.TabIndex = 24;
             // 
             // textEdit15
             // 
-            this.textEdit15.Location = new System.Drawing.Point(725, 481);
+            this.textEdit15.Location = new System.Drawing.Point(725, 434);
             this.textEdit15.Name = "textEdit15";
             this.textEdit15.Size = new System.Drawing.Size(404, 28);
             this.textEdit15.StyleController = this.layoutControl1;
@@ -201,7 +201,7 @@
             // 
             // textEdit14
             // 
-            this.textEdit14.Location = new System.Drawing.Point(171, 481);
+            this.textEdit14.Location = new System.Drawing.Point(171, 434);
             this.textEdit14.Name = "textEdit14";
             this.textEdit14.Size = new System.Drawing.Size(403, 28);
             this.textEdit14.StyleController = this.layoutControl1;
@@ -209,7 +209,7 @@
             // 
             // textEdit13
             // 
-            this.textEdit13.Location = new System.Drawing.Point(725, 449);
+            this.textEdit13.Location = new System.Drawing.Point(725, 402);
             this.textEdit13.Name = "textEdit13";
             this.textEdit13.Size = new System.Drawing.Size(404, 28);
             this.textEdit13.StyleController = this.layoutControl1;
@@ -217,7 +217,7 @@
             // 
             // textEdit12
             // 
-            this.textEdit12.Location = new System.Drawing.Point(171, 449);
+            this.textEdit12.Location = new System.Drawing.Point(171, 402);
             this.textEdit12.Name = "textEdit12";
             this.textEdit12.Size = new System.Drawing.Size(403, 28);
             this.textEdit12.StyleController = this.layoutControl1;
@@ -357,7 +357,7 @@
             this.layoutControlItem9});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1133, 372);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1133, 350);
             this.layoutControlGroup2.Text = "收费单信息";
             // 
             // layoutControlItem1
@@ -479,9 +479,9 @@
             this.layoutControlItem15,
             this.layoutControlItem16,
             this.layoutControlItem17});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 397);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 350);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1133, 249);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(1133, 296);
             this.layoutControlGroup3.Text = "拆分信息";
             // 
             // layoutControlItem13
@@ -530,7 +530,7 @@
             this.layoutControlItem17.CustomizationFormText = "新单备注：";
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 64);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(1109, 133);
+            this.layoutControlItem17.Size = new System.Drawing.Size(1109, 180);
             this.layoutControlItem17.Text = "新单备注：";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(144, 22);
             // 
@@ -568,7 +568,7 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 603);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 646);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Size = new System.Drawing.Size(853, 40);
             this.emptySpaceItem1.Text = "emptySpaceItem1";

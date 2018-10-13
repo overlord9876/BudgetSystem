@@ -64,25 +64,25 @@
             // 
             // splitContainerControl1
             // 
-            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControl1);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1075, 607);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1344, 742);
             // 
             // panCondition
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
-            this.panCondition.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panCondition.Size = new System.Drawing.Size(285, 463);
+            this.panCondition.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.panCondition.Size = new System.Drawing.Size(285, 566);
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(777, 607);
+            this.gridControl1.Size = new System.Drawing.Size(1046, 742);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -173,37 +173,37 @@
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControl1.Size = new System.Drawing.Size(285, 566);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(105, 70);
-            this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit3.Location = new System.Drawing.Point(123, 76);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(168, 25);
+            this.textEdit3.Size = new System.Drawing.Size(150, 28);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(105, 41);
-            this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit2.Location = new System.Drawing.Point(123, 44);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(150, 28);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(105, 12);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit1.Location = new System.Drawing.Point(123, 12);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(150, 28);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -218,7 +218,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 566);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -228,36 +228,36 @@
             this.layoutControlItem1.CustomizationFormText = "供应商：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 32);
             this.layoutControlItem1.Text = "供应商：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(108, 22);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "付款申请人：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 32);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 32);
             this.layoutControlItem2.Text = "付款申请人：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(108, 22);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.textEdit3;
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 64);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 385);
+            this.layoutControlItem3.Size = new System.Drawing.Size(265, 482);
             this.layoutControlItem3.Text = "财务确认人：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(108, 22);
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 607);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ClientSize = new System.Drawing.Size(1344, 742);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();

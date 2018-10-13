@@ -54,7 +54,11 @@ namespace BudgetSystem
 
         private void btnReLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Application.Restart();
+
+            Bll.TestBll s = new Bll.TestBll();
+            s.Test();
+
+           // Application.Restart();
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

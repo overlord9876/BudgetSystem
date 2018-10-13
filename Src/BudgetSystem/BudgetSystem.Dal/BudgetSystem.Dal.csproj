@@ -31,16 +31,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper_NET20">
+      <HintPath>..\Lib\Dapper_NET20.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqBridge">
+      <HintPath>..\Lib\LinqBridge.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\Lib\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DalBase.cs" />
+    <Compile Include="TestDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetSystem.Entity\BudgetSystem.Entity.csproj">
+      <Project>{6EC39F94-981B-488F-A94D-3D3F9F0C6D79}</Project>
+      <Name>BudgetSystem.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
