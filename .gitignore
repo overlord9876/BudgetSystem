@@ -3,3 +3,12 @@ Src/BudgetSystem/BudgetSystem/bin/
 Src/BudgetSystem/BudgetSystem/obj/
 bin/
 Src/BudgetSystem/Localization/obj/
+*.cache
+*.suo
+*.pdb
+Src/BudgetSystem/BudgetSystem.Bll/obj/
+Src/BudgetSystem/BudgetSystem.Dal/obj/Debug/BudgetSystem.Dal.csproj.FileListAbsolute.txt
+Src/BudgetSystem/BudgetSystem.Dal/obj/Debug/BudgetSystem.Dal.dll
+Src/BudgetSystem/BudgetSystem.Entity/obj/Debug/BudgetSystem.Entity.dll
+Src/BudgetSystem/BudgetSystem.Entity/obj/Debug/BudgetSystem.Entity.csproj.FileListAbsolute.txt
+Src/BudgetSystem/BudgetSystem.Util/obj/

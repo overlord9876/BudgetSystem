@@ -36,29 +36,34 @@
             this.rgbStyle = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.btnReLogin = new DevExpress.XtraBars.BarButtonItem();
             this.btnbudgetQuery = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddBudget = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyQuery = new DevExpress.XtraBars.BarButtonItem();
-            this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyQuery = new DevExpress.XtraBars.BarButtonItem();
-            this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUserQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCustomerQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSupplierQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInvoiceQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnVoucherNotesQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApprovalList = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMyOrder = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFlowConfig = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -80,27 +85,33 @@
             this.rgbStyle,
             this.btnReLogin,
             this.btnbudgetQuery,
-            this.btnAddBudget,
             this.btnInMoneyQuery,
-            this.btnInMoneyAdd,
             this.btnOutMoneyQuery,
-            this.btnOutMoneyAdd});
+            this.btnUserQuery,
+            this.btnCustomerQuery,
+            this.btnSupplierQuery,
+            this.btnInvoiceQuery,
+            this.btnVoucherNotesQuery,
+            this.btnApprovalList,
+            this.btnMyOrder,
+            this.barButtonItem4,
+            this.btnFlowConfig,
+            this.btnDepartment,
+            this.btnRoleManager,
+            this.btnOptionManager});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbonControl1.MaxItemId = 12;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonControl1.MaxItemId = 37;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
-            this.ribbonPage2,
-            this.ribbonPage3,
-            this.ribbonPage5,
             this.ribbonPage4});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1139, 184);
+            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -152,6 +163,23 @@
             this.imageCollection1.Images.SetKeyName(41, "Technology_32x32.png");
             this.imageCollection1.Images.SetKeyName(42, "IncreaseDecimal_32x32.png");
             this.imageCollection1.Images.SetKeyName(43, "DecreaseDecimal_32x32.png");
+            this.imageCollection1.Images.SetKeyName(44, "Add_32x32.png");
+            this.imageCollection1.Images.SetKeyName(45, "Edit_32x32.png");
+            this.imageCollection1.Images.SetKeyName(46, "SolidGreenDataBar_32x32.png");
+            this.imageCollection1.Images.SetKeyName(47, "TableLayout_32x32.png");
+            this.imageCollection1.Images.SetKeyName(48, "AddItem_32x32.png");
+            this.imageCollection1.Images.SetKeyName(49, "Edit_32x32.png");
+            this.imageCollection1.Images.SetKeyName(50, "Delete_32x32.png");
+            this.imageCollection1.Images.SetKeyName(51, "Inbox_32x32.png");
+            this.imageCollection1.Images.SetKeyName(52, "ShowDetail_32x32.png");
+            this.imageCollection1.Images.SetKeyName(53, "Outbox_32x32.png");
+            this.imageCollection1.Images.SetKeyName(54, "Stop_32x32.png");
+            this.imageCollection1.Images.SetKeyName(55, "Separator_32x32.png");
+            this.imageCollection1.Images.SetKeyName(56, "None_32x32.png");
+            this.imageCollection1.Images.SetKeyName(57, "ImportMap_32x32.png");
+            this.imageCollection1.Images.SetKeyName(58, "Print_32x32.png");
+            this.imageCollection1.Images.SetKeyName(59, "NewTask_32x32.png");
+            this.imageCollection1.Images.SetKeyName(60, "BreakingChange_32x32.png");
             // 
             // btnRefresh
             // 
@@ -180,61 +208,145 @@
             // 
             // btnbudgetQuery
             // 
-            this.btnbudgetQuery.Caption = "查询";
+            this.btnbudgetQuery.Caption = "预算单管理";
             this.btnbudgetQuery.Id = 6;
-            this.btnbudgetQuery.ImageIndex = 3;
+            this.btnbudgetQuery.ImageIndex = 19;
             this.btnbudgetQuery.Name = "btnbudgetQuery";
             this.btnbudgetQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnbudgetQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnbudgetQuery_ItemClick);
             // 
-            // btnAddBudget
-            // 
-            this.btnAddBudget.Caption = "创建";
-            this.btnAddBudget.Id = 7;
-            this.btnAddBudget.ImageIndex = 19;
-            this.btnAddBudget.Name = "btnAddBudget";
-            this.btnAddBudget.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
             // btnInMoneyQuery
             // 
-            this.btnInMoneyQuery.Caption = "查询";
+            this.btnInMoneyQuery.Caption = "收款管理";
             this.btnInMoneyQuery.Id = 8;
-            this.btnInMoneyQuery.ImageIndex = 3;
+            this.btnInMoneyQuery.ImageIndex = 43;
             this.btnInMoneyQuery.Name = "btnInMoneyQuery";
             this.btnInMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyQuery_ItemClick);
             // 
-            // btnInMoneyAdd
-            // 
-            this.btnInMoneyAdd.Caption = "创建";
-            this.btnInMoneyAdd.Id = 9;
-            this.btnInMoneyAdd.ImageIndex = 42;
-            this.btnInMoneyAdd.Name = "btnInMoneyAdd";
-            this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
             // btnOutMoneyQuery
             // 
-            this.btnOutMoneyQuery.Caption = "查询";
+            this.btnOutMoneyQuery.Caption = "付款管理";
             this.btnOutMoneyQuery.Id = 10;
-            this.btnOutMoneyQuery.ImageIndex = 3;
+            this.btnOutMoneyQuery.ImageIndex = 42;
             this.btnOutMoneyQuery.Name = "btnOutMoneyQuery";
             this.btnOutMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnOutMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoneyQuery_ItemClick);
             // 
-            // btnOutMoneyAdd
+            // btnUserQuery
             // 
-            this.btnOutMoneyAdd.Caption = "创建";
-            this.btnOutMoneyAdd.Id = 11;
-            this.btnOutMoneyAdd.ImageIndex = 43;
-            this.btnOutMoneyAdd.Name = "btnOutMoneyAdd";
-            this.btnOutMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnUserQuery.Caption = "用户管理";
+            this.btnUserQuery.Id = 25;
+            this.btnUserQuery.ImageIndex = 39;
+            this.btnUserQuery.Name = "btnUserQuery";
+            this.btnUserQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnUserQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserQuery_ItemClick);
+            // 
+            // btnCustomerQuery
+            // 
+            this.btnCustomerQuery.Caption = "客户管理";
+            this.btnCustomerQuery.Id = 26;
+            this.btnCustomerQuery.ImageIndex = 24;
+            this.btnCustomerQuery.Name = "btnCustomerQuery";
+            this.btnCustomerQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnCustomerQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCustomerQuery_ItemClick);
+            // 
+            // btnSupplierQuery
+            // 
+            this.btnSupplierQuery.Caption = "供应商管理";
+            this.btnSupplierQuery.Id = 27;
+            this.btnSupplierQuery.ImageIndex = 26;
+            this.btnSupplierQuery.Name = "btnSupplierQuery";
+            this.btnSupplierQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSupplierQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSupplierQuery_ItemClick);
+            // 
+            // btnInvoiceQuery
+            // 
+            this.btnInvoiceQuery.Caption = "开票管理";
+            this.btnInvoiceQuery.Id = 28;
+            this.btnInvoiceQuery.ImageIndex = 45;
+            this.btnInvoiceQuery.Name = "btnInvoiceQuery";
+            this.btnInvoiceQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInvoiceQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvoiceQuery_ItemClick);
+            // 
+            // btnVoucherNotesQuery
+            // 
+            this.btnVoucherNotesQuery.Caption = "付款凭证";
+            this.btnVoucherNotesQuery.Id = 29;
+            this.btnVoucherNotesQuery.ImageIndex = 12;
+            this.btnVoucherNotesQuery.Name = "btnVoucherNotesQuery";
+            this.btnVoucherNotesQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnVoucherNotesQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVoucherNotesQuery_ItemClick);
+            // 
+            // btnApprovalList
+            // 
+            this.btnApprovalList.Caption = "待审批单管理";
+            this.btnApprovalList.Id = 30;
+            this.btnApprovalList.ImageIndex = 47;
+            this.btnApprovalList.Name = "btnApprovalList";
+            this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnApprovalList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApprovalList_ItemClick);
+            // 
+            // btnMyOrder
+            // 
+            this.btnMyOrder.Caption = "我提交的单子";
+            this.btnMyOrder.Id = 31;
+            this.btnMyOrder.ImageIndex = 17;
+            this.btnMyOrder.Name = "btnMyOrder";
+            this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "决算管理";
+            this.barButtonItem4.Id = 32;
+            this.barButtonItem4.ImageIndex = 46;
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
+            // btnFlowConfig
+            // 
+            this.btnFlowConfig.Caption = "流程配置";
+            this.btnFlowConfig.Id = 33;
+            this.btnFlowConfig.ImageIndex = 52;
+            this.btnFlowConfig.Name = "btnFlowConfig";
+            this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnFlowConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFlowConfig_ItemClick);
+            // 
+            // btnDepartment
+            // 
+            this.btnDepartment.Caption = "部门管理";
+            this.btnDepartment.Id = 34;
+            this.btnDepartment.ImageIndex = 40;
+            this.btnDepartment.Name = "btnDepartment";
+            this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDepartment_ItemClick);
+            // 
+            // btnRoleManager
+            // 
+            this.btnRoleManager.Caption = "角色管理";
+            this.btnRoleManager.Id = 35;
+            this.btnRoleManager.ImageIndex = 37;
+            this.btnRoleManager.Name = "btnRoleManager";
+            this.btnRoleManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnRoleManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoleManager_ItemClick);
+            // 
+            // btnOptionManager
+            // 
+            this.btnOptionManager.Caption = "选择管理";
+            this.btnOptionManager.Id = 36;
+            this.btnOptionManager.ImageIndex = 35;
+            this.btnOptionManager.Name = "btnOptionManager";
+            this.btnOptionManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOptionManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOptionManager_ItemClick);
             // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
-            this.ribbonPageGroup3,
+            this.ribbonPageGroup5,
             this.ribbonPageGroup4});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "业务";
@@ -242,75 +354,37 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnbudgetQuery);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnAddBudget);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "预算单管理";
             // 
             // ribbonPageGroup2
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.btnInMoneyQuery);
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnInMoneyAdd);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnOutMoneyQuery);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnInvoiceQuery);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnVoucherNotesQuery);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "收款";
-            // 
-            // ribbonPageGroup3
-            // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnOutMoneyQuery);
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnOutMoneyAdd);
-            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
-            this.ribbonPageGroup3.Text = "付款";
-            // 
-            // ribbonPageGroup4
-            // 
-            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
-            this.ribbonPageGroup4.Text = "发票";
-            // 
-            // ribbonPage2
-            // 
-            this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup5,
-            this.ribbonPageGroup6});
-            this.ribbonPage2.Name = "ribbonPage2";
-            this.ribbonPage2.Text = "我的工作";
+            this.ribbonPageGroup2.Text = "收支管理";
             // 
             // ribbonPageGroup5
             // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
-            this.ribbonPageGroup5.Text = "我的待审批流程";
+            this.ribbonPageGroup5.Text = "我的工作";
             // 
-            // ribbonPageGroup6
+            // ribbonPageGroup4
             // 
-            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
-            this.ribbonPageGroup6.Text = "我提交的单据";
-            // 
-            // ribbonPage3
-            // 
-            this.ribbonPage3.Name = "ribbonPage3";
-            this.ribbonPage3.Text = "报表";
-            // 
-            // ribbonPage5
-            // 
-            this.ribbonPage5.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup7,
-            this.ribbonPageGroup8,
-            this.ribbonPageGroup9});
-            this.ribbonPage5.Name = "ribbonPage5";
-            this.ribbonPage5.Text = "配置";
-            // 
-            // ribbonPageGroup7
-            // 
-            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
-            this.ribbonPageGroup7.Text = "用户管理";
-            // 
-            // ribbonPageGroup8
-            // 
-            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
-            this.ribbonPageGroup8.Text = "客户管理";
-            // 
-            // ribbonPageGroup9
-            // 
-            this.ribbonPageGroup9.Name = "ribbonPageGroup9";
-            this.ribbonPageGroup9.Text = "供应商管理";
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnCustomerQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnSupplierQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnUserQuery);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnRoleManager);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnDepartment);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnFlowConfig);
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnOptionManager);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "系统设置";
             // 
             // ribbonPage4
             // 
@@ -328,9 +402,10 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1139, 37);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
             // 
             // documentManager1
             // 
@@ -344,15 +419,49 @@
             // 
             this.tabbedView1.DocumentProperties.AllowFloat = false;
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "修改";
+            this.barButtonItem1.Id = 19;
+            this.barButtonItem1.ImageIndex = 45;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // btnApproval
+            // 
+            this.btnApproval.Caption = "审批";
+            this.btnApproval.Id = 14;
+            this.btnApproval.ImageIndex = 2;
+            this.btnApproval.Name = "btnApproval";
+            this.btnApproval.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // btnOutMoneyAdd
+            // 
+            this.btnOutMoneyAdd.Caption = "创建";
+            this.btnOutMoneyAdd.Id = 11;
+            this.btnOutMoneyAdd.ImageIndex = 43;
+            this.btnOutMoneyAdd.Name = "btnOutMoneyAdd";
+            this.btnOutMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOutMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoneyAdd_ItemClick);
+            // 
+            // btnInMoneyAdd
+            // 
+            this.btnInMoneyAdd.Caption = "创建";
+            this.btnInMoneyAdd.Id = 9;
+            this.btnInMoneyAdd.ImageIndex = 42;
+            this.btnInMoneyAdd.Name = "btnInMoneyAdd";
+            this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1139, 997);
+            this.ClientSize = new System.Drawing.Size(1692, 997);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -374,16 +483,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
@@ -394,11 +495,24 @@
         private DevExpress.XtraBars.BarButtonItem btnReLogin;
         private DevExpress.Utils.ImageCollection imageCollection1;
         private DevExpress.XtraBars.BarButtonItem btnbudgetQuery;
-        private DevExpress.XtraBars.BarButtonItem btnAddBudget;
         private DevExpress.XtraBars.BarButtonItem btnInMoneyQuery;
-        private DevExpress.XtraBars.BarButtonItem btnInMoneyAdd;
         private DevExpress.XtraBars.BarButtonItem btnOutMoneyQuery;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem btnUserQuery;
+        private DevExpress.XtraBars.BarButtonItem btnCustomerQuery;
+        private DevExpress.XtraBars.BarButtonItem btnSupplierQuery;
+        private DevExpress.XtraBars.BarButtonItem btnApproval;
         private DevExpress.XtraBars.BarButtonItem btnOutMoneyAdd;
+        private DevExpress.XtraBars.BarButtonItem btnInMoneyAdd;
+        private DevExpress.XtraBars.BarButtonItem btnInvoiceQuery;
+        private DevExpress.XtraBars.BarButtonItem btnVoucherNotesQuery;
+        private DevExpress.XtraBars.BarButtonItem btnApprovalList;
+        private DevExpress.XtraBars.BarButtonItem btnMyOrder;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem btnFlowConfig;
+        private DevExpress.XtraBars.BarButtonItem btnDepartment;
+        private DevExpress.XtraBars.BarButtonItem btnRoleManager;
+        private DevExpress.XtraBars.BarButtonItem btnOptionManager;
     }
 }
 

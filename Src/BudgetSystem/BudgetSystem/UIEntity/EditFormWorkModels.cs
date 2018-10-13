@@ -4,10 +4,10 @@ using System.Text;
 
 namespace BudgetSystem
 {
-    public enum FormDataEditTypes
+    public enum EditFormWorkModels
     {
         New,
-        Edit,
+        Modify,
         View,
     }
 }

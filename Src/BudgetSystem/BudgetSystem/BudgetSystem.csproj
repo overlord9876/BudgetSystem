@@ -36,9 +36,16 @@
     <Reference Include="DevExpress.BonusSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.OfficeSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net20">
       <HintPath>..\Lib\Newtonsoft.Json.Net20.dll</HintPath>
     </Reference>
@@ -68,20 +75,109 @@
     <Compile Include="Base\frmBaseQueryForm.Designer.cs">
       <DependentUpon>frmBaseQueryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmBaseQueryFormWithCondtion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseQueryFormWithCondtion.Designer.cs">
+      <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmBudgetEditEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmBudgetEditEx.Designer.cs">
+      <DependentUpon>frmBudgetEditEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\frmBudgetQuery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Budget\frmBudgetQuery.Designer.cs">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base\frmBudgetEditor.cs">
+    <Compile Include="Budget\frmBudgetEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Base\frmBudgetEditor.Designer.cs">
-      <DependentUpon>frmBudgetEditor.cs</DependentUpon>
+    <Compile Include="Budget\frmBudgetEdit.Designer.cs">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmFinalAccountsQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmFinalAccountsQuery.Designer.cs">
+      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmMoneyInOutDetailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmMoneyInOutDetailEdit.Designer.cs">
+      <DependentUpon>frmMoneyInOutDetailEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmMoneyDetailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmMoneyDetailEdit.Designer.cs">
+      <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
-    <Compile Include="FormDataEditTypes.cs" />
+    <Compile Include="Customer\frmCustomerQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frmCustomerQuery.Designer.cs">
+      <DependentUpon>frmCustomerQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\frmCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frmCustomerEdit.Designer.cs">
+      <DependentUpon>frmCustomerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flow\frmFlowEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flow\frmFlowEdit.Designer.cs">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flow\frmFlowQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flow\frmFlowQuery.Designer.cs">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Department\frmDepartmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Department\frmDepartmentEdit.Designer.cs">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitCostEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitCostEdit.Designer.cs">
+      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.Designer.cs">
+      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Option\frmOptionQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Option\frmOptionQuery.Designer.cs">
+      <DependentUpon>frmOptionQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Role\frmRoleQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Role\frmRoleQuery.Designer.cs">
+      <DependentUpon>frmRoleQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInMemoryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMemoryEdit.Designer.cs">
+      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMoneyQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +199,42 @@
     <Compile Include="frmMain_UIController.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="InMoney\frmInvoiceEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceEdit.Designer.cs">
+      <DependentUpon>frmInvoiceEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceQuery.Designer.cs">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMemoryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMemoryEdit.Designer.cs">
+      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesQuery.Designer.cs">
+      <DependentUpon>frmVoucherNotesQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
+      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Department\frmDepartmentQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Department\frmDepartmentQuery.Designer.cs">
+      <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="RunInfo.cs" />
     <Compile Include="OutMoney\frmOutMoneyQuery.cs">
       <SubType>Form</SubType>
@@ -112,17 +244,97 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Supplier\frmSupplierEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierEdit.Designer.cs">
+      <DependentUpon>frmSupplierEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIEntity\EditFormWorkModels.cs" />
+    <Compile Include="UIEntity\ModelOperate.cs" />
+    <Compile Include="UIEntity\ModelOperateHelper.cs" />
+    <Compile Include="UIEntity\OperateTypes.cs" />
+    <Compile Include="UIEntity\UITypes.cs" />
+    <Compile Include="Supplier\frmSupplierQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierQuery.Designer.cs">
+      <DependentUpon>frmSupplierQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMgmt\frmUserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMgmt\frmUserEdit.Designer.cs">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMgmt\frmUserQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMgmt\frmUserQuery.Designer.cs">
+      <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalListQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalListQuery.Designer.cs">
+      <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyFlowListQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyFlowListQuery.Designer.cs">
+      <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
+      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Base\frmBaseDialogForm.resx">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseForm.resx">
       <DependentUpon>frmBaseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseQueryForm.resx">
+      <DependentUpon>frmBaseQueryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseQueryFormWithCondtion.resx">
+      <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmBudgetEditEx.resx">
+      <DependentUpon>frmBudgetEditEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmBudgetQuery.resx">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Base\frmBudgetEditor.resx">
-      <DependentUpon>frmBudgetEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmFinalAccountsQuery.resx">
+      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmMoneyInOutDetailEdit.resx">
+      <DependentUpon>frmMoneyInOutDetailEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmMoneyDetailEdit.resx">
+      <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
+      <DependentUpon>frmCustomerQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frmCustomerEdit.resx">
+      <DependentUpon>frmCustomerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flow\frmFlowEdit.resx">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flow\frmFlowQuery.resx">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Department\frmDepartmentEdit.resx">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -130,11 +342,41 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemorySplitCostEdit.resx">
+      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemorySplitToBudgetEdit.resx">
+      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\frmOptionQuery.resx">
+      <DependentUpon>frmOptionQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Role\frmRoleQuery.resx">
+      <DependentUpon>frmRoleQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMemoryEdit.resx">
+      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyQuery.resx">
       <DependentUpon>frmInMoneyQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInvoiceEdit.resx">
+      <DependentUpon>frmInvoiceEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInvoiceQuery.resx">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmOutMemoryEdit.resx">
+      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQuery.resx">
       <DependentUpon>frmOutMoneyQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmVoucherNotesQuery.resx">
+      <DependentUpon>frmVoucherNotesQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
+      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -146,6 +388,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Department\frmDepartmentQuery.resx">
+      <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierEdit.resx">
+      <DependentUpon>frmSupplierEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierQuery.resx">
+      <DependentUpon>frmSupplierQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMgmt\frmUserEdit.resx">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMgmt\frmUserQuery.resx">
+      <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
+      <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
+      <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprovalEdit.resx">
+      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,6 +428,7 @@
       <Name>Localization</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,5 +15,11 @@ namespace BudgetSystem
         {
             InitializeComponent();
         }
+
+        public EditFormWorkModels WorkModel
+        {
+            get;
+            set;
+        }
     }
 }

@@ -4,7 +4,9 @@ using System.Text;
 
 namespace BudgetSystem.Bll
 {
-    public class Class1
+    public class BudgetManager:BaseManager
     {
+
+
     }
 }

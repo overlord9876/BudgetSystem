@@ -5,14 +5,16 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetEditor : BudgetSystem.frmBaseDialogForm
+    public partial class frmInMemoryEdit : frmBaseDialogForm
     {
-        public frmBudgetEditor()
+        public frmInMemoryEdit()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // frmBaseQueryForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(998, 676);
+            this.Name = "frmBaseQueryForm";
             this.Text = "frmBaseQueryForm";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BudgetSystem.Entity
+namespace BudgetSystem.Bll
 {
-    public class Class1
+    public abstract class BaseManager
     {
     }
 }
