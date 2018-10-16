@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Resources;
+using System.Reflection;
+using System.IO;
 
 namespace BudgetSystem
 {
@@ -16,7 +19,7 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
-
+       
         public virtual void LoadData()
         { 
         

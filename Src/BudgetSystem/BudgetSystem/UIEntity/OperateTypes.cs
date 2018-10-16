@@ -38,5 +38,11 @@ namespace BudgetSystem
         Confirm,
         GiveUp,
 
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        ReSetPassword,   
+
+
     }
 }

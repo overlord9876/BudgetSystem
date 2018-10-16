@@ -7,7 +7,7 @@ namespace BudgetSystem.Util
 {
     public class SHA256
     {
-        public string ToSHA256(string data)
+        public static string ToSHA256(string data)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(data);
             byte[] hash = SHA256Managed.Create().ComputeHash(bytes);

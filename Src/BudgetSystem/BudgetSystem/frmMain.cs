@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
+using BudgetSystem.UserManager;
 
 namespace BudgetSystem
 {
@@ -276,6 +277,14 @@ namespace BudgetSystem
                 FormActivited(form);
             }
             ShowForm(form);
+        }
+
+        private void btnModifyPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmUserEdit editor = new frmUserEdit();
+            editor.WorkModel = EditFormWorkModels.Custom;
+            editor.CustomWorkModel = frmUserEdit.CustomWorkModel_ModifyPassword;
+            editor.ShowDialog();
         }
     }
 }

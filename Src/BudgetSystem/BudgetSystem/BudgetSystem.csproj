@@ -265,16 +265,16 @@
     <Compile Include="Supplier\frmSupplierQuery.Designer.cs">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserMgmt\frmUserEdit.cs">
+    <Compile Include="UserManager\frmUserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserMgmt\frmUserEdit.Designer.cs">
+    <Compile Include="UserManager\frmUserEdit.Designer.cs">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserMgmt\frmUserQuery.cs">
+    <Compile Include="UserManager\frmUserQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserMgmt\frmUserQuery.Designer.cs">
+    <Compile Include="UserManager\frmUserQuery.Designer.cs">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
@@ -401,10 +401,10 @@
     <EmbeddedResource Include="Supplier\frmSupplierQuery.resx">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserMgmt\frmUserEdit.resx">
+    <EmbeddedResource Include="UserManager\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserMgmt\frmUserQuery.resx">
+    <EmbeddedResource Include="UserManager\frmUserQuery.resx">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
@@ -441,7 +441,15 @@
       <Name>Localization</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="UserManager\frmUserEdit_Modify.xml" />
+    <EmbeddedResource Include="UserManager\frmUserEdit_Default.xml" />
+    <EmbeddedResource Include="UserManager\frmUserEdit_New.xml" />
+    <EmbeddedResource Include="UserManager\frmUserEdit_View.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserManager\frmUserEdit_ModifyPassword.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

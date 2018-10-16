@@ -115,6 +115,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 60;
             }
+            else if (operate == OperateTypes.ReSetPassword)
+            {
+                text = "重置密码";
+                group = "操作";
+                imageIndex = 61;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

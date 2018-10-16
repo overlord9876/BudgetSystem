@@ -64,6 +64,7 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -98,11 +99,13 @@
             this.btnFlowConfig,
             this.btnDepartment,
             this.btnRoleManager,
-            this.btnOptionManager});
+            this.btnOptionManager,
+            this.btnModifyPassword});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.ribbonControl1.MaxItemId = 37;
+            this.ribbonControl1.MaxItemId = 38;
             this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -180,6 +183,7 @@
             this.imageCollection1.Images.SetKeyName(58, "Print_32x32.png");
             this.imageCollection1.Images.SetKeyName(59, "NewTask_32x32.png");
             this.imageCollection1.Images.SetKeyName(60, "BreakingChange_32x32.png");
+            this.imageCollection1.Images.SetKeyName(61, "BOUser_32x32.png");
             // 
             // btnRefresh
             // 
@@ -453,6 +457,14 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // btnModifyPassword
+            // 
+            this.btnModifyPassword.Caption = "修改密码";
+            this.btnModifyPassword.Id = 37;
+            this.btnModifyPassword.ImageIndex = 61;
+            this.btnModifyPassword.Name = "btnModifyPassword";
+            this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
@@ -513,6 +525,7 @@
         private DevExpress.XtraBars.BarButtonItem btnDepartment;
         private DevExpress.XtraBars.BarButtonItem btnRoleManager;
         private DevExpress.XtraBars.BarButtonItem btnOptionManager;
+        private DevExpress.XtraBars.BarButtonItem btnModifyPassword;
     }
 }
 

@@ -13,31 +13,40 @@ namespace BudgetSystem.Bll
 
         public List<User> GetAllUser()
         {
-
             var lst = this.Query<User>((con) => {
 
                 var uList = dal.GetAllUser(con, null);
                 return uList;
             
             });
-
             return lst.ToList();
-            //IEnumerable<User> users = this.ExecuteWithoutTransaction((con) =>
-            //{
-            //    var uList = dal.GetAllUser(con, null);
-            //    return uList;
-               
-            //}) as IEnumerable<User>;
-            //return users.ToList();
         }
 
-        public void CreateUser(User user)
+        public User GetUser(string userName)
         {
-            this.ExecuteWithoutTransaction((con) =>
+            var user = this.Query<User>((con) =>
             {
 
-                dal.AddUser(user, con, null);
+                var uList = dal.GetUser(userName, con, null);
+                return uList;
 
+            });
+            return user;
+        
+        }
+
+
+        public int CreateUser(User user)
+        {
+            return this.ExecuteWithTransaction<int>((con,tran) =>
+            {
+                User existUser = dal.GetUser(user.UserName, con, tran);
+                if (existUser != null)
+                {
+                    return 2;
+                }
+                dal.AddUser(user, con, null);
+                return 1;
             });
         }
 

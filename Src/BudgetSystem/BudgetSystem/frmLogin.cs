@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
@@ -23,10 +24,13 @@ namespace BudgetSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
-
             RunInfo.Instance.Config.UserName = this.txtUserName.Text;
             RunInfo.Instance.Config.Save();
+
+
+            User user = new User();
+            user.UserName = "admin";
+            RunInfo.Instance.CurrentUser = user;
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

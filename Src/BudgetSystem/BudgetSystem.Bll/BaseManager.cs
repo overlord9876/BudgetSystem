@@ -34,6 +34,14 @@ namespace BudgetSystem.Bll
             }
         }
 
+        protected T ExecuteWithoutTransaction<T>(Func<IDbConnection, T> func)
+        {
+            using (IDbConnection con = GetConnection())
+            {
+                return func(con);
+            }
+        }
+
         protected void ExecuteWithTransaction(Action<IDbConnection, IDbTransaction> action)
         {
             using (IDbConnection con = GetConnection())
@@ -77,7 +85,37 @@ namespace BudgetSystem.Bll
         }
 
 
+        protected T ExecuteWithTransaction<T>(Func<IDbConnection, IDbTransaction, T> func)
+        {
+            using (IDbConnection con = GetConnection())
+            {
+                IDbTransaction tran = con.BeginTransaction();
+
+                try
+                {
+                    T resut = func(con, tran);
+                    tran.Commit();
+                    return resut;
+                }
+                catch
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
+
+        }
+
+
         protected IEnumerable<T> Query<T>(Func<IDbConnection, IEnumerable<T>> func)
+        {
+            using (IDbConnection con = GetConnection())
+            {
+                return func(con);
+            }
+        }
+
+        protected T Query<T>(Func<IDbConnection, T> func)
         {
             using (IDbConnection con = GetConnection())
             {

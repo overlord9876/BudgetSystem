@@ -6,8 +6,10 @@ namespace BudgetSystem
 {
     public enum EditFormWorkModels
     {
+        Default,
         New,
-        Modify,
+        Modify, 
         View,
+        Custom,
     }
 }

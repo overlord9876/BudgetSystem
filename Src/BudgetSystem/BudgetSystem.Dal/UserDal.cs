@@ -4,11 +4,18 @@ using System.Text;
 using BudgetSystem.Entity;
 using System.Data;
 using Dapper_NET20;
+using System.Linq;
 
 namespace BudgetSystem.Dal
 {
     public class UserDal
     {
+
+        public User GetUser(string userName, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `UserName`,`RealName`,`Role`,`Department`,`State`,`UpdateUser`,`UpdateDateTime` From `User` where UserName=@UserName";
+            return con.Query<User>(selectSql, new  { UserName=userName }, tran).SingleOrDefault();
+        }
 
         public IEnumerable<User> GetAllUser(IDbConnection con, IDbTransaction tran)
         {
