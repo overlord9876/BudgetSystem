@@ -11,7 +11,7 @@ namespace BudgetSystem
 
         public static Config  Read()
         {
-            Config config = null; ;
+            Config config = null; 
             if (System.IO.File.Exists(configFileName))
             {
                 string str = System.IO.File.ReadAllText(configFileName,Encoding.GetEncoding("gb2312"));

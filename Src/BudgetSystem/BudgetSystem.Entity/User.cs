@@ -41,9 +41,9 @@ namespace BudgetSystem.Entity
         public bool State { get; set; }
 
         /// <summary>
-        /// 创建人
+        /// 更新人
         /// </summary>
-        public string CreateUser { get; set; }
+        public string UpdateUser { get; set; }
 
         /// <summary>
         /// 更新时间

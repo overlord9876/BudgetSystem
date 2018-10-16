@@ -432,6 +432,10 @@
       <Project>{2D2754F5-2900-4E7D-B008-A44549A032B1}</Project>
       <Name>BudgetSystem.Bll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Entity\BudgetSystem.Entity.csproj">
+      <Project>{6EC39F94-981B-488F-A94D-3D3F9F0C6D79}</Project>
+      <Name>BudgetSystem.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Localization\Localization.csproj">
       <Project>{D2796715-1019-4731-B90B-1289826CA9BC}</Project>
       <Name>Localization</Name>
