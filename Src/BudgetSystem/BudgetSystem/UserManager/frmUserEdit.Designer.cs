@@ -42,20 +42,20 @@
             this.cboDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
             this.dtCreateDate = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcPassword = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcUserName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcIsEnable = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRole = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRealName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDepartment = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.lcPassword = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPasswordRepeat = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.lcCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPasswordRepeat.Properties)).BeginInit();
@@ -69,20 +69,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtCreateDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIsEnable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRealName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDepartment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPasswordRepeat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -250,6 +250,16 @@
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
+            // lcPassword
+            // 
+            this.lcPassword.Control = this.txtPasswrod;
+            this.lcPassword.CustomizationFormText = "用户密码";
+            this.lcPassword.Location = new System.Drawing.Point(0, 64);
+            this.lcPassword.Name = "lcPassword";
+            this.lcPassword.Size = new System.Drawing.Size(474, 32);
+            this.lcPassword.Text = "密码：";
+            this.lcPassword.TextSize = new System.Drawing.Size(90, 22);
+            // 
             // lcUserName
             // 
             this.lcUserName.Control = this.txtUserName;
@@ -301,40 +311,6 @@
             this.lcDepartment.Size = new System.Drawing.Size(474, 32);
             this.lcDepartment.Text = "所在部门：";
             this.lcDepartment.TextSize = new System.Drawing.Size(90, 22);
-            // 
-            // lcCreateUser
-            // 
-            this.lcCreateUser.Control = this.txtCreateUser;
-            this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(0, 96);
-            this.lcCreateUser.Name = "lcCreateUser";
-            this.lcCreateUser.Size = new System.Drawing.Size(474, 32);
-            this.lcCreateUser.Text = "创建人：";
-            this.lcCreateUser.TextSize = new System.Drawing.Size(90, 22);
-            // 
-            // lcCreateDate
-            // 
-            this.lcCreateDate.Control = this.dtCreateDate;
-            this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(474, 96);
-            this.lcCreateDate.Name = "lcCreateDate";
-            this.lcCreateDate.Size = new System.Drawing.Size(474, 32);
-            this.lcCreateDate.Text = "创建时间：";
-            this.lcCreateDate.TextSize = new System.Drawing.Size(90, 22);
-            // 
-            // dxErrorProvider1
-            // 
-            this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // lcPassword
-            // 
-            this.lcPassword.Control = this.txtPasswrod;
-            this.lcPassword.CustomizationFormText = "用户密码";
-            this.lcPassword.Location = new System.Drawing.Point(0, 64);
-            this.lcPassword.Name = "lcPassword";
-            this.lcPassword.Size = new System.Drawing.Size(474, 32);
-            this.lcPassword.Text = "密码：";
-            this.lcPassword.TextSize = new System.Drawing.Size(90, 22);
             // 
             // lcPasswordRepeat
             // 
@@ -396,6 +372,30 @@
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // lcCreateUser
+            // 
+            this.lcCreateUser.Control = this.txtCreateUser;
+            this.lcCreateUser.CustomizationFormText = "创建人";
+            this.lcCreateUser.Location = new System.Drawing.Point(0, 96);
+            this.lcCreateUser.Name = "lcCreateUser";
+            this.lcCreateUser.Size = new System.Drawing.Size(474, 32);
+            this.lcCreateUser.Text = "创建人：";
+            this.lcCreateUser.TextSize = new System.Drawing.Size(90, 22);
+            // 
+            // lcCreateDate
+            // 
+            this.lcCreateDate.Control = this.dtCreateDate;
+            this.lcCreateDate.CustomizationFormText = "创建时间：";
+            this.lcCreateDate.Location = new System.Drawing.Point(474, 96);
+            this.lcCreateDate.Name = "lcCreateDate";
+            this.lcCreateDate.Size = new System.Drawing.Size(474, 32);
+            this.lcCreateDate.Text = "创建时间：";
+            this.lcCreateDate.TextSize = new System.Drawing.Size(90, 22);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // frmUserEdit
             // 
             this.AcceptButton = this.btnSure;
@@ -421,20 +421,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtCreateDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIsEnable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRealName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDepartment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPasswordRepeat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

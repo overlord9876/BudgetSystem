@@ -11,6 +11,19 @@ namespace BudgetSystem.Bll
 
         Dal.UserDal dal = new Dal.UserDal();
 
+
+        public User Login(string userName, string password)
+        {
+            var user = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetUser(userName,password, con, null);
+                return uList;
+
+            });
+            return user;
+        }
+
         public List<User> GetAllUser()
         {
             var lst = this.Query<User>((con) => {
@@ -18,6 +31,54 @@ namespace BudgetSystem.Bll
                 var uList = dal.GetAllUser(con, null);
                 return uList;
             
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetRoleUsers(string roleCode)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetRoleUsers(roleCode, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetNotRoleUsers(string roleCode)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetNotRoleUsers(roleCode, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetDepartmentUsers(string departmentCode)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetDepartmentUsers(departmentCode, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetNotDepartmentUsers(string departmentCode)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetNotDepartmentUsers(departmentCode, con, null);
+                return uList;
+
             });
             return lst.ToList();
         }
@@ -34,6 +95,8 @@ namespace BudgetSystem.Bll
             return user;
         
         }
+
+
 
 
         public int CreateUser(User user)
@@ -58,21 +121,40 @@ namespace BudgetSystem.Bll
             });
         }
 
-        public void ModifyUserPassword(string userName, string password, string updateUser)
+        public void ModifyUserPassword(string userName, string password)
         {
             this.ExecuteWithoutTransaction((con) =>
             {
 
-                dal.ModifyPassword(userName, password, updateUser, con, null);
+                dal.ModifyPassword(userName, password,  con, null);
 
             });
         }
 
-        public void ModifyUserState(string userName, bool isEnable, string updateUser)
+        public void ModifyUserState(string userName, bool isEnable)
         {
             this.ExecuteWithoutTransaction((con) =>
             {
-                dal.ModifyUserState(userName, isEnable, updateUser, con, null);
+                dal.ModifyUserState(userName, isEnable, con, null);
+
+            });
+        }
+
+
+        public void SetUserRole(List<string> userList, string roleCode)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.SetUsersRole(userList, roleCode, con,tran);
+               
+            });
+        }
+
+        public void SetUserDepartment(List<string> userList, string departmentCode)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.SetUsersDepartment(userList, departmentCode, con, tran);
 
             });
         }

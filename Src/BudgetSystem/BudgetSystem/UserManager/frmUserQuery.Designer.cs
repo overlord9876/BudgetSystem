@@ -86,7 +86,7 @@
             // gcRole
             // 
             this.gcRole.Caption = "用户角色";
-            this.gcRole.FieldName = "Role";
+            this.gcRole.FieldName = "RoleName";
             this.gcRole.Name = "gcRole";
             this.gcRole.Visible = true;
             this.gcRole.VisibleIndex = 2;
@@ -94,7 +94,7 @@
             // gcDepartment
             // 
             this.gcDepartment.Caption = "所在部门";
-            this.gcDepartment.FieldName = "Department";
+            this.gcDepartment.FieldName = "DepartmentName";
             this.gcDepartment.Name = "gcDepartment";
             this.gcDepartment.Visible = true;
             this.gcDepartment.VisibleIndex = 3;

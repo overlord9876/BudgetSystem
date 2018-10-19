@@ -20,7 +20,7 @@ namespace BudgetSystem.Dal
             user1.Password = "abc";
             user1.Role = "";
             user1.Department = "";
-            user1.UpdateUser = "admin";
+            user1.CreateUser = "admin";
             user1.State = true;
             user1.UpdateDateTime = DateTime.Now;
 
@@ -30,7 +30,7 @@ namespace BudgetSystem.Dal
             user2.Password = "abc";
             user2.Role = "";
             user2.Department = "";
-            user2.UpdateUser = "admin";
+            user2.CreateUser = "admin";
             user2.State = true;
             user2.UpdateDateTime = DateTime.Now;
 
@@ -84,7 +84,7 @@ namespace BudgetSystem.Dal
             user1.Password = "abc";
             user1.Role = "";
             user1.Department = "";
-            user1.UpdateUser = "admin";
+            user1.CreateUser = "admin";
             user1.State = true;
             user1.UpdateDateTime = DateTime.Now;
 
@@ -104,7 +104,7 @@ namespace BudgetSystem.Dal
             user2.Password = "abc";
             user2.Role = "";
             user2.Department = "";
-            user2.UpdateUser = "admin";
+            user2.CreateUser = "admin";
             user2.State = true;
             user2.UpdateDateTime = DateTime.Now;
 

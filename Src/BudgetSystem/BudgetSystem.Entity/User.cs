@@ -25,10 +25,14 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Role { get; set; }
 
+        public string RoleName { get; set; }
+
         /// <summary>
         /// 所属部门
         /// </summary>
         public string Department { get; set; }
+
+        public string DepartmentName { get; set; }
 
         /// <summary>
         /// 密码
@@ -41,9 +45,9 @@ namespace BudgetSystem.Entity
         public bool State { get; set; }
 
         /// <summary>
-        /// 更新人
+        /// 创建人
         /// </summary>
-        public string UpdateUser { get; set; }
+        public string CreateUser { get; set; }
 
         /// <summary>
         /// 更新时间

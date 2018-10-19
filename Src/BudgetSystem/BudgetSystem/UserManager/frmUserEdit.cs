@@ -28,10 +28,18 @@ namespace BudgetSystem.UserManager
         public const string CustomWorkModel_ModifyPassword = "ModifyPassword";
 
         private Bll.UserManager um = new Bll.UserManager();
+        private Bll.RoleManager rm = new Bll.RoleManager();
+        private Bll.DepartmentManager dm = new Bll.DepartmentManager();
 
 
         private void frmUserEdit_Load(object sender, EventArgs e)
         {
+            List<Role> roleList = rm.GetAllRole();
+            this.cboRole.Properties.Items.AddRange(roleList);
+
+            List<Department> departmentList = dm.GetAllDepartment();
+            this.cboDepartment.Properties.Items.AddRange(departmentList);
+
             this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
             if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -70,9 +78,27 @@ namespace BudgetSystem.UserManager
             {
                 this.txtUserName.Text = user.UserName;
                 this.txtRealName.Text = user.RealName;
-                this.txtCreateUser.Text = user.UpdateUser;
+                this.txtCreateUser.Text = user.CreateUser;
                 this.dtCreateDate.EditValue = user.UpdateDateTime;
                 this.chkIsEnable.Checked = user.State;
+
+                foreach (Role role in this.cboRole.Properties.Items)
+                {
+                    if (role.Code == user.Role)
+                    {
+                        this.cboRole.SelectedItem = role;
+                        break;
+                    }
+                }
+
+                foreach (Department department in this.cboDepartment.Properties.Items)
+                {
+                    if (department.Code == user.Department)
+                    {
+                        this.cboDepartment.SelectedItem = department;
+                        break;
+                    }
+                }
                 //TODO: 绑定角色和部门
             }
         }
@@ -133,10 +159,10 @@ namespace BudgetSystem.UserManager
             user.UserName = this.txtUserName.Text.Trim();
             user.RealName = this.txtRealName.Text.Trim();
             user.Password = Util.SHA256.ToSHA256(this.txtPasswrod.Text.Trim());
-            user.Role = this.cboRole.SelectedItem != null ? this.cboRole.SelectedItem.ToString() : "";
-            user.Department = this.cboDepartment.SelectedItem != null ? this.cboDepartment.SelectedItem.ToString() : "";
+            user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
+            user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
             user.State = this.chkIsEnable.Checked;
-            user.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+            user.CreateUser = RunInfo.Instance.CurrentUser.UserName;
            
             int result= um.CreateUser(user);
 
@@ -161,9 +187,9 @@ namespace BudgetSystem.UserManager
             User user = new User();
             user.UserName = this.txtUserName.Text.Trim();
             user.RealName = this.txtRealName.Text.Trim();
-            user.Role = this.cboRole.SelectedItem != null ? this.cboRole.SelectedItem.ToString() : "";
-            user.Department = this.cboDepartment.SelectedItem != null ? this.cboDepartment.SelectedItem.ToString() : "";
-            user.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+            user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
+            user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
+            user.CreateUser = RunInfo.Instance.CurrentUser.UserName;
 
             um.ModifyUserInfo(user);
 
@@ -181,7 +207,7 @@ namespace BudgetSystem.UserManager
                 {
                     return;
                 }
-                um.ModifyUserPassword(RunInfo.Instance.CurrentUser.UserName, Util.SHA256.ToSHA256(this.txtPasswrod.Text.Trim()), RunInfo.Instance.CurrentUser.UserName);
+                um.ModifyUserPassword(RunInfo.Instance.CurrentUser.UserName, Util.SHA256.ToSHA256(this.txtPasswrod.Text.Trim()));
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
 

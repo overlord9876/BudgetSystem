@@ -452,7 +452,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 873);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmDepartmentQuery";
             this.Text = "部门管理";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

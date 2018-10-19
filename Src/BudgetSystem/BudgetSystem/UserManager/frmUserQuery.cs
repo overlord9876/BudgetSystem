@@ -73,7 +73,7 @@ namespace BudgetSystem.UserManager
             User currentRowUser = this.gvUser.GetFocusedRow() as User;
             if (currentRowUser != null)
             {
-                um.ModifyUserState(currentRowUser.UserName, true, RunInfo.Instance.CurrentUser.UserName);
+                um.ModifyUserState(currentRowUser.UserName, true);
                 this.RefreshData();
                 XtraMessageBox.Show("启用成功");
             }
@@ -84,7 +84,7 @@ namespace BudgetSystem.UserManager
             User currentRowUser = this.gvUser.GetFocusedRow() as User;
             if (currentRowUser != null)
             {
-                um.ModifyUserState(currentRowUser.UserName, false, RunInfo.Instance.CurrentUser.UserName);
+                um.ModifyUserState(currentRowUser.UserName, false);
                 this.RefreshData();
                 XtraMessageBox.Show("停用成功");
             }
@@ -95,7 +95,7 @@ namespace BudgetSystem.UserManager
             User currentRowUser = this.gvUser.GetFocusedRow() as User;
             if (currentRowUser != null)
             {
-                um.ModifyUserPassword(currentRowUser.UserName, Util.SHA256.ToSHA256("1"), RunInfo.Instance.CurrentUser.UserName);
+                um.ModifyUserPassword(currentRowUser.UserName, Util.SHA256.ToSHA256("1"));
                 XtraMessageBox.Show("重置成功");
             }
         }
