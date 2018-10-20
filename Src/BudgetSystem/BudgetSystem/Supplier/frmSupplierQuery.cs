@@ -6,11 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Entity;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BudgetSystem
 {
     public partial class frmSupplierQuery : frmBaseQueryForm
     {
+        private Bll.SupplierManager sm = new Bll.SupplierManager();
+        private GridHitInfo hInfo;
+
         public frmSupplierQuery()
         {
             InitializeComponent();
@@ -33,13 +38,11 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmSupplierEdit form = new frmSupplierEdit() { WorkModel = EditFormWorkModels.New };
-                form.ShowDialog(this);
+                CreateSupplier();
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmSupplierEdit form = new frmSupplierEdit() { WorkModel = EditFormWorkModels.View };
-                form.ShowDialog(this);
+                ModifySupplier();
             }
             else if (operate.Operate == OperateTypes.Enabled.ToString())
             {
@@ -51,30 +54,59 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmSupplierEdit form = new frmSupplierEdit() { WorkModel = EditFormWorkModels.View };
+               ViewSupplier();
+            }
+        }
+        private void CreateSupplier()
+        {
+            frmSupplierEdit form = new frmSupplierEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+        private void ModifySupplier()
+        {
+            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (supplier != null)
+            {
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.Supplier = supplier;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+        private void ViewSupplier()
+        {
+            Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            {
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.Supplier = currentRowSupplier;
                 form.ShowDialog(this);
             }
         }
 
-
         public override void LoadData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Name", typeof(string));
-            dt.Columns.Add("BankAccountName", typeof(string));
-            dt.Columns.Add("BankNO", typeof(string));
-            dt.Columns.Add("BankName", typeof(string));
-            dt.Columns.Add("IsQualified", typeof(string));
-            dt.Columns.Add("CreateDate", typeof(DateTime));
-            dt.Columns.Add("CreateUser", typeof(string));
-            dt.Columns.Add("Description", typeof(string));
-
-            dt.Rows.Add("常熟市新中华时装有限公司", "胡汉三", "2211231231231231231", "招商银行", "是", DateTime.Now, "李四");
-
-            dt.Rows.Add("上海丝绸进口公司淀山湖真丝针织厂", "王五", "2211231231231235678", "交通银行", "否", DateTime.Now, "张三");
-
-            this.gridControl1.DataSource = dt;
+            var list = sm.GetAllSupplier();
+            this.gridSupplier.DataSource = list;
+        }
+        private void gvSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ModifySupplier();
+            }
         }
 
+        private void gvSupplier_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = gvSupplier.CalcHitInfo(e.Y, e.Y);
+        }
     }
 }

@@ -28,140 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            this.gridSupplier = new DevExpress.XtraGrid.GridControl();
+            this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcvBankAccountName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcBankNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.BankName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridControl1
+            // gridSupplier
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1097, 672);
-            this.gridControl1.TabIndex = 2;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            gridLevelNode1.RelationName = "Level1";
+            this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+            this.gridSupplier.Location = new System.Drawing.Point(0, 0);
+            this.gridSupplier.MainView = this.gvSupplier;
+            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridSupplier.Name = "gridSupplier";
+            this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
+            this.gridSupplier.TabIndex = 2;
+            this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvSupplier});
             // 
-            // gridView1
+            // gvSupplier
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcName,
+            this.gcvBankAccountName,
+            this.gcBankNO,
+            this.BankName,
+            this.gcSupplierType,
+            this.gcCreateDate,
+            this.gcCreateUser,
+            this.gcDescription});
+            this.gvSupplier.GridControl = this.gridSupplier;
+            this.gvSupplier.Name = "gvSupplier";
+            this.gvSupplier.OptionsBehavior.Editable = false;
+            this.gvSupplier.OptionsView.ShowGroupPanel = false;
+            this.gvSupplier.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvSupplier_MouseDown);
+            this.gvSupplier.DoubleClick += new System.EventHandler(this.gvSupplier_DoubleClick);
             // 
-            // gridColumn1
+            // gcName
             // 
-            this.gridColumn1.Caption = "供应商名称";
-            this.gridColumn1.FieldName = "Name";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gcName.Caption = "供应商名称";
+            this.gcName.FieldName = "Name";
+            this.gcName.Name = "gcName";
+            this.gcName.Visible = true;
+            this.gcName.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gcvBankAccountName
             // 
-            this.gridColumn2.Caption = "银行户名";
-            this.gridColumn2.FieldName = "BankAccountName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gcvBankAccountName.Caption = "银行户名";
+            this.gcvBankAccountName.FieldName = "BankAccountName";
+            this.gcvBankAccountName.Name = "gcvBankAccountName";
+            this.gcvBankAccountName.Visible = true;
+            this.gcvBankAccountName.VisibleIndex = 1;
             // 
-            // gridColumn3
+            // gcBankNO
             // 
-            this.gridColumn3.Caption = "银行账号";
-            this.gridColumn3.FieldName = "BankNO";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gcBankNO.Caption = "银行账号";
+            this.gcBankNO.FieldName = "BankNO";
+            this.gcBankNO.Name = "gcBankNO";
+            this.gcBankNO.Visible = true;
+            this.gcBankNO.VisibleIndex = 2;
             // 
-            // gridColumn4
+            // BankName
             // 
-            this.gridColumn4.Caption = "开户行";
-            this.gridColumn4.FieldName = "BankName";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.BankName.Caption = "开户行";
+            this.BankName.FieldName = "BankName";
+            this.BankName.Name = "BankName";
+            this.BankName.Visible = true;
+            this.BankName.VisibleIndex = 3;
             // 
-            // gridColumn5
+            // gcSupplierType
             // 
-            this.gridColumn5.Caption = "是否合格供应商";
-            this.gridColumn5.FieldName = "IsQualified";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gcSupplierType.Caption = "供应商类型";
+            this.gcSupplierType.FieldName = "SupplierType";
+            this.gcSupplierType.Name = "gcSupplierType";
+            this.gcSupplierType.Visible = true;
+            this.gcSupplierType.VisibleIndex = 4;
             // 
-            // gridColumn6
+            // gcCreateDate
             // 
-            this.gridColumn6.Caption = "创建时间";
-            this.gridColumn6.FieldName = "CreateDate";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 5;
             // 
-            // gridColumn7
+            // gcCreateUser
             // 
-            this.gridColumn7.Caption = "创建人";
-            this.gridColumn7.FieldName = "CreateUser";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gcCreateUser.Caption = "创建人";
+            this.gcCreateUser.FieldName = "CreateUser";
+            this.gcCreateUser.Name = "gcCreateUser";
+            this.gcCreateUser.Visible = true;
+            this.gcCreateUser.VisibleIndex = 6;
             // 
-            // gridColumn8
+            // gcDescription
             // 
-            this.gridColumn8.Caption = "备注";
-            this.gridColumn8.FieldName = "Description";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gcDescription.Caption = "备注";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            this.gcDescription.Visible = true;
+            this.gcDescription.VisibleIndex = 7;
             // 
             // frmSupplierQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 672);
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.gridSupplier);
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmSupplierQuery";
             this.Text = "供应商管理";
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.GridControl gridSupplier;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvSupplier;
+        private DevExpress.XtraGrid.Columns.GridColumn gcName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcvBankAccountName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcBankNO;
+        private DevExpress.XtraGrid.Columns.GridColumn BankName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
 
 
     }
