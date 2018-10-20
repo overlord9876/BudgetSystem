@@ -33,3 +33,17 @@ PS:PowerDesign使用列名生成注释的方法见此文章 https://www.cnblogs.
 完成了用户中和部门管理，角色管理联动部份。
 调整了用户管理中，相关部门，角色显示名称而不再显示Code。
 完成了登录管理。数据库中的密码为加密密码。 1的密码值为：6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B
+
+
+
+2018-10-20 by Jason
+在Dal层增加了DapperExtensions，目前扩展了Insert方法，用于Insert有自增列数据时返回自增列的值 
+完成供应商管理相关编辑功能，暂缺审批流程控制
+完成收、付款表结构整理
+
+PS:PowerDesign使用列名生成注释的方法可参考 https://www.cnblogs.com/kangxuebin/articles/3688146.html
+   之前的修改方法会修改列的非空、自增等属性，且是每列生成了alter table column 相关Sql
+
+需确定事项
+	UI布局从xml中加载，如果界面新增控件（字段）则需要几乎修改所有相应的XML？ 可否待所有字段确认之后，再添加相对应xml配置？
+
