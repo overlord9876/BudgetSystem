@@ -23,6 +23,8 @@ namespace BudgetSystem.Dal
 
         public User GetUser(string userName,string password, IDbConnection con, IDbTransaction tran)
         {
+            string test= "Select LAST_INSERT_ID() id";
+
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
@@ -37,6 +39,16 @@ namespace BudgetSystem.Dal
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`Department` = `Department`.Code";
+            return con.Query<User>(selectSql, null, tran);
+        }
+
+        public IEnumerable<User> GetAllEnabledUser(IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            From `User` 
+            Left Join `Role` on `User`.`Role` = `Role`.`Code` 
+            Left Join `Department` on `User`.`Department` = `Department`.Code
+            where `State`=1";
             return con.Query<User>(selectSql, null, tran);
         }
 

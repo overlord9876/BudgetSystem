@@ -9,7 +9,7 @@ using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 
-namespace BudgetSystem
+namespace BudgetSystem.RoleManage
 {
     public partial class frmRoleQuery : frmBaseQueryForm
     {
@@ -38,56 +38,28 @@ namespace BudgetSystem
             this.gdRoleList.DataSource = roleList;
 
 
-
-            List<User> allUser = um.GetAllUser();
-            this.gdAllUser.DataSource = allUser;
-           // List<User> userList = um.GetAllUser();
-           // List<User> roleUserList = um.GetUsersByRole()
-
-
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("RoleName", typeof(string));
-            //dt.Columns.Add("RoleDescription", typeof(string));
-
-            //dt.Rows.Add("业务员", "提交审批单，修改审批单");
-            //dt.Rows.Add("业务部经理", "审批流程单");
-            //dt.Rows.Add("财务经理", "审批流程单，审批财务流程");
-            //dt.Rows.Add("总经理", "审理所有流程");
-            //this.gdRoleList.DataSource = dt;
-
-
-            //DataTable userdt = new DataTable();
-            //userdt.Columns.Add("Name");
-            //userdt.Columns.Add("RealName");
-            //userdt.Columns.Add("Role");
-            //userdt.Columns.Add("State");
-
-            //userdt.Rows.Add("User1", "张三", "业务员", "可用");
-            //userdt.Rows.Add("User2", "李四", "业务员", "可用");
-            //this.gdRoleUsers.DataSource = userdt;
-
-
-            //DataTable userdt2 = new DataTable();
-            //userdt2.Columns.Add("Name");
-            //userdt2.Columns.Add("RealName");
-            //userdt2.Columns.Add("Role");
-            //userdt2.Columns.Add("State");
-
-            //userdt2.Rows.Add("User3", "王五", "业务员", "可用");
-            //userdt2.Rows.Add("User4", "赵六", "业务员", "停用");
-            //this.gdAllUser.DataSource = userdt2;
+            BindAllUsers();
+         
         }
+
+      
 
         private void gvRoleList_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle >= 0)
             {
-                BindingRoleUsers();
+                BindRoleUsers();
             
             }
         }
 
-        private void BindingRoleUsers()
+        private void BindAllUsers()
+        {
+            List<User> allUser = um.GetAllUser();
+            this.gdAllUser.DataSource = allUser;
+        }
+
+        private void BindRoleUsers()
         {
             Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
             if (currentRole != null)
@@ -115,8 +87,8 @@ namespace BudgetSystem
             }
 
             um.SetUserRole(users, currentRole.Code);
-            BindingRoleUsers();
-
+            BindRoleUsers();
+            BindAllUsers();
 
         }
 
@@ -130,7 +102,8 @@ namespace BudgetSystem
             }
 
             um.SetUserRole(users, "");
-            BindingRoleUsers();
+            BindRoleUsers();
+            BindAllUsers();
         }
 
         private List<string> GetSelectUsers(GridView view)

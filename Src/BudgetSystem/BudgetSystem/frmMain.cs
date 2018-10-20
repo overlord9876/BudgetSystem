@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
-using BudgetSystem.UserManager;
+using BudgetSystem.UserManage;
+using BudgetSystem.RoleManage;
+using BudgetSystem.DepartmentManage;
 
 namespace BudgetSystem
 {

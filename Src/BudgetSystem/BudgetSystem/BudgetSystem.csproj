@@ -146,10 +146,10 @@
     <Compile Include="Flow\frmFlowQuery.Designer.cs">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Department\frmDepartmentEdit.cs">
+    <Compile Include="DepartmentManage\frmDepartmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Department\frmDepartmentEdit.Designer.cs">
+    <Compile Include="DepartmentManage\frmDepartmentEdit.Designer.cs">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="InMoney\frmInMemorySplitCostEdit.cs">
@@ -170,10 +170,10 @@
     <Compile Include="Option\frmOptionQuery.Designer.cs">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Role\frmRoleQuery.cs">
+    <Compile Include="RoleManage\frmRoleQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Role\frmRoleQuery.Designer.cs">
+    <Compile Include="RoleManage\frmRoleQuery.Designer.cs">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="InMoney\frmInMemoryEdit.cs">
@@ -233,10 +233,10 @@
     <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Department\frmDepartmentQuery.cs">
+    <Compile Include="DepartmentManage\frmDepartmentQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Department\frmDepartmentQuery.Designer.cs">
+    <Compile Include="DepartmentManage\frmDepartmentQuery.Designer.cs">
       <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="RunInfo.cs" />
@@ -265,16 +265,16 @@
     <Compile Include="Supplier\frmSupplierQuery.Designer.cs">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserManager\frmUserEdit.cs">
+    <Compile Include="UserManage\frmUserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserManager\frmUserEdit.Designer.cs">
+    <Compile Include="UserManage\frmUserEdit.Designer.cs">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserManager\frmUserQuery.cs">
+    <Compile Include="UserManage\frmUserQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserManager\frmUserQuery.Designer.cs">
+    <Compile Include="UserManage\frmUserQuery.Designer.cs">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
@@ -337,7 +337,7 @@
     <EmbeddedResource Include="Flow\frmFlowQuery.resx">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Department\frmDepartmentEdit.resx">
+    <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit.resx">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
@@ -355,7 +355,7 @@
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Role\frmRoleQuery.resx">
+    <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMemoryEdit.resx">
@@ -392,7 +392,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Department\frmDepartmentQuery.resx">
+    <EmbeddedResource Include="DepartmentManage\frmDepartmentQuery.resx">
       <DependentUpon>frmDepartmentQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierEdit.resx">
@@ -401,10 +401,10 @@
     <EmbeddedResource Include="Supplier\frmSupplierQuery.resx">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserManager\frmUserEdit.resx">
+    <EmbeddedResource Include="UserManage\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserManager\frmUserQuery.resx">
+    <EmbeddedResource Include="UserManage\frmUserQuery.resx">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
@@ -442,13 +442,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UserManager\frmUserEdit_Modify.xml" />
-    <EmbeddedResource Include="UserManager\frmUserEdit_Default.xml" />
-    <EmbeddedResource Include="UserManager\frmUserEdit_New.xml" />
-    <EmbeddedResource Include="UserManager\frmUserEdit_View.xml" />
+    <EmbeddedResource Include="UserManage\frmUserEdit_Modify.xml" />
+    <EmbeddedResource Include="UserManage\frmUserEdit_Default.xml" />
+    <EmbeddedResource Include="UserManage\frmUserEdit_New.xml" />
+    <EmbeddedResource Include="UserManage\frmUserEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UserManager\frmUserEdit_ModifyPassword.xml" />
+    <EmbeddedResource Include="UserManage\frmUserEdit_ModifyPassword.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_Default.xml" />
+    <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

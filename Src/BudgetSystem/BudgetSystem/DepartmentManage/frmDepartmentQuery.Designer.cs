@@ -1,6 +1,6 @@
-﻿namespace BudgetSystem
+﻿namespace BudgetSystem.DepartmentManage
 {
-    partial class frmRoleQuery
+    partial class frmDepartmentQuery
     {
         /// <summary>
         /// Required designer variable.
@@ -36,19 +36,22 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gdRoleUsers = new DevExpress.XtraGrid.GridControl();
-            this.gvRoleUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gdDepartmentUser = new DevExpress.XtraGrid.GridControl();
+            this.gvDepartmentUser = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gdRoleList = new DevExpress.XtraGrid.GridControl();
-            this.gvRoleList = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcRemark = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnRemveFromRole = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddToRole = new DevExpress.XtraEditors.SimpleButton();
+            this.gdDepartment = new DevExpress.XtraGrid.GridControl();
+            this.gvDepartment = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnRemoveFromDepartment = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddToDepartment = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -64,10 +67,10 @@
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gdAllUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAllUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdRoleUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvRoleUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdRoleList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvRoleList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdDepartmentUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartmentUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdDepartment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -84,25 +87,28 @@
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gdAllUser);
-            this.layoutControl1.Controls.Add(this.gdRoleUsers);
-            this.layoutControl1.Controls.Add(this.gdRoleList);
-            this.layoutControl1.Controls.Add(this.btnRemveFromRole);
-            this.layoutControl1.Controls.Add(this.btnAddToRole);
+            this.layoutControl1.Controls.Add(this.gdDepartmentUser);
+            this.layoutControl1.Controls.Add(this.gdDepartment);
+            this.layoutControl1.Controls.Add(this.btnRemoveFromDepartment);
+            this.layoutControl1.Controls.Add(this.btnAddToDepartment);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1217, 872);
+            this.layoutControl1.Size = new System.Drawing.Size(1218, 873);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // gdAllUser
             // 
-            this.gdAllUser.Location = new System.Drawing.Point(656, 328);
+            this.gdAllUser.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gdAllUser.Location = new System.Drawing.Point(656, 329);
             this.gdAllUser.MainView = this.gvAllUser;
+            this.gdAllUser.Margin = new System.Windows.Forms.Padding(2);
             this.gdAllUser.Name = "gdAllUser";
-            this.gdAllUser.Size = new System.Drawing.Size(537, 520);
-            this.gdAllUser.TabIndex = 4;
+            this.gdAllUser.Size = new System.Drawing.Size(538, 520);
+            this.gdAllUser.TabIndex = 3;
             this.gdAllUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllUser});
             // 
@@ -160,29 +166,31 @@
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 4;
             // 
-            // gdRoleUsers
+            // gdDepartmentUser
             // 
-            this.gdRoleUsers.Location = new System.Drawing.Point(24, 328);
-            this.gdRoleUsers.MainView = this.gvRoleUsers;
-            this.gdRoleUsers.Name = "gdRoleUsers";
-            this.gdRoleUsers.Size = new System.Drawing.Size(484, 520);
-            this.gdRoleUsers.TabIndex = 3;
-            this.gdRoleUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvRoleUsers});
+            this.gdDepartmentUser.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gdDepartmentUser.Location = new System.Drawing.Point(24, 329);
+            this.gdDepartmentUser.MainView = this.gvDepartmentUser;
+            this.gdDepartmentUser.Margin = new System.Windows.Forms.Padding(2);
+            this.gdDepartmentUser.Name = "gdDepartmentUser";
+            this.gdDepartmentUser.Size = new System.Drawing.Size(484, 520);
+            this.gdDepartmentUser.TabIndex = 2;
+            this.gdDepartmentUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvDepartmentUser});
             // 
-            // gvRoleUsers
+            // gvDepartmentUser
             // 
-            this.gvRoleUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvDepartmentUser.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn8,
             this.gridColumn9});
-            this.gvRoleUsers.GridControl = this.gdRoleUsers;
-            this.gvRoleUsers.Name = "gvRoleUsers";
-            this.gvRoleUsers.OptionsBehavior.Editable = false;
-            this.gvRoleUsers.OptionsSelection.MultiSelect = true;
-            this.gvRoleUsers.OptionsView.ShowGroupPanel = false;
+            this.gvDepartmentUser.GridControl = this.gdDepartmentUser;
+            this.gvDepartmentUser.Name = "gvDepartmentUser";
+            this.gvDepartmentUser.OptionsBehavior.Editable = false;
+            this.gvDepartmentUser.OptionsSelection.MultiSelect = true;
+            this.gvDepartmentUser.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn5
             // 
@@ -224,64 +232,95 @@
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 4;
             // 
-            // gdRoleList
+            // gdDepartment
             // 
-            this.gdRoleList.Location = new System.Drawing.Point(24, 52);
-            this.gdRoleList.MainView = this.gvRoleList;
-            this.gdRoleList.Name = "gdRoleList";
-            this.gdRoleList.Size = new System.Drawing.Size(1169, 220);
-            this.gdRoleList.TabIndex = 8;
-            this.gdRoleList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvRoleList});
+            this.gdDepartment.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gdDepartment.Location = new System.Drawing.Point(24, 52);
+            this.gdDepartment.MainView = this.gvDepartment;
+            this.gdDepartment.Margin = new System.Windows.Forms.Padding(2);
+            this.gdDepartment.Name = "gdDepartment";
+            this.gdDepartment.Size = new System.Drawing.Size(1170, 221);
+            this.gdDepartment.TabIndex = 8;
+            this.gdDepartment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvDepartment});
             // 
-            // gvRoleList
+            // gvDepartment
             // 
-            this.gvRoleList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gcName,
-            this.gcRemark});
-            this.gvRoleList.GridControl = this.gdRoleList;
-            this.gvRoleList.Name = "gvRoleList";
-            this.gvRoleList.OptionsBehavior.Editable = false;
-            this.gvRoleList.OptionsView.ShowGroupPanel = false;
-            this.gvRoleList.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvRoleList_FocusedRowChanged);
+            this.gvDepartment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn15});
+            this.gvDepartment.GridControl = this.gdDepartment;
+            this.gvDepartment.Name = "gvDepartment";
+            this.gvDepartment.OptionsBehavior.Editable = false;
+            this.gvDepartment.OptionsView.ShowGroupPanel = false;
+            this.gvDepartment.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvDepartment_FocusedRowChanged);
+            this.gvDepartment.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvDepartment_MouseDown);
+            this.gvDepartment.DoubleClick += new System.EventHandler(this.gvDepartment_DoubleClick);
             // 
-            // gcName
+            // gridColumn1
             // 
-            this.gcName.Caption = "角色名称";
-            this.gcName.FieldName = "Name";
-            this.gcName.Name = "gcName";
-            this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 0;
-            this.gcName.Width = 326;
+            this.gridColumn1.Caption = "部门编号";
+            this.gridColumn1.FieldName = "Code";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
             // 
-            // gcRemark
+            // gridColumn2
             // 
-            this.gcRemark.Caption = "角色描述（权限列表）";
-            this.gcRemark.FieldName = "Remark";
-            this.gcRemark.Name = "gcRemark";
-            this.gcRemark.Visible = true;
-            this.gcRemark.VisibleIndex = 1;
-            this.gcRemark.Width = 825;
+            this.gridColumn2.Caption = "部门名称";
+            this.gridColumn2.FieldName = "Name";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
             // 
-            // btnRemveFromRole
+            // gridColumn3
             // 
-            this.btnRemveFromRole.Location = new System.Drawing.Point(524, 587);
-            this.btnRemveFromRole.Name = "btnRemveFromRole";
-            this.btnRemveFromRole.Size = new System.Drawing.Size(116, 36);
-            this.btnRemveFromRole.StyleController = this.layoutControl1;
-            this.btnRemveFromRole.TabIndex = 7;
-            this.btnRemveFromRole.Text = "移出-->";
-            this.btnRemveFromRole.Click += new System.EventHandler(this.btnRemveFromRole_Click);
+            this.gridColumn3.Caption = "部门经理";
+            this.gridColumn3.FieldName = "Manager";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
             // 
-            // btnAddToRole
+            // gridColumn4
             // 
-            this.btnAddToRole.Location = new System.Drawing.Point(524, 547);
-            this.btnAddToRole.Name = "btnAddToRole";
-            this.btnAddToRole.Size = new System.Drawing.Size(116, 36);
-            this.btnAddToRole.StyleController = this.layoutControl1;
-            this.btnAddToRole.TabIndex = 6;
-            this.btnAddToRole.Text = "<--分配";
-            this.btnAddToRole.Click += new System.EventHandler(this.btnAddToRole_Click);
+            this.gridColumn4.Caption = "部门副经理";
+            this.gridColumn4.FieldName = "AssistantManager";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "gridColumn15";
+            this.gridColumn15.FieldName = "Remark";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 4;
+            // 
+            // btnRemoveFromDepartment
+            // 
+            this.btnRemoveFromDepartment.Location = new System.Drawing.Point(524, 588);
+            this.btnRemoveFromDepartment.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRemoveFromDepartment.Name = "btnRemoveFromDepartment";
+            this.btnRemoveFromDepartment.Size = new System.Drawing.Size(116, 36);
+            this.btnRemoveFromDepartment.StyleController = this.layoutControl1;
+            this.btnRemoveFromDepartment.TabIndex = 7;
+            this.btnRemoveFromDepartment.Text = "移出-->";
+            this.btnRemoveFromDepartment.Click += new System.EventHandler(this.btnRemoveFromDepartment_Click);
+            // 
+            // btnAddToDepartment
+            // 
+            this.btnAddToDepartment.Location = new System.Drawing.Point(524, 548);
+            this.btnAddToDepartment.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddToDepartment.Name = "btnAddToDepartment";
+            this.btnAddToDepartment.Size = new System.Drawing.Size(116, 36);
+            this.btnAddToDepartment.StyleController = this.layoutControl1;
+            this.btnAddToDepartment.TabIndex = 6;
+            this.btnAddToDepartment.Text = "<--分配";
+            this.btnAddToDepartment.Click += new System.EventHandler(this.btnAddToDepartment_Click);
             // 
             // layoutControlGroup1
             // 
@@ -298,15 +337,15 @@
             this.layoutControlGroup4});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1217, 872);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1218, 873);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.btnAddToRole;
+            this.layoutControlItem3.Control = this.btnAddToDepartment;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(512, 535);
+            this.layoutControlItem3.Location = new System.Drawing.Point(512, 536);
             this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -319,9 +358,9 @@
             // 
             // layoutControlItem4
             // 
-            this.layoutControlItem4.Control = this.btnRemveFromRole;
+            this.layoutControlItem4.Control = this.btnRemoveFromDepartment;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(512, 575);
+            this.layoutControlItem4.Location = new System.Drawing.Point(512, 576);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -336,7 +375,7 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(512, 276);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(512, 277);
             this.emptySpaceItem1.MaxSize = new System.Drawing.Size(120, 0);
             this.emptySpaceItem1.MinSize = new System.Drawing.Size(120, 100);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
@@ -349,7 +388,7 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(512, 615);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(512, 616);
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(120, 0);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(120, 100);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
@@ -365,16 +404,16 @@
             this.layoutControlItem5});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1197, 276);
-            this.layoutControlGroup2.Text = "角色列表";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1198, 277);
+            this.layoutControlGroup2.Text = "部门列表";
             // 
             // layoutControlItem5
             // 
-            this.layoutControlItem5.Control = this.gdRoleList;
+            this.layoutControlItem5.Control = this.gdDepartment;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(1173, 224);
+            this.layoutControlItem5.Size = new System.Drawing.Size(1174, 225);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -382,17 +421,17 @@
             // 
             // layoutControlGroup3
             // 
-            this.layoutControlGroup3.CustomizationFormText = "角色当前用户";
+            this.layoutControlGroup3.CustomizationFormText = "部门当前用户";
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 276);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 277);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Size = new System.Drawing.Size(512, 576);
-            this.layoutControlGroup3.Text = "角色当时用户";
+            this.layoutControlGroup3.Text = "部门当前用户";
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.gdRoleUsers;
+            this.layoutControlItem1.Control = this.gdDepartmentUser;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
@@ -407,9 +446,9 @@
             this.layoutControlGroup4.CustomizationFormText = "所有用户";
             this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(632, 276);
+            this.layoutControlGroup4.Location = new System.Drawing.Point(632, 277);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(565, 576);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(566, 576);
             this.layoutControlGroup4.Text = "所有用户";
             // 
             // layoutControlItem2
@@ -418,29 +457,29 @@
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(541, 524);
+            this.layoutControlItem2.Size = new System.Drawing.Size(542, 524);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
             // 
-            // frmRoleQuery
+            // frmDepartmentQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 872);
+            this.ClientSize = new System.Drawing.Size(1218, 873);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "frmRoleQuery";
-            this.Text = "角色管理";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "frmDepartmentQuery";
+            this.Text = "部门管理";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gdAllUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAllUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdRoleUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvRoleUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdRoleList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvRoleList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdDepartmentUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartmentUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdDepartment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -460,10 +499,9 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraGrid.GridControl gdRoleList;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvRoleList;
-        private DevExpress.XtraEditors.SimpleButton btnRemveFromRole;
-        private DevExpress.XtraEditors.SimpleButton btnAddToRole;
+        private DevExpress.XtraGrid.GridControl gdDepartment;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvDepartment;
+        private DevExpress.XtraEditors.SimpleButton btnRemoveFromDepartment;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
@@ -472,10 +510,12 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
-        private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcRemark;
-        private DevExpress.XtraGrid.GridControl gdRoleUsers;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvRoleUsers;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.GridControl gdDepartmentUser;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvDepartmentUser;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
@@ -490,5 +530,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraEditors.SimpleButton btnAddToDepartment;
     }
 }

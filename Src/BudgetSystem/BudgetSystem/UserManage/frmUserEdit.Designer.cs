@@ -1,4 +1,4 @@
-﻿namespace BudgetSystem.UserManager
+﻿namespace BudgetSystem.UserManage
 {
     partial class frmUserEdit
     {

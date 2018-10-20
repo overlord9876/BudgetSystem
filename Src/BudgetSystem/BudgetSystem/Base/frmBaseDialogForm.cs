@@ -36,12 +36,13 @@ namespace BudgetSystem
             return assembly.GetManifestResourceStream(resouceName);
         }
 
-        protected Stream GetResourceFileByCurrentWorkModel()
+
+        protected Stream GetResourceFileByWorkModel(EditFormWorkModels workModel)
         {
             string resouceName = "";
-            if (WorkModel != EditFormWorkModels.Custom)
+            if (workModel != EditFormWorkModels.Custom)
             {
-                resouceName = this.GetType().ToString() + "_" + this.WorkModel.ToString() + ".xml";
+                resouceName = this.GetType().ToString() + "_" + workModel.ToString() + ".xml";
             }
             else
             {
@@ -50,6 +51,40 @@ namespace BudgetSystem
 
             return GetResourceFile(resouceName);
         }
+
+        protected Stream GetResourceFileByCurrentWorkModel()
+        {
+            return GetResourceFileByWorkModel(this.WorkModel);
+        }
+
+
+        protected void SetLayoutControlStyle(EditFormWorkModels workModel = EditFormWorkModels.Default, DevExpress.XtraLayout.LayoutControl layout = null)
+        {
+            if (layout == null)
+            {
+                layout = GetMainLayoutControl();
+            }
+            if (layout == null)
+            {
+                throw new Exception("未找到需要配置的Layount");
+            }
+
+            if (workModel == EditFormWorkModels.Default)
+            {
+                workModel = this.WorkModel;
+            }
+
+            Stream stream = GetResourceFileByWorkModel(workModel);
+
+            if (stream != null)
+            {
+                layout.RestoreLayoutFromStream(stream);
+                stream.Close();
+                stream.Dispose();
+            }
+
+        }
+
 
         protected virtual void SubmitDataByWorkModel()
         {
@@ -93,6 +128,19 @@ namespace BudgetSystem
         protected virtual void SubmitCustomData()
         { 
         
+        }
+
+        private DevExpress.XtraLayout.LayoutControl GetMainLayoutControl()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is DevExpress.XtraLayout.LayoutControl)
+                {
+                    return c as DevExpress.XtraLayout.LayoutControl;
+                }
+           
+            }
+            return null;
         }
     
     }

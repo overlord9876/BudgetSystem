@@ -10,7 +10,7 @@ using System.Resources;
 using BudgetSystem.Entity;
 using BudgetSystem.Util;
 
-namespace BudgetSystem.UserManager
+namespace BudgetSystem.UserManage
 {
     public partial class frmUserEdit : frmBaseDialogForm
     {
@@ -40,7 +40,8 @@ namespace BudgetSystem.UserManager
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
 
-            this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
+           // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
+            SetLayoutControlStyle();
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "创建新用户";
@@ -49,7 +50,7 @@ namespace BudgetSystem.UserManager
             {
                 this.txtUserName.Properties.ReadOnly = true;
                 this.Text = "编辑用户信息";
-                BindingUser(User.UserName);
+                BindUser(User.UserName);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -61,7 +62,7 @@ namespace BudgetSystem.UserManager
                 this.cboRole.Properties.ReadOnly = true;
                 
                 this.Text = "查看用户信息";
-                BindingUser(User.UserName);
+                BindUser(User.UserName);
             }
             else if (this.WorkModel == EditFormWorkModels.Custom && this.CustomWorkModel == CustomWorkModel_ModifyPassword)
             {
@@ -70,7 +71,7 @@ namespace BudgetSystem.UserManager
         }
 
 
-        private void BindingUser(string userName)
+        private void BindUser(string userName)
         {
             User user = um.GetUser(userName);
 
@@ -99,7 +100,7 @@ namespace BudgetSystem.UserManager
                         break;
                     }
                 }
-                //TODO: 绑定角色和部门
+             
             }
         }
 
@@ -109,8 +110,7 @@ namespace BudgetSystem.UserManager
             
         }
 
-       
-
+      
         private void CheckUserNameInput()
         {
             if (string.IsNullOrEmpty(this.txtUserName.Text.Trim()))
@@ -189,8 +189,7 @@ namespace BudgetSystem.UserManager
             user.RealName = this.txtRealName.Text.Trim();
             user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
             user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
-            user.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-
+          
             um.ModifyUserInfo(user);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;

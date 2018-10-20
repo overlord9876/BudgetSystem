@@ -35,6 +35,18 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<User> GetAllEnabledUser()
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetAllEnabledUser(con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
         public List<User> GetRoleUsers(string roleCode)
         {
             var lst = this.Query<User>((con) =>

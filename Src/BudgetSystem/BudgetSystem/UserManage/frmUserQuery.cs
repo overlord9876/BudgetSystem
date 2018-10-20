@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 
-namespace BudgetSystem.UserManager
+namespace BudgetSystem.UserManage
 {
     public partial class frmUserQuery : frmBaseQueryForm
 
