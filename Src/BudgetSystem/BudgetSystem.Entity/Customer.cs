@@ -53,7 +53,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 业务员列表
         /// </summary>
-        public List<string> SalesmanList { get; set; }
+        public List<CustomerSalesman> SalesmanList { get; set; }
 
     }
 

@@ -32,7 +32,7 @@ namespace BudgetSystem.Dal
         }
         public void ModifySupplier(Supplier supplier, IDbConnection con, IDbTransaction tran=null)
         {
-            string updateSql = "Update `Supplier` Set `Name` = @Name,`BankAccountName` = @BankAccountName,`BankNO` = @BankNO,`BankName` = @BankName,`SupplierType` = @SupplierType,`Nature` = @Nature,`RegisterCapital` = @RegisterCapital,`Address` = @Address,`Tell` = @Tell,`FaxNumber` = @FaxNumber,`Contacts` = @Contacts,`DepartmentCode` = @DepartmentCode,`PostalCode` = @PostalCode,`Legal` = @Legal ,`CreateUser`=@CreateUser,`Description`=@Description Where `ID` = @ID";
+            string updateSql = "Update `Supplier` Set `Name` = @Name,`BankAccountName` = @BankAccountName,`BankNO` = @BankNO,`BankName` = @BankName,`SupplierType` = @SupplierType,`Nature` = @Nature,`RegisterCapital` = @RegisterCapital,`Address` = @Address,`Tell` = @Tell,`FaxNumber` = @FaxNumber,`Contacts` = @Contacts,`DepartmentCode` = @DepartmentCode,`PostalCode` = @PostalCode,`Legal` = @Legal ,`Description`=@Description Where `ID` = @ID";
             con.Execute(updateSql, supplier, tran);
         }
         public void DeleteSupplier(int id, IDbConnection con, IDbTransaction tran=null)

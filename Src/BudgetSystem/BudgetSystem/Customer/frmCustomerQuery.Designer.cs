@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridCustomer = new DevExpress.XtraGrid.GridControl();
+            this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -53,48 +53,51 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridControl1
+            // gridCustomer
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1006, 564);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridCustomer.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.Location = new System.Drawing.Point(0, 0);
+            this.gridCustomer.MainView = this.gvCustomer;
+            this.gridCustomer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.Name = "gridCustomer";
+            this.gridCustomer.Size = new System.Drawing.Size(1006, 564);
+            this.gridCustomer.TabIndex = 1;
+            this.gridCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvCustomer});
             // 
-            // gridView1
+            // gvCustomer
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
+            this.gvCustomer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcName,
+            this.gcCountry,
             this.gridColumn6,
-            this.gridColumn5,
-            this.gridColumn4,
-            this.gridColumn3});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gcState,
+            this.gcCreateUser,
+            this.gcCreateDate});
+            this.gvCustomer.GridControl = this.gridCustomer;
+            this.gvCustomer.Name = "gvCustomer";
+            this.gvCustomer.OptionsBehavior.Editable = false;
+            this.gvCustomer.OptionsView.ShowDetailButtons = false;
+            this.gvCustomer.OptionsView.ShowGroupPanel = false;
+            this.gvCustomer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvCustomer_MouseDown);
+            this.gvCustomer.DoubleClick += new System.EventHandler(this.gvCustomer_DoubleClick);
             // 
-            // gridColumn1
+            // gcName
             // 
-            this.gridColumn1.Caption = "客户名称";
-            this.gridColumn1.FieldName = "Name";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gcName.Caption = "客户名称";
+            this.gcName.FieldName = "Name";
+            this.gcName.Name = "gcName";
+            this.gcName.Visible = true;
+            this.gcName.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gcCountry
             // 
-            this.gridColumn2.Caption = "国家或地区";
-            this.gridColumn2.FieldName = "Country";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gcCountry.Caption = "国家或地区";
+            this.gcCountry.FieldName = "Country";
+            this.gcCountry.Name = "gcCountry";
+            this.gcCountry.Visible = true;
+            this.gcCountry.VisibleIndex = 1;
             // 
             // gridColumn6
             // 
@@ -104,29 +107,29 @@
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 2;
             // 
-            // gridColumn5
+            // gcState
             // 
-            this.gridColumn5.Caption = "可用状态";
-            this.gridColumn5.FieldName = "State";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
+            this.gcState.Caption = "可用状态";
+            this.gcState.FieldName = "State";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 3;
             // 
-            // gridColumn4
+            // gcCreateUser
             // 
-            this.gridColumn4.Caption = "创建人";
-            this.gridColumn4.FieldName = "CreateUser";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
+            this.gcCreateUser.Caption = "创建人";
+            this.gcCreateUser.FieldName = "CreateUserName";
+            this.gcCreateUser.Name = "gcCreateUser";
+            this.gcCreateUser.Visible = true;
+            this.gcCreateUser.VisibleIndex = 5;
             // 
-            // gridColumn3
+            // gcCreateDate
             // 
-            this.gridColumn3.Caption = "创建时间";
-            this.gridColumn3.FieldName = "CreateDate";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
+            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 4;
             // 
             // layoutControl1
             // 
@@ -195,12 +198,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 564);
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.gridCustomer);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmCustomerQuery";
             this.Text = "客户查询";
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
@@ -214,13 +217,13 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.GridControl gridCustomer;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvCustomer;
+        private DevExpress.XtraGrid.Columns.GridColumn gcName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCountry;
+        private DevExpress.XtraGrid.Columns.GridColumn gcState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit textEdit1;
