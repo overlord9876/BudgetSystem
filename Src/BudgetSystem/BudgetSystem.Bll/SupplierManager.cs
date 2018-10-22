@@ -41,9 +41,9 @@ namespace BudgetSystem.Bll
         }
         public void ModifySupplier(Supplier supplier)
         {
-            this.ExecuteWithoutTransaction((con) =>
+            this.ExecuteWithTransaction((con,tran) =>
             { 
-                dal.ModifySupplier(supplier,con);
+                dal.ModifySupplier(supplier,con,tran);
             });
         }
         public void DeleteSupplier(int id)

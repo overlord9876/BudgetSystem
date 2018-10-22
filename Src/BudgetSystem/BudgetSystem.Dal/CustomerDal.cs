@@ -9,10 +9,6 @@ namespace BudgetSystem.Dal
 {
     public class CustomerDal
     {
-        string deleteSql = "Delete From `Customer` Where `ID` = @ID";
-        string insertSql = "Insert Into `Customer` (`ID`,`Name`,`Country`,`CreateDate`,`CreateUser`,`Description`,`State`) Values (@ID,@Name,@Country,@CreateDate,@CreateUser,@Description,@State)";
-        string selectSql = "Select * From `Customer` Where `ID` = @ID";
-        string updateSql = "Update `Customer` Set `Name` = @Name,`Country` = @Country,`CreateDate` = @CreateDate,`CreateUser` = @CreateUser,`Description` = @Description,`State` = @State  Where `ID` = @ID";
         public Customer GetCustomer(int id, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName  FROM `Customer` s

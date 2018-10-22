@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BudgetDal.cs" />
     <Compile Include="CustomerDal.cs" />
     <Compile Include="DapperExtensions.cs" />
     <Compile Include="DepartmentDal.cs" />

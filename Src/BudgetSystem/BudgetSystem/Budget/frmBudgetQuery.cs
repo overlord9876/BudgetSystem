@@ -6,11 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
     public partial class frmBudgetQuery : frmBaseQueryFormWithCondtion
     {
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
+        private GridHitInfo hInfo;
+
         public frmBudgetQuery()
         {
             InitializeComponent();
@@ -40,18 +45,15 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                CreateBudget();
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                ModifyBudget();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                ViewBudget();
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
@@ -73,42 +75,57 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            //            
-            //State
-            //TotalAmount
-            //Salesman
-            //Department
-            //CreateDate
-            //SignDate
-            //Validity
-            //Purchaser
-            //TradeMode
-            //TradeNature
-            //Seaport
-            //AdvancePayment
-            //Profit
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ContractNO", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("TotalAmount", typeof(string));
-            dt.Columns.Add("Salesman", typeof(string));
-            dt.Columns.Add("Department", typeof(string));
-            dt.Columns.Add("CreateDate", typeof(DateTime));
-            dt.Columns.Add("SignDate", typeof(DateTime));
-            dt.Columns.Add("Validity", typeof(DateTime));
-            dt.Columns.Add("Purchaser", typeof(string));
-            dt.Columns.Add("TradeMode", typeof(string));
-            dt.Columns.Add("TradeNature", typeof(string));
-            dt.Columns.Add("Seaport", typeof(string));
-            dt.Columns.Add("AdvancePayment", typeof(string));
-            dt.Columns.Add("Profit", typeof(string));
+            var list = bm.GetAllBudget();
+            this.gridBudget.DataSource = list; 
+        }
+        private void CreateBudget()
+        {
+            frmBudgetEditEx form = new frmBudgetEditEx();
+            form.WorkModel = EditFormWorkModels.New;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            } 
+        }
+        private void ModifyBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmBudgetEditEx form = new frmBudgetEditEx();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.Budget = budget;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+        private void ViewBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            {
+                frmBudgetEditEx form = new frmBudgetEditEx();
+                form.WorkModel = EditFormWorkModels.View;
+                form.Budget = budget;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
 
-            dt.Rows.Add("18G-002-001", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-002", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-003", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-004", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
+        private void gvBudget_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ModifyBudget();
+            }
+        }
 
-            this.gridControl1.DataSource = dt;
+        private void gvBudget_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = gvBudget.CalcHitInfo(e.Y, e.Y);
         }
 
 
