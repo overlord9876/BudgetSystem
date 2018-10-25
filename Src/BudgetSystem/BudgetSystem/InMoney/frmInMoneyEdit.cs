@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
@@ -13,9 +14,11 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyEdit : frmBaseDialogForm
     {
-        ActualReceiptsManager manager = new ActualReceiptsManager();
+        private ActualReceiptsManager arm = new ActualReceiptsManager();
+        private Bll.CustomerManager cm = new Bll.CustomerManager();
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
 
-        BudgetManager budgetManager = new BudgetManager();
+
 
         public frmInMoneyEdit()
         {
@@ -47,14 +50,14 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.ExchangeRate = float.Parse(this.txtExchangeRate.Text);
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
             CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.Text.Trim();
-            CurrentActualReceipts.Remitter = this.txtRemitter.Text.Trim();
+            CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
             CurrentActualReceipts.RMB = decimal.Parse(this.txtRMB.Text);
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentActualReceipts.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
 
-            manager.CreateActualReceipts(CurrentActualReceipts);
+            arm.CreateActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
@@ -75,14 +78,49 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.ExchangeRate = float.Parse(this.txtExchangeRate.Text);
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
             CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.Text.Trim();
-            CurrentActualReceipts.Remitter = this.txtRemitter.Text.Trim();
+            CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
             CurrentActualReceipts.RMB = decimal.Parse(this.txtRMB.Text);
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
 
-            manager.ModifyActualReceipts(CurrentActualReceipts);
+            arm.ModifyActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        protected override void SubmitSplitConstData()
+        {
+            base.SubmitSplitConstData();
+
+            this.dxErrorProvider1.ClearErrors();
+
+            CheckSplitMoney();
+
+            if (this.dxErrorProvider1.HasErrors) { return; }
+
+        }
+
+        protected override void SubmitSplitToBudgetData()
+        {
+            base.SubmitSplitToBudgetData();
+
+            this.dxErrorProvider1.ClearErrors();
+
+            CheckSplitMoney();
+
+            var dataSource = (IEnumerable<ActualReceipts>)this.gcConstSplit.DataSource;
+            if (dataSource != null)
+            {
+                int index = dataSource.ToList().FindIndex(o => o.RelationBudget == null);
+                if (index >= 0)
+                {
+                    this.dxErrorProvider1.SetError(this.gcConstSplit, string.Format("请将第{0}项分拆金额关联合同", index + 1));
+                }
+            }
+            if (this.dxErrorProvider1.HasErrors) { return; }
+
+
+
         }
 
         protected override void SubmitCustomData()
@@ -95,11 +133,13 @@ namespace BudgetSystem.InMoney
             SetLayoutControlStyle();
 
             //TODO:绑定币种配置。
-            cboCurrency.Properties.Items.Add("RMB");
+            cboCurrency.Properties.Items.Add("CNY");
             cboCurrency.Properties.Items.Add("USD");
             cboCurrency.Properties.Items.Add("HKD");
 
-            //budgetManager.GetAllBudget();
+
+            List<Customer> customerList = cm.GetAllCustomer();
+            this.cboCustomer.Properties.DataSource = customerList;
 
 
 
@@ -118,26 +158,32 @@ namespace BudgetSystem.InMoney
                 BindActualReceipts(this.CurrentActualReceipts.ID);
 
             }
-            else if (this.WorkModel == EditFormWorkModels.SplitConst)
+            else if (this.WorkModel == EditFormWorkModels.SplitConst || this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
-                this.Text = "入账金额分拆";
-                BindActualReceipts(this.CurrentActualReceipts.ID);
+                if (this.WorkModel == EditFormWorkModels.SplitConst)
+                {
+                    this.Text = "入账金额分拆";
+                    this.lcgTitle.Text = "金额分拆设置";
+                    this.bgcBudget.Visible = false;
+                    this.gbBudget.Visible = false;
+                    BindActualReceipts(this.CurrentActualReceipts.ID);
+                }
+                else
+                {
+                    BindBudgetList();
+                    this.lcgTitle.Text = "金额分拆设置";
+                    this.Text = "金额分拆入合同";
+                    BindActualReceipts(this.CurrentActualReceipts.ID);
+                }
 
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Description", typeof(string));
-                dt.Columns.Add("Money", typeof(decimal));
-                gcSplitToBudget.DataSource = dt;
+                gcConstSplit.DataSource = new BindingList<ActualReceipts>();
+                gvConstSplit.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(gvConstSplit_ValidateRow);
+                gvConstSplit.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(gvConstSplit_CellValueChanged);
+                gvConstSplit.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(gvConstSplit_InvalidRowException);
+                gvConstSplit.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(gvConstSplit_InitNewRow);
 
-                SetReadOnly();
-            }
-            else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
-            {
-                this.Text = "金额分拆入合同";
-                BindActualReceipts(this.CurrentActualReceipts.ID);
-                DataTable dt = new DataTable();
-                dt.Columns.Add("BudgetNo", typeof(string));
-                dt.Columns.Add("Money", typeof(decimal));
-                gcSplitToBudget.DataSource = dt;
+                this.txtNotSplitOriginalCoinMoney.EditValue = this.txtOriginalCoin.Value;
+                this.txtNotSplitCNYMoney.EditValue = this.txtRMB.Value;
 
                 SetReadOnly();
             }
@@ -153,6 +199,11 @@ namespace BudgetSystem.InMoney
             }
         }
 
+        private void BindBudgetList()
+        {
+            this.gridBudget.DataSource = bm.GetAllBudget();
+        }
+
         private void SetReadOnly()
         {
 
@@ -162,7 +213,7 @@ namespace BudgetSystem.InMoney
             this.txtExchangeRate.Properties.ReadOnly = true;
             this.txtOriginalCoin.Properties.ReadOnly = true;
             this.txtPaymentMethod.Properties.ReadOnly = true;
-            this.txtRemitter.Properties.ReadOnly = true;
+            this.cboCustomer.Properties.ReadOnly = true;
             this.txtRMB.Properties.ReadOnly = true;
             this.txtVoucherNo.Properties.ReadOnly = true;
         }
@@ -177,11 +228,24 @@ namespace BudgetSystem.InMoney
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 
+        private void CheckSplitMoney()
+        {
+            if (txtNotSplitOriginalCoinMoney.Value != 0)
+            {
+                dxErrorProvider1.SetError(txtNotSplitOriginalCoinMoney, "分拆原币余额必须为0。");
+            }
+
+            if (txtNotSplitCNYMoney.Value != 0)
+            {
+                dxErrorProvider1.SetError(txtNotSplitCNYMoney, "分拆人民币余额必须为0。");
+            }
+        }
+
         private void CheckUIInput()
         {
-            if (string.IsNullOrEmpty(txtRemitter.Text.Trim()))
+            if ((cboCustomer.EditValue as Customer) == null)
             {
-                dxErrorProvider1.SetError(txtRemitter, "请输入客户信息");
+                dxErrorProvider1.SetError(cboCustomer, "请输入客户信息");
                 return;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text.Trim()))
@@ -215,18 +279,32 @@ namespace BudgetSystem.InMoney
 
         private void BindActualReceipts(int id)
         {
-            CurrentActualReceipts = manager.GetActualReceiptById(id);
+            CurrentActualReceipts = arm.GetActualReceiptById(id);
             this.txtBankName.Text = CurrentActualReceipts.BankName;
             this.txtDescription.Text = CurrentActualReceipts.Description;
             this.txtExchangeRate.Text = CurrentActualReceipts.ExchangeRate.ToString();
             this.txtOriginalCoin.Text = CurrentActualReceipts.OriginalCoin.ToString();
             this.txtPaymentMethod.Text = CurrentActualReceipts.PaymentMethod;
-            this.txtRemitter.Text = CurrentActualReceipts.Remitter;
+
+            foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
+            {
+                if (customer.Name == CurrentActualReceipts.Remitter)
+                {
+                    this.cboCustomer.EditValue = customer;
+                    break;
+                }
+            }
+
             this.txtRMB.Text = CurrentActualReceipts.RMB.ToString();
             this.txtVoucherNo.Text = CurrentActualReceipts.VoucherNo;
             this.txtCreateUser.Text = CurrentActualReceipts.CreateUser;
             this.deReceiptDate.EditValue = CurrentActualReceipts.ReceiptDate;
             this.deCreateTimestamp.EditValue = CurrentActualReceipts.CreateTimestamp;
+        }
+
+        private void CalcRMBValue()
+        {
+            txtRMB.EditValue = Math.Round(txtOriginalCoin.Value * txtExchangeRate.Value, 2);
         }
 
         private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
@@ -239,10 +317,80 @@ namespace BudgetSystem.InMoney
             CalcRMBValue();
         }
 
-        private void CalcRMBValue()
+        void gvConstSplit_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
         {
-            txtRMB.EditValue = Math.Round(txtOriginalCoin.Value * txtExchangeRate.Value, 2);
+            ActualReceipts item = this.gvConstSplit.GetRow(e.RowHandle) as ActualReceipts;
+            item.ExchangeRate = (float)txtExchangeRate.Value;
+            item.OriginalCoin = txtNotSplitOriginalCoinMoney.Value / 2;
+            item.RMB = item.OriginalCoin * (decimal)item.ExchangeRate / 2;
         }
+
+        void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            gvConstSplit.SetColumnError(null, e.ErrorText);
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        void gvConstSplit_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column == gcSplitConstOriginalCoin
+              || e.Column == bgcConstExchangeRate)
+            {
+                if (string.IsNullOrEmpty(CalcSplitMoney()))
+                {
+                    decimal originalCoin = (decimal)this.gvConstSplit.GetRowCellValue(e.RowHandle, gcSplitConstOriginalCoin);
+
+                    float exchangeRate = (float)this.gvConstSplit.GetRowCellValue(e.RowHandle, bgcConstExchangeRate);
+
+                    decimal CNY = originalCoin * (decimal)exchangeRate;
+
+                    this.gvConstSplit.SetRowCellValue(e.RowHandle, bgcConstCNY, CNY);
+                }
+            }
+            else if (e.Column == bgcConstCNY)
+            {
+                CalcSplitMoney();
+            }
+        }
+
+        private string CalcSplitMoney()
+        {
+            string message = string.Empty;
+            var dataSource = (IEnumerable<ActualReceipts>)gvConstSplit.DataSource;
+            if (dataSource != null)
+            {
+                decimal splitOriginalCoin = dataSource.Sum(o => o.OriginalCoin);
+                decimal splitCNY = dataSource.Sum(o => o.OriginalCoin);
+                if (splitOriginalCoin > txtOriginalCoin.Value)
+                {
+                    return "拆分原币金额不允许大于入帐单总额";
+                }
+                if (splitCNY > txtRMB.Value)
+                {
+                    return "拆分人民币金额不允许大于入帐单总额";
+                }
+
+                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
+                txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.RMB);
+
+                txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
+                txtNotSplitCNYMoney.EditValue = txtRMB.Value - txtAlreadySplitCNYMoney.Value;
+            }
+            return message;
+        }
+
+        void gvConstSplit_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            string messsage = CalcSplitMoney();
+
+            if (!string.IsNullOrEmpty(messsage))
+            {
+                e.ErrorText = messsage;
+                e.Valid = false;
+                return;
+            }
+        }
+
 
     }
 }

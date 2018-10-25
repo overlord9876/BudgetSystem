@@ -85,23 +85,17 @@
     <Compile Include="Base\frmBaseQueryFormWithCondtion.Designer.cs">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Budget\frmBudgetEditEx.cs">
+    <Compile Include="Budget\frmBudgetEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Budget\frmBudgetEditEx.Designer.cs">
-      <DependentUpon>frmBudgetEditEx.cs</DependentUpon>
+    <Compile Include="Budget\frmBudgetEdit.Designer.cs">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\frmBudgetQuery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Budget\frmBudgetQuery.Designer.cs">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Budget\frmBudgetEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Budget\frmBudgetEdit.Designer.cs">
-      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\frmFinalAccountsQuery.cs">
       <SubType>Form</SubType>
@@ -122,7 +116,7 @@
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\OutProductDetail.cs" />
-    <Compile Include="Budget\TextEdit_Number.cs">
+    <Compile Include="CommonControl\TextEdit_Number.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Budget\InProductDetail.cs" />
@@ -163,19 +157,9 @@
     <Compile Include="DepartmentManage\frmDepartmentEdit.Designer.cs">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="InMoney\frmInMemorySplitCostEdit.cs">
+    <Compile Include="InMoney\frmInMoneyEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InMoney\frmInMemorySplitCostEdit.Designer.cs">
-      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.Designer.cs">
-      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InMoney\frmInMoneyEdit.cs" />
     <Compile Include="InMoney\frmInMoneyEdit.Designer.cs">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
     </Compile>
@@ -322,14 +306,11 @@
     <EmbeddedResource Include="Base\frmBaseQueryFormWithCondtion.resx">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Budget\frmBudgetEditEx.resx">
-      <DependentUpon>frmBudgetEditEx.cs</DependentUpon>
+    <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
+      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmBudgetQuery.resx">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
-      <DependentUpon>frmBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmFinalAccountsQuery.resx">
       <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
@@ -363,12 +344,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InMoney\frmInMemorySplitCostEdit.resx">
-      <DependentUpon>frmInMemorySplitCostEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InMoney\frmInMemorySplitToBudgetEdit.resx">
-      <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyEdit.resx">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
@@ -477,11 +452,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InMoney\frmInMoneyEdit_Full.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_Modify.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_New.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_SplitConst.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_SplitToBudget.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_View.xml" />
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit_Modify.xml" />
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit_New.xml" />
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitConst.xml" />
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitToBudget.xml" />
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

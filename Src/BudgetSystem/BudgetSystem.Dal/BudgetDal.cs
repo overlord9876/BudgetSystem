@@ -38,7 +38,8 @@ namespace BudgetSystem.Dal
 					                                     LEFT JOIN customer c on bc.Cus_ID=c.ID
                                                GROUP BY bc.Bud_ID) t  on b.ID=t.Bud_ID
                                     LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                    LEFT JOIN `Department` d ON b.Department=d.Code  ";
+                                    LEFT JOIN `Department` d ON b.Department=d.Code  
+                                    WHERE b.ID<>0";
              
             return con.Query<Budget>(selectSql, null, tran);
         }

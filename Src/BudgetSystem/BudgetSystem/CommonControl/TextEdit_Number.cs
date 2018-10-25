@@ -4,9 +4,9 @@ using System.Text;
 using DevExpress.XtraEditors;
 using System.Windows.Forms;
 
-namespace BudgetSystem
+namespace BudgetSystem.CommonControl
 {
-    public class TextEdit_Number:TextEdit
+    public class TextEdit_Number : TextEdit
     {
         private bool isSupportNegative = false;
         /// <summary>
@@ -17,6 +17,20 @@ namespace BudgetSystem
             get { return isSupportNegative; }
             set { this.isSupportNegative = value; }
         }
+
+        /// <summary>
+        /// 编辑数值
+        /// </summary>
+        public decimal Value
+        {
+            get
+            {
+                decimal result = 0;
+                decimal.TryParse(this.EditValue.ToString(), out result);
+                return result;
+            }
+        }
+
         public TextEdit_Number()
             : base()
         {
@@ -36,7 +50,7 @@ namespace BudgetSystem
             if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
             {
                 e.SuppressKeyPress = true;
-            } 
+            }
         }
     }
 }

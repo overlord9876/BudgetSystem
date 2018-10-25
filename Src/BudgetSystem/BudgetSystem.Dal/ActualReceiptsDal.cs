@@ -32,7 +32,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyActualReceipts(ActualReceipts user, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `ActualReceipts` Set `VoucherNo` = @VoucherNo,`BudgetID` = @BudgetID,`OriginalCoin` = @OriginalCoin,`RMB` = @RMB,`ReceiptDate` = @ReceiptDate,`CreateUser` = @CreateUser,`CreateTimestamp` = @CreateTimestamp,`Description` = @Description,`PaymentMethod` = @PaymentMethod,`DepartmentCode` = @DepartmentCode,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Remitter` = @Remitter) Where `ID` = @ID";
+            string updateSql = "Update `ActualReceipts` Set `VoucherNo` = @VoucherNo,`BudgetID` = @BudgetID,`OriginalCoin` = @OriginalCoin,`RMB` = @RMB,`ReceiptDate` = @ReceiptDate,`CreateUser` = @CreateUser,`CreateTimestamp` = @CreateTimestamp,`Description` = @Description,`PaymentMethod` = @PaymentMethod,`DepartmentCode` = @DepartmentCode,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Remitter` = @Remitter Where `ID` = @ID";
             con.Execute(updateSql, user, tran);
         }
     }

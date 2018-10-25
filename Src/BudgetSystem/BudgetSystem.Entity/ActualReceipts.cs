@@ -20,6 +20,8 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string ContractNO { get; set; }
 
+        public Budget RelationBudget { get; set; }
+
         /// <summary>
         /// 合同ID
         /// </summary>
@@ -43,7 +45,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 原币类型
         /// </summary>
-public string Currency{get;set;}
+        public string Currency { get; set; }
 
         /// <summary>
         /// 入账时间

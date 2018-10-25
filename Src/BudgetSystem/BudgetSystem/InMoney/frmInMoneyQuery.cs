@@ -14,7 +14,7 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyQuery : frmBaseQueryFormWithCondtion
     {
-        ActualReceiptsManager arManager = new ActualReceiptsManager();
+        ActualReceiptsManager arm= new ActualReceiptsManager();
 
 
         private GridHitInfo hInfo;
@@ -137,7 +137,7 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            var list = arManager.GetAllActualReceipts();
+            var list = arm.GetAllActualReceipts();
 
             this.gridControl1.DataSource = list;
         }
