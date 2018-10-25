@@ -10,6 +10,7 @@ using BudgetSystem.UserManage;
 using BudgetSystem.RoleManage;
 using BudgetSystem.DepartmentManage;
 using BudgetSystem.InMoney;
+using BudgetSystem.FlowManage;
 
 namespace BudgetSystem
 {

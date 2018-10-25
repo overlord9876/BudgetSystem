@@ -51,6 +51,7 @@
     <Compile Include="CustomerDal.cs" />
     <Compile Include="DapperExtensions.cs" />
     <Compile Include="DepartmentDal.cs" />
+    <Compile Include="FlowDal.cs" />
     <Compile Include="RoleDal.cs" />
     <Compile Include="SupplierDal.cs" />
     <Compile Include="TestDal.cs" />

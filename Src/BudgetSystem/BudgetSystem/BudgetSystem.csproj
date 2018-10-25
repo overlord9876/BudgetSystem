@@ -139,16 +139,16 @@
     <Compile Include="Customer\ucCustomerSelected.Designer.cs">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
-    <Compile Include="Flow\frmFlowEdit.cs">
+    <Compile Include="FlowManage\frmFlowEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Flow\frmFlowEdit.Designer.cs">
+    <Compile Include="FlowManage\frmFlowEdit.Designer.cs">
       <DependentUpon>frmFlowEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Flow\frmFlowQuery.cs">
+    <Compile Include="FlowManage\frmFlowQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Flow\frmFlowQuery.Designer.cs">
+    <Compile Include="FlowManage\frmFlowQuery.Designer.cs">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="DepartmentManage\frmDepartmentEdit.cs">
@@ -330,10 +330,10 @@
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Flow\frmFlowEdit.resx">
+    <EmbeddedResource Include="FlowManage\frmFlowEdit.resx">
       <DependentUpon>frmFlowEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Flow\frmFlowQuery.resx">
+    <EmbeddedResource Include="FlowManage\frmFlowQuery.resx">
       <DependentUpon>frmFlowQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit.resx">
@@ -451,6 +451,9 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
+    <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
+    <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />
     <Content Include="InMoney\frmInMoneyEdit_Full.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_Modify.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_New.xml" />
