@@ -121,6 +121,11 @@
     <Compile Include="Budget\frmMoneyDetailEdit.Designer.cs">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\OutProductDetail.cs" />
+    <Compile Include="Budget\TextEdit_Number.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Budget\InProductDetail.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Customer\frmCustomerQuery.cs">
       <SubType>Form</SubType>
@@ -133,6 +138,12 @@
     </Compile>
     <Compile Include="Customer\frmCustomerEdit.Designer.cs">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\ucCustomerSelected.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Customer\ucCustomerSelected.Designer.cs">
+      <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="Flow\frmFlowEdit.cs">
       <SubType>Form</SubType>
@@ -254,6 +265,12 @@
     <Compile Include="Supplier\frmSupplierEdit.Designer.cs">
       <DependentUpon>frmSupplierEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Supplier\ucSupplierSelected.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Supplier\ucSupplierSelected.Designer.cs">
+      <DependentUpon>ucSupplierSelected.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\ModelOperate.cs" />
     <Compile Include="UIEntity\ModelOperateHelper.cs" />
@@ -331,6 +348,9 @@
     <EmbeddedResource Include="Customer\frmCustomerEdit.resx">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
+      <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Flow\frmFlowEdit.resx">
       <DependentUpon>frmFlowEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -400,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQuery.resx">
       <DependentUpon>frmSupplierQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\ucSupplierSelected.resx">
+      <DependentUpon>ucSupplierSelected.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>

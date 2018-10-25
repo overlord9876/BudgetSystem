@@ -37,6 +37,9 @@ namespace BudgetSystem.Entity
 
         /// <summary>
         /// 供应商类型
+        /// 0=合格供方
+        /// 1=临时供方
+        /// 2=货运供方
         /// </summary>
         public int SupplierType { get; set; }
 
@@ -98,7 +101,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 创建人
         /// </summary>
-        public string  CreateUser {get;set;}
+        public string CreateUser { get; set; }
 
         /// <summary>
         /// 创建人姓名
@@ -109,6 +112,11 @@ namespace BudgetSystem.Entity
         /// 备注
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// 是否选择
+        /// </summary>
+        public bool IsSelected { get; set; }
     }
 
 }

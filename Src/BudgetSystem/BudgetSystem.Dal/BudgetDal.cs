@@ -48,12 +48,14 @@ namespace BudgetSystem.Dal
                                            `TradeMode`,`TradeNature`,`OutProductDetail`,`PriceClause`,`Seaport`,`OutSettlementMethod`,
                                            `OutSettlementMethod2`,`OutSettlementMethod3`,`TotalAmount`,`Country`,`IsQualifiedSupplier`,
                                            `InProductDetail`,`InSettlementMethod1`,`InSettlementMethod2`,`AdvancePayment`,`InterestRate`,
-                                           `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`)
+                                           `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,`Quota`,
+                                           `TaxRebateRate`,`Description`)
                                     Values (@ContractNO,@State,@Salesman,@Department,now(),@SignDate,@Validity,
                                             @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@Seaport,@OutSettlementMethod,
                                             @OutSettlementMethod2,@OutSettlementMethod3,@TotalAmount,@Country,@IsQualifiedSupplier,
                                             @InProductDetail,@InSettlementMethod1,@InSettlementMethod2,@AdvancePayment,@InterestRate,
-                                           @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate)";
+                                            @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,@Quota,
+                                            @TaxRebateRate,@Description)";
             int id = con.Insert(insertSql, budget, tran);
             if (id > 0)
             {
@@ -65,7 +67,16 @@ namespace BudgetSystem.Dal
         }
         public void ModifyBudget(Budget budget, IDbConnection con, IDbTransaction tran = null)
         {
-            string updateSql = "Update `Budget` Set `ContractNO` = @ContractNO,`State` = @State,`Salesman` = @Salesman,`Department` = @Department,`SignDate` = @SignDate,`Validity` = @Validity,`TradeMode` = @TradeMode,`TradeNature` = @TradeNature,`OutProductDetail` = @OutProductDetail,`PriceClause` = @PriceClause,`Seaport` = @Seaport,`OutSettlementMethod` = @OutSettlementMethod,`OutSettlementMethod2` = @OutSettlementMethod2,`OutSettlementMethod3` = @OutSettlementMethod3,`TotalAmount` = @TotalAmount,`Country` = @Country,`IsQualifiedSupplier` = @IsQualifiedSupplier,`InProductDetail` = @InProductDetail,`InSettlementMethod1` = @InSettlementMethod1,`InSettlementMethod2` = @InSettlementMethod2,`AdvancePayment` = @AdvancePayment,`InterestRate` = @InterestRate,`Days` = @Days,`Commission` = @Commission,`Premium` = @Premium,`BankCharges` = @BankCharges,`DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,`ExchangeRate` = @ExchangeRate Where `ID` = @ID";
+            string updateSql = @"Update `Budget` Set `ContractNO` = @ContractNO,`State` = @State,`Salesman` = @Salesman,`Department` = @Department,
+                                         `SignDate` = @SignDate,`Validity` = @Validity,`TradeMode` = @TradeMode,`TradeNature` = @TradeNature,
+                                         `OutProductDetail` = @OutProductDetail,`PriceClause` = @PriceClause,`Seaport` = @Seaport,`OutSettlementMethod` = @OutSettlementMethod,
+                                         `OutSettlementMethod2` = @OutSettlementMethod2,`OutSettlementMethod3` = @OutSettlementMethod3,
+                                         `TotalAmount` = @TotalAmount,`Country` = @Country,`IsQualifiedSupplier` = @IsQualifiedSupplier,
+                                         `InProductDetail` = @InProductDetail,`InSettlementMethod1` = @InSettlementMethod1,`InSettlementMethod2` = @InSettlementMethod2,
+                                         `AdvancePayment` = @AdvancePayment,`InterestRate` = @InterestRate,`Days` = @Days,`Commission` = @Commission,
+                                         `Premium` = @Premium,`BankCharges` = @BankCharges,`DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,
+                                         `ExchangeRate` = @ExchangeRate ,`Quota`=@Quota,`TaxRebateRate`=@TaxRebateRate,`Description`=@Description
+                                Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;
                                  Delete From `BudgetSuppliers` Where `ID` = @ID;  ";
