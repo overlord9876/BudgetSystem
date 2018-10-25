@@ -178,7 +178,7 @@ namespace BudgetSystem.Entity
         /// 出口退税
         /// </summary>
         public float TaxRebateRate { get; set; }
-        
+
         /// <summary>
         /// 备注
         /// </summary>
@@ -206,7 +206,7 @@ namespace BudgetSystem.Entity
         /// 客户名称，以“，”连接
         /// </summary>
         public string CustomerNames { get; set; }
-      
+
         /// <summary>
         /// 客户列表
         /// </summary>
@@ -216,6 +216,11 @@ namespace BudgetSystem.Entity
         /// 供应商列表
         /// </summary>
         public List<Supplier> SupplierList { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", ContractNO);
+        }
     }
 
 

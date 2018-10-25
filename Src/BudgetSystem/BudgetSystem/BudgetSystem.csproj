@@ -175,6 +175,10 @@
     <Compile Include="InMoney\frmInMemorySplitToBudgetEdit.Designer.cs">
       <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\frmInMoneyEdit.cs" />
+    <Compile Include="InMoney\frmInMoneyEdit.Designer.cs">
+      <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\frmOptionQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,12 +190,6 @@
     </Compile>
     <Compile Include="RoleManage\frmRoleQuery.Designer.cs">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InMoney\frmInMemoryEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InMoney\frmInMemoryEdit.Designer.cs">
-      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="InMoney\frmInMoneyQuery.cs">
       <SubType>Form</SubType>
@@ -372,14 +370,14 @@
     <EmbeddedResource Include="InMoney\frmInMemorySplitToBudgetEdit.resx">
       <DependentUpon>frmInMemorySplitToBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMoneyEdit.resx">
+      <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InMoney\frmInMemoryEdit.resx">
-      <DependentUpon>frmInMemoryEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyQuery.resx">
       <DependentUpon>frmInMoneyQuery.cs</DependentUpon>
@@ -476,6 +474,14 @@
   <ItemGroup>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_Default.xml" />
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InMoney\frmInMoneyEdit_Full.xml" />
+    <Content Include="InMoney\frmInMoneyEdit_Modify.xml" />
+    <Content Include="InMoney\frmInMoneyEdit_New.xml" />
+    <Content Include="InMoney\frmInMoneyEdit_SplitConst.xml" />
+    <Content Include="InMoney\frmInMoneyEdit_SplitToBudget.xml" />
+    <Content Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

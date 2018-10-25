@@ -6,15 +6,24 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using BudgetSystem.Entity;
 
-namespace BudgetSystem
+namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyQuery : frmBaseQueryFormWithCondtion
     {
+        ActualReceiptsManager arManager = new ActualReceiptsManager();
+
+
+        private GridHitInfo hInfo;
+
         public frmInMoneyQuery()
         {
             InitializeComponent();
         }
+
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
@@ -33,52 +42,120 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmInMemoryEdit form = new frmInMemoryEdit();
-                form.ShowDialog(this);
+                AddActualReceipts();
             }
+            //else if (operate.Operate == OperateTypes.Modify.ToString())
+            //{
+            //    ModifyActualReceipts();
+            //}
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmInMemorySplitToBudgetEdit form = new frmInMemorySplitToBudgetEdit();
-                form.ShowDialog(this);
+                SplitMoneyToBudgetActualReceipts();
             }
             else if (operate.Operate == OperateTypes.SplitCost.ToString())
             {
-                frmInMemorySplitCostEdit form = new frmInMemorySplitCostEdit();
-                form.ShowDialog(this);
+                SplitConstMoneyActualReceipts();
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-                XtraMessageBox.Show("删除入账");
+                //？可能不存在删除
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmInMemoryEdit form = new frmInMemoryEdit();
+                ViewActualReceipts();
+            }
+        }
+
+        private void AddActualReceipts()
+        {
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.New;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void ModifyActualReceipts()
+        {
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            if (currentRowActualReceipts != null)
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.CurrentActualReceipts = currentRowActualReceipts;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void SplitMoneyToBudgetActualReceipts()
+        {
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            if (currentRowActualReceipts != null)
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.SplitToBudget;
+                form.CurrentActualReceipts = currentRowActualReceipts;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void SplitConstMoneyActualReceipts()
+        {
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            if (currentRowActualReceipts != null)
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.SplitConst;
+                form.CurrentActualReceipts = currentRowActualReceipts;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void ViewActualReceipts()
+        {
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.CurrentActualReceipts = currentRowActualReceipts;
                 form.ShowDialog(this);
             }
         }
 
         public override void LoadData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Customer", typeof(string));
-            dt.Columns.Add("BankVoucherNumber", typeof(string));
-            dt.Columns.Add("Currency", typeof(string));
-            dt.Columns.Add("OriginalCoin", typeof(string));
-            dt.Columns.Add("RMB", typeof(string));
-            dt.Columns.Add("BankName", typeof(string));
-            dt.Columns.Add("ExchangeRate", typeof(string));
-            dt.Columns.Add("BankCharges", typeof(string));
-            dt.Columns.Add("ReceiptDate", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("CreateUser", typeof(string));
-            dt.Columns.Add("CreateDate", typeof(DateTime));
-            dt.Columns.Add("Description", typeof(string));
+            var list = arManager.GetAllActualReceipts();
 
-            dt.Rows.Add("CRAFT OF SCANDINAVIA AB", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
-            dt.Rows.Add("URDI PRY LTD CRAFTSPORTSWEAR NORTH", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
-            dt.Rows.Add("UNITED BRANDS", "201809161234143143", "美元", "35000000.00", "242550000.00", "瑞士银行", "6.93", "0.00", DateTime.Now, "已收款", "张三", DateTime.Now, "");
-
-            this.gridControl1.DataSource = dt;
+            this.gridControl1.DataSource = list;
         }
+
+
+        private void gvUser_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ModifyActualReceipts();
+            }
+        }
+
+        private void gvUser_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = gvInMoney.CalcHitInfo(e.Y, e.Y);
+        }
+
+
     }
 }

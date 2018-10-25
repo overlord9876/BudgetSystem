@@ -9,6 +9,7 @@ using DevExpress.XtraBars.Ribbon;
 using BudgetSystem.UserManage;
 using BudgetSystem.RoleManage;
 using BudgetSystem.DepartmentManage;
+using BudgetSystem.InMoney;
 
 namespace BudgetSystem
 {

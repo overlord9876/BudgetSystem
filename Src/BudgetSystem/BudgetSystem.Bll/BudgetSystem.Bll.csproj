@@ -54,6 +54,7 @@
     <Compile Include="TestManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="ActualReceiptsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Dal\BudgetSystem.Dal.csproj">
