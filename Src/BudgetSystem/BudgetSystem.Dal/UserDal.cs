@@ -23,7 +23,7 @@ namespace BudgetSystem.Dal
 
         public User GetUser(string userName,string password, IDbConnection con, IDbTransaction tran)
         {
-            string test= "Select LAST_INSERT_ID() id";
+         
 
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
