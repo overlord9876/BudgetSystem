@@ -10,49 +10,87 @@ namespace BudgetSystem.Entity
     /// </summary>
     public class ActualReceipts : IEntity
     {
+        /// <summary>
+        /// 收款ID
+        /// </summary>
+        public int ID { get; set; }
 
+        /// <summary>
+        /// 合同号
+        /// </summary>
+        public string ContractNO { get; set; }
 
+        public Budget RelationBudget { get; set; }
 
+        /// <summary>
+        /// 合同ID
+        /// </summary>
+        public int BudgetID { get; set; }
 
         /// <summary>
         /// 凭证号
         /// </summary>
-        public string Name { get; set; }
-        
-        /// <summary>
-        /// 收汇日期
-        /// </summary>
-        public DateTime ReceiptDate { get; set; }
+        public string VoucherNo { get; set; }
 
         /// <summary>
-        /// 实收原币金额
+        /// 原币金额
         /// </summary>
         public decimal OriginalCoin { get; set; }
 
         /// <summary>
-        /// 实收人民币金额
+        /// 人民币
         /// </summary>
         public decimal RMB { get; set; }
 
         /// <summary>
-        /// 录入人
+        /// 原币类型
+        /// </summary>
+        public string Currency { get; set; }
+
+        /// <summary>
+        /// 入账时间
+        /// </summary>
+        public DateTime ReceiptDate { get; set; }
+
+        /// <summary>
+        /// 创建人
         /// </summary>
         public string CreateUser { get; set; }
 
         /// <summary>
-        /// 录入时间
+        /// 
         /// </summary>
         public DateTime CreateTimestamp { get; set; }
 
         /// <summary>
-        /// 状态
-        /// </summary>
-        public bool State { get; set; }
-
-        /// <summary>
-        /// 备注
+        /// 
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PaymentMethod { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DepartmentCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float ExchangeRate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string BankName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Remitter { get; set; }
 
     }
 }

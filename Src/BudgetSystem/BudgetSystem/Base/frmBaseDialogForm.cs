@@ -102,22 +102,40 @@ namespace BudgetSystem
             {
                 SubmitViewData();
             }
+            else if (this.WorkModel == EditFormWorkModels.SplitConst)
+            {
+                SubmitSplitConstData();
+            }
+            else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
+            {
+                SubmitSplitToBudgetData();
+            }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 SubmitCustomData();
             }
         }
 
-       
+
 
         protected virtual void SubmitNewData()
-        { 
-        
+        {
+
         }
 
         protected virtual void SubmitModifyData()
-        { 
-        
+        {
+
+        }
+
+        protected virtual void SubmitSplitConstData()
+        {
+
+        }
+
+        protected virtual void SubmitSplitToBudgetData()
+        {
+
         }
 
         protected virtual void SubmitViewData()
@@ -126,8 +144,8 @@ namespace BudgetSystem
         }
 
         protected virtual void SubmitCustomData()
-        { 
-        
+        {
+
         }
 
         private DevExpress.XtraLayout.LayoutControl GetMainLayoutControl()
@@ -138,10 +156,10 @@ namespace BudgetSystem
                 {
                     return c as DevExpress.XtraLayout.LayoutControl;
                 }
-           
+
             }
             return null;
         }
-    
+
     }
 }

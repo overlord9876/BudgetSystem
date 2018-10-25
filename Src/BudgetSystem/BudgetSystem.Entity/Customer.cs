@@ -55,6 +55,15 @@ namespace BudgetSystem.Entity
         /// </summary>
         public List<CustomerSalesman> SalesmanList { get; set; }
 
+        /// <summary>
+        /// 是否选择
+        /// </summary>
+        public bool IsSelected { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 
 }

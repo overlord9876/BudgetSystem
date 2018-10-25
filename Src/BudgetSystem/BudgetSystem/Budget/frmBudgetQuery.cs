@@ -80,7 +80,7 @@ namespace BudgetSystem
         }
         private void CreateBudget()
         {
-            frmBudgetEditEx form = new frmBudgetEditEx();
+            frmBudgetEdit form = new frmBudgetEdit();
             form.WorkModel = EditFormWorkModels.New;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
@@ -92,7 +92,7 @@ namespace BudgetSystem
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
+                frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.Budget = budget;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -105,7 +105,7 @@ namespace BudgetSystem
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
+                frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.View;
                 form.Budget = budget;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)

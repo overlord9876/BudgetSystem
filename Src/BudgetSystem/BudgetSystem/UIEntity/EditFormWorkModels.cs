@@ -8,8 +8,16 @@ namespace BudgetSystem
     {
         Default,
         New,
-        Modify, 
+        Modify,
         View,
         Custom,
+        /// <summary>
+        /// 分拆金额
+        /// </summary>
+        SplitConst,
+        /// <summary>
+        /// 分拆至合同
+        /// </summary>
+        SplitToBudget
     }
 }

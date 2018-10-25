@@ -53,7 +53,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
+                frmBudgetEdit form = new frmBudgetEdit();
                 form.ShowDialog(this);
             }
             else if (operate.Operate == "Test")

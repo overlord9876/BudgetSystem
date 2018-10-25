@@ -154,7 +154,7 @@ namespace BudgetSystem
         {
             if (string.IsNullOrEmpty(this.txtCountry.Text.Trim()))
             {
-                this.dxErrorProvider1.SetError(this.txtName, "请输入国家或地区");
+                this.dxErrorProvider1.SetError(this.txtCountry, "请输入国家或地区");
             }
         }
 

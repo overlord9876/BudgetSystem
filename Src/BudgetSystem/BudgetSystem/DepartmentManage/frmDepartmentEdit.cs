@@ -127,8 +127,8 @@ namespace BudgetSystem.DepartmentManage
             base.SubmitNewData();
 
             this.dxErrorProvider1.ClearErrors();
-            CheckInput() ;
-       
+            CheckInput();
+
             if (dxErrorProvider1.HasErrors)
             {
                 return;
@@ -168,6 +168,7 @@ namespace BudgetSystem.DepartmentManage
             department.Remark = this.txtRemark.Text.Trim();
             department.Manager = (this.cboManager.SelectedItem as User).UserName;
             department.AssistantManager = (this.cboAssistantManager.SelectedItem as User).UserName;
+            department.CreateUser = RunInfo.Instance.CurrentUser.UserName;
 
 
 
@@ -177,7 +178,7 @@ namespace BudgetSystem.DepartmentManage
         }
 
 
-       
+
 
     }
 
