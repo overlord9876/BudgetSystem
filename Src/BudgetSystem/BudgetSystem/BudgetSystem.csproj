@@ -145,6 +145,14 @@
     <Compile Include="DepartmentManage\frmDepartmentEdit.Designer.cs">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlowManage\frmFlowEdit.cs" />
+    <Compile Include="FlowManage\frmFlowEdit.Designer.cs">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowManage\frmFlowQuery.cs" />
+    <Compile Include="FlowManage\frmFlowQuery.Designer.cs">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMoneyEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,6 +329,12 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit.resx">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FlowManage\frmFlowEdit.resx">
+      <DependentUpon>frmFlowEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowManage\frmFlowQuery.resx">
+      <DependentUpon>frmFlowQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -440,6 +454,9 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FlowManage\frmFlowEdit_Default.xml" />
+    <Content Include="FlowManage\frmFlowEdit_Modify.xml" />
+    <Content Include="FlowManage\frmFlowEdit_View.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_Modify.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_New.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_View.xml" />
