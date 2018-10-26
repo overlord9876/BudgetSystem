@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
+using System.Linq;
+using DevExpress.XtraEditors;
 
 namespace BudgetSystem.FlowManage
 {
@@ -31,30 +33,40 @@ namespace BudgetSystem.FlowManage
         private List<Department> departmentList;
         private List<FlowNode> currentFlowDetial;
         private Flow currentFlow;
+        private bool isInit = true;
 
         private void frmFlowEdit_Load(object sender, EventArgs e)
         {
-            userList = um.GetAllEnabledUser();
+
+
+            userList = um.GetAllUser();
+            userList.Insert(0, new User() { UserName = "%StartUser%", RealName = "流程发起人" ,State =true });
+
             departmentList = dm.GetAllDepartment();
-         
+            departmentList.Insert(0, new Department() { Code = "%StartUserDepartment%", Name = "流程发起人所在部门" });
+     
+
             if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 SetLayoutControlStyle(EditFormWorkModels.Modify);
                 this.txtName.Properties.ReadOnly = true;
                 this.Text = "修改流程配置";
-                BindFlow(Flow.Name,Flow.VersionNumber);
+            
+                this.cboNodeUser.Properties.Items.AddRange(userList.Where(u=>u.State==true).ToList());
+
+                this.cboNodeDepartment.Properties.Items.AddRange(departmentList);
+
+                BindFlow(Flow.Name, Flow.VersionNumber);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
-              
-
-
                 SetLayoutControlStyle(EditFormWorkModels.View);
 
                 for (int i = 1; i <= Flow.VersionNumber; i++)
                 {
                     this.cboVersion.Properties.Items.Add(i);
                 }
+
                 if (this.Flow.VersionNumber > 0)
                 {
                     this.cboVersion.SelectedItem = Flow.VersionNumber;
@@ -68,6 +80,8 @@ namespace BudgetSystem.FlowManage
                 this.Text = "修改流程配置及历史版本信息";
                 BindFlow(Flow.Name, Flow.VersionNumber);
             }
+
+            isInit = false;
         }
 
         private void BindFlow(string flowName, int flowVersion)
@@ -79,6 +93,19 @@ namespace BudgetSystem.FlowManage
             this.dtUpdateDate.EditValue = currentFlow.UpdateDate;
 
             currentFlowDetial = fm.GetFlowDetail(flowName, flowVersion);
+            foreach (var node in currentFlowDetial)
+            {
+                if (node.NodeConfig == 0)
+                {
+                    node.NodeValueDisplayValue = userList.Single(s => s.UserName == node.NodeValue).ToString();
+                }
+                else
+                {
+                    node.NodeValueDisplayValue = departmentList.Single(s => s.Code == node.NodeValue).ToString();
+                }
+            }
+
+
             this.gdNodes.DataSource = currentFlowDetial;
         }
 
@@ -88,30 +115,48 @@ namespace BudgetSystem.FlowManage
         }
 
 
-        private void CheckInput()
-        { 
-        
+        private bool CheckInput()
+        {
+            if (this.currentFlowDetial.Count == 0)
+            {
+                XtraMessageBox.Show("流程配置信息为空，请配置审批过程！");
+                return false;
+            }
+
+            foreach (var node in currentFlowDetial)
+            {
+                if (string.IsNullOrEmpty(node.NodeValue) || string.IsNullOrEmpty(node.NodeValueRemark))
+                {
+                 
+                    XtraMessageBox.Show("请配置节点的审批人及职位信息");
+                    return false;
+                }
+            
+            }
+
+            return true;
         }
 
         protected override void SubmitModifyData()
         {
-            //base.SubmitModifyData();
-            //this.dxErrorProvider1.ClearErrors();
-            //CheckUserRealNameInput();
-            //if (dxErrorProvider1.HasErrors)
-            //{
-            //    return;
-            //}
+            base.SubmitModifyData();
 
-            //User user = new User();
-            //user.UserName = this.txtUserName.Text.Trim();
-            //user.RealName = this.txtRealName.Text.Trim();
-            //user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
-            //user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
+            if (!CheckInput())
+            {
+                return;
+            }
 
-            //um.ModifyUserInfo(user);
+            Flow flow = new Flow();
+            flow.Name = Flow.Name;
+            flow.Remark = this.txtRemark.Text.Trim();
+            flow.CreateUser = RunInfo.Instance.CurrentUser.UserName;
 
-            //this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            flow.Details = new List<FlowNode>();
+            flow.Details.AddRange(currentFlowDetial);
+
+            fm.SaveFlow(flow);
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -129,9 +174,6 @@ namespace BudgetSystem.FlowManage
                 this.gdNodes.RefreshDataSource();
             }
 
-
-
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -143,5 +185,85 @@ namespace BudgetSystem.FlowManage
                 this.gdNodes.RefreshDataSource();
             }
         }
+
+        private void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
+        {
+            FlowNode node = this.gvNodes.GetFocusedRow() as FlowNode;
+            if (node != null)
+            {
+                if (node.NodeConfig == 0)
+                {
+                    this.tabControl.SelectedTabPage = tpUser;
+                    this.cboNodeUser.SelectedItem = userList.SingleOrDefault(u => u.UserName == node.NodeValue);
+                    this.cboNodeDepartment.SelectedItem = null;
+                }
+                else
+                {
+                    this.tabControl.SelectedTabPage = tpDepartment;
+                    this.cboNodeDepartment.SelectedItem = departmentList.SingleOrDefault(d => d.Code == node.NodeValue);
+                    this.rgNodeDepartmentUserType.EditValue = node.NodeConfig;
+                    this.cboNodeUser.SelectedItem = null;
+                }
+
+            }
+        }
+
+
+        private void btnSureNodeValue_Click(object sender, EventArgs e)
+        {
+            FlowNode node = this.gvNodes.GetFocusedRow() as FlowNode;
+            if (node != null)
+            {
+                CheckAndCollectNodeInput(ref node);
+                if (dxErrorProvider1.HasErrors)
+                {
+                    return;
+                }
+            }
+            this.gdNodes.RefreshDataSource();
+
+            this.gvNodes.CloseEditor();
+        }
+
+        private void CheckAndCollectNodeInput(ref FlowNode node)
+        {
+            this.dxErrorProvider1.ClearErrors();
+            if (this.tabControl.SelectedTabPage == tpUser)
+            {
+                if (this.cboNodeUser.SelectedItem == null)
+                {
+                    this.dxErrorProvider1.SetError(this.cboNodeUser, "请选择审批人");
+                    return;
+                }
+
+                node.NodeConfig = 0;
+                node.NodeValue = (this.cboNodeUser.SelectedItem as User).UserName;
+                node.NodeValueDisplayValue = this.cboNodeUser.SelectedItem.ToString();
+            }
+            else if (this.tabControl.SelectedTabPage == tpDepartment)
+            {
+                if (this.cboNodeDepartment.SelectedItem == null)
+                {
+                    this.dxErrorProvider1.SetError(this.cboNodeDepartment, "请选择审批部门");
+                    return;
+                }
+                node.NodeConfig = (int)this.rgNodeDepartmentUserType.EditValue;
+                node.NodeValue = (this.cboNodeDepartment.SelectedItem as Department).Code;
+                node.NodeValueDisplayValue = this.cboNodeDepartment.SelectedItem.ToString();
+            }
+
+           
+        
+        }
+
+        private void cboVersion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInit)
+            {
+                BindFlow(Flow.Name, (int)this.cboVersion.SelectedItem);
+            }
+        }
+
+ 
     }
 }

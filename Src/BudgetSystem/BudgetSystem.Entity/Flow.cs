@@ -39,5 +39,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public bool IsEnabled { get; set; }
 
+        public List<FlowNode> Details { get; set; }
+
     }
 }

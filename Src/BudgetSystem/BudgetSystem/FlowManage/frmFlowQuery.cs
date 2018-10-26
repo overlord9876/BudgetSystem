@@ -7,11 +7,13 @@ using System.Text;
 using System.Windows.Forms;
 using BudgetSystem.Bll;
 using BudgetSystem.Entity;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BudgetSystem.FlowManage
 {
     public partial class frmFlowQuery : frmBaseQueryForm
     {
+        private GridHitInfo hInfo;
         FlowManager manager = new FlowManager();
 
         public frmFlowQuery()
@@ -30,30 +32,56 @@ namespace BudgetSystem.FlowManage
 
         public override void OperateHandled(ModelOperate operate)
         {
-            Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
-
             if (operate.Operate == OperateTypes.Modify.ToString())
             {
-             
-                frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.Modify , Flow = currentRowFlow };
-                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                ModifyFlow();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = currentRowFlow };
-                form.ShowDialog(this);
+                ViewFlow();
             }
         }
 
+       
+
+        private void ModifyFlow()
+        {
+            Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
+            frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.Modify, Flow = currentRowFlow };
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+
+        private void ViewFlow()
+        {
+            Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
+            frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = currentRowFlow };
+            form.ShowDialog(this);
+        }
 
         public override void LoadData()
         {
             List<Flow> flows = manager.GetAllEnabledFlow();
             this.gdFlow.DataSource = flows;
         }
+
+        private void gvFlow_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = gvFlow.CalcHitInfo(e.Y, e.Y);
+        }
+
+        private void gvFlow_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ModifyFlow();
+            }
+        }
+
+
+
 
     }
 }

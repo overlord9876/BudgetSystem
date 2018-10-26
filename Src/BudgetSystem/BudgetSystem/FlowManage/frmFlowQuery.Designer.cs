@@ -33,8 +33,8 @@
             this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcEditor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLastEditTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcVersion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcEnabledState = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gdFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFlow)).BeginInit();
@@ -63,6 +63,9 @@
             this.gvFlow.GridControl = this.gdFlow;
             this.gvFlow.Name = "gvFlow";
             this.gvFlow.OptionsBehavior.Editable = false;
+            this.gvFlow.OptionsDetail.EnableMasterViewMode = false;
+            this.gvFlow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvFlow_MouseDown);
+            this.gvFlow.DoubleClick += new System.EventHandler(this.gvFlow_DoubleClick);
             // 
             // gcFlowName
             // 
@@ -94,6 +97,14 @@
             this.gcLastEditTime.VisibleIndex = 4;
             this.gcLastEditTime.Width = 153;
             // 
+            // gcVersion
+            // 
+            this.gcVersion.Caption = "版本";
+            this.gcVersion.FieldName = "VersionNumber";
+            this.gcVersion.Name = "gcVersion";
+            this.gcVersion.Visible = true;
+            this.gcVersion.VisibleIndex = 1;
+            // 
             // gcDesc
             // 
             this.gcDesc.Caption = "描述";
@@ -102,14 +113,6 @@
             this.gcDesc.Visible = true;
             this.gcDesc.VisibleIndex = 2;
             this.gcDesc.Width = 508;
-            // 
-            // gcVersion
-            // 
-            this.gcVersion.Caption = "版本";
-            this.gcVersion.FieldName = "VersionNumber";
-            this.gcVersion.Name = "gcVersion";
-            this.gcVersion.Visible = true;
-            this.gcVersion.VisibleIndex = 1;
             // 
             // gcEnabledState
             // 

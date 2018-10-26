@@ -49,5 +49,29 @@ namespace BudgetSystem.Dal
             string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
         }
+
+        public Flow GetFlowEnableVersion(string flowName, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name  and `IsEnabled`=1";
+            return con.Query<Flow>(selectSql, new { Name = flowName, }, tran).SingleOrDefault();
+        }
+
+        public void SetFlowDisable(string flowName, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `Flow` Set `IsEnabled` = 0 Where `Name` = @Name";
+            con.Execute(updateSql, new { Name = flowName }, tran);
+        }
+
+        public void AddFlow(Flow flow, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = "Insert Into `Flow` (`Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled`) Values (@Name,@VersionNumber,@CreateUser,now(),@Remark,@IsEnabled)";
+            con.Execute(insertSql, flow, tran);
+        }
+
+        public void AddFlowDetial(List<FlowNode> nodes, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark)";
+            con.Execute(insertSql, nodes, tran);
+        }
     }
 }

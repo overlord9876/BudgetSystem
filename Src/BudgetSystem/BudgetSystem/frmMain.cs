@@ -10,6 +10,7 @@ using BudgetSystem.UserManage;
 using BudgetSystem.RoleManage;
 using BudgetSystem.DepartmentManage;
 using BudgetSystem.InMoney;
+using BudgetSystem.FlowManage;
 
 namespace BudgetSystem
 {
@@ -178,17 +179,17 @@ namespace BudgetSystem
 
         private void btnFlowConfig_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //frmFlowQuery form = GetExistForm<frmFlowQuery>();
-            //if (form == null)
-            //{
-            //    form = new frmFlowQuery();
-            //    form.RefreshData();
-            //}
-            //else
-            //{
-            //    FormActivited(form);
-            //}
-            //ShowForm(form);
+            frmFlowQuery form = GetExistForm<frmFlowQuery>();
+            if (form == null)
+            {
+                form = new frmFlowQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
         }
 
         private void btnApprovalList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

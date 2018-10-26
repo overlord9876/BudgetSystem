@@ -34,6 +34,17 @@ namespace BudgetSystem.Bll
              });
         }
 
+
+        public Flow GetFlowWithDetial(string name, int version)
+        {
+            return this.Query<Flow>((con) =>
+            {
+                Flow flow= dal.GetFlow(name, version, con, null);
+                flow.Details = dal.GetFlowDetial(name, version, con, null).ToList();
+                return flow;
+            });
+        }
+
         public List<FlowNode> GetFlowDetail(string name, int version)
         {
             var lst = this.Query<FlowNode>((con) =>
@@ -44,6 +55,31 @@ namespace BudgetSystem.Bll
 
             });
             return lst.ToList();
+        }
+
+        public void SaveFlow(Flow flow)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                //获取最大版本号
+                int version = dal.GetFlowEnableVersion(flow.Name, con, tran).VersionNumber;
+                version++;
+
+                flow.IsEnabled = true;
+                flow.VersionNumber = version;
+                for (int i = 0; i < flow.Details.Count; i++)
+                {
+                    flow.Details[i].OrderNo = i+1;
+                    flow.Details[i].Name = flow.Name;
+                    flow.Details[i].VersionNumber = version;
+                }
+
+                //把流程的其它版本号都设置为无效
+                dal.SetFlowDisable(flow.Name, con, tran);
+                dal.AddFlow(flow, con, tran);
+                dal.AddFlowDetial(flow.Details, con, tran);
+
+            });
         }
 
 
@@ -109,6 +145,8 @@ namespace BudgetSystem.Bll
         //1.如果直接作废，那引擎不需要再多的处理。在个人确认完成数据后，业务删除数据即可
         //2.如果手工再发起流程，业务那边可以加一个按钮，重新发起流程，引擎端提交接口处理，重新发起流程时检查未审批通过或未审批过。
         //目前先计划按方法2处理。
+
+
 
 
     }

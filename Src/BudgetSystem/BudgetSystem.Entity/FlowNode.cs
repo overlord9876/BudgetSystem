@@ -39,6 +39,12 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string NodeValue { get; set; }
 
+
+        /// <summary>
+        /// 节点配置值的显示内容
+        /// </summary>
+        public string NodeValueDisplayValue { get; set; }
+
         /// <summary>
         /// 节点配置值描述(用于打印时的抬头)
         /// </summary>
