@@ -25,7 +25,17 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 合同ID
         /// </summary>
-        public int BudgetID { get; set; }
+        public int BudgetID
+        {
+            get
+            {
+                if (RelationBudget != null)
+                {
+                    return RelationBudget.ID;
+                }
+                return 0;
+            }
+        }
 
         /// <summary>
         /// 凭证号

@@ -6,11 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Entity;
+using BudgetSystem.Bll;
+using BudgetSystem.OutMoney;
 
 namespace BudgetSystem
 {
     public partial class frmOutMoneyQuery : frmBaseQueryFormWithCondtion
     {
+        PaymentNotesManager pnm = new PaymentNotesManager();
+
         public frmOutMoneyQuery()
         {
             InitializeComponent();
@@ -40,22 +45,22 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmOutMemoryEdit form = new frmOutMemoryEdit();
-                form.ShowDialog(this);
+                CreatePaymentNote();
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmOutMemoryEdit form = new frmOutMemoryEdit();
-                form.ShowDialog(this);
+                ModifyPaymentNote();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmOutMemoryEdit form = new frmOutMemoryEdit();
-                form.ShowDialog(this);
+                ViewPaymentNote();
             }
-            else if (operate.Operate == "Test1")
+            else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-                XtraMessageBox.Show("Test1");
+                PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+                pnm.DeletePaymentNote(currentRowPaymentNote.ID);
+                this.gvOutMoney.DeleteRow(this.gvOutMoney.FocusedRowHandle);
+                XtraMessageBox.Show("删除成功");
             }
             else
             {
@@ -63,22 +68,44 @@ namespace BudgetSystem
             }
         }
 
+        private void CreatePaymentNote()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            {
+                frmOutMoneyEdit form = new frmOutMoneyEdit();
+                form.WorkModel = EditFormWorkModels.New;
+                form.ShowDialog(this);
+            } 
+            LoadData();
+        }
+
+        private void ModifyPaymentNote()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            {
+                frmOutMoneyEdit form = new frmOutMoneyEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.CurrentPaymentNotes = currentRowPaymentNote;
+                form.ShowDialog(this);
+            }
+            LoadData();
+        }
+
+        private void ViewPaymentNote()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            {
+                frmOutMoneyEdit form = new frmOutMoneyEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.CurrentPaymentNotes = currentRowPaymentNote;
+                form.ShowDialog(this);
+            }
+        }
+
         public override void LoadData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Supplier", typeof(string));
-            dt.Columns.Add("Payment", typeof(string));
-            dt.Columns.Add("Submitter", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("Approver", typeof(string));
-            dt.Columns.Add("ApproveTime", typeof(DateTime));
-            dt.Columns.Add("PaymentDate", typeof(DateTime));
-            dt.Columns.Add("Description", typeof(string));
-
-            dt.Rows.Add("常熟市新中华时装有限公司", "50000", "张三", "审批中", "财务确认人", DateTime.Now, DateTime.Now, "");
-            dt.Rows.Add("上海丝绸进口公司淀山湖真丝针织厂", "80000", "李四", "审批中", "财务确认人", DateTime.Now, DateTime.Now, "");
-
-            this.gridControl1.DataSource = dt;
+            this.gcOutMoney.DataSource = pnm.GetAllPaymentNotes();
+            this.gvOutMoney.RefreshData();
         }
     }
 }

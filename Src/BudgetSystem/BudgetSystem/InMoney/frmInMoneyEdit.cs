@@ -31,12 +31,6 @@ namespace BudgetSystem.InMoney
             set;
         }
 
-        public ActualReceipts SplitCostActualReceipts
-        {
-            get;
-            set;
-        }
-
         protected override void SubmitNewData()
         {
             base.SubmitNewData();
@@ -98,6 +92,7 @@ namespace BudgetSystem.InMoney
 
             if (this.dxErrorProvider1.HasErrors) { return; }
 
+            arm.SplitActualReceipts(this.CurrentActualReceipts, GetActualReceiptList());
         }
 
         protected override void SubmitSplitToBudgetData()
@@ -119,7 +114,7 @@ namespace BudgetSystem.InMoney
             }
             if (this.dxErrorProvider1.HasErrors) { return; }
 
-
+            arm.RelationActualReceiptToBudget(this.CurrentActualReceipts, GetActualReceiptList());
 
         }
 
@@ -202,6 +197,33 @@ namespace BudgetSystem.InMoney
         private void BindBudgetList()
         {
             this.gridBudget.DataSource = bm.GetAllBudget();
+        }
+
+        private List<ActualReceipts> GetActualReceiptList()
+        {
+
+            var splitList = ((IEnumerable<ActualReceipts>)this.gvConstSplit.DataSource).ToList();
+            if (splitList.Count > 1)
+            {
+                this.CurrentActualReceipts.OriginalCoin = splitList[0].OriginalCoin;
+                this.CurrentActualReceipts.RMB = splitList[0].RMB;
+                this.CurrentActualReceipts.ExchangeRate = splitList[0].ExchangeRate;
+                this.CurrentActualReceipts.RelationBudget = splitList[0].RelationBudget;
+                splitList.RemoveAt(0);
+                splitList.ForEach(o =>
+                {
+                    o.BankName = this.CurrentActualReceipts.BankName;
+                    o.CreateTimestamp = DateTime.Now;
+                    o.CreateUser = RunInfo.Instance.CurrentUser.UserName;
+                    o.Currency = this.CurrentActualReceipts.Currency;
+                    o.DepartmentCode = this.CurrentActualReceipts.DepartmentCode;
+                    o.PaymentMethod = this.CurrentActualReceipts.PaymentMethod;
+                    o.ReceiptDate = this.CurrentActualReceipts.ReceiptDate;
+                    o.Remitter = this.CurrentActualReceipts.Remitter;
+                    o.VoucherNo = this.CurrentActualReceipts.VoucherNo;
+                });
+            }
+            return splitList;
         }
 
         private void SetReadOnly()
@@ -327,12 +349,13 @@ namespace BudgetSystem.InMoney
 
         void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            gvConstSplit.SetColumnError(null, e.ErrorText);
+            gvConstSplit.SetColumnError(this.gvConstSplit.FocusedColumn, e.ErrorText);
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
         void gvConstSplit_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
+            this.gvConstSplit.ClearColumnErrors();
             if (e.Column == gcSplitConstOriginalCoin
               || e.Column == bgcConstExchangeRate)
             {

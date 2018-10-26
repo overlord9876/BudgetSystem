@@ -14,7 +14,7 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyQuery : frmBaseQueryFormWithCondtion
     {
-        ActualReceiptsManager arm= new ActualReceiptsManager();
+        ActualReceiptsManager arm = new ActualReceiptsManager();
 
 
         private GridHitInfo hInfo;
@@ -22,6 +22,8 @@ namespace BudgetSystem.InMoney
         public frmInMoneyQuery()
         {
             InitializeComponent();
+            this.gvInMoney.MouseDown += new MouseEventHandler(gvInMoney_MouseDown);
+            this.gvInMoney.DoubleClick += new EventHandler(gvInMoney_DoubleClick);
         }
 
         protected override void InitModelOperate()
@@ -139,19 +141,19 @@ namespace BudgetSystem.InMoney
         {
             var list = arm.GetAllActualReceipts();
 
-            this.gridControl1.DataSource = list;
+            this.gcInMoney.DataSource = list;
         }
 
 
-        private void gvUser_DoubleClick(object sender, EventArgs e)
+        private void gvInMoney_DoubleClick(object sender, EventArgs e)
         {
             if (hInfo.InRow)
             {
-                ModifyActualReceipts();
+                //ModifyActualReceipts();
             }
         }
 
-        private void gvUser_MouseDown(object sender, MouseEventArgs e)
+        private void gvInMoney_MouseDown(object sender, MouseEventArgs e)
         {
             hInfo = gvInMoney.CalcHitInfo(e.Y, e.Y);
         }

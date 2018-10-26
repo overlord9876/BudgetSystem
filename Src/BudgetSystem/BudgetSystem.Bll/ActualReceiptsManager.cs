@@ -57,15 +57,34 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 关联合同费用
+        /// </summary>
+        /// <param name="relationReceipt"></param>
+        public void RelationActualReceiptToBudget(ActualReceipts relationReceipt, List<ActualReceipts> splitReceiptList)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                foreach (ActualReceipts newReceipt in splitReceiptList)
+                {
+                    dal.AddActualReceipts(newReceipt, con, tran);
+                }
+                dal.RelationActualReceiptsToBudget(relationReceipt.ID, relationReceipt.BudgetID, con, tran);
+            });
+        }
+
+        /// <summary>
         /// 拆分合同费用
         /// </summary>
         /// <param name="modifyReceipts"></param>
         /// <param name="addReceipts"></param>
-        public void SplitActualReceipts(ActualReceipts modifyReceipts, ActualReceipts addReceipts)
+        public void SplitActualReceipts(ActualReceipts modifyReceipts, List<ActualReceipts> addReceipts)
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.AddActualReceipts(addReceipts, con, tran);
+                foreach (ActualReceipts newReceipt in addReceipts)
+                {
+                    dal.AddActualReceipts(newReceipt, con, tran);
+                }
                 dal.ModifyActualReceipts(modifyReceipts, con, tran);
             });
         }

@@ -24,16 +24,23 @@ namespace BudgetSystem.Dal
             return con.Query<ActualReceipts>(selectSql, null, tran).SingleOrDefault();
         }
 
-        public void AddActualReceipts(ActualReceipts user, IDbConnection con, IDbTransaction tran)
+        public void AddActualReceipts(ActualReceipts addReceipt, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = "Insert Into `ActualReceipts` (`ID`,`BudgetID`,`VoucherNo`,`OriginalCoin`,`RMB`,`ReceiptDate`,`CreateUser`,`CreateTimestamp`,`Description`,`PaymentMethod`,`DepartmentCode`,`ExchangeRate`,`BankName`,`Remitter`) Values (@ID,@BudgetID,@VoucherNo,@OriginalCoin,@RMB,@ReceiptDate,@CreateUser,@CreateTimestamp,@Description,@PaymentMethod,@DepartmentCode,@ExchangeRate,@BankName,@Remitter)";
-            con.Execute(insertSql, user, tran);
+            con.Execute(insertSql, addReceipt, tran);
         }
 
-        public void ModifyActualReceipts(ActualReceipts user, IDbConnection con, IDbTransaction tran)
+        public void ModifyActualReceipts(ActualReceipts modifyReceipt, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Update `ActualReceipts` Set `VoucherNo` = @VoucherNo,`BudgetID` = @BudgetID,`OriginalCoin` = @OriginalCoin,`RMB` = @RMB,`ReceiptDate` = @ReceiptDate,`CreateUser` = @CreateUser,`CreateTimestamp` = @CreateTimestamp,`Description` = @Description,`PaymentMethod` = @PaymentMethod,`DepartmentCode` = @DepartmentCode,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Remitter` = @Remitter Where `ID` = @ID";
-            con.Execute(updateSql, user, tran);
+            con.Execute(updateSql, modifyReceipt, tran);
+        }
+
+        public void RelationActualReceiptsToBudget(int Id, int budgetId, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `ActualReceipts` Set `BudgetID` = @budgetId
+            Where `ID` = @ID";
+            con.Execute(updateSql, new object[] { budgetId, Id }, tran);
         }
     }
 }

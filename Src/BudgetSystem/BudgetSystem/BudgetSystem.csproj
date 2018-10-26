@@ -139,18 +139,6 @@
     <Compile Include="Customer\ucCustomerSelected.Designer.cs">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
-    <Compile Include="FlowManage\frmFlowEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FlowManage\frmFlowEdit.Designer.cs">
-      <DependentUpon>frmFlowEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FlowManage\frmFlowQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FlowManage\frmFlowQuery.Designer.cs">
-      <DependentUpon>frmFlowQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="DepartmentManage\frmDepartmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +156,12 @@
     </Compile>
     <Compile Include="Option\frmOptionQuery.Designer.cs">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMoneyEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMoneyEdit.Designer.cs">
+      <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="RoleManage\frmRoleQuery.cs">
       <SubType>Form</SubType>
@@ -207,12 +201,6 @@
     </Compile>
     <Compile Include="InMoney\frmInvoiceQuery.Designer.cs">
       <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OutMoney\frmOutMemoryEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OutMoney\frmOutMemoryEdit.Designer.cs">
-      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="OutMoney\frmVoucherNotesQuery.cs">
       <SubType>Form</SubType>
@@ -330,12 +318,6 @@
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FlowManage\frmFlowEdit.resx">
-      <DependentUpon>frmFlowEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FlowManage\frmFlowQuery.resx">
-      <DependentUpon>frmFlowQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit.resx">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +333,9 @@
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmOutMoneyEdit.resx">
+      <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -362,9 +347,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInvoiceQuery.resx">
       <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OutMoney\frmOutMemoryEdit.resx">
-      <DependentUpon>frmOutMemoryEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQuery.resx">
       <DependentUpon>frmOutMoneyQuery.cs</DependentUpon>
@@ -451,15 +433,16 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
-    <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
-    <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />
-    <Content Include="InMoney\frmInMoneyEdit_Full.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_Modify.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_New.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitConst.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitToBudget.xml" />
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OutMoney\frmOutMoneyEdit_Modify.xml" />
+    <Content Include="OutMoney\frmOutMoneyEdit_New.xml" />
+    <Content Include="OutMoney\frmOutMoneyEdit_View.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

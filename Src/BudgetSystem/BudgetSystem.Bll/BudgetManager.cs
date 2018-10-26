@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace BudgetSystem.Bll
 {
-    public class BudgetManager:BaseManager
-    { 
+    public class BudgetManager : BaseManager
+    {
         Dal.BudgetDal dal = new Dal.BudgetDal();
 
         public List<Budget> GetAllBudget()
@@ -15,7 +15,7 @@ namespace BudgetSystem.Bll
             var lst = this.Query<Budget>((con) =>
             {
                 var uList = dal.GetAllBudget(con);
-                return uList; 
+                return uList;
             });
             return lst.ToList();
         }
@@ -39,10 +39,11 @@ namespace BudgetSystem.Bll
         }
         public void ModifyBudget(Budget Budget)
         {
-            this.ExecuteWithTransaction((con,tran) =>
+            this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.ModifyBudget(Budget, con,tran);
+                dal.ModifyBudget(Budget, con, tran);
             });
         }
+
     }
 }

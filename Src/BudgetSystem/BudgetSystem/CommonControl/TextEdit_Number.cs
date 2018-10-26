@@ -26,7 +26,10 @@ namespace BudgetSystem.CommonControl
             get
             {
                 decimal result = 0;
-                decimal.TryParse(this.EditValue.ToString(), out result);
+                if (this.EditValue != null)
+                {
+                    decimal.TryParse(this.EditValue.ToString(), out result);
+                }
                 return result;
             }
         }
