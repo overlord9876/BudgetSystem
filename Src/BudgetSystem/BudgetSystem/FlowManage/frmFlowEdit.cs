@@ -40,10 +40,10 @@ namespace BudgetSystem.FlowManage
 
 
             userList = um.GetAllUser();
-            userList.Insert(0, new User() { UserName = "%StartUser%", RealName = "流程发起人" ,State =true });
+            userList.Insert(0, new User() { UserName = FlowConst.FlowCreateUser, RealName = FlowConst.FlowCreateUserDisplayName, State = true });
 
             departmentList = dm.GetAllDepartment();
-            departmentList.Insert(0, new Department() { Code = "%StartUserDepartment%", Name = "流程发起人所在部门" });
+            departmentList.Insert(0, new Department() { Code = FlowConst.FlowCreateUserDepartment, Name = FlowConst .FlowCreateUserDepartmentDisplayName});
      
 
             if (this.WorkModel == EditFormWorkModels.Modify)

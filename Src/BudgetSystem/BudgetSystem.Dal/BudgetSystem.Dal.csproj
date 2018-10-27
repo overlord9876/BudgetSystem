@@ -55,7 +55,6 @@
     <Compile Include="PaymentNotesDal.cs" />
     <Compile Include="RoleDal.cs" />
     <Compile Include="SupplierDal.cs" />
-    <Compile Include="TestDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDal.cs" />
   </ItemGroup>

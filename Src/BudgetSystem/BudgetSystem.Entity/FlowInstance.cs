@@ -17,12 +17,12 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 流程名称
         /// </summary>
-        public string Name { get; set; }
+        public string FlowName { get; set; }
 
         /// <summary>
         /// 流程版本号
         /// </summary>
-        public int VersionNumber { get; set; }
+        public int FlowVersionNumber { get; set; }
 
         /// <summary>
         /// 数据项ID
@@ -32,7 +32,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 数据类型
         /// </summary>
-        public string DateItemValue { get; set; }
+        public string DateItemType { get; set; }
 
         /// <summary>
         /// 发起时间
@@ -53,6 +53,16 @@ namespace BudgetSystem.Entity
         /// 是否已结束
         /// </summary>
         public bool IsClosed { get; set; }
+
+        /// <summary>
+        /// 关闭原因
+        /// </summary>
+        public string CloseReason { get; set; }
+
+        /// <summary>
+        /// 关闭时间
+        /// </summary>
+        public DateTime CloseDateTime { get; set; }
 
         /// <summary>
         /// 发起人是否已确认

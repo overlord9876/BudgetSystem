@@ -21,15 +21,15 @@ namespace BudgetSystem.Dal
         //string updateSql = "Update `FlowNode` Set `Name` = @Name,`VersionNumber` = @VersionNumber,`OrderNo` = @OrderNo,`NodeConfig` = @NodeConfig,`NodeValue` = @NodeValue,`NodeValueRemark` = @NodeValueRemark Where `ID` = @ID";
 
         //string deleteSql = "Delete From `FlowInstance` Where `ID` = @ID";
-        //string insertSql = "Insert Into `FlowInstance` (`ID`,`Name`,`VersionNumber`,`DateItemID`,`DateItemValue`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`,`ConfirmDateTime`) Values (@ID,@Name,@VersionNumber,@DateItemID,@DateItemValue,@CreateDate,@CreateUser,@ApproveResult,@IsClosed,@IsCreateUserConfirm,@ConfirmDateTime)";
-        //string selectSql = "Select `ID`,`Name`,`VersionNumber`,`DateItemID`,`DateItemValue`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`ID` = @ID";
-        //string updateSql = "Update `FlowInstance` Set `Name` = @Name,`VersionNumber` = @VersionNumber,`DateItemID` = @DateItemID,`DateItemValue` = @DateItemValue,`CreateDate` = @CreateDate,`CreateUser` = @CreateUser,`ApproveResult` = @ApproveResult,`IsClosed` = @IsClosed,`IsCreateUserConfirm` = @IsCreateUserConfirm,`ConfirmDateTime` = @ConfirmDateTime Where `ID` = @ID";
+        //string insertSql = "Insert Into `FlowInstance` (`ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime`) Values (@ID,@FlowName,@FlowVersionNumber,@DateItemID,@DateItemType,@CreateDate,@CreateUser,@ApproveResult,@IsClosed,@CloseReason,@CloseDateTime,@IsCreateUserConfirm,@ConfirmDateTime)";
+        //string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`ID` = @ID";
+        //string updateSql = "Update `FlowInstance` Set `FlowName` = @FlowName,`FlowVersionNumber` = @FlowVersionNumber,`DateItemID` = @DateItemID,`DateItemType` = @DateItemType,`CreateDate` = @CreateDate,`CreateUser` = @CreateUser,`ApproveResult` = @ApproveResult,`IsClosed` = @IsClosed,`CloseReason`=@CloseReason,`CloseDateTime`=@CloseDateTime,`IsCreateUserConfirm` = @IsCreateUserConfirm,`ConfirmDateTime` = @ConfirmDateTime Where `ID` = @ID";
 
         //string deleteSql = "Delete From `FlowRunPoint` Where `ID` = @ID";
-        //string insertSql = "Insert Into `FlowRunPoint` (`ID`,`NodeID`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`) Values (@ID,@NodeID,@InstanceID,@NodeApproveUser,@NodeApproveResult,@NodeApproveRemark,@State)";
-        //string selectSql = "Select `ID`,`NodeID`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State` From `FlowRunPoint` Where`ID` = @ID";
-        //string updateSql = "Update `FlowRunPoint` Set `NodeID` = @NodeID,`InstanceID` = @InstanceID,`NodeApproveUser` = @NodeApproveUser,`NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = @State Where `ID` = @ID";
-
+        //string insertSql = "Insert Into `FlowRunPoint` (`ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate`) Values (@ID,@NodeID,@NodeOrderNo,@InstanceID,@NodeApproveUser,@NodeApproveResult,@NodeApproveRemark,@State,@RunPointCreateDate,@NodeApproveDate)";
+        //string selectSql = "Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` From `FlowRunPoint` Where`ID` = @ID";
+        //string updateSql = "Update `FlowRunPoint` Set `NodeID` = @NodeID,`NodeOrderNo`=@NodeOrderNo,`InstanceID` = @InstanceID,`NodeApproveUser` = @NodeApproveUser,`NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = @State,`RunPointCreateDate` = @RunPointCreateDate,`NodeApproveDate` = @NodeApproveDate Where `ID` = @ID";
+       
 
         public IEnumerable<Flow> GetAllEnabledFlow(IDbConnection con, IDbTransaction tran)
         {
@@ -50,6 +50,20 @@ namespace BudgetSystem.Dal
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
         }
 
+        public FlowNode GetFlowNode(string name, int version, int order, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";
+            return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version, OrderNo = order }, tran).SingleOrDefault();
+        }
+
+        public FlowNode GetFlowNode(int nodeID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`ID` = @ID";
+            return con.Query<FlowNode>(selectSql, new { ID =nodeID }, tran).SingleOrDefault();
+        }
+
+
+      
         public Flow GetFlowEnableVersion(string flowName, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name  and `IsEnabled`=1";
@@ -73,5 +87,66 @@ namespace BudgetSystem.Dal
             string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark)";
             con.Execute(insertSql, nodes, tran);
         }
+
+        public FlowInstance GetFlowInstance(string flowName, int dataID, string dataType, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName";
+            return con.Query<FlowInstance>(selectSql, new { FlowName = flowName, DateItemType = dataType, DateItemID = dataID }, tran).SingleOrDefault();
+        }
+
+        public FlowInstance GetFlowInstance(int instanceID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`ID` = @ID";
+
+            return con.Query<FlowInstance>(selectSql, new { ID = instanceID }, tran).SingleOrDefault();
+        }
+
+        public int AddFlowInstance(string flowName, int flowVersion, int dataID, string dataType, string createUser, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = @"Insert Into `FlowInstance` 
+                                (`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`) 
+                                Values 
+                                (@FlowName,@FlowVersionNumber,@DateItemID,@DateItemType,now(),@CreateUser,0,0,0)";
+            return con.Insert(insertSql, new { FlowName = flowName, FlowVersionNumber = flowVersion, DateItemID = dataID, DateItemType = dataType, CreateUser = createUser }, tran);
+        }
+
+        public void UpdateFlowInstanceCloseInfo(int instanceID, bool approveReslt, string closeReason, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `FlowInstance` Set `ApproveResult` = @ApproveResult,`IsClosed` = 1,`CloseReason`=@CloseReason,`CloseDateTime` = now() Where `ID` = @ID";
+            con.Execute(updateSql, new { ApproveResult = approveReslt, closeReason = closeReason, ID = instanceID }, tran);
+
+        }
+
+
+        public void UpdateFlowInstanceConfirmInfo(int instanceID, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `FlowInstance` Set IsCreateUserConfirm` = 1,`ConfirmDateTime` = now() Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = instanceID }, tran);
+        }
+
+        public int AddFlowRunPoint(int nodeID,int nodeOrderNo,int instanceID,string approve, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = @"Insert Into `FlowRunPoint` 
+                                (`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`State`,`RunPointCreateDate`) 
+                                Values 
+                                (@NodeID,@NodeOrderNo,@InstanceID,@NodeApproveUser,0,now())";
+
+            return con.Insert(insertSql, new { NodeID = nodeID, NodeOrderNo= nodeOrderNo,InstanceID = instanceID, NodeApproveUser = approve }, tran);
+        }
+
+
+        public FlowRunPoint GetFlowRunPoint(int runPointID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` From `FlowRunPoint` Where`ID` = @ID";
+
+            return con.Query<FlowRunPoint>(selectSql, new { ID = runPointID }, tran).SingleOrDefault();
+        }
+
+        public void UpdateFlowRunPointApproveInfo(int runPointID,bool result,string remark ,IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `FlowRunPoint` Set `NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = 1,`NodeApproveDate` = now() Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark =remark}, tran);
+        }
+
     }
 }

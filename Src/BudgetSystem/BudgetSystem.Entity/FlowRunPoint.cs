@@ -20,6 +20,11 @@ namespace BudgetSystem.Entity
         public int NodeID { get; set; }
 
         /// <summary>
+        /// 对应的节点顺序号
+        /// </summary>
+        public int NodeOrderNo { get; set; }
+
+        /// <summary>
         /// 实例ID
         /// </summary>
         public int InstanceID { get; set; }
@@ -43,6 +48,16 @@ namespace BudgetSystem.Entity
         /// 运行点状态0，未处理，1已审批
         /// </summary>
         public int State { get; set; }
+
+        /// <summary>
+        /// 生成时间
+        /// </summary>
+        public DateTime RunPointCreateDate { get; set; }
+
+        /// <summary>
+        /// 审核时间
+        /// </summary>
+        public DateTime NodeApproveDate { get; set; }
 
     }
 }
