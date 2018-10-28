@@ -33,6 +33,7 @@ namespace BudgetSystem.OutMoney
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "新增付款信息";
+
                 this.txtPaymentDate.EditValue = DateTime.Now;
                 this.txtApprover.Text = RunInfo.Instance.CurrentUser.UserName;
                 this.txtApproveTime.Text = DateTime.Now.ToString();

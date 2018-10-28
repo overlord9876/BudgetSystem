@@ -38,9 +38,8 @@ namespace BudgetSystem.Dal
 
         public void RelationActualReceiptsToBudget(int Id, int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = @"Update `ActualReceipts` Set `BudgetID` = @budgetId
-            Where `ID` = @ID";
-            con.Execute(updateSql, new object[] { budgetId, Id }, tran);
+            string updateSql = @"Update `ActualReceipts` Set `BudgetID` = @BudgetID Where `ID` = @ID";
+            con.Execute(updateSql, new { BudgetID = budgetId, ID = Id }, tran);
         }
     }
 }

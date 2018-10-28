@@ -16,22 +16,25 @@ namespace BudgetSystem
     {
         public Budget Budget { get; set; }
 
+        private decimal totalOriginalCurrency = 0;
+
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.SupplierManager sm = new Bll.SupplierManager();
-       
+
         public frmBudgetEdit()
         {
             InitializeComponent();
         }
-     
+
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
             this.InitData();
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 BindingBudgetDefaultInfo();
-                this.Text = "创建预算单"; 
+                this.Text = "创建预算单";
+                this.txtContractNO.Text = string.Format("{0}G-{1}-C001", DateTime.Now.ToString("yy"), RunInfo.Instance.CurrentUser.Department);
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -53,7 +56,7 @@ namespace BudgetSystem
                 BindingBudget(Budget.ID);
             }
         }
-        
+
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
@@ -66,21 +69,21 @@ namespace BudgetSystem
             List<Supplier> suppliers = sm.GetAllSupplier();
             this.ucSupplierSelected.SetDataSource(suppliers);
         }
-     
+
         private string GetCustomerNames(List<Customer> customers)
         {
             if (customers != null && customers.Any())
             {
                 List<string> names = new List<string>();
                 customers.ForEach(c => names.Add(c.Name));
-               return  string.Join(",", names.ToArray());
+                return string.Join(",", names.ToArray());
             }
             else
             {
-               return string.Empty;
-            } 
+                return string.Empty;
+            }
         }
-       
+
         private string GetSupplierNames(List<Supplier> suppliers)
         {
             if (suppliers != null && suppliers.Any())
@@ -94,7 +97,7 @@ namespace BudgetSystem
                 return string.Empty;
             }
         }
-      
+
         private void BindingBudgetDefaultInfo()
         {
             this.txtDepartment.Text = RunInfo.Instance.CurrentUser.Department + RunInfo.Instance.CurrentUser.DepartmentName;
@@ -102,7 +105,7 @@ namespace BudgetSystem
             BindingOutProductDetail(string.Empty);
             BindingInProductDetail(string.Empty);
         }
-     
+
         private void BindingBudget(int id)
         {
             Budget budget = bm.GetBudget(id);
@@ -119,7 +122,7 @@ namespace BudgetSystem
                 this.txtInSettlementMethod2.Text = budget.InSettlementMethod2;
                 this.txtInterestRate.EditValue = budget.InterestRate;
                 this.txtOutSettlementMethod.Text = budget.OutSettlementMethod;
-                this.txtOutSettlementMethod2.Text=budget.OutSettlementMethod2;
+                this.txtOutSettlementMethod2.Text = budget.OutSettlementMethod2;
                 this.txtOutSettlementMethod3.Text = budget.OutSettlementMethod3;
                 this.txtPremium.EditValue = budget.Premium;
                 this.txtPriceClause.Text = budget.PriceClause;
@@ -132,13 +135,13 @@ namespace BudgetSystem
                 this.chkIsQualified.CheckedChanged -= chkIsQualified_CheckedChanged;
                 this.chkIsQualified.Checked = budget.IsQualifiedSupplier;
                 this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
-                this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked); 
+                this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked);
                 this.pceCustomer.Text = this.GetCustomerNames(budget.CustomerList);
-                this.pceSupplier.Text = this.GetSupplierNames(budget.SupplierList); 
+                this.pceSupplier.Text = this.GetSupplierNames(budget.SupplierList);
                 this.rgTradeMode.EditValue = budget.TradeMode;
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
-                this.txtTaxRebateRate.EditValue = budget.TaxRebateRate;
+                this.txtTaxRebateRateMoney.EditValue = budget.TaxRebateRate;
                 this.txtQuota.EditValue = budget.Quota;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;
                 this.BindingOutProductDetail(budget.OutProductDetail);
@@ -147,7 +150,7 @@ namespace BudgetSystem
                 this.CalcInproductInterest();
                 this.CalcBudgetSubtotal();
             }
-        
+
         }
 
         protected override void SubmitNewData()
@@ -161,13 +164,13 @@ namespace BudgetSystem
                 return;
             }
             Budget budget = new Budget();
-            budget.State = "待审批"; 
-            budget.AdvancePayment = Convert.ToDecimal(txtAdvancePayment.EditValue); 
-            budget.BankCharges = Convert.ToDecimal(txtBankCharges.EditValue); 
+            budget.State = "待审批";
+            budget.AdvancePayment = Convert.ToDecimal(txtAdvancePayment.EditValue);
+            budget.BankCharges = Convert.ToDecimal(txtBankCharges.EditValue);
             budget.Commission = Convert.ToDecimal(txtCommission.EditValue);
-            budget.ContractNO = this.txtContractNO.Text.Trim(); 
+            budget.ContractNO = this.txtContractNO.Text.Trim();
             budget.Days = Convert.ToInt32(txtDays.EditValue);
-            budget.Department = RunInfo.Instance.CurrentUser.Department; 
+            budget.Department = RunInfo.Instance.CurrentUser.Department;
             budget.FeedMoney = Convert.ToDecimal(txtFeedMoney.EditValue);
             budget.InSettlementMethod1 = this.txtInSettlementMethod1.Text.Trim();
             budget.InSettlementMethod2 = this.txtInSettlementMethod2.Text.Trim();
@@ -175,13 +178,13 @@ namespace BudgetSystem
             budget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
             budget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
             budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
-                        
+
             budget.Premium = Convert.ToDecimal(txtPremium.EditValue);
             budget.PriceClause = this.txtPriceClause.Text;
             budget.Salesman = RunInfo.Instance.CurrentUser.UserName;
             budget.Seaport = this.txtSeaport.Text;
-                        
-            budget.TotalAmount = Convert.ToDecimal( txtTotalAmount.EditValue);
+
+            budget.TotalAmount = Convert.ToDecimal(txtTotalAmount.EditValue);
             budget.SignDate = dteSignDate.DateTime;
             budget.Validity = dteValidity.DateTime;
             budget.CustomerList = ucCustomerSelected.SelectedCustomers;
@@ -189,8 +192,8 @@ namespace BudgetSystem
             budget.IsQualifiedSupplier = chkIsQualified.Checked;
             budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
-            budget.Description = this.meDescription.Text.Trim(); 
-            budget.TaxRebateRate = Convert.ToSingle( txtTaxRebateRate.EditValue);
+            budget.Description = this.meDescription.Text.Trim();
+            budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRateMoney.EditValue);
             budget.Quota = Convert.ToDecimal(txtQuota.EditValue);
             budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             budget.OutProductDetail = this.GetOutProductDetailString();
@@ -208,30 +211,30 @@ namespace BudgetSystem
         protected override void SubmitModifyData()
         {
             base.SubmitModifyData();
-            this.dxErrorProvider1.ClearErrors(); 
+            this.dxErrorProvider1.ClearErrors();
             if (dxErrorProvider1.HasErrors)
             {
                 return;
             }
-              
-            Budget.AdvancePayment =Convert.ToDecimal( this.txtAdvancePayment.EditValue);
+
+            Budget.AdvancePayment = Convert.ToDecimal(this.txtAdvancePayment.EditValue);
             Budget.BankCharges = Convert.ToDecimal(this.txtBankCharges.EditValue);
             Budget.Commission = Convert.ToDecimal(this.txtCommission.EditValue);
-            Budget.ContractNO = this.txtContractNO.Text.Trim(); 
-            Budget.Days =Convert.ToInt32( this.txtDays.EditValue);
+            Budget.ContractNO = this.txtContractNO.Text.Trim();
+            Budget.Days = Convert.ToInt32(this.txtDays.EditValue);
             //Budget.Department = this.txtDepartment.Text.Trim(); 
             Budget.FeedMoney = Convert.ToDecimal(this.txtFeedMoney.EditValue);
             Budget.InSettlementMethod1 = this.txtInSettlementMethod1.Text.Trim();
-            Budget.InSettlementMethod2 = this.txtInSettlementMethod2.Text.Trim();  
-            Budget.InterestRate =Convert.ToSingle( txtInterestRate.EditValue);
+            Budget.InSettlementMethod2 = this.txtInSettlementMethod2.Text.Trim();
+            Budget.InterestRate = Convert.ToSingle(txtInterestRate.EditValue);
             Budget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
             Budget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
-            Budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text; 
-            Budget.Premium = Convert.ToDecimal( txtPremium.EditValue);
+            Budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
+            Budget.Premium = Convert.ToDecimal(txtPremium.EditValue);
             Budget.PriceClause = this.txtPriceClause.Text;
             // Budget.Salesman = this.txtSalesman.Text;
             Budget.Seaport = this.txtSeaport.Text;
-            
+
             Budget.TotalAmount = Convert.ToDecimal(txtTotalAmount.EditValue);
             Budget.SignDate = dteSignDate.DateTime;
             Budget.Validity = dteValidity.DateTime;
@@ -241,13 +244,13 @@ namespace BudgetSystem
             Budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             Budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
             Budget.Description = this.meDescription.Text.Trim();
-            Budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRate.EditValue);
+            Budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRateMoney.EditValue);
             Budget.Quota = Convert.ToDecimal(txtQuota.EditValue);
             Budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             Budget.OutProductDetail = this.GetOutProductDetailString();
             Budget.DirectCosts = Convert.ToDecimal(this.txtDirectCosts.EditValue);
             Budget.InProductDetail = this.GetInProductDetailString();
-            bm.ModifyBudget(Budget); 
+            bm.ModifyBudget(Budget);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -266,7 +269,7 @@ namespace BudgetSystem
                 return "";
             }
         }
-      
+
         private void BindingOutProductDetail(string detail)
         {
             List<OutProductDetail> outProductDetailList;
@@ -285,7 +288,7 @@ namespace BudgetSystem
         private string GetInProductDetailString()
         {
             //保存更改
-            bgvInProductDetail.CloseEditor(); 
+            bgvInProductDetail.CloseEditor();
             var dataSource = (IEnumerable<InProductDetail>)gridInProductDetail.DataSource;
             if (dataSource != null)
             {
@@ -296,7 +299,7 @@ namespace BudgetSystem
                 return "";
             }
         }
-       
+
         private void BindingInProductDetail(string detail)
         {
             List<InProductDetail> inProductDetailList;
@@ -312,7 +315,6 @@ namespace BudgetSystem
             this.gridInProductDetail.RefreshDataSource();
         }
 
-
         /// <summary>
         /// 计算外贸合同金额
         /// </summary>
@@ -322,9 +324,10 @@ namespace BudgetSystem
             if (dataSource != null)
             {
                 txtTotalAmount.EditValue = dataSource.Sum(o => o.CNY);
+                totalOriginalCurrency = dataSource.Sum(o => o.OriginalCurrencyMoney);
             }
         }
-        
+
         private void CalcInProductTotalAmount()
         {
             var dataSource = (IEnumerable<InProductDetail>)gridInProductDetail.DataSource;
@@ -333,7 +336,84 @@ namespace BudgetSystem
                 txtDirectCosts.EditValue = dataSource.Sum(o => (o.Count * o.Subtotal));
             }
         }
-       
+
+        /// <summary>
+        /// 计算净收入额（原币）=净收入额（人民币）/汇率
+        /// </summary>
+        private void CalcNetIncome()
+        {
+            if (txtExchangeRate.Value == 0)
+            {
+                txtNetIncome.EditValue = 0;
+            }
+            else
+            {
+                txtNetIncome.EditValue = Math.Round(txtNetIncomeCNY.Value / txtExchangeRate.Value, 2);
+            }
+        }
+
+        /// <summary>
+        /// 净收入额=外贸合约部分人民币小计（合同金额）-内贸合约部分的利息-预算部分的小计
+        /// </summary>
+        private void CalcNetIncomeCNY()
+        {
+            txtNetIncomeCNY.EditValue = this.txtTotalAmount.Value - txtInterest.Value - txtSubtotal.Value;
+        }
+
+        /// <summary>
+        /// 计算总成本
+        /// </summary>
+        private void CalcTotalCost()
+        {
+            txtTotalCost.EditValue = txtDirectCosts.Value - txtTaxRebateRateMoney.Value;
+        }
+
+        /// <summary>
+        /// 出口退税额
+        /// </summary>
+        private void CalcTaxRebateRateMoney()
+        {
+            txtTaxRebateRateMoney.EditValue = Math.Round(txtDirectCosts.Value / (decimal)1.17 * txtTaxRebateRate.Value / 100, 2);
+        }
+
+        /// <summary>
+        /// 税后换汇成本=总成本/净收入额（USD）
+        /// </summary>
+        private void CalcExchangeCost()
+        {
+            if (txtNetIncome.Value == 0)
+            {
+                txtExchangeCost.EditValue = 0;
+            }
+            else
+            {
+                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtNetIncome.Value, 2);
+            }
+        }
+
+        /// <summary>
+        /// 盈利水平=利润/净收入额（USD）
+        /// </summary>
+        private void CalcProfitLevel()
+        {
+            if (txtNetIncome.Value == 0)
+            {
+                txtProfitLevel.EditValue = 0;
+            }
+            else
+            {
+                txtProfitLevel.EditValue = Math.Round(txtProfit.Value / txtNetIncome.Value, 2);
+            }
+        }
+
+        /// <summary>
+        /// 销售利润=销售收入（人民币）-销售成本-（运保、佣金、直接费用）小计-利息
+        /// </summary>
+        private void CalcProfit()
+        {
+            txtProfit.EditValue = txtNetIncomeCNY.Value - txtTotalCost.Value;
+        }
+
         /// <summary>
         /// 计算内贸利息部分
         /// </summary>
@@ -344,16 +424,16 @@ namespace BudgetSystem
             {
                 return;
             }
-            this.txtPercentage.EditValue = Convert.ToDecimal(txtAdvancePayment.EditValue) / directCosts;//预付款占总进价百分比
-            //利息=预付款*月利息*天数/30
-            txtInterest.EditValue = Convert.ToDecimal(txtAdvancePayment.EditValue) * Convert.ToDecimal(txtInterestRate.EditValue) * Convert.ToDecimal(txtDays.EditValue) / 30;
+            this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / directCosts * 100, 2);//预付款占总进价百分比
+            //利息=预付款*月利息*天数/30*0.01
+            txtInterest.EditValue = Convert.ToDecimal(txtAdvancePayment.EditValue) * Convert.ToDecimal(txtInterestRate.EditValue) * Convert.ToDecimal(txtDays.EditValue) / 30 / 100;
         }
 
         /// <summary>
         /// 计算预算部分的小计
         /// </summary>
         private void CalcBudgetSubtotal()
-        { 
+        {
             //小计=配额+佣金+运保费+银行费用+其它(预)+进料款
             this.txtSubtotal.EditValue = Convert.ToDecimal(txtQuota.EditValue)
                                        + Convert.ToDecimal(txtCommission.EditValue)
@@ -403,7 +483,7 @@ namespace BudgetSystem
         void gvOutProductDetail_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             var detail = e.Row as OutProductDetail;
-            
+
             if (string.IsNullOrEmpty(detail.Name))
             {
                 e.ErrorText = "产品规格不能为空";
@@ -433,10 +513,10 @@ namespace BudgetSystem
                 e.ErrorText = "汇率应大于0";
                 e.Valid = false;
                 return;
-            } 
+            }
 
         }
-       
+
         void gvOutProductDetail_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.Column == gcCount
@@ -447,7 +527,7 @@ namespace BudgetSystem
                 CalcOutProductTotalAmount();
             }
         }
-       
+
         void riLinkDelete_Click(object sender, System.EventArgs e)
         {
             if (this.gvOutProductDetail.FocusedRowHandle < 0)
@@ -534,11 +614,69 @@ namespace BudgetSystem
         private void InProductDetail_EditValueChanged(object sender, EventArgs e)
         {
             this.CalcInproductInterest();
+            CalcTaxRebateRateMoney();
+            CalcTotalCost();
         }
 
         private void Charges_EditValueChanged(object sender, EventArgs e)
         {
             this.CalcBudgetSubtotal();
         }
+
+        private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcNetIncome();
+        }
+
+        private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTaxRebateRateMoney();
+        }
+
+        private void txtTaxRebateRateMoney_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTotalCost();
+        }
+
+        private void txtTotalAmount_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcNetIncomeCNY();
+        }
+
+        private void txtInterest_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcNetIncomeCNY();
+        }
+
+        private void txtSubtotal_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcNetIncomeCNY();
+
+        }
+
+        private void txtNetIncomeCNY_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcNetIncome();
+            CalcProfit();
+        }
+
+        private void txtTotalCost_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcExchangeCost();
+            CalcProfit();
+        }
+
+        private void txtNetIncome_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcExchangeCost();
+            CalcProfitLevel();
+        }
+
+        private void txtProfit_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcProfitLevel();
+        }
+
+
     }
 }

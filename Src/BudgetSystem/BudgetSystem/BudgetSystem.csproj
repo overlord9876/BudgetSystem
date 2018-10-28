@@ -175,6 +175,12 @@
     <Compile Include="OutMoney\frmOutMoneyEdit.Designer.cs">
       <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\frmPaymentCalcEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmPaymentCalcEdit.Designer.cs">
+      <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="RoleManage\frmRoleQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyEdit.resx">
       <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit.resx">
+      <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>

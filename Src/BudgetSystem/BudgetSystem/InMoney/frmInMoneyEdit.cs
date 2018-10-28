@@ -45,7 +45,7 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
             CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.Text.Trim();
             CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
-            CurrentActualReceipts.RMB = decimal.Parse(this.txtRMB.Text);
+            CurrentActualReceipts.RMB = this.txtRMB.Value;
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
@@ -203,7 +203,7 @@ namespace BudgetSystem.InMoney
         {
 
             var splitList = ((IEnumerable<ActualReceipts>)this.gvConstSplit.DataSource).ToList();
-            if (splitList.Count > 1)
+            if (splitList.Count > 0)
             {
                 this.CurrentActualReceipts.OriginalCoin = splitList[0].OriginalCoin;
                 this.CurrentActualReceipts.RMB = splitList[0].RMB;
@@ -222,8 +222,9 @@ namespace BudgetSystem.InMoney
                     o.Remitter = this.CurrentActualReceipts.Remitter;
                     o.VoucherNo = this.CurrentActualReceipts.VoucherNo;
                 });
+                return splitList;
             }
-            return splitList;
+            else { return new List<ActualReceipts>(); }
         }
 
         private void SetReadOnly()
