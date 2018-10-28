@@ -66,7 +66,7 @@ namespace BudgetSystem.Dal
       
         public Flow GetFlowEnableVersion(string flowName, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name  and `IsEnabled`=1";
+            string selectSql = "Select `Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name  and `IsEnabled`=1";
             return con.Query<Flow>(selectSql, new { Name = flowName, }, tran).SingleOrDefault();
         }
 
@@ -88,9 +88,9 @@ namespace BudgetSystem.Dal
             con.Execute(insertSql, nodes, tran);
         }
 
-        public FlowInstance GetFlowInstance(string flowName, int dataID, string dataType, IDbConnection con, IDbTransaction tran)
+        public FlowInstance GetFlowNotClosedInstance(string flowName, int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName";
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName and `IsClosed`=0";
             return con.Query<FlowInstance>(selectSql, new { FlowName = flowName, DateItemType = dataType, DateItemID = dataID }, tran).SingleOrDefault();
         }
 

@@ -128,7 +128,7 @@ namespace BudgetSystem.Bll
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
             {
                 //检查当时数据是否已存在未完成的流程了
-                FlowInstance instance = dal.GetFlowInstance(flowName, dataID, dataType, con, tran);
+                FlowInstance instance = dal.GetFlowNotClosedInstance(flowName, dataID, dataType, con, tran);
 
                 if (instance != null && instance.IsClosed == false)
                 {
@@ -180,9 +180,9 @@ namespace BudgetSystem.Bll
             
        
             //如果传进来的运行点是空的，说明是新实例 ，orderNo取1，否则获取这个运行点对应节点顺序号+1
-            if (runPoint==null)
+            if (runPoint!=null)
             {
-                runPoint.NodeOrderNo++;
+             orderNo=   runPoint.NodeOrderNo+1;
             }
 
             FlowNode nextNode = dal.GetFlowNode(flowName, flowVersion, orderNo, con, tran);
@@ -296,7 +296,7 @@ namespace BudgetSystem.Bll
                 else if (jumpResult == FlowRunState.流程发起人未配置部门)
                 {
                     //如果创建运行点时是未能匹配审批人，提交关闭运行点，并返回结果
-                    dal.UpdateFlowInstanceCloseInfo(instance.ID, false, FlowConst.FlowNotApprovedMessage, con, tran);
+                    dal.UpdateFlowInstanceCloseInfo(instance.ID, false, FlowConst.FlowUserNotConfigDepartmentMessage, con, tran);
                     return FlowRunState.流程发起人未配置部门;
                 }
 

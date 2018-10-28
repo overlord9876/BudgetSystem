@@ -26,6 +26,7 @@ namespace BudgetSystem.FlowManage
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
             this.ModelOperatePageName = "流程管理";
         }
 
@@ -40,6 +41,27 @@ namespace BudgetSystem.FlowManage
             {
                 ViewFlow();
             }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                TestFlow();
+            }
+        }
+
+        private void TestFlow()
+        {
+            string flowName = "预算单审批";
+
+            int dataID = 999;
+            string dataType = "测试业务数据";
+
+            Bll.FlowManager fm = new FlowManager();
+           // FlowRunState state=  fm.StartFlow(flowName, dataID, dataType, RunInfo.Instance.CurrentUser.UserName);
+
+            FlowRunState state = fm.StartFlow(flowName, dataID, dataType,"TestUser2");
+           state= fm.SubmitFlow(13, true, "同意");
+
+          state=  fm.SubmitFlow(14, true, "同意");
+           state= fm.SubmitFlow(15, true, "同意");
         }
 
        
