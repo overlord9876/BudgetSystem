@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
+using BudgetSystem.CommonControl;
 
 namespace BudgetSystem
 {
@@ -20,6 +21,8 @@ namespace BudgetSystem
         {
             InitializeComponent();
 
+            LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeMode, typeof(EnumTradeMode));
+            LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
 
 
@@ -32,7 +35,8 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View,"查看审批状态"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
 
 
@@ -63,9 +67,9 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("关闭预算单");
             }
-            else if (operate.Operate == "Test")
+            else if (operate.Operate == OperateTypes.BudgetAccountBill.ToString())
             {
-                XtraMessageBox.Show("Test");
+                ShowBudgetAccountBillView();
             }
             else
             {
@@ -76,8 +80,24 @@ namespace BudgetSystem
         public override void LoadData()
         {
             var list = bm.GetAllBudget();
-            this.gridBudget.DataSource = list; 
+            this.gridBudget.DataSource = list;
         }
+
+        private void ShowBudgetAccountBillView()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmAccountBillView form = new frmAccountBillView();
+                form.CurrentBudget = budget;
+
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
         private void CreateBudget()
         {
             frmBudgetEdit form = new frmBudgetEdit();
@@ -85,8 +105,9 @@ namespace BudgetSystem
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 this.RefreshData();
-            } 
+            }
         }
+
         private void ModifyBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -101,6 +122,7 @@ namespace BudgetSystem
                 }
             }
         }
+
         private void ViewBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;

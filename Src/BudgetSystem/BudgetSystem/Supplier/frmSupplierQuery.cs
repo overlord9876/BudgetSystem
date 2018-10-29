@@ -19,6 +19,7 @@ namespace BudgetSystem
         public frmSupplierQuery()
         {
             InitializeComponent();
+            CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
         }
 
         protected override void InitModelOperate()
@@ -54,7 +55,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-               ViewSupplier();
+                ViewSupplier();
             }
         }
         private void CreateSupplier()

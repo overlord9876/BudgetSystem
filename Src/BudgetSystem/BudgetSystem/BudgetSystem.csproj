@@ -85,6 +85,12 @@
     <Compile Include="Base\frmBaseQueryFormWithCondtion.Designer.cs">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmAccountBillView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmAccountBillView.Designer.cs">
+      <DependentUpon>frmAccountBillView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\frmBudgetEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,7 @@
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\OutProductDetail.cs" />
+    <Compile Include="CommonControl\LookUpEditHelper.cs" />
     <Compile Include="CommonControl\TextEdit_Number.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -282,6 +289,7 @@
     <Compile Include="UserManage\frmUserQuery.Designer.cs">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\StringUtil.cs" />
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseQueryFormWithCondtion.resx">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmAccountBillView.resx">
+      <DependentUpon>frmAccountBillView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmBudgetEdit.resx">
       <DependentUpon>frmBudgetEdit.cs</DependentUpon>

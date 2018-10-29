@@ -31,6 +31,7 @@ namespace BudgetSystem.Dal
             }
             return budget;
         }
+
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName ,t.CustomerNames FROM `Budget` b

@@ -121,6 +121,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 61;
             }
+            else if (operate == OperateTypes.BudgetAccountBill)
+            {
+                text = "按合同查看收支情况";
+                group = "查看";
+                imageIndex = 3;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

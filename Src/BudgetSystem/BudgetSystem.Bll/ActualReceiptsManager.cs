@@ -36,12 +36,13 @@ namespace BudgetSystem.Bll
         /// 创建收款记录
         /// </summary>
         /// <param name="addReceipts"></param>
-        public void CreateActualReceipts(ActualReceipts addReceipts)
+        public int CreateActualReceipts(ActualReceipts addReceipts)
         {
-            this.ExecuteWithTransaction((con, tran) =>
-           {
-               dal.AddActualReceipts(addReceipts, con, tran);
-           });
+            return this.ExecuteWithTransaction<int>((con, tran) =>
+                    {
+                        int id = dal.AddActualReceipts(addReceipts, con, tran);
+                        return id;
+                    });
         }
 
         /// <summary>
@@ -89,6 +90,19 @@ namespace BudgetSystem.Bll
             });
         }
 
+        /// <summary>
+        /// 根据合同ID获取所有收款信息内容
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <returns></returns>
+        public decimal GetTotalAmountByBudgetId(int budgetId)
+        {
+            return this.ExecuteWithTransaction<decimal>((con, tran) =>
+             {
+                 return dal.GetTotalAmountByBudgetId(budgetId, con, tran);
+             });
+
+        }
 
     }
 }

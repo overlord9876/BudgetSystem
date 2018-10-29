@@ -21,6 +21,16 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetId)
+        {
+            var lst = this.Query<PaymentNotes>((con) =>
+            {
+                var uList = dal.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
         public PaymentNotes GetPaymentNoteById(int id)
         {
             var lst = this.Query<PaymentNotes>((con) =>
@@ -31,12 +41,12 @@ namespace BudgetSystem.Bll
             return lst;
         }
 
-        public void AddPaymentNote(PaymentNotes addPaymentNote)
+        public int AddPaymentNote(PaymentNotes addPaymentNote)
         {
-            this.ExecuteWithTransaction((con, tran) =>
-            {
-                dal.AddPaymentNote(addPaymentNote, con, tran);
-            });
+            return this.ExecuteWithTransaction<int>((con, tran) =>
+                    {
+                        return dal.AddPaymentNote(addPaymentNote, con, tran);
+                    });
         }
 
         public void ModifyPaymentNote(PaymentNotes modifyPaymentNote)

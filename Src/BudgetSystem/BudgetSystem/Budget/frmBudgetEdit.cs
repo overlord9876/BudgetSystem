@@ -70,34 +70,6 @@ namespace BudgetSystem
             this.ucSupplierSelected.SetDataSource(suppliers);
         }
 
-        private string GetCustomerNames(List<Customer> customers)
-        {
-            if (customers != null && customers.Any())
-            {
-                List<string> names = new List<string>();
-                customers.ForEach(c => names.Add(c.Name));
-                return string.Join(",", names.ToArray());
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
-        private string GetSupplierNames(List<Supplier> suppliers)
-        {
-            if (suppliers != null && suppliers.Any())
-            {
-                List<string> names = new List<string>();
-                suppliers.ForEach(c => names.Add(c.Name));
-                return string.Join(",", names.ToArray());
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
         private void BindingBudgetDefaultInfo()
         {
             this.txtDepartment.Text = RunInfo.Instance.CurrentUser.Department + RunInfo.Instance.CurrentUser.DepartmentName;
@@ -136,12 +108,12 @@ namespace BudgetSystem
                 this.chkIsQualified.Checked = budget.IsQualifiedSupplier;
                 this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
                 this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked);
-                this.pceCustomer.Text = this.GetCustomerNames(budget.CustomerList);
-                this.pceSupplier.Text = this.GetSupplierNames(budget.SupplierList);
+                this.pceCustomer.Text = budget.CustomerList.ToNameString();
+                this.pceSupplier.Text = budget.SupplierList.ToNameString();
                 this.rgTradeMode.EditValue = budget.TradeMode;
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
-                this.txtTaxRebateRateMoney.EditValue = budget.TaxRebateRate;
+                this.txtTaxRebateRate.EditValue = budget.TaxRebateRate;
                 this.txtQuota.EditValue = budget.Quota;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;
                 this.BindingOutProductDetail(budget.OutProductDetail);
@@ -193,7 +165,7 @@ namespace BudgetSystem
             budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
             budget.Description = this.meDescription.Text.Trim();
-            budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRateMoney.EditValue);
+            budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRate.EditValue);
             budget.Quota = Convert.ToDecimal(txtQuota.EditValue);
             budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             budget.OutProductDetail = this.GetOutProductDetailString();
@@ -244,7 +216,7 @@ namespace BudgetSystem
             Budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             Budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
             Budget.Description = this.meDescription.Text.Trim();
-            Budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRateMoney.EditValue);
+            Budget.TaxRebateRate = Convert.ToSingle(txtTaxRebateRate.EditValue);
             Budget.Quota = Convert.ToDecimal(txtQuota.EditValue);
             Budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             Budget.OutProductDetail = this.GetOutProductDetailString();
@@ -452,7 +424,7 @@ namespace BudgetSystem
         private void pceCustomer_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
         {
             List<Customer> customers = this.ucCustomerSelected.SelectedCustomers;
-            e.Value = GetCustomerNames(customers);
+            e.Value = customers.ToNameString();
         }
 
         private void pceSupplier_QueryPopUp(object sender, CancelEventArgs e)
@@ -465,7 +437,7 @@ namespace BudgetSystem
         private void pceSupplier_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
         {
             List<Supplier> suppliers = this.ucSupplierSelected.SelectedSuppliers;
-            e.Value = GetSupplierNames(suppliers);
+            e.Value = suppliers.ToNameString();
         }
 
         private void chkIsQualified_CheckedChanged(object sender, EventArgs e)

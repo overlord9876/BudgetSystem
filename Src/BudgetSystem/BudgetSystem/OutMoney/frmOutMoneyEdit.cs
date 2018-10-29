@@ -17,6 +17,7 @@ namespace BudgetSystem.OutMoney
         SupplierManager sm = new SupplierManager();
         UserManager um = new UserManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
+        ActualReceiptsManager arm = new ActualReceiptsManager();
 
         public PaymentNotes CurrentPaymentNotes { get; set; }
 
@@ -84,43 +85,51 @@ namespace BudgetSystem.OutMoney
             if (cboSupplier.EditValue as Supplier == null)
             {
                 this.dxErrorProvider1.SetError(cboSupplier, "请选择供应商。");
+                this.cboSupplier.Focus();
                 return;
             }
             if (cboBudget.EditValue as Budget == null)
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
+                this.cboBudget.Focus();
                 return;
             }
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))
             {
                 this.dxErrorProvider1.SetError(cboPaymentMethod, "请选择付款方式。");
+                this.cboPaymentMethod.Focus();
                 return;
             }
             if (txtTaxRebateRate.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtTaxRebateRate, "请输入退税率。");
+                this.txtTaxRebateRate.Focus();
                 return;
             }
             if (txtMoney.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtMoney, "请输入用款金额。");
+                this.txtMoney.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text))
             {
                 this.dxErrorProvider1.SetError(txtVoucherNo, "请输入凭证号。");
+                this.txtVoucherNo.Focus();
                 return;
             }
 
             if (cboMoneyUsed.EditValue == null || string.IsNullOrEmpty(cboMoneyUsed.EditValue.ToString()))
             {
-                this.dxErrorProvider1.SetError(txtVoucherNo, "请输入用款类型。");
+                this.dxErrorProvider1.SetError(cboMoneyUsed, "请输入用款类型。");
+                cboMoneyUsed.Focus();
                 return;
             }
 
             if (cboApplicant.EditValue as User == null)
             {
-                this.dxErrorProvider1.SetError(txtVoucherNo, "请选择申请人。");
+                this.dxErrorProvider1.SetError(cboApplicant, "请选择申请人。");
+                this.cboApplicant.Focus();
                 return;
             }
         }
@@ -193,14 +202,21 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
         }
 
-        private void cboApplicant_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-        }
+        private List<PaymentNotes> paymentNotes;
 
         private void cboBudget_EditValueChanged(object sender, EventArgs e)
         {
-            //获取供应商
+            Budget currentBudget = cboBudget.EditValue as Budget;
+            if (currentBudget != null)
+            {
+                txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(currentBudget.ID);
+                paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+                //获取供应商
+            }
+            else
+            {
+                txtReceiptAmount.EditValue = 0;
+            }
         }
 
         private void cboSupplier_EditValueChanged(object sender, EventArgs e)
@@ -226,7 +242,18 @@ namespace BudgetSystem.OutMoney
 
         private void btnSearchMoney_Click(object sender, EventArgs e)
         {
-
+            Budget selectedBudget = this.cboBudget.EditValue as Budget;
+            if (selectedBudget != null)
+            {
+                frmPaymentCalcEdit frm = new frmPaymentCalcEdit();
+                frm.SelectedBudget = bm.GetBudget(selectedBudget.ID);
+                frm.ReceiptAmount = this.txtReceiptAmount.Value;
+                frm.ShowDialog(this);
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择合同");
+            }
         }
 
     }

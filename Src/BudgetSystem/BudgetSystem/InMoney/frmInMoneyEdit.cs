@@ -51,7 +51,7 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentActualReceipts.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
 
-            arm.CreateActualReceipts(CurrentActualReceipts);
+            CurrentActualReceipts.ID = arm.CreateActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 

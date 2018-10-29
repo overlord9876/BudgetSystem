@@ -119,4 +119,10 @@ namespace BudgetSystem.Entity
         public bool IsSelected { get; set; }
     }
 
+    public enum EnumSupplierType
+    {
+        合格供方,
+        临时供方,
+        货运供方
+    }
 }

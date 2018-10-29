@@ -39,8 +39,10 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
             this.SuspendLayout();
             // 
             // gridSupplier
@@ -54,6 +56,8 @@
             this.gridSupplier.MainView = this.gvSupplier;
             this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridSupplier.Name = "gridSupplier";
+            this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.rilueSupplierType});
             this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
             this.gridSupplier.TabIndex = 2;
             this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -112,6 +116,7 @@
             // gcSupplierType
             // 
             this.gcSupplierType.Caption = "供应商类型";
+            this.gcSupplierType.ColumnEdit = this.rilueSupplierType;
             this.gcSupplierType.FieldName = "SupplierType";
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
@@ -141,6 +146,13 @@
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 7;
             // 
+            // rilueSupplierType
+            // 
+            this.rilueSupplierType.AutoHeight = false;
+            this.rilueSupplierType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rilueSupplierType.Name = "rilueSupplierType";
+            // 
             // frmSupplierQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -152,6 +164,7 @@
             this.Text = "供应商管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -168,6 +181,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
 
 
     }

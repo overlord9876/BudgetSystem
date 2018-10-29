@@ -9,6 +9,8 @@ namespace BudgetSystem.Bll
     public class BudgetManager : BaseManager
     {
         Dal.BudgetDal dal = new Dal.BudgetDal();
+        Dal.ActualReceiptsDal arDal = new Dal.ActualReceiptsDal();
+        Dal.PaymentNotesDal pnd = new Dal.PaymentNotesDal();
 
         public List<Budget> GetAllBudget()
         {
@@ -19,6 +21,7 @@ namespace BudgetSystem.Bll
             });
             return lst.ToList();
         }
+
         public Budget GetBudget(int id)
         {
             var Budget = this.Query<Budget>((con) =>
@@ -37,12 +40,27 @@ namespace BudgetSystem.Bll
                 return id;
             });
         }
+
         public void ModifyBudget(Budget Budget)
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
                 dal.ModifyBudget(Budget, con, tran);
             });
+        }
+
+        public List<AccountBill> GetAccountBillDetailByBudgetId(int budgetId)
+        {
+            var lst = this.Query<AccountBill>((con) =>
+            {
+                var arList = arDal.GetActualReceiptsByBudgetId(budgetId, con, null);
+                var abList = arList.ToAccountBillList();
+                var pmList = pnd.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
+                abList.AddRange(pmList.ToAccountBillList());
+                return abList.OrderBy(o => o.CreateDate);
+            });
+            return lst.ToList();
+
         }
 
     }
