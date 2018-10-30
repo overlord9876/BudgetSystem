@@ -16,7 +16,6 @@ namespace BudgetSystem
         public Customer Customer { get; set; }
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.UserManager um = new Bll.UserManager();
-
         public frmCustomerEdit()
         {
             InitializeComponent();
@@ -26,6 +25,7 @@ namespace BudgetSystem
 
         private void frmCustomerEdit_Load(object sender, EventArgs e)
         {
+            InitParameter();
             BindingAllUser();
             if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -42,7 +42,7 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 this.Text = "查看客户信息";
-                this.txtCountry.Properties.ReadOnly = true;
+                this.lueCountry.Properties.ReadOnly = true;
                 this.txtName.Properties.ReadOnly = true;
                 this.chkState.Properties.ReadOnly = true;
                 this.meDescription.Properties.ReadOnly = true;
@@ -51,6 +51,7 @@ namespace BudgetSystem
                 BindingCustomer(Customer.ID);
             }
         }
+
         private void btnAddSalesman_Click(object sender, EventArgs e)
         {
             User currentUser = this.gvUser.GetFocusedRow() as User;
@@ -94,22 +95,32 @@ namespace BudgetSystem
             this.gridUser.RefreshDataSource();
             this.gridSalesman.RefreshDataSource();
         }
+
         private void btnSure_Click(object sender, EventArgs e)
         {
-             SubmitDataByWorkModel();
+            SubmitDataByWorkModel();
         }
+
+        private void InitParameter()
+        {
+            Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
+            DataTable dt = scm.GetSystemConfigValue(EnumSystemConfigNames.国家地区.ToString());
+            this.lueCountry.Properties.DataSource = dt;
+        }
+
         private void BindingAllUser()
         {
             List<User> users = um.GetAllUser();
             this.gridUser.DataSource = users;
         }
+
         private void BindingCustomer(int id)
         {
             Customer customer = cm.GetCustomer(id);
             if (customer != null)
             {
                 this.txtName.Text = customer.Name;
-                this.txtCountry.Text = customer.Country;
+                this.lueCountry.EditValue = customer.Country;
                 this.txtCreateDate.EditValue = customer.CreateDate;
                 this.txtCreateUser.Text = customer.CreateUserName;
                 this.chkState.Checked = customer.State;
@@ -150,14 +161,14 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.txtName, "请输入客户名称");
             }
         }
+
         private void CheckCountry()
         {
-            if (string.IsNullOrEmpty(this.txtCountry.Text.Trim()))
+            if (string.IsNullOrEmpty(this.lueCountry.Text.Trim()))
             {
-                this.dxErrorProvider1.SetError(this.txtCountry, "请输入国家或地区");
+                this.dxErrorProvider1.SetError(this.lueCountry, "请选择国家或地区");
             }
         }
-
 
         protected override void SubmitNewData()
         {
@@ -172,7 +183,7 @@ namespace BudgetSystem
             }
             Customer customer = new Entity.Customer();
             customer.Name = this.txtName.Text.Trim();
-            customer.Country = this.txtCountry.Text.Trim();
+            customer.Country = this.lueCountry.Text.Trim();
             customer.State = this.chkState.Checked;
             customer.Description = this.meDescription.Text.Trim();
             customer.CreateUser = RunInfo.Instance.CurrentUser.UserName;
@@ -194,8 +205,6 @@ namespace BudgetSystem
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
-
-
         protected override void SubmitModifyData()
         {
             base.SubmitModifyData();
@@ -208,7 +217,7 @@ namespace BudgetSystem
             }
 
             Customer.Name = this.txtName.Text.Trim();
-            Customer.Country = this.txtCountry.Text.Trim();
+            Customer.Country = this.lueCountry.Text.Trim();
             Customer.State = this.chkState.Checked;
             Customer.Description = this.meDescription.Text.Trim();
             List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
@@ -221,7 +230,5 @@ namespace BudgetSystem
             cm.ModifyCustomer(Customer);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
-
-      
     }
 }

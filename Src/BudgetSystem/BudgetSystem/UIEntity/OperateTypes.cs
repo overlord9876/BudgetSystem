@@ -45,6 +45,7 @@ namespace BudgetSystem
         /// <summary>
         /// 按合同查看收支情况
         /// </summary>
-        BudgetAccountBill
+        BudgetAccountBill,
+        Save
     }
 }

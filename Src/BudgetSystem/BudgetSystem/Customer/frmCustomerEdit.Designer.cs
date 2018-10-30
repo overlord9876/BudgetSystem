@@ -51,12 +51,12 @@
             this.gcRole = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
             this.meDescription = new DevExpress.XtraEditors.MemoEdit();
             this.txtCreateUser = new DevExpress.XtraEditors.TextEdit();
             this.txtCreateDate = new DevExpress.XtraEditors.TextEdit();
-            this.txtCountry = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
+            this.lueCountry = new DevExpress.XtraEditors.LookUpEdit();
+            this.textEdit3 = new DevExpress.XtraEditors.LookUpEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
@@ -86,12 +86,12 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCountry.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).BeginInit();
@@ -121,12 +121,12 @@
             this.layoutControl1.Controls.Add(this.btnAddSalesman);
             this.layoutControl1.Controls.Add(this.groupControl2);
             this.layoutControl1.Controls.Add(this.groupControl1);
-            this.layoutControl1.Controls.Add(this.textEdit3);
             this.layoutControl1.Controls.Add(this.meDescription);
             this.layoutControl1.Controls.Add(this.txtCreateUser);
             this.layoutControl1.Controls.Add(this.txtCreateDate);
-            this.layoutControl1.Controls.Add(this.txtCountry);
             this.layoutControl1.Controls.Add(this.txtName);
+            this.layoutControl1.Controls.Add(this.lueCountry);
+            this.layoutControl1.Controls.Add(this.textEdit3);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -340,14 +340,6 @@
             this.gcState.Visible = true;
             this.gcState.VisibleIndex = 4;
             // 
-            // textEdit3
-            // 
-            this.textEdit3.Location = new System.Drawing.Point(578, 41);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(379, 25);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 2;
-            // 
             // meDescription
             // 
             this.meDescription.Location = new System.Drawing.Point(105, 526);
@@ -374,15 +366,6 @@
             this.txtCreateDate.StyleController = this.layoutControl1;
             this.txtCreateDate.TabIndex = 12;
             // 
-            // txtCountry
-            // 
-            this.txtCountry.Location = new System.Drawing.Point(105, 41);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Properties.MaxLength = 50;
-            this.txtCountry.Size = new System.Drawing.Size(376, 25);
-            this.txtCountry.StyleController = this.layoutControl1;
-            this.txtCountry.TabIndex = 1;
-            // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(105, 12);
@@ -391,6 +374,33 @@
             this.txtName.Size = new System.Drawing.Size(852, 25);
             this.txtName.StyleController = this.layoutControl1;
             this.txtName.TabIndex = 0;
+            // 
+            // lueCountry
+            // 
+            this.lueCountry.Location = new System.Drawing.Point(105, 41);
+            this.lueCountry.Name = "lueCountry";
+            this.lueCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueCountry.Properties.DisplayMember = "名称";
+            this.lueCountry.Properties.DropDownRows = 15;
+            this.lueCountry.Properties.MaxLength = 50;
+            this.lueCountry.Properties.NullText = "";
+            this.lueCountry.Properties.ShowFooter = false;
+            this.lueCountry.Properties.ValueMember = "名称";
+            this.lueCountry.Size = new System.Drawing.Size(376, 25);
+            this.lueCountry.StyleController = this.layoutControl1;
+            this.lueCountry.TabIndex = 1;
+            // 
+            // textEdit3
+            // 
+            this.textEdit3.Location = new System.Drawing.Point(578, 41);
+            this.textEdit3.Name = "textEdit3";
+            this.textEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.textEdit3.Properties.NullText = "";
+            this.textEdit3.Size = new System.Drawing.Size(379, 25);
+            this.textEdit3.StyleController = this.layoutControl1;
+            this.textEdit3.TabIndex = 2;
             // 
             // layoutControlGroup1
             // 
@@ -452,7 +462,7 @@
             // 
             // lcCountry
             // 
-            this.lcCountry.Control = this.txtCountry;
+            this.lcCountry.Control = this.lueCountry;
             this.lcCountry.CustomizationFormText = "国家或地区：";
             this.lcCountry.Location = new System.Drawing.Point(0, 29);
             this.lcCountry.Name = "lcCountry";
@@ -630,12 +640,12 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCountry.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).EndInit();
@@ -664,7 +674,6 @@
         private DevExpress.XtraEditors.MemoEdit meDescription;
         private DevExpress.XtraEditors.TextEdit txtCreateUser;
         private DevExpress.XtraEditors.TextEdit txtCreateDate;
-        private DevExpress.XtraEditors.TextEdit txtCountry;
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem lcCountry;
@@ -672,7 +681,6 @@
         private DevExpress.XtraLayout.LayoutControlItem lcCreateDate;
         private DevExpress.XtraLayout.LayoutControlItem lcCreateUser;
         private DevExpress.XtraLayout.LayoutControlItem lcDescription;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
@@ -706,6 +714,8 @@
         private DevExpress.XtraEditors.CheckEdit chkState;
         private DevExpress.XtraLayout.LayoutControlItem lcState;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraEditors.LookUpEdit lueCountry;
+        private DevExpress.XtraEditors.LookUpEdit textEdit3;
 
     }
 }

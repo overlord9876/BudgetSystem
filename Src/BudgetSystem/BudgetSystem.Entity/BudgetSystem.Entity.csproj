@@ -43,6 +43,7 @@
     <Compile Include="Budget.cs" />
     <Compile Include="CustomerSalesman.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="EnumSystemConfigNames.cs" />
     <Compile Include="Flow.cs" />
     <Compile Include="FlowConst.cs" />
     <Compile Include="FlowInstance.cs" />

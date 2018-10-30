@@ -30,11 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.textEdit_Number1 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtReceiptAmount = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtOverdue = new BudgetSystem.CommonControl.TextEdit_Number();
             this.btnSearchMoney = new DevExpress.XtraEditors.SimpleButton();
             this.cboApplicant = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txtMoney = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtPaymentMoney = new BudgetSystem.CommonControl.TextEdit_Number();
             this.deCommitTime = new DevExpress.XtraEditors.DateEdit();
             this.txtTaxRebateRate = new BudgetSystem.CommonControl.TextEdit_Number();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
@@ -104,15 +105,15 @@
             this.layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.textEdit_Number1 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReceiptAmount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOverdue.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboApplicant.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMoney.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deCommitTime.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deCommitTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate.Properties)).BeginInit();
@@ -160,9 +161,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -172,7 +172,7 @@
             this.layoutControl1.Controls.Add(this.txtOverdue);
             this.layoutControl1.Controls.Add(this.btnSearchMoney);
             this.layoutControl1.Controls.Add(this.cboApplicant);
-            this.layoutControl1.Controls.Add(this.txtMoney);
+            this.layoutControl1.Controls.Add(this.txtPaymentMoney);
             this.layoutControl1.Controls.Add(this.deCommitTime);
             this.layoutControl1.Controls.Add(this.txtTaxRebateRate);
             this.layoutControl1.Controls.Add(this.btnCancel);
@@ -201,6 +201,19 @@
             this.layoutControl1.Size = new System.Drawing.Size(1152, 937);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // textEdit_Number1
+            // 
+            this.textEdit_Number1.IsSupportNegative = false;
+            this.textEdit_Number1.Location = new System.Drawing.Point(665, 99);
+            this.textEdit_Number1.Name = "textEdit_Number1";
+            this.textEdit_Number1.Properties.Mask.EditMask = "n";
+            this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.textEdit_Number1.Properties.NullText = "0.00";
+            this.textEdit_Number1.Size = new System.Drawing.Size(475, 25);
+            this.textEdit_Number1.StyleController = this.layoutControl1;
+            this.textEdit_Number1.TabIndex = 39;
             // 
             // txtReceiptAmount
             // 
@@ -248,23 +261,24 @@
             this.cboApplicant.Name = "cboApplicant";
             this.cboApplicant.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboApplicant.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboApplicant.Size = new System.Drawing.Size(463, 25);
             this.cboApplicant.StyleController = this.layoutControl1;
             this.cboApplicant.TabIndex = 35;
             // 
-            // txtMoney
+            // txtPaymentMoney
             // 
-            this.txtMoney.IsSupportNegative = false;
-            this.txtMoney.Location = new System.Drawing.Point(105, 128);
-            this.txtMoney.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtMoney.Name = "txtMoney";
-            this.txtMoney.Properties.Mask.EditMask = "c";
-            this.txtMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtMoney.Properties.NullText = "0.00";
-            this.txtMoney.Size = new System.Drawing.Size(385, 25);
-            this.txtMoney.StyleController = this.layoutControl1;
-            this.txtMoney.TabIndex = 33;
+            this.txtPaymentMoney.IsSupportNegative = false;
+            this.txtPaymentMoney.Location = new System.Drawing.Point(105, 128);
+            this.txtPaymentMoney.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPaymentMoney.Name = "txtPaymentMoney";
+            this.txtPaymentMoney.Properties.Mask.EditMask = "c";
+            this.txtPaymentMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtPaymentMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtPaymentMoney.Properties.NullText = "0.00";
+            this.txtPaymentMoney.Size = new System.Drawing.Size(385, 25);
+            this.txtPaymentMoney.StyleController = this.layoutControl1;
+            this.txtPaymentMoney.TabIndex = 33;
             // 
             // deCommitTime
             // 
@@ -442,7 +456,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSupplier.Properties.NullText = "";
             this.cboSupplier.Properties.PopupSizeable = false;
-            this.cboSupplier.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cboSupplier.Properties.View = this.gridLookUpEdit1View;
             this.cboSupplier.Size = new System.Drawing.Size(184, 25);
             this.cboSupplier.StyleController = this.layoutControl1;
@@ -539,7 +552,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboBudget.Properties.NullText = "";
             this.cboBudget.Properties.PopupSizeable = false;
-            this.cboBudget.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cboBudget.Properties.View = this.gridView1;
             this.cboBudget.Size = new System.Drawing.Size(183, 25);
             this.cboBudget.StyleController = this.layoutControl1;
@@ -891,7 +903,7 @@
             // 
             // layoutControlItem6
             // 
-            this.layoutControlItem6.Control = this.txtMoney;
+            this.layoutControlItem6.Control = this.txtPaymentMoney;
             this.layoutControlItem6.CustomizationFormText = "付款金额：";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 116);
             this.layoutControlItem6.Name = "layoutControlItem6";
@@ -995,23 +1007,6 @@
             this.layoutControlItem24.Text = "收款金额：";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(90, 18);
             // 
-            // dxErrorProvider1
-            // 
-            this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // textEdit_Number1
-            // 
-            this.textEdit_Number1.IsSupportNegative = false;
-            this.textEdit_Number1.Location = new System.Drawing.Point(665, 99);
-            this.textEdit_Number1.Name = "textEdit_Number1";
-            this.textEdit_Number1.Properties.Mask.EditMask = "n";
-            this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number1.Properties.NullText = "0.00";
-            this.textEdit_Number1.Size = new System.Drawing.Size(475, 25);
-            this.textEdit_Number1.StyleController = this.layoutControl1;
-            this.textEdit_Number1.TabIndex = 39;
-            // 
             // layoutControlItem25
             // 
             this.layoutControlItem25.Control = this.textEdit_Number1;
@@ -1021,6 +1016,10 @@
             this.layoutControlItem25.Size = new System.Drawing.Size(572, 29);
             this.layoutControlItem25.Text = "支付后余额：";
             this.layoutControlItem25.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // frmOutMoneyEdit
             // 
@@ -1034,10 +1033,11 @@
             this.Load += new System.EventHandler(this.frmOutMemoryEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReceiptAmount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOverdue.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboApplicant.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMoney.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deCommitTime.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deCommitTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate.Properties)).EndInit();
@@ -1085,9 +1085,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1139,7 +1138,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private CommonControl.TextEdit_Number txtTaxRebateRate;
         private DevExpress.XtraEditors.DateEdit deCommitTime;
-        private CommonControl.TextEdit_Number txtMoney;
+        private CommonControl.TextEdit_Number txtPaymentMoney;
         private DevExpress.XtraEditors.ComboBoxEdit cboApplicant;
         private DevExpress.XtraEditors.DateEdit txtPaymentDate;
         private DevExpress.XtraEditors.TextEdit cboDepartment;

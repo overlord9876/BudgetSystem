@@ -338,7 +338,7 @@
             // 
             // btnOptionManager
             // 
-            this.btnOptionManager.Caption = "选择管理";
+            this.btnOptionManager.Caption = "选项管理";
             this.btnOptionManager.Id = 36;
             this.btnOptionManager.ImageIndex = 35;
             this.btnOptionManager.Name = "btnOptionManager";

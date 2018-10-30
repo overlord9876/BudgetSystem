@@ -106,10 +106,10 @@ namespace BudgetSystem.OutMoney
                 this.txtTaxRebateRate.Focus();
                 return;
             }
-            if (txtMoney.Value <= 0)
+            if (txtPaymentMoney.Value <= 0)
             {
-                this.dxErrorProvider1.SetError(txtMoney, "请输入用款金额。");
-                this.txtMoney.Focus();
+                this.dxErrorProvider1.SetError(txtPaymentMoney, "请输入用款金额。");
+                this.txtPaymentMoney.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text))
@@ -151,7 +151,7 @@ namespace BudgetSystem.OutMoney
             this.txtApprover.Text = payment.Approver;
             this.txtApproveTime.EditValue = payment.ApproveTime;
             this.txtDescription.Text = payment.Description;
-            this.txtMoney.EditValue = payment.Money;
+            this.txtPaymentMoney.EditValue = payment.Money;
             this.txtOverdue.EditValue = payment.Overdue;
             this.txtPaymentDate.EditValue = payment.PaymentDate;
             this.txtTaxRebateRate.EditValue = payment.TaxRebateRate;
@@ -186,7 +186,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.Approver = this.txtApprover.Text.Trim();
             this.CurrentPaymentNotes.ApproveTime = DateTime.Parse(this.txtApproveTime.EditValue.ToString());
             this.CurrentPaymentNotes.Description = this.txtDescription.Text.Trim();
-            this.CurrentPaymentNotes.Money = this.txtMoney.Value;
+            this.CurrentPaymentNotes.Money = this.txtPaymentMoney.Value;
             this.CurrentPaymentNotes.Overdue = (int)this.txtOverdue.Value;
             this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
             this.CurrentPaymentNotes.TaxRebateRate = (float)this.txtTaxRebateRate.Value;
@@ -212,6 +212,7 @@ namespace BudgetSystem.OutMoney
                 txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(currentBudget.ID);
                 paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
                 //获取供应商
+
             }
             else
             {
@@ -245,10 +246,14 @@ namespace BudgetSystem.OutMoney
             Budget selectedBudget = this.cboBudget.EditValue as Budget;
             if (selectedBudget != null)
             {
-                frmPaymentCalcEdit frm = new frmPaymentCalcEdit();
-                frm.SelectedBudget = bm.GetBudget(selectedBudget.ID);
-                frm.ReceiptAmount = this.txtReceiptAmount.Value;
-                frm.ShowDialog(this);
+                txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(selectedBudget.ID);
+                paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
+                //获取供应商
+                frmPaymentCalcEdit form = new frmPaymentCalcEdit();
+                form.SelectedBudget = bm.GetBudget(selectedBudget.ID);
+                form.ReceiptAmount = txtReceiptAmount.Value;
+                form.PaymentNotes = paymentNotes;
+                form.ShowDialog(this);
             }
             else
             {

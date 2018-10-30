@@ -127,6 +127,12 @@ namespace BudgetSystem
                 group = "查看";
                 imageIndex = 3;
             }
+            else if (operate == OperateTypes.Save)
+            {
+                text = "保存";
+                group = "编辑";
+                imageIndex = 6;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
             return mm;
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.pccSupplier = new DevExpress.XtraEditors.PopupContainerControl();
             this.ucSupplierSelected = new BudgetSystem.ucSupplierSelected();
@@ -171,7 +172,7 @@
             this.layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pccSupplier)).BeginInit();
@@ -295,13 +296,13 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.meDescription);
             this.layoutControl1.Controls.Add(this.pccSupplier);
             this.layoutControl1.Controls.Add(this.pccCustomer);
             this.layoutControl1.Controls.Add(this.txtDirectCosts);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Controls.Add(this.textEdit33);
-            this.layoutControl1.Controls.Add(this.meDescription);
             this.layoutControl1.Controls.Add(this.txtExchangeCost);
             this.layoutControl1.Controls.Add(this.txtProfitLevel);
             this.layoutControl1.Controls.Add(this.txtProfit);
@@ -391,7 +392,7 @@
             // txtDirectCosts
             // 
             this.txtDirectCosts.IsSupportNegative = false;
-            this.txtDirectCosts.Location = new System.Drawing.Point(1241, 343);
+            this.txtDirectCosts.Location = new System.Drawing.Point(1241, 397);
             this.txtDirectCosts.Name = "txtDirectCosts";
             this.txtDirectCosts.Properties.NullText = "0.00";
             this.txtDirectCosts.Properties.ReadOnly = true;
@@ -402,7 +403,7 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(1061, 794);
+            this.btnSure.Location = new System.Drawing.Point(1061, 848);
             this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(136, 36);
@@ -414,7 +415,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1201, 794);
+            this.btnCancel.Location = new System.Drawing.Point(1201, 848);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(136, 36);
@@ -424,7 +425,7 @@
             // 
             // textEdit33
             // 
-            this.textEdit33.Location = new System.Drawing.Point(24, 765);
+            this.textEdit33.Location = new System.Drawing.Point(24, 819);
             this.textEdit33.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textEdit33.Name = "textEdit33";
             this.textEdit33.Size = new System.Drawing.Size(1313, 25);
@@ -433,7 +434,7 @@
             // 
             // meDescription
             // 
-            this.meDescription.Location = new System.Drawing.Point(94, 666);
+            this.meDescription.Location = new System.Drawing.Point(94, 720);
             this.meDescription.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.meDescription.Name = "meDescription";
             this.meDescription.Size = new System.Drawing.Size(1243, 46);
@@ -443,7 +444,7 @@
             // txtExchangeCost
             // 
             this.txtExchangeCost.IsSupportNegative = false;
-            this.txtExchangeCost.Location = new System.Drawing.Point(403, 637);
+            this.txtExchangeCost.Location = new System.Drawing.Point(403, 691);
             this.txtExchangeCost.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtExchangeCost.Name = "txtExchangeCost";
             this.txtExchangeCost.Properties.NullText = "0.00";
@@ -455,7 +456,7 @@
             // txtProfitLevel
             // 
             this.txtProfitLevel.IsSupportNegative = false;
-            this.txtProfitLevel.Location = new System.Drawing.Point(49, 637);
+            this.txtProfitLevel.Location = new System.Drawing.Point(49, 691);
             this.txtProfitLevel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtProfitLevel.Name = "txtProfitLevel";
             this.txtProfitLevel.Properties.NullText = "0.00";
@@ -467,19 +468,20 @@
             // txtProfit
             // 
             this.txtProfit.IsSupportNegative = false;
-            this.txtProfit.Location = new System.Drawing.Point(757, 637);
+            this.txtProfit.Location = new System.Drawing.Point(757, 691);
             this.txtProfit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtProfit.Name = "txtProfit";
             this.txtProfit.Properties.NullText = "0.00";
             this.txtProfit.Size = new System.Drawing.Size(580, 25);
             this.txtProfit.StyleController = this.layoutControl1;
             this.txtProfit.TabIndex = 50;
+            this.txtProfit.ToolTip = "利润=折合人名币（净收入额）-总成本";
             this.txtProfit.EditValueChanged += new System.EventHandler(this.txtProfit_EditValueChanged);
             // 
             // txtNetIncomeCNY
             // 
             this.txtNetIncomeCNY.IsSupportNegative = false;
-            this.txtNetIncomeCNY.Location = new System.Drawing.Point(580, 587);
+            this.txtNetIncomeCNY.Location = new System.Drawing.Point(580, 641);
             this.txtNetIncomeCNY.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtNetIncomeCNY.Name = "txtNetIncomeCNY";
             this.txtNetIncomeCNY.Properties.NullText = "0.00";
@@ -492,7 +494,7 @@
             // txtExchangeRate
             // 
             this.txtExchangeRate.IsSupportNegative = false;
-            this.txtExchangeRate.Location = new System.Drawing.Point(403, 587);
+            this.txtExchangeRate.Location = new System.Drawing.Point(403, 641);
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Properties.NullText = "0.00";
@@ -504,7 +506,7 @@
             // txtTotalCost
             // 
             this.txtTotalCost.IsSupportNegative = false;
-            this.txtTotalCost.Location = new System.Drawing.Point(757, 587);
+            this.txtTotalCost.Location = new System.Drawing.Point(757, 641);
             this.txtTotalCost.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTotalCost.Name = "txtTotalCost";
             this.txtTotalCost.Properties.NullText = "0.00";
@@ -517,7 +519,7 @@
             // txtNetIncome
             // 
             this.txtNetIncome.IsSupportNegative = false;
-            this.txtNetIncome.Location = new System.Drawing.Point(49, 587);
+            this.txtNetIncome.Location = new System.Drawing.Point(49, 641);
             this.txtNetIncome.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtNetIncome.Name = "txtNetIncome";
             this.txtNetIncome.Properties.NullText = "0.00";
@@ -530,7 +532,7 @@
             // txtTaxRebateRate
             // 
             this.txtTaxRebateRate.IsSupportNegative = false;
-            this.txtTaxRebateRate.Location = new System.Drawing.Point(934, 587);
+            this.txtTaxRebateRate.Location = new System.Drawing.Point(934, 641);
             this.txtTaxRebateRate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
             this.txtTaxRebateRate.Properties.NullText = "0.00";
@@ -542,7 +544,7 @@
             // txtTaxRebateRateMoney
             // 
             this.txtTaxRebateRateMoney.IsSupportNegative = false;
-            this.txtTaxRebateRateMoney.Location = new System.Drawing.Point(1111, 587);
+            this.txtTaxRebateRateMoney.Location = new System.Drawing.Point(1111, 641);
             this.txtTaxRebateRateMoney.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTaxRebateRateMoney.Name = "txtTaxRebateRateMoney";
             this.txtTaxRebateRateMoney.Properties.NullText = "0.00";
@@ -556,7 +558,7 @@
             // txtCommission
             // 
             this.txtCommission.IsSupportNegative = false;
-            this.txtCommission.Location = new System.Drawing.Point(226, 537);
+            this.txtCommission.Location = new System.Drawing.Point(226, 591);
             this.txtCommission.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCommission.Name = "txtCommission";
             this.txtCommission.Properties.NullText = "0.00";
@@ -568,7 +570,7 @@
             // txtPremium
             // 
             this.txtPremium.IsSupportNegative = false;
-            this.txtPremium.Location = new System.Drawing.Point(403, 537);
+            this.txtPremium.Location = new System.Drawing.Point(403, 591);
             this.txtPremium.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtPremium.Name = "txtPremium";
             this.txtPremium.Properties.NullText = "0.00";
@@ -580,7 +582,7 @@
             // txtBankCharges
             // 
             this.txtBankCharges.IsSupportNegative = false;
-            this.txtBankCharges.Location = new System.Drawing.Point(580, 537);
+            this.txtBankCharges.Location = new System.Drawing.Point(580, 591);
             this.txtBankCharges.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtBankCharges.Name = "txtBankCharges";
             this.txtBankCharges.Properties.NullText = "0.00";
@@ -592,7 +594,7 @@
             // txtQuota
             // 
             this.txtQuota.IsSupportNegative = false;
-            this.txtQuota.Location = new System.Drawing.Point(49, 537);
+            this.txtQuota.Location = new System.Drawing.Point(49, 591);
             this.txtQuota.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtQuota.Name = "txtQuota";
             this.txtQuota.Properties.NullText = "0.00";
@@ -604,7 +606,7 @@
             // txtOther
             // 
             this.txtOther.IsSupportNegative = false;
-            this.txtOther.Location = new System.Drawing.Point(757, 537);
+            this.txtOther.Location = new System.Drawing.Point(757, 591);
             this.txtOther.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOther.Name = "txtOther";
             this.txtOther.Properties.NullText = "0.00";
@@ -616,7 +618,7 @@
             // txtFeedMoney
             // 
             this.txtFeedMoney.IsSupportNegative = false;
-            this.txtFeedMoney.Location = new System.Drawing.Point(934, 537);
+            this.txtFeedMoney.Location = new System.Drawing.Point(934, 591);
             this.txtFeedMoney.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtFeedMoney.Name = "txtFeedMoney";
             this.txtFeedMoney.Properties.NullText = "0.00";
@@ -628,7 +630,7 @@
             // txtSubtotal
             // 
             this.txtSubtotal.IsSupportNegative = false;
-            this.txtSubtotal.Location = new System.Drawing.Point(1111, 537);
+            this.txtSubtotal.Location = new System.Drawing.Point(1111, 591);
             this.txtSubtotal.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Properties.NullText = "0.00";
@@ -640,7 +642,7 @@
             // 
             // gridOutProductDetail
             // 
-            this.gridOutProductDetail.Location = new System.Drawing.Point(49, 99);
+            this.gridOutProductDetail.Location = new System.Drawing.Point(49, 153);
             this.gridOutProductDetail.MainView = this.gvOutProductDetail;
             this.gridOutProductDetail.Name = "gridOutProductDetail";
             this.gridOutProductDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -798,7 +800,7 @@
             // txtAdvancePayment
             // 
             this.txtAdvancePayment.IsSupportNegative = false;
-            this.txtAdvancePayment.Location = new System.Drawing.Point(403, 463);
+            this.txtAdvancePayment.Location = new System.Drawing.Point(403, 517);
             this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Properties.NullText = "0.00";
@@ -810,7 +812,7 @@
             // txtPercentage
             // 
             this.txtPercentage.IsSupportNegative = false;
-            this.txtPercentage.Location = new System.Drawing.Point(581, 463);
+            this.txtPercentage.Location = new System.Drawing.Point(581, 517);
             this.txtPercentage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtPercentage.Name = "txtPercentage";
             this.txtPercentage.Properties.NullText = "0.00";
@@ -821,7 +823,7 @@
             // 
             // txtInSettlementMethod1
             // 
-            this.txtInSettlementMethod1.Location = new System.Drawing.Point(49, 463);
+            this.txtInSettlementMethod1.Location = new System.Drawing.Point(49, 517);
             this.txtInSettlementMethod1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtInSettlementMethod1.Name = "txtInSettlementMethod1";
             this.txtInSettlementMethod1.Size = new System.Drawing.Size(173, 25);
@@ -831,7 +833,7 @@
             // txtInterestRate
             // 
             this.txtInterestRate.IsSupportNegative = false;
-            this.txtInterestRate.Location = new System.Drawing.Point(758, 463);
+            this.txtInterestRate.Location = new System.Drawing.Point(758, 517);
             this.txtInterestRate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtInterestRate.Name = "txtInterestRate";
             this.txtInterestRate.Properties.NullText = "0.00";
@@ -842,7 +844,7 @@
             // 
             // txtInSettlementMethod2
             // 
-            this.txtInSettlementMethod2.Location = new System.Drawing.Point(226, 463);
+            this.txtInSettlementMethod2.Location = new System.Drawing.Point(226, 517);
             this.txtInSettlementMethod2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtInSettlementMethod2.Name = "txtInSettlementMethod2";
             this.txtInSettlementMethod2.Size = new System.Drawing.Size(173, 25);
@@ -852,7 +854,7 @@
             // txtDays
             // 
             this.txtDays.IsSupportNegative = false;
-            this.txtDays.Location = new System.Drawing.Point(935, 463);
+            this.txtDays.Location = new System.Drawing.Point(935, 517);
             this.txtDays.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDays.Name = "txtDays";
             this.txtDays.Properties.NullText = "0.00";
@@ -864,7 +866,7 @@
             // txtInterest
             // 
             this.txtInterest.IsSupportNegative = false;
-            this.txtInterest.Location = new System.Drawing.Point(1112, 463);
+            this.txtInterest.Location = new System.Drawing.Point(1112, 517);
             this.txtInterest.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtInterest.Name = "txtInterest";
             this.txtInterest.Properties.NullText = "0.00";
@@ -876,7 +878,7 @@
             // 
             // gridInProductDetail
             // 
-            this.gridInProductDetail.Location = new System.Drawing.Point(49, 322);
+            this.gridInProductDetail.Location = new System.Drawing.Point(49, 376);
             this.gridInProductDetail.MainView = this.bgvInProductDetail;
             this.gridInProductDetail.Name = "gridInProductDetail";
             this.gridInProductDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -1108,7 +1110,7 @@
             // 
             // chkIsQualified
             // 
-            this.chkIsQualified.Location = new System.Drawing.Point(1191, 293);
+            this.chkIsQualified.Location = new System.Drawing.Point(1191, 347);
             this.chkIsQualified.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkIsQualified.Name = "chkIsQualified";
             this.chkIsQualified.Properties.Caption = "是否合格供应方";
@@ -1119,7 +1121,7 @@
             // 
             // txtOutSettlementMethod2
             // 
-            this.txtOutSettlementMethod2.Location = new System.Drawing.Point(581, 240);
+            this.txtOutSettlementMethod2.Location = new System.Drawing.Point(581, 294);
             this.txtOutSettlementMethod2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOutSettlementMethod2.Name = "txtOutSettlementMethod2";
             this.txtOutSettlementMethod2.Size = new System.Drawing.Size(173, 25);
@@ -1128,7 +1130,7 @@
             // 
             // txtSeaport
             // 
-            this.txtSeaport.Location = new System.Drawing.Point(226, 240);
+            this.txtSeaport.Location = new System.Drawing.Point(226, 294);
             this.txtSeaport.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSeaport.Name = "txtSeaport";
             this.txtSeaport.Size = new System.Drawing.Size(173, 25);
@@ -1138,7 +1140,7 @@
             // textEdit7
             // 
             this.textEdit7.EditValue = "……";
-            this.textEdit7.Location = new System.Drawing.Point(1112, 240);
+            this.textEdit7.Location = new System.Drawing.Point(1112, 294);
             this.textEdit7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textEdit7.Name = "textEdit7";
             this.textEdit7.Size = new System.Drawing.Size(225, 25);
@@ -1147,7 +1149,7 @@
             // 
             // txtOutSettlementMethod
             // 
-            this.txtOutSettlementMethod.Location = new System.Drawing.Point(403, 240);
+            this.txtOutSettlementMethod.Location = new System.Drawing.Point(403, 294);
             this.txtOutSettlementMethod.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOutSettlementMethod.Name = "txtOutSettlementMethod";
             this.txtOutSettlementMethod.Size = new System.Drawing.Size(174, 25);
@@ -1157,7 +1159,7 @@
             // txtTotalAmount
             // 
             this.txtTotalAmount.IsSupportNegative = false;
-            this.txtTotalAmount.Location = new System.Drawing.Point(935, 240);
+            this.txtTotalAmount.Location = new System.Drawing.Point(935, 294);
             this.txtTotalAmount.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTotalAmount.Name = "txtTotalAmount";
             this.txtTotalAmount.Properties.NullText = "0.00";
@@ -1169,7 +1171,7 @@
             // 
             // txtOutSettlementMethod3
             // 
-            this.txtOutSettlementMethod3.Location = new System.Drawing.Point(758, 240);
+            this.txtOutSettlementMethod3.Location = new System.Drawing.Point(758, 294);
             this.txtOutSettlementMethod3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOutSettlementMethod3.Name = "txtOutSettlementMethod3";
             this.txtOutSettlementMethod3.Size = new System.Drawing.Size(173, 25);
@@ -1178,7 +1180,7 @@
             // 
             // txtPriceClause
             // 
-            this.txtPriceClause.Location = new System.Drawing.Point(49, 240);
+            this.txtPriceClause.Location = new System.Drawing.Point(49, 294);
             this.txtPriceClause.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtPriceClause.Name = "txtPriceClause";
             this.txtPriceClause.Size = new System.Drawing.Size(173, 25);
@@ -1187,7 +1189,7 @@
             // 
             // rgTradeNature
             // 
-            this.rgTradeNature.Location = new System.Drawing.Point(932, 49);
+            this.rgTradeNature.Location = new System.Drawing.Point(932, 103);
             this.rgTradeNature.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rgTradeNature.Name = "rgTradeNature";
             this.rgTradeNature.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -1199,7 +1201,7 @@
             // 
             // rgTradeMode
             // 
-            this.rgTradeMode.Location = new System.Drawing.Point(225, 49);
+            this.rgTradeMode.Location = new System.Drawing.Point(225, 103);
             this.rgTradeMode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rgTradeMode.Name = "rgTradeMode";
             this.rgTradeMode.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -1215,7 +1217,7 @@
             // dteValidity
             // 
             this.dteValidity.EditValue = null;
-            this.dteValidity.Location = new System.Drawing.Point(993, -9);
+            this.dteValidity.Location = new System.Drawing.Point(993, 45);
             this.dteValidity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dteValidity.Name = "dteValidity";
             this.dteValidity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1229,7 +1231,7 @@
             // dteSignDate
             // 
             this.dteSignDate.EditValue = null;
-            this.dteSignDate.Location = new System.Drawing.Point(757, -9);
+            this.dteSignDate.Location = new System.Drawing.Point(757, 45);
             this.dteSignDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dteSignDate.Name = "dteSignDate";
             this.dteSignDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1242,7 +1244,7 @@
             // 
             // txtSalesman
             // 
-            this.txtSalesman.Location = new System.Drawing.Point(521, -9);
+            this.txtSalesman.Location = new System.Drawing.Point(521, 45);
             this.txtSalesman.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSalesman.Name = "txtSalesman";
             this.txtSalesman.Properties.ReadOnly = true;
@@ -1252,7 +1254,7 @@
             // 
             // txtDepartment
             // 
-            this.txtDepartment.Location = new System.Drawing.Point(285, -9);
+            this.txtDepartment.Location = new System.Drawing.Point(285, 45);
             this.txtDepartment.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDepartment.Name = "txtDepartment";
             this.txtDepartment.Properties.ReadOnly = true;
@@ -1262,7 +1264,7 @@
             // 
             // txtContractNO
             // 
-            this.txtContractNO.Location = new System.Drawing.Point(49, -9);
+            this.txtContractNO.Location = new System.Drawing.Point(49, 45);
             this.txtContractNO.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtContractNO.Name = "txtContractNO";
             this.txtContractNO.Size = new System.Drawing.Size(232, 25);
@@ -1271,7 +1273,7 @@
             // 
             // pceCustomer
             // 
-            this.pceCustomer.Location = new System.Drawing.Point(225, 20);
+            this.pceCustomer.Location = new System.Drawing.Point(225, 74);
             this.pceCustomer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pceCustomer.Name = "pceCustomer";
             this.pceCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1285,7 +1287,7 @@
             // 
             // pceSupplier
             // 
-            this.pceSupplier.Location = new System.Drawing.Point(225, 293);
+            this.pceSupplier.Location = new System.Drawing.Point(225, 347);
             this.pceSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pceSupplier.Name = "pceSupplier";
             this.pceSupplier.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1307,7 +1309,7 @@
             this.layoutControlGroup3,
             this.layoutControlGroup4,
             this.layoutControlGroup5});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, -54);
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1361, 908);
             this.layoutControlGroup1.Text = "Root";

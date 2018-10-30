@@ -329,7 +329,7 @@ namespace BudgetSystem
         /// </summary>
         private void CalcNetIncomeCNY()
         {
-            txtNetIncomeCNY.EditValue = this.txtTotalAmount.Value - txtInterest.Value - txtSubtotal.Value;
+            txtNetIncomeCNY.EditValue = this.txtTotalAmount.Value - txtDirectCosts.Value - txtInterest.Value - txtSubtotal.Value;
         }
 
         /// <summary>
