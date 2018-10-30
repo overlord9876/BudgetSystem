@@ -60,11 +60,22 @@ namespace BudgetSystem.InMoney
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
+
                 //？可能不存在删除
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewActualReceipts();
+            }
+        }
+
+        private void DeleteActualReceipts()
+        {
+
+            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            if (currentRowActualReceipts != null)
+            {
+
             }
         }
 

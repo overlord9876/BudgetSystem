@@ -117,6 +117,12 @@ namespace BudgetSystem.Entity
         /// 是否选择
         /// </summary>
         public bool IsSelected { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 
     public enum EnumSupplierType

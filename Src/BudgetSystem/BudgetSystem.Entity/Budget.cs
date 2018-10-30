@@ -130,6 +130,17 @@ namespace BudgetSystem.Entity
         public decimal AdvancePayment { get; set; }
 
         /// <summary>
+        /// 是否有预付款
+        /// </summary>
+        public bool HasAdvancePayment
+        {
+            get
+            {
+                return AdvancePayment > 0;
+            }
+        }
+
+        /// <summary>
         /// 利率
         /// </summary>
         public float InterestRate { get; set; }

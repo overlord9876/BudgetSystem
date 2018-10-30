@@ -93,6 +93,7 @@ namespace BudgetSystem.InMoney
             if (this.dxErrorProvider1.HasErrors) { return; }
 
             arm.SplitActualReceipts(this.CurrentActualReceipts, GetActualReceiptList());
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         protected override void SubmitSplitToBudgetData()
@@ -115,7 +116,7 @@ namespace BudgetSystem.InMoney
             if (this.dxErrorProvider1.HasErrors) { return; }
 
             arm.RelationActualReceiptToBudget(this.CurrentActualReceipts, GetActualReceiptList());
-
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         protected override void SubmitCustomData()

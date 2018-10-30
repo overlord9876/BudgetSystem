@@ -68,7 +68,9 @@ namespace BudgetSystem.Dal
             paramter.Value = budgetId;
             command.Parameters.Add(paramter);
             object obj = command.ExecuteScalar();
-            return Convert.ToDecimal(obj);
+            decimal totalAmount = 0;
+            decimal.TryParse(obj.ToString(), out totalAmount);
+            return totalAmount;
         }
 
         public IEnumerable<ActualReceipts> GetActualReceiptsByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)

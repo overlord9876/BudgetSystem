@@ -478,6 +478,8 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_HasAdvancePayment.xml" />
+    <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_NotHasAdvancePayment.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />

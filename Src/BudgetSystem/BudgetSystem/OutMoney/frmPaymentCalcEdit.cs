@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using System.Linq;
 
-namespace BudgetSystem
+namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEdit : frmBaseDialogForm
     {
@@ -35,12 +35,29 @@ namespace BudgetSystem
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
         {
-            this.txtReceiptAmount.EditValue = ReceiptAmount;
             this.txtApplyMoney.EditValue = PaymentNotes.Sum(o => o.Money);
+            this.txtReceiptAmount.EditValue = ReceiptAmount;
+            this.txtTaxRebateRate.EditValue = SelectedBudget.TaxRebateRate;
 
-            this.txtTaxPayment.EditValue = PaymentNotes.Where(o => o.IsDrawback).Sum(o => o.Money);
-            this.txtTaxRefund.EditValue = this.txtTaxPayment.Value / (decimal)1.17 * txtTaxRebateRate.Value;
 
+            //包含预付款
+            if (SelectedBudget.HasAdvancePayment)
+            {
+                this.CustomWorkModel = "HasAdvancePayment";
+                this.txtTaxPayment.EditValue = PaymentNotes.Where(o => o.IsDrawback).Sum(o => o.Money);
+                this.txtTaxRefund.EditValue = Math.Round(this.txtTaxPayment.Value / (decimal)1.17 * txtTaxRebateRate.Value / 100, 2);
+            }
+            else//没有预付款
+            {
+                this.CustomWorkModel = "NotHasAdvancePayment";
+
+                txtTaxPaymentA.EditValue = txtApplyMoney.Value;
+                txtTaxRefundA.EditValue = txtTaxPaymentA.Value / (decimal)1.17 * this.txtTaxRebateRate.Value / 100;
+            }
+
+            SetLayoutControlStyle(EditFormWorkModels.Custom);
+
+            this.txtCommitDate.EditValue = SelectedBudget.CreateDate;
             this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
             this.txtReceiptAmount2.EditValue = ReceiptAmount;
             this.txtBudgetNo.EditValue = SelectedBudget.ContractNO;
@@ -52,7 +69,6 @@ namespace BudgetSystem
             this.txtTotalAmount.EditValue = SelectedBudget.TotalAmount;
             this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / SelectedBudget.TotalAmount * 100, 2);
             this.txtSuperPaymentScheme.EditValue = (Math.Round(this.txtReceiptAmount2.Value / txtTotalAmount.Value, 2)) * 100 - 100;
-            this.txtTaxRebateRate.EditValue = SelectedBudget.TaxRebateRate;
             decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)SelectedBudget.InterestRate * SelectedBudget.Days / 30 / 100, 2);
             decimal subTotal = SelectedBudget.Quota + SelectedBudget.Commission + SelectedBudget.Premium + SelectedBudget.BankCharges +/*直接费用*/0 + SelectedBudget.FeedMoney;
 
@@ -75,13 +91,79 @@ namespace BudgetSystem
 
             this.txtNetIncome_Plan.EditValue = txtNetIncome.Value;
             this.txtRetainedProfit.EditValue = txtNetIncome_Plan.Value * txtReceiptAmount2.Value / txtTotalAmount.Value;
-            this.txtTaxRefund_Total.EditValue = txtTaxRefund.Value;
+
             this.textEdit_Number2.EditValue = txtTaxRefund.Value;
+
+            this.textEdit_Number1.EditValue = PaymentMoney;
+            this.textEdit_Number20.EditValue = PaymentMoney;
+            this.textEdit_Number24.EditValue = PaymentMoney;
+
+            //无预付款情况下，
+            textEdit_Number21.EditValue = textEdit_Number20.Value / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100;
+            //this.txtTaxRefund_Total.EditValue = txtTaxRefund.Value;
+            this.txtTaxRefund_Total.EditValue = this.txtTaxRefundA.Value + this.txtTaxRefund.Value;
+            textEdit_Number23.EditValue = txtAccountBalance.Value + txtTaxRefund_Total.Value - textEdit_Number20.Value;
+
+            //有预付款情况下，窗体显示计税货款大于收款金额测算栏目（如果计税货款大于收款金额，则付款动用了预付款，则只能称为暂计退税款）
+
+            if (txtTaxPayment.Value > txtReceiptAmount.Value)
+            {
+                textEdit_Number28.EditValue = txtAccountBalance.Value / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100;
+            }
+            this.textEdit_Number29.EditValue = this.txtAccountBalance.Value + this.textEdit_Number28.Value - this.textEdit_Number24.Value;
+            this.textEdit_Number30.EditValue = this.textEdit_Number29.Value + this.txtAdvancePayment.Value;
 
 
             //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
             textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
             textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
+
+            this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
+
+        }
+
+        private void CalcThree()
+        {
+
+        }
+
+        private void textEdit_Number23_EditValueChanged(object sender, EventArgs e)
+        {
+            if (textEdit_Number23.Value <= 0)
+            {
+                dxErrorProvider1.SetError(textEdit_Number23, "支付余额不允许小于0。");
+            }
+        }
+
+        private void textEdit_Number30_EditValueChanged(object sender, EventArgs e)
+        {
+            if (textEdit_Number30.Value <= 0)
+            {
+                dxErrorProvider1.SetError(textEdit_Number30, "支付余额不允许小于0。");
+            }
+        }
+
+        private void textEdit_Number4_EditValueChanged(object sender, EventArgs e)
+        {
+            if (textEdit_Number4.Value <= 0)
+            {
+                dxErrorProvider1.SetError(textEdit_Number4, "支付余额不允许小于0。");
+            }
+        }
+
+        private void textEdit_Number20_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textEdit_Number24_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textEdit_Number1_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
 
 

@@ -24,6 +24,10 @@ namespace BudgetSystem.OutMoney
         public frmOutMoneyEdit()
         {
             InitializeComponent();
+
+            this.cboBudget.Properties.PopupFormSize = new Size(this.cboBudget.Width * 2, 300);
+            this.cboSupplier.Properties.PopupFormSize = new Size(this.cboSupplier.Width * 2, 300);
+
         }
 
         private void frmOutMemoryEdit_Load(object sender, EventArgs e)
@@ -253,6 +257,7 @@ namespace BudgetSystem.OutMoney
                 form.SelectedBudget = bm.GetBudget(selectedBudget.ID);
                 form.ReceiptAmount = txtReceiptAmount.Value;
                 form.PaymentNotes = paymentNotes;
+                form.PaymentMoney = txtPaymentMoney.Value;
                 form.ShowDialog(this);
             }
             else
