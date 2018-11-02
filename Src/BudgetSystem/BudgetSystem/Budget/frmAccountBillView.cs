@@ -28,11 +28,15 @@ namespace BudgetSystem
         private void frmAccountBillView_Load(object sender, EventArgs e)
         {
             this.Text = "按合同号查询收付情况";
-
-            this.gcAccountBill.DataSource = bm.GetAccountBillDetailByBudgetId(CurrentBudget.ID);
+            List<AccountBill> dataSource = bm.GetAccountBillDetailByBudgetId(CurrentBudget.ID);
+            this.gcAccountBill.DataSource = dataSource;
             this.gcAccountBill.RefreshDataSource();
 
             this.lblBudgetNO.Text = CurrentBudget.ContractNO;
+
+            this.textEdit_Number1.EditValue = dataSource.Sum(o => o.PaymentMoney);
+            this.textEdit_Number2.EditValue = dataSource.Sum(o => o.RecieptMoney);
+            this.textEdit_Number3.EditValue = dataSource.Sum(o => o.CNY);
         }
 
 

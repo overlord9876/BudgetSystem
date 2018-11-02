@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.meDescription = new DevExpress.XtraEditors.MemoEdit();
             this.pccSupplier = new DevExpress.XtraEditors.PopupContainerControl();
             this.ucSupplierSelected = new BudgetSystem.ucSupplierSelected();
             this.pccCustomer = new DevExpress.XtraEditors.PopupContainerControl();
@@ -38,7 +39,6 @@
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit33 = new DevExpress.XtraEditors.TextEdit();
-            this.meDescription = new DevExpress.XtraEditors.MemoEdit();
             this.txtExchangeCost = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtProfitLevel = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtProfit = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -79,29 +79,23 @@
             this.txtInterest = new BudgetSystem.CommonControl.TextEdit_Number();
             this.gridInProductDetail = new DevExpress.XtraGrid.GridControl();
             this.bgvInProductDetail = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcInName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcInCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtInCount = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcInUnit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcRawMaterials = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtRawMaterials = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcSubsidiaryMaterials = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtSubsidiaryMaterials = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcProcessCost = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtProcessCost = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcSubtotal = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtSubtotal = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand9 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcInDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.riLinkEditInDelete = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.chkIsQualified = new DevExpress.XtraEditors.CheckEdit();
             this.txtOutSettlementMethod2 = new DevExpress.XtraEditors.TextEdit();
             this.txtSeaport = new DevExpress.XtraEditors.TextEdit();
@@ -173,15 +167,27 @@
             this.layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand10 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand12 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand11 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand9 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pccSupplier)).BeginInit();
             this.pccSupplier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pccCustomer)).BeginInit();
             this.pccCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit33.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfitLevel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfit.Properties)).BeginInit();
@@ -355,6 +361,15 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // meDescription
+            // 
+            this.meDescription.Location = new System.Drawing.Point(94, 720);
+            this.meDescription.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.meDescription.Name = "meDescription";
+            this.meDescription.Size = new System.Drawing.Size(1243, 46);
+            this.meDescription.StyleController = this.layoutControl1;
+            this.meDescription.TabIndex = 53;
+            // 
             // pccSupplier
             // 
             this.pccSupplier.Controls.Add(this.ucSupplierSelected);
@@ -431,15 +446,6 @@
             this.textEdit33.Size = new System.Drawing.Size(1313, 25);
             this.textEdit33.StyleController = this.layoutControl1;
             this.textEdit33.TabIndex = 54;
-            // 
-            // meDescription
-            // 
-            this.meDescription.Location = new System.Drawing.Point(94, 720);
-            this.meDescription.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.meDescription.Name = "meDescription";
-            this.meDescription.Size = new System.Drawing.Size(1243, 46);
-            this.meDescription.StyleController = this.layoutControl1;
-            this.meDescription.TabIndex = 53;
             // 
             // txtExchangeCost
             // 
@@ -900,6 +906,9 @@
             this.gridBand2,
             this.gridBand3,
             this.gridBand4,
+            this.gridBand10,
+            this.gridBand12,
+            this.gridBand11,
             this.gridBand9});
             this.bgvInProductDetail.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gcInName,
@@ -909,6 +918,9 @@
             this.gcSubsidiaryMaterials,
             this.gcProcessCost,
             this.gcSubtotal,
+            this.bandedGridColumn2,
+            this.bandedGridColumn1,
+            this.bandedGridColumn3,
             this.gcInDelete});
             this.bgvInProductDetail.GridControl = this.gridInProductDetail;
             this.bgvInProductDetail.Name = "bgvInProductDetail";
@@ -922,31 +934,13 @@
             this.bgvInProductDetail.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.bgvInProductDetail_InvalidRowException);
             this.bgvInProductDetail.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.bgvInProductDetail_ValidateRow);
             // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "品名规格";
-            this.gridBand1.Columns.Add(this.gcInName);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.Width = 246;
-            // 
             // gcInName
             // 
             this.gcInName.Caption = "品名规格";
             this.gcInName.FieldName = "Name";
             this.gcInName.Name = "gcInName";
             this.gcInName.Visible = true;
-            this.gcInName.Width = 246;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand2.Caption = "数量";
-            this.gridBand2.Columns.Add(this.gcInCount);
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.Width = 134;
+            this.gcInName.Width = 187;
             // 
             // gcInCount
             // 
@@ -955,21 +949,12 @@
             this.gcInCount.FieldName = "Count";
             this.gcInCount.Name = "gcInCount";
             this.gcInCount.Visible = true;
-            this.gcInCount.Width = 134;
+            this.gcInCount.Width = 74;
             // 
             // ritxtInCount
             // 
             this.ritxtInCount.AutoHeight = false;
             this.ritxtInCount.Name = "ritxtInCount";
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand3.Caption = "单位";
-            this.gridBand3.Columns.Add(this.gcInUnit);
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.Width = 125;
             // 
             // gcInUnit
             // 
@@ -977,29 +962,7 @@
             this.gcInUnit.FieldName = "Unit";
             this.gcInUnit.Name = "gcInUnit";
             this.gcInUnit.Visible = true;
-            this.gcInUnit.Width = 125;
-            // 
-            // gridBand4
-            // 
-            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand4.Caption = "单价";
-            this.gridBand4.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand5,
-            this.gridBand6,
-            this.gridBand7,
-            this.gridBand8});
-            this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 658;
-            // 
-            // gridBand5
-            // 
-            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand5.Caption = "原料";
-            this.gridBand5.Columns.Add(this.gcRawMaterials);
-            this.gridBand5.Name = "gridBand5";
-            this.gridBand5.Width = 171;
+            this.gcInUnit.Width = 67;
             // 
             // gcRawMaterials
             // 
@@ -1008,21 +971,12 @@
             this.gcRawMaterials.FieldName = "RawMaterials";
             this.gcRawMaterials.Name = "gcRawMaterials";
             this.gcRawMaterials.Visible = true;
-            this.gcRawMaterials.Width = 171;
+            this.gcRawMaterials.Width = 112;
             // 
             // ritxtRawMaterials
             // 
             this.ritxtRawMaterials.AutoHeight = false;
             this.ritxtRawMaterials.Name = "ritxtRawMaterials";
-            // 
-            // gridBand6
-            // 
-            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand6.Caption = "辅料";
-            this.gridBand6.Columns.Add(this.gcSubsidiaryMaterials);
-            this.gridBand6.Name = "gridBand6";
-            this.gridBand6.Width = 152;
             // 
             // gcSubsidiaryMaterials
             // 
@@ -1031,21 +985,12 @@
             this.gcSubsidiaryMaterials.FieldName = "SubsidiaryMaterials";
             this.gcSubsidiaryMaterials.Name = "gcSubsidiaryMaterials";
             this.gcSubsidiaryMaterials.Visible = true;
-            this.gcSubsidiaryMaterials.Width = 152;
+            this.gcSubsidiaryMaterials.Width = 100;
             // 
             // ritxtSubsidiaryMaterials
             // 
             this.ritxtSubsidiaryMaterials.AutoHeight = false;
             this.ritxtSubsidiaryMaterials.Name = "ritxtSubsidiaryMaterials";
-            // 
-            // gridBand7
-            // 
-            this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand7.Caption = "加工";
-            this.gridBand7.Columns.Add(this.gcProcessCost);
-            this.gridBand7.Name = "gridBand7";
-            this.gridBand7.Width = 182;
             // 
             // gcProcessCost
             // 
@@ -1054,21 +999,12 @@
             this.gcProcessCost.FieldName = "ProcessCost";
             this.gcProcessCost.Name = "gcProcessCost";
             this.gcProcessCost.Visible = true;
-            this.gcProcessCost.Width = 182;
+            this.gcProcessCost.Width = 119;
             // 
             // ritxtProcessCost
             // 
             this.ritxtProcessCost.AutoHeight = false;
             this.ritxtProcessCost.Name = "ritxtProcessCost";
-            // 
-            // gridBand8
-            // 
-            this.gridBand8.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand8.Caption = "小计";
-            this.gridBand8.Columns.Add(this.gcSubtotal);
-            this.gridBand8.Name = "gridBand8";
-            this.gridBand8.Width = 153;
             // 
             // gcSubtotal
             // 
@@ -1078,7 +1014,7 @@
             this.gcSubtotal.Name = "gcSubtotal";
             this.gcSubtotal.OptionsColumn.AllowEdit = false;
             this.gcSubtotal.Visible = true;
-            this.gcSubtotal.Width = 153;
+            this.gcSubtotal.Width = 108;
             // 
             // ritxtSubtotal
             // 
@@ -1087,18 +1023,13 @@
             this.ritxtSubtotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.ritxtSubtotal.Name = "ritxtSubtotal";
             // 
-            // gridBand9
-            // 
-            this.gridBand9.Columns.Add(this.gcInDelete);
-            this.gridBand9.Name = "gridBand9";
-            this.gridBand9.Width = 75;
-            // 
             // gcInDelete
             // 
             this.gcInDelete.Caption = " ";
             this.gcInDelete.ColumnEdit = this.riLinkEditInDelete;
             this.gcInDelete.Name = "gcInDelete";
             this.gcInDelete.Visible = true;
+            this.gcInDelete.Width = 56;
             // 
             // riLinkEditInDelete
             // 
@@ -1107,6 +1038,24 @@
             this.riLinkEditInDelete.SingleClick = true;
             this.riLinkEditInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(this.riLinkEditInDelete_CustomDisplayText);
             this.riLinkEditInDelete.Click += new System.EventHandler(this.riLinkEditInDelete_Click);
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "金额小计";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.Visible = true;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "退税率";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "退税额";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.Visible = true;
             // 
             // chkIsQualified
             // 
@@ -2036,6 +1985,109 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "品名规格";
+            this.gridBand1.Columns.Add(this.gcInName);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.Width = 187;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "数量";
+            this.gridBand2.Columns.Add(this.gcInCount);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.Width = 74;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand3.Caption = "单位";
+            this.gridBand3.Columns.Add(this.gcInUnit);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.Width = 67;
+            // 
+            // gridBand4
+            // 
+            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand4.Caption = "单价";
+            this.gridBand4.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand5,
+            this.gridBand6,
+            this.gridBand7,
+            this.gridBand8});
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.Width = 439;
+            // 
+            // gridBand5
+            // 
+            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand5.Caption = "原料";
+            this.gridBand5.Columns.Add(this.gcRawMaterials);
+            this.gridBand5.Name = "gridBand5";
+            this.gridBand5.Width = 112;
+            // 
+            // gridBand6
+            // 
+            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand6.Caption = "辅料";
+            this.gridBand6.Columns.Add(this.gcSubsidiaryMaterials);
+            this.gridBand6.Name = "gridBand6";
+            this.gridBand6.Width = 100;
+            // 
+            // gridBand7
+            // 
+            this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand7.Caption = "加工";
+            this.gridBand7.Columns.Add(this.gcProcessCost);
+            this.gridBand7.Name = "gridBand7";
+            this.gridBand7.Width = 119;
+            // 
+            // gridBand8
+            // 
+            this.gridBand8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand8.Caption = "小计";
+            this.gridBand8.Columns.Add(this.gcSubtotal);
+            this.gridBand8.Name = "gridBand8";
+            this.gridBand8.Width = 108;
+            // 
+            // gridBand10
+            // 
+            this.gridBand10.Caption = "金额小计";
+            this.gridBand10.Columns.Add(this.bandedGridColumn2);
+            this.gridBand10.Name = "gridBand10";
+            this.gridBand10.Width = 75;
+            // 
+            // gridBand12
+            // 
+            this.gridBand12.Caption = "退税率";
+            this.gridBand12.Columns.Add(this.bandedGridColumn1);
+            this.gridBand12.Name = "gridBand12";
+            this.gridBand12.Width = 75;
+            // 
+            // gridBand11
+            // 
+            this.gridBand11.Caption = "退税额";
+            this.gridBand11.Columns.Add(this.bandedGridColumn3);
+            this.gridBand11.Name = "gridBand11";
+            this.gridBand11.Width = 75;
+            // 
+            // gridBand9
+            // 
+            this.gridBand9.Columns.Add(this.gcInDelete);
+            this.gridBand9.Name = "gridBand9";
+            this.gridBand9.Width = 56;
+            // 
             // frmBudgetEdit
             // 
             this.AcceptButton = this.btnSure;
@@ -2050,13 +2102,13 @@
             this.Load += new System.EventHandler(this.frmBudgetEditEx_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pccSupplier)).EndInit();
             this.pccSupplier.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pccCustomer)).EndInit();
             this.pccCustomer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit33.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfitLevel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfit.Properties)).EndInit();
@@ -2299,24 +2351,30 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtSubsidiaryMaterials;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtProcessCost;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvInProductDetail;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcInName;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcInCount;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcInUnit;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcRawMaterials;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcSubsidiaryMaterials;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcProcessCost;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcSubtotal;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtSubtotal;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand9;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcInDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit riLinkEditInDelete;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand10;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand12;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand11;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand9;
     }
 }

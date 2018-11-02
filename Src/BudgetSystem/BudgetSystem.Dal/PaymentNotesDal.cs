@@ -63,7 +63,7 @@ namespace BudgetSystem.Dal
         public void DeletePaymentNote(int id, IDbConnection con, IDbTransaction tran)
         {
             string deleteSql = "Delete From `PaymentNotes` Where `ID` = @ID";
-            con.Execute(deleteSql, new object[] { id }, tran);
+            con.Execute(deleteSql, new { ID = id }, tran);
         }
 
     }

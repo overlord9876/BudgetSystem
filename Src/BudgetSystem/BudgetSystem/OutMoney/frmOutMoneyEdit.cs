@@ -252,7 +252,7 @@ namespace BudgetSystem.OutMoney
             {
                 txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(selectedBudget.ID);
                 paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
-                //获取供应商
+
                 frmPaymentCalcEdit form = new frmPaymentCalcEdit();
                 form.SelectedBudget = bm.GetBudget(selectedBudget.ID);
                 form.ReceiptAmount = txtReceiptAmount.Value;
@@ -263,6 +263,15 @@ namespace BudgetSystem.OutMoney
             else
             {
                 XtraMessageBox.Show("请选择合同");
+            }
+        }
+
+        private void cboApplicant_SelectedValueChanged(object sender, EventArgs e)
+        {
+            User selectedUser = cboApplicant.EditValue as User;
+            if (selectedUser != null)
+            {
+                cboDepartment.Text = selectedUser.DepartmentName;
             }
         }
 

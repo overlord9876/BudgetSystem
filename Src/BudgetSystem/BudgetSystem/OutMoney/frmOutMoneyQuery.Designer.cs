@@ -71,25 +71,25 @@
             // 
             // splitContainerControl1
             // 
-            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.splitContainerControl1.Panel2.Controls.Add(this.gcOutMoney);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1008, 729);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1152, 937);
             // 
             // panCondition
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
-            this.panCondition.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.panCondition.Size = new System.Drawing.Size(285, 463);
+            this.panCondition.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.panCondition.Size = new System.Drawing.Size(285, 595);
             // 
             // gcOutMoney
             // 
             this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
             this.gcOutMoney.MainView = this.gvOutMoney;
-            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Name = "gcOutMoney";
-            this.gcOutMoney.Size = new System.Drawing.Size(710, 729);
+            this.gcOutMoney.Size = new System.Drawing.Size(854, 937);
             this.gcOutMoney.TabIndex = 1;
             this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutMoney});
@@ -114,6 +114,7 @@
             this.gcPaymentMethod});
             this.gvOutMoney.GridControl = this.gcOutMoney;
             this.gvOutMoney.Name = "gvOutMoney";
+            this.gvOutMoney.OptionsBehavior.Editable = false;
             this.gvOutMoney.OptionsView.ShowGroupPanel = false;
             // 
             // gcSupplier
@@ -233,33 +234,37 @@
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControl1.Size = new System.Drawing.Size(285, 595);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(87, 62);
+            this.textEdit3.Location = new System.Drawing.Point(105, 70);
+            this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(186, 21);
+            this.textEdit3.Size = new System.Drawing.Size(168, 25);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(87, 37);
+            this.textEdit2.Location = new System.Drawing.Point(105, 41);
+            this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(186, 21);
+            this.textEdit2.Size = new System.Drawing.Size(168, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(87, 12);
+            this.textEdit1.Location = new System.Drawing.Point(105, 12);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(186, 21);
+            this.textEdit1.Size = new System.Drawing.Size(168, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -274,7 +279,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 595);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -284,36 +289,36 @@
             this.layoutControlItem1.CustomizationFormText = "供应商：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem1.Text = "供应商：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "付款申请人：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem2.Text = "付款申请人：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.textEdit3;
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 393);
+            this.layoutControlItem3.Size = new System.Drawing.Size(265, 517);
             this.layoutControlItem3.Text = "财务确认人：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
-            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.ClientSize = new System.Drawing.Size(1152, 937);
+            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
