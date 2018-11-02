@@ -34,7 +34,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 应收人民币金额
         /// </summary>
-        public decimal RMB { get; set; }
+        public decimal CNY { get; set; }
 
         /// <summary>
         /// 录入人

@@ -36,7 +36,7 @@ namespace BudgetSystem
             dt.Columns.Add("InvoiceNo", typeof(string));
             dt.Columns.Add("InvoiceDate", typeof(DateTime));
             dt.Columns.Add("OriginalCoin", typeof(string));
-            dt.Columns.Add("RMB", typeof(string));
+            dt.Columns.Add("CNY", typeof(string));
             dt.Columns.Add("CreateUser", typeof(string));
             dt.Columns.Add("CreateTimestamp", typeof(DateTime));
             dt.Columns.Add("Description", typeof(string));

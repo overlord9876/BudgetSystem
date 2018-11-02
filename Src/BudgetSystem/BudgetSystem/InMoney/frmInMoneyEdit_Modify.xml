@@ -439,7 +439,7 @@
       <property name="TextVisible">true</property>
       <property name="ParentName">layoutControlGroup2</property>
       <property name="MinSize">@3,Width=165@2,Height=25</property>
-      <property name="ControlName">txtRMB</property>
+      <property name="ControlName">txtCNY</property>
       <property name="TextAlignMode">UseParentOptions</property>
       <property name="ImageIndex">-1</property>
       <property name="SizeConstraintsType">Default</property>

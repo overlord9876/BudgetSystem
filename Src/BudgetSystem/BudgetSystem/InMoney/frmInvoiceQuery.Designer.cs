@@ -157,7 +157,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "应收人民币金额";
-            this.gridColumn6.FieldName = "RMB";
+            this.gridColumn6.FieldName = "CNY";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;

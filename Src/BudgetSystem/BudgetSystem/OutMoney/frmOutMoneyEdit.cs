@@ -156,7 +156,6 @@ namespace BudgetSystem.OutMoney
             this.txtApproveTime.EditValue = payment.ApproveTime;
             this.txtDescription.Text = payment.Description;
             this.txtPaymentMoney.EditValue = payment.Money;
-            this.txtOverdue.EditValue = payment.Overdue;
             this.txtPaymentDate.EditValue = payment.PaymentDate;
             this.txtTaxRebateRate.EditValue = payment.TaxRebateRate;
             this.txtVoucherNo.Text = payment.VoucherNo;
@@ -191,7 +190,6 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.ApproveTime = DateTime.Parse(this.txtApproveTime.EditValue.ToString());
             this.CurrentPaymentNotes.Description = this.txtDescription.Text.Trim();
             this.CurrentPaymentNotes.Money = this.txtPaymentMoney.Value;
-            this.CurrentPaymentNotes.Overdue = (int)this.txtOverdue.Value;
             this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
             this.CurrentPaymentNotes.TaxRebateRate = (float)this.txtTaxRebateRate.Value;
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
@@ -229,7 +227,6 @@ namespace BudgetSystem.OutMoney
             Supplier editValue = (Supplier)cboSupplier.EditValue;
             if (editValue != null)
             {
-                this.txtBankAccountName.Text = editValue.BankAccountName;
                 this.txtBankName.Text = editValue.BankName;
                 this.txtBankNO.Text = editValue.BankNO;
             }

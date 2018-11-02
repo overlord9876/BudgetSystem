@@ -45,11 +45,6 @@ namespace BudgetSystem.Entity
         public int SupplierID { get; set; }
 
         /// <summary>
-        /// 付款超期
-        /// </summary>
-        public int Overdue { get; set; }
-
-        /// <summary>
         /// 付款时间
         /// </summary>
         public DateTime PaymentDate { get; set; }

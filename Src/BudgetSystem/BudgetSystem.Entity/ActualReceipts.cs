@@ -43,6 +43,16 @@ namespace BudgetSystem.Entity
         public string VoucherNo { get; set; }
 
         /// <summary>
+        /// 交易附言
+        /// </summary>
+        public string TradingPostscript { get; set; }
+
+        /// <summary>
+        /// 是否需要拆分
+        /// </summary>
+        public bool NeedSplit { get; set; }
+
+        /// <summary>
         /// 原币金额
         /// </summary>
         public decimal OriginalCoin { get; set; }
@@ -50,7 +60,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 人民币
         /// </summary>
-        public decimal RMB { get; set; }
+        public decimal CNY { get; set; }
 
         /// <summary>
         /// 原币类型

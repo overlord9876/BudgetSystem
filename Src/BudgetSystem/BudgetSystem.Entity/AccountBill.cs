@@ -109,7 +109,7 @@ namespace BudgetSystem.Entity
                     Currency = receipt.Currency,
                     VoucherNo = receipt.VoucherNo,
                     MoneyUsed = receipt.Description,
-                    CNY = receipt.RMB,
+                    CNY = receipt.CNY,
                     RecieptMoney = receipt.OriginalCoin,
                     Company = receipt.Remitter
                 };

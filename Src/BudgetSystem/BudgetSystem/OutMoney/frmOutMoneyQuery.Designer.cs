@@ -38,7 +38,6 @@
             this.gcApprover = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApproveTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcOverdue = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoneyUsed = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -79,7 +78,7 @@
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
             this.panCondition.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
-            this.panCondition.Size = new System.Drawing.Size(285, 595);
+            this.panCondition.Size = new System.Drawing.Size(285, 463);
             // 
             // gcOutMoney
             // 
@@ -105,7 +104,6 @@
             this.gcApprover,
             this.gcApproveTime,
             this.gcPaymentDate,
-            this.gcOverdue,
             this.gcDescription,
             this.gcDepartmentCode,
             this.gcMoneyUsed,
@@ -179,14 +177,6 @@
             this.gcPaymentDate.FieldName = "PaymentDate";
             this.gcPaymentDate.Name = "gcPaymentDate";
             // 
-            // gcOverdue
-            // 
-            this.gcOverdue.Caption = "付款超期";
-            this.gcOverdue.FieldName = "Overdue";
-            this.gcOverdue.Name = "gcOverdue";
-            this.gcOverdue.Visible = true;
-            this.gcOverdue.VisibleIndex = 7;
-            // 
             // gcDescription
             // 
             this.gcDescription.Caption = "备注";
@@ -199,7 +189,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 8;
+            this.gcDepartmentCode.VisibleIndex = 7;
             // 
             // gcMoneyUsed
             // 
@@ -207,7 +197,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsed";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 9;
+            this.gcMoneyUsed.VisibleIndex = 8;
             // 
             // gcIsDrawback
             // 
@@ -237,7 +227,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(285, 595);
+            this.layoutControl1.Size = new System.Drawing.Size(285, 463);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -279,7 +269,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 595);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 463);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -309,7 +299,7 @@
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 517);
+            this.layoutControlItem3.Size = new System.Drawing.Size(265, 385);
             this.layoutControlItem3.Text = "财务确认人：";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -360,7 +350,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraGrid.Columns.GridColumn gcCommitTime;
         private DevExpress.XtraGrid.Columns.GridColumn gcBudgetNO;
-        private DevExpress.XtraGrid.Columns.GridColumn gcOverdue;
         private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcMoneyUsed;
         private DevExpress.XtraGrid.Columns.GridColumn gcIsDrawback;

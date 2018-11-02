@@ -43,14 +43,14 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.Description = this.txtDescription.Text.Trim();
             CurrentActualReceipts.ExchangeRate = float.Parse(this.txtExchangeRate.Text);
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
-            CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.Text.Trim();
+            CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
-            CurrentActualReceipts.RMB = this.txtRMB.Value;
+            CurrentActualReceipts.CNY = this.txtCNY.Value;
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentActualReceipts.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
-
+            CurrentActualReceipts.TradingPostscript = this.txtTradingPostscript.Text.Trim();
             CurrentActualReceipts.ID = arm.CreateActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -71,12 +71,12 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.Description = this.txtDescription.Text.Trim();
             CurrentActualReceipts.ExchangeRate = float.Parse(this.txtExchangeRate.Text);
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
-            CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.Text.Trim();
+            CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
-            CurrentActualReceipts.RMB = decimal.Parse(this.txtRMB.Text);
+            CurrentActualReceipts.CNY = decimal.Parse(this.txtCNY.Text);
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
-
+            CurrentActualReceipts.TradingPostscript = this.txtTradingPostscript.Text.Trim();
             arm.ModifyActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -179,7 +179,7 @@ namespace BudgetSystem.InMoney
                 gvConstSplit.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(gvConstSplit_InitNewRow);
 
                 this.txtNotSplitOriginalCoinMoney.EditValue = this.txtOriginalCoin.Value;
-                this.txtNotSplitCNYMoney.EditValue = this.txtRMB.Value;
+                this.txtNotSplitCNYMoney.EditValue = this.txtCNY.Value;
 
                 SetReadOnly();
             }
@@ -207,7 +207,7 @@ namespace BudgetSystem.InMoney
             if (splitList.Count > 0)
             {
                 this.CurrentActualReceipts.OriginalCoin = splitList[0].OriginalCoin;
-                this.CurrentActualReceipts.RMB = splitList[0].RMB;
+                this.CurrentActualReceipts.CNY = splitList[0].CNY;
                 this.CurrentActualReceipts.ExchangeRate = splitList[0].ExchangeRate;
                 this.CurrentActualReceipts.RelationBudget = splitList[0].RelationBudget;
                 splitList.RemoveAt(0);
@@ -222,6 +222,7 @@ namespace BudgetSystem.InMoney
                     o.ReceiptDate = this.CurrentActualReceipts.ReceiptDate;
                     o.Remitter = this.CurrentActualReceipts.Remitter;
                     o.VoucherNo = this.CurrentActualReceipts.VoucherNo;
+                    o.TradingPostscript = this.CurrentActualReceipts.TradingPostscript;
                 });
                 return splitList;
             }
@@ -230,16 +231,15 @@ namespace BudgetSystem.InMoney
 
         private void SetReadOnly()
         {
-
-
             this.txtBankName.Properties.ReadOnly = true;
             this.txtDescription.Properties.ReadOnly = true;
             this.txtExchangeRate.Properties.ReadOnly = true;
             this.txtOriginalCoin.Properties.ReadOnly = true;
             this.txtPaymentMethod.Properties.ReadOnly = true;
             this.cboCustomer.Properties.ReadOnly = true;
-            this.txtRMB.Properties.ReadOnly = true;
+            this.txtCNY.Properties.ReadOnly = true;
             this.txtVoucherNo.Properties.ReadOnly = true;
+            this.txtTradingPostscript.Properties.ReadOnly = true;
         }
 
         private void btnSure_Click(object sender, EventArgs e)
@@ -289,14 +289,14 @@ namespace BudgetSystem.InMoney
                 return;
             }
 
-            if (txtRMB.Value <= 0)
+            if (txtCNY.Value <= 0)
             {
-                dxErrorProvider1.SetError(txtRMB, "请输入人民币金额");
+                dxErrorProvider1.SetError(txtCNY, "请输入人民币金额");
                 return;
             }
-            if (string.IsNullOrEmpty(txtPaymentMethod.Text.Trim()))
+            if (txtPaymentMethod.SelectedItem == null || string.IsNullOrEmpty(txtPaymentMethod.SelectedItem.ToString()))
             {
-                dxErrorProvider1.SetError(txtPaymentMethod, "请输入支付方式");
+                dxErrorProvider1.SetError(txtPaymentMethod, "请选择支付方式");
                 return;
             }
         }
@@ -308,7 +308,7 @@ namespace BudgetSystem.InMoney
             this.txtDescription.Text = CurrentActualReceipts.Description;
             this.txtExchangeRate.Text = CurrentActualReceipts.ExchangeRate.ToString();
             this.txtOriginalCoin.Text = CurrentActualReceipts.OriginalCoin.ToString();
-            this.txtPaymentMethod.Text = CurrentActualReceipts.PaymentMethod;
+            this.txtPaymentMethod.SelectedItem = CurrentActualReceipts.PaymentMethod;
 
             foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
             {
@@ -319,26 +319,26 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            this.txtRMB.Text = CurrentActualReceipts.RMB.ToString();
+            this.txtCNY.Text = CurrentActualReceipts.CNY.ToString();
             this.txtVoucherNo.Text = CurrentActualReceipts.VoucherNo;
             this.txtCreateUser.Text = CurrentActualReceipts.CreateUser;
             this.deReceiptDate.EditValue = CurrentActualReceipts.ReceiptDate;
             this.deCreateTimestamp.EditValue = CurrentActualReceipts.CreateTimestamp;
         }
 
-        private void CalcRMBValue()
+        private void CalcCNYValue()
         {
-            txtRMB.EditValue = Math.Round(txtOriginalCoin.Value * txtExchangeRate.Value, 2);
+            txtCNY.EditValue = Math.Round(txtOriginalCoin.Value * txtExchangeRate.Value, 2);
         }
 
         private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
         {
-            CalcRMBValue();
+            CalcCNYValue();
         }
 
         private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
         {
-            CalcRMBValue();
+            CalcCNYValue();
         }
 
         void gvConstSplit_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
@@ -346,7 +346,7 @@ namespace BudgetSystem.InMoney
             ActualReceipts item = this.gvConstSplit.GetRow(e.RowHandle) as ActualReceipts;
             item.ExchangeRate = (float)txtExchangeRate.Value;
             item.OriginalCoin = txtNotSplitOriginalCoinMoney.Value / 2;
-            item.RMB = item.OriginalCoin * (decimal)item.ExchangeRate / 2;
+            item.CNY = item.OriginalCoin * (decimal)item.ExchangeRate / 2;
         }
 
         void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
@@ -390,16 +390,16 @@ namespace BudgetSystem.InMoney
                 {
                     return "拆分原币金额不允许大于入帐单总额";
                 }
-                if (splitCNY > txtRMB.Value)
+                if (splitCNY > txtCNY.Value)
                 {
                     return "拆分人民币金额不允许大于入帐单总额";
                 }
 
                 txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
-                txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.RMB);
+                txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.CNY);
 
                 txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
-                txtNotSplitCNYMoney.EditValue = txtRMB.Value - txtAlreadySplitCNYMoney.Value;
+                txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
             }
             return message;
         }
