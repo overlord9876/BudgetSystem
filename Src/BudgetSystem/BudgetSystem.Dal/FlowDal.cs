@@ -148,5 +148,30 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark =remark}, tran);
         }
 
+
+        public IEnumerable<FlowItem> GetPendingFlowByUser(string userName, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"select t1.ID as RunPointID,t2.ID,t2.FlowName,t2.FlowVersionNumber,t2.DateItemID,t2.DateItemType,t2.CreateDate,t2.CreateUser,t3.RealName as CreateUserRealName,t1.NodeApproveUser 
+                        from FlowRunpoint t1 
+                        left join FlowInstance t2 on t1.InstanceID = t2.ID
+                        left join `User` t3 on t2.CreateUser= t3.UserName
+                        where t1.NodeApproveUser=@NodeApproveUser and t1.State=0";
+
+
+            return con.Query<FlowItem>(sql, new { NodeApproveUser = userName }, tran);
+        }
+
+
+
+        public IEnumerable<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` 
+                From `FlowRunPoint` 
+                Where`InstanceID` = @InstanceID
+                ORDER BY NodeOrderNo";
+            return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
+        }
+
+
     }
 }

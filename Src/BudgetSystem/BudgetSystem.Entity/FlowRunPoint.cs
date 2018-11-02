@@ -47,7 +47,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 运行点状态0，未处理，1已审批
         /// </summary>
-        public int State { get; set; }
+        public bool State { get; set; }
 
         /// <summary>
         /// 生成时间

@@ -11,6 +11,7 @@ using BudgetSystem.RoleManage;
 using BudgetSystem.DepartmentManage;
 using BudgetSystem.InMoney;
 using BudgetSystem.FlowManage;
+using BudgetSystem.WorkSpace;
 
 namespace BudgetSystem
 {

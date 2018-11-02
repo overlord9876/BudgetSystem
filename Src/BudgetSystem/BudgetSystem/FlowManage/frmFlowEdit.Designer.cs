@@ -140,44 +140,48 @@
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(815, 289, 948, 707);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1212, 373, 948, 707);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1106, 751);
+            this.layoutControl1.Size = new System.Drawing.Size(885, 614);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // dtUpdateDate
             // 
             this.dtUpdateDate.EditValue = null;
-            this.dtUpdateDate.Location = new System.Drawing.Point(117, 180);
+            this.dtUpdateDate.Location = new System.Drawing.Point(102, 165);
+            this.dtUpdateDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtUpdateDate.Name = "dtUpdateDate";
             this.dtUpdateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtUpdateDate.Properties.ReadOnly = true;
             this.dtUpdateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dtUpdateDate.Size = new System.Drawing.Size(965, 28);
+            this.dtUpdateDate.Size = new System.Drawing.Size(759, 25);
             this.dtUpdateDate.StyleController = this.layoutControl1;
             this.dtUpdateDate.TabIndex = 13;
             // 
             // txtCreaateUser
             // 
-            this.txtCreaateUser.Location = new System.Drawing.Point(117, 148);
+            this.txtCreaateUser.Location = new System.Drawing.Point(102, 136);
+            this.txtCreaateUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCreaateUser.Name = "txtCreaateUser";
             this.txtCreaateUser.Properties.ReadOnly = true;
-            this.txtCreaateUser.Size = new System.Drawing.Size(965, 28);
+            this.txtCreaateUser.Size = new System.Drawing.Size(759, 25);
             this.txtCreaateUser.StyleController = this.layoutControl1;
             this.txtCreaateUser.TabIndex = 12;
             // 
             // cboVersion
             // 
-            this.cboVersion.Location = new System.Drawing.Point(117, 116);
+            this.cboVersion.Location = new System.Drawing.Point(102, 107);
+            this.cboVersion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboVersion.Name = "cboVersion";
             this.cboVersion.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboVersion.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboVersion.Size = new System.Drawing.Size(965, 28);
+            this.cboVersion.Size = new System.Drawing.Size(759, 25);
             this.cboVersion.StyleController = this.layoutControl1;
             this.cboVersion.TabIndex = 10;
             this.cboVersion.SelectedIndexChanged += new System.EventHandler(this.cboVersion_SelectedIndexChanged);
@@ -185,7 +189,8 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(978, 703);
+            this.btnCancel.Location = new System.Drawing.Point(757, 566);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -194,7 +199,8 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(858, 703);
+            this.btnSure.Location = new System.Drawing.Point(637, 566);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -204,9 +210,10 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(787, 224);
+            this.btnInsert.Location = new System.Drawing.Point(629, 206);
+            this.btnInsert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(159, 29);
+            this.btnInsert.Size = new System.Drawing.Size(126, 25);
             this.btnInsert.StyleController = this.layoutControl1;
             this.btnInsert.TabIndex = 9;
             this.btnInsert.Text = "插入审批节点";
@@ -214,9 +221,10 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(950, 224);
+            this.btnDelete.Location = new System.Drawing.Point(759, 206);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(144, 29);
+            this.btnDelete.Size = new System.Drawing.Size(114, 25);
             this.btnDelete.StyleController = this.layoutControl1;
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "删除审批节点";
@@ -224,9 +232,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(640, 224);
+            this.btnAdd.Location = new System.Drawing.Point(512, 206);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(143, 29);
+            this.btnAdd.Size = new System.Drawing.Size(113, 25);
             this.btnAdd.StyleController = this.layoutControl1;
             this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "新增审批节点";
@@ -234,13 +243,15 @@
             // 
             // gdNodes
             // 
-            this.gdNodes.Location = new System.Drawing.Point(24, 297);
+            this.gdNodes.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdNodes.Location = new System.Drawing.Point(24, 272);
             this.gdNodes.MainView = this.gvNodes;
+            this.gdNodes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdNodes.Name = "gdNodes";
             this.gdNodes.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cboNodeConfig,
             this.repositoryItemPopupContainerEdit1});
-            this.gdNodes.Size = new System.Drawing.Size(1058, 390);
+            this.gdNodes.Size = new System.Drawing.Size(837, 278);
             this.gdNodes.TabIndex = 6;
             this.gdNodes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvNodes});
@@ -298,9 +309,10 @@
             // 
             this.popupContainerControl1.Controls.Add(this.tabControl);
             this.popupContainerControl1.Controls.Add(this.panelControl1);
-            this.popupContainerControl1.Location = new System.Drawing.Point(489, 486);
+            this.popupContainerControl1.Location = new System.Drawing.Point(391, 398);
+            this.popupContainerControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.popupContainerControl1.Name = "popupContainerControl1";
-            this.popupContainerControl1.Size = new System.Drawing.Size(485, 236);
+            this.popupContainerControl1.Size = new System.Drawing.Size(388, 193);
             this.popupContainerControl1.TabIndex = 11;
             // 
             // tabControl
@@ -310,7 +322,7 @@
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabPage = this.tpUser;
-            this.tabControl.Size = new System.Drawing.Size(485, 186);
+            this.tabControl.Size = new System.Drawing.Size(388, 152);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tpUser,
@@ -320,26 +332,29 @@
             // 
             this.tpUser.Controls.Add(this.labelControl1);
             this.tpUser.Controls.Add(this.cboNodeUser);
+            this.tpUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpUser.Name = "tpUser";
-            this.tpUser.Size = new System.Drawing.Size(479, 151);
+            this.tpUser.Size = new System.Drawing.Size(382, 121);
             this.tpUser.Text = "指定人员";
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(20, 44);
+            this.labelControl1.Location = new System.Drawing.Point(16, 36);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(72, 22);
+            this.labelControl1.Size = new System.Drawing.Size(60, 18);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "审批人：";
             // 
             // cboNodeUser
             // 
-            this.cboNodeUser.Location = new System.Drawing.Point(111, 41);
+            this.cboNodeUser.Location = new System.Drawing.Point(89, 34);
+            this.cboNodeUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboNodeUser.Name = "cboNodeUser";
             this.cboNodeUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboNodeUser.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboNodeUser.Size = new System.Drawing.Size(341, 28);
+            this.cboNodeUser.Size = new System.Drawing.Size(273, 25);
             this.cboNodeUser.TabIndex = 0;
             // 
             // tpDepartment
@@ -347,37 +362,41 @@
             this.tpDepartment.Controls.Add(this.rgNodeDepartmentUserType);
             this.tpDepartment.Controls.Add(this.labelControl2);
             this.tpDepartment.Controls.Add(this.cboNodeDepartment);
+            this.tpDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpDepartment.Name = "tpDepartment";
-            this.tpDepartment.Size = new System.Drawing.Size(479, 151);
+            this.tpDepartment.Size = new System.Drawing.Size(382, 121);
             this.tpDepartment.Text = "指定部门";
             // 
             // rgNodeDepartmentUserType
             // 
             this.rgNodeDepartmentUserType.EditValue = 1;
-            this.rgNodeDepartmentUserType.Location = new System.Drawing.Point(111, 76);
+            this.rgNodeDepartmentUserType.Location = new System.Drawing.Point(89, 62);
+            this.rgNodeDepartmentUserType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rgNodeDepartmentUserType.Name = "rgNodeDepartmentUserType";
             this.rgNodeDepartmentUserType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "部门经理"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "部门副经理")});
-            this.rgNodeDepartmentUserType.Size = new System.Drawing.Size(341, 53);
+            this.rgNodeDepartmentUserType.Size = new System.Drawing.Size(273, 43);
             this.rgNodeDepartmentUserType.TabIndex = 4;
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(20, 44);
+            this.labelControl2.Location = new System.Drawing.Point(16, 36);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(90, 22);
+            this.labelControl2.Size = new System.Drawing.Size(75, 18);
             this.labelControl2.TabIndex = 3;
             this.labelControl2.Text = "审批部门：";
             // 
             // cboNodeDepartment
             // 
-            this.cboNodeDepartment.Location = new System.Drawing.Point(111, 41);
+            this.cboNodeDepartment.Location = new System.Drawing.Point(89, 34);
+            this.cboNodeDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboNodeDepartment.Name = "cboNodeDepartment";
             this.cboNodeDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboNodeDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboNodeDepartment.Size = new System.Drawing.Size(341, 28);
+            this.cboNodeDepartment.Size = new System.Drawing.Size(273, 25);
             this.cboNodeDepartment.TabIndex = 2;
             // 
             // panelControl1
@@ -385,35 +404,38 @@
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.btnSureNodeValue);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 186);
+            this.panelControl1.Location = new System.Drawing.Point(0, 152);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(485, 50);
+            this.panelControl1.Size = new System.Drawing.Size(388, 41);
             this.panelControl1.TabIndex = 1;
             // 
             // btnSureNodeValue
             // 
             this.btnSureNodeValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSureNodeValue.Location = new System.Drawing.Point(366, 5);
+            this.btnSureNodeValue.Location = new System.Drawing.Point(293, 4);
+            this.btnSureNodeValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSureNodeValue.Name = "btnSureNodeValue";
-            this.btnSureNodeValue.Size = new System.Drawing.Size(104, 40);
+            this.btnSureNodeValue.Size = new System.Drawing.Size(83, 33);
             this.btnSureNodeValue.TabIndex = 2;
             this.btnSureNodeValue.Text = "确定";
             this.btnSureNodeValue.Click += new System.EventHandler(this.btnSureNodeValue_Click);
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(117, 52);
+            this.txtName.Location = new System.Drawing.Point(102, 49);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(965, 28);
+            this.txtName.Size = new System.Drawing.Size(759, 25);
             this.txtName.StyleController = this.layoutControl1;
             this.txtName.TabIndex = 5;
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(117, 84);
+            this.txtRemark.Location = new System.Drawing.Point(102, 78);
+            this.txtRemark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(965, 28);
+            this.txtRemark.Size = new System.Drawing.Size(759, 25);
             this.txtRemark.StyleController = this.layoutControl1;
             this.txtRemark.TabIndex = 4;
             // 
@@ -434,7 +456,7 @@
             this.layoutControlItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1106, 751);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(885, 614);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -449,18 +471,18 @@
             this.layoutControlItem7});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1086, 212);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(865, 194);
             this.layoutControlGroup2.Text = "流程基本信息";
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtRemark;
             this.layoutControlItem3.CustomizationFormText = "描述：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1062, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(841, 29);
             this.layoutControlItem3.Text = "描述：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 22);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem5
             // 
@@ -468,58 +490,58 @@
             this.layoutControlItem5.CustomizationFormText = "名称：";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(1062, 32);
+            this.layoutControlItem5.Size = new System.Drawing.Size(841, 29);
             this.layoutControlItem5.Text = "名称：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(90, 22);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.cboVersion;
             this.layoutControlItem6.CustomizationFormText = "版本：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 64);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(1062, 32);
+            this.layoutControlItem6.Size = new System.Drawing.Size(841, 29);
             this.layoutControlItem6.Text = "版本：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(90, 22);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.dtUpdateDate;
             this.layoutControlItem11.CustomizationFormText = "修改时间：";
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 128);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 116);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(1062, 32);
+            this.layoutControlItem11.Size = new System.Drawing.Size(841, 29);
             this.layoutControlItem11.Text = "修改时间：";
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(90, 22);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtCreaateUser;
             this.layoutControlItem7.CustomizationFormText = "创建人：";
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(1062, 32);
+            this.layoutControlItem7.Size = new System.Drawing.Size(841, 29);
             this.layoutControlItem7.Text = "创建人：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(90, 22);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlGroup3
             // 
             this.layoutControlGroup3.CustomizationFormText = "流程配置信息";
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem10});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 245);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 223);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1086, 446);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(865, 331);
             this.layoutControlGroup3.Text = "流程配置信息";
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.gdNodes;
-            this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
+            this.layoutControlItem10.CustomizationFormText = "流程节点配置表";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(1062, 394);
-            this.layoutControlItem10.Text = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(841, 282);
+            this.layoutControlItem10.Text = "流程节点配置表";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
             this.layoutControlItem10.TextVisible = false;
@@ -527,14 +549,14 @@
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnCancel;
-            this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(966, 691);
+            this.layoutControlItem9.CustomizationFormText = "取消";
+            this.layoutControlItem9.Location = new System.Drawing.Point(745, 554);
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem9.Text = "layoutControlItem9";
+            this.layoutControlItem9.Text = "取消";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
             this.layoutControlItem9.TextVisible = false;
@@ -543,23 +565,23 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 691);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 554);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(846, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(625, 40);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnSure;
-            this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
-            this.layoutControlItem8.Location = new System.Drawing.Point(846, 691);
+            this.layoutControlItem8.CustomizationFormText = "确定";
+            this.layoutControlItem8.Location = new System.Drawing.Point(625, 554);
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem8.Text = "layoutControlItem8";
+            this.layoutControlItem8.Text = "确定";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
             this.layoutControlItem8.TextVisible = false;
@@ -568,20 +590,20 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 212);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 194);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(628, 33);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(500, 29);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnInsert;
-            this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(775, 212);
+            this.layoutControlItem4.CustomizationFormText = "插入审批节点";
+            this.layoutControlItem4.Location = new System.Drawing.Point(617, 194);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(163, 33);
-            this.layoutControlItem4.Text = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(130, 29);
+            this.layoutControlItem4.Text = "插入审批节点";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
             this.layoutControlItem4.TextVisible = false;
@@ -589,11 +611,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnDelete;
-            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(938, 212);
+            this.layoutControlItem2.CustomizationFormText = "删除审批节点";
+            this.layoutControlItem2.Location = new System.Drawing.Point(747, 194);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(148, 33);
-            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(118, 29);
+            this.layoutControlItem2.Text = "删除审批节点";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
@@ -601,11 +623,11 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.btnAdd;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(628, 212);
+            this.layoutControlItem1.CustomizationFormText = "新增审批节点";
+            this.layoutControlItem1.Location = new System.Drawing.Point(500, 194);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(147, 33);
-            this.layoutControlItem1.Text = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(117, 29);
+            this.layoutControlItem1.Text = "新增审批节点";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
@@ -617,10 +639,10 @@
             // frmFlowEdit
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1106, 751);
+            this.ClientSize = new System.Drawing.Size(885, 614);
             this.Controls.Add(this.popupContainerControl1);
             this.Controls.Add(this.layoutControl1);
             this.Name = "frmFlowEdit";

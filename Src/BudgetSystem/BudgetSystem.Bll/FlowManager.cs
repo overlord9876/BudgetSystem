@@ -132,7 +132,7 @@ namespace BudgetSystem.Bll
 
                 if (instance != null && instance.IsClosed == false)
                 {
-                    return FlowRunState.存在未完成的实例;
+                    return FlowRunState.数据项已正在;
                 }
 
                 //获取流程，如果流程的版本是0，说明流程还未配置，不可以运行。
@@ -154,7 +154,7 @@ namespace BudgetSystem.Bll
                     dal.UpdateFlowInstanceCloseInfo(instanceID,false,FlowConst.FlowNotApprovedMessage,con,tran);
                     return FlowRunState.流程发起人未配置部门;
                 }
-                return FlowRunState.启动成功;
+                return FlowRunState.启动流程成功;
             });
         }
 
@@ -267,7 +267,7 @@ namespace BudgetSystem.Bll
                 FlowRunPoint runPoint = dal.GetFlowRunPoint(runPointID, con, tran);
 
                 //检查运行点状态，以免多次提交。
-                if (runPoint.State == 1)
+                if (runPoint.State )
                 {
                     return FlowRunState.提交的流程节点已审批过了;
                 }
@@ -342,9 +342,16 @@ namespace BudgetSystem.Bll
         /// 获取用户的待审批流程
         /// </summary>
         /// <returns></returns>
-        public List<int> GetPendingFlowByUser()
+        public List<FlowItem> GetPendingFlowByUser(string userName)
         {
-            throw new Exception();
+            return this.Query<FlowItem>((con) =>
+            {
+
+                var fList = dal.GetPendingFlowByUser(userName,con, null);
+                return fList;
+
+            }).ToList();
+         
         }
 
 
@@ -352,13 +359,25 @@ namespace BudgetSystem.Bll
         /// 获取用户的待确认流程
         /// </summary>
         /// <returns></returns>
-        public List<int> GetNeedConfirmFlowByUser()
+        public List<FlowItem> GetNeedConfirmFlowByUser(string userName)
         {
             throw new Exception();
         }
 
 
-    
+        public List<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID)
+        {
+            return this.Query<FlowRunPoint>((con) =>
+            {
+
+                var fList = dal.GetFlowRunPointsByInstance(instanceID, con, null);
+                return fList;
+
+            }).ToList();
+        
+        }
+
+
 
 
         //要获取数据项的RunPoint,用于处理是否已通过，或能否再发起审批

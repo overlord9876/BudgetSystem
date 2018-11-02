@@ -100,18 +100,18 @@
             this.layoutControl1.Controls.Add(this.dtCreateDate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1000, 374, 694, 685);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1275, 383, 694, 685);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(968, 355);
+            this.layoutControl1.Size = new System.Drawing.Size(774, 290);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(832, 307);
+            this.btnCancel.Location = new System.Drawing.Point(638, 242);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -120,7 +120,8 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(704, 307);
+            this.btnSure.Location = new System.Drawing.Point(510, 242);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(124, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -130,90 +131,85 @@
             // 
             // txtPasswordRepeat
             // 
-            this.txtPasswordRepeat.Location = new System.Drawing.Point(579, 76);
+            this.txtPasswordRepeat.Location = new System.Drawing.Point(467, 70);
+            this.txtPasswordRepeat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPasswordRepeat.Name = "txtPasswordRepeat";
             this.txtPasswordRepeat.Properties.PasswordChar = '*';
-            this.txtPasswordRepeat.Size = new System.Drawing.Size(377, 28);
+            this.txtPasswordRepeat.Size = new System.Drawing.Size(295, 25);
             this.txtPasswordRepeat.StyleController = this.layoutControl1;
             this.txtPasswordRepeat.TabIndex = 16;
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(105, 108);
-            this.txtCreateUser.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCreateUser.Location = new System.Drawing.Point(90, 99);
             this.txtCreateUser.Name = "txtCreateUser";
-            this.txtCreateUser.Size = new System.Drawing.Size(377, 28);
+            this.txtCreateUser.Size = new System.Drawing.Size(295, 25);
             this.txtCreateUser.StyleController = this.layoutControl1;
             this.txtCreateUser.TabIndex = 13;
             // 
             // chkIsEnable
             // 
             this.chkIsEnable.EditValue = true;
-            this.chkIsEnable.Location = new System.Drawing.Point(12, 140);
-            this.chkIsEnable.Margin = new System.Windows.Forms.Padding(4);
+            this.chkIsEnable.Location = new System.Drawing.Point(12, 128);
             this.chkIsEnable.Name = "chkIsEnable";
             this.chkIsEnable.Properties.Caption = "是否激活";
             this.chkIsEnable.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.chkIsEnable.Size = new System.Drawing.Size(944, 27);
+            this.chkIsEnable.Size = new System.Drawing.Size(750, 23);
             this.chkIsEnable.StyleController = this.layoutControl1;
             this.chkIsEnable.TabIndex = 11;
             // 
             // txtPasswrod
             // 
-            this.txtPasswrod.Location = new System.Drawing.Point(105, 76);
-            this.txtPasswrod.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPasswrod.Location = new System.Drawing.Point(90, 70);
             this.txtPasswrod.Name = "txtPasswrod";
             this.txtPasswrod.Properties.PasswordChar = '*';
-            this.txtPasswrod.Size = new System.Drawing.Size(377, 28);
+            this.txtPasswrod.Size = new System.Drawing.Size(295, 25);
             this.txtPasswrod.StyleController = this.layoutControl1;
             this.txtPasswrod.TabIndex = 9;
             // 
             // txtRealName
             // 
-            this.txtRealName.Location = new System.Drawing.Point(579, 12);
-            this.txtRealName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRealName.Location = new System.Drawing.Point(467, 12);
             this.txtRealName.Name = "txtRealName";
-            this.txtRealName.Size = new System.Drawing.Size(377, 28);
+            this.txtRealName.Size = new System.Drawing.Size(295, 25);
             this.txtRealName.StyleController = this.layoutControl1;
             this.txtRealName.TabIndex = 8;
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(105, 12);
-            this.txtUserName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUserName.Location = new System.Drawing.Point(90, 12);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(377, 28);
+            this.txtUserName.Size = new System.Drawing.Size(295, 25);
             this.txtUserName.StyleController = this.layoutControl1;
             this.txtUserName.TabIndex = 7;
             // 
             // cboRole
             // 
-            this.cboRole.Location = new System.Drawing.Point(105, 44);
-            this.cboRole.Margin = new System.Windows.Forms.Padding(4);
+            this.cboRole.Location = new System.Drawing.Point(90, 41);
             this.cboRole.Name = "cboRole";
             this.cboRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboRole.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboRole.Size = new System.Drawing.Size(377, 28);
+            this.cboRole.Size = new System.Drawing.Size(295, 25);
             this.cboRole.StyleController = this.layoutControl1;
             this.cboRole.TabIndex = 10;
             // 
             // cboDepartment
             // 
-            this.cboDepartment.Location = new System.Drawing.Point(579, 44);
+            this.cboDepartment.Location = new System.Drawing.Point(467, 41);
+            this.cboDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboDepartment.Size = new System.Drawing.Size(377, 28);
+            this.cboDepartment.Size = new System.Drawing.Size(295, 25);
             this.cboDepartment.StyleController = this.layoutControl1;
             this.cboDepartment.TabIndex = 15;
             // 
             // dtCreateDate
             // 
             this.dtCreateDate.EditValue = null;
-            this.dtCreateDate.Location = new System.Drawing.Point(579, 108);
-            this.dtCreateDate.Margin = new System.Windows.Forms.Padding(4);
+            this.dtCreateDate.Location = new System.Drawing.Point(467, 99);
             this.dtCreateDate.Name = "dtCreateDate";
             this.dtCreateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -221,7 +217,7 @@
             this.dtCreateDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.dtCreateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dtCreateDate.Size = new System.Drawing.Size(377, 28);
+            this.dtCreateDate.Size = new System.Drawing.Size(295, 25);
             this.dtCreateDate.StyleController = this.layoutControl1;
             this.dtCreateDate.TabIndex = 12;
             // 
@@ -246,7 +242,7 @@
             this.lcCreateDate});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(968, 355);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(774, 290);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -254,11 +250,11 @@
             // 
             this.lcPassword.Control = this.txtPasswrod;
             this.lcPassword.CustomizationFormText = "用户密码";
-            this.lcPassword.Location = new System.Drawing.Point(0, 64);
+            this.lcPassword.Location = new System.Drawing.Point(0, 58);
             this.lcPassword.Name = "lcPassword";
-            this.lcPassword.Size = new System.Drawing.Size(474, 32);
+            this.lcPassword.Size = new System.Drawing.Size(377, 29);
             this.lcPassword.Text = "密码：";
-            this.lcPassword.TextSize = new System.Drawing.Size(90, 22);
+            this.lcPassword.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcUserName
             // 
@@ -266,18 +262,18 @@
             this.lcUserName.CustomizationFormText = "用户名";
             this.lcUserName.Location = new System.Drawing.Point(0, 0);
             this.lcUserName.Name = "lcUserName";
-            this.lcUserName.Size = new System.Drawing.Size(474, 32);
+            this.lcUserName.Size = new System.Drawing.Size(377, 29);
             this.lcUserName.Text = "用户名：";
-            this.lcUserName.TextSize = new System.Drawing.Size(90, 22);
+            this.lcUserName.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcIsEnable
             // 
             this.lcIsEnable.Control = this.chkIsEnable;
-            this.lcIsEnable.CustomizationFormText = "layoutControlItem5";
-            this.lcIsEnable.Location = new System.Drawing.Point(0, 128);
+            this.lcIsEnable.CustomizationFormText = "是否激活";
+            this.lcIsEnable.Location = new System.Drawing.Point(0, 116);
             this.lcIsEnable.Name = "lcIsEnable";
-            this.lcIsEnable.Size = new System.Drawing.Size(948, 31);
-            this.lcIsEnable.Text = "lcIsEnable";
+            this.lcIsEnable.Size = new System.Drawing.Size(754, 27);
+            this.lcIsEnable.Text = "是否激活";
             this.lcIsEnable.TextSize = new System.Drawing.Size(0, 0);
             this.lcIsEnable.TextToControlDistance = 0;
             this.lcIsEnable.TextVisible = false;
@@ -286,53 +282,53 @@
             // 
             this.lcRole.Control = this.cboRole;
             this.lcRole.CustomizationFormText = "用户角色";
-            this.lcRole.Location = new System.Drawing.Point(0, 32);
+            this.lcRole.Location = new System.Drawing.Point(0, 29);
             this.lcRole.Name = "lcRole";
-            this.lcRole.Size = new System.Drawing.Size(474, 32);
+            this.lcRole.Size = new System.Drawing.Size(377, 29);
             this.lcRole.Text = "用户角色：";
-            this.lcRole.TextSize = new System.Drawing.Size(90, 22);
+            this.lcRole.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcRealName
             // 
             this.lcRealName.Control = this.txtRealName;
             this.lcRealName.CustomizationFormText = "用户姓名";
-            this.lcRealName.Location = new System.Drawing.Point(474, 0);
+            this.lcRealName.Location = new System.Drawing.Point(377, 0);
             this.lcRealName.Name = "lcRealName";
-            this.lcRealName.Size = new System.Drawing.Size(474, 32);
+            this.lcRealName.Size = new System.Drawing.Size(377, 29);
             this.lcRealName.Text = "用户姓名：";
-            this.lcRealName.TextSize = new System.Drawing.Size(90, 22);
+            this.lcRealName.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcDepartment
             // 
             this.lcDepartment.Control = this.cboDepartment;
             this.lcDepartment.CustomizationFormText = "所在部门：";
-            this.lcDepartment.Location = new System.Drawing.Point(474, 32);
+            this.lcDepartment.Location = new System.Drawing.Point(377, 29);
             this.lcDepartment.Name = "lcDepartment";
-            this.lcDepartment.Size = new System.Drawing.Size(474, 32);
+            this.lcDepartment.Size = new System.Drawing.Size(377, 29);
             this.lcDepartment.Text = "所在部门：";
-            this.lcDepartment.TextSize = new System.Drawing.Size(90, 22);
+            this.lcDepartment.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcPasswordRepeat
             // 
             this.lcPasswordRepeat.Control = this.txtPasswordRepeat;
             this.lcPasswordRepeat.CustomizationFormText = "重复密码：";
-            this.lcPasswordRepeat.Location = new System.Drawing.Point(474, 64);
+            this.lcPasswordRepeat.Location = new System.Drawing.Point(377, 58);
             this.lcPasswordRepeat.Name = "lcPasswordRepeat";
-            this.lcPasswordRepeat.Size = new System.Drawing.Size(474, 32);
+            this.lcPasswordRepeat.Size = new System.Drawing.Size(377, 29);
             this.lcPasswordRepeat.Text = "重复密码：";
-            this.lcPasswordRepeat.TextSize = new System.Drawing.Size(90, 22);
+            this.lcPasswordRepeat.TextSize = new System.Drawing.Size(75, 18);
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.btnCancel;
-            this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(820, 295);
+            this.layoutControlItem11.CustomizationFormText = "取消";
+            this.layoutControlItem11.Location = new System.Drawing.Point(626, 230);
             this.layoutControlItem11.MaxSize = new System.Drawing.Size(128, 40);
             this.layoutControlItem11.MinSize = new System.Drawing.Size(128, 40);
             this.layoutControlItem11.Name = "layoutControlItem11";
             this.layoutControlItem11.Size = new System.Drawing.Size(128, 40);
             this.layoutControlItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem11.Text = "layoutControlItem11";
+            this.layoutControlItem11.Text = "取消";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
             this.layoutControlItem11.TextVisible = false;
@@ -341,23 +337,23 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 295);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 230);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(692, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(498, 40);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnSure;
-            this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
-            this.layoutControlItem8.Location = new System.Drawing.Point(692, 295);
+            this.layoutControlItem8.CustomizationFormText = "确定";
+            this.layoutControlItem8.Location = new System.Drawing.Point(498, 230);
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(128, 40);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(128, 40);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(128, 40);
             this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem8.Text = "layoutControlItem8";
+            this.layoutControlItem8.Text = "确定";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
             this.layoutControlItem8.TextVisible = false;
@@ -366,9 +362,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 159);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 143);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(948, 136);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(754, 87);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -376,21 +372,21 @@
             // 
             this.lcCreateUser.Control = this.txtCreateUser;
             this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(0, 96);
+            this.lcCreateUser.Location = new System.Drawing.Point(0, 87);
             this.lcCreateUser.Name = "lcCreateUser";
-            this.lcCreateUser.Size = new System.Drawing.Size(474, 32);
+            this.lcCreateUser.Size = new System.Drawing.Size(377, 29);
             this.lcCreateUser.Text = "创建人：";
-            this.lcCreateUser.TextSize = new System.Drawing.Size(90, 22);
+            this.lcCreateUser.TextSize = new System.Drawing.Size(75, 18);
             // 
             // lcCreateDate
             // 
             this.lcCreateDate.Control = this.dtCreateDate;
             this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(474, 96);
+            this.lcCreateDate.Location = new System.Drawing.Point(377, 87);
             this.lcCreateDate.Name = "lcCreateDate";
-            this.lcCreateDate.Size = new System.Drawing.Size(474, 32);
+            this.lcCreateDate.Size = new System.Drawing.Size(377, 29);
             this.lcCreateDate.Text = "创建时间：";
-            this.lcCreateDate.TextSize = new System.Drawing.Size(90, 22);
+            this.lcCreateDate.TextSize = new System.Drawing.Size(75, 18);
             // 
             // dxErrorProvider1
             // 
@@ -399,12 +395,12 @@
             // frmUserEdit
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(968, 355);
+            this.ClientSize = new System.Drawing.Size(774, 290);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "frmUserEdit";
             this.Text = "用户编辑";
             this.Load += new System.EventHandler(this.frmUserEdit_Load);

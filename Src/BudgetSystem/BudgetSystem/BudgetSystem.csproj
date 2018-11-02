@@ -290,11 +290,18 @@
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="WorkSpace\FlowRunStateTranslator.cs" />
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WorkSpace\frmApprovalListQuery.Designer.cs">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprove.Designer.cs">
+      <DependentUpon>frmApprove.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\frmMyFlowListQuery.cs">
       <SubType>Form</SubType>
@@ -426,6 +433,9 @@
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprove.resx">
+      <DependentUpon>frmApprove.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -478,6 +488,11 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WorkSpace\frmApprove_Approve.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApprove_ApproveView.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApprove_Confirm.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApprove_ConfirmView.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApprove_Default.xml" />
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_HasAdvancePayment.xml" />
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_NotHasAdvancePayment.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />

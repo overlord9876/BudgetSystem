@@ -47,6 +47,7 @@
     <Compile Include="Flow.cs" />
     <Compile Include="FlowConst.cs" />
     <Compile Include="FlowInstance.cs" />
+    <Compile Include="FlowItem.cs" />
     <Compile Include="FlowNode.cs" />
     <Compile Include="FlowRunPoint.cs" />
     <Compile Include="FlowRunState.cs" />

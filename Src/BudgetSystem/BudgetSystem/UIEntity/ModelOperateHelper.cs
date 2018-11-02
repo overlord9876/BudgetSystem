@@ -61,9 +61,9 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 34;
             }
-            else if (operate == OperateTypes.Agree)
+            else if (operate == OperateTypes.Approve)
             {
-                text = "审核";
+                text = "审批";
                 group = "操作";
                 imageIndex = 2;
             }

@@ -1,4 +1,4 @@
-﻿namespace BudgetSystem
+﻿namespace BudgetSystem.WorkSpace
 {
     partial class frmApprovalListQuery
     {
@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gdPendingFlow = new DevExpress.XtraGrid.GridControl();
+            this.gvPendingFlow = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcDateItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowVersionNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -52,71 +53,76 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridControl1
+            // gdPendingFlow
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1006, 564);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gdPendingFlow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gdPendingFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdPendingFlow.Location = new System.Drawing.Point(0, 0);
+            this.gdPendingFlow.MainView = this.gvPendingFlow;
+            this.gdPendingFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdPendingFlow.Name = "gdPendingFlow";
+            this.gdPendingFlow.Size = new System.Drawing.Size(1006, 564);
+            this.gdPendingFlow.TabIndex = 1;
+            this.gdPendingFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvPendingFlow});
             // 
-            // gridView1
+            // gvPendingFlow
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvPendingFlow.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcDateItemID,
+            this.gcFlowName,
+            this.gcFlowVersionNumber,
+            this.gcCreateDate,
+            this.gcCreateUserRealName,
+            this.gcID});
+            this.gvPendingFlow.GridControl = this.gdPendingFlow;
+            this.gvPendingFlow.GroupCount = 1;
+            this.gvPendingFlow.Name = "gvPendingFlow";
+            this.gvPendingFlow.OptionsBehavior.Editable = false;
+            this.gvPendingFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
-            // gridColumn5
+            // gcDateItemID
             // 
-            this.gridColumn5.Caption = "审批类型";
-            this.gridColumn5.FieldName = "ApprovalType";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
+            this.gcDateItemID.Caption = "持审核项编号";
+            this.gcDateItemID.FieldName = "DateItemID";
+            this.gcDateItemID.Name = "gcDateItemID";
+            this.gcDateItemID.Visible = true;
+            this.gcDateItemID.VisibleIndex = 0;
             // 
-            // gridColumn1
+            // gcFlowName
             // 
-            this.gridColumn1.Caption = "流程名称";
-            this.gridColumn1.FieldName = "ApprovalName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gcFlowName.Caption = "审批流程";
+            this.gcFlowName.FieldName = "FlowName";
+            this.gcFlowName.Name = "gcFlowName";
             // 
-            // gridColumn2
+            // gcFlowVersionNumber
             // 
-            this.gridColumn2.Caption = "提交人";
-            this.gridColumn2.FieldName = "Commiter";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gcFlowVersionNumber.Caption = "流程版本号";
+            this.gcFlowVersionNumber.FieldName = "FlowVersionNumber";
+            this.gcFlowVersionNumber.Name = "gcFlowVersionNumber";
             // 
-            // gridColumn3
+            // gcCreateDate
             // 
-            this.gridColumn3.Caption = "提交时间";
-            this.gridColumn3.FieldName = "CommitDate";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gcCreateDate.Caption = "流程发起时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 1;
             // 
-            // gridColumn4
+            // gcCreateUserRealName
             // 
-            this.gridColumn4.Caption = "创建时间";
-            this.gridColumn4.FieldName = "CreateTime";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gcCreateUserRealName.Caption = "流程发起人";
+            this.gcCreateUserRealName.FieldName = "CreateUserRealName";
+            this.gcCreateUserRealName.Name = "gcCreateUserRealName";
+            this.gcCreateUserRealName.Visible = true;
+            this.gcCreateUserRealName.VisibleIndex = 2;
+            // 
+            // gcID
+            // 
+            this.gcID.Caption = "流程编号";
+            this.gcID.FieldName = "ID";
+            this.gcID.Name = "gcID";
             // 
             // layoutControl1
             // 
@@ -185,12 +191,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 564);
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.gdPendingFlow);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmApprovalListQuery";
             this.Text = "待审流程";
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
@@ -204,18 +210,19 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.GridControl gdPendingFlow;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDateItemID;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowVersionNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUserRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcID;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvPendingFlow;
     }
 }

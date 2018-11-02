@@ -15,9 +15,9 @@ namespace BudgetSystem
         Enabled,
         View,
         /// <summary>
-        /// 审核
+        /// 审批
         /// </summary>
-        Agree,
+        Approve,
         /// <summary>
         /// 拆分费用
         /// </summary>

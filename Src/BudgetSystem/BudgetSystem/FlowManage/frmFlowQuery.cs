@@ -50,18 +50,11 @@ namespace BudgetSystem.FlowManage
         private void TestFlow()
         {
             string flowName = "预算单审批";
-
             int dataID = 999;
             string dataType = "测试业务数据";
-
             Bll.FlowManager fm = new FlowManager();
-           // FlowRunState state=  fm.StartFlow(flowName, dataID, dataType, RunInfo.Instance.CurrentUser.UserName);
-
-            FlowRunState state = fm.StartFlow(flowName, dataID, dataType,"TestUser2");
-           state= fm.SubmitFlow(13, true, "同意");
-
-          state=  fm.SubmitFlow(14, true, "同意");
-           state= fm.SubmitFlow(15, true, "同意");
+            FlowRunState state = fm.StartFlow(flowName, dataID, dataType,RunInfo.Instance.CurrentUser.UserName);
+ 
         }
 
        
@@ -69,18 +62,24 @@ namespace BudgetSystem.FlowManage
         private void ModifyFlow()
         {
             Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
-            frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.Modify, Flow = currentRowFlow };
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (currentRowFlow != null)
             {
-                this.RefreshData();
+                frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.Modify, Flow = currentRowFlow };
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
             }
         }
 
         private void ViewFlow()
         {
             Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
-            frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = currentRowFlow };
-            form.ShowDialog(this);
+            if (currentRowFlow != null)
+            {
+                frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = currentRowFlow };
+                form.ShowDialog(this);
+            }
         }
 
         public override void LoadData()

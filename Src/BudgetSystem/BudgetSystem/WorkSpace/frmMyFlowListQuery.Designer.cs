@@ -1,4 +1,4 @@
-﻿namespace BudgetSystem
+﻿namespace BudgetSystem.WorkSpace
 {
     partial class frmMyFlowListQuery
     {

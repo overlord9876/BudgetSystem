@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
-namespace BudgetSystem
+namespace BudgetSystem.WorkSpace
 {
     public partial class frmMyFlowListQuery : frmBaseQueryForm
     {
