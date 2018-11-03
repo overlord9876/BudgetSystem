@@ -6,11 +6,17 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
+using System.Linq;
+using BudgetSystem.Entity;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BudgetSystem.WorkSpace
 {
     public partial class frmMyFlowListQuery : frmBaseQueryForm
     {
+        private GridHitInfo hInfo;
+        FlowManager manager = new FlowManager();
         public frmMyFlowListQuery()
         {
             InitializeComponent();
@@ -20,25 +26,57 @@ namespace BudgetSystem.WorkSpace
         {
             base.InitModelOperate();
 
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperatePageName = "我的流程单";
+            this.ModelOperatePageName = "我发起的流程";
         }
 
 
         public override void OperateHandled(ModelOperate operate)
         {
-            if (operate.Operate == OperateTypes.View.ToString())
+           
+
+
+            if (operate.Operate == OperateTypes.Confirm.ToString())
             {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.ShowDialog(this);
+
+                ConfirmFlowItem();
+
             }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
+            else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("撤回选中流程");
+                ViewFlowItem();
             }
-            else
+        }
+
+        private void ViewFlowItem()
+        {
+            if (this.gvFlow.FocusedRowHandle >= 0)
             {
-                XtraMessageBox.Show("未定义的操作");
+                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmViewModel };
+                    form.ShowDialog(this);
+                }
+            }
+           
+            
+        }
+
+        private void ConfirmFlowItem()
+        {
+            if (this.gvFlow.FocusedRowHandle >= 0)
+            {
+                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmModel };
+                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        this.RefreshData();
+                    }
+                }
             }
         }
 
@@ -46,19 +84,29 @@ namespace BudgetSystem.WorkSpace
 
         public override void RefreshData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ApprovalType", typeof(string));
-            dt.Columns.Add("ApprovalName", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("CommitDate", typeof(DateTime));
-            dt.Columns.Add("CreateTime", typeof(DateTime));
+            var lst = manager.GetUnConfirmFlowByUser(RunInfo.Instance.CurrentUser.UserName);
 
-            dt.Rows.Add("预算单审批", "XXX流程审批", "审批中", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("合格供方审批", "XXX流程审批", "审批不通过", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("财务付款", "XXX流程审批", "审批通过", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("预算单审批", "XXX流程审批", "审批中", DateTime.Now, DateTime.Now);
+            foreach (var i in lst)
+            {
 
-            this.gridControl1.DataSource = dt;
+                i.InstanceStateWithEmptyState = i.IsClosed ? (i.ApproveResult ? "同意" : "驳回") : "";
+            }
+
+
+            this.gdFlow.DataSource = lst;
+        }
+
+        private void gvFlow_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = this.gvFlow.CalcHitInfo(e.Y, e.Y);
+        }
+
+        private void gvFlow_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ConfirmFlowItem();
+            }
         }
 
 

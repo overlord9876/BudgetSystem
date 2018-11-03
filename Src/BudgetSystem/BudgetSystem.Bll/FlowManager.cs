@@ -359,9 +359,15 @@ namespace BudgetSystem.Bll
         /// 获取用户的待确认流程
         /// </summary>
         /// <returns></returns>
-        public List<FlowItem> GetNeedConfirmFlowByUser(string userName)
+        public List<FlowItem> GetUnConfirmFlowByUser(string userName)
         {
-            throw new Exception();
+            return this.Query<FlowItem>((con) =>
+            {
+
+                var fList = dal.GetUnConfirmFlowByUser(userName, con, null);
+                return fList;
+
+            }).ToList();
         }
 
 

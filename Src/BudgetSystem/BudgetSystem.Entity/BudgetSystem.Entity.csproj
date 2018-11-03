@@ -51,7 +51,6 @@
     <Compile Include="FlowNode.cs" />
     <Compile Include="FlowRunPoint.cs" />
     <Compile Include="FlowRunState.cs" />
-    <Compile Include="FlowWorkItem.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="PaymentNotes.cs" />
     <Compile Include="Product.cs" />

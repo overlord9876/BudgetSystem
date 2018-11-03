@@ -21,5 +21,14 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
+        /// <summary>
+        /// 用于存流程实例的状态的，主要处理未结束流程显示空的问题
+        /// </summary>
+        public string InstanceStateWithEmptyState
+        {
+            get;
+            set;
+        }
     }
 }

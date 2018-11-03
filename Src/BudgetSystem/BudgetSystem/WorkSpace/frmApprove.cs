@@ -103,15 +103,30 @@ namespace BudgetSystem.WorkSpace
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            if (!FlowItem.IsClosed)
+            {
+                XtraMessageBox.Show("当选中流程尚未审批完成，不可以确认");
+                return;
+            }
+
+
+            FlowRunState state =fm.ConfirmFlowInstance(this.FlowItem.ID);
+            string info;
+            if (state.Translate(out info))
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                XtraMessageBox.Show(info);
+            }
+
 
         }
 
         private void txtDataItemID_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-
             ShowDataItemView();    
-
-
         }
 
         private void ShowDataItemView()

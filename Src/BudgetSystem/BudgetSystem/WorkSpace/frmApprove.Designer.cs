@@ -158,6 +158,11 @@
             this.dtEndDate.Name = "dtEndDate";
             this.dtEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtEndDate.Properties.DisplayFormat.FormatString = "g";
+            this.dtEndDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dtEndDate.Properties.EditFormat.FormatString = "g";
+            this.dtEndDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dtEndDate.Properties.NullDate = new System.DateTime(((long)(0)));
             this.dtEndDate.Properties.ReadOnly = true;
             this.dtEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -268,6 +273,8 @@
             // 
             this.gcNodeApproveDate.Caption = "审批时间";
             this.gcNodeApproveDate.ColumnEdit = this.repositoryItemDateEdit1;
+            this.gcNodeApproveDate.DisplayFormat.FormatString = "g";
+            this.gcNodeApproveDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcNodeApproveDate.FieldName = "NodeApproveDate";
             this.gcNodeApproveDate.Name = "gcNodeApproveDate";
             this.gcNodeApproveDate.Visible = true;
@@ -286,6 +293,8 @@
             // gcRunPointCreateDate
             // 
             this.gcRunPointCreateDate.Caption = "审批启动时间";
+            this.gcRunPointCreateDate.DisplayFormat.FormatString = "g";
+            this.gcRunPointCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcRunPointCreateDate.FieldName = "RunPointCreateDate";
             this.gcRunPointCreateDate.Name = "gcRunPointCreateDate";
             this.gcRunPointCreateDate.Visible = true;
@@ -337,6 +346,10 @@
             this.dtCrateDate.Name = "dtCrateDate";
             this.dtCrateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCrateDate.Properties.DisplayFormat.FormatString = "g";
+            this.dtCrateDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dtCrateDate.Properties.EditFormat.FormatString = "g";
+            this.dtCrateDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dtCrateDate.Properties.Mask.EditMask = "";
             this.dtCrateDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.dtCrateDate.Properties.ReadOnly = true;

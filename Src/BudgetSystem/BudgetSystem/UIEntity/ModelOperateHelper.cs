@@ -67,6 +67,7 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 2;
             }
+
             else if (operate == OperateTypes.SplitCost)
             {
                 text = "费用拆分";

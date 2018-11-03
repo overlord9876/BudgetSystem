@@ -34,13 +34,19 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gdFlow = new DevExpress.XtraGrid.GridControl();
+            this.gvFlow = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcDateItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowVersionNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcIsClosed = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.gcApproveResult = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCloseDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -48,8 +54,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdFlow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFlow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -114,81 +123,142 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
-            // gridControl1
+            // gdFlow
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1006, 564);
-            this.gridControl1.TabIndex = 2;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gdFlow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdFlow.Location = new System.Drawing.Point(0, 0);
+            this.gdFlow.MainView = this.gvFlow;
+            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdFlow.Name = "gdFlow";
+            this.gdFlow.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemDateEdit1,
+            this.repositoryItemImageComboBox1});
+            this.gdFlow.Size = new System.Drawing.Size(1006, 564);
+            this.gdFlow.TabIndex = 2;
+            this.gdFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvFlow});
             // 
-            // gridView1
+            // gvFlow
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
-            this.gridColumn1,
-            this.gridColumn6,
-            this.gridColumn2,
-            this.gridColumn4});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvFlow.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcDateItemID,
+            this.gcFlowName,
+            this.gcFlowVersionNumber,
+            this.gcCreateUserRealName,
+            this.gcCreateDate,
+            this.gcIsClosed,
+            this.gcApproveResult,
+            this.gcCloseDateTime,
+            this.gcID});
+            this.gvFlow.GridControl = this.gdFlow;
+            this.gvFlow.GroupCount = 1;
+            this.gvFlow.Name = "gvFlow";
+            this.gvFlow.OptionsBehavior.Editable = false;
+            this.gvFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvFlow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvFlow_MouseDown);
+            this.gvFlow.DoubleClick += new System.EventHandler(this.gvFlow_DoubleClick);
             // 
-            // gridColumn5
+            // gcDateItemID
             // 
-            this.gridColumn5.Caption = "审批类型";
-            this.gridColumn5.FieldName = "ApprovalType";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
+            this.gcDateItemID.Caption = "持审批项编号";
+            this.gcDateItemID.FieldName = "DateItemID";
+            this.gcDateItemID.Name = "gcDateItemID";
+            this.gcDateItemID.Visible = true;
+            this.gcDateItemID.VisibleIndex = 0;
             // 
-            // gridColumn1
+            // gcFlowName
             // 
-            this.gridColumn1.Caption = "流程名称";
-            this.gridColumn1.FieldName = "ApprovalName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gcFlowName.Caption = "审批流程";
+            this.gcFlowName.FieldName = "FlowName";
+            this.gcFlowName.Name = "gcFlowName";
+            this.gcFlowName.Visible = true;
+            this.gcFlowName.VisibleIndex = 1;
             // 
-            // gridColumn2
+            // gcFlowVersionNumber
             // 
-            this.gridColumn2.Caption = "提交人";
-            this.gridColumn2.FieldName = "State";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gcFlowVersionNumber.Caption = "流程版本号";
+            this.gcFlowVersionNumber.FieldName = "FlowVersionNumber";
+            this.gcFlowVersionNumber.Name = "gcFlowVersionNumber";
             // 
-            // gridColumn4
+            // gcCreateUserRealName
             // 
-            this.gridColumn4.Caption = "创建时间";
-            this.gridColumn4.FieldName = "CreateTime";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gcCreateUserRealName.Caption = "流程发起人";
+            this.gcCreateUserRealName.FieldName = "CreateUserRealName";
+            this.gcCreateUserRealName.Name = "gcCreateUserRealName";
+            this.gcCreateUserRealName.Visible = true;
+            this.gcCreateUserRealName.VisibleIndex = 1;
             // 
-            // gridColumn6
+            // gcCreateDate
             // 
-            this.gridColumn6.Caption = "流程状态";
-            this.gridColumn6.FieldName = "State";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 2;
+            this.gcCreateDate.Caption = "流程发起时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 2;
+            // 
+            // gcIsClosed
+            // 
+            this.gcIsClosed.Caption = "流程审批状态";
+            this.gcIsClosed.ColumnEdit = this.repositoryItemImageComboBox1;
+            this.gcIsClosed.FieldName = "IsClosed";
+            this.gcIsClosed.Name = "gcIsClosed";
+            this.gcIsClosed.Visible = true;
+            this.gcIsClosed.VisibleIndex = 3;
+            // 
+            // repositoryItemImageComboBox1
+            // 
+            this.repositoryItemImageComboBox1.AutoHeight = false;
+            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBox1.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("已完成", true, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("进行中", false, -1)});
+            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
+            // 
+            // gcApproveResult
+            // 
+            this.gcApproveResult.Caption = "审批结果";
+            this.gcApproveResult.FieldName = "InstanceStateWithEmptyState";
+            this.gcApproveResult.Name = "gcApproveResult";
+            this.gcApproveResult.Visible = true;
+            this.gcApproveResult.VisibleIndex = 4;
+            // 
+            // gcCloseDateTime
+            // 
+            this.gcCloseDateTime.Caption = "审批完成时间";
+            this.gcCloseDateTime.ColumnEdit = this.repositoryItemDateEdit1;
+            this.gcCloseDateTime.FieldName = "CloseDateTime";
+            this.gcCloseDateTime.Name = "gcCloseDateTime";
+            this.gcCloseDateTime.Visible = true;
+            this.gcCloseDateTime.VisibleIndex = 5;
+            // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
+            this.repositoryItemDateEdit1.NullDate = new System.DateTime(((long)(0)));
+            this.repositoryItemDateEdit1.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            // 
+            // gcID
+            // 
+            this.gcID.Caption = "流程编号";
+            this.gcID.FieldName = "ID";
+            this.gcID.Name = "gcID";
             // 
             // frmMyFlowListQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 564);
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.gdFlow);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMyFlowListQuery";
-            this.Text = "我的待审流程";
+            this.Text = "我提交的流程";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
@@ -196,8 +266,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdFlow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFlow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,12 +283,18 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.GridControl gdFlow;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvFlow;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDateItemID;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowVersionNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUserRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsClosed;
+        private DevExpress.XtraGrid.Columns.GridColumn gcApproveResult;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCloseDateTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gcID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
     }
 }

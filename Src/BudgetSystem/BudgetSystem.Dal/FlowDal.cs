@@ -120,7 +120,7 @@ namespace BudgetSystem.Dal
 
         public void UpdateFlowInstanceConfirmInfo(int instanceID, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = @"Update `FlowInstance` Set IsCreateUserConfirm` = 1,`ConfirmDateTime` = now() Where `ID` = @ID";
+            string updateSql = @"Update `FlowInstance` Set `IsCreateUserConfirm` = 1,`ConfirmDateTime` = now() Where `ID` = @ID";
             con.Execute(updateSql, new { ID = instanceID }, tran);
         }
 
@@ -161,7 +161,16 @@ namespace BudgetSystem.Dal
             return con.Query<FlowItem>(sql, new { NodeApproveUser = userName }, tran);
         }
 
+        public IEnumerable<FlowItem> GetUnConfirmFlowByUser(string userName, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"Select t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName
+                        From `FlowInstance` t1
+                        Left join `User` t2 on t1.CreateUser = t2.UserName
+                        Where t1.`CreateUser` = @CreateUser and IsCreateUserConfirm=0";
 
+
+            return con.Query<FlowItem>(sql, new { CreateUser = userName }, tran);
+        }
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
