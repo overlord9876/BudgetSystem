@@ -70,7 +70,7 @@ namespace BudgetSystem.RoleManage
             }
         }
 
-        private void btnAddToRole_Click(object sender, EventArgs e)
+        private void btnAddUserToRole_Click(object sender, EventArgs e)
         {
             Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
             if (currentRole==null)
@@ -92,7 +92,7 @@ namespace BudgetSystem.RoleManage
 
         }
 
-        private void btnRemveFromRole_Click(object sender, EventArgs e)
+        private void btnRemveUserFromRole_Click(object sender, EventArgs e)
         {
             List<string> users = GetSelectUsers(gvRoleUsers);
             if (users.Count == 0)
@@ -120,5 +120,7 @@ namespace BudgetSystem.RoleManage
             return result;
         
         }
+
+
     }
 }

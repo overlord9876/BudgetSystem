@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AccountBill.cs" />
     <Compile Include="Budget.cs" />
+    <Compile Include="Infrastructure\BusinessModules.cs" />
     <Compile Include="CustomerSalesman.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="EnumSystemConfigNames.cs" />
@@ -51,11 +52,14 @@
     <Compile Include="FlowNode.cs" />
     <Compile Include="FlowRunPoint.cs" />
     <Compile Include="FlowRunState.cs" />
-    <Compile Include="IEntity.cs" />
+    <Compile Include="Infrastructure\IEntity.cs" />
+    <Compile Include="Infrastructure\OperateTypes.cs" />
     <Compile Include="PaymentNotes.cs" />
+    <Compile Include="Infrastructure\Permisson.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawMaterial.cs" />
+    <Compile Include="RolePermission.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Customer.cs" />
