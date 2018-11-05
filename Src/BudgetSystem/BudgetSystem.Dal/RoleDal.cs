@@ -29,5 +29,31 @@ namespace BudgetSystem.Dal
             return con.Query<Role>(selectSql, null, tran);
         }
 
+        public IEnumerable<string> GetRolePermissions(string roleCode, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select `Permission` From `RolePermission` Where `RoleCode`=@RoleCode";
+            return con.Query<string>(selectSql, new { RoleCode = roleCode }, tran);
+        }
+
+        public void ClearRolePermissons(string roleCode, IDbConnection con, IDbTransaction tran)
+        {
+            string deleteSql = "Delete From `RolePermission` Where `RoleCode`=@RoleCode";
+            con.Execute(deleteSql, new { RoleCode = roleCode }, tran);
+        }
+
+        public void SaveRolePermissons(string roleCode, List<string> permissions, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = "Insert Into `RolePermission` (`RoleCode`,`Permission`) Values (@RoleCode,@Permission)";
+
+
+            List<object> objs = new List<object>();
+            foreach (string p in permissions)
+            {
+                objs.Add(new { RoleCode = roleCode, Permission = p });
+            }
+
+
+            con.Execute(insertSql, objs, tran);
+        }
     }
 }

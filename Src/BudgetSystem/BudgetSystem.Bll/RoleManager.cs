@@ -23,9 +23,53 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        
+        public List<string> GetRolePermissions(string roleCode)
+        {
+            var lst = this.Query<string>((con) =>
+            {
 
-    
+                var pList = dal.GetRolePermissions(roleCode,con, null);
+                return pList;
+
+            });
+            return lst.ToList();
+        }
+
+
+        public void AddRolePermission(string roleCode, List<string> newPermissions)
+        {
+
+            this.ExecuteWithTransaction((con, tran) => 
+            {
+                var pList = dal.GetRolePermissions(roleCode, con, tran);
+
+                List<string> ps = pList.Union(newPermissions).ToList();
+
+                dal.ClearRolePermissons(roleCode, con, tran);
+                dal.SaveRolePermissons(roleCode, ps, con, tran);
+            
+            
+            });
+
+
+        
+        }
+
+        public void RemoveRolePermission(string roleCode, List<string> removePermissions)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                var pList = dal.GetRolePermissions(roleCode, con, tran);
+
+                List<string> ps = pList.Except(removePermissions).ToList();
+
+                dal.ClearRolePermissons(roleCode, con, tran);
+                dal.SaveRolePermissons(roleCode, ps, con, tran);
+
+
+            });
+
+        }
 
     }
 }
