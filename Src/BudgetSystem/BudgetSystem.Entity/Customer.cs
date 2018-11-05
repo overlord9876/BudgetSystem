@@ -49,6 +49,32 @@ namespace BudgetSystem.Entity
         /// 可用状态
         /// </summary>
         public bool State { get; set; }
+      
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        public string Code { get; set; }
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Email { get; set; }
+        
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string Contacts { get; set; }
+
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
+        /// 港口
+        /// </summary>
+        public string Port { get; set; }
+
+
 
         /// <summary>
         /// 业务员列表

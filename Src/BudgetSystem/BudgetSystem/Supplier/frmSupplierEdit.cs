@@ -57,13 +57,14 @@ namespace BudgetSystem
             {
                 this.Text = "查看供应商信息";
                 this.txtName.Properties.ReadOnly=true; 
-                this.txtBankAccountName.Properties.ReadOnly=true;  
+                this.txtTaxpayerID.Properties.ReadOnly=true;  
                 this.txtBankName.Properties.ReadOnly=true;
                 this.txtBankNO.Properties.ReadOnly = true;
                 this.txtLegal.Properties.ReadOnly = true;
                 this.cboSupplierType.Properties.ReadOnly = true;
                 this.cboNature.Properties.ReadOnly = true;
                 this.txtRegisterCapital.Properties.ReadOnly = true;
+                this.txtTaxpayerID.Properties.ReadOnly = true;
                 this.txtPostalCode.Properties.ReadOnly = true;
                 this.txtAddress.Properties.ReadOnly = true;
                 this.txtTell.Properties.ReadOnly = true;
@@ -74,6 +75,8 @@ namespace BudgetSystem
                 this.txtCreateDate.Properties.ReadOnly = true;
                 this.meDescription.Properties.ReadOnly = true;
                 this.cboDepartment.Properties.ReadOnly = true;
+                this.chkDiscredited.Properties.ReadOnly = true;
+                this.chkExistsAgentAgreement.Properties.ReadOnly = true;
                 BindingSupplier(Supplier.ID); 
             }
         }
@@ -89,7 +92,7 @@ namespace BudgetSystem
             if (supplier != null)
             {
                 this.txtName.Text = supplier.Name;
-                this.txtBankAccountName.Text = supplier.BankAccountName;
+                this.txtTaxpayerID.Text = supplier.TaxpayerID;
                 this.txtBankName.Text = supplier.BankName;
                 this.txtBankNO.Text = supplier.BankNO;
                 this.txtLegal.Text = supplier.Legal;
@@ -105,6 +108,8 @@ namespace BudgetSystem
                 this.txtCreateUser.Text = supplier.CreateUserName;
                 this.txtCreateDate.EditValue = supplier.CreateDate;
                 this.meDescription.Text = supplier.Description;
+                this.chkDiscredited.Checked = supplier.Discredited;
+                this.chkExistsAgentAgreement.Checked = supplier.ExistsAgentAgreement;
                 foreach (Department department in this.cboDepartment.Properties.Items)
                 {
                     if (department.Code == supplier.DepartmentCode) 
@@ -167,6 +172,13 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.cboSupplierType, "请选择类型");
             }
         }
+        private void CheckTaxpayerIDInput()
+        {
+            if (string.IsNullOrEmpty(this.txtTaxpayerID.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.txtTaxpayerID, "请输入纳税人识别号");
+            }
+        }
         #endregion
 
         protected override void SubmitNewData()
@@ -181,6 +193,7 @@ namespace BudgetSystem
             this.CheckTellInput();
             this.CheckLegalInput();
             this.CheckSupplierTypeInput();
+            this.CheckTaxpayerIDInput();
             if (dxErrorProvider1.HasErrors)
             {
                 return;
@@ -188,7 +201,7 @@ namespace BudgetSystem
             Supplier supplier = new Entity.Supplier();
             supplier.Name=this.txtName.Text.Trim();
             supplier.Address = this.txtAddress.Text.Trim();
-            supplier.BankAccountName = this.txtBankAccountName.Text.Trim();
+            supplier.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             supplier.BankName = this.txtBankName.Text.Trim();
             supplier.BankNO = this.txtBankNO.Text.Trim();
             supplier.Contacts = this.txtContacts.Text.Trim();
@@ -200,6 +213,8 @@ namespace BudgetSystem
             supplier.RegisterCapital = txtRegisterCapital.Text.Trim();
             supplier.SupplierType = this.cboSupplierType.SelectedIndex;
             supplier.Tell = this.txtTell.Text.Trim();
+            supplier.Discredited = this.chkDiscredited.Checked;
+            supplier.ExistsAgentAgreement = this.chkExistsAgentAgreement.Checked;
             supplier.Description = this.meDescription.Text.Trim();
             supplier.CreateUser = RunInfo.Instance.CurrentUser.UserName;
             int result = sm.AddSupplier(supplier); 
@@ -226,6 +241,7 @@ namespace BudgetSystem
             this.CheckTellInput();
             this.CheckLegalInput();
             this.CheckSupplierTypeInput();
+            this.CheckTaxpayerIDInput();
             if (dxErrorProvider1.HasErrors)
             {
                 return;
@@ -233,7 +249,7 @@ namespace BudgetSystem
 
             Supplier.Name = this.txtName.Text.Trim();
             Supplier.Address = this.txtAddress.Text.Trim();
-            Supplier.BankAccountName = this.txtBankAccountName.Text.Trim();
+            Supplier.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             Supplier.BankName = this.txtBankName.Text.Trim();
             Supplier.BankNO = this.txtBankNO.Text.Trim();
             Supplier.Contacts = this.txtContacts.Text.Trim();
@@ -246,7 +262,8 @@ namespace BudgetSystem
             Supplier.SupplierType = this.cboSupplierType.SelectedIndex;
             Supplier.Tell = this.txtTell.Text.Trim();
             Supplier.Description = this.meDescription.Text.Trim();
-
+            Supplier.Discredited = this.chkDiscredited.Checked;
+            Supplier.ExistsAgentAgreement = this.chkExistsAgentAgreement.Checked;
             sm.ModifySupplier(Supplier); 
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;

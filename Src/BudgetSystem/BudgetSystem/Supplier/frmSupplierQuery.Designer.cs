@@ -32,14 +32,14 @@
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcvBankAccountName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBankNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BankName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -67,7 +67,7 @@
             // 
             this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
-            this.gcvBankAccountName,
+            this.gcv纳税人识别号,
             this.gcBankNO,
             this.BankName,
             this.gcSupplierType,
@@ -89,13 +89,13 @@
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 0;
             // 
-            // gcvBankAccountName
+            // gcv纳税人识别号
             // 
-            this.gcvBankAccountName.Caption = "银行户名";
-            this.gcvBankAccountName.FieldName = "BankAccountName";
-            this.gcvBankAccountName.Name = "gcvBankAccountName";
-            this.gcvBankAccountName.Visible = true;
-            this.gcvBankAccountName.VisibleIndex = 1;
+            this.gcv纳税人识别号.Caption = "纳税人识别号";
+            this.gcv纳税人识别号.FieldName = "TaxpayerID";
+            this.gcv纳税人识别号.Name = "gcv纳税人识别号";
+            this.gcv纳税人识别号.Visible = true;
+            this.gcv纳税人识别号.VisibleIndex = 1;
             // 
             // gcBankNO
             // 
@@ -122,6 +122,13 @@
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 4;
             // 
+            // rilueSupplierType
+            // 
+            this.rilueSupplierType.AutoHeight = false;
+            this.rilueSupplierType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rilueSupplierType.Name = "rilueSupplierType";
+            // 
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "创建时间";
@@ -146,13 +153,6 @@
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 7;
             // 
-            // rilueSupplierType
-            // 
-            this.rilueSupplierType.AutoHeight = false;
-            this.rilueSupplierType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.rilueSupplierType.Name = "rilueSupplierType";
-            // 
             // frmSupplierQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -174,7 +174,7 @@
         private DevExpress.XtraGrid.GridControl gridSupplier;
         private DevExpress.XtraGrid.Views.Grid.GridView gvSupplier;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcvBankAccountName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
         private DevExpress.XtraGrid.Columns.GridColumn gcBankNO;
         private DevExpress.XtraGrid.Columns.GridColumn BankName;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;

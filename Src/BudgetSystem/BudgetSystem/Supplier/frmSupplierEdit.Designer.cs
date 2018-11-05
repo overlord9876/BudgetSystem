@@ -45,7 +45,7 @@
             this.txtCreateDate = new DevExpress.XtraEditors.TextEdit();
             this.txtBankName = new DevExpress.XtraEditors.TextEdit();
             this.txtBankNO = new DevExpress.XtraEditors.TextEdit();
-            this.txtBankAccountName = new DevExpress.XtraEditors.TextEdit();
+            this.txtTaxpayerID = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.cboSupplierType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cboDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -71,6 +71,10 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDescription = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.chkDiscredited = new DevExpress.XtraEditors.CheckEdit();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.chkExistsAgentAgreement = new DevExpress.XtraEditors.CheckEdit();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).BeginInit();
@@ -86,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankNO.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBankAccountName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxpayerID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSupplierType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).BeginInit();
@@ -112,10 +116,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDiscredited.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkExistsAgentAgreement.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.chkExistsAgentAgreement);
+            this.layoutControl1.Controls.Add(this.chkDiscredited);
             this.layoutControl1.Controls.Add(this.meDescription);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Controls.Add(this.btnSure);
@@ -131,14 +141,14 @@
             this.layoutControl1.Controls.Add(this.txtCreateDate);
             this.layoutControl1.Controls.Add(this.txtBankName);
             this.layoutControl1.Controls.Add(this.txtBankNO);
-            this.layoutControl1.Controls.Add(this.txtBankAccountName);
+            this.layoutControl1.Controls.Add(this.txtTaxpayerID);
             this.layoutControl1.Controls.Add(this.txtName);
             this.layoutControl1.Controls.Add(this.cboSupplierType);
             this.layoutControl1.Controls.Add(this.cboDepartment);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(581, 265, 736, 350);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(948, 265, 736, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(774, 493);
             this.layoutControl1.TabIndex = 0;
@@ -146,10 +156,10 @@
             // 
             // meDescription
             // 
-            this.meDescription.Location = new System.Drawing.Point(90, 271);
+            this.meDescription.Location = new System.Drawing.Point(120, 298);
             this.meDescription.Name = "meDescription";
             this.meDescription.Properties.MaxLength = 1024;
-            this.meDescription.Size = new System.Drawing.Size(672, 170);
+            this.meDescription.Size = new System.Drawing.Size(642, 143);
             this.meDescription.StyleController = this.layoutControl1;
             this.meDescription.TabIndex = 16;
             // 
@@ -175,155 +185,155 @@
             // 
             // txtPostalCode
             // 
-            this.txtPostalCode.Location = new System.Drawing.Point(488, 126);
+            this.txtPostalCode.Location = new System.Drawing.Point(518, 153);
             this.txtPostalCode.Name = "txtPostalCode";
             this.txtPostalCode.Properties.MaxLength = 10;
-            this.txtPostalCode.Size = new System.Drawing.Size(274, 25);
+            this.txtPostalCode.Size = new System.Drawing.Size(244, 25);
             this.txtPostalCode.StyleController = this.layoutControl1;
             this.txtPostalCode.TabIndex = 8;
             // 
             // txtContacts
             // 
-            this.txtContacts.Location = new System.Drawing.Point(90, 213);
+            this.txtContacts.Location = new System.Drawing.Point(120, 240);
             this.txtContacts.Name = "txtContacts";
             this.txtContacts.Properties.MaxLength = 50;
-            this.txtContacts.Size = new System.Drawing.Size(316, 25);
+            this.txtContacts.Size = new System.Drawing.Size(286, 25);
             this.txtContacts.StyleController = this.layoutControl1;
             this.txtContacts.TabIndex = 12;
             // 
             // txtFaxNumber
             // 
-            this.txtFaxNumber.Location = new System.Drawing.Point(488, 184);
+            this.txtFaxNumber.Location = new System.Drawing.Point(518, 211);
             this.txtFaxNumber.Name = "txtFaxNumber";
             this.txtFaxNumber.Properties.MaxLength = 20;
-            this.txtFaxNumber.Size = new System.Drawing.Size(274, 25);
+            this.txtFaxNumber.Size = new System.Drawing.Size(244, 25);
             this.txtFaxNumber.StyleController = this.layoutControl1;
             this.txtFaxNumber.TabIndex = 11;
             // 
             // txtTell
             // 
-            this.txtTell.Location = new System.Drawing.Point(90, 184);
+            this.txtTell.Location = new System.Drawing.Point(120, 211);
             this.txtTell.Name = "txtTell";
             this.txtTell.Properties.MaxLength = 20;
-            this.txtTell.Size = new System.Drawing.Size(316, 25);
+            this.txtTell.Size = new System.Drawing.Size(286, 25);
             this.txtTell.StyleController = this.layoutControl1;
             this.txtTell.TabIndex = 10;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(90, 155);
+            this.txtAddress.Location = new System.Drawing.Point(120, 182);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Properties.MaxLength = 256;
-            this.txtAddress.Size = new System.Drawing.Size(672, 25);
+            this.txtAddress.Size = new System.Drawing.Size(642, 25);
             this.txtAddress.StyleController = this.layoutControl1;
             this.txtAddress.TabIndex = 9;
             // 
             // txtRegisterCapital
             // 
-            this.txtRegisterCapital.Location = new System.Drawing.Point(90, 126);
+            this.txtRegisterCapital.Location = new System.Drawing.Point(120, 153);
             this.txtRegisterCapital.Name = "txtRegisterCapital";
             this.txtRegisterCapital.Properties.MaxLength = 20;
-            this.txtRegisterCapital.Size = new System.Drawing.Size(316, 25);
+            this.txtRegisterCapital.Size = new System.Drawing.Size(286, 25);
             this.txtRegisterCapital.StyleController = this.layoutControl1;
             this.txtRegisterCapital.TabIndex = 7;
             // 
             // txtLegal
             // 
-            this.txtLegal.Location = new System.Drawing.Point(488, 70);
+            this.txtLegal.Location = new System.Drawing.Point(518, 70);
             this.txtLegal.Name = "txtLegal";
             this.txtLegal.Properties.MaxLength = 20;
-            this.txtLegal.Size = new System.Drawing.Size(274, 25);
+            this.txtLegal.Size = new System.Drawing.Size(244, 25);
             this.txtLegal.StyleController = this.layoutControl1;
             this.txtLegal.TabIndex = 4;
             // 
             // cboNature
             // 
             this.cboNature.EditValue = "";
-            this.cboNature.Location = new System.Drawing.Point(488, 99);
+            this.cboNature.Location = new System.Drawing.Point(120, 126);
             this.cboNature.Name = "cboNature";
             this.cboNature.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.cboNature.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboNature.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboNature.Size = new System.Drawing.Size(274, 23);
+            this.cboNature.Size = new System.Drawing.Size(286, 23);
             this.cboNature.StyleController = this.layoutControl1;
             this.cboNature.TabIndex = 6;
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(488, 242);
+            this.txtCreateUser.Location = new System.Drawing.Point(518, 269);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Properties.ReadOnly = true;
-            this.txtCreateUser.Size = new System.Drawing.Size(274, 25);
+            this.txtCreateUser.Size = new System.Drawing.Size(244, 25);
             this.txtCreateUser.StyleController = this.layoutControl1;
             this.txtCreateUser.TabIndex = 15;
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(90, 242);
+            this.txtCreateDate.Location = new System.Drawing.Point(120, 269);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Properties.ReadOnly = true;
-            this.txtCreateDate.Size = new System.Drawing.Size(316, 25);
+            this.txtCreateDate.Size = new System.Drawing.Size(286, 25);
             this.txtCreateDate.StyleController = this.layoutControl1;
             this.txtCreateDate.TabIndex = 14;
             // 
             // txtBankName
             // 
-            this.txtBankName.Location = new System.Drawing.Point(488, 41);
+            this.txtBankName.Location = new System.Drawing.Point(518, 41);
             this.txtBankName.Name = "txtBankName";
             this.txtBankName.Properties.MaxLength = 256;
-            this.txtBankName.Size = new System.Drawing.Size(274, 25);
+            this.txtBankName.Size = new System.Drawing.Size(244, 25);
             this.txtBankName.StyleController = this.layoutControl1;
             this.txtBankName.TabIndex = 2;
             // 
             // txtBankNO
             // 
-            this.txtBankNO.Location = new System.Drawing.Point(90, 70);
+            this.txtBankNO.Location = new System.Drawing.Point(120, 41);
             this.txtBankNO.Name = "txtBankNO";
             this.txtBankNO.Properties.MaxLength = 30;
-            this.txtBankNO.Size = new System.Drawing.Size(316, 25);
+            this.txtBankNO.Size = new System.Drawing.Size(286, 25);
             this.txtBankNO.StyleController = this.layoutControl1;
-            this.txtBankNO.TabIndex = 3;
+            this.txtBankNO.TabIndex = 1;
             // 
-            // txtBankAccountName
+            // txtTaxpayerID
             // 
-            this.txtBankAccountName.Location = new System.Drawing.Point(90, 41);
-            this.txtBankAccountName.Name = "txtBankAccountName";
-            this.txtBankAccountName.Properties.MaxLength = 50;
-            this.txtBankAccountName.Size = new System.Drawing.Size(316, 25);
-            this.txtBankAccountName.StyleController = this.layoutControl1;
-            this.txtBankAccountName.TabIndex = 1;
+            this.txtTaxpayerID.Location = new System.Drawing.Point(120, 70);
+            this.txtTaxpayerID.Name = "txtTaxpayerID";
+            this.txtTaxpayerID.Properties.MaxLength = 30;
+            this.txtTaxpayerID.Size = new System.Drawing.Size(286, 25);
+            this.txtTaxpayerID.StyleController = this.layoutControl1;
+            this.txtTaxpayerID.TabIndex = 3;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(90, 12);
+            this.txtName.Location = new System.Drawing.Point(120, 12);
             this.txtName.Name = "txtName";
             this.txtName.Properties.MaxLength = 50;
-            this.txtName.Size = new System.Drawing.Size(672, 25);
+            this.txtName.Size = new System.Drawing.Size(642, 25);
             this.txtName.StyleController = this.layoutControl1;
             this.txtName.TabIndex = 0;
             // 
             // cboSupplierType
             // 
             this.cboSupplierType.EditValue = "";
-            this.cboSupplierType.Location = new System.Drawing.Point(90, 99);
+            this.cboSupplierType.Location = new System.Drawing.Point(120, 99);
             this.cboSupplierType.Name = "cboSupplierType";
             this.cboSupplierType.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.cboSupplierType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSupplierType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboSupplierType.Size = new System.Drawing.Size(316, 23);
+            this.cboSupplierType.Size = new System.Drawing.Size(286, 23);
             this.cboSupplierType.StyleController = this.layoutControl1;
             this.cboSupplierType.TabIndex = 5;
             // 
             // cboDepartment
             // 
-            this.cboDepartment.Location = new System.Drawing.Point(488, 213);
+            this.cboDepartment.Location = new System.Drawing.Point(518, 240);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboDepartment.Size = new System.Drawing.Size(274, 25);
+            this.cboDepartment.Size = new System.Drawing.Size(244, 25);
             this.cboDepartment.StyleController = this.layoutControl1;
             this.cboDepartment.TabIndex = 13;
             // 
@@ -334,11 +344,9 @@
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcBankAccountName,
-            this.lcBankNO,
             this.lcCreateDate,
             this.lcCreateUser,
             this.lcSupplierType,
-            this.lcNature,
             this.lcRegisterCapital,
             this.lcAddress,
             this.lcTell,
@@ -347,12 +355,16 @@
             this.lcDepartment,
             this.lcName,
             this.lcBankName,
-            this.lcLegal,
             this.lcPostalCode,
             this.emptySpaceItem2,
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.lcDescription});
+            this.lcDescription,
+            this.lcBankNO,
+            this.lcLegal,
+            this.layoutControlItem4,
+            this.lcNature,
+            this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(774, 493);
@@ -361,43 +373,43 @@
             // 
             // lcBankAccountName
             // 
-            this.lcBankAccountName.Control = this.txtBankAccountName;
+            this.lcBankAccountName.Control = this.txtTaxpayerID;
             this.lcBankAccountName.CustomizationFormText = "银行户名：";
-            this.lcBankAccountName.Location = new System.Drawing.Point(0, 29);
+            this.lcBankAccountName.Location = new System.Drawing.Point(0, 58);
             this.lcBankAccountName.Name = "lcBankAccountName";
             this.lcBankAccountName.Size = new System.Drawing.Size(398, 29);
-            this.lcBankAccountName.Text = "银行户名：";
-            this.lcBankAccountName.TextSize = new System.Drawing.Size(75, 18);
+            this.lcBankAccountName.Text = "纳税人识别号：";
+            this.lcBankAccountName.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcBankNO
             // 
             this.lcBankNO.Control = this.txtBankNO;
             this.lcBankNO.CustomizationFormText = "银行账号：";
-            this.lcBankNO.Location = new System.Drawing.Point(0, 58);
+            this.lcBankNO.Location = new System.Drawing.Point(0, 29);
             this.lcBankNO.Name = "lcBankNO";
             this.lcBankNO.Size = new System.Drawing.Size(398, 29);
             this.lcBankNO.Text = "银行账号：";
-            this.lcBankNO.TextSize = new System.Drawing.Size(75, 18);
+            this.lcBankNO.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcCreateDate
             // 
             this.lcCreateDate.Control = this.txtCreateDate;
             this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(0, 230);
+            this.lcCreateDate.Location = new System.Drawing.Point(0, 257);
             this.lcCreateDate.Name = "lcCreateDate";
             this.lcCreateDate.Size = new System.Drawing.Size(398, 29);
             this.lcCreateDate.Text = "创建时间：";
-            this.lcCreateDate.TextSize = new System.Drawing.Size(75, 18);
+            this.lcCreateDate.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcCreateUser
             // 
             this.lcCreateUser.Control = this.txtCreateUser;
             this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(398, 230);
+            this.lcCreateUser.Location = new System.Drawing.Point(398, 257);
             this.lcCreateUser.Name = "lcCreateUser";
             this.lcCreateUser.Size = new System.Drawing.Size(356, 29);
             this.lcCreateUser.Text = "创建人：";
-            this.lcCreateUser.TextSize = new System.Drawing.Size(75, 18);
+            this.lcCreateUser.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcSupplierType
             // 
@@ -407,77 +419,77 @@
             this.lcSupplierType.Name = "lcSupplierType";
             this.lcSupplierType.Size = new System.Drawing.Size(398, 27);
             this.lcSupplierType.Text = "类型：";
-            this.lcSupplierType.TextSize = new System.Drawing.Size(75, 18);
+            this.lcSupplierType.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcNature
             // 
             this.lcNature.Control = this.cboNature;
             this.lcNature.CustomizationFormText = "企业性质：";
-            this.lcNature.Location = new System.Drawing.Point(398, 87);
+            this.lcNature.Location = new System.Drawing.Point(0, 114);
             this.lcNature.Name = "lcNature";
-            this.lcNature.Size = new System.Drawing.Size(356, 27);
+            this.lcNature.Size = new System.Drawing.Size(398, 27);
             this.lcNature.Text = "企业性质：";
-            this.lcNature.TextSize = new System.Drawing.Size(75, 18);
+            this.lcNature.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcRegisterCapital
             // 
             this.lcRegisterCapital.Control = this.txtRegisterCapital;
             this.lcRegisterCapital.CustomizationFormText = "注册资金：";
-            this.lcRegisterCapital.Location = new System.Drawing.Point(0, 114);
+            this.lcRegisterCapital.Location = new System.Drawing.Point(0, 141);
             this.lcRegisterCapital.Name = "lcRegisterCapital";
             this.lcRegisterCapital.Size = new System.Drawing.Size(398, 29);
             this.lcRegisterCapital.Text = "注册资金：";
-            this.lcRegisterCapital.TextSize = new System.Drawing.Size(75, 18);
+            this.lcRegisterCapital.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcAddress
             // 
             this.lcAddress.Control = this.txtAddress;
             this.lcAddress.CustomizationFormText = "供方地址：";
-            this.lcAddress.Location = new System.Drawing.Point(0, 143);
+            this.lcAddress.Location = new System.Drawing.Point(0, 170);
             this.lcAddress.Name = "lcAddress";
             this.lcAddress.Size = new System.Drawing.Size(754, 29);
             this.lcAddress.Text = "地址：";
-            this.lcAddress.TextSize = new System.Drawing.Size(75, 18);
+            this.lcAddress.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcTell
             // 
             this.lcTell.Control = this.txtTell;
             this.lcTell.CustomizationFormText = "联系电话：";
-            this.lcTell.Location = new System.Drawing.Point(0, 172);
+            this.lcTell.Location = new System.Drawing.Point(0, 199);
             this.lcTell.Name = "lcTell";
             this.lcTell.Size = new System.Drawing.Size(398, 29);
             this.lcTell.Text = "联系电话：";
-            this.lcTell.TextSize = new System.Drawing.Size(75, 18);
+            this.lcTell.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcFaxNumber
             // 
             this.lcFaxNumber.Control = this.txtFaxNumber;
             this.lcFaxNumber.CustomizationFormText = "传真：";
-            this.lcFaxNumber.Location = new System.Drawing.Point(398, 172);
+            this.lcFaxNumber.Location = new System.Drawing.Point(398, 199);
             this.lcFaxNumber.Name = "lcFaxNumber";
             this.lcFaxNumber.Size = new System.Drawing.Size(356, 29);
             this.lcFaxNumber.Text = "传真：";
-            this.lcFaxNumber.TextSize = new System.Drawing.Size(75, 18);
+            this.lcFaxNumber.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcContacts
             // 
             this.lcContacts.Control = this.txtContacts;
             this.lcContacts.CustomizationFormText = "主要联系人：";
-            this.lcContacts.Location = new System.Drawing.Point(0, 201);
+            this.lcContacts.Location = new System.Drawing.Point(0, 228);
             this.lcContacts.Name = "lcContacts";
             this.lcContacts.Size = new System.Drawing.Size(398, 29);
             this.lcContacts.Text = "联系人：";
-            this.lcContacts.TextSize = new System.Drawing.Size(75, 18);
+            this.lcContacts.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcDepartment
             // 
             this.lcDepartment.Control = this.cboDepartment;
             this.lcDepartment.CustomizationFormText = "所属部门：";
-            this.lcDepartment.Location = new System.Drawing.Point(398, 201);
+            this.lcDepartment.Location = new System.Drawing.Point(398, 228);
             this.lcDepartment.Name = "lcDepartment";
             this.lcDepartment.Size = new System.Drawing.Size(356, 29);
             this.lcDepartment.Text = "所属部门：";
-            this.lcDepartment.TextSize = new System.Drawing.Size(75, 18);
+            this.lcDepartment.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcName
             // 
@@ -487,7 +499,7 @@
             this.lcName.Name = "lcName";
             this.lcName.Size = new System.Drawing.Size(754, 29);
             this.lcName.Text = "名称：";
-            this.lcName.TextSize = new System.Drawing.Size(75, 18);
+            this.lcName.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcBankName
             // 
@@ -497,7 +509,7 @@
             this.lcBankName.Name = "lcBankName";
             this.lcBankName.Size = new System.Drawing.Size(356, 29);
             this.lcBankName.Text = "开户行：";
-            this.lcBankName.TextSize = new System.Drawing.Size(75, 18);
+            this.lcBankName.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcLegal
             // 
@@ -507,17 +519,17 @@
             this.lcLegal.Name = "lcLegal";
             this.lcLegal.Size = new System.Drawing.Size(356, 29);
             this.lcLegal.Text = "法人代表：";
-            this.lcLegal.TextSize = new System.Drawing.Size(75, 18);
+            this.lcLegal.TextSize = new System.Drawing.Size(105, 18);
             // 
             // lcPostalCode
             // 
             this.lcPostalCode.Control = this.txtPostalCode;
             this.lcPostalCode.CustomizationFormText = "邮编：";
-            this.lcPostalCode.Location = new System.Drawing.Point(398, 114);
+            this.lcPostalCode.Location = new System.Drawing.Point(398, 141);
             this.lcPostalCode.Name = "lcPostalCode";
             this.lcPostalCode.Size = new System.Drawing.Size(356, 29);
             this.lcPostalCode.Text = "邮编：";
-            this.lcPostalCode.TextSize = new System.Drawing.Size(75, 18);
+            this.lcPostalCode.TextSize = new System.Drawing.Size(105, 18);
             // 
             // emptySpaceItem2
             // 
@@ -563,15 +575,57 @@
             // 
             this.lcDescription.Control = this.meDescription;
             this.lcDescription.CustomizationFormText = "备注：";
-            this.lcDescription.Location = new System.Drawing.Point(0, 259);
+            this.lcDescription.Location = new System.Drawing.Point(0, 286);
             this.lcDescription.Name = "lcDescription";
-            this.lcDescription.Size = new System.Drawing.Size(754, 174);
+            this.lcDescription.Size = new System.Drawing.Size(754, 147);
             this.lcDescription.Text = "备注：";
-            this.lcDescription.TextSize = new System.Drawing.Size(75, 18);
+            this.lcDescription.TextSize = new System.Drawing.Size(105, 18);
             // 
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
+            // 
+            // chkDiscredited
+            // 
+            this.chkDiscredited.Location = new System.Drawing.Point(410, 126);
+            this.chkDiscredited.Name = "chkDiscredited";
+            this.chkDiscredited.Properties.Caption = "失信企业";
+            this.chkDiscredited.Size = new System.Drawing.Size(352, 23);
+            this.chkDiscredited.StyleController = this.layoutControl1;
+            this.chkDiscredited.TabIndex = 19;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.chkDiscredited;
+            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
+            this.layoutControlItem3.Location = new System.Drawing.Point(398, 114);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(356, 27);
+            this.layoutControlItem3.Text = "layoutControlItem3";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextToControlDistance = 0;
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // chkExistsAgentAgreement
+            // 
+            this.chkExistsAgentAgreement.Location = new System.Drawing.Point(410, 99);
+            this.chkExistsAgentAgreement.Name = "chkExistsAgentAgreement";
+            this.chkExistsAgentAgreement.Properties.Caption = "有合格供方代理协议";
+            this.chkExistsAgentAgreement.Size = new System.Drawing.Size(352, 23);
+            this.chkExistsAgentAgreement.StyleController = this.layoutControl1;
+            this.chkExistsAgentAgreement.TabIndex = 20;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.chkExistsAgentAgreement;
+            this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
+            this.layoutControlItem4.Location = new System.Drawing.Point(398, 87);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(356, 27);
+            this.layoutControlItem4.Text = "layoutControlItem4";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextToControlDistance = 0;
+            this.layoutControlItem4.TextVisible = false;
             // 
             // frmSupplierEdit
             // 
@@ -600,7 +654,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankNO.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBankAccountName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxpayerID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSupplierType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).EndInit();
@@ -626,6 +680,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDiscredited.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkExistsAgentAgreement.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -634,7 +692,7 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraEditors.TextEdit txtBankAccountName;
+        private DevExpress.XtraEditors.TextEdit txtTaxpayerID;
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraLayout.LayoutControlItem lcName;
         private DevExpress.XtraLayout.LayoutControlItem lcBankAccountName;
@@ -674,6 +732,10 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraEditors.MemoEdit meDescription;
         private DevExpress.XtraLayout.LayoutControlItem lcDescription;
+        private DevExpress.XtraEditors.CheckEdit chkExistsAgentAgreement;
+        private DevExpress.XtraEditors.CheckEdit chkDiscredited;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
 
     }
 }

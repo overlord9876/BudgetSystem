@@ -12,10 +12,12 @@ namespace BudgetSystem.Dal
     {
         public Budget GetBudget(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName  FROM `Budget` b
-                                    LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                    LEFT JOIN `Department` d ON b.Department=d.Code 
-                                    WHERE b.`ID` = @ID";
+            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName
+                                 FROM `Budget` b
+                                 LEFT JOIN `User` u ON b.Salesman=u.UserName 
+                                 LEFT JOIN `Department` d ON b.Department=d.Code 
+                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID
+                                 WHERE b.`ID` = @ID";
             Budget budget = con.Query<Budget>(selectSql, new { ID = id }, tran).SingleOrDefault();
 
             if (budget != null)
@@ -34,30 +36,29 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName ,t.CustomerNames FROM `Budget` b
-                                    LEFT JOIN (select bc.Bud_ID,GROUP_CONCAT(c.`Name`) CustomerNames from BudgetCustomers bc 
-					                                     LEFT JOIN customer c on bc.Cus_ID=c.ID
-                                               GROUP BY bc.Bud_ID) t  on b.ID=t.Bud_ID
-                                    LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                    LEFT JOIN `Department` d ON b.Department=d.Code  
-                                    WHERE b.ID<>0";
-             
+            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName
+                                 FROM `Budget` b                                     
+                                 LEFT JOIN `User` u ON b.Salesman=u.UserName 
+                                 LEFT JOIN `Department` d ON b.Department=d.Code 
+                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID 
+                                 WHERE b.ID<>0";
+
             return con.Query<Budget>(selectSql, null, tran);
         }
         public int AddBudget(Budget budget, IDbConnection con, IDbTransaction tran = null)
         {
             string insertSql = @"Insert Into `Budget` (`ContractNO`,`State`,`Salesman`,`Department`,`CreateDate`,`SignDate`,`Validity`,
-                                           `TradeMode`,`TradeNature`,`OutProductDetail`,`PriceClause`,`Seaport`,`OutSettlementMethod`,
+                                           `TradeMode`,`TradeNature`,`OutProductDetail`,`PriceClause`,`OutSettlementMethod`,
                                            `OutSettlementMethod2`,`OutSettlementMethod3`,`TotalAmount`,`Country`,`IsQualifiedSupplier`,
-                                           `InProductDetail`,`InSettlementMethod1`,`InSettlementMethod2`,`AdvancePayment`,`InterestRate`,
-                                           `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,`Quota`,
-                                           `TaxRebateRate`,`Description`)
+                                           `InProductDetail`,`AdvancePayment`,`InterestRate`,
+                                           `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,
+                                           `Description`,`CustomerID`,`Port`,`TaxRebate`)
                                     Values (@ContractNO,@State,@Salesman,@Department,now(),@SignDate,@Validity,
-                                            @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@Seaport,@OutSettlementMethod,
+                                            @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@OutSettlementMethod,
                                             @OutSettlementMethod2,@OutSettlementMethod3,@TotalAmount,@Country,@IsQualifiedSupplier,
-                                            @InProductDetail,@InSettlementMethod1,@InSettlementMethod2,@AdvancePayment,@InterestRate,
-                                            @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,@Quota,
-                                            @TaxRebateRate,@Description)";
+                                            @InProductDetail,@AdvancePayment,@InterestRate,
+                                            @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,
+                                            @Description,@CustomerID,@Port,@TaxRebate)";
             int id = con.Insert(insertSql, budget, tran);
             if (id > 0)
             {
@@ -67,17 +68,18 @@ namespace BudgetSystem.Dal
             }
             return id;
         }
+
         public void ModifyBudget(Budget budget, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = @"Update `Budget` Set `ContractNO` = @ContractNO,`State` = @State,`Salesman` = @Salesman,`Department` = @Department,
                                          `SignDate` = @SignDate,`Validity` = @Validity,`TradeMode` = @TradeMode,`TradeNature` = @TradeNature,
-                                         `OutProductDetail` = @OutProductDetail,`PriceClause` = @PriceClause,`Seaport` = @Seaport,`OutSettlementMethod` = @OutSettlementMethod,
+                                         `OutProductDetail` = @OutProductDetail,`PriceClause` = @PriceClause,`OutSettlementMethod` = @OutSettlementMethod,
                                          `OutSettlementMethod2` = @OutSettlementMethod2,`OutSettlementMethod3` = @OutSettlementMethod3,
                                          `TotalAmount` = @TotalAmount,`Country` = @Country,`IsQualifiedSupplier` = @IsQualifiedSupplier,
-                                         `InProductDetail` = @InProductDetail,`InSettlementMethod1` = @InSettlementMethod1,`InSettlementMethod2` = @InSettlementMethod2,
+                                         `InProductDetail` = @InProductDetail,
                                          `AdvancePayment` = @AdvancePayment,`InterestRate` = @InterestRate,`Days` = @Days,`Commission` = @Commission,
                                          `Premium` = @Premium,`BankCharges` = @BankCharges,`DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,
-                                         `ExchangeRate` = @ExchangeRate ,`Quota`=@Quota,`TaxRebateRate`=@TaxRebateRate,`Description`=@Description
+                                         `ExchangeRate` = @ExchangeRate ,`Description`=@Description,`CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate 
                                 Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;
@@ -85,6 +87,32 @@ namespace BudgetSystem.Dal
             con.Execute(deleteSql, new { ID = budget.ID }, tran);
             AddBudgetSuppliers(budget, con, tran);
             AddBudgetCustomers(budget, con, tran);
+        }
+
+        /// <summary>
+        /// 验证合同编号是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckContractNO(int id, string contractNo, IDbConnection con)
+        {
+            string selectSql = @"SELECT  b.id FROM `Budget` b  
+                                    WHERE ID<>@ID and ContractNO=@ContractNO";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void ModifyBudgetState(int id, string state, IDbConnection con, IDbTransaction tran = null)
@@ -114,5 +142,7 @@ namespace BudgetSystem.Dal
                 con.Execute(supplerInserSql, supplers, tran);
             }
         }
+
+
     }
 }

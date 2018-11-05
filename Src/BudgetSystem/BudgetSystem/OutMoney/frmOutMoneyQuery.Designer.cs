@@ -32,7 +32,7 @@
             this.gvOutMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBudgetNO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcMoney = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApprover = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,6 +52,10 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             this.panCondition.SuspendLayout();
@@ -98,7 +102,11 @@
             this.gvOutMoney.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcSupplier,
             this.gcBudgetNO,
-            this.gcMoney,
+            this.gcVoucherNo,
+            this.gcOriginalCoin,
+            this.gcCurrency,
+            this.gcExchangeRate,
+            this.gcCNY,
             this.gcApplicant,
             this.gcCommitTime,
             this.gcApprover,
@@ -131,13 +139,13 @@
             this.gcBudgetNO.Visible = true;
             this.gcBudgetNO.VisibleIndex = 1;
             // 
-            // gcMoney
+            // gcCNY
             // 
-            this.gcMoney.Caption = "付款金额";
-            this.gcMoney.FieldName = "Money";
-            this.gcMoney.Name = "gcMoney";
-            this.gcMoney.Visible = true;
-            this.gcMoney.VisibleIndex = 2;
+            this.gcCNY.Caption = "付款人民币金额";
+            this.gcCNY.FieldName = "CNY";
+            this.gcCNY.Name = "gcCNY";
+            this.gcCNY.Visible = true;
+            this.gcCNY.VisibleIndex = 4;
             // 
             // gcApplicant
             // 
@@ -145,7 +153,7 @@
             this.gcApplicant.FieldName = "Applicant";
             this.gcApplicant.Name = "gcApplicant";
             this.gcApplicant.Visible = true;
-            this.gcApplicant.VisibleIndex = 3;
+            this.gcApplicant.VisibleIndex = 5;
             // 
             // gcCommitTime
             // 
@@ -153,7 +161,7 @@
             this.gcCommitTime.FieldName = "CommitTime";
             this.gcCommitTime.Name = "gcCommitTime";
             this.gcCommitTime.Visible = true;
-            this.gcCommitTime.VisibleIndex = 4;
+            this.gcCommitTime.VisibleIndex = 6;
             // 
             // gcApprover
             // 
@@ -161,7 +169,7 @@
             this.gcApprover.FieldName = "Approver";
             this.gcApprover.Name = "gcApprover";
             this.gcApprover.Visible = true;
-            this.gcApprover.VisibleIndex = 5;
+            this.gcApprover.VisibleIndex = 7;
             // 
             // gcApproveTime
             // 
@@ -169,7 +177,7 @@
             this.gcApproveTime.FieldName = "ApproveTime";
             this.gcApproveTime.Name = "gcApproveTime";
             this.gcApproveTime.Visible = true;
-            this.gcApproveTime.VisibleIndex = 6;
+            this.gcApproveTime.VisibleIndex = 8;
             // 
             // gcPaymentDate
             // 
@@ -189,7 +197,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 7;
+            this.gcDepartmentCode.VisibleIndex = 9;
             // 
             // gcMoneyUsed
             // 
@@ -197,7 +205,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsed";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 8;
+            this.gcMoneyUsed.VisibleIndex = 10;
             // 
             // gcIsDrawback
             // 
@@ -303,6 +311,34 @@
             this.layoutControlItem3.Text = "财务确认人：";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
             // 
+            // gcVoucherNo
+            // 
+            this.gcVoucherNo.Caption = "付款单号";
+            this.gcVoucherNo.FieldName = "VoucherNo";
+            this.gcVoucherNo.Name = "gcVoucherNo";
+            this.gcVoucherNo.Visible = true;
+            this.gcVoucherNo.VisibleIndex = 2;
+            // 
+            // gcOriginalCoin
+            // 
+            this.gcOriginalCoin.Caption = "付款原币金额";
+            this.gcOriginalCoin.FieldName = "OriginalCoin";
+            this.gcOriginalCoin.Name = "gcOriginalCoin";
+            this.gcOriginalCoin.Visible = true;
+            this.gcOriginalCoin.VisibleIndex = 3;
+            // 
+            // gcExchangeRate
+            // 
+            this.gcExchangeRate.Caption = "汇率";
+            this.gcExchangeRate.FieldName = "ExchangeRate";
+            this.gcExchangeRate.Name = "gcExchangeRate";
+            // 
+            // gcCurrency
+            // 
+            this.gcCurrency.Caption = "币种";
+            this.gcCurrency.FieldName = "Currency";
+            this.gcCurrency.Name = "gcCurrency";
+            // 
             // frmOutMoneyQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -334,7 +370,7 @@
         private DevExpress.XtraGrid.GridControl gcOutMoney;
         private DevExpress.XtraGrid.Views.Grid.GridView gvOutMoney;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplier;
-        private DevExpress.XtraGrid.Columns.GridColumn gcMoney;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCNY;
         private DevExpress.XtraGrid.Columns.GridColumn gcApplicant;
         private DevExpress.XtraGrid.Columns.GridColumn gcApprover;
         private DevExpress.XtraGrid.Columns.GridColumn gcApproveTime;
@@ -355,5 +391,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcIsDrawback;
         private DevExpress.XtraGrid.Columns.GridColumn gcHasInvoice;
         private DevExpress.XtraGrid.Columns.GridColumn gcPaymentMethod;
+        private DevExpress.XtraGrid.Columns.GridColumn gcVoucherNo;
+        private DevExpress.XtraGrid.Columns.GridColumn gcOriginalCoin;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
     }
 }

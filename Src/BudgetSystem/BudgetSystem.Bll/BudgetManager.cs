@@ -59,9 +59,23 @@ namespace BudgetSystem.Bll
                 abList.AddRange(pmList.ToAccountBillList());
                 return abList.OrderBy(o => o.CreateDate);
             });
-            return lst.ToList();
-
+            return lst.ToList(); 
         }
 
+           /// <summary>
+        /// 验证合同编号是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckContractNO(int id, string contractNo)
+        {
+            bool result = this.ExecuteWithoutTransaction<bool>((con) =>
+            {
+                return dal.CheckContractNO(id,contractNo,con);
+            });
+            return result;
+        }
     }
 }

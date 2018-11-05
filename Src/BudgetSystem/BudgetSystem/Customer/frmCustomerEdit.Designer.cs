@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtAddress = new DevExpress.XtraEditors.TextEdit();
+            this.txtEmail = new DevExpress.XtraEditors.TextEdit();
+            this.txtContacts = new DevExpress.XtraEditors.TextEdit();
+            this.txtCode = new DevExpress.XtraEditors.TextEdit();
             this.chkState = new DevExpress.XtraEditors.CheckEdit();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
@@ -56,12 +60,11 @@
             this.txtCreateDate = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.lueCountry = new DevExpress.XtraEditors.LookUpEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.LookUpEdit();
+            this.luePort = new DevExpress.XtraEditors.LookUpEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDescription = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcCountry = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -74,9 +77,18 @@
             this.lcCancel = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSure = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcState = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcContacts = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcCountry = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcEmail = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAddress = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContacts.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkState.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -91,12 +103,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.luePort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCountry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -109,11 +120,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcState)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCountry)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtAddress);
+            this.layoutControl1.Controls.Add(this.txtEmail);
+            this.layoutControl1.Controls.Add(this.txtContacts);
+            this.layoutControl1.Controls.Add(this.txtCode);
             this.layoutControl1.Controls.Add(this.chkState);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.btnCancel);
@@ -126,7 +146,7 @@
             this.layoutControl1.Controls.Add(this.txtCreateDate);
             this.layoutControl1.Controls.Add(this.txtName);
             this.layoutControl1.Controls.Add(this.lueCountry);
-            this.layoutControl1.Controls.Add(this.textEdit3);
+            this.layoutControl1.Controls.Add(this.luePort);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -136,15 +156,54 @@
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(105, 99);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Properties.MaxLength = 256;
+            this.txtAddress.Size = new System.Drawing.Size(852, 25);
+            this.txtAddress.StyleController = this.layoutControl1;
+            this.txtAddress.TabIndex = 6;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(578, 70);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Properties.Mask.EditMask = "[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)";
+            this.txtEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtEmail.Properties.MaxLength = 50;
+            this.txtEmail.Size = new System.Drawing.Size(379, 25);
+            this.txtEmail.StyleController = this.layoutControl1;
+            this.txtEmail.TabIndex = 5;
+            this.txtEmail.ToolTip = "联系方式（E-mail）";
+            // 
+            // txtContacts
+            // 
+            this.txtContacts.Location = new System.Drawing.Point(105, 70);
+            this.txtContacts.Name = "txtContacts";
+            this.txtContacts.Properties.MaxLength = 50;
+            this.txtContacts.Size = new System.Drawing.Size(376, 25);
+            this.txtContacts.StyleController = this.layoutControl1;
+            this.txtContacts.TabIndex = 4;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(105, 12);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Properties.MaxLength = 30;
+            this.txtCode.Size = new System.Drawing.Size(377, 25);
+            this.txtCode.StyleController = this.layoutControl1;
+            this.txtCode.TabIndex = 0;
+            // 
             // chkState
             // 
             this.chkState.EditValue = true;
-            this.chkState.Location = new System.Drawing.Point(12, 70);
+            this.chkState.Location = new System.Drawing.Point(12, 128);
             this.chkState.Name = "chkState";
             this.chkState.Properties.Caption = "是否可用";
             this.chkState.Size = new System.Drawing.Size(945, 23);
             this.chkState.StyleController = this.layoutControl1;
-            this.chkState.TabIndex = 22;
+            this.chkState.TabIndex = 7;
             // 
             // btnSure
             // 
@@ -168,7 +227,7 @@
             // 
             // btnRemoveSalesman
             // 
-            this.btnRemoveSalesman.Location = new System.Drawing.Point(486, 312);
+            this.btnRemoveSalesman.Location = new System.Drawing.Point(486, 349);
             this.btnRemoveSalesman.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnRemoveSalesman.Name = "btnRemoveSalesman";
             this.btnRemoveSalesman.Size = new System.Drawing.Size(116, 36);
@@ -179,7 +238,7 @@
             // 
             // btnAddSalesman
             // 
-            this.btnAddSalesman.Location = new System.Drawing.Point(486, 272);
+            this.btnAddSalesman.Location = new System.Drawing.Point(486, 309);
             this.btnAddSalesman.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnAddSalesman.Name = "btnAddSalesman";
             this.btnAddSalesman.Size = new System.Drawing.Size(116, 36);
@@ -191,10 +250,10 @@
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.gridSalesman);
-            this.groupControl2.Location = new System.Drawing.Point(105, 126);
+            this.groupControl2.Location = new System.Drawing.Point(105, 184);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(377, 396);
+            this.groupControl2.Size = new System.Drawing.Size(377, 365);
             this.groupControl2.TabIndex = 0;
             this.groupControl2.Text = "跟单业务员";
             // 
@@ -206,7 +265,7 @@
             this.gridSalesman.MainView = this.gvSalesman;
             this.gridSalesman.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridSalesman.Name = "gridSalesman";
-            this.gridSalesman.Size = new System.Drawing.Size(373, 367);
+            this.gridSalesman.Size = new System.Drawing.Size(373, 336);
             this.gridSalesman.TabIndex = 4;
             this.gridSalesman.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSalesman});
@@ -267,10 +326,10 @@
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.gridUser);
-            this.groupControl1.Location = new System.Drawing.Point(606, 126);
+            this.groupControl1.Location = new System.Drawing.Point(606, 184);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(351, 396);
+            this.groupControl1.Size = new System.Drawing.Size(351, 365);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "待选业务员";
             // 
@@ -282,7 +341,7 @@
             this.gridUser.MainView = this.gvUser;
             this.gridUser.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridUser.Name = "gridUser";
-            this.gridUser.Size = new System.Drawing.Size(347, 367);
+            this.gridUser.Size = new System.Drawing.Size(347, 336);
             this.gridUser.TabIndex = 4;
             this.gridUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvUser});
@@ -342,15 +401,15 @@
             // 
             // meDescription
             // 
-            this.meDescription.Location = new System.Drawing.Point(105, 526);
+            this.meDescription.Location = new System.Drawing.Point(105, 553);
             this.meDescription.Name = "meDescription";
-            this.meDescription.Size = new System.Drawing.Size(852, 145);
+            this.meDescription.Size = new System.Drawing.Size(852, 118);
             this.meDescription.StyleController = this.layoutControl1;
             this.meDescription.TabIndex = 3;
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(578, 97);
+            this.txtCreateUser.Location = new System.Drawing.Point(578, 155);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Properties.ReadOnly = true;
             this.txtCreateUser.Size = new System.Drawing.Size(379, 25);
@@ -359,7 +418,7 @@
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(105, 97);
+            this.txtCreateDate.Location = new System.Drawing.Point(105, 155);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Properties.ReadOnly = true;
             this.txtCreateDate.Size = new System.Drawing.Size(376, 25);
@@ -368,12 +427,12 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(105, 12);
+            this.txtName.Location = new System.Drawing.Point(579, 12);
             this.txtName.Name = "txtName";
             this.txtName.Properties.MaxLength = 100;
-            this.txtName.Size = new System.Drawing.Size(852, 25);
+            this.txtName.Size = new System.Drawing.Size(378, 25);
             this.txtName.StyleController = this.layoutControl1;
-            this.txtName.TabIndex = 0;
+            this.txtName.TabIndex = 1;
             // 
             // lueCountry
             // 
@@ -389,18 +448,21 @@
             this.lueCountry.Properties.ValueMember = "名称";
             this.lueCountry.Size = new System.Drawing.Size(376, 25);
             this.lueCountry.StyleController = this.layoutControl1;
-            this.lueCountry.TabIndex = 1;
+            this.lueCountry.TabIndex = 2;
             // 
-            // textEdit3
+            // luePort
             // 
-            this.textEdit3.Location = new System.Drawing.Point(578, 41);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.luePort.Location = new System.Drawing.Point(578, 41);
+            this.luePort.Name = "luePort";
+            this.luePort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.textEdit3.Properties.NullText = "";
-            this.textEdit3.Size = new System.Drawing.Size(379, 25);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 2;
+            this.luePort.Properties.DisplayMember = "英文名称";
+            this.luePort.Properties.NullText = "";
+            this.luePort.Properties.ShowFooter = false;
+            this.luePort.Properties.ValueMember = "英文名称";
+            this.luePort.Size = new System.Drawing.Size(379, 25);
+            this.luePort.StyleController = this.layoutControl1;
+            this.luePort.TabIndex = 3;
             // 
             // layoutControlGroup1
             // 
@@ -411,7 +473,6 @@
             this.lcCreateDate,
             this.lcCreateUser,
             this.lcDescription,
-            this.lcCountry,
             this.lcName,
             this.layoutControlItem2,
             this.layoutControlItem4,
@@ -423,7 +484,12 @@
             this.emptySpaceItem3,
             this.lcCancel,
             this.lcSure,
-            this.lcState});
+            this.lcState,
+            this.lcCode,
+            this.lcContacts,
+            this.lcCountry,
+            this.lcEmail,
+            this.lcAddress});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(969, 723);
@@ -434,7 +500,7 @@
             // 
             this.lcCreateDate.Control = this.txtCreateDate;
             this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(0, 85);
+            this.lcCreateDate.Location = new System.Drawing.Point(0, 143);
             this.lcCreateDate.Name = "lcCreateDate";
             this.lcCreateDate.Size = new System.Drawing.Size(473, 29);
             this.lcCreateDate.Text = "创建时间：";
@@ -444,7 +510,7 @@
             // 
             this.lcCreateUser.Control = this.txtCreateUser;
             this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(473, 85);
+            this.lcCreateUser.Location = new System.Drawing.Point(473, 143);
             this.lcCreateUser.Name = "lcCreateUser";
             this.lcCreateUser.Size = new System.Drawing.Size(476, 29);
             this.lcCreateUser.Text = "创建人：";
@@ -454,35 +520,25 @@
             // 
             this.lcDescription.Control = this.meDescription;
             this.lcDescription.CustomizationFormText = "备注：";
-            this.lcDescription.Location = new System.Drawing.Point(0, 514);
+            this.lcDescription.Location = new System.Drawing.Point(0, 541);
             this.lcDescription.Name = "lcDescription";
-            this.lcDescription.Size = new System.Drawing.Size(949, 149);
+            this.lcDescription.Size = new System.Drawing.Size(949, 122);
             this.lcDescription.Text = "备注：";
             this.lcDescription.TextSize = new System.Drawing.Size(90, 18);
-            // 
-            // lcCountry
-            // 
-            this.lcCountry.Control = this.lueCountry;
-            this.lcCountry.CustomizationFormText = "国家或地区：";
-            this.lcCountry.Location = new System.Drawing.Point(0, 29);
-            this.lcCountry.Name = "lcCountry";
-            this.lcCountry.Size = new System.Drawing.Size(473, 29);
-            this.lcCountry.Text = "国家或地区：";
-            this.lcCountry.TextSize = new System.Drawing.Size(90, 18);
             // 
             // lcName
             // 
             this.lcName.Control = this.txtName;
             this.lcName.CustomizationFormText = "供应商名称：";
-            this.lcName.Location = new System.Drawing.Point(0, 0);
+            this.lcName.Location = new System.Drawing.Point(474, 0);
             this.lcName.Name = "lcName";
-            this.lcName.Size = new System.Drawing.Size(949, 29);
+            this.lcName.Size = new System.Drawing.Size(475, 29);
             this.lcName.Text = "客户名称：";
             this.lcName.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.Control = this.textEdit3;
+            this.layoutControlItem2.Control = this.luePort;
             this.layoutControlItem2.CustomizationFormText = "港口：";
             this.layoutControlItem2.Location = new System.Drawing.Point(473, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
@@ -494,9 +550,9 @@
             // 
             this.layoutControlItem4.Control = this.groupControl1;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(594, 114);
+            this.layoutControlItem4.Location = new System.Drawing.Point(594, 172);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(355, 400);
+            this.layoutControlItem4.Size = new System.Drawing.Size(355, 369);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -506,9 +562,9 @@
             // 
             this.layoutControlItem5.Control = this.groupControl2;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 114);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 172);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(474, 400);
+            this.layoutControlItem5.Size = new System.Drawing.Size(474, 369);
             this.layoutControlItem5.Text = "业务员维护：";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -516,9 +572,9 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(474, 114);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(474, 172);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(120, 146);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(120, 125);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -526,9 +582,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(474, 340);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(474, 377);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 174);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 164);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -536,7 +592,7 @@
             // 
             this.layoutControlItem9.Control = this.btnAddSalesman;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(474, 260);
+            this.layoutControlItem9.Location = new System.Drawing.Point(474, 297);
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.Name = "layoutControlItem9";
@@ -551,7 +607,7 @@
             // 
             this.layoutControlItem10.Control = this.btnRemoveSalesman;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(474, 300);
+            this.layoutControlItem10.Location = new System.Drawing.Point(474, 337);
             this.layoutControlItem10.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem10.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem10.Name = "layoutControlItem10";
@@ -606,13 +662,63 @@
             // 
             this.lcState.Control = this.chkState;
             this.lcState.CustomizationFormText = "lcState";
-            this.lcState.Location = new System.Drawing.Point(0, 58);
+            this.lcState.Location = new System.Drawing.Point(0, 116);
             this.lcState.Name = "lcState";
             this.lcState.Size = new System.Drawing.Size(949, 27);
             this.lcState.Text = "lcState";
             this.lcState.TextSize = new System.Drawing.Size(0, 0);
             this.lcState.TextToControlDistance = 0;
             this.lcState.TextVisible = false;
+            // 
+            // lcCode
+            // 
+            this.lcCode.Control = this.txtCode;
+            this.lcCode.CustomizationFormText = "编号 ：";
+            this.lcCode.Location = new System.Drawing.Point(0, 0);
+            this.lcCode.Name = "lcCode";
+            this.lcCode.Size = new System.Drawing.Size(474, 29);
+            this.lcCode.Text = "编号 ：";
+            this.lcCode.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // lcContacts
+            // 
+            this.lcContacts.Control = this.txtContacts;
+            this.lcContacts.CustomizationFormText = "联系人：";
+            this.lcContacts.Location = new System.Drawing.Point(0, 58);
+            this.lcContacts.Name = "lcContacts";
+            this.lcContacts.Size = new System.Drawing.Size(473, 29);
+            this.lcContacts.Text = "联系人：";
+            this.lcContacts.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // lcCountry
+            // 
+            this.lcCountry.Control = this.lueCountry;
+            this.lcCountry.CustomizationFormText = "国家或地区：";
+            this.lcCountry.Location = new System.Drawing.Point(0, 29);
+            this.lcCountry.Name = "lcCountry";
+            this.lcCountry.Size = new System.Drawing.Size(473, 29);
+            this.lcCountry.Text = "国家或地区：";
+            this.lcCountry.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // lcEmail
+            // 
+            this.lcEmail.Control = this.txtEmail;
+            this.lcEmail.CustomizationFormText = "联系方式：";
+            this.lcEmail.Location = new System.Drawing.Point(473, 58);
+            this.lcEmail.Name = "lcEmail";
+            this.lcEmail.Size = new System.Drawing.Size(476, 29);
+            this.lcEmail.Text = "联系方式：";
+            this.lcEmail.TextSize = new System.Drawing.Size(90, 18);
+            // 
+            // lcAddress
+            // 
+            this.lcAddress.Control = this.txtAddress;
+            this.lcAddress.CustomizationFormText = "地址：";
+            this.lcAddress.Location = new System.Drawing.Point(0, 87);
+            this.lcAddress.Name = "lcAddress";
+            this.lcAddress.Size = new System.Drawing.Size(949, 29);
+            this.lcAddress.Text = "地址：";
+            this.lcAddress.TextSize = new System.Drawing.Size(90, 18);
             // 
             // dxErrorProvider1
             // 
@@ -631,6 +737,10 @@
             this.Text = "客户信息编辑";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContacts.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkState.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
@@ -645,12 +755,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.luePort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcCountry)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -663,6 +772,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSure)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcState)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCountry)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -715,7 +829,15 @@
         private DevExpress.XtraLayout.LayoutControlItem lcState;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraEditors.LookUpEdit lueCountry;
-        private DevExpress.XtraEditors.LookUpEdit textEdit3;
+        private DevExpress.XtraEditors.LookUpEdit luePort;
+        private DevExpress.XtraEditors.TextEdit txtAddress;
+        private DevExpress.XtraEditors.TextEdit txtEmail;
+        private DevExpress.XtraEditors.TextEdit txtContacts;
+        private DevExpress.XtraEditors.TextEdit txtCode;
+        private DevExpress.XtraLayout.LayoutControlItem lcCode;
+        private DevExpress.XtraLayout.LayoutControlItem lcContacts;
+        private DevExpress.XtraLayout.LayoutControlItem lcEmail;
+        private DevExpress.XtraLayout.LayoutControlItem lcAddress;
 
     }
 }

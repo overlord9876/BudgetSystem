@@ -44,10 +44,15 @@ namespace BudgetSystem
                 this.Text = "查看客户信息";
                 this.lueCountry.Properties.ReadOnly = true;
                 this.txtName.Properties.ReadOnly = true;
+                this.txtCode.Properties.ReadOnly = true;
+                this.txtEmail.Properties.ReadOnly = true;
+                this.txtContacts.Properties.ReadOnly = true;
+                this.txtAddress.Properties.ReadOnly = true;
+                this.luePort.Properties.ReadOnly = true;
                 this.chkState.Properties.ReadOnly = true;
                 this.meDescription.Properties.ReadOnly = true;
                 this.btnAddSalesman.Enabled = false;
-                this.btnRemoveSalesman.Enabled = false;
+                this.btnRemoveSalesman.Enabled = false; 
                 BindingCustomer(Customer.ID);
             }
         }
@@ -104,8 +109,10 @@ namespace BudgetSystem
         private void InitParameter()
         {
             Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
-            DataTable dt = scm.GetSystemConfigValue(EnumSystemConfigNames.国家地区.ToString());
-            this.lueCountry.Properties.DataSource = dt;
+            DataTable dtCountry = scm.GetSystemConfigValue(EnumSystemConfigNames.国家地区.ToString());
+            this.lueCountry.Properties.DataSource = dtCountry;
+            DataTable dtPort = scm.GetSystemConfigValue(EnumSystemConfigNames.港口信息.ToString());
+            this.luePort.Properties.DataSource = dtPort;
         }
 
         private void BindingAllUser()
@@ -119,8 +126,13 @@ namespace BudgetSystem
             Customer customer = cm.GetCustomer(id);
             if (customer != null)
             {
+                this.txtCode.Text=customer.Code;
                 this.txtName.Text = customer.Name;
                 this.lueCountry.EditValue = customer.Country;
+                this.luePort.EditValue = customer.Port;
+                this.txtEmail.Text=customer.Email;
+                this.txtContacts.Text=customer.Contacts;
+                this.txtAddress.Text = customer.Address;
                 this.txtCreateDate.EditValue = customer.CreateDate;
                 this.txtCreateUser.Text = customer.CreateUserName;
                 this.chkState.Checked = customer.State;
@@ -154,11 +166,42 @@ namespace BudgetSystem
             return result;
         }
 
+
+        private void CheckCodeInput()
+        {
+            if (string.IsNullOrEmpty(this.txtCode.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.txtCode, "请输入客户编号");
+            }        
+        }
         private void CheckNameInput()
         {
             if (string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtName, "请输入客户名称");
+            }
+        }
+
+        private void CheckContactsInput()
+        {
+            if (string.IsNullOrEmpty(this.txtContacts.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.txtContacts, "请输入联系人");
+            }
+        }
+        private void CheckEmailInput()
+        {
+            if (string.IsNullOrEmpty(this.txtEmail.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.txtEmail, "请输入联系方式");
+            }
+        }
+
+        private void CheckPortInput()
+        {
+            if (string.IsNullOrEmpty(this.luePort.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.luePort, "请选择港口信息");
             }
         }
 
@@ -175,8 +218,12 @@ namespace BudgetSystem
             base.SubmitNewData();
 
             this.dxErrorProvider1.ClearErrors();
+            this.CheckCodeInput();
+            this.CheckContactsInput();
+            this.CheckEmailInput(); 
             this.CheckNameInput();
             this.CheckCountry();
+            this.CheckPortInput();
             if (dxErrorProvider1.HasErrors)
             {
                 return;
@@ -187,7 +234,11 @@ namespace BudgetSystem
             customer.State = this.chkState.Checked;
             customer.Description = this.meDescription.Text.Trim();
             customer.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-
+            customer.Code=this.txtCode.Text.Trim();
+            customer.Email=this.txtEmail.Text.Trim();
+            customer.Contacts=this.txtContacts.Text.Trim();
+            customer.Address=this.txtAddress.Text.Trim();
+            customer.Port = this.luePort.Text.Trim();
             List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
             List<User> users = this.gridSalesman.DataSource as List<User>;
             if (users != null && users.Count > 0)
@@ -210,7 +261,11 @@ namespace BudgetSystem
             base.SubmitModifyData();
             this.dxErrorProvider1.ClearErrors();
             this.CheckNameInput();
-            this.CheckCountry();
+            this.CheckCountry(); 
+            this.CheckCodeInput();
+            this.CheckContactsInput();
+            this.CheckEmailInput();
+            this.CheckPortInput();
             if (dxErrorProvider1.HasErrors)
             {
                 return;
@@ -220,6 +275,11 @@ namespace BudgetSystem
             Customer.Country = this.lueCountry.Text.Trim();
             Customer.State = this.chkState.Checked;
             Customer.Description = this.meDescription.Text.Trim();
+            Customer.Code = this.txtCode.Text.Trim();
+            Customer.Email = this.txtEmail.Text.Trim();
+            Customer.Contacts = this.txtContacts.Text.Trim();
+            Customer.Address = this.txtAddress.Text.Trim();
+            Customer.Port = this.luePort.Text.Trim();
             List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
             List<User> users = this.gridSalesman.DataSource as List<User>;
             if (users != null && users.Count > 0)

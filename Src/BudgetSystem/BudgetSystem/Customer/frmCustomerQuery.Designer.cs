@@ -32,7 +32,7 @@
             this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -71,7 +71,7 @@
             this.gvCustomer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
             this.gcCountry,
-            this.gridColumn6,
+            this.gcPort,
             this.gcState,
             this.gcCreateUser,
             this.gcCreateDate});
@@ -99,13 +99,13 @@
             this.gcCountry.Visible = true;
             this.gcCountry.VisibleIndex = 1;
             // 
-            // gridColumn6
+            // gcPort
             // 
-            this.gridColumn6.Caption = "港口";
-            this.gridColumn6.FieldName = "Seaport";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 2;
+            this.gcPort.Caption = "港口";
+            this.gcPort.FieldName = "Port";
+            this.gcPort.Name = "gcPort";
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 2;
             // 
             // gcState
             // 
@@ -230,6 +230,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPort;
     }
 }

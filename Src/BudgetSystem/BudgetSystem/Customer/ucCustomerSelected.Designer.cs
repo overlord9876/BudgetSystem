@@ -61,10 +61,7 @@
             this.gvCustomer.GroupFormat = " {2}";
             this.gvCustomer.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "IsSelected", null, "")});
-            this.gvCustomer.Name = "gvCustomer"; 
-            this.gvCustomer.OptionsBehavior.AutoExpandAllGroups = true;
-            this.gvCustomer.OptionsView.ShowGroupedColumns = true;
-            this.gvCustomer.OptionsView.ShowGroupPanel = false;
+            this.gvCustomer.Name = "gvCustomer";
             this.gvCustomer.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvCustomer.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             this.gvCustomer.OptionsBehavior.AutoExpandAllGroups = true;
@@ -73,19 +70,19 @@
             this.gvCustomer.OptionsDetail.SmartDetailExpand = false;
             this.gvCustomer.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
             this.gvCustomer.OptionsFind.AlwaysVisible = true;
+            this.gvCustomer.OptionsView.ShowGroupedColumns = true;
+            this.gvCustomer.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gvCustomer.OptionsView.ShowGroupPanel = false;
             this.gvCustomer.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcIsSelected, DevExpress.Data.ColumnSortOrder.Descending)});
-
-            this.gvCustomer.CellValueChanging +=new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(gvCustomer_CellValueChanging);
-            this.gvCustomer.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvCustomer_CustomDrawGroupRow);
-
+            this.gvCustomer.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvCustomer_CustomDrawGroupRow);
+            this.gvCustomer.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvCustomer_CellValueChanging);
             // 
             // gcIsSelected
             // 
             this.gcIsSelected.Caption = " ";
             this.gcIsSelected.FieldName = "IsSelected";
-            this.gcIsSelected.Name = "gcIsSelected"; 
+            this.gcIsSelected.Name = "gcIsSelected";
             this.gcIsSelected.Visible = true;
             this.gcIsSelected.VisibleIndex = 0;
             this.gcIsSelected.Width = 66;

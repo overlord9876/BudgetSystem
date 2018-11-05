@@ -121,11 +121,11 @@ namespace BudgetSystem.Entity
                     {
                         BudgetNO = pn.ContractNO,
                         CreateDate = pn.ApproveTime,
-                        PaymentMoney = pn.Money,
+                        PaymentMoney = pn.CNY,
                         Currency = "CNY",
                         VoucherNo = pn.VoucherNo,
                         MoneyUsed = pn.MoneyUsed,
-                        CNY = pn.Money * -1,
+                        CNY = pn.CNY * -1,
                         RecieptMoney = Decimal.Zero,
                         Company = pn.SupplierName
                     };

@@ -34,6 +34,8 @@
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLegal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartmentName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +57,9 @@
             this.gcIsSelected,
             this.gcName,
             this.gcSupplierType,
-            this.gcLegal});
+            this.gcLegal,
+            this.gcDepartment,
+            this.gcDepartmentName});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.GroupCount = 1;
             this.gvSupplier.GroupFormat = " {2}";
@@ -70,15 +74,12 @@
             this.gvSupplier.OptionsDetail.SmartDetailExpand = false;
             this.gvSupplier.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
             this.gvSupplier.OptionsFind.AlwaysVisible = true;
-            this.gvSupplier.OptionsView.ShowGroupPanel = false;
-            this.gvSupplier.OptionsBehavior.AutoExpandAllGroups = true;
             this.gvSupplier.OptionsView.ShowGroupedColumns = true;
+            this.gvSupplier.OptionsView.ShowGroupPanel = false;
             this.gvSupplier.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcIsSelected, DevExpress.Data.ColumnSortOrder.Descending)});
-
-            this.gvSupplier.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(gvSupplier_CellValueChanging);
-            this.gvSupplier.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvSupplier_CustomDrawGroupRow);
-
+            this.gvSupplier.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSupplier_CustomDrawGroupRow);
+            this.gvSupplier.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvSupplier_CellValueChanging);
             // 
             // gcIsSelected
             // 
@@ -86,8 +87,8 @@
             this.gcIsSelected.FieldName = "IsSelected";
             this.gcIsSelected.Name = "gcIsSelected";
             this.gcIsSelected.Visible = true;
-            this.gcIsSelected.VisibleIndex = 0; 
-            this.gcIsSelected.Width = 66;
+            this.gcIsSelected.VisibleIndex = 0;
+            this.gcIsSelected.Width = 61;
             // 
             // gcName
             // 
@@ -97,7 +98,7 @@
             this.gcName.OptionsColumn.AllowEdit = false;
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 1;
-            this.gcName.Width = 259;
+            this.gcName.Width = 241;
             // 
             // gcSupplierType
             // 
@@ -107,7 +108,7 @@
             this.gcSupplierType.OptionsColumn.AllowEdit = false;
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 2;
-            this.gcSupplierType.Width = 230;
+            this.gcSupplierType.Width = 150;
             // 
             // gcLegal
             // 
@@ -117,7 +118,27 @@
             this.gcLegal.OptionsColumn.AllowEdit = false;
             this.gcLegal.Visible = true;
             this.gcLegal.VisibleIndex = 3;
-            this.gcLegal.Width = 141;
+            this.gcLegal.Width = 150;
+            // 
+            // gcDepartment
+            // 
+            this.gcDepartment.Caption = "部门编号";
+            this.gcDepartment.FieldName = "DepartmentCode";
+            this.gcDepartment.Name = "gcDepartment";
+            this.gcDepartment.OptionsColumn.AllowEdit = false;
+            this.gcDepartment.Visible = true;
+            this.gcDepartment.VisibleIndex = 4;
+            this.gcDepartment.Width = 100;
+            // 
+            // gcDepartmentName
+            // 
+            this.gcDepartmentName.Caption = "部门名称";
+            this.gcDepartmentName.FieldName = "DepartmentName";
+            this.gcDepartmentName.Name = "gcDepartmentName";
+            this.gcDepartmentName.OptionsColumn.AllowEdit = false;
+            this.gcDepartmentName.Visible = true;
+            this.gcDepartmentName.VisibleIndex = 5;
+            this.gcDepartmentName.Width = 100;
             // 
             // ucSupplierSelected
             // 
@@ -140,5 +161,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
         private DevExpress.XtraGrid.Columns.GridColumn gcLegal;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartment;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentName;
     }
 }

@@ -22,15 +22,20 @@ namespace BudgetSystem.Dal
             }
             return customer;
         }
+
         public IEnumerable<Customer> GetAllCustomer(IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName  FROM `Customer` s
                                     LEFT JOIN `User` u ON s.CreateUser=u.UserName   ";
             return con.Query<Customer>(selectSql, null, tran);
         }
+       
         public int AddCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)
         {
-            string insertSql = "Insert Into `Customer` (`Name`,`Country`,`CreateDate`,`CreateUser`,`Description`,`State`) Values (@Name,@Country,now(),@CreateUser,@Description,@State)";
+            string insertSql = @"Insert Into `Customer` (`Name`,`Country`,`CreateDate`,`CreateUser`,`Description`,`State`,
+                                                          `Code`,`Email`,`Contacts`,`Address`,`Port`)
+                                                 Values (@Name,@Country,now(),@CreateUser,@Description,@State,
+                                                         @Code,@Email,@Contacts,@Address,@Port)";
             int id= con.Insert(insertSql, customer, tran);
             string salesmanInsertSql = "Insert Into `CustomerSalesman` (`Customer`,`Salesman`) Values(@Customer,@Salesman)";
             if (id > 0 && customer.SalesmanList != null && customer.SalesmanList.Any())
@@ -42,7 +47,10 @@ namespace BudgetSystem.Dal
         }
         public void ModifyCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)
         {
-            string updateSql = "Update `Customer` Set `Name` = @Name,`Country` = @Country,`Description` = @Description,`State` = @State Where `ID` = @ID";
+            string updateSql = @"Update `Customer` 
+                                 Set `Name` = @Name,`Country` = @Country,`Description` = @Description,`State` = @State,
+                                     `Code`=@Code,`Email`=@Email,`Contacts`=@Contacts,`Address`=@Address,`Port`=@Port
+                                  Where `ID` = @ID";
             con.Execute(updateSql, customer, tran);
             string salesmanDeleteSql = "Delete From `CustomerSalesman` Where `Customer` = @Customer";
             con.Execute(salesmanDeleteSql, new { Customer=customer.ID }, tran);

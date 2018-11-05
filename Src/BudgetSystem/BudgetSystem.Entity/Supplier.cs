@@ -21,11 +21,6 @@ namespace BudgetSystem.Entity
         public string Name { get; set; }
 
         /// <summary>
-        /// 银行户名
-        /// </summary>
-        public string BankAccountName { get; set; }
-
-        /// <summary>
         /// 银行账号
         /// </summary>
         public string BankNO { get; set; }
@@ -114,9 +109,27 @@ namespace BudgetSystem.Entity
         public string Description { get; set; }
 
         /// <summary>
+        /// 纳税人识别号
+        /// </summary>
+        public string TaxpayerID { get; set; }
+        /// <summary>
+        /// 是否失信企业
+        /// </summary>
+        public bool Discredited { get; set; }
+
+        /// <summary>
+        /// 是否有合格供方代理协议
+        /// </summary>
+        public bool ExistsAgentAgreement { get; set; }
+
+
+        /// <summary>
         /// 是否选择
         /// </summary>
         public bool IsSelected { get; set; }
+
+
+
 
         public override string ToString()
         {

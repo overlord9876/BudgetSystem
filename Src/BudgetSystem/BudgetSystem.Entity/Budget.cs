@@ -74,10 +74,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string PriceClause { get; set; }
 
-        /// <summary>
-        /// 交货口岸
-        /// </summary>
-        public string Seaport { get; set; }
+     
 
         /// <summary>
         /// 对外结算方式1
@@ -114,16 +111,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string InProductDetail { get; set; }
 
-        /// <summary>
-        /// 对内结算方式1
-        /// </summary>
-        public string InSettlementMethod1 { get; set; }
-
-        /// <summary>
-        /// 对内结算方式2
-        /// </summary>
-        public string InSettlementMethod2 { get; set; }
-
+       
         /// <summary>
         /// 预付金额
         /// </summary>
@@ -180,15 +168,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public float ExchangeRate { get; set; }
 
-        /// <summary>
-        /// 配额
-        /// </summary>
-        public decimal Quota { get; set; }
-
-        /// <summary>
-        /// 出口退税
-        /// </summary>
-        public float TaxRebateRate { get; set; }
+       
 
         /// <summary>
         /// 备注
@@ -214,9 +194,25 @@ namespace BudgetSystem.Entity
             get { return this.Department + this.DepartmentName; }
         }
         /// <summary>
-        /// 客户名称，以“，”连接
+        /// 客户编号
         /// </summary>
-        public string CustomerNames { get; set; }
+       public int  CustomerID{get;set;}    
+
+        /// <summary>
+        /// 目的港口
+        /// </summary>
+        public string  Port {get;set;}
+
+        /// <summary>
+        ///  出口退税
+        /// </summary>
+        public float TaxRebate { get; set; }
+
+
+        /// <summary>
+        /// 主客户名称
+        /// </summary>
+        public string CustomerName { get; set; }
 
         /// <summary>
         /// 客户列表

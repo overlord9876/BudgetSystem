@@ -5,7 +5,7 @@ using System.Text;
 namespace BudgetSystem
 {
     /// <summary>
-    /// 内贸产产详情
+    /// 内贸产品详情
     /// </summary>
     public class InProductDetail
     {
@@ -22,7 +22,7 @@ namespace BudgetSystem
         /// 单位
         /// </summary>
         public string Unit { get; set; }
-        
+
         /// <summary>
         /// 原材料价格
         /// </summary>
@@ -39,9 +39,25 @@ namespace BudgetSystem
         public decimal ProcessCost { get; set; }
 
         /// <summary>
+        /// 金额小计
+        /// </summary>
+        public decimal MoneySubtotal { get { return Subtotal * Count; } }
+
+        /// <summary>
+        /// 退税率
+        /// </summary>
+        public decimal TaxRebateRate { get; set; }
+
+        /// <summary>
+        /// 退税额
+        /// </summary>
+        public decimal TaxRebate { get { return MoneySubtotal * TaxRebateRate/100; } }
+
+        /// <summary>
         /// 小计
         /// </summary>
         public decimal Subtotal { get { return RawMaterials + SubsidiaryMaterials + ProcessCost; } }
+
 
     }
 }

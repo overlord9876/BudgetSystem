@@ -110,10 +110,22 @@ namespace BudgetSystem.OutMoney
                 this.txtTaxRebateRate.Focus();
                 return;
             }
-            if (txtPaymentMoney.Value <= 0)
+            if (txtOriginalCoin.Value <= 0)
             {
-                this.dxErrorProvider1.SetError(txtPaymentMoney, "请输入用款金额。");
-                this.txtPaymentMoney.Focus();
+                this.dxErrorProvider1.SetError(txtOriginalCoin, "请输入付款金额（原币）。");
+                this.txtOriginalCoin.Focus();
+                return;
+            }
+            if (txtExchangeRate.Value <= 0)
+            {
+                this.dxErrorProvider1.SetError(txtExchangeRate, "请输入汇率。");
+                this.txtExchangeRate.Focus();
+                return;
+            }
+            if (txtCNY.Value <= 0)
+            {
+                this.dxErrorProvider1.SetError(txtCNY, "请输入付款金额（人民币）。");
+                this.txtCNY.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text))
@@ -148,6 +160,11 @@ namespace BudgetSystem.OutMoney
             this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
         }
 
+        private void CalcCNY()
+        {
+            this.txtCNY.EditValue = this.txtExchangeRate.Value * this.txtOriginalCoin.Value;
+        }
+
         private void BandPaymentNotes(int id)
         {
             PaymentNotes payment = pnm.GetPaymentNoteById(id);
@@ -155,7 +172,10 @@ namespace BudgetSystem.OutMoney
             this.txtApprover.Text = payment.Approver;
             this.txtApproveTime.EditValue = payment.ApproveTime;
             this.txtDescription.Text = payment.Description;
-            this.txtPaymentMoney.EditValue = payment.Money;
+            this.txtExchangeRate.EditValue = payment.ExchangeRate;
+            this.txtOriginalCoin.EditValue = payment.OriginalCoin;
+            this.cboCurrency.SelectedItem = payment.Currency;
+            this.txtCNY.EditValue = payment.CNY;
             this.txtPaymentDate.EditValue = payment.PaymentDate;
             this.txtTaxRebateRate.EditValue = payment.TaxRebateRate;
             this.txtVoucherNo.Text = payment.VoucherNo;
@@ -189,7 +209,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.Approver = this.txtApprover.Text.Trim();
             this.CurrentPaymentNotes.ApproveTime = DateTime.Parse(this.txtApproveTime.EditValue.ToString());
             this.CurrentPaymentNotes.Description = this.txtDescription.Text.Trim();
-            this.CurrentPaymentNotes.Money = this.txtPaymentMoney.Value;
+            this.CurrentPaymentNotes.CNY = this.txtCNY.Value;
             this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
             this.CurrentPaymentNotes.TaxRebateRate = (float)this.txtTaxRebateRate.Value;
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
@@ -199,6 +219,9 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
+            this.CurrentPaymentNotes.ExchangeRate = (float)this.txtExchangeRate.Value;
+            this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
+            this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
             this.CurrentPaymentNotes.Description = txtDescription.Text.Trim();
             this.CurrentPaymentNotes.HasInvoice = (bool)chkHasInvoice.EditValue;
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
@@ -254,7 +277,7 @@ namespace BudgetSystem.OutMoney
                 form.SelectedBudget = bm.GetBudget(selectedBudget.ID);
                 form.ReceiptAmount = txtReceiptAmount.Value;
                 form.PaymentNotes = paymentNotes;
-                form.PaymentMoney = txtPaymentMoney.Value;
+                form.PaymentMoney = txtCNY.Value;
                 form.ShowDialog(this);
             }
             else
@@ -272,5 +295,14 @@ namespace BudgetSystem.OutMoney
             }
         }
 
+        private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcCNY();
+        }
+
+        private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcCNY();
+        }
     }
 }

@@ -20,9 +20,24 @@ namespace BudgetSystem.Entity
         public DateTime CommitTime { get; set; }
 
         /// <summary>
+        /// 原币金额
+        /// </summary>
+        public decimal OriginalCoin { get; set; }
+
+        /// <summary>
+        /// 汇率
+        /// </summary>
+        public float ExchangeRate { get; set; }
+
+        /// <summary>
+        /// 币种
+        /// </summary>
+        public string Currency { get; set; }
+
+        /// <summary>
         /// 付款金额
         /// </summary>
-        public decimal Money { get; set; }
+        public decimal CNY { get; set; }
 
         /// <summary>
         /// 确认人
