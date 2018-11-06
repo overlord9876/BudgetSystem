@@ -46,7 +46,7 @@ namespace BudgetSystem.Dal
 
         public int AddPaymentNote(PaymentNotes addPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `Paymentnotes` (`ID`,`CommitTime`,`CNY`,`Approver`,`ApproveTime`,`BudgetID`,`SupplierID`,`Overdue`,`PaymentDate`,`Description`,`DepartmentCode`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`) Values (@ID,@CommitTime,@CNY,@Approver,@ApproveTime,@BudgetID,@SupplierID,@Overdue,@PaymentDate,@Description,@DepartmentCode,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency)"; 
+            string insertSql = "Insert Into `Paymentnotes` (`ID`,`CommitTime`,`CNY`,`Approver`,`ApproveTime`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DepartmentCode`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`) Values (@ID,@CommitTime,@CNY,@Approver,@ApproveTime,@BudgetID,@SupplierID,@PaymentDate,@Description,@DepartmentCode,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency)"; 
             int id = con.Insert(insertSql, addPaymentNote, tran);
             if (id > 0)
             {
@@ -57,7 +57,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyPaymentNote(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `Paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`Approver` = @Approver,`ApproveTime` = @ApproveTime,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`Overdue` = @Overdue,`PaymentDate` = @PaymentDate,`Description` = @Description,`DepartmentCode` = @DepartmentCode,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency) Where `ID` = @ID"; 
+            string updateSql = "Update `Paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`Approver` = @Approver,`ApproveTime` = @ApproveTime,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DepartmentCode` = @DepartmentCode,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency) Where `ID` = @ID"; 
             con.Execute(updateSql, modifyPaymentNote, tran);
         }
 

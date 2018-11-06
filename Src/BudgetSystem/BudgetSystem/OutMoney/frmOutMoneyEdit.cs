@@ -8,11 +8,13 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
+using Newtonsoft.Json;
 
 namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyEdit : frmBaseDialogForm
     {
+        CommonManager cm = new CommonManager();
         BudgetManager bm = new BudgetManager();
         SupplierManager sm = new SupplierManager();
         UserManager um = new UserManager();
@@ -234,10 +236,37 @@ namespace BudgetSystem.OutMoney
             Budget currentBudget = cboBudget.EditValue as Budget;
             if (currentBudget != null)
             {
+                currentBudget = bm.GetBudget(currentBudget.ID);
+                List<InProductDetail> inProductDetailList = null;
+                if (!string.IsNullOrEmpty(currentBudget.InProductDetail))
+                {
+                    try
+                    {
+                        inProductDetailList = JsonConvert.DeserializeObject<List<InProductDetail>>(currentBudget.InProductDetail);
+                    }
+                    catch { }
+                }
+                else
+                {
+                    inProductDetailList = new List<InProductDetail>();
+                }
+                txtExchangeRate.Properties.Items.Clear();
+                if (inProductDetailList != null)
+                {
+                    foreach (var v in inProductDetailList)
+                    {
+                        if (!txtExchangeRate.Properties.Items.Contains(v.TaxRebateRate))
+                        {
+                            txtExchangeRate.Properties.Items.Add(v.TaxRebateRate);
+                        }
+                    }
+                }
+
                 txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(currentBudget.ID);
                 paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
                 //获取供应商
 
+                this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO, cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
             }
             else
             {

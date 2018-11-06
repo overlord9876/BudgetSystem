@@ -39,3 +39,9 @@ Src/BudgetSystem/BudgetSystem.Dal/obj/
 Src/BudgetSystem/BudgetSystem/BudgetSystem.csproj.user
 *.user
 Src/BudgetSystem/BudgetSystem/App.config
+Src/BudgetSystem/.vs/BudgetSystem/v15/Server/sqlite3/db.lock
+Src/BudgetSystem/.vs/BudgetSystem/v15/Server/sqlite3/storage.ide
+Src/BudgetSystem/.vs/BudgetSystem/v15/Server/sqlite3/storage.ide-shm
+Src/BudgetSystem/.vs/BudgetSystem/v15/Server/sqlite3/storage.ide-wal
+Src/BudgetSystem/BudgetSystem/App.config
+Src/BudgetSystem/BudgetSystem/App.config

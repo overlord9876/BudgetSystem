@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AccountBill.cs" />
     <Compile Include="Budget.cs" />
+    <Compile Include="CodeType.cs" />
     <Compile Include="Infrastructure\BusinessModules.cs" />
     <Compile Include="CustomerSalesman.cs" />
     <Compile Include="Department.cs" />

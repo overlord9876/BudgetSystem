@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ActualReceiptsDal.cs" />
     <Compile Include="BudgetDal.cs" />
+    <Compile Include="CommonDal.cs" />
     <Compile Include="CustomerDal.cs" />
     <Compile Include="DapperExtensions.cs" />
     <Compile Include="DepartmentDal.cs" />
