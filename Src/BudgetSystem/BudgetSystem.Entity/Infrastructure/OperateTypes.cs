@@ -59,7 +59,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         DistributeRoleUser,
 
-
+        /// <summary>
+        /// 分配部门用户
+        /// </summary>
+        DistributeDepartmentUser,
 
     }
 }

@@ -10,6 +10,7 @@ namespace BudgetSystem.Entity
         RoleManagement,
         DepartmentManagement,
 
+        FlowManagement,
 
 
     }
