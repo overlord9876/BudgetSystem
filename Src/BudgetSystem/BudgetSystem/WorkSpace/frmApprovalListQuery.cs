@@ -17,11 +17,12 @@ namespace BudgetSystem.WorkSpace
     public partial class frmApprovalListQuery : frmBaseQueryForm
     {
 
-        private GridHitInfo hInfo;
+      
         FlowManager manager = new FlowManager();
         public frmApprovalListQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.MyPendingFlowManagement;
         }
 
         public override void RefreshData()
@@ -86,19 +87,12 @@ namespace BudgetSystem.WorkSpace
             
         }
 
-        private void gvPendingFlow_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = this.gvPendingFlow.CalcHitInfo(e.Y, e.Y);
-        }
 
-        private void gvPendingFlow_DoubleClick(object sender, EventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (hInfo.InRow)
-            {
-                AproveFlowItem();
-            }
-        }
+            this.gridViewAction.Add(this.gvPendingFlow, new ActionWithPermission() { MainAction = AproveFlowItem, MainOperate = OperateTypes.Approve, SecondAction = ViewFlowItem, SecondOperate = OperateTypes.View });
 
+        }
 
 
 

@@ -64,8 +64,7 @@
             this.gvFlow.Name = "gvFlow";
             this.gvFlow.OptionsBehavior.Editable = false;
             this.gvFlow.OptionsDetail.EnableMasterViewMode = false;
-            this.gvFlow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvFlow_MouseDown);
-            this.gvFlow.DoubleClick += new System.EventHandler(this.gvFlow_DoubleClick);
+
             // 
             // gcFlowName
             // 

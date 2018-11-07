@@ -16,11 +16,11 @@ namespace BudgetSystem.UserManage
     {
 
         private Bll.UserManager um = new Bll.UserManager();
-        private GridHitInfo hInfo;
-
+      
         public frmUserQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.UserManagement;
         }
 
         protected override void InitModelOperate()
@@ -143,20 +143,11 @@ namespace BudgetSystem.UserManage
             this.gridUser.DataSource = list;
         }
 
-        private void gvUser_DoubleClick(object sender, EventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (hInfo.InRow)
-            {
-                ModifyUser();
-            }
+            this.gridViewAction.Add(this.gvUser, new ActionWithPermission() { MainAction = ModifyUser, MainOperate = OperateTypes.Modify, SecondAction = ViewUser, SecondOperate = OperateTypes.View });
+        
         }
-       
-        private void gvUser_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = gvUser.CalcHitInfo(e.Y, e.Y);
-        }
-
-
 
     }
 }

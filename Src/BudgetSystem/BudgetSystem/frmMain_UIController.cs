@@ -193,6 +193,14 @@ namespace BudgetSystem
 
                 if (mo.UIType == UITypes.LargerButton)
                 {
+                    string permission = form.Module + "." + mo.Operate;
+
+                    if (!RunInfo.Instance.UserPermission.Contains(permission))
+                    {
+                        continue;
+                    }
+
+
                     BarButtonItem button = new BarButtonItem();
                     button.RibbonStyle = RibbonItemStyles.Large;
                   
@@ -205,7 +213,20 @@ namespace BudgetSystem
 
                     button.ImageIndex = mo.ImageIndex;
                 }
+
+
+
             }
+
+            foreach (RibbonPageGroup group in page.Groups)
+            {
+                if (group.ItemLinks.Count == 0)
+                {
+                    group.Visible = false;
+                }
+            
+            }
+
          
             return page;
         }
@@ -223,6 +244,35 @@ namespace BudgetSystem
         {
             RunInfo.Instance.Config.SkinName = e.Item.Caption;
             RunInfo.Instance.Config.Save();
+        }
+
+
+        private void CheckUserPermission()
+        {
+            foreach (RibbonPageGroup group in this.rpMain.Groups)
+            {
+                int groupItemCount = group.ItemLinks.Count;
+                int invisibleItemCount = 0;
+                foreach (BarItemLink itemLink in group.ItemLinks)
+                {
+                    string key = itemLink.Item.Tag != null ? itemLink.Item.Tag.ToString() : "";
+                    if (string.IsNullOrEmpty(key)  || !RunInfo.Instance.UserPermission.Contains(key))
+                    {
+                        itemLink.Visible = false;
+                    }
+
+                    if (itemLink.Visible == false)
+                    {
+                        invisibleItemCount++;
+                    }
+                }
+                if (groupItemCount == invisibleItemCount)
+                {
+                    group.Visible = false;
+                }
+            
+            }
+
         }
     }
 }

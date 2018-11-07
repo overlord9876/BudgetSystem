@@ -16,11 +16,19 @@ namespace BudgetSystem.DepartmentManage
     {
         private Bll.DepartmentManager dm = new Bll.DepartmentManager();
         private Bll.UserManager um = new Bll.UserManager();
-        private GridHitInfo hInfo;
+ 
 
         public frmDepartmentQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.DepartmentManagement;
+
+
+            if (!CheckPermission(OperateTypes.DistributeDepartmentUser))
+            {
+                this.btnAddToDepartment.Enabled = false;
+                this.btnRemoveFromDepartment.Enabled = false;
+            }
         }
 
         protected override void InitModelOperate()
@@ -169,17 +177,10 @@ namespace BudgetSystem.DepartmentManage
 
         }
 
-        private void gvDepartment_MouseDown(object sender, MouseEventArgs e)
+        protected override void InitGridViewAction()
         {
-            hInfo = this.gvDepartment.CalcHitInfo(e.Y, e.Y);
-        }
+            this.gridViewAction.Add(this.gvDepartment, new ActionWithPermission() { MainAction = ModifyDepartment , MainOperate = OperateTypes.Modify, SecondAction= ViewDepartment, SecondOperate=  OperateTypes.View });
 
-        private void gvDepartment_DoubleClick(object sender, EventArgs e)
-        {
-            if (hInfo.InRow)
-            {
-                ModifyDepartment();
-            }
         }
     }
 }
