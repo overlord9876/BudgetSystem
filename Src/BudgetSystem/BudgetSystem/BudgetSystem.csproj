@@ -170,6 +170,12 @@
     <Compile Include="InMoney\frmInMoneyEdit.Designer.cs">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\ucUserSelected.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InMoney\ucUserSelected.Designer.cs">
+      <DependentUpon>ucUserSelected.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\frmOptionQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyEdit.resx">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\ucUserSelected.resx">
+      <DependentUpon>ucUserSelected.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>

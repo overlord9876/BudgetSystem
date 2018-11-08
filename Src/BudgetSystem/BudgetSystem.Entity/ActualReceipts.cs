@@ -15,6 +15,12 @@ namespace BudgetSystem.Entity
         /// </summary>
         public int ID { get; set; }
 
+
+        /// <summary>
+        /// 拆分来源ID
+        /// </summary>
+        public int SourceID { get; set; }
+
         /// <summary>
         /// 合同号
         /// </summary>
@@ -38,6 +44,15 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
+        /// 关联业务员
+        /// </summary>
+        public List<User> Sales
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 凭证号
         /// </summary>
         public string VoucherNo { get; set; }
@@ -46,11 +61,6 @@ namespace BudgetSystem.Entity
         /// 交易附言
         /// </summary>
         public string TradingPostscript { get; set; }
-
-        /// <summary>
-        /// 是否需要拆分
-        /// </summary>
-        public bool NeedSplit { get; set; }
 
         /// <summary>
         /// 原币金额
@@ -63,9 +73,24 @@ namespace BudgetSystem.Entity
         public decimal CNY { get; set; }
 
         /// <summary>
+        /// 未拆分原币金额
+        /// </summary>
+        public decimal OriginalCoin2 { get; set; }
+
+        /// <summary>
+        /// 未拆分人民币金额
+        /// </summary>
+        public decimal CNY2 { get; set; }
+
+        /// <summary>
         /// 原币类型
         /// </summary>
         public string Currency { get; set; }
+
+        /// <summary>
+        /// 入账单状态
+        /// </summary>
+        public ReceiptState State { get; set; }
 
         /// <summary>
         /// 入账时间
@@ -111,6 +136,16 @@ namespace BudgetSystem.Entity
         /// 
         /// </summary>
         public string Remitter { get; set; }
+
+    }
+
+    public enum ReceiptState : int
+    {
+        入账 = 0,
+        待拆分 = 1,
+        已拆分 = 2,
+        关联合同 = 3,
+        作废 = 4
 
     }
 }
