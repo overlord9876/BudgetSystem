@@ -106,9 +106,10 @@ namespace BudgetSystem.OutMoney
                 this.cboPaymentMethod.Focus();
                 return;
             }
-            if (txtTaxRebateRate.Value <= 0)
+            decimal taxRebateRate = 0;
+            if (txtTaxRebateRate.EditValue == null || !decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate))
             {
-                this.dxErrorProvider1.SetError(txtTaxRebateRate, "请输入退税率。");
+                this.dxErrorProvider1.SetError(txtTaxRebateRate, "请选择退税率。");
                 this.txtTaxRebateRate.Focus();
                 return;
             }
@@ -213,7 +214,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.Description = this.txtDescription.Text.Trim();
             this.CurrentPaymentNotes.CNY = this.txtCNY.Value;
             this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
-            this.CurrentPaymentNotes.TaxRebateRate = (float)this.txtTaxRebateRate.Value;
+            this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
             this.CurrentPaymentNotes.Applicant = this.cboApplicant.SelectedItem.ToString();
             this.CurrentPaymentNotes.MoneyUsed = this.cboMoneyUsed.SelectedText;
@@ -221,7 +222,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
-            this.CurrentPaymentNotes.ExchangeRate = (float)this.txtExchangeRate.Value;
+            this.CurrentPaymentNotes.ExchangeRate = (float)(decimal)this.txtExchangeRate.EditValue;
             this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
             this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
             this.CurrentPaymentNotes.Description = txtDescription.Text.Trim();
@@ -250,14 +251,14 @@ namespace BudgetSystem.OutMoney
                 {
                     inProductDetailList = new List<InProductDetail>();
                 }
-                txtExchangeRate.Properties.Items.Clear();
+                txtTaxRebateRate.Properties.Items.Clear();
                 if (inProductDetailList != null)
                 {
                     foreach (var v in inProductDetailList)
                     {
-                        if (!txtExchangeRate.Properties.Items.Contains(v.TaxRebateRate))
+                        if (!txtTaxRebateRate.Properties.Items.Contains(v.TaxRebateRate))
                         {
-                            txtExchangeRate.Properties.Items.Add(v.TaxRebateRate);
+                            txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
                         }
                     }
                 }

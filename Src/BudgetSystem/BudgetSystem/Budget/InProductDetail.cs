@@ -51,13 +51,35 @@ namespace BudgetSystem
         /// <summary>
         /// 退税额
         /// </summary>
-        public decimal TaxRebate { get { return MoneySubtotal * TaxRebateRate/100; } }
+        public decimal TaxRebate
+        {
+            get
+            {
+                if (Vat == 0)
+                {
+                    return MoneySubtotal * TaxRebateRate / 100;
+                }
+                else
+                {
+                    return MoneySubtotal / Vat * TaxRebateRate / 100;
+                }
+            }
+        }
+
 
         /// <summary>
         /// 小计
         /// </summary>
         public decimal Subtotal { get { return RawMaterials + SubsidiaryMaterials + ProcessCost; } }
 
+        /// <summary>
+        /// 增值税率
+        /// </summary>
+        public decimal Vat
+        {
+            get;
+            set;
+        }
 
     }
 }

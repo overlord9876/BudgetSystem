@@ -206,8 +206,12 @@ namespace BudgetSystem.Entity
         /// <summary>
         ///  出口退税
         /// </summary>
-        public float TaxRebate { get; set; }
+        public decimal TaxRebate { get; set; }
 
+        /// <summary>
+        /// 总进价
+        /// </summary>
+        public decimal PurchasePrice { get; set; }
 
         /// <summary>
         /// 主客户名称

@@ -11,5 +11,8 @@ namespace BudgetSystem.Entity
     {
         国家地区,
         港口信息,
+        增值税,
+        币种,
+        用款类型,
     }
 }

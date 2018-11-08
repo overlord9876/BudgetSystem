@@ -38,7 +38,7 @@
             this.meDescription = new DevExpress.XtraEditors.MemoEdit();
             this.pccSupplier = new DevExpress.XtraEditors.PopupContainerControl();
             this.ucSupplierSelected = new BudgetSystem.ucSupplierSelected();
-            this.txtDirectCosts = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtPurchasePrice = new BudgetSystem.CommonControl.TextEdit_Number();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit33 = new DevExpress.XtraEditors.TextEdit();
@@ -53,7 +53,7 @@
             this.txtCommission = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtPremium = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtBankCharges = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.txtOther = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtDirectCosts = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtFeedMoney = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtSubtotal = new BudgetSystem.CommonControl.TextEdit_Number();
             this.gridOutProductDetail = new DevExpress.XtraGrid.GridControl();
@@ -100,6 +100,9 @@
             this.ritxtSubtotal = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gridBand10 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcMoneySubtotal = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand13 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gcVat = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.ritxtVat = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gridBand12 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcTaxRebateRate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtTaxRebateRate = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
@@ -184,7 +187,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pccSupplier)).BeginInit();
             this.pccSupplier.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPurchasePrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit33.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfitLevel1.Properties)).BeginInit();
@@ -197,7 +200,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankCharges.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOther.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFeedMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutProductDetail)).BeginInit();
@@ -218,6 +221,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ritxtSubsidiaryMaterials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtProcessCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtSubtotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtVat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtTaxRebateRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.riLinkEditInDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsQualified.Properties)).BeginInit();
@@ -298,7 +302,7 @@
             this.layoutControl1.Controls.Add(this.meDescription);
             this.layoutControl1.Controls.Add(this.pccSupplier);
             this.layoutControl1.Controls.Add(this.pccCustomer);
-            this.layoutControl1.Controls.Add(this.txtDirectCosts);
+            this.layoutControl1.Controls.Add(this.txtPurchasePrice);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Controls.Add(this.textEdit33);
@@ -313,7 +317,7 @@
             this.layoutControl1.Controls.Add(this.txtCommission);
             this.layoutControl1.Controls.Add(this.txtPremium);
             this.layoutControl1.Controls.Add(this.txtBankCharges);
-            this.layoutControl1.Controls.Add(this.txtOther);
+            this.layoutControl1.Controls.Add(this.txtDirectCosts);
             this.layoutControl1.Controls.Add(this.txtFeedMoney);
             this.layoutControl1.Controls.Add(this.txtSubtotal);
             this.layoutControl1.Controls.Add(this.gridOutProductDetail);
@@ -354,10 +358,13 @@
             this.luePort.Name = "luePort";
             this.luePort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.luePort.Properties.DisplayMember = "英文名称";
+            this.luePort.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnName", "英文名称")});
+            this.luePort.Properties.DisplayMember = "EnName";
             this.luePort.Properties.NullText = "";
             this.luePort.Properties.ShowFooter = false;
-            this.luePort.Properties.ValueMember = "英文名称";
+            this.luePort.Properties.ValueMember = "EnName";
             this.luePort.Size = new System.Drawing.Size(273, 25);
             this.luePort.StyleController = this.layoutControl1;
             this.luePort.TabIndex = 62;
@@ -431,18 +438,18 @@
             this.ucSupplierSelected.Size = new System.Drawing.Size(537, 17);
             this.ucSupplierSelected.TabIndex = 0;
             // 
-            // txtDirectCosts
+            // txtPurchasePrice
             // 
-            this.txtDirectCosts.IsSupportNegative = false;
-            this.txtDirectCosts.Location = new System.Drawing.Point(1241, 426);
-            this.txtDirectCosts.Name = "txtDirectCosts";
-            this.txtDirectCosts.Properties.NullText = "0.00";
-            this.txtDirectCosts.Properties.ReadOnly = true;
-            this.txtDirectCosts.Size = new System.Drawing.Size(96, 25);
-            this.txtDirectCosts.StyleController = this.layoutControl1;
-            this.txtDirectCosts.TabIndex = 57;
-            this.txtDirectCosts.ToolTip = "内贸合约部分所有行（数量*小计）总和";
-            this.txtDirectCosts.EditValueChanged += new System.EventHandler(this.InProductDetail_EditValueChanged);
+            this.txtPurchasePrice.IsSupportNegative = false;
+            this.txtPurchasePrice.Location = new System.Drawing.Point(1241, 426);
+            this.txtPurchasePrice.Name = "txtPurchasePrice";
+            this.txtPurchasePrice.Properties.NullText = "0.00";
+            this.txtPurchasePrice.Properties.ReadOnly = true;
+            this.txtPurchasePrice.Size = new System.Drawing.Size(96, 25);
+            this.txtPurchasePrice.StyleController = this.layoutControl1;
+            this.txtPurchasePrice.TabIndex = 57;
+            this.txtPurchasePrice.ToolTip = "内贸合约部分所有行（数量*小计）总和";
+            this.txtPurchasePrice.EditValueChanged += new System.EventHandler(this.InProductDetail_EditValueChanged);
             // 
             // btnSure
             // 
@@ -619,17 +626,17 @@
             this.txtBankCharges.TabIndex = 41;
             this.txtBankCharges.EditValueChanged += new System.EventHandler(this.Charges_EditValueChanged);
             // 
-            // txtOther
+            // txtDirectCosts
             // 
-            this.txtOther.IsSupportNegative = false;
-            this.txtOther.Location = new System.Drawing.Point(757, 620);
-            this.txtOther.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtOther.Name = "txtOther";
-            this.txtOther.Properties.NullText = "0.00";
-            this.txtOther.Size = new System.Drawing.Size(173, 25);
-            this.txtOther.StyleController = this.layoutControl1;
-            this.txtOther.TabIndex = 39;
-            this.txtOther.EditValueChanged += new System.EventHandler(this.Charges_EditValueChanged);
+            this.txtDirectCosts.IsSupportNegative = false;
+            this.txtDirectCosts.Location = new System.Drawing.Point(757, 620);
+            this.txtDirectCosts.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtDirectCosts.Name = "txtDirectCosts";
+            this.txtDirectCosts.Properties.NullText = "0.00";
+            this.txtDirectCosts.Size = new System.Drawing.Size(173, 25);
+            this.txtDirectCosts.StyleController = this.layoutControl1;
+            this.txtDirectCosts.TabIndex = 39;
+            this.txtDirectCosts.EditValueChanged += new System.EventHandler(this.Charges_EditValueChanged);
             // 
             // txtFeedMoney
             // 
@@ -671,6 +678,7 @@
             this.gridOutProductDetail.TabIndex = 36;
             this.gridOutProductDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutProductDetail});
+            this.gridOutProductDetail.Leave += new System.EventHandler(this.gridOutProductDetail_Leave);
             // 
             // gvOutProductDetail
             // 
@@ -708,6 +716,8 @@
             // 
             this.gcCount.Caption = "数量";
             this.gcCount.ColumnEdit = this.ritxtCount;
+            this.gcCount.DisplayFormat.FormatString = "n";
+            this.gcCount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcCount.FieldName = "Count";
             this.gcCount.Name = "gcCount";
             this.gcCount.Visible = true;
@@ -741,6 +751,8 @@
             // 
             this.gcPrice.Caption = "单价";
             this.gcPrice.ColumnEdit = this.ritxtPrice;
+            this.gcPrice.DisplayFormat.FormatString = "n";
+            this.gcPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcPrice.FieldName = "Price";
             this.gcPrice.Name = "gcPrice";
             this.gcPrice.Visible = true;
@@ -769,6 +781,8 @@
             // 
             this.gcExchangeRate.Caption = "汇率";
             this.gcExchangeRate.ColumnEdit = this.ritxtExchangeRate;
+            this.gcExchangeRate.DisplayFormat.FormatString = "n";
+            this.gcExchangeRate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
@@ -889,7 +903,8 @@
             this.ritxtProcessCost,
             this.ritxtSubtotal,
             this.riLinkEditInDelete,
-            this.ritxtTaxRebateRate});
+            this.ritxtTaxRebateRate,
+            this.ritxtVat});
             this.gridInProductDetail.Size = new System.Drawing.Size(1188, 116);
             this.gridInProductDetail.TabIndex = 28;
             this.gridInProductDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -903,6 +918,7 @@
             this.gridBand3,
             this.gridBand4,
             this.gridBand10,
+            this.gridBand13,
             this.gridBand12,
             this.gridBand11,
             this.gridBand9});
@@ -915,6 +931,7 @@
             this.gcProcessCost,
             this.gcSubtotal,
             this.gcMoneySubtotal,
+            this.gcVat,
             this.gcTaxRebateRate,
             this.gcTaxRebate,
             this.gcInDelete});
@@ -926,6 +943,7 @@
             this.bgvInProductDetail.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.bgvInProductDetail.OptionsView.ShowColumnHeaders = false;
             this.bgvInProductDetail.OptionsView.ShowGroupPanel = false;
+            this.bgvInProductDetail.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.bgvInProductDetail_InitNewRow);
             this.bgvInProductDetail.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.bgvInProductDetail_CellValueChanged);
             this.bgvInProductDetail.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.bgvInProductDetail_InvalidRowException);
             this.bgvInProductDetail.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.bgvInProductDetail_ValidateRow);
@@ -937,7 +955,7 @@
             this.gridBand1.Caption = "品名规格";
             this.gridBand1.Columns.Add(this.gcInName);
             this.gridBand1.Name = "gridBand1";
-            this.gridBand1.Width = 187;
+            this.gridBand1.Width = 194;
             // 
             // gcInName
             // 
@@ -945,7 +963,7 @@
             this.gcInName.FieldName = "Name";
             this.gcInName.Name = "gcInName";
             this.gcInName.Visible = true;
-            this.gcInName.Width = 187;
+            this.gcInName.Width = 194;
             // 
             // gridBand2
             // 
@@ -954,16 +972,18 @@
             this.gridBand2.Caption = "数量";
             this.gridBand2.Columns.Add(this.gcInCount);
             this.gridBand2.Name = "gridBand2";
-            this.gridBand2.Width = 74;
+            this.gridBand2.Width = 77;
             // 
             // gcInCount
             // 
             this.gcInCount.Caption = "数量";
             this.gcInCount.ColumnEdit = this.ritxtInCount;
+            this.gcInCount.DisplayFormat.FormatString = "n";
+            this.gcInCount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcInCount.FieldName = "Count";
             this.gcInCount.Name = "gcInCount";
             this.gcInCount.Visible = true;
-            this.gcInCount.Width = 74;
+            this.gcInCount.Width = 77;
             // 
             // ritxtInCount
             // 
@@ -977,7 +997,7 @@
             this.gridBand3.Caption = "单位";
             this.gridBand3.Columns.Add(this.gcInUnit);
             this.gridBand3.Name = "gridBand3";
-            this.gridBand3.Width = 67;
+            this.gridBand3.Width = 69;
             // 
             // gcInUnit
             // 
@@ -985,7 +1005,7 @@
             this.gcInUnit.FieldName = "Unit";
             this.gcInUnit.Name = "gcInUnit";
             this.gcInUnit.Visible = true;
-            this.gcInUnit.Width = 67;
+            this.gcInUnit.Width = 69;
             // 
             // gridBand4
             // 
@@ -998,7 +1018,7 @@
             this.gridBand7,
             this.gridBand8});
             this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 439;
+            this.gridBand4.Width = 406;
             // 
             // gridBand5
             // 
@@ -1007,16 +1027,18 @@
             this.gridBand5.Caption = "原料";
             this.gridBand5.Columns.Add(this.gcRawMaterials);
             this.gridBand5.Name = "gridBand5";
-            this.gridBand5.Width = 112;
+            this.gridBand5.Width = 102;
             // 
             // gcRawMaterials
             // 
             this.gcRawMaterials.Caption = "原料";
             this.gcRawMaterials.ColumnEdit = this.ritxtRawMaterials;
+            this.gcRawMaterials.DisplayFormat.FormatString = "n";
+            this.gcRawMaterials.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcRawMaterials.FieldName = "RawMaterials";
             this.gcRawMaterials.Name = "gcRawMaterials";
             this.gcRawMaterials.Visible = true;
-            this.gcRawMaterials.Width = 112;
+            this.gcRawMaterials.Width = 102;
             // 
             // ritxtRawMaterials
             // 
@@ -1030,16 +1052,18 @@
             this.gridBand6.Caption = "辅料";
             this.gridBand6.Columns.Add(this.gcSubsidiaryMaterials);
             this.gridBand6.Name = "gridBand6";
-            this.gridBand6.Width = 100;
+            this.gridBand6.Width = 91;
             // 
             // gcSubsidiaryMaterials
             // 
             this.gcSubsidiaryMaterials.Caption = "辅料";
             this.gcSubsidiaryMaterials.ColumnEdit = this.ritxtSubsidiaryMaterials;
+            this.gcSubsidiaryMaterials.DisplayFormat.FormatString = "n";
+            this.gcSubsidiaryMaterials.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcSubsidiaryMaterials.FieldName = "SubsidiaryMaterials";
             this.gcSubsidiaryMaterials.Name = "gcSubsidiaryMaterials";
             this.gcSubsidiaryMaterials.Visible = true;
-            this.gcSubsidiaryMaterials.Width = 100;
+            this.gcSubsidiaryMaterials.Width = 91;
             // 
             // ritxtSubsidiaryMaterials
             // 
@@ -1053,16 +1077,18 @@
             this.gridBand7.Caption = "加工";
             this.gridBand7.Columns.Add(this.gcProcessCost);
             this.gridBand7.Name = "gridBand7";
-            this.gridBand7.Width = 119;
+            this.gridBand7.Width = 108;
             // 
             // gcProcessCost
             // 
             this.gcProcessCost.Caption = "加工";
             this.gcProcessCost.ColumnEdit = this.ritxtProcessCost;
+            this.gcProcessCost.DisplayFormat.FormatString = "n";
+            this.gcProcessCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcProcessCost.FieldName = "ProcessCost";
             this.gcProcessCost.Name = "gcProcessCost";
             this.gcProcessCost.Visible = true;
-            this.gcProcessCost.Width = 119;
+            this.gcProcessCost.Width = 108;
             // 
             // ritxtProcessCost
             // 
@@ -1076,17 +1102,19 @@
             this.gridBand8.Caption = "小计";
             this.gridBand8.Columns.Add(this.gcSubtotal);
             this.gridBand8.Name = "gridBand8";
-            this.gridBand8.Width = 108;
+            this.gridBand8.Width = 105;
             // 
             // gcSubtotal
             // 
             this.gcSubtotal.Caption = "小计";
             this.gcSubtotal.ColumnEdit = this.ritxtSubtotal;
+            this.gcSubtotal.DisplayFormat.FormatString = "n";
+            this.gcSubtotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcSubtotal.FieldName = "Subtotal";
             this.gcSubtotal.Name = "gcSubtotal";
             this.gcSubtotal.OptionsColumn.AllowEdit = false;
             this.gcSubtotal.Visible = true;
-            this.gcSubtotal.Width = 108;
+            this.gcSubtotal.Width = 105;
             // 
             // ritxtSubtotal
             // 
@@ -1100,7 +1128,7 @@
             this.gridBand10.Caption = "金额小计";
             this.gridBand10.Columns.Add(this.gcMoneySubtotal);
             this.gridBand10.Name = "gridBand10";
-            this.gridBand10.Width = 75;
+            this.gridBand10.Width = 98;
             // 
             // gcMoneySubtotal
             // 
@@ -1111,21 +1139,48 @@
             this.gcMoneySubtotal.Name = "gcMoneySubtotal";
             this.gcMoneySubtotal.OptionsColumn.AllowEdit = false;
             this.gcMoneySubtotal.Visible = true;
+            this.gcMoneySubtotal.Width = 98;
+            // 
+            // gridBand13
+            // 
+            this.gridBand13.Caption = "增值税率";
+            this.gridBand13.Columns.Add(this.gcVat);
+            this.gridBand13.Name = "gridBand13";
+            this.gridBand13.Width = 84;
+            // 
+            // gcVat
+            // 
+            this.gcVat.Caption = "增值税率";
+            this.gcVat.ColumnEdit = this.ritxtVat;
+            this.gcVat.DisplayFormat.FormatString = "n";
+            this.gcVat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gcVat.FieldName = "Vat";
+            this.gcVat.Name = "gcVat";
+            this.gcVat.Visible = true;
+            this.gcVat.Width = 84;
+            // 
+            // ritxtVat
+            // 
+            this.ritxtVat.AutoHeight = false;
+            this.ritxtVat.Name = "ritxtVat";
             // 
             // gridBand12
             // 
             this.gridBand12.Caption = "退税率";
             this.gridBand12.Columns.Add(this.gcTaxRebateRate);
             this.gridBand12.Name = "gridBand12";
-            this.gridBand12.Width = 75;
+            this.gridBand12.Width = 84;
             // 
             // gcTaxRebateRate
             // 
             this.gcTaxRebateRate.Caption = "退税率";
             this.gcTaxRebateRate.ColumnEdit = this.ritxtTaxRebateRate;
+            this.gcTaxRebateRate.DisplayFormat.FormatString = "n";
+            this.gcTaxRebateRate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcTaxRebateRate.FieldName = "TaxRebateRate";
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
+            this.gcTaxRebateRate.Width = 84;
             // 
             // ritxtTaxRebateRate
             // 
@@ -1137,7 +1192,7 @@
             this.gridBand11.Caption = "退税额";
             this.gridBand11.Columns.Add(this.gcTaxRebate);
             this.gridBand11.Name = "gridBand11";
-            this.gridBand11.Width = 75;
+            this.gridBand11.Width = 90;
             // 
             // gcTaxRebate
             // 
@@ -1148,12 +1203,13 @@
             this.gcTaxRebate.Name = "gcTaxRebate";
             this.gcTaxRebate.OptionsColumn.AllowEdit = false;
             this.gcTaxRebate.Visible = true;
+            this.gcTaxRebate.Width = 90;
             // 
             // gridBand9
             // 
             this.gridBand9.Columns.Add(this.gcInDelete);
             this.gridBand9.Name = "gridBand9";
-            this.gridBand9.Width = 56;
+            this.gridBand9.Width = 68;
             // 
             // gcInDelete
             // 
@@ -1161,7 +1217,7 @@
             this.gcInDelete.ColumnEdit = this.riLinkEditInDelete;
             this.gcInDelete.Name = "gcInDelete";
             this.gcInDelete.Visible = true;
-            this.gcInDelete.Width = 56;
+            this.gcInDelete.Width = 68;
             // 
             // riLinkEditInDelete
             // 
@@ -1576,6 +1632,8 @@
             // 
             // layoutControlItem10
             // 
+            this.layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem10.Control = this.luePort;
             this.layoutControlItem10.CustomizationFormText = "目的港口";
             this.layoutControlItem10.Location = new System.Drawing.Point(1015, 278);
@@ -1603,7 +1661,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 352);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Size = new System.Drawing.Size(1341, 223);
-            this.layoutControlGroup3.Text = "二、内贸合约部份";
+            this.layoutControlGroup3.Text = "二、内贸合约部分";
             this.layoutControlGroup3.TextLocation = DevExpress.Utils.Locations.Left;
             // 
             // layoutControlItem22
@@ -1698,7 +1756,9 @@
             // 
             // layoutControlItem7
             // 
-            this.layoutControlItem7.Control = this.txtDirectCosts;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.layoutControlItem7.Control = this.txtPurchasePrice;
             this.layoutControlItem7.CustomizationFormText = "总进价（￥）";
             this.layoutControlItem7.Location = new System.Drawing.Point(1192, 29);
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(100, 50);
@@ -1750,7 +1810,7 @@
             this.layoutControlGroup4.Location = new System.Drawing.Point(0, 575);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
             this.layoutControlGroup4.Size = new System.Drawing.Size(1341, 224);
-            this.layoutControlGroup4.Text = "三、预算部份";
+            this.layoutControlGroup4.Text = "三、预算部分";
             this.layoutControlGroup4.TextLocation = DevExpress.Utils.Locations.Left;
             // 
             // layoutControlItem39
@@ -1796,7 +1856,7 @@
             // 
             this.layoutControlItem35.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem35.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.layoutControlItem35.Control = this.txtOther;
+            this.layoutControlItem35.Control = this.txtDirectCosts;
             this.layoutControlItem35.CustomizationFormText = "其它（预）";
             this.layoutControlItem35.Location = new System.Drawing.Point(708, 0);
             this.layoutControlItem35.Name = "layoutControlItem35";
@@ -1952,6 +2012,8 @@
             // 
             // layoutControlItem8
             // 
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem8.Control = this.txtProfitLevel2;
             this.layoutControlItem8.CustomizationFormText = "盈利水平2";
             this.layoutControlItem8.Location = new System.Drawing.Point(177, 100);
@@ -2052,7 +2114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.meDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pccSupplier)).EndInit();
             this.pccSupplier.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPurchasePrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit33.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProfitLevel1.Properties)).EndInit();
@@ -2065,7 +2127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBankCharges.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOther.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDirectCosts.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFeedMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubtotal.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutProductDetail)).EndInit();
@@ -2086,6 +2148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ritxtSubsidiaryMaterials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtProcessCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtSubtotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtVat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtTaxRebateRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.riLinkEditInDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsQualified.Properties)).EndInit();
@@ -2217,7 +2280,7 @@
         private BudgetSystem.CommonControl.TextEdit_Number txtCommission;
         private BudgetSystem.CommonControl.TextEdit_Number txtPremium;
         private BudgetSystem.CommonControl.TextEdit_Number txtBankCharges;
-        private BudgetSystem.CommonControl.TextEdit_Number txtOther;
+        private BudgetSystem.CommonControl.TextEdit_Number txtDirectCosts;
         private BudgetSystem.CommonControl.TextEdit_Number txtFeedMoney;
         private BudgetSystem.CommonControl.TextEdit_Number txtSubtotal;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem33;
@@ -2257,7 +2320,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.TextEdit txtContractNO;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
-        private BudgetSystem.CommonControl.TextEdit_Number txtDirectCosts;
+        private BudgetSystem.CommonControl.TextEdit_Number txtPurchasePrice;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.PopupContainerControl pccCustomer;
         private ucCustomerSelected ucCustomerSelected;
@@ -2289,6 +2352,13 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcMoneySubtotal;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcTaxRebateRate;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcTaxRebate;
+        private CommonControl.TextEdit_Number txtProfitLevel2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraEditors.PopupContainerEdit pceMainCustomer;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.LookUpEdit luePort;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtTaxRebateRate;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
@@ -2298,15 +2368,11 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand10;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand13;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gcVat;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtVat;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand12;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand11;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand9;
-        private CommonControl.TextEdit_Number txtProfitLevel2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.PopupContainerEdit pceMainCustomer;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraEditors.LookUpEdit luePort;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit ritxtTaxRebateRate;
     }
 }

@@ -12,21 +12,22 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<ActualReceipts> GetAllActualReceipts(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` 
-            From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID`";
+            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` ,ar.`TradingPostscript`,ar.`State`,ar.`OriginalCoin2`,ar.`CNY2`,ar.`Operator`,ar.`OperateTimestamp`,ar.`IsDelete`
+            From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID`
+            WHERE ar.IsDelete=0 and ar.`ID`<>0";
             return con.Query<ActualReceipts>(selectSql, null, tran);
         }
 
         public ActualReceipts GetActualReceiptById(int id, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` 
-            From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID` WHERE ar.`ID`=@ID";
+            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` ,ar.`TradingPostscript`,ar.`State`,ar.`OriginalCoin2`,ar.`CNY2`,ar.`Operator`,ar.`OperateTimestamp`,ar.`IsDelete`
+            From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID` WHERE ar.`ID`=@ID ";
             return con.Query<ActualReceipts>(selectSql, new { ID = id }, tran).SingleOrDefault();
         }
 
         public int AddActualReceipts(ActualReceipts actualReceipts, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `ActualReceipts` (`BudgetID`,`VoucherNo`,`OriginalCoin`,`CNY`,`ReceiptDate`,`CreateUser`,`CreateTimestamp`,`Description`,`PaymentMethod`,`DepartmentCode`,`ExchangeRate`,`BankName`,`Remitter`,`TradingPostscript`) Values (@BudgetID,@VoucherNo,@OriginalCoin,@CNY,@ReceiptDate,@CreateUser,@CreateTimestamp,@Description,@PaymentMethod,@DepartmentCode,@ExchangeRate,@BankName,@Remitter,@TradingPostscript)";
+            string insertSql = "Insert Into `ActualReceipts` (`ID`,`VoucherNo`,`OriginalCoin`,`CNY`,`ReceiptDate`,`CreateUser`,`CreateTimestamp`,`Description`,`PaymentMethod`,`DepartmentCode`,`ExchangeRate`,`BankName`,`Remitter`,`BudgetID`,`Currency`,`ReceiptType`,`TradingPostscript`,`SourceID`,`State`,`IsDelete`,`OriginalCoin2`,`CNY2`,`Operator`,`OperateTimestamp`) Values (@ID,@VoucherNo,@OriginalCoin,@CNY,@ReceiptDate,@CreateUser,@CreateTimestamp,@Description,@PaymentMethod,@DepartmentCode,@ExchangeRate,@BankName,@Remitter,@BudgetID,@Currency,@ReceiptType,@TradingPostscript,@SourceID,@State,@OriginalCoin2,@CNY2,@Operator,@OperateTimestamp)";
             int id = con.Insert(insertSql, actualReceipts, tran);
             if (id > 0)
             {
@@ -37,14 +38,45 @@ namespace BudgetSystem.Dal
 
         public void ModifyActualReceipts(ActualReceipts modifyReceipt, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `ActualReceipts` Set `VoucherNo` = @VoucherNo,`TradingPostscript`=@TradingPostscript,`BudgetID` = @BudgetID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`CreateUser` = @CreateUser,`CreateTimestamp` = @CreateTimestamp,`Description` = @Description,`PaymentMethod` = @PaymentMethod,`DepartmentCode` = @DepartmentCode,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Remitter` = @Remitter Where `ID` = @ID";
+            string updateSql = "Update `ActualReceipts` Set `VoucherNo` = @VoucherNo,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`CreateUser` = @CreateUser,`CreateTimestamp` = @CreateTimestamp,`Description` = @Description,`PaymentMethod` = @PaymentMethod,`DepartmentCode` = @DepartmentCode,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Remitter` = @Remitter,`BudgetID` = @BudgetID,`Currency` = @Currency,`ReceiptType` = @ReceiptType,`TradingPostscript` = @TradingPostscript,`SourceID` = @SourceID,`State` = @State,`OriginalCoin2` = @OriginalCoin2,`CNY2` = @CNY2,`Operator` = @Operator,`OperateTimestamp` = @OperateTimestamp) Where `ID` = @ID";
             con.Execute(updateSql, modifyReceipt, tran);
         }
 
+        /// <summary>
+        /// 关联入帐单到合同
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="budgetId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
         public void RelationActualReceiptsToBudget(int Id, int budgetId, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = @"Update `ActualReceipts` Set `BudgetID` = @BudgetID Where `ID` = @ID";
             con.Execute(updateSql, new { BudgetID = budgetId, ID = Id }, tran);
+        }
+
+        public void DeleteRelationBudgetReceipt(int Id, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `ActualReceipts` Set `IsDelete` = @IsDelete Where `ID` = @ID";
+            con.Execute(updateSql, new { IsDelete = 1, ID = Id }, tran);
+        }
+
+        public void DeleteSplitBudgetReceipt(int id, IDbConnection con, IDbTransaction tran)
+        {
+            string deleteSql = "DELETE FROM `ActualReceipts` WHERE  `ID` = @ID";
+            con.Execute(deleteSql, new { ID = id }, tran);
+        }
+
+        /// <summary>
+        /// 删除收帐单关联业务员
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        public void DeleteReceiptNoticeByReceiptId(int id, IDbConnection con, IDbTransaction tran)
+        {
+            string deleteSql = "DELETE FROM `ReceiptNotice` WHERE  `ReceiptID` = @ID";
+            con.Execute(deleteSql, new { ID = id }, tran);
         }
 
         /// <summary>
@@ -57,7 +89,7 @@ namespace BudgetSystem.Dal
         public decimal GetTotalAmountByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"select sum(CNY) as TotalAmount from actualreceipts
-                    where BudgetID=@BudgetID";
+                    where BudgetID=@BudgetID AND STATE<>4";
 
             IDbCommand command = con.CreateCommand();
             command.CommandText = selectSql;
@@ -73,11 +105,37 @@ namespace BudgetSystem.Dal
             return totalAmount;
         }
 
+        /// <summary>
+        /// 获取原单据已经分拆金额。
+        /// </summary>
+        /// <param name="sourceId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public decimal GetAmountNotSplitBySourceId(int sourceId, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"select sum(CNY) as TotalAmount from actualreceipts
+                    where BudgetID=@BudgetID AND SourceID=@SourceID AND STATE<>4";
+
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Transaction = tran;
+            IDbDataParameter paramter = command.CreateParameter();
+            paramter.DbType = DbType.Int32;
+            paramter.ParameterName = "SourceID";
+            paramter.Value = sourceId;
+            command.Parameters.Add(paramter);
+            object obj = command.ExecuteScalar();
+            decimal totalAmount = 0;
+            decimal.TryParse(obj.ToString(), out totalAmount);
+            return totalAmount;
+        }
+
         public IEnumerable<ActualReceipts> GetActualReceiptsByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` 
+            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` ,ar.`TradingPostscript`,ar.`State`,ar.`OriginalCoin2`,ar.`CNY2`,ar.`Operator`,ar.`OperateTimestamp`,ar.`IsDelete`
             From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID`
-            WHERE ar.`BudgetID`=@BudgetID";
+            WHERE ar.`BudgetID`=@BudgetID AND ar.`ID`<>0";
             return con.Query<ActualReceipts>(selectSql, new { BudgetID = budgetId }, tran);
         }
 

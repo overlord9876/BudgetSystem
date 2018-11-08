@@ -52,13 +52,13 @@ namespace BudgetSystem.Dal
                                            `OutSettlementMethod2`,`OutSettlementMethod3`,`TotalAmount`,`Country`,`IsQualifiedSupplier`,
                                            `InProductDetail`,`AdvancePayment`,`InterestRate`,
                                            `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,
-                                           `Description`,`CustomerID`,`Port`,`TaxRebate`)
+                                           `Description`,`CustomerID`,`Port`,`TaxRebate`,`PurchasePrice`)
                                     Values (@ContractNO,@State,@Salesman,@Department,now(),@SignDate,@Validity,
                                             @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@OutSettlementMethod,
                                             @OutSettlementMethod2,@OutSettlementMethod3,@TotalAmount,@Country,@IsQualifiedSupplier,
                                             @InProductDetail,@AdvancePayment,@InterestRate,
                                             @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,
-                                            @Description,@CustomerID,@Port,@TaxRebate)";
+                                            @Description,@CustomerID,@Port,@TaxRebate,@PurchasePrice)";
             int id = con.Insert(insertSql, budget, tran);
             if (id > 0)
             {
@@ -76,10 +76,10 @@ namespace BudgetSystem.Dal
                                          `OutProductDetail` = @OutProductDetail,`PriceClause` = @PriceClause,`OutSettlementMethod` = @OutSettlementMethod,
                                          `OutSettlementMethod2` = @OutSettlementMethod2,`OutSettlementMethod3` = @OutSettlementMethod3,
                                          `TotalAmount` = @TotalAmount,`Country` = @Country,`IsQualifiedSupplier` = @IsQualifiedSupplier,
-                                         `InProductDetail` = @InProductDetail,
-                                         `AdvancePayment` = @AdvancePayment,`InterestRate` = @InterestRate,`Days` = @Days,`Commission` = @Commission,
-                                         `Premium` = @Premium,`BankCharges` = @BankCharges,`DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,
-                                         `ExchangeRate` = @ExchangeRate ,`Description`=@Description,`CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate 
+                                         `InProductDetail` = @InProductDetail,`AdvancePayment` = @AdvancePayment,`InterestRate` = @InterestRate,
+                                         `Days` = @Days,`Commission` = @Commission,`Premium` = @Premium,`BankCharges` = @BankCharges,
+                                         `DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,`ExchangeRate` = @ExchangeRate ,`Description`=@Description,
+                                         `CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate ,`PurchasePrice`=@PurchasePrice
                                 Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;

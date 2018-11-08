@@ -14,7 +14,7 @@ namespace BudgetSystem.Bll
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public DataTable GetSystemConfigValue(string name) 
+        public T GetSystemConfigValue<T>(string name)
         {
             string value = this.ExecuteWithoutTransaction<string>((con) =>
             {
@@ -22,16 +22,16 @@ namespace BudgetSystem.Bll
             });
             if (!string.IsNullOrEmpty(value))
             {
-                return JsonConvert.DeserializeObject<DataTable>(value);
+                return JsonConvert.DeserializeObject<T>(value);
             }
             else
             {
-                return null;
+                return default(T);
             } 
         } 
-        public void ModifySupplier(string name,DataTable dtValue) 
+        public void ModifySupplier<T>(string name,T data) 
         {
-            string value = JsonConvert.SerializeObject(dtValue);
+            string value = JsonConvert.SerializeObject(data);
             this.ExecuteWithTransaction((con, tran) =>
             {
                 dal.ModifySystemConfig(name,value,con,tran); 

@@ -109,10 +109,10 @@ namespace BudgetSystem
         private void InitParameter()
         {
             Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
-            DataTable dtCountry = scm.GetSystemConfigValue(EnumSystemConfigNames.国家地区.ToString());
-            this.lueCountry.Properties.DataSource = dtCountry;
-            DataTable dtPort = scm.GetSystemConfigValue(EnumSystemConfigNames.港口信息.ToString());
-            this.luePort.Properties.DataSource = dtPort;
+            List<Country> countryList = scm.GetSystemConfigValue<List<Country>>(EnumSystemConfigNames.国家地区.ToString());
+            this.lueCountry.Properties.DataSource = countryList;
+            List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
+            this.luePort.Properties.DataSource = portList;
         }
 
         private void BindingAllUser()
