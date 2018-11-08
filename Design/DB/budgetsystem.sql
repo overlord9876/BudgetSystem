@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 29/10/2018 01:01:17
+ Date: 08/11/2018 21:07:53
 */
 
 SET NAMES utf8mb4;
@@ -233,15 +233,17 @@ CREATE TABLE `flowinstance`  (
   INDEX `Index_Date`(`DateItemID`, `DateItemType`) USING BTREE,
   INDEX `FK_Reference_FlowInstance_Flow`(`FlowName`, `FlowVersionNumber`) USING BTREE,
   CONSTRAINT `FK_Reference_FlowInstance_Flow` FOREIGN KEY (`FlowName`, `FlowVersionNumber`) REFERENCES `flow` (`Name`, `VersionNumber`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '审批主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '审批主表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of flowinstance
 -- ----------------------------
-INSERT INTO `flowinstance` VALUES (5, '预算单审批', 3, 999, '测试业务数据', '2018-10-29 00:24:04', 'admin', b'0', b'1', '审批不通过', '2018-10-29 00:28:01', b'0', NULL);
+INSERT INTO `flowinstance` VALUES (5, '预算单审批', 3, 999, '测试业务数据', '2018-10-29 00:24:04', 'admin', b'0', b'1', '审批不通过', '2018-10-29 00:28:01', b'1', '2018-11-03 22:32:08');
 INSERT INTO `flowinstance` VALUES (6, '预算单审批', 3, 999, '测试业务数据', '2018-10-29 00:28:56', 'admin', b'1', b'1', '审批通过', '2018-10-29 00:45:47', b'0', NULL);
 INSERT INTO `flowinstance` VALUES (8, '预算单审批', 3, 999, '测试业务数据', '2018-10-29 00:47:18', 'TestUser1', b'1', b'1', '审批通过', '2018-10-29 00:50:28', b'0', NULL);
 INSERT INTO `flowinstance` VALUES (9, '预算单审批', 3, 999, '测试业务数据', '2018-10-29 00:50:46', 'TestUser2', b'0', b'1', '审批不通过', '2018-10-29 00:51:42', b'0', NULL);
+INSERT INTO `flowinstance` VALUES (10, '预算单审批', 3, 999, '测试业务数据', '2018-11-02 22:30:41', 'TestUser2', b'0', b'1', '流转失败，流程发起人未配置部门，无法定位审批人', '2018-11-03 01:01:46', b'0', NULL);
+INSERT INTO `flowinstance` VALUES (11, '预算单审批', 3, 999, '测试业务数据', '2018-11-03 01:02:36', 'admin', b'0', b'0', NULL, NULL, b'0', NULL);
 
 -- ----------------------------
 -- Table structure for flownode
@@ -296,7 +298,7 @@ CREATE TABLE `flowrunpoint`  (
   `NodeApproveUser` varchar(30) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL COMMENT '实际审批人',
   `NodeApproveResult` bit(1) NULL DEFAULT NULL COMMENT '节点审批结果',
   `NodeApproveRemark` varchar(300) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL COMMENT '节点审批意见',
-  `State` int(11) NULL DEFAULT NULL COMMENT '运行点状态0，未处理，1已审批',
+  `State` bit(1) NULL DEFAULT NULL COMMENT '运行点状态0，未处理，1已审批',
   `RunPointCreateDate` datetime(0) NULL DEFAULT NULL COMMENT '生成时间',
   `NodeApproveDate` datetime(0) NULL DEFAULT NULL COMMENT '审核时间',
   PRIMARY KEY (`ID`) USING BTREE,
@@ -305,26 +307,32 @@ CREATE TABLE `flowrunpoint`  (
   INDEX `FK_Reference_FlowRunpoint_FlowInstance`(`InstanceID`) USING BTREE,
   CONSTRAINT `FK_Reference_FlowRunpoint_FlowInstance` FOREIGN KEY (`InstanceID`) REFERENCES `flowinstance` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_Reference_FlowRunpoint_FlowNode` FOREIGN KEY (`NodeID`) REFERENCES `flownode` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '审批过程表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '审批过程表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of flowrunpoint
 -- ----------------------------
-INSERT INTO `flowrunpoint` VALUES (1, 17, 1, 5, 'admin', b'0', '不同意', 1, '2018-10-29 00:24:05', '2018-10-29 00:27:58');
-INSERT INTO `flowrunpoint` VALUES (2, 17, 1, 6, 'admin', b'1', '不同意', 1, '2018-10-29 00:28:56', '2018-10-29 00:36:22');
-INSERT INTO `flowrunpoint` VALUES (3, 18, 2, 6, 'admin', b'1', '同意', 1, '2018-10-29 00:37:40', '2018-10-29 00:38:32');
-INSERT INTO `flowrunpoint` VALUES (4, 18, 2, 6, 'admin', b'1', '同意', 1, '2018-10-29 00:38:36', '2018-10-29 00:39:23');
-INSERT INTO `flowrunpoint` VALUES (5, 18, 2, 6, 'admin', b'1', '同意', 1, '2018-10-29 00:39:25', '2018-10-29 00:41:08');
-INSERT INTO `flowrunpoint` VALUES (6, 18, 2, 6, 'admin', b'1', '同意', 1, '2018-10-29 00:42:53', '2018-10-29 00:44:01');
-INSERT INTO `flowrunpoint` VALUES (7, 19, 3, 6, 'admin', b'1', '同意', 1, '2018-10-29 00:44:22', '2018-10-29 00:44:36');
-INSERT INTO `flowrunpoint` VALUES (8, 20, 4, 6, 'test2', b'1', '同意', 1, '2018-10-29 00:45:02', '2018-10-29 00:45:37');
-INSERT INTO `flowrunpoint` VALUES (9, 17, 1, 8, 'admin', b'1', '同意', 1, '2018-10-29 00:47:18', '2018-10-29 00:47:55');
-INSERT INTO `flowrunpoint` VALUES (10, 18, 2, 8, 'admin', b'1', '同意', 1, '2018-10-29 00:47:57', '2018-10-29 00:48:18');
-INSERT INTO `flowrunpoint` VALUES (11, 19, 3, 8, 'TestUser1', b'1', '同意', 1, '2018-10-29 00:48:30', '2018-10-29 00:49:06');
-INSERT INTO `flowrunpoint` VALUES (12, 20, 4, 8, 'test2', b'1', '同意', 1, '2018-10-29 00:49:29', '2018-10-29 00:50:28');
-INSERT INTO `flowrunpoint` VALUES (13, 17, 1, 9, 'admin', b'1', '同意', 1, '2018-10-29 00:50:46', '2018-10-29 00:51:03');
-INSERT INTO `flowrunpoint` VALUES (14, 18, 2, 9, 'admin', b'1', '同意', 1, '2018-10-29 00:51:04', '2018-10-29 00:51:19');
-INSERT INTO `flowrunpoint` VALUES (15, 19, 3, 9, 'TestUser2', b'1', '同意', 1, '2018-10-29 00:51:19', '2018-10-29 00:51:22');
+INSERT INTO `flowrunpoint` VALUES (1, 17, 1, 5, 'admin', b'0', '不同意', b'1', '2018-10-29 00:24:05', '2018-10-29 00:27:58');
+INSERT INTO `flowrunpoint` VALUES (2, 17, 1, 6, 'admin', b'1', '不同意', b'1', '2018-10-29 00:28:56', '2018-10-29 00:36:22');
+INSERT INTO `flowrunpoint` VALUES (3, 18, 2, 6, 'admin', b'1', '同意', b'1', '2018-10-29 00:37:40', '2018-10-29 00:38:32');
+INSERT INTO `flowrunpoint` VALUES (4, 18, 2, 6, 'admin', b'1', '同意', b'1', '2018-10-29 00:38:36', '2018-10-29 00:39:23');
+INSERT INTO `flowrunpoint` VALUES (5, 18, 2, 6, 'admin', b'1', '同意', b'1', '2018-10-29 00:39:25', '2018-10-29 00:41:08');
+INSERT INTO `flowrunpoint` VALUES (6, 18, 2, 6, 'admin', b'1', '同意', b'1', '2018-10-29 00:42:53', '2018-10-29 00:44:01');
+INSERT INTO `flowrunpoint` VALUES (7, 19, 3, 6, 'admin', b'1', '同意', b'1', '2018-10-29 00:44:22', '2018-10-29 00:44:36');
+INSERT INTO `flowrunpoint` VALUES (8, 20, 4, 6, 'test2', b'1', '同意', b'1', '2018-10-29 00:45:02', '2018-10-29 00:45:37');
+INSERT INTO `flowrunpoint` VALUES (9, 17, 1, 8, 'admin', b'1', '同意', b'1', '2018-10-29 00:47:18', '2018-10-29 00:47:55');
+INSERT INTO `flowrunpoint` VALUES (10, 18, 2, 8, 'admin', b'1', '同意', b'1', '2018-10-29 00:47:57', '2018-10-29 00:48:18');
+INSERT INTO `flowrunpoint` VALUES (11, 19, 3, 8, 'TestUser1', b'1', '同意', b'1', '2018-10-29 00:48:30', '2018-10-29 00:49:06');
+INSERT INTO `flowrunpoint` VALUES (12, 20, 4, 8, 'test2', b'1', '同意', b'1', '2018-10-29 00:49:29', '2018-10-29 00:50:28');
+INSERT INTO `flowrunpoint` VALUES (13, 17, 1, 9, 'admin', b'1', '同意', b'1', '2018-10-29 00:50:46', '2018-10-29 00:51:03');
+INSERT INTO `flowrunpoint` VALUES (14, 18, 2, 9, 'admin', b'1', '同意', b'1', '2018-10-29 00:51:04', '2018-10-29 00:51:19');
+INSERT INTO `flowrunpoint` VALUES (15, 19, 3, 9, 'TestUser2', b'1', '同意', b'1', '2018-10-29 00:51:19', '2018-10-29 00:51:22');
+INSERT INTO `flowrunpoint` VALUES (16, 17, 1, 10, 'admin', b'1', '1111', b'1', '2018-11-02 22:30:41', '2018-11-03 00:36:54');
+INSERT INTO `flowrunpoint` VALUES (17, 18, 2, 10, 'admin', b'1', '', b'1', '2018-11-03 00:36:54', '2018-11-03 00:37:15');
+INSERT INTO `flowrunpoint` VALUES (18, 19, 3, 10, 'TestUser2', b'1', '{\r\n                case FlowRunState.启动流程成功:\r\n                    result = true;\r\n                    info = \"启动流程成功\";\r\n                    break;\r\n                case FlowRunState.数据项已正在:\r\n                    info = \"提交流程失败，当前数据项的流程已存在，不可以发起重复审批\";\r\n                    break;', b'1', '2018-11-03 00:37:15', '2018-11-03 01:01:46');
+INSERT INTO `flowrunpoint` VALUES (19, 17, 1, 11, 'admin', b'1', '{\r\n                case FlowRunState.启动流程成功:\r\n                    result = true;\r\n                    info = \"启动流程成功\";\r\n                    break;\r\n                case FlowRunState.数据项已正在:\r\n                    info = \"提交流程失败，当前数据项的流程已存在，不可以发起重复审批\";\r\n                    break;', b'1', '2018-11-03 01:02:36', '2018-11-03 01:02:56');
+INSERT INTO `flowrunpoint` VALUES (20, 18, 2, 11, 'admin', b'1', '11\r\nbb\r\ncc', b'1', '2018-11-03 01:02:56', '2018-11-03 01:04:55');
+INSERT INTO `flowrunpoint` VALUES (21, 19, 3, 11, 'admin', NULL, NULL, b'0', '2018-11-03 01:04:55', NULL);
 
 -- ----------------------------
 -- Table structure for paymentnotes
@@ -404,6 +412,62 @@ INSERT INTO `role` VALUES ('Default', '系统管理员', '系统全局管理员'
 INSERT INTO `role` VALUES ('YWY', '业务员', NULL);
 
 -- ----------------------------
+-- Table structure for rolepermission
+-- ----------------------------
+DROP TABLE IF EXISTS `rolepermission`;
+CREATE TABLE `rolepermission`  (
+  `RoleCode` varchar(30) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL COMMENT '角色标识',
+  `Permission` varchar(50) CHARACTER SET gbk COLLATE gbk_chinese_ci NULL DEFAULT NULL COMMENT '权限',
+  INDEX `FK_Reference_27`(`RoleCode`) USING BTREE,
+  CONSTRAINT `FK_Reference_27` FOREIGN KEY (`RoleCode`) REFERENCES `role` (`Code`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of rolepermission
+-- ----------------------------
+INSERT INTO `rolepermission` VALUES ('CW', 'UserManagement');
+INSERT INTO `rolepermission` VALUES ('CW', 'UserManagement.View');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.ReSetPassword');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.Modify');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.New');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.Disabled');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.Enabled');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.View');
+INSERT INTO `rolepermission` VALUES ('YWY', 'FlowManagement.Modify');
+INSERT INTO `rolepermission` VALUES ('YWY', 'FlowManagement');
+INSERT INTO `rolepermission` VALUES ('YWY', 'FlowManagement.View');
+INSERT INTO `rolepermission` VALUES ('YWY', 'RoleManagement.New');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.DistributeRoleUser');
+INSERT INTO `rolepermission` VALUES ('YWY', 'UserManagement.DistributeRolePermission');
+INSERT INTO `rolepermission` VALUES ('YWY', 'DepartmentManagement.Modify');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.New');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.ReSetPassword');
+INSERT INTO `rolepermission` VALUES ('Default', 'RoleManagement.New');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.DistributeRolePermission');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.DistributeRoleUser');
+INSERT INTO `rolepermission` VALUES ('Default', 'DepartmentManagement');
+INSERT INTO `rolepermission` VALUES ('Default', 'DepartmentManagement.New');
+INSERT INTO `rolepermission` VALUES ('Default', 'DepartmentManagement.Modify');
+INSERT INTO `rolepermission` VALUES ('Default', 'DepartmentManagement.View');
+INSERT INTO `rolepermission` VALUES ('Default', 'FlowManagement');
+INSERT INTO `rolepermission` VALUES ('Default', 'FlowManagement.Modify');
+INSERT INTO `rolepermission` VALUES ('Default', 'FlowManagement.View');
+INSERT INTO `rolepermission` VALUES ('Default', 'RoleManagement');
+INSERT INTO `rolepermission` VALUES ('Default', 'RoleManagement.DistributeRolePermission');
+INSERT INTO `rolepermission` VALUES ('Default', 'RoleManagement.DistributeRoleUser');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.Disabled');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.Enabled');
+INSERT INTO `rolepermission` VALUES ('Default', 'UserManagement.View');
+INSERT INTO `rolepermission` VALUES ('Default', 'MySubmitFlowManagement.Confirm');
+INSERT INTO `rolepermission` VALUES ('Default', 'MySubmitFlowManagement.View');
+INSERT INTO `rolepermission` VALUES ('Default', 'MySubmitFlowManagement');
+INSERT INTO `rolepermission` VALUES ('Default', 'MyPendingFlowManagement.Approve');
+INSERT INTO `rolepermission` VALUES ('Default', 'MyPendingFlowManagement.View');
+INSERT INTO `rolepermission` VALUES ('Default', 'MyPendingFlowManagement');
+
+-- ----------------------------
 -- Table structure for supplier
 -- ----------------------------
 DROP TABLE IF EXISTS `supplier`;
@@ -464,15 +528,15 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('11', '22', 'CW', 'CWB', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-10-21 00:13:47');
-INSERT INTO `user` VALUES ('1111', '1111', 'Default', 'CWB', '4FC82B26AECB47D2868C4EFBE3581732A3E7CBCC6C2EFB32062C08170A05EEB8', b'1', 'admin', '2018-10-21 01:03:54');
-INSERT INTO `user` VALUES ('admin', 'admin', 'Default', 'TestDept1', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-10-29 00:20:38');
-INSERT INTO `user` VALUES ('fda', 'fd', 'Default', 'YWB1', 'C6F3AC57944A531490CD39902D0F777715FD005EFAC9A30622D5F5205E7F6894', b'0', 'admin', '2018-10-21 01:07:26');
-INSERT INTO `user` VALUES ('test', 'test', '', '', '4FC82B26AECB47D2868C4EFBE3581732A3E7CBCC6C2EFB32062C08170A05EEB8', b'1', 'admin', '2018-10-21 01:03:45');
-INSERT INTO `user` VALUES ('test1', 'test1', 'Default', 'YWB1', 'abc', b'1', 'admin', '2018-10-21 01:07:26');
-INSERT INTO `user` VALUES ('test2', 'test2', 'Default', '', 'abc', b'1', 'admin', '2018-10-21 01:03:54');
-INSERT INTO `user` VALUES ('TestUser1', '测试用户A', 'Default', 'TestDept1', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-10-29 00:20:05');
-INSERT INTO `user` VALUES ('TestUser2', '测试用户2', '', '', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-10-29 00:20:22');
+INSERT INTO `user` VALUES ('11', '22', 'Default', 'CWB', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('1111', '1111', 'Default', 'CWB', '4FC82B26AECB47D2868C4EFBE3581732A3E7CBCC6C2EFB32062C08170A05EEB8', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('admin', 'admin', 'Default', 'TestDept1', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('fda', 'fd', 'Default', 'YWB1', 'C6F3AC57944A531490CD39902D0F777715FD005EFAC9A30622D5F5205E7F6894', b'0', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('test', 'test', 'Default', '', '4FC82B26AECB47D2868C4EFBE3581732A3E7CBCC6C2EFB32062C08170A05EEB8', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('test1', 'test1', 'Default', 'YWB1', 'abc', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('test2', 'test2', 'Default', '', 'abc', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('TestUser1', '测试用户A', 'Default', 'TestDept1', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-11-07 22:51:19');
+INSERT INTO `user` VALUES ('TestUser2', '测试用户2', 'Default', '', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', b'1', 'admin', '2018-11-07 22:51:19');
 
 -- ----------------------------
 -- Table structure for useroperationnotes
