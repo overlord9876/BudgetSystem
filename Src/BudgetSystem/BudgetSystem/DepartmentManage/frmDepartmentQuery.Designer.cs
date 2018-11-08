@@ -257,8 +257,6 @@
             this.gvDepartment.OptionsBehavior.Editable = false;
             this.gvDepartment.OptionsView.ShowGroupPanel = false;
             this.gvDepartment.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvDepartment_FocusedRowChanged);
-            this.gvDepartment.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvDepartment_MouseDown);
-            this.gvDepartment.DoubleClick += new System.EventHandler(this.gvDepartment_DoubleClick);
             // 
             // gridColumn1
             // 

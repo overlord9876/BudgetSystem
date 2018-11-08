@@ -15,11 +15,12 @@ namespace BudgetSystem.WorkSpace
 {
     public partial class frmMyFlowListQuery : frmBaseQueryForm
     {
-        private GridHitInfo hInfo;
+     
         FlowManager manager = new FlowManager();
         public frmMyFlowListQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.MySubmitFlowManagement;
         }
 
         protected override void InitModelOperate()
@@ -96,19 +97,11 @@ namespace BudgetSystem.WorkSpace
             this.gdFlow.DataSource = lst;
         }
 
-        private void gvFlow_MouseDown(object sender, MouseEventArgs e)
+        protected override void InitGridViewAction()
         {
-            hInfo = this.gvFlow.CalcHitInfo(e.Y, e.Y);
-        }
+            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = ConfirmFlowItem, MainOperate = OperateTypes.Confirm, SecondAction = ViewFlowItem, SecondOperate = OperateTypes.View });
 
-        private void gvFlow_DoubleClick(object sender, EventArgs e)
-        {
-            if (hInfo.InRow)
-            {
-                ConfirmFlowItem();
-            }
         }
-
 
     }
 }

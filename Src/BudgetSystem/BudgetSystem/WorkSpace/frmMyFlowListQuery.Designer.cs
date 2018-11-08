@@ -157,8 +157,7 @@
             this.gvFlow.OptionsBehavior.Editable = false;
             this.gvFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
-            this.gvFlow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvFlow_MouseDown);
-            this.gvFlow.DoubleClick += new System.EventHandler(this.gvFlow_DoubleClick);
+
             // 
             // gcDateItemID
             // 

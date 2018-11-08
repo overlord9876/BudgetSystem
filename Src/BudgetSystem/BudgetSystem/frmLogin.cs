@@ -18,7 +18,7 @@ namespace BudgetSystem
         }
 
         Bll.UserManager um = new Bll.UserManager();
-
+        Bll.RoleManager rm = new Bll.RoleManager();
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -54,6 +54,8 @@ namespace BudgetSystem
 
 
             RunInfo.Instance.CurrentUser = user;
+            RunInfo.Instance.UserPermission = rm.GetRolePermissions(user.Role);
+
 
             RunInfo.Instance.Config.UserName = this.txtUserName.Text;
             RunInfo.Instance.Config.Save();

@@ -43,6 +43,12 @@ namespace BudgetSystem
             set;
         }
 
+        public List<string> UserPermission
+        {
+            get;
+            set;
+        }
+
        
     }
 }

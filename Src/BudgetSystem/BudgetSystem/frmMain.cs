@@ -21,6 +21,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             InitSkins();
+            CheckUserPermission();
         }
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

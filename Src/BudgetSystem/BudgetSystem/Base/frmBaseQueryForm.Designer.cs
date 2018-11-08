@@ -32,11 +32,12 @@
             // 
             // frmBaseQueryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 676);
+            this.ClientSize = new System.Drawing.Size(798, 553);
             this.Name = "frmBaseQueryForm";
             this.Text = "frmBaseQueryForm";
+            this.Load += new System.EventHandler(this.frmBaseQueryForm_Load);
             this.ResumeLayout(false);
 
         }

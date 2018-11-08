@@ -50,7 +50,8 @@
             this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
+            this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -64,7 +65,6 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -102,19 +102,19 @@
             this.btnOptionManager,
             this.btnModifyPassword});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonControl1.MaxItemId = 38;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.ribbonPage1,
+            this.rpMain,
             this.ribbonPage4});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
+            this.ribbonControl1.Size = new System.Drawing.Size(1354, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -217,6 +217,7 @@
             this.btnbudgetQuery.ImageIndex = 19;
             this.btnbudgetQuery.Name = "btnbudgetQuery";
             this.btnbudgetQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnbudgetQuery.Tag = "BuggetManagement";
             this.btnbudgetQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnbudgetQuery_ItemClick);
             // 
             // btnInMoneyQuery
@@ -226,6 +227,7 @@
             this.btnInMoneyQuery.ImageIndex = 43;
             this.btnInMoneyQuery.Name = "btnInMoneyQuery";
             this.btnInMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInMoneyQuery.Tag = "InMoneyManagement";
             this.btnInMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyQuery_ItemClick);
             // 
             // btnOutMoneyQuery
@@ -235,6 +237,7 @@
             this.btnOutMoneyQuery.ImageIndex = 42;
             this.btnOutMoneyQuery.Name = "btnOutMoneyQuery";
             this.btnOutMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOutMoneyQuery.Tag = "OutMoneyManagement";
             this.btnOutMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoneyQuery_ItemClick);
             // 
             // btnUserQuery
@@ -244,6 +247,7 @@
             this.btnUserQuery.ImageIndex = 39;
             this.btnUserQuery.Name = "btnUserQuery";
             this.btnUserQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnUserQuery.Tag = "UserManagement";
             this.btnUserQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserQuery_ItemClick);
             // 
             // btnCustomerQuery
@@ -253,6 +257,7 @@
             this.btnCustomerQuery.ImageIndex = 24;
             this.btnCustomerQuery.Name = "btnCustomerQuery";
             this.btnCustomerQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnCustomerQuery.Tag = "CustomerManagement";
             this.btnCustomerQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCustomerQuery_ItemClick);
             // 
             // btnSupplierQuery
@@ -262,6 +267,7 @@
             this.btnSupplierQuery.ImageIndex = 26;
             this.btnSupplierQuery.Name = "btnSupplierQuery";
             this.btnSupplierQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSupplierQuery.Tag = "SupplierManagement";
             this.btnSupplierQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSupplierQuery_ItemClick);
             // 
             // btnInvoiceQuery
@@ -271,6 +277,7 @@
             this.btnInvoiceQuery.ImageIndex = 45;
             this.btnInvoiceQuery.Name = "btnInvoiceQuery";
             this.btnInvoiceQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInvoiceQuery.Tag = "InvoiceManagement";
             this.btnInvoiceQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvoiceQuery_ItemClick);
             // 
             // btnVoucherNotesQuery
@@ -280,6 +287,7 @@
             this.btnVoucherNotesQuery.ImageIndex = 12;
             this.btnVoucherNotesQuery.Name = "btnVoucherNotesQuery";
             this.btnVoucherNotesQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnVoucherNotesQuery.Tag = "VoucherNotesManagement";
             this.btnVoucherNotesQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVoucherNotesQuery_ItemClick);
             // 
             // btnApprovalList
@@ -289,6 +297,7 @@
             this.btnApprovalList.ImageIndex = 47;
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnApprovalList.Tag = "WorkSapceManagement";
             this.btnApprovalList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApprovalList_ItemClick);
             // 
             // btnMyOrder
@@ -298,6 +307,7 @@
             this.btnMyOrder.ImageIndex = 17;
             this.btnMyOrder.Name = "btnMyOrder";
             this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyOrder.Tag = "WorkSapceManagement";
             this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
             // 
             // barButtonItem4
@@ -316,6 +326,7 @@
             this.btnFlowConfig.ImageIndex = 52;
             this.btnFlowConfig.Name = "btnFlowConfig";
             this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnFlowConfig.Tag = "FlowManagement";
             this.btnFlowConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFlowConfig_ItemClick);
             // 
             // btnDepartment
@@ -325,6 +336,7 @@
             this.btnDepartment.ImageIndex = 40;
             this.btnDepartment.Name = "btnDepartment";
             this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnDepartment.Tag = "DepartmentManagement";
             this.btnDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDepartment_ItemClick);
             // 
             // btnRoleManager
@@ -334,6 +346,7 @@
             this.btnRoleManager.ImageIndex = 37;
             this.btnRoleManager.Name = "btnRoleManager";
             this.btnRoleManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnRoleManager.Tag = "RoleManagement";
             this.btnRoleManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoleManager_ItemClick);
             // 
             // btnOptionManager
@@ -343,17 +356,26 @@
             this.btnOptionManager.ImageIndex = 35;
             this.btnOptionManager.Name = "btnOptionManager";
             this.btnOptionManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOptionManager.Tag = "OptionManagement";
             this.btnOptionManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOptionManager_ItemClick);
             // 
-            // ribbonPage1
+            // btnModifyPassword
             // 
-            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.btnModifyPassword.Caption = "修改密码";
+            this.btnModifyPassword.Id = 37;
+            this.btnModifyPassword.ImageIndex = 61;
+            this.btnModifyPassword.Name = "btnModifyPassword";
+            this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
+            // 
+            // rpMain
+            // 
+            this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
             this.ribbonPageGroup5,
             this.ribbonPageGroup4});
-            this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "业务";
+            this.rpMain.Name = "rpMain";
+            this.rpMain.Text = "业务";
             // 
             // ribbonPageGroup1
             // 
@@ -405,11 +427,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 782);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1354, 34);
             // 
             // documentManager1
             // 
@@ -457,23 +479,15 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
-            // btnModifyPassword
-            // 
-            this.btnModifyPassword.Caption = "修改密码";
-            this.btnModifyPassword.Id = 37;
-            this.btnModifyPassword.ImageIndex = 61;
-            this.btnModifyPassword.Name = "btnModifyPassword";
-            this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1692, 997);
+            this.ClientSize = new System.Drawing.Size(1354, 816);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -492,7 +506,7 @@
         #endregion
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage rpMain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;

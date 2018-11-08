@@ -20,6 +20,19 @@ namespace BudgetSystem.RoleManage
         public frmRoleQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.RoleManagement;
+
+
+            if (!this.CheckPermission(OperateTypes.DistributeRolePermission))
+            {
+                this.btnAddPermissionToRole.Enabled = false;
+                this.btnRemvePermissionFromRole.Enabled = false;
+            }
+            if (!this.CheckPermission(OperateTypes.DistributeRoleUser))
+            {
+                this.btnAddUserToRole.Enabled = false;
+                this.btnRemveUserFromRole.Enabled = false;
+            }
         }
 
         protected override void InitModelOperate()

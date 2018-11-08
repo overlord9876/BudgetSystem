@@ -64,8 +64,7 @@
             this.gvUser.Name = "gvUser";
             this.gvUser.OptionsBehavior.Editable = false;
             this.gvUser.OptionsView.ShowGroupPanel = false;
-            this.gvUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvUser_MouseDown);
-            this.gvUser.DoubleClick += new System.EventHandler(this.gvUser_DoubleClick);
+
             // 
             // gcUserName
             // 
