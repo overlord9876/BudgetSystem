@@ -182,6 +182,27 @@
     <Compile Include="Option\frmOptionQuery.Designer.cs">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Option\ucCountryOptionEdit.cs" />
+    <Compile Include="Option\ucCountryOptionEdit.Designer.cs">
+      <DependentUpon>ucCountryOptionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Option\ucMoneyTypeOptionEdit.cs" />
+    <Compile Include="Option\ucMoneyTypeOptionEdit.Designer.cs">
+      <DependentUpon>ucMoneyTypeOptionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Option\ucOptionEditBase.cs" />
+    <Compile Include="Option\ucPortOptionEdit.cs" />
+    <Compile Include="Option\ucPortOptionEdit.Designer.cs">
+      <DependentUpon>ucPortOptionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Option\ucUseMoneyTypeOptionEdit.cs" />
+    <Compile Include="Option\ucUseMoneyTypeOptionEdit.Designer.cs">
+      <DependentUpon>ucUseMoneyTypeOptionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Option\ucVATOptionEdit.cs" />
+    <Compile Include="Option\ucVATOptionEdit.Designer.cs">
+      <DependentUpon>ucVATOptionEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="OutMoney\frmOutMoneyEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +404,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucCountryOptionEdit.resx">
+      <DependentUpon>ucCountryOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucMoneyTypeOptionEdit.resx">
+      <DependentUpon>ucMoneyTypeOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucOptionEditBase.resx">
+      <DependentUpon>ucOptionEditBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucPortOptionEdit.resx">
+      <DependentUpon>ucPortOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucUseMoneyTypeOptionEdit.resx">
+      <DependentUpon>ucUseMoneyTypeOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucVATOptionEdit.resx">
+      <DependentUpon>ucVATOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyEdit.resx">
       <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>

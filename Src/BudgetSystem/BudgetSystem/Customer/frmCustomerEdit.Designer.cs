@@ -440,12 +440,16 @@
             this.lueCountry.Name = "lueCountry";
             this.lueCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lueCountry.Properties.DisplayMember = "名称";
+            this.lueCountry.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "编号"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnName", "英文名称")});
+            this.lueCountry.Properties.DisplayMember = "Name";
             this.lueCountry.Properties.DropDownRows = 15;
             this.lueCountry.Properties.MaxLength = 50;
             this.lueCountry.Properties.NullText = "";
             this.lueCountry.Properties.ShowFooter = false;
-            this.lueCountry.Properties.ValueMember = "名称";
+            this.lueCountry.Properties.ValueMember = "Name";
             this.lueCountry.Size = new System.Drawing.Size(376, 25);
             this.lueCountry.StyleController = this.layoutControl1;
             this.lueCountry.TabIndex = 2;
@@ -456,10 +460,13 @@
             this.luePort.Name = "luePort";
             this.luePort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.luePort.Properties.DisplayMember = "英文名称";
+            this.luePort.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnName", "英文名称")});
+            this.luePort.Properties.DisplayMember = "EnName";
             this.luePort.Properties.NullText = "";
             this.luePort.Properties.ShowFooter = false;
-            this.luePort.Properties.ValueMember = "英文名称";
+            this.luePort.Properties.ValueMember = "EnName";
             this.luePort.Size = new System.Drawing.Size(379, 25);
             this.luePort.StyleController = this.layoutControl1;
             this.luePort.TabIndex = 3;

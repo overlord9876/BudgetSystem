@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DevExpress.XtraEditors;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace BudgetSystem.CommonControl
 {
@@ -12,6 +13,7 @@ namespace BudgetSystem.CommonControl
         /// <summary>
         /// 是否支持负数
         /// </summary>
+        [Description("是否支持负数")]
         public bool IsSupportNegative
         {
             get { return isSupportNegative; }

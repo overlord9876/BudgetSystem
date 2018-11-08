@@ -73,7 +73,7 @@ namespace BudgetSystem.OutMoney
             decimal subTotal = SelectedBudget.Commission + SelectedBudget.Premium + SelectedBudget.BankCharges +/*直接费用*/0 + SelectedBudget.FeedMoney;
 
             //  净收入额=外贸合约人民币小计-内贸合约部分的利息-预算小计
-            decimal netIncomeCNY = this.txtTotalAmount.Value - SelectedBudget.DirectCosts - interest - subTotal;
+            decimal netIncomeCNY = this.txtTotalAmount.Value - SelectedBudget.PurchasePrice - interest - subTotal;
             //总收金额（USD）=折合人名币/汇率
 
             this.txtNetIncome.EditValue = decimal.Round(netIncomeCNY / (decimal)SelectedBudget.ExchangeRate, 2);
@@ -81,7 +81,7 @@ namespace BudgetSystem.OutMoney
             //出口退税额=总进价/1.17*出口退税率
             //decimal TaxRebateRateMoney = Math.Round(SelectedBudget.DirectCosts / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100, 2);
             //总成本=总进价-出口退税额
-            decimal totalCost = SelectedBudget.DirectCosts - (decimal)SelectedBudget.TaxRebate;
+            decimal totalCost = SelectedBudget.PurchasePrice - (decimal)SelectedBudget.TaxRebate;
 
             //利润=折合人名币（净收入额）-总成本
             txtProfit.EditValue = netIncomeCNY - totalCost;
