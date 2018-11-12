@@ -17,8 +17,10 @@ namespace BudgetSystem.InMoney
         private ActualReceiptsManager arm = new ActualReceiptsManager();
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
-
-
+        private SystenConfigManager scm = new SystenConfigManager();
+        private UserManager um = new UserManager();
+        private List<User> allSalesmanList;
+        const string SaleRoleCode = "Sales";
 
         public frmInMoneyEdit()
         {
@@ -51,10 +53,15 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentActualReceipts.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
             CurrentActualReceipts.TradingPostscript = this.txtTradingPostscript.Text.Trim();
+            CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
+            CurrentActualReceipts.OperateTimestamp = DateTime.Now;
+            CurrentActualReceipts.State = (int)ReceiptState.入账;
+            CurrentActualReceipts.ReceiptType = 0;
+            GetSalesmanValues();
+
             CurrentActualReceipts.ID = arm.CreateActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
-
         }
 
         protected override void SubmitModifyData()
@@ -77,6 +84,10 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentActualReceipts.TradingPostscript = this.txtTradingPostscript.Text.Trim();
+            CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
+            CurrentActualReceipts.OperateTimestamp = DateTime.Now;
+            GetSalesmanValues();
+
             arm.ModifyActualReceipts(CurrentActualReceipts);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -91,6 +102,12 @@ namespace BudgetSystem.InMoney
             CheckSplitMoney();
 
             if (this.dxErrorProvider1.HasErrors) { return; }
+
+            this.CurrentActualReceipts.OriginalCoin2 = txtAlreadySplitOriginalCoinMoney.Value;
+            this.CurrentActualReceipts.CNY2 = txtAlreadySplitCNYMoney.Value;
+            this.CurrentActualReceipts.State = (int)ReceiptState.已拆分;
+            this.CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
+            this.CurrentActualReceipts.OperateTimestamp = DateTime.Now;
 
             arm.SplitActualReceipts(this.CurrentActualReceipts, GetActualReceiptList());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -115,6 +132,12 @@ namespace BudgetSystem.InMoney
             }
             if (this.dxErrorProvider1.HasErrors) { return; }
 
+            this.CurrentActualReceipts.OriginalCoin2 = txtAlreadySplitOriginalCoinMoney.Value;
+            this.CurrentActualReceipts.CNY2 = txtAlreadySplitCNYMoney.Value;
+            this.CurrentActualReceipts.State = (int)ReceiptState.关联合同;
+            this.CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
+            this.CurrentActualReceipts.OperateTimestamp = DateTime.Now;
+
             arm.RelationActualReceiptToBudget(this.CurrentActualReceipts, GetActualReceiptList());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
@@ -128,11 +151,21 @@ namespace BudgetSystem.InMoney
         {
             SetLayoutControlStyle();
 
-            //TODO:绑定币种配置。
-            cboCurrency.Properties.Items.Add("CNY");
-            cboCurrency.Properties.Items.Add("USD");
-            cboCurrency.Properties.Items.Add("HKD");
+            List<MoneyType> mtList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
+            if (mtList != null)
+            {
+                foreach (var mt in mtList)
+                {
+                    cboCurrency.Properties.Items.Add(mt.Name);
+                }
+            }
 
+            allSalesmanList = um.GetRoleUsers(SaleRoleCode);
+
+            cboSales.Properties.Items.Clear();
+
+
+            cboSales.Properties.Items.AddRange(allSalesmanList.ToArray());
 
             List<Customer> customerList = cm.GetAllCustomer();
             this.cboCustomer.Properties.DataSource = customerList;
@@ -167,8 +200,14 @@ namespace BudgetSystem.InMoney
                 else
                 {
                     BindBudgetList();
+
+                    this.bgcSales.Visible = false;
+                    this.gbSalesman.Visible = false;
                     this.lcgTitle.Text = "金额分拆设置";
                     this.Text = "金额分拆入合同";
+
+                    ricSalesman.Items.AddRange(allSalesmanList.ToArray());
+
                     BindActualReceipts(this.CurrentActualReceipts.ID);
                 }
 
@@ -202,15 +241,9 @@ namespace BudgetSystem.InMoney
 
         private List<ActualReceipts> GetActualReceiptList()
         {
-
             var splitList = ((IEnumerable<ActualReceipts>)this.gvConstSplit.DataSource).ToList();
             if (splitList.Count > 0)
             {
-                this.CurrentActualReceipts.OriginalCoin = splitList[0].OriginalCoin;
-                this.CurrentActualReceipts.CNY = splitList[0].CNY;
-                this.CurrentActualReceipts.ExchangeRate = splitList[0].ExchangeRate;
-                this.CurrentActualReceipts.RelationBudget = splitList[0].RelationBudget;
-                splitList.RemoveAt(0);
                 splitList.ForEach(o =>
                 {
                     o.BankName = this.CurrentActualReceipts.BankName;
@@ -222,6 +255,7 @@ namespace BudgetSystem.InMoney
                     o.ReceiptDate = this.CurrentActualReceipts.ReceiptDate;
                     o.Remitter = this.CurrentActualReceipts.Remitter;
                     o.VoucherNo = this.CurrentActualReceipts.VoucherNo;
+                    o.State = this.WorkModel == EditFormWorkModels.SplitConst ? 2 : 3;
                     o.TradingPostscript = this.CurrentActualReceipts.TradingPostscript;
                 });
                 return splitList;
@@ -310,6 +344,8 @@ namespace BudgetSystem.InMoney
             this.txtOriginalCoin.Text = CurrentActualReceipts.OriginalCoin.ToString();
             this.txtPaymentMethod.SelectedItem = CurrentActualReceipts.PaymentMethod;
 
+            SalemanValue(um.GetActualReceiptSalesmanList(id));
+
             foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
             {
                 if (customer.Name == CurrentActualReceipts.Remitter)
@@ -331,51 +367,32 @@ namespace BudgetSystem.InMoney
             txtCNY.EditValue = Math.Round(txtOriginalCoin.Value * txtExchangeRate.Value, 2);
         }
 
-        private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
+        private void GetSalesmanValues()
         {
-            CalcCNYValue();
-        }
-
-        private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
-        {
-            CalcCNYValue();
-        }
-
-        void gvConstSplit_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        {
-            ActualReceipts item = this.gvConstSplit.GetRow(e.RowHandle) as ActualReceipts;
-            item.ExchangeRate = (float)txtExchangeRate.Value;
-            item.OriginalCoin = txtNotSplitOriginalCoinMoney.Value / 2;
-            item.CNY = item.OriginalCoin * (decimal)item.ExchangeRate / 2;
-        }
-
-        void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
-        {
-            gvConstSplit.SetColumnError(this.gvConstSplit.FocusedColumn, e.ErrorText);
-            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
-        }
-
-        void gvConstSplit_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            this.gvConstSplit.ClearColumnErrors();
-            if (e.Column == gcSplitConstOriginalCoin
-              || e.Column == bgcConstExchangeRate)
+            if (CurrentActualReceipts.Sales == null)
             {
-                if (string.IsNullOrEmpty(CalcSplitMoney()))
+                CurrentActualReceipts.Sales = new List<User>();
+            }
+            string[] arrayList = cboSales.EditValue.ToString().Split(new char[] { ',' });
+            foreach (string array in arrayList)
+            {
+                User u = allSalesmanList.Find(o => o.ToString().Equals(array));
+                if (u != null)
                 {
-                    decimal originalCoin = (decimal)this.gvConstSplit.GetRowCellValue(e.RowHandle, gcSplitConstOriginalCoin);
-
-                    float exchangeRate = (float)this.gvConstSplit.GetRowCellValue(e.RowHandle, bgcConstExchangeRate);
-
-                    decimal CNY = originalCoin * (decimal)exchangeRate;
-
-                    this.gvConstSplit.SetRowCellValue(e.RowHandle, bgcConstCNY, CNY);
+                    CurrentActualReceipts.Sales.Add(u);
                 }
             }
-            else if (e.Column == bgcConstCNY)
+        }
+
+        private void SalemanValue(List<User> userList)
+        {
+            string salesman = string.Empty;
+            foreach (var user in userList)
             {
-                CalcSplitMoney();
+                salesman += user.ToString() + ",";
             }
+
+            this.cboSales.SetEditValue(salesman);
         }
 
         private string CalcSplitMoney()
@@ -404,7 +421,54 @@ namespace BudgetSystem.InMoney
             return message;
         }
 
-        void gvConstSplit_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcCNYValue();
+        }
+
+        private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcCNYValue();
+        }
+
+        private void gvConstSplit_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            ActualReceipts item = this.gvConstSplit.GetRow(e.RowHandle) as ActualReceipts;
+            item.ExchangeRate = (float)txtExchangeRate.Value;
+            item.OriginalCoin = txtNotSplitOriginalCoinMoney.Value / 2;
+            item.CNY = item.OriginalCoin * (decimal)item.ExchangeRate / 2;
+        }
+
+        private void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            gvConstSplit.SetColumnError(this.gvConstSplit.FocusedColumn, e.ErrorText);
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void gvConstSplit_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            this.gvConstSplit.ClearColumnErrors();
+            if (e.Column == gcSplitConstOriginalCoin
+              || e.Column == bgcConstExchangeRate)
+            {
+                if (string.IsNullOrEmpty(CalcSplitMoney()))
+                {
+                    decimal originalCoin = (decimal)this.gvConstSplit.GetRowCellValue(e.RowHandle, gcSplitConstOriginalCoin);
+
+                    float exchangeRate = (float)this.gvConstSplit.GetRowCellValue(e.RowHandle, bgcConstExchangeRate);
+
+                    decimal CNY = originalCoin * (decimal)exchangeRate;
+
+                    this.gvConstSplit.SetRowCellValue(e.RowHandle, bgcConstCNY, CNY);
+                }
+            }
+            else if (e.Column == bgcConstCNY)
+            {
+                CalcSplitMoney();
+            }
+        }
+
+        private void gvConstSplit_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             string messsage = CalcSplitMoney();
 
@@ -413,6 +477,17 @@ namespace BudgetSystem.InMoney
                 e.ErrorText = messsage;
                 e.Valid = false;
                 return;
+            }
+        }
+
+        private void cboCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            Customer c = this.cboCustomer.EditValue as Customer;
+            if (c != null)
+            {
+                List<User> salesmanList = um.GetCustomerSalesmanList(c.ID);
+
+                SalemanValue(salesmanList);
             }
         }
 

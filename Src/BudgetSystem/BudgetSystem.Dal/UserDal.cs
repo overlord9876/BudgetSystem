@@ -18,19 +18,19 @@ namespace BudgetSystem.Dal
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`Department` = `Department`.Code
             where UserName=@UserName";
-            return con.Query<User>(selectSql, new  { UserName=userName }, tran).SingleOrDefault();
+            return con.Query<User>(selectSql, new { UserName = userName }, tran).SingleOrDefault();
         }
 
-        public User GetUser(string userName,string password, IDbConnection con, IDbTransaction tran)
+        public User GetUser(string userName, string password, IDbConnection con, IDbTransaction tran)
         {
-         
+
 
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`Department` = `Department`.Code
             where UserName=@UserName and Password=@Password";
-            return con.Query<User>(selectSql, new { UserName = userName, Password=password }, tran).SingleOrDefault();
+            return con.Query<User>(selectSql, new { UserName = userName, Password = password }, tran).SingleOrDefault();
         }
 
         public IEnumerable<User> GetAllUser(IDbConnection con, IDbTransaction tran)
@@ -61,6 +61,28 @@ namespace BudgetSystem.Dal
             Where `Role`=@Role";
             return con.Query<User>(selectSql, new { Role = roleCode }, tran);
 
+        }
+
+        public List<User> GetCustomerSalesmanList(int customerId, IDbConnection con, IDbTransaction tran = null)
+        {
+            string salesmanSelectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            From `CustomerSalesman` sm left join `User` on sm.Salesman=`User`.`UserName`
+            Left Join `Role` on `User`.`Role` = `Role`.`Code` 
+            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Where sm.`Customer` = @ID";
+
+            return con.Query<User>(salesmanSelectSql, new { ID = customerId }, tran).ToList();
+        }
+
+        public List<User> GetActualReceiptSalesmanList(int actualReceiptId, IDbConnection con, IDbTransaction tran = null)
+        {
+            string salesmanSelectSql = @"Select `USER`.`UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            From `ReceiptNotice` rn left join `User` on rn.UserName=`User`.`UserName`
+            Left Join `Role` on `User`.`Role` = `Role`.`Code` 
+            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Where rn.`ID` = @ID";
+
+            return con.Query<User>(salesmanSelectSql, new { ID = actualReceiptId }, tran).ToList();
         }
 
         public IEnumerable<User> GetNotRoleUsers(string roleCode, IDbConnection con, IDbTransaction tran)
@@ -97,13 +119,13 @@ namespace BudgetSystem.Dal
 
         }
 
-        public void AddUser(User user,IDbConnection con,IDbTransaction tran)
+        public void AddUser(User user, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = "Insert Into `User` (`UserName`,`RealName`,`Role`,`Department`,`Password`,`State`,`CreateUser`,`UpdateDateTime`) Values (@UserName,@RealName,@Role,@Department,@Password,true,@CreateUser,now())";
             con.Execute(insertSql, user, tran);
         }
 
-        public void ModifyPassword(string userName,string newPassword,IDbConnection con,IDbTransaction tran)
+        public void ModifyPassword(string userName, string newPassword, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Update `User` Set `Password` = @Password ,`UpdateDateTime` = now() Where `UserName` = @UserName";
             con.Execute(updateSql, new { Password = newPassword, UserName = userName }, tran);
@@ -128,7 +150,7 @@ namespace BudgetSystem.Dal
             List<User> userList = new List<User>();
             foreach (string user in users)
             {
-                User u = new User() { UserName = user, Role = roleCode};
+                User u = new User() { UserName = user, Role = roleCode };
                 userList.Add(u);
             }
 
@@ -150,4 +172,3 @@ namespace BudgetSystem.Dal
         }
     }
 }
- 

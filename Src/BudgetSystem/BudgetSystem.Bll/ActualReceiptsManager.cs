@@ -25,7 +25,6 @@ namespace BudgetSystem.Bll
         {
             var lst = this.Query<ActualReceipts>((con) =>
             {
-
                 var uList = dal.GetActualReceiptById(id, con, null);
                 return uList;
             });
@@ -41,9 +40,15 @@ namespace BudgetSystem.Bll
             return this.ExecuteWithTransaction<int>((con, tran) =>
                     {
                         int id = dal.AddActualReceipts(addReceipts, con, tran);
+                        foreach (User u in addReceipts.Sales)
+                        {
+                            dal.AddReceiptNotice(u.UserName, id, con, tran);
+                        }
                         return id;
                     });
         }
+
+
 
         /// <summary>
         /// 创建收款记录
@@ -69,7 +74,7 @@ namespace BudgetSystem.Bll
                 {
                     dal.AddActualReceipts(newReceipt, con, tran);
                 }
-                dal.RelationActualReceiptsToBudget(relationReceipt.ID, relationReceipt.BudgetID, con, tran);
+                dal.ModifyActualReceipts(relationReceipt, con, tran);
             });
         }
 

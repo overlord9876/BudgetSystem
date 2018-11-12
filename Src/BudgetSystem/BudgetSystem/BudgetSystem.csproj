@@ -182,24 +182,36 @@
     <Compile Include="Option\frmOptionQuery.Designer.cs">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucCountryOptionEdit.cs" />
+    <Compile Include="Option\ucCountryOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucCountryOptionEdit.Designer.cs">
       <DependentUpon>ucCountryOptionEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucMoneyTypeOptionEdit.cs" />
+    <Compile Include="Option\ucMoneyTypeOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucMoneyTypeOptionEdit.Designer.cs">
       <DependentUpon>ucMoneyTypeOptionEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucOptionEditBase.cs" />
-    <Compile Include="Option\ucPortOptionEdit.cs" />
+    <Compile Include="Option\ucOptionEditBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Option\ucPortOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucPortOptionEdit.Designer.cs">
       <DependentUpon>ucPortOptionEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucUseMoneyTypeOptionEdit.cs" />
+    <Compile Include="Option\ucUseMoneyTypeOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucUseMoneyTypeOptionEdit.Designer.cs">
       <DependentUpon>ucUseMoneyTypeOptionEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucVATOptionEdit.cs" />
+    <Compile Include="Option\ucVATOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucVATOptionEdit.Designer.cs">
       <DependentUpon>ucVATOptionEdit.cs</DependentUpon>
     </Compile>

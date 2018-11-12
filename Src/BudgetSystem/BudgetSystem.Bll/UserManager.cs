@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BudgetSystem.Bll
 {
-    public class UserManager:BaseManager
+    public class UserManager : BaseManager
     {
 
         Dal.UserDal dal = new Dal.UserDal();
@@ -17,7 +17,7 @@ namespace BudgetSystem.Bll
             var user = this.Query<User>((con) =>
             {
 
-                var uList = dal.GetUser(userName,password, con, null);
+                var uList = dal.GetUser(userName, password, con, null);
                 return uList;
 
             });
@@ -26,11 +26,12 @@ namespace BudgetSystem.Bll
 
         public List<User> GetAllUser()
         {
-            var lst = this.Query<User>((con) => {
+            var lst = this.Query<User>((con) =>
+            {
 
                 var uList = dal.GetAllUser(con, null);
                 return uList;
-            
+
             });
             return lst.ToList();
         }
@@ -53,6 +54,29 @@ namespace BudgetSystem.Bll
             {
 
                 var uList = dal.GetRoleUsers(roleCode, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetCustomerSalesmanList(int customerId)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+
+                var uList = dal.GetCustomerSalesmanList(customerId, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        public List<User> GetActualReceiptSalesmanList(int actualReceiptId)
+        {
+            var lst = this.Query<User>((con) =>
+            {
+                var uList = dal.GetActualReceiptSalesmanList(actualReceiptId, con, null);
                 return uList;
 
             });
@@ -105,7 +129,7 @@ namespace BudgetSystem.Bll
 
             });
             return user;
-        
+
         }
 
 
@@ -113,7 +137,7 @@ namespace BudgetSystem.Bll
 
         public int CreateUser(User user)
         {
-            return this.ExecuteWithTransaction<int>((con,tran) =>
+            return this.ExecuteWithTransaction<int>((con, tran) =>
             {
                 User existUser = dal.GetUser(user.UserName, con, tran);
                 if (existUser != null)
@@ -138,7 +162,7 @@ namespace BudgetSystem.Bll
             this.ExecuteWithoutTransaction((con) =>
             {
 
-                dal.ModifyPassword(userName, password,  con, null);
+                dal.ModifyPassword(userName, password, con, null);
 
             });
         }
@@ -157,8 +181,8 @@ namespace BudgetSystem.Bll
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.SetUsersRole(userList, roleCode, con,tran);
-               
+                dal.SetUsersRole(userList, roleCode, con, tran);
+
             });
         }
 

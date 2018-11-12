@@ -62,6 +62,9 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string TradingPostscript { get; set; }
 
+
+        public int ReceiptType { get; set; }
+
         /// <summary>
         /// 原币金额
         /// </summary>
@@ -89,8 +92,13 @@ namespace BudgetSystem.Entity
 
         /// <summary>
         /// 入账单状态
+        /// 入账 = 0,
+        /// 待拆分 = 1,
+        /// 已拆分 = 2,
+        /// 关联合同 = 3,
+        /// 作废 = 4
         /// </summary>
-        public ReceiptState State { get; set; }
+        public int State { get; set; }
 
         /// <summary>
         /// 入账时间
@@ -137,6 +145,20 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Remitter { get; set; }
 
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public bool IsDelete { get; set; }
+
+        /// <summary>
+        /// 拆分操作人
+        /// </summary>
+        public string Operator { get; set; }
+
+        /// <summary>
+        /// 操作时间
+        /// </summary>
+        public DateTime OperateTimestamp { get; set; }
     }
 
     public enum ReceiptState : int
