@@ -30,6 +30,7 @@ namespace BudgetSystem
       
         protected override void BindingOption()
         {
+            this.txtValue.Properties.ReadOnly = !this.AllowEdit;
             decimal value = this.scm.GetSystemConfigValue<decimal>(this.OptionName);
             this.txtValue.EditValue = value;
         }

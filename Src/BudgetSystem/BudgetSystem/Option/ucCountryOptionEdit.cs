@@ -31,6 +31,14 @@ namespace BudgetSystem
         }
         protected override void BindingOption()
         {
+            if (!AllowEdit)
+            {
+                this.gvCountry.Columns.Remove(this.gcDelete);
+                this.gcEnName.OptionsColumn.AllowEdit = false;
+                this.gcName.OptionsColumn.AllowEdit = false;
+                this.gcCode.OptionsColumn.AllowEdit = false;
+                this.gvCountry.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+            }
             List<Country> countryList = this.scm.GetSystemConfigValue<List<Country>>(this.OptionName);
             if (countryList == null)
             {

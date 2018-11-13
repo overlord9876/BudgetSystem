@@ -19,6 +19,7 @@ namespace BudgetSystem
         public frmCustomerQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.CustomerManagement;
         }
         protected override void InitModelOperate()
         {

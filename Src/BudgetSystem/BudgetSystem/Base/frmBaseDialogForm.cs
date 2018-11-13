@@ -36,7 +36,6 @@ namespace BudgetSystem
             return assembly.GetManifestResourceStream(resouceName);
         }
 
-
         protected Stream GetResourceFileByWorkModel(EditFormWorkModels workModel)
         {
             string resouceName = "";
@@ -56,8 +55,7 @@ namespace BudgetSystem
         {
             return GetResourceFileByWorkModel(this.WorkModel);
         }
-
-
+        
         protected void SetLayoutControlStyle(EditFormWorkModels workModel = EditFormWorkModels.Default, DevExpress.XtraLayout.LayoutControl layout = null)
         {
             if (layout == null)
@@ -84,8 +82,7 @@ namespace BudgetSystem
             }
 
         }
-
-
+        
         protected virtual void SubmitDataByWorkModel()
         {
             if (this.WorkModel == EditFormWorkModels.New)
@@ -115,9 +112,7 @@ namespace BudgetSystem
                 SubmitCustomData();
             }
         }
-
-
-
+        
         protected virtual void SubmitNewData()
         {
 

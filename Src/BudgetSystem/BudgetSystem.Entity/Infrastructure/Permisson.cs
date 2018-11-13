@@ -103,11 +103,70 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.None,"我提交的流程",600),
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.Confirm,"我提交的流程-确认",610),
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.View,"我提交的流程-查看",620),
+
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.None,"预算单管理模块",700),
+
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.New,"预算单管理-新增预算单",710),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.Modify,"预算单管理-修改预算单",720),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Delete, "预算单管理-作废预算单",730),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Close,"预算单管理-",740),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Revoke, "预算单管理-申请修改",750),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.View,"预算单管理-查看预算单",760),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.View, "预算单管理-查看审批状态",770),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.BudgetAccountBill,"预算单管理-查看收支情况",780),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Print,"预算单管理-打印预算单",790),
+
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.None,"收款管理模块",800),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.New, "收款管理-新增入账",810),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Modify, "收款管理-分拆至合同",820),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Delete, "收款管理-删除入账",830),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.SplitCost, "收款管理-费用拆分",840),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.View, "收款管理-查看详情",850),
+                       
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.None,"付款管理模块",900),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.New, "付款管理-付款申请",910),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Modify, "付款管理-修改付款申请",920),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Delete, "付款管理-删除付款申请",930),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm, "付款管理-确认已付款",940),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.GiveUp, "付款管理-放弃付款",950),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看详情",960),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看审批记录",970),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",980), 
+
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"开票管理模块",1000),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData, "开票管理-导入开票记录",1010),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Delete, "开票管理-查看收款凭证",1020),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "开票管理-查看详情",1030),
+
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"付款凭证管理模块",1100),
+                        //new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "付款凭证管理-新增付款凭证",1110),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.ImportData, "付款凭证管理-导入付款凭证",1120),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.Delete, "付款凭证管理-删除付款凭证",1130),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.View, "付款凭证管理-查看付款凭证",1140),
+
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.None,"客户管理模块",1200),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.New,"客户管理-新增客户",1210),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.Modify,"客户管理-修改客户",1220),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.Enabled,"客户管理-启用客户",1230),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.Disabled,"客户管理-停用客户",1240),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.View,"客户管理-查看详情",1250),
+                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.Relate,"客户管理-业务员维护",1260),
+            
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.None,"供应商管理模块",1300),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.New,"供应商管理-新增供应商",1310),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.Modify,"供应商管理-修改供应商",1320),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.Enabled,"供应商管理-启用供应商",1330),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.Disabled,"供应商管理-停用供应商",1340),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.View,"供应商管理-查看详情",1350),
+            
+                        new Permisson(BusinessModules.OptionManagement,OperateTypes.None,"选项管理模块",1400),
+                        new Permisson(BusinessModules.OptionManagement,OperateTypes.Save,"选项管理-维护选项",1410),
+           
                     };
                 }
                 return allPermission;
             }
-            
+
         }
 
         public static Permisson GetPermission(string permission)
@@ -123,6 +182,6 @@ namespace BudgetSystem.Entity
         }
     }
 
-  
+
 
 }

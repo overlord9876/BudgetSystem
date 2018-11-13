@@ -32,6 +32,13 @@ namespace BudgetSystem
         }
         protected override void BindingOption()
         {
+            if (!AllowEdit)
+            {
+                this.gvPort.Columns.Remove(this.gcDelete);
+                this.gcName.OptionsColumn.AllowEdit = false;
+                this.gcProvideInvoice.OptionsColumn.AllowEdit = false;
+                this.gvPort.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+            }
             List<UseMoneyType> typeList = this.scm.GetSystemConfigValue<List<UseMoneyType>>(this.OptionName);
             if (typeList == null)
             {

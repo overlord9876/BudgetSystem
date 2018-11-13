@@ -297,7 +297,7 @@
             this.btnApprovalList.ImageIndex = 47;
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btnApprovalList.Tag = "WorkSapceManagement";
+            this.btnApprovalList.Tag = "MyPendingFlowManagement";
             this.btnApprovalList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApprovalList_ItemClick);
             // 
             // btnMyOrder
@@ -307,7 +307,7 @@
             this.btnMyOrder.ImageIndex = 17;
             this.btnMyOrder.Name = "btnMyOrder";
             this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btnMyOrder.Tag = "WorkSapceManagement";
+            this.btnMyOrder.Tag = "MySubmitFlowManagement";
             this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
             // 
             // barButtonItem4

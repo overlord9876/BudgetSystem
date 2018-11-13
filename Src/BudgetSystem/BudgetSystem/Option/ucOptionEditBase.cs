@@ -8,10 +8,20 @@ namespace BudgetSystem
     public  class ucOptionEditBase:UserControl
     {
         protected Bll.SystenConfigManager scm =null; 
+
+
         public ucOptionEditBase()
         {
             scm = new Bll.SystenConfigManager(); 
             this.Load += new System.EventHandler(this.ucOptionEditBase_Load);
+        }
+        /// <summary>
+        /// 是否允许修改
+        /// </summary>
+        public bool AllowEdit
+        {
+            get;
+            set;
         }
         /// <summary>
         /// 是否修改

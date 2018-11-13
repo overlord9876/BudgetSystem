@@ -19,7 +19,7 @@ namespace BudgetSystem
         public frmOutMoneyQuery()
         {
             InitializeComponent();
-
+            this.Module = BusinessModules.OutMoneyManagement;
         }
 
         protected override void InitModelOperate()

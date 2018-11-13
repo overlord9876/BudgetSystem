@@ -32,6 +32,13 @@ namespace BudgetSystem
         }
         protected override void BindingOption()
         {
+            if (!AllowEdit)
+            {
+                this.gvPort.Columns.Remove(this.gcDelete);
+                this.gcEnName.OptionsColumn.AllowEdit = false;
+                this.gcName.OptionsColumn.AllowEdit = false;
+                this.gvPort.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+            }
             List<Port> portList = this.scm.GetSystemConfigValue<List<Port>>(this.OptionName);
             if (portList == null)
             {

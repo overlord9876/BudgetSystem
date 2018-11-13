@@ -22,6 +22,7 @@ namespace BudgetSystem.InMoney
         public frmInMoneyQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.InMoneyManagement;
             this.gvInMoney.MouseDown += new MouseEventHandler(gvInMoney_MouseDown);
             this.gvInMoney.DoubleClick += new EventHandler(gvInMoney_DoubleClick);
         }

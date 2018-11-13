@@ -14,9 +14,12 @@ namespace BudgetSystem
     {
         private Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
         private ucOptionEditBase currentOptionEdit = null;
+        private bool allowEdit = false;
         public frmOptionQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.OptionManagement;
+            this.allowEdit = this.CheckPermission(OperateTypes.Save); 
         }
 
         protected override void InitModelOperate()
@@ -107,7 +110,7 @@ namespace BudgetSystem
             {
                 return;
             }
-
+            this.currentOptionEdit.AllowEdit = this.allowEdit;
             this.currentOptionEdit.Dock = DockStyle.Fill;
             this.pnlOptionList.Controls.Add(this.currentOptionEdit);
             this.layoutControlGroupConfigValue.Text = this.currentOptionEdit.OptionName + "选项配置";
