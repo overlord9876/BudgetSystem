@@ -21,7 +21,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             InitSkins();
-            CheckUserPermission();
+            //CheckUserPermission();
         }
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -291,6 +291,21 @@ namespace BudgetSystem
             editor.WorkModel = EditFormWorkModels.Custom;
             editor.CustomWorkModel = frmUserEdit.CustomWorkModel_ModifyPassword;
             editor.ShowDialog();
+        }
+
+        private void btnReport1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmTestReport1 form = GetExistForm<Report.frmTestReport1>();
+            if (form == null)
+            {
+                form = new Report.frmTestReport1();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
         }
     }
 }

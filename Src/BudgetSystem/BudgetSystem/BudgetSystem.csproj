@@ -36,6 +36,7 @@
     <Reference Include="DevExpress.BonusSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.OfficeSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -43,6 +44,7 @@
     <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPivotGrid.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -61,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\frmBaseCommonReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseCommonReportForm.Designer.cs">
+      <DependentUpon>frmBaseCommonReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBaseDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +235,12 @@
     <Compile Include="OutMoney\frmPaymentCalcEdit.Designer.cs">
       <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmTestReport1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmTestReport1.Designer.cs">
+      <DependentUpon>frmTestReport1.cs</DependentUpon>
+    </Compile>
     <Compile Include="RoleManage\frmRoleQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -354,6 +368,9 @@
     <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
       <DependentUpon>frmApprovalEdit.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Base\frmBaseCommonReportForm.resx">
+      <DependentUpon>frmBaseCommonReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseDialogForm.resx">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -440,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit.resx">
       <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmTestReport1.resx">
+      <DependentUpon>frmTestReport1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
@@ -562,6 +582,7 @@
     <Content Include="OutMoney\frmOutMoneyEdit_New.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_View.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

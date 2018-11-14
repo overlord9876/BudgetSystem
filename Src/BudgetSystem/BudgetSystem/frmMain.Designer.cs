@@ -51,10 +51,13 @@
             this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
+            this.btnReport1 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnReport2 = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -100,10 +103,12 @@
             this.btnDepartment,
             this.btnRoleManager,
             this.btnOptionManager,
-            this.btnModifyPassword});
+            this.btnModifyPassword,
+            this.btnReport1,
+            this.btnReport2});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 38;
+            this.ribbonControl1.MaxItemId = 40;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -114,7 +119,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1354, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1516, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -367,12 +372,26 @@
             this.btnModifyPassword.Name = "btnModifyPassword";
             this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
             // 
+            // btnReport1
+            // 
+            this.btnReport1.Caption = "测试报表1";
+            this.btnReport1.Id = 38;
+            this.btnReport1.Name = "btnReport1";
+            this.btnReport1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport1_ItemClick);
+            // 
+            // btnReport2
+            // 
+            this.btnReport2.Caption = "测试报表2";
+            this.btnReport2.Id = 39;
+            this.btnReport2.Name = "btnReport2";
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
             this.ribbonPageGroup5,
+            this.rpGroup,
             this.ribbonPageGroup4});
             this.rpMain.Name = "rpMain";
             this.rpMain.Text = "业务";
@@ -399,6 +418,13 @@
             this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "我的工作";
+            // 
+            // rpGroup
+            // 
+            this.rpGroup.ItemLinks.Add(this.btnReport1);
+            this.rpGroup.ItemLinks.Add(this.btnReport2);
+            this.rpGroup.Name = "rpGroup";
+            this.rpGroup.Text = "统计报告";
             // 
             // ribbonPageGroup4
             // 
@@ -427,11 +453,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 782);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 874);
             this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1354, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1516, 34);
             // 
             // documentManager1
             // 
@@ -483,7 +509,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 816);
+            this.ClientSize = new System.Drawing.Size(1516, 908);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
@@ -540,6 +566,9 @@
         private DevExpress.XtraBars.BarButtonItem btnRoleManager;
         private DevExpress.XtraBars.BarButtonItem btnOptionManager;
         private DevExpress.XtraBars.BarButtonItem btnModifyPassword;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpGroup;
+        private DevExpress.XtraBars.BarButtonItem btnReport1;
+        private DevExpress.XtraBars.BarButtonItem btnReport2;
     }
 }
 

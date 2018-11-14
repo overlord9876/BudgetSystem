@@ -100,7 +100,7 @@
             // 
             this.dtUpdateDate.EditValue = null;
             this.dtUpdateDate.Location = new System.Drawing.Point(105, 389);
-            this.dtUpdateDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtUpdateDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtUpdateDate.Name = "dtUpdateDate";
             this.dtUpdateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -113,7 +113,7 @@
             // txtCreateUser
             // 
             this.txtCreateUser.Location = new System.Drawing.Point(105, 360);
-            this.txtCreateUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCreateUser.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Size = new System.Drawing.Size(646, 25);
             this.txtCreateUser.StyleController = this.layoutControl1;
@@ -335,7 +335,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(763, 466);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmDepartmentEdit";
             this.Text = "部门";
             this.Load += new System.EventHandler(this.frmDepartmentEdit_Load);

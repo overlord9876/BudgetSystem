@@ -43,6 +43,19 @@ namespace BudgetSystem
             return null;
         }
 
+        private T GetExistForm<T>(string formText) where T : Form
+        {
+            foreach (Form form in this.MdiChildren)
+            {
+                if (typeof(T) == form.GetType() && form.Text== formText)
+                {
+                    return (T)form;
+
+                }
+            }
+            return null;
+        }
+
         private void RefreshData()
         {
             frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
