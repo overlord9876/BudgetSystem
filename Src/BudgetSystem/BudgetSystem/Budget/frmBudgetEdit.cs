@@ -43,8 +43,8 @@ namespace BudgetSystem
             {
                 return;
             }
-            checkResult = this.CheckInProductDetailInput(); 
-            if (dxErrorProvider1.HasErrors|| checkResult==false)
+            checkResult = this.CheckInProductDetailInput();
+            if (dxErrorProvider1.HasErrors || checkResult == false)
             {
                 return;
             }
@@ -313,7 +313,7 @@ namespace BudgetSystem
                 return false;
             }
             int i = dataSource.FindIndex(d => string.IsNullOrEmpty(d.Name));
-            
+
             if (dataSource.Exists(d => d.Subtotal == 0))
             {
                 this.dxErrorProvider1.SetError(this.gridInProductDetail, "原料、辅料、加工应至少一项不为0");
@@ -597,7 +597,7 @@ namespace BudgetSystem
                     {
                         inProductDetailDataSource = new BindingList<InProductDetail>();
                     }
-                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit }));
+                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption }));
                     gridInProductDetail.DataSource = inProductDetailDataSource;
                     gridInProductDetail.RefreshDataSource();
                 }

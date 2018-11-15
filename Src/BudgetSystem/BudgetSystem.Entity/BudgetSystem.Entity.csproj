@@ -42,6 +42,7 @@
     <Compile Include="AccountBill.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="CodeType.cs" />
+    <Compile Include="FlowEnum.cs" />
     <Compile Include="Infrastructure\ActionWithPermission.cs" />
     <Compile Include="Infrastructure\BusinessModules.cs" />
     <Compile Include="CustomerSalesman.cs" />

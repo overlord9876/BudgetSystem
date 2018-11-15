@@ -74,7 +74,7 @@ namespace BudgetSystem
         {
             get
             {
-                if (this.gvUsers.FocusedRowHandle > 0)
+                if (this.gvUsers.FocusedRowHandle >= 0)
                 {
                     return this.gvUsers.GetRow(this.gvUsers.FocusedRowHandle) as User;
                 }
