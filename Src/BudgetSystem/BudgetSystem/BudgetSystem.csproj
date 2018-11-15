@@ -93,6 +93,12 @@
     <Compile Include="Base\frmBaseQueryFormWithCondtion.Designer.cs">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmInput.Designer.cs">
+      <DependentUpon>frmInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\frmAccountBillView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseQueryFormWithCondtion.resx">
       <DependentUpon>frmBaseQueryFormWithCondtion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmInput.resx">
+      <DependentUpon>frmInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmAccountBillView.resx">
       <DependentUpon>frmAccountBillView.cs</DependentUpon>

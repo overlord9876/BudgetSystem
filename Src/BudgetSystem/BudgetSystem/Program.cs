@@ -20,6 +20,7 @@ namespace BudgetSystem
         [STAThread]
         static void Main()
         {
+            Environment.CurrentDirectory = Application.StartupPath;
             DevExpress.Localization.Util.Set_zhchs_Culture();
             OfficeSkins.Register();
             BonusSkins.Register();

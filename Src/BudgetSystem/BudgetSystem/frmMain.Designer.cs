@@ -51,8 +51,7 @@
             this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReport1 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReport2 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnReport = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -104,8 +103,7 @@
             this.btnRoleManager,
             this.btnOptionManager,
             this.btnModifyPassword,
-            this.btnReport1,
-            this.btnReport2});
+            this.btnReport});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonControl1.MaxItemId = 40;
@@ -372,18 +370,14 @@
             this.btnModifyPassword.Name = "btnModifyPassword";
             this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
             // 
-            // btnReport1
+            // btnReport
             // 
-            this.btnReport1.Caption = "测试报表1";
-            this.btnReport1.Id = 38;
-            this.btnReport1.Name = "btnReport1";
-            this.btnReport1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport1_ItemClick);
-            // 
-            // btnReport2
-            // 
-            this.btnReport2.Caption = "测试报表2";
-            this.btnReport2.Id = 39;
-            this.btnReport2.Name = "btnReport2";
+            this.btnReport.Caption = "测试报表";
+            this.btnReport.Id = 38;
+            this.btnReport.ImageIndex = 21;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport1_ItemClick);
             // 
             // rpMain
             // 
@@ -421,8 +415,7 @@
             // 
             // rpGroup
             // 
-            this.rpGroup.ItemLinks.Add(this.btnReport1);
-            this.rpGroup.ItemLinks.Add(this.btnReport2);
+            this.rpGroup.ItemLinks.Add(this.btnReport);
             this.rpGroup.Name = "rpGroup";
             this.rpGroup.Text = "统计报告";
             // 
@@ -567,8 +560,7 @@
         private DevExpress.XtraBars.BarButtonItem btnOptionManager;
         private DevExpress.XtraBars.BarButtonItem btnModifyPassword;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpGroup;
-        private DevExpress.XtraBars.BarButtonItem btnReport1;
-        private DevExpress.XtraBars.BarButtonItem btnReport2;
+        private DevExpress.XtraBars.BarButtonItem btnReport;
     }
 }
 
