@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmVoucherNotesEdit
+    partial class frmDeclarationformEdit
     {
         /// <summary>
         /// Required designer variable.

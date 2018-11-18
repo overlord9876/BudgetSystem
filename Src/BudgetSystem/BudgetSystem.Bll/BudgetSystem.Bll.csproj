@@ -61,6 +61,7 @@
     <Compile Include="CustomerManager.cs" />
     <Compile Include="ActualReceiptsManager.cs" />
     <Compile Include="CommonManager.cs" />
+    <Compile Include="DeclarationformManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Dal\BudgetSystem.Dal.csproj">

@@ -11,14 +11,14 @@ using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
-    public partial class frmVoucherNotesEdit : frmBaseDialogForm
+    public partial class frmDeclarationformEdit : frmBaseDialogForm
     {
         BudgetManager bm = new BudgetManager();
         private SystenConfigManager scm = new SystenConfigManager();
         DeclarationformManager dm = new DeclarationformManager();
         public Declarationform CurrentDeclarationform { get; set; }
 
-        public frmVoucherNotesEdit()
+        public frmDeclarationformEdit()
         {
             InitializeComponent();
         }

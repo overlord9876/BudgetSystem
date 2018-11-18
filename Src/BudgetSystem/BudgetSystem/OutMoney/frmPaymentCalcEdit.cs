@@ -26,7 +26,7 @@ namespace BudgetSystem.OutMoney
 
         public decimal ReceiptAmount { get; set; }
 
-        public List<PaymentNotes> PaymentNotes { get; set; }
+        public IEnumerable<PaymentNotes> PaymentNotes { get; set; }
 
         public frmPaymentCalcEdit()
         {

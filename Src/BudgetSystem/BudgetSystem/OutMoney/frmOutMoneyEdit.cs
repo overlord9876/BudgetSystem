@@ -15,6 +15,7 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyEdit : frmBaseDialogForm
     {
+        Bll.FlowManager fm = new FlowManager();
         private decimal vatOption = 0;
         CommonManager cm = new CommonManager();
         BudgetManager bm = new BudgetManager();
@@ -78,8 +79,7 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes = new PaymentNotes();
             FillEditData();
-            pnm.AddPaymentNote(this.CurrentPaymentNotes);
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);
         }
 
         protected override void SubmitModifyData()
@@ -93,7 +93,6 @@ namespace BudgetSystem.OutMoney
 
             FillEditData();
             pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void CheckInputData()
@@ -280,7 +279,58 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.VatOption = this.vatOption;
         }
 
-        private List<PaymentNotes> paymentNotes;
+        /// <summary>
+        /// 计算当前付款退税额
+        /// </summary>
+        private void CalcPaymentTaxRebate()
+        {
+            if (currentBudget == null) { return; }
+
+            //总收款金额
+            txtReceiptAmount.EditValue = ReceiptAmount = arm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
+            this.paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+            if (paymentNotes == null)
+            {
+                paymentNotes = new System.Collections.ObjectModel.Collection<PaymentNotes>();
+            }
+            //预付款赋值
+            txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
+
+            //已收汇原币金额
+            decimal amount = arm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
+
+            //应留利润计算
+            txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
+
+            decimal taxRebateRate = 0;
+            if (txtTaxRebateRate.EditValue == null || !decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate)) { return; }
+
+            decimal paymentTaxRebate = this.txtCNY.Value / vatOption * taxRebateRate / 100;
+
+
+            //退税总金额=已付金额+当前付款退税金额
+            this.txtAmountTaxRebate.EditValue = paymentNotes.Sum(o => o.AmountOfTaxRebate()) + paymentTaxRebate;
+
+            //总付款金额=已付金额+当前付款金额
+            txtAmountPaymentMoney.EditValue = paymentNotes.Sum(o => o.CNY) + this.txtCNY.Value;
+
+            //支付后余额
+            this.txtAfterPaymentBalance.EditValue = ReceiptAmount - txtAmountPaymentMoney.Value + this.txtAmountTaxRebate.Value - txtActualRetention.Value;
+
+            if (this.txtAfterPaymentBalance.Value >= 0)
+            {
+                txtAfterPaymentBalance.ForeColor = Color.Black;
+
+            }
+            else
+            {
+                txtAfterPaymentBalance.ForeColor = Color.Red;
+            }
+        }
+
+        private IEnumerable<PaymentNotes> paymentNotes;
+        private decimal ReceiptAmount = 0;
+        private Budget currentBudget;
 
         private void cboBudget_EditValueChanged(object sender, EventArgs e)
         {
@@ -290,28 +340,8 @@ namespace BudgetSystem.OutMoney
                 currentBudget = bm.GetBudget(currentBudget.ID);
 
                 InitTaxRebateRateList(currentBudget.InProductDetail);
-                //总收款金额
-                txtReceiptAmount.EditValue = arm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
-                IEnumerable<PaymentNotes> pnList = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
-                if (pnList == null)
-                {
-                    pnList = new System.Collections.ObjectModel.Collection<PaymentNotes>();
-                }
-                //总付款金额
-                txtAmountPaymentMoney.EditValue = pnList.Sum(o => o.CNY);
 
-                //退税总金额
-                this.txtAmountTaxRebate.EditValue = pnList.Sum(o => o.AmountOfTaxRebate());
-
-                //decimal taxRebateCNY = pnList.Where(o => o.IsDrawback).Sum(o => o.CNY);
-
-                //decimal originalCoin = pnList.Where(o => o.IsDrawback).Sum(o => o.OriginalCoin);
-                //预付款赋值
-                txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
-                decimal amount = arm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
-
-                //应留利润计算
-                txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
+                CalcPaymentTaxRebate();
 
                 //生成付款单号
                 this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO, cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
@@ -332,9 +362,19 @@ namespace BudgetSystem.OutMoney
             }
         }
 
+        private void btn_Submit_Click(object sender, EventArgs e)
+        {
+            SubmitDataByWorkModel();
+
+            fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -380,6 +420,16 @@ namespace BudgetSystem.OutMoney
         private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
         {
             CalcCNY();
+        }
+
+        private void txtCNY_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcPaymentTaxRebate();
+        }
+
+        private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcPaymentTaxRebate();
         }
     }
 }

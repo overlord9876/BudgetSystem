@@ -242,6 +242,12 @@
     <Compile Include="OutMoney\frmPaymentCalcEdit.Designer.cs">
       <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
+      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmTestReport1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,11 +299,11 @@
     <Compile Include="OutMoney\frmVoucherNotesQuery.Designer.cs">
       <DependentUpon>frmVoucherNotesQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="OutMoney\frmVoucherNotesEdit.cs">
+    <Compile Include="OutMoney\frmDeclarationformEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
-      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    <Compile Include="OutMoney\frmDeclarationformEdit.Designer.cs">
+      <DependentUpon>frmDeclarationformEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="DepartmentManage\frmDepartmentQuery.cs">
       <SubType>Form</SubType>
@@ -469,6 +475,9 @@
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit.resx">
       <DependentUpon>frmPaymentCalcEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
+      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmTestReport1.resx">
       <DependentUpon>frmTestReport1.cs</DependentUpon>
     </EmbeddedResource>
@@ -490,8 +499,8 @@
     <EmbeddedResource Include="OutMoney\frmVoucherNotesQuery.resx">
       <DependentUpon>frmVoucherNotesQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
-      <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
+    <EmbeddedResource Include="OutMoney\frmDeclarationformEdit.resx">
+      <DependentUpon>frmDeclarationformEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
