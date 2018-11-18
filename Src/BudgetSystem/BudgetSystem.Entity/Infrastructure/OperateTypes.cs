@@ -25,6 +25,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         SplitCost,
         /// <summary>
+        /// 拆分申请
+        /// </summary>
+        SplitRequest,
+        /// <summary>
         /// 关闭审批单
         /// </summary>
         Close,

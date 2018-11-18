@@ -34,6 +34,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "分拆至合同"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitRequest, "费用拆分申请"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "入帐单";
@@ -59,10 +60,45 @@ namespace BudgetSystem.InMoney
             {
                 SplitConstMoneyActualReceipts();
             }
+            else if (operate.Operate == OperateTypes.SplitRequest.ToString())
+            {
+                ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+
+                if (currentRowActualReceipts != null)
+                {
+                    currentRowActualReceipts = arm.GetActualReceiptById(currentRowActualReceipts.ID);
+                    if (currentRowActualReceipts != null)
+                    {
+                        if (currentRowActualReceipts.State == 0)
+                        {
+                            //设置成待拆分状态
+                            arm.ModifyActualReceiptState(currentRowActualReceipts.ID, (int)ReceiptState.入账);
+                            currentRowActualReceipts.State = (int)ReceiptState.入账;
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show("入帐单不是入账状态，不允许提交拆分申请。");
+                        }
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("入帐单已不存在。");
+                    }
+
+                }
+                else
+                {
+                    XtraMessageBox.Show("入帐单已不存在。");
+                }
+            }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-
-                //？可能不存在删除
+                ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+                if (currentRowActualReceipts != null)
+                {
+                    arm.DeleteActualReceipt(currentRowActualReceipts.ID, RunInfo.Instance.CurrentUser.UserName);
+                    XtraMessageBox.Show("删除成功");
+                }
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
@@ -76,7 +112,7 @@ namespace BudgetSystem.InMoney
             ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
             if (currentRowActualReceipts != null)
             {
-
+                //arm.CreateActualReceipts
             }
         }
 

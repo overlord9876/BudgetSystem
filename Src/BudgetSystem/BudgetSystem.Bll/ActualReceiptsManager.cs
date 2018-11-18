@@ -31,6 +31,14 @@ namespace BudgetSystem.Bll
             return lst;
         }
 
+        public void ModifyActualReceiptState(int id, int state)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.ModifyActualReceiptState(id, state, con, tran);
+            });
+        }
+
         /// <summary>
         /// 创建收款记录
         /// </summary>
@@ -48,7 +56,30 @@ namespace BudgetSystem.Bll
                     });
         }
 
-
+        public void DeleteActualReceipt(int id, string userName)
+        {
+            ActualReceipts ar = GetActualReceiptById(id);
+            ar.OperateTimestamp = DateTime.Now;
+            ar.Operator = userName;
+            ActualReceipts sourceAR = null;
+            if (ar.SourceID != 0)
+            {
+                sourceAR = GetActualReceiptById(id);
+                sourceAR.OriginalCoin2 += ar.OriginalCoin;
+                sourceAR.CNY2 += ar.CNY;
+                sourceAR.Operator = userName;
+                sourceAR.OperateTimestamp = DateTime.Now;
+            }
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                if (sourceAR != null)
+                {
+                    dal.ModifyActualReceipts(sourceAR, con, tran);
+                }
+                dal.DeleteRelationBudgetReceipt(ar.ID, con, tran);
+                dal.DeleteReceiptNoticeByReceiptId(ar.ID, con, tran);
+            });
+        }
 
         /// <summary>
         /// 创建收款记录

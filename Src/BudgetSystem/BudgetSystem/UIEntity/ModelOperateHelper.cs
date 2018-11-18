@@ -75,6 +75,13 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 55;
             }
+
+            else if (operate == OperateTypes.SplitRequest)
+            {
+                text = "费用拆分申请";
+                group = "操作";
+                imageIndex = 28;
+            }
             else if (operate == OperateTypes.Close)
             {
                 text = "关闭预算单";

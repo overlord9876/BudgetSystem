@@ -18,6 +18,15 @@ namespace BudgetSystem.Dal
             return con.Query<ActualReceipts>(selectSql, null, tran);
         }
 
+        public IEnumerable<ActualReceipts> GetActualReceiptsBySalesman(string salesman, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` ,ar.`TradingPostscript`,ar.`State`,ar.`OriginalCoin2`,ar.`CNY2`,ar.`Operator`,ar.`OperateTimestamp`,ar.`IsDelete`,ar.`SourceID`
+            From `ActualReceipts` as ar LEFT  JOIN `Budget` as b on  ar.`BudgetID`=b.`ID`
+						inner join ReceiptNotice rn on ar.ID=rn.ID
+            WHERE ar.IsDelete=0 and ar.`ID`<>0 and rn.UserName=@UserName";
+            return con.Query<ActualReceipts>(selectSql, new { UserName = salesman }, tran);
+        }
+
         public ActualReceipts GetActualReceiptById(int id, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select ar.`ID`,`BudgetID`,b.`ContractNO`,ar.`VoucherNo`,ar.`TradingPostscript`,ar.`OriginalCoin`,ar.`CNY`,ar.`ReceiptDate`,ar.`CreateUser`,ar.`CreateTimestamp`,ar.`Description`,ar.`PaymentMethod`,ar.`DepartmentCode`,ar.`ExchangeRate`,ar.`BankName`,ar.`Remitter` ,ar.`TradingPostscript`,ar.`State`,ar.`OriginalCoin2`,ar.`CNY2`,ar.`Operator`,ar.`OperateTimestamp`,ar.`IsDelete`,ar.`SourceID`
@@ -35,7 +44,13 @@ namespace BudgetSystem.Dal
             }
             return id;
         }
-        
+
+        public void ModifyActualReceiptState(int id, int state, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `ActualReceipts` Set `State` = @State Where `ID` = @ID";
+            con.Execute(updateSql, new { State = state, ID = id }, tran);
+        }
+
         public void AddReceiptNotice(string userName, int id, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = "Insert Into `ReceiptNotice` (`UserName`,`ID`) Values (@UserName,@ID)";
@@ -48,29 +63,10 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, modifyReceipt, tran);
         }
 
-        ///// <summary>
-        ///// 关联入帐单到合同
-        ///// </summary>
-        ///// <param name="Id"></param>
-        ///// <param name="budgetId"></param>
-        ///// <param name="con"></param>
-        ///// <param name="tran"></param>
-        //public void RelationActualReceiptsToBudget(int Id, int budgetId, IDbConnection con, IDbTransaction tran)
-        //{
-        //    string updateSql = @"Update `ActualReceipts` Set `BudgetID` = @BudgetID Where `ID` = @ID";
-        //    con.Execute(updateSql, new { BudgetID = budgetId, ID = Id }, tran);
-        //}
-
         public void DeleteRelationBudgetReceipt(int Id, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = @"Update `ActualReceipts` Set `IsDelete` = @IsDelete Where `ID` = @ID";
             con.Execute(updateSql, new { IsDelete = 1, ID = Id }, tran);
-        }
-
-        public void DeleteSplitBudgetReceipt(int id, IDbConnection con, IDbTransaction tran)
-        {
-            string deleteSql = "DELETE FROM `ActualReceipts` WHERE  `ID` = @ID";
-            con.Execute(deleteSql, new { ID = id }, tran);
         }
 
         /// <summary>
