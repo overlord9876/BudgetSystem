@@ -30,6 +30,11 @@ namespace BudgetSystem.Entity
         public float ExchangeRate { get; set; }
 
         /// <summary>
+        /// 增值税项
+        /// </summary>
+        public decimal VatOption { get; set; }
+
+        /// <summary>
         /// 币种
         /// </summary>
         public string Currency { get; set; }

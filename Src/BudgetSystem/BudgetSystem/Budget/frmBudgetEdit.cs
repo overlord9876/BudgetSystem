@@ -66,7 +66,7 @@ namespace BudgetSystem
             budget.Premium = txtPremium.Value;
             budget.PriceClause = this.txtPriceClause.Text;
             budget.Salesman = RunInfo.Instance.CurrentUser.UserName;
-
+            budget.Profit = this.txtProfit.Value;
             budget.TotalAmount = txtTotalAmount.Value;
             budget.SignDate = dteSignDate.DateTime;
             budget.Validity = dteValidity.DateTime;
@@ -111,7 +111,8 @@ namespace BudgetSystem
             Budget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
             Budget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
             Budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
-            Budget.Premium = txtPremium.Value;
+            Budget.Premium = txtPremium.Value; 
+            Budget.Profit = this.txtProfit.Value;
             Budget.PriceClause = this.txtPriceClause.Text;
             Budget.Port = this.luePort.Text;
             Budget.TotalAmount = txtTotalAmount.Value;

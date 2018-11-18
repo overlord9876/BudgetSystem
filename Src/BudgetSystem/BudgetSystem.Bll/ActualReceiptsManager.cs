@@ -100,14 +100,29 @@ namespace BudgetSystem.Bll
         /// </summary>
         /// <param name="budgetId"></param>
         /// <returns></returns>
-        public decimal GetTotalAmountByBudgetId(int budgetId)
+        public decimal GetTotalAmountCNYByBudgetId(int budgetId)
         {
             return this.ExecuteWithTransaction<decimal>((con, tran) =>
              {
-                 return dal.GetTotalAmountByBudgetId(budgetId, con, tran);
+                 return dal.GetTotalAmountCNYByBudgetId(budgetId, con, tran);
              });
 
         }
 
+        /// <summary>
+        /// 根据合同ID获取所有收款原币金额
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public decimal GetTotalAmountOriginalCoinByBudgetId(int budgetId)
+        {
+            return this.ExecuteWithTransaction<decimal>((con, tran) =>
+             {
+                 return dal.GetTotalAmountOriginalCoinByBudgetId(budgetId, con, tran);
+             });
+
+        }
     }
 }

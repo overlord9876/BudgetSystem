@@ -160,6 +160,7 @@
     <Compile Include="Customer\ucCustomerSelected.Designer.cs">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomValidationRule\BudgetStateValidationRule.cs" />
     <Compile Include="DepartmentManage\frmDepartmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -348,6 +349,7 @@
     <Compile Include="UserManage\frmUserQuery.Designer.cs">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\CaculateUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="WorkSpace\FlowRunStateTranslator.cs" />
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">

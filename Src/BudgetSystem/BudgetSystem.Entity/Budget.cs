@@ -74,7 +74,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string PriceClause { get; set; }
 
-     
+
 
         /// <summary>
         /// 对外结算方式1
@@ -111,7 +111,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string InProductDetail { get; set; }
 
-       
+
         /// <summary>
         /// 预付金额
         /// </summary>
@@ -168,7 +168,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         public float ExchangeRate { get; set; }
 
-       
+        /// <summary>
+        /// 利润
+        /// </summary>
+        public decimal Profit { get; set; }
 
         /// <summary>
         /// 备注
@@ -196,12 +199,12 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 客户编号
         /// </summary>
-       public int  CustomerID{get;set;}    
+        public int CustomerID { get; set; }
 
         /// <summary>
         /// 目的港口
         /// </summary>
-        public string  Port {get;set;}
+        public string Port { get; set; }
 
         /// <summary>
         ///  出口退税

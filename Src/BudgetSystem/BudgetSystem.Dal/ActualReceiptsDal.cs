@@ -86,15 +86,41 @@ namespace BudgetSystem.Dal
         }
 
         /// <summary>
-        /// 根据合同ID获取所有收款信息内容
+        /// 根据合同ID获取所有收款人民币金额
         /// </summary>
         /// <param name="budgetId"></param>
         /// <param name="con"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public decimal GetTotalAmountByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
+        public decimal GetTotalAmountCNYByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"select sum(CNY) as TotalAmount from actualreceipts
+                    where BudgetID=@BudgetID AND STATE<>4";
+
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Transaction = tran;
+            IDbDataParameter paramter = command.CreateParameter();
+            paramter.DbType = DbType.Int32;
+            paramter.ParameterName = "BudgetID";
+            paramter.Value = budgetId;
+            command.Parameters.Add(paramter);
+            object obj = command.ExecuteScalar();
+            decimal totalAmount = 0;
+            decimal.TryParse(obj.ToString(), out totalAmount);
+            return totalAmount;
+        }
+
+        /// <summary>
+        /// 根据合同ID获取所有收款原币金额
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public decimal GetTotalAmountOriginalCoinByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"select sum(OriginalCoin) as TotalAmount from actualreceipts
                     where BudgetID=@BudgetID AND STATE<>4";
 
             IDbCommand command = con.CreateCommand();

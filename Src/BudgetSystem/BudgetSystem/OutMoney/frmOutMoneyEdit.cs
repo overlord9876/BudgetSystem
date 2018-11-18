@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
@@ -14,12 +15,15 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyEdit : frmBaseDialogForm
     {
+        private decimal vatOption = 0;
         CommonManager cm = new CommonManager();
         BudgetManager bm = new BudgetManager();
         SupplierManager sm = new SupplierManager();
         UserManager um = new UserManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
         ActualReceiptsManager arm = new ActualReceiptsManager();
+
+        Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
 
         public PaymentNotes CurrentPaymentNotes { get; set; }
 
@@ -36,10 +40,16 @@ namespace BudgetSystem.OutMoney
         {
             SetLayoutControlStyle();
 
+            BudgetStateValidationRule customValidationRule = new BudgetStateValidationRule();
+            customValidationRule.ErrorText = "Please enter a valid person name";
+            customValidationRule.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            dxValidationProvider1.SetValidationRule(cboBudget, customValidationRule);
+
             InitData();
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "新增付款信息";
+                vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税.ToString());
 
                 this.txtPaymentDate.EditValue = DateTime.Now;
                 this.txtApprover.Text = RunInfo.Instance.CurrentUser.UserName;
@@ -94,12 +104,21 @@ namespace BudgetSystem.OutMoney
                 this.cboSupplier.Focus();
                 return;
             }
-            if (cboBudget.EditValue as Budget == null)
+            Budget selectedBudget = cboBudget.EditValue as Budget;
+            if (selectedBudget == null)
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
                 this.cboBudget.Focus();
                 return;
             }
+
+            if (!selectedBudget.State.Equals("审批结束"))
+            {
+                this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
+                this.cboBudget.Focus();
+                return;
+            }
+
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))
             {
                 this.dxErrorProvider1.SetError(cboPaymentMethod, "请选择付款方式。");
@@ -172,6 +191,7 @@ namespace BudgetSystem.OutMoney
         {
             PaymentNotes payment = pnm.GetPaymentNoteById(id);
 
+            this.vatOption = payment.VatOption;
             this.txtApprover.Text = payment.Approver;
             this.txtApproveTime.EditValue = payment.ApproveTime;
             this.txtDescription.Text = payment.Description;
@@ -207,6 +227,35 @@ namespace BudgetSystem.OutMoney
             chkIsDrawback.EditValue = payment.IsDrawback;
         }
 
+        private void InitTaxRebateRateList(string inProductDetail)
+        {
+            txtTaxRebateRate.Properties.Items.Clear();
+            List<InProductDetail> inProductDetailList = null;
+            if (!string.IsNullOrEmpty(inProductDetail))
+            {
+                try
+                {
+                    inProductDetailList = JsonConvert.DeserializeObject<List<InProductDetail>>(inProductDetail);
+                }
+                catch { }
+            }
+            else
+            {
+                inProductDetailList = new List<InProductDetail>();
+            }
+            if (inProductDetailList != null)
+            {
+                foreach (var v in inProductDetailList)
+                {
+                    if (!txtTaxRebateRate.Properties.Items.Contains(v.TaxRebateRate))
+                    {
+                        txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
+                    }
+                }
+            }
+
+        }
+
         private void FillEditData()
         {
             this.CurrentPaymentNotes.Approver = this.txtApprover.Text.Trim();
@@ -228,6 +277,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.Description = txtDescription.Text.Trim();
             this.CurrentPaymentNotes.HasInvoice = (bool)chkHasInvoice.EditValue;
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
+            this.CurrentPaymentNotes.VatOption = this.vatOption;
         }
 
         private List<PaymentNotes> paymentNotes;
@@ -238,35 +288,32 @@ namespace BudgetSystem.OutMoney
             if (currentBudget != null)
             {
                 currentBudget = bm.GetBudget(currentBudget.ID);
-                List<InProductDetail> inProductDetailList = null;
-                if (!string.IsNullOrEmpty(currentBudget.InProductDetail))
-                {
-                    try
-                    {
-                        inProductDetailList = JsonConvert.DeserializeObject<List<InProductDetail>>(currentBudget.InProductDetail);
-                    }
-                    catch { }
-                }
-                else
-                {
-                    inProductDetailList = new List<InProductDetail>();
-                }
-                txtTaxRebateRate.Properties.Items.Clear();
-                if (inProductDetailList != null)
-                {
-                    foreach (var v in inProductDetailList)
-                    {
-                        if (!txtTaxRebateRate.Properties.Items.Contains(v.TaxRebateRate))
-                        {
-                            txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
-                        }
-                    }
-                }
 
-                txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(currentBudget.ID);
-                paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
-                //获取供应商
+                InitTaxRebateRateList(currentBudget.InProductDetail);
+                //总收款金额
+                txtReceiptAmount.EditValue = arm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
+                IEnumerable<PaymentNotes> pnList = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+                if (pnList == null)
+                {
+                    pnList = new System.Collections.ObjectModel.Collection<PaymentNotes>();
+                }
+                //总付款金额
+                txtAmountPaymentMoney.EditValue = pnList.Sum(o => o.CNY);
 
+                //退税总金额
+                this.txtAmountTaxRebate.EditValue = pnList.Sum(o => o.AmountOfTaxRebate());
+
+                //decimal taxRebateCNY = pnList.Where(o => o.IsDrawback).Sum(o => o.CNY);
+
+                //decimal originalCoin = pnList.Where(o => o.IsDrawback).Sum(o => o.OriginalCoin);
+                //预付款赋值
+                txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
+                decimal amount = arm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
+
+                //应留利润计算
+                txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
+
+                //生成付款单号
                 this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO, cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
             }
             else
@@ -300,8 +347,8 @@ namespace BudgetSystem.OutMoney
             Budget selectedBudget = this.cboBudget.EditValue as Budget;
             if (selectedBudget != null)
             {
-                txtReceiptAmount.EditValue = arm.GetTotalAmountByBudgetId(selectedBudget.ID);
-                paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
+                txtReceiptAmount.EditValue = arm.GetTotalAmountCNYByBudgetId(selectedBudget.ID);
+                //  paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
 
                 frmPaymentCalcEdit form = new frmPaymentCalcEdit();
                 form.SelectedBudget = bm.GetBudget(selectedBudget.ID);

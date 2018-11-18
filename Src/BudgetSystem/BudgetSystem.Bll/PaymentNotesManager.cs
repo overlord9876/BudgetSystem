@@ -21,7 +21,12 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetId)
+        /// <summary>
+        /// 根据合同ID获取所有付款信息
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <returns></returns>
+        public IEnumerable<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetId)
         {
             var lst = this.Query<PaymentNotes>((con) =>
             {
@@ -64,6 +69,5 @@ namespace BudgetSystem.Bll
                 dal.DeletePaymentNote(id, con, tran);
             });
         }
-
     }
 }
