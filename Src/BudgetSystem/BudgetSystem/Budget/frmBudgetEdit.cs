@@ -313,8 +313,6 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请输入内贸部分信息！");
                 return false;
             }
-            int i = dataSource.FindIndex(d => string.IsNullOrEmpty(d.Name));
-
             if (dataSource.Exists(d => d.Subtotal == 0))
             {
                 this.dxErrorProvider1.SetError(this.gridInProductDetail, "原料、辅料、加工应至少一项不为0");

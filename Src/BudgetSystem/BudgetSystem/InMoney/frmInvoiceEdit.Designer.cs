@@ -1,4 +1,4 @@
-﻿namespace BudgetSystem
+﻿namespace BudgetSystem.InMoney
 {
     partial class frmInvoiceEdit
     {
@@ -28,159 +28,412 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.textEdit8 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit7 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSure = new DevExpress.XtraEditors.SimpleButton();
+            this.txtFinanceImportDate = new DevExpress.XtraEditors.TextEdit();
+            this.txtFinanceImportUser = new DevExpress.XtraEditors.TextEdit();
+            this.txtImportDate = new DevExpress.XtraEditors.TextEdit();
+            this.txtImportUser = new DevExpress.XtraEditors.TextEdit();
+            this.txtTaxAmount = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtPayment = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtSupplierName = new DevExpress.XtraEditors.TextEdit();
+            this.txtTaxpayerID = new DevExpress.XtraEditors.TextEdit();
+            this.txtCode = new DevExpress.XtraEditors.TextEdit();
+            this.txtTaxRebateRate = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtOriginalCoin = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtFeedMoney = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtCommission = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtExchangeRate = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtCustomsDeclaration = new DevExpress.XtraEditors.TextEdit();
+            this.txtNumber = new DevExpress.XtraEditors.TextEdit();
+            this.txtContractNO = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinanceImportDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinanceImportUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImportDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImportUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxAmount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSupplierName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxpayerID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOriginalCoin.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeedMoney.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomsDeclaration.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractNO.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.memoEdit1;
-            this.layoutControlItem8.CustomizationFormText = "备注：";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 128);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(926, 384);
-            this.layoutControlItem8.Text = "备注：";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(144, 22);
-            // 
-            // memoEdit1
-            // 
-            this.memoEdit1.Location = new System.Drawing.Point(159, 140);
-            this.memoEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(775, 380);
-            this.memoEdit1.StyleController = this.layoutControl1;
-            this.memoEdit1.TabIndex = 14;
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.textEdit8);
-            this.layoutControl1.Controls.Add(this.textEdit7);
-            this.layoutControl1.Controls.Add(this.memoEdit1);
-            this.layoutControl1.Controls.Add(this.textEdit6);
-            this.layoutControl1.Controls.Add(this.textEdit5);
-            this.layoutControl1.Controls.Add(this.textEdit4);
-            this.layoutControl1.Controls.Add(this.textEdit3);
-            this.layoutControl1.Controls.Add(this.textEdit2);
-            this.layoutControl1.Controls.Add(this.textEdit1);
+            this.layoutControl1.Controls.Add(this.btnCancel);
+            this.layoutControl1.Controls.Add(this.btnSure);
+            this.layoutControl1.Controls.Add(this.txtFinanceImportDate);
+            this.layoutControl1.Controls.Add(this.txtFinanceImportUser);
+            this.layoutControl1.Controls.Add(this.txtImportDate);
+            this.layoutControl1.Controls.Add(this.txtImportUser);
+            this.layoutControl1.Controls.Add(this.txtTaxAmount);
+            this.layoutControl1.Controls.Add(this.txtPayment);
+            this.layoutControl1.Controls.Add(this.txtSupplierName);
+            this.layoutControl1.Controls.Add(this.txtTaxpayerID);
+            this.layoutControl1.Controls.Add(this.txtCode);
+            this.layoutControl1.Controls.Add(this.txtTaxRebateRate);
+            this.layoutControl1.Controls.Add(this.txtOriginalCoin);
+            this.layoutControl1.Controls.Add(this.txtFeedMoney);
+            this.layoutControl1.Controls.Add(this.txtCommission);
+            this.layoutControl1.Controls.Add(this.txtExchangeRate);
+            this.layoutControl1.Controls.Add(this.txtCustomsDeclaration);
+            this.layoutControl1.Controls.Add(this.txtNumber);
+            this.layoutControl1.Controls.Add(this.txtContractNO);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem8,
+            this.layoutControlItem10,
+            this.layoutControlItem12,
+            this.layoutControlItem13,
+            this.layoutControlItem14,
+            this.layoutControlItem16,
+            this.layoutControlItem17,
+            this.layoutControlItem15,
+            this.layoutControlItem11});
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(442, 201, 458, 563);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(946, 532);
+            this.layoutControl1.Size = new System.Drawing.Size(752, 389);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // textEdit8
+            // btnCancel
             // 
-            this.textEdit8.Location = new System.Drawing.Point(621, 76);
-            this.textEdit8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit8.Name = "textEdit8";
-            this.textEdit8.Size = new System.Drawing.Size(313, 28);
-            this.textEdit8.StyleController = this.layoutControl1;
-            this.textEdit8.TabIndex = 16;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(604, 341);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(136, 36);
+            this.btnCancel.StyleController = this.layoutControl1;
+            this.btnCancel.TabIndex = 27;
+            this.btnCancel.Text = "取消";
             // 
-            // textEdit7
+            // btnSure
             // 
-            this.textEdit7.Location = new System.Drawing.Point(159, 76);
-            this.textEdit7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit7.Name = "textEdit7";
-            this.textEdit7.Size = new System.Drawing.Size(311, 28);
-            this.textEdit7.StyleController = this.layoutControl1;
-            this.textEdit7.TabIndex = 15;
+            this.btnSure.Location = new System.Drawing.Point(464, 341);
+            this.btnSure.Name = "btnSure";
+            this.btnSure.Size = new System.Drawing.Size(136, 36);
+            this.btnSure.StyleController = this.layoutControl1;
+            this.btnSure.TabIndex = 26;
+            this.btnSure.Text = "确定";
+            this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             // 
-            // textEdit6
+            // txtFinanceImportDate
             // 
-            this.textEdit6.Location = new System.Drawing.Point(621, 108);
-            this.textEdit6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Size = new System.Drawing.Size(313, 28);
-            this.textEdit6.StyleController = this.layoutControl1;
-            this.textEdit6.TabIndex = 13;
+            this.txtFinanceImportDate.Location = new System.Drawing.Point(458, 244);
+            this.txtFinanceImportDate.Name = "txtFinanceImportDate";
+            this.txtFinanceImportDate.Properties.ReadOnly = true;
+            this.txtFinanceImportDate.Size = new System.Drawing.Size(287, 25);
+            this.txtFinanceImportDate.StyleController = this.layoutControl1;
+            this.txtFinanceImportDate.TabIndex = 25;
             // 
-            // textEdit5
+            // txtFinanceImportUser
             // 
-            this.textEdit5.Location = new System.Drawing.Point(159, 108);
-            this.textEdit5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Size = new System.Drawing.Size(311, 28);
-            this.textEdit5.StyleController = this.layoutControl1;
-            this.textEdit5.TabIndex = 12;
+            this.txtFinanceImportUser.Location = new System.Drawing.Point(90, 244);
+            this.txtFinanceImportUser.Name = "txtFinanceImportUser";
+            this.txtFinanceImportUser.Properties.ReadOnly = true;
+            this.txtFinanceImportUser.Size = new System.Drawing.Size(286, 25);
+            this.txtFinanceImportUser.StyleController = this.layoutControl1;
+            this.txtFinanceImportUser.TabIndex = 24;
             // 
-            // textEdit4
+            // txtImportDate
             // 
-            this.textEdit4.Location = new System.Drawing.Point(621, 44);
-            this.textEdit4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Size = new System.Drawing.Size(313, 28);
-            this.textEdit4.StyleController = this.layoutControl1;
-            this.textEdit4.TabIndex = 10;
+            this.txtImportDate.Location = new System.Drawing.Point(458, 215);
+            this.txtImportDate.Name = "txtImportDate";
+            this.txtImportDate.Properties.ReadOnly = true;
+            this.txtImportDate.Size = new System.Drawing.Size(287, 25);
+            this.txtImportDate.StyleController = this.layoutControl1;
+            this.txtImportDate.TabIndex = 23;
             // 
-            // textEdit3
+            // txtImportUser
             // 
-            this.textEdit3.Location = new System.Drawing.Point(159, 44);
-            this.textEdit3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(311, 28);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 9;
+            this.txtImportUser.Location = new System.Drawing.Point(90, 215);
+            this.txtImportUser.Name = "txtImportUser";
+            this.txtImportUser.Properties.ReadOnly = true;
+            this.txtImportUser.Size = new System.Drawing.Size(286, 25);
+            this.txtImportUser.StyleController = this.layoutControl1;
+            this.txtImportUser.TabIndex = 22;
             // 
-            // textEdit2
+            // txtTaxAmount
             // 
-            this.textEdit2.Location = new System.Drawing.Point(621, 12);
-            this.textEdit2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(313, 28);
-            this.textEdit2.StyleController = this.layoutControl1;
-            this.textEdit2.TabIndex = 8;
+            this.txtTaxAmount.IsSupportNegative = false;
+            this.txtTaxAmount.Location = new System.Drawing.Point(458, 186);
+            this.txtTaxAmount.Name = "txtTaxAmount";
+            this.txtTaxAmount.Properties.NullText = "0.00";
+            this.txtTaxAmount.Size = new System.Drawing.Size(287, 25);
+            this.txtTaxAmount.StyleController = this.layoutControl1;
+            this.txtTaxAmount.TabIndex = 21;
             // 
-            // textEdit1
+            // txtPayment
             // 
-            this.textEdit1.Location = new System.Drawing.Point(159, 12);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(311, 28);
-            this.textEdit1.StyleController = this.layoutControl1;
-            this.textEdit1.TabIndex = 7;
+            this.txtPayment.IsSupportNegative = false;
+            this.txtPayment.Location = new System.Drawing.Point(90, 186);
+            this.txtPayment.Name = "txtPayment";
+            this.txtPayment.Properties.NullText = "0.00";
+            this.txtPayment.Size = new System.Drawing.Size(286, 25);
+            this.txtPayment.StyleController = this.layoutControl1;
+            this.txtPayment.TabIndex = 20;
+            // 
+            // txtSupplierName
+            // 
+            this.txtSupplierName.Location = new System.Drawing.Point(90, 157);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.Properties.MaxLength = 50;
+            this.txtSupplierName.Size = new System.Drawing.Size(655, 25);
+            this.txtSupplierName.StyleController = this.layoutControl1;
+            this.txtSupplierName.TabIndex = 19;
+            // 
+            // txtTaxpayerID
+            // 
+            this.txtTaxpayerID.Location = new System.Drawing.Point(458, 128);
+            this.txtTaxpayerID.Name = "txtTaxpayerID";
+            this.txtTaxpayerID.Properties.MaxLength = 30;
+            this.txtTaxpayerID.Size = new System.Drawing.Size(287, 25);
+            this.txtTaxpayerID.StyleController = this.layoutControl1;
+            this.txtTaxpayerID.TabIndex = 18;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(90, 128);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Properties.MaxLength = 12;
+            this.txtCode.Size = new System.Drawing.Size(286, 25);
+            this.txtCode.StyleController = this.layoutControl1;
+            this.txtCode.TabIndex = 17;
+            // 
+            // txtTaxRebateRate
+            // 
+            this.txtTaxRebateRate.IsSupportNegative = false;
+            this.txtTaxRebateRate.Location = new System.Drawing.Point(441, 70);
+            this.txtTaxRebateRate.Name = "txtTaxRebateRate";
+            this.txtTaxRebateRate.Properties.NullText = "0.00";
+            this.txtTaxRebateRate.Size = new System.Drawing.Size(299, 25);
+            this.txtTaxRebateRate.StyleController = this.layoutControl1;
+            this.txtTaxRebateRate.TabIndex = 16;
+            // 
+            // txtOriginalCoin
+            // 
+            this.txtOriginalCoin.IsSupportNegative = false;
+            this.txtOriginalCoin.Location = new System.Drawing.Point(75, 41);
+            this.txtOriginalCoin.Name = "txtOriginalCoin";
+            this.txtOriginalCoin.Properties.NullText = "0.00";
+            this.txtOriginalCoin.Size = new System.Drawing.Size(299, 25);
+            this.txtOriginalCoin.StyleController = this.layoutControl1;
+            this.txtOriginalCoin.TabIndex = 15;
+            // 
+            // txtFeedMoney
+            // 
+            this.txtFeedMoney.EditValue = "";
+            this.txtFeedMoney.IsSupportNegative = false;
+            this.txtFeedMoney.Location = new System.Drawing.Point(441, 99);
+            this.txtFeedMoney.Name = "txtFeedMoney";
+            this.txtFeedMoney.Properties.NullText = "0.00";
+            this.txtFeedMoney.Size = new System.Drawing.Size(299, 25);
+            this.txtFeedMoney.StyleController = this.layoutControl1;
+            this.txtFeedMoney.TabIndex = 13;
+            // 
+            // txtCommission
+            // 
+            this.txtCommission.IsSupportNegative = false;
+            this.txtCommission.Location = new System.Drawing.Point(75, 99);
+            this.txtCommission.Name = "txtCommission";
+            this.txtCommission.Properties.NullText = "0.00";
+            this.txtCommission.Size = new System.Drawing.Size(299, 25);
+            this.txtCommission.StyleController = this.layoutControl1;
+            this.txtCommission.TabIndex = 12;
+            // 
+            // txtExchangeRate
+            // 
+            this.txtExchangeRate.IsSupportNegative = false;
+            this.txtExchangeRate.Location = new System.Drawing.Point(441, 41);
+            this.txtExchangeRate.Name = "txtExchangeRate";
+            this.txtExchangeRate.Properties.NullText = "0.00";
+            this.txtExchangeRate.Size = new System.Drawing.Size(299, 25);
+            this.txtExchangeRate.StyleController = this.layoutControl1;
+            this.txtExchangeRate.TabIndex = 10;
+            // 
+            // txtCustomsDeclaration
+            // 
+            this.txtCustomsDeclaration.Location = new System.Drawing.Point(75, 70);
+            this.txtCustomsDeclaration.Name = "txtCustomsDeclaration";
+            this.txtCustomsDeclaration.Size = new System.Drawing.Size(299, 25);
+            this.txtCustomsDeclaration.StyleController = this.layoutControl1;
+            this.txtCustomsDeclaration.TabIndex = 9;
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(441, 12);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Properties.MaxLength = 8;
+            this.txtNumber.Size = new System.Drawing.Size(299, 25);
+            this.txtNumber.StyleController = this.layoutControl1;
+            this.txtNumber.TabIndex = 8;
+            // 
+            // txtContractNO
+            // 
+            this.txtContractNO.Location = new System.Drawing.Point(75, 12);
+            this.txtContractNO.Name = "txtContractNO";
+            this.txtContractNO.Properties.MaxLength = 30;
+            this.txtContractNO.Size = new System.Drawing.Size(299, 25);
+            this.txtContractNO.StyleController = this.layoutControl1;
+            this.txtContractNO.TabIndex = 7;
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.txtCode;
+            this.layoutControlItem8.CustomizationFormText = "发票代码：";
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 116);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(368, 29);
+            this.layoutControlItem8.Text = "发票代码：";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem8.TextToControlDistance = 5;
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.txtTaxpayerID;
+            this.layoutControlItem10.CustomizationFormText = "销方税号：";
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 116);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(737, 29);
+            this.layoutControlItem10.Text = "销方税号：";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem10.TextToControlDistance = 5;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.txtPayment;
+            this.layoutControlItem12.CustomizationFormText = "金额：";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(368, 29);
+            this.layoutControlItem12.Text = "金额：";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem12.TextToControlDistance = 5;
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.txtTaxAmount;
+            this.layoutControlItem13.CustomizationFormText = "税额：";
+            this.layoutControlItem13.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Size = new System.Drawing.Size(737, 29);
+            this.layoutControlItem13.Text = "税额：";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem13.TextToControlDistance = 5;
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.txtImportUser;
+            this.layoutControlItem14.CustomizationFormText = "创建人：";
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(368, 29);
+            this.layoutControlItem14.Text = "创建人：";
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem14.TextToControlDistance = 5;
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.txtFinanceImportUser;
+            this.layoutControlItem16.CustomizationFormText = "修改人：";
+            this.layoutControlItem16.Location = new System.Drawing.Point(0, 174);
+            this.layoutControlItem16.Name = "layoutControlItem16";
+            this.layoutControlItem16.Size = new System.Drawing.Size(368, 29);
+            this.layoutControlItem16.Text = "修改人：";
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem16.TextToControlDistance = 5;
+            // 
+            // layoutControlItem17
+            // 
+            this.layoutControlItem17.Control = this.txtFinanceImportDate;
+            this.layoutControlItem17.CustomizationFormText = "修改时间：";
+            this.layoutControlItem17.Location = new System.Drawing.Point(0, 174);
+            this.layoutControlItem17.Name = "layoutControlItem17";
+            this.layoutControlItem17.Size = new System.Drawing.Size(737, 29);
+            this.layoutControlItem17.Text = "修改时间：";
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem17.TextToControlDistance = 5;
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.txtImportDate;
+            this.layoutControlItem15.CustomizationFormText = "创建时间：";
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(737, 29);
+            this.layoutControlItem15.Text = "创建时间：";
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem15.TextToControlDistance = 5;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.txtSupplierName;
+            this.layoutControlItem11.CustomizationFormText = "销方名称：";
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 116);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(737, 29);
+            this.layoutControlItem11.Text = "销方名称：";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(50, 20);
+            this.layoutControlItem11.TextToControlDistance = 5;
             // 
             // layoutControlGroup1
             // 
@@ -188,157 +441,261 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3,
             this.layoutControlItem1,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8,
+            this.layoutControlItem2,
+            this.layoutControlItem4,
+            this.layoutControlItem3,
             this.layoutControlItem5,
             this.layoutControlItem9,
-            this.layoutControlItem4,
-            this.layoutControlItem2});
+            this.emptySpaceItem1,
+            this.emptySpaceItem2,
+            this.layoutControlItem18,
+            this.layoutControlItem19});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(946, 532);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(752, 389);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.textEdit2;
-            this.layoutControlItem3.CustomizationFormText = "发票号";
-            this.layoutControlItem3.Location = new System.Drawing.Point(462, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(464, 32);
-            this.layoutControlItem3.Text = "发票号：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(144, 22);
-            // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.textEdit1;
-            this.layoutControlItem1.CustomizationFormText = "预算单";
+            this.layoutControlItem1.Control = this.txtContractNO;
+            this.layoutControlItem1.CustomizationFormText = "合同号";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(462, 32);
-            this.layoutControlItem1.Text = "预算单：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(144, 22);
+            this.layoutControlItem1.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem1.Text = "合同号：";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layoutControlItem6
             // 
-            this.layoutControlItem6.Control = this.textEdit5;
-            this.layoutControlItem6.CustomizationFormText = "创建时间：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem6.Control = this.txtCommission;
+            this.layoutControlItem6.CustomizationFormText = "佣金：";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(462, 32);
-            this.layoutControlItem6.Text = "创建时间：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(144, 22);
+            this.layoutControlItem6.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem6.Text = "佣金：";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layoutControlItem7
             // 
-            this.layoutControlItem7.Control = this.textEdit6;
-            this.layoutControlItem7.CustomizationFormText = "创建人";
-            this.layoutControlItem7.Location = new System.Drawing.Point(462, 96);
+            this.layoutControlItem7.Control = this.txtFeedMoney;
+            this.layoutControlItem7.CustomizationFormText = "进料款：";
+            this.layoutControlItem7.Location = new System.Drawing.Point(366, 87);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(464, 32);
-            this.layoutControlItem7.Text = "创建人：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(144, 22);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.textEdit7;
-            this.layoutControlItem5.CustomizationFormText = "实收原币金额";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 64);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(462, 32);
-            this.layoutControlItem5.Text = "实收原币金额：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(144, 22);
-            // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.textEdit8;
-            this.layoutControlItem9.CustomizationFormText = "实收人民币金额";
-            this.layoutControlItem9.Location = new System.Drawing.Point(462, 64);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(464, 32);
-            this.layoutControlItem9.Text = "实收人民币金额：";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(144, 22);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.textEdit4;
-            this.layoutControlItem4.CustomizationFormText = "发票日期";
-            this.layoutControlItem4.Location = new System.Drawing.Point(462, 32);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(464, 32);
-            this.layoutControlItem4.Text = "发票日期：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(144, 22);
+            this.layoutControlItem7.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem7.Text = "进料款：";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.Control = this.textEdit3;
-            this.layoutControlItem2.CustomizationFormText = "凭证号";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem2.Control = this.txtCustomsDeclaration;
+            this.layoutControlItem2.CustomizationFormText = "报关单：";
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(462, 32);
-            this.layoutControlItem2.Text = "凭证号：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(144, 22);
+            this.layoutControlItem2.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem2.Text = "报关单：";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 18);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.txtExchangeRate;
+            this.layoutControlItem4.CustomizationFormText = "汇率：";
+            this.layoutControlItem4.Location = new System.Drawing.Point(366, 29);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem4.Text = "汇率：";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(60, 18);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.txtNumber;
+            this.layoutControlItem3.CustomizationFormText = "发票号";
+            this.layoutControlItem3.Location = new System.Drawing.Point(366, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem3.Text = "发票号：";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 18);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.txtOriginalCoin;
+            this.layoutControlItem5.CustomizationFormText = "原币：";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem5.Text = "原币：";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(60, 18);
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.txtTaxRebateRate;
+            this.layoutControlItem9.CustomizationFormText = "退税率";
+            this.layoutControlItem9.Location = new System.Drawing.Point(366, 58);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem9.Text = "退税率：";
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 18);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 116);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(732, 213);
+            this.emptySpaceItem1.Text = "emptySpaceItem1";
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 329);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(452, 40);
+            this.emptySpaceItem2.Text = "emptySpaceItem2";
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem18
+            // 
+            this.layoutControlItem18.Control = this.btnSure;
+            this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
+            this.layoutControlItem18.Location = new System.Drawing.Point(452, 329);
+            this.layoutControlItem18.MaxSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem18.MinSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem18.Name = "layoutControlItem18";
+            this.layoutControlItem18.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem18.Text = "layoutControlItem18";
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem18.TextToControlDistance = 0;
+            this.layoutControlItem18.TextVisible = false;
+            // 
+            // layoutControlItem19
+            // 
+            this.layoutControlItem19.Control = this.btnCancel;
+            this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
+            this.layoutControlItem19.Location = new System.Drawing.Point(592, 329);
+            this.layoutControlItem19.MaxSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem19.MinSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem19.Name = "layoutControlItem19";
+            this.layoutControlItem19.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem19.Text = "layoutControlItem19";
+            this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem19.TextToControlDistance = 0;
+            this.layoutControlItem19.TextVisible = false;
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // frmInvoiceEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AcceptButton = this.btnSure;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 532);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(752, 389);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmInvoiceEdit";
             this.Text = "凭证编辑";
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
+            this.Load += new System.EventHandler(this.frmInvoiceEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinanceImportDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinanceImportUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImportDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImportUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxAmount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSupplierName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxpayerID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOriginalCoin.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeedMoney.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomsDeclaration.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractNO.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.MemoEdit memoEdit1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.TextEdit textEdit6;
-        private DevExpress.XtraEditors.TextEdit textEdit5;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private BudgetSystem.CommonControl.TextEdit_Number txtFeedMoney;
+        private BudgetSystem.CommonControl.TextEdit_Number txtCommission;
+        private BudgetSystem.CommonControl.TextEdit_Number txtExchangeRate;
+        private DevExpress.XtraEditors.TextEdit txtCustomsDeclaration;
+        private DevExpress.XtraEditors.TextEdit txtNumber;
+        private DevExpress.XtraEditors.TextEdit txtContractNO;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private BudgetSystem.CommonControl.TextEdit_Number txtTaxRebateRate;
+        private BudgetSystem.CommonControl.TextEdit_Number txtOriginalCoin;
+        private DevExpress.XtraEditors.TextEdit txtFinanceImportDate;
+        private DevExpress.XtraEditors.TextEdit txtFinanceImportUser;
+        private DevExpress.XtraEditors.TextEdit txtImportDate;
+        private DevExpress.XtraEditors.TextEdit txtImportUser;
+        private BudgetSystem.CommonControl.TextEdit_Number txtTaxAmount;
+        private BudgetSystem.CommonControl.TextEdit_Number txtPayment;
+        private DevExpress.XtraEditors.TextEdit txtSupplierName;
+        private DevExpress.XtraEditors.TextEdit txtTaxpayerID;
+        private DevExpress.XtraEditors.TextEdit txtCode;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnSure;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraEditors.TextEdit textEdit8;
-        private DevExpress.XtraEditors.TextEdit textEdit7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
 
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="FlowRunState.cs" />
     <Compile Include="Infrastructure\IEntity.cs" />
     <Compile Include="Infrastructure\OperateTypes.cs" />
+    <Compile Include="Invoice.cs" />
     <Compile Include="PaymentNotes.cs" />
     <Compile Include="Infrastructure\Permisson.cs" />
     <Compile Include="Product.cs" />

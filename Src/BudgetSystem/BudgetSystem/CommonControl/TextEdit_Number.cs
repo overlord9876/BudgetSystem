@@ -36,6 +36,20 @@ namespace BudgetSystem.CommonControl
             }
         }
 
+
+        public float FloatValue
+        {
+            get
+            {
+                float result = 0;
+                if (this.EditValue != null)
+                {
+                    float.TryParse(this.EditValue.ToString(), out result);
+                }
+                return result;
+            }
+        }
+
         public TextEdit_Number()
             : base()
         {

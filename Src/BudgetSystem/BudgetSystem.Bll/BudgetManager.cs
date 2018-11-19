@@ -32,12 +32,12 @@ namespace BudgetSystem.Bll
             return Budget;
         }
 
-        public int AddBudget(Budget Budget)
+        public int AddBudget(Budget budget)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
             {
-                int id = dal.AddBudget(Budget, con, tran);
-                FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, EnumFlowDataType.预算单.ToString(), Budget.Salesman);
+                int id = dal.AddBudget(budget, con, tran);
+                FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, EnumFlowDataType.预算单.ToString(), budget.Salesman);
                 if (state != FlowRunState.启动流程成功)
                 {
                     throw new Exception(string.Format("创建{0}失败，{1}。",EnumFlowNames.预算单审批流程.ToString(),state.ToString()));
@@ -46,11 +46,11 @@ namespace BudgetSystem.Bll
             });
         }
 
-        public void ModifyBudget(Budget Budget)
+        public void ModifyBudget(Budget budget)
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.ModifyBudget(Budget, con, tran);
+                dal.ModifyBudget(budget, con, tran);
             });
         }
 

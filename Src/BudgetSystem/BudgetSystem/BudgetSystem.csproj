@@ -185,6 +185,12 @@
     <Compile Include="InMoney\frmInMoneyEdit.Designer.cs">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\frmInvoiceImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceImport.Designer.cs">
+      <DependentUpon>frmInvoiceImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\ucUserSelected.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -445,6 +451,9 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit.resx">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInvoiceImport.resx">
+      <DependentUpon>frmInvoiceImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InMoney\ucUserSelected.resx">
       <DependentUpon>ucUserSelected.cs</DependentUpon>
     </EmbeddedResource>
@@ -562,6 +571,10 @@
       <Project>{6EC39F94-981B-488F-A94D-3D3F9F0C6D79}</Project>
       <Name>BudgetSystem.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Util\BudgetSystem.Util.csproj">
+      <Project>{4BDAACB8-C70B-470D-BE3C-C95EE42F9ECE}</Project>
+      <Name>BudgetSystem.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Localization\Localization.csproj">
       <Project>{D2796715-1019-4731-B90B-1289826CA9BC}</Project>
       <Name>Localization</Name>
@@ -598,6 +611,11 @@
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />
+    <EmbeddedResource Include="InMoney\frmInvoiceEdit_Modify.xml" />
+    <EmbeddedResource Include="InMoney\frmInvoiceEdit_New.xml" />
+    <EmbeddedResource Include="InMoney\frmInvoiceEdit_View.xml" />
+    <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_New.xml" />
+    <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_View.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_Modify.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_New.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_View.xml" />

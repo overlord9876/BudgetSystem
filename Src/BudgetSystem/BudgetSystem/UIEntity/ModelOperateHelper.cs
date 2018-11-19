@@ -75,7 +75,6 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 55;
             }
-
             else if (operate == OperateTypes.SplitRequest)
             {
                 text = "费用拆分申请";
@@ -100,7 +99,7 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 22;
             }
-            else if (operate == OperateTypes.ImportData)
+            else if (operate == OperateTypes.ImportData|| operate== OperateTypes.ImportData2)
             {
                 text = "导入";
                 group = "操作";

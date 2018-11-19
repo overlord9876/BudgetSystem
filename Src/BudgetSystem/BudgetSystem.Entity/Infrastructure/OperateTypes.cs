@@ -19,15 +19,14 @@ namespace BudgetSystem.Entity
         /// 审批
         /// </summary>
         Approve,
-
-        /// <summary>
-        /// 拆分费用
-        /// </summary>
-        SplitCost,
         /// <summary>
         /// 拆分申请
         /// </summary>
         SplitRequest,
+        /// <summary>
+        /// 拆分费用
+        /// </summary>
+        SplitCost,
         /// <summary>
         /// 关闭审批单
         /// </summary>
@@ -38,6 +37,7 @@ namespace BudgetSystem.Entity
         /// 导入
         /// </summary>
         ImportData,
+        ImportData2,
 
 
         Print,

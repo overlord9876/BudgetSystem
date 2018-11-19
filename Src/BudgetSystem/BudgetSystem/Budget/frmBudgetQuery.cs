@@ -128,6 +128,7 @@ namespace BudgetSystem
         private void ViewBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if(budget!=null)
             {
                 frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.View;

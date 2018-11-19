@@ -183,7 +183,7 @@
             // gcCustomerNames
             // 
             this.gcCustomerNames.Caption = "客户名称";
-            this.gcCustomerNames.FieldName = "CustomerNames";
+            this.gcCustomerNames.FieldName = "CustomerName";
             this.gcCustomerNames.Name = "gcCustomerNames";
             this.gcCustomerNames.Visible = true;
             this.gcCustomerNames.VisibleIndex = 1;
@@ -223,7 +223,7 @@
             // gcSeaport
             // 
             this.gcSeaport.Caption = "交货口岸";
-            this.gcSeaport.FieldName = "Seaport";
+            this.gcSeaport.FieldName = "Port";
             this.gcSeaport.Name = "gcSeaport";
             this.gcSeaport.Visible = true;
             this.gcSeaport.VisibleIndex = 11;
