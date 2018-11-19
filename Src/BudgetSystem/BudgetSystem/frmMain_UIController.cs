@@ -203,17 +203,14 @@ namespace BudgetSystem
                     group = dict[mo.GroupText];
                 }
 
-
-                if (mo.UIType == UITypes.LargerButton)
+                string permission = form.Module + "." + mo.Operate;
+                if (!RunInfo.Instance.UserPermission.Contains(permission))
                 {
-                    string permission = form.Module + "." + mo.Operate;
+                    continue;
+                }
 
-                    if (!RunInfo.Instance.UserPermission.Contains(permission))
-                    {
-                        continue;
-                    }
-
-
+                if (mo.UIType == UITypes.LargeButton)
+                {
                     BarButtonItem button = new BarButtonItem();
                     button.RibbonStyle = RibbonItemStyles.Large;
                   
@@ -226,9 +223,31 @@ namespace BudgetSystem
 
                     button.ImageIndex = mo.ImageIndex;
                 }
+                else if (mo.UIType == UITypes.LargeMenu)
+                {
+                    BarSubItem button = new BarSubItem();
+                    button.RibbonStyle = RibbonItemStyles.Large;
+                    button.Caption = mo.Text;
+                    button.Tag = mo;
+                    List<string> subItems = mo.UIElementData as List<string>;
+                    group.ItemLinks.Add(button);
+
+                    button.ImageIndex = mo.ImageIndex;
 
 
+                    if (subItems != null)
+                    {
+                        foreach (string s in subItems)
+                        {
+                            BarButtonItem sb = new BarButtonItem();
+                            sb.ItemClick += RibbonButtonClick;
+                            sb.Tag = mo;
+                            sb.Caption = s;
+                            button.ItemLinks.Add(sb);
+                        }
+                    }
 
+                }
             }
 
             foreach (RibbonPageGroup group in page.Groups)
@@ -249,7 +268,7 @@ namespace BudgetSystem
 
             frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
 
-            form.OperateHandled(e.Item.Tag as ModelOperate);
+            form.OperateHandled(e.Item.Tag as ModelOperate, new ModeOperateEventArgs() { SenderText = e.Item.Caption, Tag = e.Item.Tag });
 
         }
 
@@ -258,7 +277,6 @@ namespace BudgetSystem
             RunInfo.Instance.Config.SkinName = e.Item.Caption;
             RunInfo.Instance.Config.Save();
         }
-
 
         private void CheckUserPermission()
         {

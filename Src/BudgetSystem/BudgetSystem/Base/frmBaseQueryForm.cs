@@ -80,11 +80,12 @@ namespace BudgetSystem
         }
 
 
-        public virtual void OperateHandled(ModelOperate operate)
+        public virtual void OperateHandled(ModelOperate operate,ModeOperateEventArgs e)
         {
 
             
         }
+
 
         protected bool AutoRegeditGridViewDoubleClick = true;
 

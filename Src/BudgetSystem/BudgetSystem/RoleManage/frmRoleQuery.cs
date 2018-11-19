@@ -41,7 +41,7 @@ namespace BudgetSystem.RoleManage
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
         }

@@ -6,6 +6,7 @@ namespace BudgetSystem
 {
     public enum UITypes
     {
-        LargerButton,
+        LargeButton,
+        LargeMenu,
     }
 }

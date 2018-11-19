@@ -7,7 +7,7 @@ namespace BudgetSystem
 {
     public static class ModelOperateHelper
     {
-        public static ModelOperate GetOperate(OperateTypes operate, string caption = "")
+        public static ModelOperate GetOperate(OperateTypes operate, string caption = "", UITypes uiType = UITypes.LargeButton, object extendData = null)
         {
             string text = "";
             string group = "";
@@ -99,7 +99,7 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 22;
             }
-            else if (operate == OperateTypes.ImportData|| operate== OperateTypes.ImportData2)
+            else if (operate == OperateTypes.ImportData || operate == OperateTypes.ImportData2)
             {
                 text = "导入";
                 group = "操作";
@@ -141,7 +141,12 @@ namespace BudgetSystem
                 group = "编辑";
                 imageIndex = 6;
             }
-            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
+
+            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);
+            mm.UIElementData = extendData;
+
+
+
             return mm;
         }
 

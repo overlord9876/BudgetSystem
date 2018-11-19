@@ -36,7 +36,7 @@ namespace BudgetSystem.InMoney
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
             if (operate.Operate == OperateTypes.New.ToString())
             {

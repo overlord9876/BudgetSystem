@@ -26,12 +26,12 @@ namespace BudgetSystem.FlowManage
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
+        //    this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
             this.ModelOperatePageName = "流程管理";
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
             if (operate.Operate == OperateTypes.Modify.ToString())
             {
@@ -74,8 +74,6 @@ namespace BudgetSystem.FlowManage
 
         private void ViewFlow()
         {
-            TestFlow();
-
             Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
             if (currentRowFlow != null)
             {

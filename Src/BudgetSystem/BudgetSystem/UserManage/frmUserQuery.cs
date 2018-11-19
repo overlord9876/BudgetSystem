@@ -34,11 +34,23 @@ namespace BudgetSystem.UserManage
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ReSetPassword));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "用户管理";
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查询", UITypes.LargeMenu, new List<string>() { "查询1", "查询2", "查询3" }));
+            
+
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+
+            if (operate.Operate == OperateTypes.View.ToString())
+            {
+                MessageBox.Show(e.SenderText);
+                return;
+            }
+
+
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -64,6 +76,10 @@ namespace BudgetSystem.UserManage
             {
                 ReSetUserPassword();
             }
+
+        
+
+
         }
 
 

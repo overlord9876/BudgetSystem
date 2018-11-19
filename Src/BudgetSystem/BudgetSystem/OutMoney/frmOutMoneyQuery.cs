@@ -40,7 +40,7 @@ namespace BudgetSystem
             this.ModelOperatePageName = "付款管理";
         }
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.New.ToString())

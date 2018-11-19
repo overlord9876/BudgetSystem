@@ -33,7 +33,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Relate, "业务员维护"));
             this.ModelOperatePageName = "客户列表";
         }
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.New.ToString())
