@@ -74,6 +74,8 @@ namespace BudgetSystem.FlowManage
 
         private void ViewFlow()
         {
+            TestFlow();
+
             Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
             if (currentRowFlow != null)
             {

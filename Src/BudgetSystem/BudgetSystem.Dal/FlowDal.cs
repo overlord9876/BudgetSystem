@@ -90,13 +90,13 @@ namespace BudgetSystem.Dal
 
         public FlowInstance GetFlowNotClosedInstance(string flowName, int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName and `IsClosed`=0";
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime`,`IsRecent` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName and `IsClosed`=0";
             return con.Query<FlowInstance>(selectSql, new { FlowName = flowName, DateItemType = dataType, DateItemID = dataID }, tran).SingleOrDefault();
         }
 
         public FlowInstance GetFlowInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`ID` = @ID";
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime`,`IsRecent` From `FlowInstance` Where`ID` = @ID";
 
             return con.Query<FlowInstance>(selectSql, new { ID = instanceID }, tran).SingleOrDefault();
         }
@@ -104,9 +104,9 @@ namespace BudgetSystem.Dal
         public int AddFlowInstance(string flowName, int flowVersion, int dataID, string dataType, string createUser, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = @"Insert Into `FlowInstance` 
-                                (`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`) 
+                                (`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`,`IsRecent`) 
                                 Values 
-                                (@FlowName,@FlowVersionNumber,@DateItemID,@DateItemType,now(),@CreateUser,0,0,0)";
+                                (@FlowName,@FlowVersionNumber,@DateItemID,@DateItemType,now(),@CreateUser,0,0,0,1)";
             return con.Insert(insertSql, new { FlowName = flowName, FlowVersionNumber = flowVersion, DateItemID = dataID, DateItemType = dataType, CreateUser = createUser }, tran);
         }
 
@@ -115,6 +115,12 @@ namespace BudgetSystem.Dal
             string updateSql = @"Update `FlowInstance` Set `ApproveResult` = @ApproveResult,`IsClosed` = 1,`CloseReason`=@CloseReason,`CloseDateTime` = now() Where `ID` = @ID";
             con.Execute(updateSql, new { ApproveResult = approveReslt, closeReason = closeReason, ID = instanceID }, tran);
 
+        }
+
+        public void UpdateFlowInstanceNotRecent(string dataType, int dataID, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `FlowInstance` Set `IsRecent`= 0  Where `DateItemID`= @DateItemID And `DateItemType`= @DateItemType";
+            con.Execute(updateSql, new { DateItemID = dataID, DateItemType = dataType }, tran);
         }
 
 
