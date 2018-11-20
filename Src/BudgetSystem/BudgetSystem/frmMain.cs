@@ -22,7 +22,9 @@ namespace BudgetSystem
             InitializeComponent();
             InitSkins();
             CheckUserPermission();
+
             bsiLoginInfo.Caption = string.Format("当前登陆用户为：{0}{1}", RunInfo.Instance.CurrentUser.DepartmentName, RunInfo.Instance.CurrentUser.ToString());
+
         }
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -300,6 +302,51 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new Report.frmTestReport1();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnBudgetReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmBudgetReport form = GetExistForm<Report.frmBudgetReport>();
+            if (form == null)
+            {
+                form = new Report.frmBudgetReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnInMoneyReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmInMoneyReport form = GetExistForm<Report.frmInMoneyReport>();
+            if (form == null)
+            {
+                form = new Report.frmInMoneyReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnOutMoney_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmOutMoneyReport form = GetExistForm<Report.frmOutMoneyReport>();
+            if (form == null)
+            {
+                form = new Report.frmOutMoneyReport();
                 form.RefreshData();
             }
             else

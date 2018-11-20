@@ -59,7 +59,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyActualReceipts(ActualReceipts modifyReceipt, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `ActualReceipts` Set `OriginalCoin2` = @OriginalCoin2,`CNY2` = @CNY2,`State` = @State,`Operator` = @Operator,`OperateTimestamp` = @OperateTimestamp Where `ID` = @ID";
+            string updateSql = "Update `ActualReceipts` Set `OriginalCoin2` = @OriginalCoin2,`CNY2` = @CNY2,`State` = @State,IsDelete=1,`Operator` = @Operator,`OperateTimestamp` = @OperateTimestamp Where `ID` = @ID";
             con.Execute(updateSql, modifyReceipt, tran);
         }
 
