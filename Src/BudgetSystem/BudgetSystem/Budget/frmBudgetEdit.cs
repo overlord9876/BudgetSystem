@@ -76,6 +76,8 @@ namespace BudgetSystem
             budget.IsQualifiedSupplier = chkIsQualified.Checked;
             budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
+            budget.ProfitLevel1 = this.txtProfitLevel1.Value;
+            budget.ProfitLevel2 = this.txtProfitLevel2.Value;
             budget.Description = this.meDescription.Text.Trim();
             budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             budget.OutProductDetail = this.GetOutProductDetailString();
@@ -124,6 +126,8 @@ namespace BudgetSystem
             Budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
             Budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
             Budget.Description = this.meDescription.Text.Trim();
+            Budget.ProfitLevel1 = this.txtProfitLevel1.Value;
+            Budget.ProfitLevel2 = this.txtProfitLevel2.Value;
             Budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             Budget.OutProductDetail = this.GetOutProductDetailString();
             Budget.PurchasePrice = this.txtPurchasePrice.Value;

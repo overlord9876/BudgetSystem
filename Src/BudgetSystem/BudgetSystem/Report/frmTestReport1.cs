@@ -51,7 +51,7 @@ namespace BudgetSystem.Report
 
             base.CreateGridColumn("用户名", "UserName");
             base.CreateGridColumn("用户姓名", "RealName");
-            base.CreateGridColumn("用户部名", "DepartmentName");
+            base.CreateGridColumn("用户部门", "DepartmentName");
             base.CreateGridColumn("用户角色", "RoleName");
             base.CreateGridColumn("创建人", "CreateUser");
             base.CreateGridColumn("更新时间", "UpdateDateTime");

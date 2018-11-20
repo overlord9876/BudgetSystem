@@ -72,8 +72,8 @@ namespace BudgetSystem.InMoney
                         if (currentRowActualReceipts.State == 0)
                         {
                             //设置成待拆分状态
-                            arm.ModifyActualReceiptState(currentRowActualReceipts.ID, (int)ReceiptState.入账);
-                            currentRowActualReceipts.State = (int)ReceiptState.入账;
+                            arm.ModifyActualReceiptState(currentRowActualReceipts.ID, (int)ReceiptState.待拆分);
+                            currentRowActualReceipts.State = (int)ReceiptState.待拆分;
                         }
                         else
                         {
@@ -98,6 +98,7 @@ namespace BudgetSystem.InMoney
                 {
                     arm.DeleteActualReceipt(currentRowActualReceipts.ID, RunInfo.Instance.CurrentUser.UserName);
                     XtraMessageBox.Show("删除成功");
+                    this.RefreshData();
                 }
             }
             else if (operate.Operate == OperateTypes.View.ToString())
@@ -164,6 +165,11 @@ namespace BudgetSystem.InMoney
             ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
             if (currentRowActualReceipts != null)
             {
+                if (currentRowActualReceipts.State != 1)//不是待拆分状态不允许拆分
+                {
+                    XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
+                    return;
+                }
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.SplitConst;
                 form.CurrentActualReceipts = currentRowActualReceipts;
@@ -187,9 +193,16 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            var list = arm.GetAllActualReceipts();
-
-            this.gcInMoney.DataSource = list;
+            List<ActualReceipts> arList = null;
+            if (RunInfo.Instance.CurrentUser.Role == frmInMoneyEdit.SaleRoleCode)
+            {
+                arList = arm.GetActualReceiptsBySalesman(RunInfo.Instance.CurrentUser.UserName);
+            }
+            else
+            {
+                arList = arm.GetAllActualReceipts();
+            }
+            this.gcInMoney.DataSource = arList;
         }
 
 

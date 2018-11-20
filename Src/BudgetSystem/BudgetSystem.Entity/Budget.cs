@@ -178,7 +178,15 @@ namespace BudgetSystem.Entity
         /// </summary>
         public int FlowState { get; set; }
 
+        /// <summary>
+        /// 盈利水平1
+        /// </summary>
+        public decimal ProfitLevel1 { get; set; }
 
+        /// <summary>
+        /// 盈利水平2
+        /// </summary>
+        public decimal ProfitLevel2 { get; set; }
 
         /// <summary>
         /// 备注

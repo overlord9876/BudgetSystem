@@ -21,6 +21,7 @@ namespace BudgetSystem.WorkSpace
         {
             InitializeComponent();
             this.Module = BusinessModules.MySubmitFlowManagement;
+            this.gvFlow.ExpandAllGroups();
         }
 
         protected override void InitModelOperate()
@@ -95,6 +96,8 @@ namespace BudgetSystem.WorkSpace
 
 
             this.gdFlow.DataSource = lst;
+            
+            this.gvFlow.ExpandAllGroups();
         }
 
         protected override void InitGridViewAction()

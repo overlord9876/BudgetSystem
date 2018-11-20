@@ -42,19 +42,19 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.lcgGrid = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcGridBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgPivote = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStatBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcList = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem = new DevExpress.XtraLayout.SplitterItem();
-            this.lcgGrid = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcGridBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.pivotViewBar = new DevExpress.XtraBars.Bar();
             this.btnSaveView = new DevExpress.XtraBars.BarButtonItem();
-            this.btnShowOrVisible = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteView = new DevExpress.XtraBars.BarButtonItem();
+            this.btnShowOrVisible = new DevExpress.XtraBars.BarButtonItem();
             this.gridViewBar = new DevExpress.XtraBars.Bar();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -66,14 +66,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPivote)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,6 +138,9 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.Name = "gridView";
             this.gridView.OptionsBehavior.Editable = false;
+            this.gridView.OptionsDetail.ShowDetailTabs = false;
+            this.gridView.OptionsDetail.SmartDetailExpand = false;
+            this.gridView.OptionsView.ShowDetailButtons = false;
             // 
             // barDockControlLeft
             // 
@@ -156,9 +159,8 @@
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(24, 49);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 29);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 26);
             // 
             // barDockControlTop
             // 
@@ -213,6 +215,44 @@
             this.lcgGrid,
             this.lcgPivote});
             this.tabbedControlGroup1.Text = "TabControl";
+            // 
+            // lcgGrid
+            // 
+            this.lcgGrid.CustomizationFormText = "表格视图";
+            this.lcgGrid.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.lcGridBar});
+            this.lcgGrid.Location = new System.Drawing.Point(0, 0);
+            this.lcgGrid.Name = "lcgGrid";
+            this.lcgGrid.Size = new System.Drawing.Size(1687, 688);
+            this.lcgGrid.Text = "表格视图";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gridControl;
+            this.layoutControlItem1.CustomizationFormText = "表格";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
+            this.layoutControlItem1.Text = "表格";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // lcGridBar
+            // 
+            this.lcGridBar.Control = this.barDockControlBottom;
+            this.lcGridBar.CustomizationFormText = "表格视图工具栏";
+            this.lcGridBar.Location = new System.Drawing.Point(0, 0);
+            this.lcGridBar.MaxSize = new System.Drawing.Size(0, 30);
+            this.lcGridBar.MinSize = new System.Drawing.Size(1, 30);
+            this.lcGridBar.Name = "lcGridBar";
+            this.lcGridBar.Size = new System.Drawing.Size(1687, 30);
+            this.lcGridBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcGridBar.Text = "lcGridBar";
+            this.lcGridBar.TextSize = new System.Drawing.Size(0, 0);
+            this.lcGridBar.TextToControlDistance = 0;
+            this.lcGridBar.TextVisible = false;
             // 
             // lcgPivote
             // 
@@ -274,44 +314,6 @@
             this.splitterItem.Name = "splitterItem";
             this.splitterItem.Size = new System.Drawing.Size(5, 658);
             // 
-            // lcgGrid
-            // 
-            this.lcgGrid.CustomizationFormText = "表格视图";
-            this.lcgGrid.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.lcGridBar});
-            this.lcgGrid.Location = new System.Drawing.Point(0, 0);
-            this.lcgGrid.Name = "lcgGrid";
-            this.lcgGrid.Size = new System.Drawing.Size(1687, 688);
-            this.lcgGrid.Text = "表格视图";
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.gridControl;
-            this.layoutControlItem1.CustomizationFormText = "表格";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
-            this.layoutControlItem1.Text = "表格";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // lcGridBar
-            // 
-            this.lcGridBar.Control = this.barDockControlBottom;
-            this.lcGridBar.CustomizationFormText = "表格视图工具栏";
-            this.lcGridBar.Location = new System.Drawing.Point(0, 0);
-            this.lcGridBar.MaxSize = new System.Drawing.Size(0, 30);
-            this.lcGridBar.MinSize = new System.Drawing.Size(1, 30);
-            this.lcGridBar.Name = "lcGridBar";
-            this.lcGridBar.Size = new System.Drawing.Size(1687, 30);
-            this.lcGridBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lcGridBar.Text = "lcGridBar";
-            this.lcGridBar.TextSize = new System.Drawing.Size(0, 0);
-            this.lcGridBar.TextToControlDistance = 0;
-            this.lcGridBar.TextVisible = false;
-            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -351,19 +353,19 @@
             this.btnSaveView.Name = "btnSaveView";
             this.btnSaveView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveView_ItemClick);
             // 
-            // btnShowOrVisible
-            // 
-            this.btnShowOrVisible.Caption = "显示/隐藏视图树";
-            this.btnShowOrVisible.Id = 0;
-            this.btnShowOrVisible.Name = "btnShowOrVisible";
-            this.btnShowOrVisible.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnShowOrVisible_ItemClick);
-            // 
             // btnDeleteView
             // 
             this.btnDeleteView.Caption = "删除视图";
             this.btnDeleteView.Id = 2;
             this.btnDeleteView.Name = "btnDeleteView";
             this.btnDeleteView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteView_ItemClick);
+            // 
+            // btnShowOrVisible
+            // 
+            this.btnShowOrVisible.Caption = "显示/隐藏视图树";
+            this.btnShowOrVisible.Id = 0;
+            this.btnShowOrVisible.Name = "btnShowOrVisible";
+            this.btnShowOrVisible.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnShowOrVisible_ItemClick);
             // 
             // gridViewBar
             // 
@@ -397,14 +399,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPivote)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
 

@@ -17,7 +17,7 @@ namespace BudgetSystem.WorkSpace
     public partial class frmApprovalListQuery : frmBaseQueryForm
     {
 
-      
+
         FlowManager manager = new FlowManager();
         public frmApprovalListQuery()
         {
@@ -30,6 +30,7 @@ namespace BudgetSystem.WorkSpace
             var list = manager.GetPendingFlowByUser(RunInfo.Instance.CurrentUser.UserName);
 
             this.gdPendingFlow.DataSource = list;
+            this.gvPendingFlow.ExpandAllGroups();
         }
 
         protected override void InitModelOperate()
@@ -53,7 +54,7 @@ namespace BudgetSystem.WorkSpace
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewFlowItem();
-      
+
             }
         }
 
@@ -84,7 +85,7 @@ namespace BudgetSystem.WorkSpace
                     }
                 }
             }
-            
+
         }
 
 

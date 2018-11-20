@@ -9,6 +9,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPivotGrid;
 using BudgetSystem.Entity;
+using DevExpress.Utils;
 
 namespace BudgetSystem.Base
 {
@@ -140,11 +141,13 @@ namespace BudgetSystem.Base
         }
 
 
-        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea)
+        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea,FormatType valueFormatType= FormatType.None,string valueFormatString="")
         {
             PivotGridField field = new PivotGridField(fieldName, area);
             field.Name = caption;
             field.Caption = caption;
+            field.ValueFormat.FormatType = valueFormatType;
+            field.ValueFormat.FormatString = valueFormatString;
             this.pivotGridControl.Fields.Add(field);
 
             return field;

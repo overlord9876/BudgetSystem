@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.imageCollection1 = new DevExpress.Utils.ImageCollection();
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.rgbStyle = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.btnReLogin = new DevExpress.XtraBars.BarButtonItem();
@@ -60,12 +61,13 @@
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.bsiLoginInfo = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -102,10 +104,11 @@
             this.btnRoleManager,
             this.btnOptionManager,
             this.btnModifyPassword,
-            this.btnReport});
+            this.btnReport,
+            this.bsiLoginInfo});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ribbonControl1.MaxItemId = 40;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.ribbonControl1.MaxItemId = 41;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -445,8 +448,9 @@
             // 
             // ribbonStatusBar1
             // 
+            this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 675);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
             this.ribbonStatusBar1.Size = new System.Drawing.Size(1326, 31);
@@ -497,6 +501,13 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // bsiLoginInfo
+            // 
+            this.bsiLoginInfo.Caption = "登陆用户：";
+            this.bsiLoginInfo.Id = 40;
+            this.bsiLoginInfo.Name = "bsiLoginInfo";
+            this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -505,7 +516,7 @@
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -560,6 +571,7 @@
         private DevExpress.XtraBars.BarButtonItem btnModifyPassword;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpGroup;
         private DevExpress.XtraBars.BarButtonItem btnReport;
+        private DevExpress.XtraBars.BarStaticItem bsiLoginInfo;
     }
 }
 

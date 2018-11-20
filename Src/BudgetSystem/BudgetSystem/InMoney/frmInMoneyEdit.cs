@@ -21,7 +21,7 @@ namespace BudgetSystem.InMoney
         private SystemConfigManager scm = new SystemConfigManager();
         private UserManager um = new UserManager();
         private List<User> allSalesmanList;
-        const string SaleRoleCode = "YWY";
+        internal const string SaleRoleCode = "YWY";
 
         public frmInMoneyEdit()
         {
@@ -104,6 +104,12 @@ namespace BudgetSystem.InMoney
 
             CheckSplitMoney();
 
+            var dataSource = (IEnumerable<ActualReceipts>)this.gcConstSplit.DataSource;
+            if (dataSource == null || dataSource.Count() < 2)
+            {
+                XtraMessageBox.Show("金额分拆必须多余2项分拆才有意义。");
+            }
+
             if (this.dxErrorProvider1.HasErrors) { return; }
 
             this.CurrentActualReceipts.OriginalCoin2 = txtAlreadySplitOriginalCoinMoney.Value;
@@ -146,7 +152,7 @@ namespace BudgetSystem.InMoney
                         if (outProductDetailList != null)
                         {
                             originalMoney = outProductDetailList.Sum(o => o.OriginalCurrencyMoney);
-                            decimal rate = totalAmountOriginal - originalMoney / originalMoney;
+                            decimal rate = (totalAmountOriginal - originalMoney) / originalMoney;
                             if (rate > (decimal)0.3)
                             {
                                 this.dxErrorProvider1.SetError(this.gcConstSplit, string.Format("合同【{0}】，实际收汇超计划收汇30%以上！请调整合同计划数！原预算单如有“预付款”计划，调整计划，必须同时报批“预付款”新计划！", budget.ContractNO));
@@ -169,6 +175,7 @@ namespace BudgetSystem.InMoney
             this.CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
             this.CurrentActualReceipts.OperateTimestamp = DateTime.Now;
 
+            //合同拆分必须一次
             arm.RelationActualReceiptToBudget(this.CurrentActualReceipts, GetActualReceiptList());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
@@ -275,6 +282,10 @@ namespace BudgetSystem.InMoney
             var splitList = ((IEnumerable<ActualReceipts>)this.gvConstSplit.DataSource).ToList();
             if (splitList.Count > 0)
             {
+                if (splitList.Count == 1)
+                {
+                    this.CurrentActualReceipts.RelationBudget = splitList[0].RelationBudget;
+                }
                 splitList.ForEach(o =>
                 {
                     o.BankName = this.CurrentActualReceipts.BankName;

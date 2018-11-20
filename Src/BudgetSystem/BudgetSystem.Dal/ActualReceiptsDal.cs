@@ -63,6 +63,12 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, modifyReceipt, tran);
         }
 
+        public void ActualReceiptsRelationToBudget(ActualReceipts modifyReceipt, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `ActualReceipts` Set `BudgetID`=@BudgetID,`State` = @State,`Operator` = @Operator,`OperateTimestamp` = @OperateTimestamp Where `ID` = @ID";
+            con.Execute(updateSql, modifyReceipt, tran);
+        }
+
         public void DeleteRelationBudgetReceipt(int Id, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = @"Update `ActualReceipts` Set `IsDelete` = @IsDelete Where `ID` = @ID";
@@ -77,7 +83,7 @@ namespace BudgetSystem.Dal
         /// <param name="tran"></param>
         public void DeleteReceiptNoticeByReceiptId(int id, IDbConnection con, IDbTransaction tran)
         {
-            string deleteSql = "DELETE FROM `ReceiptNotice` WHERE  `ReceiptID` = @ID";
+            string deleteSql = "DELETE FROM `ReceiptNotice` WHERE  `ID` = @ID";
             con.Execute(deleteSql, new { ID = id }, tran);
         }
 

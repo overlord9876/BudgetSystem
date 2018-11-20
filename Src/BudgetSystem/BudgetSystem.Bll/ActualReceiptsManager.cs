@@ -21,6 +21,17 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<ActualReceipts> GetActualReceiptsBySalesman(string salesman)
+        {
+            var lst = this.Query<ActualReceipts>((con) =>
+            {
+
+                var uList = dal.GetActualReceiptsBySalesman(salesman, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
         public ActualReceipts GetActualReceiptById(int id)
         {
             var lst = this.Query<ActualReceipts>((con) =>
@@ -101,11 +112,18 @@ namespace BudgetSystem.Bll
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                foreach (ActualReceipts newReceipt in splitReceiptList)
+                if (splitReceiptList.Count > 1)
                 {
-                    dal.AddActualReceipts(newReceipt, con, tran);
+                    foreach (ActualReceipts newReceipt in splitReceiptList)
+                    {
+                        dal.AddActualReceipts(newReceipt, con, tran);
+                    }
+                    dal.ModifyActualReceipts(relationReceipt, con, tran);
                 }
-                dal.ModifyActualReceipts(relationReceipt, con, tran);
+                else
+                {
+                    dal.ActualReceiptsRelationToBudget(relationReceipt, con, tran);
+                }
             });
         }
 

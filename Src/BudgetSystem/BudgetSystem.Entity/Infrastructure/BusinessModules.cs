@@ -27,5 +27,9 @@ namespace BudgetSystem.Entity
         FlowManagement,
 
         OptionManagement,
+
+        BudgetReport,
+        InMoneyReport,
+        OutMoneyReport,
     }
 }

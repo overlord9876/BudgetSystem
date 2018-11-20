@@ -115,6 +115,7 @@ namespace BudgetSystem.Entity
                         //new Permisson(BusinessModules.BuggetManagement,OperateTypes.View, "预算单管理-查看审批状态",770),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.BudgetAccountBill,"预算单管理-查看收支情况",780),
                         //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Print,"预算单管理-打印预算单",790),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.Confirm,"预算单管理-提交审批流程",791),
 
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.None,"收款管理模块",800),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.New, "收款管理-新增入账",810),
@@ -133,6 +134,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看详情",960),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看审批记录",970),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",980), 
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-确认已付款",980), 
 
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"开票管理模块",1000),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.New,"开票管理-新增开票记录",1010),
@@ -164,6 +166,10 @@ namespace BudgetSystem.Entity
             
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.None,"选项管理模块",1400),
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.Save,"选项管理-维护选项",1410),
+
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.None,"预算单报表",1500),
+                        new Permisson(BusinessModules.InMoneyReport,OperateTypes.None,"收款报表",1600),
+                        new Permisson(BusinessModules.OutMoneyReport,OperateTypes.None,"付款报表",1700),
            
                     };
                 }
