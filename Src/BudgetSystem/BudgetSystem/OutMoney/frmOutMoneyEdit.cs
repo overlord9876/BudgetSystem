@@ -52,11 +52,9 @@ namespace BudgetSystem.OutMoney
                 this.Text = "新增付款信息";
                 vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税.ToString());
 
-                this.deCommitTime.EditValue = DateTime.Now;
                 this.txtPaymentDate.EditValue = DateTime.Now;
                 this.txtApprover.Text = RunInfo.Instance.CurrentUser.UserName;
                 this.txtApproveTime.Text = DateTime.Now.ToString();
-                BindApplicantUser(RunInfo.Instance.CurrentUser.UserName);
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -78,11 +76,6 @@ namespace BudgetSystem.OutMoney
             CheckInputData();
 
             if (dxErrorProvider1.HasErrors) { return; }
-
-            if (txtAfterPaymentBalance.Value < 0)
-            {
-                XtraMessageBox.Show("【警告】支付后余额小于0");
-            }
 
             this.CurrentPaymentNotes = new PaymentNotes();
             FillEditData();
@@ -193,19 +186,6 @@ namespace BudgetSystem.OutMoney
             this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
         }
 
-        private void BindApplicantUser(string userName)
-        {
-            foreach (User u in this.cboApplicant.Properties.Items)
-            {
-                if (u.UserName == userName)
-                {
-                    this.cboApplicant.SelectedItem = u;
-                    this.cboDepartment.Text = u.Department;
-                    break;
-                }
-            }
-        }
-
         private void CalcCNY()
         {
             this.txtCNY.EditValue = this.txtExchangeRate.Value * this.txtOriginalCoin.Value;
@@ -225,17 +205,22 @@ namespace BudgetSystem.OutMoney
             this.txtCNY.EditValue = payment.CNY;
             this.txtPaymentDate.EditValue = payment.PaymentDate;
             this.txtTaxRebateRate.EditValue = payment.TaxRebateRate;
-            this.cboPaymentMethod.EditValue = payment.PaymentMethod;
             this.txtVoucherNo.Text = payment.VoucherNo;
-            this.deCommitTime.EditValue = payment.CommitTime;
-
-            BindApplicantUser(payment.Applicant);
-
+            foreach (User u in this.cboApplicant.Properties.Items)
+            {
+                if (u.UserName == payment.Applicant)
+                {
+                    this.cboApplicant.SelectedItem = u;
+                    this.cboDepartment.Text = u.Department;
+                    break;
+                }
+            }
             foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
             {
                 if (umt.Name == payment.MoneyUsed)
                 {
-                    this.cboMoneyUsed.SelectedItem = umt;
+                    this.cboApplicant.SelectedItem = umt;
+                    this.cboDepartment.Text = umt.Name;
                     break;
                 }
             }
@@ -291,9 +276,8 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.CNY = this.txtCNY.Value;
             this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
             this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
-            this.CurrentPaymentNotes.CommitTime = DateTime.Parse(this.deCommitTime.EditValue.ToString());
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
-            this.CurrentPaymentNotes.Applicant = (this.cboApplicant.EditValue as User).UserName;
+            this.CurrentPaymentNotes.Applicant = this.cboApplicant.SelectedItem.ToString();
             this.CurrentPaymentNotes.MoneyUsed = (this.cboMoneyUsed.EditValue as UseMoneyType).Name;
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
@@ -302,7 +286,6 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.ExchangeRate = (float)(decimal)this.txtExchangeRate.EditValue;
             this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
             this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
-            this.CurrentPaymentNotes.PaymentMethod = this.cboPaymentMethod.SelectedText;
             this.CurrentPaymentNotes.Description = txtDescription.Text.Trim();
             this.CurrentPaymentNotes.HasInvoice = (bool)chkHasInvoice.EditValue;
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
@@ -332,11 +315,8 @@ namespace BudgetSystem.OutMoney
             //应留利润计算
             txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
 
-            decimal taxRebateRate = 1;
-            if (txtTaxRebateRate.EditValue != null)
-            {
-                decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
-            }
+            decimal taxRebateRate = 0;
+            if (txtTaxRebateRate.EditValue == null || !decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate)) { return; }
 
             decimal paymentTaxRebate = this.txtCNY.Value / vatOption * taxRebateRate / 100;
 
@@ -367,7 +347,7 @@ namespace BudgetSystem.OutMoney
 
         private void cboBudget_EditValueChanged(object sender, EventArgs e)
         {
-            currentBudget = cboBudget.EditValue as Budget;
+            Budget currentBudget = cboBudget.EditValue as Budget;
             if (currentBudget != null)
             {
                 currentBudget = bm.GetBudget(currentBudget.ID);
@@ -475,6 +455,7 @@ namespace BudgetSystem.OutMoney
             {
                 chkHasInvoice.Checked = false;
             }
+
         }
     }
 }

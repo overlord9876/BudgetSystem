@@ -260,24 +260,6 @@
     <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\frmBudgetReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmBudgetReport.Designer.cs">
-      <DependentUpon>frmBudgetReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\frmInMoneyReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmInMoneyReport.Designer.cs">
-      <DependentUpon>frmInMoneyReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\frmOutMoneyReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmOutMoneyReport.Designer.cs">
-      <DependentUpon>frmOutMoneyReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Report\frmTestReport1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -514,15 +496,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmBudgetReport.resx">
-      <DependentUpon>frmBudgetReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmInMoneyReport.resx">
-      <DependentUpon>frmInMoneyReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmOutMoneyReport.resx">
-      <DependentUpon>frmOutMoneyReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmTestReport1.resx">
       <DependentUpon>frmTestReport1.cs</DependentUpon>

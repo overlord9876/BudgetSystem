@@ -191,11 +191,11 @@ namespace BudgetSystem.Base
                     return;
                 }
 
-                string fileName = Guid.NewGuid().ToString("N") + ".xml";
-                string layoutName = GetReportFileFile(fileName);
+
+                string layoutName = GetReportFileFile(Guid.NewGuid().ToString("N")+".xml");
                 this.pivotGridControl.SaveLayoutToXml(layoutName);
 
-                ReportConfig rc = new ReportConfig() { Name = inputForm.Result.Trim(), FileName = fileName };
+                ReportConfig rc = new ReportConfig() { Name = inputForm.Result.Trim(), FileName = layoutName };
                 this.reportConfigs.Add(rc);
                 SaveReportConfig();
                 LoadReportConfig();
@@ -212,7 +212,7 @@ namespace BudgetSystem.Base
                 try
                 {
                     this.reportConfigs.Remove(rc);
-                    System.IO.File.Delete(GetReportFileFile(rc.FileName));
+                    System.IO.File.Delete(rc.FileName);
                     this.SaveReportConfig();
                     this.LoadReportConfig();
                 }
@@ -248,8 +248,6 @@ namespace BudgetSystem.Base
 
 
         List<ReportConfig> reportConfigs;
-
-       
 
         private string GetReportFileFile(string name)
         {
@@ -318,7 +316,7 @@ namespace BudgetSystem.Base
             {
                 try
                 {
-                    this.pivotGridControl.RestoreLayoutFromXml(GetReportFileFile(rc.FileName));
+                    this.pivotGridControl.RestoreLayoutFromXml(rc.FileName);
                 }
                 catch
                 { 
