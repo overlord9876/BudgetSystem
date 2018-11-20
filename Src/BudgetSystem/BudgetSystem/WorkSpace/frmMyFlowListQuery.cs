@@ -6,39 +6,79 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
+using System.Linq;
+using BudgetSystem.Entity;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
-namespace BudgetSystem
+namespace BudgetSystem.WorkSpace
 {
     public partial class frmMyFlowListQuery : frmBaseQueryForm
     {
+
+        FlowManager manager = new FlowManager();
         public frmMyFlowListQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.MySubmitFlowManagement;
+            this.gvFlow.ExpandAllGroups();
         }
 
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
 
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperatePageName = "我的流程单";
+            this.ModelOperatePageName = "我发起的流程";
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
-            if (operate.Operate == OperateTypes.View.ToString())
+
+
+
+            if (operate.Operate == OperateTypes.Confirm.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+
+                ConfirmFlowItem();
+
             }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
+            else if (operate.Operate == OperateTypes.View.ToString())
             {
-                XtraMessageBox.Show("撤回选中流程");
+                ViewFlowItem();
             }
-            else
+        }
+
+        private void ViewFlowItem()
+        {
+            if (this.gvFlow.FocusedRowHandle >= 0)
             {
-                XtraMessageBox.Show("未定义的操作");
+                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmViewModel };
+                    form.ShowDialog(this);
+                }
+            }
+
+
+        }
+
+        private void ConfirmFlowItem()
+        {
+            if (this.gvFlow.FocusedRowHandle >= 0)
+            {
+                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmModel };
+                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        this.RefreshData();
+                    }
+                }
             }
         }
 
@@ -46,21 +86,25 @@ namespace BudgetSystem
 
         public override void RefreshData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ApprovalType", typeof(string));
-            dt.Columns.Add("ApprovalName", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("CommitDate", typeof(DateTime));
-            dt.Columns.Add("CreateTime", typeof(DateTime));
+            var lst = manager.GetUnConfirmFlowByUser(RunInfo.Instance.CurrentUser.UserName);
 
-            dt.Rows.Add("预算单审批", "XXX流程审批", "审批中", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("合格供方审批", "XXX流程审批", "审批不通过", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("财务付款", "XXX流程审批", "审批通过", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("预算单审批", "XXX流程审批", "审批中", DateTime.Now, DateTime.Now);
+            foreach (var i in lst)
+            {
 
-            this.gridControl1.DataSource = dt;
+                i.InstanceStateWithEmptyState = i.IsClosed ? (i.ApproveResult ? "同意" : "驳回") : "";
+            }
+
+
+            this.gdFlow.DataSource = lst;
+            
+            this.gvFlow.ExpandAllGroups();
         }
 
+        protected override void InitGridViewAction()
+        {
+            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = ConfirmFlowItem, MainOperate = OperateTypes.Confirm, SecondAction = ViewFlowItem, SecondOperate = OperateTypes.View });
+
+        }
 
     }
 }

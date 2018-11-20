@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
@@ -36,6 +37,18 @@ namespace BudgetSystem
             private set;
         }
 
+        public User CurrentUser
+        {
+            get;
+            set;
+        }
 
+        public List<string> UserPermission
+        {
+            get;
+            set;
+        }
+
+       
     }
 }

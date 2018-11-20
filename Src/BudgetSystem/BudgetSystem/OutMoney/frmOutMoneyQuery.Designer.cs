@@ -28,16 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOutMoney = new DevExpress.XtraGrid.GridControl();
+            this.gvOutMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcBudgetNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcEnumFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcApprover = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcApproveTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcMoneyUsed = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcIsDrawback = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcHasInvoice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
@@ -49,8 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             this.panCondition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvOutMoney)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
@@ -64,107 +75,193 @@
             // 
             // splitContainerControl1
             // 
-            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.splitContainerControl1.Panel2.Controls.Add(this.gridControl1);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1075, 607);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.splitContainerControl1.Panel2.Controls.Add(this.gcOutMoney);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1152, 937);
             // 
             // panCondition
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
-            this.panCondition.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panCondition.Size = new System.Drawing.Size(285, 463);
+            this.panCondition.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.panCondition.Size = new System.Drawing.Size(326, 463);
             // 
-            // gridControl1
+            // gcOutMoney
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(777, 607);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
+            this.gcOutMoney.MainView = this.gvOutMoney;
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.Name = "gcOutMoney";
+            this.gcOutMoney.Size = new System.Drawing.Size(854, 937);
+            this.gcOutMoney.TabIndex = 1;
+            this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvOutMoney});
             // 
-            // gridView1
+            // gvOutMoney
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvOutMoney.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcSupplier,
+            this.gcBudgetNO,
+            this.gcVoucherNo,
+            this.gcOriginalCoin,
+            this.gcEnumFlowState,
+            this.gcCurrency,
+            this.gcExchangeRate,
+            this.gcCNY,
+            this.gcApplicant,
+            this.gcCommitTime,
+            this.gcApprover,
+            this.gcApproveTime,
+            this.gcPaymentDate,
+            this.gcDescription,
+            this.gcDepartmentCode,
+            this.gcMoneyUsed,
+            this.gcIsDrawback,
+            this.gcHasInvoice,
+            this.gcPaymentMethod});
+            this.gvOutMoney.GridControl = this.gcOutMoney;
+            this.gvOutMoney.Name = "gvOutMoney";
+            this.gvOutMoney.OptionsBehavior.Editable = false;
+            this.gvOutMoney.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn1
+            // gcSupplier
             // 
-            this.gridColumn1.Caption = "供应商";
-            this.gridColumn1.FieldName = "Supplier";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gcSupplier.Caption = "供应商";
+            this.gcSupplier.FieldName = "SupplierName";
+            this.gcSupplier.Name = "gcSupplier";
+            this.gcSupplier.Visible = true;
+            this.gcSupplier.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gcBudgetNO
             // 
-            this.gridColumn2.Caption = "付款金额";
-            this.gridColumn2.FieldName = "Payment";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gcBudgetNO.Caption = "合同号";
+            this.gcBudgetNO.FieldName = "ContractNO";
+            this.gcBudgetNO.Name = "gcBudgetNO";
+            this.gcBudgetNO.Visible = true;
+            this.gcBudgetNO.VisibleIndex = 1;
             // 
-            // gridColumn3
+            // gcVoucherNo
             // 
-            this.gridColumn3.Caption = "付款申请人";
-            this.gridColumn3.FieldName = "Submitter";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gcVoucherNo.Caption = "付款单号";
+            this.gcVoucherNo.FieldName = "VoucherNo";
+            this.gcVoucherNo.Name = "gcVoucherNo";
+            this.gcVoucherNo.Visible = true;
+            this.gcVoucherNo.VisibleIndex = 2;
             // 
-            // gridColumn4
+            // gcOriginalCoin
             // 
-            this.gridColumn4.Caption = "状态";
-            this.gridColumn4.FieldName = "State";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gcOriginalCoin.Caption = "付款原币金额";
+            this.gcOriginalCoin.FieldName = "OriginalCoin";
+            this.gcOriginalCoin.Name = "gcOriginalCoin";
+            this.gcOriginalCoin.Visible = true;
+            this.gcOriginalCoin.VisibleIndex = 3;
             // 
-            // gridColumn5
+            // gcEnumFlowState
             // 
-            this.gridColumn5.Caption = "财务确认人";
-            this.gridColumn5.FieldName = "Approver";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gcEnumFlowState.Caption = "审批状态";
+            this.gcEnumFlowState.FieldName = "EnumFlowState";
+            this.gcEnumFlowState.Name = "gcEnumFlowState";
+            this.gcEnumFlowState.Visible = true;
+            this.gcEnumFlowState.VisibleIndex = 4;
             // 
-            // gridColumn6
+            // gcCurrency
             // 
-            this.gridColumn6.Caption = "确认时间";
-            this.gridColumn6.FieldName = "ApproveTime";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gcCurrency.Caption = "币种";
+            this.gcCurrency.FieldName = "Currency";
+            this.gcCurrency.Name = "gcCurrency";
             // 
-            // gridColumn7
+            // gcExchangeRate
             // 
-            this.gridColumn7.Caption = "付款日期";
-            this.gridColumn7.FieldName = "PaymentDate";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gcExchangeRate.Caption = "汇率";
+            this.gcExchangeRate.FieldName = "ExchangeRate";
+            this.gcExchangeRate.Name = "gcExchangeRate";
             // 
-            // gridColumn8
+            // gcCNY
             // 
-            this.gridColumn8.Caption = "备注";
-            this.gridColumn8.FieldName = "Description";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gcCNY.Caption = "付款人民币金额";
+            this.gcCNY.FieldName = "CNY";
+            this.gcCNY.Name = "gcCNY";
+            this.gcCNY.Visible = true;
+            this.gcCNY.VisibleIndex = 5;
+            // 
+            // gcApplicant
+            // 
+            this.gcApplicant.Caption = "付款申请人";
+            this.gcApplicant.FieldName = "Applicant";
+            this.gcApplicant.Name = "gcApplicant";
+            this.gcApplicant.Visible = true;
+            this.gcApplicant.VisibleIndex = 6;
+            // 
+            // gcCommitTime
+            // 
+            this.gcCommitTime.Caption = "提交时间";
+            this.gcCommitTime.FieldName = "CommitTime";
+            this.gcCommitTime.Name = "gcCommitTime";
+            this.gcCommitTime.Visible = true;
+            this.gcCommitTime.VisibleIndex = 7;
+            // 
+            // gcApprover
+            // 
+            this.gcApprover.Caption = "财务确认人";
+            this.gcApprover.FieldName = "Approver";
+            this.gcApprover.Name = "gcApprover";
+            this.gcApprover.Visible = true;
+            this.gcApprover.VisibleIndex = 8;
+            // 
+            // gcApproveTime
+            // 
+            this.gcApproveTime.Caption = "确认时间";
+            this.gcApproveTime.FieldName = "ApproveTime";
+            this.gcApproveTime.Name = "gcApproveTime";
+            this.gcApproveTime.Visible = true;
+            this.gcApproveTime.VisibleIndex = 9;
+            // 
+            // gcPaymentDate
+            // 
+            this.gcPaymentDate.Caption = "付款日期";
+            this.gcPaymentDate.FieldName = "PaymentDate";
+            this.gcPaymentDate.Name = "gcPaymentDate";
+            // 
+            // gcDescription
+            // 
+            this.gcDescription.Caption = "备注";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            // 
+            // gcDepartmentCode
+            // 
+            this.gcDepartmentCode.Caption = "所属部门";
+            this.gcDepartmentCode.FieldName = "DepartmentName";
+            this.gcDepartmentCode.Name = "gcDepartmentCode";
+            this.gcDepartmentCode.Visible = true;
+            this.gcDepartmentCode.VisibleIndex = 10;
+            // 
+            // gcMoneyUsed
+            // 
+            this.gcMoneyUsed.Caption = "用途";
+            this.gcMoneyUsed.FieldName = "MoneyUsed";
+            this.gcMoneyUsed.Name = "gcMoneyUsed";
+            this.gcMoneyUsed.Visible = true;
+            this.gcMoneyUsed.VisibleIndex = 11;
+            // 
+            // gcIsDrawback
+            // 
+            this.gcIsDrawback.Caption = "是否退税";
+            this.gcIsDrawback.FieldName = "IsDrawback";
+            this.gcIsDrawback.Name = "gcIsDrawback";
+            // 
+            // gcHasInvoice
+            // 
+            this.gcHasInvoice.Caption = "是否收到发票";
+            this.gcHasInvoice.FieldName = "HasInvoice";
+            this.gcHasInvoice.Name = "gcHasInvoice";
+            // 
+            // gcPaymentMethod
+            // 
+            this.gcPaymentMethod.Caption = "付款方式";
+            this.gcPaymentMethod.FieldName = "PaymentMethod";
+            this.gcPaymentMethod.Name = "gcPaymentMethod";
             // 
             // layoutControl1
             // 
@@ -176,7 +273,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControl1.Size = new System.Drawing.Size(326, 463);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -185,7 +282,7 @@
             this.textEdit3.Location = new System.Drawing.Point(105, 70);
             this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(168, 25);
+            this.textEdit3.Size = new System.Drawing.Size(209, 25);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
@@ -194,7 +291,7 @@
             this.textEdit2.Location = new System.Drawing.Point(105, 41);
             this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(209, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
@@ -203,7 +300,7 @@
             this.textEdit1.Location = new System.Drawing.Point(105, 12);
             this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(209, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -218,7 +315,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(326, 463);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -228,7 +325,7 @@
             this.layoutControlItem1.CustomizationFormText = "供应商：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(306, 29);
             this.layoutControlItem1.Text = "供应商：";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -238,7 +335,7 @@
             this.layoutControlItem2.CustomizationFormText = "付款申请人：";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(306, 29);
             this.layoutControlItem2.Text = "付款申请人：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -248,7 +345,7 @@
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 385);
+            this.layoutControlItem3.Size = new System.Drawing.Size(306, 385);
             this.layoutControlItem3.Text = "财务确认人：";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
             // 
@@ -256,15 +353,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 607);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ClientSize = new System.Drawing.Size(1152, 937);
+            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             this.panCondition.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvOutMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
@@ -280,16 +377,15 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.GridControl gcOutMoney;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvOutMoney;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSupplier;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCNY;
+        private DevExpress.XtraGrid.Columns.GridColumn gcApplicant;
+        private DevExpress.XtraGrid.Columns.GridColumn gcApprover;
+        private DevExpress.XtraGrid.Columns.GridColumn gcApproveTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPaymentDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
@@ -298,5 +394,17 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.TextEdit textEdit3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCommitTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gcBudgetNO;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcMoneyUsed;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsDrawback;
+        private DevExpress.XtraGrid.Columns.GridColumn gcHasInvoice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPaymentMethod;
+        private DevExpress.XtraGrid.Columns.GridColumn gcVoucherNo;
+        private DevExpress.XtraGrid.Columns.GridColumn gcOriginalCoin;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
     }
 }

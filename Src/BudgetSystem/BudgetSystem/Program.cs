@@ -20,10 +20,16 @@ namespace BudgetSystem
         [STAThread]
         static void Main()
         {
+            Environment.CurrentDirectory = Application.StartupPath;
             DevExpress.Localization.Util.Set_zhchs_Culture();
             OfficeSkins.Register();
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
+
+
+            Application.ThreadException += Application_ThreadException; //UI线程异常
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException; //多线程异常
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -40,6 +46,18 @@ namespace BudgetSystem
             }
 
             
+        }
+    
+        //UI线程异常
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            //Log
+        }
+
+        //多线程异常
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            //Log
         }
     }
 }

@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 using DevExpress.XtraBars;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
     public class ModelOperate
     {
 
-        public ModelOperate(OperateTypes operate, string text, string groupText, int order,int imageIndex, UITypes uiType = UITypes.LargerButton)
+        public ModelOperate(OperateTypes operate, string text, string groupText, int order,int imageIndex, UITypes uiType = UITypes.LargeButton)
            : this(operate.ToString(), text, groupText, order,imageIndex, uiType)
         {
             
         }
 
-        public ModelOperate(string operate, string text, string groupText, int order, int imageIndex,UITypes uiType = UITypes.LargerButton)
+        public ModelOperate(string operate, string text, string groupText, int order, int imageIndex,UITypes uiType = UITypes.LargeButton)
         {
             this.Operate = operate;
             this.Text = text;

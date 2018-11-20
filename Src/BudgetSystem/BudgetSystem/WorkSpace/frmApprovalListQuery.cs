@@ -6,66 +6,94 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
+using System.Linq;
+using BudgetSystem.Entity;
+using BudgetSystem.WorkSpace;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
-namespace BudgetSystem
+namespace BudgetSystem.WorkSpace
 {
     public partial class frmApprovalListQuery : frmBaseQueryForm
     {
+
+
+        FlowManager manager = new FlowManager();
         public frmApprovalListQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.MyPendingFlowManagement;
         }
 
         public override void RefreshData()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ApprovalType", typeof(string));
-            dt.Columns.Add("ApprovalName", typeof(string));
-            dt.Columns.Add("Commiter", typeof(string));
-            dt.Columns.Add("CommitDate", typeof(DateTime));
-            dt.Columns.Add("CreateTime", typeof(DateTime));
+            var list = manager.GetPendingFlowByUser(RunInfo.Instance.CurrentUser.UserName);
 
-            dt.Rows.Add("预算单审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("合格供方审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("财务付款", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
-            dt.Rows.Add("预算单审批", "XXX流程审批", "张三", DateTime.Now, DateTime.Now);
-
-            this.gridControl1.DataSource = dt;
+            this.gdPendingFlow.DataSource = list;
+            this.gvPendingFlow.ExpandAllGroups();
         }
 
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Agree, "审批"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Approve, "审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperatePageName = "待审流程";
+            this.ModelOperatePageName = "我的待审批流程";
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
-
-            if (operate.Operate == OperateTypes.Agree.ToString())
+            if (operate.Operate == OperateTypes.Approve.ToString())
             {
-                frmApprovalEdit form = new frmApprovalEdit();
-                form.ShowDialog(this);
+
+                AproveFlowItem();
+
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
-            }
-            else if (operate.Operate == "Test")
-            {
-                XtraMessageBox.Show("Test");
-            }
-            else
-            {
-                XtraMessageBox.Show("未定义的操作");
+                ViewFlowItem();
+
             }
         }
 
+        private void ViewFlowItem()
+        {
+            if (this.gvPendingFlow.FocusedRowHandle >= 0)
+            {
+                FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ApproveViewModel };
+                    form.ShowDialog(this);
+                }
+
+            }
+        }
+        private void AproveFlowItem()
+        {
+            if (this.gvPendingFlow.FocusedRowHandle >= 0)
+            {
+                FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ApproveModel };
+                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        this.RefreshData();
+                    }
+                }
+            }
+
+        }
+
+
+        protected override void InitGridViewAction()
+        {
+            this.gridViewAction.Add(this.gvPendingFlow, new ActionWithPermission() { MainAction = AproveFlowItem, MainOperate = OperateTypes.Approve, SecondAction = ViewFlowItem, SecondOperate = OperateTypes.View });
+
+        }
 
 
 

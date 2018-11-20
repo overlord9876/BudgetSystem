@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
@@ -27,7 +28,7 @@ namespace BudgetSystem
         }
 
 
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.ViewMoney.ToString())

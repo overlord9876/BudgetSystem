@@ -6,11 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Entity;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
     public partial class frmVoucherNotesQuery : frmBaseQueryFormWithCondtion
     {
+        DeclarationformManager dm = new DeclarationformManager();
+
         public frmVoucherNotesQuery()
         {
             InitializeComponent();
@@ -21,65 +25,86 @@ namespace BudgetSystem
         {
             base.InitModelOperate();
 
-            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "导入付款凭证"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款凭证"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "导入报关单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除报关单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看报关单"));
 
-            this.ModelOperatePageName = "付款凭证管理";
+            this.ModelOperatePageName = "报关单管理";
         }
 
         public override void RefreshData()
         {
-            //            BudNo
-            //InvoiceNo
-            //InvoiceDate
-            //Payment
-            //CreateUser
-            //CtreateDate
-            //Description
-            DataTable dt = new DataTable();
-            dt.Columns.Add("BudNo", typeof(string));
-            dt.Columns.Add("InvoiceNo", typeof(string));
-            dt.Columns.Add("InvoiceDate", typeof(DateTime));
-            dt.Columns.Add("Payment", typeof(string));
-            dt.Columns.Add("CreateUser", typeof(string));
-            dt.Columns.Add("CtreateDate", typeof(DateTime));
-            dt.Columns.Add("Description", typeof(string));
-
-            dt.Rows.Add("18G-002-001", "201809130923123313231", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
-            dt.Rows.Add("18G-002-002", "201809130923123313875", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
-            dt.Rows.Add("18G-002-003", "201809130923123313980", DateTime.Now, "24255000.00", "张三", DateTime.Now, "");
-
-            this.gridControl1.DataSource = dt;
+            this.gcDeclarationform.DataSource = dm.GetAllDeclarationform();
+            this.gcDeclarationform.RefreshDataSource();
         }
 
-
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.ImportData.ToString())
             {
-                XtraMessageBox.Show("导入付款凭证");
+                frmDeclarationformEdit form = new frmDeclarationformEdit();
+                if (form.DialogResult == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+
+            }
+            else if (operate.Operate == OperateTypes.New.ToString())
+            {
+                frmDeclarationformEdit form = new frmDeclarationformEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
-                form.ShowDialog(this);
+                Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
+                if (selectedItem == null)
+                {
+                    XtraMessageBox.Show("请选择要修改的项");
+                    return;
+                }
+
+                frmDeclarationformEdit form = new frmDeclarationformEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.CurrentDeclarationform = selectedItem;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmVoucherNotesEdit form = new frmVoucherNotesEdit();
+                frmDeclarationformEdit form = new frmDeclarationformEdit();
+                form.WorkModel = EditFormWorkModels.View;
                 form.ShowDialog(this);
             }
-            else if (operate.Operate == "Test1")
+            else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-                XtraMessageBox.Show("Test1");
+                DeleteDeclarationform();
             }
             else
             {
                 XtraMessageBox.Show("未定义的操作1");
             }
+        }
+
+        private void DeleteDeclarationform()
+        {
+            Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
+            if (selectedItem == null)
+            {
+                XtraMessageBox.Show("请选择要删除的项");
+                return;
+            }
+            dm.DeleteDeclarationformById(selectedItem.ID);
+            XtraMessageBox.Show("删除成功。");
+            this.gvDeclarationform.DeleteRow(this.gvDeclarationform.FocusedRowHandle);
+
         }
     }
 }

@@ -6,6 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
+using BudgetSystem.UserManage;
+using BudgetSystem.RoleManage;
+using BudgetSystem.DepartmentManage;
+using BudgetSystem.InMoney;
+using BudgetSystem.FlowManage;
+using BudgetSystem.WorkSpace;
 
 namespace BudgetSystem
 {
@@ -15,6 +21,10 @@ namespace BudgetSystem
         {
             InitializeComponent();
             InitSkins();
+            CheckUserPermission();
+
+            bsiLoginInfo.Caption = string.Format("当前登陆用户为：{0}{1}", RunInfo.Instance.CurrentUser.DepartmentName, RunInfo.Instance.CurrentUser.ToString());
+
         }
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -269,6 +279,74 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new frmFinalAccountsQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnModifyPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmUserEdit editor = new frmUserEdit();
+            editor.WorkModel = EditFormWorkModels.Custom;
+            editor.CustomWorkModel = frmUserEdit.CustomWorkModel_ModifyPassword;
+            editor.ShowDialog();
+        }
+
+        private void btnReport1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmTestReport1 form = GetExistForm<Report.frmTestReport1>();
+            if (form == null)
+            {
+                form = new Report.frmTestReport1();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnBudgetReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmBudgetReport form = GetExistForm<Report.frmBudgetReport>();
+            if (form == null)
+            {
+                form = new Report.frmBudgetReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnInMoneyReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmInMoneyReport form = GetExistForm<Report.frmInMoneyReport>();
+            if (form == null)
+            {
+                form = new Report.frmInMoneyReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnOutMoney_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmOutMoneyReport form = GetExistForm<Report.frmOutMoneyReport>();
+            if (form == null)
+            {
+                form = new Report.frmOutMoneyReport();
                 form.RefreshData();
             }
             else

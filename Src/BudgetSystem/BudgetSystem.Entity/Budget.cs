@@ -5,24 +5,25 @@ using System.Text;
 namespace BudgetSystem.Entity
 {
     /// <summary>
-    /// 预算单信息
+    /// 预算单
     /// </summary>
     public class Budget : IEntity
     {
         /// <summary>
-        /// ID
+        /// 合同ID号
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
-        /// 合同编号
+        /// 合同号
         /// </summary>
         public string ContractNO { get; set; }
 
         /// <summary>
-        /// 合同状态
+        /// 状态
         /// </summary>
         public string State { get; set; }
+
         /// <summary>
         /// 业务员
         /// </summary>
@@ -32,68 +33,48 @@ namespace BudgetSystem.Entity
         /// 业务员所在部门
         /// </summary>
         public string Department { get; set; }
+
         /// <summary>
-        /// 创建时间
+        /// 录入时间
         /// </summary>
         public DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// 合同签约时间
+        /// 订约日期
         /// </summary>
-        public string SignDate { get; set; }
+        public DateTime SignDate { get; set; }
 
         /// <summary>
-        /// 合约有效期
+        /// 有效截止期
         /// </summary>
-        public string Validity { get; set; }
+        public DateTime Validity { get; set; }
 
         /// <summary>
-        /// 买方名称
+        /// 0=一般贸易
+        /// 1=来料加工
+        /// 2=进料加工
+        /// 3=纯进口
+        /// 4=内贸
         /// </summary>
-        public string Purchaser { get; set; }
+        public int TradeMode { get; set; }
+
         /// <summary>
-        /// 买方名称1
+        /// 0=做单
+        /// 1=过单
         /// </summary>
-        public string Purchaser1 { get; set; }
-        /// <summary>
-        /// 买方名称2
-        /// </summary>
-        public string Purchaser2 { get; set; }
-        /// <summary>
-        /// 买方名称3
-        /// </summary>
-        public string Purchaser3 { get; set; }
-        /// <summary>
-        /// 买方名称4
-        /// </summary>
-        public string Purchaser4 { get; set; }
-        /// <summary>
-        /// 买方名称5
-        /// </summary>
-        public string Purchaser5 { get; set; }
-        /// <summary>
-        /// 贸易方式
-        /// </summary>
-        public TradeMode TradeMode { get; set; }
-        /// <summary>
-        /// 贸易性质
-        /// </summary>
-        public TradeNature TradeNature { get; set; }
+        public int TradeNature { get; set; }
 
         /// <summary>
         /// 外贸商品详单
         /// </summary>
-        public List<Product> OutProductDetail { get; set; }
+        public string OutProductDetail { get; set; }
 
         /// <summary>
         /// 价格条款
         /// </summary>
         public string PriceClause { get; set; }
 
-        /// <summary>
-        /// 交货口岸
-        /// </summary>
-        public string Seaport { get; set; }
+
 
         /// <summary>
         /// 对外结算方式1
@@ -111,7 +92,7 @@ namespace BudgetSystem.Entity
         public string OutSettlementMethod3 { get; set; }
 
         /// <summary>
-        /// 合同总金额
+        /// 合同金额？
         /// </summary>
         public decimal TotalAmount { get; set; }
 
@@ -121,29 +102,15 @@ namespace BudgetSystem.Entity
         public string Country { get; set; }
 
         /// <summary>
-        /// 工厂列表
-        /// </summary>
-        public string Supplier { get; set; }
-
-        /// <summary>
-        /// 是否有效合格供方
+        /// 是否要求合格供方
         /// </summary>
         public bool IsQualifiedSupplier { get; set; }
 
         /// <summary>
         /// 内贸产品详单
         /// </summary>
-        public List<RawMaterial> InProductDetail { get; set; }
+        public string InProductDetail { get; set; }
 
-        /// <summary>
-        /// 对内结算方式1
-        /// </summary>
-        public string InSettlementMethod1 { get; set; }
-
-        /// <summary>
-        /// 对内结算方式2
-        /// </summary>
-        public string InSettlementMethod2 { get; set; }
 
         /// <summary>
         /// 预付金额
@@ -151,7 +118,18 @@ namespace BudgetSystem.Entity
         public decimal AdvancePayment { get; set; }
 
         /// <summary>
-        /// 预付金额银行利率
+        /// 是否有预付款
+        /// </summary>
+        public bool HasAdvancePayment
+        {
+            get
+            {
+                return AdvancePayment > 0;
+            }
+        }
+
+        /// <summary>
+        /// 利率
         /// </summary>
         public float InterestRate { get; set; }
 
@@ -189,9 +167,104 @@ namespace BudgetSystem.Entity
         /// 汇率
         /// </summary>
         public float ExchangeRate { get; set; }
+
+        /// <summary>
+        /// 利润
+        /// </summary>
+        public decimal Profit { get; set; }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public int FlowState { get; set; }
+
+        /// <summary>
+        /// 盈利水平1
+        /// </summary>
+        public decimal ProfitLevel1 { get; set; }
+
+        /// <summary>
+        /// 盈利水平2
+        /// </summary>
+        public decimal ProfitLevel2 { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Description { get; set; }
+
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 业务员姓名
+        /// </summary>
+        public string SalesmanName { get; set; }
+
+        /// <summary>
+        /// 部门描述
+        /// </summary>
+        public string DepartmentDesc
+        {
+            get { return this.Department + this.DepartmentName; }
+        }
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// 目的港口
+        /// </summary>
+        public string Port { get; set; }
+
+        /// <summary>
+        ///  出口退税
+        /// </summary>
+        public decimal TaxRebate { get; set; }
+
+        /// <summary>
+        /// 总进价
+        /// </summary>
+        public decimal PurchasePrice { get; set; }
+
+        /// <summary>
+        /// 主客户名称
+        /// </summary>
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 客户列表
+        /// </summary>
+        public List<Customer> CustomerList { get; set; }
+
+        /// <summary>
+        /// 供应商列表
+        /// </summary>
+        public List<Supplier> SupplierList { get; set; }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public EnumDataFlowState EnumFlowState
+        {
+            get
+            {
+                return this.FlowState.ToEnumDataFlowState();
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", ContractNO);
+        }
     }
 
-    public enum TradeMode
+
+    public enum EnumTradeMode : int
     {
         一般贸易 = 0,
         来料加工 = 1,
@@ -200,7 +273,7 @@ namespace BudgetSystem.Entity
         内贸 = 4,
     }
 
-    public enum TradeNature
+    public enum EnumTradeNature : int
     {
         做单 = 0,
         过单 = 1

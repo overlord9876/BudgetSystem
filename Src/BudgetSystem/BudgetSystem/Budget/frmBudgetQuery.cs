@@ -6,15 +6,25 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using BudgetSystem.Entity;
+using BudgetSystem.CommonControl;
 
 namespace BudgetSystem
 {
     public partial class frmBudgetQuery : frmBaseQueryFormWithCondtion
     {
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
+        private GridHitInfo hInfo;
+
         public frmBudgetQuery()
         {
             InitializeComponent();
 
+            this.Module = BusinessModules.BuggetManagement;
+
+            LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeMode, typeof(EnumTradeMode));
+            LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
 
 
@@ -23,47 +33,60 @@ namespace BudgetSystem
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "作废"));
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "作废"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View,"查看审批状态"));
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交流程"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View,"自定义查询"));
 
 
             this.ModelOperatePageName = "预算单";
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "通用查询", UITypes.LargeMenu, new List<string>() { "通用查询1", "通用查询2", "通用查询3" }));
         }
 
-
-        public override void OperateHandled(ModelOperate operate)
+        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                CreateBudget();
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                ModifyBudget();
+            }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                CommitBudget();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmBudgetEditEx form = new frmBudgetEditEx();
-                form.ShowDialog(this);
+                if (e.SenderText == "查询")
+                {
+                    ViewBudget();
+                }
+                else
+                {
+                    XtraMessageBox.Show(e.SenderText);
+                    this.RefreshData();
+                }
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
-                XtraMessageBox.Show("申请修改");
+                RevokeBudget();
             }
             else if (operate.Operate == OperateTypes.Close.ToString())
             {
-                XtraMessageBox.Show("关闭预算单");
+                CloseBudget();
             }
-            else if (operate.Operate == "Test")
+            else if (operate.Operate == OperateTypes.BudgetAccountBill.ToString())
             {
-                XtraMessageBox.Show("Test");
+                ShowBudgetAccountBillView();
             }
             else
             {
@@ -73,42 +96,115 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            //            
-            //State
-            //TotalAmount
-            //Salesman
-            //Department
-            //CreateDate
-            //SignDate
-            //Validity
-            //Purchaser
-            //TradeMode
-            //TradeNature
-            //Seaport
-            //AdvancePayment
-            //Profit
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ContractNO", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("TotalAmount", typeof(string));
-            dt.Columns.Add("Salesman", typeof(string));
-            dt.Columns.Add("Department", typeof(string));
-            dt.Columns.Add("CreateDate", typeof(DateTime));
-            dt.Columns.Add("SignDate", typeof(DateTime));
-            dt.Columns.Add("Validity", typeof(DateTime));
-            dt.Columns.Add("Purchaser", typeof(string));
-            dt.Columns.Add("TradeMode", typeof(string));
-            dt.Columns.Add("TradeNature", typeof(string));
-            dt.Columns.Add("Seaport", typeof(string));
-            dt.Columns.Add("AdvancePayment", typeof(string));
-            dt.Columns.Add("Profit", typeof(string));
+            var list = bm.GetAllBudget();
+            this.gridBudget.DataSource = list;
+        }
 
-            dt.Rows.Add("18G-002-001", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-002", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-003", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
-            dt.Rows.Add("18G-002-004", "审批中", "19695000", "李佩", "002二部", DateTime.Now, DateTime.Now.AddDays(-10), DateTime.Now.AddMonths(10), "CRAFT OF SCANDINAVIA AB", "一般贸易", "做单", "SWE/瑞士", "800000", "900000");
+        private void ShowBudgetAccountBillView()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmAccountBillView form = new frmAccountBillView();
+                form.CurrentBudget = budget;
 
-            this.gridControl1.DataSource = dt;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void CreateBudget()
+        {
+            frmBudgetEdit form = new frmBudgetEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+
+        private void ModifyBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumFlowState == EnumDataFlowState.审批中
+                    || budget.EnumFlowState == EnumDataFlowState.审批通过)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单不能修改。", budget.ContractNO));
+                    return;
+                }
+                frmBudgetEdit form = new frmBudgetEdit();
+                form.WorkModel = EditFormWorkModels.Modify;
+                form.Budget = budget;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void CommitBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
+                    return;
+                }
+                string message = bm.StartFlow(budget.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+        }
+
+        private void RevokeBudget()
+        {
+            //TODO:
+        }
+
+        private void CloseBudget()
+        {
+            //TODO:
+        }
+
+        private void ViewBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmBudgetEdit form = new frmBudgetEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.Budget = budget;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void gvBudget_DoubleClick(object sender, EventArgs e)
+        {
+            if (hInfo.InRow)
+            {
+                ModifyBudget();
+            }
+        }
+
+        private void gvBudget_MouseDown(object sender, MouseEventArgs e)
+        {
+            hInfo = gvBudget.CalcHitInfo(e.Y, e.Y);
         }
 
 

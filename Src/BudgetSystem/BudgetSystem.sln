@@ -15,10 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localizatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D508CB0A-FCCD-4693-B0CF-7AB95AA561FF}"
 	ProjectSection(SolutionItems) = preProject
+		Mysql生成增改删SQL.sql = Mysql生成增改删SQL.sql
+		Mysql生成实体类.sql = Mysql生成实体类.sql
 		Track.txt = Track.txt
 		Track0903.txt = Track0903.txt
 		Track0904.txt = Track0904.txt
 		Track2018-09-01.txt = Track2018-09-01.txt
+		开发进度跟踪.txt = 开发进度跟踪.txt
 	EndProjectSection
 EndProject
 Global

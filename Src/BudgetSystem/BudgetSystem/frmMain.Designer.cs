@@ -50,10 +50,16 @@
             this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
             this.btnOptionManager = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.btnModifyPassword = new DevExpress.XtraBars.BarButtonItem();
+            this.btnReport = new DevExpress.XtraBars.BarButtonItem();
+            this.btnBudgetReport = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInMoneyReport = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOutMoney = new DevExpress.XtraBars.BarButtonItem();
+            this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -64,6 +70,7 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.bsiLoginInfo = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -98,20 +105,27 @@
             this.btnFlowConfig,
             this.btnDepartment,
             this.btnRoleManager,
-            this.btnOptionManager});
+            this.btnOptionManager,
+            this.btnModifyPassword,
+            this.btnReport,
+            this.btnBudgetReport,
+            this.btnInMoneyReport,
+            this.btnOutMoney,
+            this.bsiLoginInfo});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.ribbonControl1.MaxItemId = 37;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonControl1.MaxItemId = 44;
             this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnReLogin);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.ribbonPage1,
+            this.rpMain,
             this.ribbonPage4});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1692, 184);
+            this.ribbonControl1.Size = new System.Drawing.Size(1515, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -180,6 +194,7 @@
             this.imageCollection1.Images.SetKeyName(58, "Print_32x32.png");
             this.imageCollection1.Images.SetKeyName(59, "NewTask_32x32.png");
             this.imageCollection1.Images.SetKeyName(60, "BreakingChange_32x32.png");
+            this.imageCollection1.Images.SetKeyName(61, "BOUser_32x32.png");
             // 
             // btnRefresh
             // 
@@ -213,6 +228,7 @@
             this.btnbudgetQuery.ImageIndex = 19;
             this.btnbudgetQuery.Name = "btnbudgetQuery";
             this.btnbudgetQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnbudgetQuery.Tag = "BuggetManagement";
             this.btnbudgetQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnbudgetQuery_ItemClick);
             // 
             // btnInMoneyQuery
@@ -222,6 +238,7 @@
             this.btnInMoneyQuery.ImageIndex = 43;
             this.btnInMoneyQuery.Name = "btnInMoneyQuery";
             this.btnInMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInMoneyQuery.Tag = "InMoneyManagement";
             this.btnInMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyQuery_ItemClick);
             // 
             // btnOutMoneyQuery
@@ -231,6 +248,7 @@
             this.btnOutMoneyQuery.ImageIndex = 42;
             this.btnOutMoneyQuery.Name = "btnOutMoneyQuery";
             this.btnOutMoneyQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOutMoneyQuery.Tag = "OutMoneyManagement";
             this.btnOutMoneyQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoneyQuery_ItemClick);
             // 
             // btnUserQuery
@@ -240,6 +258,7 @@
             this.btnUserQuery.ImageIndex = 39;
             this.btnUserQuery.Name = "btnUserQuery";
             this.btnUserQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnUserQuery.Tag = "UserManagement";
             this.btnUserQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserQuery_ItemClick);
             // 
             // btnCustomerQuery
@@ -249,6 +268,7 @@
             this.btnCustomerQuery.ImageIndex = 24;
             this.btnCustomerQuery.Name = "btnCustomerQuery";
             this.btnCustomerQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnCustomerQuery.Tag = "CustomerManagement";
             this.btnCustomerQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCustomerQuery_ItemClick);
             // 
             // btnSupplierQuery
@@ -258,6 +278,7 @@
             this.btnSupplierQuery.ImageIndex = 26;
             this.btnSupplierQuery.Name = "btnSupplierQuery";
             this.btnSupplierQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSupplierQuery.Tag = "SupplierManagement";
             this.btnSupplierQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSupplierQuery_ItemClick);
             // 
             // btnInvoiceQuery
@@ -267,15 +288,17 @@
             this.btnInvoiceQuery.ImageIndex = 45;
             this.btnInvoiceQuery.Name = "btnInvoiceQuery";
             this.btnInvoiceQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInvoiceQuery.Tag = "InvoiceManagement";
             this.btnInvoiceQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvoiceQuery_ItemClick);
             // 
             // btnVoucherNotesQuery
             // 
-            this.btnVoucherNotesQuery.Caption = "付款凭证";
+            this.btnVoucherNotesQuery.Caption = "报关单管理";
             this.btnVoucherNotesQuery.Id = 29;
             this.btnVoucherNotesQuery.ImageIndex = 12;
             this.btnVoucherNotesQuery.Name = "btnVoucherNotesQuery";
             this.btnVoucherNotesQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnVoucherNotesQuery.Tag = "VoucherNotesManagement";
             this.btnVoucherNotesQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVoucherNotesQuery_ItemClick);
             // 
             // btnApprovalList
@@ -285,6 +308,7 @@
             this.btnApprovalList.ImageIndex = 47;
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnApprovalList.Tag = "MyPendingFlowManagement";
             this.btnApprovalList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApprovalList_ItemClick);
             // 
             // btnMyOrder
@@ -294,6 +318,7 @@
             this.btnMyOrder.ImageIndex = 17;
             this.btnMyOrder.Name = "btnMyOrder";
             this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyOrder.Tag = "MySubmitFlowManagement";
             this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
             // 
             // barButtonItem4
@@ -312,6 +337,7 @@
             this.btnFlowConfig.ImageIndex = 52;
             this.btnFlowConfig.Name = "btnFlowConfig";
             this.btnFlowConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnFlowConfig.Tag = "FlowManagement";
             this.btnFlowConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFlowConfig_ItemClick);
             // 
             // btnDepartment
@@ -321,6 +347,7 @@
             this.btnDepartment.ImageIndex = 40;
             this.btnDepartment.Name = "btnDepartment";
             this.btnDepartment.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnDepartment.Tag = "DepartmentManagement";
             this.btnDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDepartment_ItemClick);
             // 
             // btnRoleManager
@@ -330,26 +357,76 @@
             this.btnRoleManager.ImageIndex = 37;
             this.btnRoleManager.Name = "btnRoleManager";
             this.btnRoleManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnRoleManager.Tag = "RoleManagement";
             this.btnRoleManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoleManager_ItemClick);
             // 
             // btnOptionManager
             // 
-            this.btnOptionManager.Caption = "选择管理";
+            this.btnOptionManager.Caption = "选项管理";
             this.btnOptionManager.Id = 36;
             this.btnOptionManager.ImageIndex = 35;
             this.btnOptionManager.Name = "btnOptionManager";
             this.btnOptionManager.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOptionManager.Tag = "OptionManagement";
             this.btnOptionManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOptionManager_ItemClick);
             // 
-            // ribbonPage1
+            // btnModifyPassword
             // 
-            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.btnModifyPassword.Caption = "修改密码";
+            this.btnModifyPassword.Id = 37;
+            this.btnModifyPassword.ImageIndex = 61;
+            this.btnModifyPassword.Name = "btnModifyPassword";
+            this.btnModifyPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModifyPassword_ItemClick);
+            // 
+            // btnReport
+            // 
+            this.btnReport.Caption = "测试报表";
+            this.btnReport.Id = 38;
+            this.btnReport.ImageIndex = 21;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport1_ItemClick);
+            // 
+            // btnBudgetReport
+            // 
+            this.btnBudgetReport.Caption = "预算单报表";
+            this.btnBudgetReport.Id = 40;
+            this.btnBudgetReport.ImageIndex = 21;
+            this.btnBudgetReport.Name = "btnBudgetReport";
+            this.btnBudgetReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnBudgetReport.Tag = "BudgetReport";
+            this.btnBudgetReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBudgetReport_ItemClick);
+            // 
+            // btnInMoneyReport
+            // 
+            this.btnInMoneyReport.Caption = "收款报表";
+            this.btnInMoneyReport.Id = 41;
+            this.btnInMoneyReport.ImageIndex = 21;
+            this.btnInMoneyReport.Name = "btnInMoneyReport";
+            this.btnInMoneyReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnInMoneyReport.Tag = "InMoneyReport";
+            this.btnInMoneyReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyReport_ItemClick);
+            // 
+            // btnOutMoney
+            // 
+            this.btnOutMoney.Caption = "付款报表";
+            this.btnOutMoney.Id = 42;
+            this.btnOutMoney.ImageIndex = 21;
+            this.btnOutMoney.Name = "btnOutMoney";
+            this.btnOutMoney.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnOutMoney.Tag = "OutMoneyReport";
+            this.btnOutMoney.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoney_ItemClick);
+            // 
+            // rpMain
+            // 
+            this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2,
             this.ribbonPageGroup5,
+            this.rpGroup,
             this.ribbonPageGroup4});
-            this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "业务";
+            this.rpMain.Name = "rpMain";
+            this.rpMain.Text = "业务";
             // 
             // ribbonPageGroup1
             // 
@@ -373,6 +450,15 @@
             this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "我的工作";
+            // 
+            // rpGroup
+            // 
+            this.rpGroup.ItemLinks.Add(this.btnReport);
+            this.rpGroup.ItemLinks.Add(this.btnBudgetReport);
+            this.rpGroup.ItemLinks.Add(this.btnInMoneyReport);
+            this.rpGroup.ItemLinks.Add(this.btnOutMoney);
+            this.rpGroup.Name = "rpGroup";
+            this.rpGroup.Text = "统计报告";
             // 
             // ribbonPageGroup4
             // 
@@ -401,11 +487,12 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 960);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 874);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1692, 37);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1515, 34);
             // 
             // documentManager1
             // 
@@ -453,15 +540,22 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // bsiLoginInfo
+            // 
+            this.bsiLoginInfo.Caption = "barStaticItem1";
+            this.bsiLoginInfo.Id = 43;
+            this.bsiLoginInfo.Name = "bsiLoginInfo";
+            this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1692, 997);
+            this.ClientSize = new System.Drawing.Size(1515, 908);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -480,7 +574,7 @@
         #endregion
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage rpMain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
@@ -513,6 +607,13 @@
         private DevExpress.XtraBars.BarButtonItem btnDepartment;
         private DevExpress.XtraBars.BarButtonItem btnRoleManager;
         private DevExpress.XtraBars.BarButtonItem btnOptionManager;
+        private DevExpress.XtraBars.BarButtonItem btnModifyPassword;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpGroup;
+        private DevExpress.XtraBars.BarButtonItem btnReport;
+        private DevExpress.XtraBars.BarButtonItem btnBudgetReport;
+        private DevExpress.XtraBars.BarButtonItem btnInMoneyReport;
+        private DevExpress.XtraBars.BarButtonItem btnOutMoney;
+        private DevExpress.XtraBars.BarStaticItem bsiLoginInfo;
     }
 }
 

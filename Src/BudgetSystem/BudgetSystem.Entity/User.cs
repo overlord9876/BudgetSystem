@@ -6,7 +6,7 @@ using System.Data;
 namespace BudgetSystem.Entity
 {
     /// <summary>
-    /// 用户信息
+    /// 用户表
     /// </summary>
     public class User : IEntity
     {
@@ -23,17 +23,42 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 用户角色
         /// </summary>
-        public Role Role { get; set; }
+        public string Role { get; set; }
+
+        public string RoleName { get; set; }
 
         /// <summary>
-        /// 用户密码
+        /// 所属部门
+        /// </summary>
+        public string Department { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 密码
         /// </summary>
         public string Password { get; set; }
 
         /// <summary>
-        /// 用户当前状态
+        /// 用户状态
         /// </summary>
-        public string State { get; set; }
+        public bool State { get; set; }
 
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        public string CreateUser { get; set; }
+
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public DateTime UpdateDateTime { get; set; }
+
+        public bool IsSelected { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[{0}]-[{1}]", RealName, UserName);
+        }
     }
 }

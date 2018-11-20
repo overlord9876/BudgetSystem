@@ -52,6 +52,6 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 换算人民币金额
         /// </summary>
-        public decimal RMBMoney { get { return UnitPrice * Count; } }
+        public decimal CNYMoney { get { return UnitPrice * Count; } }
     }
 }

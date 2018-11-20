@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
     public static class ModelOperateHelper
     {
-        public static ModelOperate GetOperate(OperateTypes operate, string caption = "")
+        public static ModelOperate GetOperate(OperateTypes operate, string caption = "", UITypes uiType = UITypes.LargeButton, object extendData = null)
         {
             string text = "";
             string group = "";
@@ -61,17 +62,24 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 34;
             }
-            else if (operate == OperateTypes.Agree)
+            else if (operate == OperateTypes.Approve)
             {
-                text = "审核";
+                text = "审批";
                 group = "操作";
                 imageIndex = 2;
             }
+
             else if (operate == OperateTypes.SplitCost)
             {
                 text = "费用拆分";
                 group = "操作";
                 imageIndex = 55;
+            }
+            else if (operate == OperateTypes.SplitRequest)
+            {
+                text = "费用拆分申请";
+                group = "操作";
+                imageIndex = 28;
             }
             else if (operate == OperateTypes.Close)
             {
@@ -91,7 +99,7 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 22;
             }
-            else if (operate == OperateTypes.ImportData)
+            else if (operate == OperateTypes.ImportData || operate == OperateTypes.ImportData2)
             {
                 text = "导入";
                 group = "操作";
@@ -115,7 +123,30 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 60;
             }
-            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex);
+            else if (operate == OperateTypes.ReSetPassword)
+            {
+                text = "重置密码";
+                group = "操作";
+                imageIndex = 61;
+            }
+            else if (operate == OperateTypes.BudgetAccountBill)
+            {
+                text = "按合同查看收支情况";
+                group = "查看";
+                imageIndex = 3;
+            }
+            else if (operate == OperateTypes.Save)
+            {
+                text = "保存";
+                group = "编辑";
+                imageIndex = 6;
+            }
+
+            ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);
+            mm.UIElementData = extendData;
+
+
+
             return mm;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace BudgetSystem
+﻿namespace BudgetSystem.InMoney
 {
     partial class frmInMoneyQuery
     {
@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcInMoney = new DevExpress.XtraGrid.GridControl();
+            this.gvInMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,8 +56,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             this.panCondition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).BeginInit();
@@ -76,8 +76,8 @@
             // splitContainerControl1
             // 
             this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.splitContainerControl1.Panel2.Controls.Add(this.gridControl1);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1116, 768);
+            this.splitContainerControl1.Panel2.Controls.Add(this.gcInMoney);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1115, 768);
             // 
             // panCondition
             // 
@@ -85,55 +85,63 @@
             this.panCondition.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panCondition.Size = new System.Drawing.Size(285, 463);
             // 
-            // gridControl1
+            // gcInMoney
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(818, 768);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gcInMoney.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcInMoney.Location = new System.Drawing.Point(0, 0);
+            this.gcInMoney.MainView = this.gvInMoney;
+            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcInMoney.Name = "gcInMoney";
+            this.gcInMoney.Size = new System.Drawing.Size(817, 768);
+            this.gcInMoney.TabIndex = 1;
+            this.gcInMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvInMoney});
             // 
-            // gridView1
+            // gvInMoney
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvInMoney.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn14,
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn11,
             this.gridColumn4,
-            this.gridColumn12,
-            this.gridColumn13,
             this.gridColumn5,
+            this.gridColumn12,
             this.gridColumn6,
-            this.gridColumn7,
+            this.gridColumn13,
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvInMoney.GridControl = this.gcInMoney;
+            this.gvInMoney.Name = "gvInMoney";
+            this.gvInMoney.OptionsBehavior.Editable = false;
+            this.gvInMoney.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "合同号";
+            this.gridColumn14.FieldName = "ContractNO";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "客户名称";
-            this.gridColumn1.FieldName = "Customer";
+            this.gridColumn1.FieldName = "Remitter";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "银行凭证号";
-            this.gridColumn2.FieldName = "BankVoucherNumber";
+            this.gridColumn2.FieldName = "VoucherNo";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn3
             // 
@@ -141,7 +149,7 @@
             this.gridColumn3.FieldName = "OriginalCoin";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 3;
             // 
             // gridColumn11
             // 
@@ -149,15 +157,23 @@
             this.gridColumn11.FieldName = "Currency";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 3;
+            this.gridColumn11.VisibleIndex = 4;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "实收人民币金额";
-            this.gridColumn4.FieldName = "RMB";
+            this.gridColumn4.FieldName = "CNY";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "支付方式";
+            this.gridColumn5.FieldName = "PaymentMethod";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 8;
             // 
             // gridColumn12
             // 
@@ -165,23 +181,7 @@
             this.gridColumn12.FieldName = "BankName";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "汇率";
-            this.gridColumn13.FieldName = "ExchangeRate";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "银行费用";
-            this.gridColumn5.FieldName = "BankCharges";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 7;
+            this.gridColumn12.VisibleIndex = 6;
             // 
             // gridColumn6
             // 
@@ -189,15 +189,15 @@
             this.gridColumn6.FieldName = "ReceiptDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.VisibleIndex = 9;
             // 
-            // gridColumn7
+            // gridColumn13
             // 
-            this.gridColumn7.Caption = "状态";
-            this.gridColumn7.FieldName = "State";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
+            this.gridColumn13.Caption = "汇率";
+            this.gridColumn13.FieldName = "ExchangeRate";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 7;
             // 
             // gridColumn8
             // 
@@ -210,7 +210,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "创建时间";
-            this.gridColumn9.FieldName = "CreateDate";
+            this.gridColumn9.FieldName = "CreateTimestamp";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 11;
@@ -344,15 +344,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 768);
+            this.ClientSize = new System.Drawing.Size(1115, 768);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInMoneyQuery";
             this.Text = "收支管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             this.panCondition.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).EndInit();
@@ -372,17 +372,15 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.GridControl gcInMoney;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvInMoney;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
@@ -397,5 +395,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }
