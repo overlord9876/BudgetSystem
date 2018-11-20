@@ -46,13 +46,13 @@
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfitLevel1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.gcProfitLevel1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             this.panCondition.SuspendLayout();
@@ -248,6 +248,22 @@
             this.gcProfit.Visible = true;
             this.gcProfit.VisibleIndex = 13;
             // 
+            // gcProfitLevel1
+            // 
+            this.gcProfitLevel1.Caption = "盈利水平1";
+            this.gcProfitLevel1.FieldName = "ProfitLevel1";
+            this.gcProfitLevel1.Name = "gcProfitLevel1";
+            this.gcProfitLevel1.Visible = true;
+            this.gcProfitLevel1.VisibleIndex = 14;
+            // 
+            // gcProfitLevel2
+            // 
+            this.gcProfitLevel2.Caption = "盈利水平2";
+            this.gcProfitLevel2.FieldName = "ProfitLevel2";
+            this.gcProfitLevel2.Name = "gcProfitLevel2";
+            this.gcProfitLevel2.Visible = true;
+            this.gcProfitLevel2.VisibleIndex = 15;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -313,22 +329,6 @@
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Size = new System.Drawing.Size(201, 25);
             this.textEdit2.TabIndex = 1;
-            // 
-            // gcProfitLevel1
-            // 
-            this.gcProfitLevel1.Caption = "盈利水平1";
-            this.gcProfitLevel1.FieldName = "ProfitLevel1";
-            this.gcProfitLevel1.Name = "gcProfitLevel1";
-            this.gcProfitLevel1.Visible = true;
-            this.gcProfitLevel1.VisibleIndex = 14;
-            // 
-            // gcProfitLevel2
-            // 
-            this.gcProfitLevel2.Caption = "盈利水平2";
-            this.gcProfitLevel2.FieldName = "ProfitLevel2";
-            this.gcProfitLevel2.Name = "gcProfitLevel2";
-            this.gcProfitLevel2.Visible = true;
-            this.gcProfitLevel2.VisibleIndex = 15;
             // 
             // frmBudgetQuery
             // 
