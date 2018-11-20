@@ -29,6 +29,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "供应商管理";
         }
@@ -44,6 +45,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
                 ModifySupplier();
+            }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                CommitSupplier();
             }
             else if (operate.Operate == OperateTypes.Enabled.ToString())
             {
@@ -72,6 +77,13 @@ namespace BudgetSystem
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
             {
+                if (supplier.EnumFlowState == EnumDataFlowState.审批中
+                  || supplier.EnumFlowState == EnumDataFlowState.审批通过)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}不能修改信息。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    return;
+                }
+
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.Supplier = supplier;
@@ -81,6 +93,30 @@ namespace BudgetSystem
                 }
             }
         }
+
+        private void CommitSupplier()
+        {
+            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (supplier != null)
+            {
+                if (supplier.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许重复提交。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    return;
+                }
+                string message = sm.StartFlow(supplier.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    RefreshData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+        }
+
         private void ViewSupplier()
         {
             Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;

@@ -55,6 +55,10 @@ namespace BudgetSystem
             {
                 ViewPaymentNote();
             }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                StartFlow();
+            }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
                 PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
@@ -75,20 +79,51 @@ namespace BudgetSystem
                 frmOutMoneyEdit form = new frmOutMoneyEdit();
                 form.WorkModel = EditFormWorkModels.New;
                 form.ShowDialog(this);
-            } 
+            }
             LoadData();
         }
 
         private void ModifyPaymentNote()
         {
             PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+
+            if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中
+              || currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批通过)
             {
-                frmOutMoneyEdit form = new frmOutMoneyEdit();
-                form.WorkModel = EditFormWorkModels.Modify;
-                form.CurrentPaymentNotes = currentRowPaymentNote;
-                form.ShowDialog(this);
+                XtraMessageBox.Show(string.Format("{0}付款单{1}不能修改信息。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
+                return;
             }
+
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.Modify;
+            form.CurrentPaymentNotes = currentRowPaymentNote;
+            form.ShowDialog(this);
+
             LoadData();
+        }
+
+        private void StartFlow()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+
+            if (currentRowPaymentNote != null)
+            {
+                if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}付款单{1}，不允许重复提交。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
+                    return;
+                }
+                string message = pnm.StartFlow(currentRowPaymentNote.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
         }
 
         private void ViewPaymentNote()

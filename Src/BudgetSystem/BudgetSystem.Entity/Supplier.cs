@@ -112,6 +112,7 @@ namespace BudgetSystem.Entity
         /// 纳税人识别号
         /// </summary>
         public string TaxpayerID { get; set; }
+
         /// <summary>
         /// 是否失信企业
         /// </summary>
@@ -121,7 +122,19 @@ namespace BudgetSystem.Entity
         /// 是否有合格供方代理协议
         /// </summary>
         public bool ExistsAgentAgreement { get; set; }
+        
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public EnumDataFlowState EnumFlowState
+        {
+            get
+            {
+                return this.FlowState.ToEnumDataFlowState();
+            }
+        }
 
+        public int FlowState { get; set; }
 
         /// <summary>
         /// 是否选择

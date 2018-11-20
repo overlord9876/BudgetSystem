@@ -32,6 +32,10 @@
             this.gvOutMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBudgetNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,10 +56,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcEnumFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             this.panCondition.SuspendLayout();
@@ -74,25 +75,25 @@
             // 
             // splitContainerControl1
             // 
-            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.splitContainerControl1.Panel2.Controls.Add(this.gcOutMoney);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1152, 937);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1008, 729);
             // 
             // panCondition
             // 
             this.panCondition.Controls.Add(this.layoutControl1);
-            this.panCondition.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
-            this.panCondition.Size = new System.Drawing.Size(285, 463);
+            this.panCondition.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.panCondition.Size = new System.Drawing.Size(285, 360);
             // 
             // gcOutMoney
             // 
             this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
             this.gcOutMoney.MainView = this.gvOutMoney;
-            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.gcOutMoney.Name = "gcOutMoney";
-            this.gcOutMoney.Size = new System.Drawing.Size(854, 937);
+            this.gcOutMoney.Size = new System.Drawing.Size(710, 729);
             this.gcOutMoney.TabIndex = 1;
             this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutMoney});
@@ -104,6 +105,7 @@
             this.gcBudgetNO,
             this.gcVoucherNo,
             this.gcOriginalCoin,
+            this.gcEnumFlowState,
             this.gcCurrency,
             this.gcExchangeRate,
             this.gcCNY,
@@ -139,13 +141,41 @@
             this.gcBudgetNO.Visible = true;
             this.gcBudgetNO.VisibleIndex = 1;
             // 
+            // gcVoucherNo
+            // 
+            this.gcVoucherNo.Caption = "付款单号";
+            this.gcVoucherNo.FieldName = "VoucherNo";
+            this.gcVoucherNo.Name = "gcVoucherNo";
+            this.gcVoucherNo.Visible = true;
+            this.gcVoucherNo.VisibleIndex = 2;
+            // 
+            // gcOriginalCoin
+            // 
+            this.gcOriginalCoin.Caption = "付款原币金额";
+            this.gcOriginalCoin.FieldName = "OriginalCoin";
+            this.gcOriginalCoin.Name = "gcOriginalCoin";
+            this.gcOriginalCoin.Visible = true;
+            this.gcOriginalCoin.VisibleIndex = 3;
+            // 
+            // gcCurrency
+            // 
+            this.gcCurrency.Caption = "币种";
+            this.gcCurrency.FieldName = "Currency";
+            this.gcCurrency.Name = "gcCurrency";
+            // 
+            // gcExchangeRate
+            // 
+            this.gcExchangeRate.Caption = "汇率";
+            this.gcExchangeRate.FieldName = "ExchangeRate";
+            this.gcExchangeRate.Name = "gcExchangeRate";
+            // 
             // gcCNY
             // 
             this.gcCNY.Caption = "付款人民币金额";
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
             this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 4;
+            this.gcCNY.VisibleIndex = 5;
             // 
             // gcApplicant
             // 
@@ -153,7 +183,7 @@
             this.gcApplicant.FieldName = "Applicant";
             this.gcApplicant.Name = "gcApplicant";
             this.gcApplicant.Visible = true;
-            this.gcApplicant.VisibleIndex = 5;
+            this.gcApplicant.VisibleIndex = 6;
             // 
             // gcCommitTime
             // 
@@ -161,7 +191,7 @@
             this.gcCommitTime.FieldName = "CommitTime";
             this.gcCommitTime.Name = "gcCommitTime";
             this.gcCommitTime.Visible = true;
-            this.gcCommitTime.VisibleIndex = 6;
+            this.gcCommitTime.VisibleIndex = 7;
             // 
             // gcApprover
             // 
@@ -169,7 +199,7 @@
             this.gcApprover.FieldName = "Approver";
             this.gcApprover.Name = "gcApprover";
             this.gcApprover.Visible = true;
-            this.gcApprover.VisibleIndex = 7;
+            this.gcApprover.VisibleIndex = 8;
             // 
             // gcApproveTime
             // 
@@ -177,7 +207,7 @@
             this.gcApproveTime.FieldName = "ApproveTime";
             this.gcApproveTime.Name = "gcApproveTime";
             this.gcApproveTime.Visible = true;
-            this.gcApproveTime.VisibleIndex = 8;
+            this.gcApproveTime.VisibleIndex = 9;
             // 
             // gcPaymentDate
             // 
@@ -197,7 +227,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 9;
+            this.gcDepartmentCode.VisibleIndex = 10;
             // 
             // gcMoneyUsed
             // 
@@ -205,7 +235,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsed";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 10;
+            this.gcMoneyUsed.VisibleIndex = 11;
             // 
             // gcIsDrawback
             // 
@@ -232,37 +262,33 @@
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControl1.Size = new System.Drawing.Size(285, 360);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(105, 70);
-            this.textEdit3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit3.Location = new System.Drawing.Point(87, 62);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(168, 25);
+            this.textEdit3.Size = new System.Drawing.Size(186, 21);
             this.textEdit3.StyleController = this.layoutControl1;
             this.textEdit3.TabIndex = 6;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(105, 41);
-            this.textEdit2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit2.Location = new System.Drawing.Point(87, 37);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(186, 21);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(105, 12);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textEdit1.Location = new System.Drawing.Point(87, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(186, 21);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -277,7 +303,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 463);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(285, 360);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -287,64 +313,44 @@
             this.layoutControlItem1.CustomizationFormText = "供应商：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
             this.layoutControlItem1.Text = "供应商：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "付款申请人：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 25);
             this.layoutControlItem2.Text = "付款申请人：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.textEdit3;
             this.layoutControlItem3.CustomizationFormText = "财务确认人：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(265, 385);
+            this.layoutControlItem3.Size = new System.Drawing.Size(265, 290);
             this.layoutControlItem3.Text = "财务确认人：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // gcVoucherNo
+            // gcEnumFlowState
             // 
-            this.gcVoucherNo.Caption = "付款单号";
-            this.gcVoucherNo.FieldName = "VoucherNo";
-            this.gcVoucherNo.Name = "gcVoucherNo";
-            this.gcVoucherNo.Visible = true;
-            this.gcVoucherNo.VisibleIndex = 2;
-            // 
-            // gcOriginalCoin
-            // 
-            this.gcOriginalCoin.Caption = "付款原币金额";
-            this.gcOriginalCoin.FieldName = "OriginalCoin";
-            this.gcOriginalCoin.Name = "gcOriginalCoin";
-            this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 3;
-            // 
-            // gcExchangeRate
-            // 
-            this.gcExchangeRate.Caption = "汇率";
-            this.gcExchangeRate.FieldName = "ExchangeRate";
-            this.gcExchangeRate.Name = "gcExchangeRate";
-            // 
-            // gcCurrency
-            // 
-            this.gcCurrency.Caption = "币种";
-            this.gcCurrency.FieldName = "Currency";
-            this.gcCurrency.Name = "gcCurrency";
+            this.gcEnumFlowState.Caption = "审批状态";
+            this.gcEnumFlowState.FieldName = "EnumFlowState";
+            this.gcEnumFlowState.Name = "gcEnumFlowState";
+            this.gcEnumFlowState.Visible = true;
+            this.gcEnumFlowState.VisibleIndex = 4;
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 937);
-            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
@@ -395,5 +401,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcOriginalCoin;
         private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
         private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
     }
 }

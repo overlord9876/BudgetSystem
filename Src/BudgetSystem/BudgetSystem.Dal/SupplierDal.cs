@@ -12,20 +12,22 @@ namespace BudgetSystem.Dal
     {
         public Supplier GetSupplier(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName 
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`  
+																 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
                                  WHERE s.`ID` = @ID";
-            return con.Query<Supplier>(selectSql, new { ID = id }, tran).SingleOrDefault();
+            return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), ID = id }, tran).SingleOrDefault();
         }
         public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName 
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
-                                 LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`  ";
-            return con.Query<Supplier>(selectSql, null, tran);
+                                 LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`
+																 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
+            return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString() }, tran);
         }
         public int AddSupplier(Supplier supplier, IDbConnection con, IDbTransaction tran = null)
         {

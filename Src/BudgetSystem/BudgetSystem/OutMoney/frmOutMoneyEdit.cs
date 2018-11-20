@@ -79,7 +79,8 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes = new PaymentNotes();
             FillEditData();
-            this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);
+            this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);            
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         protected override void SubmitModifyData()
@@ -93,6 +94,7 @@ namespace BudgetSystem.OutMoney
 
             FillEditData();
             pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void CheckInputData()
@@ -111,7 +113,7 @@ namespace BudgetSystem.OutMoney
                 return;
             }
 
-            if (!selectedBudget.State.Equals("审批结束"))
+            if (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
             {
                 this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
                 this.cboBudget.Focus();
@@ -374,7 +376,6 @@ namespace BudgetSystem.OutMoney
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

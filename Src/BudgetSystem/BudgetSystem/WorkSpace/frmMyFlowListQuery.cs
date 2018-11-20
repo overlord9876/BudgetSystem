@@ -15,7 +15,7 @@ namespace BudgetSystem.WorkSpace
 {
     public partial class frmMyFlowListQuery : frmBaseQueryForm
     {
-     
+
         FlowManager manager = new FlowManager();
         public frmMyFlowListQuery()
         {
@@ -35,7 +35,7 @@ namespace BudgetSystem.WorkSpace
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
-           
+
 
 
             if (operate.Operate == OperateTypes.Confirm.ToString())
@@ -61,8 +61,8 @@ namespace BudgetSystem.WorkSpace
                     form.ShowDialog(this);
                 }
             }
-           
-            
+
+
         }
 
         private void ConfirmFlowItem()

@@ -30,9 +30,9 @@ namespace BudgetSystem.Bll
                 return uList;
             });
             return budget;
-        } 
+        }
 
-        public int AddBudget(Budget budget,bool isStartFlow=false)
+        public int AddBudget(Budget budget, bool isStartFlow = false)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
             {
@@ -73,13 +73,14 @@ namespace BudgetSystem.Bll
             }
             return string.Empty;
         }
+
         /// <summary>
         /// 修改
         /// </summary>
         /// <param name="budget"></param>
         /// <param name="isStartFlow"></param>
         /// <returns>修改成功返回string.Empty,否则返回失败原因</returns>
-        public string  ModifyBudget(Budget budget, bool isStartFlow = false)
+        public string ModifyBudget(Budget budget, bool isStartFlow = false)
         {
             Budget budge = this.GetBudget(budget.ID);
             if (budge == null)
@@ -88,19 +89,19 @@ namespace BudgetSystem.Bll
             }
             else if (budge.EnumFlowState == EnumDataFlowState.审批中
                 || budget.EnumFlowState == EnumDataFlowState.审批通过)
-            { 
-                   return string.Format("{0}的预算单不能修改。");
+            {
+                return string.Format("{0}的预算单不能修改。");
             }
             string message = string.Empty;
             this.ExecuteWithTransaction((con, tran) =>
-            {               
+            {
                 dal.ModifyBudget(budget, con, tran);
                 if (isStartFlow == true)
                 {
                     FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), budget.ID, EnumFlowDataType.预算单.ToString(), budget.Salesman);
                     if (state != FlowRunState.启动流程成功)
                     {
-                        message= string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString());
+                        message = string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString());
                     }
                 }
             });
@@ -117,7 +118,7 @@ namespace BudgetSystem.Bll
                 abList.AddRange(pmList.ToAccountBillList());
                 return abList.OrderBy(o => o.CreateDate);
             });
-            return lst.ToList(); 
+            return lst.ToList();
         }
 
         /// <summary>
@@ -131,7 +132,7 @@ namespace BudgetSystem.Bll
         {
             bool result = this.ExecuteWithoutTransaction<bool>((con) =>
             {
-                return dal.CheckContractNO(id,contractNo,con);
+                return dal.CheckContractNO(id, contractNo, con);
             });
             return result;
         }

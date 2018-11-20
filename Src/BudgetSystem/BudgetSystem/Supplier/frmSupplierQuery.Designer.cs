@@ -40,6 +40,7 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -48,17 +49,17 @@
             // gridSupplier
             // 
             this.gridSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             gridLevelNode1.RelationName = "Level1";
             this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gridSupplier.Location = new System.Drawing.Point(0, 0);
             this.gridSupplier.MainView = this.gvSupplier;
-            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridSupplier.Name = "gridSupplier";
             this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
-            this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
+            this.gridSupplier.Size = new System.Drawing.Size(960, 523);
             this.gridSupplier.TabIndex = 2;
             this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSupplier});
@@ -71,6 +72,7 @@
             this.gcBankNO,
             this.BankName,
             this.gcSupplierType,
+            this.gcFlowState,
             this.gcCreateDate,
             this.gcCreateUser,
             this.gcDescription});
@@ -135,7 +137,7 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 5;
+            this.gcCreateDate.VisibleIndex = 6;
             // 
             // gcCreateUser
             // 
@@ -143,7 +145,7 @@
             this.gcCreateUser.FieldName = "CreateUser";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 6;
+            this.gcCreateUser.VisibleIndex = 7;
             // 
             // gcDescription
             // 
@@ -151,15 +153,23 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 7;
+            this.gcDescription.VisibleIndex = 8;
+            // 
+            // gcFlowState
+            // 
+            this.gcFlowState.Caption = "审批状态";
+            this.gcFlowState.FieldName = "EnumFlowState";
+            this.gcFlowState.Name = "gcFlowState";
+            this.gcFlowState.Visible = true;
+            this.gcFlowState.VisibleIndex = 5;
             // 
             // frmSupplierQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 672);
+            this.ClientSize = new System.Drawing.Size(960, 523);
             this.Controls.Add(this.gridSupplier);
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmSupplierQuery";
             this.Text = "供应商管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
@@ -182,6 +192,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowState;
 
 
     }

@@ -245,17 +245,7 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                switch (this.FlowState)
-                {
-                    case 0:
-                        return EnumDataFlowState.审批中;
-                    case 1:
-                        return EnumDataFlowState.审批不通过;
-                    case 2:
-                        return EnumDataFlowState.审批不通过;
-                    default:
-                        return EnumDataFlowState.未审批; 
-                }
+                return this.FlowState.ToEnumDataFlowState();
             }
         }
 

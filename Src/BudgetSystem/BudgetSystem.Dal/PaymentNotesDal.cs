@@ -12,36 +12,34 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<PaymentNotes> GetAllPaymentNotes(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.`ID`,pn.`CommitTime`,pn.`VatOption`,pn.`CNY`,pn.`OriginalCoin`,pn.`ExchangeRate`,pn.`Currency`,pn.`Approver`,pn.`ApproveTime`,pn.`BudgetID`,b.ContractNO,pn.`SupplierID`,s.`Name` as SupplierName,pn.`PaymentDate`,pn.`Description`,pn.`DepartmentCode`,d.`Name` as DepartmentName,pn.`MoneyUsed`,pn.`IsDrawback`,pn.`HasInvoice`,pn.`PaymentMethod`,pn.`VoucherNo`,pn.`TaxRebateRate`,pn.`Applicant` 
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DepartmentCode=d.`Code`";
-            return con.Query<PaymentNotes>(selectSql, null, tran);
+						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
+            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString() }, tran);
         }
 
         public IEnumerable<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.`ID`,pn.`CommitTime`,pn.`VatOption`,pn.`CNY`,pn.`OriginalCoin`,pn.`ExchangeRate`,pn.`Currency`,pn.`Approver`,pn.`ApproveTime`,pn.`BudgetID`,b.ContractNO,pn.`SupplierID`,s.`Name` as SupplierName,pn.`PaymentDate`,pn.`Description`,pn.`DepartmentCode`,d.`Name` as DepartmentName,pn.`MoneyUsed`,pn.`IsDrawback`,pn.`HasInvoice`,pn.`PaymentMethod`,pn.`VoucherNo`,pn.`TaxRebateRate`,pn.`Applicant` 
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
 						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
             WHERE pn.BudgetID=@BudgetID";
-            return con.Query<PaymentNotes>(selectSql, new { BudgetID = budgetID }, tran);
+            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
         }
 
-        public IEnumerable<PaymentNotes> GetAllPaymentNotesByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
+        public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.`ID`,pn.`CommitTime`,pn.`VatOption`,pn.`CNY`,pn.`OriginalCoin`,pn.`ExchangeRate`,pn.`Currency`,pn.`Approver`,pn.`ApproveTime`,pn.`BudgetID`,b.ContractNO,pn.`SupplierID`,s.`Name` as SupplierName,pn.`PaymentDate`,pn.`Description`,pn.`DepartmentCode`,d.`Name` as DepartmentName,pn.`MoneyUsed`,pn.`IsDrawback`,pn.`HasInvoice`,pn.`PaymentMethod`,pn.`VoucherNo`,pn.`TaxRebateRate`,pn.`Applicant` 
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
 						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
-            WHERE pn.BudgetID=@BudgetID";
-            return con.Query<PaymentNotes>(selectSql, new { BudgetID = budgetId }, tran);
-        }
-        public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
-        {
-            string selectSql = "Select * From `PaymentNotes` Where `ID` = @ID";
-            return con.Query<PaymentNotes>(selectSql, new { ID = id }, tran).SingleOrDefault();
+						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+            Where pn.`ID` = @ID";
+            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), ID = id }, tran).SingleOrDefault();
         }
 
         public int AddPaymentNote(PaymentNotes addPaymentNote, IDbConnection con, IDbTransaction tran)

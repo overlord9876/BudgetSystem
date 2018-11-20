@@ -8,10 +8,12 @@ using System.Windows.Forms;
 using BudgetSystem.Entity;
 using System.Linq;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
+using BudgetSystem.OutMoney;
 
 namespace BudgetSystem.WorkSpace
 {
-    public partial class frmApprove :  frmBaseDialogForm
+    public partial class frmApprove : frmBaseDialogForm
     {
         public frmApprove()
         {
@@ -37,7 +39,7 @@ namespace BudgetSystem.WorkSpace
         {
 
             SetLayoutControlStyle();
-            
+
             if (this.CustomWorkModel == ApproveModel)
             {
                 this.Text = "流程审批";
@@ -68,9 +70,9 @@ namespace BudgetSystem.WorkSpace
                 this.txtCloseReason.Text = this.FlowItem.CloseReason;
             }
 
-            List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).Where(s=>s.State==true).ToList();
-          
-            
+            List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).Where(s => s.State == true).ToList();
+
+
 
             this.gdApproveList.DataSource = points;
 
@@ -110,7 +112,7 @@ namespace BudgetSystem.WorkSpace
             }
 
 
-            FlowRunState state =fm.ConfirmFlowInstance(this.FlowItem.ID);
+            FlowRunState state = fm.ConfirmFlowInstance(this.FlowItem.ID);
             string info;
             if (state.Translate(out info))
             {
@@ -126,13 +128,53 @@ namespace BudgetSystem.WorkSpace
 
         private void txtDataItemID_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            ShowDataItemView();    
+            ShowDataItemView();
         }
+
+        private SupplierManager sm = new SupplierManager();
+        private BudgetManager bm = new BudgetManager();
+        private PaymentNotesManager pnm = new PaymentNotesManager();
 
         private void ShowDataItemView()
         {
-            //TODO:流程集成
-            XtraMessageBox.Show("这里要基于DataItemID和DataType显示具体的业务数据View");
+            if (FlowItem.DateItemType == EnumFlowDataType.供应商.ToString())
+            {
+                Supplier item = sm.GetSupplier(FlowItem.DateItemID);
+                if (item != null)
+                {
+                    frmSupplierEdit form = new frmSupplierEdit();
+                    form.WorkModel = EditFormWorkModels.View;
+                    form.Supplier = item;
+                    form.ShowDialog(this);
+                }
+
+            }
+            else if (FlowItem.DateItemType == EnumFlowDataType.预算单.ToString())
+            {
+                Budget item = bm.GetBudget(FlowItem.DateItemID);
+                if (item != null)
+                {
+                    frmBudgetEdit form = new frmBudgetEdit();
+                    form.WorkModel = EditFormWorkModels.View;
+                    form.Budget = item;
+                    form.ShowDialog(this);
+                }
+            }
+            else if (FlowItem.DateItemType == EnumFlowDataType.付款单.ToString())
+            {
+                PaymentNotes item = pnm.GetPaymentNoteById(FlowItem.DateItemID);
+                if (item != null)
+                {
+                    frmOutMoneyEdit form = new frmOutMoneyEdit();
+                    form.WorkModel = EditFormWorkModels.View;
+                    form.CurrentPaymentNotes = item;
+                    form.ShowDialog(this);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("未知数据类型");
+            }
         }
 
     }

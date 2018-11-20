@@ -9,7 +9,7 @@ namespace BudgetSystem.Bll
     public class PaymentNotesManager : BaseManager
     {
         Dal.PaymentNotesDal dal = new Dal.PaymentNotesDal();
-
+        Bll.FlowManager fm = new FlowManager();
 
         public List<PaymentNotes> GetAllPaymentNotes()
         {
@@ -60,6 +60,31 @@ namespace BudgetSystem.Bll
             {
                 dal.ModifyPaymentNote(modifyPaymentNote, con, tran);
             });
+        }
+
+        /// <summary>
+        /// 启动审批流程
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currentUser"></param>
+        /// <returns>返回string.Empty为成功，否则为失败原因</returns>
+        public string StartFlow(int id, string currentUser)
+        {
+            PaymentNotes payment = this.GetPaymentNoteById(id);
+            if (payment == null)
+            {
+                return "数据不存在";
+            }
+            else if (payment.EnumFlowState == EnumDataFlowState.审批中)
+            {
+                return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+            }
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, EnumFlowDataType.付款单.ToString(), currentUser);
+            if (state != FlowRunState.启动流程成功)
+            {
+                return state.ToString();
+            }
+            return string.Empty;
         }
 
         public void DeletePaymentNote(int id)

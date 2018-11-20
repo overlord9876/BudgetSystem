@@ -39,6 +39,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交流程"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
 
 
@@ -56,17 +57,21 @@ namespace BudgetSystem
             {
                 ModifyBudget();
             }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                CommitBudget();
+            }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewBudget();
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
-                XtraMessageBox.Show("申请修改");
+                RevokeBudget();
             }
             else if (operate.Operate == OperateTypes.Close.ToString())
             {
-                XtraMessageBox.Show("关闭预算单");
+                CloseBudget();
             }
             else if (operate.Operate == OperateTypes.BudgetAccountBill.ToString())
             {
@@ -117,7 +122,7 @@ namespace BudgetSystem
                 if (budget.EnumFlowState == EnumDataFlowState.审批中
                     || budget.EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    XtraMessageBox.Show(string.Format("{0}的预算单不能修改。"));
+                    XtraMessageBox.Show(string.Format("{0}的预算单不能修改。", budget.ContractNO));
                     return;
                 }
                 frmBudgetEdit form = new frmBudgetEdit();
@@ -128,6 +133,39 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+        }
+
+        private void CommitBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
+                    return;
+                }
+                string message = bm.StartFlow(budget.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+        }
+
+        private void RevokeBudget()
+        {
+            //TODO:
+        }
+
+        private void CloseBudget()
+        {
+            //TODO:
         }
 
         private void ViewBudget()

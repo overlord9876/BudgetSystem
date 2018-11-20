@@ -43,16 +43,16 @@ namespace BudgetSystem.FlowManage
             userList.Insert(0, new User() { UserName = FlowConst.FlowCreateUser, RealName = FlowConst.FlowCreateUserDisplayName, State = true });
 
             departmentList = dm.GetAllDepartment();
-            departmentList.Insert(0, new Department() { Code = FlowConst.FlowCreateUserDepartment, Name = FlowConst .FlowCreateUserDepartmentDisplayName});
-     
+            departmentList.Insert(0, new Department() { Code = FlowConst.FlowCreateUserDepartment, Name = FlowConst.FlowCreateUserDepartmentDisplayName });
+
 
             if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 SetLayoutControlStyle(EditFormWorkModels.Modify);
                 this.txtName.Properties.ReadOnly = true;
                 this.Text = "修改流程配置";
-            
-                this.cboNodeUser.Properties.Items.AddRange(userList.Where(u=>u.State==true).ToList());
+
+                this.cboNodeUser.Properties.Items.AddRange(userList.Where(u => u.State == true).ToList());
 
                 this.cboNodeDepartment.Properties.Items.AddRange(departmentList);
 
@@ -101,7 +101,7 @@ namespace BudgetSystem.FlowManage
                 }
                 else
                 {
-                    node.NodeValueDisplayValue = departmentList.Single(s => s.Code == node.NodeValue).ToString();
+                    node.NodeValueDisplayValue = departmentList.Single(s => s.Code.Equals(node.NodeValue)).ToString();
                 }
             }
 
@@ -127,11 +127,11 @@ namespace BudgetSystem.FlowManage
             {
                 if (string.IsNullOrEmpty(node.NodeValue) || string.IsNullOrEmpty(node.NodeValueRemark))
                 {
-                 
+
                     XtraMessageBox.Show("请配置节点的审批人及职位信息");
                     return false;
                 }
-            
+
             }
 
             return true;
@@ -170,7 +170,7 @@ namespace BudgetSystem.FlowManage
             int i = this.gvNodes.FocusedRowHandle;
             if (i >= 0)
             {
-                this.currentFlowDetial.Insert(i,new FlowNode());
+                this.currentFlowDetial.Insert(i, new FlowNode());
                 this.gdNodes.RefreshDataSource();
             }
 
@@ -252,8 +252,8 @@ namespace BudgetSystem.FlowManage
                 node.NodeValueDisplayValue = this.cboNodeDepartment.SelectedItem.ToString();
             }
 
-           
-        
+
+
         }
 
         private void cboVersion_SelectedIndexChanged(object sender, EventArgs e)
@@ -264,6 +264,6 @@ namespace BudgetSystem.FlowManage
             }
         }
 
- 
+
     }
 }

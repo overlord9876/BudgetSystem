@@ -128,5 +128,19 @@ namespace BudgetSystem.Entity
         /// 申请人
         /// </summary>
         public string Applicant { get; set; }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public EnumDataFlowState EnumFlowState
+        {
+            get
+            {
+                return this.FlowState.ToEnumDataFlowState();
+            }
+        }
+
+        public int FlowState { get; set; }
+
     }
 }
