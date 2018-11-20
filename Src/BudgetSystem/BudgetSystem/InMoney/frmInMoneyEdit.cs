@@ -18,10 +18,10 @@ namespace BudgetSystem.InMoney
         private ActualReceiptsManager arm = new ActualReceiptsManager();
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
-        private SystenConfigManager scm = new SystenConfigManager();
+        private SystemConfigManager scm = new SystemConfigManager();
         private UserManager um = new UserManager();
         private List<User> allSalesmanList;
-        const string SaleRoleCode = "Sales";
+        const string SaleRoleCode = "YWY";
 
         public frmInMoneyEdit()
         {

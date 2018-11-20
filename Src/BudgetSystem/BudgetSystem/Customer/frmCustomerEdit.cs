@@ -108,7 +108,7 @@ namespace BudgetSystem
 
         private void InitParameter()
         {
-            Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
+            Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             List<Country> countryList = scm.GetSystemConfigValue<List<Country>>(EnumSystemConfigNames.国家地区.ToString());
             this.lueCountry.Properties.DataSource = countryList;
             List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());

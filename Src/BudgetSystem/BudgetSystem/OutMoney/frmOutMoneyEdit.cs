@@ -24,7 +24,7 @@ namespace BudgetSystem.OutMoney
         PaymentNotesManager pnm = new PaymentNotesManager();
         ActualReceiptsManager arm = new ActualReceiptsManager();
 
-        Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
         public PaymentNotes CurrentPaymentNotes { get; set; }
 
@@ -79,7 +79,7 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes = new PaymentNotes();
             FillEditData();
-            this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);            
+            this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -158,9 +158,9 @@ namespace BudgetSystem.OutMoney
                 return;
             }
 
-            if (cboMoneyUsed.EditValue == null || string.IsNullOrEmpty(cboMoneyUsed.EditValue.ToString()))
+            if (!(cboMoneyUsed.EditValue is UseMoneyType))
             {
-                this.dxErrorProvider1.SetError(cboMoneyUsed, "请输入用款类型。");
+                this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
                 cboMoneyUsed.Focus();
                 return;
             }
@@ -175,6 +175,9 @@ namespace BudgetSystem.OutMoney
 
         private void InitData()
         {
+            List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+            this.cboMoneyUsed.Properties.Items.Clear();
+            this.cboMoneyUsed.Properties.Items.AddRange(umtList);
 
             this.cboBudget.Properties.DataSource = bm.GetAllBudget();
 
@@ -212,7 +215,15 @@ namespace BudgetSystem.OutMoney
                     break;
                 }
             }
-            this.cboMoneyUsed.SelectedText = payment.MoneyUsed;
+            foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
+            {
+                if (umt.Name == payment.MoneyUsed)
+                {
+                    this.cboApplicant.SelectedItem = umt;
+                    this.cboDepartment.Text = umt.Name;
+                    break;
+                }
+            }
             List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
             if (supplierList != null)
             {
@@ -267,7 +278,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
             this.CurrentPaymentNotes.Applicant = this.cboApplicant.SelectedItem.ToString();
-            this.CurrentPaymentNotes.MoneyUsed = this.cboMoneyUsed.SelectedText;
+            this.CurrentPaymentNotes.MoneyUsed = (this.cboMoneyUsed.EditValue as UseMoneyType).Name;
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
@@ -431,6 +442,20 @@ namespace BudgetSystem.OutMoney
         private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
         {
             CalcPaymentTaxRebate();
+        }
+
+        private void cboMoneyUsed_EditValueChanged(object sender, EventArgs e)
+        {
+            UseMoneyType selectedItem = this.cboMoneyUsed.EditValue as UseMoneyType;
+            if (selectedItem != null)
+            {
+                chkHasInvoice.Checked = selectedItem.ProvideInvoice;
+            }
+            else
+            {
+                chkHasInvoice.Checked = false;
+            }
+
         }
     }
 }

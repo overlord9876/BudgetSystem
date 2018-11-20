@@ -12,7 +12,7 @@ namespace BudgetSystem
 {
     public partial class frmOptionQuery : frmBaseQueryForm
     {
-        private Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private ucOptionEditBase currentOptionEdit = null;
         private bool allowEdit = false;
         public frmOptionQuery()

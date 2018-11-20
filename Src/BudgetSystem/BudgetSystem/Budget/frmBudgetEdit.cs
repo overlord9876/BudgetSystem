@@ -144,7 +144,7 @@ namespace BudgetSystem
             List<Supplier> suppliers = sm.GetAllSupplier();
             this.ucSupplierSelected.SetDataSource(suppliers);
 
-            Bll.SystenConfigManager scm = new Bll.SystenConfigManager();
+            Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
             this.luePort.Properties.DataSource = portList;
 

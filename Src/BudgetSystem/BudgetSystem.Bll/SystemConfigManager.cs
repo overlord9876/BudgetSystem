@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace BudgetSystem.Bll
 {
-    public class SystenConfigManager : BaseManager
+    public class SystemConfigManager : BaseManager
     {
         Dal.SystemConfigDal dal = new Dal.SystemConfigDal();
         /// <summary>

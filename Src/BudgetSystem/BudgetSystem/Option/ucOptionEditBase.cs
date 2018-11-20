@@ -7,12 +7,12 @@ namespace BudgetSystem
 {
     public  class ucOptionEditBase:UserControl
     {
-        protected Bll.SystenConfigManager scm =null; 
+        protected Bll.SystemConfigManager scm =null; 
 
 
         public ucOptionEditBase()
         {
-            scm = new Bll.SystenConfigManager(); 
+            scm = new Bll.SystemConfigManager(); 
             this.Load += new System.EventHandler(this.ucOptionEditBase_Load);
         }
         /// <summary>

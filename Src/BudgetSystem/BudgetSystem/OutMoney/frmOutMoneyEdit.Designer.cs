@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btn_Submit = new DevExpress.XtraEditors.SimpleButton();
             this.txtActualRetention = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -117,8 +118,8 @@
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtActualRetention.Properties)).BeginInit();
@@ -458,9 +459,11 @@
             this.cboMoneyUsed.Properties.Items.AddRange(new object[] {
             "预付款",
             "其他（佣金、运费、运保费等）"});
+            this.cboMoneyUsed.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboMoneyUsed.Size = new System.Drawing.Size(373, 21);
             this.cboMoneyUsed.StyleController = this.layoutControl1;
             this.cboMoneyUsed.TabIndex = 25;
+            this.cboMoneyUsed.EditValueChanged += new System.EventHandler(this.cboMoneyUsed_EditValueChanged);
             // 
             // cboPaymentMethod
             // 

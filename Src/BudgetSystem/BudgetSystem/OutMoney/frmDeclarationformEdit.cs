@@ -14,7 +14,7 @@ namespace BudgetSystem
     public partial class frmDeclarationformEdit : frmBaseDialogForm
     {
         BudgetManager bm = new BudgetManager();
-        private SystenConfigManager scm = new SystenConfigManager();
+        private SystemConfigManager scm = new SystemConfigManager();
         DeclarationformManager dm = new DeclarationformManager();
         public Declarationform CurrentDeclarationform { get; set; }
 

@@ -8,7 +8,7 @@ namespace BudgetSystem.Entity
     /// 用款类型配置
     /// </summary>
     public class UseMoneyType
-    { 
+    {
         /// <summary>
         /// 名称
         /// </summary>
@@ -24,6 +24,11 @@ namespace BudgetSystem.Entity
         {
             get;
             set;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }
