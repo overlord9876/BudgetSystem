@@ -23,4 +23,16 @@ namespace BudgetSystem.Entity
         供应商,
         付款单
     }
+
+    /// <summary>
+    /// 业务数据流程状态
+    /// </summary>
+    public enum EnumDataFlowState
+    {
+        未审批 = -1,//（未加入流程）
+        审批中 = 0,
+        审批不通过 = 1,//（已关闭）
+        审批通过 = 2,//
+    }
+
 }

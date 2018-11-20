@@ -12,12 +12,13 @@ namespace BudgetSystem.Dal
     {
         public Budget GetBudget(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
-                                 WHERE b.`ID` = @ID";
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
+                                 WHERE b.`ID` = @ID", EnumFlowDataType.预算单.ToString());
             Budget budget = con.Query<Budget>(selectSql, new { ID = id }, tran).SingleOrDefault();
 
             if (budget != null)
@@ -36,12 +37,13 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName
+            string selectSql = string.Format(@"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
-                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID 
-                                 WHERE b.ID<>0";
+                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID 								 
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
+                                 WHERE b.ID<>0", EnumFlowDataType.预算单.ToString());
 
             return con.Query<Budget>(selectSql, null, tran);
         }

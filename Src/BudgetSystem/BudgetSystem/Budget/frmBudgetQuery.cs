@@ -46,7 +46,7 @@ namespace BudgetSystem
         }
 
 
-        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
+        public override void OperateHandled(ModelOperate operate)
         {
 
             if (operate.Operate == OperateTypes.New.ToString())
@@ -115,6 +115,12 @@ namespace BudgetSystem
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
             {
+                if(budget.EnumFlowState== EnumDataFlowState.审批中
+                    || budget.EnumFlowState== EnumDataFlowState.审批通过)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单不能修改。"));
+                    return;
+                }
                 frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.Budget = budget;

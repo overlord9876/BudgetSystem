@@ -38,12 +38,12 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCustomerNames = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueTradeMode = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gcSeaport = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -102,10 +102,10 @@
             this.gcCreateDate,
             this.gcSignDate,
             this.gcValidity,
-            this.gcCustomerNames,
+            this.gcCustomerName,
             this.gcTradeMode,
             this.gcTradeNature,
-            this.gcSeaport,
+            this.gcPort,
             this.gcAdvancePayment,
             this.gcProfit});
             this.gvBudget.GridControl = this.gridBudget;
@@ -151,7 +151,7 @@
             // gcDepartmentDesc
             // 
             this.gcDepartmentDesc.Caption = "业务员所在部门";
-            this.gcDepartmentDesc.FieldName = "Department";
+            this.gcDepartmentDesc.FieldName = "DepartmentDesc";
             this.gcDepartmentDesc.Name = "gcDepartmentDesc";
             this.gcDepartmentDesc.Visible = true;
             this.gcDepartmentDesc.VisibleIndex = 6;
@@ -180,13 +180,13 @@
             this.gcValidity.Visible = true;
             this.gcValidity.VisibleIndex = 9;
             // 
-            // gcCustomerNames
+            // gcCustomerName
             // 
-            this.gcCustomerNames.Caption = "客户名称";
-            this.gcCustomerNames.FieldName = "CustomerName";
-            this.gcCustomerNames.Name = "gcCustomerNames";
-            this.gcCustomerNames.Visible = true;
-            this.gcCustomerNames.VisibleIndex = 1;
+            this.gcCustomerName.Caption = "客户名称";
+            this.gcCustomerName.FieldName = "CustomerName";
+            this.gcCustomerName.Name = "gcCustomerName";
+            this.gcCustomerName.Visible = true;
+            this.gcCustomerName.VisibleIndex = 1;
             // 
             // gcTradeMode
             // 
@@ -220,13 +220,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.rilueTradeNature.Name = "rilueTradeNature";
             // 
-            // gcSeaport
+            // gcPort
             // 
-            this.gcSeaport.Caption = "交货口岸";
-            this.gcSeaport.FieldName = "Port";
-            this.gcSeaport.Name = "gcSeaport";
-            this.gcSeaport.Visible = true;
-            this.gcSeaport.VisibleIndex = 11;
+            this.gcPort.Caption = "目的港口";
+            this.gcPort.FieldName = "Port";
+            this.gcPort.Name = "gcPort";
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 11;
             // 
             // gcAdvancePayment
             // 
@@ -349,10 +349,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcSignDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcValidity;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCustomerNames;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn gcTradeMode;
         private DevExpress.XtraGrid.Columns.GridColumn gcTradeNature;
-        private DevExpress.XtraGrid.Columns.GridColumn gcSeaport;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPort;
         private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueTradeMode;

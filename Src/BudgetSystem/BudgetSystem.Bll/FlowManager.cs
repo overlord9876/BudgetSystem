@@ -141,12 +141,8 @@ namespace BudgetSystem.Bll
                 {
                     return FlowRunState.流程未配置审批过程;
                 }
-
-                //量数据项的已完成流程的是否最近为False
-                dal.UpdateFlowInstanceNotRecent(dataType, dataID,con,tran);
-
-
-
+                //更新数据已关联流程实例的IsRecent属性为false
+                dal.UpdateFlowInstanceIsRecent(flow.Name, dataType, dataID, false, con, tran);
                 //创建流程实例 
                 int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataType, currentUser, con, tran);
 

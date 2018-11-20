@@ -90,17 +90,17 @@ namespace BudgetSystem.Dal
 
         public FlowInstance GetFlowNotClosedInstance(string flowName, int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime`,`IsRecent` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName and `IsClosed`=0";
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName and `IsClosed`=0";
             return con.Query<FlowInstance>(selectSql, new { FlowName = flowName, DateItemType = dataType, DateItemID = dataID }, tran).SingleOrDefault();
         }
 
         public FlowInstance GetFlowInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime`,`IsRecent` From `FlowInstance` Where`ID` = @ID";
+            string selectSql = "Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime` From `FlowInstance` Where`ID` = @ID";
 
             return con.Query<FlowInstance>(selectSql, new { ID = instanceID }, tran).SingleOrDefault();
         }
-
+        
         public int AddFlowInstance(string flowName, int flowVersion, int dataID, string dataType, string createUser, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = @"Insert Into `FlowInstance` 
@@ -109,18 +109,26 @@ namespace BudgetSystem.Dal
                                 (@FlowName,@FlowVersionNumber,@DateItemID,@DateItemType,now(),@CreateUser,0,0,0,1)";
             return con.Insert(insertSql, new { FlowName = flowName, FlowVersionNumber = flowVersion, DateItemID = dataID, DateItemType = dataType, CreateUser = createUser }, tran);
         }
+        /// <summary>
+        /// 更新流程IsRecent值，新创建FlowInstance前更新流程数据已有Instance的IsRecent为false
+        /// </summary>
+        /// <param name="flowName"></param>
+        /// <param name="dataItemType"></param>
+        /// <param name="dataID"></param>
+        /// <param name="isRecent"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        public void UpdateFlowInstanceIsRecent(string flowName, string dataItemType, int dataID,bool isRecent, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `FlowInstance` Set `IsRecent` = @IsRecent Where `DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName";
+            con.Execute(updateSql, new { IsRecent = isRecent, DateItemID = dataID, DateItemType = dataItemType, FlowName =flowName}, tran);
+        }
 
         public void UpdateFlowInstanceCloseInfo(int instanceID, bool approveReslt, string closeReason, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = @"Update `FlowInstance` Set `ApproveResult` = @ApproveResult,`IsClosed` = 1,`CloseReason`=@CloseReason,`CloseDateTime` = now() Where `ID` = @ID";
             con.Execute(updateSql, new { ApproveResult = approveReslt, closeReason = closeReason, ID = instanceID }, tran);
 
-        }
-
-        public void UpdateFlowInstanceNotRecent(string dataType, int dataID, IDbConnection con, IDbTransaction tran)
-        {
-            string updateSql = @"Update `FlowInstance` Set `IsRecent`= 0  Where `DateItemID`= @DateItemID And `DateItemType`= @DateItemType";
-            con.Execute(updateSql, new { DateItemID = dataID, DateItemType = dataType }, tran);
         }
 
 

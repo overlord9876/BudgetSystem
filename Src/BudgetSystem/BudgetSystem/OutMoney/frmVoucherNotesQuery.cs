@@ -39,13 +39,17 @@ namespace BudgetSystem
             this.gcDeclarationform.RefreshDataSource();
         }
 
-
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
             if (operate.Operate == OperateTypes.ImportData.ToString())
             {
-                XtraMessageBox.Show("导入付款凭证");
+                frmDeclarationformEdit form = new frmDeclarationformEdit();
+                if (form.DialogResult == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+
             }
             else if (operate.Operate == OperateTypes.New.ToString())
             {

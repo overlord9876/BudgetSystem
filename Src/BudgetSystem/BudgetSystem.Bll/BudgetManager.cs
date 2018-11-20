@@ -24,34 +24,87 @@ namespace BudgetSystem.Bll
 
         public Budget GetBudget(int id)
         {
-            var Budget = this.Query<Budget>((con) =>
+            var budget = this.Query<Budget>((con) =>
             {
                 var uList = dal.GetBudget(id, con);
                 return uList;
             });
-            return Budget;
-        }
+            return budget;
+        } 
 
-        public int AddBudget(Budget budget)
+        public int AddBudget(Budget budget,bool isStartFlow=false)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
             {
                 int id = dal.AddBudget(budget, con, tran);
-                FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, EnumFlowDataType.预算单.ToString(), budget.Salesman);
-                if (state != FlowRunState.启动流程成功)
+                if (isStartFlow == true)
                 {
-                    throw new Exception(string.Format("创建{0}失败，{1}。",EnumFlowNames.预算单审批流程.ToString(),state.ToString()));
+                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, EnumFlowDataType.预算单.ToString(), budget.Salesman);
+                    if (state != FlowRunState.启动流程成功)
+                    {
+                        throw new Exception(string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString()));
+                    }
                 }
                 return id;
             });
         }
 
-        public void ModifyBudget(Budget budget)
+        /// <summary>
+        /// 启动审批流程
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currentUser"></param>
+        /// <returns>返回string.Empty为成功，否则为失败原因</returns>
+        public string StartFlow(int id, string currentUser)
         {
-            this.ExecuteWithTransaction((con, tran) =>
+            Budget budge = this.GetBudget(id);
+            if (budge == null)
             {
+                return "数据不存在";
+            }
+            else if (budge.EnumFlowState == EnumDataFlowState.审批中)
+            {
+                return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+            }
+            FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, EnumFlowDataType.预算单.ToString(), currentUser);
+            if (state != FlowRunState.启动流程成功)
+            {
+                return state.ToString();
+            }
+            return string.Empty;
+        }
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="budget"></param>
+        /// <param name="isStartFlow"></param>
+        /// <returns>修改成功返回string.Empty,否则返回失败原因</returns>
+        public string  ModifyBudget(Budget budget, bool isStartFlow = false)
+        {
+            Budget budge = this.GetBudget(budget.ID);
+            if (budge == null)
+            {
+                return "数据不存在";
+            }
+            else if (budge.EnumFlowState == EnumDataFlowState.审批中
+                || budget.EnumFlowState == EnumDataFlowState.审批通过)
+            { 
+                   return string.Format("{0}的预算单不能修改。");
+            }
+            string message = string.Empty;
+            this.ExecuteWithTransaction((con, tran) =>
+            {               
                 dal.ModifyBudget(budget, con, tran);
+                if (isStartFlow == true)
+                {
+                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), budget.ID, EnumFlowDataType.预算单.ToString(), budget.Salesman);
+                    if (state != FlowRunState.启动流程成功)
+                    {
+                        message= string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString());
+                    }
+                }
             });
+            return string.Empty;
         }
 
         public List<AccountBill> GetAccountBillDetailByBudgetId(int budgetId)
@@ -67,7 +120,7 @@ namespace BudgetSystem.Bll
             return lst.ToList(); 
         }
 
-           /// <summary>
+        /// <summary>
         /// 验证合同编号是否存在
         /// </summary>
         /// <param name="id"></param>

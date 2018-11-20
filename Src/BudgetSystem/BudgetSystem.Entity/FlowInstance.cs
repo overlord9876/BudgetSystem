@@ -75,8 +75,9 @@ namespace BudgetSystem.Entity
         public DateTime ConfirmDateTime { get; set; }
 
         /// <summary>
-        /// 是否数据项的最近一次审批
+        /// 是否最近的
         /// </summary>
         public bool IsRecent { get; set; }
+
     }
 }

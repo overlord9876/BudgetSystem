@@ -12,11 +12,10 @@ using BudgetSystem.Entity;
 namespace BudgetSystem.UserManage
 {
     public partial class frmUserQuery : frmBaseQueryForm
-
     {
 
         private Bll.UserManager um = new Bll.UserManager();
-      
+
         public frmUserQuery()
         {
             InitializeComponent();
@@ -35,8 +34,8 @@ namespace BudgetSystem.UserManage
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "用户管理";
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查询", UITypes.LargeMenu, new List<string>() { "查询1", "查询2", "查询3" }));
-            
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查询", UITypes.LargeMenu, new List<string>() { "查询1", "查询2", "查询3" }));
+
 
         }
 
@@ -44,13 +43,11 @@ namespace BudgetSystem.UserManage
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
-            if (operate.Operate == OperateTypes.View.ToString())
-            {
-                MessageBox.Show(e.SenderText);
-                return;
-            }
-
-
+            //if (operate.Operate == OperateTypes.View.ToString())
+            //{
+            //    MessageBox.Show(e.SenderText);
+            //    return;
+            //}
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -77,7 +74,7 @@ namespace BudgetSystem.UserManage
                 ReSetUserPassword();
             }
 
-        
+
 
 
         }
@@ -116,7 +113,7 @@ namespace BudgetSystem.UserManage
             }
         }
 
-        
+
         private void CreateUser()
         {
             frmUserEdit form = new frmUserEdit();
@@ -128,7 +125,7 @@ namespace BudgetSystem.UserManage
         }
         private void ModifyUser()
         {
-          
+
             User currentRowUser = this.gvUser.GetFocusedRow() as User;
             if (currentRowUser != null)
             {
@@ -155,14 +152,14 @@ namespace BudgetSystem.UserManage
 
         public override void LoadData()
         {
-            var list= um.GetAllUser();
+            var list = um.GetAllUser();
             this.gridUser.DataSource = list;
         }
 
         protected override void InitGridViewAction()
         {
             this.gridViewAction.Add(this.gvUser, new ActionWithPermission() { MainAction = ModifyUser, MainOperate = OperateTypes.Modify, SecondAction = ViewUser, SecondOperate = OperateTypes.View });
-        
+
         }
 
     }

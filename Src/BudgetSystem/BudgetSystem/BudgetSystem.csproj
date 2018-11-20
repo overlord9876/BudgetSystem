@@ -197,6 +197,12 @@
     <Compile Include="InMoney\ucUserSelected.Designer.cs">
       <DependentUpon>ucUserSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\frmDeclarationformImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmDeclarationformImport.Designer.cs">
+      <DependentUpon>frmDeclarationformImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\frmOptionQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\ucUserSelected.resx">
       <DependentUpon>ucUserSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmDeclarationformImport.resx">
+      <DependentUpon>frmDeclarationformImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Option\frmOptionQuery.resx">
       <DependentUpon>frmOptionQuery.cs</DependentUpon>

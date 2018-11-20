@@ -174,6 +174,13 @@ namespace BudgetSystem.Entity
         public decimal Profit { get; set; }
 
         /// <summary>
+        /// 流程状态
+        /// </summary>
+        public int FlowState { get; set; }
+
+
+
+        /// <summary>
         /// 备注
         /// </summary>
         public string Description { get; set; }
@@ -230,6 +237,27 @@ namespace BudgetSystem.Entity
         /// 供应商列表
         /// </summary>
         public List<Supplier> SupplierList { get; set; }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public EnumDataFlowState EnumFlowState
+        {
+            get
+            {
+                switch (this.FlowState)
+                {
+                    case 0:
+                        return EnumDataFlowState.审批中;
+                    case 1:
+                        return EnumDataFlowState.审批不通过;
+                    case 2:
+                        return EnumDataFlowState.审批不通过;
+                    default:
+                        return EnumDataFlowState.未审批; 
+                }
+            }
+        }
 
         public override string ToString()
         {

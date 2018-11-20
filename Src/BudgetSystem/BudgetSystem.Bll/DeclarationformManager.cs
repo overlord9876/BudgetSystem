@@ -42,6 +42,18 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public int ImportDeclarationform(List<Declarationform> declarationformList)
+        {
+            return this.ExecuteWithTransaction<int>((con, tran) =>
+            {
+                int id = 0;
+                foreach (Declarationform df in declarationformList)
+                {
+                     id = dal.AddDeclarationform(df, con, tran);
+                }
+                return id;
+            });
+        }
 
         public void AddDeclarationformList(List<Declarationform> declarationformList)
         {

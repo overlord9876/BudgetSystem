@@ -111,7 +111,7 @@ namespace BudgetSystem
             Budget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
             Budget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
             Budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
-            Budget.Premium = txtPremium.Value; 
+            Budget.Premium = txtPremium.Value;
             Budget.Profit = this.txtProfit.Value;
             Budget.PriceClause = this.txtPriceClause.Text;
             Budget.Port = this.luePort.Text;
@@ -703,12 +703,14 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
-            if (detail.TaxRebateRate == 0)
+            if (detail.TaxRebateRate <= 0)
             {
                 e.ErrorText = "退税率应大于0";
                 e.Valid = false;
                 return;
             }
+            e.ErrorText = string.Empty;
+            e.Valid = true;
         }
 
         private void bgvInProductDetail_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)

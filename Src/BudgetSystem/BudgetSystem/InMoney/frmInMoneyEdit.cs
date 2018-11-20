@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
+using Newtonsoft.Json;
 
 namespace BudgetSystem.InMoney
 {
@@ -51,6 +52,7 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
+            CurrentActualReceipts.Currency = this.cboCurrency.EditValue.ToString();
             CurrentActualReceipts.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
             CurrentActualReceipts.TradingPostscript = this.txtTradingPostscript.Text.Trim();
             CurrentActualReceipts.Operator = RunInfo.Instance.CurrentUser.UserName;
@@ -80,6 +82,7 @@ namespace BudgetSystem.InMoney
             CurrentActualReceipts.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
             CurrentActualReceipts.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentActualReceipts.Remitter = (cboCustomer.EditValue as Customer).Name;
+            CurrentActualReceipts.Currency = this.cboCurrency.EditValue.ToString();
             CurrentActualReceipts.CNY = decimal.Parse(this.txtCNY.Text);
             CurrentActualReceipts.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentActualReceipts.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
@@ -128,6 +131,34 @@ namespace BudgetSystem.InMoney
                 if (index >= 0)
                 {
                     this.dxErrorProvider1.SetError(this.gcConstSplit, string.Format("请将第{0}项分拆金额关联合同", index + 1));
+                }
+                //增加合同超收提示。
+                for (index = 0; index < dataSource.Count(); index++)
+                {
+                    var ar = dataSource.ToList()[index];
+                    var budget = bm.GetBudget(ar.RelationBudget.ID);
+                    decimal totalAmountOriginal = arm.GetTotalAmountOriginalCoinByBudgetId(ar.RelationBudget.ID);
+                    decimal originalMoney = 0;
+                    try
+                    {
+                        List<OutProductDetail> outProductDetailList = JsonConvert.DeserializeObject<List<OutProductDetail>>(budget.OutProductDetail);
+
+                        if (outProductDetailList != null)
+                        {
+                            originalMoney = outProductDetailList.Sum(o => o.OriginalCurrencyMoney);
+                            decimal rate = totalAmountOriginal - originalMoney / originalMoney;
+                            if (rate > (decimal)0.3)
+                            {
+                                this.dxErrorProvider1.SetError(this.gcConstSplit, string.Format("合同【{0}】，实际收汇超计划收汇30%以上！请调整合同计划数！原预算单如有“预付款”计划，调整计划，必须同时报批“预付款”新计划！", budget.ContractNO));
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.Message);
+                        //TODO:记录日志
+                    }
                 }
             }
             if (this.dxErrorProvider1.HasErrors) { return; }
@@ -304,33 +335,45 @@ namespace BudgetSystem.InMoney
             if ((cboCustomer.EditValue as Customer) == null)
             {
                 dxErrorProvider1.SetError(cboCustomer, "请输入客户信息");
+                cboCustomer.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text.Trim()))
             {
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
+                txtVoucherNo.Focus();
                 return;
             }
 
             if (txtOriginalCoin.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtOriginalCoin, "请输入原币金额");
+                txtOriginalCoin.Focus();
+                return;
+            }
+            if (cboCurrency.EditValue == null)
+            {
+                dxErrorProvider1.SetError(cboCurrency, "请选择币种");
+                cboCurrency.Focus();
                 return;
             }
             if (txtExchangeRate.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtExchangeRate, "请输入汇率信息");
+                txtExchangeRate.Focus();
                 return;
             }
 
             if (txtCNY.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtCNY, "请输入人民币金额");
+                txtCNY.Focus();
                 return;
             }
             if (txtPaymentMethod.SelectedItem == null || string.IsNullOrEmpty(txtPaymentMethod.SelectedItem.ToString()))
             {
                 dxErrorProvider1.SetError(txtPaymentMethod, "请选择支付方式");
+                txtPaymentMethod.Focus();
                 return;
             }
         }
@@ -343,7 +386,7 @@ namespace BudgetSystem.InMoney
             this.txtExchangeRate.Text = CurrentActualReceipts.ExchangeRate.ToString();
             this.txtOriginalCoin.Text = CurrentActualReceipts.OriginalCoin.ToString();
             this.txtPaymentMethod.SelectedItem = CurrentActualReceipts.PaymentMethod;
-
+            this.cboCurrency.EditValue = CurrentActualReceipts.Currency;
             SalemanValue(um.GetActualReceiptSalesmanList(id));
 
             foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
