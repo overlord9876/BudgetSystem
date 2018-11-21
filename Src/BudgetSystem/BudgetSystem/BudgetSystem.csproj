@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -515,6 +515,7 @@
     <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -548,7 +549,6 @@
     <EmbeddedResource Include="OutMoney\frmDeclarationformEdit.resx">
       <DependentUpon>frmDeclarationformEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -638,6 +638,7 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WorkSpace\frmApprove_Revoke.xml" />
     <EmbeddedResource Include="WorkSpace\frmApprove_Approve.xml" />
     <EmbeddedResource Include="WorkSpace\frmApprove_ApproveView.xml" />
     <EmbeddedResource Include="WorkSpace\frmApprove_Confirm.xml" />

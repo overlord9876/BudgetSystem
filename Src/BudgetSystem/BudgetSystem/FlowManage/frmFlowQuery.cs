@@ -26,7 +26,7 @@ namespace BudgetSystem.FlowManage
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-        //    this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
             this.ModelOperatePageName = "流程管理";
         }
 
@@ -53,7 +53,7 @@ namespace BudgetSystem.FlowManage
             int dataID = 999;
             string dataType = "测试业务数据";
             Bll.FlowManager fm = new FlowManager();
-            FlowRunState state = fm.StartFlow(flowName, dataID, dataType,RunInfo.Instance.CurrentUser.UserName);
+            FlowRunState state = fm.StartFlow(flowName, dataID,"测试用的数据项", dataType,RunInfo.Instance.CurrentUser.UserName);
  
         }
 

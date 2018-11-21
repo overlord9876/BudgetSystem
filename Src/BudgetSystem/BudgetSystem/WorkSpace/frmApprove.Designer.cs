@@ -30,6 +30,7 @@
         {
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnRetract = new DevExpress.XtraEditors.SimpleButton();
             this.btnConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.txtCloseReason = new DevExpress.XtraEditors.TextEdit();
             this.dtEndDate = new DevExpress.XtraEditors.DateEdit();
@@ -52,6 +53,10 @@
             this.txtFlowName = new DevExpress.XtraEditors.TextEdit();
             this.dtCrateDate = new DevExpress.XtraEditors.DateEdit();
             this.txtDataItemID = new DevExpress.XtraEditors.ButtonEdit();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -63,13 +68,9 @@
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCloseReason.Properties)).BeginInit();
@@ -88,6 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtCrateDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtCrateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDataItemID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -99,17 +104,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnRetract);
             this.layoutControl1.Controls.Add(this.btnConfirm);
             this.layoutControl1.Controls.Add(this.txtCloseReason);
             this.layoutControl1.Controls.Add(this.dtEndDate);
@@ -124,17 +126,32 @@
             this.layoutControl1.Controls.Add(this.dtCrateDate);
             this.layoutControl1.Controls.Add(this.txtDataItemID);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem6,
+            this.layoutControlItem7,
+            this.layoutControlItem8,
+            this.layoutControlItem13});
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1277, 192, 807, 713);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1617, 253, 807, 713);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1023, 714);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnRetract
+            // 
+            this.btnRetract.Location = new System.Drawing.Point(12, 674);
+            this.btnRetract.Name = "btnRetract";
+            this.btnRetract.Size = new System.Drawing.Size(196, 28);
+            this.btnRetract.StyleController = this.layoutControl1;
+            this.btnRetract.TabIndex = 17;
+            this.btnRetract.Text = "撤回流程";
+            this.btnRetract.Click += new System.EventHandler(this.btnRetract_Click);
+            // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(24, 662);
+            this.btnConfirm.Location = new System.Drawing.Point(12, 674);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(146, 28);
             this.btnConfirm.StyleController = this.layoutControl1;
@@ -182,7 +199,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(853, 662);
+            this.btnCancel.Location = new System.Drawing.Point(865, 674);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(146, 28);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -191,7 +208,7 @@
             // 
             // btnNotAccept
             // 
-            this.btnNotAccept.Location = new System.Drawing.Point(324, 662);
+            this.btnNotAccept.Location = new System.Drawing.Point(474, 662);
             this.btnNotAccept.Name = "btnNotAccept";
             this.btnNotAccept.Size = new System.Drawing.Size(146, 28);
             this.btnNotAccept.StyleController = this.layoutControl1;
@@ -201,7 +218,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(174, 662);
+            this.btnAccept.Location = new System.Drawing.Point(324, 662);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(146, 28);
             this.btnAccept.StyleController = this.layoutControl1;
@@ -227,7 +244,7 @@
             this.repositoryItemMemoEdit1,
             this.repositoryItemDateEdit1,
             this.repositoryItemImageComboBox1});
-            this.gdApproveList.Size = new System.Drawing.Size(975, 290);
+            this.gdApproveList.Size = new System.Drawing.Size(975, 444);
             this.gdApproveList.TabIndex = 8;
             this.gdApproveList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvApproveList});
@@ -305,7 +322,7 @@
             // 
             this.gcNodeApproveResult.Caption = "审批结果";
             this.gcNodeApproveResult.ColumnEdit = this.repositoryItemImageComboBox1;
-            this.gcNodeApproveResult.FieldName = "NodeApproveResult";
+            this.gcNodeApproveResult.FieldName = "NodeApproveResultWithState";
             this.gcNodeApproveResult.Name = "gcNodeApproveResult";
             this.gcNodeApproveResult.Visible = true;
             this.gcNodeApproveResult.VisibleIndex = 3;
@@ -317,8 +334,9 @@
             this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemImageComboBox1.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("同意", true, -1),
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("驳回", false, -1)});
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("同意", 1, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("驳回", 0, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", -1, -1)});
             this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             // 
             // txtCreateUserRealName
@@ -372,6 +390,63 @@
             this.txtDataItemID.TabIndex = 4;
             this.txtDataItemID.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtDataItemID_ButtonClick);
             // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.txtMyInfo;
+            this.layoutControlItem6.CustomizationFormText = "审批意见：";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(832, 107);
+            this.layoutControlItem6.Text = "审批意见：";
+            this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem6.TextToControlDistance = 5;
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.btnAccept;
+            this.layoutControlItem7.CustomizationFormText = "审批通过";
+            this.layoutControlItem7.Location = new System.Drawing.Point(150, 0);
+            this.layoutControlItem7.MaxSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem7.MinSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(150, 32);
+            this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem7.Text = "审批通过";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.TextToControlDistance = 0;
+            this.layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.btnNotAccept;
+            this.layoutControlItem8.CustomizationFormText = "审批不通过";
+            this.layoutControlItem8.Location = new System.Drawing.Point(150, 0);
+            this.layoutControlItem8.MaxSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem8.MinSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(150, 32);
+            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem8.Text = "审批不通过";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextToControlDistance = 0;
+            this.layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.btnConfirm;
+            this.layoutControlItem13.CustomizationFormText = "确认审批结果";
+            this.layoutControlItem13.Location = new System.Drawing.Point(0, 662);
+            this.layoutControlItem13.MaxSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem13.MinSize = new System.Drawing.Size(150, 32);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Size = new System.Drawing.Size(150, 32);
+            this.layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem13.Text = "确认审批结果";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem13.TextToControlDistance = 0;
+            this.layoutControlItem13.TextVisible = false;
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
@@ -380,11 +455,13 @@
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup2,
             this.layoutControlGroup3,
-            this.layoutControlGroup4});
+            this.layoutControlItem9,
+            this.emptySpaceItem1,
+            this.layoutControlItem14});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1023, 714);
-            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlGroup2
@@ -480,7 +557,7 @@
             this.layoutControlItem5});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 165);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1003, 343);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(1003, 497);
             this.layoutControlGroup3.Text = "审批记录";
             // 
             // layoutControlItem5
@@ -489,73 +566,17 @@
             this.layoutControlItem5.CustomizationFormText = "审批表";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(979, 294);
+            this.layoutControlItem5.Size = new System.Drawing.Size(979, 448);
             this.layoutControlItem5.Text = "审批表";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
             this.layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlGroup4
-            // 
-            this.layoutControlGroup4.CustomizationFormText = "审批";
-            this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem6,
-            this.layoutControlItem7,
-            this.layoutControlItem8,
-            this.layoutControlItem9,
-            this.layoutControlItem13,
-            this.emptySpaceItem1});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 508);
-            this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(1003, 186);
-            this.layoutControlGroup4.Text = "我的审批";
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.txtMyInfo;
-            this.layoutControlItem6.CustomizationFormText = "审批意见：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(979, 105);
-            this.layoutControlItem6.Text = "审批意见：";
-            this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(135, 18);
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.btnAccept;
-            this.layoutControlItem7.CustomizationFormText = "审批通过";
-            this.layoutControlItem7.Location = new System.Drawing.Point(150, 105);
-            this.layoutControlItem7.MaxSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem7.MinSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(150, 32);
-            this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem7.Text = "审批通过";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem7.TextToControlDistance = 0;
-            this.layoutControlItem7.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.btnNotAccept;
-            this.layoutControlItem8.CustomizationFormText = "审批不通过";
-            this.layoutControlItem8.Location = new System.Drawing.Point(300, 105);
-            this.layoutControlItem8.MaxSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem8.MinSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(150, 32);
-            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem8.Text = "审批不通过";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem8.TextToControlDistance = 0;
-            this.layoutControlItem8.TextVisible = false;
-            // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnCancel;
             this.layoutControlItem9.CustomizationFormText = "取消";
-            this.layoutControlItem9.Location = new System.Drawing.Point(829, 105);
+            this.layoutControlItem9.Location = new System.Drawing.Point(853, 662);
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(150, 32);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(150, 32);
             this.layoutControlItem9.Name = "layoutControlItem9";
@@ -566,30 +587,29 @@
             this.layoutControlItem9.TextToControlDistance = 0;
             this.layoutControlItem9.TextVisible = false;
             // 
-            // layoutControlItem13
-            // 
-            this.layoutControlItem13.Control = this.btnConfirm;
-            this.layoutControlItem13.CustomizationFormText = "确认审批结果";
-            this.layoutControlItem13.Location = new System.Drawing.Point(0, 105);
-            this.layoutControlItem13.MaxSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem13.MinSize = new System.Drawing.Size(150, 32);
-            this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(150, 32);
-            this.layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem13.Text = "确认审批结果";
-            this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem13.TextToControlDistance = 0;
-            this.layoutControlItem13.TextVisible = false;
-            // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(450, 105);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(200, 662);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(379, 32);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(653, 32);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.btnRetract;
+            this.layoutControlItem14.CustomizationFormText = "撤回流程";
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 662);
+            this.layoutControlItem14.MinSize = new System.Drawing.Size(50, 25);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(200, 32);
+            this.layoutControlItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem14.Text = "撤回流程";
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextToControlDistance = 0;
+            this.layoutControlItem14.TextVisible = false;
             // 
             // frmApprove
             // 
@@ -619,6 +639,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtCrateDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtCrateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDataItemID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -630,13 +654,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -652,20 +672,25 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvApproveList;
         private DevExpress.XtraEditors.ButtonEdit txtDataItemID;
         private DevExpress.XtraEditors.MemoEdit txtMyInfo;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnNotAccept;
         private DevExpress.XtraEditors.SimpleButton btnAccept;
         private DevExpress.XtraGrid.Columns.GridColumn gcNodeApproveUser;
         private DevExpress.XtraGrid.Columns.GridColumn gcNodeApproveRemark;
         private DevExpress.XtraGrid.Columns.GridColumn gcNodeApproveDate;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraEditors.TextEdit txtCloseReason;
         private DevExpress.XtraEditors.DateEdit dtEndDate;
         private DevExpress.XtraEditors.TextEdit txtResult;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
         private DevExpress.XtraEditors.SimpleButton btnConfirm;
+        private DevExpress.XtraGrid.Columns.GridColumn gcRunPointCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcNodeApproveResult;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
+        private DevExpress.XtraEditors.SimpleButton btnRetract;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
@@ -677,12 +702,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gcRunPointCreateDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcNodeApproveResult;
-        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
     }
 }

@@ -34,7 +34,7 @@ namespace BudgetSystem.WorkSpace
         public const string ApproveViewModel = "ApproveView";
         public const string ConfirmModel = "Confirm";
         public const string ConfirmViewModel = "ConfirmView";
-
+        public const string RevokeModel = "Revoke";
         private void frmApprove_Load(object sender, EventArgs e)
         {
 
@@ -56,6 +56,10 @@ namespace BudgetSystem.WorkSpace
             {
                 this.Text = "查看审批结果";
             }
+            else if (this.CustomWorkModel == RevokeModel)
+            {
+                this.Text = "撤回结果";
+            }
 
             this.txtFlowName.Text = this.FlowItem.FlowName;
             this.txtDataItemID.Text = this.FlowItem.DateItemID.ToString();
@@ -69,8 +73,8 @@ namespace BudgetSystem.WorkSpace
                 this.dtEndDate.EditValue = this.FlowItem.CloseDateTime;
                 this.txtCloseReason.Text = this.FlowItem.CloseReason;
             }
-
-            List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).Where(s => s.State == true).ToList();
+            List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
+           // List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).Where(s => s.State == true).ToList();
 
 
 
@@ -174,6 +178,27 @@ namespace BudgetSystem.WorkSpace
             else
             {
                 XtraMessageBox.Show("未知数据类型");
+            }
+        }
+
+        private void btnRetract_Click(object sender, EventArgs e)
+        {
+            if (FlowItem.IsClosed)
+            {
+                XtraMessageBox.Show("当选中流程已审批完成，不可以撤回");
+                return;
+            }
+
+
+            FlowRunState state = fm.RevokeFlow(this.FlowItem.ID, true);
+            string info;
+            if (state.Translate(out info))
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                XtraMessageBox.Show(info);
             }
         }
 

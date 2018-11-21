@@ -40,6 +40,26 @@ namespace BudgetSystem.Entity
         public bool NodeApproveResult { get; set; }
 
         /// <summary>
+        /// 节点审批结果，考虑未审批状态显示 
+        /// </summary>
+        public int NodeApproveResultWithState
+        {
+            get
+            {
+                if (this.State ==false)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return NodeApproveResult ? 1 : 0;
+                
+                }
+            }
+        }
+    
+
+        /// <summary>
         /// 节点审批意见
         /// </summary>
         public string NodeApproveRemark { get; set; }

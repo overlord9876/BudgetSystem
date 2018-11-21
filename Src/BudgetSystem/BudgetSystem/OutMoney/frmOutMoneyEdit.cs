@@ -399,7 +399,7 @@ namespace BudgetSystem.OutMoney
         {
             SubmitDataByWorkModel();
 
-            fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
+            fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID,CurrentPaymentNotes.VoucherNo,  EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

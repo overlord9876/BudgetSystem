@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,11 +23,17 @@ namespace BudgetSystem
         {
             InitializeComponent();
             InitSkins();
+
+# if (!IgnorePermission)
+
             CheckUserPermission();
+#endif
 
             bsiLoginInfo.Caption = string.Format("当前登陆用户为：{0}{1}", RunInfo.Instance.CurrentUser.DepartmentName, RunInfo.Instance.CurrentUser.ToString());
 
         }
+
+    
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

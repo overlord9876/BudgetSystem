@@ -47,6 +47,7 @@
             this.gcCloseDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDateItemText = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -143,6 +144,7 @@
             // 
             this.gvFlow.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcDateItemID,
+            this.gcDateItemText,
             this.gcFlowName,
             this.gcFlowVersionNumber,
             this.gcCreateUserRealName,
@@ -157,23 +159,18 @@
             this.gvFlow.OptionsBehavior.Editable = false;
             this.gvFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
-
             // 
             // gcDateItemID
             // 
-            this.gcDateItemID.Caption = "持审批项编号";
+            this.gcDateItemID.Caption = "审批项编号";
             this.gcDateItemID.FieldName = "DateItemID";
             this.gcDateItemID.Name = "gcDateItemID";
-            this.gcDateItemID.Visible = true;
-            this.gcDateItemID.VisibleIndex = 0;
             // 
             // gcFlowName
             // 
             this.gcFlowName.Caption = "审批流程";
             this.gcFlowName.FieldName = "FlowName";
             this.gcFlowName.Name = "gcFlowName";
-            this.gcFlowName.Visible = true;
-            this.gcFlowName.VisibleIndex = 1;
             // 
             // gcFlowVersionNumber
             // 
@@ -249,6 +246,14 @@
             this.gcID.FieldName = "ID";
             this.gcID.Name = "gcID";
             // 
+            // gcDateItemText
+            // 
+            this.gcDateItemText.Caption = "审批项";
+            this.gcDateItemText.FieldName = "DateItemText";
+            this.gcDateItemText.Name = "gcDateItemText";
+            this.gcDateItemText.Visible = true;
+            this.gcDateItemText.VisibleIndex = 0;
+            // 
             // frmMyFlowListQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -295,5 +300,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcID;
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDateItemText;
     }
 }

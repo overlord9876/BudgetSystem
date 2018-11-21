@@ -35,7 +35,6 @@ namespace BudgetSystem.WorkSpace
                     info = "审批完成";
                     break;
                 case FlowRunState.提交的流程节点已审批过了:
-
                     info = "提交流程失败，当前提交的审批已被审批过了，请刷新数据";
                     break;
                 case FlowRunState.确认的流程实例已经确认过了:
@@ -47,6 +46,16 @@ namespace BudgetSystem.WorkSpace
                 case FlowRunState.确认成功:
                     result = true;
                     info = "确认成功";
+                    break;
+                case FlowRunState.撤回成功:
+                    result = true;
+                    info = "撤回成功";
+                    break;
+                case FlowRunState.撤回的流程实例已经审批完成了:
+                    info = "撤回失败，当前撤回的流程已审批完成了，不可以进行撤回操作，请刷新数据！";
+                    break;
+                case FlowRunState.撤回的流程实例已经有人审批过了:
+                    info = "撤回失败，当前撤回的流程已被审批过了，不可以进行撤回操作，请刷新数据！";
                     break;
             }
             return result;

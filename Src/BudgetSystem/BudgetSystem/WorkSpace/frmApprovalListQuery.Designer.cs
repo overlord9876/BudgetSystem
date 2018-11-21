@@ -42,6 +42,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gcDateText = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -70,6 +71,7 @@
             // 
             this.gvPendingFlow.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcDateItemID,
+            this.gcDateText,
             this.gcFlowName,
             this.gcFlowVersionNumber,
             this.gcCreateDate,
@@ -81,15 +83,12 @@
             this.gvPendingFlow.OptionsBehavior.Editable = false;
             this.gvPendingFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
-
             // 
             // gcDateItemID
             // 
-            this.gcDateItemID.Caption = "持审核项编号";
+            this.gcDateItemID.Caption = "待审核项编号";
             this.gcDateItemID.FieldName = "DateItemID";
             this.gcDateItemID.Name = "gcDateItemID";
-            this.gcDateItemID.Visible = true;
-            this.gcDateItemID.VisibleIndex = 0;
             // 
             // gcFlowName
             // 
@@ -187,6 +186,14 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
+            // gcDateText
+            // 
+            this.gcDateText.Caption = "待审批项";
+            this.gcDateText.FieldName = "DateItemText";
+            this.gcDateText.Name = "gcDateText";
+            this.gcDateText.Visible = true;
+            this.gcDateText.VisibleIndex = 0;
+            // 
             // frmApprovalListQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -225,5 +232,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUserRealName;
         private DevExpress.XtraGrid.Columns.GridColumn gcID;
         private DevExpress.XtraGrid.Views.Grid.GridView gvPendingFlow;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDateText;
     }
 }

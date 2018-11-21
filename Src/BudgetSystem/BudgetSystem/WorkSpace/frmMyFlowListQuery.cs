@@ -29,6 +29,7 @@ namespace BudgetSystem.WorkSpace
             base.InitModelOperate();
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "我发起的流程";
         }
@@ -43,6 +44,12 @@ namespace BudgetSystem.WorkSpace
             {
 
                 ConfirmFlowItem();
+
+            }
+            if (operate.Operate == OperateTypes.Revoke.ToString())
+            {
+
+                RevokeFlowItem();
 
             }
             else if (operate.Operate == OperateTypes.View.ToString())
@@ -82,7 +89,21 @@ namespace BudgetSystem.WorkSpace
             }
         }
 
-
+        private void RevokeFlowItem()
+        {
+            if (this.gvFlow.FocusedRowHandle >= 0)
+            {
+                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                if (item != null)
+                {
+                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.RevokeModel };
+                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        this.RefreshData();
+                    }
+                }
+            }
+        }
 
         public override void RefreshData()
         {

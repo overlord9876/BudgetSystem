@@ -102,7 +102,8 @@ namespace BudgetSystem.Entity
 
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.None,"我提交的流程",600),
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.Confirm,"我提交的流程-确认",610),
-                        new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.View,"我提交的流程-查看",620),
+                        new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.Revoke,"我提交的流程-撤回",620),
+                        new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.View,"我提交的流程-查看",630),
 
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.None,"预算单管理模块",700),
 

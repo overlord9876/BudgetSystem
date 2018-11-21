@@ -122,7 +122,7 @@ namespace BudgetSystem.Bll
         /// 3 流程还未配置审批过程
         /// 4 创建运行点时失败，用户部门未配置。
         /// </returns>
-        public FlowRunState StartFlow(string flowName,int dataID, string dataType,string currentUser)
+        public FlowRunState StartFlow(string flowName,int dataID,string dataText, string dataType,string currentUser)
         {
 
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
@@ -144,7 +144,7 @@ namespace BudgetSystem.Bll
                 //更新数据已关联流程实例的IsRecent属性为false
                 dal.UpdateFlowInstanceIsRecent(flow.Name, dataType, dataID, false, con, tran);
                 //创建流程实例 
-                int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataType, currentUser, con, tran);
+                int instanceID =  dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID,dataText, dataType, currentUser, con, tran);
 
                 //创建运行点
                 FlowRunState createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, null, currentUser, con, tran);
@@ -310,7 +310,31 @@ namespace BudgetSystem.Bll
 
         }
 
+        public FlowRunState RevokeFlow(int instanceID, bool checkFlowNotApproved)
+        {
+            return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
+            {
 
+                FlowInstance instance = dal.GetFlowInstance(instanceID, con, tran);
+                if (instance.IsClosed)
+                {
+                    return FlowRunState.撤回的流程实例已经审批完成了;
+                }
+
+                if (checkFlowNotApproved)
+                {
+                    int runPointCount = dal.GetFlowRunPointsByInstance(instanceID, con, tran).Count();
+                    if (runPointCount > 1)
+                    {
+                        return FlowRunState.撤回的流程实例已经有人审批过了;
+                    }
+                }
+
+                dal.UpdateFlowInstanceCloseInfo(instance.ID, false, FlowConst.FlowRetractMessage, con, tran);
+                return FlowRunState.撤回成功;
+
+            });
+        }
 
         /// <summary>
         /// 发起人确认流程结果

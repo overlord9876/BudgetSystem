@@ -66,7 +66,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.供应商审批流程.ToString(), id, EnumFlowDataType.供应商.ToString(), currentUser);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.供应商审批流程.ToString(), id, supplier.Name, EnumFlowDataType.供应商.ToString(), currentUser);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

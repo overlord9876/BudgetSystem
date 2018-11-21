@@ -35,6 +35,11 @@ namespace BudgetSystem.Entity
         public string DateItemType { get; set; }
 
         /// <summary>
+        /// 数据项名称
+        /// </summary>
+        public string DateItemText { get; set; }
+
+        /// <summary>
         /// 发起时间
         /// </summary>
         public DateTime CreateDate { get; set; }

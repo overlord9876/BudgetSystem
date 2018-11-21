@@ -6,21 +6,22 @@ using DevExpress.XtraBars.Helpers;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars;
+using System.Diagnostics;
 
 namespace BudgetSystem
 {
     public partial class frmMain
     {
 
-       
+
         private void InitSkins()
         {
-           
+
             SkinHelper.InitSkinGallery(rgbStyle, true);
-           // UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+            // UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
         }
 
-        
+
 
         private void ShowForm(Form form)
         {
@@ -47,7 +48,7 @@ namespace BudgetSystem
         {
             foreach (Form form in this.MdiChildren)
             {
-                if (typeof(T) == form.GetType() && form.Text== formText)
+                if (typeof(T) == form.GetType() && form.Text == formText)
                 {
                     return (T)form;
 
@@ -68,7 +69,7 @@ namespace BudgetSystem
         private void btnReLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
-  
+
 
             Application.Restart();
         }
@@ -86,7 +87,7 @@ namespace BudgetSystem
 
         private void FormActivited(frmBaseQueryForm form)
         {
-            
+
             SetQueryFormRefreshState(form);
             SetQueryOperateRibbonUI(form);
         }
@@ -143,7 +144,7 @@ namespace BudgetSystem
 
             for (int i = this.ribbonControl1.Pages.Count - 1; i >= 0; i--)
             {
-                if ( this.ribbonControl1.Pages[i].Tag != null)
+                if (this.ribbonControl1.Pages[i].Tag != null)
                 {
                     string formID = this.ribbonControl1.Pages[i].Tag.ToString();
 
@@ -187,7 +188,7 @@ namespace BudgetSystem
             this.ribbonControl1.Pages.Insert(0, page);
 
 
-            Dictionary<string ,RibbonPageGroup> dict = new Dictionary<string,RibbonPageGroup>();
+            Dictionary<string, RibbonPageGroup> dict = new Dictionary<string, RibbonPageGroup>();
 
             foreach (ModelOperate mo in form.ModelOperateRegistry)
             {
@@ -206,15 +207,18 @@ namespace BudgetSystem
                 string permission = form.Module + "." + mo.Operate;
                 if (!RunInfo.Instance.UserPermission.Contains(permission))
                 {
-                    continue;
+# if (!IgnorePermission)
+                           continue;
+#endif
+
                 }
 
                 if (mo.UIType == UITypes.LargeButton)
                 {
                     BarButtonItem button = new BarButtonItem();
                     button.RibbonStyle = RibbonItemStyles.Large;
-                  
-                  
+
+
                     button.Caption = mo.Text;
                     button.GroupIndex = mo.Order;
                     button.ItemClick += new ItemClickEventHandler(RibbonButtonClick);
@@ -256,10 +260,10 @@ namespace BudgetSystem
                 {
                     group.Visible = false;
                 }
-            
+
             }
 
-         
+
             return page;
         }
 
@@ -278,6 +282,7 @@ namespace BudgetSystem
             RunInfo.Instance.Config.Save();
         }
 
+
         private void CheckUserPermission()
         {
             foreach (RibbonPageGroup group in this.rpMain.Groups)
@@ -287,7 +292,7 @@ namespace BudgetSystem
                 foreach (BarItemLink itemLink in group.ItemLinks)
                 {
                     string key = itemLink.Item.Tag != null ? itemLink.Item.Tag.ToString() : "";
-                    if (string.IsNullOrEmpty(key)  || !RunInfo.Instance.UserPermission.Contains(key))
+                    if (string.IsNullOrEmpty(key) || !RunInfo.Instance.UserPermission.Contains(key))
                     {
                         itemLink.Visible = false;
                     }
@@ -301,7 +306,7 @@ namespace BudgetSystem
                 {
                     group.Visible = false;
                 }
-            
+
             }
 
         }
