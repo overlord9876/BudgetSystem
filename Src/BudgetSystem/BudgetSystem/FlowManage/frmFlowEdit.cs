@@ -84,6 +84,13 @@ namespace BudgetSystem.FlowManage
             isInit = false;
         }
 
+        public void SetVersionReadOnly()
+        {
+            this.cboVersion.Properties.ReadOnly = true;
+        }
+
+        
+
         private void BindFlow(string flowName, int flowVersion)
         {
             currentFlow = fm.GetFlow(flowName, flowVersion);
@@ -208,7 +215,6 @@ namespace BudgetSystem.FlowManage
             }
         }
 
-
         private void btnSureNodeValue_Click(object sender, EventArgs e)
         {
             FlowNode node = this.gvNodes.GetFocusedRow() as FlowNode;
@@ -263,6 +269,8 @@ namespace BudgetSystem.FlowManage
                 BindFlow(Flow.Name, (int)this.cboVersion.SelectedItem);
             }
         }
+
+
 
 
     }

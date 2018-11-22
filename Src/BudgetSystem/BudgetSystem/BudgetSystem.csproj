@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\DataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\DataControl.Designer.cs">
+      <DependentUpon>DataControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBaseCommonReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,7 +368,9 @@
     <Compile Include="Supplier\ucSupplierSelected.Designer.cs">
       <DependentUpon>ucSupplierSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIEntity\DataControlCreator.cs" />
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
+    <Compile Include="UIEntity\IDataControl.cs" />
     <Compile Include="UIEntity\ModelOperate.cs" />
     <Compile Include="UIEntity\ModelOperateHelper.cs" />
     <Compile Include="UIEntity\ModeOperateEventArgs.cs" />
@@ -395,11 +403,17 @@
     <Compile Include="WorkSpace\frmApprovalListQuery.Designer.cs">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkSpace\frmApprove.cs">
+    <Compile Include="WorkSpace\frmHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WorkSpace\frmApprove.Designer.cs">
-      <DependentUpon>frmApprove.cs</DependentUpon>
+    <Compile Include="WorkSpace\frmHistory.Designer.cs">
+      <DependentUpon>frmHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmApproveEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApproveEx.Designer.cs">
+      <DependentUpon>frmApproveEx.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkSpace\frmMyFlowListQuery.cs">
       <SubType>Form</SubType>
@@ -413,6 +427,9 @@
     <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
       <DependentUpon>frmApprovalEdit.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Base\DataControl.resx">
+      <DependentUpon>DataControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseCommonReportForm.resx">
       <DependentUpon>frmBaseCommonReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -579,8 +596,11 @@
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorkSpace\frmApprove.resx">
-      <DependentUpon>frmApprove.cs</DependentUpon>
+    <EmbeddedResource Include="WorkSpace\frmHistory.resx">
+      <DependentUpon>frmHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApproveEx.resx">
+      <DependentUpon>frmApproveEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
@@ -638,12 +658,10 @@
     <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WorkSpace\frmApprove_Revoke.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApprove_Approve.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApprove_ApproveView.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApprove_Confirm.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApprove_ConfirmView.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApprove_Default.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_ConfirmOrRevoke.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_Default.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_View.xml" />
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_HasAdvancePayment.xml" />
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_NotHasAdvancePayment.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />

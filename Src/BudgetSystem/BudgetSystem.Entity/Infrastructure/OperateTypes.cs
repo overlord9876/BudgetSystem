@@ -68,5 +68,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         DistributeDepartmentUser,
 
+
+        ConfirmOrRevoke,
     }
 }

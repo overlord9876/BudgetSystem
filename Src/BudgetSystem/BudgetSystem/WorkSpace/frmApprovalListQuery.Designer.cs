@@ -31,10 +31,12 @@
             this.gdPendingFlow = new DevExpress.XtraGrid.GridControl();
             this.gvPendingFlow = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcDateItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDateText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowVersionNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
@@ -42,7 +44,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcDateText = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -52,6 +54,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gdPendingFlow
@@ -62,6 +65,8 @@
             this.gdPendingFlow.MainView = this.gvPendingFlow;
             this.gdPendingFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gdPendingFlow.Name = "gdPendingFlow";
+            this.gdPendingFlow.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemImageComboBox1});
             this.gdPendingFlow.Size = new System.Drawing.Size(1006, 564);
             this.gdPendingFlow.TabIndex = 1;
             this.gdPendingFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -76,6 +81,7 @@
             this.gcFlowVersionNumber,
             this.gcCreateDate,
             this.gcCreateUserRealName,
+            this.gcSate,
             this.gcID});
             this.gvPendingFlow.GridControl = this.gdPendingFlow;
             this.gvPendingFlow.GroupCount = 1;
@@ -89,6 +95,14 @@
             this.gcDateItemID.Caption = "待审核项编号";
             this.gcDateItemID.FieldName = "DateItemID";
             this.gcDateItemID.Name = "gcDateItemID";
+            // 
+            // gcDateText
+            // 
+            this.gcDateText.Caption = "待审批项";
+            this.gcDateText.FieldName = "DateItemText";
+            this.gcDateText.Name = "gcDateText";
+            this.gcDateText.Visible = true;
+            this.gcDateText.VisibleIndex = 0;
             // 
             // gcFlowName
             // 
@@ -117,6 +131,15 @@
             this.gcCreateUserRealName.Name = "gcCreateUserRealName";
             this.gcCreateUserRealName.Visible = true;
             this.gcCreateUserRealName.VisibleIndex = 2;
+            // 
+            // gcSate
+            // 
+            this.gcSate.Caption = "审批状态";
+            this.gcSate.ColumnEdit = this.repositoryItemImageComboBox1;
+            this.gcSate.FieldName = "IsClosed";
+            this.gcSate.Name = "gcSate";
+            this.gcSate.Visible = true;
+            this.gcSate.VisibleIndex = 3;
             // 
             // gcID
             // 
@@ -186,13 +209,15 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
-            // gcDateText
+            // repositoryItemImageComboBox1
             // 
-            this.gcDateText.Caption = "待审批项";
-            this.gcDateText.FieldName = "DateItemText";
-            this.gcDateText.Name = "gcDateText";
-            this.gcDateText.Visible = true;
-            this.gcDateText.VisibleIndex = 0;
+            this.repositoryItemImageComboBox1.AutoHeight = false;
+            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemImageComboBox1.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("已完成", true, -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("进行中", false, -1)});
+            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             // 
             // frmApprovalListQuery
             // 
@@ -212,6 +237,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,5 +259,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcID;
         private DevExpress.XtraGrid.Views.Grid.GridView gvPendingFlow;
         private DevExpress.XtraGrid.Columns.GridColumn gcDateText;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
     }
 }

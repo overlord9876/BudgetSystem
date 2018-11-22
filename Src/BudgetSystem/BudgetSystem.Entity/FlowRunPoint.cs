@@ -42,17 +42,17 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 节点审批结果，考虑未审批状态显示 
         /// </summary>
-        public int NodeApproveResultWithState
+        public string NodeApproveResultWithState
         {
             get
             {
                 if (this.State ==false)
                 {
-                    return -1;
+                    return "";
                 }
                 else
                 {
-                    return NodeApproveResult ? 1 : 0;
+                    return NodeApproveResult ? "同意" : "驳回";
                 
                 }
             }

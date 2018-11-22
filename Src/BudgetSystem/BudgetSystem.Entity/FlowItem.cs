@@ -27,8 +27,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string InstanceStateWithEmptyState
         {
-            get;
-            set;
+            get
+            {
+               return this.IsClosed ? (this.ApproveResult ? "同意" : "驳回") : "";
+            }
         }
     }
 }

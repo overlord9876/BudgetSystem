@@ -28,59 +28,38 @@ namespace BudgetSystem.WorkSpace
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ConfirmOrRevoke));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "我发起的流程";
         }
-
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
 
 
-            if (operate.Operate == OperateTypes.Confirm.ToString())
+            if (operate.Operate == OperateTypes.ConfirmOrRevoke.ToString())
             {
 
-                ConfirmFlowItem();
-
-            }
-            if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-
-                RevokeFlowItem();
+                ConfirmOrRevokeFlowData();
 
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                ViewFlowItem();
+                ViewFlowData();
+              //  ViewFlowItem();
             }
         }
 
-        private void ViewFlowItem()
+        private void ViewFlowData()
         {
             if (this.gvFlow.FocusedRowHandle >= 0)
             {
                 FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
                 if (item != null)
                 {
-                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmViewModel };
-                    form.ShowDialog(this);
-                }
-            }
-
-
-        }
-
-        private void ConfirmFlowItem()
-        {
-            if (this.gvFlow.FocusedRowHandle >= 0)
-            {
-                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
-                if (item != null)
-                {
-                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmModel };
+                    frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ViewModel };
+                
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
@@ -89,14 +68,15 @@ namespace BudgetSystem.WorkSpace
             }
         }
 
-        private void RevokeFlowItem()
+        private void ConfirmOrRevokeFlowData()
         {
             if (this.gvFlow.FocusedRowHandle >= 0)
             {
                 FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
                 if (item != null)
                 {
-                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.RevokeModel };
+                    frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ConfirmOrRevokeModel };
+                
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
@@ -104,17 +84,57 @@ namespace BudgetSystem.WorkSpace
                 }
             }
         }
+
+        //private void ViewFlowItem()
+        //{
+        //    if (this.gvFlow.FocusedRowHandle >= 0)
+        //    {
+        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        if (item != null)
+        //        {
+        //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmViewModel };
+        //            form.ShowDialog(this);
+        //        }
+        //    }
+
+
+        //}
+
+        //private void ConfirmFlowItem()
+        //{
+        //    if (this.gvFlow.FocusedRowHandle >= 0)
+        //    {
+        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        if (item != null)
+        //        {
+        //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmModel };
+        //            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+        //            {
+        //                this.RefreshData();
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void RevokeFlowItem()
+        //{
+        //    if (this.gvFlow.FocusedRowHandle >= 0)
+        //    {
+        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        if (item != null)
+        //        {
+        //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.RevokeModel };
+        //            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+        //            {
+        //                this.RefreshData();
+        //            }
+        //        }
+        //    }
+        //}
 
         public override void RefreshData()
         {
             var lst = manager.GetUnConfirmFlowByUser(RunInfo.Instance.CurrentUser.UserName);
-
-            foreach (var i in lst)
-            {
-
-                i.InstanceStateWithEmptyState = i.IsClosed ? (i.ApproveResult ? "同意" : "驳回") : "";
-            }
-
 
             this.gdFlow.DataSource = lst;
             
@@ -123,7 +143,7 @@ namespace BudgetSystem.WorkSpace
 
         protected override void InitGridViewAction()
         {
-            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = ConfirmFlowItem, MainOperate = OperateTypes.Confirm, SecondAction = ViewFlowItem, SecondOperate = OperateTypes.View });
+            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = this.ConfirmOrRevokeFlowData, MainOperate = OperateTypes.Confirm, SecondAction = this.ViewFlowData, SecondOperate = OperateTypes.View });
 
         }
 

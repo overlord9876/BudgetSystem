@@ -141,6 +141,12 @@ namespace BudgetSystem
                 group = "编辑";
                 imageIndex = 6;
             }
+            else if (operate == OperateTypes.ConfirmOrRevoke)
+            {
+                text = "确认/撤回";
+                group = "操作";
+                imageIndex = 59;
+            }
 
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);
             mm.UIElementData = extendData;

@@ -65,7 +65,8 @@ namespace BudgetSystem.WorkSpace
                 FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
                 if (item != null)
                 {
-                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ApproveViewModel };
+                    frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ViewModel };
+                 
                     form.ShowDialog(this);
                 }
 
@@ -78,7 +79,8 @@ namespace BudgetSystem.WorkSpace
                 FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
                 if (item != null)
                 {
-                    frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ApproveModel };
+                    frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ApproveModel };
+                  
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
