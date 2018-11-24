@@ -69,15 +69,16 @@ namespace BudgetSystem.Entity
             return returnResult;
         }
 
-        public static List<AccountBill> ToAccountBillList(this List<ActualReceipts> actualReceipts)
+        public static List<AccountBill> ToAccountBillList(this List<BudgetBill> actualReceipts)
         {
             List<AccountBill> returnResult = new List<AccountBill>();
-            foreach (ActualReceipts ar in actualReceipts)
+            foreach (BudgetBill ar in actualReceipts)
             {
                 returnResult.Add(ar.ToToAccountBill());
             }
             return returnResult;
         }
+
         public static List<AccountBill> ToAccountBillList(this IEnumerable<PaymentNotes> paymentNotes)
         {
             List<AccountBill> returnResult = new List<AccountBill>();
@@ -88,27 +89,27 @@ namespace BudgetSystem.Entity
             return returnResult;
         }
 
-        public static List<AccountBill> ToAccountBillList(this IEnumerable<ActualReceipts> actualReceipts)
+        public static List<AccountBill> ToAccountBillList(this IEnumerable<BudgetBill> actualReceipts)
         {
             List<AccountBill> returnResult = new List<AccountBill>();
 
-            foreach (ActualReceipts ar in actualReceipts)
+            foreach (BudgetBill ar in actualReceipts)
             {
                 returnResult.Add(ar.ToToAccountBill());
             }
             return returnResult;
         }
 
-        public static AccountBill ToToAccountBill(this ActualReceipts receipt)
+        public static AccountBill ToToAccountBill(this BudgetBill receipt)
         {
             return new AccountBill()
                 {
                     BudgetNO = receipt.ContractNO,
-                    CreateDate = receipt.CreateTimestamp,
+                    CreateDate = receipt.ReceiptDate,
                     PaymentMoney = Decimal.Zero,
                     Currency = receipt.Currency,
                     VoucherNo = receipt.VoucherNo,
-                    MoneyUsed = receipt.Description,
+                    MoneyUsed = receipt.Remark,
                     CNY = receipt.CNY,
                     RecieptMoney = receipt.OriginalCoin,
                     Company = receipt.Remitter

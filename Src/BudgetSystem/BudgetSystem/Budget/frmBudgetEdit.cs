@@ -15,7 +15,7 @@ namespace BudgetSystem
 {
     public partial class frmBudgetEdit : frmBaseDialogForm
     {
-        public Budget Budget { get; set; }
+        public Budget CurrentBudget { get; set; }
 
         /// <summary>
         /// 增值税配置项值 
@@ -68,13 +68,34 @@ namespace BudgetSystem
             budget.Salesman = RunInfo.Instance.CurrentUser.UserName;
             budget.Profit = this.txtProfit.Value;
             budget.TotalAmount = txtTotalAmount.Value;
+            budget.USDTotalAmount = txtUSDTotalAmount.Value;
             budget.SignDate = dteSignDate.DateTime;
             budget.Validity = dteValidity.DateTime;
             budget.CustomerID = Convert.ToInt32(this.pceMainCustomer.Tag);
             budget.CustomerList = this.pceCustomer.Tag as List<Customer>;
             budget.SupplierList = ucSupplierSelected.SelectedSuppliers;
             budget.IsQualifiedSupplier = chkIsQualified.Checked;
-            budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
+            budget.TradeMode = 0;
+            if (chkTradeMode1.Checked)
+            {
+                budget.TradeMode += (int)EnumTradeMode.一般贸易;
+            }
+            if (chkTradeMode2.Checked)
+            {
+                budget.TradeMode += (int)EnumTradeMode.来料加工;
+            }
+            if (chkTradeMode3.Checked)
+            {
+                budget.TradeMode += (int)EnumTradeMode.进料加工;
+            } 
+            if (chkTradeMode4.Checked)
+            {
+                budget.TradeMode += (int)EnumTradeMode.纯进口;
+            }
+            if (chkTradeMode5.Checked)
+            {
+                budget.TradeMode += (int)EnumTradeMode.内贸;
+            }
             budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
             budget.ProfitLevel1 = this.txtProfitLevel1.Value;
             budget.ProfitLevel2 = this.txtProfitLevel2.Value;
@@ -84,6 +105,13 @@ namespace BudgetSystem
             budget.PurchasePrice = this.txtPurchasePrice.Value;
             budget.InProductDetail = this.GetInProductDetailString();
             budget.Port = this.luePort.Text;
+            budget.CreateDate = DateTime.Now;
+            budget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
+            budget.UpdateDate = DateTime.Now;
+            budget.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+            budget.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
+
+
             int result = bm.AddBudget(budget);
             if (result <= 0)
             {
@@ -102,37 +130,62 @@ namespace BudgetSystem
                 return;
             }
 
-            Budget.AdvancePayment = this.txtAdvancePayment.Value;
-            Budget.BankCharges = this.txtBankCharges.Value;
-            Budget.Commission = this.txtCommission.Value;
-            Budget.ContractNO = this.txtContractNO.Text.Trim();
-            Budget.Days = Convert.ToInt32(this.txtDays.EditValue);
-            Budget.FeedMoney = this.txtFeedMoney.Value;
-            Budget.DirectCosts = this.txtDirectCosts.Value;
-            Budget.InterestRate = Convert.ToSingle(txtInterestRate.EditValue);
-            Budget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
-            Budget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
-            Budget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
-            Budget.Premium = txtPremium.Value;
-            Budget.Profit = this.txtProfit.Value;
-            Budget.PriceClause = this.txtPriceClause.Text;
-            Budget.Port = this.luePort.Text;
-            Budget.TotalAmount = txtTotalAmount.Value;
-            Budget.SignDate = dteSignDate.DateTime;
-            Budget.Validity = dteValidity.DateTime;
-            Budget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
-            Budget.SupplierList = this.ucSupplierSelected.SelectedSuppliers;
-            Budget.IsQualifiedSupplier = this.chkIsQualified.Checked;
-            Budget.TradeMode = Convert.ToInt32(this.rgTradeMode.EditValue);
-            Budget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
-            Budget.Description = this.meDescription.Text.Trim();
-            Budget.ProfitLevel1 = this.txtProfitLevel1.Value;
-            Budget.ProfitLevel2 = this.txtProfitLevel2.Value;
-            Budget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
-            Budget.OutProductDetail = this.GetOutProductDetailString();
-            Budget.PurchasePrice = this.txtPurchasePrice.Value;
-            Budget.InProductDetail = this.GetInProductDetailString();
-            bm.ModifyBudget(Budget);
+            CurrentBudget.AdvancePayment = this.txtAdvancePayment.Value;
+            CurrentBudget.BankCharges = this.txtBankCharges.Value;
+            CurrentBudget.Commission = this.txtCommission.Value;
+            CurrentBudget.ContractNO = this.txtContractNO.Text.Trim();
+            CurrentBudget.Days = Convert.ToInt32(this.txtDays.EditValue);
+            CurrentBudget.FeedMoney = this.txtFeedMoney.Value;
+            CurrentBudget.DirectCosts = this.txtDirectCosts.Value;
+            CurrentBudget.InterestRate = Convert.ToSingle(txtInterestRate.EditValue);
+            CurrentBudget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
+            CurrentBudget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
+            CurrentBudget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
+            CurrentBudget.Premium = txtPremium.Value;
+            CurrentBudget.Profit = this.txtProfit.Value;
+            CurrentBudget.PriceClause = this.txtPriceClause.Text;
+            CurrentBudget.Port = this.luePort.Text;
+            CurrentBudget.TotalAmount = txtTotalAmount.Value;
+            CurrentBudget.USDTotalAmount = txtUSDTotalAmount.Value;
+            CurrentBudget.SignDate = dteSignDate.DateTime;
+            CurrentBudget.Validity = dteValidity.DateTime;
+            CurrentBudget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
+            CurrentBudget.SupplierList = this.ucSupplierSelected.SelectedSuppliers;
+            CurrentBudget.IsQualifiedSupplier = this.chkIsQualified.Checked;
+            CurrentBudget.TradeMode = 0;
+            if (chkTradeMode1.Checked)
+            {
+                CurrentBudget.TradeMode += (int)EnumTradeMode.一般贸易;
+            }
+            if (chkTradeMode2.Checked)
+            {
+                CurrentBudget.TradeMode += (int)EnumTradeMode.来料加工;
+            }
+            if (chkTradeMode3.Checked)
+            {
+                CurrentBudget.TradeMode += (int)EnumTradeMode.进料加工;
+            }
+            if (chkTradeMode4.Checked)
+            {
+                CurrentBudget.TradeMode += (int)EnumTradeMode.纯进口;
+            }
+            if (chkTradeMode5.Checked)
+            {
+                CurrentBudget.TradeMode += (int)EnumTradeMode.内贸;
+            }            
+            CurrentBudget.TradeNature = Convert.ToInt32(this.rgTradeNature.EditValue);
+            CurrentBudget.Description = this.meDescription.Text.Trim();
+            CurrentBudget.ProfitLevel1 = this.txtProfitLevel1.Value;
+            CurrentBudget.ProfitLevel2 = this.txtProfitLevel2.Value;
+            CurrentBudget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
+            CurrentBudget.OutProductDetail = this.GetOutProductDetailString();
+            CurrentBudget.PurchasePrice = this.txtPurchasePrice.Value;
+            CurrentBudget.InProductDetail = this.GetInProductDetailString(); 
+            CurrentBudget.UpdateDate = DateTime.Now;
+            CurrentBudget.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+            CurrentBudget.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
+
+            bm.ModifyBudget(CurrentBudget);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -151,8 +204,11 @@ namespace BudgetSystem
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
             this.luePort.Properties.DataSource = portList;
+            this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
-            this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税.ToString());
+            List<MoneyType> moneyTypeList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
+            this.ricboOriginalCurrency.Items.Clear();
+            moneyTypeList.ForEach(m => ricboOriginalCurrency.Items.Add(m.Name));
         }
 
         private void BindingBudgetDefaultInfo()
@@ -191,6 +247,7 @@ namespace BudgetSystem
                 this.txtPriceClause.Text = budget.PriceClause;
                 this.txtSalesman.Text = budget.SalesmanName;
                 this.txtTotalAmount.EditValue = budget.TotalAmount;
+                this.txtUSDTotalAmount.EditValue = budget.USDTotalAmount;
                 this.dteSignDate.EditValue = budget.SignDate;
                 this.dteValidity.EditValue = budget.Validity;
                 this.chkIsQualified.CheckedChanged -= chkIsQualified_CheckedChanged;
@@ -202,7 +259,27 @@ namespace BudgetSystem
                 this.pceMainCustomer.Text = budget.CustomerName;
                 this.pceMainCustomer.Tag = budget.CustomerID;
                 this.pceSupplier.Text = budget.SupplierList.ToNameString();
-                this.rgTradeMode.EditValue = budget.TradeMode;
+                EnumTradeMode tradeMode=(EnumTradeMode)Enum.Parse(typeof(EnumTradeMode),budget.TradeMode.ToString());
+                if ((tradeMode & EnumTradeMode.一般贸易)!=0)
+                {
+                    chkTradeMode1.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.来料加工) != 0)
+                {
+                    chkTradeMode2.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.进料加工) != 0)
+                {
+                    chkTradeMode3.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.纯进口) != 0)
+                {
+                    chkTradeMode4.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.内贸) != 0)
+                {
+                    chkTradeMode5.Checked = true;
+                } 
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;
@@ -292,7 +369,7 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为：yy-部门编号-4位数字");
                 return;
             }
-            int id = this.Budget == null ? 0 : this.Budget.ID;
+            int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
             if (bm.CheckContractNO(id, contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
@@ -472,7 +549,7 @@ namespace BudgetSystem
             decimal directCosts = txtPurchasePrice.Value; //总进价
             if (directCosts != 0)
             {
-                this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / directCosts * 100, 2);//预付款占总进价百分比
+                this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value+ txtFeedMoney.Value*(1+this.vatOption/100))/(directCosts+ txtFeedMoney.Value*(1+this.vatOption/100)) * 100, 2);//预付款占总进价百分比
             }
 
             //利息=预付款*年利率/360/100*天数
@@ -503,7 +580,7 @@ namespace BudgetSystem
                 this.Text = "编辑预算单信息";
                 this.txtContractNO.Properties.ReadOnly = true;
                 this.pceMainCustomer.Properties.ReadOnly = true;
-                BindingBudget(Budget.ID);
+                BindingBudget(CurrentBudget.ID);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -515,7 +592,8 @@ namespace BudgetSystem
                         (control as BaseEdit).Properties.ReadOnly = true;
                     }
                 }
-                BindingBudget(Budget.ID);
+                this.btnSure.Enabled = false;
+                BindingBudget(CurrentBudget.ID);
             }
         }
 
@@ -769,6 +847,7 @@ namespace BudgetSystem
 
         private void Charges_EditValueChanged(object sender, EventArgs e)
         {
+            this.CalcInproductInterest();
             this.CalcBudgetSubtotal();
         }
 
@@ -825,7 +904,42 @@ namespace BudgetSystem
             CalcProfitLevel1();
             CalcProfitLevel2();
         }
+
+        private void btnSync_Click(object sender, EventArgs e)
+        {
+            var dataSource = gridOutProductDetail.DataSource as BindingList<OutProductDetail>;
+            if (dataSource != null && dataSource.Count > 0)
+            {
+                var inProductDetailDataSource = gridInProductDetail.DataSource as BindingList<InProductDetail>;
+                if (inProductDetailDataSource == null)
+                {
+                    inProductDetailDataSource = new BindingList<InProductDetail>();
+                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption }));
+                }
+                else
+                {
+                    InProductDetail inDetail=null;
+                    foreach (OutProductDetail outDetail in dataSource)
+                    {
+                        inDetail=inProductDetailDataSource.FirstOrDefault(d=>d.Name==outDetail.Name);
+                        if (inDetail == null)
+                        {
+                            inProductDetailDataSource.Add(new InProductDetail() { Count = outDetail.Count, Name = outDetail.Name, Unit = outDetail.Unit, Vat = this.vatOption });
+                        }
+                        else
+                        {
+                            inDetail.Count = outDetail.Count;
+                            inDetail.Unit = outDetail.Unit;
+                        } 
+                    }
+                }
+                gridInProductDetail.DataSource = inProductDetailDataSource;
+                gridInProductDetail.RefreshDataSource();
+            }
+        }
         #endregion
+
+       
 
 
 

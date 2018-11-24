@@ -61,7 +61,7 @@ namespace BudgetSystem
                 }
                 else
                 {
-                    return MoneySubtotal / Vat * TaxRebateRate / 100;
+                    return MoneySubtotal / (1+Vat/100) * TaxRebateRate / 100;
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace BudgetSystem
         public decimal Subtotal { get { return RawMaterials + SubsidiaryMaterials + ProcessCost; } }
 
         /// <summary>
-        /// 增值税率
+        /// 增值税税率
         /// </summary>
         public decimal Vat
         {

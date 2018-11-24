@@ -59,7 +59,7 @@ namespace BudgetSystem
                 return false;
             }
             var dataSource = (IEnumerable<Country>)gridCountry.DataSource;
-            this.scm.ModifySupplier<IEnumerable<Country>>(this.OptionName, dataSource);
+            this.scm.ModifySystemConfig<IEnumerable<Country>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
         } 

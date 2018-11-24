@@ -94,7 +94,7 @@ namespace BudgetSystem
             {
                 this.currentOptionEdit = new ucCountryOptionEdit();
             }
-            else if (EnumSystemConfigNames.增值税.ToString().Equals(this.lbcType.SelectedItem))
+            else if (EnumSystemConfigNames.增值税税率.ToString().Equals(this.lbcType.SelectedItem))
             {
                 this.currentOptionEdit = new ucVATOptionEdit();
             }

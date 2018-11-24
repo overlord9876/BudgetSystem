@@ -138,7 +138,7 @@ namespace BudgetSystem
                 }
                 frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
-                form.Budget = budget;
+                form.CurrentBudget = budget;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
@@ -186,7 +186,7 @@ namespace BudgetSystem
             {
                 frmBudgetEdit form = new frmBudgetEdit();
                 form.WorkModel = EditFormWorkModels.View;
-                form.Budget = budget;
+                form.CurrentBudget = budget;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();

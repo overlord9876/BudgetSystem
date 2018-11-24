@@ -40,9 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBill.cs" />
+    <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="CodeType.cs" />
     <Compile Include="Declarationform.cs" />
+    <Compile Include="ExceptionExtension\VersionNumberException.cs" />
     <Compile Include="FlowEnum.cs" />
     <Compile Include="Infrastructure\ActionWithPermission.cs" />
     <Compile Include="Infrastructure\BusinessModules.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Infrastructure\IEntity.cs" />
     <Compile Include="Infrastructure\OperateTypes.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="ModifyMark.cs" />
     <Compile Include="PaymentNotes.cs" />
     <Compile Include="Infrastructure\Permisson.cs" />
     <Compile Include="Product.cs" />
@@ -79,7 +82,7 @@
     <Compile Include="SupplierApprovalDetail.cs" />
     <Compile Include="BudgetApproval.cs" />
     <Compile Include="ReceivableAccounts.cs" />
-    <Compile Include="ActualReceipts.cs" />
+    <Compile Include="BudgetBill.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

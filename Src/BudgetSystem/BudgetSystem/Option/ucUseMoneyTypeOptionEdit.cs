@@ -60,7 +60,7 @@ namespace BudgetSystem
             }
 
             var dataSource = (IEnumerable<UseMoneyType>)gridPort.DataSource;
-            this.scm.ModifySupplier<IEnumerable<UseMoneyType>>(this.OptionName, dataSource);
+            this.scm.ModifySystemConfig<IEnumerable<UseMoneyType>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
         } 

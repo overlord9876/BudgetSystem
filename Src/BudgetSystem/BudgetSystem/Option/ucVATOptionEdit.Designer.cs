@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.txtValue = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtValue.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,24 +42,35 @@
             this.txtValue.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtValue.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtValue.Properties.NullText = "0.00";
-            this.txtValue.Size = new System.Drawing.Size(526, 25);
+            this.txtValue.Size = new System.Drawing.Size(182, 25);
             this.txtValue.TabIndex = 0;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(193, 7);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(15, 18);
+            this.labelControl1.TabIndex = 1;
+            this.labelControl1.Text = "%";
             // 
             // ucVATOptionEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtValue);
             this.Name = "ucVATOptionEdit";
             this.Size = new System.Drawing.Size(862, 124);
             ((System.ComponentModel.ISupportInitialize)(this.txtValue.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private CommonControl.TextEdit_Number txtValue;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
 
     }
 }

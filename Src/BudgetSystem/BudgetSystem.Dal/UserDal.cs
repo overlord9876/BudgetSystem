@@ -74,15 +74,15 @@ namespace BudgetSystem.Dal
             return con.Query<User>(salesmanSelectSql, new { ID = customerId }, tran).ToList();
         }
 
-        public List<User> GetActualReceiptSalesmanList(int actualReceiptId, IDbConnection con, IDbTransaction tran = null)
+        public List<User> GetBankSlipSalesmanList(int bsID, IDbConnection con, IDbTransaction tran = null)
         {
             string salesmanSelectSql = @"Select `USER`.`UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `ReceiptNotice` rn left join `User` on rn.UserName=`User`.`UserName`
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`Department` = `Department`.Code
-            Where rn.`ID` = @ID";
+            Where rn.`BSID` = @ID";
 
-            return con.Query<User>(salesmanSelectSql, new { ID = actualReceiptId }, tran).ToList();
+            return con.Query<User>(salesmanSelectSql, new { ID = bsID }, tran).ToList();
         }
 
         public IEnumerable<User> GetNotRoleUsers(string roleCode, IDbConnection con, IDbTransaction tran)

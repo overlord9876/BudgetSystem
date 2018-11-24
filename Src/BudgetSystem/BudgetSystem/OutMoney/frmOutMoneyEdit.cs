@@ -22,7 +22,7 @@ namespace BudgetSystem.OutMoney
         SupplierManager sm = new SupplierManager();
         UserManager um = new UserManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
-        ActualReceiptsManager arm = new ActualReceiptsManager();
+        ReceiptMgmtManager rm = new ReceiptMgmtManager();
 
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
@@ -50,7 +50,7 @@ namespace BudgetSystem.OutMoney
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "新增付款信息";
-                vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税.ToString());
+                vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
                 this.deCommitTime.EditValue = DateTime.Now;
                 this.txtPaymentDate.EditValue = DateTime.Now;
@@ -317,7 +317,7 @@ namespace BudgetSystem.OutMoney
             if (currentBudget == null) { return; }
 
             //总收款金额
-            txtReceiptAmount.EditValue = ReceiptAmount = arm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
+            txtReceiptAmount.EditValue = ReceiptAmount = rm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
             this.paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
             if (paymentNotes == null)
             {
@@ -327,7 +327,7 @@ namespace BudgetSystem.OutMoney
             txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
 
             //已收汇原币金额
-            decimal amount = arm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
+            decimal amount = rm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
 
             //应留利润计算
             txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
@@ -419,7 +419,7 @@ namespace BudgetSystem.OutMoney
             Budget selectedBudget = this.cboBudget.EditValue as Budget;
             if (selectedBudget != null)
             {
-                txtReceiptAmount.EditValue = arm.GetTotalAmountCNYByBudgetId(selectedBudget.ID);
+                txtReceiptAmount.EditValue = rm.GetTotalAmountCNYByBudgetId(selectedBudget.ID);
                 //  paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
 
                 frmPaymentCalcEdit form = new frmPaymentCalcEdit();

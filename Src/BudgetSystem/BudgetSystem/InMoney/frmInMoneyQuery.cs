@@ -14,7 +14,7 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyQuery : frmBaseQueryFormWithCondtion
     {
-        ActualReceiptsManager arm = new ActualReceiptsManager();
+        ReceiptMgmtManager arm = new ReceiptMgmtManager();
 
 
         private GridHitInfo hInfo;
@@ -30,11 +30,10 @@ namespace BudgetSystem.InMoney
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增入账"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "分拆至合同"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除入账"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增银行水单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitRequest, "费用拆分申请"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitRequest, "申请修改费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "入帐单";
@@ -62,17 +61,17 @@ namespace BudgetSystem.InMoney
             }
             else if (operate.Operate == OperateTypes.SplitRequest.ToString())
             {
-                ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+                BankSlip currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as BankSlip;
 
                 if (currentRowActualReceipts != null)
                 {
-                    currentRowActualReceipts = arm.GetActualReceiptById(currentRowActualReceipts.ID);
+                    currentRowActualReceipts = arm.GetAllActualReceipts(currentRowActualReceipts.BSID);
                     if (currentRowActualReceipts != null)
                     {
                         if (currentRowActualReceipts.State == 0)
                         {
                             //设置成待拆分状态
-                            arm.ModifyActualReceiptState(currentRowActualReceipts.ID, (int)ReceiptState.待拆分);
+                            //arm.ModifyActualReceiptState(currentRowActualReceipts.BSID, (int)ReceiptState.待拆分);
                             currentRowActualReceipts.State = (int)ReceiptState.待拆分;
                         }
                         else
@@ -91,68 +90,49 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show("入帐单已不存在。");
                 }
             }
-            else if (operate.Operate == OperateTypes.Delete.ToString())
-            {
-                ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
-                if (currentRowActualReceipts != null)
-                {
-                    arm.DeleteActualReceipt(currentRowActualReceipts.ID, RunInfo.Instance.CurrentUser.UserName);
-                    XtraMessageBox.Show("删除成功");
-                    this.RefreshData();
-                }
-            }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewActualReceipts();
             }
         }
 
-        private void DeleteActualReceipts()
-        {
-
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
-            if (currentRowActualReceipts != null)
-            {
-                //arm.CreateActualReceipts
-            }
-        }
-
         private void AddActualReceipts()
         {
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            frmInMoneyEdit form = new frmInMoneyEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                frmInMoneyEdit form = new frmInMoneyEdit();
-                form.WorkModel = EditFormWorkModels.New;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                this.RefreshData();
             }
         }
 
         private void ModifyActualReceipts()
         {
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
-            if (currentRowActualReceipts != null)
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
-                form.CurrentActualReceipts = currentRowActualReceipts;
+                form.CurrentBankSlip = currentRowBankSlip;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+            }
         }
 
         private void SplitMoneyToBudgetActualReceipts()
         {
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
-            if (currentRowActualReceipts != null)
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.SplitToBudget;
-                form.CurrentActualReceipts = currentRowActualReceipts;
+                form.CurrentBankSlip = currentRowBankSlip;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
@@ -162,45 +142,45 @@ namespace BudgetSystem.InMoney
 
         private void SplitConstMoneyActualReceipts()
         {
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            BudgetBill currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as BudgetBill;
             if (currentRowActualReceipts != null)
             {
-                if (currentRowActualReceipts.State != 1)//不是待拆分状态不允许拆分
-                {
-                    XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
-                    return;
-                }
-                frmInMoneyEdit form = new frmInMoneyEdit();
-                form.WorkModel = EditFormWorkModels.SplitConst;
-                form.CurrentActualReceipts = currentRowActualReceipts;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                //if (currentRowActualReceipts.State != 1)//不是待拆分状态不允许拆分
+                //{
+                //    XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
+                //    return;
+                //}
+                //frmInMoneyEdit form = new frmInMoneyEdit();
+                //form.WorkModel = EditFormWorkModels.SplitConst;
+                //form.CurrentBankSlip = currentRowActualReceipts;
+                //if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                //{
+                //    this.RefreshData();
+                //}
             }
         }
 
         private void ViewActualReceipts()
         {
-            ActualReceipts currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as ActualReceipts;
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.View;
-                form.CurrentActualReceipts = currentRowActualReceipts;
+                form.CurrentBankSlip = currentRowBankSlip;
                 form.ShowDialog(this);
             }
         }
 
         public override void LoadData()
         {
-            List<ActualReceipts> arList = null;
+            List<BankSlip> arList = null;
             if (RunInfo.Instance.CurrentUser.Role == frmInMoneyEdit.SaleRoleCode)
             {
-                arList = arm.GetActualReceiptsBySalesman(RunInfo.Instance.CurrentUser.UserName);
+                arList = arm.GetBankSlipListByUserName(RunInfo.Instance.CurrentUser.UserName);
             }
             else
             {
-                arList = arm.GetAllActualReceipts();
+                arList = arm.GetAllBankSlipList();
             }
             this.gcInMoney.DataSource = arList;
         }

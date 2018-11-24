@@ -50,17 +50,17 @@ namespace BudgetSystem.Entity
         public DateTime Validity { get; set; }
 
         /// <summary>
-        /// 0=一般贸易
-        /// 1=来料加工
-        /// 2=进料加工
-        /// 3=纯进口
-        /// 4=内贸
+        /// 一般贸易 = 1
+        /// 来料加工 = 2
+        /// 进料加工 = 4
+        /// 纯进口 = 8
+        /// 内贸 = 12
         /// </summary>
         public int TradeMode { get; set; }
 
         /// <summary>
-        /// 0=做单
-        /// 1=过单
+        /// 做单=1
+        /// 过单=2
         /// </summary>
         public int TradeNature { get; set; }
 
@@ -232,6 +232,26 @@ namespace BudgetSystem.Entity
         public decimal PurchasePrice { get; set; }
 
         /// <summary>
+        /// 美元合同金额
+        /// </summary>
+        public decimal USDTotalAmount { get; set; }
+
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public DateTime UpdateDate { get; set; }
+
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        public string UpdateUser { get; set; }
+
+        /// <summary>
+        /// 更新用户名
+        /// </summary>
+        public string UpdateUserName { get; set; }
+
+        /// <summary>
         /// 主客户名称
         /// </summary>
         public string CustomerName { get; set; }
@@ -263,19 +283,19 @@ namespace BudgetSystem.Entity
         }
     }
 
-
+    [Flags]
     public enum EnumTradeMode : int
     {
-        一般贸易 = 0,
-        来料加工 = 1,
-        进料加工 = 2,
-        纯进口 = 3,
-        内贸 = 4,
+        一般贸易 = 1,
+        来料加工 = 2,
+        进料加工 = 4,
+        纯进口 = 8,
+        内贸 = 16,
     }
 
     public enum EnumTradeNature : int
     {
-        做单 = 0,
-        过单 = 1
+        做单 = 1,
+        过单 = 2
     }
 }

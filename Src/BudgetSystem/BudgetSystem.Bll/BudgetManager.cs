@@ -3,20 +3,43 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace BudgetSystem.Bll
 {
     public class BudgetManager : BaseManager
     {
         Dal.BudgetDal dal = new Dal.BudgetDal();
-        Dal.ActualReceiptsDal arDal = new Dal.ActualReceiptsDal();
+        Dal.ReceiptManagementDal rmDal = new Dal.ReceiptManagementDal();
         Dal.PaymentNotesDal pnd = new Dal.PaymentNotesDal();
+        Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
+
         public List<Budget> GetAllBudget()
         {
             var lst = this.Query<Budget>((con) =>
             {
                 var uList = dal.GetAllBudget(con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<Budget> GetBudgetListByCustomerId(string userName, int customerId)
+        {
+            var lst = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetListByCustomerId(userName, customerId, con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<Budget> GetBudgetListBySaleman(string userName)
+        {
+            var lst = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetListBySaleman(userName, con);
                 return uList;
             });
             return lst.ToList();
@@ -39,7 +62,8 @@ namespace BudgetSystem.Bll
                 int id = dal.AddBudget(budget, con, tran);
                 if (isStartFlow == true)
                 {
-                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id,budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman);
+                    mmdal.AddModifyMark<Budget>(budget, id, con, tran);
+                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman);
                     if (state != FlowRunState.启动流程成功)
                     {
                         throw new Exception(string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString()));
@@ -66,7 +90,11 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id,budge.ContractNO,EnumFlowDataType.预算单.ToString(), currentUser);
+            this.ExecuteWithoutTransaction((con) =>
+            {
+                mmdal.AddModifyMark<Budget>(budge, id, con);
+            });
+            FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, budge.ContractNO, EnumFlowDataType.预算单.ToString(), currentUser);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();
@@ -98,7 +126,8 @@ namespace BudgetSystem.Bll
                 dal.ModifyBudget(budget, con, tran);
                 if (isStartFlow == true)
                 {
-                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), budget.ID,budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman);
+                    mmdal.AddModifyMark<Budget>(budget, budget.ID, con, tran);
+                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), budget.ID, budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman);
                     if (state != FlowRunState.启动流程成功)
                     {
                         message = string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString());
@@ -112,7 +141,7 @@ namespace BudgetSystem.Bll
         {
             var lst = this.Query<AccountBill>((con) =>
             {
-                var arList = arDal.GetActualReceiptsByBudgetId(budgetId, con, null);
+                var arList = rmDal.GetBudgetBillListByBudgetId(budgetId, con, null);
                 var abList = arList.ToAccountBillList();
                 var pmList = pnd.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
                 abList.AddRange(pmList.ToAccountBillList());
@@ -136,5 +165,19 @@ namespace BudgetSystem.Bll
             });
             return result;
         }
+
+        /// <summary>
+        /// 获取所有修改记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Budget> GetAllModifyMark(int id)
+        {
+            return this.Query<Budget>((con) =>
+            {
+                return mmdal.GetAllModifyMark<Budget>(id, con);
+            }).ToList();
+        }
+
     }
 }

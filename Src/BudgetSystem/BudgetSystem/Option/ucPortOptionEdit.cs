@@ -60,7 +60,7 @@ namespace BudgetSystem
             }
            
             var dataSource = (IEnumerable<Port>)gridPort.DataSource;
-            this.scm.ModifySupplier<IEnumerable<Port>>(this.OptionName, dataSource);
+            this.scm.ModifySystemConfig<IEnumerable<Port>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
         } 

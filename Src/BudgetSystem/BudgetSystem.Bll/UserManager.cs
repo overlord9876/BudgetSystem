@@ -72,11 +72,11 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<User> GetActualReceiptSalesmanList(int actualReceiptId)
+        public List<User> GetBankSlipSalesmanList(int actualReceiptId)
         {
             var lst = this.Query<User>((con) =>
             {
-                var uList = dal.GetActualReceiptSalesmanList(actualReceiptId, con, null);
+                var uList = dal.GetBankSlipSalesmanList(actualReceiptId, con, null);
                 return uList;
 
             });

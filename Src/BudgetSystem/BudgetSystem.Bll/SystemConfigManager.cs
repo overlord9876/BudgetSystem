@@ -28,8 +28,8 @@ namespace BudgetSystem.Bll
             {
                 return default(T);
             } 
-        } 
-        public void ModifySupplier<T>(string name,T data) 
+        }
+        public void ModifySystemConfig<T>(string name, T data) 
         {
             string value = JsonConvert.SerializeObject(data);
             this.ExecuteWithTransaction((con, tran) =>

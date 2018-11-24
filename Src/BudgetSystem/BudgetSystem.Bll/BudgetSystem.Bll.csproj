@@ -60,7 +60,7 @@
     <Compile Include="SystemConfigManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="CustomerManager.cs" />
-    <Compile Include="ActualReceiptsManager.cs" />
+    <Compile Include="ReceiptMgmtManager.cs" />
     <Compile Include="CommonManager.cs" />
     <Compile Include="DeclarationformManager.cs" />
   </ItemGroup>

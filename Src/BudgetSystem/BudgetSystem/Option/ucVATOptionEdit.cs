@@ -19,7 +19,7 @@ namespace BudgetSystem
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.增值税.ToString(); 
+            this.OptionName = EnumSystemConfigNames.增值税税率.ToString(); 
         }
 
         protected override void RegisterEvent()
@@ -39,11 +39,11 @@ namespace BudgetSystem
             decimal value = this.txtValue.Value;
             if (value == 0)
             {
-                XtraMessageBox.Show("增值税配置项值应大于0");
+                XtraMessageBox.Show("增值税税率配置项值应大于0");
                 return false;
             }
 
-            this.scm.ModifySupplier<decimal>(this.OptionName, value);
+            this.scm.ModifySystemConfig<decimal>(this.OptionName, value);
             this.IsChanged = false;
             return true;
         }
