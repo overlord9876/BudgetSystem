@@ -52,7 +52,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("所属部门", "DepartmentName");
             base.CreateGridColumn("用途", "MoneyUsed");
             base.CreateGridColumn("是否退税", "IsDrawback");
-            base.CreateGridColumn("是否收到发票", "HasInvoice");
+            base.CreateGridColumn("收到货款发票", "HasInvoice");
             base.CreateGridColumn("付款方式", "PaymentMethod"); 
 
             base.gridControl.DataSource = lst;
@@ -73,7 +73,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("所属部门", "DepartmentName");
             base.CreatePivotGridField("用途", "MoneyUsed");
             base.CreatePivotGridField("是否退税", "IsDrawback");
-            base.CreatePivotGridField("是否收到发票", "HasInvoice");
+            base.CreatePivotGridField("收到货款发票", "HasInvoice");
             base.CreatePivotGridField("付款方式", "PaymentMethod"); 
             base.CreatePivotGridDefaultRowField();
 

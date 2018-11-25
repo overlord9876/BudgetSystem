@@ -121,7 +121,7 @@ namespace BudgetSystem.Entity
             return new AccountBill()
                     {
                         BudgetNO = pn.ContractNO,
-                        CreateDate = pn.ApproveTime,
+                        CreateDate = pn.CommitTime,
                         PaymentMoney = pn.CNY,
                         Currency = "CNY",
                         VoucherNo = pn.VoucherNo,

@@ -169,8 +169,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public decimal GetTotalAmountCNYByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"select sum(CNY) as TotalAmount from actualreceipts
-                    where BudgetID=@BudgetID AND STATE<>4";
+            string selectSql = @"Select COUNT(CNY) From `BudgetBill` WHERE BudgetID=@BudgetID AND IsDelete=0 AND Confirmed=1";
 
             IDbCommand command = con.CreateCommand();
             command.CommandText = selectSql;
@@ -195,7 +194,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public decimal GetTotalAmountOriginalCoinByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select COUNT(CNY) From `BudgetBill` WHERE BudgetID=@BudgetID AND IsDelete=0 AND Confirmed=1";
+            string selectSql = @"Select COUNT(OriginalCoin) From `BudgetBill` WHERE BudgetID=@BudgetID AND IsDelete=0 AND Confirmed=1";
 
             IDbCommand command = con.CreateCommand();
             command.CommandText = selectSql;

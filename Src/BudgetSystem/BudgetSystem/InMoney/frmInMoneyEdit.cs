@@ -15,11 +15,7 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInMoneyEdit : frmBaseDialogForm
     {
-        private ReceiptMgmtManager arm = new ReceiptMgmtManager();
-        private Bll.CustomerManager cm = new Bll.CustomerManager();
-        private Bll.BudgetManager bm = new Bll.BudgetManager();
-        private SystemConfigManager scm = new SystemConfigManager();
-        private UserManager um = new UserManager();
+        private ReceiptMgmtManager rm = new ReceiptMgmtManager();
 
         public frmInMoneyEdit()
         {
@@ -43,7 +39,7 @@ namespace BudgetSystem.InMoney
             }
             ucInMoneyEdit1.FillData();
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
-            CurrentBankSlip.BSID = arm.AddBankSlip(CurrentBankSlip);
+            CurrentBankSlip.BSID = rm.AddBankSlip(CurrentBankSlip);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
@@ -60,7 +56,7 @@ namespace BudgetSystem.InMoney
             }
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
 
-            arm.ModifyBankSlip(CurrentBankSlip);
+            rm.ModifyBankSlip(CurrentBankSlip);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
@@ -70,7 +66,7 @@ namespace BudgetSystem.InMoney
             base.SubmitSplitConstData();
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
 
-            arm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
+            rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -106,7 +102,7 @@ namespace BudgetSystem.InMoney
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
             if (this.ucInMoneyEdit1.SpliDetail != null)
             {
-                arm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
+                rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

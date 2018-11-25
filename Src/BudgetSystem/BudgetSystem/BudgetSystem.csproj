@@ -272,6 +272,12 @@
     <Compile Include="OutMoney\frmVoucherNotesEdit.Designer.cs">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\ucOutMoneyEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OutMoney\ucOutMoneyEdit.Designer.cs">
+      <DependentUpon>ucOutMoneyEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmBudgetReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -541,6 +547,9 @@
     <EmbeddedResource Include="OutMoney\frmVoucherNotesEdit.resx">
       <DependentUpon>frmVoucherNotesEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\ucOutMoneyEdit.resx">
+      <DependentUpon>ucOutMoneyEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
@@ -658,13 +667,6 @@
   <ItemGroup>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_Default.xml" />
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="InMoney\frmInMoneyEdit_Modify.xml" />
-    <EmbeddedResource Include="InMoney\frmInMoneyEdit_New.xml" />
-    <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitConst.xml" />
-    <EmbeddedResource Include="InMoney\frmInMoneyEdit_SplitToBudget.xml" />
-    <EmbeddedResource Include="InMoney\frmInMoneyEdit_View.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml" />

@@ -253,7 +253,7 @@
             // 
             // gcHasInvoice
             // 
-            this.gcHasInvoice.Caption = "是否收到发票";
+            this.gcHasInvoice.Caption = "收到货款发票";
             this.gcHasInvoice.FieldName = "HasInvoice";
             this.gcHasInvoice.Name = "gcHasInvoice";
             // 

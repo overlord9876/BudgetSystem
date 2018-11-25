@@ -45,14 +45,19 @@ namespace BudgetSystem.Entity
         public decimal CNY { get; set; }
 
         /// <summary>
-        /// 确认人
+        /// 修改时间
         /// </summary>
-        public string Approver { get; set; }
+        public DateTime UpdateTimestamp { get; set; }
 
         /// <summary>
-        /// 确认时间
+        /// 是否是借条
         /// </summary>
-        public DateTime ApproveTime { get; set; }
+        public bool IsIOU { get; set; }
+
+        /// <summary>
+        /// 预计归还日期
+        /// </summary>
+        public DateTime ExpectedReturnDate { get; set; }
 
         /// <summary>
         /// 
