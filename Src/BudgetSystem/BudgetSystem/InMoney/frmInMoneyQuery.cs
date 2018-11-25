@@ -31,7 +31,7 @@ namespace BudgetSystem.InMoney
         {
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增银行水单"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitRequest, "申请修改费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
@@ -45,58 +45,27 @@ namespace BudgetSystem.InMoney
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
-                AddActualReceipts();
+                AddBankSlip();
             }
-            //else if (operate.Operate == OperateTypes.Modify.ToString())
-            //{
-            //    ModifyActualReceipts();
-            //}
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                SplitMoneyToBudgetActualReceipts();
+                ModifyBankSlip();
             }
             else if (operate.Operate == OperateTypes.SplitCost.ToString())
             {
-                SplitConstMoneyActualReceipts();
+                SplitConstMoneyBankSlip();
             }
             else if (operate.Operate == OperateTypes.SplitRequest.ToString())
             {
-                BankSlip currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as BankSlip;
-
-                if (currentRowActualReceipts != null)
-                {
-                    currentRowActualReceipts = arm.GetAllActualReceipts(currentRowActualReceipts.BSID);
-                    if (currentRowActualReceipts != null)
-                    {
-                        if (currentRowActualReceipts.State == 0)
-                        {
-                            //设置成待拆分状态
-                            //arm.ModifyActualReceiptState(currentRowActualReceipts.BSID, (int)ReceiptState.待拆分);
-                            currentRowActualReceipts.State = (int)ReceiptState.待拆分;
-                        }
-                        else
-                        {
-                            XtraMessageBox.Show("入帐单不是入账状态，不允许提交拆分申请。");
-                        }
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("入帐单已不存在。");
-                    }
-
-                }
-                else
-                {
-                    XtraMessageBox.Show("入帐单已不存在。");
-                }
+                StartFlow();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                ViewActualReceipts();
+                ViewBankSlip();
             }
         }
 
-        private void AddActualReceipts()
+        private void AddBankSlip()
         {
             frmInMoneyEdit form = new frmInMoneyEdit();
             form.WorkModel = EditFormWorkModels.New;
@@ -106,7 +75,7 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void ModifyActualReceipts()
+        private void ModifyBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             if (currentRowBankSlip != null)
@@ -125,7 +94,7 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void SplitMoneyToBudgetActualReceipts()
+        private void SplitMoneyToBudgetBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             if (currentRowBankSlip != null)
@@ -140,27 +109,58 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void SplitConstMoneyActualReceipts()
+        private void StartFlow()
         {
-            BudgetBill currentRowActualReceipts = this.gvInMoney.GetFocusedRow() as BudgetBill;
-            if (currentRowActualReceipts != null)
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+
+            if (currentRowBankSlip != null)
             {
-                //if (currentRowActualReceipts.State != 1)//不是待拆分状态不允许拆分
-                //{
-                //    XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
-                //    return;
-                //}
-                //frmInMoneyEdit form = new frmInMoneyEdit();
-                //form.WorkModel = EditFormWorkModels.SplitConst;
-                //form.CurrentBankSlip = currentRowActualReceipts;
-                //if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                //{
-                //    this.RefreshData();
-                //}
+                if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单{1}，不允许重复提交。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState.ToString()));
+                    return;
+                }
+                string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
             }
         }
 
-        private void ViewActualReceipts()
+        private void SplitConstMoneyBankSlip()
+        {
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (currentRowBankSlip != null)
+            {
+                if (currentRowBankSlip.EnumFlowState != EnumDataFlowState.审批通过)
+                {
+                    if (currentRowBankSlip.State != 0)//不是待拆分状态不允许拆分
+                    {
+                        XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
+                        return;
+                    }
+                }
+                else
+                {
+                    XtraMessageBox.Show("当前不属于未审批通过状态，不允许直接进行拆分。");
+                }
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.SplitConst;
+                form.CurrentBankSlip = currentRowBankSlip;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void ViewBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             {
@@ -173,16 +173,16 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            List<BankSlip> arList = null;
-            if (RunInfo.Instance.CurrentUser.Role == frmInMoneyEdit.SaleRoleCode)
+            List<BankSlip> bsList = null;
+            if (RunInfo.Instance.CurrentUser.Role == ucInMoneyEdit.SaleRoleCode)
             {
-                arList = arm.GetBankSlipListByUserName(RunInfo.Instance.CurrentUser.UserName);
+                bsList = arm.GetBankSlipListByUserName(RunInfo.Instance.CurrentUser.UserName);
             }
             else
             {
-                arList = arm.GetAllBankSlipList();
+                bsList = arm.GetAllBankSlipList();
             }
-            this.gcInMoney.DataSource = arList;
+            this.gcInMoney.DataSource = bsList;
         }
 
 

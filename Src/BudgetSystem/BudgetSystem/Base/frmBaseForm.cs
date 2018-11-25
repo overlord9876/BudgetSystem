@@ -19,10 +19,25 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
-       
+
         public virtual void LoadData()
-        { 
-        
+        {
+
+        }
+
+        public static bool IsDesignMode
+        {
+            get
+            {
+#if DEBUG
+                if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+                    return true;
+
+                if (System.Diagnostics.Process.GetCurrentProcess().ProcessName.ToUpper().Equals("DEVENV"))
+                    return true;
+#endif
+                return false;
+            }
         }
     }
 }

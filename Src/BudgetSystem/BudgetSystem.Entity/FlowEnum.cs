@@ -11,7 +11,8 @@ namespace BudgetSystem.Entity
     {
         预算单审批流程,
         供应商审批流程,
-        付款审批流程
+        付款审批流程,
+        入账审修改批流程
     }
 
     /// <summary>
@@ -21,7 +22,8 @@ namespace BudgetSystem.Entity
     {
         预算单,
         供应商,
-        付款单
+        付款单,
+        收款单
     }
 
     /// <summary>

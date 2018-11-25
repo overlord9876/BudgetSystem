@@ -203,6 +203,12 @@
     <Compile Include="InMoney\ucUserSelected.Designer.cs">
       <DependentUpon>ucUserSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\ucInMoneyEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InMoney\ucInMoneyEdit.Designer.cs">
+      <DependentUpon>ucInMoneyEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="OutMoney\frmDeclarationformImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -498,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\ucUserSelected.resx">
       <DependentUpon>ucUserSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\ucInMoneyEdit.resx">
+      <DependentUpon>ucInMoneyEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmDeclarationformImport.resx">
       <DependentUpon>frmDeclarationformImport.cs</DependentUpon>

@@ -64,7 +64,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 是否已删除
         /// </summary>
-        public int IsDelete { get; set; }
+        public bool IsDelete { get; set; }
 
         /// <summary>
         /// 备注

@@ -44,7 +44,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
 
-            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp) Where `BSID` = @BSID";
+            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -65,8 +65,8 @@ namespace BudgetSystem.Dal
             {
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
-
-            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp) Where `BSID` = @BSID";
+            modifyBankSlip.UpdateTimestamp = DateTime.Now;
+            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -86,24 +86,26 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BankSlip> GetAllBankSlipList(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select * From `bankslip`";
+            string selectSql = @"Select * From `bankslip` bs
+                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemTy";
 
-            return con.Query<BankSlip>(selectSql, null, tran);
+            return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString() }, tran);
         }
 
         public IEnumerable<BankSlip> GetBankSlipListByUserName(string userName, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bs.* From `bankslip` bs		
-                            INNER JOIN ReceiptNotice rn ON bs.BSID=rn.ID
+            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState From `bankslip` bs		
+                            INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID
                             INNER JOIN `User` u on rn.UserName=u.UserName
                             INNER JOIN `department` d on u.Department=d.`Code`
+														LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType AND f.IsRecent=1
                             WHERE rn.UserName=@Username or d.AssistantManager=@Username or d.Manager=@Username";
 
-            return con.Query<BankSlip>(selectSql, new { Username = userName }, tran);
+            return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), Username = userName }, tran);
         }
 
 
-        public BankSlip GetAllActualReceipts(int bsID, IDbConnection con, IDbTransaction tran)
+        public BankSlip GetBankSlipByBSID(int bsID, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select * From `bankslip` Where `BSID` = @BSID";
 
@@ -152,7 +154,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public void ModifyBudgetBill(BudgetBill modifyBudgetBill, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DepartmentCode` = @DepartmentCode,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed) Where `ID` = @ID";
+            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DepartmentCode` = @DepartmentCode,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed Where `ID` = @ID";
             int id = con.Execute(updateSql, modifyBudgetBill, tran);
         }
 

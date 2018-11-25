@@ -74,6 +74,22 @@ namespace BudgetSystem.Entity
         public int State { get; set; }
 
         /// <summary>
+        /// 流程状态
+        /// </summary>
+        public int FlowState { get; set; }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public EnumDataFlowState EnumFlowState
+        {
+            get
+            {
+                return this.FlowState.ToEnumDataFlowState();
+            }
+        }
+
+        /// <summary>
         /// 贸易性质
         /// 0=做单
         ///    1=过单

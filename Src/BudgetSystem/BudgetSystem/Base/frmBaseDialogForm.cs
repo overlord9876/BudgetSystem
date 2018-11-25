@@ -103,10 +103,6 @@ namespace BudgetSystem
             {
                 SubmitSplitConstData();
             }
-            else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
-            {
-                SubmitSplitToBudgetData();
-            }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 SubmitCustomData();

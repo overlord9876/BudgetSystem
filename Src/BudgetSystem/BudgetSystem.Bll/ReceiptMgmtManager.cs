@@ -9,6 +9,7 @@ namespace BudgetSystem.Bll
     public class ReceiptMgmtManager : BaseManager
     {
         Dal.ReceiptManagementDal dal = new Dal.ReceiptManagementDal();
+        Bll.FlowManager fm = new FlowManager();
 
         public List<BankSlip> GetAllBankSlipList()
         {
@@ -32,16 +33,25 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public BankSlip GetAllActualReceipts(int bsID)
+        public BankSlip GetBankSlipByBSID(int bsID)
         {
             var lst = this.Query<BankSlip>((con) =>
             {
-                var uList = dal.GetAllActualReceipts(bsID, con, null);
+                var uList = dal.GetBankSlipByBSID(bsID, con, null);
                 return uList;
             });
             return lst;
         }
 
+        public List<BudgetBill> GetBudgetBillListByBankSlipID(int bsID)
+        {
+            var lst = this.Query<BudgetBill>((con) =>
+            {
+                var uList = dal.GetBudgetBillListByBankSlipID(bsID, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
 
         /// <summary>
         /// 创建收款记录
@@ -60,6 +70,30 @@ namespace BudgetSystem.Bll
             });
         }
 
+        /// <summary>
+        /// 启动审批流程
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="currentUser"></param>
+        /// <returns>返回string.Empty为成功，否则为失败原因</returns>
+        public string StartFlow(int bsID, string currentUser)
+        {
+            BankSlip bankSlip = this.GetBankSlipByBSID(bsID);
+            if (bankSlip == null)
+            {
+                return "数据不存在";
+            }
+            else if (bankSlip.EnumFlowState == EnumDataFlowState.审批中)
+            {
+                return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+            }
+            FlowRunState state = fm.StartFlow(EnumFlowNames.入账审修改批流程.ToString(), bsID, bankSlip.VoucherNo, EnumFlowDataType.收款单.ToString(), currentUser);
+            if (state != FlowRunState.启动流程成功)
+            {
+                return state.ToString();
+            }
+            return string.Empty;
+        }
 
         /// <summary>
         /// 修改入帐单
@@ -95,8 +129,10 @@ namespace BudgetSystem.Bll
                 foreach (BudgetBill b in budgetBillList)
                 {
                     b.Confirmed = confirmed;
+                    b.BudgetID = b.RelationBudget.ID;
                     if (b.OperatorModel == DataOperatorModel.Add)
                     {
+                        b.BSID = modifyBankSlip.BSID;
                         dal.AddBudgetBill(b, con, tran);
                     }
                     else if (b.OperatorModel == DataOperatorModel.Modify)
