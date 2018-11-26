@@ -126,74 +126,58 @@ namespace BudgetSystem.OutMoney
             if (cboSupplier.EditValue as Supplier == null)
             {
                 this.dxErrorProvider1.SetError(cboSupplier, "请选择供应商。");
-                this.cboSupplier.Focus();
-                return false;
             }
+
+            if (txtBankName.EditValue as BankInfo == null)
+            {
+                this.dxErrorProvider1.SetError(txtBankName, "请选择付款开户行。");
+            }
+
             Budget selectedBudget = cboBudget.EditValue as Budget;
             if (selectedBudget == null)
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
-                this.cboBudget.Focus();
-                return false;
             }
 
             if (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
             {
                 this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
-                this.cboBudget.Focus();
-                return false;
             }
 
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))
             {
                 this.dxErrorProvider1.SetError(cboPaymentMethod, "请选择付款方式。");
-                this.cboPaymentMethod.Focus();
-                return false;
             }
             decimal taxRebateRate = 0;
             if (txtTaxRebateRate.EditValue == null || !decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate))
             {
                 this.dxErrorProvider1.SetError(txtTaxRebateRate, "请选择退税率。");
-                this.txtTaxRebateRate.Focus();
-                return false;
             }
             if (txtOriginalCoin.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtOriginalCoin, "请输入付款金额（原币）。");
-                this.txtOriginalCoin.Focus();
-                return false;
             }
             if (txtExchangeRate.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtExchangeRate, "请输入汇率。");
-                this.txtExchangeRate.Focus();
-                return false;
             }
             if (txtCNY.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtCNY, "请输入付款金额（人民币）。");
-                this.txtCNY.Focus();
-                return false;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text))
             {
                 this.dxErrorProvider1.SetError(txtVoucherNo, "请输入凭证号。");
-                this.txtVoucherNo.Focus();
-                return false;
             }
 
             if (!(cboMoneyUsed.EditValue is UseMoneyType))
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
-                cboMoneyUsed.Focus();
-                return false;
             }
 
             if (cboApplicant.EditValue as User == null)
             {
                 this.dxErrorProvider1.SetError(cboApplicant, "请选择申请人。");
-                this.cboApplicant.Focus();
-                return false;
             }
 
             if (txtAfterPaymentBalance.Value < 0)
@@ -403,8 +387,7 @@ namespace BudgetSystem.OutMoney
             Supplier editValue = (Supplier)cboSupplier.EditValue;
             if (editValue != null)
             {
-                this.txtBankName.Text = editValue.BankName;
-                this.txtBankNO.Text = editValue.BankNO;
+                txtBankName.Properties.DataSource = editValue.BankInfoDetail.ToBankInfoList();
             }
         }
 
@@ -480,6 +463,14 @@ namespace BudgetSystem.OutMoney
             else
             {
                 chkHasInvoice.Checked = false;
+            }
+        }
+
+        private void txtBankName_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.txtBankName.EditValue is BankInfo)
+            {
+                this.txtBankNO.Text = (this.txtBankName.EditValue as BankInfo).Account;
             }
         }
     }

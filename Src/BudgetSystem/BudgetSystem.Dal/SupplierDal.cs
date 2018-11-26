@@ -12,33 +12,37 @@ namespace BudgetSystem.Dal
     {
         public Supplier GetSupplier(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,
+                                        u2.RealName AS UpdateUserName, IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
+                                 LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`  
-																 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
                                  WHERE s.`ID` = @ID";
             return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), ID = id }, tran).SingleOrDefault();
         }
         public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,
+                                        u2.RealName AS UpdateUserName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
+                                 LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`
-																 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
             return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString() }, tran);
         }
         public int AddSupplier(Supplier supplier, IDbConnection con, IDbTransaction tran = null)
         {
-            string insertSql = @"Insert Into `Supplier` (`Name`,`BankNO`,`BankName`,`SupplierType`,`CreateDate`,
+            string insertSql = @"Insert Into `Supplier` (`Name`,`BankInfoDetail`,`SupplierType`,`CreateDate`,
                                                          `Nature`,`RegisterCapital`,`Address`,`Tell`,`FaxNumber`,`Contacts`,
-                                                         `DepartmentCode`,`PostalCode`,`Legal`,`CreateUser`,`Description`,
-                                                         `TaxpayerID`,`Discredited`,`ExistsAgentAgreement`) 
-                                               Values (@Name,@BankNO,@BankName,@SupplierType,now(),
+                                                         `DepartmentCode`,`PostalCode`,`Legal`,`CreateUser`,`Description`,`UpdateDate`,`UpdateUser`,
+                                                         `TaxpayerID`,`Discredited`,`ExistsAgentAgreement`,`RegistrationDate`,`BusinessEffectiveDate`,`AgreementDate`) 
+                                               Values (@Name,@BankInfoDetail,@SupplierType,now(),
                                                        @Nature,@RegisterCapital,@Address,@Tell,@FaxNumber,@Contacts,
-                                                       @DepartmentCode,@PostalCode,@Legal,@CreateUser,@Description,
-                                                       @TaxpayerID,@Discredited,@ExistsAgentAgreement)";
+                                                       @DepartmentCode,@PostalCode,@Legal,@CreateUser,@Description,now(),@UpdateUser,
+                                                       @TaxpayerID,@Discredited,@ExistsAgentAgreement,@RegistrationDate,@BusinessEffectiveDate,@AgreementDate)";
             int id = con.Insert(insertSql, supplier, tran);
             if (id > 0)
             {
@@ -49,11 +53,13 @@ namespace BudgetSystem.Dal
         public void ModifySupplier(Supplier supplier, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = @"Update `Supplier` 
-                                Set `Name` = @Name,`BankNO` = @BankNO,`BankName` = @BankName,`SupplierType` = @SupplierType,
+                                 Set `Name` = @Name,`BankInfoDetail` = @BankInfoDetail,`SupplierType` = @SupplierType,
                                     `Nature` = @Nature,`RegisterCapital` = @RegisterCapital,`Address` = @Address,`Tell` = @Tell,
                                     `FaxNumber` = @FaxNumber,`Contacts` = @Contacts,`DepartmentCode` = @DepartmentCode,
                                     `PostalCode` = @PostalCode,`Legal` = @Legal ,`Description`=@Description ,
-                                    `TaxpayerID`=@TaxpayerID,`Discredited`=@Discredited,`ExistsAgentAgreement`=@ExistsAgentAgreement 
+                                    `TaxpayerID`=@TaxpayerID,`Discredited`=@Discredited,`ExistsAgentAgreement`=@ExistsAgentAgreement,
+                                    `RegistrationDate`=@RegistrationDate,`BusinessEffectiveDate`=@BusinessEffectiveDate,`AgreementDate`=@AgreementDate,
+                                    `UpdateDate`=now(),`UpdateUser`=@UpdateUser
                                     Where `ID` = @ID";
             con.Execute(updateSql, supplier, tran);
         }

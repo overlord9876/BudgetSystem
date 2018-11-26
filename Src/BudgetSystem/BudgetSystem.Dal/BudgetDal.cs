@@ -16,7 +16,7 @@ namespace BudgetSystem.Dal
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                 LEFT JOIN `User` u2 ON b.UpdateUser=u.UserName 
+                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
@@ -43,7 +43,7 @@ namespace BudgetSystem.Dal
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                 LEFT JOIN `User` u2 ON b.UpdateUser=u.UserName 
+                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID 								 
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
@@ -59,7 +59,7 @@ namespace BudgetSystem.Dal
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName AND b.Salesman=@Salesman
-                                 LEFT JOIN `User` u2 ON b.UpdateUser=u.UserName
+                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID AND b.CustomerID=@CustomerID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
@@ -74,7 +74,7 @@ namespace BudgetSystem.Dal
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName  AND b.Salesman=@Salesman
-                                 LEFT JOIN `User` u2 ON b.UpdateUser=u.UserName
+                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON b.Department=d.Code
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1

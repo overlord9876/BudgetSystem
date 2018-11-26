@@ -21,5 +21,23 @@ namespace BudgetSystem.Entity
                     return EnumDataFlowState.未审批;
             }
         }
+
+        public static List<BankInfo> ToBankInfoList(this string bankInfoJson)
+        {
+            if (!string.IsNullOrEmpty(bankInfoJson))
+            {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<BankInfo>>(bankInfoJson);
+            }
+            else
+            {
+                return new List<BankInfo>();
+            }
+        }
+
+        public static string ToJson<T>(this T obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+        }
+
     }
 }

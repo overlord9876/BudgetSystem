@@ -40,7 +40,6 @@
             this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rilueTradeMode = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,7 +57,6 @@
             this.panCondition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rilueTradeMode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
@@ -86,7 +84,6 @@
             this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.rilueTradeMode,
             this.rilueTradeNature});
             this.gridBudget.Size = new System.Drawing.Size(1079, 690);
             this.gridBudget.TabIndex = 0;
@@ -195,18 +192,10 @@
             // gcTradeMode
             // 
             this.gcTradeMode.Caption = "贸易方式";
-            this.gcTradeMode.ColumnEdit = this.rilueTradeMode;
-            this.gcTradeMode.FieldName = "TradeMode";
+            this.gcTradeMode.FieldName = "TradeModeDesc";
             this.gcTradeMode.Name = "gcTradeMode";
             this.gcTradeMode.Visible = true;
             this.gcTradeMode.VisibleIndex = 2;
-            // 
-            // rilueTradeMode
-            // 
-            this.rilueTradeMode.AutoHeight = false;
-            this.rilueTradeMode.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.rilueTradeMode.Name = "rilueTradeMode";
             // 
             // gcTradeNature
             // 
@@ -343,7 +332,6 @@
             this.panCondition.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rilueTradeMode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
@@ -375,7 +363,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcPort;
         private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueTradeMode;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueTradeNature;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfitLevel1;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfitLevel2;

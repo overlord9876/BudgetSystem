@@ -86,7 +86,7 @@ namespace BudgetSystem
 
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
-                form.Supplier = supplier;
+                form.CurrentSupplier = supplier;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
@@ -123,7 +123,7 @@ namespace BudgetSystem
             {
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.View;
-                form.Supplier = currentRowSupplier;
+                form.CurrentSupplier = currentRowSupplier;
                 form.ShowDialog(this);
             }
         }

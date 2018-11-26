@@ -5,15 +5,19 @@ using System.Windows.Forms;
 
 namespace BudgetSystem
 {
-    public  class ucOptionEditBase:UserControl
+    public class ucOptionEditBase : UserControl
     {
-        protected Bll.SystemConfigManager scm =null; 
+        protected Bll.SystemConfigManager scm = null;
 
 
         public ucOptionEditBase()
         {
-            scm = new Bll.SystemConfigManager(); 
-            this.Load += new System.EventHandler(this.ucOptionEditBase_Load);
+            this.RegisterEvent();
+
+            if (!frmBaseForm.IsDesignMode)
+            {
+                scm = new Bll.SystemConfigManager();
+            }
         }
         /// <summary>
         /// 是否允许修改
@@ -39,7 +43,7 @@ namespace BudgetSystem
             get;
             set;
         }
-       
+
         /// <summary>
         /// 保存
         /// </summary>
@@ -52,22 +56,24 @@ namespace BudgetSystem
         /// </summary>
         protected virtual void BindingOption()
         {
-        
+
         }
         /// <summary>
         /// 注册事件
         /// </summary>
         protected virtual void RegisterEvent()
-        { 
-        
+        {
+            this.Load += new System.EventHandler(this.ucOptionEditBase_Load);
         }
 
-       
+
 
         private void ucOptionEditBase_Load(object sender, EventArgs e)
         {
-            this.BindingOption();
-            this.RegisterEvent();
+            if (!frmBaseForm.IsDesignMode)
+            {
+                this.BindingOption();
+            }
         }
 
     }

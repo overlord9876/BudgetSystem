@@ -21,20 +21,14 @@ namespace BudgetSystem.Entity
         public string Name { get; set; }
 
         /// <summary>
-        /// 银行账号
+        /// 银行信息
         /// </summary>
-        public string BankNO { get; set; }
-
-        /// <summary>
-        /// 开户行
-        /// </summary>
-        public string BankName { get; set; }
+        public string BankInfoDetail { get; set; }
 
         /// <summary>
         /// 供应商类型
         /// 0=合格供方
         /// 1=临时供方
-        /// 2=货运供方
         /// </summary>
         public int SupplierType { get; set; }
 
@@ -122,7 +116,36 @@ namespace BudgetSystem.Entity
         /// 是否有合格供方代理协议
         /// </summary>
         public bool ExistsAgentAgreement { get; set; }
-        
+
+        /// <summary>
+        /// 经营登记日期
+        /// </summary>
+        public DateTime? RegistrationDate { get; set; }
+
+        /// <summary>
+        /// 经营截止时间
+        /// </summary>
+        public DateTime? BusinessEffectiveDate { get; set; }
+
+        /// <summary>
+        /// 代理协议有效期
+        /// </summary>
+        public DateTime? AgreementDate { get; set; }
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public DateTime UpdateDate { get; set; }
+
+        /// <summary>
+        /// 更新人
+        /// </summary>
+        public string UpdateUser { get; set; }
+
+        /// <summary>
+        /// 更新人名
+        /// </summary>
+        public string UpdateUserName { get; set; }
+
         /// <summary>
         /// 流程状态
         /// </summary>
@@ -150,11 +173,10 @@ namespace BudgetSystem.Entity
         }
 
     }
-
+    
     public enum EnumSupplierType
     {
-        合格供方,
-        临时供方,
-        货运供方
+        合格供方 = 0,
+        临时供方 = 1
     }
 }

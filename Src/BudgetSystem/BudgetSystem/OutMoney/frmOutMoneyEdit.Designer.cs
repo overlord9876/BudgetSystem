@@ -57,29 +57,26 @@
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(444, 208, 678, 586);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1152, 937);
+            this.layoutControl1.Size = new System.Drawing.Size(1008, 729);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // ucOutMoneyEdit1
             // 
             this.ucOutMoneyEdit1.Location = new System.Drawing.Point(12, 12);
-            this.ucOutMoneyEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ucOutMoneyEdit1.Name = "ucOutMoneyEdit1";
-            this.ucOutMoneyEdit1.Size = new System.Drawing.Size(1128, 873);
+            this.ucOutMoneyEdit1.Size = new System.Drawing.Size(984, 665);
             this.ucOutMoneyEdit1.TabIndex = 49;
             this.ucOutMoneyEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // btn_Submit
             // 
-            this.btn_Submit.Location = new System.Drawing.Point(864, 889);
-            this.btn_Submit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_Submit.Location = new System.Drawing.Point(767, 681);
             this.btn_Submit.Name = "btn_Submit";
-            this.btn_Submit.Size = new System.Drawing.Size(136, 36);
+            this.btn_Submit.Size = new System.Drawing.Size(89, 36);
             this.btn_Submit.StyleController = this.layoutControl1;
             this.btn_Submit.TabIndex = 48;
             this.btn_Submit.Text = "提交";
@@ -87,8 +84,8 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(1004, 889);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnCancel.Location = new System.Drawing.Point(860, 681);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(136, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -98,8 +95,8 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(724, 889);
-            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnSure.Location = new System.Drawing.Point(627, 681);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(136, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -120,7 +117,7 @@
             this.layoutControlItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1152, 937);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1008, 729);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -128,9 +125,9 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 877);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 669);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(712, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(615, 40);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -138,7 +135,7 @@
             // 
             this.lciCancel.Control = this.btnCancel;
             this.lciCancel.CustomizationFormText = "取消按钮";
-            this.lciCancel.Location = new System.Drawing.Point(992, 877);
+            this.lciCancel.Location = new System.Drawing.Point(848, 669);
             this.lciCancel.MaxSize = new System.Drawing.Size(140, 40);
             this.lciCancel.MinSize = new System.Drawing.Size(140, 40);
             this.lciCancel.Name = "lciCancel";
@@ -153,11 +150,11 @@
             // 
             this.lciCommit.Control = this.btn_Submit;
             this.lciCommit.CustomizationFormText = "提交按钮";
-            this.lciCommit.Location = new System.Drawing.Point(852, 877);
+            this.lciCommit.Location = new System.Drawing.Point(755, 669);
             this.lciCommit.MaxSize = new System.Drawing.Size(140, 40);
             this.lciCommit.MinSize = new System.Drawing.Size(93, 26);
             this.lciCommit.Name = "lciCommit";
-            this.lciCommit.Size = new System.Drawing.Size(140, 40);
+            this.lciCommit.Size = new System.Drawing.Size(93, 40);
             this.lciCommit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciCommit.Text = "提交按钮";
             this.lciCommit.TextSize = new System.Drawing.Size(0, 0);
@@ -168,7 +165,7 @@
             // 
             this.lciSave.Control = this.btnSure;
             this.lciSave.CustomizationFormText = "保存按钮";
-            this.lciSave.Location = new System.Drawing.Point(712, 877);
+            this.lciSave.Location = new System.Drawing.Point(615, 669);
             this.lciSave.MaxSize = new System.Drawing.Size(140, 40);
             this.lciSave.MinSize = new System.Drawing.Size(140, 40);
             this.lciSave.Name = "lciSave";
@@ -185,7 +182,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1132, 877);
+            this.layoutControlItem1.Size = new System.Drawing.Size(988, 669);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -193,11 +190,11 @@
             // 
             // frmOutMoneyEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 937);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "frmOutMoneyEdit";
             this.Text = "付款申请单";
             this.Load += new System.EventHandler(this.frmOutMemoryEdit_Load);

@@ -267,6 +267,23 @@ namespace BudgetSystem.Entity
         public List<Supplier> SupplierList { get; set; }
 
         /// <summary>
+        /// 贸易状态描述
+        /// </summary>
+        public string TradeModeDesc
+        {
+            get
+            {
+                if (this.TradeMode == 0)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return ((EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), this.TradeMode.ToString())).ToString();
+                }
+            }
+        }
+        /// <summary>
         /// 流程状态
         /// </summary>
         public EnumDataFlowState EnumFlowState
