@@ -142,6 +142,12 @@
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Budget\OutProductDetail.cs" />
+    <Compile Include="Budget\ucBudgetEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Budget\ucBudgetEdit.Designer.cs">
+      <DependentUpon>ucBudgetEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonControl\LookUpEditHelper.cs" />
     <Compile Include="CommonControl\TextEdit_Number.cs">
       <SubType>Component</SubType>
@@ -165,6 +171,12 @@
     </Compile>
     <Compile Include="Customer\ucCustomerSelected.Designer.cs">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\ucSupplierEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Supplier\ucSupplierEdit.Designer.cs">
+      <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomValidationRule\BudgetStateValidationRule.cs" />
     <Compile Include="DepartmentManage\frmDepartmentEdit.cs">
@@ -478,6 +490,9 @@
     <EmbeddedResource Include="Budget\frmMoneyDetailEdit.resx">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\ucBudgetEdit.resx">
+      <DependentUpon>ucBudgetEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -486,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">
+      <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit.resx">
       <DependentUpon>frmDepartmentEdit.cs</DependentUpon>

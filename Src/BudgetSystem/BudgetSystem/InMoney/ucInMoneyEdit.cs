@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace BudgetSystem.InMoney
 {
-    public partial class ucInMoneyEdit : UserControl
+    public partial class ucInMoneyEdit : DataControl
     {
         private ReceiptMgmtManager arm = new ReceiptMgmtManager();
         private Bll.CustomerManager cm = new Bll.CustomerManager();
@@ -74,6 +74,7 @@ namespace BudgetSystem.InMoney
         }
 
         private EditFormWorkModels _workModel;
+
         public EditFormWorkModels WorkModel
         {
             get { return this._workModel; }
@@ -205,6 +206,12 @@ namespace BudgetSystem.InMoney
             BindBankSlip(item);
         }
 
+        public override void BindingData(int dataID)
+        {
+            base.BindingData(dataID);
+            BindBankSlipByID(dataID);
+        }
+
         public bool CheckUIInput()
         {
             this.dxErrorProvider1.ClearErrors();
@@ -318,25 +325,13 @@ namespace BudgetSystem.InMoney
 
         private void SetReadOnly()
         {
-            this.cboCustomer.Properties.ReadOnly = true;
-            this.txtVoucherNo.Properties.ReadOnly = true;
-            this.txtOriginalCoin.Properties.ReadOnly = true;
-            this.txtBankName.Properties.ReadOnly = true;
-            this.txtExchangeRate.Properties.ReadOnly = true;
-            this.txtCNY.Properties.ReadOnly = true;
-            this.txtPaymentMethod.Properties.ReadOnly = true;
-            this.deReceiptDate.Properties.ReadOnly = true;
-            this.cboSales.Properties.ReadOnly = true;
-            this.txtCreateUser.Properties.ReadOnly = true;
-            this.deCreateTimestamp.Properties.ReadOnly = true;
-            this.cboTradeNature.Properties.ReadOnly = true;
-            this.txtExportName.Properties.ReadOnly = true;
-
-            this.txtTradingPostscript.Properties.ReadOnly = true;
-            this.txtDescription.Properties.ReadOnly = true;
-
-            this.gvConstSplit.OptionsBehavior.Editable = false;
-
+            foreach (var control in this.layoutControl1.Controls)
+            {
+                if (control is BaseEdit)
+                {
+                    (control as BaseEdit).Properties.ReadOnly = true;
+                }
+            }
         }
 
         private void CheckSplitMoney()
@@ -529,6 +524,14 @@ namespace BudgetSystem.InMoney
                 {
                     CanCommitEventHandler(this, e); ;
                 }
+            }
+        }
+
+        private void cboCurrency_EditValueChanged(object sender, EventArgs e)
+        {
+            if (cboCurrency.EditValue != null && (cboCurrency.EditValue.ToString().Equals("CNY") || cboCurrency.EditValue.ToString().Equals("人民币")))
+            {
+                this.txtExchangeRate.EditValue = 1;
             }
         }
 

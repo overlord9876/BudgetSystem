@@ -16,11 +16,11 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
-        public void BindingData(int dataID)
+        public virtual void BindingData(int dataID)
         {
-            this.BackColor = Color.Red;
-            this.Width = 800;
-            this.Height = 600;
+            //this.BackColor = Color.Red;
+            //this.Width = 800;
+            //this.Height = 600;
 
         }
     }

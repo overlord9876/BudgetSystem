@@ -29,7 +29,7 @@ namespace BudgetSystem.Dal
         //string insertSql = "Insert Into `FlowRunPoint` (`ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate`) Values (@ID,@NodeID,@NodeOrderNo,@InstanceID,@NodeApproveUser,@NodeApproveResult,@NodeApproveRemark,@State,@RunPointCreateDate,@NodeApproveDate)";
         //string selectSql = "Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` From `FlowRunPoint` Where`ID` = @ID";
         //string updateSql = "Update `FlowRunPoint` Set `NodeID` = @NodeID,`NodeOrderNo`=@NodeOrderNo,`InstanceID` = @InstanceID,`NodeApproveUser` = @NodeApproveUser,`NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = @State,`RunPointCreateDate` = @RunPointCreateDate,`NodeApproveDate` = @NodeApproveDate Where `ID` = @ID";
-       
+
 
         public IEnumerable<Flow> GetAllEnabledFlow(IDbConnection con, IDbTransaction tran)
         {
@@ -37,14 +37,14 @@ namespace BudgetSystem.Dal
             return con.Query<Flow>(selectSql, null, tran);
         }
 
-        public Flow GetFlow(string name,int version,IDbConnection con, IDbTransaction tran)
+        public Flow GetFlow(string name, int version, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name and `VersionNumber` = @VersionNumber"; 
+            string selectSql = "Select `Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
             return con.Query<Flow>(selectSql, new { Name = name, VersionNumber = version }, tran).SingleOrDefault();
         }
 
 
-        public IEnumerable<FlowNode> GetFlowDetial(string name,int version,IDbConnection con, IDbTransaction tran)
+        public IEnumerable<FlowNode> GetFlowDetial(string name, int version, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
@@ -59,11 +59,9 @@ namespace BudgetSystem.Dal
         public FlowNode GetFlowNode(int nodeID, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`ID` = @ID";
-            return con.Query<FlowNode>(selectSql, new { ID =nodeID }, tran).SingleOrDefault();
+            return con.Query<FlowNode>(selectSql, new { ID = nodeID }, tran).SingleOrDefault();
         }
 
-
-      
         public Flow GetFlowEnableVersion(string flowName, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`Remark`,`IsEnabled` From `Flow` Where`Name` = @Name  and `IsEnabled`=1";
@@ -100,8 +98,8 @@ namespace BudgetSystem.Dal
 
             return con.Query<FlowInstance>(selectSql, new { ID = instanceID }, tran).SingleOrDefault();
         }
-        
-        public int AddFlowInstance(string flowName, int flowVersion, int dataID, string dataText,string dataType, string createUser, IDbConnection con, IDbTransaction tran)
+
+        public int AddFlowInstance(string flowName, int flowVersion, int dataID, string dataText, string dataType, string createUser, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = @"Insert Into `FlowInstance` 
                                 (`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemText`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`IsCreateUserConfirm`,`IsRecent`) 
@@ -118,10 +116,10 @@ namespace BudgetSystem.Dal
         /// <param name="isRecent"></param>
         /// <param name="con"></param>
         /// <param name="tran"></param>
-        public void UpdateFlowInstanceIsRecent(string flowName, string dataItemType, int dataID,bool isRecent, IDbConnection con, IDbTransaction tran)
+        public void UpdateFlowInstanceIsRecent(string flowName, string dataItemType, int dataID, bool isRecent, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = @"Update `FlowInstance` Set `IsRecent` = @IsRecent Where `DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName";
-            con.Execute(updateSql, new { IsRecent = isRecent, DateItemID = dataID, DateItemType = dataItemType, FlowName =flowName}, tran);
+            con.Execute(updateSql, new { IsRecent = isRecent, DateItemID = dataID, DateItemType = dataItemType, FlowName = flowName }, tran);
         }
 
         public void UpdateFlowInstanceCloseInfo(int instanceID, bool approveReslt, string closeReason, IDbConnection con, IDbTransaction tran)
@@ -138,14 +136,14 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, new { ID = instanceID }, tran);
         }
 
-        public int AddFlowRunPoint(int nodeID,int nodeOrderNo,int instanceID,string approve, IDbConnection con, IDbTransaction tran)
+        public int AddFlowRunPoint(int nodeID, int nodeOrderNo, int instanceID, string approve, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = @"Insert Into `FlowRunPoint` 
                                 (`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`State`,`RunPointCreateDate`) 
                                 Values 
                                 (@NodeID,@NodeOrderNo,@InstanceID,@NodeApproveUser,0,now())";
 
-            return con.Insert(insertSql, new { NodeID = nodeID, NodeOrderNo= nodeOrderNo,InstanceID = instanceID, NodeApproveUser = approve }, tran);
+            return con.Insert(insertSql, new { NodeID = nodeID, NodeOrderNo = nodeOrderNo, InstanceID = instanceID, NodeApproveUser = approve }, tran);
         }
 
 
@@ -156,10 +154,10 @@ namespace BudgetSystem.Dal
             return con.Query<FlowRunPoint>(selectSql, new { ID = runPointID }, tran).SingleOrDefault();
         }
 
-        public void UpdateFlowRunPointApproveInfo(int runPointID,bool result,string remark ,IDbConnection con, IDbTransaction tran)
+        public void UpdateFlowRunPointApproveInfo(int runPointID, bool result, string remark, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Update `FlowRunPoint` Set `NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = 1,`NodeApproveDate` = now() Where `ID` = @ID";
-            con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark =remark}, tran);
+            con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark = remark }, tran);
         }
 
 

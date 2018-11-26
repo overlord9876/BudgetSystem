@@ -164,7 +164,49 @@ namespace BudgetSystem.Entity
         /// </summary>
         public bool IsSelected { get; set; }
 
+        /// <summary>
+        /// 是否警告（提醒评审）
+        /// </summary>
+        public bool IsWarned
+        {
+            get
+            {
+                if (SupplierType == (int)EnumSupplierType.合格供方)
+                {
+                    if (this.EnumFlowState == EnumDataFlowState.审批通过
+                        && (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.AddDays(-15).Date <= DateTime.Now.Date))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
 
+        /// <summary>
+        /// 是否合格供应商
+        /// </summary>
+        public bool IsQualified
+        {
+            get
+            {
+                if (SupplierType == (int)EnumSupplierType.合格供方)
+                {
+                    if (this.EnumFlowState != EnumDataFlowState.审批通过
+                        || (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.AddDays(-15).Date > DateTime.Now.Date)
+                        || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date > DateTime.Now.Date))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
 
 
         public override string ToString()
@@ -173,7 +215,7 @@ namespace BudgetSystem.Entity
         }
 
     }
-    
+
     public enum EnumSupplierType
     {
         合格供方 = 0,

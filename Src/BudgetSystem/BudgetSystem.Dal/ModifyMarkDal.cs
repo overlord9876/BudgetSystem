@@ -30,7 +30,7 @@ namespace BudgetSystem.Dal
             ModifyMark modifyMark = new ModifyMark()
             {
                 DataID = dataID,
-                DateItemType = typeof(T).ToString(),
+                DateItemType = typeof(T).Name,
                 Content = JsonConvert.SerializeObject(content)
             };
             return this.AddModifyMark(modifyMark, con, tran);

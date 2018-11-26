@@ -22,6 +22,18 @@ namespace BudgetSystem.Bll
             });
             return lst.ToList();
         }
+
+        public List<Supplier> GetSupplierListByBudgetId(int budgetId)
+        {
+            var lst = this.Query<Supplier>((con) =>
+            {
+                var uList = dal.GetSupplierListByBudgetId(budgetId, con);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
         public Supplier GetSupplier(int id)
         {
             var supplier = this.Query<Supplier>((con) =>

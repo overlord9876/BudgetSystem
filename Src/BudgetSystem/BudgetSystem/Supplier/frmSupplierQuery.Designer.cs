@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -36,13 +38,27 @@
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gcIsWarned
+            // 
+            this.gcIsWarned.Caption = "是否提醒";
+            this.gcIsWarned.FieldName = "IsWarned";
+            this.gcIsWarned.Name = "gcIsWarned";
+            this.gcIsWarned.OptionsColumn.AllowMove = false;
+            this.gcIsWarned.OptionsColumn.AllowShowHide = false;
+            this.gcIsWarned.OptionsColumn.ShowInCustomizationForm = false;
             // 
             // gridSupplier
             // 
@@ -69,9 +85,28 @@
             this.gcv纳税人识别号,
             this.gcSupplierType,
             this.gcFlowState,
+            this.gcIsQualified,
+            this.gcRegistrationDate,
+            this.gcBusinessEffectiveDate,
+            this.gcExistsAgentAgreement,
+            this.gcAgreementDate,
             this.gcCreateDate,
             this.gcCreateUser,
-            this.gcDescription});
+            this.gcDescription,
+            this.gcIsWarned});
+            styleFormatCondition1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition1.Appearance.Options.UseBackColor = true;
+            styleFormatCondition1.Appearance.Options.UseFont = true;
+            styleFormatCondition1.Appearance.Options.UseForeColor = true;
+            styleFormatCondition1.ApplyToRow = true;
+            styleFormatCondition1.Column = this.gcIsWarned;
+            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition1.Expression = "True";
+            styleFormatCondition1.Value1 = true;
+            this.gvSupplier.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
+            styleFormatCondition1});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
@@ -119,13 +154,21 @@
             this.gcFlowState.Visible = true;
             this.gcFlowState.VisibleIndex = 3;
             // 
+            // gcIsQualified
+            // 
+            this.gcIsQualified.Caption = "是否合格供应商";
+            this.gcIsQualified.FieldName = "IsQualified";
+            this.gcIsQualified.Name = "gcIsQualified";
+            this.gcIsQualified.Visible = true;
+            this.gcIsQualified.VisibleIndex = 4;
+            // 
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "创建时间";
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 4;
+            this.gcCreateDate.VisibleIndex = 9;
             // 
             // gcCreateUser
             // 
@@ -133,7 +176,7 @@
             this.gcCreateUser.FieldName = "CreateUser";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 5;
+            this.gcCreateUser.VisibleIndex = 10;
             // 
             // gcDescription
             // 
@@ -141,7 +184,39 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 6;
+            this.gcDescription.VisibleIndex = 11;
+            // 
+            // gcRegistrationDate
+            // 
+            this.gcRegistrationDate.Caption = "工商登记日期";
+            this.gcRegistrationDate.FieldName = "RegistrationDate";
+            this.gcRegistrationDate.Name = "gcRegistrationDate";
+            this.gcRegistrationDate.Visible = true;
+            this.gcRegistrationDate.VisibleIndex = 5;
+            // 
+            // gcBusinessEffectiveDate
+            // 
+            this.gcBusinessEffectiveDate.Caption = "经营截至日期";
+            this.gcBusinessEffectiveDate.FieldName = "BusinessEffectiveDate";
+            this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
+            this.gcBusinessEffectiveDate.Visible = true;
+            this.gcBusinessEffectiveDate.VisibleIndex = 6;
+            // 
+            // gcExistsAgentAgreement
+            // 
+            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
+            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
+            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
+            this.gcExistsAgentAgreement.Visible = true;
+            this.gcExistsAgentAgreement.VisibleIndex = 7;
+            // 
+            // gcAgreementDate
+            // 
+            this.gcAgreementDate.Caption = "代理协议有效期";
+            this.gcAgreementDate.FieldName = "AgreementDate";
+            this.gcAgreementDate.Name = "gcAgreementDate";
+            this.gcAgreementDate.Visible = true;
+            this.gcAgreementDate.VisibleIndex = 8;
             // 
             // frmSupplierQuery
             // 
@@ -171,6 +246,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsQualified;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsWarned;
+        private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
 
 
     }

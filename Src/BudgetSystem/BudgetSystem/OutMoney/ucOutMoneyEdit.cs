@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace BudgetSystem.OutMoney
 {
-    public partial class ucOutMoneyEdit : UserControl
+    public partial class ucOutMoneyEdit : DataControl
     {
         Bll.FlowManager fm = new FlowManager();
         private decimal vatOption = 0;
@@ -60,17 +60,23 @@ namespace BudgetSystem.OutMoney
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.deCommitTime.EditValue = DateTime.Now;
-                this.txtPaymentDate.EditValue = DateTime.Now;
                 this.txtExpectedReturnDate.EditValue = DateTime.Now;
                 BindApplicantUser(RunInfo.Instance.CurrentUser.UserName);
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
+                this.txtPaymentDate.EditValue = DateTime.Now;
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetReadOnly();
             }
+        }
+
+        public override void BindingData(int dataID)
+        {
+            base.BindingData(dataID);
+            BandPaymentNotes(dataID);
         }
 
         public void BandPaymentNotes(int id)
@@ -190,26 +196,13 @@ namespace BudgetSystem.OutMoney
 
         private void SetReadOnly()
         {
-            this.txtExpectedReturnDate.Properties.ReadOnly = true;
-            this.txtDescription.Properties.ReadOnly = true;
-            this.txtExchangeRate.Properties.ReadOnly = true;
-            this.txtOriginalCoin.Properties.ReadOnly = true;
-            this.cboCurrency.Properties.ReadOnly = true;
-            this.txtCNY.Properties.ReadOnly = true;
-            this.txtPaymentDate.Properties.ReadOnly = true;
-            this.txtTaxRebateRate.Properties.ReadOnly = true;
-            this.cboPaymentMethod.Properties.ReadOnly = true;
-            this.txtVoucherNo.Properties.ReadOnly = true;
-            this.deCommitTime.Properties.ReadOnly = true;
-            this.cboApplicant.Properties.ReadOnly = true;
-            this.cboMoneyUsed.Properties.ReadOnly = true;
-            this.cboSupplier.Properties.ReadOnly = true;
-            this.cboBudget.Properties.ReadOnly = true;
-            this.txtDescription.Properties.ReadOnly = true;
-            this.chkHasInvoice.Properties.ReadOnly = true;
-            this.chkIsDrawback.Properties.ReadOnly = true;
-            this.chkIsIOU.Properties.ReadOnly = true;
-            this.txtExpectedReturnDate.Properties.ReadOnly = true;
+            foreach (var control in this.layoutControl1.Controls)
+            {
+                if (control is BaseEdit)
+                {
+                    (control as BaseEdit).Properties.ReadOnly = true;
+                }
+            }
         }
 
         private void InitData()
@@ -221,8 +214,6 @@ namespace BudgetSystem.OutMoney
             this.cboMoneyUsed.Properties.Items.AddRange(umtList);
 
             this.cboBudget.Properties.DataSource = bm.GetAllBudget();
-
-            this.cboSupplier.Properties.DataSource = sm.GetAllSupplier();
 
             this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
         }
@@ -368,6 +359,8 @@ namespace BudgetSystem.OutMoney
             if (currentBudget != null)
             {
                 currentBudget = bm.GetBudget(currentBudget.ID);
+
+                this.cboSupplier.Properties.DataSource = sm.GetSupplierListByBudgetId(currentBudget.ID);
 
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 
