@@ -51,7 +51,7 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (Operate == OperateTypes.None)
+                if (Operate == OperateTypes.None || Operate == OperateTypes.CommonQuery || Operate == OperateTypes.MyQuery)
                 {
                     return this.Module.ToString();
                 }

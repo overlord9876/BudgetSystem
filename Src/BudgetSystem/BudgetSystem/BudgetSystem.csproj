@@ -87,6 +87,12 @@
     <Compile Include="Base\frmBaseForm.Designer.cs">
       <DependentUpon>frmBaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmBaseQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmBaseQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBaseQueryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,6 +445,12 @@
     <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
       <DependentUpon>frmApprovalEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserManage\frmUserQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\frmUserQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmUserQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Base\DataControl.resx">
       <DependentUpon>DataControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -450,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseForm.resx">
       <DependentUpon>frmBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseQueryConditionEditor.resx">
+      <DependentUpon>frmBaseQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseQueryForm.resx">
       <DependentUpon>frmBaseQueryForm.cs</DependentUpon>
@@ -610,6 +625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage\frmUserQuery.resx">
       <DependentUpon>frmUserQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage\frmUserQueryConditionEditor.resx">
+      <DependentUpon>frmUserQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>

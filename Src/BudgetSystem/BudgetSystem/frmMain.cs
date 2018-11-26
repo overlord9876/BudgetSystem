@@ -298,10 +298,16 @@ namespace BudgetSystem
 
         private void btnModifyPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            frmUserEdit editor = new frmUserEdit();
-            editor.WorkModel = EditFormWorkModels.Custom;
-            editor.CustomWorkModel = frmUserEdit.CustomWorkModel_ModifyPassword;
-            editor.ShowDialog();
+            frmUserQueryConditionEditor form = new frmUserQueryConditionEditor();
+            form.ShowDialog();
+         
+
+
+
+            //frmUserEdit editor = new frmUserEdit();
+            //editor.WorkModel = EditFormWorkModels.Custom;
+            //editor.CustomWorkModel = frmUserEdit.CustomWorkModel_ModifyPassword;
+            //editor.ShowDialog();
         }
 
         private void btnReport1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

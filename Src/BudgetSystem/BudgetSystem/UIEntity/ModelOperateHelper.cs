@@ -14,7 +14,28 @@ namespace BudgetSystem
             int order = (int)operate;
             int imageIndex = -1;
 
-            if (operate == OperateTypes.New)
+
+
+            if (operate == OperateTypes.CommonQuery)
+            {
+                text = "通用查询";
+                group = "查询";
+                imageIndex = 48;
+            }
+            else if (operate == OperateTypes.MyQuery)
+            {
+                text = "我的查询";
+                group = "查询";
+                imageIndex = 48;
+            }
+            else if (operate == OperateTypes.New)
+            {
+                text = "自定义查询";
+                group = "查询";
+                imageIndex = 48;
+            }
+
+            else if (operate == OperateTypes.New)
             {
                 text = "新增";
                 group = "编辑";

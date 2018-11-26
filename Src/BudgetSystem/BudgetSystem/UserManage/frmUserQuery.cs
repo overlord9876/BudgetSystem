@@ -32,6 +32,8 @@ namespace BudgetSystem.UserManage
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ReSetPassword));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CommonQuery));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery));
             this.ModelOperatePageName = "用户管理";
 
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查询", UITypes.LargeMenu, new List<string>() { "查询1", "查询2", "查询3" }));

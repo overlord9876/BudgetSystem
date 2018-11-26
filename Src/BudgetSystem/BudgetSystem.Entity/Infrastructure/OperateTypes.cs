@@ -6,7 +6,16 @@ namespace BudgetSystem.Entity
 {
     public enum OperateTypes
     {
+        /// <summary>
+        /// None,CommonQuery,MyQuery,CustomQuery是不要权限的
+        /// </summary>
         None,
+        CommonQuery,
+        MyQuery,
+        CustomQuery,
+        
+        
+        
         New,
         Modify,
         Delete,
