@@ -76,14 +76,7 @@ namespace BudgetSystem
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
-            {
-                if (supplier.EnumFlowState == EnumDataFlowState.审批中
-                  || supplier.EnumFlowState == EnumDataFlowState.审批通过)
-                {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}不能修改信息。", supplier.Name, supplier.EnumFlowState.ToString()));
-                    return;
-                }
-
+            {     
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.CurrentSupplier = supplier;

@@ -27,8 +27,6 @@ namespace BudgetSystem.OutMoney
 
         private void frmOutMemoryEdit_Load(object sender, EventArgs e)
         {
-            SetLayoutControlStyle();
-
             this.ucOutMoneyEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             {

@@ -127,6 +127,17 @@ namespace BudgetSystem.OutMoney
 
         }
 
+        private void SetReadOnly()
+        {
+            foreach (var control in this.layoutControl1.Controls)
+            {
+                if (control is BaseEdit)
+                {
+                    (control as BaseEdit).Properties.ReadOnly = true;
+                }
+            }
+        }
+
         private void textEdit_Number23_EditValueChanged(object sender, EventArgs e)
         {
             if (textEdit_Number23.Value <= 0)
@@ -165,6 +176,7 @@ namespace BudgetSystem.OutMoney
         {
 
         }
+
 
 
     }
