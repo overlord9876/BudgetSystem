@@ -155,3 +155,12 @@ Ps:使用Dapper查询时当返回对象属性中包含枚举类型时类型转�
 	 请处理新增了DataControl和IDataControl用于提交用户控制给流程界面使用。请注意提供的UserControl的高度，我这边会基于高度处理滚动条的。
 	 DataControl的和流程界面的交互请完成UIEntity下的DataControlCreator里的内容即可。
 	 顺便说一下，我昨天修改了条件编译，去掉了权限处理，要开权限的话，可以使用Budget项目的属性中，去掉生成-条件编译符号中的“IgnorePermission”即可。
+
+2018-11-28 by zxw
+	查询的统一处理已经完成了，使用方式 ：
+	查询条件类参见:Entity/QueryCondition目录下
+	新的查询界面参见UserManage/frmUserQueryConditionEditor
+	注册查询，和使用查询的参见UserManage/frmUserQuery 我在基类里包装了大多数的使用，在窗体中只需要实现几个方法就行了
+	整个查询这块已经支持了保存常用查询，在保存后，支持了主界面的菜单的自动刷新。
+	目前缺的就是已保存的删除了，今天来不及了
+

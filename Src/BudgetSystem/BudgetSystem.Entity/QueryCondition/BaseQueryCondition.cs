@@ -12,6 +12,11 @@ namespace BudgetSystem.Entity.QueryCondition
             set;
         }
 
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 
 }

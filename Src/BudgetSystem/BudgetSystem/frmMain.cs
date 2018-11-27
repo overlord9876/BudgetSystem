@@ -369,5 +369,10 @@ namespace BudgetSystem
             }
             ShowForm(form);
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            RunInfo.Instance.MainForm = this;
+        }
     }
 }

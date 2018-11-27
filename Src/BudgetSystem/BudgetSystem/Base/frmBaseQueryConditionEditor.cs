@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Linq;
 namespace BudgetSystem.Base
 {
-    public partial class frmBaseQueryConditionEditor<T> : DevExpress.XtraEditors.XtraForm where T:Entity.QueryCondition.BaseQueryCondition
+    public partial class frmBaseQueryConditionEditor<T> : QueryConditionEditorForm where T:Entity.QueryCondition.BaseQueryCondition
     {
 
         public frmBaseQueryConditionEditor()
@@ -19,13 +19,7 @@ namespace BudgetSystem.Base
             InitializeComponent();
         }
 
-        protected string QueryName
-        {
-            get;
-            set;
-        }
 
-        
         protected virtual void Sure()
         {
             if (CollectData())
@@ -35,11 +29,6 @@ namespace BudgetSystem.Base
 
         }
 
-        public T QueryCondition
-        {
-            get;
-            protected set;
-        }
 
         /// <summary>
         /// 正常主要就是为重写这一个方法
@@ -65,71 +54,27 @@ namespace BudgetSystem.Base
                     string conditionName = input.Result;
                     this.QueryCondition.Name = conditionName;
 
-                    List<T> existCondition = GetExistCondition();
+                    List<T> existCondition =UIEntity.QueryConditionHelper. GetExistCondition<T>(this.QueryName);
                     if (existCondition.Exists(s => s.Name == conditionName))
                     {
                         if (XtraMessageBox.Show("查询名称已存在，是否覆盖？", "请选择", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
                             existCondition.Remove(existCondition.Single(s => s.Name == conditionName));
-                            existCondition.Add(this.QueryCondition);
-                            this.SaveCondition(existCondition);
+                            existCondition.Add(this.QueryCondition as T);
+                            UIEntity.QueryConditionHelper.SaveCondition(existCondition,this.QueryName);
+                            IsSavedNewCondition = true;
                         }
                     }
                     else
                     {
-                        existCondition.Add(this.QueryCondition);
-                        this.SaveCondition(existCondition);
+                        existCondition.Add(this.QueryCondition as T);
+                        UIEntity.QueryConditionHelper.SaveCondition(existCondition, this.QueryName);
+                        IsSavedNewCondition = true;
                     }
                 }
             }
         }
 
-        private string GetQuerySaveFileName()
-        {
-            string fileName = System.IO.Path.Combine(Environment.CurrentDirectory, "Query");
-            if (!System.IO.Directory.Exists(fileName))
-            {
-                System.IO.Directory.CreateDirectory(fileName);
-            }
 
-            fileName = System.IO.Path.Combine(fileName, this.QueryName + ".json");
-            return fileName;
-        }
-
-        private List<T> GetExistCondition()
-        {
-            string queryFileName = GetQuerySaveFileName();
-            try
-            {
-                if (System.IO.File.Exists(queryFileName))
-                {
-                    string str = System.IO.File.ReadAllText(queryFileName, Encoding.UTF8);
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(str);
-                }
-                return new List<T>();
-            }
-            catch
-            {
-                return new List<T>();
-            }
-        }
-
-        private void SaveCondition(List<T> conditions)
-        {
-            try
-            {
-
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(conditions);
-
-                System.IO.File.WriteAllText(GetQuerySaveFileName(), json, Encoding.UTF8);
-
-            }
-            catch
-            {
-
-            }
-        
-        
-        }
     }
 }

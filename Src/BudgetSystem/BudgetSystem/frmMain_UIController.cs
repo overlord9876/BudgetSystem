@@ -7,6 +7,7 @@ using DevExpress.LookAndFeel;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars;
 using System.Diagnostics;
+using System.Collections;
 
 namespace BudgetSystem
 {
@@ -128,7 +129,19 @@ namespace BudgetSystem
             }
         }
 
-
+        public void RefreshQueryOperateRibbonUI(frmBaseQueryForm form)
+        {
+            RibbonPage page = GetPageByID(form.FormID);
+            if (page != null)
+            {
+                this.ribbonControl1.Pages.Remove(page);
+            }
+            page = CreateRibbonPage(form);
+            if (page != null)
+            {
+                this.ribbonControl1.SelectedPage = page;
+            }
+        }
 
 
         private void SetOperatonGroupNotVisibleAndClearNotExistFormPage(string exceptFormID)
@@ -222,7 +235,7 @@ namespace BudgetSystem
                     button.Caption = mo.Text;
                     button.GroupIndex = mo.Order;
                     button.ItemClick += new ItemClickEventHandler(RibbonButtonClick);
-                    button.Tag = mo;
+                    button.Tag = new UIEntity.UIElementTag() { Operate = mo };
                     group.ItemLinks.Add(button);
 
                     button.ImageIndex = mo.ImageIndex;
@@ -232,8 +245,8 @@ namespace BudgetSystem
                     BarSubItem button = new BarSubItem();
                     button.RibbonStyle = RibbonItemStyles.Large;
                     button.Caption = mo.Text;
-                    button.Tag = mo;
-                    List<string> subItems = mo.UIElementData as List<string>;
+                    button.Tag = new UIEntity.UIElementTag() { Operate = mo };
+                    IList subItems = mo.UIElementData as IList;
                     group.ItemLinks.Add(button);
 
                     button.ImageIndex = mo.ImageIndex;
@@ -241,12 +254,13 @@ namespace BudgetSystem
 
                     if (subItems != null)
                     {
-                        foreach (string s in subItems)
+                        foreach (object s in subItems)
                         {
                             BarButtonItem sb = new BarButtonItem();
                             sb.ItemClick += RibbonButtonClick;
-                            sb.Tag = mo;
-                            sb.Caption = s;
+                            sb.Tag = new UIEntity.UIElementTag() { Operate = mo, Tag = s };
+                            
+                            sb.Caption = s.ToString();
                             button.ItemLinks.Add(sb);
                         }
                     }
@@ -270,9 +284,10 @@ namespace BudgetSystem
         private void RibbonButtonClick(object sender, ItemClickEventArgs e)
         {
 
+           
             frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
-
-            form.OperateHandled(e.Item.Tag as ModelOperate, new ModeOperateEventArgs() { SenderText = e.Item.Caption, Tag = e.Item.Tag });
+            UIEntity.UIElementTag tag = e.Item.Tag as UIEntity.UIElementTag;
+            form.OperateHandled(tag.Operate, new ModeOperateEventArgs() { SenderText = e.Item.Caption, Tag = tag.Tag });
 
         }
 

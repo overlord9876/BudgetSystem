@@ -10,20 +10,22 @@ using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
-    public partial class frmUserQueryConditionEditor : frmTestQueryConditionEditorransit
+    public partial class frmUserQueryConditionEditor : frmUserQueryConditionEditorTransit
     {
         public frmUserQueryConditionEditor()
         {
             InitializeComponent();
-            this.QueryName = "UserQuery";
         }
 
 
         public override bool CollectData()
         {
-           
-            this.QueryCondition = new UserQueryCondition();
-            this.QueryCondition.UserName = "abc";
+            UserQueryCondition c = new UserQueryCondition();
+
+            c.UserName = "abc";
+
+
+            this.QueryCondition = c;
             return true;
          
         }
@@ -33,7 +35,7 @@ namespace BudgetSystem
     /// <summary>
     /// 过渡一下，不然窗体编辑器无法打开
     /// </summary>
-    public class frmTestQueryConditionEditorransit : Base.frmBaseQueryConditionEditor<UserQueryCondition>
+    public class frmUserQueryConditionEditorTransit : Base.frmBaseQueryConditionEditor<UserQueryCondition>
     { 
     
     }

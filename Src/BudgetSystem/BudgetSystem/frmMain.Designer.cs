@@ -55,6 +55,7 @@
             this.btnBudgetReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoney = new DevExpress.XtraBars.BarButtonItem();
+            this.bsiLoginInfo = new DevExpress.XtraBars.BarStaticItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -70,7 +71,6 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.bsiLoginInfo = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -417,6 +417,13 @@
             this.btnOutMoney.Tag = "OutMoneyReport";
             this.btnOutMoney.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOutMoney_ItemClick);
             // 
+            // bsiLoginInfo
+            // 
+            this.bsiLoginInfo.Caption = "barStaticItem1";
+            this.bsiLoginInfo.Id = 43;
+            this.bsiLoginInfo.Name = "bsiLoginInfo";
+            this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -540,13 +547,6 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
-            // bsiLoginInfo
-            // 
-            this.bsiLoginInfo.Caption = "barStaticItem1";
-            this.bsiLoginInfo.Id = 43;
-            this.bsiLoginInfo.Name = "bsiLoginInfo";
-            this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -562,6 +562,7 @@
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "上服集团预算系统   ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.MdiChildActivate += new System.EventHandler(this.frmMain_MdiChildActivate);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();

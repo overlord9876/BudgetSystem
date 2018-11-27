@@ -61,7 +61,7 @@ namespace BudgetSystem
             set;
         }
 
-
+        
         /// <summary>
         /// 现在看来只需要处理Button不用支持扩展的控制数据
         /// 如果要支持CheckBox，CheckedButton一类的，还需要处理额外的控制状态数据。

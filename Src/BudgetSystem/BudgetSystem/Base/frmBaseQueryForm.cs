@@ -10,6 +10,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
@@ -79,13 +80,46 @@ namespace BudgetSystem
             protected set;
         }
 
-
         public virtual void OperateHandled(ModelOperate operate,ModeOperateEventArgs e)
         {
+            if (operate.Operate == OperateTypes.CommonQuery.ToString())
+            {
+                DoCommonQuery(e.SenderText);
+            }
+            else if (operate.Operate == OperateTypes.CustomQuery.ToString())
+            {
+                QueryConditionEditorForm form = this.CreateConditionEditorForm();
 
-            
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    DoConditionQuery(form.QueryCondition);
+                }
+                if (form.IsSavedNewCondition)
+                {
+                    this.InitModelOperate();
+                    RunInfo.Instance.MainForm.RefreshQueryOperateRibbonUI(this);
+                }
+            }
+            else if (operate.Operate == OperateTypes.MyQuery.ToString())
+            {
+                DoConditionQuery(e.Tag as BaseQueryCondition);
+            }
         }
 
+        protected virtual void DoCommonQuery(string queryName)
+        { 
+        
+        }
+
+        protected virtual void DoConditionQuery(BaseQueryCondition condition)
+        { 
+        
+        }
+
+        protected virtual QueryConditionEditorForm CreateConditionEditorForm() 
+        {
+            return null;
+        }
 
         protected bool AutoRegeditGridViewDoubleClick = true;
 
@@ -174,8 +208,26 @@ namespace BudgetSystem
           
         }
 
+        protected void RegeditQueryOperate<T>(bool supportCustomCondition,List<string> commonQueryConditions) where T:BaseQueryCondition
+        {
+            if (commonQueryConditions != null && commonQueryConditions.Count > 0)
+            {
+                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, "", UITypes.LargeMenu, commonQueryConditions));
 
+            }
 
+            if (supportCustomCondition)
+            {
+                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CustomQuery));
+            }
+
+            List<T> condition = UIEntity.QueryConditionHelper.GetExistCondition<T>(this.GetType().ToString());
+
+            if (condition.Count > 0)
+            {
+                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery, "", UITypes.LargeMenu, condition));
+            }
+        }
 
     }
 }

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.UserManage
 {
@@ -25,19 +26,20 @@ namespace BudgetSystem.UserManage
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-
+            
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ReSetPassword));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CommonQuery));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery));
+
+
+            //注册查询我在基类里处理了，如果业务模块需要使用查询功能，可以像这里一样注册就行了
+            this.RegeditQueryOperate<UserQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+
+
             this.ModelOperatePageName = "用户管理";
-
-            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查询", UITypes.LargeMenu, new List<string>() { "查询1", "查询2", "查询3" }));
-
 
         }
 
@@ -45,11 +47,7 @@ namespace BudgetSystem.UserManage
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
 
-            //if (operate.Operate == OperateTypes.View.ToString())
-            //{
-            //    MessageBox.Show(e.SenderText);
-            //    return;
-            //}
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -75,11 +73,25 @@ namespace BudgetSystem.UserManage
             {
                 ReSetUserPassword();
             }
-
-
-
-
         }
+
+        protected override void DoCommonQuery(string queryName)
+        {
+            XtraMessageBox.Show(queryName);
+        }
+
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            XtraMessageBox.Show(condition.ToString());
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmUserQueryConditionEditor form = new frmUserQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            return form;
+        }
+
 
 
 
@@ -114,7 +126,6 @@ namespace BudgetSystem.UserManage
                 XtraMessageBox.Show("重置成功");
             }
         }
-
 
         private void CreateUser()
         {

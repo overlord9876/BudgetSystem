@@ -49,6 +49,10 @@ namespace BudgetSystem
             set;
         }
 
-       
+        public frmMain MainForm
+        {
+            get;
+            set;
+        }
     }
 }

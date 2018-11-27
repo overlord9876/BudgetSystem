@@ -28,7 +28,7 @@ namespace BudgetSystem
                 group = "查询";
                 imageIndex = 48;
             }
-            else if (operate == OperateTypes.New)
+            else if (operate == OperateTypes.CustomQuery)
             {
                 text = "自定义查询";
                 group = "查询";
