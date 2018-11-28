@@ -27,8 +27,8 @@ namespace BudgetSystem
 
         private void frmSupplierEdit_Load(object sender, EventArgs e)
         {
-            this.ucSupplierEdit1.WorkModel=this.WorkModel;
             this.ucSupplierEdit1.CurrentSupplier = this.CurrentSupplier;
+            this.ucSupplierEdit1.WorkModel=this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "创建供应商"; 

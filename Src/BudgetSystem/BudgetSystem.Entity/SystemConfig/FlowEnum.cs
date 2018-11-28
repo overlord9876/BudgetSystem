@@ -10,11 +10,11 @@ namespace BudgetSystem.Entity
     public enum EnumFlowNames
     {
         预算单审批流程,
+        预算单修改流程,
+        预算单删除流程,
         供应商审批流程,
         付款审批流程,
-        入账审修改批流程,
-        预算单删除流程,
-        预算单修改流程
+        入账审修改批流程
     }
 
     /// <summary>

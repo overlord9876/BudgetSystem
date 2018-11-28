@@ -52,6 +52,7 @@ namespace BudgetSystem
         {
             this.dxErrorProvider1.ClearErrors();
             this.CheckContractNOInput();
+            this.CheckDateInput();
             this.CheckCustomerInput();
             if (dxErrorProvider1.HasErrors
                 || CheckOutProductDetailInput() == false
@@ -73,6 +74,7 @@ namespace BudgetSystem
                 this.CurrentBudget = new Budget();
                 CurrentBudget.State = "待审批";
                 CurrentBudget.CreateDate = DateTime.Now;
+                CurrentBudget.Department = RunInfo.Instance.CurrentUser.Department;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 CurrentBudget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
                 //主买方不允许修改，所以只有新增时获取选择值 
@@ -170,7 +172,10 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetReadOnly();
-                BindingBudget(CurrentBudget.ID);
+                if (CurrentBudget != null)
+                {
+                    BindingBudget(CurrentBudget.ID);
+                }
             }
         }
 
@@ -183,10 +188,12 @@ namespace BudgetSystem
                     (control as BaseEdit).Properties.ReadOnly = true;
                 }
             }
+
+            this.btnSync.Enabled = false;
             this.gvOutProductDetail.Columns.Remove(this.colDelete);
             this.gvOutProductDetail.OptionsBehavior.Editable = false;
 
-            this.bgvInProductDetail.Columns.Remove(this.colDelete);
+            this.bgvInProductDetail.Columns.Remove(this.gcInDelete);
             this.bgvInProductDetail.OptionsBehavior.Editable = false;
         }
 
@@ -197,6 +204,7 @@ namespace BudgetSystem
             contractNoPrefix = DateTime.Now.ToString("yy") + "-" + RunInfo.Instance.CurrentUser.Department + "-";
 
             this.txtContractNO.Text = contractNoPrefix;
+            this.dteSignDate.EditValue = DateTime.Now;
             //this.txtContractNO.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             //this.txtContractNO.Properties.Mask.EditMask = "("+contractNoPrefix+")\\d{4}";
             //this.txtContractNO.Properties.NullText = contractNoPrefix; 
@@ -333,6 +341,33 @@ namespace BudgetSystem
         }
 
         #region Check Method
+        private void CheckDateInput()
+        {
+            if (this.dteSignDate.EditValue == null)
+            {
+                this.dxErrorProvider1.SetError(this.dteSignDate, "请输入签约日期");
+                return;
+            }
+            if (this.dteValidity.EditValue == null)
+            {
+                this.dxErrorProvider1.SetError(this.dteValidity, "请输入有效期");
+                return;
+            }
+            if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
+            {
+                this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
+                return;
+            }
+            
+            if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批) 
+            {
+                if (this.dteSignDate.DateTime.AddYears(1) > this.dteValidity.DateTime)
+                {
+                    this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
+                    return;
+                }
+            }
+        }
         private void CheckContractNOInput()
         {
             string contractNo = this.txtContractNO.Text.Trim();

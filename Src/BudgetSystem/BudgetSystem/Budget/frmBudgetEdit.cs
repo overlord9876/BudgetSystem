@@ -54,8 +54,15 @@ namespace BudgetSystem
             }
             this.ucBudgetEdit1.FillData(); 
 
-            bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget);
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            string message= bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget);
+            if (!string.IsNullOrEmpty(message))
+            {
+                XtraMessageBox.Show(message, "提示");
+            }
+            else
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
         }
 
 
@@ -63,8 +70,8 @@ namespace BudgetSystem
         #region Event Method
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
-            this.ucBudgetEdit1.WorkModel = this.WorkModel;
             this.ucBudgetEdit1.CurrentBudget = this.CurrentBudget;
+            this.ucBudgetEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             { 
                 this.Text = "创建预算单";

@@ -78,5 +78,30 @@ namespace BudgetSystem.Dal
             }
         }
 
+        /// <summary>
+        /// 验证合同号是否存在
+        /// </summary>
+        /// <param name="contractNo"></param>
+        /// <param name="?"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public bool CheckContractNO(string contractNo, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"SELECT  id FROM `Invoice`  
+                                    WHERE  `ContractNO`=@ContractNO";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

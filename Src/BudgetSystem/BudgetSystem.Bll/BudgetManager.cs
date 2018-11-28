@@ -12,6 +12,7 @@ namespace BudgetSystem.Bll
         Dal.BudgetDal dal = new Dal.BudgetDal();
         Dal.ReceiptManagementDal rmDal = new Dal.ReceiptManagementDal();
         Dal.PaymentNotesDal pnd = new Dal.PaymentNotesDal();
+        Dal.InvoiceDal idal = new Dal.InvoiceDal();
         Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
 
@@ -79,7 +80,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(int id, string currentUser)
+        public string StartFlow(int id,EnumFlowNames flowName, string currentUser)
         {
             Budget budge = this.GetBudget(id);
             if (budge == null)
@@ -94,7 +95,7 @@ namespace BudgetSystem.Bll
             {
                 mmdal.AddModifyMark<Budget>(budge, id, con);
             });
-            FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, budge.ContractNO, EnumFlowDataType.预算单.ToString(), currentUser);
+            FlowRunState state = fm.StartFlow(flowName.ToString(), id, budge.ContractNO, EnumFlowDataType.预算单.ToString(), currentUser);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();
@@ -110,15 +111,19 @@ namespace BudgetSystem.Bll
         /// <returns>修改成功返回string.Empty,否则返回失败原因</returns>
         public string ModifyBudget(Budget budget, bool isStartFlow = false)
         {
-            Budget budge = this.GetBudget(budget.ID);
-            if (budge == null)
+            Budget oldBudget = this.GetBudget(budget.ID);
+            if (oldBudget == null)
             {
                 return "数据不存在";
             }
-            else if (budge.EnumFlowState == EnumDataFlowState.审批中
-                || budget.EnumFlowState == EnumDataFlowState.审批通过)
+            else if (oldBudget.EnumFlowState == EnumDataFlowState.审批中
+                || (EnumFlowNames.预算单审批流程.ToString().Equals(oldBudget.FlowName) && oldBudget.EnumFlowState == EnumDataFlowState.审批通过))
             {
-                return string.Format("{0}的预算单不能修改。");
+                return string.Format("{0}的预算单不能修改。", oldBudget.EnumFlowState.ToString());
+            }
+            else if (EnumFlowNames.预算单修改流程.ToString().Equals(oldBudget.FlowName) && oldBudget.EnumFlowState != EnumDataFlowState.审批通过)
+            {
+                return string.Format("{0}未审批通过不能修改。", EnumFlowNames.预算单修改流程.ToString());
             }
             string message = string.Empty;
             this.ExecuteWithTransaction((con, tran) =>
@@ -134,7 +139,7 @@ namespace BudgetSystem.Bll
                     }
                 }
             });
-            return string.Empty;
+            return message;
         }
 
         public List<AccountBill> GetAccountBillDetailByBudgetId(int budgetId)
@@ -177,6 +182,44 @@ namespace BudgetSystem.Bll
             {
                 return mmdal.GetAllModifyMark<Budget>(id, con);
             }).ToList();
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeleteBudget(int id)
+        {
+            Budget budget = this.GetBudget(id);
+            if (budget == null)
+            {
+                return "数据不存在";
+            }
+            else if (!EnumFlowNames.预算单删除流程.ToString().Equals(budget.FlowName)
+                      || budget.EnumFlowState != EnumDataFlowState.审批通过)
+            {
+                return string.Format("{0}没有审批通过，不能删除。", EnumFlowNames.预算单删除流程.ToString());
+            }
+            string message = string.Empty;
+            bool checkResult = false;
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                checkResult = pnd.CheckContractNO(id, con, tran);
+                if (checkResult)
+                {
+                    message = "存在付款信息，不能删除";
+                    return;
+                }
+                checkResult = idal.CheckContractNO(budget.ContractNO, con, tran);
+                if (checkResult)
+                {
+                    message = "存在发票信息，不能删除";
+                    return;
+                }
+                dal.DeleteBudget(id, con, tran);
+            });
+            return message;
         }
 
     }

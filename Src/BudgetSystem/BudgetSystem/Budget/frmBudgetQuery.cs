@@ -32,15 +32,15 @@ namespace BudgetSystem
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
-            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "作废"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交流程"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Revoke, "申请修改"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close,"申请删除"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交流程"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View,"自定义查询"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "自定义查询"));
 
 
             this.ModelOperatePageName = "预算单";
@@ -74,6 +74,10 @@ namespace BudgetSystem
                     XtraMessageBox.Show(e.SenderText);
                     this.RefreshData();
                 }
+            }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                DeleteBudget();
             }
             else if (operate.Operate == OperateTypes.Revoke.ToString())
             {
@@ -129,10 +133,19 @@ namespace BudgetSystem
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
             {
+                string message = string.Empty;
                 if (budget.EnumFlowState == EnumDataFlowState.审批中
-                    || budget.EnumFlowState == EnumDataFlowState.审批通过)
+                    || (EnumFlowNames.预算单审批流程.ToString().Equals(budget.FlowName) && budget.EnumFlowState == EnumDataFlowState.审批通过))
                 {
-                    XtraMessageBox.Show(string.Format("{0}的预算单不能修改。", budget.ContractNO));
+                    message = string.Format("{0}的预算单不能修改。", budget.EnumFlowState.ToString());
+                }
+                else if (EnumFlowNames.预算单修改流程.ToString().Equals(budget.FlowName) && budget.EnumFlowState != EnumDataFlowState.审批通过)
+                {
+                    message = string.Format("{0}未审批通过不能修改。", EnumFlowNames.预算单修改流程.ToString());
+                }
+                if (!string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show(message, "提示");
                     return;
                 }
                 frmBudgetEdit form = new frmBudgetEdit();
@@ -155,7 +168,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                     return;
                 }
-                string message = bm.StartFlow(budget.ID, RunInfo.Instance.CurrentUser.UserName);
+                string message = bm.StartFlow(budget.ID,EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");
@@ -170,12 +183,48 @@ namespace BudgetSystem
 
         private void RevokeBudget()
         {
-            //TODO:
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
+                    return;
+                }
+                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
         }
 
         private void CloseBudget()
         {
-            //TODO:
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
+                    return;
+                }
+                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
         }
 
         private void ViewBudget()
@@ -187,6 +236,23 @@ namespace BudgetSystem
                 form.WorkModel = EditFormWorkModels.View;
                 form.CurrentBudget = budget;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.RefreshData();
+                }
+            }
+        }
+
+        private void DeleteBudget()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                string message = this.bm.DeleteBudget(budget.ID);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show(message, "提示");
+                }
+                else
                 {
                     this.RefreshData();
                 }

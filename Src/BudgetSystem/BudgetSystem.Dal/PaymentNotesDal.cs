@@ -99,5 +99,29 @@ INNER JOIN Supplier s on pn.SupplierID=s.ID and s.SupplierType=1 and s.ID=@Suppl
             return totalPaymentAmount;
         }
 
+        /// <summary>
+        /// 验证合同ID是否存在
+        /// </summary>
+        /// <param name="budgetID"></param> 
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public bool CheckContractNO(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"SELECT  id FROM `PaymentNotes`  
+                                    WHERE  `BudgetID`=@BudgetID";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetID));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

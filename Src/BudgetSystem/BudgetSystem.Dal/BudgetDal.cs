@@ -13,7 +13,7 @@ namespace BudgetSystem.Dal
         public Budget GetBudget(int id, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
-                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName                                               
+                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
@@ -40,7 +40,7 @@ namespace BudgetSystem.Dal
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
-                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
+                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
@@ -56,7 +56,7 @@ namespace BudgetSystem.Dal
         public IEnumerable<Budget> GetBudgetListByCustomerId(string userName, int customerId, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
-                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
+                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName AND b.Salesman=@Salesman
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
@@ -71,7 +71,7 @@ namespace BudgetSystem.Dal
         public IEnumerable<Budget> GetBudgetListBySaleman(string userName, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
-                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,u2.RealName AS UpdateUserName
+                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName  AND b.Salesman=@Salesman
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
@@ -164,6 +164,19 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, new { ID = id, State = state }, tran);
         }
 
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        public void DeleteBudget(int id, IDbConnection con, IDbTransaction tran)
+        {
+            string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;
+                                 Delete From `BudgetSuppliers` Where `ID` = @ID;  
+                                 Delete From `Budget` Where `ID` = @ID";
+            con.Execute(deleteSql, new { ID =id }, tran);
+        }
         private void AddBudgetCustomers(Budget budget, IDbConnection con, IDbTransaction tran)
         {
             if (budget.CustomerList != null && budget.CustomerList.Any())
@@ -186,6 +199,6 @@ namespace BudgetSystem.Dal
             }
         }
 
-
+        
     }
 }

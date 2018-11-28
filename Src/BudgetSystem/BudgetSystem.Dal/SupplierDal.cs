@@ -12,8 +12,8 @@ namespace BudgetSystem.Dal
     {
         public Supplier GetSupplier(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,
-                                        u2.RealName AS UpdateUserName, IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,u2.RealName AS UpdateUserName, 
+                                        IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
@@ -25,8 +25,8 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,
-                                        u2.RealName AS UpdateUserName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,u2.RealName AS UpdateUserName,
+                                        IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
@@ -37,8 +37,8 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Supplier> GetSupplierListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,
-                                        u2.RealName AS UpdateUserName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName,u2.RealName AS UpdateUserName,
+                                        IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
                                  INNER JOIN BudgetSuppliers bs on s.ID=bs.Sup_ID and bs.ID=@BudgetID
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
