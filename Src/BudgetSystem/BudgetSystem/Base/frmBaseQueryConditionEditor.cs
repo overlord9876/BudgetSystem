@@ -69,6 +69,7 @@ namespace BudgetSystem.Base
                     {
                         existCondition.Add(this.QueryCondition as T);
                         UIEntity.QueryConditionHelper.SaveCondition(existCondition, this.QueryName);
+
                         IsSavedNewCondition = true;
                     }
                 }

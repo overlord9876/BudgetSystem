@@ -11,6 +11,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Base;
 
 namespace BudgetSystem
 {
@@ -103,6 +104,18 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.MyQuery.ToString())
             {
                 DoConditionQuery(e.Tag as BaseQueryCondition);
+            }
+            else if (operate.Operate == OperateTypes.QueryManager.ToString())
+            {
+                frmCustomQueryEditor editor = new frmCustomQueryEditor();
+                editor.QueryName = this.GetType().ToString();
+                editor.ShowDialog();
+ 
+                if (editor.IsModifyedCondition)
+                {
+                    this.InitModelOperate();
+                    RunInfo.Instance.MainForm.RefreshQueryOperateRibbonUI(this);
+                }
             }
         }
 
@@ -226,6 +239,7 @@ namespace BudgetSystem
             if (condition.Count > 0)
             {
                 this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery, "", UITypes.LargeMenu, condition));
+                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.QueryManager));
             }
         }
 

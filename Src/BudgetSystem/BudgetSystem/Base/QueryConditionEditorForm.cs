@@ -2,7 +2,7 @@
 using DevExpress.XtraEditors;
 namespace BudgetSystem
 {
-    public abstract class QueryConditionEditorForm : XtraForm, IQueryConditionEditor
+    public class QueryConditionEditorForm : XtraForm, IQueryConditionEditor
     {
 
 

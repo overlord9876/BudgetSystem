@@ -34,7 +34,12 @@ namespace BudgetSystem
                 group = "查询";
                 imageIndex = 48;
             }
-
+            else if (operate == OperateTypes.QueryManager)
+            {
+                text = "查询配置";
+                group = "查询";
+                imageIndex = 48;
+            }
             else if (operate == OperateTypes.New)
             {
                 text = "新增";

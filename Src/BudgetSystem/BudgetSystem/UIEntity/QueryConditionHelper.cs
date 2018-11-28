@@ -37,13 +37,11 @@ namespace BudgetSystem.UIEntity
             }
         }
 
-        public static void SaveCondition<T>(List<T> conditions,string queryName) where T:Entity.QueryCondition.BaseQueryCondition
+        public static void SaveCondition<T>(List<T> conditions, string queryName) where T : Entity.QueryCondition.BaseQueryCondition
         {
             try
             {
-
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(conditions);
-
                 System.IO.File.WriteAllText(QueryConditionHelper.GetQuerySaveFileName(queryName), json, Encoding.UTF8);
 
             }
@@ -51,10 +49,7 @@ namespace BudgetSystem.UIEntity
             {
 
             }
-
-
         }
-
 
     }
 }

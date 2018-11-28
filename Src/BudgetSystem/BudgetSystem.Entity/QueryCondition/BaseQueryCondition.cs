@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BudgetSystem.Entity.QueryCondition
 {
-    public abstract class BaseQueryCondition
+    public class BaseQueryCondition
     {
         public string Name
         {

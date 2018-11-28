@@ -13,6 +13,7 @@ namespace BudgetSystem.Entity
         CommonQuery,
         MyQuery,
         CustomQuery,
+        QueryManager,
         
         
         
