@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtExportName = new DevExpress.XtraEditors.TextEdit();
@@ -113,6 +114,7 @@
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.bgcIsDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -302,7 +304,15 @@
             this.bgcConstCNY,
             this.bgcOperator,
             this.bgcDepartmentCode,
+            this.bgcIsDelete,
             this.gcConstInDelete});
+            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Strikeout);
+            styleFormatCondition1.Appearance.Options.UseFont = true;
+            styleFormatCondition1.Column = this.bgcIsDelete;
+            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition1.Value1 = true;
+            this.gvConstSplit.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
+            styleFormatCondition1});
             this.gvConstSplit.GridControl = this.gcConstSplit;
             this.gvConstSplit.Name = "gvConstSplit";
             this.gvConstSplit.NewItemRowText = "单击此处添加";
@@ -1054,6 +1064,13 @@
             this.layoutControlItem22.TextSize = new System.Drawing.Size(50, 20);
             this.layoutControlItem22.TextToControlDistance = 5;
             // 
+            // bgcIsDelete
+            // 
+            this.bgcIsDelete.Caption = "是否删除";
+            this.bgcIsDelete.FieldName = "IsDelete";
+            this.bgcIsDelete.Name = "bgcIsDelete";
+            this.bgcIsDelete.Visible = true;
+            // 
             // ucInMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1205,5 +1222,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcIsDelete;
     }
 }

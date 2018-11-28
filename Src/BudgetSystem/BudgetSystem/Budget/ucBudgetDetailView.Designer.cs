@@ -442,6 +442,7 @@
             this.gvBudget.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvBudget.Name = "gvBudget";
             this.gvBudget.OptionsBehavior.Editable = false;
+            this.gvBudget.OptionsDetail.SmartDetailExpand = false;
             this.gvBudget.OptionsView.ShowGroupPanel = false;
             // 
             // gcContractNO

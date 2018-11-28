@@ -280,7 +280,10 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes.Description = this.txtDescription.Text.Trim();
             this.CurrentPaymentNotes.CNY = this.txtCNY.Value;
-            this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
+            if (this.txtPaymentDate.EditValue != null)
+            {
+                this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
+            }
             this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
             this.CurrentPaymentNotes.CommitTime = DateTime.Parse(this.deCommitTime.EditValue.ToString());
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;

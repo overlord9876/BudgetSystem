@@ -87,7 +87,7 @@ namespace BudgetSystem.Dal
         public IEnumerable<BankSlip> GetAllBankSlipList(IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select * From `bankslip` bs
-                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemTy";
+                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType";
 
             return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString() }, tran);
         }

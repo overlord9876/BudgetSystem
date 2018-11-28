@@ -55,7 +55,7 @@ namespace BudgetSystem.OutMoney
         {
             base.SubmitNewData();
 
-            if (!this.ucOutMoneyEdit1.CheckInputData()) { return; }
+            if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
             this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);
@@ -79,7 +79,7 @@ namespace BudgetSystem.OutMoney
         {
             SubmitDataByWorkModel();
 
-            if (!this.ucOutMoneyEdit1.CheckInputData()) { return; }
+            if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 

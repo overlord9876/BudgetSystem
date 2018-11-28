@@ -54,6 +54,11 @@ namespace BudgetSystem
             this.CheckContractNOInput();
             this.CheckDateInput();
             this.CheckCustomerInput();
+            if (txtExchangeRate.Value <= 0)
+            {
+                this.dxErrorProvider1.SetError(txtExchangeRate, "汇率值错误。");
+            }
+
             if (dxErrorProvider1.HasErrors
                 || CheckOutProductDetailInput() == false
                 || CheckInProductDetailInput() == false)
@@ -354,7 +359,7 @@ namespace BudgetSystem
                 return;
             }
 
-            if (!(this.dteSignDate.DateTime > this.dteValidity.DateTime))
+            if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
                 return;
@@ -362,7 +367,7 @@ namespace BudgetSystem
 
             if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批)
             {
-                if (this.dteSignDate.DateTime.AddYears(1) > this.dteValidity.DateTime)
+                if (this.dteSignDate.DateTime.AddYears(1) <= this.dteValidity.DateTime)
                 {
                     this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
                     return;

@@ -122,7 +122,7 @@ namespace BudgetSystem.Dal
                                          `DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,`ExchangeRate` = @ExchangeRate ,`Description`=@Description,
                                          `CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate ,`PurchasePrice`=@PurchasePrice,Profit=@Profit,
                                          `ProfitLevel1`=@ProfitLevel1,`ProfitLevel2`=@ProfitLevel2 ,`USDTotalAmount`=@USDTotalAmount,
-                                         `UpdateDate`=now(),`UpdateUser`=@UpdateDate 
+                                         `UpdateDate`=now(),`UpdateUser`=@UpdateUser 
                                 Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;
@@ -175,7 +175,7 @@ namespace BudgetSystem.Dal
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;
                                  Delete From `BudgetSuppliers` Where `ID` = @ID;  
                                  Delete From `Budget` Where `ID` = @ID";
-            con.Execute(deleteSql, new { ID =id }, tran);
+            con.Execute(deleteSql, new { ID = id }, tran);
         }
         private void AddBudgetCustomers(Budget budget, IDbConnection con, IDbTransaction tran)
         {
@@ -199,6 +199,6 @@ namespace BudgetSystem.Dal
             }
         }
 
-        
+
     }
 }
