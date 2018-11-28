@@ -65,5 +65,39 @@ namespace BudgetSystem.Dal
             con.Execute(deleteSql, new { ID = id }, tran);
         }
 
+        /// <summary>
+        /// 合同付款，单个非合格供方付款人民币总数
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <param name="supplierId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public decimal GetTemporarySupplierPaymentByBudgetId(int budgetId, int supplierId, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"select SUM(CNY) from PaymentNotes pn
+INNER JOIN Supplier s on pn.SupplierID=s.ID and s.SupplierType=1 and s.ID=@SupplierID
+ where BudgetID=50;";
+
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Transaction = tran;
+            IDbDataParameter budgetIDParamter = command.CreateParameter();
+            budgetIDParamter.DbType = DbType.Int32;
+            budgetIDParamter.ParameterName = "BudgetID";
+            budgetIDParamter.Value = budgetId;
+            command.Parameters.Add(budgetIDParamter);
+
+            IDbDataParameter supplierIDParamter = command.CreateParameter();
+            supplierIDParamter.DbType = DbType.Int32;
+            supplierIDParamter.ParameterName = "SupplierID";
+            supplierIDParamter.Value = budgetId;
+            command.Parameters.Add(supplierIDParamter);
+            object obj = command.ExecuteScalar();
+            decimal totalPaymentAmount = 0;
+            decimal.TryParse(obj.ToString(), out totalPaymentAmount);
+            return totalPaymentAmount;
+        }
+
     }
 }

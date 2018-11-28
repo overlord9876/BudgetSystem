@@ -26,7 +26,7 @@ namespace BudgetSystem.OutMoney
         private EditFormWorkModels _workModel;
         private PaymentNotes _paymentNote;
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
-
+        const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
         public PaymentNotes CurrentPaymentNotes
         {
             get { return this._paymentNote; }
@@ -180,7 +180,11 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
             }
-
+            decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
+            if (totalAmount > temporarySupplierPaymenttotalAmountMaxValue)
+            {
+                this.dxErrorProvider1.SetError(txtCNY, string.Format("当前临时供方已付款{0}，加上当前付款金额已超过最大限制。", temporarySupplierPaymenttotalAmount));
+            }
             if (cboApplicant.EditValue as User == null)
             {
                 this.dxErrorProvider1.SetError(cboApplicant, "请选择申请人。");
@@ -315,10 +319,10 @@ namespace BudgetSystem.OutMoney
             txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
 
             //已收汇原币金额
-            decimal amount = rm.GetTotalAmountOriginalCoinByBudgetId(currentBudget.ID);
+            //decimal amount = rm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
 
             //应留利润计算
-            txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * amount;
+            txtActualRetention.EditValue = currentBudget.Profit / currentBudget.TotalAmount * txtReceiptAmount.Value;
 
             decimal taxRebateRate = 1;
             if (txtTaxRebateRate.EditValue != null)
@@ -374,13 +378,21 @@ namespace BudgetSystem.OutMoney
                 txtReceiptAmount.EditValue = 0;
             }
         }
-
+        private decimal temporarySupplierPaymenttotalAmount;
         private void cboSupplier_EditValueChanged(object sender, EventArgs e)
         {
             Supplier editValue = (Supplier)cboSupplier.EditValue;
             if (editValue != null)
             {
-                txtBankName.Properties.DataSource = editValue.BankInfoDetail.ToBankInfoList();
+                txtBankName.Properties.DataSource = editValue.BankInfoDetail.ToObjectList<List<BankInfo>>();
+                if (editValue.SupplierType == 1)
+                {
+                    temporarySupplierPaymenttotalAmount = pnm.GetTemporarySupplierPaymentByBudgetId(currentBudget.ID, editValue.ID);
+                    if (temporarySupplierPaymenttotalAmount >= temporarySupplierPaymenttotalAmountMaxValue)
+                    {
+                        this.dxErrorProvider1.SetError(this.cboSupplier, string.Format("当前临时供方已付款{0}，已经没有付款额度。", temporarySupplierPaymenttotalAmount), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                    }
+                }
             }
         }
 

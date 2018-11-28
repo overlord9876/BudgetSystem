@@ -278,7 +278,7 @@ namespace BudgetSystem
             List<BankInfo> bankInfoList;
             if (!string.IsNullOrEmpty(detail))
             {
-                bankInfoList = detail.ToBankInfoList();
+                bankInfoList = detail.ToObjectList();
             }
             else
             {

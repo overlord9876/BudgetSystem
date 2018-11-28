@@ -63,6 +63,22 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 合同付款，单个非合格供方付款人民币总数
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        public decimal GetTemporarySupplierPaymentByBudgetId(int budgetId, int supplierId)
+        {
+            var result = this.Query<decimal>((con) =>
+            {
+                var totalAmount = dal.GetTemporarySupplierPaymentByBudgetId(budgetId, supplierId, con, null);
+                return totalAmount;
+            });
+            return result;
+        }
+
+        /// <summary>
         /// 启动审批流程
         /// </summary>
         /// <param name="id"></param>
@@ -79,7 +95,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id,payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

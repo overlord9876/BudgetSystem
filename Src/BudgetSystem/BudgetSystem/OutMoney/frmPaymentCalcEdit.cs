@@ -13,6 +13,9 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEdit : frmBaseDialogForm
     {
+        private decimal vatOption = 0;
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
+
         /// <summary>
         /// 选择的合同
         /// </summary>
@@ -35,40 +38,44 @@ namespace BudgetSystem.OutMoney
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
         {
-            this.txtApplyMoney.EditValue = PaymentNotes.Sum(o => o.CNY);
-            this.txtReceiptAmount.EditValue = ReceiptAmount;
-            //this.txtTaxRebateRate.EditValue = SelectedBudget.TaxRebateRate;
+            vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
+            //所有收款金额
+            this.txtApplyMoney.EditValue = PaymentNotes.Sum(o => o.CNY);
+            //所有付款金额
+            this.txtReceiptAmount.EditValue = ReceiptAmount;
+            //已收汇人民币
+            this.txtReceiptAmount2.EditValue = ReceiptAmount;
+            //合同计划款
+            this.txtTotalAmount.EditValue = SelectedBudget.TotalAmount;
+
+            InitTaxRebateRateList(SelectedBudget.InProductDetail);
 
             //包含预付款
             if (SelectedBudget.HasAdvancePayment)
             {
                 this.CustomWorkModel = "HasAdvancePayment";
                 this.txtTaxPayment.EditValue = PaymentNotes.Where(o => o.IsDrawback).Sum(o => o.CNY);
-                this.txtTaxRefund.EditValue = Math.Round(this.txtTaxPayment.Value / (decimal)1.17 * txtTaxRebateRate.Value / 100, 2);
+                this.txtTaxRefund.EditValue = PaymentNotes.Sum(o => o.AmountOfTaxRebate());
             }
             else//没有预付款
             {
                 this.CustomWorkModel = "NotHasAdvancePayment";
 
                 txtTaxPaymentA.EditValue = txtApplyMoney.Value;
-                txtTaxRefundA.EditValue = txtTaxPaymentA.Value / (decimal)1.17 * this.txtTaxRebateRate.Value / 100;
+                txtTaxRefundA.EditValue = PaymentNotes.Sum(o => o.AmountOfTaxRebate());
             }
 
             SetLayoutControlStyle(EditFormWorkModels.Custom);
 
             this.txtCommitDate.EditValue = SelectedBudget.CreateDate;
-            this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
-            this.txtReceiptAmount2.EditValue = ReceiptAmount;
             this.txtBudgetNo.EditValue = SelectedBudget.ContractNO;
             this.txtCustomer.Text = SelectedBudget.CustomerList.ToNameString();
             this.txtSupplier.Text = SelectedBudget.SupplierList.ToNameString();
             this.txtAdvancePayment.EditValue = SelectedBudget.AdvancePayment;
             this.txtApprovalState.EditValue = SelectedBudget.State;
             this.txtFeedMoney.EditValue = SelectedBudget.FeedMoney;
-            this.txtTotalAmount.EditValue = SelectedBudget.TotalAmount;
-            this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / SelectedBudget.TotalAmount * 100, 2);
-            this.txtSuperPaymentScheme.EditValue = (Math.Round(this.txtReceiptAmount2.Value / txtTotalAmount.Value, 2)) * 100 - 100;
+
             decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)SelectedBudget.InterestRate * SelectedBudget.Days / 30 / 100, 2);
             decimal subTotal = SelectedBudget.Commission + SelectedBudget.Premium + SelectedBudget.BankCharges +/*直接费用*/0 + SelectedBudget.FeedMoney;
 
@@ -101,8 +108,6 @@ namespace BudgetSystem.OutMoney
             //无预付款情况下，
             //textEdit_Number21.EditValue = textEdit_Number20.Value / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100;
             //this.txtTaxRefund_Total.EditValue = txtTaxRefund.Value;
-            this.txtTaxRefund_Total.EditValue = this.txtTaxRefundA.Value + this.txtTaxRefund.Value;
-            textEdit_Number23.EditValue = txtAccountBalance.Value + txtTaxRefund_Total.Value - textEdit_Number20.Value;
 
             //有预付款情况下，窗体显示计税货款大于收款金额测算栏目（如果计税货款大于收款金额，则付款动用了预付款，则只能称为暂计退税款）
 
@@ -119,6 +124,35 @@ namespace BudgetSystem.OutMoney
             textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
 
             this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
+
+        }
+
+        private void InitTaxRebateRateList(string inProductDetail)
+        {
+            txtTaxRebateRate.Properties.Items.Clear();
+            List<InProductDetail> inProductDetailList = null;
+            if (!string.IsNullOrEmpty(inProductDetail))
+            {
+                try
+                {
+                    inProductDetailList = inProductDetail.ToObjectList<List<InProductDetail>>();
+                }
+                catch { }
+            }
+            else
+            {
+                inProductDetailList = new List<InProductDetail>();
+            }
+            if (inProductDetailList != null)
+            {
+                foreach (var v in inProductDetailList)
+                {
+                    if (!txtTaxRebateRate.Properties.Items.Contains(v.TaxRebateRate))
+                    {
+                        txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
+                    }
+                }
+            }
 
         }
 
@@ -164,7 +198,7 @@ namespace BudgetSystem.OutMoney
 
         private void textEdit_Number20_EditValueChanged(object sender, EventArgs e)
         {
-
+            CalcTaxRebate();
         }
 
         private void textEdit_Number24_EditValueChanged(object sender, EventArgs e)
@@ -177,6 +211,94 @@ namespace BudgetSystem.OutMoney
 
         }
 
+        /// <summary>
+        /// 计算所有收款金额
+        /// </summary>
+        private void CalcAccountBalance()
+        {
+            //账上余额=收款金额（所有）-申请用款金额（所有）
+            this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
+        }
+
+        /// <summary>
+        /// 完成进度
+        /// </summary>
+        private void CalcSuperPaymentScheme()
+        {
+            //收汇超计划%=（已收汇人民币-合同计划款）/合同计划款*100%
+            if (this.txtTotalAmount.Value != 0)
+            {
+                this.txtSuperPaymentScheme.EditValue = (Math.Round((this.txtReceiptAmount2.Value - txtTotalAmount.Value) / txtTotalAmount.Value, 2)) * 100 - 100;
+            }
+            else
+            {
+                this.txtSuperPaymentScheme.EditValue = 0;
+            }
+        }
+
+        /// <summary>
+        /// 预算款占总额%：=预付款/合同金额
+        /// </summary>
+        private void CalcPercentage()
+        {
+            if (txtTotalAmount.Value != 0)
+            {
+                this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / txtTotalAmount.Value * 100, 2);
+            }
+            else
+            {
+                this.txtPercentage.EditValue = 0;
+            }
+        }
+
+        /// <summary>
+        /// 可计退税款=现申请用款/营业税率*出口退税%
+        /// </summary>
+        private void CalcTaxRebate()
+        {
+            decimal taxRebateRate = 0;
+            if (txtTaxRebateRate.EditValue != null)
+            {
+                decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
+            }
+
+            textEdit_Number19.EditValue = textEdit_Number20.Value / (1 + vatOption) * taxRebateRate;
+
+            this.txtTaxRefund_Total.EditValue = this.textEdit_Number19.Value + this.txtTaxRefund.Value;
+            textEdit_Number23.EditValue = txtAccountBalance.Value + txtTaxRefund_Total.Value - textEdit_Number20.Value;
+
+        }
+
+        private void txtReceiptAmount_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcAccountBalance();
+        }
+
+        private void txtApplyMoney_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcAccountBalance();
+        }
+
+        private void txtTotalAmount_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcSuperPaymentScheme();
+            CalcPercentage();
+        }
+
+        private void txtReceiptAmount2_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcSuperPaymentScheme();
+        }
+
+        private void txtAdvancePayment_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcPercentage();
+        }
+
+        private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTaxRebate();
+        }
 
 
     }

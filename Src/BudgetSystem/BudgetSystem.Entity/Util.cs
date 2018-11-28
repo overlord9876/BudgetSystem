@@ -22,15 +22,15 @@ namespace BudgetSystem.Entity
             }
         }
 
-        public static List<BankInfo> ToBankInfoList(this string bankInfoJson)
+        public static T ToObjectList<T>(this string bankInfoJson)
         {
             if (!string.IsNullOrEmpty(bankInfoJson))
             {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<BankInfo>>(bankInfoJson);
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(bankInfoJson);
             }
             else
             {
-                return new List<BankInfo>();
+                return default(T);
             }
         }
 
