@@ -109,6 +109,9 @@
     <Compile Include="Base\frmInput.Designer.cs">
       <DependentUpon>frmInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\QueryConditionEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Budget\frmAccountBillView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -399,10 +402,13 @@
     <Compile Include="UIEntity\DataControlCreator.cs" />
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\IDataControl.cs" />
+    <Compile Include="UIEntity\IQueryConditionEditor.cs" />
     <Compile Include="UIEntity\ModelOperate.cs" />
     <Compile Include="UIEntity\ModelOperateHelper.cs" />
     <Compile Include="UIEntity\ModeOperateEventArgs.cs" />
     <Compile Include="UIEntity\OperateTypes.cs" />
+    <Compile Include="UIEntity\QueryConditionHelper.cs" />
+    <Compile Include="UIEntity\UIElementTag.cs" />
     <Compile Include="UIEntity\UITypes.cs" />
     <Compile Include="Supplier\frmSupplierQuery.cs">
       <SubType>Form</SubType>
