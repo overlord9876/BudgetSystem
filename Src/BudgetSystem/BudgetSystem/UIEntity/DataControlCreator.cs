@@ -30,7 +30,7 @@ namespace BudgetSystem.UIEntity
             }
             else if (dataItemType == EnumFlowDataType.预算单.ToString())
             {
-                ucBudgetEdit edit = new ucBudgetEdit();
+                ucBudgetDetailView edit = new ucBudgetDetailView();
                 edit.WorkModel = EditFormWorkModels.View;
                 return edit;
             }

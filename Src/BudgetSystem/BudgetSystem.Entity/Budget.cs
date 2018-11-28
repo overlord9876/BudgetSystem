@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text; 
 
 namespace BudgetSystem.Entity
 {
@@ -293,6 +293,42 @@ namespace BudgetSystem.Entity
                 }
             }
         }
+        /// <summary>
+        /// 内贸产品详单
+        /// </summary>
+        public List<InProductDetail> InProductList 
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.InProductDetail))
+                {
+                    return this.InProductDetail.ToObjectList<List<InProductDetail>>();
+                }
+                else
+                {
+                    return new List<InProductDetail>();
+                }
+            }
+        }
+        /// <summary>
+        /// 外贸商品详单
+        /// </summary>
+        public List<OutProductDetail> OutProductList 
+        {
+            get 
+            {
+                if (!string.IsNullOrEmpty(this.OutProductDetail))
+                {
+                    return this.OutProductDetail.ToObjectList<List<OutProductDetail>>();
+                }
+                else
+                {
+                    return new List<OutProductDetail>();
+                }
+            }
+        }
+
+
         /// <summary>
         /// 流程状态
         /// </summary>

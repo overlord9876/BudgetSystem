@@ -53,6 +53,16 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public IEnumerable<BudgetBill> GetBudgetBillListByBudgetId(int budgetId)
+        {
+            var lst = this.Query<BudgetBill>((con) =>
+            {
+                var uList = dal.GetBudgetBillListByBudgetId(budgetId, con, null);
+                return uList;
+            });
+            return lst.ToList();        
+        }
+
         /// <summary>
         /// 创建收款记录
         /// </summary>

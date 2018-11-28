@@ -20,7 +20,7 @@ namespace BudgetSystem.Dal
         }
         public List<T> GetAllModifyMark<T>(int dataID, IDbConnection con, IDbTransaction tran = null)
         {
-            IEnumerable<ModifyMark> modifyMarkList = this.GetAllModifyMark(typeof(T).ToString(), dataID, con, tran);
+            IEnumerable<ModifyMark> modifyMarkList = this.GetAllModifyMark(typeof(T).Name, dataID, con, tran);
             List<T> result = new List<T>();
             modifyMarkList.ToList().ForEach(m => result.Add(JsonConvert.DeserializeObject<T>(m.Content)));
             return result;
@@ -45,10 +45,10 @@ namespace BudgetSystem.Dal
             }
             return id;
         }
-        public void DeleteModifyMark(string type, int dataID, IDbConnection con, IDbTransaction tran = null)
+        public void DeleteModifyMark<T>(int dataID, IDbConnection con, IDbTransaction tran = null)
         {
             string deleteSql = "Delete From `ModifyMark` Where `DateItemType` = @DateItemType AND `DataID`=@DataID";
-            con.Execute(deleteSql, new { DateItemType = type, DataID = dataID }, tran);
+            con.Execute(deleteSql, new { DateItemType = typeof(T).Name, DataID = dataID }, tran);
         }
 
         public void DeleteModifyMark(int id, IDbConnection con, IDbTransaction tran = null)

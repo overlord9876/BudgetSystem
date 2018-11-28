@@ -217,6 +217,7 @@ namespace BudgetSystem.Bll
                     message = "存在发票信息，不能删除";
                     return;
                 }
+                mmdal.DeleteModifyMark<Budget>(id, con, tran);
                 dal.DeleteBudget(id, con, tran);
             });
             return message;

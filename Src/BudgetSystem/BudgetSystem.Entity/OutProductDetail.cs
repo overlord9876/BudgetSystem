@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BudgetSystem
+namespace BudgetSystem.Entity
 {
     /// <summary>
     /// 外贸产产详情

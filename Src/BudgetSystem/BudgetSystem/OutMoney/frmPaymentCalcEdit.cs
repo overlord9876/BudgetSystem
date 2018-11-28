@@ -13,23 +13,8 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEdit : frmBaseDialogForm
     {
-        private decimal vatOption = 0;
-        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
-        /// <summary>
-        /// 选择的合同
-        /// </summary>
-        public Budget SelectedBudget
-        {
-            get;
-            set;
-        }
-
-        public decimal PaymentMoney { get; set; }
-
-        public decimal ReceiptAmount { get; set; }
-
-        public IEnumerable<PaymentNotes> PaymentNotes { get; set; }
+        public OutMoneyCaculator Caculator { get; set; }
 
         public frmPaymentCalcEdit()
         {
@@ -38,57 +23,80 @@ namespace BudgetSystem.OutMoney
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
         {
-            vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
-
-            //所有收款金额
-            this.txtApplyMoney.EditValue = PaymentNotes.Sum(o => o.CNY);
             //所有付款金额
-            this.txtReceiptAmount.EditValue = ReceiptAmount;
+            this.txtApplyMoney.EditValue = Caculator.PaymentMoneyAmount;
+            //所有收款金额
+            this.txtReceiptAmount.EditValue = Caculator.ReceiptMoneyAmount;
             //已收汇人民币
-            this.txtReceiptAmount2.EditValue = ReceiptAmount;
+            this.txtReceiptAmount2.EditValue = Caculator.ReceiptMoneyAmount;
             //合同计划款
-            this.txtTotalAmount.EditValue = SelectedBudget.TotalAmount;
+            this.txtTotalAmount.EditValue = Caculator.TotalAmount;
 
-            InitTaxRebateRateList(SelectedBudget.InProductDetail);
+            InitTaxRebateRateList();
 
             //包含预付款
-            if (SelectedBudget.HasAdvancePayment)
+            if (Caculator.AdvancePayment > 0)
             {
                 this.CustomWorkModel = "HasAdvancePayment";
-                this.txtTaxPayment.EditValue = PaymentNotes.Where(o => o.IsDrawback).Sum(o => o.CNY);
-                this.txtTaxRefund.EditValue = PaymentNotes.Sum(o => o.AmountOfTaxRebate());
+                foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_NotHasAdvancePayment.Items)
+                {
+                    item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                lcg_NotHasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
             }
             else//没有预付款
             {
                 this.CustomWorkModel = "NotHasAdvancePayment";
-
-                txtTaxPaymentA.EditValue = txtApplyMoney.Value;
-                txtTaxRefundA.EditValue = PaymentNotes.Sum(o => o.AmountOfTaxRebate());
+                foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_HasAdvancePayment.Items)
+                {
+                    item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                lcg_HasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
 
-            SetLayoutControlStyle(EditFormWorkModels.Custom);
+            if (Caculator.IsReceiptGreaterThanTaxPayment(0))
+            {
+                this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）< 收款时)";
+                this.txtTaxPayment.EditValue = Caculator.TaxPayment;
+                this.txtTaxRefund.EditValue = Caculator.TaxRefund;
+            }
+            else
+            {
+                this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）> 收款时)";
+                txtTaxPaymentA.EditValue = Caculator.TaxPayment;
+                decimal taxRebateRate = 0;
+                if (txtTaxRebateRate.EditValue != null)
+                {
+                    decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
+                }
 
-            this.txtCommitDate.EditValue = SelectedBudget.CreateDate;
-            this.txtBudgetNo.EditValue = SelectedBudget.ContractNO;
-            this.txtCustomer.Text = SelectedBudget.CustomerList.ToNameString();
-            this.txtSupplier.Text = SelectedBudget.SupplierList.ToNameString();
-            this.txtAdvancePayment.EditValue = SelectedBudget.AdvancePayment;
-            this.txtApprovalState.EditValue = SelectedBudget.State;
-            this.txtFeedMoney.EditValue = SelectedBudget.FeedMoney;
+                txtTaxRefundA.EditValue = txtTaxPaymentA.Value / (1 + Caculator.ValueAddedTaxRate) * taxRebateRate;
+            }
 
-            decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)SelectedBudget.InterestRate * SelectedBudget.Days / 30 / 100, 2);
-            decimal subTotal = SelectedBudget.Commission + SelectedBudget.Premium + SelectedBudget.BankCharges +/*直接费用*/0 + SelectedBudget.FeedMoney;
+            //SetLayoutControlStyle(EditFormWorkModels.Custom);
+
+            this.txtCommitDate.EditValue = Caculator.CurrentBudget.CreateDate;
+            this.txtBudgetNo.EditValue = Caculator.CurrentBudget.ContractNO;
+            this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameString();
+            this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
+            this.txtAdvancePayment.EditValue = Caculator.CurrentBudget.AdvancePayment;
+            this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
+            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney;
+
+            decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)Caculator.CurrentBudget.InterestRate * Caculator.CurrentBudget.Days / 30 / 100, 2);
+            decimal subTotal = Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium + Caculator.CurrentBudget.BankCharges +/*直接费用*/0 + Caculator.CurrentBudget.FeedMoney;
 
             //  净收入额=外贸合约人民币小计-内贸合约部分的利息-预算小计
-            decimal netIncomeCNY = this.txtTotalAmount.Value - SelectedBudget.PurchasePrice - interest - subTotal;
+            decimal netIncomeCNY = this.txtTotalAmount.Value - Caculator.CurrentBudget.PurchasePrice - interest - subTotal;
             //总收金额（USD）=折合人名币/汇率
 
-            this.txtNetIncome.EditValue = decimal.Round(netIncomeCNY / (decimal)SelectedBudget.ExchangeRate, 2);
+            this.txtNetIncome.EditValue = decimal.Round(netIncomeCNY / (decimal)Caculator.CurrentBudget.ExchangeRate, 2);
 
             //出口退税额=总进价/1.17*出口退税率
             //decimal TaxRebateRateMoney = Math.Round(SelectedBudget.DirectCosts / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100, 2);
             //总成本=总进价-出口退税额
-            decimal totalCost = SelectedBudget.PurchasePrice - (decimal)SelectedBudget.TaxRebate;
+            decimal totalCost = Caculator.CurrentBudget.PurchasePrice - (decimal)Caculator.CurrentBudget.TaxRebate;
 
             //利润=折合人名币（净收入额）-总成本
             txtProfit.EditValue = netIncomeCNY - totalCost;
@@ -99,11 +107,11 @@ namespace BudgetSystem.OutMoney
             this.txtNetIncome_Plan.EditValue = txtNetIncome.Value;
             this.txtRetainedProfit.EditValue = txtNetIncome_Plan.Value * txtReceiptAmount2.Value / txtTotalAmount.Value;
 
-            this.textEdit_Number2.EditValue = txtTaxRefund.Value;
+            //this.textEdit_Number2.EditValue = txtTaxRefund.Value;
 
-            this.textEdit_Number1.EditValue = PaymentMoney;
-            this.textEdit_Number20.EditValue = PaymentMoney;
-            this.textEdit_Number24.EditValue = PaymentMoney;
+            //this.textEdit_Number1.EditValue = PaymentMoney;
+            this.textEdit_Number20.EditValue = Caculator.PaymentMoneyAmount;
+            this.textEdit_Number24.EditValue = Caculator.PaymentMoneyAmount;
 
             //无预付款情况下，
             //textEdit_Number21.EditValue = textEdit_Number20.Value / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100;
@@ -120,38 +128,27 @@ namespace BudgetSystem.OutMoney
 
 
             //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
-            textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
-            textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
+            //textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
+            //textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
 
-            this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
+            //this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
 
         }
 
-        private void InitTaxRebateRateList(string inProductDetail)
+        private void InitTaxRebateRateList()
         {
             txtTaxRebateRate.Properties.Items.Clear();
-            List<InProductDetail> inProductDetailList = null;
-            if (!string.IsNullOrEmpty(inProductDetail))
+            txtTaxRebateRate2.Properties.Items.Clear();
+
+            if (Caculator.TaxRebateRateList != null && Caculator.TaxRebateRateList.Count > 0)
             {
-                try
+                foreach (decimal taxRebateRate in Caculator.TaxRebateRateList)
                 {
-                    inProductDetailList = inProductDetail.ToObjectList<List<InProductDetail>>();
+                    txtTaxRebateRate.Properties.Items.Add(taxRebateRate);
+                    txtTaxRebateRate2.Properties.Items.Add(taxRebateRate);
                 }
-                catch { }
-            }
-            else
-            {
-                inProductDetailList = new List<InProductDetail>();
-            }
-            if (inProductDetailList != null)
-            {
-                foreach (var v in inProductDetailList)
-                {
-                    if (!txtTaxRebateRate.Properties.Items.Contains(v.TaxRebateRate))
-                    {
-                        txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
-                    }
-                }
+                txtTaxRebateRate.SelectedIndex = 0;
+                txtTaxRebateRate2.SelectedIndex = 0;
             }
 
         }
@@ -188,22 +185,9 @@ namespace BudgetSystem.OutMoney
             }
         }
 
-        private void textEdit_Number4_EditValueChanged(object sender, EventArgs e)
-        {
-            if (textEdit_Number4.Value <= 0)
-            {
-                dxErrorProvider1.SetError(textEdit_Number4, "支付余额不允许小于0。");
-            }
-        }
-
         private void textEdit_Number20_EditValueChanged(object sender, EventArgs e)
         {
             CalcTaxRebate();
-        }
-
-        private void textEdit_Number24_EditValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void textEdit_Number1_EditValueChanged(object sender, EventArgs e)
@@ -262,10 +246,32 @@ namespace BudgetSystem.OutMoney
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }
 
-            textEdit_Number19.EditValue = textEdit_Number20.Value / (1 + vatOption) * taxRebateRate;
+            Caculator.GetAllTaxes(textEdit_Number20.Value, taxRebateRate);
+            textEdit_Number19.EditValue = Caculator.CurrentTaxes;
 
-            this.txtTaxRefund_Total.EditValue = this.textEdit_Number19.Value + this.txtTaxRefund.Value;
-            textEdit_Number23.EditValue = txtAccountBalance.Value + txtTaxRefund_Total.Value - textEdit_Number20.Value;
+            this.txtTaxRefund_Total.EditValue = Caculator.AllTaxes;
+            textEdit_Number23.EditValue = Caculator.Balance;
+
+        }
+
+        /// <summary>
+        /// 可计退税款=现申请用款/营业税率*出口退税%
+        /// </summary>
+        private void CalcTaxRebate2()
+        {
+            decimal taxRebateRate = 0;
+            if (txtTaxRebateRate.EditValue != null)
+            {
+                decimal.TryParse(txtTaxRebateRate2.EditValue.ToString(), out taxRebateRate);
+            }
+
+            Caculator.GetAllTaxes(textEdit_Number20.Value, taxRebateRate);
+
+            textEdit_Number28.EditValue = textEdit_Number24.Value / (1 + Caculator.ValueAddedTaxRate) * taxRebateRate;
+
+            this.textEdit_Number1.EditValue = Caculator.AllTaxes;
+            textEdit_Number29.EditValue = Caculator.Balance;
+            textEdit_Number30.EditValue = Caculator.RetainedInterestBalance;
 
         }
 
@@ -298,6 +304,21 @@ namespace BudgetSystem.OutMoney
         private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
         {
             CalcTaxRebate();
+        }
+
+        private void txtTaxRebateRate2_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTaxRebate2();
+        }
+
+        private void textEdit_Number24_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTaxRebate2();
+        }
+
+        private void textEdit_Number28_EditValueChanged(object sender, EventArgs e)
+        {
+            textEdit_Number1.EditValue = txtTaxRefundA.Value + textEdit_Number28.Value;
         }
 
 

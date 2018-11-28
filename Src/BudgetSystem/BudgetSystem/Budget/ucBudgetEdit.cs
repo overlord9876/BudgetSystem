@@ -353,13 +353,14 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.dteValidity, "请输入有效期");
                 return;
             }
-            if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
+
+            if (!(this.dteSignDate.DateTime > this.dteValidity.DateTime))
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
                 return;
             }
-            
-            if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批) 
+
+            if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批)
             {
                 if (this.dteSignDate.DateTime.AddYears(1) > this.dteValidity.DateTime)
                 {

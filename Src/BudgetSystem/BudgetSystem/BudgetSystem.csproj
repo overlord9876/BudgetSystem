@@ -156,7 +156,12 @@
     <Compile Include="Budget\frmMoneyDetailEdit.Designer.cs">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Budget\OutProductDetail.cs" />
+    <Compile Include="Budget\ucBudgetDetailView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Budget\ucBudgetDetailView.Designer.cs">
+      <DependentUpon>ucBudgetDetailView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\ucBudgetEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -167,7 +172,6 @@
     <Compile Include="CommonControl\TextEdit_Number.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Budget\InProductDetail.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Customer\frmCustomerQuery.cs">
       <SubType>Form</SubType>
@@ -437,6 +441,7 @@
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\CaculateUtil.cs" />
+    <Compile Include="Util\OutMoneyCaculator.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="WorkSpace\FlowRunStateTranslator.cs" />
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
@@ -520,6 +525,9 @@
     <EmbeddedResource Include="Budget\frmMoneyDetailEdit.resx">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\ucBudgetDetailView.resx">
+      <DependentUpon>ucBudgetDetailView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Budget\ucBudgetEdit.resx">
       <DependentUpon>ucBudgetEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -532,7 +540,6 @@
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">
       <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -724,8 +731,6 @@
     <EmbeddedResource Include="WorkSpace\frmApproveEx_ConfirmOrRevoke.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Default.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_View.xml" />
-    <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_HasAdvancePayment.xml" />
-    <EmbeddedResource Include="OutMoney\frmPaymentCalcEdit_NotHasAdvancePayment.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />
