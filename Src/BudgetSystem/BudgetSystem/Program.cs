@@ -55,13 +55,13 @@ namespace BudgetSystem
         //UI线程异常
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
-            //Log
+            RunInfo.Instance.Logger.LogError(e.Exception.ToString());
         }
 
         //多线程异常
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            //Log
+            RunInfo.Instance.Logger.LogError("UnhandledException" + e.ExceptionObject.ToString());
         }
     }
 }

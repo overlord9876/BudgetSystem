@@ -10,6 +10,7 @@ namespace BudgetSystem
         private  RunInfo()
         {
             this.Config = Config.Read();
+            this.Logger = new Util.Logger(System.IO.Path.Combine(Environment.CurrentDirectory, "Log"));
         }
 
         private static object lockObj = new object();
@@ -44,6 +45,12 @@ namespace BudgetSystem
         }
 
         public List<string> UserPermission
+        {
+            get;
+            set;
+        }
+
+        public Util.Logger Logger
         {
             get;
             set;
