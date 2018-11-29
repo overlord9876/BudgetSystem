@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -740,6 +743,7 @@
     <EmbeddedResource Include="InMoney\frmInvoiceEdit_View.xml" />
     <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_New.xml" />
     <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_View.xml" />
+    <Content Include="logo.ico" />
     <Content Include="OutMoney\frmOutMoneyEdit_Modify.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_New.xml" />
     <Content Include="OutMoney\frmOutMoneyEdit_View.xml" />
