@@ -16,6 +16,7 @@ namespace BudgetSystem
         public frmBaseDialogForm()
         {
             InitializeComponent();
+            this.IsNotifyWhenFormClosing = true;
         }
 
         public EditFormWorkModels WorkModel
@@ -55,7 +56,7 @@ namespace BudgetSystem
         {
             return GetResourceFileByWorkModel(this.WorkModel);
         }
-        
+
         protected void SetLayoutControlStyle(EditFormWorkModels workModel = EditFormWorkModels.Default, DevExpress.XtraLayout.LayoutControl layout = null)
         {
             if (layout == null)
@@ -82,7 +83,7 @@ namespace BudgetSystem
             }
 
         }
-        
+
         protected virtual void SubmitDataByWorkModel()
         {
             if (this.WorkModel == EditFormWorkModels.New)
@@ -108,7 +109,7 @@ namespace BudgetSystem
                 SubmitCustomData();
             }
         }
-        
+
         protected virtual void SubmitNewData()
         {
 
@@ -152,5 +153,34 @@ namespace BudgetSystem
             return null;
         }
 
+
+        public bool IsNotifyWhenFormClosing
+        {
+            get;
+            set;
+        }
+
+
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData)
+        {
+
+            int WM_KEYDOWN = 256;
+            int WM_SYSKEYDOWN = 260;
+
+            if (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN)
+            {
+                if (keyData == Keys.Escape)
+                {
+                    if (XtraMessageBox.Show("是否关闭编辑窗体？", "请确认", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg,  keyData);
+        }
     }
 }

@@ -63,7 +63,7 @@ namespace BudgetSystem.RoleManage
             {
                 BindRoleUsers();
                 BindRolePermissions();
-            
+                BindAllPermissions();
             }
         }
 
@@ -73,11 +73,28 @@ namespace BudgetSystem.RoleManage
             this.gdAllUser.DataSource = allUser;
         }
 
+        //private void BindAllPermissions()
+        //{
+        //    List<Permisson> permissions = Permisson.Permissions;
+        //    this.gdAllPermission.DataSource = permissions;
+        //}
+
         private void BindAllPermissions()
         {
+            List<Permisson> existPermission = this.gdRolePermissions.DataSource as List<Permisson>;
             List<Permisson> permissions = Permisson.Permissions;
-            this.gdAllPermission.DataSource = permissions;
-        
+            if (existPermission != null)
+            {
+                List<Permisson> NotContainPermissions = new List<Permisson>();
+                NotContainPermissions.AddRange(permissions.Where(s => !existPermission.Contains(s)));
+                NotContainPermissions = NotContainPermissions.OrderBy(s => s.DisplayOrder).ToList();
+                this.gdAllPermission.DataSource = NotContainPermissions;
+            }
+            else
+            {
+                this.gdAllPermission.DataSource = permissions;
+            }
+
         }
 
         private void BindRoleUsers()
@@ -171,7 +188,7 @@ namespace BudgetSystem.RoleManage
 
             this.rm.AddRolePermission(currentRole.Code, ps);
             BindRolePermissions();
-       
+            BindAllPermissions();
 
 
         }
@@ -195,7 +212,7 @@ namespace BudgetSystem.RoleManage
 
             rm.RemoveRolePermission(currentRole.Code, ps);
             BindRolePermissions();
-       
+            BindAllPermissions();
         }
 
         private List<string> GetSelectUsers(GridView view)
