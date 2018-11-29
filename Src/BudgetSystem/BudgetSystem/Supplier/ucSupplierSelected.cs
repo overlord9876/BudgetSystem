@@ -13,7 +13,7 @@ namespace BudgetSystem
 {
     public partial class ucSupplierSelected : UserControl
     {
-        private bool isQualified=false;
+        private bool isQualified = false;
         List<Supplier> dataSource = null;
         public ucSupplierSelected()
         {
@@ -27,7 +27,7 @@ namespace BudgetSystem
             get
             {
                 //保存更改
-                this.gvSupplier.CloseEditor(); 
+                this.gvSupplier.CloseEditor();
                 var dataSource = (IEnumerable<Supplier>)gridSupplier.DataSource;
                 if (dataSource != null)
                 {
@@ -46,7 +46,7 @@ namespace BudgetSystem
             if (dataSource != null)
             {
                 this.dataSource = new List<Supplier>();
-                dataSource.ForEach(s=>this.dataSource.Add(s)); 
+                dataSource.ForEach(s => this.dataSource.Add(s));
             }
             else
             {
@@ -54,22 +54,22 @@ namespace BudgetSystem
             }
         }
 
-        public void SetSelectedItems(List<Supplier> selectedItems,bool isQualified)
-        { 
+        public void SetSelectedItems(List<Supplier> selectedItems, bool isQualified)
+        {
             var suppliers = this.gridSupplier.DataSource as BindingList<Supplier>;
-           
+
             if (suppliers != null)
             {
                 if (this.isQualified != isQualified)
                 {
                     List<Supplier> newDataSource = new List<Supplier>();
-                    if (isQualified ==false)
-                    { 
-                        this.dataSource.ForEach(s => newDataSource.Add(s)); 
+                    if (isQualified == false)
+                    {
+                        this.dataSource.ForEach(s => newDataSource.Add(s));
                     }
                     else
                     {
-                        this.dataSource.ForEach(s => { if (s.SupplierType == 0) { newDataSource.Add(s); } });
+                        this.dataSource.ForEach(s => { if (s.IsQualified) { newDataSource.Add(s); } });
                     }
                     suppliers = new BindingList<Supplier>(newDataSource);
                 }
@@ -82,7 +82,7 @@ namespace BudgetSystem
                 {
                     foreach (Supplier supplier in selectedItems)
                     {
-                        Supplier findedItem = suppliers.FirstOrDefault(r => r.ID == supplier.ID); 
+                        Supplier findedItem = suppliers.FirstOrDefault(r => r.ID == supplier.ID);
                         if (findedItem != null)
                         {
                             findedItem.IsSelected = true;

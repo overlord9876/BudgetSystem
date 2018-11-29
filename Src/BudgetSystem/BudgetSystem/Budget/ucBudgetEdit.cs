@@ -672,7 +672,6 @@ namespace BudgetSystem
 
         private void gvOutProductDetail_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            gvOutProductDetail.SetColumnError(null, e.ErrorText);
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
@@ -684,34 +683,106 @@ namespace BudgetSystem
             {
                 e.ErrorText = "产品规格不能为空";
                 e.Valid = false;
-                return;
+                gvOutProductDetail.SetColumnError(gcName, e.ErrorText);
             }
-            if (string.IsNullOrEmpty(detail.Unit))
+            else if (string.IsNullOrEmpty(detail.Unit))
             {
                 e.ErrorText = "单位不能为空";
                 e.Valid = false;
-                return;
+                gvOutProductDetail.SetColumnError(gcUnit, e.ErrorText);
             }
-            if (detail.Count <= 0)
+            else if (detail.Count <= 0)
             {
                 e.ErrorText = "数量应大于0";
                 e.Valid = false;
-                return;
+                gvOutProductDetail.SetColumnError(gcCount, e.ErrorText);
             }
-            if (detail.Price <= 0)
+            else if (detail.Price <= 0)
             {
                 e.ErrorText = "单价应大于0";
                 e.Valid = false;
-                return;
+                gvOutProductDetail.SetColumnError(gcPrice, e.ErrorText);
             }
-            if (detail.ExchangeRate <= 0)
+            else if (detail.ExchangeRate <= 0)
             {
                 e.ErrorText = "汇率应大于0";
                 e.Valid = false;
-                return;
+                gvOutProductDetail.SetColumnError(gcExchangeRate, e.ErrorText);
             }
-
         }
+
+        private void gvOutProductDetail_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            e.Valid = false;
+            if (e.Value == null || string.IsNullOrEmpty(e.Value.ToString()))
+            {
+                if (gvOutProductDetail.FocusedColumn == gcName)
+                {
+                    e.ErrorText = "产品规格不能为空";
+                    gvOutProductDetail.SetColumnError(gcName, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcUnit)
+                {
+                    e.ErrorText = "单位不能为空";
+                    gvOutProductDetail.SetColumnError(gcUnit, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcCount)
+                {
+                    e.ErrorText = "数量应大于0";
+                    gvOutProductDetail.SetColumnError(gcCount, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcPrice)
+                {
+                    e.ErrorText = "单价应大于0";
+                    gvOutProductDetail.SetColumnError(gcPrice, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcExchangeRate)
+                {
+                    e.ErrorText = "汇率应大于0";
+                    gvOutProductDetail.SetColumnError(gcExchangeRate, e.ErrorText);
+                }
+                else
+                {
+                    e.Valid = true;
+                }
+            }
+            else
+            {
+                decimal value = 0;
+                bool isNumber = Decimal.TryParse(e.Value.ToString(), out value);
+                string errorMsg = (isNumber ? "" : "的数字");
+                if (gvOutProductDetail.FocusedColumn == gcCount && value <= 0)
+                {
+                    e.ErrorText = "数量应大于0" + errorMsg;
+                    gvOutProductDetail.SetColumnError(gcCount, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcPrice && value <= 0)
+                {
+                    e.ErrorText = "单价应大于0" + errorMsg;
+                    gvOutProductDetail.SetColumnError(gcPrice, e.ErrorText);
+                }
+                else if (gvOutProductDetail.FocusedColumn == gcExchangeRate && value <= 0)
+                {
+                    e.ErrorText = "汇率应大于0" + errorMsg;
+                    gvOutProductDetail.SetColumnError(gcExchangeRate, e.ErrorText);
+                }
+                else
+                {
+                    e.Valid = true;
+                }
+            }
+            if (e.Valid == true)
+            {
+                gvOutProductDetail.SetColumnError(gvOutProductDetail.FocusedColumn, null);
+            }
+        }
+
+        private void gvOutProductDetail_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+
 
         private void gvOutProductDetail_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -745,44 +816,46 @@ namespace BudgetSystem
         private void bgvInProductDetail_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             var detail = e.Row as InProductDetail;
-
+            e.Valid = false;
             if (string.IsNullOrEmpty(detail.Name))
             {
                 e.ErrorText = "品名规格不能为空";
-                e.Valid = false;
-                return;
+                bgvInProductDetail.SetColumnError(gcInName, e.ErrorText);
             }
-            if (string.IsNullOrEmpty(detail.Unit))
+            else if (string.IsNullOrEmpty(detail.Unit))
             {
                 e.ErrorText = "单位不能为空";
-                e.Valid = false;
-                return;
+                bgvInProductDetail.SetColumnError(gcInUnit, e.ErrorText);
             }
-            if (detail.Count <= 0)
+            else if (detail.Count <= 0)
             {
                 e.ErrorText = "数量应大于0";
-                e.Valid = false;
-                return;
+                bgvInProductDetail.SetColumnError(gcInCount, e.ErrorText);
             }
-            if (detail.Subtotal == 0)
+            else if (detail.Subtotal == 0)
             {
                 e.ErrorText = "原料、辅料、加工应至少一项不为0";
-                e.Valid = false;
-                return;
+                bgvInProductDetail.SetColumnError(gcSubtotal, e.ErrorText);
             }
-            if (detail.TaxRebateRate <= 0)
+            else if (detail.TaxRebateRate < 0)
             {
-                e.ErrorText = "退税率应大于0";
-                e.Valid = false;
-                return;
+                e.ErrorText = "退税率应大于等于0";
+                bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
             }
-            e.ErrorText = string.Empty;
-            e.Valid = true;
+            else if (detail.Vat <= 0)
+            {
+                e.ErrorText = "增值税税率应大于0";
+                bgvInProductDetail.SetColumnError(gcVat, e.ErrorText);
+            }
+            else
+            {
+                e.ErrorText = string.Empty;
+                e.Valid = true;
+            }
         }
 
         private void bgvInProductDetail_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            bgvInProductDetail.SetColumnError(null, e.ErrorText);
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
@@ -799,10 +872,101 @@ namespace BudgetSystem
                 CalcTaxRebateRateMoney();
             }
         }
+
         private void bgvInProductDetail_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
         {
             InProductDetail detail = bgvInProductDetail.GetRow(e.RowHandle) as InProductDetail;
             detail.Vat = this.vatOption;
+        }
+
+        private void bgvInProductDetail_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void bgvInProductDetail_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            e.Valid = false;
+            if (e.Value == null || string.IsNullOrEmpty(e.Value.ToString()))
+            {
+                if (bgvInProductDetail.FocusedColumn == gcInName)
+                {
+                    e.ErrorText = "品名规格不能为空";
+                    bgvInProductDetail.SetColumnError(gcInName, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcInUnit)
+                {
+                    e.ErrorText = "单位不能为空";
+                    bgvInProductDetail.SetColumnError(gcInUnit, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcInCount)
+                {
+                    e.ErrorText = "数量应大于0";
+                    bgvInProductDetail.SetColumnError(gcInCount, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcSubtotal)
+                {
+                    e.ErrorText = "原料、辅料、加工应至少一项不为0";
+                    bgvInProductDetail.SetColumnError(gcSubtotal, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcTaxRebateRate)
+                {
+                    e.ErrorText = "退税率应大于等于0";
+                    bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcVat)
+                {
+                    e.ErrorText = "增值税税率应大于0";
+                    bgvInProductDetail.SetColumnError(gcVat, e.ErrorText);
+                }
+                else
+                {
+                    e.Valid = true;
+                }
+            }
+            else
+            {
+                decimal value = 0;
+                bool isNumber = Decimal.TryParse(e.Value.ToString(), out value);
+                string errorMsg = (isNumber ? "" : "的数字");
+                if (bgvInProductDetail.FocusedColumn == gcInCount && value <= 0)
+                {
+                    e.ErrorText = "数量应大于0" + errorMsg;
+                    bgvInProductDetail.SetColumnError(gcInCount, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcSubtotal && value <= 0)
+                {
+                    e.ErrorText = "原料、辅料、加工应至少一项不为0";
+                    bgvInProductDetail.SetColumnError(gcSubtotal, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcTaxRebateRate && value < 0)
+                {
+                    e.ErrorText = "退税率应大于等于0" + errorMsg;
+                    bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
+                }
+                else if (bgvInProductDetail.FocusedColumn == gcVat && value <= 0)
+                {
+                    e.ErrorText = "增值税税率应大于0" + errorMsg;
+                    bgvInProductDetail.SetColumnError(gcVat, e.ErrorText);
+                }
+                else
+                {
+                    e.Valid = true;
+                }
+            }
+            if (e.Valid == true)
+            {
+                if (bgvInProductDetail.FocusedColumn == gcRawMaterials
+                    || bgvInProductDetail.FocusedColumn == gcSubsidiaryMaterials
+                    || bgvInProductDetail.FocusedColumn == gcProcessCost)
+                {
+                    bgvInProductDetail.SetColumnError(gcSubtotal, null);
+                }
+                else
+                {
+                    bgvInProductDetail.SetColumnError(bgvInProductDetail.FocusedColumn, null);
+                }
+            }
         }
 
         private void riLinkEditInDelete_Click(object sender, System.EventArgs e)
@@ -924,11 +1088,5 @@ namespace BudgetSystem
             }
         }
         #endregion
-
-
-
-
-
-
     }
 }
