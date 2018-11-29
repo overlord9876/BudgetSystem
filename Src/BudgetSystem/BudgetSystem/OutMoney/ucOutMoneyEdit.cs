@@ -29,12 +29,14 @@ namespace BudgetSystem.OutMoney
         private PaymentNotes _paymentNote;
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
+
+        private List<Supplier> supplierList;
+
         public PaymentNotes CurrentPaymentNotes
         {
             get { return this._paymentNote; }
             private set { this._paymentNote = value; }
         }
-
         public EditFormWorkModels WorkModel
         {
             get { return this._workModel; }
@@ -48,6 +50,8 @@ namespace BudgetSystem.OutMoney
         public ucOutMoneyEdit()
         {
             InitializeComponent();
+
+            CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
 
             this.cboBudget.Properties.PopupFormSize = new Size(this.cboBudget.Width * 2, 300);
             this.cboSupplier.Properties.PopupFormSize = new Size(this.cboSupplier.Width * 2, 300);
@@ -216,15 +220,24 @@ namespace BudgetSystem.OutMoney
 
         private void InitData()
         {
-            valueAddedTaxRate = vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
+            try
+            {
+                valueAddedTaxRate = vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
-            List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
-            this.cboMoneyUsed.Properties.Items.Clear();
-            this.cboMoneyUsed.Properties.Items.AddRange(umtList);
+                List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+                this.cboMoneyUsed.Properties.Items.Clear();
+                this.cboMoneyUsed.Properties.Items.AddRange(umtList);
 
-            this.cboBudget.Properties.DataSource = bm.GetAllBudget();
+                this.cboBudget.Properties.DataSource = bm.GetAllBudget();
 
-            this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
+                this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
+
+                supplierList = sm.GetAllSupplier();
+            }
+            catch (Exception ex)
+            {
+                RunInfo.Instance.Logger.LogError(ex);
+            }
         }
 
         private void BindApplicantUser(string userName)
@@ -439,8 +452,10 @@ namespace BudgetSystem.OutMoney
 
                 currentBudget = bm.GetBudget(currentBudget.ID);
 
-                this.cboSupplier.Properties.DataSource = sm.GetSupplierListByBudgetId(currentBudget.ID);
-
+                List<Supplier> budgetSupplierList = sm.GetSupplierListByBudgetId(currentBudget.ID);
+                budgetSupplierList.RemoveAll(o => !o.IsQualified);
+                budgetSupplierList.AddRange(supplierList.Where(o => !o.IsQualified));
+                this.cboSupplier.Properties.DataSource = budgetSupplierList;
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 
                 CalcPaymentTaxRebate();

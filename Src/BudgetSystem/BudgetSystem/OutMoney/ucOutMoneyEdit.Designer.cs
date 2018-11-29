@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.chkIsIOU = new DevExpress.XtraEditors.CheckEdit();
             this.txtActualRetention = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -51,12 +53,17 @@
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.txtVoucherNo = new DevExpress.XtraEditors.TextEdit();
             this.cboSupplier = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcvBankAccountName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcBankNO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BankName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -140,6 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSupplier.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -185,6 +193,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider2)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gcIsWarned
+            // 
+            this.gcIsWarned.Caption = "是否提醒";
+            this.gcIsWarned.FieldName = "IsWarned";
+            this.gcIsWarned.Name = "gcIsWarned";
+            this.gcIsWarned.OptionsColumn.AllowMove = false;
+            this.gcIsWarned.OptionsColumn.AllowShowHide = false;
+            this.gcIsWarned.OptionsColumn.ShowInCustomizationForm = false;
             // 
             // layoutControl1
             // 
@@ -238,6 +255,7 @@
             // 
             // txtActualRetention
             // 
+            this.txtActualRetention.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtActualRetention.IsSupportNegative = false;
             this.txtActualRetention.Location = new System.Drawing.Point(726, 186);
             this.txtActualRetention.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -253,6 +271,7 @@
             // 
             // txtAdvancePayment
             // 
+            this.txtAdvancePayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAdvancePayment.IsSupportNegative = false;
             this.txtAdvancePayment.Location = new System.Drawing.Point(726, 244);
             this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -268,6 +287,7 @@
             // 
             // txtAmountTaxRebate
             // 
+            this.txtAmountTaxRebate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountTaxRebate.IsSupportNegative = false;
             this.txtAmountTaxRebate.Location = new System.Drawing.Point(165, 244);
             this.txtAmountTaxRebate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -283,6 +303,7 @@
             // 
             // txtAmountPaymentMoney
             // 
+            this.txtAmountPaymentMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountPaymentMoney.IsSupportNegative = false;
             this.txtAmountPaymentMoney.Location = new System.Drawing.Point(726, 215);
             this.txtAmountPaymentMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -298,6 +319,7 @@
             // 
             // txtExchangeRate
             // 
+            this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(400, 128);
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -328,6 +350,7 @@
             // 
             // txtOriginalCoin
             // 
+            this.txtOriginalCoin.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtOriginalCoin.IsSupportNegative = false;
             this.txtOriginalCoin.Location = new System.Drawing.Point(165, 157);
             this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -343,6 +366,7 @@
             // 
             // txtAfterPaymentBalance
             // 
+            this.txtAfterPaymentBalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAfterPaymentBalance.IsSupportNegative = false;
             this.txtAfterPaymentBalance.Location = new System.Drawing.Point(165, 215);
             this.txtAfterPaymentBalance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -358,6 +382,7 @@
             // 
             // txtReceiptAmount
             // 
+            this.txtReceiptAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtReceiptAmount.IsSupportNegative = false;
             this.txtReceiptAmount.Location = new System.Drawing.Point(165, 186);
             this.txtReceiptAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -397,6 +422,7 @@
             // 
             // txtCNY
             // 
+            this.txtCNY.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCNY.IsSupportNegative = false;
             this.txtCNY.Location = new System.Drawing.Point(724, 157);
             this.txtCNY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -508,24 +534,51 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSupplier.Properties.NullText = "";
             this.cboSupplier.Properties.PopupSizeable = false;
+            this.cboSupplier.Properties.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.rilueSupplierType});
             this.cboSupplier.Properties.View = this.gridLookUpEdit1View;
             this.cboSupplier.Size = new System.Drawing.Size(402, 25);
             this.cboSupplier.StyleController = this.layoutControl1;
             this.cboSupplier.TabIndex = 29;
             this.cboSupplier.EditValueChanged += new System.EventHandler(this.cboSupplier_EditValueChanged);
             // 
+            // rilueSupplierType
+            // 
+            this.rilueSupplierType.AutoHeight = false;
+            this.rilueSupplierType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rilueSupplierType.Name = "rilueSupplierType";
+            // 
             // gridLookUpEdit1View
             // 
             this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
-            this.gcvBankAccountName,
-            this.gcBankNO,
-            this.BankName,
+            this.gcv纳税人识别号,
             this.gcSupplierType,
+            this.gcFlowState,
+            this.gcIsQualified,
+            this.gcRegistrationDate,
+            this.gcBusinessEffectiveDate,
+            this.gcExistsAgentAgreement,
+            this.gcAgreementDate,
             this.gridColumn1,
             this.gcCreateUser,
-            this.gcDescription});
+            this.gcDescription,
+            this.gcIsWarned});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            styleFormatCondition1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition1.Appearance.Options.UseBackColor = true;
+            styleFormatCondition1.Appearance.Options.UseFont = true;
+            styleFormatCondition1.Appearance.Options.UseForeColor = true;
+            styleFormatCondition1.ApplyToRow = true;
+            styleFormatCondition1.Column = this.gcIsWarned;
+            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition1.Expression = "True";
+            styleFormatCondition1.Value1 = true;
+            this.gridLookUpEdit1View.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
+            styleFormatCondition1});
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsBehavior.Editable = false;
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -538,70 +591,85 @@
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 0;
-            this.gcName.Width = 120;
             // 
-            // gcvBankAccountName
+            // gcv纳税人识别号
             // 
-            this.gcvBankAccountName.Caption = "银行户名";
-            this.gcvBankAccountName.FieldName = "BankAccountName";
-            this.gcvBankAccountName.Name = "gcvBankAccountName";
-            this.gcvBankAccountName.Visible = true;
-            this.gcvBankAccountName.VisibleIndex = 1;
-            this.gcvBankAccountName.Width = 37;
-            // 
-            // gcBankNO
-            // 
-            this.gcBankNO.Caption = "银行账号";
-            this.gcBankNO.FieldName = "BankNO";
-            this.gcBankNO.Name = "gcBankNO";
-            this.gcBankNO.Visible = true;
-            this.gcBankNO.VisibleIndex = 2;
-            this.gcBankNO.Width = 37;
-            // 
-            // BankName
-            // 
-            this.BankName.Caption = "开户行";
-            this.BankName.FieldName = "BankName";
-            this.BankName.Name = "BankName";
-            this.BankName.Visible = true;
-            this.BankName.VisibleIndex = 3;
-            this.BankName.Width = 37;
+            this.gcv纳税人识别号.Caption = "纳税人识别号";
+            this.gcv纳税人识别号.FieldName = "TaxpayerID";
+            this.gcv纳税人识别号.Name = "gcv纳税人识别号";
             // 
             // gcSupplierType
             // 
             this.gcSupplierType.Caption = "供应商类型";
+            this.gcSupplierType.ColumnEdit = this.rilueSupplierType;
             this.gcSupplierType.FieldName = "SupplierType";
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
-            this.gcSupplierType.VisibleIndex = 4;
-            this.gcSupplierType.Width = 37;
+            this.gcSupplierType.VisibleIndex = 1;
+            // 
+            // gcFlowState
+            // 
+            this.gcFlowState.Caption = "审批状态";
+            this.gcFlowState.FieldName = "EnumFlowState";
+            this.gcFlowState.Name = "gcFlowState";
+            this.gcFlowState.Visible = true;
+            this.gcFlowState.VisibleIndex = 2;
+            // 
+            // gcIsQualified
+            // 
+            this.gcIsQualified.Caption = "是否合格供应商";
+            this.gcIsQualified.FieldName = "IsQualified";
+            this.gcIsQualified.Name = "gcIsQualified";
+            this.gcIsQualified.Visible = true;
+            this.gcIsQualified.VisibleIndex = 3;
+            // 
+            // gcRegistrationDate
+            // 
+            this.gcRegistrationDate.Caption = "工商登记日期";
+            this.gcRegistrationDate.FieldName = "RegistrationDate";
+            this.gcRegistrationDate.Name = "gcRegistrationDate";
+            this.gcRegistrationDate.Visible = true;
+            this.gcRegistrationDate.VisibleIndex = 4;
+            // 
+            // gcBusinessEffectiveDate
+            // 
+            this.gcBusinessEffectiveDate.Caption = "经营截至日期";
+            this.gcBusinessEffectiveDate.FieldName = "BusinessEffectiveDate";
+            this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
+            this.gcBusinessEffectiveDate.Visible = true;
+            this.gcBusinessEffectiveDate.VisibleIndex = 5;
+            // 
+            // gcExistsAgentAgreement
+            // 
+            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
+            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
+            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
+            // 
+            // gcAgreementDate
+            // 
+            this.gcAgreementDate.Caption = "代理协议有效期";
+            this.gcAgreementDate.FieldName = "AgreementDate";
+            this.gcAgreementDate.Name = "gcAgreementDate";
+            this.gcAgreementDate.Visible = true;
+            this.gcAgreementDate.VisibleIndex = 6;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "创建时间";
             this.gridColumn1.FieldName = "CreateDate";
             this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 5;
-            this.gridColumn1.Width = 37;
             // 
             // gcCreateUser
             // 
             this.gcCreateUser.Caption = "创建人";
             this.gcCreateUser.FieldName = "CreateUser";
             this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 6;
-            this.gcCreateUser.Width = 37;
             // 
             // gcDescription
             // 
             this.gcDescription.Caption = "备注";
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 7;
-            this.gcDescription.Width = 42;
             // 
             // cboBudget
             // 
@@ -1211,6 +1279,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSupplier.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -1288,11 +1357,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcvBankAccountName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcBankNO;
-        private DevExpress.XtraGrid.Columns.GridColumn BankName;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraEditors.DateEdit deCommitTime;
@@ -1349,5 +1414,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcBankName;
         private DevExpress.XtraGrid.Columns.GridColumn gcAccount;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider2;
+        private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsQualified;
+        private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsWarned;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
     }
 }

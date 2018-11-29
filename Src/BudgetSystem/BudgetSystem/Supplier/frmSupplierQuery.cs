@@ -46,7 +46,7 @@ namespace BudgetSystem
             {
                 ModifySupplier();
             }
-            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            else if (operate.Operate == OperateTypes.SubmitApply.ToString())
             {
                 CommitSupplier();
             }
