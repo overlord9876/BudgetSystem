@@ -66,7 +66,7 @@ namespace BudgetSystem.InMoney
                     df.Currency = DataRowConvertHelper.GetStringValue(row, "报关币种").Trim();
                     df.ExportAmount = DataRowConvertHelper.GetDecimalValue(row, "出口金额");
                     df.ExportDate = DataRowConvertHelper.GetDateTimeValue(row, "出口日期");
-                    df.IsReport = DataRowConvertHelper.GetBoolValue(row, "是否已报告延期收款");
+                    df.IsReport = DataRowConvertHelper.GetStringValue(row, "是否已报告延期收款") == "是";
                     df.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                     df.CreateDate = DateTime.Now;
                     list.Add(df);

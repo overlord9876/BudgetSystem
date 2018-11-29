@@ -29,7 +29,12 @@ namespace BudgetSystem
             this.ucBudgetEdit1.InitData();
             this.ucBudgetEdit1.WorkModel = WorkModel;
             this.ucBudgetEdit1.BindingData(dataID);
-            this.gridBudget.DataSource = mmm.GetAllModifyMark<Budget>(dataID);
+            List<Budget> historyData = mmm.GetAllModifyMark<Budget>(dataID);
+            if (historyData != null)
+            {
+                historyData.ForEach(h => { h.SupplierList = null; h.CustomerList = null; });
+            }
+            this.gridBudget.DataSource = historyData;
         }
     }
 }

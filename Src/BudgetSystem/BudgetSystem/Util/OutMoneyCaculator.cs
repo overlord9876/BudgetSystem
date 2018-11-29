@@ -235,6 +235,10 @@ namespace BudgetSystem
             this.Balance = ReceiptMoneyAmount - PaymentMoneyAmount + TaxRefund - paymentMoney + AdvancePayment;
         }
 
+        public decimal GetUsagePayMoney(string usageName)
+        {
+            return this._paymentList.Where(o => o.MoneyUsed == usageName).Sum(o => o.CNY);
+        }
 
     }
 }

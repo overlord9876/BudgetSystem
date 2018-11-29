@@ -144,11 +144,11 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData2, "开票管理-财务导入开票记录",1040),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "开票管理-查看详情",1050),
 
-                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"付款凭证管理模块",1100),
-                        //new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "付款凭证管理-新增付款凭证",1110),
-                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.ImportData, "付款凭证管理-导入付款凭证",1120),
-                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.Delete, "付款凭证管理-删除付款凭证",1130),
-                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.View, "付款凭证管理-查看付款凭证",1140),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"报关单管理模块",1100),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "报关单管理-新增报关单",1110),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.ImportData, "报关单管理-导入报关单",1120),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.Delete, "报关单管理-删除报关单",1130),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.View, "报关单管理-查看报关单",1140),
 
                         new Permisson(BusinessModules.CustomerManagement,OperateTypes.None,"客户管理模块",1200),
                         new Permisson(BusinessModules.CustomerManagement,OperateTypes.New,"客户管理-新增客户",1210),

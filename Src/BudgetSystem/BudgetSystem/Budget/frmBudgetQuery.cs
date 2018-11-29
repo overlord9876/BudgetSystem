@@ -46,7 +46,6 @@ namespace BudgetSystem
 
             this.ModelOperatePageName = "预算单";
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "通用查询", UITypes.LargeMenu, new List<string>() { "通用查询1", "通用查询2", "通用查询3" }));
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
@@ -66,15 +65,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                if (e.SenderText == "查询")
-                {
-                    ViewBudget();
-                }
-                else
-                {
-                    XtraMessageBox.Show(e.SenderText);
-                    this.RefreshData();
-                }
+                ViewBudget();
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {

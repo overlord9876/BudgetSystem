@@ -53,8 +53,9 @@ namespace BudgetSystem.CommonControl
         public TextEdit_Number()
             : base()
         {
-            this.Properties.Mask.EditMask = "n";
+            this.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.Properties.Mask.EditMask = "n";
             this.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.Properties.NullText = "0.00";            
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(TextEdit_Number_KeyDown);

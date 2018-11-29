@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
+using BudgetSystem.InMoney;
 
 namespace BudgetSystem
 {
@@ -18,14 +19,14 @@ namespace BudgetSystem
         public frmVoucherNotesQuery()
         {
             InitializeComponent();
-            this.CanRefreshData = false;
+            this.Module = BusinessModules.VoucherNotesManagement;
         }
 
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增付款凭证"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增报关单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "导入报关单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除报关单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看报关单"));
@@ -44,8 +45,9 @@ namespace BudgetSystem
 
             if (operate.Operate == OperateTypes.ImportData.ToString())
             {
-                frmDeclarationformEdit form = new frmDeclarationformEdit();
-                if (form.DialogResult == System.Windows.Forms.DialogResult.OK)
+                frmDeclarationformImport form = new frmDeclarationformImport();
+
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
                 }

@@ -131,6 +131,9 @@ namespace BudgetSystem.OutMoney
 
         public bool CheckInputData()
         {
+            this.dxErrorProvider1.ClearErrors();
+            this.dxErrorProvider2.ClearErrors();
+
             if (cboSupplier.EditValue as Supplier == null)
             {
                 this.dxErrorProvider1.SetError(cboSupplier, "请选择供应商。");
@@ -191,7 +194,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboApplicant, "请选择申请人。");
             }
-
+            CheckUsage();
             if (txtAfterPaymentBalance.Value < 0)
             {
                 XtraMessageBox.Show("【警告】支付后余额小于0");
@@ -304,6 +307,67 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes.IsIOU = this.chkIsIOU.Checked;
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
+        }
+
+        private List<string> CommissionUsageNameList = new List<string>() { "佣金", "咨询费", "服务费", "费用支付审批单" };
+
+        private void CheckUsage()
+        {
+            UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
+            if (umt != null)
+            {
+                if (umt.Name == "辅料款")
+                {
+                    decimal price = this.currentBudget.InProductList.Sum(o => o.RawMaterials + o.SubsidiaryMaterials);
+                    if (price == 0)
+                    {
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现原料、辅料价格");
+                    }
+                    return;
+                }
+                else if (umt.Name == "运杂费")
+                {
+                    if (this.currentBudget.Premium == 0)
+                    {
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现运杂费");
+                        return;
+                    }
+                    decimal money = caculator.GetUsagePayMoney(umt.Name);
+                    if (money + txtCNY.Value > this.currentBudget.Premium)
+                    {
+                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        return;
+                    }
+                }
+                else if (umt.Name == "进料款")
+                {
+                    if (this.currentBudget.FeedMoney == 0)
+                    {
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现进料款");
+                        return;
+                    }
+                    decimal money = caculator.GetUsagePayMoney(umt.Name);
+                    if (money + txtCNY.Value > this.currentBudget.Premium)
+                    {
+                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        return;
+                    }
+                }
+                else if (CommissionUsageNameList.Contains(umt.Name))
+                {
+                    if (this.currentBudget.Commission == 0)
+                    {
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现佣金");
+                        return;
+                    }
+                    //decimal money = caculator.GetUsagePayMoney(umt.Name);
+                    //if (money + txtCNY.Value > this.currentBudget.Premium)
+                    //{
+                    //    this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                    //    return;
+                    //}
+                }
+            }
         }
 
         /// <summary>

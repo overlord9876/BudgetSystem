@@ -100,7 +100,7 @@ namespace BudgetSystem.Entity
         public string SupplierName { get; set; }
 
         /// <summary>
-        /// 
+        /// 用途
         /// </summary>
         public string MoneyUsed { get; set; }
 
