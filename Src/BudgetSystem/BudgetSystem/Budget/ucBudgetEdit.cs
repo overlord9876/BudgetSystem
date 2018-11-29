@@ -838,6 +838,7 @@ namespace BudgetSystem
 
         private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
         {
+            this.txtExchangeRateView.EditValue = this.txtExchangeRate.Value;
             CalcNetIncome();
             CalcProfitLevel1();
             CalcExchangeCost();
