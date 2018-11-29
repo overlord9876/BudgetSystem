@@ -29,7 +29,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交审批"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperatePageName = "供应商管理";
         }
@@ -76,7 +76,7 @@ namespace BudgetSystem
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
-            {     
+            {
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.CurrentSupplier = supplier;
