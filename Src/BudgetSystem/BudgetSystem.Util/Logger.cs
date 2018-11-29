@@ -8,7 +8,7 @@ namespace BudgetSystem.Util
     public class Logger
     {
         private readonly string logFilePath;
-       
+
         public Logger(string logFilePath)
         {
             this.logFilePath = string.IsNullOrEmpty(logFilePath.Trim()) ? "" : logFilePath;
@@ -23,12 +23,12 @@ namespace BudgetSystem.Util
             }
         }
 
-        private void Log( string type,string head, string context, bool extendDateToFileName = true)
+        private void Log(string type, string head, string context, bool extendDateToFileName = true)
         {
             string fileName;
             if (extendDateToFileName)
             {
-                fileName = System.IO.Path.Combine(this.logFilePath, type+DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+                fileName = System.IO.Path.Combine(this.logFilePath, type + DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
             }
             else
             {
@@ -36,16 +36,24 @@ namespace BudgetSystem.Util
             }
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("{0} : {1}",head,DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            sb.AppendLine(string.Format("{0} : {1}", head, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             sb.AppendLine(context);
 
             SaveToLogFile(fileName, sb.ToString());
         }
 
+        public void LogError(Exception ex)
+        {
+            if (ex != null)
+            {
+                LogError(ex.ToString());
+            }
+        }
+
         public void LogError(string context)
         {
-            this.Log("error","error", context);
-            this.Log("info", "error", context,true);
+            this.Log("error", "error", context);
+            this.Log("info", "error", context, true);
         }
 
         [Conditional("DEBUG")]

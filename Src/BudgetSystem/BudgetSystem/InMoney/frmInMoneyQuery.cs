@@ -33,7 +33,8 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增银行水单"));
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitRequest, "申请修改费用拆分"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交确认"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "入帐单";
@@ -55,9 +56,13 @@ namespace BudgetSystem.InMoney
             {
                 SplitConstMoneyBankSlip();
             }
-            else if (operate.Operate == OperateTypes.SplitRequest.ToString())
+            else if (operate.Operate == OperateTypes.ModifyApply.ToString())
             {
                 StartFlow();
+            }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                Confirm();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
@@ -133,22 +138,54 @@ namespace BudgetSystem.InMoney
             }
         }
 
+        private void Confirm()
+        {
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+
+            if (currentRowBankSlip != null)
+            {
+                currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中 || currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批不通过)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单{1}，此时不允许确认入账。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState.ToString()));
+                    return;
+                }
+                if (currentRowBankSlip.CNY2 > 0)
+                {
+                    XtraMessageBox.Show(string.Format("金额未分拆完成，此时不允许确认入账。"));
+                    return;
+                }
+                try
+                {
+                    currentRowBankSlip.State = (int)ReceiptState.已拆分; ;
+                    currentRowBankSlip.UpdateTimestamp = arm.ConfirmSplitAmount(currentRowBankSlip);
+                    XtraMessageBox.Show("提交数据成功。");
+                }
+                catch (Exception ex)
+                {
+                    RunInfo.Instance.Logger.LogError(ex);
+                    XtraMessageBox.Show("提交数据失败。");
+                }
+            }
+        }
+
         private void SplitConstMoneyBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             if (currentRowBankSlip != null)
             {
-                if (currentRowBankSlip.EnumFlowState != EnumDataFlowState.审批通过)
+                if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中 || currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
-                    if (currentRowBankSlip.State != 0)//不是待拆分状态不允许拆分
-                    {
-                        XtraMessageBox.Show("当前不属于待拆分状态，不允许直接进行拆分。");
-                        return;
-                    }
+                    XtraMessageBox.Show("当前不属于未审批通过状态，不允许直接进行拆分。");
+                    return;
                 }
                 else
                 {
-                    XtraMessageBox.Show("当前不属于未审批通过状态，不允许直接进行拆分。");
+                    if (currentRowBankSlip.State != 0)//不是待拆分状态不允许拆分
+                    {
+                        XtraMessageBox.Show("当前不属于已拆分状态，不允许直接进行拆分。");
+                        return;
+                    }
                 }
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.SplitConst;
@@ -190,7 +227,7 @@ namespace BudgetSystem.InMoney
         {
             if (hInfo.InRow)
             {
-                //ModifyActualReceipts();
+                ViewBankSlip();
             }
         }
 

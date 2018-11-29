@@ -107,9 +107,12 @@ namespace BudgetSystem.Dal
 
         public BankSlip GetBankSlipByBSID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select * From `bankslip` Where `BSID` = @BSID";
+            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+                                From `bankslip` bs 
+                                    LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType AND f.IsRecent=1
+                                Where `BSID` = @BSID";
 
-            return con.Query<BankSlip>(selectSql, new { BSID = @bsID }, tran).SingleOrDefault();
+            return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), BSID = @bsID }, tran).SingleOrDefault();
         }
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
@@ -143,6 +146,12 @@ namespace BudgetSystem.Dal
                 addBudgetBill.BSID = id;
             }
             return id;
+        }
+
+        public void ConfirmSplitBankSlip(int bsID, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `BudgetBill` Set `Confirmed` = @Confirmed Where `BSID` = @BSID AND  `IsDelete` = 0";
+            int id = con.Execute(updateSql, new { BSID = bsID, Confirmed = true }, tran);
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace BudgetSystem.InMoney
                 }
                 catch (Exception ex)
                 {
-                    //TODO: 记录日志
+                    RunInfo.Instance.Logger.LogError(ex);
                 }
             }
         }
@@ -51,26 +51,7 @@ namespace BudgetSystem.InMoney
             gvConstSplit.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(gvConstSplit_InitNewRow);
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
-            this.gvConstSplit.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvConstSplit_CustomDrawGroupRow);
-            this.gvConstSplit.CustomDrawRowPreview += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvConstSplit_CustomDrawRowPreview);
-        }
-
-        void gvConstSplit_CustomDrawRowPreview(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
-        {
-            Font f = new Font("宋体", 10, FontStyle.Bold);
-
-            Rectangle r = new Rectangle(e.Bounds.Left + 5, e.Bounds.Top + 5, e.Bounds.Width - 5, e.Bounds.Height - 5);
-
-            e.Graphics.DrawString("aaaaaaaaa", f, Brushes.Black, r);
-        }
-
-        void gvConstSplit_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
-        {
-            Font f = new Font("宋体", 10, FontStyle.Bold);
-
-            Rectangle r = new Rectangle(e.Bounds.Left + 5, e.Bounds.Top + 5, e.Bounds.Width - 5, e.Bounds.Height - 5);
-
-            e.Graphics.DrawString("aaaaaaaaa", f, Brushes.Black, r);
+            this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
         }
 
         private EditFormWorkModels _workModel;
@@ -96,10 +77,8 @@ namespace BudgetSystem.InMoney
 
         public List<BudgetBill> SpliDetail
         {
-            get
-            {
-                return (this.gvConstSplit.DataSource as BindingList<BudgetBill>).ToList();
-            }
+            get;
+            private set;
         }
 
         public void InitData()
@@ -157,6 +136,8 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.State = (int)ReceiptState.入账;
 
             GetSalesmanValues();
+            this.SpliDetail = (this.gvConstSplit.DataSource as BindingList<BudgetBill>).ToList();
+            this.CurrentBankSlip.CNY2 = txtNotSplitCNYMoney.Value;
         }
 
         public void BindBankSlip(BankSlip item)
@@ -197,6 +178,7 @@ namespace BudgetSystem.InMoney
                 o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
             });
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
+            CalcSplitMoney();
 
         }
 
@@ -514,6 +496,16 @@ namespace BudgetSystem.InMoney
         private void riLinkEditConstInDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
         {
             e.DisplayText = "删除";
+        }
+
+        void gvConstSplit_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            BudgetBill item = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
+
+            if (item != null)
+            {
+                e.Cancel = item.IsDelete;
+            }
         }
 
         private void txtNotSplitCNYMoney_EditValueChanged(object sender, EventArgs e)

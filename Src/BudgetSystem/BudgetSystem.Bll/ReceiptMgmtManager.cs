@@ -60,7 +60,7 @@ namespace BudgetSystem.Bll
                 var uList = dal.GetBudgetBillListByBudgetId(budgetId, con, null);
                 return uList;
             });
-            return lst.ToList();        
+            return lst.ToList();
         }
 
         /// <summary>
@@ -151,6 +151,17 @@ namespace BudgetSystem.Bll
                     }
                 }
 
+                return versionNumber;
+            });
+        }
+
+        public DateTime ConfirmSplitAmount(BankSlip modifyBankSlip)
+        {
+            return this.ExecuteWithTransaction<DateTime>((con, tran) =>
+            {
+                DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
+                bool confirmed = (modifyBankSlip.CNY2 == 0);
+                dal.ConfirmSplitBankSlip(modifyBankSlip.BSID, con, tran);
                 return versionNumber;
             });
         }

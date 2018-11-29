@@ -94,18 +94,29 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 2;
             }
-
+            else if (operate == OperateTypes.ModifyApply)
+            {
+                text = "修改申请";
+                group = "操作";
+                imageIndex = 59;
+            }
+            else if (operate == OperateTypes.DeleteApply)
+            {
+                text = "删除申请";
+                group = "操作";
+                imageIndex = 59;
+            }
+            else if (operate == OperateTypes.SubmitApply)
+            {
+                text = "提交流程";
+                group = "操作";
+                imageIndex = 59;
+            }
             else if (operate == OperateTypes.SplitCost)
             {
                 text = "费用拆分";
                 group = "操作";
                 imageIndex = 55;
-            }
-            else if (operate == OperateTypes.SplitRequest)
-            {
-                text = "费用拆分申请";
-                group = "操作";
-                imageIndex = 28;
             }
             else if (operate == OperateTypes.Close)
             {

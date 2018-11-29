@@ -64,6 +64,12 @@ namespace BudgetSystem.InMoney
         protected override void SubmitSplitConstData()
         {
             base.SubmitSplitConstData();
+            ucInMoneyEdit1.FillData();
+
+            if (!ucInMoneyEdit1.CheckUIInput())
+            {
+                return;
+            }
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
 
             rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
@@ -102,6 +108,7 @@ namespace BudgetSystem.InMoney
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
             if (this.ucInMoneyEdit1.SpliDetail != null)
             {
+                CurrentBankSlip.State = (int)ReceiptState.已拆分;
                 rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;

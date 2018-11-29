@@ -14,10 +14,13 @@ namespace BudgetSystem.Entity
         MyQuery,
         CustomQuery,
         QueryManager,
-        
-        
-        
+
+
+
         New,
+        ModifyApply,
+        DeleteApply,
+        SubmitApply,
         Modify,
         Delete,
         Relate,
@@ -29,10 +32,6 @@ namespace BudgetSystem.Entity
         /// 审批
         /// </summary>
         Approve,
-        /// <summary>
-        /// 拆分申请
-        /// </summary>
-        SplitRequest,
         /// <summary>
         /// 拆分费用
         /// </summary>
