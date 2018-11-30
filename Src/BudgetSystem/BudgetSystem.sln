@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localizatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D508CB0A-FCCD-4693-B0CF-7AB95AA561FF}"
 	ProjectSection(SolutionItems) = preProject
+		CheckPoint.txt = CheckPoint.txt
 		Mysql生成增改删SQL.sql = Mysql生成增改删SQL.sql
 		Mysql生成实体类.sql = Mysql生成实体类.sql
 		Track.txt = Track.txt
@@ -22,6 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Track0904.txt = Track0904.txt
 		Track2018-09-01.txt = Track2018-09-01.txt
 		开发进度跟踪.txt = 开发进度跟踪.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetSystem.Deploy", "BudgetSystem.Deploy\BudgetSystem.Deploy.csproj", "{49205E92-9406-4516-817F-53DFE25C9044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetSystem.Tools", "BudgetSystem.Tools\BudgetSystem.Tools.csproj", "{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚本", "{78108BA3-280F-4E2C-B2E4-5A5AC729AD3A}"
+	ProjectSection(SolutionItems) = preProject
+		2018-12-01升级脚本.sql = 2018-12-01升级脚本.sql
 	EndProjectSection
 EndProject
 Global
@@ -94,6 +104,26 @@ Global
 		{D2796715-1019-4731-B90B-1289826CA9BC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D2796715-1019-4731-B90B-1289826CA9BC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D2796715-1019-4731-B90B-1289826CA9BC}.Release|x86.ActiveCfg = Release|Any CPU
+		{49205E92-9406-4516-817F-53DFE25C9044}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Debug|x86.ActiveCfg = Debug|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Debug|x86.Build.0 = Debug|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Release|Any CPU.ActiveCfg = Release|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Release|Mixed Platforms.Build.0 = Release|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Release|x86.ActiveCfg = Release|x86
+		{49205E92-9406-4516-817F-53DFE25C9044}.Release|x86.Build.0 = Release|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Debug|x86.ActiveCfg = Debug|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Debug|x86.Build.0 = Debug|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|Any CPU.ActiveCfg = Release|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|x86.ActiveCfg = Release|x86
+		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

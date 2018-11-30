@@ -47,8 +47,10 @@
     <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="CodeType.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Declarationform.cs" />
     <Compile Include="ExceptionExtension\VersionNumberException.cs" />
+    <Compile Include="FileData.cs" />
     <Compile Include="FlowEnum.cs" />
     <Compile Include="Infrastructure\ActionWithPermission.cs" />
     <Compile Include="Infrastructure\BusinessModules.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="SystemConfig\MoneyType.cs" />
     <Compile Include="SystemConfig\Port.cs" />
     <Compile Include="SystemConfig\UseMoneyType.cs" />
+    <Compile Include="SystemInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Customer.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="ReceivableAccounts.cs" />
     <Compile Include="BudgetBill.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VersionFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

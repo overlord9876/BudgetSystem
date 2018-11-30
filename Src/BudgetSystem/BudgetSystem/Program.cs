@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
 using DevExpress.LookAndFeel;
+using System.Configuration;
 
 namespace BudgetSystem
 {
@@ -24,6 +25,9 @@ namespace BudgetSystem
         [STAThread]
         static void Main()
         {
+
+    
+
             Environment.CurrentDirectory = Application.StartupPath;
             DevExpress.Localization.Util.Set_zhchs_Culture();
             OfficeSkins.Register();
@@ -40,7 +44,10 @@ namespace BudgetSystem
 
             
              UserLookAndFeel.Default.SkinName=RunInfo.Instance.Config.SkinName;
-          
+
+
+             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
+             Bll.BaseManager.ConnectionString = connectionString;
 
             frmLogin loginForm = new frmLogin();
             if (loginForm.ShowDialog() == DialogResult.OK)

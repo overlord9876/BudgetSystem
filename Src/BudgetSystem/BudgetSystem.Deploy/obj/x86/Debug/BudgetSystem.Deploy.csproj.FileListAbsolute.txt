@@ -1,0 +1,6 @@
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\bin\Debug\BudgetSystem.Deploy.exe
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\bin\Debug\BudgetSystem.Deploy.pdb
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.Properties.Resources.resources
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.csproj.GenerateResource.Cache
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.exe
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.pdb

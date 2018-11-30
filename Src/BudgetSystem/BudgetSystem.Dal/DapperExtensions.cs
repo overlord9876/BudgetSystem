@@ -18,5 +18,6 @@ namespace BudgetSystem.Dal
             object obj = command.ExecuteScalar();
             return Convert.ToInt32(obj);
         }
+
     }
 }

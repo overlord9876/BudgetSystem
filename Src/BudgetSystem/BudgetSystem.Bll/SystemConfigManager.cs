@@ -34,7 +34,7 @@ namespace BudgetSystem.Bll
             string value = JsonConvert.SerializeObject(data);
             this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.ModifySystemConfig(name,value,con,tran); 
+                dal.InsertOrModifySystemConfig(name,value,con,tran); 
             });
         }
     }

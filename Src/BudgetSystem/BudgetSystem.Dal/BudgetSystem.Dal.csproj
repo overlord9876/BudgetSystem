@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DalBase.cs" />
+    <Compile Include="FileDal.cs" />
     <Compile Include="ModifyMarkDal.cs" />
     <Compile Include="ReceiptManagementDal.cs" />
     <Compile Include="BudgetDal.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="SystemConfigDal.cs" />
     <Compile Include="UserDal.cs" />
     <Compile Include="DeclarationformDal.cs" />
+    <Compile Include="VersionDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Entity\BudgetSystem.Entity.csproj">

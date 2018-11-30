@@ -10,10 +10,18 @@ namespace BudgetSystem.Bll
     public abstract class BaseManager
     {
 
+        public static string ConnectionString
+        {
+            get;
+            set;
+        }
+
         protected IDbConnection GetConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
-            IDbConnection con = new MySqlConnection(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
+            //IDbConnection con = new MySqlConnection(connectionString);
+
+            IDbConnection con = new MySqlConnection(BaseManager.ConnectionString);
             con.Open();
             return con;
         }

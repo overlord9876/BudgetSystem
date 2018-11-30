@@ -1,0 +1,10 @@
+CheckPoint
+
+修改Mysql.ini文件，默认在    C:\ProgramData\MySQL\MySQL Server 5.7\
+
+1.注意修改Mysql默认链接数不够的问题        max_connections = 300
+2.注意修改Mysql默认支持数据包太小的问题    max_allowed_packet=20M
+
+
+
+改完需要重启Mysql服务

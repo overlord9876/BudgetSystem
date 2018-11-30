@@ -51,6 +51,7 @@
     <Compile Include="BaseManager.cs" />
     <Compile Include="BudgetManager.cs" />
     <Compile Include="DepartmentManager.cs" />
+    <Compile Include="FileManager.cs" />
     <Compile Include="FlowManager.cs" />
     <Compile Include="InvoiceManager.cs" />
     <Compile Include="ModifyMarkManager.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="ReceiptMgmtManager.cs" />
     <Compile Include="CommonManager.cs" />
     <Compile Include="DeclarationformManager.cs" />
+    <Compile Include="VersionInfoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Dal\BudgetSystem.Dal.csproj">

@@ -14,6 +14,7 @@ using BudgetSystem.DepartmentManage;
 using BudgetSystem.InMoney;
 using BudgetSystem.FlowManage;
 using BudgetSystem.WorkSpace;
+using System.Reflection;
 
 namespace BudgetSystem
 {
@@ -367,6 +368,36 @@ namespace BudgetSystem
         private void frmMain_Load(object sender, EventArgs e)
         {
             RunInfo.Instance.MainForm = this;
+            string formName = RunInfo.Instance.Config.LastForm;
+            try
+            {
+                frmBaseQueryForm form = Assembly.GetExecutingAssembly().CreateInstance(formName) as frmBaseQueryForm;
+                if (form != null)
+                {
+                    if (form.CanRefreshData)
+                    {
+                        form.RefreshData();
+                    }
+                    ShowForm(form);
+                }
+            }
+            catch
+            {
+
+
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form form = this.ActiveMdiChild;
+            if (form != null)
+            {
+                RunInfo.Instance.Config.LastForm = form.GetType().FullName;
+                RunInfo.Instance.Config.Save();
+            }
+
+
         }
     }
 }

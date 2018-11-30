@@ -28,10 +28,16 @@ namespace BudgetSystem.Dal
                 return null;
             }
         }
-        public void ModifySystemConfig(string name, string value, IDbConnection con, IDbTransaction tran = null)
+        public void InsertOrModifySystemConfig(string name, string value, IDbConnection con, IDbTransaction tran = null)
         {
-            string updateSql = "Update `SystemConfig` Set `Value`=@Value  Where `Name` = @Name";
+
+
+            string updateSql = "REPLACE Into `SystemConfig` (`Name`, `Value`) VALUES (@Name, @Value)";
             con.Execute(updateSql, new { Name = name, Value = value }, tran);
+            // string updateSql = "Update `SystemConfig` Set `Value`=@Value  Where `Name` = @Name";
+            // con.Execute(updateSql, new { Name = name, Value = value }, tran);
         }
+
+
     }
 }
