@@ -14,7 +14,6 @@ namespace BudgetSystem
     public partial class frmMain
     {
 
-
         private void InitSkins()
         {
 
@@ -22,15 +21,12 @@ namespace BudgetSystem
             // UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
         }
 
-
-
         private void ShowForm(Form form)
         {
             form.WindowState = FormWindowState.Maximized;
             form.MdiParent = this;
             form.Show();
         }
-
 
         private T GetExistForm<T>() where T : Form
         {
@@ -142,7 +138,6 @@ namespace BudgetSystem
                 this.ribbonControl1.SelectedPage = page;
             }
         }
-
 
         private void SetOperatonGroupNotVisibleAndClearNotExistFormPage(string exceptFormID)
         {
@@ -296,7 +291,6 @@ namespace BudgetSystem
             RunInfo.Instance.Config.SkinName = e.Item.Caption;
             RunInfo.Instance.Config.Save();
         }
-
 
         private void CheckUserPermission()
         {

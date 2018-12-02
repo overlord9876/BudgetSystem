@@ -4,3 +4,8 @@ D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\Budget
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.csproj.GenerateResource.Cache
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.exe
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.pdb
+D:\github\BudgetSystem\Src\BudgetSystem\bin\Debug\BudgetSystem.Deploy.exe
+D:\github\BudgetSystem\Src\BudgetSystem\bin\Debug\BudgetSystem.Deploy.pdb
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.frmVersionUpdate.resources
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.csprojResolveAssemblyReference.cache
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Deploy\obj\x86\Debug\BudgetSystem.Deploy.frmSetting.resources

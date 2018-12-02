@@ -25,12 +25,12 @@ namespace BudgetSystem
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+
 
             try
             {
-
                 Environment.CurrentDirectory = Application.StartupPath;
                 DevExpress.Localization.Util.Set_zhchs_Culture();
                 OfficeSkins.Register();
@@ -48,22 +48,16 @@ namespace BudgetSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-
             UserLookAndFeel.Default.SkinName = RunInfo.Instance.Config.SkinName;
 
-
             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
-            Bll.BaseManager.ConnectionString = connectionString;
+            Bll.BaseManager.SetConnectionString(connectionString, false);
 
             frmLogin loginForm = new frmLogin();
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-
                 Application.Run(new frmMain());
             }
-
-
         }
 
         //UI线程异常

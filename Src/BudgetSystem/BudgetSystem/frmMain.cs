@@ -34,8 +34,6 @@ namespace BudgetSystem
 
         }
 
-    
-
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmBudgetQuery form = GetExistForm<frmBudgetQuery>();
@@ -50,8 +48,6 @@ namespace BudgetSystem
             }
             ShowForm(form);
         }
-
-
 
         private void btnInMoneyQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -82,9 +78,6 @@ namespace BudgetSystem
             }
             ShowForm(form);
         }
-
-
-
 
         private void btnAddBudget_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -372,6 +365,14 @@ namespace BudgetSystem
             try
             {
                 frmBaseQueryForm form = Assembly.GetExecutingAssembly().CreateInstance(formName) as frmBaseQueryForm;
+
+                string permission = form.Module.ToString();
+
+                if (!RunInfo.Instance.UserPermission.Contains(permission))
+                {
+                    return;
+                }
+
                 if (form != null)
                 {
                     if (form.CanRefreshData)

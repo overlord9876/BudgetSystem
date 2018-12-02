@@ -76,6 +76,10 @@
       <Project>{6EC39F94-981B-488F-A94D-3D3F9F0C6D79}</Project>
       <Name>BudgetSystem.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Util\BudgetSystem.Util.csproj">
+      <Project>{4BDAACB8-C70B-470D-BE3C-C95EE42F9ECE}</Project>
+      <Name>BudgetSystem.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

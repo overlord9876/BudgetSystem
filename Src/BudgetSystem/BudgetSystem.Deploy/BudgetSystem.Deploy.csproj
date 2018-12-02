@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,12 +27,18 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinqBridge">
+      <HintPath>..\Lib\LinqBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net20">
+      <HintPath>..\Lib\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -41,14 +47,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="DeployConfig.cs" />
+    <Compile Include="frmSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmSetting.Designer.cs">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVersionUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVersionUpdate.Designer.cs">
+      <DependentUpon>frmVersionUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVersionUpdate.resx">
+      <DependentUpon>frmVersionUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -67,6 +86,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetSystem.Bll\BudgetSystem.Bll.csproj">
+      <Project>{2D2754F5-2900-4E7D-B008-A44549A032B1}</Project>
+      <Name>BudgetSystem.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Dal\BudgetSystem.Dal.csproj">
+      <Project>{A4405AAF-A361-4995-98D0-37CBAB07CE03}</Project>
+      <Name>BudgetSystem.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Entity\BudgetSystem.Entity.csproj">
+      <Project>{6EC39F94-981B-488F-A94D-3D3F9F0C6D79}</Project>
+      <Name>BudgetSystem.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BudgetSystem.Util\BudgetSystem.Util.csproj">
+      <Project>{4BDAACB8-C70B-470D-BE3C-C95EE42F9ECE}</Project>
+      <Name>BudgetSystem.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

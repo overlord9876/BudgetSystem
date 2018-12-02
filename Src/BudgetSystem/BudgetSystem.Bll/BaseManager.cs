@@ -10,18 +10,35 @@ namespace BudgetSystem.Bll
     public abstract class BaseManager
     {
 
-        public static string ConnectionString
+        public static void SetConnectionString(string connection, bool isEncrypted = true)
+        {
+            if (isEncrypted)
+            {
+                ConnectionString = Util.DES.Decrypt(connection);
+            }
+            else
+            {
+                ConnectionString = connection;
+            }
+
+
+        }
+
+
+        private static string ConnectionString
         {
             get;
             set;
         }
+
+
 
         protected IDbConnection GetConnection()
         {
             //string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
             //IDbConnection con = new MySqlConnection(connectionString);
 
-            IDbConnection con = new MySqlConnection(BaseManager.ConnectionString);
+            IDbConnection con = new MySqlConnection(ConnectionString);
             con.Open();
             return con;
         }

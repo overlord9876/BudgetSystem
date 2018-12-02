@@ -17,10 +17,10 @@ namespace BudgetSystem.Tools
             InitializeComponent();
         }
 
-
-
         private string rootPath;
+
         private FileInfo[] upFiles;
+
         private void btnAddFile_Click(object sender, EventArgs e)
         {
 

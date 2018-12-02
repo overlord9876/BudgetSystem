@@ -17,7 +17,7 @@ namespace BudgetSystem.Tools
             Application.SetCompatibleTextRenderingDefault(false);
 
             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
-            Bll.BaseManager.ConnectionString = connectionString;
+            Bll.BaseManager.SetConnectionString(connectionString, false);
             
             
 
