@@ -13,6 +13,8 @@ using DevExpress.Skins;
 using DevExpress.UserSkins;
 using DevExpress.LookAndFeel;
 using System.Configuration;
+using MySql.Data.MySqlClient;
+using DevExpress.XtraEditors;
 
 namespace BudgetSystem
 {
@@ -67,6 +69,10 @@ namespace BudgetSystem
         //UI线程异常
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
+            if (e.Exception is MySqlException)
+            {
+                XtraMessageBox.Show("访问数据服务失败，请联系管理员。");
+            }
             RunInfo.Instance.Logger.LogError(e.Exception.ToString());
         }
 
