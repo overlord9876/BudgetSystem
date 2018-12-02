@@ -80,26 +80,18 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(this.txtNO.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtNO, "请输入报关单号");
-                this.txtNO.Focus();
-                return;
             }
             if (this.cboCurrency.EditValue == null)
             {
                 this.dxErrorProvider1.SetError(this.cboCurrency, "请选择报关币种");
-                this.cboCurrency.Focus();
-                return;
             }
             if (this.txtExportAmount.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(this.txtExportAmount, "请输入出口金额");
-                this.txtExportAmount.Focus();
-                return;
             }
             if (!(this.cboBudget.EditValue is Budget))
             {
                 this.dxErrorProvider1.SetError(this.cboBudget, "请选择合同号");
-                this.cboBudget.Focus();
-                return;
             }
         }
 

@@ -201,46 +201,32 @@ namespace BudgetSystem.InMoney
             if ((cboCustomer.EditValue as Customer) == null)
             {
                 dxErrorProvider1.SetError(cboCustomer, "请输入客户信息");
-                cboCustomer.Focus();
-                return false;
             }
             if (string.IsNullOrEmpty(txtVoucherNo.Text.Trim()))
             {
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
-                txtVoucherNo.Focus();
-                return false;
             }
 
             if (txtOriginalCoin.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtOriginalCoin, "请输入原币金额");
-                txtOriginalCoin.Focus();
-                return false;
             }
             if (cboCurrency.EditValue == null)
             {
                 dxErrorProvider1.SetError(cboCurrency, "请选择币种");
-                cboCurrency.Focus();
-                return false;
             }
             if (txtExchangeRate.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtExchangeRate, "请输入汇率信息");
-                txtExchangeRate.Focus();
-                return false;
             }
 
             if (txtCNY.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtCNY, "请输入人民币金额");
-                txtCNY.Focus();
-                return false;
             }
             if (txtPaymentMethod.SelectedItem == null || string.IsNullOrEmpty(txtPaymentMethod.SelectedItem.ToString()))
             {
                 dxErrorProvider1.SetError(txtPaymentMethod, "请选择支付方式");
-                txtPaymentMethod.Focus();
-                return false;
             }
             return !dxErrorProvider1.HasErrors;
         }

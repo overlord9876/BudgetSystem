@@ -351,18 +351,15 @@ namespace BudgetSystem
             if (this.dteSignDate.EditValue == null)
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "请输入签约日期");
-                return;
             }
             if (this.dteValidity.EditValue == null)
             {
                 this.dxErrorProvider1.SetError(this.dteValidity, "请输入有效期");
-                return;
             }
 
             if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
-                return;
             }
 
             if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批)
@@ -370,7 +367,6 @@ namespace BudgetSystem
                 if (this.dteSignDate.DateTime.AddYears(1) <= this.dteValidity.DateTime)
                 {
                     this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
-                    return;
                 }
             }
         }
@@ -380,19 +376,16 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同编号");
-                return;
             }
             Match match = Regex.Match(contractNo, "(" + contractNoPrefix + ")\\d{4}$");
             if (!match.Success)
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为：yy-部门编号-4位数字");
-                return;
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
             if (bm.CheckContractNO(id, contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
-                return;
             }
         }
 
@@ -401,7 +394,6 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(this.pceMainCustomer.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.pceMainCustomer, "请选择主买方");
-                return;
             }
         }
 

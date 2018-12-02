@@ -26,14 +26,19 @@ namespace BudgetSystem
         static void Main()
         {
 
-    
+            try
+            {
 
-            Environment.CurrentDirectory = Application.StartupPath;
-            DevExpress.Localization.Util.Set_zhchs_Culture();
-            OfficeSkins.Register();
-            BonusSkins.Register();
-            SkinManager.EnableFormSkins();
-
+                Environment.CurrentDirectory = Application.StartupPath;
+                DevExpress.Localization.Util.Set_zhchs_Culture();
+                OfficeSkins.Register();
+                BonusSkins.Register();
+                SkinManager.EnableFormSkins();
+            }
+            catch (Exception ex)
+            {
+                RunInfo.Instance.Logger.LogInfomation(ex.ToString());
+            }
 
             Application.ThreadException += Application_ThreadException; //UI线程异常
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException; //多线程异常
@@ -42,12 +47,12 @@ namespace BudgetSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            
-             UserLookAndFeel.Default.SkinName=RunInfo.Instance.Config.SkinName;
+
+            UserLookAndFeel.Default.SkinName = RunInfo.Instance.Config.SkinName;
 
 
-             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
-             Bll.BaseManager.ConnectionString = connectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
+            Bll.BaseManager.ConnectionString = connectionString;
 
             frmLogin loginForm = new frmLogin();
             if (loginForm.ShowDialog() == DialogResult.OK)
@@ -56,9 +61,9 @@ namespace BudgetSystem
                 Application.Run(new frmMain());
             }
 
-            
+
         }
-    
+
         //UI线程异常
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
