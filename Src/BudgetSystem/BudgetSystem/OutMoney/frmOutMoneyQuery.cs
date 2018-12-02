@@ -12,7 +12,7 @@ using BudgetSystem.OutMoney;
 
 namespace BudgetSystem
 {
-    public partial class frmOutMoneyQuery : frmBaseQueryFormWithCondtion
+    public partial class frmOutMoneyQuery : frmBaseQueryForm
     {
         PaymentNotesManager pnm = new PaymentNotesManager();
 

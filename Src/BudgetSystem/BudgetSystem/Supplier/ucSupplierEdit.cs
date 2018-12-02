@@ -356,6 +356,7 @@ namespace BudgetSystem
         {
             if (this.gvBankInfoDetail.FocusedRowHandle < 0)
             {
+                gvBankInfoDetail.CloseEditor();
                 gvBankInfoDetail.CancelUpdateCurrentRow();
             }
             else

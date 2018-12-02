@@ -67,7 +67,11 @@ namespace BudgetSystem.OutMoney
             {
                 this.deCommitTime.EditValue = DateTime.Now;
                 this.txtExpectedReturnDate.EditValue = DateTime.Now;
-                BindApplicantUser(RunInfo.Instance.CurrentUser.UserName);
+                txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
+
+                cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
+                cboDepartment.Tag = RunInfo.Instance.CurrentUser.Department;
+
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -106,7 +110,10 @@ namespace BudgetSystem.OutMoney
             this.txtVoucherNo.Text = payment.VoucherNo;
             this.deCommitTime.EditValue = payment.CommitTime;
 
-            BindApplicantUser(payment.Applicant);
+            this.txtApplicant.EditValue = um.GetUser(payment.Applicant);
+
+            this.cboDepartment.EditValue = payment.DepartmentName;
+            this.cboDepartment.Tag = payment.DepartmentCode;
 
             foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
             {
@@ -194,10 +201,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(txtCNY, string.Format("当前临时供方已付款{0}，加上当前付款金额已超过最大限制。", temporarySupplierPaymenttotalAmount));
             }
-            if (cboApplicant.EditValue as User == null)
-            {
-                this.dxErrorProvider1.SetError(cboApplicant, "请选择申请人。");
-            }
+
             CheckUsage();
             if (txtAfterPaymentBalance.Value < 0)
             {
@@ -230,26 +234,11 @@ namespace BudgetSystem.OutMoney
 
                 this.cboBudget.Properties.DataSource = bm.GetAllBudget();
 
-                this.cboApplicant.Properties.Items.AddRange(um.GetAllUser());
-
                 supplierList = sm.GetAllSupplier();
             }
             catch (Exception ex)
             {
                 RunInfo.Instance.Logger.LogError(ex);
-            }
-        }
-
-        private void BindApplicantUser(string userName)
-        {
-            foreach (User u in this.cboApplicant.Properties.Items)
-            {
-                if (u.UserName == userName)
-                {
-                    this.cboApplicant.SelectedItem = u;
-                    this.cboDepartment.Text = u.Department;
-                    break;
-                }
             }
         }
 
@@ -303,7 +292,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
             this.CurrentPaymentNotes.CommitTime = DateTime.Parse(this.deCommitTime.EditValue.ToString());
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
-            this.CurrentPaymentNotes.Applicant = (this.cboApplicant.EditValue as User).UserName;
+            this.CurrentPaymentNotes.Applicant = (this.txtApplicant.EditValue as User).UserName;
             this.CurrentPaymentNotes.MoneyUsed = (this.cboMoneyUsed.EditValue as UseMoneyType).Name;
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
@@ -499,15 +488,6 @@ namespace BudgetSystem.OutMoney
             else
             {
                 XtraMessageBox.Show("请选择合同");
-            }
-        }
-
-        private void cboApplicant_SelectedValueChanged(object sender, EventArgs e)
-        {
-            User selectedUser = cboApplicant.EditValue as User;
-            if (selectedUser != null)
-            {
-                cboDepartment.Text = selectedUser.DepartmentName;
             }
         }
 

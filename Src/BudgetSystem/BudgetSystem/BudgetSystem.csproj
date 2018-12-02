@@ -548,7 +548,6 @@
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">
       <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>

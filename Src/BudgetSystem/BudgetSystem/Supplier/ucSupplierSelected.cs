@@ -116,5 +116,13 @@ namespace BudgetSystem
                 this.gvSupplier.FocusedRowHandle = rowHandle;
             }
         }
+
+        private void btnSure_Click(object sender, EventArgs e)
+        {
+            if (this.Parent is DevExpress.XtraEditors.PopupContainerControl)
+            {
+                (this.Parent as DevExpress.XtraEditors.PopupContainerControl).OwnerEdit.ClosePopup();
+            }
+        }
     }
 }

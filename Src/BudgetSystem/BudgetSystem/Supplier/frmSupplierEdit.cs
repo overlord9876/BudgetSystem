@@ -27,6 +27,7 @@ namespace BudgetSystem
 
         private void frmSupplierEdit_Load(object sender, EventArgs e)
         {
+            this.ucSupplierEdit1.InitData();
             this.ucSupplierEdit1.CurrentSupplier = this.CurrentSupplier;
             this.ucSupplierEdit1.WorkModel=this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
@@ -41,7 +42,6 @@ namespace BudgetSystem
             {
                 this.Text = "查看供应商信息";
             }
-            this.ucSupplierEdit1.InitData();
         }
         private void btnSure_Click(object sender, EventArgs e)
         {

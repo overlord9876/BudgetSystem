@@ -88,6 +88,7 @@ namespace BudgetSystem
         {
             if (this.gvCountry.FocusedRowHandle < 0)
             {
+                gvCountry.CloseEditor();
                 gvCountry.CancelUpdateCurrentRow();
                 this.IsChanged = true;
             }

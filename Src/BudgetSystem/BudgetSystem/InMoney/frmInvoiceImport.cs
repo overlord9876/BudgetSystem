@@ -280,6 +280,7 @@ namespace BudgetSystem.InMoney
         {
             if (this.gvInvoice.FocusedRowHandle < 0)
             {
+                gvInvoice.CloseEditor();
                 gvInvoice.CancelUpdateCurrentRow();
             }
             else

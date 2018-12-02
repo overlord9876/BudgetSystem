@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.ucBudgetEdit1 = new BudgetSystem.ucBudgetEdit();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ucBudgetEdit1 = new BudgetSystem.ucBudgetEdit();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -55,18 +55,28 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(323, 387, 1151, 769);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(148, 320, 1151, 769);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1412, 854);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // ucBudgetEdit1
+            // 
+            this.ucBudgetEdit1.CurrentBudget = null;
+            this.ucBudgetEdit1.Location = new System.Drawing.Point(10, 10);
+            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetEdit1.Name = "ucBudgetEdit1";
+            this.ucBudgetEdit1.Size = new System.Drawing.Size(1392, 798);
+            this.ucBudgetEdit1.TabIndex = 57;
+            this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
+            // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(1124, 806);
+            this.btnSure.Location = new System.Drawing.Point(1164, 810);
             this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSure.Name = "btnSure";
-            this.btnSure.Size = new System.Drawing.Size(136, 36);
+            this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
             this.btnSure.TabIndex = 56;
             this.btnSure.Text = "确定";
@@ -75,10 +85,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1264, 806);
+            this.btnCancel.Location = new System.Drawing.Point(1284, 810);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(136, 36);
+            this.btnCancel.Size = new System.Drawing.Size(116, 32);
             this.btnCancel.StyleController = this.layoutControl1;
             this.btnCancel.TabIndex = 55;
             this.btnCancel.Text = "取消";
@@ -103,11 +113,11 @@
             // 
             this.layoutControlItem50.Control = this.btnCancel;
             this.layoutControlItem50.CustomizationFormText = "layoutControlItem50";
-            this.layoutControlItem50.Location = new System.Drawing.Point(1252, 794);
-            this.layoutControlItem50.MaxSize = new System.Drawing.Size(140, 40);
-            this.layoutControlItem50.MinSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem50.Location = new System.Drawing.Point(1272, 798);
+            this.layoutControlItem50.MaxSize = new System.Drawing.Size(120, 36);
+            this.layoutControlItem50.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem50.Name = "layoutControlItem50";
-            this.layoutControlItem50.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem50.Size = new System.Drawing.Size(120, 36);
             this.layoutControlItem50.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem50.Text = "layoutControlItem50";
             this.layoutControlItem50.TextSize = new System.Drawing.Size(0, 0);
@@ -118,11 +128,11 @@
             // 
             this.layoutControlItem51.Control = this.btnSure;
             this.layoutControlItem51.CustomizationFormText = "确定";
-            this.layoutControlItem51.Location = new System.Drawing.Point(1112, 794);
-            this.layoutControlItem51.MaxSize = new System.Drawing.Size(140, 40);
-            this.layoutControlItem51.MinSize = new System.Drawing.Size(140, 40);
+            this.layoutControlItem51.Location = new System.Drawing.Point(1152, 798);
+            this.layoutControlItem51.MaxSize = new System.Drawing.Size(120, 36);
+            this.layoutControlItem51.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem51.Name = "layoutControlItem51";
-            this.layoutControlItem51.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem51.Size = new System.Drawing.Size(120, 36);
             this.layoutControlItem51.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem51.Text = "确定";
             this.layoutControlItem51.TextSize = new System.Drawing.Size(0, 0);
@@ -133,21 +143,11 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 794);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 798);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(1112, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(1152, 36);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // ucBudgetEdit1
-            // 
-            this.ucBudgetEdit1.CurrentBudget = null;
-            this.ucBudgetEdit1.Location = new System.Drawing.Point(10, 10);
-            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetEdit1.Name = "ucBudgetEdit1";
-            this.ucBudgetEdit1.Size = new System.Drawing.Size(1392, 794);
-            this.ucBudgetEdit1.TabIndex = 57;
-            this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // layoutControlItem1
             // 
@@ -156,7 +156,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem1.Size = new System.Drawing.Size(1392, 794);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1392, 798);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;

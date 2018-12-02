@@ -48,34 +48,10 @@
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfitLevel1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
-            this.panCondition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // splitContainerControl1
-            // 
-            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.splitContainerControl1.Panel2.Controls.Add(this.gridBudget);
-            this.splitContainerControl1.Size = new System.Drawing.Size(1377, 690);
-            this.splitContainerControl1.SplitterPosition = 285;
-            // 
-            // panCondition
-            // 
-            this.panCondition.Controls.Add(this.tableLayoutPanel1);
-            this.panCondition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panCondition.Size = new System.Drawing.Size(277, 463);
             // 
             // gridBudget
             // 
@@ -87,7 +63,7 @@
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(1087, 690);
+            this.gridBudget.Size = new System.Drawing.Size(1377, 690);
             this.gridBudget.TabIndex = 0;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBudget});
@@ -279,89 +255,18 @@
             this.gcProfitLevel2.VisibleIndex = 16;
             this.gcProfitLevel2.Width = 59;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.textEdit1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelControl2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textEdit2, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(277, 463);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEdit1.Location = new System.Drawing.Point(82, 3);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(193, 25);
-            this.textEdit1.TabIndex = 1;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(2, 3);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(76, 18);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "预算单号：";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl2.Location = new System.Drawing.Point(2, 27);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(76, 18);
-            this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "合同号：";
-            // 
-            // textEdit2
-            // 
-            this.textEdit2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEdit2.Location = new System.Drawing.Point(82, 27);
-            this.textEdit2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(193, 25);
-            this.textEdit2.TabIndex = 1;
-            // 
             // frmBudgetQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1377, 690);
+            this.Controls.Add(this.gridBudget);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmBudgetQuery";
             this.Text = "预算单查询";
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
-            this.panCondition.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -370,11 +275,6 @@
 
         private DevExpress.XtraGrid.GridControl gridBudget;
         private DevExpress.XtraGrid.Views.Grid.GridView gvBudget;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
         private DevExpress.XtraGrid.Columns.GridColumn gcState;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalAmount;

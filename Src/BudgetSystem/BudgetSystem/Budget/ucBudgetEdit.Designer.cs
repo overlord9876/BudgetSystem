@@ -381,9 +381,10 @@
             // 
             // txtExchangeRateView
             // 
+            this.txtExchangeRateView.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRateView.IsSupportNegative = false;
             this.txtExchangeRateView.Location = new System.Drawing.Point(233, 659);
-            this.txtExchangeRateView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtExchangeRateView.Margin = new System.Windows.Forms.Padding(4);
             this.txtExchangeRateView.Name = "txtExchangeRateView";
             this.txtExchangeRateView.Properties.Mask.EditMask = "n";
             this.txtExchangeRateView.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -396,6 +397,7 @@
             // 
             // txtUSDTotalAmount
             // 
+            this.txtUSDTotalAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtUSDTotalAmount.IsSupportNegative = false;
             this.txtUSDTotalAmount.Location = new System.Drawing.Point(971, 302);
             this.txtUSDTotalAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -530,6 +532,7 @@
             // 
             // txtProfitLevel2
             // 
+            this.txtProfitLevel2.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtProfitLevel2.IsSupportNegative = false;
             this.txtProfitLevel2.Location = new System.Drawing.Point(233, 709);
             this.txtProfitLevel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -570,6 +573,7 @@
             // 
             // txtPurchasePrice
             // 
+            this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPurchasePrice.IsSupportNegative = false;
             this.txtPurchasePrice.Location = new System.Drawing.Point(1235, 444);
             this.txtPurchasePrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -584,6 +588,7 @@
             // 
             // txtExchangeCost
             // 
+            this.txtExchangeCost.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeCost.IsSupportNegative = false;
             this.txtExchangeCost.Location = new System.Drawing.Point(418, 709);
             this.txtExchangeCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -597,6 +602,7 @@
             // 
             // txtProfitLevel1
             // 
+            this.txtProfitLevel1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtProfitLevel1.IsSupportNegative = false;
             this.txtProfitLevel1.Location = new System.Drawing.Point(49, 709);
             this.txtProfitLevel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -610,6 +616,7 @@
             // 
             // txtProfit
             // 
+            this.txtProfit.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtProfit.IsSupportNegative = false;
             this.txtProfit.Location = new System.Drawing.Point(787, 709);
             this.txtProfit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -624,6 +631,7 @@
             // 
             // txtNetIncomeCNY
             // 
+            this.txtNetIncomeCNY.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtNetIncomeCNY.IsSupportNegative = false;
             this.txtNetIncomeCNY.Location = new System.Drawing.Point(418, 659);
             this.txtNetIncomeCNY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -638,6 +646,7 @@
             // 
             // txtExchangeRate
             // 
+            this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(818, 132);
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -650,6 +659,7 @@
             // 
             // txtTotalCost
             // 
+            this.txtTotalCost.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTotalCost.IsSupportNegative = false;
             this.txtTotalCost.Location = new System.Drawing.Point(787, 659);
             this.txtTotalCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -664,6 +674,7 @@
             // 
             // txtNetIncome
             // 
+            this.txtNetIncome.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtNetIncome.IsSupportNegative = false;
             this.txtNetIncome.Location = new System.Drawing.Point(49, 659);
             this.txtNetIncome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -678,6 +689,7 @@
             // 
             // txtTaxRebateRateMoney
             // 
+            this.txtTaxRebateRateMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTaxRebateRateMoney.IsSupportNegative = false;
             this.txtTaxRebateRateMoney.Location = new System.Drawing.Point(971, 659);
             this.txtTaxRebateRateMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -692,6 +704,7 @@
             // 
             // txtCommission
             // 
+            this.txtCommission.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCommission.IsSupportNegative = false;
             this.txtCommission.Location = new System.Drawing.Point(49, 609);
             this.txtCommission.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -704,6 +717,7 @@
             // 
             // txtPremium
             // 
+            this.txtPremium.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPremium.IsSupportNegative = false;
             this.txtPremium.Location = new System.Drawing.Point(418, 609);
             this.txtPremium.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -716,6 +730,7 @@
             // 
             // txtBankCharges
             // 
+            this.txtBankCharges.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtBankCharges.IsSupportNegative = false;
             this.txtBankCharges.Location = new System.Drawing.Point(602, 609);
             this.txtBankCharges.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -728,6 +743,7 @@
             // 
             // txtDirectCosts
             // 
+            this.txtDirectCosts.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtDirectCosts.IsSupportNegative = false;
             this.txtDirectCosts.Location = new System.Drawing.Point(787, 609);
             this.txtDirectCosts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -740,6 +756,7 @@
             // 
             // txtFeedMoney
             // 
+            this.txtFeedMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtFeedMoney.IsSupportNegative = false;
             this.txtFeedMoney.Location = new System.Drawing.Point(971, 609);
             this.txtFeedMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -752,6 +769,7 @@
             // 
             // txtSubtotal
             // 
+            this.txtSubtotal.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtSubtotal.IsSupportNegative = false;
             this.txtSubtotal.Location = new System.Drawing.Point(1155, 609);
             this.txtSubtotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -965,6 +983,7 @@
             // 
             // txtAdvancePayment
             // 
+            this.txtAdvancePayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAdvancePayment.IsSupportNegative = false;
             this.txtAdvancePayment.Location = new System.Drawing.Point(49, 535);
             this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -977,6 +996,7 @@
             // 
             // txtPercentage
             // 
+            this.txtPercentage.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPercentage.IsSupportNegative = false;
             this.txtPercentage.Location = new System.Drawing.Point(346, 535);
             this.txtPercentage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -990,6 +1010,7 @@
             // 
             // txtInterestRate
             // 
+            this.txtInterestRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtInterestRate.IsSupportNegative = false;
             this.txtInterestRate.Location = new System.Drawing.Point(681, 535);
             this.txtInterestRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1002,6 +1023,7 @@
             // 
             // txtDays
             // 
+            this.txtDays.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtDays.IsSupportNegative = false;
             this.txtDays.Location = new System.Drawing.Point(971, 535);
             this.txtDays.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1014,6 +1036,7 @@
             // 
             // txtInterest
             // 
+            this.txtInterest.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtInterest.IsSupportNegative = false;
             this.txtInterest.Location = new System.Drawing.Point(1155, 535);
             this.txtInterest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1411,6 +1434,7 @@
             // 
             // txtTotalAmount
             // 
+            this.txtTotalAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTotalAmount.IsSupportNegative = false;
             this.txtTotalAmount.Location = new System.Drawing.Point(786, 302);
             this.txtTotalAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1449,8 +1473,8 @@
             this.rgTradeNature.Properties.Appearance.Options.UseBackColor = true;
             this.rgTradeNature.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.rgTradeNature.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "做单"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "过单")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "做单"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "过单")});
             this.rgTradeNature.Size = new System.Drawing.Size(225, 25);
             this.rgTradeNature.StyleController = this.layoutControl1;
             this.rgTradeNature.TabIndex = 18;
@@ -2320,7 +2344,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucBudgetEdit";
             this.Size = new System.Drawing.Size(1381, 712);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

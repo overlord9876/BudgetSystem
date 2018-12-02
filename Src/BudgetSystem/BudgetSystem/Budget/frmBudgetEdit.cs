@@ -70,6 +70,7 @@ namespace BudgetSystem
         #region Event Method
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
+            this.ucBudgetEdit1.InitData();
             this.ucBudgetEdit1.CurrentBudget = this.CurrentBudget;
             this.ucBudgetEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
@@ -85,7 +86,6 @@ namespace BudgetSystem
                 this.Text = "查看预算单信息"; 
                 this.btnSure.Enabled = false; 
             }
-            this.ucBudgetEdit1.InitData();
         }
 
         private void btnSure_Click(object sender, EventArgs e)

@@ -116,10 +116,10 @@ namespace BudgetSystem.Dal
         /// <param name="isRecent"></param>
         /// <param name="con"></param>
         /// <param name="tran"></param>
-        public void UpdateFlowInstanceIsRecent(string flowName, string dataItemType, int dataID, bool isRecent, IDbConnection con, IDbTransaction tran)
+        public void UpdateFlowInstanceIsRecent(string dataItemType, int dataID, bool isRecent, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = @"Update `FlowInstance` Set `IsRecent` = @IsRecent Where `DateItemID` = @DateItemID and @DateItemType=DateItemType and FlowName=@FlowName";
-            con.Execute(updateSql, new { IsRecent = isRecent, DateItemID = dataID, DateItemType = dataItemType, FlowName = flowName }, tran);
+            string updateSql = @"Update `FlowInstance` Set `IsRecent` = @IsRecent Where `DateItemID` = @DateItemID and DateItemType=@DateItemType";
+            con.Execute(updateSql, new { IsRecent = isRecent, DateItemID = dataID, DateItemType = dataItemType }, tran);
         }
 
         public void UpdateFlowInstanceCloseInfo(int instanceID, bool approveReslt, string closeReason, IDbConnection con, IDbTransaction tran)

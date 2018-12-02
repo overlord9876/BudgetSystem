@@ -163,6 +163,7 @@ namespace BudgetSystem.InMoney
         {
             if (this.gvDeclarationform.FocusedRowHandle < 0)
             {
+                gvDeclarationform.CloseEditor();
                 gvDeclarationform.CancelUpdateCurrentRow();
             }
             else

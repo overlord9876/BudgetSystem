@@ -88,6 +88,7 @@ namespace BudgetSystem
         {
             if (this.gvMoneyType.FocusedRowHandle < 0)
             {
+                gvMoneyType.CloseEditor();
                 gvMoneyType.CancelUpdateCurrentRow();
                 this.IsChanged = true;
             }

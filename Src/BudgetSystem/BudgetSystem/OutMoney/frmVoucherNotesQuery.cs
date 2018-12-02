@@ -12,7 +12,7 @@ using BudgetSystem.InMoney;
 
 namespace BudgetSystem
 {
-    public partial class frmVoucherNotesQuery : frmBaseQueryFormWithCondtion
+    public partial class frmVoucherNotesQuery : frmBaseQueryForm
     {
         DeclarationformManager dm = new DeclarationformManager();
 
@@ -56,7 +56,7 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.New.ToString())
             {
                 frmDeclarationformEdit form = new frmDeclarationformEdit();
-                form.WorkModel = EditFormWorkModels.Modify;
+                form.WorkModel = EditFormWorkModels.New;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();

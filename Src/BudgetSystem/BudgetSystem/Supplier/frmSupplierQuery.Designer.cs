@@ -34,7 +34,7 @@
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTaxpayerIdentificationNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,7 +82,7 @@
             // 
             this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
-            this.gcv纳税人识别号,
+            this.gcTaxpayerIdentificationNumber,
             this.gcSupplierType,
             this.gcFlowState,
             this.gcIsQualified,
@@ -124,11 +124,11 @@
             // 
             // gcv纳税人识别号
             // 
-            this.gcv纳税人识别号.Caption = "纳税人识别号";
-            this.gcv纳税人识别号.FieldName = "TaxpayerID";
-            this.gcv纳税人识别号.Name = "gcv纳税人识别号";
-            this.gcv纳税人识别号.Visible = true;
-            this.gcv纳税人识别号.VisibleIndex = 1;
+            this.gcTaxpayerIdentificationNumber.Caption = "纳税人识别号";
+            this.gcTaxpayerIdentificationNumber.FieldName = "TaxpayerID";
+            this.gcTaxpayerIdentificationNumber.Name = "gcv纳税人识别号";
+            this.gcTaxpayerIdentificationNumber.Visible = true;
+            this.gcTaxpayerIdentificationNumber.VisibleIndex = 1;
             // 
             // gcSupplierType
             // 
@@ -239,7 +239,7 @@
         private DevExpress.XtraGrid.GridControl gridSupplier;
         private DevExpress.XtraGrid.Views.Grid.GridView gvSupplier;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTaxpayerIdentificationNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;

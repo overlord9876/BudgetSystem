@@ -12,11 +12,10 @@ namespace BudgetSystem
 
         public ucOptionEditBase()
         {
-            this.RegisterEvent();
-
             if (!frmBaseForm.IsDesignMode)
             {
                 scm = new Bll.SystemConfigManager();
+                this.Load+=new EventHandler(ucOptionEditBase_Load);
             }
         }
         /// <summary>
@@ -63,7 +62,6 @@ namespace BudgetSystem
         /// </summary>
         protected virtual void RegisterEvent()
         {
-            this.Load += new System.EventHandler(this.ucOptionEditBase_Load);
         }
 
 
@@ -73,6 +71,7 @@ namespace BudgetSystem
             if (!frmBaseForm.IsDesignMode)
             {
                 this.BindingOption();
+                this.RegisterEvent();
             }
         }
 

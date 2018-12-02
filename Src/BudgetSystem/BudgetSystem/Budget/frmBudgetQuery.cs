@@ -12,7 +12,7 @@ using BudgetSystem.CommonControl;
 
 namespace BudgetSystem
 {
-    public partial class frmBudgetQuery : frmBaseQueryFormWithCondtion
+    public partial class frmBudgetQuery : frmBaseQueryForm
     {
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private GridHitInfo hInfo;
@@ -59,9 +59,17 @@ namespace BudgetSystem
             {
                 ModifyBudget();
             }
-            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            else if (operate.Operate == OperateTypes.SubmitApply.ToString())
             {
-                CommitBudget();
+                SubmitApply();
+            }
+            else if (operate.Operate == OperateTypes.ModifyApply.ToString())
+            {
+                ModifyApply();
+            }
+            else if (operate.Operate == OperateTypes.DeleteApply.ToString())
+            {
+                DeleteApply();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
@@ -70,14 +78,6 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
                 DeleteBudget();
-            }
-            else if (operate.Operate == OperateTypes.Revoke.ToString())
-            {
-                RevokeBudget();
-            }
-            else if (operate.Operate == OperateTypes.Close.ToString())
-            {
-                CloseBudget();
             }
             else if (operate.Operate == OperateTypes.BudgetAccountBill.ToString())
             {
@@ -150,7 +150,7 @@ namespace BudgetSystem
             }
         }
 
-        private void CommitBudget()
+        private void SubmitApply()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
@@ -172,8 +172,8 @@ namespace BudgetSystem
                 }
             }
         }
-
-        private void RevokeBudget()
+        
+        private void ModifyApply()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
@@ -196,7 +196,7 @@ namespace BudgetSystem
             }
         }
 
-        private void CloseBudget()
+        private void DeleteApply()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)

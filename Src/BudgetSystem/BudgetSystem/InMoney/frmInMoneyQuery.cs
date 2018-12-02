@@ -12,7 +12,7 @@ using BudgetSystem.Entity;
 
 namespace BudgetSystem.InMoney
 {
-    public partial class frmInMoneyQuery : frmBaseQueryFormWithCondtion
+    public partial class frmInMoneyQuery : frmBaseQueryForm
     {
         ReceiptMgmtManager arm = new ReceiptMgmtManager();
 

@@ -244,8 +244,9 @@ namespace BudgetSystem
                 this.dteValidity.EditValue = budget.Validity;
                 this.chkIsQualified.CheckedChanged -= chkIsQualified_CheckedChanged;
                 this.chkIsQualified.Checked = budget.IsQualifiedSupplier;
-                this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
                 this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked);
+                this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
+                
                 this.pceCustomer.Text = budget.CustomerList.ToNameString();
                 this.pceCustomer.Tag = budget.CustomerList;
                 this.pceMainCustomer.Text = budget.CustomerName;
@@ -369,6 +370,10 @@ namespace BudgetSystem
                     this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
                 }
             }
+            if (string.IsNullOrEmpty(this.pceSupplier.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.pceSupplier, "请选择工厂");
+            } 
         }
         private void CheckContractNOInput()
         {
@@ -574,6 +579,13 @@ namespace BudgetSystem
         {
             //小计=配额+佣金+运保费+银行费用+其它(预)+进料款
             this.txtSubtotal.EditValue = txtCommission.Value + txtPremium.Value + txtBankCharges.Value + txtDirectCosts.Value + txtFeedMoney.Value;
+        }
+        /// <summary>
+        /// 计算美元合同金额
+        /// </summary>
+        private void CalcUSDTotalAmount()
+        {
+            this.txtUSDTotalAmount.EditValue = this.txtTotalAmount.Value * this.txtExchangeRate.Value;
         }
         #endregion
 
@@ -785,12 +797,20 @@ namespace BudgetSystem
             {
                 CalcOutProductTotalAmount();
             }
+            else if (e.Column == gcOriginalCurrency&&e.Value!=null)
+            {
+                if ("usd".Equals(e.Value.ToString().ToLower()))
+                {
+                    gvOutProductDetail.SetRowCellValue(e.RowHandle, gcExchangeRate, this.txtExchangeRate.Value);
+                }
+            }
         }
 
         private void riLinkDelete_Click(object sender, System.EventArgs e)
         {
             if (this.gvOutProductDetail.FocusedRowHandle < 0)
             {
+                gvOutProductDetail.CloseEditor();
                 gvOutProductDetail.CancelUpdateCurrentRow();
             }
             else
@@ -832,7 +852,7 @@ namespace BudgetSystem
             else if (detail.TaxRebateRate < 0)
             {
                 e.ErrorText = "退税率应大于等于0";
-                bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
+                bgvInProductDetail.SetColumnError(gcTaxRebateRate, e.ErrorText);
             }
             else if (detail.Vat <= 0)
             {
@@ -904,7 +924,7 @@ namespace BudgetSystem
                 else if (bgvInProductDetail.FocusedColumn == gcTaxRebateRate)
                 {
                     e.ErrorText = "退税率应大于等于0";
-                    bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
+                    bgvInProductDetail.SetColumnError(gcTaxRebateRate, e.ErrorText);
                 }
                 else if (bgvInProductDetail.FocusedColumn == gcVat)
                 {
@@ -934,7 +954,7 @@ namespace BudgetSystem
                 else if (bgvInProductDetail.FocusedColumn == gcTaxRebateRate && value < 0)
                 {
                     e.ErrorText = "退税率应大于等于0" + errorMsg;
-                    bgvInProductDetail.SetColumnError(gcTaxRebate, e.ErrorText);
+                    bgvInProductDetail.SetColumnError(gcTaxRebateRate, e.ErrorText);
                 }
                 else if (bgvInProductDetail.FocusedColumn == gcVat && value <= 0)
                 {
@@ -965,6 +985,7 @@ namespace BudgetSystem
         {
             if (this.bgvInProductDetail.FocusedRowHandle < 0)
             {
+                bgvInProductDetail.CloseEditor();
                 bgvInProductDetail.CancelUpdateCurrentRow();
             }
             else
@@ -998,6 +1019,7 @@ namespace BudgetSystem
             CalcNetIncome();
             CalcProfitLevel1();
             CalcExchangeCost();
+            CalcUSDTotalAmount();
         }
 
         private void txtTaxRebateRateMoney_EditValueChanged(object sender, EventArgs e)
@@ -1010,6 +1032,7 @@ namespace BudgetSystem
             CalcNetIncomeCNY();
             CalcProfitLevel1();
             CalcExchangeCost();
+            CalcUSDTotalAmount();
         }
 
         private void txtInterest_EditValueChanged(object sender, EventArgs e)

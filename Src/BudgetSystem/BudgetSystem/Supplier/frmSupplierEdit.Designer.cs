@@ -66,25 +66,25 @@
             this.ucSupplierEdit1.Location = new System.Drawing.Point(12, 12);
             this.ucSupplierEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucSupplierEdit1.Name = "ucSupplierEdit1";
-            this.ucSupplierEdit1.Size = new System.Drawing.Size(867, 589);
+            this.ucSupplierEdit1.Size = new System.Drawing.Size(867, 593);
             this.ucSupplierEdit1.TabIndex = 19;
             this.ucSupplierEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(755, 605);
+            this.btnCancel.Location = new System.Drawing.Point(763, 609);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 36);
+            this.btnCancel.Size = new System.Drawing.Size(116, 32);
             this.btnCancel.StyleController = this.layoutControl1;
             this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "取消";
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(627, 605);
+            this.btnSure.Location = new System.Drawing.Point(643, 609);
             this.btnSure.Name = "btnSure";
-            this.btnSure.Size = new System.Drawing.Size(124, 36);
+            this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
             this.btnSure.TabIndex = 17;
             this.btnSure.Text = "确定";
@@ -110,11 +110,11 @@
             // 
             this.layoutControlItem1.Control = this.btnSure;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(615, 593);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(128, 40);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(128, 40);
+            this.layoutControlItem1.Location = new System.Drawing.Point(631, 597);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(120, 36);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(128, 40);
+            this.layoutControlItem1.Size = new System.Drawing.Size(120, 36);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -125,11 +125,11 @@
             // 
             this.layoutControlItem2.Control = this.btnCancel;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(743, 593);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(128, 40);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(128, 40);
+            this.layoutControlItem2.Location = new System.Drawing.Point(751, 597);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(120, 36);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(128, 40);
+            this.layoutControlItem2.Size = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -140,9 +140,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 593);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 597);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(615, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(631, 36);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -152,7 +152,7 @@
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(871, 593);
+            this.layoutControlItem3.Size = new System.Drawing.Size(871, 597);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;

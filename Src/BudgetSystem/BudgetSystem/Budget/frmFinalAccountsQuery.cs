@@ -10,7 +10,7 @@ using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
-    public partial class frmFinalAccountsQuery : frmBaseQueryFormWithCondtion
+    public partial class frmFinalAccountsQuery : frmBaseQueryForm
     {
         public frmFinalAccountsQuery()
         {

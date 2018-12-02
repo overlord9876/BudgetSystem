@@ -15,14 +15,16 @@ namespace BudgetSystem
 {
     public partial class ucCustomerSelected : UserControl
     {
+        bool isShowSelectedColumn = true;
         /// <summary>
         /// 是否显示选择列
         /// </summary>
-        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool IsShowSelectedColumn
         {
             set
             {
+                isShowSelectedColumn = value;
                 if (value && !this.gvCustomer.Columns.Contains(this.gcIsSelected))
                 {
                     this.gvCustomer.Columns.Insert(0, this.gcIsSelected);
@@ -38,6 +40,14 @@ namespace BudgetSystem
                     this.gvCustomer.Columns.Remove(this.gcIsSelected);
                 }
                 this.gridCustomer.RefreshDataSource();
+                if (value)
+                {
+                    this.layoutControlItemSure.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                else
+                {
+                    this.layoutControlItemSure.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
             }
         }
 
@@ -149,6 +159,33 @@ namespace BudgetSystem
                 int rowHandle = this.gvCustomer.FocusedRowHandle;
                 this.gvCustomer.RefreshData();
                 this.gvCustomer.FocusedRowHandle = rowHandle;
+            }
+        }
+
+        private void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (!this.isShowSelectedColumn
+                && this.gvCustomer.FocusedRowHandle >= 0
+                && this.Parent is DevExpress.XtraEditors.PopupContainerControl)
+            {
+                (this.Parent as DevExpress.XtraEditors.PopupContainerControl).OwnerEdit.ClosePopup();
+            }
+            //是否有必要实现在非选择列点击时选择（或取消选择）?
+            //else if (this.gvCustomer.FocusedRowHandle >= 0)
+            //{
+            //    bool isSelect=(bool)this.gvCustomer.GetRowCellValue(this.gvCustomer.FocusedRowHandle,this.gcIsSelected);
+            //    int rowHandle = this.gvCustomer.FocusedRowHandle;
+            //    this.gvCustomer.SetRowCellValue(e.RowHandle, gcIsSelected,!isSelect);
+            //    this.gvCustomer.RefreshData();
+            //    this.gvCustomer.FocusedRowHandle = rowHandle;
+            //}
+        }
+
+        private void btnSure_Click(object sender, EventArgs e)
+        {
+            if(this.Parent is DevExpress.XtraEditors.PopupContainerControl)
+            {
+                (this.Parent as DevExpress.XtraEditors.PopupContainerControl).OwnerEdit.ClosePopup();
             }
         }
     }

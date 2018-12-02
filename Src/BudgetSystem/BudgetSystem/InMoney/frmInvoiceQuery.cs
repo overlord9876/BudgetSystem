@@ -11,7 +11,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BudgetSystem.InMoney
 {
-    public partial class frmInvoiceQuery : frmBaseQueryFormWithCondtion
+    public partial class frmInvoiceQuery : frmBaseQueryForm
     {
         private GridHitInfo hInfo;
         private Bll.InvoiceManager im = new Bll.InvoiceManager();

@@ -235,6 +235,7 @@ namespace BudgetSystem.InMoney
         {
             this.txtCreateUser.Properties.ReadOnly = true;
             this.deCreateTimestamp.Properties.ReadOnly = true;
+            this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.txtCreateUser.Text = RunInfo.Instance.CurrentUser.UserName;
@@ -458,6 +459,7 @@ namespace BudgetSystem.InMoney
         {
             if (this.gvConstSplit.FocusedRowHandle < 0)
             {
+                gvConstSplit.CloseEditor();
                 gvConstSplit.CancelUpdateCurrentRow();
             }
             else

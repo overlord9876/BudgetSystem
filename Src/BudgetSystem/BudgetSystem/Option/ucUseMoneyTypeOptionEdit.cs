@@ -89,6 +89,7 @@ namespace BudgetSystem
         {
             if (this.gvPort.FocusedRowHandle < 0)
             {
+                gvPort.CloseEditor();
                 gvPort.CancelUpdateCurrentRow();
                 this.IsChanged = true;
             }
