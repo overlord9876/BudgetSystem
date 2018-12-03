@@ -128,7 +128,7 @@
             this.Controls.Add(this.gridInvoice);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInvoiceQuery";
-            this.Text = "开票管理";
+            this.Text = "交单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).EndInit();
             this.ResumeLayout(false);

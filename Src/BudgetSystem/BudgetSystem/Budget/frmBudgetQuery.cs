@@ -41,7 +41,6 @@ namespace BudgetSystem
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "自定义查询"));
 
 
             this.ModelOperatePageName = "预算单";

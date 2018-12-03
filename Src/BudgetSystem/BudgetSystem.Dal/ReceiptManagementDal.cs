@@ -19,7 +19,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public int AddBankSlip(BankSlip addBankSlip, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Remitter`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Remitter,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp)";
+            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Remitter`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`,`NatureOfMoney`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Remitter,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp,@NatureOfMoney)";
             int id = con.Insert(insertSql, addBankSlip, tran);
             if (id > 0)
             {
@@ -44,7 +44,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
 
-            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
+            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -66,7 +66,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
             modifyBankSlip.UpdateTimestamp = DateTime.Now;
-            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
+            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -117,7 +117,9 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select * From `BudgetBill` Where `BSID` = @BSID";
+            string selectSql = @"Select b.* From `BudgetBill` b
+                LEFT JOIN Customer c on b.Cus_ID=c.ID
+                Where `BSID` = @BSID";
             return con.Query<BudgetBill>(selectSql, new { BSID = bsID }, tran);
         }
 
@@ -125,6 +127,7 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.ReceiptDate,bs.Remitter,bs.VoucherNo From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
+                                        LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
                                 Where `BudgetID` = @BudgetID";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
@@ -139,7 +142,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public int AddBudgetBill(BudgetBill addBudgetBill, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `BudgetBill` (`ID`,`BudgetID`,`BSID`,`OriginalCoin`,`CNY`,`Operator`,`DepartmentCode`,`OperateTimestamp`,`IsDelete`,`Remark`,`Confirmed`) Values (@ID,@BudgetID,@BSID,@OriginalCoin,@CNY,@Operator,@DepartmentCode,@OperateTimestamp,@IsDelete,@Remark,@Confirmed)";
+            string insertSql = "Insert Into `BudgetBill` (`ID`,`BudgetID`,`BSID`,`Cus_ID`,`OriginalCoin`,`CNY`,`Operator`,`DepartmentCode`,`OperateTimestamp`,`IsDelete`,`Remark`,`Confirmed`) Values (@ID,@BudgetID,@BSID,@Cus_ID,@OriginalCoin,@CNY,@Operator,@DepartmentCode,@OperateTimestamp,@IsDelete,@Remark,@Confirmed)";
             int id = con.Insert(insertSql, addBudgetBill, tran);
             if (id > 0)
             {
@@ -163,7 +166,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public void ModifyBudgetBill(BudgetBill modifyBudgetBill, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DepartmentCode` = @DepartmentCode,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed Where `ID` = @ID";
+            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,Cus_ID=@Cus_ID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DepartmentCode` = @DepartmentCode,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed Where `ID` = @ID";
             int id = con.Execute(updateSql, modifyBudgetBill, tran);
         }
 

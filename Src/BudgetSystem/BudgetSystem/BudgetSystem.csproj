@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission,NotUseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NotUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>

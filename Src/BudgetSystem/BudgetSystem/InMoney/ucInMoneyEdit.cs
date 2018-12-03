@@ -121,6 +121,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentBankSlip.Remitter = (cboCustomer.EditValue as Customer).Name;
             CurrentBankSlip.CNY = this.txtCNY.Value;
+            CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem.ToString();
             CurrentBankSlip.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentBankSlip.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
@@ -164,6 +165,7 @@ namespace BudgetSystem.InMoney
             this.txtVoucherNo.Text = CurrentBankSlip.VoucherNo;
             this.txtCreateUser.Text = CurrentBankSlip.CreateUser;
             this.deReceiptDate.EditValue = CurrentBankSlip.ReceiptDate;
+            this.cboNatureOfMoney.EditValue = CurrentBankSlip.NatureOfMoney;
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
             this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
             this.txtExportName.EditValue = CurrentBankSlip.ExportName;
@@ -205,6 +207,11 @@ namespace BudgetSystem.InMoney
             if (string.IsNullOrEmpty(txtVoucherNo.Text.Trim()))
             {
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
+            }
+
+            if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
+            {
+                dxErrorProvider1.SetError(cboNatureOfMoney, "请选择款项性质");
             }
 
             if (txtOriginalCoin.Value <= 0)
@@ -352,16 +359,23 @@ namespace BudgetSystem.InMoney
             var dataSource = (IEnumerable<BudgetBill>)gvConstSplit.DataSource;
             if (dataSource != null)
             {
-                decimal splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+                decimal splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+
+                decimal splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
 
                 if (splitCNY > txtCNY.Value)
                 {
                     return "拆分人民币金额不允许大于入帐单总额";
                 }
-
+                if (splitCoinMoney > txtOriginalCoin.Value)
+                {
+                    return "拆分原币金额不允许大于入帐单总额";
+                }
                 txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.CNY);
+                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
 
                 txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
+                txtNotSplitOriginalCoinMoney.EditValue = txtCNY.Value - txtAlreadySplitOriginalCoinMoney.Value;
             }
             return message;
         }

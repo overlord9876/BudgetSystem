@@ -40,6 +40,11 @@ namespace BudgetSystem.Entity
         public DateTime ReceiptDate { get; set; }
 
         /// <summary>
+        /// 款项性质
+        /// </summary>
+        public string NatureOfMoney { get; set; }
+
+        /// <summary>
         /// 汇款方式
         /// </summary>
         public string PaymentMethod { get; set; }
@@ -48,6 +53,11 @@ namespace BudgetSystem.Entity
         /// 未拆分人民币金额
         /// </summary>
         public decimal CNY2 { get; set; }
+
+        /// <summary>
+        /// 未拆原币金额
+        /// </summary>
+        public decimal OriginalCoin2 { get; set; }
 
         /// <summary>
         /// 汇率

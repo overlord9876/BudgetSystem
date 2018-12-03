@@ -508,7 +508,7 @@
             this.Controls.Add(this.layoutControl1);
             this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmInvoiceImport";
-            this.Text = "导入开票信息";
+            this.Text = "导入交单信息";
             this.Load += new System.EventHandler(this.frmInvoiceImport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

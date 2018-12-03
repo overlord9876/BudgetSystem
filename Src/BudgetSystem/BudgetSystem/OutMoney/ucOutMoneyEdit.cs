@@ -543,5 +543,18 @@ namespace BudgetSystem.OutMoney
                 this.txtBankNO.Text = (this.txtBankName.EditValue as BankInfo).Account;
             }
         }
+
+        private void btnShowBudgetHistory_Click(object sender, EventArgs e)
+        {
+            if (currentBudget == null)
+            {
+                XtraMessageBox.Show("请选择合同");
+                return;
+            }
+
+            frmAccountBillView form = new frmAccountBillView();
+            form.CurrentBudget = currentBudget;
+            form.ShowDialog(this);
+        }
     }
 }

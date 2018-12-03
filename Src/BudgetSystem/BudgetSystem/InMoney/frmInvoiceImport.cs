@@ -27,7 +27,7 @@ namespace BudgetSystem.InMoney
         {
             if (this.isFinanceImport == true)
             {
-                this.Text = "财务导入开票信息";
+                this.Text = "财务导入交单信息";
                 this.gvInvoice.Columns.Remove(gcContractNO);
                 this.gvInvoice.Columns.Remove(gcOriginalCoin);
                 this.gvInvoice.Columns.Remove(gcExchangeRate);
@@ -38,7 +38,7 @@ namespace BudgetSystem.InMoney
             }
             else
             {
-                this.Text = "部门导入开票信息";
+                this.Text = "部门导入交单信息";
                 this.gvInvoice.Columns.Remove(gcCode);
                 this.gvInvoice.Columns.Remove(gcTaxpayerID);
                 this.gvInvoice.Columns.Remove(gcSupplierName);

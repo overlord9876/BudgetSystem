@@ -28,11 +28,11 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "部门导入开票记录"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData2, "财务导入开票记录"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "部门导入交单记录"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData2, "财务导入认证记录"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
-            this.ModelOperatePageName = "开票管理"; 
+            this.ModelOperatePageName = "交单管理"; 
         }
 
 

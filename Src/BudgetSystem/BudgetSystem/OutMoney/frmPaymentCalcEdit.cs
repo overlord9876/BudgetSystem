@@ -80,7 +80,8 @@ namespace BudgetSystem.OutMoney
             this.txtBudgetNo.EditValue = Caculator.CurrentBudget.ContractNO;
             this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameString();
             this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
-            this.txtAdvancePayment.EditValue = Caculator.CurrentBudget.AdvancePayment;
+            this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
+            this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
             this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney + Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium;
 

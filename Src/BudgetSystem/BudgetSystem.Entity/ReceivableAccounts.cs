@@ -22,7 +22,7 @@ namespace BudgetSystem.Entity
         public string InvoiceNo { get; set; }
 
         /// <summary>
-        /// 开票日期
+        /// 交单日期
         /// </summary>
         public DateTime InvoiceDate { get; set; }
 

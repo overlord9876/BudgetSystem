@@ -234,7 +234,7 @@
             this.ClientSize = new System.Drawing.Size(976, 597);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmInMoneyQuery";
-            this.Text = "收支管理";
+            this.Text = "收款管理";
             this.Controls.Add(gcInMoney);
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).EndInit();

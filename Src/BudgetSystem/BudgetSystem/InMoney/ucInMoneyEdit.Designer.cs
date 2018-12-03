@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.bgcIsDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtExportName = new DevExpress.XtraEditors.TextEdit();
             this.cboTradeNature = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txtTradingPostscript = new DevExpress.XtraEditors.MemoEdit();
             this.txtNotSplitCNYMoney = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtAlreadySplitCNYMoney = new BudgetSystem.CommonControl.TextEdit_Number();
             this.gcConstSplit = new DevExpress.XtraGrid.GridControl();
@@ -58,8 +56,6 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gcDescription = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcSplitConstOriginalCoin = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -70,6 +66,8 @@
             this.bgcConstCNY = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcOperator = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gcDescription = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcConstInDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.riLinkEditConstInDelete = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
@@ -91,6 +89,8 @@
             this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtPaymentMethod = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtTradingPostscript = new DevExpress.XtraEditors.TextEdit();
+            this.cboNatureOfMoney = new DevExpress.XtraEditors.ComboBoxEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -109,18 +109,23 @@
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciTradeNature = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciExportName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgConstSplit = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lciConstSplit = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtAlreadySplitOriginalCoinMoney = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtNotSplitOriginalCoinMoney = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.bgcCustomer = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtExportName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTradeNature.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotSplitCNYMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAlreadySplitCNYMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcConstSplit)).BeginInit();
@@ -145,6 +150,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMethod.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -163,12 +170,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciTradeNature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciExportName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgConstSplit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciConstSplit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlreadySplitOriginalCoinMoney.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNotSplitOriginalCoinMoney.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             this.SuspendLayout();
             // 
             // bgcIsDelete
@@ -180,18 +192,19 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(162, 287);
+            this.txtDescription.Location = new System.Drawing.Point(183, 281);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(966, 39);
+            this.txtDescription.Size = new System.Drawing.Size(945, 49);
             this.txtDescription.StyleController = this.layoutControl1;
             this.txtDescription.TabIndex = 16;
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtNotSplitOriginalCoinMoney);
+            this.layoutControl1.Controls.Add(this.txtAlreadySplitOriginalCoinMoney);
             this.layoutControl1.Controls.Add(this.txtExportName);
             this.layoutControl1.Controls.Add(this.cboTradeNature);
-            this.layoutControl1.Controls.Add(this.txtTradingPostscript);
             this.layoutControl1.Controls.Add(this.txtNotSplitCNYMoney);
             this.layoutControl1.Controls.Add(this.txtAlreadySplitCNYMoney);
             this.layoutControl1.Controls.Add(this.gcConstSplit);
@@ -208,6 +221,8 @@
             this.layoutControl1.Controls.Add(this.txtCNY);
             this.layoutControl1.Controls.Add(this.cboCustomer);
             this.layoutControl1.Controls.Add(this.txtPaymentMethod);
+            this.layoutControl1.Controls.Add(this.txtTradingPostscript);
+            this.layoutControl1.Controls.Add(this.cboNatureOfMoney);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -220,42 +235,35 @@
             // 
             // txtExportName
             // 
-            this.txtExportName.Location = new System.Drawing.Point(716, 223);
+            this.txtExportName.Location = new System.Drawing.Point(737, 223);
             this.txtExportName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtExportName.Name = "txtExportName";
-            this.txtExportName.Size = new System.Drawing.Size(412, 25);
+            this.txtExportName.Size = new System.Drawing.Size(391, 25);
             this.txtExportName.StyleController = this.layoutControl1;
             this.txtExportName.TabIndex = 14;
             // 
             // cboTradeNature
             // 
-            this.cboTradeNature.Location = new System.Drawing.Point(162, 223);
+            this.cboTradeNature.Location = new System.Drawing.Point(183, 223);
             this.cboTradeNature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboTradeNature.Name = "cboTradeNature";
             this.cboTradeNature.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTradeNature.Properties.Items.AddRange(new object[] {
-            "做单",
-            "过单"});
+            "一般贸易",
+            "来料加工",
+            "进料加工",
+            "其他"});
             this.cboTradeNature.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboTradeNature.Size = new System.Drawing.Size(412, 25);
+            this.cboTradeNature.Size = new System.Drawing.Size(391, 25);
             this.cboTradeNature.StyleController = this.layoutControl1;
             this.cboTradeNature.TabIndex = 13;
-            // 
-            // txtTradingPostscript
-            // 
-            this.txtTradingPostscript.Location = new System.Drawing.Point(162, 252);
-            this.txtTradingPostscript.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTradingPostscript.Name = "txtTradingPostscript";
-            this.txtTradingPostscript.Size = new System.Drawing.Size(966, 31);
-            this.txtTradingPostscript.StyleController = this.layoutControl1;
-            this.txtTradingPostscript.TabIndex = 15;
             // 
             // txtNotSplitCNYMoney
             // 
             this.txtNotSplitCNYMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtNotSplitCNYMoney.IsSupportNegative = false;
-            this.txtNotSplitCNYMoney.Location = new System.Drawing.Point(716, 342);
+            this.txtNotSplitCNYMoney.Location = new System.Drawing.Point(737, 375);
             this.txtNotSplitCNYMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNotSplitCNYMoney.Name = "txtNotSplitCNYMoney";
             this.txtNotSplitCNYMoney.Properties.Mask.EditMask = "n";
@@ -263,7 +271,7 @@
             this.txtNotSplitCNYMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtNotSplitCNYMoney.Properties.NullText = "0.00";
             this.txtNotSplitCNYMoney.Properties.ReadOnly = true;
-            this.txtNotSplitCNYMoney.Size = new System.Drawing.Size(424, 25);
+            this.txtNotSplitCNYMoney.Size = new System.Drawing.Size(403, 25);
             this.txtNotSplitCNYMoney.StyleController = this.layoutControl1;
             this.txtNotSplitCNYMoney.TabIndex = 18;
             this.txtNotSplitCNYMoney.EditValueChanged += new System.EventHandler(this.txtNotSplitCNYMoney_EditValueChanged);
@@ -272,7 +280,7 @@
             // 
             this.txtAlreadySplitCNYMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAlreadySplitCNYMoney.IsSupportNegative = false;
-            this.txtAlreadySplitCNYMoney.Location = new System.Drawing.Point(150, 342);
+            this.txtAlreadySplitCNYMoney.Location = new System.Drawing.Point(171, 375);
             this.txtAlreadySplitCNYMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAlreadySplitCNYMoney.Name = "txtAlreadySplitCNYMoney";
             this.txtAlreadySplitCNYMoney.Properties.Mask.EditMask = "n";
@@ -280,14 +288,14 @@
             this.txtAlreadySplitCNYMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtAlreadySplitCNYMoney.Properties.NullText = "0.00";
             this.txtAlreadySplitCNYMoney.Properties.ReadOnly = true;
-            this.txtAlreadySplitCNYMoney.Size = new System.Drawing.Size(424, 25);
+            this.txtAlreadySplitCNYMoney.Size = new System.Drawing.Size(403, 25);
             this.txtAlreadySplitCNYMoney.StyleController = this.layoutControl1;
             this.txtAlreadySplitCNYMoney.TabIndex = 17;
             // 
             // gcConstSplit
             // 
             this.gcConstSplit.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gcConstSplit.Location = new System.Drawing.Point(24, 408);
+            this.gcConstSplit.Location = new System.Drawing.Point(24, 441);
             this.gcConstSplit.MainView = this.gvConstSplit;
             this.gcConstSplit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gcConstSplit.Name = "gcConstSplit";
@@ -296,7 +304,7 @@
             this.ritxtConstExchageRate,
             this.riLinkEditConstInDelete,
             this.gridBudget});
-            this.gcConstSplit.Size = new System.Drawing.Size(1104, 349);
+            this.gcConstSplit.Size = new System.Drawing.Size(1104, 316);
             this.gcConstSplit.TabIndex = 19;
             this.gcConstSplit.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvConstSplit});
@@ -305,18 +313,19 @@
             // 
             this.gvConstSplit.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gbBudget,
-            this.gridBand1,
             this.gridBand2,
             this.gridBand7,
+            this.gridBand1,
             this.gridBand3});
             this.gvConstSplit.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bgcBudget,
-            this.gcDescription,
+            this.bgcCustomer,
             this.gcSplitConstOriginalCoin,
             this.bgcConstExchangeRate,
             this.bgcConstCNY,
             this.bgcOperator,
             this.bgcDepartmentCode,
+            this.gcDescription,
             this.bgcIsDelete,
             this.gcConstInDelete});
             styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Strikeout);
@@ -457,7 +466,7 @@
             // 
             // gridColumn11
             // 
-            this.gridColumn11.Caption = "贸易性质";
+            this.gridColumn11.Caption = "贸易方式";
             this.gridColumn11.FieldName = "TradeNature";
             this.gridColumn11.Name = "gridColumn11";
             // 
@@ -478,23 +487,6 @@
             this.gridColumn14.Caption = "利润";
             this.gridColumn14.FieldName = "Profit";
             this.gridColumn14.Name = "gridColumn14";
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "备注";
-            this.gridBand1.Columns.Add(this.gcDescription);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.Width = 181;
-            // 
-            // gcDescription
-            // 
-            this.gcDescription.Caption = "备注";
-            this.gcDescription.FieldName = "Description";
-            this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.Width = 181;
             // 
             // gridBand2
             // 
@@ -582,6 +574,23 @@
             this.bgcOperator.Visible = true;
             this.bgcOperator.Width = 59;
             // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "备注";
+            this.gridBand1.Columns.Add(this.gcDescription);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.Width = 181;
+            // 
+            // gcDescription
+            // 
+            this.gcDescription.Caption = "备注";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            this.gcDescription.Visible = true;
+            this.gcDescription.Width = 181;
+            // 
             // gridBand3
             // 
             this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
@@ -625,82 +634,82 @@
             // cboSales
             // 
             this.cboSales.EditValue = "";
-            this.cboSales.Location = new System.Drawing.Point(716, 165);
+            this.cboSales.Location = new System.Drawing.Point(737, 165);
             this.cboSales.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboSales.Name = "cboSales";
             this.cboSales.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSales.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.CheckedListBoxItem[] {
             new DevExpress.XtraEditors.Controls.CheckedListBoxItem("所有业务员")});
-            this.cboSales.Size = new System.Drawing.Size(412, 25);
+            this.cboSales.Size = new System.Drawing.Size(391, 25);
             this.cboSales.StyleController = this.layoutControl1;
             this.cboSales.TabIndex = 10;
             // 
             // deCreateTimestamp
             // 
             this.deCreateTimestamp.EditValue = null;
-            this.deCreateTimestamp.Location = new System.Drawing.Point(715, 194);
+            this.deCreateTimestamp.Location = new System.Drawing.Point(736, 194);
             this.deCreateTimestamp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deCreateTimestamp.Name = "deCreateTimestamp";
             this.deCreateTimestamp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deCreateTimestamp.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deCreateTimestamp.Size = new System.Drawing.Size(413, 25);
+            this.deCreateTimestamp.Size = new System.Drawing.Size(392, 25);
             this.deCreateTimestamp.StyleController = this.layoutControl1;
             this.deCreateTimestamp.TabIndex = 12;
             // 
             // deReceiptDate
             // 
             this.deReceiptDate.EditValue = null;
-            this.deReceiptDate.Location = new System.Drawing.Point(162, 165);
+            this.deReceiptDate.Location = new System.Drawing.Point(183, 165);
             this.deReceiptDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.deReceiptDate.Name = "deReceiptDate";
             this.deReceiptDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deReceiptDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deReceiptDate.Size = new System.Drawing.Size(412, 25);
+            this.deReceiptDate.Size = new System.Drawing.Size(391, 25);
             this.deReceiptDate.StyleController = this.layoutControl1;
             this.deReceiptDate.TabIndex = 9;
             // 
             // cboCurrency
             // 
-            this.cboCurrency.Location = new System.Drawing.Point(162, 107);
+            this.cboCurrency.Location = new System.Drawing.Point(183, 107);
             this.cboCurrency.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboCurrency.Name = "cboCurrency";
             this.cboCurrency.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboCurrency.Size = new System.Drawing.Size(411, 25);
+            this.cboCurrency.Size = new System.Drawing.Size(390, 25);
             this.cboCurrency.StyleController = this.layoutControl1;
             this.cboCurrency.TabIndex = 5;
             this.cboCurrency.EditValueChanged += new System.EventHandler(this.cboCurrency_EditValueChanged);
             // 
             // txtBankName
             // 
-            this.txtBankName.Location = new System.Drawing.Point(715, 78);
+            this.txtBankName.Location = new System.Drawing.Point(736, 78);
             this.txtBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBankName.Name = "txtBankName";
-            this.txtBankName.Size = new System.Drawing.Size(413, 25);
+            this.txtBankName.Size = new System.Drawing.Size(392, 25);
             this.txtBankName.StyleController = this.layoutControl1;
             this.txtBankName.TabIndex = 4;
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(162, 194);
+            this.txtCreateUser.Location = new System.Drawing.Point(183, 194);
             this.txtCreateUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateUser.Name = "txtCreateUser";
-            this.txtCreateUser.Size = new System.Drawing.Size(411, 25);
+            this.txtCreateUser.Size = new System.Drawing.Size(390, 25);
             this.txtCreateUser.StyleController = this.layoutControl1;
             this.txtCreateUser.TabIndex = 11;
             // 
             // txtVoucherNo
             // 
-            this.txtVoucherNo.Location = new System.Drawing.Point(716, 49);
+            this.txtVoucherNo.Location = new System.Drawing.Point(737, 49);
             this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoucherNo.Name = "txtVoucherNo";
-            this.txtVoucherNo.Size = new System.Drawing.Size(412, 25);
+            this.txtVoucherNo.Size = new System.Drawing.Size(391, 25);
             this.txtVoucherNo.StyleController = this.layoutControl1;
             this.txtVoucherNo.TabIndex = 2;
             // 
@@ -713,12 +722,12 @@
             0});
             this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
-            this.txtExchangeRate.Location = new System.Drawing.Point(715, 107);
+            this.txtExchangeRate.Location = new System.Drawing.Point(736, 107);
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Properties.Mask.EditMask = "f";
             this.txtExchangeRate.Properties.NullText = "0.00";
-            this.txtExchangeRate.Size = new System.Drawing.Size(413, 25);
+            this.txtExchangeRate.Size = new System.Drawing.Size(392, 25);
             this.txtExchangeRate.StyleController = this.layoutControl1;
             this.txtExchangeRate.TabIndex = 6;
             this.txtExchangeRate.EditValueChanged += new System.EventHandler(this.txtExchangeRate_EditValueChanged);
@@ -732,13 +741,13 @@
             0});
             this.txtOriginalCoin.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtOriginalCoin.IsSupportNegative = false;
-            this.txtOriginalCoin.Location = new System.Drawing.Point(162, 78);
+            this.txtOriginalCoin.Location = new System.Drawing.Point(183, 78);
             this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOriginalCoin.Name = "txtOriginalCoin";
             this.txtOriginalCoin.Properties.Mask.EditMask = "n";
             this.txtOriginalCoin.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtOriginalCoin.Properties.NullText = "0.00";
-            this.txtOriginalCoin.Size = new System.Drawing.Size(411, 25);
+            this.txtOriginalCoin.Size = new System.Drawing.Size(390, 25);
             this.txtOriginalCoin.StyleController = this.layoutControl1;
             this.txtOriginalCoin.TabIndex = 3;
             this.txtOriginalCoin.EditValueChanged += new System.EventHandler(this.txtOriginalCoin_EditValueChanged);
@@ -752,18 +761,18 @@
             0});
             this.txtCNY.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCNY.IsSupportNegative = false;
-            this.txtCNY.Location = new System.Drawing.Point(162, 136);
+            this.txtCNY.Location = new System.Drawing.Point(183, 136);
             this.txtCNY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCNY.Name = "txtCNY";
             this.txtCNY.Properties.Mask.EditMask = "c";
             this.txtCNY.Properties.NullText = "0.00";
-            this.txtCNY.Size = new System.Drawing.Size(412, 25);
+            this.txtCNY.Size = new System.Drawing.Size(391, 25);
             this.txtCNY.StyleController = this.layoutControl1;
             this.txtCNY.TabIndex = 7;
             // 
             // cboCustomer
             // 
-            this.cboCustomer.Location = new System.Drawing.Point(162, 49);
+            this.cboCustomer.Location = new System.Drawing.Point(183, 49);
             this.cboCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -771,7 +780,7 @@
             this.cboCustomer.Properties.NullText = "";
             this.cboCustomer.Properties.PopupSizeable = false;
             this.cboCustomer.Properties.View = this.searchLookUpEdit1View;
-            this.cboCustomer.Size = new System.Drawing.Size(412, 25);
+            this.cboCustomer.Size = new System.Drawing.Size(391, 25);
             this.cboCustomer.StyleController = this.layoutControl1;
             this.cboCustomer.TabIndex = 1;
             this.cboCustomer.EditValueChanged += new System.EventHandler(this.cboCustomer_EditValueChanged);
@@ -814,18 +823,50 @@
             // 
             // txtPaymentMethod
             // 
-            this.txtPaymentMethod.Location = new System.Drawing.Point(716, 136);
+            this.txtPaymentMethod.Location = new System.Drawing.Point(737, 136);
             this.txtPaymentMethod.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPaymentMethod.Name = "txtPaymentMethod";
             this.txtPaymentMethod.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtPaymentMethod.Properties.Items.AddRange(new object[] {
             "T/T",
-            "L/C"});
+            "L/C",
+            "划账",
+            "现金",
+            "其他"});
             this.txtPaymentMethod.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtPaymentMethod.Size = new System.Drawing.Size(412, 25);
+            this.txtPaymentMethod.Size = new System.Drawing.Size(391, 25);
             this.txtPaymentMethod.StyleController = this.layoutControl1;
             this.txtPaymentMethod.TabIndex = 8;
+            // 
+            // txtTradingPostscript
+            // 
+            this.txtTradingPostscript.Location = new System.Drawing.Point(183, 252);
+            this.txtTradingPostscript.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTradingPostscript.Name = "txtTradingPostscript";
+            this.txtTradingPostscript.Size = new System.Drawing.Size(391, 25);
+            this.txtTradingPostscript.StyleController = this.layoutControl1;
+            this.txtTradingPostscript.TabIndex = 15;
+            // 
+            // cboNatureOfMoney
+            // 
+            this.cboNatureOfMoney.Location = new System.Drawing.Point(737, 252);
+            this.cboNatureOfMoney.Name = "cboNatureOfMoney";
+            this.cboNatureOfMoney.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNatureOfMoney.Properties.Items.AddRange(new object[] {
+            "内销",
+            "调拨",
+            "进口货款",
+            "货款退回",
+            "保证金退回",
+            "押金退回",
+            "服务费",
+            "其他"});
+            this.cboNatureOfMoney.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboNatureOfMoney.Size = new System.Drawing.Size(391, 25);
+            this.cboNatureOfMoney.StyleController = this.layoutControl1;
+            this.cboNatureOfMoney.TabIndex = 20;
             // 
             // layoutControlGroup1
             // 
@@ -836,7 +877,9 @@
             this.layoutControlGroup2,
             this.lcgConstSplit,
             this.layoutControlItem18,
-            this.layoutControlItem19});
+            this.layoutControlItem19,
+            this.layoutControlItem15,
+            this.layoutControlItem17});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1152, 781);
@@ -862,10 +905,11 @@
             this.layoutControlItem10,
             this.layoutControlItem13,
             this.lciTradeNature,
-            this.lciExportName});
+            this.lciExportName,
+            this.layoutControlItem14});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1132, 330);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1132, 334);
             this.layoutControlGroup2.Text = "收款单信息";
             // 
             // layoutControlItem3
@@ -876,7 +920,7 @@
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem3.Text = "银行凭证号：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem2
             // 
@@ -886,7 +930,7 @@
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(553, 29);
             this.layoutControlItem2.Text = "实收原币金额：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem11
             // 
@@ -896,7 +940,7 @@
             this.layoutControlItem11.Name = "layoutControlItem11";
             this.layoutControlItem11.Size = new System.Drawing.Size(555, 29);
             this.layoutControlItem11.Text = "银行：";
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem12
             // 
@@ -906,7 +950,7 @@
             this.layoutControlItem12.Name = "layoutControlItem12";
             this.layoutControlItem12.Size = new System.Drawing.Size(555, 29);
             this.layoutControlItem12.Text = "汇率：";
-            this.layoutControlItem12.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem4
             // 
@@ -916,7 +960,7 @@
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem4.Text = "实收人民币金额：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem5
             // 
@@ -926,17 +970,17 @@
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(553, 29);
             this.layoutControlItem5.Text = "创建人：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtDescription;
             this.layoutControlItem8.CustomizationFormText = "备注：";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 238);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 232);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1108, 43);
+            this.layoutControlItem8.Size = new System.Drawing.Size(1108, 53);
             this.layoutControlItem8.Text = "备注：";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem16
             // 
@@ -946,7 +990,7 @@
             this.layoutControlItem16.Name = "layoutControlItem16";
             this.layoutControlItem16.Size = new System.Drawing.Size(553, 29);
             this.layoutControlItem16.Text = "币种：";
-            this.layoutControlItem16.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem7
             // 
@@ -956,7 +1000,7 @@
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem7.Text = "收汇日期：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem9
             // 
@@ -966,7 +1010,7 @@
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(555, 29);
             this.layoutControlItem9.Text = "创建时间";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem6
             // 
@@ -976,7 +1020,7 @@
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem6.Text = "支付方式：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem1
             // 
@@ -986,7 +1030,7 @@
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem1.Text = "客户名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem10
             // 
@@ -996,46 +1040,56 @@
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem10.Text = "收款单业务员设置：";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem13
             // 
             this.layoutControlItem13.Control = this.txtTradingPostscript;
-            this.layoutControlItem13.CustomizationFormText = "收款单业务员设置：";
+            this.layoutControlItem13.CustomizationFormText = "付款人常驻国际/地区";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 203);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(1108, 35);
-            this.layoutControlItem13.Text = "交易附言：";
-            this.layoutControlItem13.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem13.Size = new System.Drawing.Size(554, 29);
+            this.layoutControlItem13.Text = "付款人常驻国际/地区：";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(156, 18);
             // 
             // lciTradeNature
             // 
             this.lciTradeNature.Control = this.cboTradeNature;
-            this.lciTradeNature.CustomizationFormText = "贸易性质：";
+            this.lciTradeNature.CustomizationFormText = "贸易方式：";
             this.lciTradeNature.Location = new System.Drawing.Point(0, 174);
             this.lciTradeNature.Name = "lciTradeNature";
             this.lciTradeNature.Size = new System.Drawing.Size(554, 29);
-            this.lciTradeNature.Text = "贸易性质：";
-            this.lciTradeNature.TextSize = new System.Drawing.Size(135, 18);
+            this.lciTradeNature.Text = "贸易方式：";
+            this.lciTradeNature.TextSize = new System.Drawing.Size(156, 18);
             // 
             // lciExportName
             // 
             this.lciExportName.Control = this.txtExportName;
-            this.lciExportName.CustomizationFormText = "出口名称：";
+            this.lciExportName.CustomizationFormText = "出口货款名称：";
             this.lciExportName.Location = new System.Drawing.Point(554, 174);
             this.lciExportName.Name = "lciExportName";
             this.lciExportName.Size = new System.Drawing.Size(554, 29);
-            this.lciExportName.Text = "出口名称：";
-            this.lciExportName.TextSize = new System.Drawing.Size(135, 18);
+            this.lciExportName.Text = "出口货款名称：";
+            this.lciExportName.TextSize = new System.Drawing.Size(156, 18);
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.cboNatureOfMoney;
+            this.layoutControlItem14.CustomizationFormText = "款项性质：";
+            this.layoutControlItem14.Location = new System.Drawing.Point(554, 203);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(554, 29);
+            this.layoutControlItem14.Text = "款项性质：";
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(156, 18);
             // 
             // lcgConstSplit
             // 
             this.lcgConstSplit.CustomizationFormText = "金额分拆设置";
             this.lcgConstSplit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lciConstSplit});
-            this.lcgConstSplit.Location = new System.Drawing.Point(0, 359);
+            this.lcgConstSplit.Location = new System.Drawing.Point(0, 392);
             this.lcgConstSplit.Name = "lcgConstSplit";
-            this.lcgConstSplit.Size = new System.Drawing.Size(1132, 402);
+            this.lcgConstSplit.Size = new System.Drawing.Size(1132, 369);
             this.lcgConstSplit.Text = "金额分拆设置";
             // 
             // lciConstSplit
@@ -1044,7 +1098,7 @@
             this.lciConstSplit.CustomizationFormText = "layoutControlItem17";
             this.lciConstSplit.Location = new System.Drawing.Point(0, 0);
             this.lciConstSplit.Name = "lciConstSplit";
-            this.lciConstSplit.Size = new System.Drawing.Size(1108, 353);
+            this.lciConstSplit.Size = new System.Drawing.Size(1108, 320);
             this.lciConstSplit.Text = " ";
             this.lciConstSplit.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             this.lciConstSplit.TextSize = new System.Drawing.Size(0, 0);
@@ -1054,21 +1108,21 @@
             // 
             this.layoutControlItem18.Control = this.txtAlreadySplitCNYMoney;
             this.layoutControlItem18.CustomizationFormText = "已拆分人民币金额：";
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 330);
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 363);
             this.layoutControlItem18.Name = "layoutControlItem18";
             this.layoutControlItem18.Size = new System.Drawing.Size(566, 29);
             this.layoutControlItem18.Text = "已拆分人民币金额：";
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem19
             // 
             this.layoutControlItem19.Control = this.txtNotSplitCNYMoney;
             this.layoutControlItem19.CustomizationFormText = "未拆分人民币金额";
-            this.layoutControlItem19.Location = new System.Drawing.Point(566, 330);
+            this.layoutControlItem19.Location = new System.Drawing.Point(566, 363);
             this.layoutControlItem19.Name = "layoutControlItem19";
             this.layoutControlItem19.Size = new System.Drawing.Size(566, 29);
             this.layoutControlItem19.Text = "未拆分人民币余额：";
-            this.layoutControlItem19.TextSize = new System.Drawing.Size(135, 18);
+            this.layoutControlItem19.TextSize = new System.Drawing.Size(156, 18);
             // 
             // dxErrorProvider1
             // 
@@ -1084,12 +1138,68 @@
             this.layoutControlItem22.TextSize = new System.Drawing.Size(50, 20);
             this.layoutControlItem22.TextToControlDistance = 5;
             // 
+            // txtAlreadySplitOriginalCoinMoney
+            // 
+            this.txtAlreadySplitOriginalCoinMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtAlreadySplitOriginalCoinMoney.IsSupportNegative = false;
+            this.txtAlreadySplitOriginalCoinMoney.Location = new System.Drawing.Point(171, 346);
+            this.txtAlreadySplitOriginalCoinMoney.Name = "txtAlreadySplitOriginalCoinMoney";
+            this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.EditMask = "n";
+            this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtAlreadySplitOriginalCoinMoney.Properties.NullText = "0.00";
+            this.txtAlreadySplitOriginalCoinMoney.Properties.ReadOnly = true;
+            this.txtAlreadySplitOriginalCoinMoney.Size = new System.Drawing.Size(403, 25);
+            this.txtAlreadySplitOriginalCoinMoney.StyleController = this.layoutControl1;
+            this.txtAlreadySplitOriginalCoinMoney.TabIndex = 21;
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.txtAlreadySplitOriginalCoinMoney;
+            this.layoutControlItem15.CustomizationFormText = "已分拆原币金额：";
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 334);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(566, 29);
+            this.layoutControlItem15.Text = "已分拆原币金额：";
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(156, 18);
+            // 
+            // txtNotSplitOriginalCoinMoney
+            // 
+            this.txtNotSplitOriginalCoinMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtNotSplitOriginalCoinMoney.IsSupportNegative = false;
+            this.txtNotSplitOriginalCoinMoney.Location = new System.Drawing.Point(737, 346);
+            this.txtNotSplitOriginalCoinMoney.Name = "txtNotSplitOriginalCoinMoney";
+            this.txtNotSplitOriginalCoinMoney.Properties.Mask.EditMask = "n";
+            this.txtNotSplitOriginalCoinMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtNotSplitOriginalCoinMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtNotSplitOriginalCoinMoney.Properties.NullText = "0.00";
+            this.txtNotSplitOriginalCoinMoney.Properties.ReadOnly = true;
+            this.txtNotSplitOriginalCoinMoney.Size = new System.Drawing.Size(403, 25);
+            this.txtNotSplitOriginalCoinMoney.StyleController = this.layoutControl1;
+            this.txtNotSplitOriginalCoinMoney.TabIndex = 22;
+            // 
+            // layoutControlItem17
+            // 
+            this.layoutControlItem17.Control = this.txtNotSplitOriginalCoinMoney;
+            this.layoutControlItem17.CustomizationFormText = "未拆分原币金额：";
+            this.layoutControlItem17.Location = new System.Drawing.Point(566, 334);
+            this.layoutControlItem17.Name = "layoutControlItem17";
+            this.layoutControlItem17.Size = new System.Drawing.Size(566, 29);
+            this.layoutControlItem17.Text = "未拆分原币金额：";
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(156, 18);
+            // 
+            // bgcCustomer
+            // 
+            this.bgcCustomer.Caption = "bandedGridColumn1";
+            this.bgcCustomer.Name = "bgcCustomer";
+            this.bgcCustomer.Visible = true;
+            // 
             // ucInMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucInMoneyEdit";
             this.Size = new System.Drawing.Size(1152, 781);
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -1097,7 +1207,6 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtExportName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTradeNature.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotSplitCNYMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAlreadySplitCNYMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcConstSplit)).EndInit();
@@ -1122,6 +1231,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMethod.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -1140,12 +1251,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciTradeNature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciExportName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgConstSplit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciConstSplit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlreadySplitOriginalCoinMoney.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNotSplitOriginalCoinMoney.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1202,7 +1318,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraEditors.ComboBoxEdit txtPaymentMethod;
-        private DevExpress.XtraEditors.MemoEdit txtTradingPostscript;
         private DevExpress.XtraLayout.LayoutControlItem lciConstSplit;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
@@ -1230,12 +1345,20 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcDepartmentCode;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcIsDelete;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbBudget;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraEditors.TextEdit txtTradingPostscript;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraEditors.ComboBoxEdit cboNatureOfMoney;
+        private CommonControl.TextEdit_Number txtNotSplitOriginalCoinMoney;
+        private CommonControl.TextEdit_Number txtAlreadySplitOriginalCoinMoney;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcCustomer;
     }
 }

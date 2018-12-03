@@ -458,7 +458,7 @@ namespace BudgetSystem
             var dataSource = (IEnumerable<InProductDetail>)gridInProductDetail.DataSource;
             if (dataSource != null)
             {
-                txtPurchasePrice.EditValue = dataSource.Sum(o => (o.Count * o.Subtotal));
+                txtPurchasePrice.EditValue = dataSource.Sum(o => (o.MoneySubtotal));
             }
         }
 
@@ -567,6 +567,10 @@ namespace BudgetSystem
             {
                 this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value + txtFeedMoney.Value * (1 + this.vatOption / 100)) / (directCosts + txtFeedMoney.Value * (1 + this.vatOption / 100)) * 100, 2);//预付款占总进价百分比
             }
+            else
+            {
+                this.txtPercentage.EditValue = 0;
+            }
 
             //利息=预付款*年利率/360/100*天数
             txtInterest.EditValue = txtAdvancePayment.Value * txtInterestRate.Value * txtDays.Value / 360 / 100;
@@ -577,7 +581,7 @@ namespace BudgetSystem
         /// </summary>
         private void CalcBudgetSubtotal()
         {
-            //小计=配额+佣金+运保费+银行费用+其它(预)+进料款
+            //小计=佣金+运保费+银行费用+直接费用+进料款
             this.txtSubtotal.EditValue = txtCommission.Value + txtPremium.Value + txtBankCharges.Value + txtDirectCosts.Value + txtFeedMoney.Value;
         }
         /// <summary>
@@ -1025,8 +1029,8 @@ namespace BudgetSystem
             this.txtExchangeRateView.EditValue = this.txtExchangeRate.Value;
             CalcNetIncome();
             CalcProfitLevel1();
-            CalcExchangeCost();
             CalcUSDTotalAmount();
+            CalcExchangeCost();
         }
 
         private void txtTaxRebateRateMoney_EditValueChanged(object sender, EventArgs e)
@@ -1038,20 +1042,18 @@ namespace BudgetSystem
         {
             CalcNetIncomeCNY();
             CalcProfitLevel1();
-            CalcExchangeCost();
             CalcUSDTotalAmount();
+            CalcExchangeCost();
         }
 
         private void txtInterest_EditValueChanged(object sender, EventArgs e)
         {
-            CalcNetIncomeCNY();
             CalcProfit();
         }
 
         private void txtSubtotal_EditValueChanged(object sender, EventArgs e)
         {
             CalcNetIncomeCNY();
-
         }
 
         private void txtNetIncomeCNY_EditValueChanged(object sender, EventArgs e)

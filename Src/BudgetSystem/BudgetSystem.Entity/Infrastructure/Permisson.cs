@@ -137,12 +137,12 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",970), 
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-确认付款",980), 
 
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"开票管理模块",1000),
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.New,"开票管理-新增开票记录",1010),
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Modify,"开票管理-修改开票记录",1020),
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData, "开票管理-部门导入开票记录",1030),
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData2, "开票管理-财务导入开票记录",1040),
-                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "开票管理-查看详情",1050),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"交单管理模块",1000),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.New,"交单管理-新增交单记录",1010),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Modify,"交单管理-修改交单记录",1020),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData, "交单管理-部门导入交单记录",1030),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData2, "交单管理-财务导入认证记录",1040),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "交单管理-查看详情",1050),
 
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"报关单管理模块",1100),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "报关单管理-新增报关单",1110),
