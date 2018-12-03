@@ -91,14 +91,12 @@ namespace BudgetSystem.Tools
                 }
 
                 string path = fi.DirectoryName.Replace(rootPath, "");
-                if (string.IsNullOrEmpty(path))
-                {
-                    path = "\\";
-                }
                 VersionFile vf = new VersionFile() { FileName = fi.Name, FilePath = path, FileMD5 = md5, Version = si.Version };
                 vfs.Add(vf);
             }
             versionBll.AddVersion(si, vfs);
+
+            MessageBox.Show("发布完成");
         }
     }
 }

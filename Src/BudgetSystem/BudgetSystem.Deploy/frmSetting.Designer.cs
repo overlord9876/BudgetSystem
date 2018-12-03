@@ -28,65 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtConnectoinString = new System.Windows.Forms.TextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSure = new System.Windows.Forms.Button();
+            this.btnSure = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtConnectoinString = new DevExpress.XtraEditors.MemoEdit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtConnectoinString.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "服务器连接：";
-            // 
-            // txtConnectoinString
-            // 
-            this.txtConnectoinString.Location = new System.Drawing.Point(138, 26);
-            this.txtConnectoinString.Multiline = true;
-            this.txtConnectoinString.Name = "txtConnectoinString";
-            this.txtConnectoinString.Size = new System.Drawing.Size(500, 124);
-            this.txtConnectoinString.TabIndex = 0;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(533, 172);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(105, 36);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(422, 172);
+            this.btnSure.Location = new System.Drawing.Point(412, 186);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSure.Name = "btnSure";
-            this.btnSure.Size = new System.Drawing.Size(105, 36);
-            this.btnSure.TabIndex = 1;
+            this.btnSure.Size = new System.Drawing.Size(105, 43);
+            this.btnSure.TabIndex = 3;
             this.btnSure.Text = "确定";
-            this.btnSure.UseVisualStyleBackColor = true;
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(533, 186);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(105, 43);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "取消";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(32, 31);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(90, 18);
+            this.labelControl1.TabIndex = 4;
+            this.labelControl1.Text = "服务器连接：";
+            // 
+            // txtConnectoinString
+            // 
+            this.txtConnectoinString.Location = new System.Drawing.Point(128, 29);
+            this.txtConnectoinString.Name = "txtConnectoinString";
+            this.txtConnectoinString.Size = new System.Drawing.Size(510, 138);
+            this.txtConnectoinString.TabIndex = 5;
             // 
             // frmSetting
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(679, 232);
-            this.Controls.Add(this.btnSure);
-            this.Controls.Add(this.btnCancel);
+            this.ClientSize = new System.Drawing.Size(679, 248);
             this.Controls.Add(this.txtConnectoinString);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSure);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSetting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "配置";
+            ((System.ComponentModel.ISupportInitialize)(this.txtConnectoinString.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,9 +96,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtConnectoinString;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSure;
+        private DevExpress.XtraEditors.SimpleButton btnSure;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.MemoEdit txtConnectoinString;
     }
 }

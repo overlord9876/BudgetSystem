@@ -50,8 +50,23 @@ namespace BudgetSystem
 
             UserLookAndFeel.Default.SkinName = RunInfo.Instance.Config.SkinName;
 
+
+# if (UseDeploy)
+
+            if (args.Length == 0)
+            {
+                RunInfo.Instance.Logger.LogError("在Deploy模式下，传入参数为空");
+                return;
+            }
+            string connectionString = args[0];
+            Bll.BaseManager.SetConnectionString(connectionString, true);
+
+# else
             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
             Bll.BaseManager.SetConnectionString(connectionString, false);
+#endif
+
+
 
             frmLogin loginForm = new frmLogin();
             if (loginForm.ShowDialog() == DialogResult.OK)

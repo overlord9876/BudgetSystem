@@ -29,6 +29,15 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public List<VersionFile> GetVersionFiles(string version)
+        {
+            var versionFiles = this.Query<VersionFile>((con) =>
+            {
+                return dal.GetVersionFiles(version, con, null);
+            });
+            return versionFiles.ToList();
+        }
+
 
     }
 }

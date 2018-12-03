@@ -30,5 +30,12 @@ namespace BudgetSystem.Dal
             con.Execute(insertSql, files, tran);
         }
 
+
+        public IEnumerable<VersionFile> GetVersionFiles(string version, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = "select * from `VersionInfo` where `Version` = @Version";
+            return con.Query<VersionFile>(sql, new { Version = version }, tran);
+        }
+
     }
 }

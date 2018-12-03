@@ -408,6 +408,17 @@ namespace BudgetSystem.Bll
         
         }
 
+        public List<FlowRunPoint> GetFlowRunPointsByData(int dataID,string dataType)
+        {
+            return this.Query<FlowRunPoint>((con) =>
+            {
+
+                var fList = dal.GetFlowRunPointsByData(dataID, dataType, con, null);
+                return fList;
+
+            }).ToList();
+
+        }
 
 
 

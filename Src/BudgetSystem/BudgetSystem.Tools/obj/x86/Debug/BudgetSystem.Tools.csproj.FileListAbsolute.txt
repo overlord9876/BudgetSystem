@@ -1,11 +1,6 @@
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Tools.exe.config
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Tools.exe
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Tools.pdb
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.frmTools.resources
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.Properties.Resources.resources
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.csproj.GenerateResource.Cache
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.exe
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.pdb
-D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Tools.exe.config
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Bll.dll
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Dal.dll
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSystem.Entity.dll
@@ -26,4 +21,9 @@ D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\BudgetSyste
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\bin\Debug\NPOI.xml
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.csprojResolveAssemblyReference.cache
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.frmMessage.resources
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.frmTools.resources
 D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.frmVersionPublisher.resources
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.Properties.Resources.resources
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.csproj.GenerateResource.Cache
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.exe
+D:\github\BudgetSystem\Src\BudgetSystem\BudgetSystem.Tools\obj\x86\Debug\BudgetSystem.Tools.pdb

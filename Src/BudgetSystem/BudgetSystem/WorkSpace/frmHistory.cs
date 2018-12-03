@@ -35,6 +35,8 @@ namespace BudgetSystem.WorkSpace
             this.txtDataItemText.Text = this.FlowItem.DateItemText;
             this.txtCreateUserRealName.Text = this.FlowItem.CreateUserRealName;
             this.dtCrateDate.EditValue = this.FlowItem.CreateDate;
+
+            //List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
             List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
             this.gdApproveList.DataSource = points;
         }

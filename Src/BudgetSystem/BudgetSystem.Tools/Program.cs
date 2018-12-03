@@ -20,7 +20,6 @@ namespace BudgetSystem.Tools
             Bll.BaseManager.SetConnectionString(connectionString, false);
             
             
-
             Application.Run(new frmTools());
         }
     }

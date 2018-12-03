@@ -186,13 +186,20 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` 
-                From `FlowRunPoint` 
-                Where`InstanceID` = @InstanceID
-                ORDER BY NodeOrderNo";
+                string sql = @"Select `ID`,`NodeID`,`NodeOrderNo`,`InstanceID`,`NodeApproveUser`,`NodeApproveResult`,`NodeApproveRemark`,`State`,`RunPointCreateDate`,`NodeApproveDate` 
+                    From `FlowRunPoint` 
+                    Where`InstanceID` = @InstanceID
+                    ORDER BY NodeOrderNo";
             return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
         }
 
-
+        public IEnumerable<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"Select t2.`ID`,t2.`NodeID`,t2.`NodeOrderNo`,t2.`InstanceID`,t2.`NodeApproveUser`,t2.`NodeApproveResult`,t2.`NodeApproveRemark`,t2.`State`,t2.`RunPointCreateDate`,t2.`NodeApproveDate` 
+                        From `FlowInstance` t1  left join `FlowRunPoint` t2 on t1.ID = t2.InstanceID 
+                        Where t1.`DateItemID` = @DateItemID and t1.DateItemType=@DateItemType
+                        ORDER BY t2.NodeOrderNo";
+            return con.Query<FlowRunPoint>(sql, new { DateItemID = dataID, DateItemType = dataType }, tran);
+        }
     }
 }

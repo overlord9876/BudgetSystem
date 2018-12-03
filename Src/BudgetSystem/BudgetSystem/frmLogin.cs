@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 
+
 namespace BudgetSystem
 {
     public partial class frmLogin : DevExpress.XtraEditors.XtraForm

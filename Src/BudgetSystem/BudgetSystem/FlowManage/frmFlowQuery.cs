@@ -49,8 +49,8 @@ namespace BudgetSystem.FlowManage
 
         private void TestFlow()
         {
-            string flowName = "预算单审批";
-            int dataID = 999;
+            string flowName = "预算单审批流程";
+            int dataID = 888;
             string dataType = "测试业务数据";
             Bll.FlowManager fm = new FlowManager();
             FlowRunState state = fm.StartFlow(flowName, dataID,"测试用的数据项", dataType,RunInfo.Instance.CurrentUser.UserName);
