@@ -82,7 +82,7 @@ namespace BudgetSystem.OutMoney
             this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
             this.txtAdvancePayment.EditValue = Caculator.CurrentBudget.AdvancePayment;
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
-            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney;
+            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney + Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium;
 
             decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)Caculator.CurrentBudget.InterestRate * Caculator.CurrentBudget.Days / 30 / 100, 2);
             decimal subTotal = Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium + Caculator.CurrentBudget.BankCharges +/*直接费用*/0 + Caculator.CurrentBudget.FeedMoney;
@@ -212,7 +212,7 @@ namespace BudgetSystem.OutMoney
             //收汇超计划%=（已收汇人民币-合同计划款）/合同计划款*100%
             if (this.txtTotalAmount.Value != 0)
             {
-                this.txtSuperPaymentScheme.EditValue = (Math.Round((this.txtReceiptAmount2.Value - txtTotalAmount.Value) / txtTotalAmount.Value, 2)) * 100 - 100;
+                this.txtSuperPaymentScheme.EditValue = (Math.Round((this.txtReceiptAmount2.Value - txtTotalAmount.Value) / txtTotalAmount.Value, 2)) * 100;
             }
             else
             {

@@ -246,7 +246,7 @@ namespace BudgetSystem
                 this.chkIsQualified.Checked = budget.IsQualifiedSupplier;
                 this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked);
                 this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
-                
+
                 this.pceCustomer.Text = budget.CustomerList.ToNameString();
                 this.pceCustomer.Tag = budget.CustomerList;
                 this.pceMainCustomer.Text = budget.CustomerName;
@@ -373,7 +373,7 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(this.pceSupplier.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.pceSupplier, "请选择工厂");
-            } 
+            }
         }
         private void CheckContractNOInput()
         {
@@ -585,7 +585,14 @@ namespace BudgetSystem
         /// </summary>
         private void CalcUSDTotalAmount()
         {
-            this.txtUSDTotalAmount.EditValue = this.txtTotalAmount.Value * this.txtExchangeRate.Value;
+            if (this.txtExchangeRate.Value != 0)
+            {
+                this.txtUSDTotalAmount.EditValue = this.txtTotalAmount.Value / this.txtExchangeRate.Value;
+            }
+            else
+            {
+                this.txtUSDTotalAmount.EditValue = 0;
+            }
         }
         #endregion
 
@@ -797,7 +804,7 @@ namespace BudgetSystem
             {
                 CalcOutProductTotalAmount();
             }
-            else if (e.Column == gcOriginalCurrency&&e.Value!=null)
+            else if (e.Column == gcOriginalCurrency && e.Value != null)
             {
                 if ("usd".Equals(e.Value.ToString().ToLower()))
                 {

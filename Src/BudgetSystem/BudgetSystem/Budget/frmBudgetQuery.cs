@@ -172,7 +172,7 @@ namespace BudgetSystem
                 }
             }
         }
-        
+
         private void ModifyApply()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -255,7 +255,14 @@ namespace BudgetSystem
         {
             if (hInfo.InRow)
             {
-                ModifyBudget();
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifyBudget();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewBudget();
+                }
             }
         }
 

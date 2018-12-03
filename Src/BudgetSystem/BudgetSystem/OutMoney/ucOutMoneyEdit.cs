@@ -429,12 +429,12 @@ namespace BudgetSystem.OutMoney
             currentBudget = cboBudget.EditValue as Budget;
             if (currentBudget != null)
             {
-                if (currentBudget.FlowName != EnumFlowNames.预算单审批流程.ToString() || currentBudget.EnumFlowState != EnumDataFlowState.审批通过)
-                {
-                    XtraMessageBox.Show(string.Format("合同号【{0}】还未通过审批，暂不允许付款", currentBudget.ContractNO));
-                    currentBudget = null;
-                    return;
-                }
+                //if (currentBudget.FlowName != EnumFlowNames.预算单审批流程.ToString() || currentBudget.EnumFlowState != EnumDataFlowState.审批通过)
+                //{
+                //    XtraMessageBox.Show(string.Format("合同号【{0}】还未通过审批，暂不允许付款", currentBudget.ContractNO));
+                //    currentBudget = null;
+                //    return;
+                //}
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
                 var receiptList = rm.GetBudgetBillListByBudgetId(currentBudget.ID);
                 caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
