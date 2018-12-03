@@ -506,7 +506,7 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 税后换汇成本=总成本/净收入额（USD）
+        /// 税后换汇成本=总成本/合同金额（美元）
         /// </summary>
         private void CalcExchangeCost()
         {
@@ -516,7 +516,7 @@ namespace BudgetSystem
             }
             else
             {
-                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtTotalAmount.Value / txtExchangeRate.Value, 2);
+                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtUSDTotalAmount.Value, 2);
             }
         }
 
