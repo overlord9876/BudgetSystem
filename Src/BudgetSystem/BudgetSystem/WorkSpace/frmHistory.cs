@@ -27,18 +27,33 @@ namespace BudgetSystem.WorkSpace
             set;
         }
 
+        public List<FlowRunPoint> Points
+        {
+            get;
+            set;
+        }
+
+
         private Bll.FlowManager fm = new Bll.FlowManager();
 
         private void frmApprove_Load(object sender, EventArgs e)
         {
-            this.txtFlowName.Text = this.FlowItem.FlowName;
-            this.txtDataItemText.Text = this.FlowItem.DateItemText;
-            this.txtCreateUserRealName.Text = this.FlowItem.CreateUserRealName;
-            this.dtCrateDate.EditValue = this.FlowItem.CreateDate;
+            if (FlowItem != null)
+            {
+                this.txtFlowName.Text = this.FlowItem.FlowName;
+                this.txtDataItemText.Text = this.FlowItem.DateItemText;
+                this.txtCreateUserRealName.Text = this.FlowItem.CreateUserRealName;
+                this.dtCrateDate.EditValue = this.FlowItem.CreateDate;
 
-            //List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
-            List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
-            this.gdApproveList.DataSource = points;
+                //List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
+                List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
+                this.gdApproveList.DataSource = points;
+            }
+            else
+            {
+                this.layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.gdApproveList.DataSource = Points;
+            }
         }
 
 

@@ -19,6 +19,7 @@ namespace BudgetSystem
         public frmVoucherNotesQuery()
         {
             InitializeComponent();
+            this.gvDeclarationform.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvDeclarationform_RowClick);
             this.Module = BusinessModules.VoucherNotesManagement;
         }
 
@@ -55,35 +56,15 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.New.ToString())
             {
-                frmDeclarationformEdit form = new frmDeclarationformEdit();
-                form.WorkModel = EditFormWorkModels.New;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                NewDeclaration();
             }
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
-                Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
-                if (selectedItem == null)
-                {
-                    XtraMessageBox.Show("请选择要修改的项");
-                    return;
-                }
-
-                frmDeclarationformEdit form = new frmDeclarationformEdit();
-                form.WorkModel = EditFormWorkModels.Modify;
-                form.CurrentDeclarationform = selectedItem;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                ModifyDeclaration();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
-                frmDeclarationformEdit form = new frmDeclarationformEdit();
-                form.WorkModel = EditFormWorkModels.View;
-                form.ShowDialog(this);
+                ViewDeclarationform();
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
@@ -93,6 +74,41 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("未定义的操作1");
             }
+        }
+
+        private void NewDeclaration()
+        {
+            frmDeclarationformEdit form = new frmDeclarationformEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+
+        private void ModifyDeclaration()
+        {
+            Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
+            if (selectedItem == null)
+            {
+                XtraMessageBox.Show("请选择要修改的项");
+                return;
+            }
+
+            frmDeclarationformEdit form = new frmDeclarationformEdit();
+            form.WorkModel = EditFormWorkModels.Modify;
+            form.CurrentDeclarationform = selectedItem;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+
+        private void ViewDeclarationform()
+        {
+            frmDeclarationformEdit form = new frmDeclarationformEdit();
+            form.WorkModel = EditFormWorkModels.View;
+            form.ShowDialog(this);
         }
 
         private void DeleteDeclarationform()
@@ -108,5 +124,21 @@ namespace BudgetSystem
             this.gvDeclarationform.DeleteRow(this.gvDeclarationform.FocusedRowHandle);
 
         }
+
+        private void gvDeclarationform_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (e.Clicks == 2 && e.RowHandle >= 0)
+            {
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifyDeclaration();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewDeclarationform();
+                }
+            }
+        }
+
     }
 }

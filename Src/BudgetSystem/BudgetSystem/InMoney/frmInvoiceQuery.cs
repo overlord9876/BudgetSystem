@@ -17,10 +17,10 @@ namespace BudgetSystem.InMoney
         private Bll.InvoiceManager im = new Bll.InvoiceManager();
         public frmInvoiceQuery()
         {
-            InitializeComponent(); 
-            this.Module = BusinessModules.InvoiceManagement; 
+            InitializeComponent();
+            this.gvInvoice.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvInvoice_RowClick);
+            this.Module = BusinessModules.InvoiceManagement;
         }
-
 
         protected override void InitModelOperate()
         {
@@ -32,7 +32,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData2, "财务导入认证记录"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
-            this.ModelOperatePageName = "交单管理"; 
+            this.ModelOperatePageName = "交单管理";
         }
 
 
@@ -72,7 +72,7 @@ namespace BudgetSystem.InMoney
 
         private void ImportInvoice(bool isFinaceImport)
         {
-            frmInvoiceImport form = new frmInvoiceImport(isFinaceImport); 
+            frmInvoiceImport form = new frmInvoiceImport(isFinaceImport);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 this.RefreshData();
@@ -95,7 +95,7 @@ namespace BudgetSystem.InMoney
             {
                 frmInvoiceEdit form = new frmInvoiceEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
-                form.CurrentInvoice=invoice;
+                form.CurrentInvoice = invoice;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
@@ -118,18 +118,26 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void gvInvoice_DoubleClick(object sender, EventArgs e)
+        private void gvInvoice_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (hInfo.InRow)
+            if (e.Clicks == 2 && e.RowHandle >= 0)
             {
-                ModifyInvoice();
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifyInvoice();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewInvoice();
+                }
+                else
+                {
+
+                }
             }
         }
 
-        private void gvInvoice_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = gvInvoice.CalcHitInfo(e.Y, e.Y);
-        }
- 
+
+
     }
 }

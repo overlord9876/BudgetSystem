@@ -8,7 +8,7 @@ using System.Data;
 
 namespace BudgetSystem.Bll
 {
-    public class FlowManager:BaseManager
+    public class FlowManager : BaseManager
     {
 
         private FlowDal dal = new FlowDal();
@@ -48,7 +48,7 @@ namespace BudgetSystem.Bll
 
             });
             return lst.ToList();
-        
+
         }
 
         public Flow GetFlow(string name, int version)
@@ -65,7 +65,7 @@ namespace BudgetSystem.Bll
         {
             return this.Query<Flow>((con) =>
             {
-                Flow flow= dal.GetFlow(name, version, con, null);
+                Flow flow = dal.GetFlow(name, version, con, null);
                 flow.Details = dal.GetFlowDetial(name, version, con, null).ToList();
                 return flow;
             });
@@ -76,7 +76,7 @@ namespace BudgetSystem.Bll
             var lst = this.Query<FlowNode>((con) =>
             {
 
-                var uList = dal.GetFlowDetial(name,version,con, null);
+                var uList = dal.GetFlowDetial(name, version, con, null);
                 return uList;
 
             });
@@ -95,7 +95,7 @@ namespace BudgetSystem.Bll
                 flow.VersionNumber = version;
                 for (int i = 0; i < flow.Details.Count; i++)
                 {
-                    flow.Details[i].OrderNo = i+1;
+                    flow.Details[i].OrderNo = i + 1;
                     flow.Details[i].Name = flow.Name;
                     flow.Details[i].VersionNumber = version;
                 }
@@ -122,7 +122,7 @@ namespace BudgetSystem.Bll
         /// 3 流程还未配置审批过程
         /// 4 创建运行点时失败，用户部门未配置。
         /// </returns>
-        public FlowRunState StartFlow(string flowName,int dataID,string dataText, string dataType,string currentUser)
+        public FlowRunState StartFlow(string flowName, int dataID, string dataText, string dataType, string currentUser)
         {
 
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
@@ -136,7 +136,7 @@ namespace BudgetSystem.Bll
                 }
 
                 //获取流程，如果流程的版本是0，说明流程还未配置，不可以运行。
-                Flow flow =  dal.GetFlowEnableVersion(flowName, con, tran);
+                Flow flow = dal.GetFlowEnableVersion(flowName, con, tran);
                 if (flow.VersionNumber == 0)
                 {
                     return FlowRunState.流程未配置审批过程;
@@ -144,15 +144,15 @@ namespace BudgetSystem.Bll
                 //更新数据已关联流程实例的IsRecent属性为false
                 dal.UpdateFlowInstanceIsRecent(dataType, dataID, false, con, tran);
                 //创建流程实例 
-                int instanceID =  dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID,dataText, dataType, currentUser, con, tran);
+                int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataText, dataType, currentUser, con, tran);
 
                 //创建运行点
                 FlowRunState createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, null, currentUser, con, tran);
 
                 //如果运行点返回是3的，关闭实例 
-                if (createRunpointResult ==  FlowRunState.流程发起人未配置部门)
-                { 
-                    dal.UpdateFlowInstanceCloseInfo(instanceID,false,FlowConst.FlowNotApprovedMessage,con,tran);
+                if (createRunpointResult == FlowRunState.流程发起人未配置部门)
+                {
+                    dal.UpdateFlowInstanceCloseInfo(instanceID, false, FlowConst.FlowNotApprovedMessage, con, tran);
                     return FlowRunState.流程发起人未配置部门;
                 }
                 return FlowRunState.启动流程成功;
@@ -176,14 +176,14 @@ namespace BudgetSystem.Bll
         /// </returns>
         private FlowRunState ToNextRunPoint(string flowName, int flowVersion, int instanceID, FlowRunPoint runPoint, string instanceCreateUser, IDbConnection con, IDbTransaction tran)
         {
-            
-            int orderNo=1;
-            
-       
+
+            int orderNo = 1;
+
+
             //如果传进来的运行点是空的，说明是新实例 ，orderNo取1，否则获取这个运行点对应节点顺序号+1
-            if (runPoint!=null)
+            if (runPoint != null)
             {
-             orderNo=   runPoint.NodeOrderNo+1;
+                orderNo = runPoint.NodeOrderNo + 1;
             }
 
             FlowNode nextNode = dal.GetFlowNode(flowName, flowVersion, orderNo, con, tran);
@@ -210,7 +210,7 @@ namespace BudgetSystem.Bll
             }
             else
             {
-                
+
                 string departMentCode;
                 if (nextNode.NodeValue == FlowConst.FlowCreateUserDepartment)
                 {
@@ -220,7 +220,7 @@ namespace BudgetSystem.Bll
                 }
                 else
                 {
-                   departMentCode= nextNode.NodeValue;
+                    departMentCode = nextNode.NodeValue;
                 }
 
                 if (string.IsNullOrEmpty(departMentCode))
@@ -241,10 +241,10 @@ namespace BudgetSystem.Bll
                 }
             }
 
-            dal.AddFlowRunPoint(nextNode.ID,nextNode.OrderNo, instanceID, nextApprove, con, tran);
+            dal.AddFlowRunPoint(nextNode.ID, nextNode.OrderNo, instanceID, nextApprove, con, tran);
 
             return FlowRunState.创建运行点成功;
-        
+
         }
 
 
@@ -268,11 +268,11 @@ namespace BudgetSystem.Bll
                 FlowRunPoint runPoint = dal.GetFlowRunPoint(runPointID, con, tran);
 
                 //检查运行点状态，以免多次提交。
-                if (runPoint.State )
+                if (runPoint.State)
                 {
                     return FlowRunState.提交的流程节点已审批过了;
                 }
-                
+
                 //更新当前运行点状态、
                 dal.UpdateFlowRunPointApproveInfo(runPointID, approveResult, approveRemark, con, tran);
 
@@ -282,7 +282,7 @@ namespace BudgetSystem.Bll
                     dal.UpdateFlowInstanceCloseInfo(runPoint.InstanceID, false, FlowConst.FlowNotApprovedMessage, con, tran);
                     return FlowRunState.流程审批完成;
                 }
-                
+
                 //准备创建下一个运行点
                 FlowInstance instance = dal.GetFlowInstance(runPoint.InstanceID, con, tran);
 
@@ -305,7 +305,7 @@ namespace BudgetSystem.Bll
 
                 return FlowRunState.创建运行点成功;
             });
-         
+
 
 
         }
@@ -353,7 +353,7 @@ namespace BudgetSystem.Bll
                 }
                 if (instance.IsCreateUserConfirm)
                 {
-                    return FlowRunState.确认的流程实例已经确认过了; 
+                    return FlowRunState.确认的流程实例已经确认过了;
                 }
 
                 dal.UpdateFlowInstanceConfirmInfo(instanceID, con, tran);
@@ -372,11 +372,11 @@ namespace BudgetSystem.Bll
             return this.Query<FlowItem>((con) =>
             {
 
-                var fList = dal.GetPendingFlowByUser(userName,con, null);
+                var fList = dal.GetPendingFlowByUser(userName, con, null);
                 return fList;
 
             }).ToList();
-         
+
         }
 
 
@@ -405,10 +405,10 @@ namespace BudgetSystem.Bll
                 return fList;
 
             }).ToList();
-        
+
         }
 
-        public List<FlowRunPoint> GetFlowRunPointsByData(int dataID,string dataType)
+        public List<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType)
         {
             return this.Query<FlowRunPoint>((con) =>
             {

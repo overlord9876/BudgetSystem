@@ -52,6 +52,12 @@ namespace BudgetSystem.InMoney
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
             this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
+            this.gridCustomer.BeforeShowMenu += new DevExpress.XtraEditors.Controls.BeforeShowMenuEventHandler(gridCustomer_BeforeShowMenu);
+        }
+
+        void gridCustomer_BeforeShowMenu(object sender, DevExpress.XtraEditors.Controls.BeforeShowMenuEventArgs e)
+        {
+
         }
 
         private EditFormWorkModels _workModel;
@@ -98,7 +104,7 @@ namespace BudgetSystem.InMoney
 
             cboSales.Properties.Items.AddRange(allSalesmanList.ToArray());
 
-            List<Customer> customerList = cm.GetAllCustomer();
+            this.customerList = cm.GetAllCustomer();
             this.cboCustomer.Properties.DataSource = customerList;
 
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
@@ -178,6 +184,7 @@ namespace BudgetSystem.InMoney
             {
                 o.ExchangeRate = txtExchangeRate.Value;
                 o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
+                o.Custom = customerList != null ? customerList.Find(c => c.ID.Equals(o.Cus_ID)) : null;
             });
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
             CalcSplitMoney();
@@ -288,6 +295,7 @@ namespace BudgetSystem.InMoney
         }
 
         private List<Budget> budgetList;
+        private List<Customer> customerList;
 
         private void BindBudgetList()
         {
@@ -296,6 +304,8 @@ namespace BudgetSystem.InMoney
             {
                 budgetList = bm.GetBudgetListByCustomerId(RunInfo.Instance.CurrentUser.UserName, c.ID);
                 this.gridBudget.DataSource = budgetList;
+
+                this.gridCustomer.DataSource = customerList;
             }
         }
 

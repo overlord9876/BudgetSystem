@@ -30,7 +30,7 @@ namespace BudgetSystem.Entity
         /// 客户ID
         /// </summary>
         public int Cus_ID { get; set; }
-
+        
         /// <summary>
         /// 客户对象
         /// </summary>
