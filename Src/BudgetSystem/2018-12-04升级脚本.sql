@@ -1,4 +1,9 @@
 
+/*==============================================================*/
+/*					by zxj					                      */
+/*==============================================================*/
+
+
 DELIMITER ??
 DROP PROCEDURE IF EXISTS schema_change??
 CREATE PROCEDURE schema_change()
