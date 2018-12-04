@@ -506,17 +506,19 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 税后换汇成本=总成本/合同金额（美元）
+        /// 退税后换汇成本=总成本/合同金额（人民币）/汇率（USD）
         /// </summary>
         private void CalcExchangeCost()
         {
             if (txtTotalAmount.Value == 0 || txtExchangeRate.Value == 0)
             {
+                txtExchangeCost.ToolTipTitle = "合同金额（RMB）或汇率（USD）的值为0";
                 txtExchangeCost.EditValue = 0;
             }
             else
             {
-                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtUSDTotalAmount.Value, 2);
+                txtExchangeCost.ToolTipTitle = "退税后换汇成本=总成本/合同金额（人民币）/汇率（USD）";
+                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtTotalAmount.Value / txtExchangeRate.Value, 2);
             }
         }
 
@@ -565,7 +567,7 @@ namespace BudgetSystem
             decimal directCosts = txtPurchasePrice.Value; //总进价
             if (directCosts != 0)
             {
-                this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value + txtFeedMoney.Value * (1 + this.vatOption / 100)) / (directCosts + txtFeedMoney.Value * (1 + this.vatOption / 100)) * 100, 2);//预付款占总进价百分比
+                this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value) / (directCosts + txtFeedMoney.Value * (1 + this.vatOption / 100)) * 100, 2);//预付款占总进价百分比
             }
             else
             {
@@ -584,6 +586,7 @@ namespace BudgetSystem
             //小计=佣金+运保费+银行费用+直接费用+进料款
             this.txtSubtotal.EditValue = txtCommission.Value + txtPremium.Value + txtBankCharges.Value + txtDirectCosts.Value + txtFeedMoney.Value;
         }
+
         /// <summary>
         /// 计算美元合同金额
         /// </summary>
@@ -591,13 +594,16 @@ namespace BudgetSystem
         {
             if (this.txtExchangeRate.Value != 0)
             {
+                this.txtUSDTotalAmount.ToolTip = "汇率（USD）值为0。";
                 this.txtUSDTotalAmount.EditValue = this.txtTotalAmount.Value / this.txtExchangeRate.Value;
             }
             else
             {
+                this.txtUSDTotalAmount.ToolTip = "美元合同金额=合同金额（人民币）/汇率（USD）";
                 this.txtUSDTotalAmount.EditValue = 0;
             }
         }
+
         #endregion
 
         #region Event Method
