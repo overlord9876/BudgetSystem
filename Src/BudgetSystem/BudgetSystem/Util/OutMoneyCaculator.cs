@@ -162,7 +162,6 @@ namespace BudgetSystem
                         if (!returnResult.Contains(v.TaxRebateRate))
                         {
                             returnResult.Add(v.TaxRebateRate);
-                            returnResult.Add(v.TaxRebateRate);
                         }
                     }
                 }

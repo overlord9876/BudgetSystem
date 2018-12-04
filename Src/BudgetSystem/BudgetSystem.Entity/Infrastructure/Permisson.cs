@@ -132,6 +132,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.New, "付款管理-付款申请",910),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Modify, "付款管理-修改付款",920),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Delete, "付款管理-删除付款",930),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.ViewMoneyDetail, "付款管理-用款查询",940),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.SubmitApply, "付款管理-提交付款申请",950),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看详情",960),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",970), 
@@ -156,7 +157,6 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.CustomerManagement,OperateTypes.Enabled,"客户管理-启用客户",1230),
                         new Permisson(BusinessModules.CustomerManagement,OperateTypes.Disabled,"客户管理-停用客户",1240),
                         new Permisson(BusinessModules.CustomerManagement,OperateTypes.View,"客户管理-查看详情",1250),
-                        new Permisson(BusinessModules.CustomerManagement,OperateTypes.Relate,"客户管理-业务员维护",1260),
             
                         new Permisson(BusinessModules.SupplierManagement,OperateTypes.None,"供应商管理模块",1300),
                         new Permisson(BusinessModules.SupplierManagement,OperateTypes.New,"供应商管理-新增供应商",1310),

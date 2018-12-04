@@ -21,6 +21,14 @@ alter table BudgetBill add constraint FK_Reference_BudgetBill_Customer foreign k
 
 END IF; 
 
+IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DATABASE()  AND table_name = 'Customer' AND column_name = 'Code') THEN
+    ALTER TABLE Customer ADD COLUMN Code varchar(30)  null; 
+    ALTER TABLE Customer ADD COLUMN  Email                varchar(50)  null;
+    ALTER TABLE Customer Address              varchar(256) null;
+    ALTER TABLE Customer Port                 varchar(128) null;
+    ALTER TABLE Customer Contacts         varchar(50) null;
+END IF; 
+
 END??
 DELIMITER ;
 CALL schema_change();

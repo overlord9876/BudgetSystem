@@ -8,12 +8,13 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEdit : frmBaseDialogForm
     {
-
+        private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
 
         public frmPaymentCalcEdit()
@@ -22,6 +23,25 @@ namespace BudgetSystem.OutMoney
         }
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
+        {
+            this.txtBudgetNo.Properties.DataSource = bm.GetAllBudget();
+
+            if (Caculator == null)
+            {
+                return;
+            }
+
+            this.txtBudgetNo.Properties.ReadOnly = true;
+            InitBudgetMoneyDetail();
+            //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
+            //textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
+            //textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
+
+            //this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
+
+        }
+
+        private void InitBudgetMoneyDetail()
         {
             //所有付款金额
             this.txtApplyMoney.EditValue = Caculator.PaymentMoneyAmount;
@@ -43,7 +63,11 @@ namespace BudgetSystem.OutMoney
                     item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
                 lcg_NotHasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
+                foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_HasAdvancePayment.Items)
+                {
+                    item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                lcg_HasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
             else//没有预付款
             {
@@ -53,6 +77,12 @@ namespace BudgetSystem.OutMoney
                     item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
                 lcg_HasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+                foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_NotHasAdvancePayment.Items)
+                {
+                    item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                lcg_NotHasAdvancePayment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
 
             if (Caculator.IsReceiptGreaterThanTaxPayment(0))
@@ -77,13 +107,13 @@ namespace BudgetSystem.OutMoney
             //SetLayoutControlStyle(EditFormWorkModels.Custom);
 
             this.txtCommitDate.EditValue = Caculator.CurrentBudget.CreateDate;
-            this.txtBudgetNo.EditValue = Caculator.CurrentBudget.ContractNO;
+            this.txtBudgetNo.EditValue = Caculator.CurrentBudget;
             this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameString();
             this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
             this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
             this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
-            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney  + Caculator.CurrentBudget.Premium;
+            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney + Caculator.CurrentBudget.Premium;
             this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
 
@@ -130,12 +160,6 @@ namespace BudgetSystem.OutMoney
             this.textEdit_Number30.EditValue = this.textEdit_Number29.Value + this.txtAdvancePayment.Value;
 
 
-            //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
-            //textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
-            //textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
-
-            //this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
-
         }
 
         private void InitTaxRebateRateList()
@@ -174,18 +198,30 @@ namespace BudgetSystem.OutMoney
 
         private void textEdit_Number23_EditValueChanged(object sender, EventArgs e)
         {
-            if (textEdit_Number23.Value <= 0)
+            if (this.textEdit_Number23.Value >= 0)
             {
-                dxErrorProvider1.SetError(textEdit_Number23, "支付余额不允许小于0。");
+                textEdit_Number23.ForeColor = Color.Black;
+
             }
+            else
+            {
+                textEdit_Number23.ForeColor = Color.Red;
+            }
+            //dxErrorProvider1.SetError(textEdit_Number23, "支付余额不允许小于0。");
         }
 
         private void textEdit_Number30_EditValueChanged(object sender, EventArgs e)
         {
-            if (textEdit_Number30.Value <= 0)
+            if (this.textEdit_Number30.Value >= 0)
             {
-                dxErrorProvider1.SetError(textEdit_Number30, "支付余额不允许小于0。");
+                textEdit_Number30.ForeColor = Color.Black;
+
             }
+            else
+            {
+                textEdit_Number30.ForeColor = Color.Red;
+            }
+            //dxErrorProvider1.SetError(textEdit_Number30, "支付余额不允许小于0。");
         }
 
         private void textEdit_Number20_EditValueChanged(object sender, EventArgs e)
@@ -324,6 +360,21 @@ namespace BudgetSystem.OutMoney
             textEdit_Number1.EditValue = txtTaxRefundA.Value + textEdit_Number28.Value;
         }
 
+        private void txtBudgetNo_EditValueChanged(object sender, EventArgs e)
+        {
+            Budget selectedBudget = this.txtBudgetNo.EditValue as Budget;
+            if (selectedBudget != null)
+            {
+                SystemConfigManager scm = new SystemConfigManager();
+                PaymentNotesManager pnm = new PaymentNotesManager();
+                ReceiptMgmtManager rm = new ReceiptMgmtManager();
+                decimal valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
+                var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
+                var receiptList = rm.GetBudgetBillListByBudgetId(selectedBudget.ID);
+                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate);
 
+                InitBudgetMoneyDetail();
+            }
+        }
     }
 }

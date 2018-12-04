@@ -13,12 +13,10 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInvoiceQuery : frmBaseQueryForm
     {
-        private GridHitInfo hInfo;
         private Bll.InvoiceManager im = new Bll.InvoiceManager();
         public frmInvoiceQuery()
         {
             InitializeComponent();
-            this.gvInvoice.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvInvoice_RowClick);
             this.Module = BusinessModules.InvoiceManagement;
         }
 
@@ -118,25 +116,12 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void gvInvoice_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifyInvoice();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewInvoice();
-                }
-                else
-                {
+            this.gridViewAction.Add(this.gvInvoice, new ActionWithPermission() { MainAction = ModifyInvoice, MainOperate = OperateTypes.Modify, SecondAction = ViewInvoice, SecondOperate = OperateTypes.View });
 
-                }
-            }
         }
-
 
 
     }

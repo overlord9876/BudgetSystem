@@ -20,7 +20,6 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.Module = BusinessModules.OutMoneyManagement;
-            this.gvOutMoney.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvOutMoney_RowClick);
         }
 
         protected override void InitModelOperate()
@@ -32,6 +31,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交付款申请"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoneyDetail, "用款查询"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
 
@@ -54,6 +54,11 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewPaymentNote();
+            }
+            else if (operate.Operate == OperateTypes.ViewMoneyDetail.ToString())
+            {
+                frmPaymentCalcEdit form = new frmPaymentCalcEdit();
+                form.ShowDialog(this);
             }
             else if (operate.Operate == OperateTypes.Confirm.ToString())
             {
@@ -143,19 +148,10 @@ namespace BudgetSystem
             this.gvOutMoney.RefreshData();
         }
 
-        private void gvOutMoney_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifyPaymentNote();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewPaymentNote();
-                }
-            }
+            this.gridViewAction.Add(this.gvOutMoney, new ActionWithPermission() { MainAction = ModifyPaymentNote, MainOperate = OperateTypes.Modify, SecondAction = ViewPaymentNote, SecondOperate = OperateTypes.View });
+
         }
 
     }

@@ -23,7 +23,6 @@ namespace BudgetSystem.Entity
         SubmitApply,
         Modify,
         Delete,
-        Relate,
         Revoke,
         Disabled,
         Enabled,

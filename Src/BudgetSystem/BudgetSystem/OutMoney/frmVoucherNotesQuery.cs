@@ -19,7 +19,6 @@ namespace BudgetSystem
         public frmVoucherNotesQuery()
         {
             InitializeComponent();
-            this.gvDeclarationform.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvDeclarationform_RowClick);
             this.Module = BusinessModules.VoucherNotesManagement;
         }
 
@@ -125,19 +124,10 @@ namespace BudgetSystem
 
         }
 
-        private void gvDeclarationform_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifyDeclaration();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewDeclarationform();
-                }
-            }
+            this.gridViewAction.Add(this.gvDeclarationform, new ActionWithPermission() { MainAction = ModifyDeclaration, MainOperate = OperateTypes.Modify, SecondAction = ViewDeclarationform, SecondOperate = OperateTypes.View });
+
         }
 
     }

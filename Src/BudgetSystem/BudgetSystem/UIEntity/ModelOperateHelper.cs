@@ -70,12 +70,6 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 9;
             }
-            else if (operate == OperateTypes.Relate)
-            {
-                text = "关联";
-                group = "操作";
-                imageIndex = 28;
-            }
             else if (operate == OperateTypes.Disabled)
             {
                 text = "停用";

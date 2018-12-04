@@ -281,6 +281,7 @@
             this.gvSalesman.GridControl = this.gridSalesman;
             this.gvSalesman.Name = "gvSalesman";
             this.gvSalesman.OptionsBehavior.Editable = false;
+            this.gvSalesman.OptionsSelection.MultiSelect = true;
             this.gvSalesman.OptionsView.ShowGroupPanel = false;
             // 
             // gcsUserName
@@ -357,6 +358,7 @@
             this.gvUser.GridControl = this.gridUser;
             this.gvUser.Name = "gvUser";
             this.gvUser.OptionsBehavior.Editable = false;
+            this.gvUser.OptionsSelection.MultiSelect = true;
             this.gvUser.OptionsView.ShowGroupPanel = false;
             // 
             // gcUserName

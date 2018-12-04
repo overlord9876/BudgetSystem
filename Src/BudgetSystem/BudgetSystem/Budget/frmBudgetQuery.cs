@@ -18,12 +18,10 @@ namespace BudgetSystem
     {
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
-        private GridHitInfo hInfo;
 
         public frmBudgetQuery()
         {
             InitializeComponent();
-            this.gvBudget.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvBudget_RowClick);
             this.Module = BusinessModules.BuggetManagement;
 
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
@@ -266,20 +264,10 @@ namespace BudgetSystem
             }
         }
 
-
-        private void gvBudget_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifyBudget();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewBudget();
-                }
-            }
+            this.gridViewAction.Add(this.gvBudget, new ActionWithPermission() { MainAction = ModifyBudget, MainOperate = OperateTypes.Modify, SecondAction = ViewBudget, SecondOperate = OperateTypes.View });
+
         }
 
 

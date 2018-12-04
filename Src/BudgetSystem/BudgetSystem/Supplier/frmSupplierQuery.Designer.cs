@@ -34,18 +34,19 @@
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTaxpayerIdentificationNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -82,13 +83,14 @@
             // 
             this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
-            this.gcTaxpayerIdentificationNumber,
+            this.gcv纳税人识别号,
             this.gcSupplierType,
             this.gcFlowState,
             this.gcIsQualified,
             this.gcRegistrationDate,
             this.gcBusinessEffectiveDate,
             this.gcExistsAgentAgreement,
+            this.gcDiscredited,
             this.gcAgreementDate,
             this.gcCreateDate,
             this.gcCreateUser,
@@ -122,11 +124,11 @@
             // 
             // gcv纳税人识别号
             // 
-            this.gcTaxpayerIdentificationNumber.Caption = "纳税人识别号";
-            this.gcTaxpayerIdentificationNumber.FieldName = "TaxpayerID";
-            this.gcTaxpayerIdentificationNumber.Name = "gcv纳税人识别号";
-            this.gcTaxpayerIdentificationNumber.Visible = true;
-            this.gcTaxpayerIdentificationNumber.VisibleIndex = 1;
+            this.gcv纳税人识别号.Caption = "纳税人识别号";
+            this.gcv纳税人识别号.FieldName = "TaxpayerID";
+            this.gcv纳税人识别号.Name = "gcv纳税人识别号";
+            this.gcv纳税人识别号.Visible = true;
+            this.gcv纳税人识别号.VisibleIndex = 1;
             // 
             // gcSupplierType
             // 
@@ -160,30 +162,6 @@
             this.gcIsQualified.Visible = true;
             this.gcIsQualified.VisibleIndex = 4;
             // 
-            // gcCreateDate
-            // 
-            this.gcCreateDate.Caption = "创建时间";
-            this.gcCreateDate.FieldName = "CreateDate";
-            this.gcCreateDate.Name = "gcCreateDate";
-            this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 9;
-            // 
-            // gcCreateUser
-            // 
-            this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUser";
-            this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 10;
-            // 
-            // gcDescription
-            // 
-            this.gcDescription.Caption = "备注";
-            this.gcDescription.FieldName = "Description";
-            this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 11;
-            // 
             // gcRegistrationDate
             // 
             this.gcRegistrationDate.Caption = "工商登记日期";
@@ -214,7 +192,39 @@
             this.gcAgreementDate.FieldName = "AgreementDate";
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
-            this.gcAgreementDate.VisibleIndex = 8;
+            this.gcAgreementDate.VisibleIndex = 9;
+            // 
+            // gcCreateDate
+            // 
+            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 10;
+            // 
+            // gcCreateUser
+            // 
+            this.gcCreateUser.Caption = "创建人";
+            this.gcCreateUser.FieldName = "CreateUser";
+            this.gcCreateUser.Name = "gcCreateUser";
+            this.gcCreateUser.Visible = true;
+            this.gcCreateUser.VisibleIndex = 11;
+            // 
+            // gcDescription
+            // 
+            this.gcDescription.Caption = "备注";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            this.gcDescription.Visible = true;
+            this.gcDescription.VisibleIndex = 12;
+            // 
+            // gcDiscredited
+            // 
+            this.gcDiscredited.Caption = "是否失信企业";
+            this.gcDiscredited.FieldName = "Discredited";
+            this.gcDiscredited.Name = "gcDiscredited";
+            this.gcDiscredited.Visible = true;
+            this.gcDiscredited.VisibleIndex = 8;
             // 
             // frmSupplierQuery
             // 
@@ -250,6 +260,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
 
 
     }

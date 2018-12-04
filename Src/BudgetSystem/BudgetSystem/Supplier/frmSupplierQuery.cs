@@ -14,12 +14,10 @@ namespace BudgetSystem
     public partial class frmSupplierQuery : frmBaseQueryForm
     {
         private Bll.SupplierManager sm = new Bll.SupplierManager();
-        private GridHitInfo hInfo;
 
         public frmSupplierQuery()
         {
             InitializeComponent();
-            this.gvSupplier.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvSupplier_RowClick);
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
         }
 
@@ -128,20 +126,10 @@ namespace BudgetSystem
             this.gridSupplier.DataSource = list;
         }
 
-
-        private void gvSupplier_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifySupplier();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewSupplier();
-                }
-            }
+            this.gridViewAction.Add(this.gvSupplier, new ActionWithPermission() { MainAction = ModifySupplier, MainOperate = OperateTypes.Modify, SecondAction = ViewSupplier, SecondOperate = OperateTypes.View });
+
         }
     }
 }

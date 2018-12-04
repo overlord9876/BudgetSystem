@@ -16,14 +16,10 @@ namespace BudgetSystem.InMoney
     {
         ReceiptMgmtManager arm = new ReceiptMgmtManager();
 
-
-        private GridHitInfo hInfo;
-
         public frmInMoneyQuery()
         {
             InitializeComponent();
             this.Module = BusinessModules.InMoneyManagement;
-            this.gvInMoney.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvInMoney_RowClick);
         }
 
         protected override void InitModelOperate()
@@ -221,27 +217,10 @@ namespace BudgetSystem.InMoney
             this.gcInMoney.DataSource = bsList;
         }
 
-        private void gvInMoney_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (e.Clicks == 2 && e.RowHandle >= 0)
-            {
-                if (CheckPermission(OperateTypes.Modify))
-                {
-                    ModifyBankSlip();
-                }
-                else if (CheckPermission(OperateTypes.SplitCost))
-                {
-                    SplitConstMoneyBankSlip();
-                }
-                else if (CheckPermission(OperateTypes.View))
-                {
-                    ViewBankSlip();
-                }
-                else
-                {
+            this.gridViewAction.Add(this.gvInMoney, new ActionWithPermission() { MainAction = ModifyBankSlip, MainOperate = OperateTypes.Modify, SecondAction = ViewBankSlip, SecondOperate = OperateTypes.View });
 
-                }
-            }
         }
 
     }

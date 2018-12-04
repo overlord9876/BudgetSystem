@@ -14,12 +14,10 @@ namespace BudgetSystem
     public partial class frmCustomerQuery : frmBaseQueryForm
     {
         private Bll.CustomerManager cm = new Bll.CustomerManager();
-        private GridHitInfo hInfo;
 
         public frmCustomerQuery()
         {
             InitializeComponent();
-            this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
             this.Module = BusinessModules.CustomerManagement;
         }
 
@@ -32,7 +30,6 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Relate, "业务员维护"));
             this.ModelOperatePageName = "客户列表";
         }
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
@@ -49,10 +46,6 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 this.ViewCustomer();
-            }
-            else if (operate.Operate == OperateTypes.Relate.ToString())
-            {
-                XtraMessageBox.Show("业务员维护");
             }
             else if (operate.Operate == OperateTypes.Enabled.ToString())
             {
@@ -129,21 +122,10 @@ namespace BudgetSystem
             this.gridCustomer.DataSource = list;
         }
 
-        private void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        protected override void InitGridViewAction()
         {
-            if (CheckPermission(OperateTypes.Modify))
-            {
-                ModifyCustomer();
-            }
-            else if (CheckPermission(OperateTypes.View))
-            {
-                ViewCustomer();
-            }
-            else
-            {
+            this.gridViewAction.Add(this.gvCustomer, new ActionWithPermission() { MainAction = ModifyCustomer, MainOperate = OperateTypes.Modify, SecondAction = ViewCustomer, SecondOperate = OperateTypes.View });
 
-            }
         }
-
     }
 }
