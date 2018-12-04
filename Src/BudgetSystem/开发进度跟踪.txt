@@ -179,3 +179,8 @@ Ps:使用Dapper查询时当返回对象属性中包含枚举类型时类型转�
 2018-12-01 by zxw
 	版本自动更新已支持。注意主程序中连接支持使用配置文件传入或使用Deploy模式由Deploy传入，修改项目文件即可。
 	FlowBll 新增方法GetFlowRunPointsByData 支持基于数据项ID和类型查询历史 （已测试）
+
+
+
+2018-12-01 by Jason
+	数据库有修改，参考Upgrade.sql
