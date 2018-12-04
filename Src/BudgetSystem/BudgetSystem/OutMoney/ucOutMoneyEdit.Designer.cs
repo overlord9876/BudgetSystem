@@ -276,7 +276,7 @@
             this.txtActualRetention.Properties.Mask.EditMask = "n";
             this.txtActualRetention.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtActualRetention.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtActualRetention.Properties.NullText = "0.00";
+            this.txtActualRetention.Properties.NullText = "0";
             this.txtActualRetention.Properties.ReadOnly = true;
             this.txtActualRetention.Size = new System.Drawing.Size(404, 25);
             this.txtActualRetention.StyleController = this.layoutControl1;

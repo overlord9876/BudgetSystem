@@ -41,7 +41,7 @@
             this.txtValue.Properties.Mask.EditMask = "n";
             this.txtValue.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtValue.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtValue.Properties.NullText = "0.00";
+            this.txtValue.Properties.NullText = "0";
             this.txtValue.Size = new System.Drawing.Size(182, 25);
             this.txtValue.TabIndex = 0;
             // 

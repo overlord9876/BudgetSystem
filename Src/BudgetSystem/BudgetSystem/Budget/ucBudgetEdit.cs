@@ -506,7 +506,7 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 退税后换汇成本=总成本/合同金额（人民币）/汇率（USD）
+        /// 退税后换汇成本=总成本/合同金额（USD）
         /// </summary>
         private void CalcExchangeCost()
         {
@@ -517,8 +517,8 @@ namespace BudgetSystem
             }
             else
             {
-                txtExchangeCost.ToolTipTitle = "退税后换汇成本=总成本/合同金额（人民币）/汇率（USD）";
-                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtTotalAmount.Value / txtExchangeRate.Value, 2);
+                txtExchangeCost.ToolTipTitle = "退税后换汇成本=总成本/合同金额（USD）";
+                txtExchangeCost.EditValue = Math.Round(txtTotalCost.Value / txtUSDTotalAmount.Value, 2);
             }
         }
 
@@ -1022,6 +1022,7 @@ namespace BudgetSystem
         {
             CalcInproductInterest();
             CalcTotalCost();
+            CalcTaxRebateRateMoney();
         }
 
         private void Charges_EditValueChanged(object sender, EventArgs e)
@@ -1036,6 +1037,10 @@ namespace BudgetSystem
             CalcNetIncome();
             CalcProfitLevel1();
             CalcUSDTotalAmount();
+        }
+
+        private void txtUSDTotalAmount_EditValueChanged(object sender, EventArgs e)
+        {
             CalcExchangeCost();
         }
 
@@ -1048,8 +1053,8 @@ namespace BudgetSystem
         {
             CalcNetIncomeCNY();
             CalcProfitLevel1();
+
             CalcUSDTotalAmount();
-            CalcExchangeCost();
         }
 
         private void txtInterest_EditValueChanged(object sender, EventArgs e)
@@ -1118,5 +1123,6 @@ namespace BudgetSystem
             }
         }
         #endregion
+
     }
 }

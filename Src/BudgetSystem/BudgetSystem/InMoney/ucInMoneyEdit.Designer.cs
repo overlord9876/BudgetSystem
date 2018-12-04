@@ -41,7 +41,6 @@
             this.txtAlreadySplitCNYMoney = new BudgetSystem.CommonControl.TextEdit_Number();
             this.gcConstSplit = new DevExpress.XtraGrid.GridControl();
             this.gvConstSplit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.gbBudget = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcBudget = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBudget = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -59,23 +58,21 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcCustomer = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridCustomer = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcSplitConstOriginalCoin = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ritxtConstMoney = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcConstExchangeRate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcConstCNY = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bgcOperator = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcConstInDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.riLinkEditConstInDelete = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.bgcDepartmentCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -97,7 +94,6 @@
             this.gridColumnState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtPaymentMethod = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtTradingPostscript = new DevExpress.XtraEditors.TextEdit();
-            this.cboNatureOfMoney = new DevExpress.XtraEditors.ComboBoxEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -125,12 +121,16 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gbBudget = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand8 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.cboNatureOfMoney = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -165,7 +165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMethod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -193,6 +192,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // bgcIsDelete
@@ -255,7 +255,7 @@
             this.txtNotSplitOriginalCoinMoney.Properties.Mask.EditMask = "n";
             this.txtNotSplitOriginalCoinMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtNotSplitOriginalCoinMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtNotSplitOriginalCoinMoney.Properties.NullText = "0.00";
+            this.txtNotSplitOriginalCoinMoney.Properties.NullText = "0";
             this.txtNotSplitOriginalCoinMoney.Properties.ReadOnly = true;
             this.txtNotSplitOriginalCoinMoney.Size = new System.Drawing.Size(290, 21);
             this.txtNotSplitOriginalCoinMoney.StyleController = this.layoutControl1;
@@ -271,7 +271,7 @@
             this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.EditMask = "n";
             this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAlreadySplitOriginalCoinMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtAlreadySplitOriginalCoinMoney.Properties.NullText = "0.00";
+            this.txtAlreadySplitOriginalCoinMoney.Properties.NullText = "0";
             this.txtAlreadySplitOriginalCoinMoney.Properties.ReadOnly = true;
             this.txtAlreadySplitOriginalCoinMoney.Size = new System.Drawing.Size(290, 21);
             this.txtAlreadySplitOriginalCoinMoney.StyleController = this.layoutControl1;
@@ -313,7 +313,7 @@
             this.txtNotSplitCNYMoney.Properties.Mask.EditMask = "n";
             this.txtNotSplitCNYMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtNotSplitCNYMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtNotSplitCNYMoney.Properties.NullText = "0.00";
+            this.txtNotSplitCNYMoney.Properties.NullText = "0";
             this.txtNotSplitCNYMoney.Properties.ReadOnly = true;
             this.txtNotSplitCNYMoney.Size = new System.Drawing.Size(290, 21);
             this.txtNotSplitCNYMoney.StyleController = this.layoutControl1;
@@ -330,7 +330,7 @@
             this.txtAlreadySplitCNYMoney.Properties.Mask.EditMask = "n";
             this.txtAlreadySplitCNYMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAlreadySplitCNYMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtAlreadySplitCNYMoney.Properties.NullText = "0.00";
+            this.txtAlreadySplitCNYMoney.Properties.NullText = "0";
             this.txtAlreadySplitCNYMoney.Properties.ReadOnly = true;
             this.txtAlreadySplitCNYMoney.Size = new System.Drawing.Size(290, 21);
             this.txtAlreadySplitCNYMoney.StyleController = this.layoutControl1;
@@ -359,9 +359,9 @@
             this.gvConstSplit.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gbBudget,
             this.gridBand8,
-            this.gridBand1,
             this.gridBand2,
             this.gridBand7,
+            this.gridBand1,
             this.gridBand3});
             this.gvConstSplit.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bgcBudget,
@@ -391,15 +391,6 @@
             this.gvConstSplit.OptionsView.ShowColumnHeaders = false;
             this.gvConstSplit.OptionsView.ShowGroupPanel = false;
             // 
-            // gbBudget
-            // 
-            this.gbBudget.AppearanceHeader.Options.UseTextOptions = true;
-            this.gbBudget.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gbBudget.Caption = "合同选择";
-            this.gbBudget.Columns.Add(this.bgcBudget);
-            this.gbBudget.Name = "gbBudget";
-            this.gbBudget.Width = 183;
-            // 
             // bgcBudget
             // 
             this.bgcBudget.Caption = "合同号";
@@ -407,7 +398,7 @@
             this.bgcBudget.FieldName = "RelationBudget";
             this.bgcBudget.Name = "bgcBudget";
             this.bgcBudget.Visible = true;
-            this.bgcBudget.Width = 183;
+            this.bgcBudget.Width = 139;
             // 
             // gridBudget
             // 
@@ -534,13 +525,6 @@
             this.gridColumn14.FieldName = "Profit";
             this.gridColumn14.Name = "gridColumn14";
             // 
-            // gridBand8
-            // 
-            this.gridBand8.Caption = "买方名称";
-            this.gridBand8.Columns.Add(this.bgcCustomer);
-            this.gridBand8.Name = "gridBand8";
-            this.gridBand8.Width = 115;
-            // 
             // bgcCustomer
             // 
             this.bgcCustomer.Caption = "买方名称";
@@ -548,7 +532,7 @@
             this.bgcCustomer.FieldName = "Custom";
             this.bgcCustomer.Name = "bgcCustomer";
             this.bgcCustomer.Visible = true;
-            this.bgcCustomer.Width = 115;
+            this.bgcCustomer.Width = 98;
             // 
             // gridCustomer
             // 
@@ -568,19 +552,60 @@
             this.gcState,
             this.gcCreateUser,
             this.gcCreateDate});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowDetailButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // gridBand1
+            // gridColumn15
             // 
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "备注";
-            this.gridBand1.Columns.Add(this.gcDescription);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.Width = 164;
+            this.gridColumn15.Caption = "客户名称";
+            this.gridColumn15.FieldName = "Name";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 0;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "国家或地区";
+            this.gridColumn16.FieldName = "Country";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 1;
+            // 
+            // gcPort
+            // 
+            this.gcPort.Caption = "港口";
+            this.gcPort.FieldName = "Port";
+            this.gcPort.Name = "gcPort";
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 2;
+            // 
+            // gcState
+            // 
+            this.gcState.Caption = "可用状态";
+            this.gcState.FieldName = "State";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 3;
+            // 
+            // gcCreateUser
+            // 
+            this.gcCreateUser.Caption = "创建人";
+            this.gcCreateUser.FieldName = "CreateUserName";
+            this.gcCreateUser.Name = "gcCreateUser";
+            this.gcCreateUser.Visible = true;
+            this.gcCreateUser.VisibleIndex = 5;
+            // 
+            // gcCreateDate
+            // 
+            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 4;
             // 
             // gcDescription
             // 
@@ -588,28 +613,7 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.Width = 164;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand2.Caption = "金额分拆";
-            this.gridBand2.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand4,
-            this.gridBand6,
-            this.gridBand5});
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.Width = 475;
-            // 
-            // gridBand4
-            // 
-            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand4.Caption = "原币金额";
-            this.gridBand4.Columns.Add(this.gcSplitConstOriginalCoin);
-            this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 214;
+            this.gcDescription.Width = 113;
             // 
             // gcSplitConstOriginalCoin
             // 
@@ -618,21 +622,12 @@
             this.gcSplitConstOriginalCoin.FieldName = "OriginalCoin";
             this.gcSplitConstOriginalCoin.Name = "gcSplitConstOriginalCoin";
             this.gcSplitConstOriginalCoin.Visible = true;
-            this.gcSplitConstOriginalCoin.Width = 214;
+            this.gcSplitConstOriginalCoin.Width = 158;
             // 
             // ritxtConstMoney
             // 
             this.ritxtConstMoney.AutoHeight = false;
             this.ritxtConstMoney.Name = "ritxtConstMoney";
-            // 
-            // gridBand6
-            // 
-            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand6.Caption = "汇率";
-            this.gridBand6.Columns.Add(this.bgcConstExchangeRate);
-            this.gridBand6.Name = "gridBand6";
-            this.gridBand6.Width = 117;
             // 
             // bgcConstExchangeRate
             // 
@@ -641,16 +636,7 @@
             this.bgcConstExchangeRate.Name = "bgcConstExchangeRate";
             this.bgcConstExchangeRate.OptionsColumn.AllowEdit = false;
             this.bgcConstExchangeRate.Visible = true;
-            this.bgcConstExchangeRate.Width = 117;
-            // 
-            // gridBand5
-            // 
-            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand5.Caption = "人民币金额";
-            this.gridBand5.Columns.Add(this.bgcConstCNY);
-            this.gridBand5.Name = "gridBand5";
-            this.gridBand5.Width = 144;
+            this.bgcConstExchangeRate.Width = 86;
             // 
             // bgcConstCNY
             // 
@@ -659,14 +645,7 @@
             this.bgcConstCNY.FieldName = "CNY";
             this.bgcConstCNY.Name = "bgcConstCNY";
             this.bgcConstCNY.Visible = true;
-            this.bgcConstCNY.Width = 144;
-            // 
-            // gridBand7
-            // 
-            this.gridBand7.Caption = "认领人";
-            this.gridBand7.Columns.Add(this.bgcOperator);
-            this.gridBand7.Name = "gridBand7";
-            this.gridBand7.Width = 52;
+            this.bgcConstCNY.Width = 110;
             // 
             // bgcOperator
             // 
@@ -674,16 +653,7 @@
             this.bgcOperator.FieldName = "Operator";
             this.bgcOperator.Name = "bgcOperator";
             this.bgcOperator.Visible = true;
-            this.bgcOperator.Width = 52;
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand3.Caption = "操作";
-            this.gridBand3.Columns.Add(this.gcConstInDelete);
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.Width = 61;
+            this.bgcOperator.Width = 48;
             // 
             // gcConstInDelete
             // 
@@ -693,7 +663,7 @@
             this.gcConstInDelete.ColumnEdit = this.riLinkEditConstInDelete;
             this.gcConstInDelete.Name = "gcConstInDelete";
             this.gcConstInDelete.Visible = true;
-            this.gcConstInDelete.Width = 61;
+            this.gcConstInDelete.Width = 46;
             // 
             // riLinkEditConstInDelete
             // 
@@ -811,7 +781,7 @@
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(2);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Properties.Mask.EditMask = "f";
-            this.txtExchangeRate.Properties.NullText = "0.00";
+            this.txtExchangeRate.Properties.NullText = "0";
             this.txtExchangeRate.Size = new System.Drawing.Size(279, 21);
             this.txtExchangeRate.StyleController = this.layoutControl1;
             this.txtExchangeRate.TabIndex = 6;
@@ -831,7 +801,7 @@
             this.txtOriginalCoin.Name = "txtOriginalCoin";
             this.txtOriginalCoin.Properties.Mask.EditMask = "n";
             this.txtOriginalCoin.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtOriginalCoin.Properties.NullText = "0.00";
+            this.txtOriginalCoin.Properties.NullText = "0";
             this.txtOriginalCoin.Size = new System.Drawing.Size(277, 21);
             this.txtOriginalCoin.StyleController = this.layoutControl1;
             this.txtOriginalCoin.TabIndex = 3;
@@ -850,7 +820,7 @@
             this.txtCNY.Margin = new System.Windows.Forms.Padding(2);
             this.txtCNY.Name = "txtCNY";
             this.txtCNY.Properties.Mask.EditMask = "c";
-            this.txtCNY.Properties.NullText = "0.00";
+            this.txtCNY.Properties.NullText = "0";
             this.txtCNY.Size = new System.Drawing.Size(278, 21);
             this.txtCNY.StyleController = this.layoutControl1;
             this.txtCNY.TabIndex = 7;
@@ -932,27 +902,6 @@
             this.txtTradingPostscript.Size = new System.Drawing.Size(278, 21);
             this.txtTradingPostscript.StyleController = this.layoutControl1;
             this.txtTradingPostscript.TabIndex = 15;
-            // 
-            // cboNatureOfMoney
-            // 
-            this.cboNatureOfMoney.Location = new System.Drawing.Point(562, 220);
-            this.cboNatureOfMoney.Margin = new System.Windows.Forms.Padding(2);
-            this.cboNatureOfMoney.Name = "cboNatureOfMoney";
-            this.cboNatureOfMoney.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboNatureOfMoney.Properties.Items.AddRange(new object[] {
-            "内销",
-            "调拨",
-            "进口货款",
-            "货款退回",
-            "保证金退回",
-            "押金退回",
-            "服务费",
-            "其他"});
-            this.cboNatureOfMoney.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboNatureOfMoney.Size = new System.Drawing.Size(278, 21);
-            this.cboNatureOfMoney.StyleController = this.layoutControl1;
-            this.cboNatureOfMoney.TabIndex = 20;
             // 
             // layoutControlGroup1
             // 
@@ -1244,53 +1193,106 @@
             this.layoutControlItem22.TextSize = new System.Drawing.Size(50, 20);
             this.layoutControlItem22.TextToControlDistance = 5;
             // 
-            // gridColumn15
+            // gbBudget
             // 
-            this.gridColumn15.Caption = "客户名称";
-            this.gridColumn15.FieldName = "Name";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 0;
+            this.gbBudget.AppearanceHeader.Options.UseTextOptions = true;
+            this.gbBudget.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gbBudget.Caption = "合同选择";
+            this.gbBudget.Columns.Add(this.bgcBudget);
+            this.gbBudget.Name = "gbBudget";
+            this.gbBudget.Width = 139;
             // 
-            // gridColumn16
+            // gridBand8
             // 
-            this.gridColumn16.Caption = "国家或地区";
-            this.gridColumn16.FieldName = "Country";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 1;
+            this.gridBand8.Caption = "预算单买方名称";
+            this.gridBand8.Columns.Add(this.bgcCustomer);
+            this.gridBand8.Name = "gridBand8";
+            this.gridBand8.Width = 98;
             // 
-            // gcPort
+            // gridBand2
             // 
-            this.gcPort.Caption = "港口";
-            this.gcPort.FieldName = "Port";
-            this.gcPort.Name = "gcPort";
-            this.gcPort.Visible = true;
-            this.gcPort.VisibleIndex = 2;
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "金额分拆";
+            this.gridBand2.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand4,
+            this.gridBand6,
+            this.gridBand5});
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.Width = 354;
             // 
-            // gcState
+            // gridBand4
             // 
-            this.gcState.Caption = "可用状态";
-            this.gcState.FieldName = "State";
-            this.gcState.Name = "gcState";
-            this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 3;
+            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand4.Caption = "原币金额";
+            this.gridBand4.Columns.Add(this.gcSplitConstOriginalCoin);
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.Width = 158;
             // 
-            // gcCreateUser
+            // gridBand6
             // 
-            this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUserName";
-            this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 5;
+            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand6.Caption = "汇率";
+            this.gridBand6.Columns.Add(this.bgcConstExchangeRate);
+            this.gridBand6.Name = "gridBand6";
+            this.gridBand6.Width = 86;
             // 
-            // gcCreateDate
+            // gridBand5
             // 
-            this.gcCreateDate.Caption = "创建时间";
-            this.gcCreateDate.FieldName = "CreateDate";
-            this.gcCreateDate.Name = "gcCreateDate";
-            this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 4;
+            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand5.Caption = "人民币金额";
+            this.gridBand5.Columns.Add(this.bgcConstCNY);
+            this.gridBand5.Name = "gridBand5";
+            this.gridBand5.Width = 110;
+            // 
+            // gridBand7
+            // 
+            this.gridBand7.Caption = "认领人";
+            this.gridBand7.Columns.Add(this.bgcOperator);
+            this.gridBand7.Name = "gridBand7";
+            this.gridBand7.Width = 48;
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "备注";
+            this.gridBand1.Columns.Add(this.gcDescription);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.Width = 113;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand3.Caption = "操作";
+            this.gridBand3.Columns.Add(this.gcConstInDelete);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.Width = 46;
+            // 
+            // cboNatureOfMoney
+            // 
+            this.cboNatureOfMoney.Location = new System.Drawing.Point(562, 220);
+            this.cboNatureOfMoney.Margin = new System.Windows.Forms.Padding(2);
+            this.cboNatureOfMoney.Name = "cboNatureOfMoney";
+            this.cboNatureOfMoney.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNatureOfMoney.Properties.Items.AddRange(new object[] {
+            "内销",
+            "调拨",
+            "进口货款",
+            "货款退回",
+            "保证金退回",
+            "押金退回",
+            "服务费",
+            "其他"});
+            this.cboNatureOfMoney.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboNatureOfMoney.Size = new System.Drawing.Size(278, 21);
+            this.cboNatureOfMoney.StyleController = this.layoutControl1;
+            this.cboNatureOfMoney.TabIndex = 20;
             // 
             // ucInMoneyEdit
             // 
@@ -1334,7 +1336,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentMethod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTradingPostscript.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -1362,6 +1363,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNatureOfMoney.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1446,7 +1448,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcIsDelete;
         private DevExpress.XtraEditors.TextEdit txtTradingPostscript;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
-        private DevExpress.XtraEditors.ComboBoxEdit cboNatureOfMoney;
         private CommonControl.TextEdit_Number txtNotSplitOriginalCoinMoney;
         private CommonControl.TextEdit_Number txtAlreadySplitOriginalCoinMoney;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
@@ -1454,20 +1455,21 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bgcCustomer;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit gridCustomer;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbBudget;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gcPort;
         private DevExpress.XtraGrid.Columns.GridColumn gcState;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbBudget;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand8;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraEditors.ComboBoxEdit cboNatureOfMoney;
     }
 }

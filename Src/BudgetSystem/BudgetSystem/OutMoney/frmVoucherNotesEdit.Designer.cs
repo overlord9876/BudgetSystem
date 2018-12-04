@@ -251,7 +251,7 @@
             this.txtExportAmount.Properties.Mask.EditMask = "n";
             this.txtExportAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtExportAmount.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtExportAmount.Properties.NullText = "0.00";
+            this.txtExportAmount.Properties.NullText = "0";
             this.txtExportAmount.Size = new System.Drawing.Size(208, 21);
             this.txtExportAmount.StyleController = this.layoutControl1;
             this.txtExportAmount.TabIndex = 17;

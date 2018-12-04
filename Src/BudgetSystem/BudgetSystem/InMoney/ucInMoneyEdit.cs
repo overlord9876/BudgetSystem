@@ -216,10 +216,10 @@ namespace BudgetSystem.InMoney
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
             }
 
-            if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
-            {
-                dxErrorProvider1.SetError(cboNatureOfMoney, "请选择款项性质");
-            }
+            //if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
+            //{
+            //    dxErrorProvider1.SetError(cboNatureOfMoney, "请选择款项性质");
+            //}
 
             if (txtOriginalCoin.Value <= 0)
             {
@@ -255,10 +255,16 @@ namespace BudgetSystem.InMoney
                 this.txtCreateUser.Text = RunInfo.Instance.CurrentUser.UserName;
                 this.deReceiptDate.EditValue = DateTime.Now;
                 this.deCreateTimestamp.EditValue = DateTime.Now;
+                this.layoutControlItem13.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lcgConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciTradeNature.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciExportName.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem17.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem18.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem19.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {

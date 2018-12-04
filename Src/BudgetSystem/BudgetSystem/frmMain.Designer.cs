@@ -419,7 +419,7 @@
             // 
             // bsiLoginInfo
             // 
-            this.bsiLoginInfo.Caption = "barStaticItem1";
+            this.bsiLoginInfo.Caption = "bsiLoginInfo";
             this.bsiLoginInfo.Id = 43;
             this.bsiLoginInfo.Name = "bsiLoginInfo";
             this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;

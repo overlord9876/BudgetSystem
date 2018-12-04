@@ -142,8 +142,10 @@ namespace BudgetSystem.Entity
 
     public enum BankSlipTradeNature
     {
-        做单 = 0,
-        过单 = 1
+        一般贸易 = 0,
+        来料加工 = 1,
+        进料加工 = 2,
+        其他 = 3
     }
 
     public enum ReceiptState : int
