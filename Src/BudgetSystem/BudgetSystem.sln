@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Track0903.txt = Track0903.txt
 		Track0904.txt = Track0904.txt
 		Track2018-09-01.txt = Track2018-09-01.txt
-		Upgrade.sql = Upgrade.sql
 		开发进度跟踪.txt = 开发进度跟踪.txt
 	EndProjectSection
 EndProject
@@ -33,6 +32,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚本", "{78108BA3-280F-4E2C-B2E4-5A5AC729AD3A}"
 	ProjectSection(SolutionItems) = preProject
 		2018-12-01升级脚本.sql = 2018-12-01升级脚本.sql
+		2018-12-04升级脚本.sql = 2018-12-04升级脚本.sql
 	EndProjectSection
 EndProject
 Global
