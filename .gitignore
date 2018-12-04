@@ -67,3 +67,5 @@ Src/BudgetSystem/BudgetSystem.Deploy/obj/x86/Debug/BudgetSystem.Deploy.exe
 Src/BudgetSystem/BudgetSystem.Deploy/obj/x86/Debug/BudgetSystem.Deploy.csproj.FileListAbsolute.txt
 Installer/BudgetSystem-cache/
 Installer/Setup Files/
+Src/BudgetSystem/BudgetSystem.Tools/obj/
+Src/BudgetSystem/BudgetSystem.Deploy/obj/
