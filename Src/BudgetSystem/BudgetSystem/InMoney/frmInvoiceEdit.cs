@@ -31,12 +31,12 @@ namespace BudgetSystem.InMoney
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 SetLayoutControlStyle(EditFormWorkModels.New);
-                this.Text = "创建开票信息";
+                this.Text = "创建交单信息";
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 SetLayoutControlStyle(EditFormWorkModels.Modify);
-                this.Text = "编辑开票信息";
+                this.Text = "编辑交单信息";
                 BindInvoice(CurrentInvoice.ID);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
@@ -59,7 +59,7 @@ namespace BudgetSystem.InMoney
                 this.txtTaxAmount.Properties.ReadOnly=true;
                 this.txtTaxpayerID.Properties.ReadOnly=true;
                 this.txtTaxRebateRate.Properties.ReadOnly=true;
-                this.Text = "查看开票信息";
+                this.Text = "查看交单信息";
                 BindInvoice(CurrentInvoice.ID);;
             }
 

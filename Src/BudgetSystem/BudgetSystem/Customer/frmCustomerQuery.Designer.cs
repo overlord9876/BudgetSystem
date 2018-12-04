@@ -80,8 +80,6 @@
             this.gvCustomer.OptionsBehavior.Editable = false;
             this.gvCustomer.OptionsView.ShowDetailButtons = false;
             this.gvCustomer.OptionsView.ShowGroupPanel = false;
-            this.gvCustomer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvCustomer_MouseDown);
-            this.gvCustomer.DoubleClick += new System.EventHandler(this.gvCustomer_DoubleClick);
             // 
             // gcName
             // 

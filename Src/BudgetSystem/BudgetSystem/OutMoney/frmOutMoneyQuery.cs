@@ -20,6 +20,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.Module = BusinessModules.OutMoneyManagement;
+            this.gvOutMoney.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvOutMoney_RowClick);
         }
 
         protected override void InitModelOperate()
@@ -141,5 +142,21 @@ namespace BudgetSystem
             this.gcOutMoney.DataSource = pnm.GetAllPaymentNotes();
             this.gvOutMoney.RefreshData();
         }
+
+        private void gvOutMoney_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (e.Clicks == 2 && e.RowHandle >= 0)
+            {
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifyPaymentNote();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewPaymentNote();
+                }
+            }
+        }
+
     }
 }

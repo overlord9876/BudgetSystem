@@ -283,7 +283,7 @@
             // 
             // btnInvoiceQuery
             // 
-            this.btnInvoiceQuery.Caption = "开票管理";
+            this.btnInvoiceQuery.Caption = "交单管理";
             this.btnInvoiceQuery.Id = 28;
             this.btnInvoiceQuery.ImageIndex = 45;
             this.btnInvoiceQuery.Name = "btnInvoiceQuery";
@@ -419,7 +419,7 @@
             // 
             // bsiLoginInfo
             // 
-            this.bsiLoginInfo.Caption = "barStaticItem1";
+            this.bsiLoginInfo.Caption = "bsiLoginInfo";
             this.bsiLoginInfo.Id = 43;
             this.bsiLoginInfo.Name = "bsiLoginInfo";
             this.bsiLoginInfo.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -448,7 +448,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.btnInvoiceQuery);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnVoucherNotesQuery);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "收支管理";
+            this.ribbonPageGroup2.Text = "收款管理";
             // 
             // ribbonPageGroup5
             // 

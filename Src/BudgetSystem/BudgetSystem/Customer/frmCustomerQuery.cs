@@ -19,8 +19,10 @@ namespace BudgetSystem
         public frmCustomerQuery()
         {
             InitializeComponent();
+            this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
             this.Module = BusinessModules.CustomerManagement;
         }
+
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
@@ -65,7 +67,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("未定义的操作");
             }
         }
-       
+
 
         private void CreateCustomer()
         {
@@ -74,7 +76,7 @@ namespace BudgetSystem
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 this.RefreshData();
-            } 
+            }
         }
         private void ModifyCustomer()
         {
@@ -87,7 +89,7 @@ namespace BudgetSystem
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
-                } 
+                }
             }
         }
         private void ViewCustomer()
@@ -127,19 +129,21 @@ namespace BudgetSystem
             this.gridCustomer.DataSource = list;
         }
 
-        private void gvCustomer_DoubleClick(object sender, EventArgs e)
+        private void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (hInfo.InRow)
+            if (CheckPermission(OperateTypes.Modify))
             {
                 ModifyCustomer();
             }
-        }
+            else if (CheckPermission(OperateTypes.View))
+            {
+                ViewCustomer();
+            }
+            else
+            {
 
-        private void gvCustomer_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = gvCustomer.CalcHitInfo(e.Y, e.Y);
+            }
         }
-
 
     }
 }

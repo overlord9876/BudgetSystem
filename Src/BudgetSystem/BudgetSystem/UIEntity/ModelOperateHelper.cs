@@ -172,6 +172,12 @@ namespace BudgetSystem
                 group = "查看";
                 imageIndex = 3;
             }
+            else if (operate == OperateTypes.ViewApply)
+            {
+                text = "查看审批记录";
+                group = "查看";
+                imageIndex = 3;
+            }
             else if (operate == OperateTypes.Save)
             {
                 text = "保存";

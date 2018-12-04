@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtPremium = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtCommission = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtAdvancePayment2 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.textEdit_Number1 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtTaxRebateRate2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.textEdit_Number30 = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -94,6 +97,9 @@
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem39 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem41 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcg_NotHasAdvancePayment = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem27 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -115,6 +121,9 @@
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAdvancePayment2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number30.Properties)).BeginInit();
@@ -178,6 +187,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem39)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem40)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcg_NotHasAdvancePayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem27)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
@@ -201,6 +213,9 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtPremium);
+            this.layoutControl1.Controls.Add(this.txtCommission);
+            this.layoutControl1.Controls.Add(this.txtAdvancePayment2);
             this.layoutControl1.Controls.Add(this.textEdit_Number1);
             this.layoutControl1.Controls.Add(this.txtTaxRebateRate2);
             this.layoutControl1.Controls.Add(this.textEdit_Number30);
@@ -248,16 +263,60 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txtPremium
+            // 
+            this.txtPremium.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtPremium.IsSupportNegative = false;
+            this.txtPremium.Location = new System.Drawing.Point(816, 265);
+            this.txtPremium.Name = "txtPremium";
+            this.txtPremium.Properties.Mask.EditMask = "n";
+            this.txtPremium.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtPremium.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtPremium.Properties.NullText = "0";
+            this.txtPremium.Size = new System.Drawing.Size(168, 21);
+            this.txtPremium.StyleController = this.layoutControl1;
+            this.txtPremium.TabIndex = 48;
+            // 
+            // txtCommission
+            // 
+            this.txtCommission.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtCommission.IsSupportNegative = false;
+            this.txtCommission.Location = new System.Drawing.Point(605, 265);
+            this.txtCommission.Name = "txtCommission";
+            this.txtCommission.Properties.Mask.EditMask = "n";
+            this.txtCommission.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtCommission.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtCommission.Properties.NullText = "0";
+            this.txtCommission.Size = new System.Drawing.Size(108, 21);
+            this.txtCommission.StyleController = this.layoutControl1;
+            this.txtCommission.TabIndex = 47;
+            // 
+            // txtAdvancePayment2
+            // 
+            this.txtAdvancePayment2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtAdvancePayment2.IsSupportNegative = false;
+            this.txtAdvancePayment2.Location = new System.Drawing.Point(123, 240);
+            this.txtAdvancePayment2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAdvancePayment2.Name = "txtAdvancePayment2";
+            this.txtAdvancePayment2.Properties.Mask.EditMask = "n";
+            this.txtAdvancePayment2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtAdvancePayment2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtAdvancePayment2.Properties.NullText = "0";
+            this.txtAdvancePayment2.Properties.ReadOnly = true;
+            this.txtAdvancePayment2.Size = new System.Drawing.Size(379, 21);
+            this.txtAdvancePayment2.StyleController = this.layoutControl1;
+            this.txtAdvancePayment2.TabIndex = 46;
+            // 
             // textEdit_Number1
             // 
             this.textEdit_Number1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number1.IsSupportNegative = false;
-            this.textEdit_Number1.Location = new System.Drawing.Point(89, 505);
+            this.textEdit_Number1.Location = new System.Drawing.Point(89, 530);
             this.textEdit_Number1.Name = "textEdit_Number1";
             this.textEdit_Number1.Properties.Mask.EditMask = "n";
             this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number1.Properties.NullText = "0.00";
+            this.textEdit_Number1.Properties.NullText = "0";
             this.textEdit_Number1.Properties.ReadOnly = true;
             this.textEdit_Number1.Size = new System.Drawing.Size(266, 21);
             this.textEdit_Number1.StyleController = this.layoutControl1;
@@ -265,7 +324,7 @@
             // 
             // txtTaxRebateRate2
             // 
-            this.txtTaxRebateRate2.Location = new System.Drawing.Point(424, 480);
+            this.txtTaxRebateRate2.Location = new System.Drawing.Point(424, 505);
             this.txtTaxRebateRate2.Name = "txtTaxRebateRate2";
             this.txtTaxRebateRate2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -278,12 +337,12 @@
             // 
             this.textEdit_Number30.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number30.IsSupportNegative = false;
-            this.textEdit_Number30.Location = new System.Drawing.Point(777, 505);
+            this.textEdit_Number30.Location = new System.Drawing.Point(777, 530);
             this.textEdit_Number30.Name = "textEdit_Number30";
             this.textEdit_Number30.Properties.Mask.EditMask = "n";
             this.textEdit_Number30.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number30.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number30.Properties.NullText = "0.00";
+            this.textEdit_Number30.Properties.NullText = "0";
             this.textEdit_Number30.Size = new System.Drawing.Size(207, 21);
             this.textEdit_Number30.StyleController = this.layoutControl1;
             this.textEdit_Number30.TabIndex = 42;
@@ -293,12 +352,12 @@
             // 
             this.textEdit_Number29.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number29.IsSupportNegative = false;
-            this.textEdit_Number29.Location = new System.Drawing.Point(424, 505);
+            this.textEdit_Number29.Location = new System.Drawing.Point(424, 530);
             this.textEdit_Number29.Name = "textEdit_Number29";
             this.textEdit_Number29.Properties.Mask.EditMask = "n";
             this.textEdit_Number29.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number29.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number29.Properties.NullText = "0.00";
+            this.textEdit_Number29.Properties.NullText = "0";
             this.textEdit_Number29.Properties.ReadOnly = true;
             this.textEdit_Number29.Size = new System.Drawing.Size(224, 21);
             this.textEdit_Number29.StyleController = this.layoutControl1;
@@ -308,12 +367,12 @@
             // 
             this.textEdit_Number28.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number28.IsSupportNegative = false;
-            this.textEdit_Number28.Location = new System.Drawing.Point(621, 480);
+            this.textEdit_Number28.Location = new System.Drawing.Point(621, 505);
             this.textEdit_Number28.Name = "textEdit_Number28";
             this.textEdit_Number28.Properties.Mask.EditMask = "n";
             this.textEdit_Number28.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number28.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number28.Properties.NullText = "0.00";
+            this.textEdit_Number28.Properties.NullText = "0";
             this.textEdit_Number28.Properties.ReadOnly = true;
             this.textEdit_Number28.Size = new System.Drawing.Size(363, 21);
             this.textEdit_Number28.StyleController = this.layoutControl1;
@@ -322,9 +381,9 @@
             // 
             // memoEdit1
             // 
-            this.memoEdit1.Location = new System.Drawing.Point(53, 612);
+            this.memoEdit1.Location = new System.Drawing.Point(53, 637);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(943, 105);
+            this.memoEdit1.Size = new System.Drawing.Size(943, 80);
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 39;
             // 
@@ -332,12 +391,12 @@
             // 
             this.textEdit_Number27.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number27.IsSupportNegative = false;
-            this.textEdit_Number27.Location = new System.Drawing.Point(800, 575);
+            this.textEdit_Number27.Location = new System.Drawing.Point(800, 600);
             this.textEdit_Number27.Name = "textEdit_Number27";
             this.textEdit_Number27.Properties.Mask.EditMask = "n";
             this.textEdit_Number27.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number27.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number27.Properties.NullText = "0.00";
+            this.textEdit_Number27.Properties.NullText = "0";
             this.textEdit_Number27.Properties.ReadOnly = true;
             this.textEdit_Number27.Size = new System.Drawing.Size(184, 21);
             this.textEdit_Number27.StyleController = this.layoutControl1;
@@ -347,12 +406,12 @@
             // 
             this.txtRetainedProfit.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtRetainedProfit.IsSupportNegative = false;
-            this.txtRetainedProfit.Location = new System.Drawing.Point(430, 575);
+            this.txtRetainedProfit.Location = new System.Drawing.Point(430, 600);
             this.txtRetainedProfit.Name = "txtRetainedProfit";
             this.txtRetainedProfit.Properties.Mask.EditMask = "n";
             this.txtRetainedProfit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtRetainedProfit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtRetainedProfit.Properties.NullText = "0.00";
+            this.txtRetainedProfit.Properties.NullText = "0";
             this.txtRetainedProfit.Properties.ReadOnly = true;
             this.txtRetainedProfit.Size = new System.Drawing.Size(217, 21);
             this.txtRetainedProfit.StyleController = this.layoutControl1;
@@ -362,12 +421,12 @@
             // 
             this.txtNetIncome_Plan.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtNetIncome_Plan.IsSupportNegative = false;
-            this.txtNetIncome_Plan.Location = new System.Drawing.Point(89, 575);
+            this.txtNetIncome_Plan.Location = new System.Drawing.Point(89, 600);
             this.txtNetIncome_Plan.Name = "txtNetIncome_Plan";
             this.txtNetIncome_Plan.Properties.Mask.EditMask = "n";
             this.txtNetIncome_Plan.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtNetIncome_Plan.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtNetIncome_Plan.Properties.NullText = "0.00";
+            this.txtNetIncome_Plan.Properties.NullText = "0";
             this.txtNetIncome_Plan.Properties.ReadOnly = true;
             this.txtNetIncome_Plan.Size = new System.Drawing.Size(248, 21);
             this.txtNetIncome_Plan.StyleController = this.layoutControl1;
@@ -377,12 +436,12 @@
             // 
             this.textEdit_Number24.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number24.IsSupportNegative = false;
-            this.textEdit_Number24.Location = new System.Drawing.Point(89, 480);
+            this.textEdit_Number24.Location = new System.Drawing.Point(89, 505);
             this.textEdit_Number24.Name = "textEdit_Number24";
             this.textEdit_Number24.Properties.Mask.EditMask = "n";
             this.textEdit_Number24.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number24.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number24.Properties.NullText = "0.00";
+            this.textEdit_Number24.Properties.NullText = "0";
             this.textEdit_Number24.Size = new System.Drawing.Size(266, 21);
             this.textEdit_Number24.StyleController = this.layoutControl1;
             this.textEdit_Number24.TabIndex = 35;
@@ -392,12 +451,12 @@
             // 
             this.textEdit_Number23.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number23.IsSupportNegative = false;
-            this.textEdit_Number23.Location = new System.Drawing.Point(571, 410);
+            this.textEdit_Number23.Location = new System.Drawing.Point(571, 435);
             this.textEdit_Number23.Name = "textEdit_Number23";
             this.textEdit_Number23.Properties.Mask.EditMask = "n";
             this.textEdit_Number23.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number23.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number23.Properties.NullText = "0.00";
+            this.textEdit_Number23.Properties.NullText = "0";
             this.textEdit_Number23.Properties.ReadOnly = true;
             this.textEdit_Number23.Size = new System.Drawing.Size(413, 21);
             this.textEdit_Number23.StyleController = this.layoutControl1;
@@ -408,12 +467,12 @@
             // 
             this.txtTaxRefund_Total.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTaxRefund_Total.IsSupportNegative = false;
-            this.txtTaxRefund_Total.Location = new System.Drawing.Point(89, 410);
+            this.txtTaxRefund_Total.Location = new System.Drawing.Point(89, 435);
             this.txtTaxRefund_Total.Name = "txtTaxRefund_Total";
             this.txtTaxRefund_Total.Properties.Mask.EditMask = "n";
             this.txtTaxRefund_Total.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTaxRefund_Total.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxRefund_Total.Properties.NullText = "0.00";
+            this.txtTaxRefund_Total.Properties.NullText = "0";
             this.txtTaxRefund_Total.Properties.ReadOnly = true;
             this.txtTaxRefund_Total.Size = new System.Drawing.Size(413, 21);
             this.txtTaxRefund_Total.StyleController = this.layoutControl1;
@@ -423,12 +482,12 @@
             // 
             this.textEdit_Number20.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number20.IsSupportNegative = false;
-            this.textEdit_Number20.Location = new System.Drawing.Point(89, 385);
+            this.textEdit_Number20.Location = new System.Drawing.Point(89, 410);
             this.textEdit_Number20.Name = "textEdit_Number20";
             this.textEdit_Number20.Properties.Mask.EditMask = "n";
             this.textEdit_Number20.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number20.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number20.Properties.NullText = "0.00";
+            this.textEdit_Number20.Properties.NullText = "0";
             this.textEdit_Number20.Size = new System.Drawing.Size(264, 21);
             this.textEdit_Number20.StyleController = this.layoutControl1;
             this.textEdit_Number20.TabIndex = 31;
@@ -438,12 +497,12 @@
             // 
             this.textEdit_Number19.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number19.IsSupportNegative = false;
-            this.textEdit_Number19.Location = new System.Drawing.Point(614, 385);
+            this.textEdit_Number19.Location = new System.Drawing.Point(614, 410);
             this.textEdit_Number19.Name = "textEdit_Number19";
             this.textEdit_Number19.Properties.Mask.EditMask = "n";
             this.textEdit_Number19.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number19.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number19.Properties.NullText = "0.00";
+            this.textEdit_Number19.Properties.NullText = "0";
             this.textEdit_Number19.Properties.ReadOnly = true;
             this.textEdit_Number19.Size = new System.Drawing.Size(370, 21);
             this.textEdit_Number19.StyleController = this.layoutControl1;
@@ -451,7 +510,7 @@
             // 
             // txtGeneralManager
             // 
-            this.txtGeneralManager.Location = new System.Drawing.Point(605, 315);
+            this.txtGeneralManager.Location = new System.Drawing.Point(605, 340);
             this.txtGeneralManager.Name = "txtGeneralManager";
             this.txtGeneralManager.Properties.ReadOnly = true;
             this.txtGeneralManager.Size = new System.Drawing.Size(379, 21);
@@ -462,12 +521,12 @@
             // 
             this.txtSuperPaymentScheme.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtSuperPaymentScheme.IsSupportNegative = false;
-            this.txtSuperPaymentScheme.Location = new System.Drawing.Point(123, 315);
+            this.txtSuperPaymentScheme.Location = new System.Drawing.Point(123, 340);
             this.txtSuperPaymentScheme.Name = "txtSuperPaymentScheme";
             this.txtSuperPaymentScheme.Properties.Mask.EditMask = "n";
             this.txtSuperPaymentScheme.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtSuperPaymentScheme.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtSuperPaymentScheme.Properties.NullText = "0.00";
+            this.txtSuperPaymentScheme.Properties.NullText = "0";
             this.txtSuperPaymentScheme.Properties.ReadOnly = true;
             this.txtSuperPaymentScheme.Size = new System.Drawing.Size(379, 21);
             this.txtSuperPaymentScheme.StyleController = this.layoutControl1;
@@ -476,7 +535,7 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(605, 290);
+            this.txtSupplier.Location = new System.Drawing.Point(605, 315);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Properties.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(379, 21);
@@ -487,12 +546,12 @@
             // 
             this.txtTotalAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTotalAmount.IsSupportNegative = false;
-            this.txtTotalAmount.Location = new System.Drawing.Point(123, 290);
+            this.txtTotalAmount.Location = new System.Drawing.Point(123, 315);
             this.txtTotalAmount.Name = "txtTotalAmount";
             this.txtTotalAmount.Properties.Mask.EditMask = "n";
             this.txtTotalAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTotalAmount.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTotalAmount.Properties.NullText = "0.00";
+            this.txtTotalAmount.Properties.NullText = "0";
             this.txtTotalAmount.Properties.ReadOnly = true;
             this.txtTotalAmount.Size = new System.Drawing.Size(379, 21);
             this.txtTotalAmount.StyleController = this.layoutControl1;
@@ -503,12 +562,12 @@
             // 
             this.txtNetIncome.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtNetIncome.IsSupportNegative = false;
-            this.txtNetIncome.Location = new System.Drawing.Point(605, 265);
+            this.txtNetIncome.Location = new System.Drawing.Point(605, 290);
             this.txtNetIncome.Name = "txtNetIncome";
             this.txtNetIncome.Properties.Mask.EditMask = "n";
             this.txtNetIncome.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtNetIncome.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtNetIncome.Properties.NullText = "0.00";
+            this.txtNetIncome.Properties.NullText = "0";
             this.txtNetIncome.Properties.ReadOnly = true;
             this.txtNetIncome.Size = new System.Drawing.Size(379, 21);
             this.txtNetIncome.StyleController = this.layoutControl1;
@@ -518,12 +577,12 @@
             // 
             this.txtReceiptAmount2.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtReceiptAmount2.IsSupportNegative = false;
-            this.txtReceiptAmount2.Location = new System.Drawing.Point(123, 265);
+            this.txtReceiptAmount2.Location = new System.Drawing.Point(123, 290);
             this.txtReceiptAmount2.Name = "txtReceiptAmount2";
             this.txtReceiptAmount2.Properties.Mask.EditMask = "n";
             this.txtReceiptAmount2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtReceiptAmount2.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtReceiptAmount2.Properties.NullText = "0.00";
+            this.txtReceiptAmount2.Properties.NullText = "0";
             this.txtReceiptAmount2.Properties.ReadOnly = true;
             this.txtReceiptAmount2.Size = new System.Drawing.Size(379, 21);
             this.txtReceiptAmount2.StyleController = this.layoutControl1;
@@ -539,7 +598,7 @@
             this.txtProfit.Properties.Mask.EditMask = "n";
             this.txtProfit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtProfit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtProfit.Properties.NullText = "0.00";
+            this.txtProfit.Properties.NullText = "0";
             this.txtProfit.Properties.ReadOnly = true;
             this.txtProfit.Size = new System.Drawing.Size(168, 21);
             this.txtProfit.StyleController = this.layoutControl1;
@@ -554,7 +613,7 @@
             this.txtFeedMoney.Properties.Mask.EditMask = "n";
             this.txtFeedMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtFeedMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtFeedMoney.Properties.NullText = "0.00";
+            this.txtFeedMoney.Properties.NullText = "0";
             this.txtFeedMoney.Properties.ReadOnly = true;
             this.txtFeedMoney.Size = new System.Drawing.Size(108, 21);
             this.txtFeedMoney.StyleController = this.layoutControl1;
@@ -564,12 +623,12 @@
             // 
             this.txtPercentage.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPercentage.IsSupportNegative = false;
-            this.txtPercentage.Location = new System.Drawing.Point(123, 240);
+            this.txtPercentage.Location = new System.Drawing.Point(123, 265);
             this.txtPercentage.Name = "txtPercentage";
             this.txtPercentage.Properties.Mask.EditMask = "n";
             this.txtPercentage.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtPercentage.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtPercentage.Properties.NullText = "0.00";
+            this.txtPercentage.Properties.NullText = "0";
             this.txtPercentage.Properties.ReadOnly = true;
             this.txtPercentage.Size = new System.Drawing.Size(379, 21);
             this.txtPercentage.StyleController = this.layoutControl1;
@@ -595,7 +654,7 @@
             this.txtProfitLevel.Properties.Mask.EditMask = "n";
             this.txtProfitLevel.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtProfitLevel.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtProfitLevel.Properties.NullText = "0.00";
+            this.txtProfitLevel.Properties.NullText = "0";
             this.txtProfitLevel.Properties.ReadOnly = true;
             this.txtProfitLevel.Size = new System.Drawing.Size(123, 21);
             this.txtProfitLevel.StyleController = this.layoutControl1;
@@ -619,7 +678,7 @@
             this.txtAdvancePayment.Properties.Mask.EditMask = "n";
             this.txtAdvancePayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAdvancePayment.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtAdvancePayment.Properties.NullText = "0.00";
+            this.txtAdvancePayment.Properties.NullText = "0";
             this.txtAdvancePayment.Properties.ReadOnly = true;
             this.txtAdvancePayment.Size = new System.Drawing.Size(379, 21);
             this.txtAdvancePayment.StyleController = this.layoutControl1;
@@ -653,7 +712,7 @@
             this.txtTaxRefund.Properties.Mask.EditMask = "n";
             this.txtTaxRefund.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTaxRefund.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxRefund.Properties.NullText = "0.00";
+            this.txtTaxRefund.Properties.NullText = "0";
             this.txtTaxRefund.Properties.ReadOnly = true;
             this.txtTaxRefund.Size = new System.Drawing.Size(380, 21);
             this.txtTaxRefund.StyleController = this.layoutControl1;
@@ -668,7 +727,7 @@
             this.txtAccountBalance.Properties.Mask.EditMask = "n";
             this.txtAccountBalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAccountBalance.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtAccountBalance.Properties.NullText = "0.00";
+            this.txtAccountBalance.Properties.NullText = "0";
             this.txtAccountBalance.Properties.ReadOnly = true;
             this.txtAccountBalance.Size = new System.Drawing.Size(378, 21);
             this.txtAccountBalance.StyleController = this.layoutControl1;
@@ -684,7 +743,7 @@
             this.txtTaxPayment.Properties.Mask.EditMask = "n";
             this.txtTaxPayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTaxPayment.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxPayment.Properties.NullText = "0.00";
+            this.txtTaxPayment.Properties.NullText = "0";
             this.txtTaxPayment.Properties.ReadOnly = true;
             this.txtTaxPayment.Size = new System.Drawing.Size(380, 21);
             this.txtTaxPayment.StyleController = this.layoutControl1;
@@ -699,7 +758,7 @@
             this.txtApplyMoney.Properties.Mask.EditMask = "n";
             this.txtApplyMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtApplyMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtApplyMoney.Properties.NullText = "0.00";
+            this.txtApplyMoney.Properties.NullText = "0";
             this.txtApplyMoney.Properties.ReadOnly = true;
             this.txtApplyMoney.Size = new System.Drawing.Size(378, 21);
             this.txtApplyMoney.StyleController = this.layoutControl1;
@@ -716,7 +775,7 @@
             this.txtTaxRefundA.Properties.Mask.EditMask = "n";
             this.txtTaxRefundA.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTaxRefundA.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxRefundA.Properties.NullText = "0.00";
+            this.txtTaxRefundA.Properties.NullText = "0";
             this.txtTaxRefundA.Properties.ReadOnly = true;
             this.txtTaxRefundA.Size = new System.Drawing.Size(380, 21);
             this.txtTaxRefundA.StyleController = this.layoutControl1;
@@ -731,7 +790,7 @@
             this.txtTaxPaymentA.Properties.Mask.EditMask = "n";
             this.txtTaxPaymentA.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTaxPaymentA.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxPaymentA.Properties.NullText = "0.00";
+            this.txtTaxPaymentA.Properties.NullText = "0";
             this.txtTaxPaymentA.Properties.ReadOnly = true;
             this.txtTaxPaymentA.Size = new System.Drawing.Size(380, 21);
             this.txtTaxPaymentA.StyleController = this.layoutControl1;
@@ -746,7 +805,7 @@
             this.txtReceiptAmount.Properties.Mask.EditMask = "n";
             this.txtReceiptAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtReceiptAmount.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtReceiptAmount.Properties.NullText = "0.00";
+            this.txtReceiptAmount.Properties.NullText = "0";
             this.txtReceiptAmount.Properties.ReadOnly = true;
             this.txtReceiptAmount.Size = new System.Drawing.Size(378, 21);
             this.txtReceiptAmount.StyleController = this.layoutControl1;
@@ -766,11 +825,11 @@
             // txtTaxRebateRate
             // 
             this.txtTaxRebateRate.EditValue = "";
-            this.txtTaxRebateRate.Location = new System.Drawing.Point(422, 385);
+            this.txtTaxRebateRate.Location = new System.Drawing.Point(422, 410);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
             this.txtTaxRebateRate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtTaxRebateRate.Properties.NullText = "0.00";
+            this.txtTaxRebateRate.Properties.NullText = "0";
             this.txtTaxRebateRate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtTaxRebateRate.Size = new System.Drawing.Size(123, 21);
             this.txtTaxRebateRate.StyleController = this.layoutControl1;
@@ -910,10 +969,13 @@
             this.layoutControlItem21,
             this.layoutControlItem22,
             this.layoutControlItem23,
-            this.layoutControlItem24});
+            this.layoutControlItem24,
+            this.layoutControlItem39,
+            this.layoutControlItem40,
+            this.layoutControlItem41});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 145);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(988, 195);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(988, 220);
             this.layoutControlGroup3.Text = "预算单信息";
             // 
             // layoutControlItem9
@@ -982,7 +1044,7 @@
             // 
             this.layoutControlItem15.Control = this.txtPercentage;
             this.layoutControlItem15.CustomizationFormText = "预算款占总额%：";
-            this.layoutControlItem15.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem15.Name = "layoutControlItem15";
             this.layoutControlItem15.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem15.Text = "预算款占总额%：";
@@ -995,7 +1057,7 @@
             this.layoutControlItem16.Location = new System.Drawing.Point(482, 50);
             this.layoutControlItem16.Name = "layoutControlItem16";
             this.layoutControlItem16.Size = new System.Drawing.Size(211, 25);
-            this.layoutControlItem16.Text = "   进料款：";
+            this.layoutControlItem16.Text = "进料款：";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(96, 14);
             // 
             // layoutControlItem17
@@ -1012,7 +1074,7 @@
             // 
             this.layoutControlItem18.Control = this.txtReceiptAmount2;
             this.layoutControlItem18.CustomizationFormText = "已收汇人民币：";
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 75);
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 100);
             this.layoutControlItem18.Name = "layoutControlItem18";
             this.layoutControlItem18.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem18.Text = "已收汇人民币：";
@@ -1022,7 +1084,7 @@
             // 
             this.layoutControlItem20.Control = this.txtNetIncome;
             this.layoutControlItem20.CustomizationFormText = "净收金额：";
-            this.layoutControlItem20.Location = new System.Drawing.Point(482, 75);
+            this.layoutControlItem20.Location = new System.Drawing.Point(482, 100);
             this.layoutControlItem20.Name = "layoutControlItem20";
             this.layoutControlItem20.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem20.Text = "净收金额：";
@@ -1032,7 +1094,7 @@
             // 
             this.layoutControlItem21.Control = this.txtTotalAmount;
             this.layoutControlItem21.CustomizationFormText = "合同计划款：";
-            this.layoutControlItem21.Location = new System.Drawing.Point(0, 100);
+            this.layoutControlItem21.Location = new System.Drawing.Point(0, 125);
             this.layoutControlItem21.Name = "layoutControlItem21";
             this.layoutControlItem21.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem21.Text = "合同计划款：";
@@ -1042,7 +1104,7 @@
             // 
             this.layoutControlItem22.Control = this.txtSupplier;
             this.layoutControlItem22.CustomizationFormText = "预算单工厂：";
-            this.layoutControlItem22.Location = new System.Drawing.Point(482, 100);
+            this.layoutControlItem22.Location = new System.Drawing.Point(482, 125);
             this.layoutControlItem22.Name = "layoutControlItem22";
             this.layoutControlItem22.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem22.Text = "预算单工厂：";
@@ -1052,7 +1114,7 @@
             // 
             this.layoutControlItem23.Control = this.txtSuperPaymentScheme;
             this.layoutControlItem23.CustomizationFormText = "收款超计划%：";
-            this.layoutControlItem23.Location = new System.Drawing.Point(0, 125);
+            this.layoutControlItem23.Location = new System.Drawing.Point(0, 150);
             this.layoutControlItem23.Name = "layoutControlItem23";
             this.layoutControlItem23.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem23.Text = "收款超计划%：";
@@ -1062,11 +1124,41 @@
             // 
             this.layoutControlItem24.Control = this.txtGeneralManager;
             this.layoutControlItem24.CustomizationFormText = "总经理：";
-            this.layoutControlItem24.Location = new System.Drawing.Point(482, 125);
+            this.layoutControlItem24.Location = new System.Drawing.Point(482, 150);
             this.layoutControlItem24.Name = "layoutControlItem24";
             this.layoutControlItem24.Size = new System.Drawing.Size(482, 25);
             this.layoutControlItem24.Text = "总经理：";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // layoutControlItem39
+            // 
+            this.layoutControlItem39.Control = this.txtAdvancePayment2;
+            this.layoutControlItem39.CustomizationFormText = "压缩后预付款：";
+            this.layoutControlItem39.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem39.Name = "layoutControlItem39";
+            this.layoutControlItem39.Size = new System.Drawing.Size(482, 25);
+            this.layoutControlItem39.Text = "压缩后预付款：";
+            this.layoutControlItem39.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // layoutControlItem40
+            // 
+            this.layoutControlItem40.Control = this.txtCommission;
+            this.layoutControlItem40.CustomizationFormText = "佣金：";
+            this.layoutControlItem40.Location = new System.Drawing.Point(482, 75);
+            this.layoutControlItem40.Name = "layoutControlItem40";
+            this.layoutControlItem40.Size = new System.Drawing.Size(211, 25);
+            this.layoutControlItem40.Text = "佣   金：";
+            this.layoutControlItem40.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // layoutControlItem41
+            // 
+            this.layoutControlItem41.Control = this.txtPremium;
+            this.layoutControlItem41.CustomizationFormText = "运保费：";
+            this.layoutControlItem41.Location = new System.Drawing.Point(693, 75);
+            this.layoutControlItem41.Name = "layoutControlItem41";
+            this.layoutControlItem41.Size = new System.Drawing.Size(271, 25);
+            this.layoutControlItem41.Text = "运保费：";
+            this.layoutControlItem41.TextSize = new System.Drawing.Size(96, 14);
             // 
             // lcg_NotHasAdvancePayment
             // 
@@ -1077,7 +1169,7 @@
             this.layoutControlItem26,
             this.layoutControlItem29,
             this.layoutControlItem30});
-            this.lcg_NotHasAdvancePayment.Location = new System.Drawing.Point(0, 340);
+            this.lcg_NotHasAdvancePayment.Location = new System.Drawing.Point(0, 365);
             this.lcg_NotHasAdvancePayment.Name = "lcg_NotHasAdvancePayment";
             this.lcg_NotHasAdvancePayment.Size = new System.Drawing.Size(988, 95);
             this.lcg_NotHasAdvancePayment.Text = "无预付款计算栏";
@@ -1146,9 +1238,9 @@
             // 
             this.layoutControlItem35.Control = this.memoEdit1;
             this.layoutControlItem35.CustomizationFormText = "批示：";
-            this.layoutControlItem35.Location = new System.Drawing.Point(0, 600);
+            this.layoutControlItem35.Location = new System.Drawing.Point(0, 625);
             this.layoutControlItem35.Name = "layoutControlItem35";
-            this.layoutControlItem35.Size = new System.Drawing.Size(988, 109);
+            this.layoutControlItem35.Size = new System.Drawing.Size(988, 84);
             this.layoutControlItem35.Text = "批示：";
             this.layoutControlItem35.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem35.TextSize = new System.Drawing.Size(36, 14);
@@ -1161,7 +1253,7 @@
             this.layoutControlItem32,
             this.layoutControlItem33,
             this.layoutControlItem34});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 530);
+            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 555);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
             this.layoutControlGroup5.Size = new System.Drawing.Size(988, 70);
             this.layoutControlGroup5.Text = "检验留利情况";
@@ -1212,7 +1304,7 @@
             this.layoutControlItem25,
             this.layoutControlItem37,
             this.layoutControlItem38});
-            this.lcg_HasAdvancePayment.Location = new System.Drawing.Point(0, 435);
+            this.lcg_HasAdvancePayment.Location = new System.Drawing.Point(0, 460);
             this.lcg_HasAdvancePayment.Name = "lcg_HasAdvancePayment";
             this.lcg_HasAdvancePayment.Size = new System.Drawing.Size(988, 95);
             this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏";
@@ -1304,6 +1396,9 @@
             this.Load += new System.EventHandler(this.frmPaymentCalcEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAdvancePayment2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number30.Properties)).EndInit();
@@ -1367,6 +1462,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem39)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem40)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcg_NotHasAdvancePayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem27)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
@@ -1476,6 +1574,12 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
         private CommonControl.TextEdit_Number textEdit_Number1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
+        private CommonControl.TextEdit_Number txtAdvancePayment2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem39;
+        private CommonControl.TextEdit_Number txtPremium;
+        private CommonControl.TextEdit_Number txtCommission;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem40;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem41;
 
 
     }

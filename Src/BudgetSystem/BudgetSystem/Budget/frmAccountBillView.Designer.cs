@@ -293,7 +293,7 @@
             this.textEdit_Number1.Properties.Mask.EditMask = "n";
             this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number1.Properties.NullText = "0.00";
+            this.textEdit_Number1.Properties.NullText = "0";
             this.textEdit_Number1.Size = new System.Drawing.Size(463, 25);
             this.textEdit_Number1.StyleController = this.layoutControl1;
             this.textEdit_Number1.TabIndex = 8;
@@ -317,7 +317,7 @@
             this.textEdit_Number2.Properties.Mask.EditMask = "n";
             this.textEdit_Number2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number2.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number2.Properties.NullText = "0.00";
+            this.textEdit_Number2.Properties.NullText = "0";
             this.textEdit_Number2.Size = new System.Drawing.Size(455, 25);
             this.textEdit_Number2.StyleController = this.layoutControl1;
             this.textEdit_Number2.TabIndex = 9;
@@ -341,7 +341,7 @@
             this.textEdit_Number3.Properties.Mask.EditMask = "n";
             this.textEdit_Number3.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number3.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number3.Properties.NullText = "0.00";
+            this.textEdit_Number3.Properties.NullText = "0";
             this.textEdit_Number3.Size = new System.Drawing.Size(432, 25);
             this.textEdit_Number3.StyleController = this.layoutControl1;
             this.textEdit_Number3.TabIndex = 10;

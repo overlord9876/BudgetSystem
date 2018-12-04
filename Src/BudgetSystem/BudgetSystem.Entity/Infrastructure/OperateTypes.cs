@@ -33,6 +33,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         Approve,
         /// <summary>
+        /// 查看审批记录
+        /// </summary>
+        ViewApply,
+        /// <summary>
         /// 拆分费用
         /// </summary>
         SplitCost,

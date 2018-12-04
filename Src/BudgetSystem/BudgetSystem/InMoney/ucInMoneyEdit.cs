@@ -52,6 +52,12 @@ namespace BudgetSystem.InMoney
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
             this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
+            this.gridCustomer.BeforeShowMenu += new DevExpress.XtraEditors.Controls.BeforeShowMenuEventHandler(gridCustomer_BeforeShowMenu);
+        }
+
+        void gridCustomer_BeforeShowMenu(object sender, DevExpress.XtraEditors.Controls.BeforeShowMenuEventArgs e)
+        {
+
         }
 
         private EditFormWorkModels _workModel;
@@ -98,7 +104,7 @@ namespace BudgetSystem.InMoney
 
             cboSales.Properties.Items.AddRange(allSalesmanList.ToArray());
 
-            List<Customer> customerList = cm.GetAllCustomer();
+            this.customerList = cm.GetAllCustomer();
             this.cboCustomer.Properties.DataSource = customerList;
 
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
@@ -121,6 +127,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentBankSlip.Remitter = (cboCustomer.EditValue as Customer).Name;
             CurrentBankSlip.CNY = this.txtCNY.Value;
+            CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem.ToString();
             CurrentBankSlip.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentBankSlip.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
@@ -164,6 +171,7 @@ namespace BudgetSystem.InMoney
             this.txtVoucherNo.Text = CurrentBankSlip.VoucherNo;
             this.txtCreateUser.Text = CurrentBankSlip.CreateUser;
             this.deReceiptDate.EditValue = CurrentBankSlip.ReceiptDate;
+            this.cboNatureOfMoney.EditValue = CurrentBankSlip.NatureOfMoney;
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
             this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
             this.txtExportName.EditValue = CurrentBankSlip.ExportName;
@@ -176,6 +184,7 @@ namespace BudgetSystem.InMoney
             {
                 o.ExchangeRate = txtExchangeRate.Value;
                 o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
+                o.Custom = customerList != null ? customerList.Find(c => c.ID.Equals(o.Cus_ID)) : null;
             });
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
             CalcSplitMoney();
@@ -206,6 +215,11 @@ namespace BudgetSystem.InMoney
             {
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
             }
+
+            //if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
+            //{
+            //    dxErrorProvider1.SetError(cboNatureOfMoney, "请选择款项性质");
+            //}
 
             if (txtOriginalCoin.Value <= 0)
             {
@@ -241,10 +255,16 @@ namespace BudgetSystem.InMoney
                 this.txtCreateUser.Text = RunInfo.Instance.CurrentUser.UserName;
                 this.deReceiptDate.EditValue = DateTime.Now;
                 this.deCreateTimestamp.EditValue = DateTime.Now;
+                this.layoutControlItem13.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lcgConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciTradeNature.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciExportName.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem17.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem18.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem19.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -281,6 +301,7 @@ namespace BudgetSystem.InMoney
         }
 
         private List<Budget> budgetList;
+        private List<Customer> customerList;
 
         private void BindBudgetList()
         {
@@ -289,6 +310,8 @@ namespace BudgetSystem.InMoney
             {
                 budgetList = bm.GetBudgetListByCustomerId(RunInfo.Instance.CurrentUser.UserName, c.ID);
                 this.gridBudget.DataSource = budgetList;
+
+                this.gridCustomer.DataSource = customerList;
             }
         }
 
@@ -352,16 +375,23 @@ namespace BudgetSystem.InMoney
             var dataSource = (IEnumerable<BudgetBill>)gvConstSplit.DataSource;
             if (dataSource != null)
             {
-                decimal splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+                decimal splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+
+                decimal splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
 
                 if (splitCNY > txtCNY.Value)
                 {
                     return "拆分人民币金额不允许大于入帐单总额";
                 }
-
+                if (splitCoinMoney > txtOriginalCoin.Value)
+                {
+                    return "拆分原币金额不允许大于入帐单总额";
+                }
                 txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.CNY);
+                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
 
                 txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
+                txtNotSplitOriginalCoinMoney.EditValue = txtCNY.Value - txtAlreadySplitOriginalCoinMoney.Value;
             }
             return message;
         }

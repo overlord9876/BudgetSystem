@@ -94,8 +94,6 @@
             this.gvBudget.OptionsBehavior.Editable = false;
             this.gvBudget.OptionsView.ShowDetailButtons = false;
             this.gvBudget.OptionsView.ShowGroupPanel = false;
-            this.gvBudget.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvBudget_MouseDown);
-            this.gvBudget.DoubleClick += new System.EventHandler(this.gvBudget_DoubleClick);
             // 
             // gcContractNO
             // 

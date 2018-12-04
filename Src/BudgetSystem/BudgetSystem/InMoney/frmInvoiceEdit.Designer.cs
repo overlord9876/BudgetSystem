@@ -217,7 +217,7 @@
             this.txtTaxAmount.IsSupportNegative = false;
             this.txtTaxAmount.Location = new System.Drawing.Point(458, 186);
             this.txtTaxAmount.Name = "txtTaxAmount";
-            this.txtTaxAmount.Properties.NullText = "0.00";
+            this.txtTaxAmount.Properties.NullText = "0";
             this.txtTaxAmount.Size = new System.Drawing.Size(287, 25);
             this.txtTaxAmount.StyleController = this.layoutControl1;
             this.txtTaxAmount.TabIndex = 21;
@@ -227,7 +227,7 @@
             this.txtPayment.IsSupportNegative = false;
             this.txtPayment.Location = new System.Drawing.Point(90, 186);
             this.txtPayment.Name = "txtPayment";
-            this.txtPayment.Properties.NullText = "0.00";
+            this.txtPayment.Properties.NullText = "0";
             this.txtPayment.Size = new System.Drawing.Size(286, 25);
             this.txtPayment.StyleController = this.layoutControl1;
             this.txtPayment.TabIndex = 20;
@@ -264,7 +264,7 @@
             this.txtTaxRebateRate.IsSupportNegative = false;
             this.txtTaxRebateRate.Location = new System.Drawing.Point(441, 70);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
-            this.txtTaxRebateRate.Properties.NullText = "0.00";
+            this.txtTaxRebateRate.Properties.NullText = "0";
             this.txtTaxRebateRate.Size = new System.Drawing.Size(299, 25);
             this.txtTaxRebateRate.StyleController = this.layoutControl1;
             this.txtTaxRebateRate.TabIndex = 16;
@@ -274,7 +274,7 @@
             this.txtOriginalCoin.IsSupportNegative = false;
             this.txtOriginalCoin.Location = new System.Drawing.Point(75, 41);
             this.txtOriginalCoin.Name = "txtOriginalCoin";
-            this.txtOriginalCoin.Properties.NullText = "0.00";
+            this.txtOriginalCoin.Properties.NullText = "0";
             this.txtOriginalCoin.Size = new System.Drawing.Size(299, 25);
             this.txtOriginalCoin.StyleController = this.layoutControl1;
             this.txtOriginalCoin.TabIndex = 15;
@@ -285,7 +285,7 @@
             this.txtFeedMoney.IsSupportNegative = false;
             this.txtFeedMoney.Location = new System.Drawing.Point(441, 99);
             this.txtFeedMoney.Name = "txtFeedMoney";
-            this.txtFeedMoney.Properties.NullText = "0.00";
+            this.txtFeedMoney.Properties.NullText = "0";
             this.txtFeedMoney.Size = new System.Drawing.Size(299, 25);
             this.txtFeedMoney.StyleController = this.layoutControl1;
             this.txtFeedMoney.TabIndex = 13;
@@ -295,7 +295,7 @@
             this.txtCommission.IsSupportNegative = false;
             this.txtCommission.Location = new System.Drawing.Point(75, 99);
             this.txtCommission.Name = "txtCommission";
-            this.txtCommission.Properties.NullText = "0.00";
+            this.txtCommission.Properties.NullText = "0";
             this.txtCommission.Size = new System.Drawing.Size(299, 25);
             this.txtCommission.StyleController = this.layoutControl1;
             this.txtCommission.TabIndex = 12;
@@ -305,7 +305,7 @@
             this.txtExchangeRate.IsSupportNegative = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(441, 41);
             this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.Properties.NullText = "0.00";
+            this.txtExchangeRate.Properties.NullText = "0";
             this.txtExchangeRate.Size = new System.Drawing.Size(299, 25);
             this.txtExchangeRate.StyleController = this.layoutControl1;
             this.txtExchangeRate.TabIndex = 10;

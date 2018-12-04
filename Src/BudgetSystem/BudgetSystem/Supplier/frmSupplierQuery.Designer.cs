@@ -111,8 +111,6 @@
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
             this.gvSupplier.OptionsView.ShowGroupPanel = false;
-            this.gvSupplier.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvSupplier_MouseDown);
-            this.gvSupplier.DoubleClick += new System.EventHandler(this.gvSupplier_DoubleClick);
             // 
             // gcName
             // 

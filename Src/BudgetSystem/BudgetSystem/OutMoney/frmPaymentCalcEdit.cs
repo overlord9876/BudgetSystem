@@ -80,9 +80,12 @@ namespace BudgetSystem.OutMoney
             this.txtBudgetNo.EditValue = Caculator.CurrentBudget.ContractNO;
             this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameString();
             this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
-            this.txtAdvancePayment.EditValue = Caculator.CurrentBudget.AdvancePayment;
+            this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
+            this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
-            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney + Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium;
+            this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney  + Caculator.CurrentBudget.Premium;
+            this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
+            this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
 
             decimal interest = Math.Round(txtAdvancePayment.Value * (decimal)Caculator.CurrentBudget.InterestRate * Caculator.CurrentBudget.Days / 30 / 100, 2);
             decimal subTotal = Caculator.CurrentBudget.Commission + Caculator.CurrentBudget.Premium + Caculator.CurrentBudget.BankCharges +/*直接费用*/0 + Caculator.CurrentBudget.FeedMoney;

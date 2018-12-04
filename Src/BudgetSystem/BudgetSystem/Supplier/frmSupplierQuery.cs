@@ -19,6 +19,7 @@ namespace BudgetSystem
         public frmSupplierQuery()
         {
             InitializeComponent();
+            this.gvSupplier.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvSupplier_RowClick);
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
         }
 
@@ -126,17 +127,21 @@ namespace BudgetSystem
             var list = sm.GetAllSupplier();
             this.gridSupplier.DataSource = list;
         }
-        private void gvSupplier_DoubleClick(object sender, EventArgs e)
-        {
-            if (hInfo.InRow)
-            {
-                ModifySupplier();
-            }
-        }
 
-        private void gvSupplier_MouseDown(object sender, MouseEventArgs e)
+
+        private void gvSupplier_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            hInfo = gvSupplier.CalcHitInfo(e.Y, e.Y);
+            if (e.Clicks == 2 && e.RowHandle >= 0)
+            {
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifySupplier();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewSupplier();
+                }
+            }
         }
     }
 }

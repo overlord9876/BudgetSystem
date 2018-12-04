@@ -40,6 +40,11 @@ namespace BudgetSystem.Entity
         public DateTime ReceiptDate { get; set; }
 
         /// <summary>
+        /// 款项性质
+        /// </summary>
+        public string NatureOfMoney { get; set; }
+
+        /// <summary>
         /// 汇款方式
         /// </summary>
         public string PaymentMethod { get; set; }
@@ -48,6 +53,11 @@ namespace BudgetSystem.Entity
         /// 未拆分人民币金额
         /// </summary>
         public decimal CNY2 { get; set; }
+
+        /// <summary>
+        /// 未拆原币金额
+        /// </summary>
+        public decimal OriginalCoin2 { get; set; }
 
         /// <summary>
         /// 汇率
@@ -132,8 +142,10 @@ namespace BudgetSystem.Entity
 
     public enum BankSlipTradeNature
     {
-        做单 = 0,
-        过单 = 1
+        一般贸易 = 0,
+        来料加工 = 1,
+        进料加工 = 2,
+        其他 = 3
     }
 
     public enum ReceiptState : int

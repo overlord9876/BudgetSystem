@@ -9,23 +9,25 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.CommonControl;
+using BudgetSystem.Bll;
+using BudgetSystem.WorkSpace;
 
 namespace BudgetSystem
 {
     public partial class frmBudgetQuery : frmBaseQueryForm
     {
+        private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private GridHitInfo hInfo;
 
         public frmBudgetQuery()
         {
             InitializeComponent();
-
+            this.gvBudget.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvBudget_RowClick);
             this.Module = BusinessModules.BuggetManagement;
 
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
-
 
         protected override void InitModelOperate()
         {
@@ -38,10 +40,9 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看审批状态"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "自定义查询"));
 
 
             this.ModelOperatePageName = "预算单";
@@ -74,6 +75,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewBudget();
+            }
+            else if (operate.Operate == OperateTypes.ViewApply.ToString())
+            {
+                ViewApplyHistory();
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
@@ -234,6 +239,16 @@ namespace BudgetSystem
             }
         }
 
+        private void ViewApplyHistory()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmHistory hisotryForm = new frmHistory();
+                hisotryForm.Points = fm.GetFlowRunPointsByData(budget.ID, EnumFlowDataType.预算单.ToString());
+                hisotryForm.ShowDialog();
+            }
+        }
         private void DeleteBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -251,9 +266,10 @@ namespace BudgetSystem
             }
         }
 
-        private void gvBudget_DoubleClick(object sender, EventArgs e)
+
+        private void gvBudget_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (hInfo.InRow)
+            if (e.Clicks == 2 && e.RowHandle >= 0)
             {
                 if (CheckPermission(OperateTypes.Modify))
                 {
@@ -264,11 +280,6 @@ namespace BudgetSystem
                     ViewBudget();
                 }
             }
-        }
-
-        private void gvBudget_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = gvBudget.CalcHitInfo(e.Y, e.Y);
         }
 
 

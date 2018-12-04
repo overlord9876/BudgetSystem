@@ -23,8 +23,7 @@ namespace BudgetSystem.InMoney
         {
             InitializeComponent();
             this.Module = BusinessModules.InMoneyManagement;
-            this.gvInMoney.MouseDown += new MouseEventHandler(gvInMoney_MouseDown);
-            this.gvInMoney.DoubleClick += new EventHandler(gvInMoney_DoubleClick);
+            this.gvInMoney.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvInMoney_RowClick);
         }
 
         protected override void InitModelOperate()
@@ -222,20 +221,28 @@ namespace BudgetSystem.InMoney
             this.gcInMoney.DataSource = bsList;
         }
 
-
-        private void gvInMoney_DoubleClick(object sender, EventArgs e)
+        private void gvInMoney_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (hInfo.InRow)
+            if (e.Clicks == 2 && e.RowHandle >= 0)
             {
-                ViewBankSlip();
+                if (CheckPermission(OperateTypes.Modify))
+                {
+                    ModifyBankSlip();
+                }
+                else if (CheckPermission(OperateTypes.SplitCost))
+                {
+                    SplitConstMoneyBankSlip();
+                }
+                else if (CheckPermission(OperateTypes.View))
+                {
+                    ViewBankSlip();
+                }
+                else
+                {
+
+                }
             }
         }
-
-        private void gvInMoney_MouseDown(object sender, MouseEventArgs e)
-        {
-            hInfo = gvInMoney.CalcHitInfo(e.Y, e.Y);
-        }
-
 
     }
 }
