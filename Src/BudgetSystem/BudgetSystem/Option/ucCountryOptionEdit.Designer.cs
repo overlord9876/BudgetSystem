@@ -57,8 +57,8 @@
             // 
             this.gvCountry.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcCode,
-            this.gcName,
             this.gcEnName,
+            this.gcName,
             this.gcDelete});
             this.gvCountry.GridControl = this.gridCountry;
             this.gvCountry.Name = "gvCountry";
@@ -90,7 +90,7 @@
             this.gcName.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcName.OptionsColumn.ShowInCustomizationForm = false;
             this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 1;
+            this.gcName.VisibleIndex = 2;
             // 
             // gcEnName
             // 
@@ -102,7 +102,7 @@
             this.gcEnName.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcEnName.OptionsColumn.ShowInCustomizationForm = false;
             this.gcEnName.Visible = true;
-            this.gcEnName.VisibleIndex = 2;
+            this.gcEnName.VisibleIndex = 1;
             // 
             // gcDelete
             // 

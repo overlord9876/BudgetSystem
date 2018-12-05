@@ -62,9 +62,9 @@ namespace BudgetSystem.OutMoney
             this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney;
             this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
+            this.txtCommissionRate.EditValue = Caculator.CommissionRate;
 
-
-            this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme; 
+            this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
             this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
 
             InitTaxRebateRateList();
@@ -145,7 +145,7 @@ namespace BudgetSystem.OutMoney
             this.txtProfitLevel.EditValue = Caculator.ProfitLevel;
 
             this.txtNetIncome_Plan.EditValue = Caculator.PlannedProfit;
-            this.txtRetainedProfit.EditValue = Caculator.ActualProfit;            
+            this.txtRetainedProfit.EditValue = Caculator.ActualProfit;
 
             Caculator.GetAllTaxes(usageMoney, taxRebateRate);
 
@@ -321,9 +321,9 @@ namespace BudgetSystem.OutMoney
             IsHightLightControl(this.textEdit_Number23);
         }
 
-        private void IsHightLightControl(TextEdit_Number control)
+        private void IsHightLightControl(TextEdit_Number control, decimal MaxValue = 0)
         {
-            if (control.Value >= 0)
+            if (control.Value > MaxValue)
             {
                 control.ForeColor = Color.Black;
 
@@ -332,6 +332,16 @@ namespace BudgetSystem.OutMoney
             {
                 control.ForeColor = Color.Red;
             }
+        }
+
+        private void txtSuperPaymentScheme_EditValueChanged(object sender, EventArgs e)
+        {
+            IsHightLightControl(txtSuperPaymentScheme, 30);
+        }
+
+        private void txtCommissionRate_EditValueChanged(object sender, EventArgs e)
+        {
+            IsHightLightControl(txtSuperPaymentScheme, (decimal)19.99);
         }
 
     }

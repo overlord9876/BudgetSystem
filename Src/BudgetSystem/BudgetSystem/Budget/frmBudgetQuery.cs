@@ -141,6 +141,7 @@ namespace BudgetSystem
                 if (!string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show(message, "提示");
+                    this.ViewBudget();
                     return;
                 }
                 frmBudgetEdit form = new frmBudgetEdit();

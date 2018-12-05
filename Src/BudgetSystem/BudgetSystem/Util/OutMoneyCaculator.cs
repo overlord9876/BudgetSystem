@@ -162,6 +162,11 @@ namespace BudgetSystem
         }
 
         /// <summary>
+        /// 佣金比率
+        /// </summary>
+        public decimal CommissionRate { get; private set; }
+
+        /// <summary>
         /// 净收入额
         /// </summary>
         public decimal NetIncomeCNY { get; private set; }
@@ -241,6 +246,11 @@ namespace BudgetSystem
         private void CalcAboutPaymentMoney()
         {
             TaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
+
+            decimal commissionTotal = _paymentList.Where(o => o.MoneyUsed == "佣金").Sum(o => o.CNY);
+
+            CommissionRate = (commissionTotal - this.CurrentBudget.Commission) / this.CurrentBudget.Commission * 100;
+
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());
         }
 

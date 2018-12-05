@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class ucVATOptionEdit
+    partial class ucRateOptionEdit
     {
         /// <summary> 
         /// 必需的设计器变量。

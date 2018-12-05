@@ -317,11 +317,11 @@
     <Compile Include="Option\ucUseMoneyTypeOptionEdit.Designer.cs">
       <DependentUpon>ucUseMoneyTypeOptionEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\ucVATOptionEdit.cs">
+    <Compile Include="Option\ucRateOptionEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Option\ucVATOptionEdit.Designer.cs">
-      <DependentUpon>ucVATOptionEdit.cs</DependentUpon>
+    <Compile Include="Option\ucRateOptionEdit.Designer.cs">
+      <DependentUpon>ucRateOptionEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="OutMoney\frmOutMoneyEdit.cs">
       <SubType>Form</SubType>
@@ -630,8 +630,8 @@
     <EmbeddedResource Include="Option\ucUseMoneyTypeOptionEdit.resx">
       <DependentUpon>ucUseMoneyTypeOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Option\ucVATOptionEdit.resx">
-      <DependentUpon>ucVATOptionEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Option\ucRateOptionEdit.resx">
+      <DependentUpon>ucRateOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyEdit.resx">
       <DependentUpon>frmOutMoneyEdit.cs</DependentUpon>

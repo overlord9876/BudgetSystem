@@ -63,6 +63,8 @@ ALTER TABLE 	invoice	 modify  COLUMN 	TaxAmount	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	OriginalCoin	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	CNY	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	VatOption	 decimal(14,2) DEFAULT 0;
+REPLACE Into `SystemConfig` (`Name`, `Value`) VALUES ('年利率', 4.8);
+REPLACE Into `SystemConfig` (`Name`, `Value`) VALUES ('退税率', 16); 
 
 END??
 DELIMITER ;

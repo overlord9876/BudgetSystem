@@ -96,7 +96,15 @@ namespace BudgetSystem
             }
             else if (EnumSystemConfigNames.增值税税率.ToString().Equals(this.lbcType.SelectedItem))
             {
-                this.currentOptionEdit = new ucVATOptionEdit();
+                this.currentOptionEdit = new ucRateOptionEdit(EnumSystemConfigNames.增值税税率); 
+            }
+            else if (EnumSystemConfigNames.年利率.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucRateOptionEdit(EnumSystemConfigNames.年利率);
+            }
+            else if (EnumSystemConfigNames.退税率.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucRateOptionEdit(EnumSystemConfigNames.退税率);
             }
             else if (EnumSystemConfigNames.币种.ToString().Equals(this.lbcType.SelectedItem))
             {

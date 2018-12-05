@@ -14,5 +14,7 @@ namespace BudgetSystem.Entity
         增值税税率,
         币种,
         用款类型,
+        年利率,
+        退税率,
     }
 }

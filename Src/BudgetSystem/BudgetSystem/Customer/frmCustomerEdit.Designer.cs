@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtAddress = new DevExpress.XtraEditors.TextEdit();
             this.txtEmail = new DevExpress.XtraEditors.TextEdit();
@@ -59,8 +58,15 @@
             this.txtCreateUser = new DevExpress.XtraEditors.TextEdit();
             this.txtCreateDate = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.lueCountry = new DevExpress.XtraEditors.LookUpEdit();
-            this.luePort = new DevExpress.XtraEditors.LookUpEdit();
+            this.lueCountry = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcEnName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.luePort = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
@@ -82,7 +88,7 @@
             this.lcCountry = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcEmail = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcAddress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
@@ -103,7 +109,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.luePort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).BeginInit();
@@ -442,19 +450,66 @@
             this.lueCountry.Name = "lueCountry";
             this.lueCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lueCountry.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Code", "编号"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnName", "英文名称")});
-            this.lueCountry.Properties.DisplayMember = "Name";
-            this.lueCountry.Properties.DropDownRows = 15;
+            this.lueCountry.Properties.DisplayMember = "Code";
             this.lueCountry.Properties.MaxLength = 50;
             this.lueCountry.Properties.NullText = "";
             this.lueCountry.Properties.ShowFooter = false;
-            this.lueCountry.Properties.ValueMember = "Name";
+            this.lueCountry.Properties.ValueMember = "Code";
+            this.lueCountry.Properties.View = this.searchLookUpEdit1View;
             this.lueCountry.Size = new System.Drawing.Size(376, 25);
             this.lueCountry.StyleController = this.layoutControl1;
             this.lueCountry.TabIndex = 2;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcCode,
+            this.gcEnName,
+            this.gcName});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.NewItemRowText = "单击此处添加";
+            this.searchLookUpEdit1View.OptionsDetail.EnableMasterViewMode = false;
+            this.searchLookUpEdit1View.OptionsDetail.ShowDetailTabs = false;
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcCode
+            // 
+            this.gcCode.Caption = "编码";
+            this.gcCode.FieldName = "Code";
+            this.gcCode.Name = "gcCode";
+            this.gcCode.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.gcCode.OptionsColumn.AllowMove = false;
+            this.gcCode.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.gcCode.OptionsColumn.ShowInCustomizationForm = false;
+            this.gcCode.Visible = true;
+            this.gcCode.VisibleIndex = 0;
+            // 
+            // gcEnName
+            // 
+            this.gcEnName.Caption = "英文名称";
+            this.gcEnName.FieldName = "EnName";
+            this.gcEnName.Name = "gcEnName";
+            this.gcEnName.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.gcEnName.OptionsColumn.AllowMove = false;
+            this.gcEnName.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.gcEnName.OptionsColumn.ShowInCustomizationForm = false;
+            this.gcEnName.Visible = true;
+            this.gcEnName.VisibleIndex = 1;
+            // 
+            // gcName
+            // 
+            this.gcName.Caption = "名称";
+            this.gcName.FieldName = "Name";
+            this.gcName.Name = "gcName";
+            this.gcName.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.gcName.OptionsColumn.AllowMove = false;
+            this.gcName.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.gcName.OptionsColumn.ShowInCustomizationForm = false;
+            this.gcName.Visible = true;
+            this.gcName.VisibleIndex = 2;
             // 
             // luePort
             // 
@@ -462,16 +517,52 @@
             this.luePort.Name = "luePort";
             this.luePort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.luePort.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EnName", "英文名称")});
             this.luePort.Properties.DisplayMember = "EnName";
             this.luePort.Properties.NullText = "";
             this.luePort.Properties.ShowFooter = false;
             this.luePort.Properties.ValueMember = "EnName";
+            this.luePort.Properties.View = this.gridView1;
             this.luePort.Size = new System.Drawing.Size(379, 25);
             this.luePort.StyleController = this.layoutControl1;
             this.luePort.TabIndex = 3;
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.NewItemRowText = "单击此处添加";
+            this.gridView1.OptionsDetail.EnableMasterViewMode = false;
+            this.gridView1.OptionsDetail.ShowDetailTabs = false;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "名称";
+            this.gridColumn1.FieldName = "Name";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn1.OptionsColumn.AllowMove = false;
+            this.gridColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn1.OptionsColumn.ShowInCustomizationForm = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "英文名称";
+            this.gridColumn2.FieldName = "EnName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn2.OptionsColumn.AllowMove = false;
+            this.gridColumn2.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn2.OptionsColumn.ShowInCustomizationForm = false;
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
             // 
             // layoutControlGroup1
             // 
@@ -764,7 +855,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueCountry.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.luePort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateUser)).EndInit();
@@ -837,8 +930,6 @@
         private DevExpress.XtraEditors.CheckEdit chkState;
         private DevExpress.XtraLayout.LayoutControlItem lcState;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
-        private DevExpress.XtraEditors.LookUpEdit lueCountry;
-        private DevExpress.XtraEditors.LookUpEdit luePort;
         private DevExpress.XtraEditors.TextEdit txtAddress;
         private DevExpress.XtraEditors.TextEdit txtEmail;
         private DevExpress.XtraEditors.TextEdit txtContacts;
@@ -847,6 +938,15 @@
         private DevExpress.XtraLayout.LayoutControlItem lcContacts;
         private DevExpress.XtraLayout.LayoutControlItem lcEmail;
         private DevExpress.XtraLayout.LayoutControlItem lcAddress;
+        private DevExpress.XtraEditors.SearchLookUpEdit lueCountry;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcEnName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcName;
+        private DevExpress.XtraEditors.SearchLookUpEdit luePort;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
 
     }
 }

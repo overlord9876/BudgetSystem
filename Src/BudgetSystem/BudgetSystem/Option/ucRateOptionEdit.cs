@@ -11,15 +11,15 @@ using DevExpress.XtraEditors;
 namespace BudgetSystem
 {
     /// <summary>
-    /// 增值税配置界面
+    /// 比率类配置项配置界面
     /// </summary>
-    public partial class ucVATOptionEdit : ucOptionEditBase
+    public partial class ucRateOptionEdit : ucOptionEditBase
     {
-        public ucVATOptionEdit()
+        public ucRateOptionEdit(EnumSystemConfigNames name)
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.增值税税率.ToString(); 
+            this.OptionName = name.ToString(); 
         }
 
         protected override void RegisterEvent()
@@ -37,9 +37,9 @@ namespace BudgetSystem
         public override bool Save()
         {
             decimal value = this.txtValue.Value;
-            if (value == 0)
+            if (value <= 0)
             {
-                XtraMessageBox.Show("增值税税率配置项值应大于0");
+                XtraMessageBox.Show(this.OptionName+ "配置项值应大于0");
                 return false;
             }
 

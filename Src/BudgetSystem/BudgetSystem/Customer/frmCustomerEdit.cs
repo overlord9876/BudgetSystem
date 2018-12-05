@@ -13,6 +13,8 @@ namespace BudgetSystem
 {
     public partial class frmCustomerEdit : frmBaseDialogForm
     {
+        private List<Country> countryList;
+        private List<Port> portList;
         public Customer Customer { get; set; }
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.UserManager um = new Bll.UserManager();
@@ -52,7 +54,7 @@ namespace BudgetSystem
                 this.chkState.Properties.ReadOnly = true;
                 this.meDescription.Properties.ReadOnly = true;
                 this.btnAddSalesman.Enabled = false;
-                this.btnRemoveSalesman.Enabled = false; 
+                this.btnRemoveSalesman.Enabled = false;
                 BindingCustomer(Customer.ID);
             }
         }
@@ -109,9 +111,9 @@ namespace BudgetSystem
         private void InitParameter()
         {
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
-            List<Country> countryList = scm.GetSystemConfigValue<List<Country>>(EnumSystemConfigNames.国家地区.ToString());
+            countryList = scm.GetSystemConfigValue<List<Country>>(EnumSystemConfigNames.国家地区.ToString());
             this.lueCountry.Properties.DataSource = countryList;
-            List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
+            portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
             this.luePort.Properties.DataSource = portList;
         }
 
@@ -126,12 +128,12 @@ namespace BudgetSystem
             Customer customer = cm.GetCustomer(id);
             if (customer != null)
             {
-                this.txtCode.Text=customer.Code;
+                this.txtCode.Text = customer.Code;
                 this.txtName.Text = customer.Name;
                 this.lueCountry.EditValue = customer.Country;
                 this.luePort.EditValue = customer.Port;
-                this.txtEmail.Text=customer.Email;
-                this.txtContacts.Text=customer.Contacts;
+                this.txtEmail.Text = customer.Email;
+                this.txtContacts.Text = customer.Contacts;
                 this.txtAddress.Text = customer.Address;
                 this.txtCreateDate.EditValue = customer.CreateDate;
                 this.txtCreateUser.Text = customer.CreateUserName;
@@ -172,7 +174,7 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(this.txtCode.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtCode, "请输入客户编号");
-            }        
+            }
         }
         private void CheckNameInput()
         {
@@ -199,7 +201,7 @@ namespace BudgetSystem
 
         private void CheckPortInput()
         {
-            if (string.IsNullOrEmpty(this.luePort.Text.Trim()))
+            if (string.IsNullOrEmpty(this.luePort.Text))
             {
                 this.dxErrorProvider1.SetError(this.luePort, "请选择港口信息");
             }
@@ -207,7 +209,7 @@ namespace BudgetSystem
 
         private void CheckCountry()
         {
-            if (string.IsNullOrEmpty(this.lueCountry.Text.Trim()))
+            if (string.IsNullOrEmpty(this.lueCountry.Text))
             {
                 this.dxErrorProvider1.SetError(this.lueCountry, "请选择国家或地区");
             }
@@ -220,7 +222,7 @@ namespace BudgetSystem
             this.dxErrorProvider1.ClearErrors();
             this.CheckCodeInput();
             this.CheckContactsInput();
-            this.CheckEmailInput(); 
+            this.CheckEmailInput();
             this.CheckNameInput();
             this.CheckCountry();
             this.CheckPortInput();
@@ -228,25 +230,9 @@ namespace BudgetSystem
             {
                 return;
             }
-            Customer customer = new Entity.Customer();
-            customer.Name = this.txtName.Text.Trim();
-            customer.Country = this.lueCountry.Text.Trim();
-            customer.State = this.chkState.Checked;
-            customer.Description = this.meDescription.Text.Trim();
-            customer.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-            customer.Code=this.txtCode.Text.Trim();
-            customer.Email=this.txtEmail.Text.Trim();
-            customer.Contacts=this.txtContacts.Text.Trim();
-            customer.Address=this.txtAddress.Text.Trim();
-            customer.Port = this.luePort.Text.Trim();
-            List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
-            List<User> users = this.gridSalesman.DataSource as List<User>;
-            if (users != null && users.Count > 0)
-            {
-                users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
-            }
-            customer.SalesmanList = salesmans;
-            int result = cm.AddCustomer(customer);
+
+            FillData();
+            int result = cm.AddCustomer(Customer);
 
             if (result <= 0)
             {
@@ -261,7 +247,7 @@ namespace BudgetSystem
             base.SubmitModifyData();
             this.dxErrorProvider1.ClearErrors();
             this.CheckNameInput();
-            this.CheckCountry(); 
+            this.CheckCountry();
             this.CheckCodeInput();
             this.CheckContactsInput();
             this.CheckEmailInput();
@@ -270,16 +256,27 @@ namespace BudgetSystem
             {
                 return;
             }
+            FillData();
+            cm.ModifyCustomer(Customer);
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
 
+        private void FillData()
+        {
+            if (Customer == null)
+            {
+                Customer = new Customer();
+            }
             Customer.Name = this.txtName.Text.Trim();
-            Customer.Country = this.lueCountry.Text.Trim();
+            Customer.Country = this.lueCountry.EditValue.ToString();
             Customer.State = this.chkState.Checked;
             Customer.Description = this.meDescription.Text.Trim();
+            Customer.CreateUser = RunInfo.Instance.CurrentUser.UserName;
             Customer.Code = this.txtCode.Text.Trim();
             Customer.Email = this.txtEmail.Text.Trim();
             Customer.Contacts = this.txtContacts.Text.Trim();
             Customer.Address = this.txtAddress.Text.Trim();
-            Customer.Port = this.luePort.Text.Trim();
+            Customer.Port = this.luePort.EditValue.ToString();
             List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
             List<User> users = this.gridSalesman.DataSource as List<User>;
             if (users != null && users.Count > 0)
@@ -287,8 +284,7 @@ namespace BudgetSystem
                 users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
             }
             Customer.SalesmanList = salesmans;
-            cm.ModifyCustomer(Customer);
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+
         }
     }
 }

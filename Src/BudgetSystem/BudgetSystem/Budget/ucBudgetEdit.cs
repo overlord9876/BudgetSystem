@@ -22,6 +22,16 @@ namespace BudgetSystem
         /// </summary>
         private decimal vatOption = 0;
 
+        /// <summary>
+        /// 年利率配置项值 
+        /// </summary>
+        private decimal interestRate = 0;
+
+        /// <summary>
+        /// 退税率配置项值 
+        /// </summary>
+        private decimal taxRebateRate = 0;
+
         private decimal totalOriginalCurrency = 0;
 
         private Bll.BudgetManager bm = new Bll.BudgetManager();
@@ -170,11 +180,11 @@ namespace BudgetSystem
 
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
-
+            this.interestRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.年利率.ToString());
+            this.taxRebateRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.退税率.ToString());
             List<MoneyType> moneyTypeList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
             this.ricboOriginalCurrency.Items.Clear();
             moneyTypeList.ForEach(m => ricboOriginalCurrency.Items.Add(m.Name));
-
         }
 
         private void InitControlState()
@@ -225,6 +235,7 @@ namespace BudgetSystem
 
             this.txtContractNO.Text = contractNoPrefix;
             this.dteSignDate.EditValue = DateTime.Now;
+            this.txtInterestRate.EditValue = this.interestRate;
             //this.txtContractNO.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             //this.txtContractNO.Properties.Mask.EditMask = "("+contractNoPrefix+")\\d{4}";
             //this.txtContractNO.Properties.NullText = contractNoPrefix; 
@@ -926,6 +937,7 @@ namespace BudgetSystem
         {
             InProductDetail detail = bgvInProductDetail.GetRow(e.RowHandle) as InProductDetail;
             detail.Vat = this.vatOption;
+            detail.TaxRebateRate = this.taxRebateRate;
         }
 
         private void bgvInProductDetail_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
