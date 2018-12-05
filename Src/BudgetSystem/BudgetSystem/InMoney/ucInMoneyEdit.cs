@@ -127,7 +127,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentBankSlip.Remitter = (cboCustomer.EditValue as Customer).Name;
             CurrentBankSlip.CNY = this.txtCNY.Value;
-            CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem.ToString();
+            CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem == null ? string.Empty : this.cboNatureOfMoney.SelectedItem.ToString();
             CurrentBankSlip.VoucherNo = this.txtVoucherNo.Text.Trim();
             CurrentBankSlip.CreateUser = this.txtCreateUser.Text.Trim();
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
@@ -381,17 +381,19 @@ namespace BudgetSystem.InMoney
 
                 if (splitCNY > txtCNY.Value)
                 {
+                    ErrorColumn = this.bgcConstCNY;
                     return "拆分人民币金额不允许大于入帐单总额";
                 }
                 if (splitCoinMoney > txtOriginalCoin.Value)
                 {
+                    ErrorColumn = this.gcSplitConstOriginalCoin;
                     return "拆分原币金额不允许大于入帐单总额";
                 }
                 txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.CNY);
                 txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
 
                 txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
-                txtNotSplitOriginalCoinMoney.EditValue = txtCNY.Value - txtAlreadySplitOriginalCoinMoney.Value;
+                txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
             }
             return message;
         }
@@ -415,9 +417,11 @@ namespace BudgetSystem.InMoney
             item.DepartmentCode = RunInfo.Instance.CurrentUser.Department;
         }
 
+        private DevExpress.XtraGrid.Columns.GridColumn ErrorColumn;
+
         private void gvConstSplit_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            gvConstSplit.SetColumnError(this.gvConstSplit.FocusedColumn, e.ErrorText);
+            gvConstSplit.SetColumnError(ErrorColumn, e.ErrorText);
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
@@ -528,7 +532,7 @@ namespace BudgetSystem.InMoney
 
         private void txtNotSplitCNYMoney_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.txtNotSplitCNYMoney.Value == 0)
+            if (this.txtNotSplitCNYMoney.Value == 0 && this.txtNotSplitOriginalCoinMoney.Value == 0)
             {
                 if (CanCommitEventHandler != null)
                 {
@@ -542,6 +546,17 @@ namespace BudgetSystem.InMoney
             if (cboCurrency.EditValue != null && (cboCurrency.EditValue.ToString().Equals("CNY") || cboCurrency.EditValue.ToString().Equals("人民币")))
             {
                 this.txtExchangeRate.EditValue = 1;
+            }
+        }
+
+        private void txtNotSplitOriginalCoinMoney_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.txtNotSplitCNYMoney.Value == 0 && this.txtNotSplitOriginalCoinMoney.Value == 0)
+            {
+                if (CanCommitEventHandler != null)
+                {
+                    CanCommitEventHandler(this, e); ;
+                }
             }
         }
 

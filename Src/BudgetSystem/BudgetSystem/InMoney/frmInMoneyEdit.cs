@@ -105,6 +105,13 @@ namespace BudgetSystem.InMoney
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
+            ucInMoneyEdit1.FillData();
+
+            if (!ucInMoneyEdit1.CheckUIInput())
+            {
+                return;
+            }
+            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
             if (this.ucInMoneyEdit1.SpliDetail != null)
             {

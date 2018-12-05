@@ -39,10 +39,8 @@ namespace BudgetSystem
         /// </summary>
         public decimal PlannedProfit
         {
-            get
-            {
-                return _currentBudget.Profit;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -50,14 +48,8 @@ namespace BudgetSystem
         /// </summary>
         public decimal ActualProfit
         {
-            get
-            {
-                if (_currentBudget.TotalAmount != 0)
-                {
-                    return PlannedProfit / _currentBudget.TotalAmount * ReceiptMoneyAmount;
-                }
-                else { return 0; }
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -170,6 +162,23 @@ namespace BudgetSystem
         }
 
         /// <summary>
+        /// 净收入额
+        /// </summary>
+        public decimal NetIncomeCNY { get; private set; }
+
+        /// <summary>
+        /// 净收入额(美元)
+        /// </summary>
+        public decimal NetIncomeUSD { get; private set; }
+
+        /// <summary>
+        /// 盈利水平
+        /// </summary>
+        public decimal ProfitLevel { get; private set; }
+
+        public decimal SuperPaymentScheme { get; private set; }
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="currentBudget">预算单（合同）对象</param>
@@ -178,14 +187,50 @@ namespace BudgetSystem
         /// <param name="vatOption">增值税率</param>
         public OutMoneyCaculator(Budget currentBudget, IEnumerable<PaymentNotes> paymentList, IEnumerable<BudgetBill> receiptList, decimal vatOption)
         {
+
+
             this.vatOption = vatOption;
             this._currentBudget = currentBudget;
             this._paymentList = paymentList;
             this._receiptList = receiptList;
-
             CalcAboutReceiptMoney();
 
             CalcAboutPaymentMoney();
+
+            decimal interest = Math.Round(AdvancePayment * (decimal)CurrentBudget.InterestRate * CurrentBudget.Days / 30 / 100, 2);
+            decimal subTotal = CurrentBudget.Commission + CurrentBudget.Premium + CurrentBudget.BankCharges +/*直接费用*/0 + CurrentBudget.FeedMoney;
+
+            //  净收入额=外贸合约人民币小计-内贸合约部分的利息-预算小计
+            NetIncomeCNY = TotalAmount - CurrentBudget.PurchasePrice - interest - subTotal;
+            //总收金额（USD）=折合人名币/汇率
+
+            if (CurrentBudget.ExchangeRate != 0)
+            {
+                NetIncomeUSD = decimal.Round(NetIncomeCNY / (decimal)CurrentBudget.ExchangeRate, 2);
+            }
+            //出口退税额=总进价/1.17*出口退税率
+            //decimal TaxRebateRateMoney = Math.Round(SelectedBudget.DirectCosts / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100, 2);
+            //总成本=总进价-出口退税额
+            decimal totalCost = CurrentBudget.PurchasePrice - (decimal)CurrentBudget.TaxRebate;
+
+            //利润=折合人名币（净收入额）-总成本
+            PlannedProfit = NetIncomeCNY - totalCost;
+
+            if (NetIncomeCNY != 0)
+            {
+                //盈利水平=利润/净收入额
+                ProfitLevel = PlannedProfit / NetIncomeCNY;
+            }
+
+            if (TotalAmount != 0)
+            {
+                ActualProfit = PlannedProfit / TotalAmount * ReceiptMoneyAmount;
+            }
+            //收汇超计划%=（已收汇人民币-合同计划款）/合同计划款*100%
+            if (this.TotalAmount != 0)
+            {
+                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
+            }
         }
 
         private void CalcAboutReceiptMoney()
@@ -213,7 +258,7 @@ namespace BudgetSystem
         /// <returns></returns>
         public void GetAllTaxes(decimal paymentMoney, decimal exportRebateRate)
         {
-            CurrentTaxes = TaxRefund + paymentMoney / (1 + ValueAddedTaxRate) * exportRebateRate;
+            CurrentTaxes = TaxRefund + paymentMoney / (1 + ValueAddedTaxRate / 100) * (exportRebateRate / 100);
             if (_currentBudget.AdvancePayment > 0)
             {
                 if (IsReceiptGreaterThanTaxPayment(paymentMoney))
@@ -223,7 +268,7 @@ namespace BudgetSystem
                 else
                 {
                     //收到的钱小于或等于退税款，按实际收汇金额计算
-                    AllTaxes = (ReceiptMoneyAmount / ValueAddedTaxRate) * exportRebateRate;
+                    AllTaxes = (ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100);
                 }
             }
             else
@@ -231,7 +276,7 @@ namespace BudgetSystem
                 AllTaxes = TaxRefund + CurrentTaxes;
             }
 
-            this.Balance = ReceiptMoneyAmount - PaymentMoneyAmount + TaxRefund - paymentMoney + AdvancePayment;
+            this.Balance = ReceiptMoneyAmount - PaymentMoneyAmount + AllTaxes - paymentMoney + AdvancePayment;
         }
 
         public decimal GetUsagePayMoney(string usageName)

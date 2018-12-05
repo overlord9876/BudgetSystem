@@ -169,8 +169,6 @@ namespace BudgetSystem
             this.ucSupplierSelected.SetDataSource(suppliers);
 
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
-            List<Port> portList = scm.GetSystemConfigValue<List<Port>>(EnumSystemConfigNames.港口信息.ToString());
-            this.luePort.Properties.DataSource = portList;
             this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
             List<MoneyType> moneyTypeList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
@@ -669,6 +667,7 @@ namespace BudgetSystem
             {
                 e.Value = string.Empty;
                 pceMainCustomer.Tag = 0;
+                this.luePort.Text = string.Empty;
             }
         }
 
