@@ -28,6 +28,8 @@ namespace BudgetSystem.InMoney
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "部门导入交单记录"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData2, "财务导入认证记录"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出交单记录"));
+
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "交单管理";
@@ -56,6 +58,10 @@ namespace BudgetSystem.InMoney
             {
                 ImportInvoice(true);
             }
+            else if (operate.Operate == OperateTypes.ExportData.ToString())
+            {
+                ExportInvoice();
+            }
             else
             {
                 XtraMessageBox.Show("未定义的操作");
@@ -70,7 +76,12 @@ namespace BudgetSystem.InMoney
 
         private void ImportInvoice(bool isFinaceImport)
         {
-            frmInvoiceImport form = new frmInvoiceImport(isFinaceImport);
+            if (openFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK
+                || !System.IO.File.Exists(openFileDialog1.FileName))
+            {
+                return;
+            }
+            frmInvoiceImport form = new frmInvoiceImport(openFileDialog1.FileName, isFinaceImport);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 this.RefreshData();
@@ -116,12 +127,29 @@ namespace BudgetSystem.InMoney
             }
         }
 
+        private void ExportInvoice()
+        {
+            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+            string extension = System.IO.Path.GetExtension(saveFileDialog1.FileName);
+            if (extension.ToLower().EndsWith("xls"))
+            {
+                this.gvInvoice.ExportToXls(saveFileDialog1.FileName);
+            }
+            else
+            {
+                this.gvInvoice.ExportToXlsx(saveFileDialog1.FileName);
+            }
+        }
 
         protected override void InitGridViewAction()
         {
             this.gridViewAction.Add(this.gvInvoice, new ActionWithPermission() { MainAction = ModifyInvoice, MainOperate = OperateTypes.Modify, SecondAction = ViewInvoice, SecondOperate = OperateTypes.View });
 
         }
+
 
 
     }

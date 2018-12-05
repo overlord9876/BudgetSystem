@@ -68,7 +68,6 @@
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
@@ -493,11 +492,6 @@
             this.layoutControlItem32.TextToControlDistance = 0;
             this.layoutControlItem32.TextVisible = false;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Excel|*.xlsx;*.xls";
-            // 
             // frmInvoiceImport
             // 
             this.AcceptButton = this.btnSure;
@@ -580,7 +574,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit riLinkDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gcMessage;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
 
     }
 }

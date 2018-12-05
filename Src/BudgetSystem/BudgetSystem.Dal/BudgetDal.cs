@@ -12,7 +12,7 @@ namespace BudgetSystem.Dal
     {
         public Budget GetBudget(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -39,7 +39,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
+            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -55,7 +55,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetBudgetListByCustomerId(string userName, int customerId, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
+            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName AND b.Salesman=@Salesman
@@ -70,7 +70,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetBudgetListBySaleman(string userName, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,
+            string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName  AND b.Salesman=@Salesman
@@ -92,14 +92,14 @@ namespace BudgetSystem.Dal
                                            `InProductDetail`,`AdvancePayment`,`InterestRate`,
                                            `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,
                                            `Description`,`CustomerID`,`Port`,`TaxRebate`,`PurchasePrice`,`Profit`,
-                                           `ProfitLevel1`,`ProfitLevel2`,`USDTotalAmount`,`UpdateDate`,`UpdateUser`)
+                                           `ProfitLevel1`,`ProfitLevel2`,`USDTotalAmount`,`UpdateDate`,`UpdateUser`,`VATRate`)
                                     Values (@ContractNO,@State,@Salesman,@Department,now(),@SignDate,@Validity,
                                             @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@OutSettlementMethod,
                                             @OutSettlementMethod2,@OutSettlementMethod3,@TotalAmount,@Country,@IsQualifiedSupplier,
                                             @InProductDetail,@AdvancePayment,@InterestRate,
                                             @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,
                                             @Description,@CustomerID,@Port,@TaxRebate,@PurchasePrice,@Profit,
-                                            @ProfitLevel1,@ProfitLevel2,@USDTotalAmount,now(),@UpdateUser)";
+                                            @ProfitLevel1,@ProfitLevel2,@USDTotalAmount,now(),@UpdateUser,@VATRate)";
             int id = con.Insert(insertSql, budget, tran);
             if (id > 0)
             {
@@ -122,7 +122,7 @@ namespace BudgetSystem.Dal
                                          `DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,`ExchangeRate` = @ExchangeRate ,`Description`=@Description,
                                          `CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate ,`PurchasePrice`=@PurchasePrice,Profit=@Profit,
                                          `ProfitLevel1`=@ProfitLevel1,`ProfitLevel2`=@ProfitLevel2 ,`USDTotalAmount`=@USDTotalAmount,
-                                         `UpdateDate`=now(),`UpdateUser`=@UpdateUser 
+                                         `UpdateDate`=now(),`UpdateUser`=@UpdateUser ,`VATRate`=@VATRate
                                 Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;

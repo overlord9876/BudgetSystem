@@ -144,6 +144,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData, "交单管理-部门导入交单记录",1030),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData2, "交单管理-财务导入认证记录",1040),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "交单管理-查看详情",1050),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ExportData, "交单管理-导出交单记录",1060),
 
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"报关单管理模块",1100),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "报关单管理-新增报关单",1110),

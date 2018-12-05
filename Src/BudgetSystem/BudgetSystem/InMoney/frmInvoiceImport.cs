@@ -15,9 +15,11 @@ namespace BudgetSystem.InMoney
     public partial class frmInvoiceImport : frmBaseDialogForm
     {
         bool isFinanceImport = false;
-        public frmInvoiceImport(bool isFinanceImport = false)
+        string fileName = string.Empty;
+        public frmInvoiceImport(string fileName, bool isFinanceImport = false)
         {
             InitializeComponent();
+            this.fileName = fileName;
             this.isFinanceImport = isFinanceImport;
         }
 
@@ -45,7 +47,7 @@ namespace BudgetSystem.InMoney
                 this.gvInvoice.Columns.Remove(gcPayment);
                 this.gvInvoice.Columns.Remove(gcTaxAmount);
             }
-            bool result=ReadData();
+            bool result = ReadData();
             if (!result)
             {
                 this.Close();
@@ -53,11 +55,6 @@ namespace BudgetSystem.InMoney
         }
         private bool ReadData()
         {
-            if (openFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            {
-                return false;
-            }
-
             DevExpress.Utils.WaitDialogForm sdf = new DevExpress.Utils.WaitDialogForm("正在读取数据……");
             try
             {
@@ -65,13 +62,13 @@ namespace BudgetSystem.InMoney
                 List<string> columns = null;
                 if (isFinanceImport)
                 {
-                    columns = new List<string> {"发票代码",	"发票号码","销方税号","销方名称","金额","税额"};
+                    columns = new List<string> { "发票代码", "发票号码", "销方税号", "销方名称", "金额", "税额" };
                 }
                 else
                 {
-                    columns = new List<string> { "合同号","原币","汇率","报关单","发票号","退税率","佣金","进料款"};
+                    columns = new List<string> { "合同号", "原币", "汇率", "报关单", "发票号", "退税率", "佣金", "进料款" };
                 }
-                DataTable dt = ExcelHelper.ReadExcelToDataTable(openFileDialog1.FileName, out message, string.Empty, columns);
+                DataTable dt = ExcelHelper.ReadExcelToDataTable(this.fileName, out message, string.Empty, columns);
                 if (!string.IsNullOrEmpty(message))
                 {
                     sdf.Close();
@@ -217,59 +214,59 @@ namespace BudgetSystem.InMoney
             else
             {
                 if (string.IsNullOrEmpty(invoice.ContractNO.Trim()))
-                { 
+                {
                     e.ErrorText = "合同号不能为空";
                     e.Valid = false;
                     return;
                 }
                 else if (!bm.CheckContractNO(0, invoice.ContractNO.Trim()))
                 {
-                    e.ErrorText = "合同号不存在;"; 
+                    e.ErrorText = "合同号不存在;";
                     e.Valid = false;
                     return;
                 }
                 if (string.IsNullOrEmpty(invoice.Number.Trim()))
                 {
-                    e.ErrorText = "发票号不能为空;"; 
+                    e.ErrorText = "发票号不能为空;";
                     e.Valid = false;
                     return;
                 }
                 else if (im.CheckNumber(0, invoice.Number))
                 {
-                    e.ErrorText = "发票号已存在;"; 
+                    e.ErrorText = "发票号已存在;";
                     e.Valid = false;
                     return;
                 }
                 if (invoice.ExchangeRate <= 0)
                 {
-                    e.ErrorText = "汇率应大于0"; 
+                    e.ErrorText = "汇率应大于0";
                     e.Valid = false;
                     return;
                 }
                 if (string.IsNullOrEmpty(invoice.CustomsDeclaration.Trim()))
                 {
-                    e.ErrorText = "报关单不能为空"; 
+                    e.ErrorText = "报关单不能为空";
                     e.Valid = false;
                     return;
                 }
                 if (invoice.TaxRebateRate < 0)
                 {
-                    e.ErrorText = "退税率应大于等于0"; 
+                    e.ErrorText = "退税率应大于等于0";
                     e.Valid = false;
                     return;
                 }
                 if (invoice.Commission < 0)
                 {
-                    e.ErrorText = "佣金应大于等于0"; 
+                    e.ErrorText = "佣金应大于等于0";
                     e.Valid = false;
                     return;
                 }
                 if (invoice.FeedMoney < 0)
                 {
-                    e.ErrorText = "进料款应大于等于0"; 
+                    e.ErrorText = "进料款应大于等于0";
                     e.Valid = false;
                     return;
-                } 
+                }
             }
             invoice.Message = string.Empty;
         }

@@ -108,7 +108,7 @@ namespace BudgetSystem.OutMoney
 
             this.txtCommitDate.EditValue = Caculator.CurrentBudget.CreateDate;
             this.txtBudgetNo.EditValue = Caculator.CurrentBudget;
-            this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameString();
+            this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameAndCountryString();
             this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
             this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
             this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;

@@ -41,6 +41,12 @@ namespace BudgetSystem
         public ucBudgetEdit()
         {
             InitializeComponent();
+            this.bgvInProductDetail.DataSourceChanged += new EventHandler(bgvInProductDetail_DataSourceChanged);
+        }
+
+        private void bgvInProductDetail_DataSourceChanged(object sender, EventArgs e)
+        {
+            CalcTaxRebateRateMoney();
         }
 
         public override void BindingData(int dataID)
@@ -54,6 +60,7 @@ namespace BudgetSystem
             this.CheckContractNOInput();
             this.CheckDateInput();
             this.CheckCustomerInput();
+            this.CheckSupplierInput();
             if (txtExchangeRate.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtExchangeRate, "汇率值错误。");
@@ -82,6 +89,7 @@ namespace BudgetSystem
                 CurrentBudget.Department = RunInfo.Instance.CurrentUser.Department;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 CurrentBudget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
+                CurrentBudget.VATRate = this.vatOption;
                 //主买方不允许修改，所以只有新增时获取选择值 
                 CurrentBudget.CustomerID = Convert.ToInt32(this.pceMainCustomer.Tag);
             }
@@ -105,8 +113,17 @@ namespace BudgetSystem
             CurrentBudget.SignDate = dteSignDate.DateTime;
             CurrentBudget.Validity = dteValidity.DateTime;
             CurrentBudget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
-            CurrentBudget.SupplierList = this.ucSupplierSelected.SelectedSuppliers;
-            CurrentBudget.IsQualifiedSupplier = this.chkIsQualified.Checked;
+            CurrentBudget.SupplierList = new List<Supplier>();
+            List<Supplier> suppliers = this.pceQualifiedSupplier.Tag as List<Supplier>;
+            if (suppliers != null)
+            {
+                CurrentBudget.SupplierList.AddRange(suppliers);
+            }
+            suppliers = this.pceSupplier.Tag as List<Supplier>;
+            if (suppliers != null)
+            {
+                CurrentBudget.SupplierList.AddRange(suppliers);
+            }
             CurrentBudget.TradeMode = 0;
             if (chkTradeMode1.Checked)
             {
@@ -134,8 +151,8 @@ namespace BudgetSystem
             CurrentBudget.ProfitLevel2 = this.txtProfitLevel2.Value;
             CurrentBudget.ExchangeRate = Convert.ToSingle(txtExchangeRate.EditValue);
             CurrentBudget.OutProductDetail = this.GetOutProductDetailString();
-            CurrentBudget.PurchasePrice = this.txtPurchasePrice.Value;
             CurrentBudget.InProductDetail = this.GetInProductDetailString();
+            CurrentBudget.PurchasePrice = this.txtPurchasePrice.Value;
             CurrentBudget.UpdateDate = DateTime.Now;
             CurrentBudget.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentBudget.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
@@ -223,6 +240,7 @@ namespace BudgetSystem
             Budget budget = bm.GetBudget(id);
             if (budget != null)
             {
+                this.vatOption = budget.VATRate;
                 this.txtAdvancePayment.EditValue = budget.AdvancePayment;
                 this.txtBankCharges.EditValue = budget.BankCharges;
                 this.txtCommission.EditValue = budget.Commission;
@@ -242,16 +260,17 @@ namespace BudgetSystem
                 this.txtUSDTotalAmount.EditValue = budget.USDTotalAmount;
                 this.dteSignDate.EditValue = budget.SignDate;
                 this.dteValidity.EditValue = budget.Validity;
-                this.chkIsQualified.CheckedChanged -= chkIsQualified_CheckedChanged;
-                this.chkIsQualified.Checked = budget.IsQualifiedSupplier;
-                this.ucSupplierSelected.SetSelectedItems(budget.SupplierList, this.chkIsQualified.Checked);
-                this.chkIsQualified.CheckedChanged += chkIsQualified_CheckedChanged;
-
-                this.pceCustomer.Text = budget.CustomerList.ToNameString();
+                this.pceCustomer.Text = budget.CustomerList.ToNameAndCountryString();
                 this.pceCustomer.Tag = budget.CustomerList;
-                this.pceMainCustomer.Text = budget.CustomerName;
+                this.pceMainCustomer.Text = budget.CustomerNameEx;
                 this.pceMainCustomer.Tag = budget.CustomerID;
-                this.pceSupplier.Text = budget.SupplierList.ToNameString();
+                List<Supplier> qualifiedSuppliers = budget.SupplierList.FindAll(s => s.IsQualified);
+                this.pceQualifiedSupplier.Text = qualifiedSuppliers.ToNameString();
+                this.pceQualifiedSupplier.Tag = qualifiedSuppliers;
+                List<Supplier> suppliers = budget.SupplierList.FindAll(s => !s.IsQualified);
+                this.pceSupplier.Text = suppliers.ToNameString();
+                this.pceSupplier.Tag = suppliers;
+
                 EnumTradeMode tradeMode = (EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), budget.TradeMode.ToString());
                 if ((tradeMode & EnumTradeMode.一般贸易) != 0)
                 {
@@ -370,10 +389,6 @@ namespace BudgetSystem
                     this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
                 }
             }
-            if (string.IsNullOrEmpty(this.pceSupplier.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.pceSupplier, "请选择工厂");
-            }
         }
         private void CheckContractNOInput()
         {
@@ -399,6 +414,14 @@ namespace BudgetSystem
             if (string.IsNullOrEmpty(this.pceMainCustomer.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.pceMainCustomer, "请选择主买方");
+            }
+        }
+        private void CheckSupplierInput()
+        {
+            if (string.IsNullOrEmpty(this.pceQualifiedSupplier.Text.Trim())
+                && string.IsNullOrEmpty(this.pceSupplier.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.pceQualifiedSupplier, "请选择合格供方工厂名称或非合格供方工厂名称");
             }
         }
 
@@ -620,7 +643,7 @@ namespace BudgetSystem
         private void pceCustomer_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
         {
             List<Customer> customers = this.ucCustomerSelected.SelectedCustomers;
-            e.Value = customers.ToNameString();
+            e.Value = customers.ToNameAndCountryString();
             pceCustomer.Tag = customers;
         }
 
@@ -638,7 +661,7 @@ namespace BudgetSystem
             Customer customer = this.ucCustomerSelected.FocusedCustomer;
             if (customer != null)
             {
-                e.Value = customer.Name;
+                e.Value = string.Format("{0}({1})", customer.Name, customer.Country);
                 pceMainCustomer.Tag = customer.ID;
                 this.luePort.Text = customer.Port;
             }
@@ -652,6 +675,9 @@ namespace BudgetSystem
         private void pceSupplier_QueryPopUp(object sender, CancelEventArgs e)
         {
             PopupContainerEdit popupedit = (PopupContainerEdit)sender;
+            popupedit.Properties.PopupControl = this.pccSupplier;
+            bool isQualified = (popupedit == this.pceQualifiedSupplier);
+            this.ucSupplierSelected.SetSelectedItems(popupedit.Tag as List<Supplier>, isQualified);
             pccSupplier.Width = popupedit.Width;
             pccSupplier.Height = 300;
         }
@@ -660,14 +686,9 @@ namespace BudgetSystem
         {
             List<Supplier> suppliers = this.ucSupplierSelected.SelectedSuppliers;
             e.Value = suppliers.ToNameString();
+            PopupContainerEdit popupedit = (PopupContainerEdit)sender;
+            popupedit.Tag = suppliers;
         }
-
-        private void chkIsQualified_CheckedChanged(object sender, EventArgs e)
-        {
-            this.ucSupplierSelected.SetSelectedItems(this.ucSupplierSelected.SelectedSuppliers, this.chkIsQualified.Checked);
-            this.pceSupplier.ShowPopup();
-        }
-
         private void gridOutProductDetail_Leave(object sender, EventArgs e)
         {
             if (this.WorkModel == EditFormWorkModels.New)
@@ -1122,7 +1143,15 @@ namespace BudgetSystem
                 gridInProductDetail.RefreshDataSource();
             }
         }
+
+        private void dteSignDate_EditValueChanged(object sender, EventArgs e)
+        {
+            this.dteValidity.Properties.MinValue = this.dteSignDate.DateTime;
+            this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1);
+        }
         #endregion
+
+
 
     }
 }

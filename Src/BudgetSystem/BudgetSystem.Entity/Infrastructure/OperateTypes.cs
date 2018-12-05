@@ -51,6 +51,10 @@ namespace BudgetSystem.Entity
         ImportData,
         ImportData2,
 
+        /// <summary>
+        /// 导出
+        /// </summary>
+        ExportData,
 
         Print,
         Confirm,

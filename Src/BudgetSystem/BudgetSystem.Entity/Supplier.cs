@@ -193,7 +193,7 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方)
                 {
                     if (this.EnumFlowState != EnumDataFlowState.审批通过
-                        || (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.AddDays(-15).Date < DateTime.Now.Date)
+                        || (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date < DateTime.Now.Date)
                         || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date < DateTime.Now.Date))
                     {
                         return false;

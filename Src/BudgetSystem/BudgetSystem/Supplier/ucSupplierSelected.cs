@@ -63,14 +63,7 @@ namespace BudgetSystem
                 if (this.isQualified != isQualified)
                 {
                     List<Supplier> newDataSource = new List<Supplier>();
-                    if (isQualified == false)
-                    {
-                        this.dataSource.ForEach(s => newDataSource.Add(s));
-                    }
-                    else
-                    {
-                        this.dataSource.ForEach(s => { if (s.IsQualified) { newDataSource.Add(s); } });
-                    }
+                    this.dataSource.ForEach(s => { if (s.IsQualified == isQualified) { newDataSource.Add(s); } });
                     suppliers = new BindingList<Supplier>(newDataSource);
                 }
                 foreach (var supplier in suppliers)

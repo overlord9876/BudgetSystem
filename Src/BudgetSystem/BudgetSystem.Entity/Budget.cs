@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text; 
+using System.Text;
 
 namespace BudgetSystem.Entity
 {
@@ -245,6 +245,11 @@ namespace BudgetSystem.Entity
         /// 美元合同金额
         /// </summary>
         public decimal USDTotalAmount { get; set; }
+        
+        /// <summary>
+        /// 增值税税率
+        /// </summary>
+        public decimal VATRate { get; set; }
 
         /// <summary>
         /// 更新日期
@@ -265,6 +270,19 @@ namespace BudgetSystem.Entity
         /// 主客户名称
         /// </summary>
         public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 主客户国家/地区
+        /// </summary>
+        public string CustomerCountry { get; set; }
+
+        /// <summary>
+        /// 主客户名称（含国家/地区)
+        /// </summary>
+        public string CustomerNameEx
+        {
+            get { return string.Format("{0}({1})", this.CustomerName, this.CustomerCountry); }
+        }
 
         /// <summary>
         /// 客户列表
@@ -296,7 +314,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 内贸产品详单
         /// </summary>
-        public List<InProductDetail> InProductList 
+        public List<InProductDetail> InProductList
         {
             get
             {
@@ -313,9 +331,9 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 外贸商品详单
         /// </summary>
-        public List<OutProductDetail> OutProductList 
+        public List<OutProductDetail> OutProductList
         {
-            get 
+            get
             {
                 if (!string.IsNullOrEmpty(this.OutProductDetail))
                 {

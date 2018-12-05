@@ -21,6 +21,19 @@ namespace BudgetSystem
                 return string.Empty;
             }
         }
+        public static string ToNameAndCountryString(this List<Customer> customers)
+        {
+            if (customers != null && customers.Any())
+            {
+                List<string> names = new List<string>();
+                customers.ForEach(c => names.Add(string.Format("{0}({1})", c.Name,c.Country)));
+                return string.Join(",", names.ToArray());
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
         public static string ToNameString(this List<Supplier> suppliers)
         {
