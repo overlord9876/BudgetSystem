@@ -15,6 +15,7 @@ namespace BudgetSystem.OutMoney
 {
     public partial class ucOutMoneyEdit : DataControl
     {
+        private List<Budget> budgetList;
         private decimal valueAddedTaxRate;
         private OutMoneyCaculator caculator;
         Bll.FlowManager fm = new FlowManager();
@@ -97,6 +98,33 @@ namespace BudgetSystem.OutMoney
 
         public void BandPaymentNotes(PaymentNotes payment)
         {
+            List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
+            if (budgetList != null)
+            {
+                this.cboBudget.EditValue = budgetList.Find(o => o.ID == payment.BudgetID);
+            }
+            List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
+            if (supplierList != null)
+            {
+                this.cboSupplier.EditValue = supplierList.Find(o => o.ID == payment.SupplierID);
+            }
+
+            List<BankInfo> bankInfoList = txtBankName.Properties.DataSource as List<BankInfo>;
+
+            if (bankInfoList != null)
+            {
+                foreach (BankInfo info in bankInfoList)
+                {
+                    if (info.Account.Equals(payment.BankNO))
+                    {
+                        this.txtBankName.EditValue = info;
+                        this.txtBankNO.EditValue = info.Account;
+                        break;
+                    }
+                }
+            }
+
+
             this.vatOption = payment.VatOption;
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
             this.txtDescription.Text = payment.Description;
@@ -122,16 +150,6 @@ namespace BudgetSystem.OutMoney
                     this.cboMoneyUsed.SelectedItem = umt;
                     break;
                 }
-            }
-            List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
-            if (supplierList != null)
-            {
-                this.cboSupplier.EditValue = supplierList.Find(o => o.ID == payment.SupplierID);
-            }
-            List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
-            if (budgetList != null)
-            {
-                this.cboBudget.EditValue = budgetList.Find(o => o.ID == payment.BudgetID);
             }
             txtDescription.Text = payment.Description;
             chkHasInvoice.EditValue = payment.HasInvoice;
@@ -232,7 +250,15 @@ namespace BudgetSystem.OutMoney
                 this.cboMoneyUsed.Properties.Items.Clear();
                 this.cboMoneyUsed.Properties.Items.AddRange(umtList);
 
-                this.cboBudget.Properties.DataSource = bm.GetAllBudget();
+                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+                {
+                    budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
+                }
+                else
+                {
+                    budgetList = bm.GetAllBudget();
+                }
+                this.cboBudget.Properties.DataSource = budgetList;
 
                 supplierList = sm.GetAllSupplier();
             }
@@ -289,7 +315,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.CurrentPaymentNotes.PaymentDate = DateTime.Parse(this.txtPaymentDate.EditValue.ToString());
             }
-            this.CurrentPaymentNotes.TaxRebateRate = (float)(decimal)this.txtTaxRebateRate.EditValue;
+            this.CurrentPaymentNotes.TaxRebateRate = float.Parse(this.txtTaxRebateRate.EditValue.ToString());
             this.CurrentPaymentNotes.CommitTime = DateTime.Parse(this.deCommitTime.EditValue.ToString());
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
             this.CurrentPaymentNotes.Applicant = (this.txtApplicant.EditValue as User).UserName;
@@ -298,14 +324,17 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
-            this.CurrentPaymentNotes.ExchangeRate = (float)(decimal)this.txtExchangeRate.EditValue;
+            this.CurrentPaymentNotes.ExchangeRate = float.Parse(this.txtExchangeRate.EditValue.ToString());
             this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
             this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
-            this.CurrentPaymentNotes.PaymentMethod = this.cboPaymentMethod.SelectedText;
+            this.CurrentPaymentNotes.PaymentMethod = this.cboPaymentMethod.EditValue.ToString();
             this.CurrentPaymentNotes.Description = txtDescription.Text.Trim();
             this.CurrentPaymentNotes.HasInvoice = (bool)chkHasInvoice.EditValue;
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
             this.CurrentPaymentNotes.VatOption = this.vatOption;
+
+            this.CurrentPaymentNotes.BankName = (this.txtBankName.EditValue as BankInfo).Name;
+            this.CurrentPaymentNotes.BankNO = this.txtBankNO.Text;
 
             this.CurrentPaymentNotes.IsIOU = this.chkIsIOU.Checked;
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
@@ -555,6 +584,14 @@ namespace BudgetSystem.OutMoney
             frmAccountBillView form = new frmAccountBillView();
             form.CurrentBudget = currentBudget;
             form.ShowDialog(this);
+        }
+
+        private void cboCurrency_EditValueChanged(object sender, EventArgs e)
+        {
+            if (cboCurrency.EditValue != null && (cboCurrency.EditValue.ToString().Equals("CNY") || cboCurrency.EditValue.ToString().Equals("人民币")))
+            {
+                this.txtExchangeRate.EditValue = 1;
+            }
         }
     }
 }

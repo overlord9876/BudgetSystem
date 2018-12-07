@@ -143,7 +143,6 @@ namespace BudgetSystem.Bll
                     if (b.OperatorModel == DataOperatorModel.Add)
                     {
                         b.BSID = modifyBankSlip.BSID;
-                        b.Cus_ID = b.Custom.ID;
                         dal.AddBudgetBill(b, con, tran);
                     }
                     else if (b.OperatorModel == DataOperatorModel.Modify)

@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnShowBudgetHistory = new DevExpress.XtraEditors.SimpleButton();
             this.txtApplicant = new DevExpress.XtraEditors.TextEdit();
             this.chkIsIOU = new DevExpress.XtraEditors.CheckEdit();
             this.txtActualRetention = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -120,11 +122,10 @@
             this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
-            this.dxErrorProvider2 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
-            this.btnShowBudgetHistory = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.dxErrorProvider2 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtApplicant.Properties)).BeginInit();
@@ -190,10 +191,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // gcIsWarned
@@ -245,6 +246,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(1152, 781);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnShowBudgetHistory
+            // 
+            this.btnShowBudgetHistory.Location = new System.Drawing.Point(464, 12);
+            this.btnShowBudgetHistory.Name = "btnShowBudgetHistory";
+            this.btnShowBudgetHistory.Size = new System.Drawing.Size(103, 25);
+            this.btnShowBudgetHistory.StyleController = this.layoutControl1;
+            this.btnShowBudgetHistory.TabIndex = 213;
+            this.btnShowBudgetHistory.Text = "查看收支情况";
+            this.btnShowBudgetHistory.Click += new System.EventHandler(this.btnShowBudgetHistory_Click);
             // 
             // txtApplicant
             // 
@@ -337,10 +348,10 @@
             this.txtExchangeRate.Location = new System.Drawing.Point(400, 128);
             this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.Properties.Mask.EditMask = "n";
-            this.txtExchangeRate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtExchangeRate.Properties.Mask.EditMask = "(\\d|[1-9]\\d|100)(\\.\\d{1,6})?";
+            this.txtExchangeRate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtExchangeRate.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtExchangeRate.Properties.NullText = "0.00";
+            this.txtExchangeRate.Properties.NullText = "0.000000";
             this.txtExchangeRate.Size = new System.Drawing.Size(167, 25);
             this.txtExchangeRate.StyleController = this.layoutControl1;
             this.txtExchangeRate.TabIndex = 13;
@@ -360,6 +371,7 @@
             this.cboCurrency.Size = new System.Drawing.Size(181, 25);
             this.cboCurrency.StyleController = this.layoutControl1;
             this.cboCurrency.TabIndex = 12;
+            this.cboCurrency.EditValueChanged += new System.EventHandler(this.cboCurrency_EditValueChanged);
             // 
             // txtOriginalCoin
             // 
@@ -467,9 +479,6 @@
             this.cboMoneyUsed.Name = "cboMoneyUsed";
             this.cboMoneyUsed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboMoneyUsed.Properties.Items.AddRange(new object[] {
-            "预付款",
-            "其他（佣金、运费、运保费等）"});
             this.cboMoneyUsed.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboMoneyUsed.Size = new System.Drawing.Size(284, 25);
             this.cboMoneyUsed.StyleController = this.layoutControl1;
@@ -566,19 +575,19 @@
             this.gcDescription,
             this.gcIsWarned});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            styleFormatCondition2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            styleFormatCondition2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            styleFormatCondition2.Appearance.ForeColor = System.Drawing.Color.Red;
-            styleFormatCondition2.Appearance.Options.UseBackColor = true;
-            styleFormatCondition2.Appearance.Options.UseFont = true;
-            styleFormatCondition2.Appearance.Options.UseForeColor = true;
-            styleFormatCondition2.ApplyToRow = true;
-            styleFormatCondition2.Column = this.gcIsWarned;
-            styleFormatCondition2.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
-            styleFormatCondition2.Expression = "True";
-            styleFormatCondition2.Value1 = true;
+            styleFormatCondition1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition1.Appearance.Options.UseBackColor = true;
+            styleFormatCondition1.Appearance.Options.UseFont = true;
+            styleFormatCondition1.Appearance.Options.UseForeColor = true;
+            styleFormatCondition1.ApplyToRow = true;
+            styleFormatCondition1.Column = this.gcIsWarned;
+            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition1.Expression = "True";
+            styleFormatCondition1.Value1 = true;
             this.gridLookUpEdit1View.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition2});
+            styleFormatCondition1});
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsBehavior.Editable = false;
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -1241,24 +1250,6 @@
             this.layoutControlItem25.Text = "支付后余额：";
             this.layoutControlItem25.TextSize = new System.Drawing.Size(150, 18);
             // 
-            // dxErrorProvider1
-            // 
-            this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // dxErrorProvider2
-            // 
-            this.dxErrorProvider2.ContainerControl = this;
-            // 
-            // btnShowBudgetHistory
-            // 
-            this.btnShowBudgetHistory.Location = new System.Drawing.Point(464, 12);
-            this.btnShowBudgetHistory.Name = "btnShowBudgetHistory";
-            this.btnShowBudgetHistory.Size = new System.Drawing.Size(103, 25);
-            this.btnShowBudgetHistory.StyleController = this.layoutControl1;
-            this.btnShowBudgetHistory.TabIndex = 213;
-            this.btnShowBudgetHistory.Text = "查看收支情况";
-            this.btnShowBudgetHistory.Click += new System.EventHandler(this.btnShowBudgetHistory_Click);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnShowBudgetHistory;
@@ -1271,12 +1262,20 @@
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
             // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
+            // dxErrorProvider2
+            // 
+            this.dxErrorProvider2.ContainerControl = this;
+            // 
             // ucOutMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucOutMoneyEdit";
             this.Size = new System.Drawing.Size(1152, 781);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -1344,10 +1343,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }

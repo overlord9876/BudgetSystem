@@ -129,7 +129,12 @@ namespace BudgetSystem
             {
                 CurrentBudget.SupplierList.AddRange(suppliers);
             }
-            suppliers = this.pceSupplier.Tag as List<Supplier>;
+            suppliers = this.pceTempSupplier.Tag as List<Supplier>;
+            if (suppliers != null)
+            {
+                CurrentBudget.SupplierList.AddRange(suppliers);
+            }
+            suppliers = this.pceOtherSupplier.Tag as List<Supplier>;
             if (suppliers != null)
             {
                 CurrentBudget.SupplierList.AddRange(suppliers);
@@ -273,12 +278,18 @@ namespace BudgetSystem
                 this.pceCustomer.Tag = budget.CustomerList;
                 this.pceMainCustomer.Text = budget.CustomerNameEx;
                 this.pceMainCustomer.Tag = budget.CustomerID;
+
                 List<Supplier> qualifiedSuppliers = budget.SupplierList.FindAll(s => s.IsQualified);
                 this.pceQualifiedSupplier.Text = qualifiedSuppliers.ToNameString();
                 this.pceQualifiedSupplier.Tag = qualifiedSuppliers;
-                List<Supplier> suppliers = budget.SupplierList.FindAll(s => !s.IsQualified);
-                this.pceSupplier.Text = suppliers.ToNameString();
-                this.pceSupplier.Tag = suppliers;
+
+                List<Supplier> tempSuppliers = budget.SupplierList.FindAll(s => s.SupplierType == (int)EnumSupplierType.临时供方);
+                this.pceTempSupplier.Text = tempSuppliers.ToNameString();
+                this.pceTempSupplier.Tag = tempSuppliers;
+
+                List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType == (int)EnumSupplierType.其它供方);
+                this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
+                this.pceOtherSupplier.Tag = otherSuppliers;
 
                 EnumTradeMode tradeMode = (EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), budget.TradeMode.ToString());
                 if ((tradeMode & EnumTradeMode.一般贸易) != 0)
@@ -428,9 +439,10 @@ namespace BudgetSystem
         private void CheckSupplierInput()
         {
             if (string.IsNullOrEmpty(this.pceQualifiedSupplier.Text.Trim())
-                && string.IsNullOrEmpty(this.pceSupplier.Text.Trim()))
+                && string.IsNullOrEmpty(this.pceTempSupplier.Text.Trim())
+                && string.IsNullOrEmpty(this.pceOtherSupplier.Text.Trim()))
             {
-                this.dxErrorProvider1.SetError(this.pceQualifiedSupplier, "请选择合格供方工厂名称或非合格供方工厂名称");
+                this.dxErrorProvider1.SetError(this.pceQualifiedSupplier, "至少选择一个供方工厂名称");
             }
         }
 
@@ -686,8 +698,21 @@ namespace BudgetSystem
         {
             PopupContainerEdit popupedit = (PopupContainerEdit)sender;
             popupedit.Properties.PopupControl = this.pccSupplier;
+            EnumSupplierType type = EnumSupplierType.合格供方;
+            if (popupedit == this.pceOtherSupplier)
+            {
+                type = EnumSupplierType.其它供方;
+            }
+            else if (popupedit == this.pceTempSupplier)
+            {
+                type = EnumSupplierType.临时供方;
+            }
+            else
+            {
+                type = EnumSupplierType.合格供方;
+            }
             bool isQualified = (popupedit == this.pceQualifiedSupplier);
-            this.ucSupplierSelected.SetSelectedItems(popupedit.Tag as List<Supplier>, isQualified);
+            this.ucSupplierSelected.SetSelectedItems(popupedit.Tag as List<Supplier>, type);
             pccSupplier.Width = popupedit.Width;
             pccSupplier.Height = 300;
         }
@@ -699,6 +724,9 @@ namespace BudgetSystem
             PopupContainerEdit popupedit = (PopupContainerEdit)sender;
             popupedit.Tag = suppliers;
         }
+
+
+
         private void gridOutProductDetail_Leave(object sender, EventArgs e)
         {
             if (this.WorkModel == EditFormWorkModels.New)
@@ -715,7 +743,7 @@ namespace BudgetSystem
                     {
                         inProductDetailDataSource = new BindingList<InProductDetail>();
                     }
-                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption }));
+                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption, TaxRebateRate = this.taxRebateRate }));
                     gridInProductDetail.DataSource = inProductDetailDataSource;
                     gridInProductDetail.RefreshDataSource();
                 }
@@ -850,6 +878,10 @@ namespace BudgetSystem
                 if ("usd".Equals(e.Value.ToString().ToLower()))
                 {
                     gvOutProductDetail.SetRowCellValue(e.RowHandle, gcExchangeRate, this.txtExchangeRate.Value);
+                }
+                else if ("cny".Equals(e.Value.ToString().ToLower()))
+                {
+                    gvOutProductDetail.SetRowCellValue(e.RowHandle, gcExchangeRate, 1);
                 }
             }
         }
@@ -1131,7 +1163,7 @@ namespace BudgetSystem
                 if (inProductDetailDataSource == null)
                 {
                     inProductDetailDataSource = new BindingList<InProductDetail>();
-                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption }));
+                    dataSource.ToList().ForEach(d => inProductDetailDataSource.Add(new InProductDetail() { Count = d.Count, Name = d.Name, Unit = d.Unit, Vat = this.vatOption, TaxRebateRate = this.taxRebateRate }));
                 }
                 else
                 {
@@ -1161,6 +1193,7 @@ namespace BudgetSystem
             this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1);
         }
         #endregion
+
 
 
 

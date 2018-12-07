@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using System.Data;
 using Dapper_NET20;
 using BudgetSystem.Entity;
 

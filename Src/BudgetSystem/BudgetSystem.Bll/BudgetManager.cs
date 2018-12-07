@@ -36,6 +36,16 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<Customer> GetCustomerListByBudgetId(int budgetId)
+        {
+            var lst = this.Query<Customer>((con) =>
+            {
+                var uList = dal.GetCustomerListByBudgetId(budgetId, con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
         public List<Budget> GetBudgetListBySaleman(string userName)
         {
             var lst = this.Query<Budget>((con) =>
@@ -80,7 +90,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(int id,EnumFlowNames flowName, string currentUser)
+        public string StartFlow(int id, EnumFlowNames flowName, string currentUser)
         {
             Budget budge = this.GetBudget(id);
             if (budge == null)

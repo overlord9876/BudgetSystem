@@ -66,7 +66,7 @@ namespace BudgetSystem.OutMoney
         {
             base.SubmitModifyData();
 
-            if (!this.ucOutMoneyEdit1.CheckInputData()) { return; }
+            if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 

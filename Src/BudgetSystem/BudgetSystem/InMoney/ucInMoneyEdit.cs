@@ -21,7 +21,6 @@ namespace BudgetSystem.InMoney
         private SystemConfigManager scm = new SystemConfigManager();
         private UserManager um = new UserManager();
         private List<User> allSalesmanList;
-        internal const string SaleRoleCode = "YWY";
         private BankSlip _currentBankSlip;
 
         public event EventHandler<EventArgs> CanCommitEventHandler;
@@ -52,12 +51,51 @@ namespace BudgetSystem.InMoney
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
             this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
-            this.gridCustomer.BeforeShowMenu += new DevExpress.XtraEditors.Controls.BeforeShowMenuEventHandler(gridCustomer_BeforeShowMenu);
+            repositoryItemPopupContainerEdit1.QueryPopUp += new CancelEventHandler(repositoryItemPopupContainerEdit1_QueryPopUp);
+            repositoryItemPopupContainerEdit1.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(repositoryItemPopupContainerEdit1_QueryResultValue);
+            this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
         }
 
-        void gridCustomer_BeforeShowMenu(object sender, DevExpress.XtraEditors.Controls.BeforeShowMenuEventArgs e)
+        void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
+            if (e.RowHandle >= 0)
+            {
+            }
+        }
 
+        void repositoryItemPopupContainerEdit1_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
+        {
+            Customer focusedRow = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
+            if (focusedRow != null)
+            {
+                e.Value = focusedRow.Name;
+                BudgetBill budgetBill = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
+                if (budgetBill != null)
+                {
+                    budgetBill.Cus_ID = focusedRow.ID;
+                }
+            }
+        }
+
+        void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
+        {
+            Budget currentBudget = this.gvConstSplit.GetRowCellValue(this.gvConstSplit.FocusedRowHandle, this.bgcBudget) as Budget;
+            if (currentBudget != null)
+            {
+                List<Customer> budgetCustomerList = bm.GetCustomerListByBudgetId(currentBudget.ID);
+                if (budgetCustomerList != null && customerList != null)
+                {
+                    this.gcCustomer.DataSource = customerList.FindAll(o => budgetCustomerList.Exists(bc => bc.ID.Equals(o.ID)));
+                }
+                else
+                {
+                    this.gcCustomer.DataSource = null;
+                }
+            }
+            else
+            {
+                this.gcCustomer.DataSource = null;
+            }
         }
 
         private EditFormWorkModels _workModel;
@@ -98,7 +136,7 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            allSalesmanList = um.GetRoleUsers(SaleRoleCode);
+            allSalesmanList = um.GetRoleUsers(StringUtil.SaleRoleCode);
 
             cboSales.Properties.Items.Clear();
 
@@ -184,7 +222,11 @@ namespace BudgetSystem.InMoney
             {
                 o.ExchangeRate = txtExchangeRate.Value;
                 o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
-                o.Custom = customerList != null ? customerList.Find(c => c.ID.Equals(o.Cus_ID)) : null;
+                if (customerList != null)
+                {
+                    var cus = customerList.Find(c => c.ID.Equals(o.Cus_ID));
+                    o.Customer = cus != null ? cus.Name : string.Empty;
+                }
             });
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
             CalcSplitMoney();
@@ -268,7 +310,7 @@ namespace BudgetSystem.InMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                if (RunInfo.Instance.CurrentUser.Role == ucInMoneyEdit.SaleRoleCode)
+                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
                 {
                     this.cboCustomer.Properties.ReadOnly = true;
                     this.txtVoucherNo.Properties.ReadOnly = true;
@@ -279,7 +321,7 @@ namespace BudgetSystem.InMoney
                     this.txtPaymentMethod.Properties.ReadOnly = true;
                     this.deReceiptDate.Properties.ReadOnly = true;
                     this.cboSales.Properties.ReadOnly = true;
-                    this.txtTradingPostscript.Properties.ReadOnly = true;
+                    //this.txtTradingPostscript.Properties.ReadOnly = true;
                     this.txtDescription.Properties.ReadOnly = true;
                 }
                 else
@@ -311,7 +353,6 @@ namespace BudgetSystem.InMoney
                 budgetList = bm.GetBudgetListByCustomerId(RunInfo.Instance.CurrentUser.UserName, c.ID);
                 this.gridBudget.DataSource = budgetList;
 
-                this.gridCustomer.DataSource = customerList;
             }
         }
 
@@ -324,6 +365,9 @@ namespace BudgetSystem.InMoney
                     (control as BaseEdit).Properties.ReadOnly = true;
                 }
             }
+            this.gvConstSplit.OptionsBehavior.Editable = false;
+
+
         }
 
         private void CheckSplitMoney()
@@ -463,6 +507,15 @@ namespace BudgetSystem.InMoney
             if (budget == null)
             {
                 e.ErrorText = "请选择合同号";
+                e.Valid = false;
+                return;
+            }
+
+            object customer = this.gvConstSplit.GetRowCellValue(e.RowHandle, this.bgcCustomer);
+
+            if (customer == null || string.IsNullOrEmpty(customer.ToString()))
+            {
+                e.ErrorText = "请选择预算单买方名称";
                 e.Valid = false;
                 return;
             }

@@ -94,7 +94,7 @@
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
             this.btnSure.TabIndex = 101;
-            this.btnSure.Text = "确定";
+            this.btnSure.Text = "保存";
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             // 
             // btnCancel

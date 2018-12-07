@@ -57,8 +57,17 @@ namespace BudgetSystem.CommonControl
             this.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.Properties.Mask.EditMask = "n";
             this.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.Properties.NullText = "0";            
+            this.Properties.NullText = "0";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(TextEdit_Number_KeyDown);
+            this.EditValueChanged += new EventHandler(TextEdit_Number_EditValueChanged);
+        }
+
+        void TextEdit_Number_EditValueChanged(object sender, EventArgs e)
+        {
+            if ("0.00".Equals(this.Text))
+            {
+                this.EditValue = null;
+            }
         }
 
         void TextEdit_Number_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

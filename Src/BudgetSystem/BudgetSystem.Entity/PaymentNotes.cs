@@ -60,14 +60,24 @@ namespace BudgetSystem.Entity
         public DateTime ExpectedReturnDate { get; set; }
 
         /// <summary>
-        /// 
+        /// 合同ID
         /// </summary>
         public int BudgetID { get; set; }
 
         /// <summary>
-        /// 
+        /// 客户ID
         /// </summary>
         public int SupplierID { get; set; }
+
+        /// <summary>
+        /// 开户行
+        /// </summary>
+        public string BankName { get; set; }
+
+        /// <summary>
+        /// 银行账号
+        /// </summary>
+        public string BankNO { get; set; }
 
         /// <summary>
         /// 付款时间
@@ -105,17 +115,17 @@ namespace BudgetSystem.Entity
         public string MoneyUsed { get; set; }
 
         /// <summary>
-        /// 
+        /// 是否退税
         /// </summary>
         public bool IsDrawback { get; set; }
 
         /// <summary>
-        /// 
+        /// 是否有发票
         /// </summary>
         public bool HasInvoice { get; set; }
 
         /// <summary>
-        /// 
+        /// 支付方式
         /// </summary>
         public string PaymentMethod { get; set; }
 

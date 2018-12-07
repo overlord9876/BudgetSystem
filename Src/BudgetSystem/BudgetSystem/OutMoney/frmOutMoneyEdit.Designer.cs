@@ -76,7 +76,7 @@
             // 
             // btn_Submit
             // 
-            this.btn_Submit.Location = new System.Drawing.Point(904, 893);
+            this.btn_Submit.Location = new System.Drawing.Point(784, 893);
             this.btn_Submit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_Submit.Name = "btn_Submit";
             this.btn_Submit.Size = new System.Drawing.Size(116, 32);
@@ -98,7 +98,7 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(784, 893);
+            this.btnSure.Location = new System.Drawing.Point(904, 893);
             this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 32);
@@ -116,8 +116,8 @@
             this.emptySpaceItem1,
             this.lciCancel,
             this.lciCommit,
-            this.lciSave,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.lciSave});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1152, 937);
@@ -153,7 +153,7 @@
             // 
             this.lciCommit.Control = this.btn_Submit;
             this.lciCommit.CustomizationFormText = "提交按钮";
-            this.lciCommit.Location = new System.Drawing.Point(892, 881);
+            this.lciCommit.Location = new System.Drawing.Point(772, 881);
             this.lciCommit.MaxSize = new System.Drawing.Size(120, 36);
             this.lciCommit.MinSize = new System.Drawing.Size(93, 26);
             this.lciCommit.Name = "lciCommit";
@@ -168,7 +168,7 @@
             // 
             this.lciSave.Control = this.btnSure;
             this.lciSave.CustomizationFormText = "保存按钮";
-            this.lciSave.Location = new System.Drawing.Point(772, 881);
+            this.lciSave.Location = new System.Drawing.Point(892, 881);
             this.lciSave.MaxSize = new System.Drawing.Size(120, 36);
             this.lciSave.MinSize = new System.Drawing.Size(120, 36);
             this.lciSave.Name = "lciSave";

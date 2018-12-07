@@ -60,7 +60,7 @@ namespace BudgetSystem
                 frmPaymentCalcEdit form = new frmPaymentCalcEdit();
                 form.ShowDialog(this);
             }
-            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            else if (operate.Operate == OperateTypes.SubmitApply.ToString())
             {
                 StartFlow();
             }

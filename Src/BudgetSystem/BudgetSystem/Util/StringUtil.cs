@@ -8,6 +8,8 @@ namespace BudgetSystem
 {
     public static class StringUtil
     {
+        internal const string SaleRoleCode = "YWY";
+
         public static string ToNameString(this List<Customer> customers)
         {
             if (customers != null && customers.Any())

@@ -17,6 +17,7 @@ namespace BudgetSystem.OutMoney
     {
         private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
+        public List<Budget> BudgetList { get; set; }
 
         public frmPaymentCalcEdit()
         {
@@ -25,13 +26,25 @@ namespace BudgetSystem.OutMoney
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
         {
-            this.txtBudgetNo.Properties.DataSource = bm.GetAllBudget();
+            if (BudgetList == null)
+            {
+                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+                {
+                    BudgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
+                }
+                else
+                {
+                    BudgetList = bm.GetAllBudget();
+                }
+            }
 
+            this.txtBudgetNo.Properties.DataSource = BudgetList;
             if (Caculator == null)
             {
                 return;
             }
 
+            this.txtBudgetNo.EditValue = BudgetList.Find(o => o.ID.Equals(Caculator.CurrentBudget.ID));
             this.txtBudgetNo.Properties.ReadOnly = true;
             InitBudgetMoneyDetail();
             //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
@@ -45,10 +58,12 @@ namespace BudgetSystem.OutMoney
         private void InitBudgetMoneyDetail()
         {
             this.txtCommitDate.EditValue = Caculator.CurrentBudget.CreateDate;
-            this.txtBudgetNo.EditValue = Caculator.CurrentBudget;
-            this.txtCustomer.Text = Caculator.CurrentBudget.CustomerList.ToNameAndCountryString();
-            this.txtSupplier.Text = Caculator.CurrentBudget.SupplierList.ToNameString();
-
+            Budget budget = bm.GetBudget(Caculator.CurrentBudget.ID);
+            if (budget != null)
+            {
+                this.txtCustomer.Text = budget.CustomerList.ToNameAndCountryString();
+                this.txtSupplier.Text = budget.SupplierList.ToNameString();
+            }
             //所有付款金额
             this.txtApplyMoney.EditValue = Caculator.PaymentMoneyAmount;
             //所有收款金额

@@ -34,8 +34,14 @@ IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DAT
     ALTER TABLE Budget ADD COLUMN VATRate  decimal(10,2) default 16;
 END IF;
 
+IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DATABASE()  AND table_name = 'PaymentNotes' AND column_name = 'BankName') THEN
+    ALTER TABLE PaymentNotes ADD COLUMN  BankName             varchar(100) default '';
+	ALTER TABLE PaymentNotes  ADD COLUMN  BankNO               varchar(30) default '';
+END IF;
+
 ALTER TABLE 	bankslip	 modify  COLUMN 	OriginalCoin	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	CNY	 decimal(14,2) DEFAULT 0;
+ALTER TABLE 	bankslip	 modify  COLUMN 	ExchangeRate     float(8,6) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	CNY2	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	OriginalCoin2	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	budget	 modify  COLUMN 	USDTotalAmount	 decimal(14,2) DEFAULT 0;
@@ -61,6 +67,7 @@ ALTER TABLE 	invoice	 modify  COLUMN 	FeedMoney	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	invoice	 modify  COLUMN 	Payment	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	invoice	 modify  COLUMN 	TaxAmount	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	OriginalCoin	 decimal(14,2) DEFAULT 0;
+ALTER TABLE 	paymentnotes	 modify  COLUMN 	ExchangeRate     float(8,6) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	CNY	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	paymentnotes	 modify  COLUMN 	VatOption	 decimal(14,2) DEFAULT 0;
 REPLACE Into `SystemConfig` (`Name`, `Value`) VALUES ('ÄêÀûÂÊ', 4.8);

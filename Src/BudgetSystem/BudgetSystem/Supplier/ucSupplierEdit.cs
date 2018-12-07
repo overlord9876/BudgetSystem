@@ -41,6 +41,7 @@ namespace BudgetSystem
         {
             this.cboSupplierType.Properties.Items.Add("合格供方");
             this.cboSupplierType.Properties.Items.Add("临时供方");
+            this.cboSupplierType.Properties.Items.Add("其它供方");
             this.cboSupplierType.SelectedIndex = 1;
 
             this.cboNature.Properties.Items.Add("有限责任公司");
@@ -120,7 +121,7 @@ namespace BudgetSystem
                 if (supplier != null)
                 {
                     BindingSupplier(supplier);
-                    if (supplier.EnumFlowState != EnumDataFlowState.未审批 && supplier.SupplierType != (int)EnumSupplierType.临时供方)
+                    if (supplier.EnumFlowState != EnumDataFlowState.未审批 && supplier.SupplierType == (int)EnumSupplierType.合格供方)
                     {
                         SetReadOnly();
                     }

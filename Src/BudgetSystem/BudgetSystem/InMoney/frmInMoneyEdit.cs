@@ -84,7 +84,7 @@ namespace BudgetSystem.InMoney
         }
 
         private void ucInMoneyEdit1_CanCommitEventHandler(object sender, EventArgs e)
-        {
+        {  
             this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
         }
 
@@ -100,6 +100,12 @@ namespace BudgetSystem.InMoney
             if (this.WorkModel != EditFormWorkModels.New)
             {
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
+            }
+            if (this.WorkModel == EditFormWorkModels.View)
+            {
+                lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
 

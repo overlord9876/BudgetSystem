@@ -25,9 +25,10 @@ namespace BudgetSystem.Dal
 
             if (budget != null)
             {
-                string supplierSelectSql = @"SELECT s.ID,s.`Name`,s.SupplierType FROM  Supplier s
+                string supplierSelectSql = string.Format(@"SELECT s.ID,s.`Name`,s.SupplierType ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState FROM  Supplier s
                                                 INNER JOIN BudgetSuppliers bs ON s.ID=bs.Sup_ID
-                                                WHERE bs.ID=@ID";
+                                                LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType='{0}' AND f.IsRecent=1
+                                                WHERE bs.ID=@ID", EnumFlowDataType.供应商.ToString());
                 budget.SupplierList = con.Query<Supplier>(supplierSelectSql, new { ID = id }, tran).ToList();
                 string custumerSelectSql = @"SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
                                                 INNER JOIN BudgetCustomers bc ON c.ID=bc.Cus_ID
@@ -66,6 +67,18 @@ namespace BudgetSystem.Dal
                                  WHERE b.ID<>0";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName, CustomerID = customerId, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
+        }
+
+        public IEnumerable<Customer> GetCustomerListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null)
+        {
+            string custumerSelectSql = @"SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
+                                                INNER JOIN BudgetCustomers bc ON c.ID=bc.Cus_ID
+                                                WHERE bc.Bud_ID=@ID
+Union 
+SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
+INNER join budget b on c.ID=b.CustomerID
+where b.ID=@ID";
+            return con.Query<Customer>(custumerSelectSql, new { ID = budgetId }, tran);
         }
 
         public IEnumerable<Budget> GetBudgetListBySaleman(string userName, IDbConnection con, IDbTransaction tran = null)

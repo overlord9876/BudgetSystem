@@ -207,6 +207,9 @@
       <DependentUpon>ucBudgetEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="CommonControl\LookUpEditHelper.cs" />
+    <Compile Include="CommonControl\RepositoryItemTextEdit_Number.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CommonControl\TextEdit_Number.cs">
       <SubType>Component</SubType>
     </Compile>

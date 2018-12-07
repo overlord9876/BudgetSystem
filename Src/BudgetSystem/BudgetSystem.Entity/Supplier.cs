@@ -29,6 +29,7 @@ namespace BudgetSystem.Entity
         /// 供应商类型
         /// 0=合格供方
         /// 1=临时供方
+        /// 2=其它供方
         /// </summary>
         public int SupplierType { get; set; }
 
@@ -219,6 +220,7 @@ namespace BudgetSystem.Entity
     public enum EnumSupplierType
     {
         合格供方 = 0,
-        临时供方 = 1
+        临时供方 = 1,
+        其它供方 = 2
     }
 }

@@ -94,8 +94,16 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            var list = bm.GetAllBudget();
-            this.gridBudget.DataSource = list;
+            List<Budget> budgetList = null;
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
+            }
+            else
+            {
+                budgetList = bm.GetAllBudget();
+            }
+            this.gridBudget.DataSource = budgetList;
         }
 
         private void ShowBudgetAccountBillView()

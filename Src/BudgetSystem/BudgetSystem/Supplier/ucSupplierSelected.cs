@@ -13,7 +13,7 @@ namespace BudgetSystem
 {
     public partial class ucSupplierSelected : UserControl
     {
-        private bool isQualified = false;
+        private EnumSupplierType supplierType = EnumSupplierType.临时供方;
         List<Supplier> dataSource = null;
         public ucSupplierSelected()
         {
@@ -54,16 +54,23 @@ namespace BudgetSystem
             }
         }
 
-        public void SetSelectedItems(List<Supplier> selectedItems, bool isQualified)
+        public void SetSelectedItems(List<Supplier> selectedItems, EnumSupplierType type)
         {
             var suppliers = this.gridSupplier.DataSource as BindingList<Supplier>;
 
             if (suppliers != null)
             {
-                if (this.isQualified != isQualified)
+                if (this.supplierType != type)
                 {
                     List<Supplier> newDataSource = new List<Supplier>();
-                    this.dataSource.ForEach(s => { if (s.IsQualified == isQualified) { newDataSource.Add(s); } });
+                    if (type == EnumSupplierType.合格供方)
+                    {
+                        this.dataSource.ForEach(s => { if (s.IsQualified == true) { newDataSource.Add(s); } });
+                    }
+                    else
+                    {
+                        this.dataSource.ForEach(s => { if (s.SupplierType == (int)type) { newDataSource.Add(s); } });
+                    }
                     suppliers = new BindingList<Supplier>(newDataSource);
                 }
                 foreach (var supplier in suppliers)
@@ -83,7 +90,7 @@ namespace BudgetSystem
                     }
                 }
             }
-            this.isQualified = isQualified;
+            this.supplierType = type;
             this.gridSupplier.DataSource = suppliers;
             this.gridSupplier.RefreshDataSource();
         }

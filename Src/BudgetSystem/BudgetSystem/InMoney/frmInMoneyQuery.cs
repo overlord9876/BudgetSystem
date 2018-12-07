@@ -26,7 +26,7 @@ namespace BudgetSystem.InMoney
         {
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增银行水单"));
-            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交确认"));
@@ -206,7 +206,7 @@ namespace BudgetSystem.InMoney
         public override void LoadData()
         {
             List<BankSlip> bsList = null;
-            if (RunInfo.Instance.CurrentUser.Role == ucInMoneyEdit.SaleRoleCode)
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {
                 bsList = arm.GetBankSlipListByUserName(RunInfo.Instance.CurrentUser.UserName);
             }

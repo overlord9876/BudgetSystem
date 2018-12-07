@@ -34,7 +34,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 客户对象
         /// </summary>
-        public Customer Custom { get; set; }
+        public string Customer { get; set; }
 
         /// <summary>
         /// 入帐单ID
