@@ -49,6 +49,7 @@
     <Compile Include="CodeType.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Declarationform.cs" />
+    <Compile Include="ExceptionExtension\MessageException.cs" />
     <Compile Include="ExceptionExtension\VersionNumberException.cs" />
     <Compile Include="FileData.cs" />
     <Compile Include="FlowEnum.cs" />

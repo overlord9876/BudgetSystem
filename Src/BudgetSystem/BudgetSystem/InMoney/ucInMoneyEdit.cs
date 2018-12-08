@@ -51,52 +51,53 @@ namespace BudgetSystem.InMoney
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
             this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
-            repositoryItemPopupContainerEdit1.QueryPopUp += new CancelEventHandler(repositoryItemPopupContainerEdit1_QueryPopUp);
-            repositoryItemPopupContainerEdit1.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(repositoryItemPopupContainerEdit1_QueryResultValue);
-            this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
+            //repositoryItemPopupContainerEdit1.QueryPopUp += new CancelEventHandler(repositoryItemPopupContainerEdit1_QueryPopUp);
+            //repositoryItemPopupContainerEdit1.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(repositoryItemPopupContainerEdit1_QueryResultValue);
+            //this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
         }
 
-        void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
-        {
-            if (e.RowHandle >= 0)
-            {
-            }
-        }
+        //void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        //{
+        //    if (e.RowHandle >= 0)
+        //    {
+        //        this.popupContainerControl1.OwnerEdit.ClosePopup();
+        //    }
+        //}
 
-        void repositoryItemPopupContainerEdit1_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
-        {
-            Customer focusedRow = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
-            if (focusedRow != null)
-            {
-                e.Value = focusedRow.Name;
-                BudgetBill budgetBill = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
-                if (budgetBill != null)
-                {
-                    budgetBill.Cus_ID = focusedRow.ID;
-                }
-            }
-        }
+        //void repositoryItemPopupContainerEdit1_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
+        //{
+        //    Customer focusedRow = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
+        //    if (focusedRow != null)
+        //    {
+        //        e.Value = focusedRow.Name;
+        //        BudgetBill budgetBill = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
+        //        if (budgetBill != null)
+        //        {
+        //            budgetBill.Cus_ID = focusedRow.ID;
+        //        }
+        //    }
+        //}
 
-        void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
-        {
-            Budget currentBudget = this.gvConstSplit.GetRowCellValue(this.gvConstSplit.FocusedRowHandle, this.bgcBudget) as Budget;
-            if (currentBudget != null)
-            {
-                List<Customer> budgetCustomerList = bm.GetCustomerListByBudgetId(currentBudget.ID);
-                if (budgetCustomerList != null && customerList != null)
-                {
-                    this.gcCustomer.DataSource = customerList.FindAll(o => budgetCustomerList.Exists(bc => bc.ID.Equals(o.ID)));
-                }
-                else
-                {
-                    this.gcCustomer.DataSource = null;
-                }
-            }
-            else
-            {
-                this.gcCustomer.DataSource = null;
-            }
-        }
+        //void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
+        //{
+        //    Budget currentBudget = this.gvConstSplit.GetRowCellValue(this.gvConstSplit.FocusedRowHandle, this.bgcBudget) as Budget;
+        //    if (currentBudget != null)
+        //    {
+        //        List<Customer> budgetCustomerList = bm.GetCustomerListByBudgetId(currentBudget.ID);
+        //        if (budgetCustomerList != null && customerList != null)
+        //        {
+        //            this.gcCustomer.DataSource = customerList.FindAll(o => budgetCustomerList.Exists(bc => bc.ID.Equals(o.ID)));
+        //        }
+        //        else
+        //        {
+        //            this.gcCustomer.DataSource = null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        this.gcCustomer.DataSource = null;
+        //    }
+        //}
 
         private EditFormWorkModels _workModel;
 
@@ -177,11 +178,12 @@ namespace BudgetSystem.InMoney
                 CurrentBankSlip.TradeNature = (int)(BankSlipTradeNature)Enum.Parse(typeof(BankSlipTradeNature), this.cboTradeNature.EditValue.ToString());
             }
             CurrentBankSlip.ExportName = this.txtExportName.Text.Trim();
-
-            CurrentBankSlip.State = (int)ReceiptState.入账;
-
-            GetSalesmanValues();
+            if (WorkModel == EditFormWorkModels.New)
+            {
+                CurrentBankSlip.ReceiptState = ReceiptState.入账;
+            }
             this.SpliDetail = (this.gvConstSplit.DataSource as BindingList<BudgetBill>).ToList();
+            GetSalesmanValues();
             this.CurrentBankSlip.CNY2 = txtNotSplitCNYMoney.Value;
         }
 
@@ -213,6 +215,7 @@ namespace BudgetSystem.InMoney
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
             this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
             this.txtExportName.EditValue = CurrentBankSlip.ExportName;
+            this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
             var source = arm.GetBudgetBillListByBankSlipID(item.BSID);
             if (source == null)
             {
@@ -222,10 +225,11 @@ namespace BudgetSystem.InMoney
             {
                 o.ExchangeRate = txtExchangeRate.Value;
                 o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
-                if (customerList != null)
+                if (o.RelationBudget != null)
                 {
-                    var cus = customerList.Find(c => c.ID.Equals(o.Cus_ID));
+                    var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
                     o.Customer = cus != null ? cus.Name : string.Empty;
+                    o.Cus_ID = cus.ID;
                 }
             });
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
@@ -258,11 +262,28 @@ namespace BudgetSystem.InMoney
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
             }
 
-            //if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
-            //{
-            //    dxErrorProvider1.SetError(cboNatureOfMoney, "请选择款项性质");
-            //}
-
+            if (WorkModel == EditFormWorkModels.SplitToBudget)
+            {
+                if (txtNotSplitCNYMoney.Value == 0)
+                {
+                    if (cboTradeNature.SelectedItem == null || string.IsNullOrEmpty(cboTradeNature.SelectedItem.ToString()))
+                    {
+                        dxErrorProvider1.SetError(cboTradeNature, "提交收款前，请选择贸易方式");
+                    }
+                    if (string.IsNullOrEmpty(txtExportName.Text))
+                    {
+                        dxErrorProvider1.SetError(txtExportName, "提交收款前，请输入出口货款名称");
+                    }
+                    if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
+                    {
+                        dxErrorProvider1.SetError(cboNatureOfMoney, "提交收款前，请选择款项性质");
+                    }
+                    if (string.IsNullOrEmpty(txtTradingPostscript.Text))
+                    {
+                        dxErrorProvider1.SetError(txtTradingPostscript, "提交收款前，请输入付款人常驻国际/地区");
+                    }
+                }
+            }
             if (txtOriginalCoin.Value <= 0)
             {
                 dxErrorProvider1.SetError(txtOriginalCoin, "请输入原币金额");
@@ -310,30 +331,34 @@ namespace BudgetSystem.InMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-                {
-                    this.cboCustomer.Properties.ReadOnly = true;
-                    this.txtVoucherNo.Properties.ReadOnly = true;
-                    this.txtOriginalCoin.Properties.ReadOnly = true;
-                    this.txtBankName.Properties.ReadOnly = true;
-                    this.txtExchangeRate.Properties.ReadOnly = true;
-                    this.txtCNY.Properties.ReadOnly = true;
-                    this.txtPaymentMethod.Properties.ReadOnly = true;
-                    this.deReceiptDate.Properties.ReadOnly = true;
-                    this.cboSales.Properties.ReadOnly = true;
-                    //this.txtTradingPostscript.Properties.ReadOnly = true;
-                    this.txtDescription.Properties.ReadOnly = true;
-                }
-                else
-                {
-                    this.lcgConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    this.lciConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    this.lciTradeNature.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    this.lciExportName.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                }
+                this.lcgConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.lciConstSplit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.lciTradeNature.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.lciExportName.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem17.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem18.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem19.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem13.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
                 this.txtNotSplitCNYMoney.EditValue = this.txtCNY.Value;
 
+            }
+            else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
+            {
+
+                this.cboCustomer.Properties.ReadOnly = true;
+                this.txtVoucherNo.Properties.ReadOnly = true;
+                this.txtOriginalCoin.Properties.ReadOnly = true;
+                this.txtBankName.Properties.ReadOnly = true;
+                this.txtExchangeRate.Properties.ReadOnly = true;
+                this.txtCNY.Properties.ReadOnly = true;
+                this.txtPaymentMethod.Properties.ReadOnly = true;
+                this.deReceiptDate.Properties.ReadOnly = true;
+                this.cboSales.Properties.ReadOnly = true;
+                this.cboCurrency.Properties.ReadOnly = true;
+                this.txtDescription.Properties.ReadOnly = true;
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -481,7 +506,7 @@ namespace BudgetSystem.InMoney
 
                     decimal exchangeRate = (decimal)this.gvConstSplit.GetRowCellValue(e.RowHandle, bgcConstExchangeRate);
 
-                    decimal CNY = originalCoin * (decimal)exchangeRate;
+                    decimal CNY = Math.Round(originalCoin * (decimal)exchangeRate, 2);
 
                     this.gvConstSplit.SetRowCellValue(e.RowHandle, bgcConstCNY, CNY);
                 }
@@ -490,12 +515,22 @@ namespace BudgetSystem.InMoney
             {
                 CalcSplitMoney();
             }
+
             BudgetBill budget = this.gvConstSplit.GetRow(e.RowHandle) as BudgetBill;
             if (budget != null)
             {
                 if (budget.OperatorModel != DataOperatorModel.Add)
                 {
                     budget.OperatorModel = DataOperatorModel.Modify;
+                }
+                if (e.Column == bgcBudget && budget.RelationBudget != null)
+                {
+                    var customer = customerList.Find(o => o.ID == budget.RelationBudget.CustomerID);
+                    if (customer != null)
+                    {
+                        budget.Cus_ID = customer.ID;
+                        budget.Customer = customer.Name;
+                    }
                 }
             }
         }

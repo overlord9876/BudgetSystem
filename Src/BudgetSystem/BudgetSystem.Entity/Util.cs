@@ -22,6 +22,21 @@ namespace BudgetSystem.Entity
             }
         }
 
+        public static string ToEnumDataFlowState(this int flowState, string defaultString)
+        {
+            switch (flowState)
+            {
+                case 0:
+                    return EnumDataFlowState.审批中.ToString();
+                case 1:
+                    return EnumDataFlowState.审批不通过.ToString();
+                case 2:
+                    return EnumDataFlowState.审批通过.ToString();
+                default:
+                    return defaultString;
+            }
+        }
+
         public static T ToObjectList<T>(this string bankInfoJson)
         {
             if (!string.IsNullOrEmpty(bankInfoJson))
