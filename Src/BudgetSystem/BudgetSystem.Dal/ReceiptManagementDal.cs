@@ -44,7 +44,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
 
-            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
+            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`TradingPostscript`=@TradingPostscript,`NatureOfMoney`=@NatureOfMoney,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");

@@ -152,7 +152,7 @@ namespace BudgetSystem.InMoney
                 }
                 try
                 {
-                    currentRowBankSlip.State = (int)ReceiptState.已拆分; ;
+                    currentRowBankSlip.ReceiptState = ReceiptState.已拆分;
                     currentRowBankSlip.UpdateTimestamp = arm.ConfirmSplitAmount(currentRowBankSlip);
                     XtraMessageBox.Show("提交数据成功。");
                 }
@@ -176,14 +176,14 @@ namespace BudgetSystem.InMoney
                 }
                 else
                 {
-                    if (currentRowBankSlip.State != 0)//不是待拆分状态不允许拆分
+                    if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分)//不是待拆分状态不允许拆分
                     {
                         XtraMessageBox.Show("当前不属于已拆分状态，不允许直接进行拆分。");
                         return;
                     }
                 }
                 frmInMoneyEdit form = new frmInMoneyEdit();
-                form.WorkModel = EditFormWorkModels.SplitConst;
+                form.WorkModel = EditFormWorkModels.SplitToBudget;
                 form.CurrentBankSlip = currentRowBankSlip;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -215,6 +215,8 @@ namespace BudgetSystem.InMoney
                 bsList = arm.GetAllBankSlipList();
             }
             this.gcInMoney.DataSource = bsList;
+
+            this.gvInMoney.BestFitColumns();
         }
 
         protected override void InitGridViewAction()

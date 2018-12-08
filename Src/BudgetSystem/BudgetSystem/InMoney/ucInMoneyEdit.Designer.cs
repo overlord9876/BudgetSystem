@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.bgcIsDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -123,16 +123,6 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.repositoryItemPopupContainerEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit();
-            this.popupContainerControl1 = new DevExpress.XtraEditors.PopupContainerControl();
-            this.gcCustomer = new DevExpress.XtraGrid.GridControl();
-            this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -193,11 +183,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl1)).BeginInit();
-            this.popupContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // bgcIsDelete
@@ -218,7 +203,6 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.popupContainerControl1);
             this.layoutControl1.Controls.Add(this.txtNotSplitOriginalCoinMoney);
             this.layoutControl1.Controls.Add(this.txtAlreadySplitOriginalCoinMoney);
             this.layoutControl1.Controls.Add(this.txtExportName);
@@ -354,8 +338,7 @@
             this.ritxtConstMoney,
             this.ritxtConstExchageRate,
             this.riLinkEditConstInDelete,
-            this.gridBudget,
-            this.repositoryItemPopupContainerEdit1});
+            this.gridBudget});
             this.gcConstSplit.Size = new System.Drawing.Size(1104, 315);
             this.gcConstSplit.TabIndex = 19;
             this.gcConstSplit.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -381,14 +364,14 @@
             this.gcDescription,
             this.bgcIsDelete,
             this.gcConstInDelete});
-            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Strikeout);
-            styleFormatCondition1.Appearance.Options.UseFont = true;
-            styleFormatCondition1.ApplyToRow = true;
-            styleFormatCondition1.Column = this.bgcIsDelete;
-            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
-            styleFormatCondition1.Value1 = true;
+            styleFormatCondition2.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Strikeout);
+            styleFormatCondition2.Appearance.Options.UseFont = true;
+            styleFormatCondition2.ApplyToRow = true;
+            styleFormatCondition2.Column = this.bgcIsDelete;
+            styleFormatCondition2.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition2.Value1 = true;
             this.gvConstSplit.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition1});
+            styleFormatCondition2});
             this.gvConstSplit.GridControl = this.gcConstSplit;
             this.gvConstSplit.Name = "gvConstSplit";
             this.gvConstSplit.NewItemRowText = "单击此处添加";
@@ -551,9 +534,9 @@
             // bgcCustomer
             // 
             this.bgcCustomer.Caption = "买方名称";
-            this.bgcCustomer.ColumnEdit = this.repositoryItemPopupContainerEdit1;
             this.bgcCustomer.FieldName = "Customer";
             this.bgcCustomer.Name = "bgcCustomer";
+            this.bgcCustomer.OptionsColumn.AllowEdit = false;
             this.bgcCustomer.Visible = true;
             this.bgcCustomer.Width = 98;
             // 
@@ -1229,98 +1212,6 @@
             this.layoutControlItem22.TextSize = new System.Drawing.Size(50, 20);
             this.layoutControlItem22.TextToControlDistance = 5;
             // 
-            // repositoryItemPopupContainerEdit1
-            // 
-            this.repositoryItemPopupContainerEdit1.AutoHeight = false;
-            this.repositoryItemPopupContainerEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemPopupContainerEdit1.Name = "repositoryItemPopupContainerEdit1";
-            this.repositoryItemPopupContainerEdit1.PopupControl = this.popupContainerControl1;
-            // 
-            // popupContainerControl1
-            // 
-            this.popupContainerControl1.Controls.Add(this.gcCustomer);
-            this.popupContainerControl1.Location = new System.Drawing.Point(208, 544);
-            this.popupContainerControl1.Name = "popupContainerControl1";
-            this.popupContainerControl1.Size = new System.Drawing.Size(403, 176);
-            this.popupContainerControl1.TabIndex = 24;
-            // 
-            // gcCustomer
-            // 
-            this.gcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcCustomer.Location = new System.Drawing.Point(0, 0);
-            this.gcCustomer.MainView = this.gvCustomer;
-            this.gcCustomer.Name = "gcCustomer";
-            this.gcCustomer.Size = new System.Drawing.Size(403, 176);
-            this.gcCustomer.TabIndex = 0;
-            this.gcCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvCustomer});
-            // 
-            // gvCustomer
-            // 
-            this.gvCustomer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn15,
-            this.gridColumn16,
-            this.gcPort,
-            this.gcState,
-            this.gcCreateUser,
-            this.gcCreateDate});
-            this.gvCustomer.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gvCustomer.GridControl = this.gcCustomer;
-            this.gvCustomer.Name = "gvCustomer";
-            this.gvCustomer.OptionsBehavior.Editable = false;
-            this.gvCustomer.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gvCustomer.OptionsView.ShowDetailButtons = false;
-            this.gvCustomer.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "客户名称";
-            this.gridColumn15.FieldName = "Name";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 0;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "国家或地区";
-            this.gridColumn16.FieldName = "Country";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 1;
-            // 
-            // gcPort
-            // 
-            this.gcPort.Caption = "港口";
-            this.gcPort.FieldName = "Port";
-            this.gcPort.Name = "gcPort";
-            this.gcPort.Visible = true;
-            this.gcPort.VisibleIndex = 2;
-            // 
-            // gcState
-            // 
-            this.gcState.Caption = "可用状态";
-            this.gcState.FieldName = "State";
-            this.gcState.Name = "gcState";
-            this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 3;
-            // 
-            // gcCreateUser
-            // 
-            this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUserName";
-            this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 5;
-            // 
-            // gcCreateDate
-            // 
-            this.gcCreateDate.Caption = "创建时间";
-            this.gcCreateDate.FieldName = "CreateDate";
-            this.gcCreateDate.Name = "gcCreateDate";
-            this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 4;
-            // 
             // ucInMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1389,11 +1280,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl1)).EndInit();
-            this.popupContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1493,15 +1379,5 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraEditors.ComboBoxEdit cboNatureOfMoney;
-        private DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit repositoryItemPopupContainerEdit1;
-        private DevExpress.XtraEditors.PopupContainerControl popupContainerControl1;
-        private DevExpress.XtraGrid.GridControl gcCustomer;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvCustomer;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
-        private DevExpress.XtraGrid.Columns.GridColumn gcPort;
-        private DevExpress.XtraGrid.Columns.GridColumn gcState;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
     }
 }

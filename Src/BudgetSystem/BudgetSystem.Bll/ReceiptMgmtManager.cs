@@ -129,12 +129,15 @@ namespace BudgetSystem.Bll
         /// </summary>
         /// <param name="modifyBankSlip"></param>
         /// <returns></returns>
-        public DateTime SplitAmountOfBankSlip(BankSlip modifyBankSlip, List<BudgetBill> budgetBillList)
+        public DateTime SplitAmountOfBankSlip(BankSlip modifyBankSlip, List<BudgetBill> budgetBillList, bool confirmed = false)
         {
             return this.ExecuteWithTransaction<DateTime>((con, tran) =>
             {
                 DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
-                bool confirmed = (modifyBankSlip.CNY2 == 0);
+                if (confirmed && modifyBankSlip.CNY2 != 0)
+                {
+                    throw new MessageException("未拆分人民币金额不等于0，不允许保存数据。");
+                }
 
                 foreach (BudgetBill b in budgetBillList)
                 {

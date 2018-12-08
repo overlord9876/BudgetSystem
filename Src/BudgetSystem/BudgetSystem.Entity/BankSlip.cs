@@ -77,9 +77,19 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 状态
         ///    入账 = 0,
-        ///已拆分 = 1
+        ///拆分中 = 1，
+        ///拆分完成=2
         /// </summary>
-        public int State { get; set; }
+        public int State { get; private set; }
+
+        /// <summary>
+        /// 拆分状态
+        /// </summary>
+        public ReceiptState ReceiptState
+        {
+            get { return (ReceiptState)State; }
+            set { State = (int)value; }
+        }
 
         /// <summary>
         /// 流程状态
@@ -94,6 +104,17 @@ namespace BudgetSystem.Entity
             get
             {
                 return this.FlowState.ToEnumDataFlowState();
+            }
+        }
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public string EnumFlowStateDisplayValue
+        {
+            get
+            {
+                return this.FlowState.ToEnumDataFlowState("");
             }
         }
 
@@ -151,7 +172,8 @@ namespace BudgetSystem.Entity
     public enum ReceiptState : int
     {
         入账 = 0,
-        已拆分 = 1
+        拆分中 = 1,
+        已拆分 = 2
 
     }
 }

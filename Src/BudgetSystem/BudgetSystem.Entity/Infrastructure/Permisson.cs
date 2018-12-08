@@ -122,7 +122,7 @@ namespace BudgetSystem.Entity
 
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.None,"收款管理模块",800),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.New, "收款管理-新增银行水单",810),
-                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Modify, "收款管理-分拆至合同",820),
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Modify, "收款管理-修改银行水单",820),
                         //new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Delete, "收款管理-删除入账",830),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.SplitCost, "收款管理-费用拆分",840),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.View, "收款管理-查看详情",850),

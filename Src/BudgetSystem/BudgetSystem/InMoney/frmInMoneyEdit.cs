@@ -48,12 +48,12 @@ namespace BudgetSystem.InMoney
         {
             base.SubmitModifyData();
 
-            ucInMoneyEdit1.FillData();
-
             if (!ucInMoneyEdit1.CheckUIInput())
             {
                 return;
             }
+            ucInMoneyEdit1.FillData();
+
             this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
 
             rm.ModifyBankSlip(CurrentBankSlip);
@@ -61,30 +61,45 @@ namespace BudgetSystem.InMoney
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
-        protected override void SubmitSplitConstData()
+        protected override void SubmitSplitToBudgetData()
         {
-            base.SubmitSplitConstData();
-            ucInMoneyEdit1.FillData();
+            base.SubmitSplitToBudgetData();
 
             if (!ucInMoneyEdit1.CheckUIInput())
             {
                 return;
             }
-            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
+            ucInMoneyEdit1.FillData();
 
-            rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
+            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
+            if (this.ucInMoneyEdit1.SpliDetail != null)
+            {
+                CurrentBankSlip.ReceiptState = ReceiptState.已拆分;
+                rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail, true);
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
-        protected override void SubmitSplitToBudgetData()
+        private void SaveSplitToBudgetData()
         {
-            base.SubmitSplitToBudgetData();
+            if (!ucInMoneyEdit1.CheckUIInput())
+            {
+                return;
+            }
+            ucInMoneyEdit1.FillData();
 
+            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
+            if (this.ucInMoneyEdit1.SpliDetail != null)
+            {
+                CurrentBankSlip.ReceiptState = ReceiptState.拆分中;
+                rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail, false);
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+
         }
 
         private void ucInMoneyEdit1_CanCommitEventHandler(object sender, EventArgs e)
-        {  
+        {
             this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
         }
 
@@ -100,6 +115,10 @@ namespace BudgetSystem.InMoney
             if (this.WorkModel != EditFormWorkModels.New)
             {
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
+                if (this.WorkModel == EditFormWorkModels.Modify)
+                {
+                    lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
             }
             if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -111,25 +130,19 @@ namespace BudgetSystem.InMoney
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
-            ucInMoneyEdit1.FillData();
-
-            if (!ucInMoneyEdit1.CheckUIInput())
-            {
-                return;
-            }
-            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
-            this.CurrentBankSlip = ucInMoneyEdit1.CurrentBankSlip;
-            if (this.ucInMoneyEdit1.SpliDetail != null)
-            {
-                CurrentBankSlip.State = (int)ReceiptState.已拆分;
-                rm.SplitAmountOfBankSlip(CurrentBankSlip, ucInMoneyEdit1.SpliDetail);
-            }
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            SubmitDataByWorkModel();
         }
 
         private void btnSure_Click(object sender, EventArgs e)
         {
-            SubmitDataByWorkModel();
+            if (WorkModel == EditFormWorkModels.SplitToBudget)
+            {
+                SaveSplitToBudgetData();
+            }
+            else
+            {
+                SubmitDataByWorkModel();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

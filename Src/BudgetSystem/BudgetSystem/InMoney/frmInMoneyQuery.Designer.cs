@@ -31,6 +31,7 @@
             this.gcInMoney = new DevExpress.XtraGrid.GridControl();
             this.gvInMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBankName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRemitter = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -43,7 +44,6 @@
             this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcReceiptDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateTimestamp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -55,14 +55,14 @@
             // gcInMoney
             // 
             this.gcInMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcInMoney.Location = new System.Drawing.Point(0, 0);
             this.gcInMoney.MainView = this.gvInMoney;
-            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2);
+            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcInMoney.Name = "gcInMoney";
             this.gcInMoney.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1});
-            this.gcInMoney.Size = new System.Drawing.Size(678, 597);
+            this.gcInMoney.Size = new System.Drawing.Size(1115, 768);
             this.gcInMoney.TabIndex = 1;
             this.gcInMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInMoney});
@@ -71,6 +71,7 @@
             // 
             this.gvInMoney.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcVoucherNo,
+            this.gcState,
             this.gcBankName,
             this.gcRemitter,
             this.gcCurrency,
@@ -83,7 +84,6 @@
             this.gcPaymentMethod,
             this.gcReceiptDate,
             this.gcCreateUser,
-            this.gcState,
             this.gcCreateTimestamp,
             this.gcDescription});
             this.gvInMoney.GridControl = this.gcInMoney;
@@ -100,13 +100,21 @@
             this.gcVoucherNo.Visible = true;
             this.gcVoucherNo.VisibleIndex = 0;
             // 
+            // gcState
+            // 
+            this.gcState.Caption = "入账状态";
+            this.gcState.FieldName = "ReceiptState";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 1;
+            // 
             // gcBankName
             // 
             this.gcBankName.Caption = "银行";
             this.gcBankName.FieldName = "BankName";
             this.gcBankName.Name = "gcBankName";
             this.gcBankName.Visible = true;
-            this.gcBankName.VisibleIndex = 1;
+            this.gcBankName.VisibleIndex = 2;
             // 
             // gcRemitter
             // 
@@ -114,7 +122,7 @@
             this.gcRemitter.FieldName = "Remitter";
             this.gcRemitter.Name = "gcRemitter";
             this.gcRemitter.Visible = true;
-            this.gcRemitter.VisibleIndex = 2;
+            this.gcRemitter.VisibleIndex = 3;
             // 
             // gcCurrency
             // 
@@ -122,15 +130,15 @@
             this.gcCurrency.FieldName = "Currency";
             this.gcCurrency.Name = "gcCurrency";
             this.gcCurrency.Visible = true;
-            this.gcCurrency.VisibleIndex = 3;
+            this.gcCurrency.VisibleIndex = 4;
             // 
             // gcEnumFlowState
             // 
             this.gcEnumFlowState.Caption = "审批状态";
-            this.gcEnumFlowState.FieldName = "EnumFlowState";
+            this.gcEnumFlowState.FieldName = "EnumFlowStateDisplayValue";
             this.gcEnumFlowState.Name = "gcEnumFlowState";
             this.gcEnumFlowState.Visible = true;
-            this.gcEnumFlowState.VisibleIndex = 4;
+            this.gcEnumFlowState.VisibleIndex = 5;
             // 
             // gcOriginalCoin
             // 
@@ -138,7 +146,7 @@
             this.gcOriginalCoin.FieldName = "OriginalCoin";
             this.gcOriginalCoin.Name = "gcOriginalCoin";
             this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 5;
+            this.gcOriginalCoin.VisibleIndex = 6;
             // 
             // gcExchangeRate
             // 
@@ -146,7 +154,7 @@
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 6;
+            this.gcExchangeRate.VisibleIndex = 7;
             // 
             // gcCNY
             // 
@@ -154,7 +162,7 @@
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
             this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 7;
+            this.gcCNY.VisibleIndex = 8;
             // 
             // gcTradingPostscript
             // 
@@ -162,7 +170,7 @@
             this.gcTradingPostscript.FieldName = "TradingPostscript";
             this.gcTradingPostscript.Name = "gcTradingPostscript";
             this.gcTradingPostscript.Visible = true;
-            this.gcTradingPostscript.VisibleIndex = 8;
+            this.gcTradingPostscript.VisibleIndex = 9;
             // 
             // gcExportName
             // 
@@ -170,7 +178,7 @@
             this.gcExportName.FieldName = "ExportName";
             this.gcExportName.Name = "gcExportName";
             this.gcExportName.Visible = true;
-            this.gcExportName.VisibleIndex = 9;
+            this.gcExportName.VisibleIndex = 10;
             // 
             // gcPaymentMethod
             // 
@@ -178,7 +186,7 @@
             this.gcPaymentMethod.FieldName = "PaymentMethod";
             this.gcPaymentMethod.Name = "gcPaymentMethod";
             this.gcPaymentMethod.Visible = true;
-            this.gcPaymentMethod.VisibleIndex = 10;
+            this.gcPaymentMethod.VisibleIndex = 11;
             // 
             // gcReceiptDate
             // 
@@ -186,7 +194,7 @@
             this.gcReceiptDate.FieldName = "ReceiptDate";
             this.gcReceiptDate.Name = "gcReceiptDate";
             this.gcReceiptDate.Visible = true;
-            this.gcReceiptDate.VisibleIndex = 11;
+            this.gcReceiptDate.VisibleIndex = 12;
             // 
             // gcCreateUser
             // 
@@ -194,15 +202,7 @@
             this.gcCreateUser.FieldName = "CreateUser";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 12;
-            // 
-            // gcState
-            // 
-            this.gcState.Caption = "是否已拆分";
-            this.gcState.FieldName = "State";
-            this.gcState.Name = "gcState";
-            this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 13;
+            this.gcCreateUser.VisibleIndex = 13;
             // 
             // gcCreateTimestamp
             // 
@@ -229,13 +229,13 @@
             // 
             // frmInMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 597);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientSize = new System.Drawing.Size(1115, 768);
+            this.Controls.Add(this.gcInMoney);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInMoneyQuery";
             this.Text = "收款管理";
-            this.Controls.Add(gcInMoney);
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();

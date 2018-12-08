@@ -100,9 +100,9 @@ namespace BudgetSystem
             {
                 SubmitViewData();
             }
-            else if (this.WorkModel == EditFormWorkModels.SplitConst)
+            else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
-                SubmitSplitConstData();
+                SubmitSplitToBudgetData();
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
@@ -116,11 +116,6 @@ namespace BudgetSystem
         }
 
         protected virtual void SubmitModifyData()
-        {
-
-        }
-
-        protected virtual void SubmitSplitConstData()
         {
 
         }
