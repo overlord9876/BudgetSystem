@@ -15,7 +15,7 @@ namespace BudgetSystem
 
         private static object lockObj = new object();
         private static RunInfo instance = null;
-        
+       
         public static RunInfo Instance
         {
             get
@@ -48,6 +48,29 @@ namespace BudgetSystem
         {
             get;
             set;
+        }
+
+
+
+
+        private FlowApproveNameConfigCollection flowAppreveNameConfigs = null;
+        public FlowApproveNameConfigCollection FlowAppreveNameConfigs
+        {
+            get
+            {
+                if (flowAppreveNameConfigs == null)
+                {
+                    Bll.SystemConfigManager sm = new Bll.SystemConfigManager();
+                    flowAppreveNameConfigs = sm.GetSystemConfigValue<FlowApproveNameConfigCollection>("FlowApproveNameConfig");
+
+                    if (flowAppreveNameConfigs == null)
+                    {
+                        flowAppreveNameConfigs = new FlowApproveNameConfigCollection();
+                    }
+                }
+                return flowAppreveNameConfigs;
+
+            }
         }
 
         public Util.Logger Logger

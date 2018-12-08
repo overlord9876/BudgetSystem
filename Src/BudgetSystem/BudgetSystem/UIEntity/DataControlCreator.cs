@@ -34,6 +34,11 @@ namespace BudgetSystem.UIEntity
                 edit.WorkModel = EditFormWorkModels.View;
                 return edit;
             }
+            else if (dataItemType == "BatchApprove")
+            {
+                BatchDataControl c = new BatchDataControl();
+                return c;
+            }
             else
             {
                 //TODO:这里写生成器

@@ -32,6 +32,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         Approve,
         /// <summary>
+        /// 批量审批
+        /// </summary>
+        BatchApprove,
+        /// <summary>
         /// 查看审批记录
         /// </summary>
         ViewApply,

@@ -47,6 +47,12 @@ namespace BudgetSystem.WorkSpace
 
                 //List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
                 List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
+
+                foreach (FlowRunPoint point in points)
+                {
+                    FlowApproveDisplayHelper.SetRunPointFlowNodeApproveResultWithStateDisplayName(point, this.FlowItem.FlowName);
+                }
+
                 this.gdApproveList.DataSource = points;
             }
             else

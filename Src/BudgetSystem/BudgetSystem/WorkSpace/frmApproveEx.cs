@@ -28,18 +28,38 @@ namespace BudgetSystem.WorkSpace
             set;
         }
 
+        public List<FlowItem> BatchFlowItems
+        {
+            get;
+            set;
+        }
+
+        //public bool IsBatchApprove
+        //{
+        //    get;
+        //    set;
+        //}
+
         public const string ApproveModel = "Approve";
+        public const string BatchApproveModel = "BatchApprove";
         public const string ConfirmOrRevokeModel = "ConfirmOrRevoke";
         public const string ViewModel = "View";
+     
 
         private void frmApproveEx_Load(object sender, EventArgs e)
         {
             SetLayoutControlStyle();
             CreateView();
 
-            if (this.CustomWorkModel == ApproveModel)
+            if (this.CustomWorkModel == ApproveModel || this.CustomWorkModel== BatchApproveModel)
             {
                 this.Text = "流程审批";
+                string flowName = this.CustomWorkModel == BatchApproveModel ? BatchFlowItems[0].FlowName : FlowItem.FlowName;
+
+
+                this.btnAccept.Text = RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayAcceptName(flowName);
+                this.btnReturn.Text = RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayRefuseName(flowName);
+
             }
             else if (this.CustomWorkModel == ViewModel)
             {
@@ -58,14 +78,24 @@ namespace BudgetSystem.WorkSpace
 
             lcDataGroup.Clear();
 
-            DataControl dc = DataControlCreator.CreateDataControl(FlowItem.DateItemType);
-            dc.BindingData(FlowItem.DateItemID);
+            string dcType = this.CustomWorkModel == BatchApproveModel ? "BatchApprove" : FlowItem.DateItemType;
 
+            DataControl dc = DataControlCreator.CreateDataControl(dcType);
+            string layoutItemName;
+            if (dc is BatchDataControl)
+            {
+                (dc as BatchDataControl).BindingBachData(this.BatchFlowItems );
+                layoutItemName = "批量审批-" + this.BatchFlowItems[0].FlowName;
+            }
+            else
+            {
+                dc.BindingData(FlowItem.DateItemID);
+                layoutItemName = FlowItem.DateItemText;
+            }
 
-
-
+        
             this.layoutControl1.Controls.Add(dc);
-            var temp = lcDataGroup.AddItem(FlowItem.DateItemText, dc);
+            var temp = lcDataGroup.AddItem(layoutItemName, dc);
 
 
             temp.TextLocation = DevExpress.Utils.Locations.Top;
@@ -92,14 +122,45 @@ namespace BudgetSystem.WorkSpace
             }
         }
 
+        private void BatchSubmit(bool result)
+        {
+            string info;
+            foreach (FlowItem item in this.BatchFlowItems)
+            {
+                FlowRunState state = fm.SubmitFlow(item.RunPointID, result, this.txtMyInfo.Text.Trim());
+                if (state.Translate(out info))
+                {
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                }
+                else
+                {
+                    XtraMessageBox.Show(item.DateItemText + "\r\n" + info);
+                }
+            }
+        }
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            Submit(true);
+            if (this.CustomWorkModel == BatchApproveModel)
+            {
+                BatchSubmit(true);
+            }
+            else
+            {
+                Submit(true);
+            }
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            Submit(false);
+            if (this.CustomWorkModel == BatchApproveModel)
+            {
+                BatchSubmit(false);
+            }
+            else
+            {
+                Submit(false);
+            }
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)

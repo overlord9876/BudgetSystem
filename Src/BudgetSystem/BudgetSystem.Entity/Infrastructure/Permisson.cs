@@ -98,6 +98,7 @@ namespace BudgetSystem.Entity
 
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.None,"我的待审批流程",500),
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.Approve,"我的待审批流程-审批",510),
+                        new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.BatchApprove,"我的待审批流程-批量审批",515),
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.View,"我的待审批流程-查看",520),
 
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.None,"我提交的流程",600),

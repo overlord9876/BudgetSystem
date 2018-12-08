@@ -135,7 +135,7 @@ namespace BudgetSystem.WorkSpace
         public override void RefreshData()
         {
             var lst = manager.GetUnConfirmFlowByUser(RunInfo.Instance.CurrentUser.UserName);
-
+            lst.ForEach(FlowApproveDisplayHelper.SetFlowItemInstanceStateWithEmptyStateDisplayName);
             this.gdFlow.DataSource = lst;
             
             this.gvFlow.ExpandAllGroups();

@@ -87,6 +87,12 @@ namespace BudgetSystem
                 text = "审批";
                 group = "操作";
                 imageIndex = 2;
+            }   
+            else if (operate == OperateTypes.BatchApprove)
+            {
+                text = "批量审批";
+                group = "操作";
+                imageIndex = 2;
             }
             else if (operate == OperateTypes.ModifyApply)
             {

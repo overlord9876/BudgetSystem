@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚�
 	ProjectSection(SolutionItems) = preProject
 		2018-12-01升级脚本.sql = 2018-12-01升级脚本.sql
 		2018-12-04升级脚本.sql = 2018-12-04升级脚本.sql
+		2018-12-08升级脚本.sql = 2018-12-08升级脚本.sql
 	EndProjectSection
 EndProject
 Global

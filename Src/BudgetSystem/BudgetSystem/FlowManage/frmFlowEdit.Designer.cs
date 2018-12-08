@@ -122,6 +122,7 @@
             this.gcNodeValueRemark.Caption = "审批人职位";
             this.gcNodeValueRemark.FieldName = "NodeValueRemark";
             this.gcNodeValueRemark.Name = "gcNodeValueRemark";
+            this.gcNodeValueRemark.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcNodeValueRemark.Visible = true;
             this.gcNodeValueRemark.VisibleIndex = 1;
             // 
@@ -140,7 +141,7 @@
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1212, 373, 948, 707);
             this.layoutControl1.Root = this.layoutControlGroup1;
@@ -152,7 +153,7 @@
             // 
             this.dtUpdateDate.EditValue = null;
             this.dtUpdateDate.Location = new System.Drawing.Point(102, 165);
-            this.dtUpdateDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtUpdateDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtUpdateDate.Name = "dtUpdateDate";
             this.dtUpdateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -166,7 +167,7 @@
             // txtCreaateUser
             // 
             this.txtCreaateUser.Location = new System.Drawing.Point(102, 136);
-            this.txtCreaateUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCreaateUser.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreaateUser.Name = "txtCreaateUser";
             this.txtCreaateUser.Properties.ReadOnly = true;
             this.txtCreaateUser.Size = new System.Drawing.Size(759, 25);
@@ -176,7 +177,7 @@
             // cboVersion
             // 
             this.cboVersion.Location = new System.Drawing.Point(102, 107);
-            this.cboVersion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboVersion.Margin = new System.Windows.Forms.Padding(2);
             this.cboVersion.Name = "cboVersion";
             this.cboVersion.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -190,7 +191,7 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(757, 566);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -200,7 +201,7 @@
             // btnSure
             // 
             this.btnSure.Location = new System.Drawing.Point(637, 566);
-            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -211,7 +212,7 @@
             // btnInsert
             // 
             this.btnInsert.Location = new System.Drawing.Point(629, 206);
-            this.btnInsert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnInsert.Margin = new System.Windows.Forms.Padding(2);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(126, 25);
             this.btnInsert.StyleController = this.layoutControl1;
@@ -222,7 +223,7 @@
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(759, 206);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(114, 25);
             this.btnDelete.StyleController = this.layoutControl1;
@@ -233,7 +234,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(512, 206);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(113, 25);
             this.btnAdd.StyleController = this.layoutControl1;
@@ -243,10 +244,10 @@
             // 
             // gdNodes
             // 
-            this.gdNodes.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdNodes.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gdNodes.Location = new System.Drawing.Point(24, 272);
             this.gdNodes.MainView = this.gvNodes;
-            this.gdNodes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdNodes.Margin = new System.Windows.Forms.Padding(2);
             this.gdNodes.Name = "gdNodes";
             this.gdNodes.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cboNodeConfig,
@@ -273,6 +274,7 @@
             this.gcNodeConfig.FieldName = "NodeConfig";
             this.gcNodeConfig.Name = "gcNodeConfig";
             this.gcNodeConfig.OptionsColumn.AllowEdit = false;
+            this.gcNodeConfig.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcNodeConfig.Visible = true;
             this.gcNodeConfig.VisibleIndex = 2;
             // 
@@ -293,6 +295,7 @@
             this.gcNodeValue.ColumnEdit = this.repositoryItemPopupContainerEdit1;
             this.gcNodeValue.FieldName = "NodeValueDisplayValue";
             this.gcNodeValue.Name = "gcNodeValue";
+            this.gcNodeValue.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcNodeValue.Visible = true;
             this.gcNodeValue.VisibleIndex = 0;
             // 
@@ -310,7 +313,7 @@
             this.popupContainerControl1.Controls.Add(this.tabControl);
             this.popupContainerControl1.Controls.Add(this.panelControl1);
             this.popupContainerControl1.Location = new System.Drawing.Point(391, 398);
-            this.popupContainerControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.popupContainerControl1.Margin = new System.Windows.Forms.Padding(2);
             this.popupContainerControl1.Name = "popupContainerControl1";
             this.popupContainerControl1.Size = new System.Drawing.Size(388, 193);
             this.popupContainerControl1.TabIndex = 11;
@@ -332,7 +335,7 @@
             // 
             this.tpUser.Controls.Add(this.labelControl1);
             this.tpUser.Controls.Add(this.cboNodeUser);
-            this.tpUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpUser.Margin = new System.Windows.Forms.Padding(2);
             this.tpUser.Name = "tpUser";
             this.tpUser.Size = new System.Drawing.Size(382, 121);
             this.tpUser.Text = "指定人员";
@@ -340,7 +343,7 @@
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(16, 36);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(2);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(60, 18);
             this.labelControl1.TabIndex = 1;
@@ -349,7 +352,7 @@
             // cboNodeUser
             // 
             this.cboNodeUser.Location = new System.Drawing.Point(89, 34);
-            this.cboNodeUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboNodeUser.Margin = new System.Windows.Forms.Padding(2);
             this.cboNodeUser.Name = "cboNodeUser";
             this.cboNodeUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -362,7 +365,7 @@
             this.tpDepartment.Controls.Add(this.rgNodeDepartmentUserType);
             this.tpDepartment.Controls.Add(this.labelControl2);
             this.tpDepartment.Controls.Add(this.cboNodeDepartment);
-            this.tpDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.tpDepartment.Name = "tpDepartment";
             this.tpDepartment.Size = new System.Drawing.Size(382, 121);
             this.tpDepartment.Text = "指定部门";
@@ -371,7 +374,7 @@
             // 
             this.rgNodeDepartmentUserType.EditValue = 1;
             this.rgNodeDepartmentUserType.Location = new System.Drawing.Point(89, 62);
-            this.rgNodeDepartmentUserType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rgNodeDepartmentUserType.Margin = new System.Windows.Forms.Padding(2);
             this.rgNodeDepartmentUserType.Name = "rgNodeDepartmentUserType";
             this.rgNodeDepartmentUserType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "部门经理"),
@@ -382,7 +385,7 @@
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(16, 36);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(75, 18);
             this.labelControl2.TabIndex = 3;
@@ -391,7 +394,7 @@
             // cboNodeDepartment
             // 
             this.cboNodeDepartment.Location = new System.Drawing.Point(89, 34);
-            this.cboNodeDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboNodeDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.cboNodeDepartment.Name = "cboNodeDepartment";
             this.cboNodeDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -414,7 +417,7 @@
             // 
             this.btnSureNodeValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSureNodeValue.Location = new System.Drawing.Point(293, 4);
-            this.btnSureNodeValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSureNodeValue.Margin = new System.Windows.Forms.Padding(2);
             this.btnSureNodeValue.Name = "btnSureNodeValue";
             this.btnSureNodeValue.Size = new System.Drawing.Size(83, 33);
             this.btnSureNodeValue.TabIndex = 2;
@@ -424,7 +427,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(102, 49);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(759, 25);
             this.txtName.StyleController = this.layoutControl1;
@@ -433,7 +436,7 @@
             // txtRemark
             // 
             this.txtRemark.Location = new System.Drawing.Point(102, 78);
-            this.txtRemark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRemark.Margin = new System.Windows.Forms.Padding(2);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(759, 25);
             this.txtRemark.StyleController = this.layoutControl1;

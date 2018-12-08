@@ -101,6 +101,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BatchDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\BatchDataControl.Designer.cs">
+      <DependentUpon>BatchDataControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\DataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -232,6 +238,7 @@
     <Compile Include="Customer\ucCustomerSelected.Designer.cs">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlowApproveDisplayHelper.cs" />
     <Compile Include="Supplier\ucSupplierEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -521,6 +528,9 @@
     <Compile Include="UserManage\frmUserQueryConditionEditor.Designer.cs">
       <DependentUpon>frmUserQueryConditionEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Base\BatchDataControl.resx">
+      <DependentUpon>BatchDataControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\DataControl.resx">
       <DependentUpon>DataControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -771,6 +781,7 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_ConfirmOrRevoke.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Default.xml" />

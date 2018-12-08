@@ -44,18 +44,20 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string NodeApproveResultWithState
         {
-            get
-            {
-                if (this.State ==false)
-                {
-                    return "";
-                }
-                else
-                {
-                    return NodeApproveResult ? "同意" : "驳回";
-                
-                }
-            }
+            get;
+            set;
+            //get
+            //{
+            //    if (this.State ==false)
+            //    {
+            //        return "";
+            //    }
+            //    else
+            //    {
+            //        return NodeApproveResult ? "同意" : "驳回";
+
+            //    }
+            //}
         }
     
 

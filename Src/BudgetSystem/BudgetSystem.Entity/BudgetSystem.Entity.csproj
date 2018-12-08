@@ -51,6 +51,8 @@
     <Compile Include="Declarationform.cs" />
     <Compile Include="ExceptionExtension\VersionNumberException.cs" />
     <Compile Include="FileData.cs" />
+    <Compile Include="FlowApproveNameConfig.cs" />
+    <Compile Include="FlowApproveNameConfigCollection.cs" />
     <Compile Include="FlowEnum.cs" />
     <Compile Include="Infrastructure\ActionWithPermission.cs" />
     <Compile Include="Infrastructure\BusinessModules.cs" />
