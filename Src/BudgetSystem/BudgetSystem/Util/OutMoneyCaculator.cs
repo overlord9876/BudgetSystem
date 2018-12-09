@@ -53,6 +53,11 @@ namespace BudgetSystem
         }
 
         /// <summary>
+        /// 申请用款金额
+        /// </summary>
+        public decimal ApplyMoney { get; private set; }
+
+        /// <summary>
         /// 可退税货款款（金额）
         /// </summary>
         public decimal TaxPayment { get; private set; }
@@ -67,19 +72,9 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 加上本次用款，共计退税款
+        /// 账上余额
         /// </summary>
-        public decimal AllTaxes { get; private set; }
-
-        /// <summary>
-        /// 支付后余额
-        /// </summary>
-        public decimal Balance { get; private set; }
-
-        /// <summary>
-        /// 扣除应留利润余额
-        /// </summary>
-        public decimal RetainedInterestBalance { get { return Balance - ActualProfit; } }
+        public decimal AccountBalance { get; private set; }
 
         /// <summary>
         /// 合同金额（合同计划款）
@@ -95,25 +90,12 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 压缩预付款金额
+        /// 压缩后的预付款金额
         /// </summary>
         public decimal CompressAdvancePayment
         {
-            get
-            {
-                if (ReceiptMoneyAmount > 0)
-                {
-                    if (_currentBudget.TotalAmount != 0)
-                    {
-                        return (1 - (ReceiptMoneyAmount / _currentBudget.TotalAmount)) * AdvancePayment;
-                    }
-                    else { return 0; }
-                }
-                else
-                {
-                    return AdvancePayment;
-                }
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -162,6 +144,11 @@ namespace BudgetSystem
         }
 
         /// <summary>
+        /// 预算款占总额%
+        /// </summary>
+        public decimal Percentage { get; private set; }
+
+        /// <summary>
         /// 佣金比率
         /// </summary>
         public decimal CommissionRate { get; private set; }
@@ -202,6 +189,62 @@ namespace BudgetSystem
 
             CalcAboutPaymentMoney();
 
+            #region 1.佣金比率=（（已付佣金总额-预算单佣金总额）/预算单佣金金额）*100%
+
+            //已付佣金总额
+            decimal commissionTotal = _paymentList.Where(o => o.MoneyUsed == "佣金").Sum(o => o.CNY);
+
+            if (this.CurrentBudget.Commission > 0)
+            {
+                CommissionRate = Math.Round((commissionTotal - this.CurrentBudget.Commission) / this.CurrentBudget.Commission * 100, 2);
+            }
+
+            #endregion
+
+            #region 2.压缩后的预付款=（1-所有人民币收汇金额/预算单的合同金额）*预算单的预付款
+
+            if (ReceiptMoneyAmount > 0 && TotalAmount != 0)
+            {
+                CompressAdvancePayment = (1 - (ReceiptMoneyAmount / TotalAmount)) * AdvancePayment;
+            }
+
+            #endregion
+
+            #region 3.预算款占总额%=预付款/合同金额
+
+            if (TotalAmount != 0)
+            {
+                Percentage = Math.Round(((AdvancePayment / TotalAmount) * 100), 2);
+            }
+
+            #endregion
+
+            #region 4.账上余额 = 所有收款 – 申请用款金额
+
+            AccountBalance = ReceiptMoneyAmount - ApplyMoney;
+
+            #endregion
+
+            #region 5.应留实际利润=预算单（预算）利润/预算单合同金额*外汇收款
+
+            if (TotalAmount != 0)
+            {
+                ActualProfit = Math.Round(PlannedProfit / TotalAmount * ReceiptMoneyAmount, 2);
+            }
+
+            #endregion
+
+            #region 6.收汇超计划%=（已收汇人民币-合同计划款）/合同计划款*100%
+
+            if (this.TotalAmount != 0)
+            {
+                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
+            }
+
+            #endregion
+
+            #region 其他
+
             decimal interest = Math.Round(AdvancePayment * (decimal)CurrentBudget.InterestRate * CurrentBudget.Days / 30 / 100, 2);
             decimal subTotal = CurrentBudget.Commission + CurrentBudget.Premium + CurrentBudget.BankCharges +/*直接费用*/0 + CurrentBudget.FeedMoney;
 
@@ -227,16 +270,84 @@ namespace BudgetSystem
                 ProfitLevel = PlannedProfit / NetIncomeCNY;
             }
 
-            if (TotalAmount != 0)
+            #endregion
+
+        }
+
+        /// <summary>
+        /// 可计退税款/暂计退税款
+        /// </summary>
+        public decimal CurrentTaxes { get; private set; }
+
+        /// <summary>
+        /// 加上本次用款，共计退税款
+        /// </summary>
+        public decimal AllTaxes { get; private set; }
+
+        /// <summary>
+        /// 扣除应留利润余额
+        /// </summary>
+        public decimal RetainedInterestBalance { get; private set; }
+
+        /// <summary>
+        /// 启用预付款支付后余额
+        /// </summary>
+        public decimal EnablingAdvancePayment { get; private set; }
+
+        #region Public Method
+
+        /// <summary>
+        /// 获取所有税款
+        /// </summary>
+        /// <param name="paymentMoney">申请用款</param>
+        /// <param name="exportRebateRate">退税率</param>
+        public void ApplyForPayment(decimal paymentMoney, decimal exportRebateRate)
+        {
+            CurrentTaxes = paymentMoney / (1 + ValueAddedTaxRate / 100) * (exportRebateRate / 100);
+
+            if (_currentBudget.AdvancePayment == 0)//不包含预付款情况
             {
-                ActualProfit = PlannedProfit / TotalAmount * ReceiptMoneyAmount;
+                AllTaxes = TaxRefund + CurrentTaxes;
+                //支付后余额=账上余额+共计退税款-现申请用款
+                this.Balance = AccountBalance + AllTaxes - paymentMoney;
             }
-            //收汇超计划%=（已收汇人民币-合同计划款）/合同计划款*100%
-            if (this.TotalAmount != 0)
+            else
             {
-                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
+                if (IsReceiptGreaterThanTaxPayment(paymentMoney))//合同有预付款（所有可退税货款（辅料款）< 收款时）
+                {
+                    AllTaxes = TaxRefund + CurrentTaxes;
+                }
+                else//合同有预付款（所有可退税货款（辅料款）> 收款，或两者都为零时）
+                {
+                    CurrentTaxes = 0;
+                    //收到的钱小于或等于退税款，按实际收汇金额计算
+                    AllTaxes = (ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100);
+                }
+
+                //支付后余额=账上余额+共计退税款-现申请用款
+                this.Balance = AccountBalance + AllTaxes - paymentMoney;
+
+                //启用预付款支付后余额
+                this.EnablingAdvancePayment = this.Balance + this.CompressAdvancePayment;
+
+                //留利后可支付款含退税款
+                this.RetainedInterestBalance = this.Balance - this.ActualProfit;
             }
         }
+
+        /// <summary>
+        /// 支付后余额
+        /// </summary>
+        public decimal Balance { get; private set; }
+
+        public decimal GetUsagePayMoney(string usageName)
+        {
+            return this._paymentList.Where(o => o.MoneyUsed == usageName).Sum(o => o.CNY);
+        }
+
+        #endregion
+
+        #region Private Method
 
         private void CalcAboutReceiptMoney()
         {
@@ -247,53 +358,10 @@ namespace BudgetSystem
         {
             TaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
 
-            decimal commissionTotal = _paymentList.Where(o => o.MoneyUsed == "佣金").Sum(o => o.CNY);
-            if (this.CurrentBudget.Commission > 0)
-            {
-                CommissionRate = (commissionTotal - this.CurrentBudget.Commission) / this.CurrentBudget.Commission * 100;
-            }
+            ApplyMoney = _paymentList.Sum(o => o.CNY);
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());
         }
 
-        /// <summary>
-        /// 当前最新计算的退税额
-        /// </summary>
-        public decimal CurrentTaxes { get; private set; }
-
-
-        /// <summary>
-        /// 获取所有税款
-        /// </summary>
-        /// <param name="paymentMoney"></param>
-        /// <param name="exportRebateRate"></param>
-        /// <returns></returns>
-        public void GetAllTaxes(decimal paymentMoney, decimal exportRebateRate)
-        {
-            CurrentTaxes = TaxRefund + paymentMoney / (1 + ValueAddedTaxRate / 100) * (exportRebateRate / 100);
-            if (_currentBudget.AdvancePayment > 0)
-            {
-                if (IsReceiptGreaterThanTaxPayment(paymentMoney))
-                {
-                    AllTaxes = TaxRefund + CurrentTaxes;
-                }
-                else
-                {
-                    //收到的钱小于或等于退税款，按实际收汇金额计算
-                    AllTaxes = (ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100);
-                }
-            }
-            else
-            {
-                AllTaxes = TaxRefund + CurrentTaxes;
-            }
-
-            this.Balance = ReceiptMoneyAmount - PaymentMoneyAmount + AllTaxes - paymentMoney + AdvancePayment;
-        }
-
-        public decimal GetUsagePayMoney(string usageName)
-        {
-            return this._paymentList.Where(o => o.MoneyUsed == usageName).Sum(o => o.CNY);
-        }
-
+        #endregion
     }
 }

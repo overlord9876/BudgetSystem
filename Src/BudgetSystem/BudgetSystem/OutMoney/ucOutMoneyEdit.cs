@@ -429,7 +429,7 @@ namespace BudgetSystem.OutMoney
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }
-            caculator.GetAllTaxes(this.txtCNY.Value, taxRebateRate);
+            caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate);
             //退税总金额=已付金额+当前付款退税金额
             this.txtAmountTaxRebate.EditValue = caculator.AllTaxes;
 

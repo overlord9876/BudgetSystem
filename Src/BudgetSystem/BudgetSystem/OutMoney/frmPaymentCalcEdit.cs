@@ -64,7 +64,11 @@ namespace BudgetSystem.OutMoney
                 this.txtCustomer.Text = budget.CustomerList.ToNameAndCountryString();
                 this.txtSupplier.Text = budget.SupplierList.ToNameString();
             }
-            //所有付款金额
+            //预付款
+            this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
+            //压缩后预付款
+            this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
+            //申请用款金额
             this.txtApplyMoney.EditValue = Caculator.PaymentMoneyAmount;
             //所有收款金额
             this.txtReceiptAmount.EditValue = Caculator.ReceiptMoneyAmount;
@@ -72,12 +76,18 @@ namespace BudgetSystem.OutMoney
             this.txtReceiptAmount2.EditValue = Caculator.ReceiptMoneyAmount;
             //合同计划款
             this.txtTotalAmount.EditValue = Caculator.TotalAmount;
+            //预算款占总额%
+            this.txtPercentage.EditValue = Caculator.Percentage;
+            //收款超计划%
+            this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
+            //佣金比率
+            this.txtCommissionRate.EditValue = Caculator.CommissionRate;
+
 
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
             this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney;
             this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
-            this.txtCommissionRate.EditValue = Caculator.CommissionRate;
 
             this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
             this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
@@ -146,7 +156,6 @@ namespace BudgetSystem.OutMoney
                     txtTaxRefundA.EditValue = txtTaxPaymentA.Value / (1 + (Caculator.ValueAddedTaxRate / 100)) * (taxRebateRate / 100);
                 }
             }
-            //SetLayoutControlStyle(EditFormWorkModels.Custom);
 
             this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
             this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
@@ -162,7 +171,7 @@ namespace BudgetSystem.OutMoney
             this.txtNetIncome_Plan.EditValue = Caculator.PlannedProfit;
             this.txtRetainedProfit.EditValue = Caculator.ActualProfit;
 
-            Caculator.GetAllTaxes(usageMoney, taxRebateRate);
+            Caculator.ApplyForPayment(usageMoney, taxRebateRate);
 
             if (Caculator.AdvancePayment > 0)//有预付款的情况
             {
@@ -229,37 +238,6 @@ namespace BudgetSystem.OutMoney
         }
 
 
-        /// <summary>
-        /// 预算款占总额%：=预付款/合同金额
-        /// </summary>
-        private void CalcPercentage()
-        {
-            if (txtTotalAmount.Value != 0)
-            {
-                this.txtPercentage.EditValue = Math.Round(txtAdvancePayment.Value / txtTotalAmount.Value * 100, 2);
-            }
-            else
-            {
-                this.txtPercentage.EditValue = 0;
-            }
-        }
-
-        private void txtTotalAmount_EditValueChanged(object sender, EventArgs e)
-        {
-            CalcPercentage();
-        }
-
-        private void txtReceiptAmount2_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtAdvancePayment_EditValueChanged(object sender, EventArgs e)
-        {
-            CalcPercentage();
-        }
-
-
-
         private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
         {
             decimal taxRebateRate = 0;
@@ -302,11 +280,6 @@ namespace BudgetSystem.OutMoney
             }
 
             ChangedUsageMoneyValue(textEdit_Number24.Value, taxRebateRate);
-        }
-
-        private void textEdit_Number28_EditValueChanged(object sender, EventArgs e)
-        {
-            textEdit_Number1.EditValue = txtTaxRefundA.Value + textEdit_Number28.Value;
         }
 
         private void txtBudgetNo_EditValueChanged(object sender, EventArgs e)
