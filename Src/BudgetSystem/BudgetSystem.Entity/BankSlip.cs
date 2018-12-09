@@ -159,6 +159,13 @@ namespace BudgetSystem.Entity
         /// 关联业务员
         /// </summary>
         public List<User> Sales { get; set; }
+
+
+        public string ToDesc()
+        {
+            return string.Format("{0}水单,需要修改合同入账",
+                this.VoucherNo);
+        }
     }
 
     public enum BankSlipTradeNature

@@ -245,7 +245,7 @@ namespace BudgetSystem.Entity
         /// 美元合同金额
         /// </summary>
         public decimal USDTotalAmount { get; set; }
-        
+
         /// <summary>
         /// 增值税税率
         /// </summary>
@@ -357,10 +357,26 @@ namespace BudgetSystem.Entity
                 return this.FlowState.ToEnumDataFlowState();
             }
         }
+        /// <summary>
+        /// 总成本
+        /// </summary>
+        public decimal TotalCost
+        {
+            get 
+            {
+                return PurchasePrice - TaxRebate;
+            }
+        }
 
         public override string ToString()
         {
             return string.Format("{0}", ContractNO);
+        }
+
+        public string ToDesc()
+        {
+            return string.Format("主买方[{0}],合同金额[{1}],美元合同金额[{2}],总进价[{3}],出口退税[{4}],总成本[{5}],利润[{6}]",
+                                  CustomerNameEx, TotalAmount, USDTotalAmount, PurchasePrice, TaxRebate,TotalCost, Profit);
         }
     }
 

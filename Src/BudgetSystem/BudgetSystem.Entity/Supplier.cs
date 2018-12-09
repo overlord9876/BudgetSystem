@@ -215,6 +215,12 @@ namespace BudgetSystem.Entity
             return Name;
         }
 
+        public string ToDesc()
+        {
+            return string.Format("名称[{0}],法人[{1}],有合格供方代理协议[{2}],经营异常企业[{3}],联系人[{4}],所属部门[{5}]",
+                this.Name, this.Legal, ExistsAgentAgreement ? "是" : "否", Discredited ? "是" : "否", Contacts, DepartmentCode + "-" + DepartmentName);
+        }
+
     }
 
     public enum EnumSupplierType

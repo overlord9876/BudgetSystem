@@ -42,7 +42,7 @@
             this.gdBatchApproveData.Location = new System.Drawing.Point(0, 0);
             this.gdBatchApproveData.MainView = this.gvBatchApproveData;
             this.gdBatchApproveData.Name = "gdBatchApproveData";
-            this.gdBatchApproveData.Size = new System.Drawing.Size(806, 346);
+            this.gdBatchApproveData.Size = new System.Drawing.Size(951, 346);
             this.gdBatchApproveData.TabIndex = 0;
             this.gdBatchApproveData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBatchApproveData});
@@ -64,6 +64,7 @@
             this.gcText.Name = "gcText";
             this.gcText.Visible = true;
             this.gcText.VisibleIndex = 0;
+            this.gcText.Width = 163;
             // 
             // gcDescription
             // 
@@ -72,6 +73,7 @@
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 1;
+            this.gcDescription.Width = 756;
             // 
             // BatchDataControl
             // 
@@ -79,7 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gdBatchApproveData);
             this.Name = "BatchDataControl";
-            this.Size = new System.Drawing.Size(806, 346);
+            this.Size = new System.Drawing.Size(951, 346);
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).EndInit();
             this.ResumeLayout(false);

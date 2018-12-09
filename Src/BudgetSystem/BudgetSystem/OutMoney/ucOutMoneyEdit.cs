@@ -410,16 +410,9 @@ namespace BudgetSystem.OutMoney
 
             //总收款金额
             txtReceiptAmount.EditValue = caculator.ReceiptMoneyAmount;
-            //this.paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
-            //if (paymentNotes == null)
-            //{
-            //    paymentNotes = new System.Collections.ObjectModel.Collection<PaymentNotes>();
-            //}
+
             //预付款赋值
             txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
-
-            //已收汇原币金额
-            //decimal amount = rm.GetTotalAmountCNYByBudgetId(currentBudget.ID);
 
             //应留利润计算
             txtActualRetention.EditValue = caculator.ActualProfit;

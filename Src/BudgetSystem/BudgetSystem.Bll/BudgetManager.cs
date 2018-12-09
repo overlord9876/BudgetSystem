@@ -66,6 +66,18 @@ namespace BudgetSystem.Bll
             return budget;
         }
 
+        public string GetBudgetDesc(int id)
+        {
+            Budget budget = this.GetBudget(id);
+            if (budget != null)
+            {
+                return budget.ToDesc();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
         public int AddBudget(Budget budget, bool isStartFlow = false)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>

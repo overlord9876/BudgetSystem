@@ -33,20 +33,20 @@
             this.txtPremium = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtCommission = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtAdvancePayment2 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number1 = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtAllTaxes2 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtTaxRebateRate2 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.textEdit_Number30 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number29 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number28 = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtEnablingAdvancePayment = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtBalance2 = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtCurrentTaxes2 = new BudgetSystem.CommonControl.TextEdit_Number();
             this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
-            this.textEdit_Number27 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.txtRetainedProfit = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.txtNetIncome_Plan = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number24 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number23 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.txtTaxRefund_Total = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number20 = new BudgetSystem.CommonControl.TextEdit_Number();
-            this.textEdit_Number19 = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtRetainedInterestBalance = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtActualProfit = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtPlannedProfit = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtApplyForPayment2 = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtBalance = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtAllTaxes = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtApplyForPayment = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.txtCurrentTaxes = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtSuperPaymentScheme = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
             this.txtTotalAmount = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -139,20 +139,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdvancePayment2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAllTaxes2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number30.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number29.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number28.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEnablingAdvancePayment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBalance2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCurrentTaxes2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number27.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRetainedProfit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNetIncome_Plan.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number24.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number23.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTaxRefund_Total.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number20.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number19.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRetainedInterestBalance.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtActualProfit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlannedProfit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyForPayment2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBalance.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAllTaxes.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyForPayment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCurrentTaxes.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSuperPaymentScheme.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmount.Properties)).BeginInit();
@@ -232,20 +232,20 @@
             this.layoutControl1.Controls.Add(this.txtPremium);
             this.layoutControl1.Controls.Add(this.txtCommission);
             this.layoutControl1.Controls.Add(this.txtAdvancePayment2);
-            this.layoutControl1.Controls.Add(this.textEdit_Number1);
+            this.layoutControl1.Controls.Add(this.txtAllTaxes2);
             this.layoutControl1.Controls.Add(this.txtTaxRebateRate2);
-            this.layoutControl1.Controls.Add(this.textEdit_Number30);
-            this.layoutControl1.Controls.Add(this.textEdit_Number29);
-            this.layoutControl1.Controls.Add(this.textEdit_Number28);
+            this.layoutControl1.Controls.Add(this.txtEnablingAdvancePayment);
+            this.layoutControl1.Controls.Add(this.txtBalance2);
+            this.layoutControl1.Controls.Add(this.txtCurrentTaxes2);
             this.layoutControl1.Controls.Add(this.memoEdit1);
-            this.layoutControl1.Controls.Add(this.textEdit_Number27);
-            this.layoutControl1.Controls.Add(this.txtRetainedProfit);
-            this.layoutControl1.Controls.Add(this.txtNetIncome_Plan);
-            this.layoutControl1.Controls.Add(this.textEdit_Number24);
-            this.layoutControl1.Controls.Add(this.textEdit_Number23);
-            this.layoutControl1.Controls.Add(this.txtTaxRefund_Total);
-            this.layoutControl1.Controls.Add(this.textEdit_Number20);
-            this.layoutControl1.Controls.Add(this.textEdit_Number19);
+            this.layoutControl1.Controls.Add(this.txtRetainedInterestBalance);
+            this.layoutControl1.Controls.Add(this.txtActualProfit);
+            this.layoutControl1.Controls.Add(this.txtPlannedProfit);
+            this.layoutControl1.Controls.Add(this.txtApplyForPayment2);
+            this.layoutControl1.Controls.Add(this.txtBalance);
+            this.layoutControl1.Controls.Add(this.txtAllTaxes);
+            this.layoutControl1.Controls.Add(this.txtApplyForPayment);
+            this.layoutControl1.Controls.Add(this.txtCurrentTaxes);
             this.layoutControl1.Controls.Add(this.txtSuperPaymentScheme);
             this.layoutControl1.Controls.Add(this.txtSupplier);
             this.layoutControl1.Controls.Add(this.txtTotalAmount);
@@ -342,21 +342,21 @@
             this.txtAdvancePayment2.StyleController = this.layoutControl1;
             this.txtAdvancePayment2.TabIndex = 46;
             // 
-            // textEdit_Number1
+            // txtAllTaxes2
             // 
-            this.textEdit_Number1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number1.IsSupportNegative = false;
-            this.textEdit_Number1.Location = new System.Drawing.Point(104, 602);
-            this.textEdit_Number1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number1.Name = "textEdit_Number1";
-            this.textEdit_Number1.Properties.Mask.EditMask = "n";
-            this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number1.Properties.NullText = "0";
-            this.textEdit_Number1.Properties.ReadOnly = true;
-            this.textEdit_Number1.Size = new System.Drawing.Size(301, 25);
-            this.textEdit_Number1.StyleController = this.layoutControl1;
-            this.textEdit_Number1.TabIndex = 45;
+            this.txtAllTaxes2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtAllTaxes2.IsSupportNegative = false;
+            this.txtAllTaxes2.Location = new System.Drawing.Point(104, 602);
+            this.txtAllTaxes2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAllTaxes2.Name = "txtAllTaxes2";
+            this.txtAllTaxes2.Properties.Mask.EditMask = "n";
+            this.txtAllTaxes2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtAllTaxes2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtAllTaxes2.Properties.NullText = "0";
+            this.txtAllTaxes2.Properties.ReadOnly = true;
+            this.txtAllTaxes2.Size = new System.Drawing.Size(301, 25);
+            this.txtAllTaxes2.StyleController = this.layoutControl1;
+            this.txtAllTaxes2.TabIndex = 45;
             // 
             // txtTaxRebateRate2
             // 
@@ -371,55 +371,55 @@
             this.txtTaxRebateRate2.TabIndex = 44;
             this.txtTaxRebateRate2.EditValueChanged += new System.EventHandler(this.txtTaxRebateRate2_EditValueChanged);
             // 
-            // textEdit_Number30
+            // txtEnablingAdvancePayment
             // 
-            this.textEdit_Number30.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number30.IsSupportNegative = false;
-            this.textEdit_Number30.Location = new System.Drawing.Point(901, 602);
-            this.textEdit_Number30.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number30.Name = "textEdit_Number30";
-            this.textEdit_Number30.Properties.Mask.EditMask = "n";
-            this.textEdit_Number30.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number30.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number30.Properties.NullText = "0";
-            this.textEdit_Number30.Properties.ReadOnly = true;
-            this.textEdit_Number30.Size = new System.Drawing.Size(227, 25);
-            this.textEdit_Number30.StyleController = this.layoutControl1;
-            this.textEdit_Number30.TabIndex = 42;
-            this.textEdit_Number30.EditValueChanged += new System.EventHandler(this.textEdit_Number30_EditValueChanged);
+            this.txtEnablingAdvancePayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtEnablingAdvancePayment.IsSupportNegative = false;
+            this.txtEnablingAdvancePayment.Location = new System.Drawing.Point(901, 602);
+            this.txtEnablingAdvancePayment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtEnablingAdvancePayment.Name = "txtEnablingAdvancePayment";
+            this.txtEnablingAdvancePayment.Properties.Mask.EditMask = "n";
+            this.txtEnablingAdvancePayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtEnablingAdvancePayment.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtEnablingAdvancePayment.Properties.NullText = "0";
+            this.txtEnablingAdvancePayment.Properties.ReadOnly = true;
+            this.txtEnablingAdvancePayment.Size = new System.Drawing.Size(227, 25);
+            this.txtEnablingAdvancePayment.StyleController = this.layoutControl1;
+            this.txtEnablingAdvancePayment.TabIndex = 42;
+            this.txtEnablingAdvancePayment.EditValueChanged += new System.EventHandler(this.txtEnablingAdvancePayment_EditValueChanged);
             // 
-            // textEdit_Number29
+            // txtBalance2
             // 
-            this.textEdit_Number29.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number29.IsSupportNegative = false;
-            this.textEdit_Number29.Location = new System.Drawing.Point(489, 602);
-            this.textEdit_Number29.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number29.Name = "textEdit_Number29";
-            this.textEdit_Number29.Properties.Mask.EditMask = "n";
-            this.textEdit_Number29.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number29.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number29.Properties.NullText = "0";
-            this.textEdit_Number29.Properties.ReadOnly = true;
-            this.textEdit_Number29.Size = new System.Drawing.Size(253, 25);
-            this.textEdit_Number29.StyleController = this.layoutControl1;
-            this.textEdit_Number29.TabIndex = 41;
-            this.textEdit_Number29.EditValueChanged += new System.EventHandler(this.textEdit_Number29_EditValueChanged);
+            this.txtBalance2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtBalance2.IsSupportNegative = false;
+            this.txtBalance2.Location = new System.Drawing.Point(489, 602);
+            this.txtBalance2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBalance2.Name = "txtBalance2";
+            this.txtBalance2.Properties.Mask.EditMask = "n";
+            this.txtBalance2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtBalance2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtBalance2.Properties.NullText = "0";
+            this.txtBalance2.Properties.ReadOnly = true;
+            this.txtBalance2.Size = new System.Drawing.Size(253, 25);
+            this.txtBalance2.StyleController = this.layoutControl1;
+            this.txtBalance2.TabIndex = 41;
+            this.txtBalance2.EditValueChanged += new System.EventHandler(this.txtBalance2_EditValueChanged);
             // 
-            // textEdit_Number28
+            // txtCurrentTaxes2
             // 
-            this.textEdit_Number28.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number28.IsSupportNegative = false;
-            this.textEdit_Number28.Location = new System.Drawing.Point(715, 573);
-            this.textEdit_Number28.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number28.Name = "textEdit_Number28";
-            this.textEdit_Number28.Properties.Mask.EditMask = "n";
-            this.textEdit_Number28.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number28.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number28.Properties.NullText = "0";
-            this.textEdit_Number28.Properties.ReadOnly = true;
-            this.textEdit_Number28.Size = new System.Drawing.Size(413, 25);
-            this.textEdit_Number28.StyleController = this.layoutControl1;
-            this.textEdit_Number28.TabIndex = 40;
+            this.txtCurrentTaxes2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtCurrentTaxes2.IsSupportNegative = false;
+            this.txtCurrentTaxes2.Location = new System.Drawing.Point(715, 573);
+            this.txtCurrentTaxes2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCurrentTaxes2.Name = "txtCurrentTaxes2";
+            this.txtCurrentTaxes2.Properties.Mask.EditMask = "n";
+            this.txtCurrentTaxes2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtCurrentTaxes2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtCurrentTaxes2.Properties.NullText = "0";
+            this.txtCurrentTaxes2.Properties.ReadOnly = true;
+            this.txtCurrentTaxes2.Size = new System.Drawing.Size(413, 25);
+            this.txtCurrentTaxes2.StyleController = this.layoutControl1;
+            this.txtCurrentTaxes2.TabIndex = 40;
             // 
             // memoEdit1
             // 
@@ -430,134 +430,134 @@
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 39;
             // 
-            // textEdit_Number27
+            // txtRetainedInterestBalance
             // 
-            this.textEdit_Number27.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number27.IsSupportNegative = false;
-            this.textEdit_Number27.Location = new System.Drawing.Point(929, 680);
-            this.textEdit_Number27.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number27.Name = "textEdit_Number27";
-            this.textEdit_Number27.Properties.Mask.EditMask = "n";
-            this.textEdit_Number27.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number27.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number27.Properties.NullText = "0";
-            this.textEdit_Number27.Properties.ReadOnly = true;
-            this.textEdit_Number27.Size = new System.Drawing.Size(199, 25);
-            this.textEdit_Number27.StyleController = this.layoutControl1;
-            this.textEdit_Number27.TabIndex = 38;
+            this.txtRetainedInterestBalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtRetainedInterestBalance.IsSupportNegative = false;
+            this.txtRetainedInterestBalance.Location = new System.Drawing.Point(929, 680);
+            this.txtRetainedInterestBalance.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRetainedInterestBalance.Name = "txtRetainedInterestBalance";
+            this.txtRetainedInterestBalance.Properties.Mask.EditMask = "n";
+            this.txtRetainedInterestBalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtRetainedInterestBalance.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtRetainedInterestBalance.Properties.NullText = "0";
+            this.txtRetainedInterestBalance.Properties.ReadOnly = true;
+            this.txtRetainedInterestBalance.Size = new System.Drawing.Size(199, 25);
+            this.txtRetainedInterestBalance.StyleController = this.layoutControl1;
+            this.txtRetainedInterestBalance.TabIndex = 38;
             // 
-            // txtRetainedProfit
+            // txtActualProfit
             // 
-            this.txtRetainedProfit.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtRetainedProfit.IsSupportNegative = false;
-            this.txtRetainedProfit.Location = new System.Drawing.Point(498, 680);
-            this.txtRetainedProfit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtRetainedProfit.Name = "txtRetainedProfit";
-            this.txtRetainedProfit.Properties.Mask.EditMask = "n";
-            this.txtRetainedProfit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtRetainedProfit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtRetainedProfit.Properties.NullText = "0";
-            this.txtRetainedProfit.Properties.ReadOnly = true;
-            this.txtRetainedProfit.Size = new System.Drawing.Size(242, 25);
-            this.txtRetainedProfit.StyleController = this.layoutControl1;
-            this.txtRetainedProfit.TabIndex = 37;
+            this.txtActualProfit.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtActualProfit.IsSupportNegative = false;
+            this.txtActualProfit.Location = new System.Drawing.Point(498, 680);
+            this.txtActualProfit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtActualProfit.Name = "txtActualProfit";
+            this.txtActualProfit.Properties.Mask.EditMask = "n";
+            this.txtActualProfit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtActualProfit.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtActualProfit.Properties.NullText = "0";
+            this.txtActualProfit.Properties.ReadOnly = true;
+            this.txtActualProfit.Size = new System.Drawing.Size(242, 25);
+            this.txtActualProfit.StyleController = this.layoutControl1;
+            this.txtActualProfit.TabIndex = 37;
             // 
-            // txtNetIncome_Plan
+            // txtPlannedProfit
             // 
-            this.txtNetIncome_Plan.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtNetIncome_Plan.IsSupportNegative = false;
-            this.txtNetIncome_Plan.Location = new System.Drawing.Point(104, 680);
-            this.txtNetIncome_Plan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtNetIncome_Plan.Name = "txtNetIncome_Plan";
-            this.txtNetIncome_Plan.Properties.Mask.EditMask = "n";
-            this.txtNetIncome_Plan.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtNetIncome_Plan.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtNetIncome_Plan.Properties.NullText = "0";
-            this.txtNetIncome_Plan.Properties.ReadOnly = true;
-            this.txtNetIncome_Plan.Size = new System.Drawing.Size(280, 25);
-            this.txtNetIncome_Plan.StyleController = this.layoutControl1;
-            this.txtNetIncome_Plan.TabIndex = 36;
+            this.txtPlannedProfit.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtPlannedProfit.IsSupportNegative = false;
+            this.txtPlannedProfit.Location = new System.Drawing.Point(104, 680);
+            this.txtPlannedProfit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPlannedProfit.Name = "txtPlannedProfit";
+            this.txtPlannedProfit.Properties.Mask.EditMask = "n";
+            this.txtPlannedProfit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtPlannedProfit.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtPlannedProfit.Properties.NullText = "0";
+            this.txtPlannedProfit.Properties.ReadOnly = true;
+            this.txtPlannedProfit.Size = new System.Drawing.Size(280, 25);
+            this.txtPlannedProfit.StyleController = this.layoutControl1;
+            this.txtPlannedProfit.TabIndex = 36;
             // 
-            // textEdit_Number24
+            // txtApplyForPayment2
             // 
-            this.textEdit_Number24.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number24.IsSupportNegative = false;
-            this.textEdit_Number24.Location = new System.Drawing.Point(104, 573);
-            this.textEdit_Number24.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number24.Name = "textEdit_Number24";
-            this.textEdit_Number24.Properties.Mask.EditMask = "n";
-            this.textEdit_Number24.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number24.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number24.Properties.NullText = "0";
-            this.textEdit_Number24.Size = new System.Drawing.Size(301, 25);
-            this.textEdit_Number24.StyleController = this.layoutControl1;
-            this.textEdit_Number24.TabIndex = 35;
-            this.textEdit_Number24.EditValueChanged += new System.EventHandler(this.textEdit_Number24_EditValueChanged);
+            this.txtApplyForPayment2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtApplyForPayment2.IsSupportNegative = false;
+            this.txtApplyForPayment2.Location = new System.Drawing.Point(104, 573);
+            this.txtApplyForPayment2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApplyForPayment2.Name = "txtApplyForPayment2";
+            this.txtApplyForPayment2.Properties.Mask.EditMask = "n";
+            this.txtApplyForPayment2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtApplyForPayment2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtApplyForPayment2.Properties.NullText = "0";
+            this.txtApplyForPayment2.Size = new System.Drawing.Size(301, 25);
+            this.txtApplyForPayment2.StyleController = this.layoutControl1;
+            this.txtApplyForPayment2.TabIndex = 35;
+            this.txtApplyForPayment2.EditValueChanged += new System.EventHandler(this.ApplyForPayment2_EditValueChanged);
             // 
-            // textEdit_Number23
+            // txtBalance
             // 
-            this.textEdit_Number23.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number23.IsSupportNegative = false;
-            this.textEdit_Number23.Location = new System.Drawing.Point(658, 495);
-            this.textEdit_Number23.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number23.Name = "textEdit_Number23";
-            this.textEdit_Number23.Properties.Mask.EditMask = "n";
-            this.textEdit_Number23.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number23.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number23.Properties.NullText = "0";
-            this.textEdit_Number23.Properties.ReadOnly = true;
-            this.textEdit_Number23.Size = new System.Drawing.Size(470, 25);
-            this.textEdit_Number23.StyleController = this.layoutControl1;
-            this.textEdit_Number23.TabIndex = 34;
-            this.textEdit_Number23.EditValueChanged += new System.EventHandler(this.textEdit_Number23_EditValueChanged);
+            this.txtBalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtBalance.IsSupportNegative = false;
+            this.txtBalance.Location = new System.Drawing.Point(658, 495);
+            this.txtBalance.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBalance.Name = "txtBalance";
+            this.txtBalance.Properties.Mask.EditMask = "n";
+            this.txtBalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtBalance.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtBalance.Properties.NullText = "0";
+            this.txtBalance.Properties.ReadOnly = true;
+            this.txtBalance.Size = new System.Drawing.Size(470, 25);
+            this.txtBalance.StyleController = this.layoutControl1;
+            this.txtBalance.TabIndex = 34;
+            this.txtBalance.EditValueChanged += new System.EventHandler(this.txtBalance_EditValueChanged);
             // 
-            // txtTaxRefund_Total
+            // txtAllTaxes
             // 
-            this.txtTaxRefund_Total.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtTaxRefund_Total.IsSupportNegative = false;
-            this.txtTaxRefund_Total.Location = new System.Drawing.Point(104, 495);
-            this.txtTaxRefund_Total.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtTaxRefund_Total.Name = "txtTaxRefund_Total";
-            this.txtTaxRefund_Total.Properties.Mask.EditMask = "n";
-            this.txtTaxRefund_Total.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtTaxRefund_Total.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTaxRefund_Total.Properties.NullText = "0";
-            this.txtTaxRefund_Total.Properties.ReadOnly = true;
-            this.txtTaxRefund_Total.Size = new System.Drawing.Size(470, 25);
-            this.txtTaxRefund_Total.StyleController = this.layoutControl1;
-            this.txtTaxRefund_Total.TabIndex = 33;
+            this.txtAllTaxes.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtAllTaxes.IsSupportNegative = false;
+            this.txtAllTaxes.Location = new System.Drawing.Point(104, 495);
+            this.txtAllTaxes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAllTaxes.Name = "txtAllTaxes";
+            this.txtAllTaxes.Properties.Mask.EditMask = "n";
+            this.txtAllTaxes.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtAllTaxes.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtAllTaxes.Properties.NullText = "0";
+            this.txtAllTaxes.Properties.ReadOnly = true;
+            this.txtAllTaxes.Size = new System.Drawing.Size(470, 25);
+            this.txtAllTaxes.StyleController = this.layoutControl1;
+            this.txtAllTaxes.TabIndex = 33;
             // 
-            // textEdit_Number20
+            // txtApplyForPayment
             // 
-            this.textEdit_Number20.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number20.IsSupportNegative = false;
-            this.textEdit_Number20.Location = new System.Drawing.Point(104, 466);
-            this.textEdit_Number20.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number20.Name = "textEdit_Number20";
-            this.textEdit_Number20.Properties.Mask.EditMask = "n";
-            this.textEdit_Number20.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number20.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number20.Properties.NullText = "0";
-            this.textEdit_Number20.Size = new System.Drawing.Size(299, 25);
-            this.textEdit_Number20.StyleController = this.layoutControl1;
-            this.textEdit_Number20.TabIndex = 31;
-            this.textEdit_Number20.EditValueChanged += new System.EventHandler(this.textEdit_Number20_EditValueChanged);
+            this.txtApplyForPayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtApplyForPayment.IsSupportNegative = false;
+            this.txtApplyForPayment.Location = new System.Drawing.Point(104, 466);
+            this.txtApplyForPayment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApplyForPayment.Name = "txtApplyForPayment";
+            this.txtApplyForPayment.Properties.Mask.EditMask = "n";
+            this.txtApplyForPayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtApplyForPayment.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtApplyForPayment.Properties.NullText = "0";
+            this.txtApplyForPayment.Size = new System.Drawing.Size(299, 25);
+            this.txtApplyForPayment.StyleController = this.layoutControl1;
+            this.txtApplyForPayment.TabIndex = 31;
+            this.txtApplyForPayment.EditValueChanged += new System.EventHandler(this.ApplyForPayment_EditValueChanged);
             // 
-            // textEdit_Number19
+            // txtCurrentTaxes
             // 
-            this.textEdit_Number19.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textEdit_Number19.IsSupportNegative = false;
-            this.textEdit_Number19.Location = new System.Drawing.Point(708, 466);
-            this.textEdit_Number19.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textEdit_Number19.Name = "textEdit_Number19";
-            this.textEdit_Number19.Properties.Mask.EditMask = "n";
-            this.textEdit_Number19.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.textEdit_Number19.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.textEdit_Number19.Properties.NullText = "0";
-            this.textEdit_Number19.Properties.ReadOnly = true;
-            this.textEdit_Number19.Size = new System.Drawing.Size(420, 25);
-            this.textEdit_Number19.StyleController = this.layoutControl1;
-            this.textEdit_Number19.TabIndex = 30;
+            this.txtCurrentTaxes.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtCurrentTaxes.IsSupportNegative = false;
+            this.txtCurrentTaxes.Location = new System.Drawing.Point(708, 466);
+            this.txtCurrentTaxes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCurrentTaxes.Name = "txtCurrentTaxes";
+            this.txtCurrentTaxes.Properties.Mask.EditMask = "n";
+            this.txtCurrentTaxes.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtCurrentTaxes.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtCurrentTaxes.Properties.NullText = "0";
+            this.txtCurrentTaxes.Properties.ReadOnly = true;
+            this.txtCurrentTaxes.Size = new System.Drawing.Size(420, 25);
+            this.txtCurrentTaxes.StyleController = this.layoutControl1;
+            this.txtCurrentTaxes.TabIndex = 30;
             // 
             // txtSuperPaymentScheme
             // 
@@ -1370,7 +1370,7 @@
             // 
             // layoutControlItem27
             // 
-            this.layoutControlItem27.Control = this.textEdit_Number20;
+            this.layoutControlItem27.Control = this.txtApplyForPayment;
             this.layoutControlItem27.CustomizationFormText = "现申请用款";
             this.layoutControlItem27.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem27.Name = "layoutControlItem27";
@@ -1394,7 +1394,7 @@
             // 
             // layoutControlItem26
             // 
-            this.layoutControlItem26.Control = this.textEdit_Number19;
+            this.layoutControlItem26.Control = this.txtCurrentTaxes;
             this.layoutControlItem26.CustomizationFormText = "可计退税款";
             this.layoutControlItem26.Location = new System.Drawing.Point(604, 0);
             this.layoutControlItem26.Name = "layoutControlItem26";
@@ -1406,7 +1406,7 @@
             // 
             // layoutControlItem29
             // 
-            this.layoutControlItem29.Control = this.txtTaxRefund_Total;
+            this.layoutControlItem29.Control = this.txtAllTaxes;
             this.layoutControlItem29.CustomizationFormText = "共计退税款";
             this.layoutControlItem29.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem29.Name = "layoutControlItem29";
@@ -1418,7 +1418,7 @@
             // 
             // layoutControlItem30
             // 
-            this.layoutControlItem30.Control = this.textEdit_Number23;
+            this.layoutControlItem30.Control = this.txtBalance;
             this.layoutControlItem30.CustomizationFormText = "支付后余额";
             this.layoutControlItem30.Location = new System.Drawing.Point(554, 29);
             this.layoutControlItem30.Name = "layoutControlItem30";
@@ -1454,7 +1454,7 @@
             // 
             // layoutControlItem32
             // 
-            this.layoutControlItem32.Control = this.txtNetIncome_Plan;
+            this.layoutControlItem32.Control = this.txtPlannedProfit;
             this.layoutControlItem32.CustomizationFormText = "计划利润：";
             this.layoutControlItem32.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem32.Name = "layoutControlItem32";
@@ -1466,7 +1466,7 @@
             // 
             // layoutControlItem33
             // 
-            this.layoutControlItem33.Control = this.txtRetainedProfit;
+            this.layoutControlItem33.Control = this.txtActualProfit;
             this.layoutControlItem33.CustomizationFormText = "应留实际利润：";
             this.layoutControlItem33.Location = new System.Drawing.Point(364, 0);
             this.layoutControlItem33.Name = "layoutControlItem33";
@@ -1478,7 +1478,7 @@
             // 
             // layoutControlItem34
             // 
-            this.layoutControlItem34.Control = this.textEdit_Number27;
+            this.layoutControlItem34.Control = this.txtRetainedInterestBalance;
             this.layoutControlItem34.CustomizationFormText = "留利后可支付款含退税款：";
             this.layoutControlItem34.Location = new System.Drawing.Point(720, 0);
             this.layoutControlItem34.Name = "layoutControlItem34";
@@ -1505,7 +1505,7 @@
             // 
             // layoutControlItem31
             // 
-            this.layoutControlItem31.Control = this.textEdit_Number24;
+            this.layoutControlItem31.Control = this.txtApplyForPayment2;
             this.layoutControlItem31.CustomizationFormText = "现申请用款";
             this.layoutControlItem31.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem31.Name = "layoutControlItem31";
@@ -1517,7 +1517,7 @@
             // 
             // layoutControlItem36
             // 
-            this.layoutControlItem36.Control = this.textEdit_Number28;
+            this.layoutControlItem36.Control = this.txtCurrentTaxes2;
             this.layoutControlItem36.CustomizationFormText = "暂计退税款";
             this.layoutControlItem36.Location = new System.Drawing.Point(611, 0);
             this.layoutControlItem36.Name = "layoutControlItem36";
@@ -1541,7 +1541,7 @@
             // 
             // layoutControlItem25
             // 
-            this.layoutControlItem25.Control = this.textEdit_Number1;
+            this.layoutControlItem25.Control = this.txtAllTaxes2;
             this.layoutControlItem25.CustomizationFormText = "共计退税款";
             this.layoutControlItem25.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem25.Name = "layoutControlItem25";
@@ -1553,7 +1553,7 @@
             // 
             // layoutControlItem37
             // 
-            this.layoutControlItem37.Control = this.textEdit_Number29;
+            this.layoutControlItem37.Control = this.txtBalance2;
             this.layoutControlItem37.CustomizationFormText = "支付后余额";
             this.layoutControlItem37.Location = new System.Drawing.Point(385, 29);
             this.layoutControlItem37.Name = "layoutControlItem37";
@@ -1565,7 +1565,7 @@
             // 
             // layoutControlItem38
             // 
-            this.layoutControlItem38.Control = this.textEdit_Number30;
+            this.layoutControlItem38.Control = this.txtEnablingAdvancePayment;
             this.layoutControlItem38.CustomizationFormText = "启用预付款支付后余额";
             this.layoutControlItem38.Location = new System.Drawing.Point(722, 29);
             this.layoutControlItem38.Name = "layoutControlItem38";
@@ -1591,20 +1591,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdvancePayment2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAllTaxes2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxRebateRate2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number30.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number29.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number28.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEnablingAdvancePayment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBalance2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCurrentTaxes2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number27.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRetainedProfit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNetIncome_Plan.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number24.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number23.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTaxRefund_Total.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number20.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit_Number19.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRetainedInterestBalance.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtActualProfit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlannedProfit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyForPayment2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBalance.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAllTaxes.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyForPayment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCurrentTaxes.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSuperPaymentScheme.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmount.Properties)).EndInit();
@@ -1705,18 +1705,18 @@
         private CommonControl.TextEdit_Number txtTotalAmount;
         private DevExpress.XtraEditors.TextEdit txtSupplier;
         private CommonControl.TextEdit_Number txtSuperPaymentScheme;
-        private CommonControl.TextEdit_Number textEdit_Number19;
-        private CommonControl.TextEdit_Number textEdit_Number24;
-        private CommonControl.TextEdit_Number textEdit_Number23;
-        private CommonControl.TextEdit_Number txtTaxRefund_Total;
-        private CommonControl.TextEdit_Number textEdit_Number20;
-        private CommonControl.TextEdit_Number txtNetIncome_Plan;
-        private CommonControl.TextEdit_Number txtRetainedProfit;
-        private CommonControl.TextEdit_Number textEdit_Number27;
+        private CommonControl.TextEdit_Number txtCurrentTaxes;
+        private CommonControl.TextEdit_Number txtApplyForPayment2;
+        private CommonControl.TextEdit_Number txtBalance;
+        private CommonControl.TextEdit_Number txtAllTaxes;
+        private CommonControl.TextEdit_Number txtApplyForPayment;
+        private CommonControl.TextEdit_Number txtPlannedProfit;
+        private CommonControl.TextEdit_Number txtActualProfit;
+        private CommonControl.TextEdit_Number txtRetainedInterestBalance;
         private DevExpress.XtraEditors.MemoEdit memoEdit1;
-        private CommonControl.TextEdit_Number textEdit_Number28;
-        private CommonControl.TextEdit_Number textEdit_Number30;
-        private CommonControl.TextEdit_Number textEdit_Number29;
+        private CommonControl.TextEdit_Number txtCurrentTaxes2;
+        private CommonControl.TextEdit_Number txtEnablingAdvancePayment;
+        private CommonControl.TextEdit_Number txtBalance2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem27;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem29;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
@@ -1760,7 +1760,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtTaxRebateRate;
         private DevExpress.XtraEditors.ComboBoxEdit txtTaxRebateRate2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
-        private CommonControl.TextEdit_Number textEdit_Number1;
+        private CommonControl.TextEdit_Number txtAllTaxes2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
         private CommonControl.TextEdit_Number txtAdvancePayment2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem39;

@@ -94,6 +94,5 @@ namespace BudgetSystem.Bll
             });
         }
 
-
     }
 }

@@ -21,7 +21,7 @@ namespace BudgetSystem
         Bll.SupplierManager sm;
         Bll.ReceiptMgmtManager rm;
         Bll.PaymentNotesManager pm;
-        
+
 
         public void BindingBachData(List<FlowItem> items)
         {
@@ -33,8 +33,8 @@ namespace BudgetSystem
 
             foreach (FlowItem item in items)
             {
-                dt.Rows.Add(item.DateItemText, GetItemDesc(item.DateItemType,item.DateItemID));
-                
+                dt.Rows.Add(item.DateItemText, GetItemDesc(item.DateItemType, item.DateItemID));
+
             }
 
 
@@ -64,25 +64,30 @@ namespace BudgetSystem
         }
 
 
-        private string GetItemDesc(string dataType,int dataId)
+        private string GetItemDesc(string dataType, int dataId)
         {
-            return "Desc";
-            //if (dataType == EnumFlowDataType.预算单.ToString())
-            //{
-            //    return bm.xxx(dataId);
-            //}
-            //else if (dataType == EnumFlowDataType.供应商.ToString())
-            //{
-            //    return sm.xxx(dataId);
-            //}
-            //else if (dataType == EnumFlowDataType.付款单.ToString())
-            //{
-            //    return pm.xxx(dataId);
-            //}
-            //else if (dataType == EnumFlowDataType.收款单.ToString())
-            //{
-            //    return rm.xxx(dataId);
-            //}
+            if (dataType == EnumFlowDataType.预算单.ToString())
+            {
+                Budget b = bm.GetBudget(dataId);
+                return b != null ? b.ToDesc() : string.Empty;
+
+            }
+            else if (dataType == EnumFlowDataType.供应商.ToString())
+            {
+                Supplier s = sm.GetSupplier(dataId);
+                return s != null ? s.ToDesc() : string.Empty;
+            }
+            else if (dataType == EnumFlowDataType.付款单.ToString())
+            {
+                PaymentNotes pn = pm.GetPaymentNoteById(dataId);
+                return pn != null ? pn.ToDesc() : string.Empty;
+            }
+            else if (dataType == EnumFlowDataType.收款单.ToString())
+            {
+                BankSlip bs = rm.GetBankSlipByBSID(dataId);
+                return bs != null ? bs.ToDesc() : string.Empty;
+            }
+            return string.Empty;
         }
 
     }

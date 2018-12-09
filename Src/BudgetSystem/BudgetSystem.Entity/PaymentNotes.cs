@@ -157,5 +157,11 @@ namespace BudgetSystem.Entity
 
         public int FlowState { get; set; }
 
+        public string ToDesc()
+        {
+            return string.Format("{0},于{1}申请向{2}付款人民币{3}",
+                this.Applicant, this.CommitTime.ToString("yyyy年MM月dd日"), this.SupplierName, this.CNY);
+        }
+
     }
 }
