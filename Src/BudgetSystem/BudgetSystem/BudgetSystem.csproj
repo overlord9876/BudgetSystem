@@ -239,6 +239,7 @@
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowApproveDisplayHelper.cs" />
+    <Compile Include="PrinterHelper.cs" />
     <Compile Include="Supplier\ucSupplierEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -591,6 +592,7 @@
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">
       <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>

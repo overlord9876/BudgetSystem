@@ -58,6 +58,7 @@ namespace BudgetSystem.WorkSpace
 
 
                 this.btnAccept.Text = RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayAcceptName(flowName);
+                this.btnAcceptAndPrint.Caption = this.btnAccept.Text + "并打印";
                 this.btnReturn.Text = RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayRefuseName(flowName);
 
             }
