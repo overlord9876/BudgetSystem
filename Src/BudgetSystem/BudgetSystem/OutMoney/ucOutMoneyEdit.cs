@@ -98,6 +98,7 @@ namespace BudgetSystem.OutMoney
 
         public void BandPaymentNotes(PaymentNotes payment)
         {
+            this.CurrentPaymentNotes = payment;
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
             if (budgetList != null)
             {
@@ -162,7 +163,7 @@ namespace BudgetSystem.OutMoney
         {
             this.dxErrorProvider1.ClearErrors();
             this.dxErrorProvider2.ClearErrors();
-
+            Supplier currentSupplier = cboSupplier.EditValue as Supplier;
             if (cboSupplier.EditValue as Supplier == null)
             {
                 this.dxErrorProvider1.SetError(cboSupplier, "请选择供应商。");
@@ -179,10 +180,10 @@ namespace BudgetSystem.OutMoney
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
             }
 
-            if (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
-            {
-                this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
-            }
+            //if (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
+            //{
+            //    this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
+            //}
 
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))
             {
@@ -214,12 +215,14 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
             }
-            decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
-            if (totalAmount > temporarySupplierPaymenttotalAmountMaxValue)
+            if (!currentSupplier.IsQualified)
             {
-                this.dxErrorProvider1.SetError(txtCNY, string.Format("当前临时供方已付款{0}，加上当前付款金额已超过最大限制。", temporarySupplierPaymenttotalAmount));
+                decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
+                if (totalAmount > temporarySupplierPaymenttotalAmountMaxValue)
+                {
+                    this.dxErrorProvider1.SetError(txtCNY, string.Format("当前临时供方已付款{0}，加上当前付款金额已超过最大限制。", temporarySupplierPaymenttotalAmount));
+                }
             }
-
             CheckUsage();
             if (txtAfterPaymentBalance.Value < 0)
             {
@@ -318,8 +321,11 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.TaxRebateRate = float.Parse(this.txtTaxRebateRate.EditValue.ToString());
             this.CurrentPaymentNotes.CommitTime = DateTime.Parse(this.deCommitTime.EditValue.ToString());
             this.CurrentPaymentNotes.VoucherNo = this.txtVoucherNo.Text;
-            this.CurrentPaymentNotes.Applicant = (this.txtApplicant.EditValue as User).UserName;
             this.CurrentPaymentNotes.MoneyUsed = (this.cboMoneyUsed.EditValue as UseMoneyType).Name;
+            this.CurrentPaymentNotes.Applicant = (this.txtApplicant.EditValue as User).UserName;
+
+            this.CurrentPaymentNotes.DepartmentName = this.cboDepartment.EditValue.ToString();
+            this.CurrentPaymentNotes.DepartmentCode = this.cboDepartment.Tag.ToString();
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
@@ -401,48 +407,6 @@ namespace BudgetSystem.OutMoney
             }
         }
 
-        /// <summary>
-        /// 计算当前付款退税额
-        /// </summary>
-        private void CalcPaymentTaxRebate()
-        {
-            if (currentBudget == null) { return; }
-
-            //总收款金额
-            txtReceiptAmount.EditValue = caculator.ReceiptMoneyAmount;
-
-            //预付款赋值
-            txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
-
-            //应留利润计算
-            txtActualRetention.EditValue = caculator.ActualProfit;
-
-            decimal taxRebateRate = 1;
-            if (txtTaxRebateRate.EditValue != null)
-            {
-                decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
-            }
-            caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate);
-            //退税总金额=已付金额+当前付款退税金额
-            this.txtAmountTaxRebate.EditValue = caculator.AllTaxes;
-
-            //总付款金额=已付金额+当前付款金额
-            txtAmountPaymentMoney.EditValue = caculator.PaymentMoneyAmount + this.txtCNY.Value;
-
-            //支付后余额
-            this.txtAfterPaymentBalance.EditValue = caculator.Balance;
-
-            if (this.txtAfterPaymentBalance.Value >= 0)
-            {
-                txtAfterPaymentBalance.ForeColor = Color.Black;
-
-            }
-            else
-            {
-                txtAfterPaymentBalance.ForeColor = Color.Red;
-            }
-        }
-
         //private IEnumerable<PaymentNotes> paymentNotes;
         private Budget currentBudget;
 
@@ -458,26 +422,64 @@ namespace BudgetSystem.OutMoney
                 //    return;
                 //}
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+                //过滤当前自己的单据
+                if (CurrentPaymentNotes != null)
+                {
+                    paymentNotes = paymentNotes.Where(o => o.ID != CurrentPaymentNotes.ID);
+                }
                 var receiptList = rm.GetBudgetBillListByBudgetId(currentBudget.ID);
-                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
-
                 currentBudget = bm.GetBudget(currentBudget.ID);
 
                 List<Supplier> budgetSupplierList = sm.GetSupplierListByBudgetId(currentBudget.ID);
                 budgetSupplierList.RemoveAll(o => !o.IsQualified);
                 budgetSupplierList.AddRange(supplierList.Where(o => !o.IsQualified));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
-                InitTaxRebateRateList(currentBudget.InProductDetail);
 
-                CalcPaymentTaxRebate();
+                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+
+                InitTaxRebateRateList(currentBudget.InProductDetail);
 
                 //生成付款单号
                 this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO, cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
+
+                if (currentBudget == null) { return; }
+
+                //总收款金额
+                txtReceiptAmount.EditValue = caculator.ReceiptMoneyAmount;
+
+                //预付款赋值
+                txtAdvancePayment.EditValue = currentBudget.AdvancePayment;
+
+                //应留利润计算
+                txtActualRetention.EditValue = caculator.ActualProfit;
+                CalcPaymentTaxRebate();
             }
             else
             {
                 txtReceiptAmount.EditValue = 0;
             }
+        }
+
+
+        private void CalcPaymentTaxRebate()
+        {
+            if (caculator == null) { return; }
+            decimal taxRebateRate = 1;
+            if (txtTaxRebateRate.EditValue != null)
+            {
+                decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
+            }
+            caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate, this.chkIsDrawback.Checked);
+
+            //退税总金额=已付金额+当前付款退税金额
+            this.txtAmountTaxRebate.EditValue = caculator.AllTaxes;
+
+            //总付款金额=已付金额+当前付款金额
+            txtAmountPaymentMoney.EditValue = caculator.PaymentMoneyAmount + this.txtCNY.Value;
+
+            //支付后余额
+            this.txtAfterPaymentBalance.EditValue = caculator.Balance;
+
         }
 
         private decimal temporarySupplierPaymenttotalAmount;
@@ -488,7 +490,7 @@ namespace BudgetSystem.OutMoney
             if (editValue != null)
             {
                 txtBankName.Properties.DataSource = editValue.BankInfoDetail.ToObjectList<List<BankInfo>>();
-                if (editValue.SupplierType == 1)
+                if (!editValue.IsQualified)
                 {
                     temporarySupplierPaymenttotalAmount = pnm.GetTemporarySupplierPaymentByBudgetId(currentBudget.ID, editValue.ID);
                     if (temporarySupplierPaymenttotalAmount >= temporarySupplierPaymenttotalAmountMaxValue)
@@ -584,6 +586,19 @@ namespace BudgetSystem.OutMoney
             if (cboCurrency.EditValue != null && (cboCurrency.EditValue.ToString().Equals("CNY") || cboCurrency.EditValue.ToString().Equals("人民币")))
             {
                 this.txtExchangeRate.EditValue = 1;
+            }
+        }
+
+        private void txtAfterPaymentBalance_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.txtAfterPaymentBalance.Value >= 0)
+            {
+                txtAfterPaymentBalance.ForeColor = Color.Black;
+
+            }
+            else
+            {
+                txtAfterPaymentBalance.ForeColor = Color.Red;
             }
         }
     }

@@ -77,8 +77,6 @@ namespace BudgetSystem.OutMoney
 
         private void btn_Submit_Click(object sender, EventArgs e)
         {
-            SubmitDataByWorkModel();
-
             if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;

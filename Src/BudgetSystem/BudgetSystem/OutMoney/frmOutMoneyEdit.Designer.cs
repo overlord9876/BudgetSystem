@@ -37,16 +37,16 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lciCancel = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciCommit = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lciSave = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciSave = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCommit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lciSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciSave)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -140,7 +140,7 @@
             this.lciCancel.CustomizationFormText = "取消按钮";
             this.lciCancel.Location = new System.Drawing.Point(1012, 881);
             this.lciCancel.MaxSize = new System.Drawing.Size(120, 36);
-            this.lciCancel.MinSize = new System.Drawing.Size(120, 20);
+            this.lciCancel.MinSize = new System.Drawing.Size(120, 36);
             this.lciCancel.Name = "lciCancel";
             this.lciCancel.Size = new System.Drawing.Size(120, 36);
             this.lciCancel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
@@ -155,7 +155,7 @@
             this.lciCommit.CustomizationFormText = "提交按钮";
             this.lciCommit.Location = new System.Drawing.Point(772, 881);
             this.lciCommit.MaxSize = new System.Drawing.Size(120, 36);
-            this.lciCommit.MinSize = new System.Drawing.Size(93, 26);
+            this.lciCommit.MinSize = new System.Drawing.Size(120, 36);
             this.lciCommit.Name = "lciCommit";
             this.lciCommit.Size = new System.Drawing.Size(120, 36);
             this.lciCommit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
@@ -163,6 +163,18 @@
             this.lciCommit.TextSize = new System.Drawing.Size(0, 0);
             this.lciCommit.TextToControlDistance = 0;
             this.lciCommit.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.ucOutMoneyEdit1;
+            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(1132, 881);
+            this.layoutControlItem1.Text = "layoutControlItem1";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
             // 
             // lciSave
             // 
@@ -178,18 +190,6 @@
             this.lciSave.TextSize = new System.Drawing.Size(0, 0);
             this.lciSave.TextToControlDistance = 0;
             this.lciSave.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.ucOutMoneyEdit1;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1132, 881);
-            this.layoutControlItem1.Text = "layoutControlItem1";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
             // 
             // frmOutMoneyEdit
             // 
@@ -207,8 +207,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCommit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lciSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciSave)).EndInit();
             this.ResumeLayout(false);
 
         }

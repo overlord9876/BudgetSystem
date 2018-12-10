@@ -1022,7 +1022,7 @@
             this.txtPercentage.Size = new System.Drawing.Size(309, 25);
             this.txtPercentage.StyleController = this.layoutControl1;
             this.txtPercentage.TabIndex = 34;
-            this.txtPercentage.ToolTip = "占总额%=预付款/（总进价+进料款*(1+增值税就率))*100";
+            this.txtPercentage.ToolTip = "占总额%=预付款/（总进价+进料款*(1+增值税税率))*100";
             // 
             // txtInterestRate
             // 

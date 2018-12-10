@@ -46,12 +46,6 @@ namespace BudgetSystem.OutMoney
 
             this.txtBudgetNo.EditValue = BudgetList.Find(o => o.ID.Equals(Caculator.CurrentBudget.ID));
             this.txtBudgetNo.Properties.ReadOnly = true;
-            InitBudgetMoneyDetail();
-            //有预付款情况下，窗体显示计税货款小于收款金额测算栏目
-            //textEdit_Number3.EditValue = txtAccountBalance.Value + textEdit_Number2.Value - textEdit_Number1.Value;
-            //textEdit_Number4.EditValue = textEdit_Number3.Value + txtAdvancePayment.Value;
-
-            //this.textEdit_Number27.EditValue = this.textEdit_Number3.Value - this.txtRetainedProfit.Value;
 
         }
 
@@ -61,6 +55,7 @@ namespace BudgetSystem.OutMoney
             Budget budget = bm.GetBudget(Caculator.CurrentBudget.ID);
             if (budget != null)
             {
+                budget.CustomerList = bm.GetCustomerListByBudgetId(budget.ID);
                 this.txtCustomer.Text = budget.CustomerList.ToNameAndCountryString();
                 this.txtSupplier.Text = budget.SupplierList.ToNameString();
             }
@@ -69,7 +64,7 @@ namespace BudgetSystem.OutMoney
             //压缩后预付款
             this.txtAdvancePayment2.EditValue = Caculator.CompressAdvancePayment;
             //申请用款金额
-            this.txtApplyMoney.EditValue = Caculator.PaymentMoneyAmount;
+            this.txtPaymentMoneyAmount.EditValue = Caculator.PaymentMoneyAmount;
             //所有收款金额
             this.txtReceiptAmount.EditValue = Caculator.ReceiptMoneyAmount;
             //已收汇人民币
@@ -90,7 +85,7 @@ namespace BudgetSystem.OutMoney
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
 
             this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
-            this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtApplyMoney.Value;
+            this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtPaymentMoneyAmount.Value;
 
 
             this.txtAdvancePayment.EditValue = Caculator.AdvancePayment;
@@ -110,7 +105,7 @@ namespace BudgetSystem.OutMoney
             if (Caculator.AdvancePayment > 0)
             {
                 txtApplyForPayment.EditValueChanged -= new EventHandler(ApplyForPayment_EditValueChanged);
-                this.txtApplyForPayment.EditValue = Caculator.PaymentMoneyAmount;
+                this.txtApplyForPayment.EditValue = Caculator.ApplyMoney;
                 txtApplyForPayment.EditValueChanged += new EventHandler(ApplyForPayment_EditValueChanged);
                 this.CustomWorkModel = "HasAdvancePayment";
                 foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_NotHasAdvancePayment.Items)
@@ -127,7 +122,7 @@ namespace BudgetSystem.OutMoney
             else//没有预付款
             {
                 this.txtApplyForPayment2.EditValueChanged -= new EventHandler(ApplyForPayment2_EditValueChanged);
-                this.txtApplyForPayment2.EditValue = Caculator.PaymentMoneyAmount;
+                this.txtApplyForPayment2.EditValue = Caculator.ApplyMoney;
                 this.txtApplyForPayment2.EditValueChanged += new EventHandler(ApplyForPayment2_EditValueChanged);
                 this.CustomWorkModel = "NotHasAdvancePayment";
                 foreach (DevExpress.XtraLayout.BaseLayoutItem item in lcg_HasAdvancePayment.Items)
@@ -147,7 +142,7 @@ namespace BudgetSystem.OutMoney
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }
-            ChangedUsageMoneyValue(Caculator.PaymentMoneyAmount, taxRebateRate);
+            ChangedUsageMoneyValue(Caculator.ApplyMoney, taxRebateRate);
         }
 
         private void ChangedUsageMoneyValue(decimal usageMoney, decimal taxRebateRate)
@@ -161,8 +156,10 @@ namespace BudgetSystem.OutMoney
                     this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）< 收款时)";
                     this.txtTaxPayment.EditValue = Caculator.TaxPayment;
                     this.txtTaxRefund.EditValue = Caculator.TaxRefund;
-                    txtTaxPaymentA.EditValue = 0;
-                    txtTaxRefundA.EditValue = 0;
+                    this.txtTaxPaymentA.EditValue = 0;
+                    this.txtTaxRefundA.EditValue = 0;
+                    this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率/100)*出口退税率%/100";
+                    this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%/100)*出口退税率%/100)+ 暂计退税款";
                 }
                 else
                 {
@@ -171,6 +168,8 @@ namespace BudgetSystem.OutMoney
                     this.txtTaxRefund.EditValue = 0;
                     txtTaxPaymentA.EditValue = Caculator.TaxPayment;
                     txtTaxRefundA.EditValue = Caculator.TaxRefund;
+                    this.txtCurrentTaxes2.ToolTip = "收款<付款，暂计退税款为0";
+                    this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%/100)* 出口退税率%/100";
                 }
 
                 txtCurrentTaxes2.EditValue = Caculator.CurrentTaxes;
@@ -301,36 +300,46 @@ namespace BudgetSystem.OutMoney
 
         private void txtBalance2_EditValueChanged(object sender, EventArgs e)
         {
-            IsHightLightControl(this.txtBalance2);
+            IsLessThanHightLightControl(this.txtBalance2);
         }
 
         private void txtBalance_EditValueChanged(object sender, EventArgs e)
         {
-            IsHightLightControl(this.txtBalance);
+            IsLessThanHightLightControl(this.txtBalance);
         }
 
-        private void IsHightLightControl(TextEdit_Number control, decimal MaxValue = 0)
+        private void IsLessThanHightLightControl(TextEdit_Number control, decimal MaxValue = 0)
         {
-            if (control.Value > MaxValue)
+            if (control.Value < MaxValue)
             {
-                control.ForeColor = Color.Black;
-
+                control.ForeColor = Color.Red;
             }
             else
             {
+                control.ForeColor = Color.Black;
+            }
+        }
+
+        private void IsGreaterThanHightLightControl(TextEdit_Number control, decimal MaxValue = 0)
+        {
+            if (control.Value > MaxValue)
+            {
                 control.ForeColor = Color.Red;
+            }
+            else
+            {
+                control.ForeColor = Color.Black;
             }
         }
 
         private void txtSuperPaymentScheme_EditValueChanged(object sender, EventArgs e)
         {
-            IsHightLightControl(txtSuperPaymentScheme, 30);
+            IsGreaterThanHightLightControl(txtSuperPaymentScheme, 30);
         }
 
         private void txtCommissionRate_EditValueChanged(object sender, EventArgs e)
         {
-            IsHightLightControl(txtSuperPaymentScheme, (decimal)19.99);
+            IsGreaterThanHightLightControl(txtSuperPaymentScheme, (decimal)19.99);
         }
-
     }
 }
