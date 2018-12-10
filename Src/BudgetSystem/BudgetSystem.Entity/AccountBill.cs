@@ -55,6 +55,22 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string MoneyUsed { get; set; }
 
+        /// <summary>
+        /// 是否退税
+        /// </summary>
+        public bool IsDrawback { get; set; }
+
+        /// <summary>
+        /// 用途
+        /// </summary>
+        public string MoneyUsedDesc
+        {
+            get
+            {
+                return string.Format("{0}（{1}）", MoneyUsed, IsDrawback ? "可退税" : string.Empty);
+            }
+        }
+
     }
 
     public static class AccountBillConvertExtension
@@ -127,6 +143,7 @@ namespace BudgetSystem.Entity
                         VoucherNo = pn.VoucherNo,
                         MoneyUsed = pn.MoneyUsed,
                         CNY = pn.CNY * -1,
+                        IsDrawback = pn.IsDrawback,
                         RecieptMoney = Decimal.Zero,
                         Company = pn.SupplierName
                     };

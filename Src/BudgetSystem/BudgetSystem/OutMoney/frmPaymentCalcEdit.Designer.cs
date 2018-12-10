@@ -357,7 +357,7 @@
             this.txtAllTaxes2.Size = new System.Drawing.Size(266, 21);
             this.txtAllTaxes2.StyleController = this.layoutControl1;
             this.txtAllTaxes2.TabIndex = 45;
-            this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%/100)*出口退税率%/100)+ 暂计退税款";
+            this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款";
             // 
             // txtTaxRebateRate2
             // 
@@ -419,7 +419,7 @@
             this.txtCurrentTaxes2.Size = new System.Drawing.Size(363, 21);
             this.txtCurrentTaxes2.StyleController = this.layoutControl1;
             this.txtCurrentTaxes2.TabIndex = 40;
-            this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率/100)*出口退税率%/100";
+            this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%)*出口退税率%";
             // 
             // memoEdit1
             // 
@@ -523,7 +523,7 @@
             this.txtAllTaxes.Size = new System.Drawing.Size(413, 21);
             this.txtAllTaxes.StyleController = this.layoutControl1;
             this.txtAllTaxes.TabIndex = 33;
-            this.txtAllTaxes.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%/100)*出口退税率%/100)+ 暂计退税款";
+            this.txtAllTaxes.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款";
             // 
             // txtApplyForPayment
             // 
@@ -554,7 +554,7 @@
             this.txtCurrentTaxes.Size = new System.Drawing.Size(370, 21);
             this.txtCurrentTaxes.StyleController = this.layoutControl1;
             this.txtCurrentTaxes.TabIndex = 30;
-            this.txtCurrentTaxes.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%/100))*(出口退税率%/100)";
+            this.txtCurrentTaxes.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%))*(出口退税率%)";
             // 
             // txtSuperPaymentScheme
             // 
@@ -672,7 +672,7 @@
             this.txtPercentage.Size = new System.Drawing.Size(343, 21);
             this.txtPercentage.StyleController = this.layoutControl1;
             this.txtPercentage.TabIndex = 19;
-            this.txtPercentage.ToolTip = "预算款占总额%=(预付款)/(总进价+预算部分进料款*(1+增值税税率%/100))*100%";
+            this.txtPercentage.ToolTip = "预算款占总额%=(预付款)/(总进价+预算部分进料款)*100%";
             // 
             // labelControl1
             // 
@@ -756,6 +756,7 @@
             this.txtTaxRefund.Size = new System.Drawing.Size(344, 21);
             this.txtTaxRefund.StyleController = this.layoutControl1;
             this.txtTaxRefund.TabIndex = 12;
+            this.txtTaxRefund.ToolTip = "退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)";
             // 
             // txtAccountBalance
             // 
@@ -787,13 +788,14 @@
             this.txtTaxPayment.Size = new System.Drawing.Size(344, 21);
             this.txtTaxPayment.StyleController = this.layoutControl1;
             this.txtTaxPayment.TabIndex = 10;
+            this.txtTaxPayment.ToolTip = "可计退税的货款=Sum(单笔付款金额)";
             // 
-            // txtApplyMoney
+            // txtPaymentMoneyAmount
             // 
             this.txtPaymentMoneyAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPaymentMoneyAmount.IsSupportNegative = false;
             this.txtPaymentMoneyAmount.Location = new System.Drawing.Point(159, 95);
-            this.txtPaymentMoneyAmount.Name = "txtApplyMoney";
+            this.txtPaymentMoneyAmount.Name = "txtPaymentMoneyAmount";
             this.txtPaymentMoneyAmount.Properties.Mask.EditMask = "n";
             this.txtPaymentMoneyAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtPaymentMoneyAmount.Properties.Mask.UseMaskAsDisplayFormat = true;
@@ -818,6 +820,7 @@
             this.txtTaxRefundA.Size = new System.Drawing.Size(344, 21);
             this.txtTaxRefundA.StyleController = this.layoutControl1;
             this.txtTaxRefundA.TabIndex = 8;
+            this.txtTaxRefundA.ToolTip = "退税款（收款）=已收汇（人民币）金额/(1+增值税率%)* 出口退税率%";
             // 
             // txtTaxPaymentA
             // 
@@ -833,6 +836,7 @@
             this.txtTaxPaymentA.Size = new System.Drawing.Size(344, 21);
             this.txtTaxPaymentA.StyleController = this.layoutControl1;
             this.txtTaxPaymentA.TabIndex = 7;
+            this.txtTaxPaymentA.ToolTip = "计税款（收款）=已收汇（人民币）金额";
             // 
             // txtReceiptAmount
             // 
@@ -848,7 +852,7 @@
             this.txtReceiptAmount.Size = new System.Drawing.Size(342, 21);
             this.txtReceiptAmount.StyleController = this.layoutControl1;
             this.txtReceiptAmount.TabIndex = 6;
-            this.txtReceiptAmount.ToolTip = "收款金额（所有）";
+            this.txtReceiptAmount.ToolTip = "收款金额=已收汇（人民币）金额";
             // 
             // txtTaxRebateRate
             // 
@@ -1043,11 +1047,11 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtReceiptAmount;
-            this.layoutControlItem3.CustomizationFormText = "已收汇（人民币）金额";
+            this.layoutControlItem3.CustomizationFormText = "收款金额";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 25);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(481, 25);
-            this.layoutControlItem3.Text = "已收汇（人民币）金额";
+            this.layoutControlItem3.Text = "收款金额";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(132, 14);
             // 
             // layoutControlItem5

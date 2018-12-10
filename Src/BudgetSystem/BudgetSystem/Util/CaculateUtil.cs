@@ -16,7 +16,7 @@ namespace BudgetSystem
         {
             if (pn.IsDrawback)
             {
-                return pn.CNY / pn.VatOption * (decimal)pn.TaxRebateRate;
+                return pn.CNY / (1 + pn.VatOption / 100) * ((decimal)pn.TaxRebateRate / 100);
             }
             else
             {

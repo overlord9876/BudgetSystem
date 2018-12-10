@@ -99,6 +99,8 @@ namespace BudgetSystem.OutMoney
         public void BandPaymentNotes(PaymentNotes payment)
         {
             this.CurrentPaymentNotes = payment;
+            chkIsDrawback.EditValue = payment.IsDrawback;
+            this.vatOption = payment.VatOption;
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
             if (budgetList != null)
             {
@@ -126,7 +128,6 @@ namespace BudgetSystem.OutMoney
             }
 
 
-            this.vatOption = payment.VatOption;
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
             this.txtDescription.Text = payment.Description;
             this.txtExchangeRate.EditValue = payment.ExchangeRate;
@@ -154,7 +155,6 @@ namespace BudgetSystem.OutMoney
             }
             txtDescription.Text = payment.Description;
             chkHasInvoice.EditValue = payment.HasInvoice;
-            chkIsDrawback.EditValue = payment.IsDrawback;
             chkIsIOU.EditValue = payment.IsIOU;
             txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
         }
@@ -464,7 +464,7 @@ namespace BudgetSystem.OutMoney
         private void CalcPaymentTaxRebate()
         {
             if (caculator == null) { return; }
-            decimal taxRebateRate = 1;
+            decimal taxRebateRate = 0;
             if (txtTaxRebateRate.EditValue != null)
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
@@ -529,8 +529,8 @@ namespace BudgetSystem.OutMoney
         {
             CalcPaymentTaxRebate();
         }
-
-        private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
+        
+        private void txtTaxRebateRate_EditValueChanged_1(object sender, EventArgs e)
         {
             CalcPaymentTaxRebate();
         }

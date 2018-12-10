@@ -611,7 +611,7 @@ namespace BudgetSystem
             decimal directCosts = txtPurchasePrice.Value; //总进价
             if (directCosts != 0)
             {
-                this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value) / (directCosts + txtFeedMoney.Value * (1 + this.vatOption / 100)) * 100, 2);//预付款占总进价百分比
+                this.txtPercentage.EditValue = Math.Round((txtAdvancePayment.Value) / (directCosts + txtFeedMoney.Value) * 100, 2);//占总额%=预付款/(总进价+进料款)*100
             }
             else
             {

@@ -115,6 +115,17 @@ namespace BudgetSystem.Entity
         public string MoneyUsed { get; set; }
 
         /// <summary>
+        /// 用途
+        /// </summary>
+        public string MoneyUsedDesc
+        {
+            get
+            {
+                return string.Format("{0}（{1}）", MoneyUsed, IsDrawback ? "可退税" : string.Empty);
+            }
+        }
+
+        /// <summary>
         /// 是否退税
         /// </summary>
         public bool IsDrawback { get; set; }

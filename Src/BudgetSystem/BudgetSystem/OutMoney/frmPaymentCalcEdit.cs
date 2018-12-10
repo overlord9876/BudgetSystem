@@ -84,7 +84,6 @@ namespace BudgetSystem.OutMoney
             this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
 
-            this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
             this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtPaymentMoneyAmount.Value;
 
 
@@ -158,8 +157,8 @@ namespace BudgetSystem.OutMoney
                     this.txtTaxRefund.EditValue = Caculator.TaxRefund;
                     this.txtTaxPaymentA.EditValue = 0;
                     this.txtTaxRefundA.EditValue = 0;
-                    this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率/100)*出口退税率%/100";
-                    this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%/100)*出口退税率%/100)+ 暂计退税款";
+                    this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%)*出口退税率%";
+                    this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款";
                 }
                 else
                 {
@@ -169,7 +168,7 @@ namespace BudgetSystem.OutMoney
                     txtTaxPaymentA.EditValue = Caculator.TaxPayment;
                     txtTaxRefundA.EditValue = Caculator.TaxRefund;
                     this.txtCurrentTaxes2.ToolTip = "收款<付款，暂计退税款为0";
-                    this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%/100)* 出口退税率%/100";
+                    this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%)* 出口退税率%";
                 }
 
                 txtCurrentTaxes2.EditValue = Caculator.CurrentTaxes;
@@ -334,7 +333,7 @@ namespace BudgetSystem.OutMoney
 
         private void txtSuperPaymentScheme_EditValueChanged(object sender, EventArgs e)
         {
-            IsGreaterThanHightLightControl(txtSuperPaymentScheme, 30);
+            IsGreaterThanHightLightControl(txtSuperPaymentScheme, (decimal)129.99);
         }
 
         private void txtCommissionRate_EditValueChanged(object sender, EventArgs e)

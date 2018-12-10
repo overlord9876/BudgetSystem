@@ -56,12 +56,12 @@
             // gcOutMoney
             // 
             this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
             this.gcOutMoney.MainView = this.gvOutMoney;
-            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.gcOutMoney.Name = "gcOutMoney";
-            this.gcOutMoney.Size = new System.Drawing.Size(854, 937);
+            this.gcOutMoney.Size = new System.Drawing.Size(1008, 729);
             this.gcOutMoney.TabIndex = 1;
             this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutMoney});
@@ -208,7 +208,7 @@
             // gcMoneyUsed
             // 
             this.gcMoneyUsed.Caption = "用途";
-            this.gcMoneyUsed.FieldName = "MoneyUsed";
+            this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
             this.gcMoneyUsed.VisibleIndex = 11;
@@ -233,13 +233,13 @@
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 937);
-            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.gcOutMoney);
+            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
-            this.Controls.Add(this.gcOutMoney);
             ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvOutMoney)).EndInit();
             this.ResumeLayout(false);

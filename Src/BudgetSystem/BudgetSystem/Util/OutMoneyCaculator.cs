@@ -203,7 +203,7 @@ namespace BudgetSystem
 
             #region 2.压缩后的预付款=（1-已收汇（人民币）金额/预算单的合同金额）*预算单的预付款
 
-            if (ReceiptMoneyAmount > 0 && TotalAmount != 0)
+            if (TotalAmount != 0)
             {
                 CompressAdvancePayment = (1 - (ReceiptMoneyAmount / TotalAmount)) * AdvancePayment;
             }
@@ -222,24 +222,6 @@ namespace BudgetSystem
             #region 4.账上余额 =已收汇（人民币）金额 – 申请用款金额（所有付款）
 
             AccountBalance = ReceiptMoneyAmount - PaymentMoneyAmount;
-
-            #endregion
-
-            #region 5.应留实际利润=预算单（预算）利润/预算单合同金额*已收汇（人民币）金额
-
-            if (TotalAmount != 0)
-            {
-                ActualProfit = Math.Round(PlannedProfit / TotalAmount * ReceiptMoneyAmount, 2);
-            }
-
-            #endregion
-
-            #region 6.收汇超计划%=((已收汇（人民币）金额-合同计划款)/合同计划款)*100%
-
-            if (this.TotalAmount != 0)
-            {
-                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
-            }
 
             #endregion
 
@@ -268,6 +250,24 @@ namespace BudgetSystem
             {
                 //盈利水平=利润/净收入额
                 ProfitLevel = PlannedProfit / NetIncomeCNY;
+            }
+
+            #endregion
+
+            #region 5.应留实际利润=预算单（预算）利润/预算单合同金额*已收汇（人民币）金额
+
+            if (TotalAmount != 0)
+            {
+                ActualProfit = Math.Round(PlannedProfit / TotalAmount * ReceiptMoneyAmount, 2);
+            }
+
+            #endregion
+
+            #region 6.收汇超计划%=((已收汇（人民币）金额-合同计划款)/合同计划款)*100%
+
+            if (this.TotalAmount != 0)
+            {
+                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
             }
 
             #endregion
@@ -339,9 +339,9 @@ namespace BudgetSystem
                 //启用预付款支付后余额
                 this.EnablingAdvancePayment = this.Balance + this.CompressAdvancePayment;
 
-                //留利后可支付款含退税款
-                this.RetainedInterestBalance = this.Balance - this.ActualProfit;
             }
+            //留利后可支付款含退税款
+            this.RetainedInterestBalance = this.Balance - this.ActualProfit;
         }
 
         /// <summary>
