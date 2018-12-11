@@ -67,7 +67,7 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                return string.Format("{0}（{1}）", MoneyUsed, IsDrawback ? "可退税" : string.Empty);
+                return string.Format("{0}{1}", MoneyUsed, IsDrawback ? "（可退税）" : string.Empty);
             }
         }
 

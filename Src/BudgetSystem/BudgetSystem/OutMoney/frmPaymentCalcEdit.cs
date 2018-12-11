@@ -18,6 +18,7 @@ namespace BudgetSystem.OutMoney
         private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
         public List<Budget> BudgetList { get; set; }
+        private Budget selectedBudget;
 
         public frmPaymentCalcEdit()
         {
@@ -165,8 +166,8 @@ namespace BudgetSystem.OutMoney
                     this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）> 收款时)";
                     this.txtTaxPayment.EditValue = 0;
                     this.txtTaxRefund.EditValue = 0;
-                    txtTaxPaymentA.EditValue = Caculator.TaxPayment;
-                    txtTaxRefundA.EditValue = Caculator.TaxRefund;
+                    txtTaxPaymentA.EditValue = Caculator.ReceiptMoneyAmount;
+                    txtTaxRefundA.EditValue = Caculator.AllTaxes;
                     this.txtCurrentTaxes2.ToolTip = "收款<付款，暂计退税款为0";
                     this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%)* 出口退税率%";
                 }
@@ -282,7 +283,7 @@ namespace BudgetSystem.OutMoney
 
         private void txtBudgetNo_EditValueChanged(object sender, EventArgs e)
         {
-            Budget selectedBudget = this.txtBudgetNo.EditValue as Budget;
+            selectedBudget = this.txtBudgetNo.EditValue as Budget;
             if (selectedBudget != null)
             {
                 SystemConfigManager scm = new SystemConfigManager();
@@ -338,7 +339,20 @@ namespace BudgetSystem.OutMoney
 
         private void txtCommissionRate_EditValueChanged(object sender, EventArgs e)
         {
-            IsGreaterThanHightLightControl(txtSuperPaymentScheme, (decimal)19.99);
+            IsGreaterThanHightLightControl(txtCommissionRate, (decimal)19.99);
+        }
+
+        private void btnShowBudgetHistory_Click(object sender, EventArgs e)
+        {
+            if (selectedBudget == null)
+            {
+                XtraMessageBox.Show("请选择合同");
+                return;
+            }
+
+            frmAccountBillView form = new frmAccountBillView();
+            form.CurrentBudget = selectedBudget;
+            form.ShowDialog(this);
         }
     }
 }

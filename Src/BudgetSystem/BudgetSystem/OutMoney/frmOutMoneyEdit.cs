@@ -81,10 +81,17 @@ namespace BudgetSystem.OutMoney
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 
-            pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
+            if (this.WorkModel == EditFormWorkModels.New)
+            {
+                pnm.AddPaymentNote(this.CurrentPaymentNotes);
+            }
+            else
+            {
+                pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
+            }
 
-            fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
-
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
+            XtraMessageBox.Show(state.ToString());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

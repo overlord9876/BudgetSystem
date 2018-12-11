@@ -59,7 +59,7 @@ namespace BudgetSystem.Entity
         public string Tell { get; set; }
 
         /// <summary>
-        /// 传真
+        /// 传真/Email
         /// </summary>
         public string FaxNumber { get; set; }
 

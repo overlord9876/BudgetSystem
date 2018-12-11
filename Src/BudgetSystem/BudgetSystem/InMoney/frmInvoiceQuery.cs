@@ -110,6 +110,10 @@ namespace BudgetSystem.InMoney
                     this.RefreshData();
                 }
             }
+            else 
+            {
+                XtraMessageBox.Show("请选择需要修改的项");     
+            }
         }
 
         private void ViewInvoice()
@@ -124,6 +128,10 @@ namespace BudgetSystem.InMoney
                 {
                     this.RefreshData();
                 }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
 
@@ -147,7 +155,6 @@ namespace BudgetSystem.InMoney
         protected override void InitGridViewAction()
         {
             this.gridViewAction.Add(this.gvInvoice, new ActionWithPermission() { MainAction = ModifyInvoice, MainOperate = OperateTypes.Modify, SecondAction = ViewInvoice, SecondOperate = OperateTypes.View });
-
         }
 
 

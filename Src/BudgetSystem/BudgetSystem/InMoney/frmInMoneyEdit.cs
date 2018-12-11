@@ -126,6 +126,14 @@ namespace BudgetSystem.InMoney
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                this.btnSure.Text = "收汇确认";
+            }
+            else
+            {
+                this.btnSure.Text = "通知业务员";
+            }
         }
 
         private void btnCommit_Click(object sender, EventArgs e)

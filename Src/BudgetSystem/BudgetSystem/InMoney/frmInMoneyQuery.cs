@@ -29,7 +29,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "费用拆分"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "提交确认"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "收汇确认"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.ModelOperatePageName = "入帐单";
@@ -190,16 +190,25 @@ namespace BudgetSystem.InMoney
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要费用拆分的项");
+            }
         }
 
         private void ViewBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if(currentRowBankSlip!=null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.View;
                 form.CurrentBankSlip = currentRowBankSlip;
                 form.ShowDialog(this);
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
 

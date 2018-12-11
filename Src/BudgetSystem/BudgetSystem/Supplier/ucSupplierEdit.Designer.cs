@@ -594,11 +594,11 @@
             // lcFaxNumber
             // 
             this.lcFaxNumber.Control = this.txtFaxNumber;
-            this.lcFaxNumber.CustomizationFormText = "传真：";
+            this.lcFaxNumber.CustomizationFormText = "传真/Email：";
             this.lcFaxNumber.Location = new System.Drawing.Point(436, 201);
             this.lcFaxNumber.Name = "lcFaxNumber";
             this.lcFaxNumber.Size = new System.Drawing.Size(435, 29);
-            this.lcFaxNumber.Text = "传真：";
+            this.lcFaxNumber.Text = "传真/Email：";
             this.lcFaxNumber.TextSize = new System.Drawing.Size(120, 18);
             // 
             // lcContacts

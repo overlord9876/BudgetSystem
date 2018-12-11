@@ -90,7 +90,7 @@ namespace BudgetSystem
             Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
             if (selectedItem == null)
             {
-                XtraMessageBox.Show("请选择要修改的项");
+                XtraMessageBox.Show("请选择需要修改的项");
                 return;
             }
 
@@ -105,8 +105,15 @@ namespace BudgetSystem
 
         private void ViewDeclarationform()
         {
+            Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
+            if (selectedItem == null)
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
+            }
             frmDeclarationformEdit form = new frmDeclarationformEdit();
             form.WorkModel = EditFormWorkModels.View;
+            form.CurrentDeclarationform = selectedItem;
             form.ShowDialog(this);
         }
 
@@ -115,7 +122,7 @@ namespace BudgetSystem
             Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
             if (selectedItem == null)
             {
-                XtraMessageBox.Show("请选择要删除的项");
+                XtraMessageBox.Show("请选择需要删除的项");
                 return;
             }
             dm.DeleteDeclarationformById(selectedItem.ID);

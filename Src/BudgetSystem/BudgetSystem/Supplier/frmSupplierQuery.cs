@@ -84,6 +84,10 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+            }
         }
 
         private void CommitSupplier()
@@ -107,16 +111,25 @@ namespace BudgetSystem
                     XtraMessageBox.Show(message);
                 }
             }
+            else 
+            {
+                XtraMessageBox.Show("请选择需要提交审批的项");
+            }
         }
 
         private void ViewSupplier()
         {
             Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (currentRowSupplier != null)
             {
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.View;
                 form.CurrentSupplier = currentRowSupplier;
                 form.ShowDialog(this);
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
 

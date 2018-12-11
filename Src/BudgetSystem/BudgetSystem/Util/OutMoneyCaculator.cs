@@ -203,7 +203,7 @@ namespace BudgetSystem
 
             #region 2.压缩后的预付款=（1-已收汇（人民币）金额/预算单的合同金额）*预算单的预付款
 
-            if (TotalAmount != 0)
+            if (TotalAmount != 0 && ReceiptMoneyAmount <= TotalAmount)
             {
                 CompressAdvancePayment = (1 - (ReceiptMoneyAmount / TotalAmount)) * AdvancePayment;
             }
@@ -227,29 +227,40 @@ namespace BudgetSystem
 
             #region 其他
 
-            decimal interest = Math.Round(AdvancePayment * (decimal)CurrentBudget.InterestRate * CurrentBudget.Days / 30 / 100, 2);
+            decimal interest = Math.Round(AdvancePayment * (decimal)CurrentBudget.InterestRate / 360 / 100 * CurrentBudget.Days, 2);
             decimal subTotal = CurrentBudget.Commission + CurrentBudget.Premium + CurrentBudget.BankCharges +/*直接费用*/0 + CurrentBudget.FeedMoney;
 
-            //  净收入额=外贸合约人民币小计-内贸合约部分的利息-预算小计
-            NetIncomeCNY = TotalAmount - CurrentBudget.PurchasePrice - interest - subTotal;
+            //  净收入额=外贸合约人民币小计-预算小计
+            NetIncomeCNY = TotalAmount - subTotal;
             //总收金额（USD）=折合人名币/汇率
 
             if (CurrentBudget.ExchangeRate != 0)
             {
                 NetIncomeUSD = decimal.Round(NetIncomeCNY / (decimal)CurrentBudget.ExchangeRate, 2);
             }
-            //出口退税额=总进价/1.17*出口退税率
-            //decimal TaxRebateRateMoney = Math.Round(SelectedBudget.DirectCosts / (decimal)1.17 * (decimal)SelectedBudget.TaxRebateRate / 100, 2);
+
+            List<InProductDetail> inProductDetailList;
+            if (!string.IsNullOrEmpty(currentBudget.InProductDetail))
+            {
+                inProductDetailList = currentBudget.InProductDetail.ToObjectList<List<InProductDetail>>();
+            }
+            else
+            {
+                inProductDetailList = new List<InProductDetail>();
+            }
+            //出口退税额
+            decimal taxRebateRateMoney = inProductDetailList.Sum(o => o.TaxRebate);
+
             //总成本=总进价-出口退税额
-            decimal totalCost = CurrentBudget.PurchasePrice - (decimal)CurrentBudget.TaxRebate;
+            decimal totalCost = CurrentBudget.TotalCost - taxRebateRateMoney;
 
             //利润=折合人名币（净收入额）-总成本
-            PlannedProfit = NetIncomeCNY - totalCost;
+            PlannedProfit = NetIncomeCNY - totalCost - interest;
 
-            if (NetIncomeCNY != 0)
+            if (NetIncomeUSD != 0)
             {
-                //盈利水平=利润/净收入额
-                ProfitLevel = PlannedProfit / NetIncomeCNY;
+                //盈利水平=利润/净收入额（USD）
+                ProfitLevel = PlannedProfit / NetIncomeUSD;
             }
 
             #endregion
@@ -267,7 +278,7 @@ namespace BudgetSystem
 
             if (this.TotalAmount != 0)
             {
-                this.SuperPaymentScheme = (Math.Round((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount, 2)) * 100;
+                this.SuperPaymentScheme = Math.Round(((this.ReceiptMoneyAmount - TotalAmount) / TotalAmount) * 100, 2);
             }
 
             #endregion

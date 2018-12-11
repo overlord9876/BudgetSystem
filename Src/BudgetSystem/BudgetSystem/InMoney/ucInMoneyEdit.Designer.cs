@@ -1119,11 +1119,11 @@
             // lciExportName
             // 
             this.lciExportName.Control = this.txtExportName;
-            this.lciExportName.CustomizationFormText = "出口货款名称：";
+            this.lciExportName.CustomizationFormText = "出口货物名称：";
             this.lciExportName.Location = new System.Drawing.Point(554, 174);
             this.lciExportName.Name = "lciExportName";
             this.lciExportName.Size = new System.Drawing.Size(554, 29);
-            this.lciExportName.Text = "出口货款名称：";
+            this.lciExportName.Text = "出口货物名称：";
             this.lciExportName.TextSize = new System.Drawing.Size(156, 18);
             // 
             // layoutControlItem14

@@ -1190,7 +1190,7 @@ namespace BudgetSystem
         private void dteSignDate_EditValueChanged(object sender, EventArgs e)
         {
             this.dteValidity.Properties.MinValue = this.dteSignDate.DateTime;
-            this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1);
+            this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1).AddDays(-1);
         }
         #endregion
 

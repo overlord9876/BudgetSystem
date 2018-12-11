@@ -272,7 +272,7 @@ namespace BudgetSystem.InMoney
                     }
                     if (string.IsNullOrEmpty(txtExportName.Text))
                     {
-                        dxErrorProvider1.SetError(txtExportName, "提交收款前，请输入出口货款名称");
+                        dxErrorProvider1.SetError(txtExportName, "提交收款前，请输入出口货物名称");
                     }
                     if (cboNatureOfMoney.SelectedItem == null || string.IsNullOrEmpty(cboNatureOfMoney.SelectedItem.ToString()))
                     {

@@ -515,6 +515,7 @@
             this.chkIsDrawback.Size = new System.Drawing.Size(111, 19);
             this.chkIsDrawback.StyleController = this.layoutControl1;
             this.chkIsDrawback.TabIndex = 10;
+            this.chkIsDrawback.CheckedChanged += new System.EventHandler(this.chkIsDrawback_CheckedChanged);
             // 
             // txtDescription
             // 

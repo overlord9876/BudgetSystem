@@ -67,6 +67,11 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
                 PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+                if (currentRowPaymentNote == null)
+                {
+                    XtraMessageBox.Show("请选择需要删除的项");
+                    return;
+                }
                 pnm.DeletePaymentNote(currentRowPaymentNote.ID);
                 this.gvOutMoney.DeleteRow(this.gvOutMoney.FocusedRowHandle);
                 XtraMessageBox.Show("删除成功");
@@ -91,6 +96,11 @@ namespace BudgetSystem
         private void ModifyPaymentNote()
         {
             PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
 
             if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中
               || currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批通过)
@@ -134,12 +144,15 @@ namespace BudgetSystem
         private void ViewPaymentNote()
         {
             PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (currentRowPaymentNote == null)
             {
-                frmOutMoneyEdit form = new frmOutMoneyEdit();
-                form.WorkModel = EditFormWorkModels.View;
-                form.CurrentPaymentNotes = currentRowPaymentNote;
-                form.ShowDialog(this);
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
             }
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.View;
+            form.CurrentPaymentNotes = currentRowPaymentNote;
+            form.ShowDialog(this);
         }
 
         public override void LoadData()

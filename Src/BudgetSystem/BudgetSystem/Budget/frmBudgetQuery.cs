@@ -119,6 +119,10 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要按合同查看收支情况的项");             
+            }
         }
 
         private void CreateBudget()
@@ -160,6 +164,10 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要修改的项"); 
+            }
         }
 
         private void SubmitApply()
@@ -182,6 +190,10 @@ namespace BudgetSystem
                 {
                     XtraMessageBox.Show(message);
                 }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要提交流程的项"); 
             }
         }
 
@@ -206,6 +218,10 @@ namespace BudgetSystem
                     XtraMessageBox.Show(message);
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要申请修改的项"); 
+            }
         }
 
         private void DeleteApply()
@@ -229,6 +245,10 @@ namespace BudgetSystem
                     XtraMessageBox.Show(message);
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要申请删除的项"); 
+            }
         }
 
         private void ViewBudget()
@@ -244,6 +264,10 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项"); 
+            }
         }
 
         private void ViewApplyHistory()
@@ -254,6 +278,10 @@ namespace BudgetSystem
                 frmHistory hisotryForm = new frmHistory();
                 hisotryForm.Points = fm.GetFlowRunPointsByData(budget.ID, EnumFlowDataType.预算单.ToString());
                 hisotryForm.ShowDialog();
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看审批状态的项"); 
             }
         }
         private void DeleteBudget()
@@ -270,6 +298,10 @@ namespace BudgetSystem
                 {
                     this.RefreshData();
                 }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要删除的项");  
             }
         }
 

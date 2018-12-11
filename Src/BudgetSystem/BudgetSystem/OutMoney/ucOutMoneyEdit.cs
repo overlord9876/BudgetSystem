@@ -215,7 +215,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
             }
-            if (!currentSupplier.IsQualified)
+            if (currentSupplier != null && !currentSupplier.IsQualified)
             {
                 decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
                 if (totalAmount > temporarySupplierPaymenttotalAmountMaxValue)
@@ -292,7 +292,7 @@ namespace BudgetSystem.OutMoney
             {
                 inProductDetailList = new List<InProductDetail>();
             }
-            if (inProductDetailList != null)
+            if (inProductDetailList != null && inProductDetailList.Count > 0)
             {
                 foreach (var v in inProductDetailList)
                 {
@@ -301,6 +301,8 @@ namespace BudgetSystem.OutMoney
                         txtTaxRebateRate.Properties.Items.Add(v.TaxRebateRate);
                     }
                 }
+
+                txtTaxRebateRate.SelectedIndex = 0;
             }
 
         }
@@ -529,8 +531,13 @@ namespace BudgetSystem.OutMoney
         {
             CalcPaymentTaxRebate();
         }
-        
+
         private void txtTaxRebateRate_EditValueChanged_1(object sender, EventArgs e)
+        {
+            CalcPaymentTaxRebate();
+        }
+
+        private void chkIsDrawback_CheckedChanged(object sender, EventArgs e)
         {
             CalcPaymentTaxRebate();
         }
@@ -601,5 +608,6 @@ namespace BudgetSystem.OutMoney
                 txtAfterPaymentBalance.ForeColor = Color.Red;
             }
         }
+
     }
 }

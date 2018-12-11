@@ -84,15 +84,24 @@ namespace BudgetSystem
                     this.RefreshData();
                 }
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+            }
         }
         private void ViewCustomer()
         {
             Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
+            if (currentRowCustomer != null)
             {
                 frmCustomerEdit form = new frmCustomerEdit();
                 form.WorkModel = EditFormWorkModels.View;
                 form.Customer = currentRowCustomer;
                 form.ShowDialog(this);
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
         private void EnableCustomer()
@@ -104,6 +113,10 @@ namespace BudgetSystem
                 this.RefreshData();
                 XtraMessageBox.Show("启用成功");
             }
+            else
+            {
+                XtraMessageBox.Show("请选择需要启用的项");
+            }
         }
         private void DisabledCustomer()
         {
@@ -113,6 +126,10 @@ namespace BudgetSystem
                 cm.ModifyCustomerState(currentRowCustomer.ID, false);
                 this.RefreshData();
                 XtraMessageBox.Show("停用成功");
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要停用的项");
             }
         }
 

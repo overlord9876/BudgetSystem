@@ -559,7 +559,7 @@
             this.txtProfitLevel2.Size = new System.Drawing.Size(249, 21);
             this.txtProfitLevel2.StyleController = this.layoutControl1;
             this.txtProfitLevel2.TabIndex = 60;
-            this.txtProfitLevel2.ToolTip = "盈利水平=利润/净收入额";
+            this.txtProfitLevel2.ToolTip = "盈利水平=利润/净收入额（USD）";
             // 
             // meDescription
             // 
