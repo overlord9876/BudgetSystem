@@ -16,5 +16,9 @@ namespace BudgetSystem.Entity
         用款类型,
         年利率,
         退税率,
+        价格条款,
+        结算方式,
+        商品单位,
+        企业性质,
     }
 }

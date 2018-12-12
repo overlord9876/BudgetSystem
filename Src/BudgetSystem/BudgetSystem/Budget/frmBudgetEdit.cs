@@ -17,7 +17,7 @@ namespace BudgetSystem
     {
         public Budget CurrentBudget { get; set; }
 
-       
+        private bool isStartFlow = false;
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         public frmBudgetEdit()
         {
@@ -35,7 +35,7 @@ namespace BudgetSystem
             }
             this.ucBudgetEdit1.FillData();
 
-            int result = bm.AddBudget(this.ucBudgetEdit1.CurrentBudget);
+            int result = bm.AddBudget(this.ucBudgetEdit1.CurrentBudget,isStartFlow);
             if (result <= 0)
             {
                 XtraMessageBox.Show("创建失败！");
@@ -54,7 +54,7 @@ namespace BudgetSystem
             }
             this.ucBudgetEdit1.FillData(); 
 
-            string message= bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget);
+            string message= bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget,isStartFlow);
             if (!string.IsNullOrEmpty(message))
             {
                 XtraMessageBox.Show(message, "提示");
@@ -84,16 +84,24 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 this.Text = "查看预算单信息"; 
-                this.btnSure.Enabled = false; 
+                this.btnSure.Enabled = false;
+                this.btnSubmit.Enabled = false;
             }
         }
 
         private void btnSure_Click(object sender, EventArgs e)
         {
+            isStartFlow = false;
             SubmitDataByWorkModel();
         }
-
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            isStartFlow = true;
+            SubmitDataByWorkModel();
+        }
         #endregion
+
+        
 
        
 

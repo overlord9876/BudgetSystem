@@ -86,6 +86,7 @@ namespace BudgetSystem
             {
                 return;
             }
+            
             if (EnumSystemConfigNames.港口信息.ToString().Equals(this.lbcType.SelectedItem))
             {
                 this.currentOptionEdit = new ucPortOptionEdit(); 
@@ -113,6 +114,22 @@ namespace BudgetSystem
             else if (EnumSystemConfigNames.用款类型.ToString().Equals(this.lbcType.SelectedItem))
             {
                 this.currentOptionEdit = new ucUseMoneyTypeOptionEdit();
+            }
+            else if (EnumSystemConfigNames.价格条款.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.价格条款);
+            }
+            else if (EnumSystemConfigNames.结算方式.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.结算方式);
+            }
+            else if (EnumSystemConfigNames.商品单位.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.商品单位);
+            }
+            else if (EnumSystemConfigNames.企业性质.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.企业性质);
             }
             else
             {

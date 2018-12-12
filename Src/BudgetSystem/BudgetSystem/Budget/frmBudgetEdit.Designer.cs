@@ -37,6 +37,8 @@
             this.layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -44,10 +46,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnSubmit);
             this.layoutControl1.Controls.Add(this.ucBudgetEdit1);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.btnCancel);
@@ -79,7 +83,7 @@
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
             this.btnSure.TabIndex = 56;
-            this.btnSure.Text = "确定";
+            this.btnSure.Text = "保存";
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             // 
             // btnCancel
@@ -102,7 +106,8 @@
             this.layoutControlItem50,
             this.layoutControlItem51,
             this.emptySpaceItem2,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1412, 854);
@@ -145,7 +150,7 @@
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 798);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(1152, 36);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(1032, 36);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -161,6 +166,31 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(1044, 810);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(116, 32);
+            this.btnSubmit.StyleController = this.layoutControl1;
+            this.btnSubmit.TabIndex = 58;
+            this.btnSubmit.Text = "提交";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.btnSubmit;
+            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem2.Location = new System.Drawing.Point(1032, 798);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 36);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 36);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(120, 36);
+            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextToControlDistance = 0;
+            this.layoutControlItem2.TextVisible = false;
             // 
             // frmBudgetEdit
             // 
@@ -181,6 +211,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem51)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -196,5 +227,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private ucBudgetEdit ucBudgetEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.SimpleButton btnSubmit;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

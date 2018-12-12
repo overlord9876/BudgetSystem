@@ -111,12 +111,12 @@ namespace BudgetSystem
             CurrentBudget.FeedMoney = this.txtFeedMoney.Value;
             CurrentBudget.DirectCosts = this.txtDirectCosts.Value;
             CurrentBudget.InterestRate = Convert.ToSingle(txtInterestRate.EditValue);
-            CurrentBudget.OutSettlementMethod = this.txtOutSettlementMethod.Text;
-            CurrentBudget.OutSettlementMethod2 = this.txtOutSettlementMethod2.Text;
-            CurrentBudget.OutSettlementMethod3 = this.txtOutSettlementMethod3.Text;
+            CurrentBudget.OutSettlementMethod = this.cboOutSettlementMethod.Text;
+            CurrentBudget.OutSettlementMethod2 = this.cboOutSettlementMethod2.Text;
+            CurrentBudget.OutSettlementMethod3 = this.cboOutSettlementMethod3.Text;
             CurrentBudget.Premium = txtPremium.Value;
             CurrentBudget.Profit = this.txtProfit.Value;
-            CurrentBudget.PriceClause = this.txtPriceClause.Text;
+            CurrentBudget.PriceClause = this.cboPriceClause.Text;
             CurrentBudget.Port = this.luePort.Text;
             CurrentBudget.TotalAmount = txtTotalAmount.Value;
             CurrentBudget.USDTotalAmount = txtUSDTotalAmount.Value;
@@ -190,6 +190,25 @@ namespace BudgetSystem
             List<MoneyType> moneyTypeList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
             this.ricboOriginalCurrency.Items.Clear();
             moneyTypeList.ForEach(m => ricboOriginalCurrency.Items.Add(m.Name));
+            List<string> priceClauseList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.价格条款.ToString());
+            cboPriceClause.Properties.Items.Clear();
+            cboPriceClause.Properties.Items.AddRange(priceClauseList);
+            cboPriceClause.SelectedIndex = 0;
+
+            List<string> outSettlementMethodList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.结算方式.ToString());
+            cboOutSettlementMethod.Properties.Items.Clear();
+            cboOutSettlementMethod.Properties.Items.AddRange(outSettlementMethodList);
+            cboOutSettlementMethod.SelectedIndex = 0;
+            cboOutSettlementMethod2.Properties.Items.Clear();
+            cboOutSettlementMethod2.Properties.Items.AddRange(outSettlementMethodList);
+            cboOutSettlementMethod3.Properties.Items.Clear();
+            cboOutSettlementMethod3.Properties.Items.AddRange(outSettlementMethodList);
+
+            List<string> unitList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.商品单位.ToString());
+            this.ricboUnit.Items.Clear();
+            this.ricboUnit.Items.AddRange(unitList);
+            this.ricboInUnit.Items.Clear();
+            this.ricboInUnit.Items.AddRange(unitList);
         }
 
         private void InitControlState()
@@ -264,11 +283,11 @@ namespace BudgetSystem
                 this.txtFeedMoney.EditValue = budget.FeedMoney;
                 this.txtDirectCosts.EditValue = budget.DirectCosts;
                 this.txtInterestRate.EditValue = budget.InterestRate;
-                this.txtOutSettlementMethod.Text = budget.OutSettlementMethod;
-                this.txtOutSettlementMethod2.Text = budget.OutSettlementMethod2;
-                this.txtOutSettlementMethod3.Text = budget.OutSettlementMethod3;
+                this.cboOutSettlementMethod.Text = budget.OutSettlementMethod;
+                this.cboOutSettlementMethod2.Text = budget.OutSettlementMethod2;
+                this.cboOutSettlementMethod3.Text = budget.OutSettlementMethod3;
                 this.txtPremium.EditValue = budget.Premium;
-                this.txtPriceClause.Text = budget.PriceClause;
+                this.cboPriceClause.Text = budget.PriceClause;
                 this.txtSalesman.Text = budget.SalesmanName;
                 this.txtTotalAmount.EditValue = budget.TotalAmount;
                 this.txtUSDTotalAmount.EditValue = budget.USDTotalAmount;
@@ -862,7 +881,11 @@ namespace BudgetSystem
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
-
+        private void gv_CustomRowCellEditForEditing(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+            SendKeys.Flush();
+            SendKeys.Send("^+A");
+        }
 
         private void gvOutProductDetail_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -1193,6 +1216,10 @@ namespace BudgetSystem
             this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1).AddDays(-1);
         }
         #endregion
+
+       
+
+
 
 
 

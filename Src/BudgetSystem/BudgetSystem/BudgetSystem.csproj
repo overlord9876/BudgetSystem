@@ -239,6 +239,10 @@
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowApproveDisplayHelper.cs" />
+    <Compile Include="Option\ucStringListOptionEdit.cs" />
+    <Compile Include="Option\ucStringListOptionEdit.Designer.cs">
+      <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrinterHelper.cs" />
     <Compile Include="Supplier\ucSupplierEdit.cs">
       <SubType>UserControl</SubType>
@@ -591,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucStringListOptionEdit.resx">
+      <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">

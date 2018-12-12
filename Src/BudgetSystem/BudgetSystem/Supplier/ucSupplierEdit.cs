@@ -20,6 +20,7 @@ namespace BudgetSystem
         }
         private Bll.SupplierManager sm = new Bll.SupplierManager();
         private Bll.DepartmentManager dm = new Bll.DepartmentManager();
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private EditFormWorkModels _workModel;
 
         public EditFormWorkModels WorkModel
@@ -44,11 +45,9 @@ namespace BudgetSystem
             this.cboSupplierType.Properties.Items.Add("其它供方");
             this.cboSupplierType.SelectedIndex = 1;
 
-            this.cboNature.Properties.Items.Add("有限责任公司");
-            this.cboNature.Properties.Items.Add("股份有限责任公司");
-            this.cboNature.Properties.Items.Add("个人独资企业");
-            this.cboNature.Properties.Items.Add("合伙企业");
-            this.cboNature.Properties.Items.Add("其它");
+            List<string> natureList=scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());
+            this.cboNature.Properties.Items.Clear();
+            this.cboNature.Properties.Items.AddRange(natureList);
             this.cboNature.SelectedIndex = 0;
 
             List<Department> departmentList = dm.GetAllDepartment();
