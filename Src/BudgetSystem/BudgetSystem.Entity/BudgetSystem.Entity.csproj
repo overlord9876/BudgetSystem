@@ -71,6 +71,7 @@
     <Compile Include="Infrastructure\OperateTypes.cs" />
     <Compile Include="InProductDetail.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceInfo.cs" />
     <Compile Include="ModifyMark.cs" />
     <Compile Include="OutProductDetail.cs" />
     <Compile Include="PaymentNotes.cs" />

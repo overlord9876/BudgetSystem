@@ -33,7 +33,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoneyDetail, "用款查询"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
 
 
 
@@ -76,6 +76,10 @@ namespace BudgetSystem
                 this.gvOutMoney.DeleteRow(this.gvOutMoney.FocusedRowHandle);
                 XtraMessageBox.Show("删除成功");
             }
+            else if (operate.Operate == OperateTypes.Confirm.ToString())
+            {
+                RepayLoanPaymentNote();
+            }
             else
             {
                 XtraMessageBox.Show("未定义的操作1");
@@ -115,6 +119,25 @@ namespace BudgetSystem
             form.ShowDialog(this);
 
             LoadData();
+        }
+
+        private void RepayLoanPaymentNote()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("请选择需要确认归还的项");
+                return;
+            }
+
+            if (!currentRowPaymentNote.IsIOU)
+            {
+                XtraMessageBox.Show(string.Format("该付款不是借款类型。"));
+                return;
+            }
+            currentRowPaymentNote.RepayLoan = true;
+
+            currentRowPaymentNote.UpdateTimestamp = pnm.ModifyPaymentNote(currentRowPaymentNote);
         }
 
         private void StartFlow()

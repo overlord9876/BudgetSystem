@@ -54,12 +54,12 @@ namespace BudgetSystem.Bll
                     });
         }
 
-        public void ModifyPaymentNote(PaymentNotes modifyPaymentNote)
+        public DateTime ModifyPaymentNote(PaymentNotes modifyPaymentNote)
         {
-            this.ExecuteWithTransaction((con, tran) =>
-            {
-                dal.ModifyPaymentNote(modifyPaymentNote, con, tran);
-            });
+            return this.ExecuteWithTransaction<DateTime>((con, tran) =>
+                 {
+                     return dal.ModifyPaymentNote(modifyPaymentNote, con, tran);
+                 });
         }
 
         /// <summary>

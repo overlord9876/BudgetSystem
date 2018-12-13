@@ -40,12 +40,12 @@
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcApprover = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcApproveTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExpectedReturnDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoneyUsed = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcRepayLoanText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsDrawback = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcHasInvoice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -79,12 +79,12 @@
             this.gcCNY,
             this.gcApplicant,
             this.gcCommitTime,
-            this.gcApprover,
-            this.gcApproveTime,
             this.gcPaymentDate,
             this.gcDescription,
             this.gcDepartmentCode,
             this.gcMoneyUsed,
+            this.gcRepayLoanText,
+            this.gcExpectedReturnDate,
             this.gcIsDrawback,
             this.gcHasInvoice,
             this.gcPaymentMethod});
@@ -169,21 +169,13 @@
             this.gcCommitTime.Visible = true;
             this.gcCommitTime.VisibleIndex = 7;
             // 
-            // gcApprover
+            // gcExpectedReturnDate
             // 
-            this.gcApprover.Caption = "财务确认人";
-            this.gcApprover.FieldName = "Approver";
-            this.gcApprover.Name = "gcApprover";
-            this.gcApprover.Visible = true;
-            this.gcApprover.VisibleIndex = 8;
-            // 
-            // gcApproveTime
-            // 
-            this.gcApproveTime.Caption = "确认时间";
-            this.gcApproveTime.FieldName = "ApproveTime";
-            this.gcApproveTime.Name = "gcApproveTime";
-            this.gcApproveTime.Visible = true;
-            this.gcApproveTime.VisibleIndex = 9;
+            this.gcExpectedReturnDate.Caption = "预计归还时间";
+            this.gcExpectedReturnDate.FieldName = "ExpectedReturnDate";
+            this.gcExpectedReturnDate.Name = "gcExpectedReturnDate";
+            this.gcExpectedReturnDate.Visible = true;
+            this.gcExpectedReturnDate.VisibleIndex = 11;
             // 
             // gcPaymentDate
             // 
@@ -203,7 +195,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 10;
+            this.gcDepartmentCode.VisibleIndex = 9;
             // 
             // gcMoneyUsed
             // 
@@ -211,7 +203,15 @@
             this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 11;
+            this.gcMoneyUsed.VisibleIndex = 10;
+            // 
+            // gcRepayLoanText
+            // 
+            this.gcRepayLoanText.Caption = "借款信息";
+            this.gcRepayLoanText.FieldName = "RepayLoanText";
+            this.gcRepayLoanText.Name = "gcRepayLoanText";
+            this.gcRepayLoanText.Visible = true;
+            this.gcRepayLoanText.VisibleIndex = 11;
             // 
             // gcIsDrawback
             // 
@@ -253,8 +253,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplier;
         private DevExpress.XtraGrid.Columns.GridColumn gcCNY;
         private DevExpress.XtraGrid.Columns.GridColumn gcApplicant;
-        private DevExpress.XtraGrid.Columns.GridColumn gcApprover;
-        private DevExpress.XtraGrid.Columns.GridColumn gcApproveTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExpectedReturnDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcPaymentDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraGrid.Columns.GridColumn gcCommitTime;
@@ -269,5 +268,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
         private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
         private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcRepayLoanText;
     }
 }

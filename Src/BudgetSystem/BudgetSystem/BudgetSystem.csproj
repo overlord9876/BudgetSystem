@@ -239,7 +239,9 @@
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowApproveDisplayHelper.cs" />
-    <Compile Include="Option\ucStringListOptionEdit.cs" />
+    <Compile Include="Option\ucStringListOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Option\ucStringListOptionEdit.Designer.cs">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </Compile>

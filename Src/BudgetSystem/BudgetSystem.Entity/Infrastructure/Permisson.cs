@@ -137,7 +137,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.SubmitApply, "付款管理-提交付款申请",950),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看详情",960),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",970), 
-                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-确认付款",980), 
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-借款归还确认",980), 
 
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"交单管理模块",1000),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.New,"交单管理-新增交单记录",1010),

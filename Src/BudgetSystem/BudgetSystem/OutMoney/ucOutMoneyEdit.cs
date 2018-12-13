@@ -53,6 +53,8 @@ namespace BudgetSystem.OutMoney
             InitializeComponent();
 
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
+            this.riLinkDelete.Click += new EventHandler(riLinkDelete_Click);
+            this.riLinkDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
 
             this.cboBudget.Properties.PopupFormSize = new Size(this.cboBudget.Width * 2, 300);
             this.cboSupplier.Properties.PopupFormSize = new Size(this.cboSupplier.Width * 2, 300);
@@ -64,6 +66,8 @@ namespace BudgetSystem.OutMoney
 
         private void InitEditStyle()
         {
+            lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.deCommitTime.EditValue = DateTime.Now;
@@ -127,6 +131,7 @@ namespace BudgetSystem.OutMoney
                 }
             }
 
+            BindingBankInfoDetail(payment.InvoiceNumber);
 
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
             this.txtDescription.Text = payment.Description;
@@ -156,7 +161,38 @@ namespace BudgetSystem.OutMoney
             txtDescription.Text = payment.Description;
             chkHasInvoice.EditValue = payment.HasInvoice;
             chkIsIOU.EditValue = payment.IsIOU;
+            chkRepayLoan.EditValue = payment.RepayLoan;
             txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
+        }
+
+        private void BindingBankInfoDetail(string detail)
+        {
+            List<InvoiceInfo> invoiceInfoList;
+            if (!string.IsNullOrEmpty(detail))
+            {
+                invoiceInfoList = detail.ToObjectList<List<InvoiceInfo>>();
+            }
+            else
+            {
+                invoiceInfoList = new List<InvoiceInfo>();
+            }
+
+            this.gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>(invoiceInfoList);
+            this.gridInvoiceNumber.RefreshDataSource();
+        }
+
+        private string GetInvoiceNumberDetailString()
+        {
+            this.gvInvoiceNumber.CloseEditor();
+            var dataSource = (IEnumerable<InvoiceInfo>)gridInvoiceNumber.DataSource;
+            if (dataSource != null)
+            {
+                return dataSource.ToJson<IEnumerable<InvoiceInfo>>();
+            }
+            else
+            {
+                return "";
+            }
         }
 
         public bool CheckInputData()
@@ -345,6 +381,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.BankNO = this.txtBankNO.Text;
 
             this.CurrentPaymentNotes.IsIOU = this.chkIsIOU.Checked;
+            this.CurrentPaymentNotes.InvoiceNumber = GetInvoiceNumberDetailString();
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
         }
 
@@ -409,7 +446,6 @@ namespace BudgetSystem.OutMoney
             }
         }
 
-        //private IEnumerable<PaymentNotes> paymentNotes;
         private Budget currentBudget;
 
         private void cboBudget_EditValueChanged(object sender, EventArgs e)
@@ -461,8 +497,7 @@ namespace BudgetSystem.OutMoney
                 txtReceiptAmount.EditValue = 0;
             }
         }
-
-
+        
         private void CalcPaymentTaxRebate()
         {
             if (caculator == null) { return; }
@@ -532,7 +567,7 @@ namespace BudgetSystem.OutMoney
             CalcPaymentTaxRebate();
         }
 
-        private void txtTaxRebateRate_EditValueChanged_1(object sender, EventArgs e)
+        private void txtTaxRebateRate_EditValueChanged(object sender, EventArgs e)
         {
             CalcPaymentTaxRebate();
         }
@@ -544,11 +579,32 @@ namespace BudgetSystem.OutMoney
 
         private List<string> ignoreItems = new List<string>() { "货款", "面辅料" };
 
+        private List<string> ignoreMessageUsageNameList = new List<string>() { "货款", "辅料款", "预付货款", "预付辅料款" };
+
+        private List<string> needInvoiceUsageNameList = new List<string>() { "运杂费", "咨询费", "服务费", "快递费", "海关关税", "海关增值税" };
+
         private void cboMoneyUsed_EditValueChanged(object sender, EventArgs e)
         {
             UseMoneyType selectedItem = this.cboMoneyUsed.EditValue as UseMoneyType;
             if (selectedItem != null)
             {
+                if (!ignoreMessageUsageNameList.Contains(selectedItem.Name))
+                {
+                    lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                else
+                {
+                    lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                if (needInvoiceUsageNameList.Contains(selectedItem.Name))
+                {
+                    lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                else
+                {
+                    gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>();
+                    lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
                 if (ignoreItems.Contains(selectedItem.Name))
                 {
                     this.chkIsIOU.Properties.ReadOnly = true;
@@ -606,6 +662,37 @@ namespace BudgetSystem.OutMoney
             else
             {
                 txtAfterPaymentBalance.ForeColor = Color.Red;
+            }
+        }
+
+        private void riLinkDelete_Click(object sender, System.EventArgs e)
+        {
+            if (this.gvInvoiceNumber.FocusedRowHandle < 0)
+            {
+                gvInvoiceNumber.CloseEditor();
+                gvInvoiceNumber.CancelUpdateCurrentRow();
+            }
+            else
+            {
+                gvInvoiceNumber.DeleteRow(gvInvoiceNumber.FocusedRowHandle);
+            }
+            gvInvoiceNumber.ClearColumnErrors();
+        }
+
+        private void riLinkDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
+        {
+            e.DisplayText = "删除";
+        }
+
+        private void chkIsIOU_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkIsIOU.Checked)
+            {
+                lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+            else
+            {
+                lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
 

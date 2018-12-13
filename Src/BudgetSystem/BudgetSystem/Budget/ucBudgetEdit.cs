@@ -192,23 +192,31 @@ namespace BudgetSystem
             moneyTypeList.ForEach(m => ricboOriginalCurrency.Items.Add(m.Name));
             List<string> priceClauseList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.价格条款.ToString());
             cboPriceClause.Properties.Items.Clear();
-            cboPriceClause.Properties.Items.AddRange(priceClauseList);
-            cboPriceClause.SelectedIndex = 0;
-
+            if (priceClauseList != null && priceClauseList.Count > 0)
+            {
+                cboPriceClause.Properties.Items.AddRange(priceClauseList);
+                cboPriceClause.SelectedIndex = 0;
+            }
             List<string> outSettlementMethodList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.结算方式.ToString());
             cboOutSettlementMethod.Properties.Items.Clear();
-            cboOutSettlementMethod.Properties.Items.AddRange(outSettlementMethodList);
-            cboOutSettlementMethod.SelectedIndex = 0;
             cboOutSettlementMethod2.Properties.Items.Clear();
-            cboOutSettlementMethod2.Properties.Items.AddRange(outSettlementMethodList);
             cboOutSettlementMethod3.Properties.Items.Clear();
-            cboOutSettlementMethod3.Properties.Items.AddRange(outSettlementMethodList);
+            if (outSettlementMethodList != null && outSettlementMethodList.Count > 0)
+            {
+                cboOutSettlementMethod.Properties.Items.AddRange(outSettlementMethodList);
+                cboOutSettlementMethod.SelectedIndex = 0;
+                cboOutSettlementMethod2.Properties.Items.AddRange(outSettlementMethodList);
+                cboOutSettlementMethod3.Properties.Items.AddRange(outSettlementMethodList);
+            }
 
             List<string> unitList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.商品单位.ToString());
             this.ricboUnit.Items.Clear();
-            this.ricboUnit.Items.AddRange(unitList);
             this.ricboInUnit.Items.Clear();
-            this.ricboInUnit.Items.AddRange(unitList);
+            if (unitList != null && unitList.Count > 0)
+            {
+                this.ricboUnit.Items.AddRange(unitList);
+                this.ricboInUnit.Items.AddRange(unitList);
+            }
         }
 
         private void InitControlState()
@@ -1217,7 +1225,7 @@ namespace BudgetSystem
         }
         #endregion
 
-       
+
 
 
 

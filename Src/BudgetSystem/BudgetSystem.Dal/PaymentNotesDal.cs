@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace BudgetSystem.Dal
 {
-    public class PaymentNotesDal
+    public class PaymentNotesDal : DalBase
     {
         public IEnumerable<PaymentNotes> GetAllPaymentNotes(IDbConnection con, IDbTransaction tran)
         {
@@ -44,7 +44,7 @@ namespace BudgetSystem.Dal
 
         public int AddPaymentNote(PaymentNotes addPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `paymentnotes` (`ID`,`CommitTime`,`CNY`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DepartmentCode`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`,`VatOption`,`UpdateTimestamp`,`BankName`,`BankNO`) Values (@ID,@CommitTime,@CNY,@BudgetID,@SupplierID,@PaymentDate,@Description,@DepartmentCode,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency,@VatOption,@UpdateTimestamp,@BankName,@BankNO)";
+            string insertSql = "Insert Into `paymentnotes` (`ID`,`CommitTime`,`CNY`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DepartmentCode`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`,`VatOption`,`UpdateTimestamp`,`BankName`,`BankNO`,`IsIOU`,`ExpectedReturnDate`,`RepayLoan`,`InvoiceNumber`) Values (@ID,@CommitTime,@CNY,@BudgetID,@SupplierID,@PaymentDate,@Description,@DepartmentCode,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency,@VatOption,@UpdateTimestamp,@BankName,@BankNO,@IsIOU,@ExpectedReturnDate,@RepayLoan,@InvoiceNumber)";
             int id = con.Insert(insertSql, addPaymentNote, tran);
             if (id > 0)
             {
@@ -53,10 +53,22 @@ namespace BudgetSystem.Dal
             return id;
         }
 
-        public void ModifyPaymentNote(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
+        public DateTime ModifyPaymentNote(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DepartmentCode` = @DepartmentCode,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency,`VatOption` = @VatOption,`UpdateTimestamp` = @UpdateTimestamp,`BankName` = @BankName,`BankNO` = @BankNO Where `ID` = @ID";
+
+            DateTime versionNumber = GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
+
+            if (this.CheckExpired(versionNumber, modifyPaymentNote.UpdateTimestamp))
+            {
+                throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
+            }
+            modifyPaymentNote.UpdateTimestamp = DateTime.Now;
+
+            string updateSql = "Update `paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DepartmentCode` = @DepartmentCode,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency,`VatOption` = @VatOption,`UpdateTimestamp` = @UpdateTimestamp,`BankName` = @BankName,`BankNO` = @BankNO,IsIOU=@IsIOU,ExpectedReturnDate=@ExpectedReturnDate,RepayLoan=@RepayLoan,InvoiceNumber =@InvoiceNumber Where `ID` = @ID";
             con.Execute(updateSql, modifyPaymentNote, tran);
+
+            return GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
+
         }
 
         public void DeletePaymentNote(int id, IDbConnection con, IDbTransaction tran)

@@ -70,7 +70,7 @@ namespace BudgetSystem.OutMoney
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 
-            pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
+            this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
@@ -87,7 +87,7 @@ namespace BudgetSystem.OutMoney
             }
             else
             {
-                pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
+                this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
             }
 
             FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);

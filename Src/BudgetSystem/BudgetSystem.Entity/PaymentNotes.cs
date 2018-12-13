@@ -60,6 +60,28 @@ namespace BudgetSystem.Entity
         public DateTime ExpectedReturnDate { get; set; }
 
         /// <summary>
+        /// 归还借款
+        /// </summary>
+        public bool RepayLoan { get; set; }
+
+        public string RepayLoanText
+        {
+            get
+            {
+                if (IsIOU)
+                {
+                    return RepayLoan ? "借款已归还" : "未归还借款";
+                }
+                else { return string.Empty; }
+            }
+        }
+
+        /// <summary>
+        /// 发票号码
+        /// </summary>
+        public string InvoiceNumber { get; set; }
+
+        /// <summary>
         /// 合同ID
         /// </summary>
         public int BudgetID { get; set; }

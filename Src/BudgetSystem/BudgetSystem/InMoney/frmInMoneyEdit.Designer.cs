@@ -88,7 +88,7 @@
             // btnSure
             // 
             this.btnSure.Location = new System.Drawing.Point(760, 685);
-            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
@@ -99,7 +99,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(880, 685);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 32);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -207,7 +207,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmInMoneyEdit";
             this.Text = "收款单";
             this.Load += new System.EventHandler(this.frmInMemoryEdit_Load);

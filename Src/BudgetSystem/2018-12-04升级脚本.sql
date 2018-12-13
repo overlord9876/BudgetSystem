@@ -39,6 +39,13 @@ IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DAT
 	ALTER TABLE PaymentNotes  ADD COLUMN  BankNO               varchar(30) default '';
 END IF;
 
+IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DATABASE()  AND table_name = 'PaymentNotes' AND column_name = 'IsIOU') THEN
+   ALTER TABLE PaymentNotes ADD COLUMN     IsIOU                bit;
+   ALTER TABLE PaymentNotes ADD COLUMN     ExpectedReturnDate   datetime;
+   ALTER TABLE PaymentNotes ADD COLUMN     RepayLoan            bit;
+   ALTER TABLE PaymentNotes ADD COLUMN     InvoiceNumber        text;
+END IF;
+
 ALTER TABLE 	bankslip	 modify  COLUMN 	OriginalCoin	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	CNY	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	ExchangeRate     float(8,6) DEFAULT 0;
