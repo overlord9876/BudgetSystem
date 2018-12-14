@@ -74,6 +74,8 @@
             this.gcMoney.Caption = "金额";
             this.gcMoney.FieldName = "Money";
             this.gcMoney.Name = "gcMoney";
+            this.gcMoney.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Money", "合计={0:n}")});
             this.gcMoney.Visible = true;
             this.gcMoney.VisibleIndex = 1;
             this.gcMoney.Width = 169;
