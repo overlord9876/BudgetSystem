@@ -178,6 +178,11 @@ namespace BudgetSystem.Entity
         public string Applicant { get; set; }
 
         /// <summary>
+        /// 付款银行
+        /// </summary>
+        public string PayingBank { get; set; }
+
+        /// <summary>
         /// 流程状态
         /// </summary>
         public EnumDataFlowState EnumFlowState

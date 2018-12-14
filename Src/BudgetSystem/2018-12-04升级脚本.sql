@@ -46,6 +46,10 @@ IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DAT
    ALTER TABLE PaymentNotes ADD COLUMN     InvoiceNumber        text;
 END IF;
 
+IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DATABASE()  AND table_name = 'PaymentNotes' AND column_name = 'PayingBank') THEN
+   ALTER TABLE PaymentNotes ADD COLUMN     PayingBank                varchar(100);
+END IF;
+
 ALTER TABLE 	bankslip	 modify  COLUMN 	OriginalCoin	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	CNY	 decimal(14,2) DEFAULT 0;
 ALTER TABLE 	bankslip	 modify  COLUMN 	ExchangeRate     float(8,6) DEFAULT 0;

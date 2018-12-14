@@ -111,24 +111,34 @@ namespace BudgetSystem.InMoney
         private void frmInMemoryEdit_Load(object sender, EventArgs e)
         {
             this.ucInMoneyEdit1.WorkModel = this.WorkModel;
-
-            if (this.WorkModel != EditFormWorkModels.New)
+            lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
+                this.Text = "收汇拆分";
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
-                if (this.WorkModel == EditFormWorkModels.Modify)
-                {
-                    lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                }
             }
-            if (this.WorkModel == EditFormWorkModels.View)
+            else if (this.WorkModel == EditFormWorkModels.Modify)
             {
+                this.Text = "修改银行水单";
+                this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
+            }
+            else if (this.WorkModel == EditFormWorkModels.View)
+            {
+                this.Text = "查看详情";
+                this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
+
                 lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
+            else if (this.WorkModel == EditFormWorkModels.New)
+            {
+                this.Text = "新增银行水单";
+            }
+            this.btnCommit.Text = "收汇确认";
             if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {
-                this.btnSure.Text = "收汇确认";
+                this.btnSure.Text = "收汇拆分";
             }
             else
             {

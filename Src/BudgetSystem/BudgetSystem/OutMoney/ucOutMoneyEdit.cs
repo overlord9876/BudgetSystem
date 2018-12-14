@@ -144,7 +144,7 @@ namespace BudgetSystem.OutMoney
             this.cboPaymentMethod.EditValue = payment.PaymentMethod;
             this.txtVoucherNo.Text = payment.VoucherNo;
             this.deCommitTime.EditValue = payment.CommitTime;
-
+            this.txtPayingBank.Text = payment.PayingBank;
             this.txtApplicant.EditValue = um.GetUser(payment.Applicant);
 
             this.cboDepartment.EditValue = payment.DepartmentName;
@@ -246,7 +246,10 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(txtVoucherNo, "请输入凭证号。");
             }
-
+            if (string.IsNullOrEmpty(txtPayingBank.Text))
+            {
+                this.dxErrorProvider1.SetError(txtPayingBank, "请输入付款银行。");
+            }
             if (!(cboMoneyUsed.EditValue is UseMoneyType))
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
@@ -368,6 +371,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
+            this.CurrentPaymentNotes.PayingBank = this.txtPayingBank.Text;
             this.CurrentPaymentNotes.ExchangeRate = float.Parse(this.txtExchangeRate.EditValue.ToString());
             this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
             this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
@@ -497,7 +501,7 @@ namespace BudgetSystem.OutMoney
                 txtReceiptAmount.EditValue = 0;
             }
         }
-        
+
         private void CalcPaymentTaxRebate()
         {
             if (caculator == null) { return; }
