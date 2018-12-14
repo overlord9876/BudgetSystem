@@ -31,6 +31,7 @@
             this.gdBatchApproveData = new DevExpress.XtraGrid.GridControl();
             this.gvBatchApproveData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcText = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).BeginInit();
@@ -51,10 +52,12 @@
             // 
             this.gvBatchApproveData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcText,
+            this.gcMoney,
             this.gcDescription});
             this.gvBatchApproveData.GridControl = this.gdBatchApproveData;
             this.gvBatchApproveData.Name = "gvBatchApproveData";
             this.gvBatchApproveData.OptionsBehavior.Editable = false;
+            this.gvBatchApproveData.OptionsView.ShowFooter = true;
             this.gvBatchApproveData.OptionsView.ShowGroupPanel = false;
             // 
             // gcText
@@ -64,7 +67,16 @@
             this.gcText.Name = "gcText";
             this.gcText.Visible = true;
             this.gcText.VisibleIndex = 0;
-            this.gcText.Width = 163;
+            this.gcText.Width = 152;
+            // 
+            // gcMoney
+            // 
+            this.gcMoney.Caption = "金额";
+            this.gcMoney.FieldName = "Money";
+            this.gcMoney.Name = "gcMoney";
+            this.gcMoney.Visible = true;
+            this.gcMoney.VisibleIndex = 1;
+            this.gcMoney.Width = 169;
             // 
             // gcDescription
             // 
@@ -72,8 +84,8 @@
             this.gcDescription.FieldName = "DataDesc";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 1;
-            this.gcDescription.Width = 756;
+            this.gcDescription.VisibleIndex = 2;
+            this.gcDescription.Width = 612;
             // 
             // BatchDataControl
             // 
@@ -94,5 +106,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvBatchApproveData;
         private DevExpress.XtraGrid.Columns.GridColumn gcText;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
+        private DevExpress.XtraGrid.Columns.GridColumn gcMoney;
     }
 }
