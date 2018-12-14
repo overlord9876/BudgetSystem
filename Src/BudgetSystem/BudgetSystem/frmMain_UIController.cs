@@ -8,6 +8,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars;
 using System.Diagnostics;
 using System.Collections;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
@@ -212,8 +213,12 @@ namespace BudgetSystem
                     group = dict[mo.GroupText];
                 }
 
-                string permission = form.Module + "." + mo.Operate;
-                if (!RunInfo.Instance.UserPermission.Contains(permission) && !(RunInfo.Instance.UserPermission.Contains(form.Module.ToString()) && mo.IgnorePermission))
+               // string permission = form.Module + "." + mo.Operate;
+                string permission = Permisson.CalcPermission(form.Module, mo.Operate);
+
+
+                if (!RunInfo.Instance.UserPermission.Contains(permission))
+
                 {
 # if (!IgnorePermission)
                     continue;

@@ -25,11 +25,6 @@ namespace BudgetSystem
             this.UIType = uiType;
         }
 
-        public bool IgnorePermission
-        {
-            get;
-            set;
-        }
 
         public string Operate
         {

@@ -51,14 +51,27 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (Operate == OperateTypes.None || Operate == OperateTypes.CommonQuery || Operate == OperateTypes.MyQuery || Operate == OperateTypes.CustomQuery || Operate == OperateTypes.QueryManager)
-                {
-                    return this.Module.ToString();
-                }
-                else
-                {
-                    return this.Module + "." + this.Operate;
-                }
+                return CalcPermission(this.Module, this.Operate.ToString());
+                //if (Operate == OperateTypes.None || Operate == OperateTypes.CommonQuery || Operate == OperateTypes.MyQuery || Operate == OperateTypes.CustomQuery || Operate == OperateTypes.QueryManager)
+                //{
+                //    return this.Module.ToString();
+                //}
+                //else
+                //{
+                //    return this.Module + "." + this.Operate;
+                //}
+            }
+        }
+
+        public static string CalcPermission(BusinessModules module,string operate)
+        {
+            if (operate == OperateTypes.None.ToString() || operate == OperateTypes.CommonQuery.ToString() || operate == OperateTypes.MyQuery.ToString() || operate == OperateTypes.CustomQuery.ToString() || operate == OperateTypes.QueryManager.ToString())
+            {
+                return module.ToString();
+            }
+            else
+            {
+                return module + "." + operate;
             }
         }
 
