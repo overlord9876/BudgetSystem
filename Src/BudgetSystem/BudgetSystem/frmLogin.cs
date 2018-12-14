@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
+using BudgetSystem.Properties;
 
 
 namespace BudgetSystem
@@ -16,6 +17,7 @@ namespace BudgetSystem
         public frmLogin()
         {
             InitializeComponent();
+            this.Icon = Resources.logo;
         }
 
         Bll.UserManager um = new Bll.UserManager();

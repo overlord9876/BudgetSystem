@@ -26,22 +26,22 @@ namespace BudgetSystem
             this.FormID = Guid.NewGuid().ToString("N");
 
 
-        
+
         }
 
 
         protected bool CheckPermission(OperateTypes operate)
         {
-            string permission = this.Module +"." +operate.ToString();
+            string permission = this.Module + "." + operate.ToString();
 
             return RunInfo.Instance.UserPermission.Contains(permission);
-        
+
         }
 
         public string FormID
         {
-             get;
-             private set;
+            get;
+            private set;
         }
 
         public virtual Entity.BusinessModules Module
@@ -57,11 +57,11 @@ namespace BudgetSystem
         }
 
 
-        public virtual bool CanRefreshData 
+        public virtual bool CanRefreshData
         {
             get;
             set;
-        } 
+        }
 
         public virtual void RefreshData()
         {
@@ -74,14 +74,14 @@ namespace BudgetSystem
             get;
             protected set;
         }
-      
+
         public virtual string ModelOperatePageName
         {
             get;
             protected set;
         }
 
-        public virtual void OperateHandled(ModelOperate operate,ModeOperateEventArgs e)
+        public virtual void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
             if (operate.Operate == OperateTypes.CommonQuery.ToString())
             {
@@ -110,7 +110,7 @@ namespace BudgetSystem
                 frmCustomQueryEditor editor = new frmCustomQueryEditor();
                 editor.QueryName = this.GetType().ToString();
                 editor.ShowDialog();
- 
+
                 if (editor.IsModifyedCondition)
                 {
                     this.InitModelOperate();
@@ -120,16 +120,16 @@ namespace BudgetSystem
         }
 
         protected virtual void DoCommonQuery(string queryName)
-        { 
-        
+        {
+
         }
 
         protected virtual void DoConditionQuery(BaseQueryCondition condition)
-        { 
-        
+        {
+
         }
 
-        protected virtual QueryConditionEditorForm CreateConditionEditorForm() 
+        protected virtual QueryConditionEditorForm CreateConditionEditorForm()
         {
             return null;
         }
@@ -140,7 +140,7 @@ namespace BudgetSystem
 
         protected virtual void InitGridViewAction()
         {
-        
+
         }
 
         private void frmBaseQueryForm_Load(object sender, EventArgs e)
@@ -158,8 +158,8 @@ namespace BudgetSystem
                     gv.MouseDown += new MouseEventHandler(gv_MouseDown);
                     gv.DoubleClick += new EventHandler(gv_DoubleClick);
                 }
-            
-            }       
+
+            }
         }
         private GridHitInfo hInfo;
 
@@ -172,7 +172,7 @@ namespace BudgetSystem
                 if (gridViewAction.ContainsKey(gv))
                 {
                     ActionWithPermission action = gridViewAction[gv];
-                    if (action != null && action.MainAction!=null && CheckPermission(action.MainOperate))
+                    if (action != null && action.MainAction != null && CheckPermission(action.MainOperate))
                     {
                         action.MainAction.Invoke();
                     }
@@ -193,7 +193,7 @@ namespace BudgetSystem
         }
 
 
-        private void GetGridViews(ref  List<GridView> list,Control control)
+        private void GetGridViews(ref  List<GridView> list, Control control)
         {
             if (control is GridControl)
             {
@@ -218,20 +218,24 @@ namespace BudgetSystem
                 }
             }
 
-          
+
         }
 
-        protected void RegeditQueryOperate<T>(bool supportCustomCondition,List<string> commonQueryConditions) where T:BaseQueryCondition
+        protected void RegeditQueryOperate<T>(bool supportCustomCondition, List<string> commonQueryConditions) where T : BaseQueryCondition
         {
             if (commonQueryConditions != null && commonQueryConditions.Count > 0)
             {
-                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, "", UITypes.LargeMenu, commonQueryConditions));
+                ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, "", UITypes.LargeMenu, commonQueryConditions);
+                mo.IgnorePermission = true;
+                this.ModelOperateRegistry.Add(mo);
 
             }
 
             if (supportCustomCondition)
             {
-                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.CustomQuery));
+                ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CustomQuery);
+                mo.IgnorePermission = true;
+                this.ModelOperateRegistry.Add(mo);
             }
 
             List<T> condition = UIEntity.QueryConditionHelper.GetExistCondition<T>(this.GetType().ToString());

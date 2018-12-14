@@ -182,6 +182,12 @@
     <Compile Include="Budget\frmBudgetQuery.Designer.cs">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmBudgetQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmBudgetQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmBudgetQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\frmFinalAccountsQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,12 @@
     <Compile Include="Customer\frmCustomerEdit.Designer.cs">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customer\frmCustomerQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frmCustomerQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmCustomerQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customer\ucCustomerSelected.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -239,13 +251,31 @@
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowApproveDisplayHelper.cs" />
+    <Compile Include="InMoney\frmInMoneyQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMoneyQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmInMoneyQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\ucStringListOptionEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Option\ucStringListOptionEdit.Designer.cs">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrinterHelper.cs" />
+    <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Supplier\ucSupplierEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -574,6 +604,9 @@
     <EmbeddedResource Include="Budget\frmBudgetQuery.resx">
       <DependentUpon>frmBudgetQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmBudgetQueryConditionEditor.resx">
+      <DependentUpon>frmBudgetQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmFinalAccountsQuery.resx">
       <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -595,13 +628,24 @@
     <EmbeddedResource Include="Customer\frmCustomerEdit.resx">
       <DependentUpon>frmCustomerEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frmCustomerQueryConditionEditor.resx">
+      <DependentUpon>frmCustomerQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMoneyQueryConditionEditor.resx">
+      <DependentUpon>frmInMoneyQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Option\ucStringListOptionEdit.resx">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
+      <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
+      <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Supplier\ucSupplierEdit.resx">
       <DependentUpon>ucSupplierEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -709,6 +753,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="DepartmentManage\frmDepartmentQuery.resx">
       <DependentUpon>frmDepartmentQuery.cs</DependentUpon>

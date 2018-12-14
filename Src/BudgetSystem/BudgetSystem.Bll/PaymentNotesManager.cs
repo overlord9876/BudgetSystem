@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -16,6 +17,16 @@ namespace BudgetSystem.Bll
             var lst = this.Query<PaymentNotes>((con) =>
             {
                 var uList = dal.GetAllPaymentNotes(con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition)
+        {
+            var lst = this.Query<PaymentNotes>((con) =>
+            {
+                var uList = dal.GetAllPaymentNoteByCondition(condition, con, null);
                 return uList;
             });
             return lst.ToList();

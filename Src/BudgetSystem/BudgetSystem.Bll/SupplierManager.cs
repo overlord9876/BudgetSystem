@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -12,11 +13,11 @@ namespace BudgetSystem.Bll
         Bll.FlowManager fm = new FlowManager();
         Dal.SupplierDal dal = new Dal.SupplierDal();
 
-        public List<Supplier> GetAllSupplier()
+        public List<Supplier> GetAllSupplier(SupplierQueryCondition condition = null)
         {
             var lst = this.Query<Supplier>((con) =>
             {
-                var uList = dal.GetAllSupplier(con);
+                var uList = dal.GetAllSupplier(con, null, condition);
                 return uList;
 
             });

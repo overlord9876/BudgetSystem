@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -11,23 +12,12 @@ namespace BudgetSystem.Bll
         Dal.ReceiptManagementDal dal = new Dal.ReceiptManagementDal();
         Bll.FlowManager fm = new FlowManager();
 
-        public List<BankSlip> GetAllBankSlipList()
+        public List<BankSlip> GetAllBankSlipList(InMoneyQueryCondition condition)
         {
             var lst = this.Query<BankSlip>((con) =>
             {
 
-                var uList = dal.GetAllBankSlipList(con, null);
-                return uList;
-            });
-            return lst.ToList();
-        }
-
-        public List<BankSlip> GetBankSlipListByUserName(string salesman)
-        {
-            var lst = this.Query<BankSlip>((con) =>
-            {
-
-                var uList = dal.GetBankSlipListByUserName(salesman, con, null);
+                var uList = dal.GetAllBankSlipListByCondition(condition, con, null);
                 return uList;
             });
             return lst.ToList();

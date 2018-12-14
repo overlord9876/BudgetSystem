@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -11,11 +12,11 @@ namespace BudgetSystem.Bll
 
         Dal.CustomerDal dal = new Dal.CustomerDal();
 
-        public List<Customer> GetAllCustomer()
+        public List<Customer> GetAllCustomer(CustomerQueryCondition condition = null)
         {
             var lst = this.Query<Customer>((con) =>
             { 
-                var uList = dal.GetAllCustomer(con);
+                var uList = dal.GetAllCustomer(con,null,condition);
                 return uList;
 
             });

@@ -8,13 +8,15 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
     public partial class frmCustomerQuery : frmBaseQueryForm
     {
         private Bll.CustomerManager cm = new Bll.CustomerManager();
-
+        private const string COMMONQUERY_MYCREATE = "我创建的";
+        CustomerQueryCondition currentCondition = null;
         public frmCustomerQuery()
         {
             InitializeComponent();
@@ -30,11 +32,14 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+
+            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
+
             this.ModelOperatePageName = "客户列表";
         }
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
-
+            base.OperateHandled(operate, e);
             if (operate.Operate == OperateTypes.New.ToString())
             {
                 this.CreateCustomer();
@@ -55,12 +60,30 @@ namespace BudgetSystem
             {
                 DisabledCustomer();
             }
-            else
+            
+        }
+       
+        protected override void DoCommonQuery(string queryName)
+        {
+            if (COMMONQUERY_MYCREATE.Equals(queryName))
             {
-                XtraMessageBox.Show("未定义的操作");
-            }
+                CustomerQueryCondition condition = new CustomerQueryCondition() { CreateUser = RunInfo.Instance.CurrentUser.UserName };
+                LoadData(condition);
+            } 
         }
 
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            this.LoadData((CustomerQueryCondition)condition);
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmCustomerQueryConditionEditor form = new frmCustomerQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            form.QueryCondition = this.currentCondition;
+            return form;
+        }
 
         private void CreateCustomer()
         {
@@ -133,11 +156,18 @@ namespace BudgetSystem
             }
         }
 
-        public override void LoadData()
+        private void LoadData(CustomerQueryCondition condition)
         {
-            var list = cm.GetAllCustomer();
+            currentCondition = condition;
+            var list = cm.GetAllCustomer(condition);
             this.gridCustomer.DataSource = list;
         }
+
+        public override void LoadData()
+        {
+            LoadData(null);
+        }
+
 
         protected override void InitGridViewAction()
         {

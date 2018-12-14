@@ -34,7 +34,7 @@ namespace BudgetSystem.Report
         public override void LoadData()
         {
             Bll.ReceiptMgmtManager arm = new Bll.ReceiptMgmtManager();
-            var lst = arm.GetAllBankSlipList(); 
+            var lst = arm.GetAllBankSlipList(null); 
             base.CreateGridColumn("合同号", "ContractNO");
             base.CreateGridColumn("客户名称", "Remitter");
             base.CreateGridColumn("银行凭证号", "VoucherNo");

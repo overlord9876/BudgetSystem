@@ -8,13 +8,14 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
     public partial class frmSupplierQuery : frmBaseQueryForm
     {
-        private Bll.SupplierManager sm = new Bll.SupplierManager();
-
+        private Bll.SupplierManager sm = new Bll.SupplierManager(); 
+        private const string COMMONQUERY_MYCREATE = "我创建的";
         public frmSupplierQuery()
         {
             InitializeComponent();
@@ -30,12 +31,15 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+
+            this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
             this.ModelOperatePageName = "供应商管理";
         }
 
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -62,6 +66,38 @@ namespace BudgetSystem
                 ViewSupplier();
             }
         }
+
+        protected override void DoCommonQuery(string queryName)
+        {
+            if (COMMONQUERY_MYCREATE.Equals(queryName))
+            {
+                SupplierQueryCondition condition = new SupplierQueryCondition() { CreateUser = RunInfo.Instance.CurrentUser.UserName };
+                LoadData(condition);
+            }
+        }
+
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            this.LoadData((SupplierQueryCondition)condition);
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmSupplierQueryConditionEditor form = new frmSupplierQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            return form;
+        }
+        public override void LoadData()
+        {
+            LoadData(null);
+        }
+
+        private void LoadData(SupplierQueryCondition condition)
+        {
+            var list = sm.GetAllSupplier(condition);
+            this.gridSupplier.DataSource = list;
+        }
+     
         private void CreateSupplier()
         {
             frmSupplierEdit form = new frmSupplierEdit();
@@ -132,12 +168,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
-
-        public override void LoadData()
-        {
-            var list = sm.GetAllSupplier();
-            this.gridSupplier.DataSource = list;
-        }
+         
 
         protected override void InitGridViewAction()
         {

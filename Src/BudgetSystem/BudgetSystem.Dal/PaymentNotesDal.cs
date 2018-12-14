@@ -5,6 +5,7 @@ using BudgetSystem.Entity;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Dal
 {
@@ -18,6 +19,49 @@ namespace BudgetSystem.Dal
 						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString() }, tran);
+        }
+
+        public IEnumerable<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
+						LEFT JOIN supplier s on pn.SupplierID=s.ID
+						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+            WHERE 1=1 ";
+
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("DateItemType", EnumFlowDataType.付款单.ToString(), null, null, null);
+            if (condition != null)
+            {
+                List<string> strConditionList = new List<string>();
+                if (!string.IsNullOrEmpty(condition.VoucherNo))
+                {
+                    strConditionList.Add(" pn.VoucherNo  like @VoucherNo ");
+                    dp.Add("VoucherNo", string.Format("%{0}%", condition.VoucherNo), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.BudgetNO))
+                {
+                    strConditionList.Add(" b.ContractNO like @BudgetNO ");
+                    dp.Add("BudgetNO", string.Format("%{0}%", condition.BudgetNO), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Applicant))
+                {
+                    strConditionList.Add(" pn.Applicant = @Applicant  ");
+                    dp.Add("Applicant", condition.Applicant, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Supplier))
+                {
+                    strConditionList.Add(" s.`NAME` = @Supplier  ");
+                    dp.Add("Supplier", condition.Supplier, null, null, null);
+                }
+
+                if (strConditionList.Count > 0)
+                {
+                    selectSql += string.Format(" and {0}", string.Join(" and ", strConditionList.ToArray()));
+                }
+            }
+            return con.Query<PaymentNotes>(selectSql, dp, tran);
         }
 
         public IEnumerable<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetID, IDbConnection con, IDbTransaction tran)

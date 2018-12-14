@@ -47,9 +47,11 @@ namespace BudgetSystem
 
             List<string> natureList=scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());
             this.cboNature.Properties.Items.Clear();
-            this.cboNature.Properties.Items.AddRange(natureList);
-            this.cboNature.SelectedIndex = 0;
-
+            if (natureList != null && natureList.Count > 0)
+            {
+                this.cboNature.Properties.Items.AddRange(natureList);
+                this.cboNature.SelectedIndex = 0;
+            }
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
 

@@ -9,14 +9,17 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity.QueryCondition;
 using System.Reflection;
 using System.Linq;
+using BudgetSystem.Properties;
 namespace BudgetSystem.Base
 {
-    public partial class frmBaseQueryConditionEditor<T> : QueryConditionEditorForm where T:Entity.QueryCondition.BaseQueryCondition
+    public partial class frmBaseQueryConditionEditor<T> : QueryConditionEditorForm where T : Entity.QueryCondition.BaseQueryCondition
     {
 
         public frmBaseQueryConditionEditor()
         {
             InitializeComponent();
+
+            this.Icon = Resources.logo;
         }
 
 
@@ -54,14 +57,14 @@ namespace BudgetSystem.Base
                     string conditionName = input.Result;
                     this.QueryCondition.Name = conditionName;
 
-                    List<T> existCondition =UIEntity.QueryConditionHelper. GetExistCondition<T>(this.QueryName);
+                    List<T> existCondition = UIEntity.QueryConditionHelper.GetExistCondition<T>(this.QueryName);
                     if (existCondition.Exists(s => s.Name == conditionName))
                     {
                         if (XtraMessageBox.Show("查询名称已存在，是否覆盖？", "请选择", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
                             existCondition.Remove(existCondition.Single(s => s.Name == conditionName));
                             existCondition.Add(this.QueryCondition as T);
-                            UIEntity.QueryConditionHelper.SaveCondition(existCondition,this.QueryName);
+                            UIEntity.QueryConditionHelper.SaveCondition(existCondition, this.QueryName);
                             IsSavedNewCondition = true;
                         }
                     }

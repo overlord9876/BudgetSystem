@@ -5,6 +5,7 @@ using BudgetSystem.Entity;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Dal
 {
@@ -84,26 +85,61 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, new { BSID = bsID }, tran);
         }
 
-        public IEnumerable<BankSlip> GetAllBankSlipList(IDbConnection con, IDbTransaction tran)
+        public IEnumerable<BankSlip> GetAllBankSlipListByCondition(InMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs
-                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType";
+            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType
+                WHERE 1=1 ";
 
-            return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString() }, tran);
-        }
-
-        public IEnumerable<BankSlip> GetBankSlipListByUserName(string userName, IDbConnection con, IDbTransaction tran)
-        {
-            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState From `bankslip` bs		
-                            INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("DateItemType", EnumFlowDataType.收款单.ToString(), null, null, null);
+            if (condition != null)
+            {
+                List<string> strConditionList = new List<string>();
+                if (!string.IsNullOrEmpty(condition.VoucherNo))
+                {
+                    strConditionList.Add(" bs.VoucherNo like @VoucherNo ");
+                    dp.Add("VoucherNo", string.Format("%{0}%", condition.VoucherNo), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.BudgetNO))
+                {
+                    strConditionList.Add(" bs.VoucherNo like @BudgetNO ");
+                    dp.Add("BudgetNO", string.Format("%{0}%", condition.BudgetNO), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Customer))
+                {
+                    strConditionList.Add(" bs.Remitter like @Customer ");
+                    dp.Add("Customer", string.Format("%{0}%", condition.Customer), null, null, null);
+                }
+                if (condition.ReceiptDateBegin != DateTime.MinValue)
+                {
+                    strConditionList.Add(" bs.ReceiptDate bs.ReceiptDate >@ReceiptDateBegin ");
+                    dp.Add("ReceiptDateBegin", condition.ReceiptDateBegin.ToString("yyyy-MM-dd"), null, null, null);
+                }
+                if (condition.ReceiptDateEnd != DateTime.MinValue)
+                {
+                    strConditionList.Add(" bs.ReceiptDate bs.ReceiptDate <@ReceiptDateEnd ");
+                    dp.Add("ReceiptDateEnd", condition.ReceiptDateEnd.ToString("yyyy-MM-dd"), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Salesman))
+                {
+                    selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                            INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID AND rn.UserName=@Username
                             INNER JOIN `User` u on rn.UserName=u.UserName
                             INNER JOIN `department` d on u.Department=d.`Code`
-														LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                            WHERE rn.UserName=@Username or d.AssistantManager=@Username or d.Manager=@Username";
+                LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType
+                WHERE 1=1 ";
+                    strConditionList.Add(" rn.UserName=@Username or d.AssistantManager=@Username or d.Manager=@Username");
+                    dp.Add("Username", condition.Salesman, null, null, null);
+                }
 
-            return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), Username = userName }, tran);
+                if (strConditionList.Count > 0)
+                {
+                    selectSql += string.Format(" and {0}", string.Join(" and ", strConditionList.ToArray()));
+                }
+            }
+            return con.Query<BankSlip>(selectSql, dp, tran);
         }
-
 
         public BankSlip GetBankSlipByBSID(int bsID, IDbConnection con, IDbTransaction tran)
         {

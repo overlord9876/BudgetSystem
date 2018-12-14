@@ -4,6 +4,7 @@ using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
 using Newtonsoft.Json;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -16,11 +17,11 @@ namespace BudgetSystem.Bll
         Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
 
-        public List<Budget> GetAllBudget()
+        public List<Budget> GetAllBudget(BudgetQueryCondition condition=null)
         {
             var lst = this.Query<Budget>((con) =>
             {
-                var uList = dal.GetAllBudget(con);
+                var uList = dal.GetAllBudget(con,null,condition);
                 return uList;
             });
             return lst.ToList();

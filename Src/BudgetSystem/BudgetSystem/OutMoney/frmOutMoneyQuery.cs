@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using BudgetSystem.OutMoney;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
@@ -35,13 +36,14 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
 
-
+            this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
 
             this.ModelOperatePageName = "付款管理";
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -80,10 +82,25 @@ namespace BudgetSystem
             {
                 RepayLoanPaymentNote();
             }
-            else
-            {
-                XtraMessageBox.Show("未定义的操作1");
-            }
+        }
+
+        protected override void DoCommonQuery(string queryName)
+        {
+            XtraMessageBox.Show(queryName);
+        }
+
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            OutMoneyQueryCondition outMoneyCondition = condition as OutMoneyQueryCondition;
+            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
+            this.gvOutMoney.RefreshData();
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmOutMoneyQueryConditionEditor form = new frmOutMoneyQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            return form;
         }
 
         private void CreatePaymentNote()

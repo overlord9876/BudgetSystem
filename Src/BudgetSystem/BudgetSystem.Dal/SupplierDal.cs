@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`  
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                                 WHERE s.`ID` = @ID";
+                                 WHERE s.`ID` = @ID ";
             return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), ID = id }, tran).SingleOrDefault();
         }
 
-        public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null, SupplierQueryCondition condition = null)
         {
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,d.`Name` AS DepartmentName ,u2.RealName AS UpdateUserName,
                                         IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
@@ -31,8 +32,39 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON s.DepartmentCode=d.`Code`
-								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
-            return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString() }, tran);
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1 ";
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("DateItemType", EnumFlowDataType.供应商.ToString(), null, null, null);
+            if (condition != null)
+            {
+                List<string> strConditionList = new List<string>();
+                if (!string.IsNullOrEmpty(condition.CreateUser))
+                {
+                    strConditionList.Add(" s.CreateUser=@CreateUser");
+                    dp.Add("CreateUser", condition.CreateUser, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Department))
+                {
+                    strConditionList.Add(" s.DepartmentCode=@Department");
+                    dp.Add("Department", condition.Department, null, null, null);
+                }
+                if (condition.SupplierType >= 0)
+                {
+                    strConditionList.Add("s.SupplierType=@SupplierType");
+                    dp.Add("SupplierType", condition.SupplierType, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.SupplierName))
+                {
+                    strConditionList.Add("s.Name like @Name");
+                    dp.Add("Name",  string.Format("%{0}%",condition.SupplierName), null, null, null);
+                }
+                if (strConditionList.Count > 0)
+                {
+                    selectSql += string.Format(" where {0}", string.Join(" and ", strConditionList.ToArray()));
+                }
+            }
+
+            return con.Query<Supplier>(selectSql, dp, tran);
         }
 
         public IEnumerable<Supplier> GetSupplierListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
@@ -23,11 +24,36 @@ namespace BudgetSystem.Dal
             return customer;
         }
 
-        public IEnumerable<Customer> GetAllCustomer(IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<Customer> GetAllCustomer(IDbConnection con, IDbTransaction tran = null, CustomerQueryCondition condition = null)
         {
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName  FROM `Customer` s
                                     LEFT JOIN `User` u ON s.CreateUser=u.UserName   ";
-            return con.Query<Customer>(selectSql, null, tran);
+            DynamicParameters dp = new DynamicParameters();
+            if (condition != null)
+            {
+                List<string> strConditionList = new List<string>();
+
+                if (!string.IsNullOrEmpty(condition.CreateUser))
+                {
+                    strConditionList.Add(" s.CreateUser=@CreateUser ");
+                    dp.Add("CreateUser", condition.CreateUser, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Code))
+                {
+                    strConditionList.Add(" s.Code Like @Code ");
+                    dp.Add("Code", string.Format("%{0}%", condition.Code), null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.CustomName))
+                {
+                    strConditionList.Add(" s.Name Like @Name ");
+                    dp.Add("Name", string.Format("%{0}%", condition.CustomName), null, null, null);
+                }
+                if (strConditionList.Count > 0)
+                {
+                    selectSql += string.Format(" where {0}", string.Join(" and ", strConditionList.ToArray()));
+                }
+            }
+            return con.Query<Customer>(selectSql, dp, tran);
         }
 
         public int AddCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)

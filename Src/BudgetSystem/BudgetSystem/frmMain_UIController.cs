@@ -213,10 +213,10 @@ namespace BudgetSystem
                 }
 
                 string permission = form.Module + "." + mo.Operate;
-                if (!RunInfo.Instance.UserPermission.Contains(permission))
+                if (!RunInfo.Instance.UserPermission.Contains(permission) && !(RunInfo.Instance.UserPermission.Contains(form.Module.ToString()) && mo.IgnorePermission))
                 {
 # if (!IgnorePermission)
-                           continue;
+                    continue;
 #endif
 
                 }
@@ -254,7 +254,7 @@ namespace BudgetSystem
                             BarButtonItem sb = new BarButtonItem();
                             sb.ItemClick += RibbonButtonClick;
                             sb.Tag = new UIEntity.UIElementTag() { Operate = mo, Tag = s };
-                            
+
                             sb.Caption = s.ToString();
                             button.ItemLinks.Add(sb);
                         }
@@ -279,7 +279,7 @@ namespace BudgetSystem
         private void RibbonButtonClick(object sender, ItemClickEventArgs e)
         {
 
-           
+
             frmBaseQueryForm form = this.ActiveMdiChild as frmBaseQueryForm;
             UIEntity.UIElementTag tag = e.Item.Tag as UIEntity.UIElementTag;
             form.OperateHandled(tag.Operate, new ModeOperateEventArgs() { SenderText = e.Item.Caption, Tag = tag.Tag });

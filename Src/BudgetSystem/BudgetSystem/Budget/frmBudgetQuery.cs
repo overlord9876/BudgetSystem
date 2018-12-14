@@ -11,6 +11,7 @@ using BudgetSystem.Entity;
 using BudgetSystem.CommonControl;
 using BudgetSystem.Bll;
 using BudgetSystem.WorkSpace;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
@@ -18,7 +19,7 @@ namespace BudgetSystem
     {
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
-
+        private const string COMMONQUERY_MYCREATE = "我负责的";
         public frmBudgetQuery()
         {
             InitializeComponent();
@@ -42,13 +43,14 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
 
-
+            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
             this.ModelOperatePageName = "预算单";
 
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -86,26 +88,47 @@ namespace BudgetSystem
             {
                 ShowBudgetAccountBillView();
             }
-            else
+        }
+        
+        protected override void DoCommonQuery(string queryName)
+        {
+            if (COMMONQUERY_MYCREATE.Equals(queryName))
             {
-                XtraMessageBox.Show("未定义的操作");
+                BudgetQueryCondition condition = new BudgetQueryCondition() {  Salesman = RunInfo.Instance.CurrentUser.UserName };
+                LoadData(condition);
             }
         }
 
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            this.LoadData((BudgetQueryCondition)condition);
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmBudgetQueryConditionEditor form = new frmBudgetQueryConditionEditor();
+            form.QueryName = this.GetType().ToString(); 
+            return form;
+        }
         public override void LoadData()
         {
-            List<Budget> budgetList = null;
+            LoadData(null);
+        }
+        
+        private void LoadData(BudgetQueryCondition condition)
+        {
             if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {
-                budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
+                if (condition == null)
+                {
+                    condition = new BudgetQueryCondition();
+                }
+                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
             }
-            else
-            {
-                budgetList = bm.GetAllBudget();
-            }
+            List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;
         }
-
+     
         private void ShowBudgetAccountBillView()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -121,7 +144,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要按合同查看收支情况的项");             
+                XtraMessageBox.Show("请选择需要按合同查看收支情况的项");
             }
         }
 
@@ -166,7 +189,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要修改的项"); 
+                XtraMessageBox.Show("请选择需要修改的项");
             }
         }
 
@@ -193,7 +216,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要提交流程的项"); 
+                XtraMessageBox.Show("请选择需要提交流程的项");
             }
         }
 
@@ -220,7 +243,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要申请修改的项"); 
+                XtraMessageBox.Show("请选择需要申请修改的项");
             }
         }
 
@@ -247,7 +270,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要申请删除的项"); 
+                XtraMessageBox.Show("请选择需要申请删除的项");
             }
         }
 
@@ -266,7 +289,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要查看详情的项"); 
+                XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
 
@@ -281,7 +304,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要查看审批状态的项"); 
+                XtraMessageBox.Show("请选择需要查看审批状态的项");
             }
         }
         private void DeleteBudget()
@@ -301,7 +324,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要删除的项");  
+                XtraMessageBox.Show("请选择需要删除的项");
             }
         }
 

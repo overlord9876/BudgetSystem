@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Bll;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.InMoney
 {
@@ -32,12 +33,14 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "收汇确认"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
+            this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+
             this.ModelOperatePageName = "入帐单";
         }
 
-
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.New.ToString())
             {
@@ -63,6 +66,23 @@ namespace BudgetSystem.InMoney
             {
                 ViewBankSlip();
             }
+        }
+
+        protected override void DoCommonQuery(string queryName)
+        {
+            XtraMessageBox.Show(queryName);
+        }
+
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            LoadData(condition as InMoneyQueryCondition);
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmInMoneyQueryConditionEditor form = new frmInMoneyQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            return form;
         }
 
         private void AddBankSlip()
@@ -199,7 +219,7 @@ namespace BudgetSystem.InMoney
         private void ViewBankSlip()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
-            if(currentRowBankSlip!=null)
+            if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.View;
@@ -214,15 +234,22 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            List<BankSlip> bsList = null;
-            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            LoadData(null);
+        }
+
+        private void LoadData(InMoneyQueryCondition condition)
+        {
+
+            if (condition == null)
             {
-                bsList = arm.GetBankSlipListByUserName(RunInfo.Instance.CurrentUser.UserName);
+                condition = new InMoneyQueryCondition();
+                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+                {
+                    condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
+                }
             }
-            else
-            {
-                bsList = arm.GetAllBankSlipList();
-            }
+            List<BankSlip> bsList = arm.GetAllBankSlipList(condition);
+
             this.gcInMoney.DataSource = bsList;
 
             this.gvInMoney.BestFitColumns();

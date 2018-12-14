@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace BudgetSystem.Dal
             return budget;
         }
 
-        public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null,BudgetQueryCondition condition=null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
@@ -48,9 +49,40 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID 								 
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                                 WHERE b.ID<>0";
+                                 WHERE b.ID<>0 ";
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("DateItemType", EnumFlowDataType.预算单.ToString(), null, null, null);
+            if (condition != null)
+            {
+                List<string> strConditionList = new List<string>();
+                if (!string.IsNullOrEmpty(condition.Salesman))
+                {
+                    strConditionList.Add(" b.Salesman=@Salesman ");
+                    dp.Add("Salesman", condition.Salesman, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.Department))
+                {
+                    strConditionList.Add(" b.Department=@Department ");
+                    dp.Add("Department", condition.Department, null, null, null);
+                }
+                if (!string.IsNullOrEmpty(condition.ContractNO))
+                {
+                    strConditionList.Add(" b.ContractNO like @ContractNO "); 
+                    dp.Add("ContractNO", string.Format("%{0}%", condition.ContractNO), null, null, null);
+                }
+                
+                if (!string.IsNullOrEmpty(condition.CustomerName))
+                {
+                    strConditionList.Add(" c.Name like @CustomerName ");
+                    dp.Add("CustomerName", string.Format("%{0}%", condition.CustomerName), null, null, null);
+                }
+                if (strConditionList.Count > 0)
+                {
+                    selectSql += string.Format(" and {0}", string.Join(" and ", strConditionList.ToArray()));
+                }
+            }
 
-            return con.Query<Budget>(selectSql, new { DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
+            return con.Query<Budget>(selectSql, dp, tran);
         }
 
 
@@ -74,10 +106,10 @@ namespace BudgetSystem.Dal
             string custumerSelectSql = @"SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
                                                 INNER JOIN BudgetCustomers bc ON c.ID=bc.Cus_ID
                                                 WHERE bc.Bud_ID=@ID
-Union 
-SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
-INNER join budget b on c.ID=b.CustomerID
-where b.ID=@ID";
+                                        Union 
+                                        SELECT c.ID,c.`Name`,c.Country FROM  Customer c 
+                                        INNER join budget b on c.ID=b.CustomerID
+                                        where b.ID=@ID";
             return con.Query<Customer>(custumerSelectSql, new { ID = budgetId }, tran);
         }
 
