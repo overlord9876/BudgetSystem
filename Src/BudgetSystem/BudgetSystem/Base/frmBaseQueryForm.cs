@@ -226,7 +226,7 @@ namespace BudgetSystem
             if (commonQueryConditions != null && commonQueryConditions.Count > 0)
             {
                 ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, "", UITypes.LargeMenu, commonQueryConditions);
-                mo.IgnorePermission = true;
+         
                 this.ModelOperateRegistry.Add(mo);
 
             }
@@ -234,7 +234,7 @@ namespace BudgetSystem
             if (supportCustomCondition)
             {
                 ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CustomQuery);
-                mo.IgnorePermission = true;
+             
                 this.ModelOperateRegistry.Add(mo);
             }
 
