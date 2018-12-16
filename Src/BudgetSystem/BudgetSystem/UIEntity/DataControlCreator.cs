@@ -14,6 +14,7 @@ namespace BudgetSystem.UIEntity
             {
                 BudgetSystem.OutMoney.ucOutMoneyEdit edit = new BudgetSystem.OutMoney.ucOutMoneyEdit();
                 edit.WorkModel = EditFormWorkModels.View;
+                edit.Height = 400;
                 return edit;
             }
             else if (dataItemType == EnumFlowDataType.供应商.ToString())
@@ -26,11 +27,13 @@ namespace BudgetSystem.UIEntity
             {
                 BudgetSystem.InMoney.ucInMoneyEdit edit = new BudgetSystem.InMoney.ucInMoneyEdit();
                 edit.WorkModel = EditFormWorkModels.View;
+                edit.Height = 500;
                 return edit;
             }
             else if (dataItemType == EnumFlowDataType.预算单.ToString())
             {
                 ucBudgetDetailView edit = new ucBudgetDetailView();
+                edit.Height = 800;
                 edit.WorkModel = EditFormWorkModels.View;
                 return edit;
             }

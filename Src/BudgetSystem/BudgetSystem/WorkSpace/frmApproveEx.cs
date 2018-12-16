@@ -81,6 +81,9 @@ namespace BudgetSystem.WorkSpace
 
             string dcType = this.CustomWorkModel == BatchApproveModel ? "BatchApprove" : FlowItem.DateItemType;
 
+
+            
+
             DataControl dc = DataControlCreator.CreateDataControl(dcType);
             string layoutItemName;
             if (dc is BatchDataControl)
@@ -94,7 +97,9 @@ namespace BudgetSystem.WorkSpace
                 layoutItemName = FlowItem.DateItemText;
             }
 
-        
+            this.Top = 0;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+
             this.layoutControl1.Controls.Add(dc);
             var temp = lcDataGroup.AddItem(layoutItemName, dc);
 
@@ -104,6 +109,8 @@ namespace BudgetSystem.WorkSpace
             temp.MaxSize = new Size(0, dc.Height);
             temp.MinSize = new Size(0, dc.Height);
             this.Width = dc.Width + 20;
+
+         
 
             this.lcDataGroup.Remove(emptySpaceItem1);
             lcDataGroup.EndUpdate();
