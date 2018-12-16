@@ -32,13 +32,13 @@ namespace BudgetSystem
             dt.Columns.Add("Money", typeof(decimal));
 
             InitBusinessObject(items[0].DateItemType);
+            InitBatchApproveColumn(items[0].DateItemType);
 
             foreach (FlowItem item in items)
             {
                 decimal money = 0;
-                string description = GetItemDesc(item.DateItemType, item.DateItemID, out money);
-                dt.Rows.Add(item.DateItemText, description, money);
-
+                BatchApproveDataItemDesc iv = GetItemDesc(item.DateItemType, item.DateItemID);
+                dt.Rows.Add(item.DateItemText, iv.Desc, iv.Money);
             }
 
 
@@ -67,54 +67,78 @@ namespace BudgetSystem
             }
         }
 
-
-        private string GetItemDesc(string dataType, int dataId, out decimal money)
+        private void InitBatchApproveColumn(string dataType)
         {
-            money = 0;
+            if (dataType == EnumFlowDataType.供应商.ToString())
+            {
+                this.gcMoney.Visible = false;
+            }
+        }
+
+        private BatchApproveDataItemDesc GetItemDesc(string dataType, int dataId)
+        {
+            BatchApproveDataItemDesc item = new BatchApproveDataItemDesc();
+
+
             if (dataType == EnumFlowDataType.预算单.ToString())
             {
                 Budget b = bm.GetBudget(dataId);
                 if (b != null)
                 {
-                    money = b.TotalAmount;
-                    return b.ToDesc();
+                    item.Money = b.TotalAmount;
+                    item.Desc = b.ToDesc();
                 }
-                else
-                {
-                    return string.Empty;
-                }
-
             }
             else if (dataType == EnumFlowDataType.供应商.ToString())
             {
                 Supplier s = sm.GetSupplier(dataId);
-                return s != null ? s.ToDesc() : string.Empty;
+
+                item.Desc = s != null ? s.ToDesc() : string.Empty;
+
             }
             else if (dataType == EnumFlowDataType.付款单.ToString())
             {
                 PaymentNotes pn = pm.GetPaymentNoteById(dataId);
                 if (pn != null)
                 {
-                    money = pn.CNY;
-                    return pn.ToDesc();
+                    item.Money = pn.CNY;
+                    item.Desc = pn.ToDesc();
                 }
-                else
-                {
-                    return string.Empty;
-                }
+
             }
             else if (dataType == EnumFlowDataType.收款单.ToString())
             {
                 BankSlip bs = rm.GetBankSlipByBSID(dataId);
                 if (bs != null)
                 {
-                    money = bs.CNY;
-                    return bs.ToDesc();
+                    item.Money = bs.CNY;
+                    item.Desc = bs.ToDesc();
                 }
-                else { return string.Empty; }
+
             }
-            return string.Empty;
+            return item;
         }
 
+
+
+        private class BatchApproveDataItemDesc
+        {
+            public BatchApproveDataItemDesc()
+            {
+                this.Desc = "";
+                this.Money = 0;
+            }
+            public string Desc
+            {
+                get;
+                set;
+            }
+
+            public decimal Money
+            {
+                get;
+                set;
+            }
+        }
     }
 }

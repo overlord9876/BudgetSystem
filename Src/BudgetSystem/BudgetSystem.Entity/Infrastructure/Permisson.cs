@@ -41,6 +41,19 @@ namespace BudgetSystem.Entity
             set;
         }
 
+        public int DisplayGroup
+        {
+            get
+            {
+
+                return (this.DisplayOrder / 100) * 100;
+
+            }
+           
+        }
+
+
+
         public int DisplayOrder
         {
             get;

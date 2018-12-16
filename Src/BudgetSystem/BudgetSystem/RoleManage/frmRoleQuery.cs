@@ -9,6 +9,7 @@ using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Linq;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace BudgetSystem.RoleManage
 {
@@ -94,6 +95,7 @@ namespace BudgetSystem.RoleManage
             {
                 this.gdAllPermission.DataSource = permissions;
             }
+            this.gvAllPermission.ExpandAllGroups();
 
         }
 
@@ -128,6 +130,7 @@ namespace BudgetSystem.RoleManage
                 }
                 pList= pList.OrderBy(s => s.DisplayOrder).ToList();
                 this.gdRolePermissions.DataSource = pList;
+                this.gvRolePermissons.ExpandAllGroups();
             }
         }
 
@@ -189,7 +192,8 @@ namespace BudgetSystem.RoleManage
             this.rm.AddRolePermission(currentRole.Code, ps);
             BindRolePermissions();
             BindAllPermissions();
-
+            this.gvAllPermission.ExpandAllGroups();
+            this.gvRolePermissons.ExpandAllGroups();
 
         }
 
@@ -213,6 +217,8 @@ namespace BudgetSystem.RoleManage
             rm.RemoveRolePermission(currentRole.Code, ps);
             BindRolePermissions();
             BindAllPermissions();
+            this.gvAllPermission.ExpandAllGroups();
+            this.gvRolePermissons.ExpandAllGroups();
         }
 
         private List<string> GetSelectUsers(GridView view)
@@ -234,10 +240,51 @@ namespace BudgetSystem.RoleManage
             int[] selectRows = view.GetSelectedRows();
             foreach (int row in selectRows)
             {
-                Permisson p = view.GetRow(row) as Permisson;
+                if (row >= 0)
+                {
+                    Permisson p = view.GetRow(row) as Permisson;
+                    result.Add(p.Code);
+                }
+                else
+                {
+                    result.AddRange(GetGroupedRow(row, view).ToArray());
+                }
+
+             
+            }
+            return result.Distinct().ToList();
+        }
+
+
+        private List<string> GetGroupedRow(int row, GridView view)
+        {
+            int groupedRowCount = view.GetChildRowCount(row);
+            List<string> result = new List<string>();
+            for (int i = 0; i < groupedRowCount; i++)
+            {
+                int crow = view.GetChildRowHandle(row, i);
+                Permisson p = view.GetRow(crow) as Permisson;
                 result.Add(p.Code);
             }
             return result;
+        
+        
         }
+
+
+
+        private void gv_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            GridGroupRowInfo GridGroupRowInfo = e.Info as GridGroupRowInfo;
+            if (GridGroupRowInfo.Column == gridColumn2 || GridGroupRowInfo.Column == gridColumn1)
+            {
+                GridGroupRowInfo.GroupText = Permisson.Permissions.Single(s => s.DisplayOrder == (int)GridGroupRowInfo.EditValue).DisplayName;
+            }
+        
+      
+        }
+
+
+
     }
 }
