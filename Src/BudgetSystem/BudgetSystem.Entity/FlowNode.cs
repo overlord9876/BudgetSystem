@@ -50,5 +50,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string NodeValueRemark { get; set; }
 
+        /// <summary>
+        /// 节点提交扩展事件
+        /// </summary>
+        public string NodeExtEvent { get; set; }
+
     }
 }

@@ -97,7 +97,6 @@ namespace BudgetSystem.WorkSpace
                     }
                 }
             }
-
         }
 
         private void AproveBatch()

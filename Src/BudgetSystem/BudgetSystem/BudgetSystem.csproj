@@ -125,6 +125,12 @@
     <Compile Include="Base\frmBaseDialogForm.Designer.cs">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmBaseFlowEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseFlowEventForm.Designer.cs">
+      <DependentUpon>frmBaseFlowEventForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -577,6 +583,9 @@
     <EmbeddedResource Include="Base\frmBaseDialogForm.resx">
       <DependentUpon>frmBaseDialogForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseFlowEventForm.resx">
+      <DependentUpon>frmBaseFlowEventForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseForm.resx">
       <DependentUpon>frmBaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -643,6 +652,7 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>

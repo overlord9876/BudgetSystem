@@ -83,6 +83,17 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public FlowNode GetFlowNode(int runPointID)
+        {
+            return this.Query<FlowNode>((con) =>
+            {
+                FlowRunPoint runPoint = dal.GetFlowRunPoint(runPointID, con, null);
+                FlowNode node = dal.GetFlowNode(runPoint.NodeID, con, null);
+                return node;
+
+            });
+        }
+
         public void SaveFlow(Flow flow)
         {
             this.ExecuteWithTransaction((con, tran) =>
@@ -247,6 +258,8 @@ namespace BudgetSystem.Bll
 
         }
 
+       
+        
 
         /// <summary>
         /// 提交流程

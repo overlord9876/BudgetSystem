@@ -75,6 +75,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.gcExtEvent = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtUpdateDate.Properties.VistaTimeProperties)).BeginInit();
@@ -262,7 +263,8 @@
             this.gvNodes.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcNodeConfig,
             this.gcNodeValue,
-            this.gcNodeValueRemark});
+            this.gcNodeValueRemark,
+            this.gcExtEvent});
             this.gvNodes.GridControl = this.gdNodes;
             this.gvNodes.Name = "gvNodes";
             this.gvNodes.OptionsView.ShowGroupPanel = false;
@@ -639,6 +641,14 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
+            // gcExtEvent
+            // 
+            this.gcExtEvent.Caption = "扩展事件";
+            this.gcExtEvent.FieldName = "NodeExtEvent";
+            this.gcExtEvent.Name = "gcExtEvent";
+            this.gcExtEvent.Visible = true;
+            this.gcExtEvent.VisibleIndex = 3;
+            // 
             // frmFlowEdit
             // 
             this.AcceptButton = this.btnSure;
@@ -745,6 +755,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExtEvent;
 
     }
 }

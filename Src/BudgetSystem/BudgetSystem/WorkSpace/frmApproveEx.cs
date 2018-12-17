@@ -10,6 +10,7 @@ using DevExpress.XtraLayout;
 using BudgetSystem.UIEntity;
 using DevExpress.XtraEditors;
 using BudgetSystem.FlowManage;
+using BudgetSystem.Base;
 
 namespace BudgetSystem.WorkSpace
 {
@@ -118,6 +119,16 @@ namespace BudgetSystem.WorkSpace
 
         private void Submit(bool result)
         {
+
+            if (result)
+            {
+                if (!DoFlowExtEvent())
+                {
+                  
+                    return;
+                }
+            }
+        
             FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, this.txtMyInfo.Text.Trim());
             string info;
             if (state.Translate(out info))
@@ -132,6 +143,16 @@ namespace BudgetSystem.WorkSpace
 
         private void BatchSubmit(bool result)
         {
+
+            if (result)
+            {
+                if (!DoFlowExtEvent())
+                {
+                    
+                    return;
+                }
+            }
+
             string info;
             foreach (FlowItem item in this.BatchFlowItems)
             {
@@ -146,6 +167,33 @@ namespace BudgetSystem.WorkSpace
                 }
             }
         }
+
+        private bool DoFlowExtEvent()
+        {
+            FlowItem item = this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems[0] : this.FlowItem;
+            FlowNode node = fm.GetFlowNode(item.RunPointID);
+            string extEvent = node.NodeExtEvent;
+            if (string.IsNullOrEmpty(extEvent))
+            {
+                return true;
+            }
+
+            frmBaseFlowEventForm form = frmBaseFlowEventForm.GetFlowExtEventForm(extEvent, this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems : new List<FlowItem>() { this.FlowItem });
+
+            if (form == null)
+            {
+                return true;
+            }
+
+
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         private void btnAccept_Click(object sender, EventArgs e)
         {

@@ -46,19 +46,19 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<FlowNode> GetFlowDetial(string name, int version, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
         }
 
         public FlowNode GetFlowNode(string name, int version, int order, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version, OrderNo = order }, tran).SingleOrDefault();
         }
 
         public FlowNode GetFlowNode(int nodeID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark` From `FlowNode` Where`ID` = @ID";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`ID` = @ID";
             return con.Query<FlowNode>(selectSql, new { ID = nodeID }, tran).SingleOrDefault();
         }
 
@@ -82,7 +82,7 @@ namespace BudgetSystem.Dal
 
         public void AddFlowDetial(List<FlowNode> nodes, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark)";
+            string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark,@NodeExtEvent)";
             con.Execute(insertSql, nodes, tran);
         }
 
