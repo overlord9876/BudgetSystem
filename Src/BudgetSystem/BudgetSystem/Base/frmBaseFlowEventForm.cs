@@ -28,7 +28,7 @@ namespace BudgetSystem.Base
             frmBaseFlowEventForm form =null;
             if (extEventName == "test")
             {
-                form = new frmBaseFlowEventForm();
+                form = new frmTestFlowEventForm();
             }
         
             if (form !=null)

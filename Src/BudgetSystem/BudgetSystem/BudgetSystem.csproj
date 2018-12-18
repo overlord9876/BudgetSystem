@@ -167,6 +167,12 @@
     <Compile Include="Base\frmInput.Designer.cs">
       <DependentUpon>frmInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmTestFlowEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmTestFlowEventForm.Designer.cs">
+      <DependentUpon>frmTestFlowEventForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\QueryConditionEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -603,6 +609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmInput.resx">
       <DependentUpon>frmInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmTestFlowEventForm.resx">
+      <DependentUpon>frmTestFlowEventForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmAccountBillView.resx">
       <DependentUpon>frmAccountBillView.cs</DependentUpon>
