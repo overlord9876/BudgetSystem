@@ -156,12 +156,28 @@ namespace BudgetSystem.WorkSpace
             }
 
             string baseFlowName = items[0].FlowName;
+            int baseFlowVersion = items[0].FlowVersionNumber;
+            int baseNodeID = items[0].NodeID;
+
 
             foreach (FlowItem item in items)
             {
                 if (item.FlowName != baseFlowName)
                 {
                     error = "选中数据项来自于多个不同的流程，不可以进行批量审批，请重新选择！";
+                    return false;
+                }
+
+                if (item.FlowVersionNumber != baseFlowVersion)
+                {
+                    error = "选中数据项来源自不同的流程图版本，不可以进行批量审批，请重新选择！";
+                    return false;
+                }
+
+
+                if (item.NodeID != baseNodeID)
+                {
+                    error = "选中数据项处于不同的流程节点，不可以进行批量审批，请重新选择！";
                     return false;
                 }
             }
