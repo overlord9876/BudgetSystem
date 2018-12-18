@@ -31,6 +31,7 @@ namespace BudgetSystem.OutMoney
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
 
+        private bool isApprovalView = false;
         private List<Supplier> supplierList;
 
         public PaymentNotes CurrentPaymentNotes
@@ -95,6 +96,8 @@ namespace BudgetSystem.OutMoney
 
         public override void BindingData(int dataID)
         {
+            isApprovalView = true;
+            lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             base.BindingData(dataID);
             BandPaymentNotes(dataID);
         }
@@ -111,9 +114,12 @@ namespace BudgetSystem.OutMoney
             chkIsDrawback.EditValue = payment.IsDrawback;
             this.vatOption = payment.VatOption;
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
+            Budget findedItem = null;
             if (budgetList != null)
             {
-                this.cboBudget.EditValue = budgetList.Find(o => o.ID == payment.BudgetID);
+                findedItem = budgetList.Find(o => o.ID == payment.BudgetID);
+                this.cboBudget.EditValue = findedItem;
+
             }
             List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
             if (supplierList != null)
@@ -168,6 +174,22 @@ namespace BudgetSystem.OutMoney
             chkIsIOU.EditValue = payment.IsIOU;
             chkRepayLoan.EditValue = payment.RepayLoan;
             txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
+            if (isApprovalView)
+            {
+                lblMessage.Text = string.Empty;
+                if (findedItem != null && findedItem.EnumFlowState != EnumDataFlowState.审批通过)
+                {
+                    lblMessage.Text = "预算单还未审批通过";
+                }
+                if (txtAfterPaymentBalance.Value < 0)
+                {
+                    if (!string.IsNullOrEmpty(lblMessage.Text))
+                    {
+                        lblMessage.Text += "\r\n";
+                    }
+                    lblMessage.Text += "【警告】支付后余额小于0";
+                }
+            }
         }
 
         private void BindingBankInfoDetail(string detail)
@@ -610,13 +632,16 @@ namespace BudgetSystem.OutMoney
             UseMoneyType selectedItem = this.cboMoneyUsed.EditValue as UseMoneyType;
             if (selectedItem != null)
             {
-                if (!ignoreMessageUsageNameList.Contains(selectedItem.Name))
+                if (!isApprovalView)
                 {
-                    lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                }
-                else
-                {
-                    lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    if (!ignoreMessageUsageNameList.Contains(selectedItem.Name))
+                    {
+                        lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    }
+                    else
+                    {
+                        lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    }
                 }
                 if (needInvoiceUsageNameList.Contains(selectedItem.Name))
                 {

@@ -1090,11 +1090,11 @@
             // layoutControlItem13
             // 
             this.layoutControlItem13.Control = this.txtTradingPostscript;
-            this.layoutControlItem13.CustomizationFormText = "付款人常驻国际/地区";
+            this.layoutControlItem13.CustomizationFormText = "付款人常驻国家/地区";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 203);
             this.layoutControlItem13.Name = "layoutControlItem13";
             this.layoutControlItem13.Size = new System.Drawing.Size(554, 29);
-            this.layoutControlItem13.Text = "付款人常驻国际/地区：";
+            this.layoutControlItem13.Text = "付款人常驻国家/地区：";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(156, 18);
             // 
             // lciTradeNature

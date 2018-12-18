@@ -156,7 +156,7 @@ namespace BudgetSystem.InMoney
             this.cboCustomer.Properties.DataSource = customerList;
 
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
-
+            this.cboTradeNature.Properties.Items.Clear();
             this.cboTradeNature.Properties.Items.AddRange(Enum.GetNames(typeof(BankSlipTradeNature)));
 
         }
@@ -292,7 +292,7 @@ namespace BudgetSystem.InMoney
                     }
                     if (string.IsNullOrEmpty(txtTradingPostscript.Text))
                     {
-                        dxErrorProvider1.SetError(txtTradingPostscript, "提交收款前，请输入付款人常驻国际/地区");
+                        dxErrorProvider1.SetError(txtTradingPostscript, "提交收款前，请输入付款人常驻国家/地区");
                     }
                 }
             }
