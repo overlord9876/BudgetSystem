@@ -82,7 +82,6 @@
             this.deCreateTimestamp = new DevExpress.XtraEditors.DateEdit();
             this.deReceiptDate = new DevExpress.XtraEditors.DateEdit();
             this.cboCurrency = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txtBankName = new DevExpress.XtraEditors.TextEdit();
             this.txtCreateUser = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherNo = new DevExpress.XtraEditors.TextEdit();
             this.txtExchangeRate = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -123,6 +122,7 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cboBankName = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -145,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.deReceiptDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deReceiptDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCurrency.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBankName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).BeginInit();
@@ -183,6 +182,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboBankName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // bgcIsDelete
@@ -214,7 +214,6 @@
             this.layoutControl1.Controls.Add(this.deCreateTimestamp);
             this.layoutControl1.Controls.Add(this.deReceiptDate);
             this.layoutControl1.Controls.Add(this.cboCurrency);
-            this.layoutControl1.Controls.Add(this.txtBankName);
             this.layoutControl1.Controls.Add(this.txtCreateUser);
             this.layoutControl1.Controls.Add(this.txtDescription);
             this.layoutControl1.Controls.Add(this.txtVoucherNo);
@@ -225,6 +224,7 @@
             this.layoutControl1.Controls.Add(this.txtPaymentMethod);
             this.layoutControl1.Controls.Add(this.txtTradingPostscript);
             this.layoutControl1.Controls.Add(this.cboNatureOfMoney);
+            this.layoutControl1.Controls.Add(this.cboBankName);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -738,15 +738,6 @@
             this.cboCurrency.TabIndex = 5;
             this.cboCurrency.EditValueChanged += new System.EventHandler(this.cboCurrency_EditValueChanged);
             // 
-            // txtBankName
-            // 
-            this.txtBankName.Location = new System.Drawing.Point(736, 78);
-            this.txtBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBankName.Name = "txtBankName";
-            this.txtBankName.Size = new System.Drawing.Size(392, 25);
-            this.txtBankName.StyleController = this.layoutControl1;
-            this.txtBankName.TabIndex = 4;
-            // 
             // txtCreateUser
             // 
             this.txtCreateUser.Location = new System.Drawing.Point(183, 194);
@@ -988,7 +979,7 @@
             // 
             // layoutControlItem11
             // 
-            this.layoutControlItem11.Control = this.txtBankName;
+            this.layoutControlItem11.Control = this.cboBankName;
             this.layoutControlItem11.CustomizationFormText = "银行";
             this.layoutControlItem11.Location = new System.Drawing.Point(553, 29);
             this.layoutControlItem11.Name = "layoutControlItem11";
@@ -1212,6 +1203,18 @@
             this.layoutControlItem22.TextSize = new System.Drawing.Size(50, 20);
             this.layoutControlItem22.TextToControlDistance = 5;
             // 
+            // cboBankName
+            // 
+            this.cboBankName.Location = new System.Drawing.Point(736, 78);
+            this.cboBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboBankName.Name = "cboBankName";
+            this.cboBankName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboBankName.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboBankName.Size = new System.Drawing.Size(392, 25);
+            this.cboBankName.StyleController = this.layoutControl1;
+            this.cboBankName.TabIndex = 4;
+            // 
             // ucInMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1242,7 +1245,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.deReceiptDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deReceiptDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCurrency.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBankName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCreateUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).EndInit();
@@ -1280,6 +1282,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboBankName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1291,7 +1294,6 @@
         private DevExpress.XtraEditors.TextEdit txtVoucherNo;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit txtCreateUser;
-        private DevExpress.XtraEditors.TextEdit txtBankName;
         private DevExpress.XtraEditors.ComboBoxEdit cboCurrency;
         private DevExpress.XtraEditors.DateEdit deReceiptDate;
         private DevExpress.XtraEditors.DateEdit deCreateTimestamp;
@@ -1379,5 +1381,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraEditors.ComboBoxEdit cboNatureOfMoney;
+        private DevExpress.XtraEditors.ComboBoxEdit cboBankName;
     }
 }

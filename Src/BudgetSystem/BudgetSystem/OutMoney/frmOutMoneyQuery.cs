@@ -152,9 +152,11 @@ namespace BudgetSystem
                 XtraMessageBox.Show(string.Format("该付款不是借款类型。"));
                 return;
             }
-            currentRowPaymentNote.RepayLoan = true;
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.Custom;
+            form.CurrentPaymentNotes = currentRowPaymentNote;
+            form.ShowDialog(this);
 
-            currentRowPaymentNote.UpdateTimestamp = pnm.ModifyPaymentNote(currentRowPaymentNote);
         }
 
         private void StartFlow()

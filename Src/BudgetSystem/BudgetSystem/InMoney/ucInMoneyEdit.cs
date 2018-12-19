@@ -137,6 +137,15 @@ namespace BudgetSystem.InMoney
                 }
             }
 
+            List<string> bankNameList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.银行名称.ToString());
+            if (bankNameList != null)
+            {
+                foreach (var bankName in bankNameList)
+                {
+                    cboBankName.Properties.Items.Add(bankName);
+                }
+            }
+
             allSalesmanList = um.GetRoleUsers(StringUtil.SaleRoleCode);
 
             cboSales.Properties.Items.Clear();
@@ -159,7 +168,7 @@ namespace BudgetSystem.InMoney
                 CurrentBankSlip = new BankSlip();
                 CurrentBankSlip.UpdateTimestamp = DateTime.Now;
             }
-            CurrentBankSlip.BankName = this.txtBankName.Text.Trim();
+            CurrentBankSlip.BankName = this.cboBankName.SelectedItem.ToString().Trim();
             CurrentBankSlip.Description = this.txtDescription.Text.Trim();
             CurrentBankSlip.ExchangeRate = float.Parse(this.txtExchangeRate.Text);
             CurrentBankSlip.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
@@ -180,7 +189,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.ExportName = this.txtExportName.Text.Trim();
             if (WorkModel == EditFormWorkModels.New)
             {
-                CurrentBankSlip.ReceiptState = ReceiptState.入账;
+                CurrentBankSlip.ReceiptState = ReceiptState.已发布;
             }
             this.SpliDetail = (this.gvConstSplit.DataSource as BindingList<BudgetBill>).ToList();
             GetSalesmanValues();
@@ -190,14 +199,12 @@ namespace BudgetSystem.InMoney
         public void BindBankSlip(BankSlip item)
         {
             this.CurrentBankSlip = item;
-            this.txtBankName.Text = CurrentBankSlip.BankName;
+            this.cboBankName.EditValue = CurrentBankSlip.BankName;
             this.txtDescription.Text = CurrentBankSlip.Description;
             this.txtExchangeRate.Text = CurrentBankSlip.ExchangeRate.ToString();
             this.txtOriginalCoin.Text = CurrentBankSlip.OriginalCoin.ToString();
             this.txtPaymentMethod.SelectedItem = CurrentBankSlip.PaymentMethod;
             this.cboCurrency.EditValue = CurrentBankSlip.Currency;
-            SalemanValue(um.GetBankSlipSalesmanList(item.BSID));
-
             foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
             {
                 if (customer.Name == CurrentBankSlip.Remitter)
@@ -206,6 +213,8 @@ namespace BudgetSystem.InMoney
                     break;
                 }
             }
+
+            SalemanValue(um.GetBankSlipSalesmanList(item.BSID));
 
             this.txtCNY.Text = CurrentBankSlip.CNY.ToString();
             this.txtVoucherNo.Text = CurrentBankSlip.VoucherNo;
@@ -261,7 +270,10 @@ namespace BudgetSystem.InMoney
             {
                 dxErrorProvider1.SetError(txtVoucherNo, "请输入银行凭证号信息");
             }
-
+            if (this.cboBankName.SelectedItem == null || string.IsNullOrEmpty(this.cboBankName.SelectedItem.ToString()))
+            {
+                dxErrorProvider1.SetError(this.cboBankName, "请选择收款银行。");
+            }
             if (WorkModel == EditFormWorkModels.SplitToBudget)
             {
                 if (txtNotSplitCNYMoney.Value == 0)
@@ -351,7 +363,7 @@ namespace BudgetSystem.InMoney
                 this.cboCustomer.Properties.ReadOnly = true;
                 this.txtVoucherNo.Properties.ReadOnly = true;
                 this.txtOriginalCoin.Properties.ReadOnly = true;
-                this.txtBankName.Properties.ReadOnly = true;
+                this.cboBankName.Properties.ReadOnly = true;
                 this.txtExchangeRate.Properties.ReadOnly = true;
                 this.txtCNY.Properties.ReadOnly = true;
                 this.txtPaymentMethod.Properties.ReadOnly = true;
@@ -458,8 +470,8 @@ namespace BudgetSystem.InMoney
                     ErrorColumn = this.gcSplitConstOriginalCoin;
                     return "拆分原币金额不允许大于入帐单总额";
                 }
-                txtAlreadySplitCNYMoney.EditValue = dataSource.Sum(o => o.CNY);
-                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Sum(o => o.OriginalCoin);
+                txtAlreadySplitCNYMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
 
                 txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
                 txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
@@ -589,8 +601,8 @@ namespace BudgetSystem.InMoney
                 BudgetBill budgetBill = gvConstSplit.GetRow(gvConstSplit.FocusedRowHandle) as BudgetBill;
                 if (budgetBill != null && budgetBill.OperatorModel != DataOperatorModel.Add)
                 {
-                    budgetBill.OriginalCoin = 0;
-                    budgetBill.CNY = 0;
+                    //budgetBill.OriginalCoin = 0;
+                    //budgetBill.CNY = 0;
                     budgetBill.IsDelete = true;
                     budgetBill.OperatorModel = DataOperatorModel.Modify;
                 }

@@ -133,11 +133,11 @@
             this.lciInvoiceNumber = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciRepayLoan = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.dxErrorProvider2 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.txtPayingBank = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cboPayingBank = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkRepayLoan.Properties)).BeginInit();
@@ -211,11 +211,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.lciInvoiceNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciRepayLoan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayingBank.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboPayingBank.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcIsWarned
@@ -229,7 +229,6 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.txtPayingBank);
             this.layoutControl1.Controls.Add(this.chkRepayLoan);
             this.layoutControl1.Controls.Add(this.gridInvoiceNumber);
             this.layoutControl1.Controls.Add(this.lblMessage);
@@ -262,6 +261,7 @@
             this.layoutControl1.Controls.Add(this.txtExpectedReturnDate);
             this.layoutControl1.Controls.Add(this.txtBankName);
             this.layoutControl1.Controls.Add(this.txtBankNO);
+            this.layoutControl1.Controls.Add(this.cboPayingBank);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -275,7 +275,7 @@
             // chkRepayLoan
             // 
             this.chkRepayLoan.Location = new System.Drawing.Point(1027, 70);
-            this.chkRepayLoan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkRepayLoan.Margin = new System.Windows.Forms.Padding(4);
             this.chkRepayLoan.Name = "chkRepayLoan";
             this.chkRepayLoan.Properties.Caption = "借款归还";
             this.chkRepayLoan.Properties.ReadOnly = true;
@@ -343,7 +343,7 @@
             this.lblMessage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lblMessage.Location = new System.Drawing.Point(378, 500);
-            this.lblMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblMessage.Margin = new System.Windows.Forms.Padding(4);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(396, 21);
             this.lblMessage.StyleController = this.layoutControl1;
@@ -1410,6 +1410,16 @@
             this.layoutControlItem11.TextSize = new System.Drawing.Size(45, 18);
             this.layoutControlItem11.TextToControlDistance = 5;
             // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.cboPayingBank;
+            this.layoutControlItem20.CustomizationFormText = "付款银行：";
+            this.layoutControlItem20.Location = new System.Drawing.Point(0, 430);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(1132, 29);
+            this.layoutControlItem20.Text = "付款银行：";
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(150, 18);
+            // 
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
@@ -1418,30 +1428,23 @@
             // 
             this.dxErrorProvider2.ContainerControl = this;
             // 
-            // txtPayingBank
+            // cboPayingBank
             // 
-            this.txtPayingBank.Location = new System.Drawing.Point(165, 442);
-            this.txtPayingBank.Name = "txtPayingBank";
-            this.txtPayingBank.Size = new System.Drawing.Size(975, 25);
-            this.txtPayingBank.StyleController = this.layoutControl1;
-            this.txtPayingBank.TabIndex = 218;
-            // 
-            // layoutControlItem20
-            // 
-            this.layoutControlItem20.Control = this.txtPayingBank;
-            this.layoutControlItem20.CustomizationFormText = "付款银行：";
-            this.layoutControlItem20.Location = new System.Drawing.Point(0, 430);
-            this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(1132, 29);
-            this.layoutControlItem20.Text = "付款银行：";
-            this.layoutControlItem20.TextSize = new System.Drawing.Size(150, 18);
+            this.cboPayingBank.Location = new System.Drawing.Point(165, 442);
+            this.cboPayingBank.Name = "cboPayingBank";
+            this.cboPayingBank.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboPayingBank.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboPayingBank.Size = new System.Drawing.Size(975, 25);
+            this.cboPayingBank.StyleController = this.layoutControl1;
+            this.cboPayingBank.TabIndex = 218;
             // 
             // ucOutMoneyEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucOutMoneyEdit";
             this.Size = new System.Drawing.Size(1152, 781);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -1517,11 +1520,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.lciInvoiceNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciRepayLoan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayingBank.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboPayingBank.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1634,7 +1637,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit riLinkDelete;
         private DevExpress.XtraEditors.CheckEdit chkRepayLoan;
         private DevExpress.XtraLayout.LayoutControlItem lciRepayLoan;
-        private DevExpress.XtraEditors.TextEdit txtPayingBank;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
+        private DevExpress.XtraEditors.ComboBoxEdit cboPayingBank;
     }
 }

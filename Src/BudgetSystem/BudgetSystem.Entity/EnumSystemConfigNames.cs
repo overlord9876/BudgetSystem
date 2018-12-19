@@ -20,5 +20,6 @@ namespace BudgetSystem.Entity
         结算方式,
         商品单位,
         企业性质,
+        银行名称
     }
 }

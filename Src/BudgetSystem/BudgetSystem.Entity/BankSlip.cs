@@ -76,7 +76,7 @@ namespace BudgetSystem.Entity
 
         /// <summary>
         /// 状态
-        ///    入账 = 0,
+        ///    已发布 = 0,
         ///拆分中 = 1，
         ///拆分完成=2
         /// </summary>
@@ -178,7 +178,7 @@ namespace BudgetSystem.Entity
 
     public enum ReceiptState : int
     {
-        入账 = 0,
+        已发布 = 0,
         拆分中 = 1,
         已拆分 = 2
 

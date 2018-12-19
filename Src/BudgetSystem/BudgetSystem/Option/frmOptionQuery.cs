@@ -131,6 +131,10 @@ namespace BudgetSystem
             {
                 this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.企业性质);
             }
+            else if (EnumSystemConfigNames.银行名称.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.银行名称);
+            }
             else
             {
                 return;

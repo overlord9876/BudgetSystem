@@ -45,9 +45,13 @@ namespace BudgetSystem.OutMoney
             {
                 this.Text = "查看付款信息";
                 this.emptySpaceItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                this.lciCommit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciCancel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciSave.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+            else if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                this.Text = "借款归还确认";
+                this.lciCommit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
 
@@ -72,6 +76,20 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
 
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        protected override void SubmitCustomData()
+        {
+            base.SubmitCustomData();
+
+            if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
+            this.ucOutMoneyEdit1.FillEditData();
+            this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
+
+            CurrentPaymentNotes.RepayLoan = true;
+
+            CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(CurrentPaymentNotes);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

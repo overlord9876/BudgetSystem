@@ -21,7 +21,6 @@ namespace BudgetSystem.InMoney
         {
             InitializeComponent();
             this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            this.ucInMoneyEdit1.CanCommitEventHandler += new EventHandler<EventArgs>(ucInMoneyEdit1_CanCommitEventHandler);
         }
 
         public BankSlip CurrentBankSlip
@@ -115,6 +114,7 @@ namespace BudgetSystem.InMoney
             if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
                 this.Text = "收汇拆分";
+                this.ucInMoneyEdit1.CanCommitEventHandler += new EventHandler<EventArgs>(ucInMoneyEdit1_CanCommitEventHandler);
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
@@ -153,7 +153,7 @@ namespace BudgetSystem.InMoney
 
         private void btnSure_Click(object sender, EventArgs e)
         {
-            if (WorkModel == EditFormWorkModels.SplitToBudget)
+            if (WorkModel == EditFormWorkModels.SplitToBudget && RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {
                 SaveSplitToBudgetData();
             }

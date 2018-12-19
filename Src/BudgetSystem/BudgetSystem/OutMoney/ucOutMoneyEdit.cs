@@ -82,9 +82,14 @@ namespace BudgetSystem.OutMoney
             {
                 this.txtPaymentDate.EditValue = DateTime.Now;
             }
+            else if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                SetReadOnly();
+            }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetReadOnly();
+                gvInvoiceNumber.OptionsBehavior.Editable = false;
             }
         }
 
@@ -144,7 +149,7 @@ namespace BudgetSystem.OutMoney
             this.cboPaymentMethod.EditValue = payment.PaymentMethod;
             this.txtVoucherNo.Text = payment.VoucherNo;
             this.deCommitTime.EditValue = payment.CommitTime;
-            this.txtPayingBank.Text = payment.PayingBank;
+            this.cboPayingBank.EditValue = payment.PayingBank;
             this.txtApplicant.EditValue = um.GetUser(payment.Applicant);
 
             this.cboDepartment.EditValue = payment.DepartmentName;
@@ -246,15 +251,15 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(txtVoucherNo, "请输入凭证号。");
             }
-            if (string.IsNullOrEmpty(txtPayingBank.Text))
-            {
-                this.dxErrorProvider1.SetError(txtPayingBank, "请输入付款银行。");
-            }
+            //if (cboPayingBank.SelectedItem == null || string.IsNullOrEmpty(cboPayingBank.SelectedItem.ToString()))
+            //{
+            //    this.dxErrorProvider1.SetError(cboPayingBank, "请输入付款银行。");
+            //}
             if (!(cboMoneyUsed.EditValue is UseMoneyType))
             {
                 this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
             }
-            if (currentSupplier != null && !currentSupplier.IsQualified)
+            if (currentSupplier != null && currentSupplier.SupplierType == (int)EnumSupplierType.临时供方)
             {
                 decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
                 if (totalAmount > temporarySupplierPaymenttotalAmountMaxValue)
@@ -290,8 +295,19 @@ namespace BudgetSystem.OutMoney
 
                 List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
                 this.cboMoneyUsed.Properties.Items.Clear();
-                this.cboMoneyUsed.Properties.Items.AddRange(umtList);
+                if (umtList != null)
+                {
+                    this.cboMoneyUsed.Properties.Items.AddRange(umtList);
+                }
 
+                List<string> bankNameList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.银行名称.ToString());
+                if (bankNameList != null)
+                {
+                    foreach (var bankName in bankNameList)
+                    {
+                        cboPayingBank.Properties.Items.Add(bankName);
+                    }
+                }
                 if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
                 {
                     budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
@@ -370,8 +386,10 @@ namespace BudgetSystem.OutMoney
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
-
-            this.CurrentPaymentNotes.PayingBank = this.txtPayingBank.Text;
+            if (cboPayingBank.SelectedItem != null)
+            {
+                this.CurrentPaymentNotes.PayingBank = this.cboPayingBank.SelectedItem.ToString();
+            }
             this.CurrentPaymentNotes.ExchangeRate = float.Parse(this.txtExchangeRate.EditValue.ToString());
             this.CurrentPaymentNotes.OriginalCoin = this.txtOriginalCoin.Value;
             this.CurrentPaymentNotes.Currency = this.cboCurrency.SelectedItem.ToString();
@@ -531,7 +549,7 @@ namespace BudgetSystem.OutMoney
             if (editValue != null)
             {
                 txtBankName.Properties.DataSource = editValue.BankInfoDetail.ToObjectList<List<BankInfo>>();
-                if (!editValue.IsQualified)
+                if (editValue.SupplierType == (int)EnumSupplierType.临时供方)
                 {
                     temporarySupplierPaymenttotalAmount = pnm.GetTemporarySupplierPaymentByBudgetId(currentBudget.ID, editValue.ID);
                     if (temporarySupplierPaymenttotalAmount >= temporarySupplierPaymenttotalAmountMaxValue)

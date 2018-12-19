@@ -196,7 +196,7 @@ namespace BudgetSystem.InMoney
                 }
                 else
                 {
-                    if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分)//不是待拆分状态不允许拆分
+                    if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分 && currentRowBankSlip.EnumFlowState != EnumDataFlowState.审批通过)//不是待拆分状态不允许拆分
                     {
                         XtraMessageBox.Show("当前不属于已拆分状态，不允许直接进行拆分。");
                         return;
@@ -242,9 +242,9 @@ namespace BudgetSystem.InMoney
 
             if (condition == null)
             {
-                condition = new InMoneyQueryCondition();
                 if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
                 {
+                    condition = new InMoneyQueryCondition();
                     condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 }
             }

@@ -40,12 +40,12 @@
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExpectedReturnDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoneyUsed = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRepayLoanText = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExpectedReturnDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsDrawback = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcHasInvoice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,12 +56,12 @@
             // gcOutMoney
             // 
             this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
             this.gcOutMoney.MainView = this.gvOutMoney;
-            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Name = "gcOutMoney";
-            this.gcOutMoney.Size = new System.Drawing.Size(1008, 729);
+            this.gcOutMoney.Size = new System.Drawing.Size(1152, 937);
             this.gcOutMoney.TabIndex = 1;
             this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutMoney});
@@ -127,7 +127,7 @@
             // 
             // gcEnumFlowState
             // 
-            this.gcEnumFlowState.Caption = "审批状态";
+            this.gcEnumFlowState.Caption = "付款单审批状态";
             this.gcEnumFlowState.FieldName = "EnumFlowState";
             this.gcEnumFlowState.Name = "gcEnumFlowState";
             this.gcEnumFlowState.Visible = true;
@@ -169,14 +169,6 @@
             this.gcCommitTime.Visible = true;
             this.gcCommitTime.VisibleIndex = 7;
             // 
-            // gcExpectedReturnDate
-            // 
-            this.gcExpectedReturnDate.Caption = "预计归还时间";
-            this.gcExpectedReturnDate.FieldName = "ExpectedReturnDate";
-            this.gcExpectedReturnDate.Name = "gcExpectedReturnDate";
-            this.gcExpectedReturnDate.Visible = true;
-            this.gcExpectedReturnDate.VisibleIndex = 11;
-            // 
             // gcPaymentDate
             // 
             this.gcPaymentDate.Caption = "付款日期";
@@ -195,7 +187,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 9;
+            this.gcDepartmentCode.VisibleIndex = 8;
             // 
             // gcMoneyUsed
             // 
@@ -203,7 +195,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 10;
+            this.gcMoneyUsed.VisibleIndex = 9;
             // 
             // gcRepayLoanText
             // 
@@ -211,7 +203,15 @@
             this.gcRepayLoanText.FieldName = "RepayLoanText";
             this.gcRepayLoanText.Name = "gcRepayLoanText";
             this.gcRepayLoanText.Visible = true;
-            this.gcRepayLoanText.VisibleIndex = 11;
+            this.gcRepayLoanText.VisibleIndex = 10;
+            // 
+            // gcExpectedReturnDate
+            // 
+            this.gcExpectedReturnDate.Caption = "预计归还时间";
+            this.gcExpectedReturnDate.FieldName = "ExpectedReturnDate";
+            this.gcExpectedReturnDate.Name = "gcExpectedReturnDate";
+            this.gcExpectedReturnDate.Visible = true;
+            this.gcExpectedReturnDate.VisibleIndex = 11;
             // 
             // gcIsDrawback
             // 
@@ -233,11 +233,11 @@
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1152, 937);
             this.Controls.Add(this.gcOutMoney);
-            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).EndInit();

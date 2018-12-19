@@ -371,7 +371,7 @@ namespace BudgetSystem
 
         private void CalcAboutReceiptMoney()
         {
-            ReceiptMoneyAmount = _receiptList.Sum(o => o.CNY);
+            ReceiptMoneyAmount = _receiptList.Where(o => !o.IsDelete).Sum(o => o.CNY);
         }
 
         private void CalcAboutPaymentMoney()
