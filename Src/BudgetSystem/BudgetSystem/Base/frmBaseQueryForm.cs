@@ -12,6 +12,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
 using BudgetSystem.Base;
+using DevExpress.XtraPrinting;
 
 namespace BudgetSystem
 {
@@ -29,6 +30,9 @@ namespace BudgetSystem
 
         }
 
+        List<GridView> gridViewList = null;
+        GridView printGridView;
+        bool isPrintLandscape;
 
         protected bool CheckPermission(OperateTypes operate)
         {
@@ -117,6 +121,14 @@ namespace BudgetSystem
                     RunInfo.Instance.MainForm.RefreshQueryOperateRibbonUI(this);
                 }
             }
+            else if (operate.Operate == OperateTypes.PrintList.ToString())
+            {
+                base.PrintData(this.isPrintLandscape,this.GetPrintView().GridControl);
+            }
+            else if (operate.Operate == OperateTypes.Print.ToString())
+            {
+                this.PrintItem();
+            }
         }
 
         protected virtual void DoCommonQuery(string queryName)
@@ -148,11 +160,8 @@ namespace BudgetSystem
             this.InitGridViewAction();
             if (this.AutoRegeditGridViewDoubleClick)
             {
-                List<GridView> gvList = new List<GridView>();
-                foreach (Control c in this.Controls)
-                {
-                    GetGridViews(ref gvList, c);
-                }
+                List<GridView> gvList = LoadGridViews();
+
                 foreach (GridView gv in gvList)
                 {
                     gv.MouseDown += new MouseEventHandler(gv_MouseDown);
@@ -190,6 +199,20 @@ namespace BudgetSystem
             GridView gv = sender as GridView;
 
             hInfo = gv.CalcHitInfo(e.Y, e.Y);
+        }
+
+
+        private List<GridView> LoadGridViews()
+        {
+            if (this.gridViewList == null)
+            {
+                this.gridViewList = new List<GridView>();
+                foreach (Control c in this.Controls)
+                {
+                    GetGridViews(ref gridViewList, c);
+                }
+            }
+            return this.gridViewList;
         }
 
 
@@ -247,5 +270,24 @@ namespace BudgetSystem
             }
         }
 
+
+      
+        protected void RegeditPrintOperate(bool isPrintLandscape= true,GridView printListGridView=null)
+        {
+            this.isPrintLandscape = isPrintLandscape;
+            this.printGridView = printListGridView;
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.PrintList));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
+        }
+
+        private GridView GetPrintView()
+        {
+            return this.printGridView == null ? this.LoadGridViews()[0] : printGridView; ;
+        }
+
+        protected virtual void PrintItem()
+        { 
+        
+        }
     }
 }

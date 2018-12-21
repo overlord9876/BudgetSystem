@@ -60,6 +60,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         ExportData,
 
+        PrintList,
         Print,
         Confirm,
         GiveUp,

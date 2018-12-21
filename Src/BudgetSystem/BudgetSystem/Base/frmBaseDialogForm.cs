@@ -177,5 +177,11 @@ namespace BudgetSystem
 
             return base.ProcessCmdKey(ref msg,  keyData);
         }
+
+
+        public virtual void PrintItem()
+        { 
+        
+        }
     }
 }

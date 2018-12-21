@@ -34,13 +34,18 @@ namespace BudgetSystem.UserManage
 
         private void frmUserEdit_Load(object sender, EventArgs e)
         {
+            InitData();
+        }
+
+        private void InitData()
+        {
             List<Role> roleList = rm.GetAllRole();
             this.cboRole.Properties.Items.AddRange(roleList);
 
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
 
-           // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
+            // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
             SetLayoutControlStyle();
             if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -60,7 +65,7 @@ namespace BudgetSystem.UserManage
                 this.dtCreateDate.Properties.ReadOnly = true;
                 this.cboDepartment.Properties.ReadOnly = true;
                 this.cboRole.Properties.ReadOnly = true;
-                
+
                 this.Text = "查看用户信息";
                 BindUser(User.UserName);
             }
@@ -213,7 +218,11 @@ namespace BudgetSystem.UserManage
         }
 
 
-
+        public void PrintItem()
+        {
+            InitData();
+            this.layoutControl1.ShowPrintPreview();
+        }
           
 
 

@@ -27,6 +27,11 @@ namespace BudgetSystem.OutMoney
 
         private void frmOutMemoryEdit_Load(object sender, EventArgs e)
         {
+            InitData();
+        }
+
+        private void InitData()
+        {
             this.ucOutMoneyEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -121,6 +126,14 @@ namespace BudgetSystem.OutMoney
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+        }
+
+
+        public override void PrintItem()
+        {
+            InitData();
+
+            this.PrintData(true, this.layoutControl1);
         }
 
     }

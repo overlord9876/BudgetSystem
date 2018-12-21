@@ -33,10 +33,12 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交付款申请"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoneyDetail, "用款查询"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
+
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
 
             this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+
+            this.RegeditPrintOperate();
 
             this.ModelOperatePageName = "付款管理";
         }
@@ -207,6 +209,25 @@ namespace BudgetSystem
         {
             this.gridViewAction.Add(this.gvOutMoney, new ActionWithPermission() { MainAction = ModifyPaymentNote, MainOperate = OperateTypes.Modify, SecondAction = ViewPaymentNote, SecondOperate = OperateTypes.View });
 
+        }
+
+
+        protected override void PrintItem()
+        {
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("请选择需要打印项");
+                return;
+            }
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.View;
+            form.CurrentPaymentNotes = currentRowPaymentNote;
+
+            form.Visible = false;
+            form.Show();
+            form.PrintItem();
+            form.Close();
         }
 
     }

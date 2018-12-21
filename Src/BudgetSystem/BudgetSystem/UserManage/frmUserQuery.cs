@@ -36,8 +36,8 @@ namespace BudgetSystem.UserManage
 
 
             //注册查询我在基类里处理了，如果业务模块需要使用查询功能，可以像这里一样注册就行了
-            this.RegeditQueryOperate<UserQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
-
+           // this.RegeditQueryOperate<UserQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+           // this.RegeditPrintOperate();
 
             this.ModelOperatePageName = "用户管理";
 
@@ -72,6 +72,10 @@ namespace BudgetSystem.UserManage
             else if (operate.Operate == OperateTypes.ReSetPassword.ToString())
             {
                 ReSetUserPassword();
+            }
+            else if (operate.Operate == OperateTypes.Print.ToString())
+            {
+
             }
         }
 

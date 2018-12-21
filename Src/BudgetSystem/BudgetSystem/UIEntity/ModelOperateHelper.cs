@@ -148,6 +148,12 @@ namespace BudgetSystem
                 group = "打印";
                 imageIndex = 58;
             }
+            else if (operate == OperateTypes.PrintList)
+            {
+                text = "打印列表";
+                group = "打印";
+                imageIndex = 58;
+            }
             else if (operate == OperateTypes.Confirm)
             {
                 text = "确认";
