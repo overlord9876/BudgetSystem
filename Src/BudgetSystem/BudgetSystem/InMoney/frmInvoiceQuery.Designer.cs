@@ -47,6 +47,8 @@
             this.gcImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +69,7 @@
             // gvInvoice
             // 
             this.gvInvoice.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcDepartmentCode,
             this.gcContractNO,
             this.gcCode,
             this.gcNumber,
@@ -77,6 +80,7 @@
             this.gcTaxRebateRate,
             this.gcCommission,
             this.gcFeedMoney,
+            this.gcTotalCost,
             this.gcCustomsDeclaration,
             this.gcTaxpayerID,
             this.gcSupplierName,
@@ -94,7 +98,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.OptionsColumn.AllowEdit = false;
             this.gcContractNO.Visible = true;
-            this.gcContractNO.VisibleIndex = 0;
+            this.gcContractNO.VisibleIndex = 1;
             // 
             // gcCode
             // 
@@ -102,7 +106,7 @@
             this.gcCode.FieldName = "Code";
             this.gcCode.Name = "gcCode";
             this.gcCode.Visible = true;
-            this.gcCode.VisibleIndex = 1;
+            this.gcCode.VisibleIndex = 2;
             // 
             // gcNumber
             // 
@@ -111,7 +115,7 @@
             this.gcNumber.Name = "gcNumber";
             this.gcNumber.OptionsColumn.AllowEdit = false;
             this.gcNumber.Visible = true;
-            this.gcNumber.VisibleIndex = 2;
+            this.gcNumber.VisibleIndex = 3;
             // 
             // gcOriginalCoin
             // 
@@ -120,7 +124,7 @@
             this.gcOriginalCoin.Name = "gcOriginalCoin";
             this.gcOriginalCoin.OptionsColumn.AllowEdit = false;
             this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 3;
+            this.gcOriginalCoin.VisibleIndex = 4;
             // 
             // gcPayment
             // 
@@ -129,7 +133,7 @@
             this.gcPayment.Name = "gcPayment";
             this.gcPayment.OptionsColumn.AllowEdit = false;
             this.gcPayment.Visible = true;
-            this.gcPayment.VisibleIndex = 4;
+            this.gcPayment.VisibleIndex = 5;
             // 
             // gcTaxAmount
             // 
@@ -137,7 +141,7 @@
             this.gcTaxAmount.FieldName = "TaxAmount";
             this.gcTaxAmount.Name = "gcTaxAmount";
             this.gcTaxAmount.Visible = true;
-            this.gcTaxAmount.VisibleIndex = 5;
+            this.gcTaxAmount.VisibleIndex = 6;
             // 
             // gcExchangeRate
             // 
@@ -145,7 +149,7 @@
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 6;
+            this.gcExchangeRate.VisibleIndex = 7;
             // 
             // gcTaxRebateRate
             // 
@@ -153,7 +157,7 @@
             this.gcTaxRebateRate.FieldName = "TaxRebateRate";
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
-            this.gcTaxRebateRate.VisibleIndex = 7;
+            this.gcTaxRebateRate.VisibleIndex = 8;
             // 
             // gcCommission
             // 
@@ -161,7 +165,7 @@
             this.gcCommission.FieldName = "Commission";
             this.gcCommission.Name = "gcCommission";
             this.gcCommission.Visible = true;
-            this.gcCommission.VisibleIndex = 8;
+            this.gcCommission.VisibleIndex = 9;
             // 
             // gcFeedMoney
             // 
@@ -169,7 +173,7 @@
             this.gcFeedMoney.FieldName = "FeedMoney";
             this.gcFeedMoney.Name = "gcFeedMoney";
             this.gcFeedMoney.Visible = true;
-            this.gcFeedMoney.VisibleIndex = 9;
+            this.gcFeedMoney.VisibleIndex = 10;
             // 
             // gcCustomsDeclaration
             // 
@@ -177,7 +181,7 @@
             this.gcCustomsDeclaration.FieldName = "CustomsDeclaration";
             this.gcCustomsDeclaration.Name = "gcCustomsDeclaration";
             this.gcCustomsDeclaration.Visible = true;
-            this.gcCustomsDeclaration.VisibleIndex = 10;
+            this.gcCustomsDeclaration.VisibleIndex = 12;
             // 
             // gcTaxpayerID
             // 
@@ -185,7 +189,7 @@
             this.gcTaxpayerID.FieldName = "TaxpayerID";
             this.gcTaxpayerID.Name = "gcTaxpayerID";
             this.gcTaxpayerID.Visible = true;
-            this.gcTaxpayerID.VisibleIndex = 11;
+            this.gcTaxpayerID.VisibleIndex = 13;
             // 
             // gcSupplierName
             // 
@@ -193,7 +197,7 @@
             this.gcSupplierName.FieldName = "SupplierName";
             this.gcSupplierName.Name = "gcSupplierName";
             this.gcSupplierName.Visible = true;
-            this.gcSupplierName.VisibleIndex = 12;
+            this.gcSupplierName.VisibleIndex = 14;
             // 
             // gcImportUserName
             // 
@@ -202,7 +206,7 @@
             this.gcImportUserName.Name = "gcImportUserName";
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
             this.gcImportUserName.Visible = true;
-            this.gcImportUserName.VisibleIndex = 13;
+            this.gcImportUserName.VisibleIndex = 15;
             // 
             // gcImportDate
             // 
@@ -211,7 +215,7 @@
             this.gcImportDate.Name = "gcImportDate";
             this.gcImportDate.OptionsColumn.AllowEdit = false;
             this.gcImportDate.Visible = true;
-            this.gcImportDate.VisibleIndex = 14;
+            this.gcImportDate.VisibleIndex = 16;
             // 
             // openFileDialog1
             // 
@@ -220,8 +224,26 @@
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.Filter = "Excel|*.xlsx;*.xls";
+            this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
+            // 
+            // gcDepartmentCode
+            // 
+            this.gcDepartmentCode.Caption = "部门";
+            this.gcDepartmentCode.FieldName = "DepartmentCode";
+            this.gcDepartmentCode.Name = "gcDepartmentCode";
+            this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
+            this.gcDepartmentCode.Visible = true;
+            this.gcDepartmentCode.VisibleIndex = 0;
+            // 
+            // gcTotalCost
+            // 
+            this.gcTotalCost.Caption = "成本";
+            this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.Name = "gcTotalCost";
+            this.gcTotalCost.OptionsColumn.AllowEdit = false;
+            this.gcTotalCost.Visible = true;
+            this.gcTotalCost.VisibleIndex = 11;
             // 
             // frmInvoiceQuery
             // 
@@ -259,5 +281,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcTaxpayerID;
         private DevExpress.XtraGrid.Columns.GridColumn gcSupplierName;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
     }
 }

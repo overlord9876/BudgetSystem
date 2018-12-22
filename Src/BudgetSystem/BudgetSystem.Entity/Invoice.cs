@@ -102,7 +102,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 导入人姓名
         /// </summary>
-        public string ImportUserName{get;set;}
+        public string ImportUserName { get; set; }
 
         /// <summary>
         /// 财务导入人姓名
@@ -113,6 +113,43 @@ namespace BudgetSystem.Entity
         /// 导入时的验证信息
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// 成本(成本=金额+进项转出+进料款)
+        /// 出口退税：出口退税=ROUND(税金/ROUND(税金/金额*100,0)*退税率,2)
+        /// 进项转出：进项转出=IF(退税率=0,0,税金-出口退税)
+        /// </summary>
+        public decimal TotalCost
+        {
+            get
+            {
+                if (this.TaxRebateRate == 0)
+                {
+                    return Payment + FeedMoney;
+                }
+                else
+                {
+                    return Payment + FeedMoney + (TaxAmount - Math.Round(TaxAmount / Math.Round(TaxAmount / Payment * 100, 0) * (decimal)TaxRebateRate, 2));
+                }
+            }
+        }
+        /// <summary>
+        /// 部门编号（从合同编号中提取）
+        /// </summary>
+        public string DepartmentCode
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.ContractNO) && this.ContractNO.Length > 6)
+                {
+                    return this.ContractNO.Substring(4, 2);
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
     }
 
 }
