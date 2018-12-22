@@ -179,9 +179,20 @@ namespace BudgetSystem
         }
 
 
-        public virtual void PrintItem()
+
+        public virtual void PrintData()
         { 
         
+        }
+
+        public virtual void PrintItem()
+        {
+            this.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.LookAndFeel.SkinName = "Whiteprint";
+            this.Visible = false;
+            this.Show();
+            this.PrintData();
+            this.Close();
         }
     }
 }

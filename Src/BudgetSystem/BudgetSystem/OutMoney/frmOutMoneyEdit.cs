@@ -27,11 +27,6 @@ namespace BudgetSystem.OutMoney
 
         private void frmOutMemoryEdit_Load(object sender, EventArgs e)
         {
-            InitData();
-        }
-
-        private void InitData()
-        {
             this.ucOutMoneyEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -129,12 +124,11 @@ namespace BudgetSystem.OutMoney
         }
 
 
-        public override void PrintItem()
+
+        public override void PrintData()
         {
-            InitData();
-
-            this.PrintData(true, this.layoutControl1);
+            this.Height -= 50;
+            PrinterHelper.PrintControl(true, this.layoutControl1);
         }
-
     }
 }

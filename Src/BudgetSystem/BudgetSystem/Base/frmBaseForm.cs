@@ -41,18 +41,5 @@ namespace BudgetSystem
             }
         }
 
-
-        protected virtual void PrintData(bool isPrintLandscape, IPrintable printControl)
-        {
-            PrintingSystem printingSystem = new PrintingSystem();
-            PrintableComponentLink printableComponentLink = new PrintableComponentLink();
-            // Add the link to the printing system's collection of links.
-            printingSystem.Links.AddRange(new object[] { printableComponentLink });
-            // Assign a control to be printed by this link.
-            printableComponentLink.Component = printControl;
-            // Set the paper orientation to Landscape.
-            printableComponentLink.Landscape = isPrintLandscape;
-            printableComponentLink.ShowPreview();
-        }
     }
 }

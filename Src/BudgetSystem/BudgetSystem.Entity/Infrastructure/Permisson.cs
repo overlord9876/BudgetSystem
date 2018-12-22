@@ -78,7 +78,7 @@ namespace BudgetSystem.Entity
 
         public static string CalcPermission(BusinessModules module,string operate)
         {
-            if (operate == OperateTypes.None.ToString() || operate == OperateTypes.CommonQuery.ToString() || operate == OperateTypes.MyQuery.ToString() || operate == OperateTypes.CustomQuery.ToString() || operate == OperateTypes.QueryManager.ToString() || operate== OperateTypes.PrintList.ToString() || operate== OperateTypes.Print.ToString())
+            if (operate == OperateTypes.None.ToString() || operate == OperateTypes.CommonQuery.ToString() || operate == OperateTypes.MyQuery.ToString() || operate == OperateTypes.CustomQuery.ToString() || operate == OperateTypes.QueryManager.ToString() || operate== OperateTypes.PrintList.ToString())
             {
                 return module.ToString();
             }

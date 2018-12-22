@@ -223,11 +223,7 @@ namespace BudgetSystem
             frmOutMoneyEdit form = new frmOutMoneyEdit();
             form.WorkModel = EditFormWorkModels.View;
             form.CurrentPaymentNotes = currentRowPaymentNote;
-
-            form.Visible = false;
-            form.Show();
             form.PrintItem();
-            form.Close();
         }
 
     }

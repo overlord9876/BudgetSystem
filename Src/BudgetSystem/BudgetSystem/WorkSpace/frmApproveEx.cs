@@ -276,5 +276,11 @@ namespace BudgetSystem.WorkSpace
             form.SetVersionReadOnly();
             form.ShowDialog();
         }
+
+        private void btnAcceptAndPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            PrinterHelper.PrintControl(false, this.layoutControl1);
+            btnAccept_Click(null, null);
+        }
     }
 }
