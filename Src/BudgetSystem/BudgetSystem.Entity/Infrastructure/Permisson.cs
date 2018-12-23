@@ -145,6 +145,8 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.BudgetAccountBill,"预算单管理-查看收支情况",780),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Print,"预算单管理-打印",790),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.SubmitApply,"预算单管理-提交审批流程",791),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.ExportData,"预算单管理-导出预算单",792),
+                        
 
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.None,"收款管理模块",800),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.New, "收款管理-新增银行水单",810),
@@ -174,6 +176,8 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "交单管理-查看详情",1050),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ExportData, "交单管理-导出交单记录",1060),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Print, "交单管理-打印",1070),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.PrintSignatureForm, "交单管理-打印签收单",1080),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.PrintCostForm, "交单管理-打印成本销售表",1090),
 
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"报关单管理模块",1100),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "报关单管理-新增报关单",1110),

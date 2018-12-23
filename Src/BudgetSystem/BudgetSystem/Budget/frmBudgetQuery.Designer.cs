@@ -32,23 +32,24 @@
             this.gvBudget = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUSDTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcUSDTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).BeginInit();
@@ -119,16 +120,6 @@
             this.gcCustomerName.VisibleIndex = 1;
             this.gcCustomerName.Width = 91;
             // 
-            // gcState
-            // 
-            this.gcState.Caption = "审批状态";
-            this.gcState.FieldName = "EnumFlowState";
-            this.gcState.MinWidth = 80;
-            this.gcState.Name = "gcState";
-            this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 3;
-            this.gcState.Width = 90;
-            // 
             // gcFlowName
             // 
             this.gcFlowName.Caption = "当前流程";
@@ -139,15 +130,15 @@
             this.gcFlowName.VisibleIndex = 2;
             this.gcFlowName.Width = 87;
             // 
-            // gcTradeMode
+            // gcState
             // 
-            this.gcTradeMode.Caption = "贸易方式";
-            this.gcTradeMode.FieldName = "TradeModeDesc";
-            this.gcTradeMode.MinWidth = 80;
-            this.gcTradeMode.Name = "gcTradeMode";
-            this.gcTradeMode.Visible = true;
-            this.gcTradeMode.VisibleIndex = 11;
-            this.gcTradeMode.Width = 87;
+            this.gcState.Caption = "审批状态";
+            this.gcState.FieldName = "EnumFlowState";
+            this.gcState.MinWidth = 80;
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 3;
+            this.gcState.Width = 90;
             // 
             // gcTotalAmount
             // 
@@ -158,6 +149,84 @@
             this.gcTotalAmount.Visible = true;
             this.gcTotalAmount.VisibleIndex = 4;
             this.gcTotalAmount.Width = 87;
+            // 
+            // gcUSDTotalAmount
+            // 
+            this.gcUSDTotalAmount.Caption = "美元合同金额";
+            this.gcUSDTotalAmount.FieldName = "USDTotalAmount";
+            this.gcUSDTotalAmount.MinWidth = 80;
+            this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
+            this.gcUSDTotalAmount.Visible = true;
+            this.gcUSDTotalAmount.VisibleIndex = 5;
+            this.gcUSDTotalAmount.Width = 87;
+            // 
+            // gcTotalCost
+            // 
+            this.gcTotalCost.Caption = "总成本";
+            this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.MinWidth = 80;
+            this.gcTotalCost.Name = "gcTotalCost";
+            this.gcTotalCost.Visible = true;
+            this.gcTotalCost.VisibleIndex = 6;
+            this.gcTotalCost.Width = 87;
+            // 
+            // gcProfit
+            // 
+            this.gcProfit.Caption = "利润";
+            this.gcProfit.FieldName = "Profit";
+            this.gcProfit.MinWidth = 80;
+            this.gcProfit.Name = "gcProfit";
+            this.gcProfit.Visible = true;
+            this.gcProfit.VisibleIndex = 7;
+            this.gcProfit.Width = 80;
+            // 
+            // gcProfitLevel2
+            // 
+            this.gcProfitLevel2.Caption = "盈利水平";
+            this.gcProfitLevel2.FieldName = "ProfitLevel2";
+            this.gcProfitLevel2.MinWidth = 80;
+            this.gcProfitLevel2.Name = "gcProfitLevel2";
+            this.gcProfitLevel2.Visible = true;
+            this.gcProfitLevel2.VisibleIndex = 8;
+            this.gcProfitLevel2.Width = 80;
+            // 
+            // gcAdvancePayment
+            // 
+            this.gcAdvancePayment.Caption = "预付金额";
+            this.gcAdvancePayment.FieldName = "AdvancePayment";
+            this.gcAdvancePayment.MinWidth = 80;
+            this.gcAdvancePayment.Name = "gcAdvancePayment";
+            this.gcAdvancePayment.Visible = true;
+            this.gcAdvancePayment.VisibleIndex = 9;
+            this.gcAdvancePayment.Width = 80;
+            // 
+            // gcTradeNature
+            // 
+            this.gcTradeNature.Caption = "贸易性质";
+            this.gcTradeNature.ColumnEdit = this.rilueTradeNature;
+            this.gcTradeNature.FieldName = "TradeNature";
+            this.gcTradeNature.MinWidth = 80;
+            this.gcTradeNature.Name = "gcTradeNature";
+            this.gcTradeNature.Visible = true;
+            this.gcTradeNature.VisibleIndex = 10;
+            this.gcTradeNature.Width = 80;
+            // 
+            // rilueTradeNature
+            // 
+            this.rilueTradeNature.AutoHeight = false;
+            this.rilueTradeNature.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rilueTradeNature.Name = "rilueTradeNature";
+            // 
+            // gcTradeMode
+            // 
+            this.gcTradeMode.Caption = "贸易方式";
+            this.gcTradeMode.FieldName = "TradeModeDesc";
+            this.gcTradeMode.MinWidth = 80;
+            this.gcTradeMode.Name = "gcTradeMode";
+            this.gcTradeMode.Visible = true;
+            this.gcTradeMode.VisibleIndex = 11;
+            this.gcTradeMode.Width = 87;
             // 
             // gcSalesman
             // 
@@ -209,24 +278,6 @@
             this.gcValidity.VisibleIndex = 16;
             this.gcValidity.Width = 80;
             // 
-            // gcTradeNature
-            // 
-            this.gcTradeNature.Caption = "贸易性质";
-            this.gcTradeNature.ColumnEdit = this.rilueTradeNature;
-            this.gcTradeNature.FieldName = "TradeNature";
-            this.gcTradeNature.MinWidth = 80;
-            this.gcTradeNature.Name = "gcTradeNature";
-            this.gcTradeNature.Visible = true;
-            this.gcTradeNature.VisibleIndex = 10;
-            this.gcTradeNature.Width = 80;
-            // 
-            // rilueTradeNature
-            // 
-            this.rilueTradeNature.AutoHeight = false;
-            this.rilueTradeNature.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.rilueTradeNature.Name = "rilueTradeNature";
-            // 
             // gcPort
             // 
             this.gcPort.Caption = "目的港口";
@@ -237,55 +288,10 @@
             this.gcPort.VisibleIndex = 17;
             this.gcPort.Width = 89;
             // 
-            // gcAdvancePayment
+            // saveFileDialog1
             // 
-            this.gcAdvancePayment.Caption = "预付金额";
-            this.gcAdvancePayment.FieldName = "AdvancePayment";
-            this.gcAdvancePayment.MinWidth = 80;
-            this.gcAdvancePayment.Name = "gcAdvancePayment";
-            this.gcAdvancePayment.Visible = true;
-            this.gcAdvancePayment.VisibleIndex = 9;
-            this.gcAdvancePayment.Width = 80;
-            // 
-            // gcProfit
-            // 
-            this.gcProfit.Caption = "利润";
-            this.gcProfit.FieldName = "Profit";
-            this.gcProfit.MinWidth = 80;
-            this.gcProfit.Name = "gcProfit";
-            this.gcProfit.Visible = true;
-            this.gcProfit.VisibleIndex = 7;
-            this.gcProfit.Width = 80;
-            // 
-            // gcProfitLevel2
-            // 
-            this.gcProfitLevel2.Caption = "盈利水平";
-            this.gcProfitLevel2.FieldName = "ProfitLevel2";
-            this.gcProfitLevel2.MinWidth = 80;
-            this.gcProfitLevel2.Name = "gcProfitLevel2";
-            this.gcProfitLevel2.Visible = true;
-            this.gcProfitLevel2.VisibleIndex = 8;
-            this.gcProfitLevel2.Width = 80;
-            // 
-            // gcUSDTotalAmount
-            // 
-            this.gcUSDTotalAmount.Caption = "美元合同金额";
-            this.gcUSDTotalAmount.FieldName = "USDTotalAmount";
-            this.gcUSDTotalAmount.MinWidth = 80;
-            this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
-            this.gcUSDTotalAmount.Visible = true;
-            this.gcUSDTotalAmount.VisibleIndex = 5;
-            this.gcUSDTotalAmount.Width = 87;
-            // 
-            // gcTotalCost
-            // 
-            this.gcTotalCost.Caption = "总成本";
-            this.gcTotalCost.FieldName = "TotalCost";
-            this.gcTotalCost.MinWidth = 80;
-            this.gcTotalCost.Name = "gcTotalCost";
-            this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 6;
-            this.gcTotalCost.Width = 87;
+            this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
+            this.saveFileDialog1.Title = "保存";
             // 
             // frmBudgetQuery
             // 
@@ -326,5 +332,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
         private DevExpress.XtraGrid.Columns.GridColumn gcUSDTotalAmount;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

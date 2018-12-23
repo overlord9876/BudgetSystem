@@ -34,6 +34,8 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
             this.RegeditPrintOperate();
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.PrintSignatureForm));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.PrintCostForm));
 
             this.ModelOperatePageName = "交单管理";
         }
@@ -67,9 +69,13 @@ namespace BudgetSystem.InMoney
             {
                 ExportInvoice();
             }
-            else
+            else if (operate.Operate == OperateTypes.PrintCostForm.ToString())
             {
-                XtraMessageBox.Show("未定义的操作");
+                PrintCostForm();
+            }
+            else if (operate.Operate == OperateTypes.PrintSignatureForm.ToString())
+            {
+                PrintSignatureForm();
             }
         }
 
@@ -213,6 +219,20 @@ namespace BudgetSystem.InMoney
                 sdf.Close();
                 XtraMessageBox.Show("导出失：" + ex.Message);
             }
+        }
+
+        private void PrintSignatureForm()
+        { 
+            List<Invoice> dataSource= this.gridInvoice.DataSource as List<Invoice>;
+            frmSignatureForm frm=new frmSignatureForm();
+            frm.PrintData(dataSource);
+        }
+
+        private void PrintCostForm()
+        {
+            List<Invoice> dataSource = this.gridInvoice.DataSource as List<Invoice>;
+            frmCostForm frm = new frmCostForm();
+            frm.PrintData(dataSource);
         }
 
         protected override void InitGridViewAction()

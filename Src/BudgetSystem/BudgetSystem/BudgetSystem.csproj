@@ -272,6 +272,18 @@
     <Compile Include="InMoney\frmInMoneyQueryConditionEditor.Designer.cs">
       <DependentUpon>frmInMoneyQueryConditionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\frmSignatureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmSignatureForm.Designer.cs">
+      <DependentUpon>frmSignatureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InMoney\frmCostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmCostForm.Designer.cs">
+      <DependentUpon>frmCostForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\ucStringListOptionEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -657,6 +669,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyQueryConditionEditor.resx">
       <DependentUpon>frmInMoneyQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmSignatureForm.resx">
+      <DependentUpon>frmSignatureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmCostForm.resx">
+      <DependentUpon>frmCostForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Option\ucStringListOptionEdit.resx">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>

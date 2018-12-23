@@ -38,6 +38,8 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.DeleteApply, "申请删除"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
+
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
@@ -89,6 +91,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.BudgetAccountBill.ToString())
             {
                 ShowBudgetAccountBillView();
+            }
+            else if (operate.Operate == OperateTypes.ExportData.ToString())
+            {
+                ExportDataBudget();
             }
         }
 
@@ -309,6 +315,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看审批状态的项");
             }
         }
+        
         private void DeleteBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -327,6 +334,22 @@ namespace BudgetSystem
             else
             {
                 XtraMessageBox.Show("请选择需要删除的项");
+            }
+        }
+
+        private void ExportDataBudget()
+        {
+            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            { 
+                return;
+            }
+            if (saveFileDialog1.FileName.ToLower().EndsWith(".xls"))
+            {
+                this.gvBudget.Export(DevExpress.XtraPrinting.ExportTarget.Xls, saveFileDialog1.FileName);
+            }
+            else
+            {
+                this.gvBudget.Export(DevExpress.XtraPrinting.ExportTarget.Xlsx, saveFileDialog1.FileName);
             }
         }
 

@@ -140,7 +140,7 @@ namespace BudgetSystem
             {
                 text = "导入";
                 group = "操作";
-                imageIndex = 57;
+                imageIndex = 51;
             }
             else if (operate == OperateTypes.Print)
             {
@@ -151,6 +151,18 @@ namespace BudgetSystem
             else if (operate == OperateTypes.PrintList)
             {
                 text = "打印列表";
+                group = "打印";
+                imageIndex = 58;
+            }
+            else if (operate == OperateTypes.PrintSignatureForm)
+            {
+                text = "打印签收单";
+                group = "打印";
+                imageIndex = 58;
+            }
+            else if (operate == OperateTypes.PrintCostForm)
+            {
+                text = "打印成本销售表";
                 group = "打印";
                 imageIndex = 58;
             }
@@ -195,6 +207,12 @@ namespace BudgetSystem
                 text = "确认/撤回";
                 group = "操作";
                 imageIndex = 59;
+            }
+            else if (operate == OperateTypes.ExportData)
+            {
+                text = "导出";
+                group = "操作";
+                imageIndex = 53;
             }
 
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);

@@ -114,25 +114,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Message { get; set; }
 
-        /// <summary>
-        /// 成本(成本=金额+进项转出+进料款)
-        /// 出口退税：出口退税=ROUND(税金/ROUND(税金/金额*100,0)*退税率,2)
-        /// 进项转出：进项转出=IF(退税率=0,0,税金-出口退税)
-        /// </summary>
-        public decimal TotalCost
-        {
-            get
-            {
-                if (this.TaxRebateRate == 0)
-                {
-                    return Payment + FeedMoney;
-                }
-                else
-                {
-                    return Payment + FeedMoney + (TaxAmount - Math.Round(TaxAmount / Math.Round(TaxAmount / Payment * 100, 0) * (decimal)TaxRebateRate, 2));
-                }
-            }
-        }
+       
         /// <summary>
         /// 部门编号（从合同编号中提取）
         /// </summary>
@@ -148,6 +130,104 @@ namespace BudgetSystem.Entity
                 {
                     return string.Empty;
                 }
+            }
+        }
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        public string CustomerName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 人民币
+        /// 人民币销售=ROUND(原币*汇率,2)
+        /// </summary>
+        public decimal CNY
+        {
+            get
+            {
+                return Math.Round(OriginalCoin * (decimal)ExchangeRate, 2);
+            }
+        }
+
+        /// <summary>
+        /// 出口退税
+        /// 出口退税=ROUND(税金/ROUND(税金/金额*100,0)*退税率,2)
+        /// </summary>
+        public decimal TaxRebate
+        {
+            get
+            {
+                if (Payment == 0 || TaxAmount == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Math.Round(TaxAmount / Math.Round(TaxAmount / Payment * 100, 0) * (decimal)TaxRebateRate, 2);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 进项转出
+        /// 进项转出=IF(退税率=0,0,税金-出口退税)
+        /// </summary>
+        public decimal IncomeExits
+        {
+            get
+            {
+                if (TaxRebateRate == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return TaxAmount - TaxRebate;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 应付账款
+        /// 应付账款=金额+税额
+        /// </summary>
+        public decimal AccountsPayable
+        {
+            get
+            {
+                return Payment + TaxAmount;
+            }
+        }
+        /// <summary>
+        /// 成本(成本=金额+进项转出+进料款) 
+        /// </summary>
+        public decimal TotalCost
+        {
+            get
+            {
+                if (this.TaxRebateRate == 0)
+                {
+                    return Payment + FeedMoney;
+                }
+                else
+                {
+                    return Payment + IncomeExits + FeedMoney ;
+                }
+            }
+        }
+        /// <summary>
+        /// 毛利
+        /// 毛利=人民币销售-成本-佣金
+        /// </summary>
+        public decimal GrossProfit
+        {
+            get
+            {
+                return CNY - TotalCost - Commission;
             }
         }
     }

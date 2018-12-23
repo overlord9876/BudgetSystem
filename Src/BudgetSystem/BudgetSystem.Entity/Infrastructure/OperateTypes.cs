@@ -91,5 +91,14 @@ namespace BudgetSystem.Entity
 
 
         ConfirmOrRevoke,
+        /// <summary>
+        /// 打印签收单
+        /// </summary>
+        PrintSignatureForm,
+
+        /// <summary>
+        /// 打印成本销售表
+        /// </summary>
+        PrintCostForm
     }
 }

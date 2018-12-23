@@ -11,9 +11,11 @@ namespace BudgetSystem.Dal
 {
     public class InvoiceDal
     {
-        string selectSql = @"SELECT i.*,u1.RealName ImportUserName,u2.RealName FinanceImportUserName FROM `Invoice` i
-                                 LEFT JOIN `User` u1 ON i.ImportUser=u1.UserName
-                                 LEFT JOIN `user` u2 on i.FinanceImportUser =u2.UserName ";
+        string selectSql = @"SELECT i.*,c.`Name` CustomerName,u1.RealName ImportUserName,u2.RealName FinanceImportUserName FROM `Invoice` i
+                             LEFT JOIN `Budget` b ON i.ContractNO=b.ContractNO
+							 LEFT JOIN `Customer` c ON b.CustomerID =c.ID
+                             LEFT JOIN `User` u1 ON i.ImportUser=u1.UserName
+                             LEFT JOIN `user` u2 on i.FinanceImportUser =u2.UserName ";
         public IEnumerable<Invoice> GetAllInvoice(IDbConnection con, IDbTransaction tran)
         {
             return con.Query<Invoice>(selectSql, null, tran);
