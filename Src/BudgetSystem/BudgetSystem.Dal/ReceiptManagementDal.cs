@@ -20,7 +20,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public int AddBankSlip(BankSlip addBankSlip, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Remitter`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`,`NatureOfMoney`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Remitter,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp,@NatureOfMoney)";
+            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Remitter`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`,`NatureOfMoney`,`IsActive`,`RemarkState`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Remitter,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp,@NatureOfMoney,@IsActive,@RemarkState)";
             int id = con.Insert(insertSql, addBankSlip, tran);
             if (id > 0)
             {
@@ -45,7 +45,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
 
-            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`TradingPostscript`=@TradingPostscript,`NatureOfMoney`=@NatureOfMoney,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
+            string updateSql = "Update `bankslip` Set `Description` = @Description,`CNY2` = @CNY2,`OriginalCoin2`=@OriginalCoin2,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`TradingPostscript`=@TradingPostscript,`NatureOfMoney`=@NatureOfMoney,`IsActive`=@IsActive,`RemarkState`=@RemarkState,`UpdateTimestamp` = @UpdateTimestamp Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -67,7 +67,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
             modifyBankSlip.UpdateTimestamp = DateTime.Now;
-            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney Where `BSID` = @BSID";
+            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney,IsActive=@IsActive,RemarkState=@RemarkState Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");

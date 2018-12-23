@@ -167,5 +167,11 @@ namespace BudgetSystem.InMoney
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
+        
+        public override void PrintData()
+        {
+            this.Height -= 50;
+            PrinterHelper.PrintControl(true, this.layoutControl1);
+        }
     }
 }

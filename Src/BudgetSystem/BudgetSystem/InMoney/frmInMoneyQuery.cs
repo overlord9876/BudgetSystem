@@ -35,6 +35,8 @@ namespace BudgetSystem.InMoney
 
             this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
 
+            this.RegeditPrintOperate();
+
             this.ModelOperatePageName = "入帐单";
         }
 
@@ -173,6 +175,7 @@ namespace BudgetSystem.InMoney
                 try
                 {
                     currentRowBankSlip.ReceiptState = ReceiptState.已拆分;
+                    currentRowBankSlip.IsActive = true;
                     currentRowBankSlip.UpdateTimestamp = arm.ConfirmSplitAmount(currentRowBankSlip);
                     XtraMessageBox.Show("提交数据成功。");
                 }
@@ -261,5 +264,20 @@ namespace BudgetSystem.InMoney
 
         }
 
+        protected override void PrintItem()
+        {
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (currentRowBankSlip != null)
+            {
+                frmInMoneyEdit form = new frmInMoneyEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.CurrentBankSlip = currentRowBankSlip;
+                form.PrintItem();
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要打印的项");
+            }
+        }
     }
 }

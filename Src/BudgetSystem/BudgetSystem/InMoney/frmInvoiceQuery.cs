@@ -33,12 +33,16 @@ namespace BudgetSystem.InMoney
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
 
+            this.RegeditPrintOperate();
+
             this.ModelOperatePageName = "交单管理";
         }
 
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
+
             if (operate.Operate == OperateTypes.New.ToString())
             {
                 CreateInvoice();
@@ -216,7 +220,20 @@ namespace BudgetSystem.InMoney
             this.gridViewAction.Add(this.gvInvoice, new ActionWithPermission() { MainAction = ModifyInvoice, MainOperate = OperateTypes.Modify, SecondAction = ViewInvoice, SecondOperate = OperateTypes.View });
         }
 
-
-
+        protected override void PrintItem()
+        {
+            Invoice invoice = this.gvInvoice.GetFocusedRow() as Invoice;
+            if (invoice != null)
+            {
+                frmInvoiceEdit form = new frmInvoiceEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.CurrentInvoice = invoice;
+                form.PrintItem();
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要打印的项");
+            }
+        }
     }
 }

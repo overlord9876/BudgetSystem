@@ -35,7 +35,7 @@ namespace BudgetSystem
             }
             this.ucBudgetEdit1.FillData();
 
-            int result = bm.AddBudget(this.ucBudgetEdit1.CurrentBudget,isStartFlow);
+            int result = bm.AddBudget(this.ucBudgetEdit1.CurrentBudget, isStartFlow);
             if (result <= 0)
             {
                 XtraMessageBox.Show("创建失败！");
@@ -46,15 +46,15 @@ namespace BudgetSystem
 
         protected override void SubmitModifyData()
         {
-            base.SubmitModifyData();  
+            base.SubmitModifyData();
             bool checkResult = this.ucBudgetEdit1.CheckInputData();
             if (!checkResult)
             {
                 return;
             }
-            this.ucBudgetEdit1.FillData(); 
+            this.ucBudgetEdit1.FillData();
 
-            string message= bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget,isStartFlow);
+            string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, isStartFlow);
             if (!string.IsNullOrEmpty(message))
             {
                 XtraMessageBox.Show(message, "提示");
@@ -65,8 +65,6 @@ namespace BudgetSystem
             }
         }
 
-
- 
         #region Event Method
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
@@ -74,16 +72,16 @@ namespace BudgetSystem
             this.ucBudgetEdit1.CurrentBudget = this.CurrentBudget;
             this.ucBudgetEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
-            { 
+            {
                 this.Text = "创建预算单";
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                this.Text = "编辑预算单信息"; 
+                this.Text = "编辑预算单信息";
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
-                this.Text = "查看预算单信息"; 
+                this.Text = "查看预算单信息";
                 this.btnSure.Enabled = false;
                 this.btnSubmit.Enabled = false;
             }
@@ -101,12 +99,10 @@ namespace BudgetSystem
         }
         #endregion
 
-        
-
-       
-
-
-
-
+        public override void PrintData()
+        {
+            this.Height += 200;
+            PrinterHelper.PrintControl(true, this.layoutControl1);
+        }
     }
 }

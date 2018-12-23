@@ -41,9 +41,11 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
+
+            this.RegeditPrintOperate();
+
             this.ModelOperatePageName = "预算单";
 
         }
@@ -89,12 +91,12 @@ namespace BudgetSystem
                 ShowBudgetAccountBillView();
             }
         }
-        
+
         protected override void DoCommonQuery(string queryName)
         {
             if (COMMONQUERY_MYCREATE.Equals(queryName))
             {
-                BudgetQueryCondition condition = new BudgetQueryCondition() {  Salesman = RunInfo.Instance.CurrentUser.UserName };
+                BudgetQueryCondition condition = new BudgetQueryCondition() { Salesman = RunInfo.Instance.CurrentUser.UserName };
                 LoadData(condition);
             }
         }
@@ -107,14 +109,14 @@ namespace BudgetSystem
         protected override QueryConditionEditorForm CreateConditionEditorForm()
         {
             frmBudgetQueryConditionEditor form = new frmBudgetQueryConditionEditor();
-            form.QueryName = this.GetType().ToString(); 
+            form.QueryName = this.GetType().ToString();
             return form;
         }
         public override void LoadData()
         {
             LoadData(null);
         }
-        
+
         private void LoadData(BudgetQueryCondition condition)
         {
             if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
@@ -128,7 +130,7 @@ namespace BudgetSystem
             List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;
         }
-     
+
         private void ShowBudgetAccountBillView()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -334,6 +336,21 @@ namespace BudgetSystem
 
         }
 
+        protected override void PrintItem()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmBudgetEdit form = new frmBudgetEdit();
+                form.WorkModel = EditFormWorkModels.View;
+                form.CurrentBudget = budget;
+                form.PrintItem();
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要打印的项");
+            }
+        }
 
     }
 }

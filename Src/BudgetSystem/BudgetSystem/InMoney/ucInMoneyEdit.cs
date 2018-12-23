@@ -182,6 +182,20 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.Currency = this.cboCurrency.EditValue.ToString();
             CurrentBankSlip.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
             CurrentBankSlip.TradingPostscript = this.txtTradingPostscript.Text.Trim();
+
+            if (this.chkState1.Checked)
+            {
+                CurrentBankSlip.RemarkState = (int)RemarkState.水单付款人余预算单买方不同备注;
+            }
+            else if (this.chkState2.Checked)
+            {
+                CurrentBankSlip.RemarkState = (int)RemarkState.另附纸质说明;
+            }
+            else
+            {
+                CurrentBankSlip.RemarkState = (int)RemarkState.None;
+            }
+
             if (this.cboTradeNature.EditValue != null)
             {
                 CurrentBankSlip.TradeNature = (int)(BankSlipTradeNature)Enum.Parse(typeof(BankSlipTradeNature), this.cboTradeNature.EditValue.ToString());
@@ -224,27 +238,45 @@ namespace BudgetSystem.InMoney
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
             this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
             this.txtExportName.EditValue = CurrentBankSlip.ExportName;
-            this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
-            var source = arm.GetBudgetBillListByBankSlipID(item.BSID);
-            if (source == null)
-            {
-                this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
-            }
-            source.ForEach(o =>
-            {
-                o.ExchangeRate = txtExchangeRate.Value;
-                o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
-                if (o.RelationBudget != null)
-                {
-                    var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
-                    o.Customer = cus != null ? cus.Name : string.Empty;
-                    o.Cus_ID = cus.ID;
-                }
-            });
-            this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
-            CalcSplitMoney();
 
+            this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
+
+            if (CurrentBankSlip.RemarkState == (int)RemarkState.水单付款人余预算单买方不同备注)
+            {
+                this.chkState1.Checked = true;
+            }
+            else if (CurrentBankSlip.RemarkState == (int)RemarkState.另附纸质说明)
+            {
+                this.chkState2.Checked = true;
+            }
+            try
+            {
+                var source = arm.GetBudgetBillListByBankSlipID(item.BSID);
+                if (source == null)
+                {
+                    this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
+                    this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
+                }
+                source.ForEach(o =>
+                {
+                    o.ExchangeRate = txtExchangeRate.Value;
+                    o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
+                    if (o.RelationBudget != null)
+                    {
+                        var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
+                        o.Customer = cus != null ? cus.Name : string.Empty;
+                        o.Cus_ID = cus.ID;
+                    }
+                });
+                this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
+                CalcSplitMoney();
+            }
+            catch (Exception ex)
+            {
+                RunInfo.Instance.Logger.LogError(ex);
+            }
         }
+
 
         public void BindBankSlipByID(int bsID)
         {
@@ -658,6 +690,20 @@ namespace BudgetSystem.InMoney
                     CanCommitEventHandler(this, e); ;
                 }
             }
+        }
+
+        private void chkState1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.chkState2.CheckedChanged -= new EventHandler(chkState2_CheckedChanged);
+            this.chkState2.Checked = !chkState1.Checked;
+            this.chkState2.CheckedChanged += new EventHandler(chkState2_CheckedChanged);
+        }
+
+        private void chkState2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.chkState1.CheckedChanged -= new EventHandler(chkState1_CheckedChanged);
+            this.chkState1.Checked = !chkState2.Checked;
+            this.chkState1.CheckedChanged += new EventHandler(chkState1_CheckedChanged);
         }
 
     }

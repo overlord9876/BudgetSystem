@@ -664,6 +664,7 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>

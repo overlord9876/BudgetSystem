@@ -123,6 +123,7 @@ namespace BudgetSystem.Bll
         {
             return this.ExecuteWithTransaction<DateTime>((con, tran) =>
             {
+                modifyBankSlip.IsActive = confirmed;
                 DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
                 if (confirmed && modifyBankSlip.CNY2 != 0)
                 {

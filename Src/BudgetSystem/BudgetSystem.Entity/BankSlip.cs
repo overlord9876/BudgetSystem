@@ -160,6 +160,15 @@ namespace BudgetSystem.Entity
         /// </summary>
         public List<User> Sales { get; set; }
 
+        /// <summary>
+        /// 是否活跃（允许修改）
+        /// </summary>
+        public bool IsActive { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int RemarkState { get; set; }
 
         public string ToDesc()
         {
@@ -182,5 +191,12 @@ namespace BudgetSystem.Entity
         拆分中 = 1,
         已拆分 = 2
 
+    }
+
+    public enum RemarkState : int
+    {
+        None = 0,
+        水单付款人余预算单买方不同备注 = 1,
+        另附纸质说明 = 2
     }
 }

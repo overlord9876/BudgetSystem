@@ -17,17 +17,17 @@ namespace BudgetSystem.InMoney
             InitializeComponent();
         }
 
-        
+
         public Invoice CurrentInvoice
         {
             get;
             set;
         }
 
-        private Bll.InvoiceManager im=new Bll.InvoiceManager();
+        private Bll.InvoiceManager im = new Bll.InvoiceManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private void frmInvoiceEdit_Load(object sender, EventArgs e)
-        { 
+        {
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 SetLayoutControlStyle(EditFormWorkModels.New);
@@ -42,25 +42,25 @@ namespace BudgetSystem.InMoney
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetLayoutControlStyle(EditFormWorkModels.View);
-                this.txtCode.Properties.ReadOnly=true;
-                this.txtCommission.Properties.ReadOnly=true; 
-                this.txtContractNO.Properties.ReadOnly=true;
-                this.txtCustomsDeclaration.Properties.ReadOnly=true; 
-                this.txtExchangeRate.Properties.ReadOnly=true;
-                this.txtFeedMoney.Properties.ReadOnly=true;
-                this.txtFinanceImportDate.Properties.ReadOnly=true;
-                this.txtFinanceImportUser.Properties.ReadOnly=true;
-                this.txtImportDate.Properties.ReadOnly=true;
-                this.txtImportUser.Properties.ReadOnly=true;
-                this.txtNumber.Properties.ReadOnly=true;
-                this.txtOriginalCoin.Properties.ReadOnly=true; 
-                this.txtPayment.Properties.ReadOnly=true;
-                this.txtSupplierName.Properties.ReadOnly=true;
-                this.txtTaxAmount.Properties.ReadOnly=true;
-                this.txtTaxpayerID.Properties.ReadOnly=true;
-                this.txtTaxRebateRate.Properties.ReadOnly=true;
+                this.txtCode.Properties.ReadOnly = true;
+                this.txtCommission.Properties.ReadOnly = true;
+                this.txtContractNO.Properties.ReadOnly = true;
+                this.txtCustomsDeclaration.Properties.ReadOnly = true;
+                this.txtExchangeRate.Properties.ReadOnly = true;
+                this.txtFeedMoney.Properties.ReadOnly = true;
+                this.txtFinanceImportDate.Properties.ReadOnly = true;
+                this.txtFinanceImportUser.Properties.ReadOnly = true;
+                this.txtImportDate.Properties.ReadOnly = true;
+                this.txtImportUser.Properties.ReadOnly = true;
+                this.txtNumber.Properties.ReadOnly = true;
+                this.txtOriginalCoin.Properties.ReadOnly = true;
+                this.txtPayment.Properties.ReadOnly = true;
+                this.txtSupplierName.Properties.ReadOnly = true;
+                this.txtTaxAmount.Properties.ReadOnly = true;
+                this.txtTaxpayerID.Properties.ReadOnly = true;
+                this.txtTaxRebateRate.Properties.ReadOnly = true;
                 this.Text = "查看交单信息";
-                BindInvoice(CurrentInvoice.ID);;
+                BindInvoice(CurrentInvoice.ID); ;
             }
 
         }
@@ -104,7 +104,7 @@ namespace BudgetSystem.InMoney
             }
             else
             {
-                bool result = bm.CheckContractNO(this.CurrentInvoice==null?0:this.CurrentInvoice.ID, txtContractNO.Text.Trim());
+                bool result = bm.CheckContractNO(this.CurrentInvoice == null ? 0 : this.CurrentInvoice.ID, txtContractNO.Text.Trim());
                 if (result == false)
                 {
                     this.dxErrorProvider1.SetError(this.txtContractNO, "合同号不存在");
@@ -120,13 +120,13 @@ namespace BudgetSystem.InMoney
                 if (result == true)
                 {
                     this.dxErrorProvider1.SetError(this.txtNumber, "发票号已存在");
-                }                
+                }
             }
             if (txtExchangeRate.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(this.txtExchangeRate, "汇率应大于0");
             }
-            if (string.IsNullOrEmpty( txtCustomsDeclaration.Text.Trim()))
+            if (string.IsNullOrEmpty(txtCustomsDeclaration.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtCustomsDeclaration, "请输入报关单");
             }
@@ -205,8 +205,11 @@ namespace BudgetSystem.InMoney
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
-         
 
-
+        public override void PrintData()
+        {
+            this.Height -= 50;
+            PrinterHelper.PrintControl(true, this.layoutControl1);
+        }
     }
 }
