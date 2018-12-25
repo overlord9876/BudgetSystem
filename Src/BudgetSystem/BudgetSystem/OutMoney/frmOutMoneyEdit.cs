@@ -47,6 +47,7 @@ namespace BudgetSystem.OutMoney
                 this.emptySpaceItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciCancel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.lciSave.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.lciCommit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {

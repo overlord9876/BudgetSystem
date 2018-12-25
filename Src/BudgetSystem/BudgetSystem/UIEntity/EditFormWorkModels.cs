@@ -14,6 +14,7 @@ namespace BudgetSystem
         /// <summary>
         /// 分拆至合同
         /// </summary>
-        SplitToBudget
+        SplitToBudget,
+        Print
     }
 }

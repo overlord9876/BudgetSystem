@@ -73,6 +73,15 @@ namespace BudgetSystem.Bll
                  });
         }
 
+        public void ModifyPaymentNotePayingBankName(int pnId, string bankName)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+                          {
+                              dal.ModifyPaymentNotePayingBankName(pnId, bankName, con, tran);
+                          });
+        }
+
+
         /// <summary>
         /// 合同付款，单个非合格供方付款人民币总数
         /// </summary>

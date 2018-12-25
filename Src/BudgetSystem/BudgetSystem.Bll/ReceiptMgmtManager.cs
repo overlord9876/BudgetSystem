@@ -53,6 +53,16 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<BudgetBill> GetBudgetBillListByCondition()
+        {
+            var lst = this.Query<BudgetBill>((con) =>
+            {
+                var uList = dal.GetBudgetBillListByCondition(con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
         /// <summary>
         /// 创建收款记录
         /// </summary>

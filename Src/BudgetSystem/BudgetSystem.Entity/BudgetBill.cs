@@ -30,7 +30,7 @@ namespace BudgetSystem.Entity
         /// 客户ID
         /// </summary>
         public int Cus_ID { get; set; }
-        
+
         /// <summary>
         /// 客户对象
         /// </summary>
@@ -65,6 +65,21 @@ namespace BudgetSystem.Entity
         /// 认领人所在部门
         /// </summary>
         public string DepartmentCode { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 部门显示信息
+        /// </summary>
+        public string DepartmentContent { get { return string.Format("{0}{1}", DepartmentCode, DepartmentName); } }
+
+        /// <summary>
+        /// 支付方式
+        /// </summary>
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// 操作、认领时间

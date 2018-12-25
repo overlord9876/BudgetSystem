@@ -156,7 +156,8 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.View, "收款管理-查看详情",850),
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.ModifyApply, "收款管理-申请修改费用拆分",860),    
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Confirm, "收款管理-收汇确认",870),    
-                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Print,"收款管理-打印",880),                     
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.Print,"收款管理-打印",880),          
+                        new Permisson(BusinessModules.InMoneyManagement,OperateTypes.ExportData,"收款管理-导出数据",890),                    
                        
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.None,"付款管理模块",900),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.New, "付款管理-付款申请",910),

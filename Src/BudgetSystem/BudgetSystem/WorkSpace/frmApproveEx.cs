@@ -177,14 +177,12 @@ namespace BudgetSystem.WorkSpace
             {
                 return true;
             }
-
             frmBaseFlowEventForm form = frmBaseFlowEventForm.GetFlowExtEventForm(extEvent, this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems : new List<FlowItem>() { this.FlowItem });
 
             if (form == null)
             {
                 return true;
             }
-
 
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

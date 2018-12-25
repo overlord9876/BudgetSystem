@@ -100,7 +100,7 @@ namespace BudgetSystem.Dal
         public DateTime ModifyPaymentNote(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
         {
 
-            DateTime versionNumber = GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
+            DateTime versionNumber = GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
 
             if (this.CheckExpired(versionNumber, modifyPaymentNote.UpdateTimestamp))
             {
@@ -113,6 +113,12 @@ namespace BudgetSystem.Dal
 
             return GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
 
+        }
+
+        public void ModifyPaymentNotePayingBankName(int paymentId, string bankName, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `paymentnotes` Set `UpdateTimestamp` = @UpdateTimestamp,PayingBank=@PayingBank Where `ID` = @ID";
+            con.Execute(updateSql, new { UpdateTimestamp = DateTime.Now, PayingBank = bankName, ID = paymentId }, tran);
         }
 
         public void DeletePaymentNote(int id, IDbConnection con, IDbTransaction tran)

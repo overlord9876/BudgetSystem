@@ -231,7 +231,7 @@ namespace BudgetSystem
                 this.pceMainCustomer.Properties.ReadOnly = true;
                 BindingBudget(CurrentBudget.ID);
             }
-            else if (this.WorkModel == EditFormWorkModels.View)
+            else if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print)
             {
                 SetReadOnly();
                 if (CurrentBudget != null)

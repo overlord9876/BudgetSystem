@@ -354,6 +354,7 @@ namespace BudgetSystem.InMoney
 
         private void InitControlState()
         {
+            this.lciPrintTime.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             this.txtCreateUser.Properties.ReadOnly = true;
             this.deCreateTimestamp.Properties.ReadOnly = true;
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
@@ -406,6 +407,13 @@ namespace BudgetSystem.InMoney
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
+                SetReadOnly();
+            }
+            else if (this.WorkModel == EditFormWorkModels.Print)
+            {
+                this.lciPrintTime.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                txtPrintDateTime.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                txtPrintDateTime.Properties.ReadOnly = true;
                 SetReadOnly();
             }
 

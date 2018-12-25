@@ -10,6 +10,7 @@ using BudgetSystem.Bll;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Util;
 
 namespace BudgetSystem.InMoney
 {
@@ -32,6 +33,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "收汇确认"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出数据"));
 
             this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
 
@@ -67,6 +69,10 @@ namespace BudgetSystem.InMoney
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewBankSlip();
+            }
+            else if (operate.Operate == OperateTypes.ExportData.ToString())
+            {
+                ExportData();
             }
         }
 
@@ -235,6 +241,12 @@ namespace BudgetSystem.InMoney
             }
         }
 
+        private void ExportData()
+        {
+            frmInMoneyDetailExport export = new frmInMoneyDetailExport();
+            export.ExportData();
+        }
+
         public override void LoadData()
         {
             LoadData(null);
@@ -270,7 +282,7 @@ namespace BudgetSystem.InMoney
             if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
-                form.WorkModel = EditFormWorkModels.View;
+                form.WorkModel = EditFormWorkModels.Print;
                 form.CurrentBankSlip = currentRowBankSlip;
                 form.PrintItem();
             }

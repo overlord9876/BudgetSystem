@@ -131,6 +131,15 @@ namespace BudgetSystem.InMoney
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
+            else if (this.WorkModel == EditFormWorkModels.Print)
+            {
+                this.Text = "打印";
+                this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
+
+                lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
             else if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "新增银行水单";
@@ -167,7 +176,7 @@ namespace BudgetSystem.InMoney
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
-        
+
         public override void PrintData()
         {
             this.Height -= 50;

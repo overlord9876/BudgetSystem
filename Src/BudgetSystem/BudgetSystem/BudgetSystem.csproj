@@ -284,6 +284,12 @@
     <Compile Include="InMoney\frmCostForm.Designer.cs">
       <DependentUpon>frmCostForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InMoney\frmInMoneyDetailExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInMoneyDetailExport.Designer.cs">
+      <DependentUpon>frmInMoneyDetailExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Option\ucStringListOptionEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,6 +301,12 @@
     </Compile>
     <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.Designer.cs">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMoneyPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmOutMoneyPrint.Designer.cs">
+      <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="PrinterHelper.cs" />
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
@@ -676,11 +688,17 @@
     <EmbeddedResource Include="InMoney\frmCostForm.resx">
       <DependentUpon>frmCostForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInMoneyDetailExport.resx">
+      <DependentUpon>frmInMoneyDetailExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Option\ucStringListOptionEdit.resx">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
+      <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">

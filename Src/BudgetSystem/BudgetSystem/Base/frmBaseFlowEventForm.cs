@@ -23,15 +23,15 @@ namespace BudgetSystem.Base
             set;
         }
 
-        public static frmBaseFlowEventForm GetFlowExtEventForm(string extEventName,List<FlowItem> items)
+        public static frmBaseFlowEventForm GetFlowExtEventForm(string extEventName, List<FlowItem> items)
         {
-            frmBaseFlowEventForm form =null;
-            if (extEventName == "test")
+            frmBaseFlowEventForm form = null;
+            if (extEventName == "修改付款银行")
             {
                 form = new frmTestFlowEventForm();
             }
-        
-            if (form !=null)
+
+            if (form != null)
             {
                 form.ReleateFlowItems = items;
             }

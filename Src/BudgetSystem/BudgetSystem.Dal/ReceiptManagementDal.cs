@@ -153,20 +153,38 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select b.* From `BudgetBill` b
-                LEFT JOIN Customer c on b.Cus_ID=c.ID
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+                                        From `BudgetBill`  bb 
+                                        LEFT JOIN budget b on bb.BudgetID=b.ID
+                                        LEFT JOIN Customer c on bb.Cus_ID=c.ID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
                 Where `BSID` = @BSID";
             return con.Query<BudgetBill>(selectSql, new { BSID = bsID }, tran);
         }
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.ReceiptDate,bs.Remitter,bs.VoucherNo From `BudgetBill`  bb 
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+                                        From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
                                 Where `BudgetID` = @BudgetID";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
+        }
+
+        public IEnumerable<BudgetBill> GetBudgetBillListByCondition(IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName 
+                                        From `BudgetBill`  bb 
+                                        LEFT JOIN budget b on bb.BudgetID=b.ID
+                                        LEFT JOIN Customer c on bb.Cus_ID=c.ID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
+                                Where 1=1";
+            return con.Query<BudgetBill>(selectSql, new { }, tran);
         }
 
         /// <summary>

@@ -57,8 +57,8 @@ namespace BudgetSystem.OutMoney
             this.riLinkDelete.Click += new EventHandler(riLinkDelete_Click);
             this.riLinkDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
 
-            this.cboBudget.Properties.PopupFormSize = new Size(this.cboBudget.Width * 2, 300);
-            this.cboSupplier.Properties.PopupFormSize = new Size(this.cboSupplier.Width * 2, 300);
+            this.cboBudget.Properties.PopupFormSize = new Size(this.Width / 2, 300);
+            this.cboSupplier.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             if (!frmBaseForm.IsDesignMode)
             {
                 InitData();
@@ -67,6 +67,7 @@ namespace BudgetSystem.OutMoney
 
         private void InitEditStyle()
         {
+            lciPayingBank.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.New)
@@ -91,6 +92,7 @@ namespace BudgetSystem.OutMoney
             {
                 SetReadOnly();
                 gvInvoiceNumber.OptionsBehavior.Editable = false;
+                lciPayingBank.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
         }
 
@@ -110,6 +112,10 @@ namespace BudgetSystem.OutMoney
 
         public void BandPaymentNotes(PaymentNotes payment)
         {
+            if (payment == null)
+            {
+                XtraMessageBox.Show("单据已经不存在。");
+            }
             this.CurrentPaymentNotes = payment;
             chkIsDrawback.EditValue = payment.IsDrawback;
             this.vatOption = payment.VatOption;

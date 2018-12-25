@@ -220,7 +220,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要打印项");
                 return;
             }
-            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            frmOutMoneyPrint form = new frmOutMoneyPrint();
             form.WorkModel = EditFormWorkModels.View;
             form.CurrentPaymentNotes = currentRowPaymentNote;
             form.PrintItem();

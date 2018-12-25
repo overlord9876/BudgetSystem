@@ -315,7 +315,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看审批状态的项");
             }
         }
-        
+
         private void DeleteBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -340,7 +340,7 @@ namespace BudgetSystem
         private void ExportDataBudget()
         {
             if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            { 
+            {
                 return;
             }
             if (saveFileDialog1.FileName.ToLower().EndsWith(".xls"))
@@ -365,7 +365,7 @@ namespace BudgetSystem
             if (budget != null)
             {
                 frmBudgetEdit form = new frmBudgetEdit();
-                form.WorkModel = EditFormWorkModels.View;
+                form.WorkModel = EditFormWorkModels.Print;
                 form.CurrentBudget = budget;
                 form.PrintItem();
             }

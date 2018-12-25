@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem.InMoney
 {
-    partial class frmInMoneyQuery
+    partial class frmInMoneyDetailExport
     {
         /// <summary>
         /// Required designer variable.
@@ -30,22 +30,15 @@
         {
             this.gcInMoney = new DevExpress.XtraGrid.GridControl();
             this.gvInMoney = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcBankName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcRemitter = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcEnumFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTradingPostscript = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExportName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcReceiptDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateTimestamp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcBankName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).BeginInit();
@@ -56,10 +49,10 @@
             // gcInMoney
             // 
             this.gcInMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gcInMoney.Location = new System.Drawing.Point(0, 0);
             this.gcInMoney.MainView = this.gvInMoney;
-            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2);
             this.gcInMoney.Name = "gcInMoney";
             this.gcInMoney.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1});
@@ -71,27 +64,29 @@
             // gvInMoney
             // 
             this.gvInMoney.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gcVoucherNo,
-            this.gcState,
-            this.gcBankName,
-            this.gcRemitter,
-            this.gcCurrency,
-            this.gcEnumFlowState,
-            this.gcOriginalCoin,
-            this.gcExchangeRate,
-            this.gcCNY,
-            this.gcTradingPostscript,
-            this.gcExportName,
-            this.gcPaymentMethod,
             this.gcReceiptDate,
-            this.gcCreateUser,
-            this.gcCreateTimestamp,
-            this.gcDescription});
+            this.gcVoucherNo,
+            this.gcDepartment,
+            this.gcBankName,
+            this.gcContractNO,
+            this.gcOriginalCoin,
+            this.gcCurrency,
+            this.gcExchangeRate,
+            this.gcPaymentMethod});
             this.gvInMoney.GridControl = this.gcInMoney;
             this.gvInMoney.Name = "gvInMoney";
             this.gvInMoney.OptionsBehavior.Editable = false;
             this.gvInMoney.OptionsView.ShowDetailButtons = false;
             this.gvInMoney.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcReceiptDate
+            // 
+            this.gcReceiptDate.Caption = "收汇日期";
+            this.gcReceiptDate.FieldName = "ReceiptDate";
+            this.gcReceiptDate.Name = "gcReceiptDate";
+            this.gcReceiptDate.Visible = true;
+            this.gcReceiptDate.VisibleIndex = 0;
+            this.gcReceiptDate.Width = 150;
             // 
             // gcVoucherNo
             // 
@@ -99,15 +94,17 @@
             this.gcVoucherNo.FieldName = "VoucherNo";
             this.gcVoucherNo.Name = "gcVoucherNo";
             this.gcVoucherNo.Visible = true;
-            this.gcVoucherNo.VisibleIndex = 0;
+            this.gcVoucherNo.VisibleIndex = 1;
+            this.gcVoucherNo.Width = 115;
             // 
-            // gcState
+            // gcDepartment
             // 
-            this.gcState.Caption = "入账状态";
-            this.gcState.FieldName = "ReceiptState";
-            this.gcState.Name = "gcState";
-            this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 1;
+            this.gcDepartment.Caption = "部门";
+            this.gcDepartment.FieldName = "DepartmentContent";
+            this.gcDepartment.Name = "gcDepartment";
+            this.gcDepartment.Visible = true;
+            this.gcDepartment.VisibleIndex = 2;
+            this.gcDepartment.Width = 97;
             // 
             // gcBankName
             // 
@@ -115,15 +112,26 @@
             this.gcBankName.FieldName = "BankName";
             this.gcBankName.Name = "gcBankName";
             this.gcBankName.Visible = true;
-            this.gcBankName.VisibleIndex = 2;
+            this.gcBankName.VisibleIndex = 3;
+            this.gcBankName.Width = 97;
             // 
-            // gcRemitter
+            // gcContractNO
             // 
-            this.gcRemitter.Caption = "客户名称";
-            this.gcRemitter.FieldName = "Remitter";
-            this.gcRemitter.Name = "gcRemitter";
-            this.gcRemitter.Visible = true;
-            this.gcRemitter.VisibleIndex = 3;
+            this.gcContractNO.Caption = "合同编号";
+            this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.Name = "gcContractNO";
+            this.gcContractNO.Visible = true;
+            this.gcContractNO.VisibleIndex = 4;
+            this.gcContractNO.Width = 144;
+            // 
+            // gcOriginalCoin
+            // 
+            this.gcOriginalCoin.Caption = "收款金额";
+            this.gcOriginalCoin.FieldName = "OriginalCoin";
+            this.gcOriginalCoin.Name = "gcOriginalCoin";
+            this.gcOriginalCoin.Visible = true;
+            this.gcOriginalCoin.VisibleIndex = 6;
+            this.gcOriginalCoin.Width = 84;
             // 
             // gcCurrency
             // 
@@ -131,23 +139,8 @@
             this.gcCurrency.FieldName = "Currency";
             this.gcCurrency.Name = "gcCurrency";
             this.gcCurrency.Visible = true;
-            this.gcCurrency.VisibleIndex = 4;
-            // 
-            // gcEnumFlowState
-            // 
-            this.gcEnumFlowState.Caption = "审批状态";
-            this.gcEnumFlowState.FieldName = "EnumFlowStateDisplayValue";
-            this.gcEnumFlowState.Name = "gcEnumFlowState";
-            this.gcEnumFlowState.Visible = true;
-            this.gcEnumFlowState.VisibleIndex = 5;
-            // 
-            // gcOriginalCoin
-            // 
-            this.gcOriginalCoin.Caption = "实收原币金额";
-            this.gcOriginalCoin.FieldName = "OriginalCoin";
-            this.gcOriginalCoin.Name = "gcOriginalCoin";
-            this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 6;
+            this.gcCurrency.VisibleIndex = 5;
+            this.gcCurrency.Width = 84;
             // 
             // gcExchangeRate
             // 
@@ -156,30 +149,7 @@
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
             this.gcExchangeRate.VisibleIndex = 7;
-            // 
-            // gcCNY
-            // 
-            this.gcCNY.Caption = "实收人民币金额";
-            this.gcCNY.FieldName = "CNY";
-            this.gcCNY.Name = "gcCNY";
-            this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 8;
-            // 
-            // gcTradingPostscript
-            // 
-            this.gcTradingPostscript.Caption = "交易附言";
-            this.gcTradingPostscript.FieldName = "TradingPostscript";
-            this.gcTradingPostscript.Name = "gcTradingPostscript";
-            this.gcTradingPostscript.Visible = true;
-            this.gcTradingPostscript.VisibleIndex = 9;
-            // 
-            // gcExportName
-            // 
-            this.gcExportName.Caption = "出口名称";
-            this.gcExportName.FieldName = "ExportName";
-            this.gcExportName.Name = "gcExportName";
-            this.gcExportName.Visible = true;
-            this.gcExportName.VisibleIndex = 10;
+            this.gcExchangeRate.Width = 84;
             // 
             // gcPaymentMethod
             // 
@@ -187,39 +157,8 @@
             this.gcPaymentMethod.FieldName = "PaymentMethod";
             this.gcPaymentMethod.Name = "gcPaymentMethod";
             this.gcPaymentMethod.Visible = true;
-            this.gcPaymentMethod.VisibleIndex = 11;
-            // 
-            // gcReceiptDate
-            // 
-            this.gcReceiptDate.Caption = "收汇日期";
-            this.gcReceiptDate.FieldName = "ReceiptDate";
-            this.gcReceiptDate.Name = "gcReceiptDate";
-            this.gcReceiptDate.Visible = true;
-            this.gcReceiptDate.VisibleIndex = 12;
-            // 
-            // gcCreateUser
-            // 
-            this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUser";
-            this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 13;
-            // 
-            // gcCreateTimestamp
-            // 
-            this.gcCreateTimestamp.Caption = "创建时间";
-            this.gcCreateTimestamp.FieldName = "CreateTimestamp";
-            this.gcCreateTimestamp.Name = "gcCreateTimestamp";
-            this.gcCreateTimestamp.Visible = true;
-            this.gcCreateTimestamp.VisibleIndex = 14;
-            // 
-            // gcDescription
-            // 
-            this.gcDescription.Caption = "备注";
-            this.gcDescription.FieldName = "Description";
-            this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 15;
+            this.gcPaymentMethod.VisibleIndex = 8;
+            this.gcPaymentMethod.Width = 103;
             // 
             // repositoryItemComboBox1
             // 
@@ -228,13 +167,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
-            // frmInMoneyQuery
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "\"Excel|*.xlsx|Excel2003|*.xls\"";
+            // 
+            // frmInMoneyDetailExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 597);
             this.Controls.Add(this.gcInMoney);
-            this.Name = "frmInMoneyQuery";
+            this.Name = "frmInMoneyDetailExport";
             this.Text = "收款管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).EndInit();
@@ -247,22 +190,15 @@
 
         private DevExpress.XtraGrid.GridControl gcInMoney;
         private DevExpress.XtraGrid.Views.Grid.GridView gvInMoney;
-        private DevExpress.XtraGrid.Columns.GridColumn gcRemitter;
+        private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
         private DevExpress.XtraGrid.Columns.GridColumn gcVoucherNo;
         private DevExpress.XtraGrid.Columns.GridColumn gcOriginalCoin;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCNY;
         private DevExpress.XtraGrid.Columns.GridColumn gcReceiptDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
-        private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
         private DevExpress.XtraGrid.Columns.GridColumn gcBankName;
         private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
         private DevExpress.XtraGrid.Columns.GridColumn gcPaymentMethod;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateTimestamp;
-        private DevExpress.XtraGrid.Columns.GridColumn gcTradingPostscript;
-        private DevExpress.XtraGrid.Columns.GridColumn gcExportName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcState;
-        private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartment;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }

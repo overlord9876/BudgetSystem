@@ -59,7 +59,7 @@ namespace BudgetSystem.Entity
             //    }
             //}
         }
-    
+
 
         /// <summary>
         /// 节点审批意见
@@ -81,5 +81,14 @@ namespace BudgetSystem.Entity
         /// </summary>
         public DateTime NodeApproveDate { get; set; }
 
+        /// <summary>
+        /// 审批角色
+        /// </summary>
+        public string NodeValueRemark { get; set; }
+
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public string RealName { get; set; }
     }
 }

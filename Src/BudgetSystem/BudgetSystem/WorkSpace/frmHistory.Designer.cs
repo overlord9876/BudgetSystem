@@ -35,7 +35,9 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.gdApproveList = new DevExpress.XtraGrid.GridControl();
             this.gvApproveList = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcRealName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcNodeApproveUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcNodeValueRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcNodeApproveRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gcNodeApproveDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -103,26 +105,29 @@
             this.layoutControl1.Controls.Add(this.txtDataItemText);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1537, 253, 807, 713);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1023, 714);
+            this.layoutControl1.Size = new System.Drawing.Size(895, 555);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txtCloseReason
             // 
-            this.txtCloseReason.Location = new System.Drawing.Point(132, 136);
+            this.txtCloseReason.Location = new System.Drawing.Point(111, 120);
+            this.txtCloseReason.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCloseReason.Name = "txtCloseReason";
             this.txtCloseReason.Properties.ReadOnly = true;
-            this.txtCloseReason.Size = new System.Drawing.Size(867, 25);
+            this.txtCloseReason.Size = new System.Drawing.Size(760, 21);
             this.txtCloseReason.StyleController = this.layoutControl1;
             this.txtCloseReason.TabIndex = 15;
             // 
             // dtEndDate
             // 
             this.dtEndDate.EditValue = null;
-            this.dtEndDate.Location = new System.Drawing.Point(616, 107);
+            this.dtEndDate.Location = new System.Drawing.Point(532, 95);
+            this.dtEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtEndDate.Name = "dtEndDate";
             this.dtEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -134,23 +139,25 @@
             this.dtEndDate.Properties.ReadOnly = true;
             this.dtEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dtEndDate.Size = new System.Drawing.Size(383, 25);
+            this.dtEndDate.Size = new System.Drawing.Size(339, 21);
             this.dtEndDate.StyleController = this.layoutControl1;
             this.dtEndDate.TabIndex = 14;
             // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(132, 107);
+            this.txtResult.Location = new System.Drawing.Point(111, 95);
+            this.txtResult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtResult.Name = "txtResult";
             this.txtResult.Properties.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(372, 25);
+            this.txtResult.Size = new System.Drawing.Size(330, 21);
             this.txtResult.StyleController = this.layoutControl1;
             this.txtResult.TabIndex = 13;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(865, 674);
+            this.btnCancel.Location = new System.Drawing.Point(737, 515);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(146, 28);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -159,13 +166,15 @@
             // 
             // gdApproveList
             // 
-            this.gdApproveList.Location = new System.Drawing.Point(24, 214);
+            this.gdApproveList.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gdApproveList.Location = new System.Drawing.Point(24, 190);
             this.gdApproveList.MainView = this.gvApproveList;
+            this.gdApproveList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gdApproveList.Name = "gdApproveList";
             this.gdApproveList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEdit1,
             this.repositoryItemDateEdit1});
-            this.gdApproveList.Size = new System.Drawing.Size(975, 444);
+            this.gdApproveList.Size = new System.Drawing.Size(847, 309);
             this.gdApproveList.TabIndex = 8;
             this.gdApproveList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvApproveList});
@@ -173,7 +182,9 @@
             // gvApproveList
             // 
             this.gvApproveList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcRealName,
             this.gcNodeApproveUser,
+            this.gcNodeValueRemark,
             this.gcNodeApproveRemark,
             this.gcNodeApproveDate,
             this.gcRunPointCreateDate,
@@ -184,14 +195,32 @@
             this.gvApproveList.OptionsView.RowAutoHeight = true;
             this.gvApproveList.OptionsView.ShowGroupPanel = false;
             // 
+            // gcRealName
+            // 
+            this.gcRealName.Caption = "审批人姓名";
+            this.gcRealName.FieldName = "RealName";
+            this.gcRealName.Name = "gcRealName";
+            this.gcRealName.Visible = true;
+            this.gcRealName.VisibleIndex = 0;
+            this.gcRealName.Width = 76;
+            // 
             // gcNodeApproveUser
             // 
             this.gcNodeApproveUser.Caption = "审批人";
             this.gcNodeApproveUser.FieldName = "NodeApproveUser";
             this.gcNodeApproveUser.Name = "gcNodeApproveUser";
             this.gcNodeApproveUser.Visible = true;
-            this.gcNodeApproveUser.VisibleIndex = 0;
-            this.gcNodeApproveUser.Width = 142;
+            this.gcNodeApproveUser.VisibleIndex = 1;
+            this.gcNodeApproveUser.Width = 102;
+            // 
+            // gcNodeValueRemark
+            // 
+            this.gcNodeValueRemark.Caption = "职位";
+            this.gcNodeValueRemark.FieldName = "NodeValueRemark";
+            this.gcNodeValueRemark.Name = "gcNodeValueRemark";
+            this.gcNodeValueRemark.Visible = true;
+            this.gcNodeValueRemark.VisibleIndex = 2;
+            this.gcNodeValueRemark.Width = 54;
             // 
             // gcNodeApproveRemark
             // 
@@ -200,8 +229,8 @@
             this.gcNodeApproveRemark.FieldName = "NodeApproveRemark";
             this.gcNodeApproveRemark.Name = "gcNodeApproveRemark";
             this.gcNodeApproveRemark.Visible = true;
-            this.gcNodeApproveRemark.VisibleIndex = 4;
-            this.gcNodeApproveRemark.Width = 469;
+            this.gcNodeApproveRemark.VisibleIndex = 6;
+            this.gcNodeApproveRemark.Width = 349;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -216,8 +245,8 @@
             this.gcNodeApproveDate.FieldName = "NodeApproveDate";
             this.gcNodeApproveDate.Name = "gcNodeApproveDate";
             this.gcNodeApproveDate.Visible = true;
-            this.gcNodeApproveDate.VisibleIndex = 2;
-            this.gcNodeApproveDate.Width = 130;
+            this.gcNodeApproveDate.VisibleIndex = 4;
+            this.gcNodeApproveDate.Width = 94;
             // 
             // repositoryItemDateEdit1
             // 
@@ -236,8 +265,8 @@
             this.gcRunPointCreateDate.FieldName = "RunPointCreateDate";
             this.gcRunPointCreateDate.Name = "gcRunPointCreateDate";
             this.gcRunPointCreateDate.Visible = true;
-            this.gcRunPointCreateDate.VisibleIndex = 1;
-            this.gcRunPointCreateDate.Width = 128;
+            this.gcRunPointCreateDate.VisibleIndex = 3;
+            this.gcRunPointCreateDate.Width = 92;
             // 
             // gcNodeApproveResult
             // 
@@ -245,31 +274,34 @@
             this.gcNodeApproveResult.FieldName = "NodeApproveResultWithState";
             this.gcNodeApproveResult.Name = "gcNodeApproveResult";
             this.gcNodeApproveResult.Visible = true;
-            this.gcNodeApproveResult.VisibleIndex = 3;
-            this.gcNodeApproveResult.Width = 88;
+            this.gcNodeApproveResult.VisibleIndex = 5;
+            this.gcNodeApproveResult.Width = 62;
             // 
             // txtCreateUserRealName
             // 
-            this.txtCreateUserRealName.Location = new System.Drawing.Point(132, 78);
+            this.txtCreateUserRealName.Location = new System.Drawing.Point(111, 70);
+            this.txtCreateUserRealName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateUserRealName.Name = "txtCreateUserRealName";
             this.txtCreateUserRealName.Properties.ReadOnly = true;
-            this.txtCreateUserRealName.Size = new System.Drawing.Size(372, 25);
+            this.txtCreateUserRealName.Size = new System.Drawing.Size(330, 21);
             this.txtCreateUserRealName.StyleController = this.layoutControl1;
             this.txtCreateUserRealName.TabIndex = 6;
             // 
             // txtFlowName
             // 
-            this.txtFlowName.Location = new System.Drawing.Point(132, 49);
+            this.txtFlowName.Location = new System.Drawing.Point(111, 45);
+            this.txtFlowName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFlowName.Name = "txtFlowName";
             this.txtFlowName.Properties.ReadOnly = true;
-            this.txtFlowName.Size = new System.Drawing.Size(372, 25);
+            this.txtFlowName.Size = new System.Drawing.Size(330, 21);
             this.txtFlowName.StyleController = this.layoutControl1;
             this.txtFlowName.TabIndex = 5;
             // 
             // dtCrateDate
             // 
             this.dtCrateDate.EditValue = null;
-            this.dtCrateDate.Location = new System.Drawing.Point(616, 78);
+            this.dtCrateDate.Location = new System.Drawing.Point(532, 70);
+            this.dtCrateDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtCrateDate.Name = "dtCrateDate";
             this.dtCrateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -282,16 +314,17 @@
             this.dtCrateDate.Properties.ReadOnly = true;
             this.dtCrateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dtCrateDate.Size = new System.Drawing.Size(383, 25);
+            this.dtCrateDate.Size = new System.Drawing.Size(339, 21);
             this.dtCrateDate.StyleController = this.layoutControl1;
             this.dtCrateDate.TabIndex = 7;
             // 
             // txtDataItemText
             // 
-            this.txtDataItemText.Location = new System.Drawing.Point(616, 49);
+            this.txtDataItemText.Location = new System.Drawing.Point(532, 45);
+            this.txtDataItemText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDataItemText.Name = "txtDataItemText";
             this.txtDataItemText.Properties.ReadOnly = true;
-            this.txtDataItemText.Size = new System.Drawing.Size(383, 25);
+            this.txtDataItemText.Size = new System.Drawing.Size(339, 21);
             this.txtDataItemText.StyleController = this.layoutControl1;
             this.txtDataItemText.TabIndex = 4;
             // 
@@ -307,7 +340,7 @@
             this.emptySpaceItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1023, 714);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(895, 555);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -324,38 +357,38 @@
             this.layoutControlItem12});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1003, 165);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(875, 145);
             this.layoutControlGroup2.Text = "流程信息";
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtDataItemText;
             this.layoutControlItem1.CustomizationFormText = "待审批数据项：";
-            this.layoutControlItem1.Location = new System.Drawing.Point(484, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(421, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(495, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(430, 25);
             this.layoutControlItem1.Text = "待审批数据项：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.dtCrateDate;
             this.layoutControlItem4.CustomizationFormText = "流程发起时间：";
-            this.layoutControlItem4.Location = new System.Drawing.Point(484, 29);
+            this.layoutControlItem4.Location = new System.Drawing.Point(421, 25);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(495, 29);
+            this.layoutControlItem4.Size = new System.Drawing.Size(430, 25);
             this.layoutControlItem4.Text = "流程发起时间：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtCreateUserRealName;
             this.layoutControlItem3.CustomizationFormText = "流程发起人:";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 25);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(484, 29);
+            this.layoutControlItem3.Size = new System.Drawing.Size(421, 25);
             this.layoutControlItem3.Text = "流程发起人:";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem2
             // 
@@ -363,48 +396,48 @@
             this.layoutControlItem2.CustomizationFormText = "流程名称：";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(484, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(421, 25);
             this.layoutControlItem2.Text = "流程名称：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.txtResult;
             this.layoutControlItem10.CustomizationFormText = "审批结果：";
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 50);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(484, 29);
+            this.layoutControlItem10.Size = new System.Drawing.Size(421, 25);
             this.layoutControlItem10.Text = "审批结果：";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.dtEndDate;
             this.layoutControlItem11.CustomizationFormText = "审批结束时间：";
-            this.layoutControlItem11.Location = new System.Drawing.Point(484, 58);
+            this.layoutControlItem11.Location = new System.Drawing.Point(421, 50);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(495, 29);
+            this.layoutControlItem11.Size = new System.Drawing.Size(430, 25);
             this.layoutControlItem11.Text = "审批结束时间：";
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.txtCloseReason;
             this.layoutControlItem12.CustomizationFormText = "流程结束原因：";
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 87);
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(979, 29);
+            this.layoutControlItem12.Size = new System.Drawing.Size(851, 25);
             this.layoutControlItem12.Text = "流程结束原因：";
-            this.layoutControlItem12.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(84, 14);
             // 
             // layoutControlGroup3
             // 
             this.layoutControlGroup3.CustomizationFormText = "审批记录";
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem5});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 165);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 145);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1003, 497);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(875, 358);
             this.layoutControlGroup3.Text = "审批记录";
             // 
             // layoutControlItem5
@@ -413,7 +446,7 @@
             this.layoutControlItem5.CustomizationFormText = "审批表";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(979, 448);
+            this.layoutControlItem5.Size = new System.Drawing.Size(851, 313);
             this.layoutControlItem5.Text = "审批表";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -423,7 +456,7 @@
             // 
             this.layoutControlItem9.Control = this.btnCancel;
             this.layoutControlItem9.CustomizationFormText = "取消";
-            this.layoutControlItem9.Location = new System.Drawing.Point(853, 662);
+            this.layoutControlItem9.Location = new System.Drawing.Point(725, 503);
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(150, 32);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(150, 32);
             this.layoutControlItem9.Name = "layoutControlItem9";
@@ -438,18 +471,18 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 662);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 503);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(853, 32);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(725, 32);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // frmHistory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1023, 714);
+            this.ClientSize = new System.Drawing.Size(895, 555);
             this.Controls.Add(this.layoutControl1);
             this.Name = "frmHistory";
             this.Text = "审批历史";
@@ -520,5 +553,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.TextEdit txtDataItemText;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcNodeValueRemark;
     }
 }

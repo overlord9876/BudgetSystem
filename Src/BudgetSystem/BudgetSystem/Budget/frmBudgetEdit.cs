@@ -85,6 +85,14 @@ namespace BudgetSystem
                 this.btnSure.Enabled = false;
                 this.btnSubmit.Enabled = false;
             }
+            else if (this.WorkModel == EditFormWorkModels.Print)
+            {
+                this.Text = "打印";
+                layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem51.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem50.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
         }
 
         private void btnSure_Click(object sender, EventArgs e)

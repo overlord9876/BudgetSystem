@@ -49,12 +49,12 @@
             // gridInvoice
             // 
             this.gridInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridInvoice.Location = new System.Drawing.Point(0, 0);
             this.gridInvoice.MainView = this.gvInvoice;
-            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(1333, 723);
+            this.gridInvoice.Size = new System.Drawing.Size(1166, 562);
             this.gridInvoice.TabIndex = 1;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -192,11 +192,10 @@
             // 
             // frmSignatureForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 723);
+            this.ClientSize = new System.Drawing.Size(1166, 562);
             this.Controls.Add(this.gridInvoice);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmSignatureForm";
             this.Text = "打印签收单";
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
