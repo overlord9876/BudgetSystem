@@ -700,6 +700,7 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -894,7 +895,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml" />
-    <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_ConfirmOrRevoke.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Default.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_View.xml" />

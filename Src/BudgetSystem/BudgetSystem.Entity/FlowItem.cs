@@ -16,6 +16,15 @@ namespace BudgetSystem.Entity
             set;
         }
 
+        /// <summary>
+        /// 下一个审批人名字
+        /// </summary>
+        public string NextUserRealName
+        {
+            get;
+            set;
+        }
+
         public int RunPointID
         {
             get;

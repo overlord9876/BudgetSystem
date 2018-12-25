@@ -121,8 +121,11 @@ namespace BudgetSystem.OutMoney
 
         public override void PrintData()
         {
+            
             this.Height -= 50;
-            PrinterHelper.PrintControl(true, this.layoutControl1);
+            this.labelControl1.Focus();
+            PrinterHelper.PrintControl(true, this.layoutControl2);
+            
         }
     }
 }

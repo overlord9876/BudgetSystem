@@ -37,17 +37,18 @@
             this.gdFlow = new DevExpress.XtraGrid.GridControl();
             this.gvFlow = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcDateItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDateItemText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowVersionNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsClosed = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.gcNextUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApproveResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCloseDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDateItemText = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -150,6 +151,7 @@
             this.gcCreateUserRealName,
             this.gcCreateDate,
             this.gcIsClosed,
+            this.gcNextUserRealName,
             this.gcApproveResult,
             this.gcCloseDateTime,
             this.gcID});
@@ -165,6 +167,14 @@
             this.gcDateItemID.Caption = "审批项编号";
             this.gcDateItemID.FieldName = "DateItemID";
             this.gcDateItemID.Name = "gcDateItemID";
+            // 
+            // gcDateItemText
+            // 
+            this.gcDateItemText.Caption = "审批项";
+            this.gcDateItemText.FieldName = "DateItemText";
+            this.gcDateItemText.Name = "gcDateItemText";
+            this.gcDateItemText.Visible = true;
+            this.gcDateItemText.VisibleIndex = 0;
             // 
             // gcFlowName
             // 
@@ -213,13 +223,21 @@
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("进行中", false, -1)});
             this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             // 
+            // gcNextUserRealName
+            // 
+            this.gcNextUserRealName.Caption = "下一步审批人";
+            this.gcNextUserRealName.FieldName = "NextUserRealName";
+            this.gcNextUserRealName.Name = "gcNextUserRealName";
+            this.gcNextUserRealName.Visible = true;
+            this.gcNextUserRealName.VisibleIndex = 4;
+            // 
             // gcApproveResult
             // 
             this.gcApproveResult.Caption = "审批结果";
             this.gcApproveResult.FieldName = "InstanceStateWithEmptyState";
             this.gcApproveResult.Name = "gcApproveResult";
             this.gcApproveResult.Visible = true;
-            this.gcApproveResult.VisibleIndex = 4;
+            this.gcApproveResult.VisibleIndex = 5;
             // 
             // gcCloseDateTime
             // 
@@ -228,7 +246,7 @@
             this.gcCloseDateTime.FieldName = "CloseDateTime";
             this.gcCloseDateTime.Name = "gcCloseDateTime";
             this.gcCloseDateTime.Visible = true;
-            this.gcCloseDateTime.VisibleIndex = 5;
+            this.gcCloseDateTime.VisibleIndex = 6;
             // 
             // repositoryItemDateEdit1
             // 
@@ -245,14 +263,6 @@
             this.gcID.Caption = "流程编号";
             this.gcID.FieldName = "ID";
             this.gcID.Name = "gcID";
-            // 
-            // gcDateItemText
-            // 
-            this.gcDateItemText.Caption = "审批项";
-            this.gcDateItemText.FieldName = "DateItemText";
-            this.gcDateItemText.Name = "gcDateItemText";
-            this.gcDateItemText.Visible = true;
-            this.gcDateItemText.VisibleIndex = 0;
             // 
             // frmMyFlowListQuery
             // 
@@ -301,5 +311,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
         private DevExpress.XtraGrid.Columns.GridColumn gcDateItemText;
+        private DevExpress.XtraGrid.Columns.GridColumn gcNextUserRealName;
     }
 }
