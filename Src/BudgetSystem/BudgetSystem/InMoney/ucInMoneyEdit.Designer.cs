@@ -444,7 +444,7 @@
             this.bgcBudget.FieldName = "RelationBudget";
             this.bgcBudget.Name = "bgcBudget";
             this.bgcBudget.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "RelationBudget", "合计")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "RelationBudget", "累计")});
             this.bgcBudget.Visible = true;
             this.bgcBudget.Width = 139;
             // 
@@ -617,7 +617,7 @@
             this.gcSplitConstOriginalCoin.FieldName = "OriginalCoin";
             this.gcSplitConstOriginalCoin.Name = "gcSplitConstOriginalCoin";
             this.gcSplitConstOriginalCoin.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.gcSplitConstOriginalCoin.Visible = true;
             this.gcSplitConstOriginalCoin.Width = 158;
             // 
@@ -660,7 +660,7 @@
             this.bgcConstCNY.FieldName = "CNY";
             this.bgcConstCNY.Name = "bgcConstCNY";
             this.bgcConstCNY.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.bgcConstCNY.Visible = true;
             this.bgcConstCNY.Width = 110;
             // 

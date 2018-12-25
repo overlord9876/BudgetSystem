@@ -10,6 +10,8 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using Newtonsoft.Json;
+using DevExpress.XtraGrid;
+using DevExpress.Data;
 
 namespace BudgetSystem.InMoney
 {
@@ -51,53 +53,9 @@ namespace BudgetSystem.InMoney
             this.riLinkEditConstInDelete.Click += new EventHandler(riLinkEditConstInDelete_Click);
             this.riLinkEditConstInDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkEditConstInDelete_CustomDisplayText);
             this.gvConstSplit.ShowingEditor += new CancelEventHandler(gvConstSplit_ShowingEditor);
-            //repositoryItemPopupContainerEdit1.QueryPopUp += new CancelEventHandler(repositoryItemPopupContainerEdit1_QueryPopUp);
-            //repositoryItemPopupContainerEdit1.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(repositoryItemPopupContainerEdit1_QueryResultValue);
-            //this.gvCustomer.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(gvCustomer_RowClick);
+            this.gvConstSplit.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gvConstSplit_CustomSummaryCalculate);
         }
 
-        //void gvCustomer_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
-        //{
-        //    if (e.RowHandle >= 0)
-        //    {
-        //        this.popupContainerControl1.OwnerEdit.ClosePopup();
-        //    }
-        //}
-
-        //void repositoryItemPopupContainerEdit1_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
-        //{
-        //    Customer focusedRow = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
-        //    if (focusedRow != null)
-        //    {
-        //        e.Value = focusedRow.Name;
-        //        BudgetBill budgetBill = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
-        //        if (budgetBill != null)
-        //        {
-        //            budgetBill.Cus_ID = focusedRow.ID;
-        //        }
-        //    }
-        //}
-
-        //void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
-        //{
-        //    Budget currentBudget = this.gvConstSplit.GetRowCellValue(this.gvConstSplit.FocusedRowHandle, this.bgcBudget) as Budget;
-        //    if (currentBudget != null)
-        //    {
-        //        List<Customer> budgetCustomerList = bm.GetCustomerListByBudgetId(currentBudget.ID);
-        //        if (budgetCustomerList != null && customerList != null)
-        //        {
-        //            this.gcCustomer.DataSource = customerList.FindAll(o => budgetCustomerList.Exists(bc => bc.ID.Equals(o.ID)));
-        //        }
-        //        else
-        //        {
-        //            this.gcCustomer.DataSource = null;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        this.gcCustomer.DataSource = null;
-        //    }
-        //}
 
         private EditFormWorkModels _workModel;
 
@@ -108,6 +66,64 @@ namespace BudgetSystem.InMoney
             {
                 this._workModel = value;
                 InitControlState();
+            }
+        }
+
+        decimal totalOriginalCoin = 0;
+        decimal totalCNY = 0;
+        void gvConstSplit_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            if (e.Item != null)
+            {
+                var gridView = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                string fieldName = (e.Item as GridSummaryItem).FieldName;
+                if (gridView.Columns.ColumnByFieldName(fieldName) != null)
+                {
+                    GridSummaryItem gridSummaryItem = e.Item as GridSummaryItem;
+                    switch (e.SummaryProcess)
+                    {
+                        //calculation entry point 
+                        case CustomSummaryProcess.Start:
+                            if (fieldName == this.gcSplitConstOriginalCoin.FieldName)
+                            {
+                                totalOriginalCoin = 0;
+                            }
+                            else if (fieldName == this.bgcConstCNY.FieldName)
+                            {
+                                totalCNY = 0;
+                            }
+                            break;
+                        //consequent calculations 
+                        case CustomSummaryProcess.Calculate:
+                            if (e.FieldValue != null && e.FieldValue != DBNull.Value)
+                            {
+                                BudgetBill bb = gridView.GetRow(e.RowHandle) as BudgetBill;
+                                if (!bb.IsDelete)
+                                {
+                                    if (fieldName == this.gcSplitConstOriginalCoin.FieldName)
+                                    {
+                                        totalOriginalCoin += Convert.ToDecimal(gridView.GetRowCellValue(e.RowHandle, gcSplitConstOriginalCoin));
+                                    }
+                                    else if (fieldName == this.bgcConstCNY.FieldName)
+                                    {
+                                        totalCNY += Convert.ToDecimal(gridView.GetRowCellValue(e.RowHandle, bgcConstCNY));
+                                    }
+                                }
+                            }
+                            break;
+                        //final summary value 
+                        case CustomSummaryProcess.Finalize:                        
+                            if (fieldName == this.gcSplitConstOriginalCoin.FieldName)
+                            {
+                                e.TotalValue = totalOriginalCoin;
+                            }
+                            else if (fieldName == this.bgcConstCNY.FieldName)
+                            {
+                                e.TotalValue = totalCNY;
+                            }
+                            break;
+                    }
+                }
             }
         }
 

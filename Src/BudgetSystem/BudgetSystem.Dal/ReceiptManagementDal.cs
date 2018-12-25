@@ -159,7 +159,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
-                Where `BSID` = @BSID";
+                Where bb.`BSID` = @BSID";
             return con.Query<BudgetBill>(selectSql, new { BSID = bsID }, tran);
         }
 
@@ -171,7 +171,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
-                                Where `BudgetID` = @BudgetID";
+                                Where bb.`BudgetID` = @BudgetID";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
 

@@ -469,7 +469,7 @@ namespace BudgetSystem
                 && string.IsNullOrEmpty(this.pceTempSupplier.Text.Trim())
                 && string.IsNullOrEmpty(this.pceOtherSupplier.Text.Trim()))
             {
-                this.dxErrorProvider1.SetError(this.pceQualifiedSupplier, "至少选择一个供方工厂名称");
+                this.dxErrorProvider1.SetError(this.pceQualifiedSupplier, "至少选择一个供应商");
             }
         }
 
