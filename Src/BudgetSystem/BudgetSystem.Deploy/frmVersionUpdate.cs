@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
+using BudgetSystem.Deploy.Properties;
 
 namespace BudgetSystem.Deploy
 {
@@ -15,6 +16,8 @@ namespace BudgetSystem.Deploy
         public frmVersionUpdate()
         {
             InitializeComponent();
+
+            this.Icon = Resources.logo;
         }
 
 
@@ -64,14 +67,27 @@ namespace BudgetSystem.Deploy
                 {
                     VersionFile vf = files[i];
 
-                    string fileName = System.IO.Path.Combine(ConstData.BudgetSystemRootPath, vf.FilePath);
-                    fileName = System.IO.Path.Combine(fileName, vf.FileName);
+                    string[] folderNames = vf.FilePath.Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+                    string fileName = ConstData.BudgetSystemRootPath;
+                    foreach (string folderName in folderNames)
+                    {
+                        if (!string.IsNullOrEmpty(folderName))
+                        {
+                            fileName = System.IO.Path.Combine(fileName, folderName);
+                        }
+                    }
 
+                    if (!System.IO.Directory.Exists(fileName))
+                    {
+                        System.IO.Directory.CreateDirectory(fileName);
+                    }
+
+                    fileName = System.IO.Path.Combine(fileName, vf.FileName);
 
                     bool needUpdate = IfCheckFileNeedUpdate(fileName, vf.FileMD5);
 
 
-                    if (needUpdate)
+                    if (needUpdate || true)
                     {
                         FileData data = fm.GetFile(vf.FileMD5);
                         System.IO.File.WriteAllBytes(fileName, data.Data);
@@ -113,7 +129,7 @@ namespace BudgetSystem.Deploy
             return false;
         }
 
-       
+
 
     }
 }

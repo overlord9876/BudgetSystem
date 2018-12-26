@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using System.Configuration;
+using BudgetSystem.Tools.Properties;
 
 namespace BudgetSystem.Tools
 {
@@ -17,9 +18,7 @@ namespace BudgetSystem.Tools
         {
             InitializeComponent();
 
-
-
-       
+            this.Icon = Resources.logo;       
         }
 
         private void frmTools_Load(object sender, EventArgs e)

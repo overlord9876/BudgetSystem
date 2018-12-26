@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NotUseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -621,6 +621,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseForm.resx">
       <DependentUpon>frmBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseQueryConditionEditor.resx">
       <DependentUpon>frmBaseQueryConditionEditor.cs</DependentUpon>
@@ -700,7 +701,6 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>

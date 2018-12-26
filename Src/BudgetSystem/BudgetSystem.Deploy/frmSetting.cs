@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using BudgetSystem.Deploy.Properties;
 
 namespace BudgetSystem.Deploy
 {
@@ -14,6 +15,8 @@ namespace BudgetSystem.Deploy
         public frmSetting()
         {
             InitializeComponent();
+
+            this.Icon = Resources.logo;
         }
 
         private void btnSure_Click(object sender, EventArgs e)

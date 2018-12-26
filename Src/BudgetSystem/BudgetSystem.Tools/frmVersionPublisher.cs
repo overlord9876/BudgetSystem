@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using BudgetSystem.Entity;
+using BudgetSystem.Tools.Properties;
 
 namespace BudgetSystem.Tools
 {
@@ -15,6 +16,8 @@ namespace BudgetSystem.Tools
         public frmVersionPublisher()
         {
             InitializeComponent();
+
+            this.Icon = Resources.logo;
         }
 
         private string rootPath;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BudgetSystem.Entity
 {
-   public class MessageException: Exception
+    public class MessageException : Exception
     {
         private string message;
 

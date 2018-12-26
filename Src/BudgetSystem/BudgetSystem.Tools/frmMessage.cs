@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BudgetSystem.Tools.Properties;
 
 namespace BudgetSystem.Tools
 {
@@ -13,6 +14,7 @@ namespace BudgetSystem.Tools
         public frmMessage()
         {
             InitializeComponent();
+            this.Icon = Resources.logo;
         }
 
         public static void ShowMessage(string message)
