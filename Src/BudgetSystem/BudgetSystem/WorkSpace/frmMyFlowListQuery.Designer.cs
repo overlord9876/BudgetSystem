@@ -49,6 +49,7 @@
             this.gcCloseDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCloseReason = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -153,6 +154,7 @@
             this.gcIsClosed,
             this.gcNextUserRealName,
             this.gcApproveResult,
+            this.gcCloseReason,
             this.gcCloseDateTime,
             this.gcID});
             this.gvFlow.GridControl = this.gdFlow;
@@ -246,7 +248,7 @@
             this.gcCloseDateTime.FieldName = "CloseDateTime";
             this.gcCloseDateTime.Name = "gcCloseDateTime";
             this.gcCloseDateTime.Visible = true;
-            this.gcCloseDateTime.VisibleIndex = 6;
+            this.gcCloseDateTime.VisibleIndex = 7;
             // 
             // repositoryItemDateEdit1
             // 
@@ -263,6 +265,14 @@
             this.gcID.Caption = "流程编号";
             this.gcID.FieldName = "ID";
             this.gcID.Name = "gcID";
+            // 
+            // gcCloseReason
+            // 
+            this.gcCloseReason.Caption = "结束原因";
+            this.gcCloseReason.FieldName = "CloseReason";
+            this.gcCloseReason.Name = "gcCloseReason";
+            this.gcCloseReason.Visible = true;
+            this.gcCloseReason.VisibleIndex = 6;
             // 
             // frmMyFlowListQuery
             // 
@@ -312,5 +322,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
         private DevExpress.XtraGrid.Columns.GridColumn gcDateItemText;
         private DevExpress.XtraGrid.Columns.GridColumn gcNextUserRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCloseReason;
     }
 }
