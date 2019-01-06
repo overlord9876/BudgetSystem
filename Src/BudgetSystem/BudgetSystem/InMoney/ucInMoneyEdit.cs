@@ -389,6 +389,8 @@ namespace BudgetSystem.InMoney
                 this.layoutControlItem17.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem18.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem19.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -402,12 +404,16 @@ namespace BudgetSystem.InMoney
                 this.layoutControlItem19.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem13.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
                 this.txtNotSplitCNYMoney.EditValue = this.txtCNY.Value;
 
             }
             else if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
+                this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
                 this.cboCustomer.Properties.ReadOnly = true;
                 this.txtVoucherNo.Properties.ReadOnly = true;

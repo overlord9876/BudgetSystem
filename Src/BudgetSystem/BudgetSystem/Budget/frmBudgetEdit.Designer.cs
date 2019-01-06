@@ -57,18 +57,17 @@
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(377, 506, 1151, 769);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-48, 328, 1151, 769);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1236, 664);
+            this.layoutControl1.Size = new System.Drawing.Size(1413, 854);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(868, 620);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSubmit.Location = new System.Drawing.Point(1045, 810);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(116, 32);
             this.btnSubmit.StyleController = this.layoutControl1;
@@ -82,14 +81,14 @@
             this.ucBudgetEdit1.Location = new System.Drawing.Point(10, 10);
             this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetEdit1.Name = "ucBudgetEdit1";
-            this.ucBudgetEdit1.Size = new System.Drawing.Size(1216, 608);
+            this.ucBudgetEdit1.Size = new System.Drawing.Size(1393, 798);
             this.ucBudgetEdit1.TabIndex = 57;
             this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(988, 620);
-            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSure.Location = new System.Drawing.Point(1165, 810);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
@@ -100,8 +99,8 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1108, 620);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(1285, 810);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 32);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -121,7 +120,7 @@
             this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1236, 664);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1413, 854);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -129,7 +128,7 @@
             // 
             this.layoutControlItem50.Control = this.btnCancel;
             this.layoutControlItem50.CustomizationFormText = "layoutControlItem50";
-            this.layoutControlItem50.Location = new System.Drawing.Point(1096, 608);
+            this.layoutControlItem50.Location = new System.Drawing.Point(1273, 798);
             this.layoutControlItem50.MaxSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem50.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem50.Name = "layoutControlItem50";
@@ -144,7 +143,7 @@
             // 
             this.layoutControlItem51.Control = this.btnSure;
             this.layoutControlItem51.CustomizationFormText = "确定";
-            this.layoutControlItem51.Location = new System.Drawing.Point(976, 608);
+            this.layoutControlItem51.Location = new System.Drawing.Point(1153, 798);
             this.layoutControlItem51.MaxSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem51.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem51.Name = "layoutControlItem51";
@@ -159,9 +158,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 608);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 798);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(856, 36);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(1033, 36);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -172,7 +171,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem1.Size = new System.Drawing.Size(1216, 608);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1393, 798);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -182,8 +181,8 @@
             // 
             this.layoutControlItem2.Control = this.btnSubmit;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(856, 608);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 36);
+            this.layoutControlItem2.Location = new System.Drawing.Point(1033, 798);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(120, 36);
@@ -196,11 +195,12 @@
             // frmBudgetEdit
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1236, 664);
+            this.ClientSize = new System.Drawing.Size(1413, 854);
             this.Controls.Add(this.layoutControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmBudgetEdit";
             this.Text = "预算单";
             this.Load += new System.EventHandler(this.frmBudgetEditEx_Load);

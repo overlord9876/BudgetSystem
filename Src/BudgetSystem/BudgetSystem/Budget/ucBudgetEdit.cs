@@ -51,6 +51,8 @@ namespace BudgetSystem
         public ucBudgetEdit()
         {
             InitializeComponent();
+            this.chkTradeMode1.Checked = true;
+            this.rgTradeNature.EditValue = 1;
             this.bgvInProductDetail.DataSourceChanged += new EventHandler(bgvInProductDetail_DataSourceChanged);
         }
 
@@ -1204,7 +1206,7 @@ namespace BudgetSystem
                         inDetail = inProductDetailDataSource.FirstOrDefault(d => d.Name == outDetail.Name);
                         if (inDetail == null)
                         {
-                            inProductDetailDataSource.Add(new InProductDetail() { Count = outDetail.Count, Name = outDetail.Name, Unit = outDetail.Unit, Vat = this.vatOption });
+                            inProductDetailDataSource.Add(new InProductDetail() { Count = outDetail.Count, Name = outDetail.Name, Unit = outDetail.Unit, Vat = this.vatOption, TaxRebateRate = this.taxRebateRate });
                         }
                         else
                         {
