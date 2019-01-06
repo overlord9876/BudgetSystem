@@ -118,14 +118,14 @@ namespace BudgetSystem.Dal
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
                                  FROM `Budget` b                                     
-                                 LEFT JOIN `User` u ON b.Salesman=u.UserName  AND b.Salesman=@Salesman
+                                 LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON b.Department=d.Code
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
-								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
-                                 WHERE b.ID<>0";
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='预算单' AND f.IsRecent=1
+                                 WHERE b.ID<>0  AND b.Salesman=@Salesman";
 
-            return con.Query<Budget>(selectSql, new { Salesman = userName, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
+            return con.Query<Budget>(selectSql, new { Salesman = userName}, tran);
         }
 
 
