@@ -96,7 +96,7 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID AND b.CustomerID=@CustomerID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
-                                 WHERE b.ID<>0";
+                                 WHERE b.ID<>0 AND b.Salesman=@Salesman";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName, CustomerID = customerId, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
         }
@@ -123,7 +123,7 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.Department=d.Code
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
-                                 WHERE b.ID<>0";
+                                 WHERE b.ID<>0  AND b.Salesman=@Salesman";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
         }

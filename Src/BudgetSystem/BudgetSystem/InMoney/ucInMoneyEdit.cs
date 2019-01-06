@@ -112,7 +112,7 @@ namespace BudgetSystem.InMoney
                             }
                             break;
                         //final summary value 
-                        case CustomSummaryProcess.Finalize:                        
+                        case CustomSummaryProcess.Finalize:
                             if (fieldName == this.gcSplitConstOriginalCoin.FieldName)
                             {
                                 e.TotalValue = totalOriginalCoin;
@@ -406,7 +406,6 @@ namespace BudgetSystem.InMoney
                 this.layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
                 this.txtNotSplitCNYMoney.EditValue = this.txtCNY.Value;
 
             }
@@ -414,6 +413,7 @@ namespace BudgetSystem.InMoney
             {
                 this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                chkState1.Checked = true;
 
                 this.cboCustomer.Properties.ReadOnly = true;
                 this.txtVoucherNo.Properties.ReadOnly = true;
