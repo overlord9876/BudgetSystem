@@ -124,8 +124,6 @@ namespace BudgetSystem.OutMoney
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 
-
-
         public override void PrintData()
         {
             this.Height -= 50;
