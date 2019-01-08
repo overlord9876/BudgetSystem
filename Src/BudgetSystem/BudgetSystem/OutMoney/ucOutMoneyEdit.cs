@@ -658,12 +658,12 @@ namespace BudgetSystem.OutMoney
                     gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>();
                     lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
-                if (ignoreItems.Contains(selectedItem.Name) && this.WorkModel != EditFormWorkModels.View)
+                if (ignoreItems.Contains(selectedItem.Name))
                 {
                     this.chkIsIOU.Properties.ReadOnly = true;
                     this.txtExpectedReturnDate.Properties.ReadOnly = true;
                 }
-                else
+                else if (this.WorkModel != EditFormWorkModels.View)
                 {
                     this.chkIsIOU.Properties.ReadOnly = false;
                     this.txtExpectedReturnDate.Properties.ReadOnly = false;
