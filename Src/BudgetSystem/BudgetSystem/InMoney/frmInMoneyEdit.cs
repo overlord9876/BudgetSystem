@@ -113,7 +113,7 @@ namespace BudgetSystem.InMoney
             lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
-                this.Text = "收汇拆分";
+                this.Text = "收汇进入合同";
                 this.ucInMoneyEdit1.CanCommitEventHandler += new EventHandler<EventArgs>(ucInMoneyEdit1_CanCommitEventHandler);
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
             }
@@ -147,7 +147,7 @@ namespace BudgetSystem.InMoney
             this.btnCommit.Text = "收汇确认";
             if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {
-                this.btnSure.Text = "收汇拆分";
+                this.btnSure.Text = "收汇进入合同";
             }
             else
             {

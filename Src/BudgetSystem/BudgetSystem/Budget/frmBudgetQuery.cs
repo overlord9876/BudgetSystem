@@ -20,6 +20,11 @@ namespace BudgetSystem
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private const string COMMONQUERY_MYCREATE = "我负责的";
+        private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "总经理审批合同";
+        private const string COMMONQUERY_MANAGERAPPROVAL = "部门经理审批合同";
+        private const string COMMONQUERY_ARCHIVEQUERY = "预算单归档数据";
+        private const string COMMONQUERY_ARCHIVEWARNINGQUERY = "预算单归档预警";
+        private const string COMMONQUERY_FINANCEQUERY = "财务平账征求";
         public frmBudgetQuery()
         {
             InitializeComponent();
@@ -44,7 +49,13 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
 
-            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
+            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
+                                                                            { COMMONQUERY_MYCREATE,
+                                                                              COMMONQUERY_GENERALMANAGERAPPROVAL,
+                                                                              COMMONQUERY_MANAGERAPPROVAL,
+                                                                              COMMONQUERY_ARCHIVEQUERY ,
+                                                                              COMMONQUERY_ARCHIVEWARNINGQUERY,
+                                                                              COMMONQUERY_FINANCEQUERY});
 
             this.RegeditPrintOperate();
 
@@ -103,6 +114,31 @@ namespace BudgetSystem
             if (COMMONQUERY_MYCREATE.Equals(queryName))
             {
                 BudgetQueryCondition condition = new BudgetQueryCondition() { Salesman = RunInfo.Instance.CurrentUser.UserName };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_GENERALMANAGERAPPROVAL.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { IsGeneralManagerApproval = true };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_MANAGERAPPROVAL.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { IsManagerApproval = true };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_ARCHIVEQUERY.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = EnumBudgetState.已结束 };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_ARCHIVEWARNINGQUERY.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { IsArchiveWarningQuery = true };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_FINANCEQUERY.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = EnumBudgetState.财务平账征求 };
                 LoadData(condition);
             }
         }

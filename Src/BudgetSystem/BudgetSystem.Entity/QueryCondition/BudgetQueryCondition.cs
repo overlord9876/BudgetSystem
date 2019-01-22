@@ -18,7 +18,7 @@ namespace BudgetSystem.Entity.QueryCondition
         /// 合同号
         /// </summary>
         public string ContractNO { get; set; }
-       
+
         /// <summary>
         /// 所在部门
         /// </summary>
@@ -28,5 +28,44 @@ namespace BudgetSystem.Entity.QueryCondition
         /// 主客户名称
         /// </summary>
         public string CustomerName { get; set; }
+
+        private bool isGeneralManagerApproval = false;
+        /// <summary>
+        /// 是否总经理审批查询 
+        /// </summary>
+        public bool IsGeneralManagerApproval
+        {
+            get { return isGeneralManagerApproval; }
+            set { isGeneralManagerApproval = value; }
+        }
+        private bool isManagerApproval = false;
+
+        /// <summary>
+        /// 是否部门经理审批查询 
+        /// </summary>
+        public bool IsManagerApproval
+        {
+            get { return isManagerApproval; }
+            set { isManagerApproval = value; }
+        }
+        private EnumBudgetState state = (EnumBudgetState)(-1);
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public EnumBudgetState State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+        private bool isArchiveWarningQuery = false;
+        /// <summary>
+        /// 是否归档预警查询 
+        /// </summary>
+        public bool IsArchiveWarningQuery
+        {
+            get { return isArchiveWarningQuery; }
+            set { isArchiveWarningQuery = value; }
+        }
+
     }
 }

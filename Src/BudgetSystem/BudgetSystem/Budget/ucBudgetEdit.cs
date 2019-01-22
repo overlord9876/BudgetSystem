@@ -35,7 +35,6 @@ namespace BudgetSystem
         private decimal totalOriginalCurrency = 0;
 
         private Bll.BudgetManager bm = new Bll.BudgetManager();
-        private string contractNoPrefix = string.Empty;
         private EditFormWorkModels _workModel;
 
         public EditFormWorkModels WorkModel
@@ -96,7 +95,7 @@ namespace BudgetSystem
             {
                 //新增
                 this.CurrentBudget = new Budget();
-                CurrentBudget.State = "待审批";
+                CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim() + this.lblTradeMode.Text;
                 CurrentBudget.CreateDate = DateTime.Now;
                 CurrentBudget.Department = RunInfo.Instance.CurrentUser.Department;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
@@ -107,8 +106,7 @@ namespace BudgetSystem
             }
             CurrentBudget.AdvancePayment = this.txtAdvancePayment.Value;
             CurrentBudget.BankCharges = this.txtBankCharges.Value;
-            CurrentBudget.Commission = this.txtCommission.Value;
-            CurrentBudget.ContractNO = this.txtContractNO.Text.Trim();
+            CurrentBudget.Commission = this.txtCommission.Value; 
             CurrentBudget.Days = Convert.ToInt32(this.txtDays.EditValue);
             CurrentBudget.FeedMoney = this.txtFeedMoney.Value;
             CurrentBudget.DirectCosts = this.txtDirectCosts.Value;
@@ -252,7 +250,7 @@ namespace BudgetSystem
                     (control as BaseEdit).Properties.ReadOnly = true;
                 }
             }
-
+            this.txtContractNO.Properties.ReadOnly = true;
             this.btnSync.Enabled = false;
             this.gvOutProductDetail.Columns.Remove(this.colDelete);
             this.gvOutProductDetail.OptionsBehavior.Editable = false;
@@ -265,9 +263,7 @@ namespace BudgetSystem
         {
             this.txtDepartment.Text = RunInfo.Instance.CurrentUser.Department + RunInfo.Instance.CurrentUser.DepartmentName;
             this.txtSalesman.Text = RunInfo.Instance.CurrentUser.RealName;
-            contractNoPrefix = DateTime.Now.ToString("yy") + "-" + RunInfo.Instance.CurrentUser.Department + "-";
-
-            this.txtContractNO.Text = contractNoPrefix;
+            this.lblContractNOPrefix.Text = DateTime.Now.ToString("yy") + "G-" + RunInfo.Instance.CurrentUser.Department + "-";
             this.dteSignDate.EditValue = DateTime.Now;
             this.txtInterestRate.EditValue = this.interestRate;
             //this.txtContractNO.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -283,11 +279,34 @@ namespace BudgetSystem
             Budget budget = bm.GetBudget(id);
             if (budget != null)
             {
+                EnumTradeMode tradeMode = (EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), budget.TradeMode.ToString());
+                if ((tradeMode & EnumTradeMode.一般贸易) != 0)
+                {
+                    chkTradeMode1.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.来料加工) != 0)
+                {
+                    chkTradeMode2.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.进料加工) != 0)
+                {
+                    chkTradeMode3.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.纯进口) != 0)
+                {
+                    chkTradeMode4.Checked = true;
+                }
+                if ((tradeMode & EnumTradeMode.内贸) != 0)
+                {
+                    chkTradeMode5.Checked = true;
+                }
                 this.vatOption = budget.VATRate;
                 this.txtAdvancePayment.EditValue = budget.AdvancePayment;
                 this.txtBankCharges.EditValue = budget.BankCharges;
                 this.txtCommission.EditValue = budget.Commission;
-                this.txtContractNO.Text = budget.ContractNO;
+                this.txtContractNO.Text = budget.ContractNO.Substring(budget.ContractNO.LastIndexOf('-')+1,4);
+                this.lblContractNOPrefix.Text = budget.ContractNO.Substring(0, budget.ContractNO.LastIndexOf('-') + 1);
+                this.lblTradeMode.Text = GetTradeModeString();
                 this.txtDays.EditValue = budget.Days;
                 this.txtDepartment.EditValue = budget.DepartmentDesc;
                 this.txtFeedMoney.EditValue = budget.FeedMoney;
@@ -318,29 +337,8 @@ namespace BudgetSystem
 
                 List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType == (int)EnumSupplierType.其它供方);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
-                this.pceOtherSupplier.Tag = otherSuppliers;
-
-                EnumTradeMode tradeMode = (EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), budget.TradeMode.ToString());
-                if ((tradeMode & EnumTradeMode.一般贸易) != 0)
-                {
-                    chkTradeMode1.Checked = true;
-                }
-                if ((tradeMode & EnumTradeMode.来料加工) != 0)
-                {
-                    chkTradeMode2.Checked = true;
-                }
-                if ((tradeMode & EnumTradeMode.进料加工) != 0)
-                {
-                    chkTradeMode3.Checked = true;
-                }
-                if ((tradeMode & EnumTradeMode.纯进口) != 0)
-                {
-                    chkTradeMode4.Checked = true;
-                }
-                if ((tradeMode & EnumTradeMode.内贸) != 0)
-                {
-                    chkTradeMode5.Checked = true;
-                }
+                this.pceOtherSupplier.Tag = otherSuppliers; 
+                 
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;
@@ -350,6 +348,42 @@ namespace BudgetSystem
                 this.BindingInProductDetail(budget.InProductDetail);
                 this.CalcInproductInterest();
                 this.CalcBudgetSubtotal();
+
+                this.txtFlowSalesman.Text = budget.SalesmanName;
+                if (budget.FlowName == EnumFlowNames.预算单审批流程.ToString())
+                {
+                    Bll.FlowManager fm = new Bll.FlowManager();
+                    List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(budget.FlowInstanceID).ToList();
+                    if (points == null || points.Count == 0)
+                    {
+                        return;
+                    }
+                    foreach(FlowRunPoint point in points)
+                    {
+                        if (point.NodeValueRemark == null || point.State == false)
+                        {
+                            continue;
+                        }
+                        switch(point.NodeValueRemark)
+                        {
+                            //case "业务员":
+                            //    this.txtFlowSalesman.Text = point.RealName;
+                            //    break;
+                            case  "部门经理":
+                                this.txtFlowManager.Text = point.RealName;
+                                break;
+                            case "贸管部经理":
+                                this.txtFlowTradeManager.Text = point.RealName;
+                                break;
+                            case "财务经理":
+                                this.txtFlowFinanceManager.Text = point.RealName;
+                                break;
+                            case "总经办":
+                                this.txtFlowGeneralManager.Text = point.RealName;
+                                break;
+                        }
+                    }
+                }
             }
         }
 
@@ -414,6 +448,31 @@ namespace BudgetSystem
             this.gridInProductDetail.RefreshDataSource();
         }
 
+        private string GetTradeModeString()
+        {
+            if (this.chkTradeMode1.Checked)
+            {
+                return " ";
+            }
+            else if (this.chkTradeMode2.Checked)
+            {
+                return "L";
+            }
+            else if (this.chkTradeMode3.Checked)
+            {
+                return "G";
+            }
+            else if (this.chkTradeMode4.Checked)
+            {
+                return "C";
+            }
+            else if (this.chkTradeMode5.Checked)
+            {
+                return "N";
+            }
+            return "";
+        }
+
         #region Check Method
         private void CheckDateInput()
         {
@@ -425,7 +484,12 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.dteValidity, "请输入有效期");
             }
-
+            if (!this.chkTradeMode1.Checked && !this.chkTradeMode2.Checked
+                && !this.chkTradeMode3.Checked && !this.chkTradeMode4.Checked
+                && !this.chkTradeMode5.Checked)
+            {
+                this.dxErrorProvider1.SetError(this.chkTradeMode1, "请选择贸易方式");
+            }
             if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
@@ -446,13 +510,13 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同编号");
             }
-            Match match = Regex.Match(contractNo, "(" + contractNoPrefix + ")\\d{4}$");
+            Match match = Regex.Match(contractNo, "^\\d{4}$");
             if (!match.Success)
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为：yy-部门编号-4位数字");
+                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为4位数字");
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
-            if (bm.CheckContractNO(id, contractNo))
+            if (bm.CheckContractNO(id,this.lblContractNOPrefix+ contractNo+this.lblTradeMode.Text))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
             }
@@ -1225,7 +1289,18 @@ namespace BudgetSystem
             this.dteValidity.Properties.MinValue = this.dteSignDate.DateTime;
             this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1).AddDays(-1);
         }
+
+        private void chkTradeMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.txtContractNO.Properties.ReadOnly)
+            {
+                return;
+            }
+            this.lblTradeMode.Text = this.GetTradeModeString();
+        }
         #endregion
+
+
 
 
 

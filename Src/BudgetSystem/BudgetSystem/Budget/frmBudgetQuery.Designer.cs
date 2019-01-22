@@ -108,7 +108,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
-            this.gcContractNO.Width = 90;
+            this.gcContractNO.Width = 100;
             // 
             // gcCustomerName
             // 
@@ -118,7 +118,7 @@
             this.gcCustomerName.Name = "gcCustomerName";
             this.gcCustomerName.Visible = true;
             this.gcCustomerName.VisibleIndex = 1;
-            this.gcCustomerName.Width = 91;
+            this.gcCustomerName.Width = 80;
             // 
             // gcFlowName
             // 
@@ -128,7 +128,7 @@
             this.gcFlowName.Name = "gcFlowName";
             this.gcFlowName.Visible = true;
             this.gcFlowName.VisibleIndex = 2;
-            this.gcFlowName.Width = 87;
+            this.gcFlowName.Width = 80;
             // 
             // gcState
             // 
@@ -138,7 +138,7 @@
             this.gcState.Name = "gcState";
             this.gcState.Visible = true;
             this.gcState.VisibleIndex = 3;
-            this.gcState.Width = 90;
+            this.gcState.Width = 80;
             // 
             // gcTotalAmount
             // 
@@ -148,7 +148,7 @@
             this.gcTotalAmount.Name = "gcTotalAmount";
             this.gcTotalAmount.Visible = true;
             this.gcTotalAmount.VisibleIndex = 4;
-            this.gcTotalAmount.Width = 87;
+            this.gcTotalAmount.Width = 80;
             // 
             // gcUSDTotalAmount
             // 
@@ -158,7 +158,7 @@
             this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
             this.gcUSDTotalAmount.Visible = true;
             this.gcUSDTotalAmount.VisibleIndex = 5;
-            this.gcUSDTotalAmount.Width = 87;
+            this.gcUSDTotalAmount.Width = 80;
             // 
             // gcTotalCost
             // 
@@ -168,7 +168,7 @@
             this.gcTotalCost.Name = "gcTotalCost";
             this.gcTotalCost.Visible = true;
             this.gcTotalCost.VisibleIndex = 6;
-            this.gcTotalCost.Width = 87;
+            this.gcTotalCost.Width = 80;
             // 
             // gcProfit
             // 
@@ -226,7 +226,7 @@
             this.gcTradeMode.Name = "gcTradeMode";
             this.gcTradeMode.Visible = true;
             this.gcTradeMode.VisibleIndex = 11;
-            this.gcTradeMode.Width = 87;
+            this.gcTradeMode.Width = 80;
             // 
             // gcSalesman
             // 
@@ -246,7 +246,7 @@
             this.gcDepartmentDesc.Name = "gcDepartmentDesc";
             this.gcDepartmentDesc.Visible = true;
             this.gcDepartmentDesc.VisibleIndex = 13;
-            this.gcDepartmentDesc.Width = 85;
+            this.gcDepartmentDesc.Width = 80;
             // 
             // gcCreateDate
             // 
@@ -286,7 +286,7 @@
             this.gcPort.Name = "gcPort";
             this.gcPort.Visible = true;
             this.gcPort.VisibleIndex = 17;
-            this.gcPort.Width = 89;
+            this.gcPort.Width = 80;
             // 
             // saveFileDialog1
             // 

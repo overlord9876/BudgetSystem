@@ -93,7 +93,7 @@
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
             this.btnSure.TabIndex = 101;
-            this.btnSure.Text = "收汇拆分";
+            this.btnSure.Text = "收汇进入合同";
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             // 
             // btnCancel

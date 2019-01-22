@@ -13,7 +13,7 @@ namespace BudgetSystem
         {
 
             Budget budget = value as Budget;
-            return budget.State == "审批结束";
+            return false;// budget.State == "审批结束";
         }
     }
 }

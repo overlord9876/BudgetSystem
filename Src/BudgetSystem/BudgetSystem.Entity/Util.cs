@@ -36,7 +36,14 @@ namespace BudgetSystem.Entity
                     return defaultString;
             }
         }
-
+        public static EnumBudgetState ToEnumBudgetState(this int budgetState)
+        {
+            return (EnumBudgetState)budgetState;
+        }
+        public static string ToStringEnumBudgetState(this int budgetState)
+        {
+            return ToEnumBudgetState(budgetState).ToString();
+        }
         public static T ToObjectList<T>(this string bankInfoJson)
         {
             if (!string.IsNullOrEmpty(bankInfoJson))

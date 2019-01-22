@@ -17,11 +17,11 @@ namespace BudgetSystem.Bll
         Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
 
-        public List<Budget> GetAllBudget(BudgetQueryCondition condition=null)
+        public List<Budget> GetAllBudget(BudgetQueryCondition condition = null)
         {
             var lst = this.Query<Budget>((con) =>
             {
-                var uList = dal.GetAllBudget(con,null,condition);
+                var uList = dal.GetAllBudget(con, null, condition);
                 return uList;
             });
             return lst.ToList();
@@ -96,7 +96,30 @@ namespace BudgetSystem.Bll
                 return id;
             });
         }
-
+        /// <summary>
+        /// 修改预算单 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public string ModifyBudgetState(int id, EnumBudgetState state)
+        {
+            Budget oldBudget = this.GetBudget(id);
+            if (oldBudget == null)
+            {
+                return "数据不存在";
+            }
+            else if (!EnumFlowNames.预算单审批流程.ToString().Equals(oldBudget.FlowName) || oldBudget.EnumFlowState == EnumDataFlowState.审批通过)
+            {
+                return string.Format("预算单当前不满足{0}且审批状态为{1}，不能进行当前操作。", EnumFlowNames.预算单审批流程, EnumDataFlowState.审批通过);
+            }
+            string message = string.Empty;
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.ModifyBudgetState(id, state, con, tran);
+            });
+            return message;
+        }
         /// <summary>
         /// 启动审批流程
         /// </summary>

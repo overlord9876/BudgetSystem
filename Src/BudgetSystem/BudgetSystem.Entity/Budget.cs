@@ -19,10 +19,35 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string ContractNO { get; set; }
 
+        private int state = 0;
         /// <summary>
         /// 状态
         /// </summary>
-        public string State { get; set; }
+        public int State 
+        { 
+            get
+            {
+                return state;
+            }
+            set
+            {
+                this.state = value;
+            }
+        }
+        /// <summary>
+        /// 枚举状态
+        /// </summary>
+        public EnumBudgetState EnumState
+        {
+            get { return this.State.ToEnumBudgetState(); }
+        }
+        /// <summary>
+        /// 字符串状态
+        /// </summary>
+        public string StringState
+        {
+            get { return this.state.ToStringEnumBudgetState(); }
+        }
 
         /// <summary>
         /// 业务员
@@ -295,7 +320,7 @@ namespace BudgetSystem.Entity
         public List<Supplier> SupplierList { get; set; }
 
         /// <summary>
-        /// 贸易状态描述
+        /// 贸易方式描述
         /// </summary>
         public string TradeModeDesc
         {
