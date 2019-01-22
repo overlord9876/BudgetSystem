@@ -121,6 +121,16 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" bs.ReceiptDate bs.ReceiptDate <@ReceiptDateEnd ");
                     dp.Add("ReceiptDateEnd", condition.ReceiptDateEnd.ToString("yyyy-MM-dd"), null, null, null);
                 }
+
+                if (condition.State == QueryReceiptState.Confirmed)
+                {
+                    strConditionList.Add(" bs.State=2 ");
+                }
+                else if (condition.State == QueryReceiptState.ToBeConfirmed)
+                {
+                    strConditionList.Add(" bs.State<>2 ");
+                }
+
                 if (!string.IsNullOrEmpty(condition.Salesman))
                 {
                     selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	

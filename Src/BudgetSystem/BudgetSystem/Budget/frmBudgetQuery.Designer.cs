@@ -33,6 +33,7 @@
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcUSDTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -76,6 +77,7 @@
             this.gcContractNO,
             this.gcCustomerName,
             this.gcFlowName,
+            this.gcFlowState,
             this.gcState,
             this.gcTotalAmount,
             this.gcUSDTotalAmount,
@@ -108,7 +110,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
-            this.gcContractNO.Width = 100;
+            this.gcContractNO.Width = 80;
             // 
             // gcCustomerName
             // 
@@ -130,15 +132,24 @@
             this.gcFlowName.VisibleIndex = 2;
             this.gcFlowName.Width = 80;
             // 
+            // gcFlowState
+            // 
+            this.gcFlowState.Caption = "审批状态";
+            this.gcFlowState.FieldName = "EnumFlowState";
+            this.gcFlowState.MinWidth = 80;
+            this.gcFlowState.Name = "gcFlowState";
+            this.gcFlowState.Visible = true;
+            this.gcFlowState.VisibleIndex = 3;
+            this.gcFlowState.Width = 80;
+            // 
             // gcState
             // 
-            this.gcState.Caption = "审批状态";
-            this.gcState.FieldName = "EnumFlowState";
-            this.gcState.MinWidth = 80;
+            this.gcState.Caption = "预算单状态";
+            this.gcState.FieldName = "StringState";
             this.gcState.Name = "gcState";
             this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 3;
-            this.gcState.Width = 80;
+            this.gcState.VisibleIndex = 4;
+            this.gcState.Width = 90;
             // 
             // gcTotalAmount
             // 
@@ -147,7 +158,7 @@
             this.gcTotalAmount.MinWidth = 80;
             this.gcTotalAmount.Name = "gcTotalAmount";
             this.gcTotalAmount.Visible = true;
-            this.gcTotalAmount.VisibleIndex = 4;
+            this.gcTotalAmount.VisibleIndex = 5;
             this.gcTotalAmount.Width = 80;
             // 
             // gcUSDTotalAmount
@@ -157,7 +168,7 @@
             this.gcUSDTotalAmount.MinWidth = 80;
             this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
             this.gcUSDTotalAmount.Visible = true;
-            this.gcUSDTotalAmount.VisibleIndex = 5;
+            this.gcUSDTotalAmount.VisibleIndex = 6;
             this.gcUSDTotalAmount.Width = 80;
             // 
             // gcTotalCost
@@ -167,7 +178,7 @@
             this.gcTotalCost.MinWidth = 80;
             this.gcTotalCost.Name = "gcTotalCost";
             this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 6;
+            this.gcTotalCost.VisibleIndex = 7;
             this.gcTotalCost.Width = 80;
             // 
             // gcProfit
@@ -177,7 +188,7 @@
             this.gcProfit.MinWidth = 80;
             this.gcProfit.Name = "gcProfit";
             this.gcProfit.Visible = true;
-            this.gcProfit.VisibleIndex = 7;
+            this.gcProfit.VisibleIndex = 8;
             this.gcProfit.Width = 80;
             // 
             // gcProfitLevel2
@@ -187,7 +198,7 @@
             this.gcProfitLevel2.MinWidth = 80;
             this.gcProfitLevel2.Name = "gcProfitLevel2";
             this.gcProfitLevel2.Visible = true;
-            this.gcProfitLevel2.VisibleIndex = 8;
+            this.gcProfitLevel2.VisibleIndex = 9;
             this.gcProfitLevel2.Width = 80;
             // 
             // gcAdvancePayment
@@ -197,7 +208,7 @@
             this.gcAdvancePayment.MinWidth = 80;
             this.gcAdvancePayment.Name = "gcAdvancePayment";
             this.gcAdvancePayment.Visible = true;
-            this.gcAdvancePayment.VisibleIndex = 9;
+            this.gcAdvancePayment.VisibleIndex = 10;
             this.gcAdvancePayment.Width = 80;
             // 
             // gcTradeNature
@@ -208,7 +219,7 @@
             this.gcTradeNature.MinWidth = 80;
             this.gcTradeNature.Name = "gcTradeNature";
             this.gcTradeNature.Visible = true;
-            this.gcTradeNature.VisibleIndex = 10;
+            this.gcTradeNature.VisibleIndex = 11;
             this.gcTradeNature.Width = 80;
             // 
             // rilueTradeNature
@@ -225,7 +236,7 @@
             this.gcTradeMode.MinWidth = 80;
             this.gcTradeMode.Name = "gcTradeMode";
             this.gcTradeMode.Visible = true;
-            this.gcTradeMode.VisibleIndex = 11;
+            this.gcTradeMode.VisibleIndex = 12;
             this.gcTradeMode.Width = 80;
             // 
             // gcSalesman
@@ -235,7 +246,7 @@
             this.gcSalesman.MinWidth = 80;
             this.gcSalesman.Name = "gcSalesman";
             this.gcSalesman.Visible = true;
-            this.gcSalesman.VisibleIndex = 12;
+            this.gcSalesman.VisibleIndex = 13;
             this.gcSalesman.Width = 80;
             // 
             // gcDepartmentDesc
@@ -245,7 +256,7 @@
             this.gcDepartmentDesc.MinWidth = 80;
             this.gcDepartmentDesc.Name = "gcDepartmentDesc";
             this.gcDepartmentDesc.Visible = true;
-            this.gcDepartmentDesc.VisibleIndex = 13;
+            this.gcDepartmentDesc.VisibleIndex = 14;
             this.gcDepartmentDesc.Width = 80;
             // 
             // gcCreateDate
@@ -255,7 +266,7 @@
             this.gcCreateDate.MinWidth = 80;
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 14;
+            this.gcCreateDate.VisibleIndex = 15;
             this.gcCreateDate.Width = 80;
             // 
             // gcSignDate
@@ -265,7 +276,7 @@
             this.gcSignDate.MinWidth = 80;
             this.gcSignDate.Name = "gcSignDate";
             this.gcSignDate.Visible = true;
-            this.gcSignDate.VisibleIndex = 15;
+            this.gcSignDate.VisibleIndex = 16;
             this.gcSignDate.Width = 80;
             // 
             // gcValidity
@@ -275,7 +286,7 @@
             this.gcValidity.MinWidth = 80;
             this.gcValidity.Name = "gcValidity";
             this.gcValidity.Visible = true;
-            this.gcValidity.VisibleIndex = 16;
+            this.gcValidity.VisibleIndex = 17;
             this.gcValidity.Width = 80;
             // 
             // gcPort
@@ -285,7 +296,7 @@
             this.gcPort.MinWidth = 80;
             this.gcPort.Name = "gcPort";
             this.gcPort.Visible = true;
-            this.gcPort.VisibleIndex = 17;
+            this.gcPort.VisibleIndex = 18;
             this.gcPort.Width = 80;
             // 
             // saveFileDialog1
@@ -314,7 +325,7 @@
         private DevExpress.XtraGrid.GridControl gridBudget;
         private DevExpress.XtraGrid.Views.Grid.GridView gvBudget;
         private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
-        private DevExpress.XtraGrid.Columns.GridColumn gcState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowState;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalAmount;
         private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
         private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentDesc;
@@ -333,5 +344,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcUSDTotalAmount;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcState;
     }
 }

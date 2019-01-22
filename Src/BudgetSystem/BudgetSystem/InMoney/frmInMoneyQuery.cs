@@ -18,6 +18,10 @@ namespace BudgetSystem.InMoney
     {
         ReceiptMgmtManager arm = new ReceiptMgmtManager();
 
+        const string COMMONQUERY_TOBECONFIRMED = "未确认银行水单";
+        const string COMMONQUERY_CONFIRMED = "已确认银行水单";
+        const string COMMONQUERY_ALL = "所有银行水单";
+
         public frmInMoneyQuery()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出数据"));
 
-            this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+            this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_CONFIRMED, COMMONQUERY_TOBECONFIRMED });
 
             this.RegeditPrintOperate();
 
@@ -78,7 +82,16 @@ namespace BudgetSystem.InMoney
 
         protected override void DoCommonQuery(string queryName)
         {
-            XtraMessageBox.Show(queryName);
+            InMoneyQueryCondition condition = new InMoneyQueryCondition();
+            if (COMMONQUERY_TOBECONFIRMED.Equals(queryName))
+            {
+                condition.State = QueryReceiptState.ToBeConfirmed;
+            }
+            else if (COMMONQUERY_CONFIRMED.Equals(queryName))
+            {
+                condition.State = QueryReceiptState.Confirmed;
+            }
+            LoadData(condition);
         }
 
         protected override void DoConditionQuery(BaseQueryCondition condition)

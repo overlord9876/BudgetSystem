@@ -12,5 +12,13 @@ namespace BudgetSystem.Entity.QueryCondition
         public DateTime ReceiptDateBegin { get; set; }
         public DateTime ReceiptDateEnd { get; set; }
         public string Salesman { get; set; }
+        public QueryReceiptState State { get; set; }
+    }
+
+    public enum QueryReceiptState
+    {
+        ALL,
+        ToBeConfirmed,
+        Confirmed
     }
 }

@@ -15,7 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localizatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D508CB0A-FCCD-4693-B0CF-7AB95AA561FF}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\Jason\AppData\Local\Temp\Rar$DRa13260.31696\BudgetSystem\2019-01-21升级脚本.sql = C:\Users\Jason\AppData\Local\Temp\Rar$DRa13260.31696\BudgetSystem\2019-01-21升级脚本.sql
 		CheckPoint.txt = CheckPoint.txt
 		Mysql生成增改删SQL.sql = Mysql生成增改删SQL.sql
 		Mysql生成实体类.sql = Mysql生成实体类.sql
@@ -36,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚�
 		2018-12-04升级脚本.sql = 2018-12-04升级脚本.sql
 		2018-12-08升级脚本.sql = 2018-12-08升级脚本.sql
 		2018-12-17升级脚本.sql = 2018-12-17升级脚本.sql
-		C:\Users\Jason\AppData\Local\Temp\Rar$DRa13260.31696\BudgetSystem\2019-01-21升级脚本.sql = C:\Users\Jason\AppData\Local\Temp\Rar$DRa13260.31696\BudgetSystem\2019-01-21升级脚本.sql
+		2019-01-22升级脚本.sql = 2019-01-22升级脚本.sql
 	EndProjectSection
 EndProject
 Global

@@ -99,6 +99,26 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 打印成本销售表
         /// </summary>
-        PrintCostForm
+        PrintCostForm,
+        
+        /// <summary>
+        /// 结账申请
+        /// </summary>
+        ClosingAccountApply,
+        
+        /// <summary>
+        /// 驳回申请
+        /// </summary>
+        RejectedAccount,
+
+        /// <summary>
+        /// 财务归档征求
+        /// </summary>
+        FinancialArchiveApply,
+        
+        /// <summary>
+        /// 归档
+        /// </summary>
+        Archive
     }
 }

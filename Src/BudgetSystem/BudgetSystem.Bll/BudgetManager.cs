@@ -79,6 +79,7 @@ namespace BudgetSystem.Bll
                 return string.Empty;
             }
         }
+        
         public int AddBudget(Budget budget, bool isStartFlow = false)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
@@ -96,6 +97,7 @@ namespace BudgetSystem.Bll
                 return id;
             });
         }
+       
         /// <summary>
         /// 修改预算单 
         /// </summary>
@@ -120,6 +122,7 @@ namespace BudgetSystem.Bll
             });
             return message;
         }
+       
         /// <summary>
         /// 启动审批流程
         /// </summary>

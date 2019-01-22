@@ -44,6 +44,11 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
 
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ClosingAccountApply, "结账申请"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.RejectedAccount, "驳回结账申请"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinancialArchiveApply, "财务平账征求"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Archive, "归档"));
+
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
@@ -106,6 +111,22 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.ExportData.ToString())
             {
                 ExportDataBudget();
+            }
+            else if (operate.Operate == OperateTypes.ClosingAccountApply.ToString())
+            {
+                ClosingAccountApply();
+            }
+            else if (operate.Operate == OperateTypes.RejectedAccount.ToString())
+            {
+                RejectedAccount();
+            }
+            else if (operate.Operate == OperateTypes.FinancialArchiveApply.ToString())
+            {
+                FinancialArchiveApply();
+            }
+            else if (operate.Operate == OperateTypes.Archive.ToString())
+            {
+                Archive();
             }
         }
 
@@ -408,6 +429,127 @@ namespace BudgetSystem
             else
             {
                 XtraMessageBox.Show("请选择需要打印的项");
+            }
+        }
+
+        /// <summary>
+        /// 结账申请
+        /// </summary>
+        private void ClosingAccountApply()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumState != EnumBudgetState.进行中 && budget.EnumState != EnumBudgetState.财务平账征求)
+                {
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许结账申请。", budget.StringState));
+                    return;
+                }
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.结账申请);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("结账申请成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要结账申请的项");
+            }
+
+        }
+
+        /// <summary>
+        /// 驳回申请
+        /// </summary>
+        private void RejectedAccount()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumState != EnumBudgetState.结账申请)
+                {
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许驳回结账申请。", budget.StringState));
+                    return;
+                }
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.进行中);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("驳回结账申请成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要驳回结账申请的项");
+            }
+        }
+
+        /// <summary>
+        /// 财务平账征求
+        /// </summary>
+        private void FinancialArchiveApply()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumState != EnumBudgetState.进行中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许财务平账征求。", budget.StringState));
+                    return;
+                }
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务平账征求);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("财务平账征求成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要财务平账征求的项");
+            }
+        }
+
+        /// <summary>
+        /// 归档
+        /// </summary>
+        private void Archive()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                if (budget.EnumState != EnumBudgetState.结账申请)
+                {
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许归档。", budget.StringState));
+                    return;
+                }
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.已结束);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("归档成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要归档的项");
             }
         }
 

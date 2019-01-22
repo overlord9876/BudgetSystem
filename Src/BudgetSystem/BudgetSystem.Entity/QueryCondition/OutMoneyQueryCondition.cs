@@ -10,5 +10,22 @@ namespace BudgetSystem.Entity.QueryCondition
         public string BudgetNO { get; set; }
         public string VoucherNo { get; set; }
         public string Applicant { get; set; }
+        public PaymentState PayState { get; set; }
+    }
+
+    public enum PaymentState
+    {
+        /// <summary>
+        /// 所有已付款或未付
+        /// </summary>
+        All,
+        /// <summary>
+        /// 待付款
+        /// </summary>
+        PendingPayment,
+        /// <summary>
+        /// 已付款
+        /// </summary>
+        Paid
     }
 }

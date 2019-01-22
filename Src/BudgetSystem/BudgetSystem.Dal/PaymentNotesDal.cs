@@ -55,6 +55,16 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" s.`NAME` = @Supplier  ");
                     dp.Add("Supplier", condition.Supplier, null, null, null);
                 }
+                if (condition.PayState == PaymentState.Paid)
+                {
+                    strConditionList.Add(" f.`ApproveResult` = 1  ");
+                    strConditionList.Add(" f.`IsClosed` = 1  ");
+                }
+                else if (condition.PayState == PaymentState.PendingPayment)
+                {
+                    strConditionList.Add(" f.`ApproveResult` = 0  ");
+                    strConditionList.Add(" f.`IsClosed` = 0  ");
+                }
 
                 if (strConditionList.Count > 0)
                 {

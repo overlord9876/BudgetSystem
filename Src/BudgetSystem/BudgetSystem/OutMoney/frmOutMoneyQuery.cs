@@ -17,6 +17,10 @@ namespace BudgetSystem
     {
         PaymentNotesManager pnm = new PaymentNotesManager();
 
+        const string COMMONQUERY_APPLICATIONFORPAYMENT = "申请付款";
+        const string COMMONQUERY_BEPAID = "已付货款";
+        const string COMMONQUERY_ALL = "所有付款单";
+
         public frmOutMoneyQuery()
         {
             InitializeComponent();
@@ -36,7 +40,7 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
 
-            this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+            this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_APPLICATIONFORPAYMENT, COMMONQUERY_BEPAID });
 
             this.RegeditPrintOperate();
 
@@ -88,7 +92,18 @@ namespace BudgetSystem
 
         protected override void DoCommonQuery(string queryName)
         {
-            XtraMessageBox.Show(queryName);
+            OutMoneyQueryCondition outMoneyCondition = new OutMoneyQueryCondition();
+
+            if (COMMONQUERY_APPLICATIONFORPAYMENT.Equals(queryName))
+            {
+                outMoneyCondition.PayState = PaymentState.PendingPayment;
+            }
+            else if (COMMONQUERY_BEPAID.Equals(queryName))
+            {
+                outMoneyCondition.PayState = PaymentState.Paid;
+            }
+            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
+            this.gvOutMoney.RefreshData();
         }
 
         protected override void DoConditionQuery(BaseQueryCondition condition)
