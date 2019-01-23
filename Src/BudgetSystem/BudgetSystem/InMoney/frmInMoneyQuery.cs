@@ -135,32 +135,25 @@ namespace BudgetSystem.InMoney
             }
         }
 
-        private void SplitMoneyToBudgetBankSlip()
-        {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
-            if (currentRowBankSlip != null)
-            {
-                frmInMoneyEdit form = new frmInMoneyEdit();
-                form.WorkModel = EditFormWorkModels.SplitToBudget;
-                form.CurrentBankSlip = currentRowBankSlip;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
-            }
-        }
-
         private void StartFlow()
         {
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
 
             if (currentRowBankSlip != null)
             {
+                currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip == null)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
                 if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中)
                 {
                     XtraMessageBox.Show(string.Format("{0}收款单{1}，不允许重复提交。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState.ToString()));
                     return;
                 }
+                currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
+                currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
                 string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName);
                 if (string.IsNullOrEmpty(message))
                 {
@@ -181,14 +174,24 @@ namespace BudgetSystem.InMoney
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip == null)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
                 if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中 || currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
                     XtraMessageBox.Show(string.Format("{0}收款单{1}，此时不允许确认入账。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState.ToString()));
                     return;
                 }
-                if (currentRowBankSlip.CNY2 > 0)
+                if (currentRowBankSlip.CNY2 != 0)
                 {
                     XtraMessageBox.Show(string.Format("金额未分拆完成，此时不允许确认入账。"));
+                    return;
+                }
+                if (currentRowBankSlip.State == 2)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单已经被拆分，不允许重复拆分。", currentRowBankSlip.VoucherNo));
                     return;
                 }
                 try
@@ -211,6 +214,12 @@ namespace BudgetSystem.InMoney
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             if (currentRowBankSlip != null)
             {
+                currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip == null)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
                 if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中 || currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
                     XtraMessageBox.Show("当前不属于未审批通过状态，不允许直接进行拆分。");
@@ -218,9 +227,9 @@ namespace BudgetSystem.InMoney
                 }
                 else
                 {
-                    if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分 && currentRowBankSlip.EnumFlowState != EnumDataFlowState.审批通过)//不是待拆分状态不允许拆分
+                    if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分)
                     {
-                        XtraMessageBox.Show("当前不属于已拆分状态，不允许直接进行拆分。");
+                        XtraMessageBox.Show("当前不属于已拆分状态，不允许再次进行拆分。");
                         return;
                     }
                 }

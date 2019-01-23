@@ -276,14 +276,29 @@ namespace BudgetSystem.InMoney
                 source.ForEach(o =>
                 {
                     o.ExchangeRate = txtExchangeRate.Value;
-                    o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
-                    if (o.RelationBudget != null)
+                    if (WorkModel != EditFormWorkModels.SplitToBudget)
                     {
-                        var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
-                        o.Customer = cus != null ? cus.Name : string.Empty;
-                        o.Cus_ID = cus.ID;
+                        o.RelationBudget = new Budget();
+                        o.RelationBudget.ContractNO = o.ContractNO;
+                        o.RelationBudget.CustomerName = o.Customer;
+                        budgetList.Add(o.RelationBudget);
+
+                    }
+                    else
+                    {
+                        o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
+                        if (o.RelationBudget != null)
+                        {
+                            var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
+                            o.Customer = cus != null ? cus.Name : string.Empty;
+                            o.Cus_ID = cus.ID;
+                        }
                     }
                 });
+                if (WorkModel != EditFormWorkModels.SplitToBudget)
+                {
+                    this.gridBudget.DataSource = budgetList;
+                }
                 this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
                 CalcSplitMoney();
             }
@@ -450,6 +465,7 @@ namespace BudgetSystem.InMoney
             if (c != null)
             {
                 budgetList = bm.GetBudgetListByCustomerId(RunInfo.Instance.CurrentUser.UserName, c.ID);
+
                 this.gridBudget.DataSource = budgetList;
 
             }

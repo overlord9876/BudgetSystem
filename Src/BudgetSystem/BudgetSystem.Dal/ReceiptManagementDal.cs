@@ -73,6 +73,28 @@ namespace BudgetSystem.Dal
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
         }
 
+        /// <summary>
+        /// 修改入帐单信息
+        /// </summary>
+        /// <param name="modifyBankSlip"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public DateTime ModifyBankSlipState(BankSlip modifyBankSlip, IDbConnection con, IDbTransaction tran)
+        {
+            DateTime versionNumber = GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
+
+            if (this.CheckExpired(versionNumber, modifyBankSlip.UpdateTimestamp))
+            {
+                throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
+            }
+            modifyBankSlip.UpdateTimestamp = DateTime.Now;
+            string updateSql = "Update `BankSlip` Set `State` = @State Where `BSID` = @BSID";
+            int id = con.Execute(updateSql, modifyBankSlip, tran);
+
+            return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
+        }
+
         public void AddReceiptNotice(int bsID, string userName, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Insert Into `ReceiptNotice`(`UserName`,`BSID`)Values(@UserName,@BSID)";
@@ -163,7 +185,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID

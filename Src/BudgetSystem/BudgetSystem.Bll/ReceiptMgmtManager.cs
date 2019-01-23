@@ -125,6 +125,21 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 修改入帐单状态
+        /// </summary>
+        /// <param name="modifyBankSlip"></param>
+        /// <returns></returns>
+        public DateTime ModifyBankSlipState(BankSlip modifyBankSlip)
+        {
+            return this.ExecuteWithTransaction<DateTime>((con, tran) =>
+            {
+                DateTime versionNumber = dal.ModifyBankSlipState(modifyBankSlip, con, tran);
+
+                return versionNumber;
+            });
+        }
+
+        /// <summary>
         /// 拆分金额
         /// </summary>
         /// <param name="modifyBankSlip"></param>

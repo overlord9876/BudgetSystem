@@ -39,7 +39,7 @@ namespace BudgetSystem.Dal
             return budget;
         }
 
-        public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null,BudgetQueryCondition condition=null)
+        public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
         {
             string selectSql = string.Format(@"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName
@@ -51,8 +51,8 @@ namespace BudgetSystem.Dal
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
                                  {0}
                                  WHERE b.ID<>0 ",
-                                 (condition!=null&&condition.IsManagerApproval)?
-                                 @"LEFT JOIN  `FlowRunPoint` frp ON frp.InstanceID=f.ID LEFT JOIN `FlowNode` fn on frp.NodeID=fn.ID":"");
+                                 (condition != null && condition.IsManagerApproval) ?
+                                 @"LEFT JOIN  `FlowRunPoint` frp ON frp.InstanceID=f.ID LEFT JOIN `FlowNode` fn on frp.NodeID=fn.ID" : "");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("DateItemType", EnumFlowDataType.预算单.ToString(), null, null, null);
             if (condition != null)
@@ -62,8 +62,8 @@ namespace BudgetSystem.Dal
                 {
                     strConditionList.Add(" b.`State`<>@State and f.FlowName=@FlowName and  (f.ApproveResult+f.IsClosed)=@FlowState");
                     dp.Add("State", EnumBudgetState.已结束, DbType.Int32, ParameterDirection.Input, null);
-                    dp.Add("FlowName", EnumFlowNames.预算单审批流程.ToString(),DbType.String,null,null);
-                    dp.Add("FlowState", EnumDataFlowState.审批通过,DbType.Int32, ParameterDirection.Input,null);
+                    dp.Add("FlowName", EnumFlowNames.预算单审批流程.ToString(), DbType.String, null, null);
+                    dp.Add("FlowState", EnumDataFlowState.审批通过, DbType.Int32, ParameterDirection.Input, null);
                 }
                 if (condition.IsManagerApproval)
                 {
@@ -73,7 +73,7 @@ namespace BudgetSystem.Dal
                 if ((int)condition.State != -1)
                 {
                     strConditionList.Add(" b.`State`=@State ");
-                    dp.Add("State", condition.State,DbType.Int32,ParameterDirection.Input,null);
+                    dp.Add("State", condition.State, DbType.Int32, ParameterDirection.Input, null);
                 }
                 if (condition.IsArchiveWarningQuery)
                 {
@@ -92,10 +92,10 @@ namespace BudgetSystem.Dal
                 }
                 if (!string.IsNullOrEmpty(condition.ContractNO))
                 {
-                    strConditionList.Add(" b.ContractNO like @ContractNO "); 
+                    strConditionList.Add(" b.ContractNO like @ContractNO ");
                     dp.Add("ContractNO", string.Format("%{0}%", condition.ContractNO), null, null, null);
                 }
-                
+
                 if (!string.IsNullOrEmpty(condition.CustomerName))
                 {
                     strConditionList.Add(" c.Name like @CustomerName ");
@@ -110,7 +110,6 @@ namespace BudgetSystem.Dal
             return con.Query<Budget>(selectSql, dp, tran);
         }
 
-
         public IEnumerable<Budget> GetBudgetListByCustomerId(string userName, int customerId, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT b.*,u.RealName  AS SalesmanName,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
@@ -120,7 +119,7 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName
                                  LEFT JOIN `Department` d ON b.Department=d.Code 
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID AND b.CustomerID=@CustomerID
-								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='{0}' AND f.IsRecent=1
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
                                  WHERE b.ID<>0 AND b.Salesman=@Salesman";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName, CustomerID = customerId, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
@@ -150,7 +149,7 @@ namespace BudgetSystem.Dal
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='预算单' AND f.IsRecent=1
                                  WHERE b.ID<>0  AND b.Salesman=@Salesman";
 
-            return con.Query<Budget>(selectSql, new { Salesman = userName}, tran);
+            return con.Query<Budget>(selectSql, new { Salesman = userName }, tran);
         }
 
 
