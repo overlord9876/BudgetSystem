@@ -74,6 +74,7 @@ namespace BudgetSystem.InMoney
 
                 try
                 {
+                    dm.CheckImportData(list);
                     this.gcDeclarationform.DataSource = new BindingList<Declarationform>(list);
                     this.gcDeclarationform.RefreshDataSource();
                     sdf.Close();
@@ -109,6 +110,11 @@ namespace BudgetSystem.InMoney
             List<Declarationform> list = (gcDeclarationform.DataSource as BindingList<Declarationform>).ToList();
             if (list != null)
             {
+                if (list.Exists(i => !string.IsNullOrEmpty(i.Message)))
+                {
+                    XtraMessageBox.Show("存在不合法数据，不能导入");
+                    return;
+                }
                 dm.ImportDeclarationform(list);
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
@@ -133,24 +139,42 @@ namespace BudgetSystem.InMoney
             if (string.IsNullOrEmpty(df.NO.Trim()))
             {
                 e.ErrorText = "报关单号不能为空";
+                df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }
             else if (list.Count(i => i.NO == df.NO) > 1)
             {
                 e.ErrorText = "报关单号存在重复";
+                df.Message = e.ErrorText;
+                e.Valid = false;
+                return;
+            }
+            else if (dm.CheckNumber(df.NO))
+            {
+                e.ErrorText = "报关单号存在重复";
+                df.Message = e.ErrorText;
+                e.Valid = false;
+                return;
+            }
+            if (!dm.CheckContractNO(df.ContractNO))
+            {
+                e.ErrorText = "合同号不存在";
+                df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }
             if (string.IsNullOrEmpty(df.Currency.Trim()))
             {
                 e.ErrorText = "报关币种不能为空";
+                df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }
             if (df.ExportAmount <= 0)
             {
                 e.ErrorText = "出口金额应大于0";
+                df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }

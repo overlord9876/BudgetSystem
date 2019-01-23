@@ -81,6 +81,11 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtNO, "请输入报关单号");
             }
+            else if (dm.CheckNumber(this.txtNO.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(this.txtNO, "报关单号存在重复");
+            }
+
             if (this.cboCurrency.EditValue == null)
             {
                 this.dxErrorProvider1.SetError(this.cboCurrency, "请选择报关币种");
@@ -92,6 +97,10 @@ namespace BudgetSystem
             if (!(this.cboBudget.EditValue is Budget))
             {
                 this.dxErrorProvider1.SetError(this.cboBudget, "请选择合同号");
+            }
+            else if (!dm.CheckContractNO((this.cboBudget.EditValue as Budget).ContractNO))
+            {
+                this.dxErrorProvider1.SetError(this.cboBudget, "合同号不存在");
             }
         }
 

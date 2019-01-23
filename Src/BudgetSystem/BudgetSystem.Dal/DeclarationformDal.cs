@@ -33,6 +33,32 @@ namespace BudgetSystem.Dal
             return id;
         }
 
+        /// <summary>
+        /// 验证报关单号是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="NO"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckNumber(int id, string NO, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"SELECT  ID FROM `Declarationform`  
+                                    WHERE ID<>@ID and `NO`=@NO";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("NO", NO));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void ModifyDeclarationform(Declarationform declarationform, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Update `Declarationform` Set `NO` = @NO,`Currency` = @Currency,`ExportAmount` = @ExportAmount,`ExportDate` = @ExportDate,`ContractNO` = @ContractNO,`IsReport` = @IsReport,`CreateUser` = @CreateUser,`CreateDate` = @CreateDate Where `ID` = @ID";

@@ -54,5 +54,9 @@ namespace BudgetSystem.Entity
         /// </summary>
         public DateTime CreateDate { get; set; }
 
+        /// <summary>
+        /// 验证消息
+        /// </summary>
+        public string Message { get; set; }
     }
 }

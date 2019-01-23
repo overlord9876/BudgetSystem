@@ -214,7 +214,30 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 53;
             }
-
+            else if (operate == OperateTypes.ClosingAccountApply)
+            {
+                text = "结账申请";
+                group = "操作";
+                imageIndex = 2;
+            }
+            else if (operate == OperateTypes.RejectedAccount)
+            {
+                text = "驳回结账申请";
+                group = "操作";
+                imageIndex = 29;
+            }
+            else if (operate == OperateTypes.FinancialArchiveApply)
+            {
+                text = "财务平账征求";
+                group = "操作";
+                imageIndex = 11;
+            }
+            else if (operate == OperateTypes.Archive)
+            {
+                text = "归档";
+                group = "操作";
+                imageIndex = 28;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);
             mm.UIElementData = extendData;
 

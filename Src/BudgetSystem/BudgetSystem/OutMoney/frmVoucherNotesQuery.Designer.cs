@@ -51,7 +51,7 @@
             this.gcDeclarationform.MainView = this.gvDeclarationform;
             this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcDeclarationform.Name = "gcDeclarationform";
-            this.gcDeclarationform.Size = new System.Drawing.Size(849, 723);
+            this.gcDeclarationform.Size = new System.Drawing.Size(1147, 723);
             this.gcDeclarationform.TabIndex = 1;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -59,8 +59,8 @@
             // gvDeclarationform
             // 
             this.gvDeclarationform.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
             this.gridColumn3,
+            this.gridColumn1,
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn7,
@@ -79,15 +79,15 @@
             this.gridColumn1.FieldName = "NO";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "发票号";
-            this.gridColumn3.FieldName = "InvoiceNo";
+            this.gridColumn3.Caption = "合同号";
+            this.gridColumn3.FieldName = "ContractNO";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn4
             // 
@@ -150,10 +150,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 723);
+            this.Controls.Add(this.gcDeclarationform);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmVoucherNotesQuery";
-            this.Text = "付款凭证管理";
-            this.Controls.Add(this.gcDeclarationform);
+            this.Text = "报关单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDeclarationform)).EndInit();
             this.ResumeLayout(false);

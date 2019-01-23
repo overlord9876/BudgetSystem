@@ -9,6 +9,7 @@ namespace BudgetSystem.Bll
     public class DeclarationformManager : BaseManager
     {
         Dal.DeclarationformDal dal = new Dal.DeclarationformDal();
+        Dal.BudgetDal budgetDal = new Dal.BudgetDal();
 
 
         public List<Declarationform> GetAllDeclarationform()
@@ -42,6 +43,76 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public bool CheckNumber(string NO)
+        {
+            return this.ExecuteWithoutTransaction<bool>((con) =>
+               {
+                   return dal.CheckNumber(0, NO, con, null);
+               });
+        }
+
+        public bool CheckContractNO(string contractNO)
+        {
+            return this.ExecuteWithoutTransaction<bool>((con) =>
+            {
+                return budgetDal.CheckContractNO(0, contractNO, con);
+            });
+        }
+
+        /// <summary>
+        /// 验证导入数据是否合法
+        /// </summary>
+        /// <param name="list">待导入数据</param>
+        /// <returns></returns>
+        public bool CheckImportData(List<Declarationform> list)
+        {
+            bool result = true;
+            this.ExecuteWithoutTransaction((con) =>
+            {
+                foreach (Declarationform df in list)
+                {
+                    if (string.IsNullOrEmpty(df.NO.Trim()))
+                    {
+                        df.Message += "报关单号不能为空;";
+                        result = false;
+                    }
+                    else if (list.Count(i => i.NO == df.NO) > 1)
+                    {
+                        df.Message += "导入报关单号存在重复;";
+                        result = false;
+                    }
+                    else if (dal.CheckNumber(0, df.NO.Trim(), con, null))
+                    {
+                        df.Message += "报关单号已导入，不允许重复导入;";
+                        result = false;
+                    }
+
+                    if (string.IsNullOrEmpty(df.ContractNO.Trim()))
+                    {
+                        df.Message += "合同号不能为空;";
+                        result = false;
+                    }
+                    else if (!budgetDal.CheckContractNO(0, df.ContractNO.Trim(), con))
+                    {
+                        df.Message += "合同号不存在;";
+                        result = false;
+                    }
+                    if (df.ExportAmount <= 0)
+                    {
+                        df.Message += "出口金额应大于0;";
+                        result = false;
+                    }
+                    if (string.IsNullOrEmpty(df.Currency.Trim()))
+                    {
+                        df.Message += "报关币种不能为空";
+                        result = false;
+                    }
+                }
+
+            });
+            return result;
+        }
+
         public int ImportDeclarationform(List<Declarationform> declarationformList)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
@@ -49,7 +120,7 @@ namespace BudgetSystem.Bll
                 int id = 0;
                 foreach (Declarationform df in declarationformList)
                 {
-                     id = dal.AddDeclarationform(df, con, tran);
+                    id = dal.AddDeclarationform(df, con, tran);
                 }
                 return id;
             });
