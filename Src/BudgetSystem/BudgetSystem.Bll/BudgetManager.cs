@@ -221,6 +221,21 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 验证合同编号是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public int CheckContractNO(string contractNo)
+        {
+            return this.ExecuteWithoutTransaction<int>((con) =>
+                    {
+                        return dal.CheckContractNO(contractNo, con);
+                    });
+        }
+
+        /// <summary>
         /// 获取所有修改记录
         /// </summary>
         /// <param name="id"></param>
@@ -260,7 +275,7 @@ namespace BudgetSystem.Bll
                     message = "存在付款信息，不能删除";
                     return;
                 }
-                checkResult = idal.CheckContractNO(budget.ContractNO, con, tran);
+                checkResult = idal.CheckContractNO(budget.ID, con, tran);
                 if (checkResult)
                 {
                     message = "存在发票信息，不能删除";

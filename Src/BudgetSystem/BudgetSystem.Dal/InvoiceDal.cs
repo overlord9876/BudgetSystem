@@ -11,8 +11,8 @@ namespace BudgetSystem.Dal
 {
     public class InvoiceDal
     {
-        string selectSql = @"SELECT i.*,c.`Name` CustomerName,u1.RealName ImportUserName,u2.RealName FinanceImportUserName FROM `Invoice` i
-                             LEFT JOIN `Budget` b ON i.ContractNO=b.ContractNO
+        string selectSql = @"SELECT i.*,c.`Name` CustomerName,u1.RealName ImportUserName,u2.RealName FinanceImportUserName,b.ContractNO FROM `Invoice` i
+                             LEFT JOIN `Budget` b ON i.BudgetID=b.ID
 							 LEFT JOIN `Customer` c ON b.CustomerID =c.ID
                              LEFT JOIN `User` u1 ON i.ImportUser=u1.UserName
                              LEFT JOIN `user` u2 on i.FinanceImportUser =u2.UserName ";
@@ -29,9 +29,9 @@ namespace BudgetSystem.Dal
 
         public void AddInvoice(Invoice invoice, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = @"Insert Into `Invoice` (`Number`,`Code`,`ContractNO`,`OriginalCoin`,`ExchangeRate`,`CustomsDeclaration`,`TaxRebateRate`,
+            string insertSql = @"Insert Into `Invoice` (`Number`,`Code`,`BudgetID`,`OriginalCoin`,`ExchangeRate`,`CustomsDeclaration`,`TaxRebateRate`,
                                         `Commission`,`FeedMoney`,`TaxpayerID`,`SupplierName`,`Payment`,`TaxAmount`,`ImportUser`,`ImportDate`,`FinanceImportUser`,`FinanceImportDate`) 
-                                  Values (@Number,@Code,@ContractNO,@OriginalCoin,@ExchangeRate,@CustomsDeclaration,@TaxRebateRate,@Commission,@FeedMoney,
+                                  Values (@Number,@Code,@BudgetID,@OriginalCoin,@ExchangeRate,@CustomsDeclaration,@TaxRebateRate,@Commission,@FeedMoney,
                                           @TaxpayerID,@SupplierName, @Payment,@TaxAmount,@ImportUser,now(),@FinanceImportUser,@FinanceImportDate)";
             con.Insert(insertSql, invoice, tran);
         }
@@ -45,7 +45,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyInvoice(Invoice invoice, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = @"Update `Invoice` Set `Number` = @Number,`Code` = @Code,`ContractNO` = @ContractNO,`OriginalCoin` = @OriginalCoin,
+            string updateSql = @"Update `Invoice` Set `Number` = @Number,`Code` = @Code,`BudgetID` = @BudgetID,`OriginalCoin` = @OriginalCoin,
                                         `ExchangeRate` = @ExchangeRate,`CustomsDeclaration` = @CustomsDeclaration,`TaxRebateRate` = @TaxRebateRate,
                                         `Commission` = @Commission,`FeedMoney` = @FeedMoney,`TaxpayerID` = @TaxpayerID,`SupplierName` = @SupplierName,
                                          `Payment` = @Payment,`TaxAmount` = @TaxAmount,`ImportUser` = @ImportUser,`ImportDate` = @ImportDate,
@@ -83,17 +83,17 @@ namespace BudgetSystem.Dal
         /// <summary>
         /// 验证合同号是否存在
         /// </summary>
-        /// <param name="contractNo"></param>
+        /// <param name="budgetId"></param>
         /// <param name="?"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public bool CheckContractNO(string contractNo, IDbConnection con, IDbTransaction tran)
+        public bool CheckContractNO(int budgetId, IDbConnection con, IDbTransaction tran)
         {
             string sql = @"SELECT  id FROM `Invoice`  
-                                    WHERE  `ContractNO`=@ContractNO";
+                                    WHERE  `BudgetID`=@BudgetID";
             IDbCommand command = con.CreateCommand();
             command.CommandText = sql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetId));
             object obj = command.ExecuteScalar();
             if (obj != null)
             {

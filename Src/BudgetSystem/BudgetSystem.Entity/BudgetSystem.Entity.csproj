@@ -88,6 +88,9 @@
     <Compile Include="QueryCondition\OutMoneyQueryCondition.cs" />
     <Compile Include="RawMaterial.cs" />
     <Compile Include="ReportConfig.cs" />
+    <Compile Include="ReportMgmt\BudgetReport.cs" />
+    <Compile Include="ReportMgmt\CustomerReport.cs" />
+    <Compile Include="ReportMgmt\SupplierReport.cs" />
     <Compile Include="RolePermission.cs" />
     <Compile Include="SystemConfig\Country.cs" />
     <Compile Include="SystemConfig\MoneyType.cs" />

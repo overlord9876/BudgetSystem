@@ -52,9 +52,9 @@
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            this.txtExportDate = new DevExpress.XtraEditors.TextEdit();
             this.txtNO = new DevExpress.XtraEditors.TextEdit();
             this.cboCurrency = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtExportDate = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -77,9 +77,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtExportAmount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCurrency.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -105,9 +106,9 @@
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.textEdit6);
             this.layoutControl1.Controls.Add(this.textEdit5);
-            this.layoutControl1.Controls.Add(this.txtExportDate);
             this.layoutControl1.Controls.Add(this.txtNO);
             this.layoutControl1.Controls.Add(this.cboCurrency);
+            this.layoutControl1.Controls.Add(this.txtExportDate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -315,18 +316,11 @@
             this.textEdit5.StyleController = this.layoutControl1;
             this.textEdit5.TabIndex = 7;
             // 
-            // txtExportDate
-            // 
-            this.txtExportDate.Location = new System.Drawing.Point(406, 41);
-            this.txtExportDate.Name = "txtExportDate";
-            this.txtExportDate.Size = new System.Drawing.Size(233, 25);
-            this.txtExportDate.StyleController = this.layoutControl1;
-            this.txtExportDate.TabIndex = 4;
-            // 
             // txtNO
             // 
             this.txtNO.Location = new System.Drawing.Point(90, 12);
             this.txtNO.Name = "txtNO";
+            this.txtNO.Properties.MaxLength = 50;
             this.txtNO.Size = new System.Drawing.Size(234, 25);
             this.txtNO.StyleController = this.layoutControl1;
             this.txtNO.TabIndex = 1;
@@ -342,6 +336,21 @@
             this.cboCurrency.Size = new System.Drawing.Size(233, 25);
             this.cboCurrency.StyleController = this.layoutControl1;
             this.cboCurrency.TabIndex = 2;
+            // 
+            // txtExportDate
+            // 
+            this.txtExportDate.EditValue = null;
+            this.txtExportDate.Location = new System.Drawing.Point(406, 41);
+            this.txtExportDate.Name = "txtExportDate";
+            this.txtExportDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtExportDate.Properties.Mask.EditMask = "";
+            this.txtExportDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
+            this.txtExportDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtExportDate.Size = new System.Drawing.Size(233, 25);
+            this.txtExportDate.StyleController = this.layoutControl1;
+            this.txtExportDate.TabIndex = 4;
             // 
             // layoutControlGroup1
             // 
@@ -523,9 +532,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtExportAmount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCurrency.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExportDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -549,7 +559,6 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit textEdit6;
         private DevExpress.XtraEditors.TextEdit textEdit5;
-        private DevExpress.XtraEditors.TextEdit txtExportDate;
         private DevExpress.XtraEditors.TextEdit txtNO;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
@@ -586,6 +595,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraEditors.DateEdit txtExportDate;
 
     }
 }

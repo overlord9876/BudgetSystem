@@ -46,7 +46,8 @@ namespace BudgetSystem.Bll
         public bool CheckImportData(List<Invoice> list, bool isFinanceImport)
         {
             bool result = true;
-            this.ExecuteWithoutTransaction((con) => {
+            this.ExecuteWithoutTransaction((con) =>
+            {
                 if (isFinanceImport)
                 {
                     foreach (Invoice invoice in list)
@@ -66,7 +67,7 @@ namespace BudgetSystem.Bll
                             invoice.Message += "发票号不存在;";
                             result = false;
                         }
-                        if (string.IsNullOrEmpty(invoice.Code.Trim())) 
+                        if (string.IsNullOrEmpty(invoice.Code.Trim()))
                         {
                             invoice.Message += "发票代码不能为空;";
                             result = false;
@@ -81,12 +82,12 @@ namespace BudgetSystem.Bll
                             invoice.Message += "销方名称不能为空;";
                             result = false;
                         }
-                        if ( invoice.Payment<=0)
+                        if (invoice.Payment <= 0)
                         {
                             invoice.Message += "金额应大于0;";
                             result = false;
                         }
-                        if (invoice.TaxAmount<0)
+                        if (invoice.TaxAmount < 0)
                         {
                             invoice.Message += "税额应大于等于0;";
                             result = false;
@@ -99,23 +100,31 @@ namespace BudgetSystem.Bll
                     {
                         if (string.IsNullOrEmpty(invoice.ContractNO.Trim()))
                         {
-                            invoice.Message+="合同号不能为空;";
+                            invoice.Message += "合同号不能为空;";
                             result = false;
                         }
-                        else if(!budgetDal.CheckContractNO(0,invoice.ContractNO.Trim(),con))
+                        else
                         {
-                           invoice.Message+= "合同号不存在;";
-                           result = false;
+                            int budgetId = budgetDal.CheckContractNO(invoice.ContractNO.Trim(), con);
+                            if (budgetId < 0)
+                            {
+                                invoice.Message += "合同号不存在;";
+                                result = false;
+                            }
+                            else
+                            {
+                                invoice.BudgetID = budgetId;
+                            }
                         }
                         if (string.IsNullOrEmpty(invoice.Number.Trim()))
                         {
-                            invoice.Message+="发票号不能为空;";
+                            invoice.Message += "发票号不能为空;";
                             result = false;
                         }
-                        else if(invoiceDal.CheckNumber(0,invoice.Number,con,null))
+                        else if (invoiceDal.CheckNumber(0, invoice.Number, con, null))
                         {
-                           invoice.Message+="发票号已存在;";
-                           result = false;
+                            invoice.Message += "发票号已存在;";
+                            result = false;
                         }
                         if (invoice.ExchangeRate <= 0)
                         {
@@ -141,11 +150,11 @@ namespace BudgetSystem.Bll
                         {
                             invoice.Message += "进料款应大于等于0;";
                             result = false;
-                        } 
+                        }
                     }
                 }
-                
-            }); 
+
+            });
             return result;
         }
         /// <summary>
@@ -161,7 +170,7 @@ namespace BudgetSystem.Bll
             {
                 return false;
             }
-            this.ExecuteWithTransaction((con,tran) =>
+            this.ExecuteWithTransaction((con, tran) =>
             {
                 if (isFinanceImport)
                 {

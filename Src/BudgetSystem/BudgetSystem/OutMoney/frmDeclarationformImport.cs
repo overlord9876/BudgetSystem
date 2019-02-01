@@ -157,12 +157,17 @@ namespace BudgetSystem.InMoney
                 e.Valid = false;
                 return;
             }
-            if (!dm.CheckContractNO(df.ContractNO))
+            int budgetId = dm.CheckContractNO(df.ContractNO);
+            if (budgetId < 0)
             {
                 e.ErrorText = "合同号不存在";
                 df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
+            }
+            else
+            {
+                df.BudgetID = budgetId;
             }
             if (string.IsNullOrEmpty(df.Currency.Trim()))
             {

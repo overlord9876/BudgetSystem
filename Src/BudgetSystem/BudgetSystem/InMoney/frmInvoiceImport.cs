@@ -219,11 +219,19 @@ namespace BudgetSystem.InMoney
                     e.Valid = false;
                     return;
                 }
-                else if (!bm.CheckContractNO(0, invoice.ContractNO.Trim()))
+                else
                 {
-                    e.ErrorText = "合同号不存在;";
-                    e.Valid = false;
-                    return;
+                    int budgetId = bm.CheckContractNO(invoice.ContractNO.Trim());
+                    if (budgetId < 0)
+                    {
+                        e.ErrorText = "合同号不存在;";
+                        e.Valid = false;
+                        return;
+                    }
+                    else
+                    {
+                        invoice.BudgetID = budgetId;
+                    }
                 }
                 if (string.IsNullOrEmpty(invoice.Number.Trim()))
                 {

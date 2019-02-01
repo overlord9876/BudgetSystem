@@ -40,6 +40,11 @@ namespace BudgetSystem.Entity
         public string ContractNO { get; set; }
 
         /// <summary>
+        /// 合同ID
+        /// </summary>
+        public int BudgetID { get; set; }
+
+        /// <summary>
         /// 是否已报告延期收款
         /// </summary>
         public bool IsReport { get; set; }
@@ -58,5 +63,10 @@ namespace BudgetSystem.Entity
         /// 验证消息
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        public string Name { get; set; }
     }
 }

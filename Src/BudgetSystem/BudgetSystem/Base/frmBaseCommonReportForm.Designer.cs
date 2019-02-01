@@ -42,20 +42,26 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.lcgGrid = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcGridBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgPivote = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStatBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcList = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem = new DevExpress.XtraLayout.SplitterItem();
+            this.lcgGrid = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcGridBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.pivotViewBar = new DevExpress.XtraBars.Bar();
             this.btnSaveView = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteView = new DevExpress.XtraBars.BarButtonItem();
             this.btnShowOrVisible = new DevExpress.XtraBars.BarButtonItem();
             this.gridViewBar = new DevExpress.XtraBars.Bar();
+            this.startDate = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.endDate = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listBox)).BeginInit();
@@ -66,15 +72,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPivote)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -159,8 +170,9 @@
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(24, 49);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 26);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 29);
             // 
             // barDockControlTop
             // 
@@ -215,44 +227,6 @@
             this.lcgGrid,
             this.lcgPivote});
             this.tabbedControlGroup1.Text = "TabControl";
-            // 
-            // lcgGrid
-            // 
-            this.lcgGrid.CustomizationFormText = "表格视图";
-            this.lcgGrid.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.lcGridBar});
-            this.lcgGrid.Location = new System.Drawing.Point(0, 0);
-            this.lcgGrid.Name = "lcgGrid";
-            this.lcgGrid.Size = new System.Drawing.Size(1687, 688);
-            this.lcgGrid.Text = "表格视图";
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.gridControl;
-            this.layoutControlItem1.CustomizationFormText = "表格";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
-            this.layoutControlItem1.Text = "表格";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // lcGridBar
-            // 
-            this.lcGridBar.Control = this.barDockControlBottom;
-            this.lcGridBar.CustomizationFormText = "表格视图工具栏";
-            this.lcGridBar.Location = new System.Drawing.Point(0, 0);
-            this.lcGridBar.MaxSize = new System.Drawing.Size(0, 30);
-            this.lcGridBar.MinSize = new System.Drawing.Size(1, 30);
-            this.lcGridBar.Name = "lcGridBar";
-            this.lcGridBar.Size = new System.Drawing.Size(1687, 30);
-            this.lcGridBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lcGridBar.Text = "lcGridBar";
-            this.lcGridBar.TextSize = new System.Drawing.Size(0, 0);
-            this.lcGridBar.TextToControlDistance = 0;
-            this.lcGridBar.TextVisible = false;
             // 
             // lcgPivote
             // 
@@ -314,6 +288,44 @@
             this.splitterItem.Name = "splitterItem";
             this.splitterItem.Size = new System.Drawing.Size(5, 658);
             // 
+            // lcgGrid
+            // 
+            this.lcgGrid.CustomizationFormText = "表格视图";
+            this.lcgGrid.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.lcGridBar});
+            this.lcgGrid.Location = new System.Drawing.Point(0, 0);
+            this.lcgGrid.Name = "lcgGrid";
+            this.lcgGrid.Size = new System.Drawing.Size(1687, 688);
+            this.lcgGrid.Text = "表格视图";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gridControl;
+            this.layoutControlItem1.CustomizationFormText = "表格";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
+            this.layoutControlItem1.Text = "表格";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // lcGridBar
+            // 
+            this.lcGridBar.Control = this.barDockControlBottom;
+            this.lcGridBar.CustomizationFormText = "表格视图工具栏";
+            this.lcGridBar.Location = new System.Drawing.Point(0, 0);
+            this.lcGridBar.MaxSize = new System.Drawing.Size(0, 30);
+            this.lcGridBar.MinSize = new System.Drawing.Size(1, 30);
+            this.lcGridBar.Name = "lcGridBar";
+            this.lcGridBar.Size = new System.Drawing.Size(1687, 30);
+            this.lcGridBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcGridBar.Text = "lcGridBar";
+            this.lcGridBar.TextSize = new System.Drawing.Size(0, 0);
+            this.lcGridBar.TextToControlDistance = 0;
+            this.lcGridBar.TextVisible = false;
+            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -327,8 +339,15 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnShowOrVisible,
             this.btnSaveView,
-            this.btnDeleteView});
-            this.barManager1.MaxItemId = 3;
+            this.btnDeleteView,
+            this.startDate,
+            this.endDate});
+            this.barManager1.MaxItemId = 6;
+            this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemComboBox1,
+            this.repositoryItemTextEdit1,
+            this.repositoryItemDateEdit1,
+            this.repositoryItemTextEdit2});
             // 
             // pivotViewBar
             // 
@@ -339,7 +358,9 @@
             this.pivotViewBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveView),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteView),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnShowOrVisible, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnShowOrVisible, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.startDate, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.endDate)});
             this.pivotViewBar.OptionsBar.AllowQuickCustomization = false;
             this.pivotViewBar.OptionsBar.DisableCustomization = true;
             this.pivotViewBar.OptionsBar.DrawDragBorder = false;
@@ -380,6 +401,48 @@
             this.gridViewBar.OptionsBar.UseWholeRow = true;
             this.gridViewBar.Text = "Custom 2";
             // 
+            // startDate
+            // 
+            this.startDate.Caption = "开始时间";
+            this.startDate.Edit = this.repositoryItemDateEdit1;
+            this.startDate.Id = 3;
+            this.startDate.Name = "startDate";
+            this.startDate.Width = 100;
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
+            this.repositoryItemDateEdit1.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            // 
+            // endDate
+            // 
+            this.endDate.Caption = "结束时间";
+            this.endDate.Edit = this.repositoryItemDateEdit1;
+            this.endDate.Id = 5;
+            this.endDate.Name = "endDate";
+            this.endDate.Width = 100;
+            // 
+            // repositoryItemTextEdit2
+            // 
+            this.repositoryItemTextEdit2.AutoHeight = false;
+            this.repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
+            // 
             // frmBaseCommonReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -399,15 +462,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPivote)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,5 +509,11 @@
         protected DevExpress.XtraLayout.SplitterItem splitterItem;
         protected DevExpress.XtraLayout.LayoutControlItem lcList;
         protected DevExpress.XtraBars.BarButtonItem btnDeleteView;
+        private DevExpress.XtraBars.BarEditItem startDate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraBars.BarEditItem endDate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
     }
 }

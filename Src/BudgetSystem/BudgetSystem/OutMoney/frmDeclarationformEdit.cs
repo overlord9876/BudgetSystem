@@ -21,6 +21,7 @@ namespace BudgetSystem
         public frmDeclarationformEdit()
         {
             InitializeComponent();
+            txtExportDate.EditValue = DateTime.Now;
         }
 
         private void frmDeclarationformEdit_Load(object sender, EventArgs e)
@@ -98,9 +99,12 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.cboBudget, "请选择合同号");
             }
-            else if (!dm.CheckContractNO((this.cboBudget.EditValue as Budget).ContractNO))
+            else
             {
-                this.dxErrorProvider1.SetError(this.cboBudget, "合同号不存在");
+                if (dm.CheckContractNO((this.cboBudget.EditValue as Budget).ContractNO) < 0)
+                {
+                    this.dxErrorProvider1.SetError(this.cboBudget, "合同号不存在");
+                }
             }
         }
 

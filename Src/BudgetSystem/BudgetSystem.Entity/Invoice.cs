@@ -30,6 +30,11 @@ namespace BudgetSystem.Entity
         public string ContractNO { get; set; }
 
         /// <summary>
+        /// 合同ID
+        /// </summary>
+        public int BudgetID { get; set; }
+
+        /// <summary>
         /// 原币
         /// </summary>
         public decimal OriginalCoin { get; set; }

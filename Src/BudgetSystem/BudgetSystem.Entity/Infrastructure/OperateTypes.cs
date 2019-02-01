@@ -119,6 +119,33 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 归档
         /// </summary>
-        Archive
+        Archive,
+
+        /// <summary>
+        /// 合同报表
+        /// </summary>
+        BudgetReport,
+
+        /// <summary>
+        /// 客户报表
+        /// </summary>
+        CustomerReport,
+
+        /// <summary>
+        /// 供应商报表
+        /// </summary>
+        SlipperReport,
+        /// <summary>
+        /// 业务员报表
+        /// </summary>
+        SalemenReport,
+        /// <summary>
+        /// 部门报表
+        /// </summary>
+        DepartmentReport,
+        /// <summary>
+        /// 公司报表
+        /// </summary>
+        CompanyReport,
     }
 }

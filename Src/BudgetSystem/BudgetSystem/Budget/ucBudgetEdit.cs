@@ -50,7 +50,6 @@ namespace BudgetSystem
         public ucBudgetEdit()
         {
             InitializeComponent();
-            this.chkTradeMode1.Checked = true;
             this.rgTradeNature.EditValue = 1;
             this.bgvInProductDetail.DataSourceChanged += new EventHandler(bgvInProductDetail_DataSourceChanged);
         }
@@ -95,7 +94,7 @@ namespace BudgetSystem
             {
                 //新增
                 this.CurrentBudget = new Budget();
-                CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim() + this.lblTradeMode.Text;
+                CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim();
                 CurrentBudget.CreateDate = DateTime.Now;
                 CurrentBudget.Department = RunInfo.Instance.CurrentUser.Department;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
@@ -106,7 +105,7 @@ namespace BudgetSystem
             }
             CurrentBudget.AdvancePayment = this.txtAdvancePayment.Value;
             CurrentBudget.BankCharges = this.txtBankCharges.Value;
-            CurrentBudget.Commission = this.txtCommission.Value; 
+            CurrentBudget.Commission = this.txtCommission.Value;
             CurrentBudget.Days = Convert.ToInt32(this.txtDays.EditValue);
             CurrentBudget.FeedMoney = this.txtFeedMoney.Value;
             CurrentBudget.DirectCosts = this.txtDirectCosts.Value;
@@ -229,6 +228,11 @@ namespace BudgetSystem
             {
                 this.txtContractNO.Properties.ReadOnly = true;
                 this.pceMainCustomer.Properties.ReadOnly = true;
+                this.chkTradeMode1.Properties.ReadOnly = true;
+                this.chkTradeMode2.Properties.ReadOnly = true;
+                this.chkTradeMode3.Properties.ReadOnly = true;
+                this.chkTradeMode4.Properties.ReadOnly = true;
+                this.chkTradeMode5.Properties.ReadOnly = true;
                 BindingBudget(CurrentBudget.ID);
             }
             else if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print)
@@ -304,9 +308,8 @@ namespace BudgetSystem
                 this.txtAdvancePayment.EditValue = budget.AdvancePayment;
                 this.txtBankCharges.EditValue = budget.BankCharges;
                 this.txtCommission.EditValue = budget.Commission;
-                this.txtContractNO.Text = budget.ContractNO.Substring(budget.ContractNO.LastIndexOf('-')+1,4);
+                this.txtContractNO.Text = budget.ContractNO.Substring(budget.ContractNO.LastIndexOf('-') + 1);
                 this.lblContractNOPrefix.Text = budget.ContractNO.Substring(0, budget.ContractNO.LastIndexOf('-') + 1);
-                this.lblTradeMode.Text = GetTradeModeString();
                 this.txtDays.EditValue = budget.Days;
                 this.txtDepartment.EditValue = budget.DepartmentDesc;
                 this.txtFeedMoney.EditValue = budget.FeedMoney;
@@ -337,8 +340,8 @@ namespace BudgetSystem
 
                 List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType == (int)EnumSupplierType.其它供方);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
-                this.pceOtherSupplier.Tag = otherSuppliers; 
-                 
+                this.pceOtherSupplier.Tag = otherSuppliers;
+
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;
@@ -358,18 +361,18 @@ namespace BudgetSystem
                     {
                         return;
                     }
-                    foreach(FlowRunPoint point in points)
+                    foreach (FlowRunPoint point in points)
                     {
                         if (point.NodeValueRemark == null || point.State == false)
                         {
                             continue;
                         }
-                        switch(point.NodeValueRemark)
+                        switch (point.NodeValueRemark)
                         {
                             //case "业务员":
                             //    this.txtFlowSalesman.Text = point.RealName;
                             //    break;
-                            case  "部门经理":
+                            case "部门经理":
                                 this.txtFlowManager.Text = point.RealName;
                                 break;
                             case "贸管部经理":
@@ -450,27 +453,28 @@ namespace BudgetSystem
 
         private string GetTradeModeString()
         {
+            string tradeMode = string.Empty;
             if (this.chkTradeMode1.Checked)
             {
-                return " ";
+                tradeMode += " ";
             }
-            else if (this.chkTradeMode2.Checked)
+            if (this.chkTradeMode2.Checked)
             {
-                return "L";
+                tradeMode += "L";
             }
-            else if (this.chkTradeMode3.Checked)
+            if (this.chkTradeMode3.Checked)
             {
-                return "G";
+                tradeMode += "G";
             }
-            else if (this.chkTradeMode4.Checked)
+            if (this.chkTradeMode4.Checked)
             {
-                return "C";
+                tradeMode += "C";
             }
-            else if (this.chkTradeMode5.Checked)
+            if (this.chkTradeMode5.Checked)
             {
-                return "N";
+                tradeMode += "N";
             }
-            return "";
+            return tradeMode;
         }
 
         #region Check Method
@@ -510,13 +514,13 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同编号");
             }
-            Match match = Regex.Match(contractNo, "^\\d{4}$");
+            Match match = Regex.Match(contractNo, "^\\d{4}\\s?L?G?C?N?$");
             if (!match.Success)
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为4位数字");
+                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为4位数字加贸易方式字母");
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
-            if (bm.CheckContractNO(id,this.lblContractNOPrefix+ contractNo+this.lblTradeMode.Text))
+            if (bm.CheckContractNO(id, this.lblContractNOPrefix + contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
             }
@@ -1296,7 +1300,16 @@ namespace BudgetSystem
             {
                 return;
             }
-            this.lblTradeMode.Text = this.GetTradeModeString();
+            string tradeModeString = this.GetTradeModeString();
+            if (this.txtContractNO.Tag == null)
+            {
+                this.txtContractNO.Text += tradeModeString;
+            }
+            else
+            {
+                this.txtContractNO.Text = this.txtContractNO.Text.TrimEnd(txtContractNO.Tag.ToString().ToCharArray())+tradeModeString;
+            }
+            txtContractNO.Tag = tradeModeString;
         }
         #endregion
 

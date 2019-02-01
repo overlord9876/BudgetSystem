@@ -227,6 +227,30 @@ namespace BudgetSystem.Dal
             }
         }
 
+        /// <summary>
+        /// 验证合同编号是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public int CheckContractNO(string contractNo, IDbConnection con)
+        {
+
+            int budgetId = -1;
+            string selectSql = @"SELECT  b.id FROM `Budget` b  
+                                    WHERE ContractNO=@ContractNO";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                budgetId = (int)obj;
+            }
+            return budgetId;
+        }
+
         public void ModifyBudgetState(int id, EnumBudgetState state, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = "Update `Budget` Set  `State` = @State  Where `ID` = @ID";

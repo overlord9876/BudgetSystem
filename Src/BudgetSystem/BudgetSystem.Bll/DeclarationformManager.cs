@@ -51,11 +51,11 @@ namespace BudgetSystem.Bll
                });
         }
 
-        public bool CheckContractNO(string contractNO)
+        public int CheckContractNO(string contractNO)
         {
-            return this.ExecuteWithoutTransaction<bool>((con) =>
+            return this.ExecuteWithoutTransaction<int>((con) =>
             {
-                return budgetDal.CheckContractNO(0, contractNO, con);
+                return budgetDal.CheckContractNO(contractNO, con);
             });
         }
 
@@ -92,10 +92,18 @@ namespace BudgetSystem.Bll
                         df.Message += "合同号不能为空;";
                         result = false;
                     }
-                    else if (!budgetDal.CheckContractNO(0, df.ContractNO.Trim(), con))
+                    else
                     {
-                        df.Message += "合同号不存在;";
-                        result = false;
+                        int budgetId = budgetDal.CheckContractNO(df.ContractNO.Trim(), con);
+                        if (budgetId < 0)
+                        {
+                            df.Message += "合同号不存在;";
+                            result = false;
+                        }
+                        else
+                        {
+                            df.BudgetID = budgetId;
+                        }
                     }
                     if (df.ExportAmount <= 0)
                     {

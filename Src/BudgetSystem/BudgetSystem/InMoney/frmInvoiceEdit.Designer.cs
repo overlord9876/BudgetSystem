@@ -48,7 +48,6 @@
             this.txtExchangeRate = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtCustomsDeclaration = new DevExpress.XtraEditors.TextEdit();
             this.txtNumber = new DevExpress.XtraEditors.TextEdit();
-            this.txtContractNO = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -59,7 +58,6 @@
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -72,6 +70,23 @@
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.cboBudget = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCustomerNames = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSeaport = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFinanceImportDate.Properties)).BeginInit();
@@ -90,7 +105,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomsDeclaration.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractNO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
@@ -101,7 +115,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -114,10 +127,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cboBudget);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.txtFinanceImportDate);
@@ -136,7 +153,6 @@
             this.layoutControl1.Controls.Add(this.txtExchangeRate);
             this.layoutControl1.Controls.Add(this.txtCustomsDeclaration);
             this.layoutControl1.Controls.Add(this.txtNumber);
-            this.layoutControl1.Controls.Add(this.txtContractNO);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem8,
@@ -214,6 +230,7 @@
             // 
             // txtTaxAmount
             // 
+            this.txtTaxAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTaxAmount.IsSupportNegative = false;
             this.txtTaxAmount.Location = new System.Drawing.Point(458, 186);
             this.txtTaxAmount.Name = "txtTaxAmount";
@@ -224,6 +241,7 @@
             // 
             // txtPayment
             // 
+            this.txtPayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtPayment.IsSupportNegative = false;
             this.txtPayment.Location = new System.Drawing.Point(90, 186);
             this.txtPayment.Name = "txtPayment";
@@ -261,6 +279,7 @@
             // 
             // txtTaxRebateRate
             // 
+            this.txtTaxRebateRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtTaxRebateRate.IsSupportNegative = false;
             this.txtTaxRebateRate.Location = new System.Drawing.Point(441, 70);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
@@ -271,6 +290,7 @@
             // 
             // txtOriginalCoin
             // 
+            this.txtOriginalCoin.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtOriginalCoin.IsSupportNegative = false;
             this.txtOriginalCoin.Location = new System.Drawing.Point(75, 41);
             this.txtOriginalCoin.Name = "txtOriginalCoin";
@@ -282,6 +302,7 @@
             // txtFeedMoney
             // 
             this.txtFeedMoney.EditValue = "";
+            this.txtFeedMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtFeedMoney.IsSupportNegative = false;
             this.txtFeedMoney.Location = new System.Drawing.Point(441, 99);
             this.txtFeedMoney.Name = "txtFeedMoney";
@@ -292,6 +313,7 @@
             // 
             // txtCommission
             // 
+            this.txtCommission.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCommission.IsSupportNegative = false;
             this.txtCommission.Location = new System.Drawing.Point(75, 99);
             this.txtCommission.Name = "txtCommission";
@@ -302,6 +324,7 @@
             // 
             // txtExchangeRate
             // 
+            this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(441, 41);
             this.txtExchangeRate.Name = "txtExchangeRate";
@@ -320,21 +343,12 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(441, 12);
+            this.txtNumber.Location = new System.Drawing.Point(442, 12);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Properties.MaxLength = 8;
-            this.txtNumber.Size = new System.Drawing.Size(299, 25);
+            this.txtNumber.Size = new System.Drawing.Size(298, 25);
             this.txtNumber.StyleController = this.layoutControl1;
             this.txtNumber.TabIndex = 8;
-            // 
-            // txtContractNO
-            // 
-            this.txtContractNO.Location = new System.Drawing.Point(75, 12);
-            this.txtContractNO.Name = "txtContractNO";
-            this.txtContractNO.Properties.MaxLength = 30;
-            this.txtContractNO.Size = new System.Drawing.Size(299, 25);
-            this.txtContractNO.StyleController = this.layoutControl1;
-            this.txtContractNO.TabIndex = 7;
             // 
             // layoutControlItem8
             // 
@@ -441,7 +455,6 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlItem2,
@@ -452,22 +465,13 @@
             this.emptySpaceItem1,
             this.emptySpaceItem2,
             this.layoutControlItem18,
-            this.layoutControlItem19});
+            this.layoutControlItem19,
+            this.layoutControlItem20});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(752, 389);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.txtContractNO;
-            this.layoutControlItem1.CustomizationFormText = "合同号";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(366, 29);
-            this.layoutControlItem1.Text = "合同号：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layoutControlItem6
             // 
@@ -513,9 +517,9 @@
             // 
             this.layoutControlItem3.Control = this.txtNumber;
             this.layoutControlItem3.CustomizationFormText = "发票号";
-            this.layoutControlItem3.Location = new System.Drawing.Point(366, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(367, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(366, 29);
+            this.layoutControlItem3.Size = new System.Drawing.Size(365, 29);
             this.layoutControlItem3.Text = "发票号：";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 18);
             // 
@@ -593,6 +597,153 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
+            // cboBudget
+            // 
+            this.cboBudget.Location = new System.Drawing.Point(75, 12);
+            this.cboBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboBudget.Name = "cboBudget";
+            this.cboBudget.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboBudget.Properties.NullText = "";
+            this.cboBudget.Properties.PopupSizeable = false;
+            this.cboBudget.Properties.View = this.gridView1;
+            this.cboBudget.Size = new System.Drawing.Size(300, 25);
+            this.cboBudget.StyleController = this.layoutControl1;
+            this.cboBudget.TabIndex = 2;
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcContractNO,
+            this.gcState,
+            this.gcTotalAmount,
+            this.gcSalesman,
+            this.gcDepartmentDesc,
+            this.gcCreateDate,
+            this.gcSignDate,
+            this.gcValidity,
+            this.gcCustomerNames,
+            this.gcTradeMode,
+            this.gcTradeNature,
+            this.gcSeaport,
+            this.gcAdvancePayment,
+            this.gcProfit});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowDetailButtons = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcContractNO
+            // 
+            this.gcContractNO.Caption = "合同号";
+            this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.Name = "gcContractNO";
+            this.gcContractNO.Visible = true;
+            this.gcContractNO.VisibleIndex = 0;
+            this.gcContractNO.Width = 150;
+            // 
+            // gcState
+            // 
+            this.gcState.Caption = "审批状态";
+            this.gcState.FieldName = "EnumFlowState";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 1;
+            this.gcState.Width = 80;
+            // 
+            // gcTotalAmount
+            // 
+            this.gcTotalAmount.Caption = "合同金额";
+            this.gcTotalAmount.FieldName = "TotalAmount";
+            this.gcTotalAmount.Name = "gcTotalAmount";
+            this.gcTotalAmount.Visible = true;
+            this.gcTotalAmount.VisibleIndex = 2;
+            this.gcTotalAmount.Width = 80;
+            // 
+            // gcSalesman
+            // 
+            this.gcSalesman.Caption = "业务员";
+            this.gcSalesman.FieldName = "SalesmanName";
+            this.gcSalesman.Name = "gcSalesman";
+            this.gcSalesman.Visible = true;
+            this.gcSalesman.VisibleIndex = 3;
+            this.gcSalesman.Width = 34;
+            // 
+            // gcDepartmentDesc
+            // 
+            this.gcDepartmentDesc.Caption = "业务员所在部门";
+            this.gcDepartmentDesc.FieldName = "Department";
+            this.gcDepartmentDesc.Name = "gcDepartmentDesc";
+            this.gcDepartmentDesc.Visible = true;
+            this.gcDepartmentDesc.VisibleIndex = 4;
+            this.gcDepartmentDesc.Width = 40;
+            // 
+            // gcCreateDate
+            // 
+            this.gcCreateDate.Caption = "录入时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            // 
+            // gcSignDate
+            // 
+            this.gcSignDate.Caption = "订约日期";
+            this.gcSignDate.FieldName = "SignDate";
+            this.gcSignDate.Name = "gcSignDate";
+            // 
+            // gcValidity
+            // 
+            this.gcValidity.Caption = "有效截止期";
+            this.gcValidity.FieldName = "Validity";
+            this.gcValidity.Name = "gcValidity";
+            // 
+            // gcCustomerNames
+            // 
+            this.gcCustomerNames.Caption = "客户名称";
+            this.gcCustomerNames.FieldName = "CustomerNames";
+            this.gcCustomerNames.Name = "gcCustomerNames";
+            // 
+            // gcTradeMode
+            // 
+            this.gcTradeMode.Caption = "贸易方式";
+            this.gcTradeMode.FieldName = "TradeMode";
+            this.gcTradeMode.Name = "gcTradeMode";
+            // 
+            // gcTradeNature
+            // 
+            this.gcTradeNature.Caption = "贸易性质";
+            this.gcTradeNature.FieldName = "TradeNature";
+            this.gcTradeNature.Name = "gcTradeNature";
+            // 
+            // gcSeaport
+            // 
+            this.gcSeaport.Caption = "交货口岸";
+            this.gcSeaport.FieldName = "Seaport";
+            this.gcSeaport.Name = "gcSeaport";
+            // 
+            // gcAdvancePayment
+            // 
+            this.gcAdvancePayment.Caption = "预付金额";
+            this.gcAdvancePayment.FieldName = "AdvancePayment";
+            this.gcAdvancePayment.Name = "gcAdvancePayment";
+            // 
+            // gcProfit
+            // 
+            this.gcProfit.Caption = "利润";
+            this.gcProfit.FieldName = "Profit";
+            this.gcProfit.Name = "gcProfit";
+            // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.cboBudget;
+            this.layoutControlItem20.CustomizationFormText = "合同号：";
+            this.layoutControlItem20.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(367, 29);
+            this.layoutControlItem20.Text = "合同号：";
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(60, 18);
+            // 
             // frmInvoiceEdit
             // 
             this.AcceptButton = this.btnSure;
@@ -623,7 +774,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtExchangeRate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomsDeclaration.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractNO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
@@ -634,7 +784,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -647,6 +796,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -659,7 +811,6 @@
         private BudgetSystem.CommonControl.TextEdit_Number txtExchangeRate;
         private DevExpress.XtraEditors.TextEdit txtCustomsDeclaration;
         private DevExpress.XtraEditors.TextEdit txtNumber;
-        private DevExpress.XtraEditors.TextEdit txtContractNO;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private BudgetSystem.CommonControl.TextEdit_Number txtTaxRebateRate;
         private BudgetSystem.CommonControl.TextEdit_Number txtOriginalCoin;
@@ -684,7 +835,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
@@ -696,6 +846,23 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
+        private DevExpress.XtraEditors.GridLookUpEdit cboBudget;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
+        private DevExpress.XtraGrid.Columns.GridColumn gcState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTotalAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentDesc;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSignDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcValidity;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCustomerNames;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTradeMode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTradeNature;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSeaport;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
+        private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
 
     }
 }

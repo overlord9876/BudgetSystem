@@ -20,11 +20,11 @@ namespace BudgetSystem
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private const string COMMONQUERY_MYCREATE = "我负责的";
-        private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "总经理审批合同";
-        private const string COMMONQUERY_MANAGERAPPROVAL = "部门经理审批合同";
-        private const string COMMONQUERY_ARCHIVEQUERY = "预算单归档数据";
+        private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "已完成审批预算单列表";
+        private const string COMMONQUERY_MANAGERAPPROVAL = "未完成审批预算单列表";
         private const string COMMONQUERY_ARCHIVEWARNINGQUERY = "预算单归档预警";
         private const string COMMONQUERY_FINANCEQUERY = "财务平账征求";
+        private const string COMMONQUERY_ARCHIVEQUERY = "预算单已归档合同列表";
         public frmBudgetQuery()
         {
             InitializeComponent();
@@ -56,11 +56,12 @@ namespace BudgetSystem
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
                                                                             { COMMONQUERY_MYCREATE,
-                                                                              COMMONQUERY_GENERALMANAGERAPPROVAL,
                                                                               COMMONQUERY_MANAGERAPPROVAL,
-                                                                              COMMONQUERY_ARCHIVEQUERY ,
+                                                                              COMMONQUERY_GENERALMANAGERAPPROVAL,     
                                                                               COMMONQUERY_ARCHIVEWARNINGQUERY,
-                                                                              COMMONQUERY_FINANCEQUERY});
+                                                                              COMMONQUERY_FINANCEQUERY,
+                                                                              COMMONQUERY_ARCHIVEQUERY
+                                                                              });
 
             this.RegeditPrintOperate();
 

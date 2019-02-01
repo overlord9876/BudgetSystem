@@ -208,10 +208,16 @@ namespace BudgetSystem.Entity
             
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.None,"选项管理模块",1400),
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.Save,"选项管理-维护选项",1410),
-
+                       
                         new Permisson(BusinessModules.BudgetReport,OperateTypes.None,"预算单报表",1500),
-                        new Permisson(BusinessModules.InMoneyReport,OperateTypes.None,"收款报表",1600),
-                        new Permisson(BusinessModules.OutMoneyReport,OperateTypes.None,"付款报表",1700),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.BudgetReport,"预算单报表-合同管理",1510),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.CustomerReport,"预算单报表-客户管理",1520),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.SlipperReport,"预算单报表-供应商管理",1530),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.SalemenReport,"预算单报表-业务员管理",1540),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.DepartmentReport,"预算单报表-部门管理",1550),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.CompanyReport,"预算单报表-公司管理",1560),
+                        //new Permisson(BusinessModules.InMoneyReport,OperateTypes.None,"客户管理",1600),
+                        //new Permisson(BusinessModules.OutMoneyReport,OperateTypes.None,"供应商管理",1700),
            
                     };
                 }

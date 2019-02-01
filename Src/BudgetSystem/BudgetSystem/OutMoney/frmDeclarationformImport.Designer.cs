@@ -31,6 +31,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcDeclarationform = new DevExpress.XtraGrid.GridControl();
             this.gvDeclarationform = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcCheckMessage = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ritxtContractNO = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcNO = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,7 +56,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ritxtOriginalCoin = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCheckMessage = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
@@ -123,6 +123,16 @@
             this.gvDeclarationform.OptionsDetail.ShowDetailTabs = false;
             this.gvDeclarationform.OptionsView.ShowFooter = true;
             this.gvDeclarationform.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcCheckMessage
+            // 
+            this.gcCheckMessage.AppearanceCell.ForeColor = System.Drawing.Color.Red;
+            this.gcCheckMessage.AppearanceCell.Options.UseForeColor = true;
+            this.gcCheckMessage.Caption = "验证消息";
+            this.gcCheckMessage.FieldName = "Message";
+            this.gcCheckMessage.Name = "gcCheckMessage";
+            this.gcCheckMessage.Visible = true;
+            this.gcCheckMessage.VisibleIndex = 0;
             // 
             // gridColumnContractNO
             // 
@@ -351,16 +361,6 @@
             this.gcContractNO.VisibleIndex = 1;
             this.gcContractNO.Width = 85;
             // 
-            // gcCheckMessage
-            // 
-            this.gcCheckMessage.AppearanceCell.ForeColor = System.Drawing.Color.Red;
-            this.gcCheckMessage.AppearanceCell.Options.UseForeColor = true;
-            this.gcCheckMessage.Caption = "验证消息";
-            this.gcCheckMessage.FieldName = "Message";
-            this.gcCheckMessage.Name = "gcCheckMessage";
-            this.gcCheckMessage.Visible = true;
-            this.gcCheckMessage.VisibleIndex = 0;
-            // 
             // frmDeclarationformImport
             // 
             this.AcceptButton = this.btnSure;
@@ -369,7 +369,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1466, 550);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmDeclarationformImport";
             this.Text = "导入交单信息";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

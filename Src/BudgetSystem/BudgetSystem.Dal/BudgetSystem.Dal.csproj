@@ -68,6 +68,7 @@
     <Compile Include="UserDal.cs" />
     <Compile Include="DeclarationformDal.cs" />
     <Compile Include="VersionDal.cs" />
+    <Compile Include="ReportDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BudgetSystem.Entity\BudgetSystem.Entity.csproj">

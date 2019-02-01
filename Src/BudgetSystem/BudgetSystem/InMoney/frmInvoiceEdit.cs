@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.InMoney
 {
@@ -28,6 +29,15 @@ namespace BudgetSystem.InMoney
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private void frmInvoiceEdit_Load(object sender, EventArgs e)
         {
+            BudgetQueryCondition condition = new BudgetQueryCondition();
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
+            }
+            List<Budget> budgetList = bm.GetAllBudget(condition);
+
+            cboBudget.Properties.DataSource = budgetList;
+
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 SetLayoutControlStyle(EditFormWorkModels.New);
@@ -44,7 +54,7 @@ namespace BudgetSystem.InMoney
                 SetLayoutControlStyle(EditFormWorkModels.View);
                 this.txtCode.Properties.ReadOnly = true;
                 this.txtCommission.Properties.ReadOnly = true;
-                this.txtContractNO.Properties.ReadOnly = true;
+                this.cboBudget.Properties.ReadOnly = true;
                 this.txtCustomsDeclaration.Properties.ReadOnly = true;
                 this.txtExchangeRate.Properties.ReadOnly = true;
                 this.txtFeedMoney.Properties.ReadOnly = true;
@@ -73,7 +83,11 @@ namespace BudgetSystem.InMoney
             {
                 this.txtCode.EditValue = invoice.Code;
                 this.txtCommission.EditValue = invoice.Commission;
-                this.txtContractNO.EditValue = invoice.ContractNO;
+                List<Budget> budgetList = cboBudget.Properties.DataSource as List<Budget>;
+                if (budgetList != null)
+                {
+                    this.cboBudget.EditValue = budgetList.Find(o => o.ID == invoice.BudgetID);
+                }
                 this.txtCustomsDeclaration.EditValue = invoice.CustomsDeclaration;
                 this.txtExchangeRate.EditValue = invoice.ExchangeRate;
                 this.txtFeedMoney.EditValue = invoice.FeedMoney;
@@ -98,18 +112,12 @@ namespace BudgetSystem.InMoney
 
         private void CheckNewInput()
         {
-            if (string.IsNullOrEmpty(this.txtContractNO.Text.Trim()))
+            Budget budget = cboBudget.EditValue as Budget;
+            if (budget == null)
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同号");
+                this.dxErrorProvider1.SetError(this.cboBudget, "请选择合同号");
             }
-            else
-            {
-                bool result = bm.CheckContractNO(this.CurrentInvoice == null ? 0 : this.CurrentInvoice.ID, txtContractNO.Text.Trim());
-                if (result == false)
-                {
-                    this.dxErrorProvider1.SetError(this.txtContractNO, "合同号不存在");
-                }
-            }
+
             if (string.IsNullOrEmpty(this.txtNumber.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtNumber, "请输入发票号");
@@ -162,18 +170,8 @@ namespace BudgetSystem.InMoney
             {
                 return;
             }
-            Invoice invoice = new Invoice();
-            invoice.ContractNO = this.txtContractNO.Text.Trim();
-            invoice.Number = this.txtNumber.Text.Trim();
-            invoice.OriginalCoin = this.txtOriginalCoin.Value;
-            invoice.ExchangeRate = this.txtExchangeRate.FloatValue;
-            invoice.CustomsDeclaration = this.txtCustomsDeclaration.Text.Trim();
-            invoice.TaxRebateRate = this.txtTaxRebateRate.FloatValue;
-            invoice.Commission = this.txtCommission.Value;
-            invoice.FeedMoney = this.txtFeedMoney.Value;
-            invoice.ImportUser = RunInfo.Instance.CurrentUser.UserName;
-            invoice.ImportDate = DateTime.Now;
-            im.AddInvoice(invoice);
+            InputData();
+            im.AddInvoice(CurrentInvoice);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -186,7 +184,22 @@ namespace BudgetSystem.InMoney
             {
                 return;
             }
-            CurrentInvoice.ContractNO = this.txtContractNO.Text.Trim();
+            InputData();
+            im.ModifyInvoice(CurrentInvoice);
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void InputData()
+        {
+            if (CurrentInvoice == null)
+            {
+                CurrentInvoice = new Invoice();
+            }
+
+            Budget budget = (Budget)this.cboBudget.EditValue;
+            CurrentInvoice.ContractNO = budget.ContractNO;
+            CurrentInvoice.BudgetID = budget.ID;
             CurrentInvoice.Number = this.txtNumber.Text.Trim();
             CurrentInvoice.OriginalCoin = this.txtOriginalCoin.Value;
             CurrentInvoice.ExchangeRate = this.txtExchangeRate.FloatValue;
@@ -194,16 +207,8 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.TaxRebateRate = this.txtTaxRebateRate.FloatValue;
             CurrentInvoice.Commission = this.txtCommission.Value;
             CurrentInvoice.FeedMoney = this.txtFeedMoney.Value;
-            CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
-            CurrentInvoice.FinanceImportDate = DateTime.Now;
-            CurrentInvoice.Code = this.txtCode.Text.Trim();
-            CurrentInvoice.TaxpayerID = this.txtTaxpayerID.Text.Trim();
-            CurrentInvoice.SupplierName = this.txtSupplierName.Text.Trim();
-            CurrentInvoice.Payment = this.txtPayment.Value;
-            CurrentInvoice.TaxAmount = this.txtPayment.Value;
-            im.ModifyInvoice(CurrentInvoice);
-
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            CurrentInvoice.ImportUser = RunInfo.Instance.CurrentUser.UserName;
+            CurrentInvoice.ImportDate = DateTime.Now;
         }
 
         public override void PrintData()

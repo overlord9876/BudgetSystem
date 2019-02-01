@@ -23,7 +23,7 @@ namespace BudgetSystem.Base
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
         {
-           
+
         }
 
 
@@ -37,8 +37,8 @@ namespace BudgetSystem.Base
 
 
         protected virtual void InitData()
-        { 
-        
+        {
+
         }
 
         protected void InitShowStyle()
@@ -65,7 +65,7 @@ namespace BudgetSystem.Base
 
             foreach (var kv in GridToolBarActions)
             {
-                DevExpress.XtraBars.BarItem item = new DevExpress.XtraBars.BarButtonItem(this.barManager1,kv.Key);
+                DevExpress.XtraBars.BarItem item = new DevExpress.XtraBars.BarButtonItem(this.barManager1, kv.Key);
                 this.gridViewBar.AddItem(item);
                 item.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(GridBarItem_ItemClick);
             }
@@ -89,13 +89,13 @@ namespace BudgetSystem.Base
 
         }
 
-     
+
 
         private bool GetBarShowState(Bar bar)
         {
             bool isBarEmpty = true;
 
-            
+
             foreach (DevExpress.XtraBars.BarItemLink item in bar.ItemLinks)
             {
                 if (item.Visible)
@@ -122,9 +122,15 @@ namespace BudgetSystem.Base
 
         }
 
+        protected void ClearColumns()
+        {
+            i = 0;
+            gridView.Columns.Clear();
+            this.pivotGridControl.Fields.Clear();
+        }
 
         int i;
-        protected GridColumn CreateGridColumn(string caption, string fieldName, int width=0)
+        protected GridColumn CreateGridColumn(string caption, string fieldName, int width = 0)
         {
             GridColumn gc = new GridColumn();
             gc.Name = caption;
@@ -141,7 +147,7 @@ namespace BudgetSystem.Base
         }
 
 
-        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea,FormatType valueFormatType= FormatType.None,string valueFormatString="")
+        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea, FormatType valueFormatType = FormatType.None, string valueFormatString = "")
         {
             PivotGridField field = new PivotGridField(fieldName, area);
             field.Name = caption;
@@ -217,15 +223,15 @@ namespace BudgetSystem.Base
                     this.LoadReportConfig();
                 }
                 catch
-                { 
-                
+                {
+
                 }
-            
+
             }
 
         }
 
-        private string reportName="";
+        private string reportName = "";
         protected string ReportName
         {
             get
@@ -249,7 +255,7 @@ namespace BudgetSystem.Base
 
         List<ReportConfig> reportConfigs;
 
-       
+
 
         private string GetReportFileFile(string name)
         {
@@ -283,8 +289,8 @@ namespace BudgetSystem.Base
                     }
                 }
                 catch
-                { 
-                
+                {
+
                 }
             }
 
@@ -319,14 +325,15 @@ namespace BudgetSystem.Base
                 try
                 {
                     this.pivotGridControl.RestoreLayoutFromXml(GetReportFileFile(rc.FileName));
+                    LoadData();
                 }
                 catch
-                { 
-                
+                {
+
                 }
-            
-            
-            
+
+
+
             }
 
 
