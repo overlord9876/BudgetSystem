@@ -12,19 +12,19 @@ using DevExpress.Utils;
 
 namespace BudgetSystem.Report
 {
-    public partial class frmBudgetReport : Base.frmBaseCommonReportForm
+    public partial class frmCompanyReport : Base.frmBaseCommonReportForm
     {
-        public frmBudgetReport()
+        public frmCompanyReport()
         {
             InitializeComponent();
-            this.Module = BusinessModules.BudgetReport;
+            this.Module = BusinessModules.CompanyReport;
         }
 
         protected override void InitLayout()
         {
             base.InitModelOperate();
 
-            InitBudgetReportGrid();
+            InitCompanyReportGrid();
         }
 
         protected override void InitModelOperate()
@@ -32,9 +32,11 @@ namespace BudgetSystem.Report
             this.supportPivotGrid = true;
             this.supportPivotGridSaveView = true;
         }
+
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
             base.OperateHandled(operate, e);
+
         }
 
         private void frmTestReport1_Load(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace BudgetSystem.Report
             this.pivotGridControl.DataSource = lst;
         }
 
-        private void InitBudgetReportGrid()
+        private void InitCompanyReportGrid()
         {
             ClearColumns();
             base.CreateGridColumn("合同号", "ContractNO");

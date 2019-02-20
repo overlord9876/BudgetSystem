@@ -29,7 +29,6 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.Module = BusinessModules.BuggetManagement;
-
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
 

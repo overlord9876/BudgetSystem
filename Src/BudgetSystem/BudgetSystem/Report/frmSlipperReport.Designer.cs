@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem.Report
 {
-    partial class frmTestReport1
+    partial class frmSlipperReport
     {
         /// <summary>
         /// Required designer variable.
@@ -61,7 +61,7 @@
             // 
             // listBox
             // 
-            this.listBox.Size = new System.Drawing.Size(266, 708);
+            this.listBox.Size = new System.Drawing.Size(252, 708);
             // 
             // tabbedControlGroup1
             // 
@@ -81,8 +81,8 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Location = new System.Drawing.Point(275, 30);
-            this.layoutControlItem3.Size = new System.Drawing.Size(1050, 712);
+            this.layoutControlItem3.Location = new System.Drawing.Point(261, 30);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1064, 712);
             // 
             // lcStatBar
             // 
@@ -90,20 +90,20 @@
             // 
             // splitterItem
             // 
-            this.splitterItem.Location = new System.Drawing.Point(270, 30);
+            this.splitterItem.Location = new System.Drawing.Point(256, 30);
             this.splitterItem.Size = new System.Drawing.Size(5, 712);
             // 
             // lcList
             // 
-            this.lcList.Size = new System.Drawing.Size(270, 712);
+            this.lcList.Size = new System.Drawing.Size(256, 712);
             // 
-            // frmTestReport1
+            // frmBudgetReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1369, 811);
-            this.Name = "frmTestReport1";
-            this.Text = "测试报表";
+            this.Name = "frmBudgetReport";
+            this.Text = "预算单报表";
             this.Load += new System.EventHandler(this.frmTestReport1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

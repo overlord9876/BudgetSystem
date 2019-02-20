@@ -12,19 +12,20 @@ using DevExpress.Utils;
 
 namespace BudgetSystem.Report
 {
-    public partial class frmBudgetReport : Base.frmBaseCommonReportForm
+    public partial class frmDepartmentReport : Base.frmBaseCommonReportForm
     {
-        public frmBudgetReport()
+        public frmDepartmentReport()
         {
             InitializeComponent();
-            this.Module = BusinessModules.BudgetReport;
+            this.Module = BusinessModules.DepartmentReport;
         }
 
         protected override void InitLayout()
         {
             base.InitModelOperate();
 
-            InitBudgetReportGrid();
+            InitDepartmentReportGrid();
+
         }
 
         protected override void InitModelOperate()
@@ -37,7 +38,7 @@ namespace BudgetSystem.Report
             base.OperateHandled(operate, e);
         }
 
-        private void frmTestReport1_Load(object sender, EventArgs e)
+        private void frmDepartment_Load(object sender, EventArgs e)
         {
             InitShowStyle();
         }
@@ -55,7 +56,7 @@ namespace BudgetSystem.Report
             this.pivotGridControl.DataSource = lst;
         }
 
-        private void InitBudgetReportGrid()
+        private void InitDepartmentReportGrid()
         {
             ClearColumns();
             base.CreateGridColumn("合同号", "ContractNO");
@@ -74,7 +75,8 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("利润", "Profit");
             base.CreateGridColumn("交单金额", "Amount");
             base.CreateGridColumn("直接费用", "DirectCosts");
-            base.CreateGridColumn("盈利水平", "ProfitLevel");
+            base.CreateGridColumn("盈利水平1", "ProfitLevel1");
+            base.CreateGridColumn("盈利水平2", "ProfitLevel2");
             base.CreatePivotGridField("合同号", "ContractNO");
             base.CreatePivotGridField("客户名称", "CustomerName");
             base.CreatePivotGridField("贸易方式", "TradeMode");

@@ -36,7 +36,7 @@ namespace BudgetSystem
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            frmBudgetQuery form = GetExistForm<frmBudgetQuery>();
+            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(Entity.BusinessModules.BuggetManagement.ToString());
             if (form == null)
             {
                 form = new frmBudgetQuery();
@@ -46,6 +46,7 @@ namespace BudgetSystem
             {
                 FormActivited(form);
             }
+            form.Module = Entity.BusinessModules.BuggetManagement;
             ShowForm(form);
         }
 
@@ -298,21 +299,6 @@ namespace BudgetSystem
             editor.ShowDialog();
         }
 
-        private void btnReport1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Report.frmTestReport1 form = GetExistForm<Report.frmTestReport1>();
-            if (form == null)
-            {
-                form = new Report.frmTestReport1();
-                form.RefreshData();
-            }
-            else
-            {
-                FormActivited(form);
-            }
-            ShowForm(form);
-        }
-
         private void btnBudgetReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Report.frmBudgetReport form = GetExistForm<Report.frmBudgetReport>();
@@ -328,12 +314,12 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
-        private void btnInMoneyReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnCustomerReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Report.frmInMoneyReport form = GetExistForm<Report.frmInMoneyReport>();
+            Report.frmCustomerReport form = GetExistForm<Report.frmCustomerReport>();
             if (form == null)
             {
-                form = new Report.frmInMoneyReport();
+                form = new Report.frmCustomerReport();
                 form.RefreshData();
             }
             else
@@ -343,18 +329,80 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
-        private void btnOutMoney_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnSlipperReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Report.frmOutMoneyReport form = GetExistForm<Report.frmOutMoneyReport>();
+            Report.frmSlipperReport form = GetExistForm<Report.frmSlipperReport>();
             if (form == null)
             {
-                form = new Report.frmOutMoneyReport();
+                form = new Report.frmSlipperReport();
                 form.RefreshData();
             }
             else
             {
                 FormActivited(form);
             }
+            ShowForm(form);
+        }
+
+        private void btnSalemenReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmSalemenReport form = GetExistForm<Report.frmSalemenReport>();
+            if (form == null)
+            {
+                form = new Report.frmSalemenReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+
+        private void btnDepartmentReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmDepartmentReport form = GetExistForm<Report.frmDepartmentReport>();
+            if (form == null)
+            {
+                form = new Report.frmDepartmentReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnCompanyReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmCompanyReport form = GetExistForm<Report.frmCompanyReport>();
+            if (form == null)
+            {
+                form = new Report.frmCompanyReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
+        private void btnFinalAccount_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(BudgetSystem.Entity.BusinessModules.FinalAccount.ToString());
+            if (form == null)
+            {
+                form = new frmBudgetQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = Entity.BusinessModules.FinalAccount;
             ShowForm(form);
         }
 
@@ -382,10 +430,9 @@ namespace BudgetSystem
                     ShowForm(form);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
-
+                RunInfo.Instance.Logger.LogError(ex);
             }
         }
 
@@ -400,5 +447,6 @@ namespace BudgetSystem
 
 
         }
+
     }
 }

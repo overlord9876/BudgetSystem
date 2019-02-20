@@ -346,6 +346,11 @@ namespace BudgetSystem.Entity
 
         public List<Invoice> InvoiceList { get; set; }
 
+        /// <summary>
+        /// 交单金额
+        /// </summary>
+        public decimal Amount { get; set; }
+
         public decimal TotalInvoice
         {
             get

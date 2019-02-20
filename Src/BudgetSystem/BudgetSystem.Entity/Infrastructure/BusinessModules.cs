@@ -29,7 +29,11 @@ namespace BudgetSystem.Entity
         OptionManagement,
 
         BudgetReport,
-        InMoneyReport,
-        OutMoneyReport,
+        CustomerReport,
+        SlipperReport,
+        SalemenReport,
+        DepartmentReport,
+        CompanyReport,
+        FinalAccount
     }
 }

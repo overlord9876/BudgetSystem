@@ -309,6 +309,36 @@
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="PrinterHelper.cs" />
+    <Compile Include="Report\frmCustomerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmCustomerReport.Designer.cs">
+      <DependentUpon>frmCustomerReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmBudgetReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmBudgetReport.Designer.cs">
+      <DependentUpon>frmBudgetReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmSalemenReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmSalemenReport.Designer.cs">
+      <DependentUpon>frmSalemenReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmDepartmentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmDepartmentReport.Designer.cs">
+      <DependentUpon>frmDepartmentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmCompanyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmCompanyReport.Designer.cs">
+      <DependentUpon>frmCompanyReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,29 +463,11 @@
     <Compile Include="OutMoney\ucOutMoneyEdit.Designer.cs">
       <DependentUpon>ucOutMoneyEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\frmBudgetReport.cs">
+    <Compile Include="Report\frmSlipperReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\frmBudgetReport.Designer.cs">
-      <DependentUpon>frmBudgetReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\frmInMoneyReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmInMoneyReport.Designer.cs">
-      <DependentUpon>frmInMoneyReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\frmOutMoneyReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmOutMoneyReport.Designer.cs">
-      <DependentUpon>frmOutMoneyReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\frmTestReport1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmTestReport1.Designer.cs">
-      <DependentUpon>frmTestReport1.cs</DependentUpon>
+    <Compile Include="Report\frmSlipperReport.Designer.cs">
+      <DependentUpon>frmSlipperReport.cs</DependentUpon>
     </Compile>
     <Compile Include="RoleManage\frmRoleQuery.cs">
       <SubType>Form</SubType>
@@ -701,6 +713,22 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Report\frmCustomerReport.resx">
+      <DependentUpon>frmCustomerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmBudgetReport.resx">
+      <DependentUpon>frmBudgetReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmSalemenReport.resx">
+      <DependentUpon>frmSalemenReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDepartmentReport.resx">
+      <DependentUpon>frmDepartmentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmCompanyReport.resx">
+      <DependentUpon>frmCompanyReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -770,17 +798,8 @@
     <EmbeddedResource Include="OutMoney\ucOutMoneyEdit.resx">
       <DependentUpon>ucOutMoneyEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmBudgetReport.resx">
-      <DependentUpon>frmBudgetReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmInMoneyReport.resx">
-      <DependentUpon>frmInMoneyReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmOutMoneyReport.resx">
-      <DependentUpon>frmOutMoneyReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmTestReport1.resx">
-      <DependentUpon>frmTestReport1.cs</DependentUpon>
+    <EmbeddedResource Include="Report\frmSlipperReport.resx">
+      <DependentUpon>frmSlipperReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleManage\frmRoleQuery.resx">
       <DependentUpon>frmRoleQuery.cs</DependentUpon>
