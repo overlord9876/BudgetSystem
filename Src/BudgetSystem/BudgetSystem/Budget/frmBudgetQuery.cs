@@ -52,6 +52,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinalAccount));
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
                                                                             { COMMONQUERY_MYCREATE,
@@ -127,6 +128,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Archive.ToString())
             {
                 Archive();
+            }
+            else if (operate.Operate == OperateTypes.FinalAccount.ToString())
+            {
+                
             }
         }
 

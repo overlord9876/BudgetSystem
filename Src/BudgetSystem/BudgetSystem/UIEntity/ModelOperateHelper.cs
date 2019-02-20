@@ -238,6 +238,12 @@ namespace BudgetSystem
                 group = "操作";
                 imageIndex = 28;
             }
+            else if (operate == OperateTypes.FinalAccount)
+            {
+                text = "单一合同决算";
+                group = "操作";
+                imageIndex = 28;
+            }
             ModelOperate mm = new ModelOperate(operate, string.IsNullOrEmpty(caption) ? text : caption, group, order, imageIndex, uiType);
             mm.UIElementData = extendData;
 

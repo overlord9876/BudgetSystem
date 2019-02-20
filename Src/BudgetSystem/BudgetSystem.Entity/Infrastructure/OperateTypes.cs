@@ -119,6 +119,10 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 归档
         /// </summary>
-        Archive
+        Archive, 
+        /// <summary>
+        /// 单一合同决算
+        /// </summary>
+        FinalAccount
     }
 }
