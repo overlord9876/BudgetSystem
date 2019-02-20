@@ -97,13 +97,13 @@
             // 
             this.lcList.Size = new System.Drawing.Size(256, 712);
             // 
-            // frmBudgetReport
+            // frmCompanyReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1369, 811);
-            this.Name = "frmBudgetReport";
-            this.Text = "预算单报表";
+            this.Name = "frmCompanyReport";
+            this.Text = "公司管理";
             this.Load += new System.EventHandler(this.frmTestReport1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

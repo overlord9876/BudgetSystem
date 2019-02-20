@@ -10,6 +10,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPivotGrid;
 using BudgetSystem.Entity;
 using DevExpress.Utils;
+using System.IO;
 
 namespace BudgetSystem.Base
 {
@@ -18,7 +19,26 @@ namespace BudgetSystem.Base
         public frmBaseCommonReportForm()
         {
             InitializeComponent();
+
+            int year = DateTime.Now.Year - 2;
+            for (int index = 0; index < 52; index++)
+            {
+                cboYears.Items.Add((year + index));
+            }
+            this.barEditItem1.EditValue = DateTime.Now.Year;
+
+            this.startDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime nextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            this.endDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+
+            this.cboYears.EditValueChanged += new EventHandler(repositoryItemDateEdit1_EditValueChanged);
             InitData();
+        }
+
+        void repositoryItemDateEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+
+
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
@@ -238,7 +258,7 @@ namespace BudgetSystem.Base
             {
                 if (string.IsNullOrEmpty(reportName.Trim()))
                 {
-                    return this.Text;
+                    return this.Module.ToString();
                 }
                 else
                 {
@@ -255,7 +275,17 @@ namespace BudgetSystem.Base
 
         List<ReportConfig> reportConfigs;
 
+        private string GetDefaultLayoutXmlFile()
+        {
+            string fileName = System.IO.Path.Combine(Environment.CurrentDirectory, "Report");
+            if (!System.IO.Directory.Exists(fileName))
+            {
+                System.IO.Directory.CreateDirectory(fileName);
+            }
 
+            fileName = System.IO.Path.Combine(fileName, this.Module.ToString() + ".xml");
+            return fileName;
+        }
 
         private string GetReportFileFile(string name)
         {
@@ -288,18 +318,29 @@ namespace BudgetSystem.Base
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    RunInfo.Instance.Logger.LogError(ex);
                 }
             }
 
+            try
+            {
+                string defaultFileName = GetDefaultLayoutXmlFile();
+                if (File.Exists(defaultFileName))
+                {
+                    this.pivotGridControl.RestoreLayoutFromXml(defaultFileName);
+                    LoadData();
+                }
+            }
+            catch (Exception ex)
+            {
+                RunInfo.Instance.Logger.LogError(ex);
+            }
             if (reportConfigs == null)
             {
                 reportConfigs = new List<ReportConfig>();
             }
-
-
         }
 
         private void SaveReportConfig()
@@ -310,9 +351,9 @@ namespace BudgetSystem.Base
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(reportConfigs);
                 System.IO.File.WriteAllText(fileName, json, Encoding.UTF8);
             }
-            catch
+            catch (Exception ex)
             {
-
+                RunInfo.Instance.Logger.LogError(ex);
             }
         }
 
@@ -327,9 +368,9 @@ namespace BudgetSystem.Base
                     this.pivotGridControl.RestoreLayoutFromXml(GetReportFileFile(rc.FileName));
                     LoadData();
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    RunInfo.Instance.Logger.LogError(ex);
                 }
 
 

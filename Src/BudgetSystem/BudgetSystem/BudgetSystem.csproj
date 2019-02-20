@@ -713,7 +713,6 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -913,6 +912,24 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Report\BudgetReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\CompanyReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\CustomerReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\DepartmentReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\SalemenReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\SlipperReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml" />
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml">
       <SubType>Designer</SubType>

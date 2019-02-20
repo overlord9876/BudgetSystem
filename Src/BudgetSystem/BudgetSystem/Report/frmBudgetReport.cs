@@ -57,7 +57,6 @@ namespace BudgetSystem.Report
 
         private void InitBudgetReportGrid()
         {
-            ClearColumns();
             base.CreateGridColumn("合同号", "ContractNO");
             base.CreateGridColumn("客户名称", "CustomerName");
             base.CreateGridColumn("贸易方式", "TradeMode");
