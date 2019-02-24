@@ -119,14 +119,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes = payment;
             chkIsDrawback.EditValue = payment.IsDrawback;
             this.vatOption = payment.VatOption;
-            List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
-            Budget findedItem = null;
-            if (budgetList != null)
-            {
-                findedItem = budgetList.Find(o => o.ID == payment.BudgetID);
-                this.cboBudget.EditValue = findedItem;
-
-            }
+            Budget findedItem = SelectedBudgetById(payment.BudgetID);
             List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
             if (supplierList != null)
             {
@@ -196,6 +189,23 @@ namespace BudgetSystem.OutMoney
                     lblMessage.Text += "【警告】支付后余额小于0";
                 }
             }
+        }
+
+        public Budget SelectedBudgetById(int budgetId)
+        {
+            List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
+            Budget findedItem = null;
+            if (budgetList != null)
+            {
+                findedItem = budgetList.Find(o => o.ID == budgetId);
+            }
+            this.cboBudget.EditValue = findedItem;
+            return findedItem;
+        }
+
+        public void SetBudgetEditable(bool editable = false)
+        {
+            this.cboBudget.Properties.ReadOnly = !editable;
         }
 
         private void BindingBankInfoDetail(string detail)

@@ -217,6 +217,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.SlipperReport,OperateTypes.None,"供应商管理",2000),
                         new Permisson(BusinessModules.FinalAccount,OperateTypes.None,"决算管理",2100),
                         new Permisson(BusinessModules.FinalAccount,OperateTypes.FinalAccount,"决算管理-单一合同决算",2110),
+                        new Permisson(BusinessModules.FinalAccount,OperateTypes.NewPayment,"决算管理-新增付款",2120),
            
                     };
                 }

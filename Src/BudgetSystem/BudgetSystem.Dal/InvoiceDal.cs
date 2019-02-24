@@ -21,6 +21,11 @@ namespace BudgetSystem.Dal
             return con.Query<Invoice>(selectSql, null, tran);
         }
 
+        public IEnumerable<Invoice> GetAllInvoiceByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = selectSql + " WHERE b.ID=@ID";
+            return con.Query<Invoice>(sql,new { ID = budgetID }, tran);
+        }
         public Invoice GetInvoice(int id, IDbConnection con, IDbTransaction tran)
         {
             string sql = selectSql + " WHERE i.ID=@ID";

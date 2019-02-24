@@ -100,12 +100,12 @@ namespace BudgetSystem.Entity
         /// 打印成本销售表
         /// </summary>
         PrintCostForm,
-        
+
         /// <summary>
         /// 结账申请
         /// </summary>
         ClosingAccountApply,
-        
+
         /// <summary>
         /// 驳回申请
         /// </summary>
@@ -115,14 +115,18 @@ namespace BudgetSystem.Entity
         /// 财务归档征求
         /// </summary>
         FinancialArchiveApply,
-        
+
         /// <summary>
         /// 归档
         /// </summary>
-        Archive, 
+        Archive,
         /// <summary>
         /// 单一合同决算
         /// </summary>
-        FinalAccount
+        FinalAccount,
+        /// <summary>
+        /// 新增支付
+        /// </summary>
+        NewPayment,
     }
 }

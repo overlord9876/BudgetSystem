@@ -53,6 +53,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinalAccount));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.NewPayment, "新增付款"));
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
                                                                             { COMMONQUERY_MYCREATE,
@@ -131,7 +132,11 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.FinalAccount.ToString())
             {
-                
+                FinalAccount();
+            }
+            else if (operate.Operate == OperateTypes.NewPayment.ToString())
+            {
+                AddPaymentNote();
             }
         }
 
@@ -378,6 +383,21 @@ namespace BudgetSystem
             }
         }
 
+        private void FinalAccount()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget != null)
+            {
+                frmSingleBudgetFinalAccountsReport finalAccountReportForm = new frmSingleBudgetFinalAccountsReport();
+                finalAccountReportForm.CurrentBudget = budget;
+                finalAccountReportForm.ShowDialog();
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看单一合同决算报表的项");
+            }
+        }
+
         private void DeleteBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
@@ -556,6 +576,20 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("请选择需要归档的项");
             }
+        }
+
+        private void AddPaymentNote()
+        {
+            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            if (budget == null)
+            {
+                XtraMessageBox.Show("请选择合同");
+                return;
+            }
+            BudgetSystem.OutMoney.frmOutMoneyEdit form = new BudgetSystem.OutMoney.frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            form.SelectedBudget(budget.ID);
+            form.ShowDialog(this);
         }
 
     }

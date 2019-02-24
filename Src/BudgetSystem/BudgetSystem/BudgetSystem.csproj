@@ -221,6 +221,12 @@
     <Compile Include="Budget\frmMoneyDetailEdit.Designer.cs">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmSingleBudgetFinalAccountsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmSingleBudgetFinalAccountsReport.Designer.cs">
+      <DependentUpon>frmSingleBudgetFinalAccountsReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\ucBudgetDetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -673,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmMoneyDetailEdit.resx">
       <DependentUpon>frmMoneyDetailEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmSingleBudgetFinalAccountsReport.resx">
+      <DependentUpon>frmSingleBudgetFinalAccountsReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\ucBudgetDetailView.resx">
       <DependentUpon>ucBudgetDetailView.cs</DependentUpon>

@@ -22,7 +22,15 @@ namespace BudgetSystem.Bll
             });
             return lst.ToList();
         }
-
+        public List<Declarationform> GetDeclarationformByBudgetID(int budgetID)
+        {
+            var lst = this.Query<Declarationform>((con) =>
+            {
+                var uList = dal.GetDeclarationformByBudgetID(budgetID, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
         public Declarationform GetDeclarationformByID(int id)
         {
             var lst = this.Query<Declarationform>((con) =>

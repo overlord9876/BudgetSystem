@@ -46,6 +46,12 @@ namespace BudgetSystem
                 group = "编辑";
                 imageIndex = 48;
             }
+            else if (operate == OperateTypes.NewPayment)
+            {
+                text = "新增";
+                group = "编辑";
+                imageIndex = 48;
+            }
             else if (operate == OperateTypes.Modify)
             {
                 text = "修改";

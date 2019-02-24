@@ -22,6 +22,12 @@ namespace BudgetSystem.Dal
             return con.Query<Declarationform>(selectSql, new { ID = id }, tran).SingleOrDefault();
         }
 
+        public IEnumerable<Declarationform> GetDeclarationformByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "Select * From `Declarationform` Where `BudgetID` = @BudgetID";
+            return con.Query<Declarationform>(selectSql, new { BudgetID = budgetID }, tran);
+        }
+
         public int AddDeclarationform(Declarationform declarationform, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = "Insert Into `Declarationform` (`ID`,`NO`,`Currency`,`ExportAmount`,`ExportDate`,`BudgetID`,`IsReport`,`CreateUser`,`CreateDate`) Values (@ID,@NO,@Currency,@ExportAmount,@ExportDate,@BudgetID,@IsReport,@CreateUser,@CreateDate)";
