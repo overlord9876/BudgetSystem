@@ -63,12 +63,13 @@ namespace BudgetSystem
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
             if (budgetList != null)
             {
-                this.cboBudget.EditValue = budgetList.Find(o => o.ContractNO == CurrentDeclarationform.ContractNO);
+                this.cboBudget.EditValue = budgetList.Find(o => o.ID== CurrentDeclarationform.BudgetID);
             }
 
             this.txtNO.EditValue = CurrentDeclarationform.NO;
             this.txtExportAmount.EditValue = CurrentDeclarationform.ExportAmount;
             this.txtExportDate.EditValue = CurrentDeclarationform.ExportDate;
+            this.txtExchangeRate.EditValue = CurrentDeclarationform.ExchangeRate;
             this.textEdit5.EditValue = CurrentDeclarationform.CreateDate;
             this.textEdit6.EditValue = CurrentDeclarationform.CreateUser;
             this.cboCurrency.EditValue = CurrentDeclarationform.Currency;
@@ -95,6 +96,10 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtExportAmount, "请输入出口金额");
             }
+            if (this.txtExchangeRate.Value <= 0)
+            {
+                this.dxErrorProvider1.SetError(this.txtExchangeRate, "请输入汇率");
+            }
             if (!(this.cboBudget.EditValue is Budget))
             {
                 this.dxErrorProvider1.SetError(this.cboBudget, "请选择合同号");
@@ -119,11 +124,13 @@ namespace BudgetSystem
 
             CurrentDeclarationform.NO = this.txtNO.Text;
             CurrentDeclarationform.ExportAmount = this.txtExportAmount.Value;
+            CurrentDeclarationform.ExchangeRate = this.txtExchangeRate.FloatValue;
             CurrentDeclarationform.ExportDate = DateTime.Parse(this.txtExportDate.EditValue.ToString());
             CurrentDeclarationform.CreateDate = DateTime.Parse(this.textEdit5.EditValue.ToString());
             CurrentDeclarationform.CreateUser = this.textEdit6.Text;
             CurrentDeclarationform.Currency = this.cboCurrency.EditValue.ToString();
             CurrentDeclarationform.IsReport = this.chkIsReport.Checked;
+            CurrentDeclarationform.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
 
         }
@@ -146,8 +153,6 @@ namespace BudgetSystem
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
-
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -166,6 +171,7 @@ namespace BudgetSystem
             if (dxErrorProvider1.HasErrors) { return; }
             FillData();
             this.CurrentDeclarationform.ID = dm.AddDeclarationform(this.CurrentDeclarationform);
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         protected override void SubmitModifyData()
@@ -178,6 +184,8 @@ namespace BudgetSystem
             if (dxErrorProvider1.HasErrors) { return; }
             FillData();
             dm.ModifyDeclarationform(this.CurrentDeclarationform);
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }
 }

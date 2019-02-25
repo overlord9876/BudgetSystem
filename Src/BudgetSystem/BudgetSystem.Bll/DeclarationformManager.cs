@@ -123,6 +123,11 @@ namespace BudgetSystem.Bll
                         df.Message += "报关币种不能为空";
                         result = false;
                     }
+                    if (df.ExchangeRate <= 0)
+                    {
+                        df.Message += "汇率应大于0;";
+                        result = false;
+                    }
                 }
 
             });

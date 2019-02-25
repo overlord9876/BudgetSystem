@@ -11,6 +11,7 @@ using System.Linq;
 using BudgetSystem.Entity;
 using BudgetSystem.WorkSpace;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace BudgetSystem.WorkSpace
 {
@@ -34,8 +35,8 @@ namespace BudgetSystem.WorkSpace
             this.gdPendingFlow.DataSource = list;
             this.gvPendingFlow.ExpandAllGroups();
         }
-        
-      
+
+
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
@@ -76,7 +77,7 @@ namespace BudgetSystem.WorkSpace
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ViewModel };
-                 
+
                     form.ShowDialog(this);
                 }
 
@@ -90,7 +91,7 @@ namespace BudgetSystem.WorkSpace
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ApproveModel };
-                  
+
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
@@ -105,7 +106,7 @@ namespace BudgetSystem.WorkSpace
             List<FlowItem> selectItems = GetSelectedFlowItem();
 
             string info;
-            if (!CheckBatchApproveItems(selectItems,out info))
+            if (!CheckBatchApproveItems(selectItems, out info))
             {
                 XtraMessageBox.Show(info);
                 return;
@@ -117,13 +118,6 @@ namespace BudgetSystem.WorkSpace
             {
                 this.RefreshData();
             }
-
-
-
-            
-
-        
-        
         }
 
 
@@ -132,14 +126,21 @@ namespace BudgetSystem.WorkSpace
         private List<FlowItem> GetSelectedFlowItem()
         {
             List<FlowItem> items = new List<FlowItem>();
-
-            foreach (int i in this.gvPendingFlow.GetSelectedRows())
+            int[] selectRows = this.gvPendingFlow.GetSelectedRows();
+            foreach (int i in selectRows)
             {
-                FlowItem item= this.gvPendingFlow.GetRow(i) as FlowItem;
-
-                if (item != null)
+                if (i >= 0)
                 {
-                    items.Add(item);
+                    FlowItem item = this.gvPendingFlow.GetRow(i) as FlowItem;
+
+                    if (item != null)
+                    {
+                        items.Add(item);
+                    }
+                }
+                else
+                {
+                    items.AddRange(GetGroupedRow(i, this.gvPendingFlow));
                 }
             }
 
@@ -147,7 +148,22 @@ namespace BudgetSystem.WorkSpace
         }
 
 
-        private bool CheckBatchApproveItems(List<FlowItem> items,out string error)
+        private List<FlowItem> GetGroupedRow(int groupIndex, GridView view)
+        {
+            int groupedRowCount = view.GetChildRowCount(groupIndex);
+            List<FlowItem> result = new List<FlowItem>();
+            for (int i = 0; i < groupedRowCount; i++)
+            {
+                int crow = view.GetChildRowHandle(groupIndex, i);
+                FlowItem p = view.GetRow(crow) as FlowItem;
+                result.Add(p);
+            }
+            return result;
+
+
+        }
+
+        private bool CheckBatchApproveItems(List<FlowItem> items, out string error)
         {
             if (items.Count == 0)
             {

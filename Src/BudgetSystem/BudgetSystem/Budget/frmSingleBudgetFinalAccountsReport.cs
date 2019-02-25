@@ -19,7 +19,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.Load += new EventHandler(frmSingleBudgetFinalAccountsReport_Load);
-            this.bgvReport.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(bgvReport_CustomDrawCell);
+            this.advBandedGridView.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(bgvReport_CustomDrawCell);
         }
 
         void frmSingleBudgetFinalAccountsReport_Load(object sender, EventArgs e)
@@ -29,7 +29,6 @@ namespace BudgetSystem
 
         void bgvReport_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            var row = bgvReport.GetRow(e.RowHandle) as DataRowView;
             if (e.Column == gcIndex)
             {
                 //序号列
@@ -72,6 +71,11 @@ namespace BudgetSystem
                     row = dt.NewRow();
                     row["Date"] = df.ExportDate;
                     row["ExportAmount"] = df.ExportAmount;
+                    if (df.ExchangeRate != 0)
+                    {
+                        //TODO:折算美元，这里先按照报关原币（出口金额）/汇率*预算单汇率 来计算
+                        row["USAExportAmount"] = Math.Round(df.ExportAmount / (decimal)df.ExchangeRate * (decimal)budget.ExchangeRate,2);
+                    }
                     dt.Rows.Add(row);
                 }
                 //实际收款单表+银行流水表
@@ -108,7 +112,7 @@ namespace BudgetSystem
                     {
                         row["Date"] = invoice.ImportDate;
                     }
-                    row["Payment"] = invoice.Payment;
+                    row["Payment"] = invoice.AccountsPayable;
                     row["TaxRebateRate"] = invoice.TaxRebateRate/100;
                     row["SupplierName"] = invoice.SupplierName;
                     dt.Rows.Add(row);
@@ -125,6 +129,7 @@ namespace BudgetSystem
             dt.Columns.Add("Date", typeof(DateTime));//日期
             //报关单表
             dt.Columns.Add("ExportAmount", typeof(decimal));//报关原币（出口金额）
+            dt.Columns.Add("USAExportAmount", typeof(decimal));//报关原币折算美元
             //预算单表
             dt.Columns.Add("TotalAmount", typeof(decimal));//应收人民币
             dt.Columns.Add("ExchangeRate", typeof(decimal));//汇率

@@ -53,7 +53,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看审批状态"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinalAccount));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.NewPayment, "新增付款"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.NewPayment, "财务调账"));
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
                                                                             { COMMONQUERY_MYCREATE,
@@ -586,10 +586,12 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择合同");
                 return;
             }
-            BudgetSystem.OutMoney.frmOutMoneyEdit form = new BudgetSystem.OutMoney.frmOutMoneyEdit();
-            form.WorkModel = EditFormWorkModels.New;
-            form.SelectedBudget(budget.ID);
-            form.ShowDialog(this);
+
+            XtraMessageBox.Show("TODO:财务调账");
+            //BudgetSystem.OutMoney.frmOutMoneyEdit form = new BudgetSystem.OutMoney.frmOutMoneyEdit();
+            //form.WorkModel = EditFormWorkModels.New;
+            //form.SelectedBudget(budget.ID);
+            //form.ShowDialog(this);
         }
 
     }

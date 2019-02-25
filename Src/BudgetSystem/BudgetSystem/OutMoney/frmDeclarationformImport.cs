@@ -47,7 +47,7 @@ namespace BudgetSystem.InMoney
                 string message = string.Empty;
                 List<string> columns = null;
 
-                columns = new List<string> { "合同号", "报关单号", "报关币种", "出口金额", "出口日期", "是否已报告延期收款" };
+                columns = new List<string> { "合同号", "报关单号", "报关币种", "出口金额", "出口日期", "是否已报告延期收款","汇率" };
                 DataTable dt = ExcelHelper.ReadExcelToDataTable(openFileDialog1.FileName, out message, string.Empty, columns);
                 if (!string.IsNullOrEmpty(message))
                 {
@@ -67,6 +67,7 @@ namespace BudgetSystem.InMoney
                     df.ExportAmount = DataRowConvertHelper.GetDecimalValue(row, "出口金额");
                     df.ExportDate = DataRowConvertHelper.GetDateTimeValue(row, "出口日期");
                     df.IsReport = DataRowConvertHelper.GetStringValue(row, "是否已报告延期收款") == "是";
+                    df.ExchangeRate = DataRowConvertHelper.GetFloatValue(row, "汇率");
                     df.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                     df.CreateDate = DateTime.Now;
                     list.Add(df);

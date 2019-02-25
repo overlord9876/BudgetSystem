@@ -132,19 +132,22 @@
             this.layoutControl1.Controls.Add(this.btnAddUserToRole);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(536, 236, 640, 670);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(812, 198, 640, 670);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1217, 872);
+            this.layoutControl1.Size = new System.Drawing.Size(974, 713);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // gdAllPermission
             // 
-            this.gdAllPermission.Location = new System.Drawing.Point(667, 369);
+            this.gdAllPermission.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdAllPermission.Location = new System.Drawing.Point(561, 350);
             this.gdAllPermission.MainView = this.gvAllPermission;
+            this.gdAllPermission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdAllPermission.Name = "gdAllPermission";
-            this.gdAllPermission.Size = new System.Drawing.Size(514, 467);
+            this.gdAllPermission.Size = new System.Drawing.Size(377, 327);
             this.gdAllPermission.TabIndex = 5;
             this.gdAllPermission.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllPermission});
@@ -181,7 +184,8 @@
             // 
             // btnRemvePermissionFromRole
             // 
-            this.btnRemvePermissionFromRole.Location = new System.Drawing.Point(535, 576);
+            this.btnRemvePermissionFromRole.Location = new System.Drawing.Point(429, 503);
+            this.btnRemvePermissionFromRole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRemvePermissionFromRole.Name = "btnRemvePermissionFromRole";
             this.btnRemvePermissionFromRole.Size = new System.Drawing.Size(116, 36);
             this.btnRemvePermissionFromRole.StyleController = this.layoutControl1;
@@ -191,7 +195,8 @@
             // 
             // btnAddPermissionToRole
             // 
-            this.btnAddPermissionToRole.Location = new System.Drawing.Point(535, 536);
+            this.btnAddPermissionToRole.Location = new System.Drawing.Point(429, 463);
+            this.btnAddPermissionToRole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddPermissionToRole.Name = "btnAddPermissionToRole";
             this.btnAddPermissionToRole.Size = new System.Drawing.Size(116, 36);
             this.btnAddPermissionToRole.StyleController = this.layoutControl1;
@@ -201,10 +206,12 @@
             // 
             // gdRolePermissions
             // 
-            this.gdRolePermissions.Location = new System.Drawing.Point(36, 369);
+            this.gdRolePermissions.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdRolePermissions.Location = new System.Drawing.Point(36, 350);
             this.gdRolePermissions.MainView = this.gvRolePermissons;
+            this.gdRolePermissions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdRolePermissions.Name = "gdRolePermissions";
-            this.gdRolePermissions.Size = new System.Drawing.Size(483, 467);
+            this.gdRolePermissions.Size = new System.Drawing.Size(377, 327);
             this.gdRolePermissions.TabIndex = 4;
             this.gdRolePermissions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRolePermissons});
@@ -242,10 +249,12 @@
             // 
             // gdAllUser
             // 
-            this.gdAllUser.Location = new System.Drawing.Point(667, 369);
+            this.gdAllUser.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdAllUser.Location = new System.Drawing.Point(561, 350);
             this.gdAllUser.MainView = this.gvAllUser;
+            this.gdAllUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdAllUser.Name = "gdAllUser";
-            this.gdAllUser.Size = new System.Drawing.Size(514, 467);
+            this.gdAllUser.Size = new System.Drawing.Size(377, 327);
             this.gdAllUser.TabIndex = 4;
             this.gdAllUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllUser});
@@ -306,10 +315,12 @@
             // 
             // gdRoleUsers
             // 
-            this.gdRoleUsers.Location = new System.Drawing.Point(36, 369);
+            this.gdRoleUsers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdRoleUsers.Location = new System.Drawing.Point(36, 350);
             this.gdRoleUsers.MainView = this.gvRoleUsers;
+            this.gdRoleUsers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdRoleUsers.Name = "gdRoleUsers";
-            this.gdRoleUsers.Size = new System.Drawing.Size(483, 467);
+            this.gdRoleUsers.Size = new System.Drawing.Size(377, 327);
             this.gdRoleUsers.TabIndex = 3;
             this.gdRoleUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRoleUsers});
@@ -370,10 +381,12 @@
             // 
             // gdRoleList
             // 
-            this.gdRoleList.Location = new System.Drawing.Point(24, 52);
+            this.gdRoleList.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdRoleList.Location = new System.Drawing.Point(24, 49);
             this.gdRoleList.MainView = this.gvRoleList;
+            this.gdRoleList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdRoleList.Name = "gdRoleList";
-            this.gdRoleList.Size = new System.Drawing.Size(1169, 215);
+            this.gdRoleList.Size = new System.Drawing.Size(926, 206);
             this.gdRoleList.TabIndex = 8;
             this.gdRoleList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRoleList});
@@ -409,7 +422,8 @@
             // 
             // btnRemveUserFromRole
             // 
-            this.btnRemveUserFromRole.Location = new System.Drawing.Point(535, 576);
+            this.btnRemveUserFromRole.Location = new System.Drawing.Point(429, 503);
+            this.btnRemveUserFromRole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRemveUserFromRole.Name = "btnRemveUserFromRole";
             this.btnRemveUserFromRole.Size = new System.Drawing.Size(116, 36);
             this.btnRemveUserFromRole.StyleController = this.layoutControl1;
@@ -419,7 +433,8 @@
             // 
             // btnAddUserToRole
             // 
-            this.btnAddUserToRole.Location = new System.Drawing.Point(535, 536);
+            this.btnAddUserToRole.Location = new System.Drawing.Point(429, 463);
+            this.btnAddUserToRole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddUserToRole.Name = "btnAddUserToRole";
             this.btnAddUserToRole.Size = new System.Drawing.Size(116, 36);
             this.btnAddUserToRole.StyleController = this.layoutControl1;
@@ -438,7 +453,7 @@
             this.splitterItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1217, 872);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(974, 713);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -449,7 +464,7 @@
             this.layoutControlItem5});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1197, 271);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(954, 259);
             this.layoutControlGroup2.Text = "角色列表组";
             // 
             // layoutControlItem5
@@ -458,7 +473,7 @@
             this.layoutControlItem5.CustomizationFormText = "角色列表";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(1173, 219);
+            this.layoutControlItem5.Size = new System.Drawing.Size(930, 210);
             this.layoutControlItem5.Text = "角色列表";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -467,11 +482,11 @@
             // tabbedControlGroup1
             // 
             this.tabbedControlGroup1.CustomizationFormText = "tabbedControlGroup1";
-            this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 276);
+            this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 264);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.gd;
-            this.tabbedControlGroup1.SelectedTabPageIndex = 1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(1197, 576);
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedControlGroup1.SelectedTabPageIndex = 0;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(954, 429);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup3,
             this.gd});
@@ -489,14 +504,14 @@
             this.layoutControlGroup8});
             this.gd.Location = new System.Drawing.Point(0, 0);
             this.gd.Name = "gd";
-            this.gd.Size = new System.Drawing.Size(1173, 523);
+            this.gd.Size = new System.Drawing.Size(930, 380);
             this.gd.Text = "角色权限分配";
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.btnAddPermissionToRole;
             this.layoutControlItem7.CustomizationFormText = "分配权限";
-            this.layoutControlItem7.Location = new System.Drawing.Point(511, 207);
+            this.layoutControlItem7.Location = new System.Drawing.Point(405, 150);
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -511,7 +526,7 @@
             // 
             this.layoutControlItem8.Control = this.btnRemvePermissionFromRole;
             this.layoutControlItem8.CustomizationFormText = "移出权限";
-            this.layoutControlItem8.Location = new System.Drawing.Point(511, 247);
+            this.layoutControlItem8.Location = new System.Drawing.Point(405, 190);
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.Name = "layoutControlItem8";
@@ -526,11 +541,11 @@
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
             this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
-            this.emptySpaceItem3.Location = new System.Drawing.Point(511, 287);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(405, 230);
             this.emptySpaceItem3.MaxSize = new System.Drawing.Size(120, 0);
-            this.emptySpaceItem3.MinSize = new System.Drawing.Size(120, 150);
+            this.emptySpaceItem3.MinSize = new System.Drawing.Size(120, 10);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(120, 236);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(120, 150);
             this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem3.Text = "emptySpaceItem3";
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -539,11 +554,11 @@
             // 
             this.emptySpaceItem4.AllowHotTrack = false;
             this.emptySpaceItem4.CustomizationFormText = "emptySpaceItem4";
-            this.emptySpaceItem4.Location = new System.Drawing.Point(511, 0);
+            this.emptySpaceItem4.Location = new System.Drawing.Point(405, 0);
             this.emptySpaceItem4.MaxSize = new System.Drawing.Size(120, 0);
-            this.emptySpaceItem4.MinSize = new System.Drawing.Size(120, 150);
+            this.emptySpaceItem4.MinSize = new System.Drawing.Size(120, 10);
             this.emptySpaceItem4.Name = "emptySpaceItem4";
-            this.emptySpaceItem4.Size = new System.Drawing.Size(120, 207);
+            this.emptySpaceItem4.Size = new System.Drawing.Size(120, 150);
             this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem4.Text = "emptySpaceItem4";
             this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
@@ -555,7 +570,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup7.Name = "layoutControlGroup7";
-            this.layoutControlGroup7.Size = new System.Drawing.Size(511, 523);
+            this.layoutControlGroup7.Size = new System.Drawing.Size(405, 380);
             this.layoutControlGroup7.Text = "角色当前权限";
             // 
             // layoutControlItem6
@@ -564,7 +579,7 @@
             this.layoutControlItem6.CustomizationFormText = "角色当前权限";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(487, 471);
+            this.layoutControlItem6.Size = new System.Drawing.Size(381, 331);
             this.layoutControlItem6.Text = "角色当前权限";
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
@@ -576,9 +591,9 @@
             this.layoutControlGroup8.CustomizationFormText = "所有权限";
             this.layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem9});
-            this.layoutControlGroup8.Location = new System.Drawing.Point(631, 0);
+            this.layoutControlGroup8.Location = new System.Drawing.Point(525, 0);
             this.layoutControlGroup8.Name = "layoutControlGroup8";
-            this.layoutControlGroup8.Size = new System.Drawing.Size(542, 523);
+            this.layoutControlGroup8.Size = new System.Drawing.Size(405, 380);
             this.layoutControlGroup8.Text = "所有权限";
             // 
             // layoutControlItem9
@@ -587,7 +602,7 @@
             this.layoutControlItem9.CustomizationFormText = "所有权限";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(518, 471);
+            this.layoutControlItem9.Size = new System.Drawing.Size(381, 331);
             this.layoutControlItem9.Text = "所有权限";
             this.layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
@@ -606,18 +621,18 @@
             this.layoutControlGroup5});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1173, 523);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(930, 380);
             this.layoutControlGroup3.Text = "角色用户分配";
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(511, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(405, 0);
             this.emptySpaceItem1.MaxSize = new System.Drawing.Size(120, 0);
-            this.emptySpaceItem1.MinSize = new System.Drawing.Size(120, 150);
+            this.emptySpaceItem1.MinSize = new System.Drawing.Size(120, 10);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(120, 207);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(120, 150);
             this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -626,7 +641,7 @@
             // 
             this.layoutControlItem3.Control = this.btnAddUserToRole;
             this.layoutControlItem3.CustomizationFormText = "分配用户";
-            this.layoutControlItem3.Location = new System.Drawing.Point(511, 207);
+            this.layoutControlItem3.Location = new System.Drawing.Point(405, 150);
             this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -641,7 +656,7 @@
             // 
             this.layoutControlItem4.Control = this.btnRemveUserFromRole;
             this.layoutControlItem4.CustomizationFormText = "移出用户";
-            this.layoutControlItem4.Location = new System.Drawing.Point(511, 247);
+            this.layoutControlItem4.Location = new System.Drawing.Point(405, 190);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -656,11 +671,11 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(511, 287);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(405, 230);
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(120, 0);
-            this.emptySpaceItem2.MinSize = new System.Drawing.Size(120, 150);
+            this.emptySpaceItem2.MinSize = new System.Drawing.Size(120, 10);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 236);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 150);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -672,7 +687,7 @@
             this.layoutControlItem1});
             this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(511, 523);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(405, 380);
             this.layoutControlGroup4.Text = "角色当前用户";
             // 
             // layoutControlItem1
@@ -681,7 +696,7 @@
             this.layoutControlItem1.CustomizationFormText = "角色当前用户";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(487, 471);
+            this.layoutControlItem1.Size = new System.Drawing.Size(381, 331);
             this.layoutControlItem1.Text = "角色当前用户";
             this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -693,9 +708,9 @@
             this.layoutControlGroup5.CustomizationFormText = "所有用户";
             this.layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(631, 0);
+            this.layoutControlGroup5.Location = new System.Drawing.Point(525, 0);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
-            this.layoutControlGroup5.Size = new System.Drawing.Size(542, 523);
+            this.layoutControlGroup5.Size = new System.Drawing.Size(405, 380);
             this.layoutControlGroup5.Text = "所有用户";
             // 
             // layoutControlItem2
@@ -704,7 +719,7 @@
             this.layoutControlItem2.CustomizationFormText = "所有用户";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(518, 471);
+            this.layoutControlItem2.Size = new System.Drawing.Size(381, 331);
             this.layoutControlItem2.Text = "所有用户";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -715,17 +730,18 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(0, 271);
+            this.splitterItem1.Location = new System.Drawing.Point(0, 259);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(1197, 5);
+            this.splitterItem1.ResizeMode = DevExpress.XtraLayout.SplitterItemResizeMode.AllSiblings;
+            this.splitterItem1.Size = new System.Drawing.Size(954, 5);
             // 
             // frmRoleQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 872);
+            this.ClientSize = new System.Drawing.Size(974, 713);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmRoleQuery";
             this.Text = "角色管理";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

@@ -45,14 +45,14 @@ namespace BudgetSystem.WorkSpace
         public const string BatchApproveModel = "BatchApprove";
         public const string ConfirmOrRevokeModel = "ConfirmOrRevoke";
         public const string ViewModel = "View";
-     
+
 
         private void frmApproveEx_Load(object sender, EventArgs e)
         {
             SetLayoutControlStyle();
             CreateView();
 
-            if (this.CustomWorkModel == ApproveModel || this.CustomWorkModel== BatchApproveModel)
+            if (this.CustomWorkModel == ApproveModel || this.CustomWorkModel == BatchApproveModel)
             {
                 this.Text = "流程审批";
                 string flowName = this.CustomWorkModel == BatchApproveModel ? BatchFlowItems[0].FlowName : FlowItem.FlowName;
@@ -71,6 +71,7 @@ namespace BudgetSystem.WorkSpace
             {
                 this.Text = "流程发起人确认或撤回";
             }
+
         }
 
 
@@ -82,14 +83,11 @@ namespace BudgetSystem.WorkSpace
 
             string dcType = this.CustomWorkModel == BatchApproveModel ? "BatchApprove" : FlowItem.DateItemType;
 
-
-            
-
             DataControl dc = DataControlCreator.CreateDataControl(dcType);
             string layoutItemName;
             if (dc is BatchDataControl)
             {
-                (dc as BatchDataControl).BindingBachData(this.BatchFlowItems );
+                (dc as BatchDataControl).BindingBachData(this.BatchFlowItems);
                 layoutItemName = "批量审批-" + this.BatchFlowItems[0].FlowName;
             }
             else
@@ -110,11 +108,10 @@ namespace BudgetSystem.WorkSpace
             temp.MaxSize = new Size(0, dc.Height);
             temp.MinSize = new Size(0, dc.Height);
             this.Width = dc.Width + 20;
-
-         
-
             this.lcDataGroup.Remove(emptySpaceItem1);
+            this.lcDataGroup.Remove(emptySpaceItem2);
             lcDataGroup.EndUpdate();
+
         }
 
         private void Submit(bool result)
@@ -124,11 +121,11 @@ namespace BudgetSystem.WorkSpace
             {
                 if (!DoFlowExtEvent())
                 {
-                  
+
                     return;
                 }
             }
-        
+
             FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, this.txtMyInfo.Text.Trim());
             string info;
             if (state.Translate(out info))
@@ -148,7 +145,7 @@ namespace BudgetSystem.WorkSpace
             {
                 if (!DoFlowExtEvent())
                 {
-                    
+
                     return;
                 }
             }
@@ -268,7 +265,7 @@ namespace BudgetSystem.WorkSpace
 
         private void btnViewFlow_Click(object sender, EventArgs e)
         {
-            Flow flow= fm.GetFlow(FlowItem.FlowName, FlowItem.FlowVersionNumber);
+            Flow flow = fm.GetFlow(FlowItem.FlowName, FlowItem.FlowVersionNumber);
 
             frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = flow };
             form.SetVersionReadOnly();

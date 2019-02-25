@@ -6,6 +6,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.Data;
 
 namespace BudgetSystem
 {
@@ -15,6 +17,37 @@ namespace BudgetSystem
         {
             InitializeComponent();
 
+            this.gvBatchApproveData.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gvBatchApproveData_CustomSummaryCalculate);
+        }
+
+        decimal customSummary = 0;
+        void gvBatchApproveData_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            SummaryItemType summaryType = (e.Item as DevExpress.XtraGrid.GridSummaryItem).SummaryType;
+            GridView gridView = sender as GridView;
+            // Initialization 
+            if (e.SummaryProcess == CustomSummaryProcess.Start)
+            {
+                customSummary = 0;
+            }
+            // Calculation 
+            if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+            {
+                if (summaryType == SummaryItemType.Custom)
+                {
+                    bool isSelected = (bool)gridView.GetRowCellValue(e.RowHandle, gcIsSelected);
+
+                    if (isSelected) customSummary += Convert.ToInt32(e.FieldValue);
+                }
+            }
+            // Finalization 
+            if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+            {
+                if (summaryType == SummaryItemType.Custom)
+                {
+                    e.TotalValue = customSummary;
+                }
+            }
         }
 
 
@@ -27,6 +60,7 @@ namespace BudgetSystem
         public void BindingBachData(List<FlowItem> items)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("IsSelected", typeof(bool));
             dt.Columns.Add("DataText");
             dt.Columns.Add("DataDesc");
             dt.Columns.Add("Money", typeof(decimal));
@@ -38,10 +72,8 @@ namespace BudgetSystem
             {
                 decimal money = 0;
                 BatchApproveDataItemDesc iv = GetItemDesc(item.DateItemType, item.DateItemID);
-                dt.Rows.Add(item.DateItemText, iv.Desc, iv.Money);
+                dt.Rows.Add(false, item.DateItemText, iv.Desc, iv.Money);
             }
-
-
 
             this.gdBatchApproveData.DataSource = dt;
 

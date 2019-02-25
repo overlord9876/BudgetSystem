@@ -30,6 +30,7 @@
         {
             this.gdBatchApproveData = new DevExpress.XtraGrid.GridControl();
             this.gvBatchApproveData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,43 +52,54 @@
             // gvBatchApproveData
             // 
             this.gvBatchApproveData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcIsSelected,
             this.gcText,
             this.gcMoney,
             this.gcDescription});
             this.gvBatchApproveData.GridControl = this.gdBatchApproveData;
             this.gvBatchApproveData.Name = "gvBatchApproveData";
-            this.gvBatchApproveData.OptionsBehavior.Editable = false;
             this.gvBatchApproveData.OptionsView.ShowFooter = true;
             this.gvBatchApproveData.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcIsSelected
+            // 
+            this.gcIsSelected.FieldName = "IsSelected";
+            this.gcIsSelected.Name = "gcIsSelected";
+            this.gcIsSelected.Visible = true;
+            this.gcIsSelected.VisibleIndex = 0;
+            this.gcIsSelected.Width = 60;
             // 
             // gcText
             // 
             this.gcText.Caption = "审批项";
             this.gcText.FieldName = "DataText";
             this.gcText.Name = "gcText";
+            this.gcText.OptionsColumn.AllowEdit = false;
             this.gcText.Visible = true;
-            this.gcText.VisibleIndex = 0;
-            this.gcText.Width = 152;
+            this.gcText.VisibleIndex = 1;
+            this.gcText.Width = 141;
             // 
             // gcMoney
             // 
             this.gcMoney.Caption = "金额";
             this.gcMoney.FieldName = "Money";
             this.gcMoney.Name = "gcMoney";
+            this.gcMoney.OptionsColumn.AllowEdit = false;
             this.gcMoney.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Money", "合计={0:n}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Money", "合计={0:n}")});
             this.gcMoney.Visible = true;
-            this.gcMoney.VisibleIndex = 1;
-            this.gcMoney.Width = 169;
+            this.gcMoney.VisibleIndex = 2;
+            this.gcMoney.Width = 157;
             // 
             // gcDescription
             // 
             this.gcDescription.Caption = "审批项描述";
             this.gcDescription.FieldName = "DataDesc";
             this.gcDescription.Name = "gcDescription";
+            this.gcDescription.OptionsColumn.AllowEdit = false;
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 2;
-            this.gcDescription.Width = 612;
+            this.gcDescription.VisibleIndex = 3;
+            this.gcDescription.Width = 575;
             // 
             // BatchDataControl
             // 
@@ -109,5 +121,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcText;
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraGrid.Columns.GridColumn gcMoney;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsSelected;
     }
 }

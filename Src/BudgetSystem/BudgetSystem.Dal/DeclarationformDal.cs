@@ -30,7 +30,7 @@ namespace BudgetSystem.Dal
 
         public int AddDeclarationform(Declarationform declarationform, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `Declarationform` (`ID`,`NO`,`Currency`,`ExportAmount`,`ExportDate`,`BudgetID`,`IsReport`,`CreateUser`,`CreateDate`) Values (@ID,@NO,@Currency,@ExportAmount,@ExportDate,@BudgetID,@IsReport,@CreateUser,@CreateDate)";
+            string insertSql = "Insert Into `Declarationform` (`ID`,`NO`,`Currency`,`ExportAmount`,`ExportDate`,`BudgetID`,`IsReport`,`CreateUser`,`CreateDate`,`ExchangeRate`) Values (@ID,@NO,@Currency,@ExportAmount,@ExportDate,@BudgetID,@IsReport,@CreateUser,@CreateDate,@ExchangeRate)";
             int id = con.Insert(insertSql, declarationform, tran);
             if (id > 0)
             {
@@ -67,7 +67,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyDeclarationform(Declarationform declarationform, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `Declarationform` Set `NO` = @NO,`Currency` = @Currency,`ExportAmount` = @ExportAmount,`ExportDate` = @ExportDate,`BudgetID` = @BudgetID,`IsReport` = @IsReport,`CreateUser` = @CreateUser,`CreateDate` = @CreateDate Where `ID` = @ID";
+            string updateSql = "Update `Declarationform` Set `NO` = @NO,`Currency` = @Currency,`ExportAmount` = @ExportAmount,`ExportDate` = @ExportDate,`BudgetID` = @BudgetID,`IsReport` = @IsReport,`CreateUser` = @CreateUser,`CreateDate` = @CreateDate,`ExchangeRate`=@ExchangeRate Where `ID` = @ID";
             con.Execute(updateSql, declarationform, tran);
         }
 

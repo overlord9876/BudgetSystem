@@ -60,6 +60,11 @@ namespace BudgetSystem.Entity
         public DateTime CreateDate { get; set; }
 
         /// <summary>
+        /// 汇率
+        /// </summary>
+        public float ExchangeRate { get; set; }
+
+        /// <summary>
         /// 验证消息
         /// </summary>
         public string Message { get; set; }
@@ -67,6 +72,6 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 客户名称
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } 
     }
 }
