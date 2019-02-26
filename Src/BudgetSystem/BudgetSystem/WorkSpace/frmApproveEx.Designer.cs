@@ -59,7 +59,6 @@
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lcDataGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.esiData = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMyInfo.Properties)).BeginInit();
@@ -79,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDataGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.esiData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -240,8 +238,7 @@
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcApproveGroup,
-            this.lcDataGroup,
-            this.emptySpaceItem2});
+            this.lcDataGroup});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1648, 1017);
@@ -417,7 +414,7 @@
             this.esiData});
             this.lcDataGroup.Location = new System.Drawing.Point(0, 0);
             this.lcDataGroup.Name = "lcDataGroup";
-            this.lcDataGroup.Size = new System.Drawing.Size(1628, 835);
+            this.lcDataGroup.Size = new System.Drawing.Size(1628, 856);
             this.lcDataGroup.Text = "审批对象";
             // 
             // esiData
@@ -426,19 +423,9 @@
             this.esiData.CustomizationFormText = "emptySpaceItem2";
             this.esiData.Location = new System.Drawing.Point(0, 0);
             this.esiData.Name = "esiData";
-            this.esiData.Size = new System.Drawing.Size(1604, 786);
+            this.esiData.Size = new System.Drawing.Size(1604, 807);
             this.esiData.Text = "esiData";
             this.esiData.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 835);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(1628, 21);
-            this.emptySpaceItem2.Text = "emptySpaceItem2";
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // frmApproveEx
             // 
@@ -473,7 +460,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDataGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.esiData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -510,6 +496,5 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
     }
 }

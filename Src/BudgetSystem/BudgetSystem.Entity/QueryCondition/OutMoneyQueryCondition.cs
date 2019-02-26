@@ -11,6 +11,9 @@ namespace BudgetSystem.Entity.QueryCondition
         public string VoucherNo { get; set; }
         public string Applicant { get; set; }
         public PaymentState PayState { get; set; }
+        public string ApproveUser { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
     public enum PaymentState

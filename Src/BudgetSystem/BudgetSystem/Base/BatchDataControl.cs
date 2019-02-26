@@ -16,8 +16,16 @@ namespace BudgetSystem
         public BatchDataControl()
         {
             InitializeComponent();
+            this.gvBatchApproveData.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(gvBatchApproveData_CellValueChanging);
 
             this.gvBatchApproveData.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gvBatchApproveData_CustomSummaryCalculate);
+        }
+
+        void gvBatchApproveData_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            gvBatchApproveData.SetRowCellValue(e.RowHandle, e.Column, e.Value);
+            this.gvBatchApproveData.FocusedRowHandle = this.gvBatchApproveData.FocusedRowHandle + 1;
+
         }
 
         decimal customSummary = 0;
@@ -60,6 +68,7 @@ namespace BudgetSystem
         public void BindingBachData(List<FlowItem> items)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("IsSelected", typeof(bool));
             dt.Columns.Add("DataText");
             dt.Columns.Add("DataDesc");
@@ -72,11 +81,47 @@ namespace BudgetSystem
             {
                 decimal money = 0;
                 BatchApproveDataItemDesc iv = GetItemDesc(item.DateItemType, item.DateItemID);
-                dt.Rows.Add(false, item.DateItemText, iv.Desc, iv.Money);
+                dt.Rows.Add(item.ID, false, item.DateItemText, iv.Desc, iv.Money);
             }
 
             this.gdBatchApproveData.DataSource = dt;
 
+        }
+
+        private List<DataRow> selectedRows = new List<DataRow>();
+
+        public List<int> GetSelectedItems()
+        {
+            List<int> returnResult = new List<int>();
+            DataTable dt = this.gdBatchApproveData.DataSource as DataTable;
+            if (dt != null)
+            {
+                DataRow[] rows = dt.Select("IsSelected=1");
+                if (rows.Length > 0)
+                {
+                    foreach (DataRow row in rows)
+                    {
+                        returnResult.Add((int)row["ID"]);
+                        selectedRows.Add(row);
+                    }
+                }
+            }
+            return returnResult;
+        }
+
+        public void ClearSelectedItems(List<int> removedIdList)
+        {
+            DataTable dt = this.gdBatchApproveData.DataSource as DataTable;
+            if (dt != null)
+            {
+                foreach (DataRow row in selectedRows)
+                {
+                    if (removedIdList.Contains((int)row["ID"]))
+                    {
+                        dt.Rows.Remove(row);
+                    }
+                }
+            }
         }
 
         private void InitBusinessObject(string dataType)

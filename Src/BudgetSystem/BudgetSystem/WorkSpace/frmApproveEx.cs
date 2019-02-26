@@ -21,6 +21,7 @@ namespace BudgetSystem.WorkSpace
             InitializeComponent();
         }
 
+        private BatchDataControl dataControl;
         private Bll.FlowManager fm = new Bll.FlowManager();
 
         public FlowItem FlowItem
@@ -50,6 +51,7 @@ namespace BudgetSystem.WorkSpace
         private void frmApproveEx_Load(object sender, EventArgs e)
         {
             SetLayoutControlStyle();
+            this.WindowState = FormWindowState.Maximized;
             CreateView();
 
             if (this.CustomWorkModel == ApproveModel || this.CustomWorkModel == BatchApproveModel)
@@ -87,7 +89,8 @@ namespace BudgetSystem.WorkSpace
             string layoutItemName;
             if (dc is BatchDataControl)
             {
-                (dc as BatchDataControl).BindingBachData(this.BatchFlowItems);
+                dataControl = dc as BatchDataControl;
+                dataControl.BindingBachData(this.BatchFlowItems);
                 layoutItemName = "批量审批-" + this.BatchFlowItems[0].FlowName;
             }
             else
@@ -104,12 +107,11 @@ namespace BudgetSystem.WorkSpace
 
 
             temp.TextLocation = DevExpress.Utils.Locations.Top;
-            temp.SizeConstraintsType = SizeConstraintsType.Custom;
+            temp.SizeConstraintsType = SizeConstraintsType.SupportHorzAlignment;
             temp.MaxSize = new Size(0, dc.Height);
             temp.MinSize = new Size(0, dc.Height);
             this.Width = dc.Width + 20;
             this.lcDataGroup.Remove(emptySpaceItem1);
-            this.lcDataGroup.Remove(emptySpaceItem2);
             lcDataGroup.EndUpdate();
 
         }
@@ -140,7 +142,6 @@ namespace BudgetSystem.WorkSpace
 
         private void BatchSubmit(bool result)
         {
-
             if (result)
             {
                 if (!DoFlowExtEvent())
@@ -149,19 +150,31 @@ namespace BudgetSystem.WorkSpace
                     return;
                 }
             }
-
             string info;
-            foreach (FlowItem item in this.BatchFlowItems)
+
+            List<int> idList = dataControl.GetSelectedItems();
+
+            List<FlowItem> selectedItems = this.BatchFlowItems.FindAll(o => idList.Contains(o.ID));
+
+            foreach (FlowItem item in selectedItems)
             {
                 FlowRunState state = fm.SubmitFlow(item.RunPointID, result, this.txtMyInfo.Text.Trim());
-                if (state.Translate(out info))
+                if (!state.Translate(out info))
                 {
-                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                }
-                else
-                {
+                    idList.Remove(item.ID);
                     XtraMessageBox.Show(item.DateItemText + "\r\n" + info);
                 }
+            }
+            this.BatchFlowItems.RemoveAll(o => idList.Contains(o.ID));
+            dataControl.ClearSelectedItems(idList);
+            if (this.BatchFlowItems.Count == 0)
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                XtraMessageBox.Show("操作成功");
+                this.txtMyInfo.Text = string.Empty;
             }
         }
 

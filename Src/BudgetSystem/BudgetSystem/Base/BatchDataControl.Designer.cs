@@ -58,16 +58,18 @@
             this.gcDescription});
             this.gvBatchApproveData.GridControl = this.gdBatchApproveData;
             this.gvBatchApproveData.Name = "gvBatchApproveData";
+            this.gvBatchApproveData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gvBatchApproveData.OptionsView.ShowFooter = true;
             this.gvBatchApproveData.OptionsView.ShowGroupPanel = false;
             // 
             // gcIsSelected
             // 
+            this.gcIsSelected.Caption = "选择";
             this.gcIsSelected.FieldName = "IsSelected";
             this.gcIsSelected.Name = "gcIsSelected";
             this.gcIsSelected.Visible = true;
             this.gcIsSelected.VisibleIndex = 0;
-            this.gcIsSelected.Width = 60;
+            this.gcIsSelected.Width = 50;
             // 
             // gcText
             // 

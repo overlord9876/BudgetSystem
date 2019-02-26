@@ -38,6 +38,10 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cboApproveUser = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cboApproveTimespan = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.panMain)).BeginInit();
             this.panMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -51,6 +55,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboApproveUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboApproveTimespan.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // panMain
@@ -59,6 +67,8 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cboApproveTimespan);
+            this.layoutControl1.Controls.Add(this.cboApproveUser);
             this.layoutControl1.Controls.Add(this.txtBudgetNO);
             this.layoutControl1.Controls.Add(this.txtSupplier);
             this.layoutControl1.Controls.Add(this.txtVoucherNo);
@@ -112,7 +122,9 @@
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem3,
-            this.layoutControlItem4});
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(712, 365);
@@ -155,9 +167,55 @@
             this.layoutControlItem4.CustomizationFormText = "申请人：";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(692, 258);
+            this.layoutControlItem4.Size = new System.Drawing.Size(692, 29);
             this.layoutControlItem4.Text = "申请人：";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(75, 18);
+            // 
+            // cboApproveUser
+            // 
+            this.cboApproveUser.Location = new System.Drawing.Point(90, 128);
+            this.cboApproveUser.Name = "cboApproveUser";
+            this.cboApproveUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboApproveUser.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboApproveUser.Size = new System.Drawing.Size(610, 25);
+            this.cboApproveUser.StyleController = this.layoutControl1;
+            this.cboApproveUser.TabIndex = 8;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.cboApproveUser;
+            this.layoutControlItem5.CustomizationFormText = "审批人：";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 116);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(692, 29);
+            this.layoutControlItem5.Text = "审批人：";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(75, 18);
+            // 
+            // cboApproveTimespan
+            // 
+            this.cboApproveTimespan.Location = new System.Drawing.Point(90, 157);
+            this.cboApproveTimespan.Name = "cboApproveTimespan";
+            this.cboApproveTimespan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboApproveTimespan.Properties.Items.AddRange(new object[] {
+            "当天",
+            "当月",
+            "当年"});
+            this.cboApproveTimespan.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboApproveTimespan.Size = new System.Drawing.Size(610, 25);
+            this.cboApproveTimespan.StyleController = this.layoutControl1;
+            this.cboApproveTimespan.TabIndex = 9;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.cboApproveTimespan;
+            this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(692, 200);
+            this.layoutControlItem6.Text = "审批区间：";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(75, 18);
             // 
             // frmOutMoneyQueryConditionEditor
             // 
@@ -178,6 +236,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboApproveUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboApproveTimespan.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,5 +256,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.TextEdit txtVoucherNo;
         private DevExpress.XtraEditors.TextEdit txtApplicant;
+        private DevExpress.XtraEditors.ComboBoxEdit cboApproveUser;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.ComboBoxEdit cboApproveTimespan;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
     }
 }

@@ -70,6 +70,16 @@ namespace BudgetSystem.Dal
                 {
                     selectSql += string.Format(" and {0}", string.Join(" and ", strConditionList.ToArray()));
                 }
+                if (condition.BeginDate != DateTime.MinValue)
+                {
+                    string approveCondition = string.Empty;
+                    if (string.IsNullOrEmpty(condition.ApproveUser))
+                    {
+                        approveCondition = string.Format("NodeApproveUser='{0}' and ", condition.ApproveUser);
+                    }
+                    selectSql += string.Format(" and f.ID in (SELECT ID from flowrunpoint where {0} NodeApproveDate BETWEEN '{1}' and '{2}')", approveCondition, condition.BeginDate.ToString("yyyy-MM-dd hh:mm:ss"), condition.EndDate.ToString("yyyy-MM-dd hh:mm:ss"));
+                }
+
             }
             return con.Query<PaymentNotes>(selectSql, dp, tran);
         }

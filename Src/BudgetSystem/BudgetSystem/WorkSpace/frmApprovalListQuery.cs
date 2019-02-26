@@ -114,13 +114,11 @@ namespace BudgetSystem.WorkSpace
 
             frmApproveEx form = new frmApproveEx() { BatchFlowItems = selectItems, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.BatchApproveModel };
 
-            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            form.ShowDialog(this);
             {
                 this.RefreshData();
             }
         }
-
-
 
 
         private List<FlowItem> GetSelectedFlowItem()
