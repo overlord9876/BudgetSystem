@@ -124,7 +124,7 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.PrintList.ToString())
             {
                 PrinterHelper.PrintControl(this.isPrintLandscape, this.GetPrintView().GridControl);
-             
+
             }
             else if (operate.Operate == OperateTypes.Print.ToString())
             {
@@ -245,12 +245,12 @@ namespace BudgetSystem
 
         }
 
-        protected void RegeditQueryOperate<T>(bool supportCustomCondition, List<string> commonQueryConditions) where T : BaseQueryCondition
+        protected void RegeditQueryOperate<T>(bool supportCustomCondition, List<string> commonQueryConditions, string caption) where T : BaseQueryCondition
         {
             if (commonQueryConditions != null && commonQueryConditions.Count > 0)
             {
-                ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, "", UITypes.LargeMenu, commonQueryConditions);
-         
+                ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CommonQuery, caption, UITypes.LargeMenu, commonQueryConditions);
+
                 this.ModelOperateRegistry.Add(mo);
 
             }
@@ -258,7 +258,7 @@ namespace BudgetSystem
             if (supportCustomCondition)
             {
                 ModelOperate mo = ModelOperateHelper.GetOperate(OperateTypes.CustomQuery);
-             
+
                 this.ModelOperateRegistry.Add(mo);
             }
 
@@ -272,8 +272,8 @@ namespace BudgetSystem
         }
 
 
-      
-        protected void RegeditPrintOperate(bool isPrintLandscape= true,bool supposePrintItem=true,GridView printListGridView=null)
+
+        protected void RegeditPrintOperate(bool isPrintLandscape = true, bool supposePrintItem = true, GridView printListGridView = null)
         {
             this.isPrintLandscape = isPrintLandscape;
             this.printGridView = printListGridView;
@@ -290,8 +290,8 @@ namespace BudgetSystem
         }
 
         protected virtual void PrintItem()
-        { 
-        
+        {
+
         }
     }
 }

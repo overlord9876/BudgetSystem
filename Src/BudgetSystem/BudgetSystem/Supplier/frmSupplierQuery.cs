@@ -14,7 +14,7 @@ namespace BudgetSystem
 {
     public partial class frmSupplierQuery : frmBaseQueryForm
     {
-        private Bll.SupplierManager sm = new Bll.SupplierManager(); 
+        private Bll.SupplierManager sm = new Bll.SupplierManager();
         private const string COMMONQUERY_MYCREATE = "我创建的";
         public frmSupplierQuery()
         {
@@ -32,7 +32,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
 
-            this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
+            this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "供应商查询");
             this.ModelOperatePageName = "供应商管理";
         }
 
@@ -97,7 +97,7 @@ namespace BudgetSystem
             var list = sm.GetAllSupplier(condition);
             this.gridSupplier.DataSource = list;
         }
-     
+
         private void CreateSupplier()
         {
             frmSupplierEdit form = new frmSupplierEdit();
@@ -147,7 +147,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(message);
                 }
             }
-            else 
+            else
             {
                 XtraMessageBox.Show("请选择需要提交审批的项");
             }
@@ -168,7 +168,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
-         
+
 
         protected override void InitGridViewAction()
         {

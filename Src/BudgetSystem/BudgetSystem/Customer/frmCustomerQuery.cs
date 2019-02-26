@@ -33,7 +33,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
 
-            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE });
+            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "客户查询");
 
             this.ModelOperatePageName = "客户列表";
         }
@@ -60,16 +60,16 @@ namespace BudgetSystem
             {
                 DisabledCustomer();
             }
-            
+
         }
-       
+
         protected override void DoCommonQuery(string queryName)
         {
             if (COMMONQUERY_MYCREATE.Equals(queryName))
             {
                 CustomerQueryCondition condition = new CustomerQueryCondition() { CreateUser = RunInfo.Instance.CurrentUser.UserName };
                 LoadData(condition);
-            } 
+            }
         }
 
         protected override void DoConditionQuery(BaseQueryCondition condition)

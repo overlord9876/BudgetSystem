@@ -39,7 +39,7 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出数据"));
 
-            this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_CONFIRMED, COMMONQUERY_TOBECONFIRMED });
+            this.RegeditQueryOperate<InMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_CONFIRMED, COMMONQUERY_TOBECONFIRMED }, "收款查询");
 
             this.RegeditPrintOperate();
 

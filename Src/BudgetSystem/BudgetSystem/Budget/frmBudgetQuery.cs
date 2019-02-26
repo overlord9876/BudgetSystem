@@ -62,7 +62,7 @@ namespace BudgetSystem
                                                                               COMMONQUERY_ARCHIVEWARNINGQUERY,
                                                                               COMMONQUERY_FINANCEQUERY,
                                                                               COMMONQUERY_ARCHIVEQUERY
-                                                                              });
+                                                                              }, "预算单查询");
 
             this.RegeditPrintOperate();
 
