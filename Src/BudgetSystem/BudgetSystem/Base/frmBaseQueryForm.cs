@@ -266,7 +266,7 @@ namespace BudgetSystem
 
             if (condition.Count > 0)
             {
-                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery, "", UITypes.LargeMenu, condition));
+                this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.MyQuery, "我的查询", UITypes.LargeMenu, condition));
                 this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.QueryManager));
             }
         }

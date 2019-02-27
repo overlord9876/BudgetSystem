@@ -25,20 +25,13 @@ namespace BudgetSystem.Base
             {
                 cboYears.Items.Add((year + index));
             }
-            this.barEditItem1.EditValue = DateTime.Now.Year;
+            this.cboSelectYear.EditValue = DateTime.Now.Year;
 
-            this.startDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            this.deStartDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime nextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            this.endDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+            this.deEndDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
 
-            this.cboYears.EditValueChanged += new EventHandler(repositoryItemDateEdit1_EditValueChanged);
             InitData();
-        }
-
-        void repositoryItemDateEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-
-
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
@@ -372,15 +365,106 @@ namespace BudgetSystem.Base
                 {
                     RunInfo.Instance.Logger.LogError(ex);
                 }
-
-
-
             }
-
-
-
         }
 
+        private void btnJanuary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(1);
+        }
+
+        private void btnFebruary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(2);
+        }
+
+        private void btnMarch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(3);
+        }
+
+        private void btnApril_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(4);
+        }
+
+        private void btnMay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(5);
+        }
+
+        private void btnJune_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(6);
+        }
+
+        private void btnJuly_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(7);
+        }
+
+        private void btnAugust_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(8);
+        }
+
+        private void btnSeptember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(9);
+        }
+
+        private void btnOctober_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(10);
+        }
+
+        private void btnNovember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(11);
+        }
+
+        private void btnDecember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(12);
+        }
+
+        private void cboSelectYear_EditValueChanged(object sender, EventArgs e)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            deStartDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0);
+            deEndDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0).AddYears(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void ChangedMonth(int month)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            DateTime beginDate = new DateTime(year, month, 1, 0, 0, 0);
+            deStartDate.EditValue = beginDate;
+            deEndDate.EditValue = beginDate.AddMonths(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void btnSearch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+
+        public override void LoadData()
+        {
+            base.LoadData();
+            DateTime startTime = (DateTime)deStartDate.EditValue;
+            startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, 0, 0, 0);
+            DateTime endTime = (DateTime)deEndDate.EditValue;
+            endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
+            LoadDataByCondition(startTime, endTime);
+        }
+
+        protected virtual void LoadDataByCondition(DateTime beginDate, DateTime endDate)
+        {
+
+        }
 
     }
 }

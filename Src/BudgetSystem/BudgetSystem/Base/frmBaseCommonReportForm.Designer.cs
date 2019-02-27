@@ -55,24 +55,25 @@
             this.btnSaveView = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteView = new DevExpress.XtraBars.BarButtonItem();
             this.btnShowOrVisible = new DevExpress.XtraBars.BarButtonItem();
-            this.startDate = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-            this.endDate = new DevExpress.XtraBars.BarEditItem();
-            this.gridViewBar = new DevExpress.XtraBars.Bar();
-            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.cboSelectYear = new DevExpress.XtraBars.BarEditItem();
             this.cboYears = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnJanuary = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFebruary = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMarch = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApril = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMay = new DevExpress.XtraBars.BarButtonItem();
+            this.btnJune = new DevExpress.XtraBars.BarButtonItem();
+            this.btnJuly = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAugust = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSeptember = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOctober = new DevExpress.XtraBars.BarButtonItem();
+            this.btnNovember = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDecember = new DevExpress.XtraBars.BarButtonItem();
+            this.deStartDate = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.deEndDate = new DevExpress.XtraBars.BarEditItem();
+            this.btnSearch = new DevExpress.XtraBars.BarButtonItem();
+            this.gridViewBar = new DevExpress.XtraBars.Bar();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listBox)).BeginInit();
@@ -92,9 +93,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -111,27 +112,30 @@
             this.layoutControlItem6,
             this.layoutControlItem7});
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(829, 657, 552, 529);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1731, 757);
+            this.layoutControl1.Size = new System.Drawing.Size(1515, 589);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // listBox
             // 
-            this.listBox.Location = new System.Drawing.Point(24, 79);
+            this.listBox.Location = new System.Drawing.Point(24, 75);
+            this.listBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(340, 654);
+            this.listBox.Size = new System.Drawing.Size(296, 490);
             this.listBox.StyleController = this.layoutControl1;
             this.listBox.TabIndex = 12;
             this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
             // pivotGridControl
             // 
-            this.pivotGridControl.Location = new System.Drawing.Point(373, 79);
+            this.pivotGridControl.Location = new System.Drawing.Point(329, 75);
+            this.pivotGridControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pivotGridControl.Name = "pivotGridControl";
-            this.pivotGridControl.Size = new System.Drawing.Size(1334, 654);
+            this.pivotGridControl.Size = new System.Drawing.Size(1162, 490);
             this.pivotGridControl.TabIndex = 6;
             // 
             // gridControl
@@ -145,10 +149,12 @@
             this.gridControl.EmbeddedNavigator.Buttons.NextPage.Visible = false;
             this.gridControl.EmbeddedNavigator.Buttons.PrevPage.Visible = false;
             this.gridControl.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gridControl.Location = new System.Drawing.Point(24, 79);
+            this.gridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridControl.Location = new System.Drawing.Point(24, 75);
             this.gridControl.MainView = this.gridView;
+            this.gridControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(1683, 654);
+            this.gridControl.Size = new System.Drawing.Size(1467, 490);
             this.gridControl.TabIndex = 4;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -166,28 +172,32 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(151, 73);
+            this.barDockControlLeft.Location = new System.Drawing.Point(132, 57);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.barDockControlLeft.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(151, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(132, 38);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(24, 49);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 29);
+            this.barDockControlBottom.Location = new System.Drawing.Point(24, 45);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1467, 29);
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Location = new System.Drawing.Point(24, 49);
-            this.barDockControlTop.Size = new System.Drawing.Size(1683, 26);
+            this.barDockControlTop.Location = new System.Drawing.Point(24, 45);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlTop.Size = new System.Drawing.Size(1467, 26);
             // 
             // layoutControlItem6
             // 
@@ -220,7 +230,7 @@
             this.tabbedControlGroup1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1731, 757);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1515, 589);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -231,7 +241,7 @@
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
             this.tabbedControlGroup1.SelectedTabPage = this.lcgPivote;
             this.tabbedControlGroup1.SelectedTabPageIndex = 1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(1711, 737);
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(1495, 569);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgGrid,
             this.lcgPivote});
@@ -247,16 +257,16 @@
             this.splitterItem});
             this.lcgPivote.Location = new System.Drawing.Point(0, 0);
             this.lcgPivote.Name = "lcgPivote";
-            this.lcgPivote.Size = new System.Drawing.Size(1687, 688);
+            this.lcgPivote.Size = new System.Drawing.Size(1471, 524);
             this.lcgPivote.Text = "统计视图";
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.pivotGridControl;
             this.layoutControlItem3.CustomizationFormText = "统计表";
-            this.layoutControlItem3.Location = new System.Drawing.Point(349, 30);
+            this.layoutControlItem3.Location = new System.Drawing.Point(305, 30);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1338, 658);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1166, 494);
             this.layoutControlItem3.Text = "统计表";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -270,7 +280,7 @@
             this.lcStatBar.MaxSize = new System.Drawing.Size(0, 30);
             this.lcStatBar.MinSize = new System.Drawing.Size(1, 30);
             this.lcStatBar.Name = "lcStatBar";
-            this.lcStatBar.Size = new System.Drawing.Size(1687, 30);
+            this.lcStatBar.Size = new System.Drawing.Size(1471, 30);
             this.lcStatBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcStatBar.Text = "lcStatBar";
             this.lcStatBar.TextSize = new System.Drawing.Size(0, 0);
@@ -283,7 +293,7 @@
             this.lcList.CustomizationFormText = "统计视表列表";
             this.lcList.Location = new System.Drawing.Point(0, 30);
             this.lcList.Name = "lcList";
-            this.lcList.Size = new System.Drawing.Size(344, 658);
+            this.lcList.Size = new System.Drawing.Size(300, 494);
             this.lcList.Text = "统计视表列表";
             this.lcList.TextSize = new System.Drawing.Size(0, 0);
             this.lcList.TextToControlDistance = 0;
@@ -293,9 +303,9 @@
             // 
             this.splitterItem.AllowHotTrack = true;
             this.splitterItem.CustomizationFormText = "splitterItem1";
-            this.splitterItem.Location = new System.Drawing.Point(344, 30);
+            this.splitterItem.Location = new System.Drawing.Point(300, 30);
             this.splitterItem.Name = "splitterItem";
-            this.splitterItem.Size = new System.Drawing.Size(5, 658);
+            this.splitterItem.Size = new System.Drawing.Size(5, 494);
             // 
             // lcgGrid
             // 
@@ -305,7 +315,7 @@
             this.lcGridBar});
             this.lcgGrid.Location = new System.Drawing.Point(0, 0);
             this.lcgGrid.Name = "lcgGrid";
-            this.lcgGrid.Size = new System.Drawing.Size(1687, 688);
+            this.lcgGrid.Size = new System.Drawing.Size(1471, 524);
             this.lcgGrid.Text = "表格视图";
             // 
             // layoutControlItem1
@@ -314,7 +324,7 @@
             this.layoutControlItem1.CustomizationFormText = "表格";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1471, 494);
             this.layoutControlItem1.Text = "表格";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -328,7 +338,7 @@
             this.lcGridBar.MaxSize = new System.Drawing.Size(0, 30);
             this.lcGridBar.MinSize = new System.Drawing.Size(1, 30);
             this.lcGridBar.Name = "lcGridBar";
-            this.lcGridBar.Size = new System.Drawing.Size(1687, 30);
+            this.lcGridBar.Size = new System.Drawing.Size(1471, 30);
             this.lcGridBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcGridBar.Text = "lcGridBar";
             this.lcGridBar.TextSize = new System.Drawing.Size(0, 0);
@@ -349,22 +359,23 @@
             this.btnShowOrVisible,
             this.btnSaveView,
             this.btnDeleteView,
-            this.startDate,
-            this.endDate,
-            this.barEditItem1,
-            this.barButtonItem1,
-            this.barButtonItem2,
-            this.barButtonItem3,
-            this.barButtonItem4,
-            this.barButtonItem5,
-            this.barButtonItem6,
-            this.barButtonItem7,
-            this.barButtonItem8,
-            this.barButtonItem9,
-            this.barButtonItem10,
-            this.barButtonItem11,
-            this.barButtonItem12});
-            this.barManager1.MaxItemId = 19;
+            this.deStartDate,
+            this.deEndDate,
+            this.cboSelectYear,
+            this.btnJanuary,
+            this.btnFebruary,
+            this.btnMarch,
+            this.btnApril,
+            this.btnMay,
+            this.btnJune,
+            this.btnJuly,
+            this.btnAugust,
+            this.btnSeptember,
+            this.btnOctober,
+            this.btnNovember,
+            this.btnDecember,
+            this.btnSearch});
+            this.barManager1.MaxItemId = 20;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
             this.cboYears});
@@ -379,21 +390,22 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveView),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteView),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnShowOrVisible, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barEditItem1, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem4),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem10),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem11),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem12),
-            new DevExpress.XtraBars.LinkPersistInfo(this.startDate),
-            new DevExpress.XtraBars.LinkPersistInfo(this.endDate)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.cboSelectYear, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJanuary),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFebruary),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMarch),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnApril),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMay),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJune),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJuly),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAugust),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSeptember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnOctober),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnNovember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDecember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.deStartDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.deEndDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSearch)});
             this.pivotViewBar.OptionsBar.AllowQuickCustomization = false;
             this.pivotViewBar.OptionsBar.DisableCustomization = true;
             this.pivotViewBar.OptionsBar.DrawDragBorder = false;
@@ -421,14 +433,115 @@
             this.btnShowOrVisible.Name = "btnShowOrVisible";
             this.btnShowOrVisible.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnShowOrVisible_ItemClick);
             // 
-            // startDate
+            // cboSelectYear
             // 
-            this.startDate.Caption = "开始时间：";
-            this.startDate.Edit = this.repositoryItemDateEdit1;
-            this.startDate.Id = 3;
-            this.startDate.Name = "startDate";
-            this.startDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.startDate.Width = 100;
+            this.cboSelectYear.Caption = "选择年份：";
+            this.cboSelectYear.Edit = this.cboYears;
+            this.cboSelectYear.Id = 6;
+            this.cboSelectYear.Name = "cboSelectYear";
+            this.cboSelectYear.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.cboSelectYear.Width = 75;
+            this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
+            // 
+            // cboYears
+            // 
+            this.cboYears.AutoHeight = false;
+            this.cboYears.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboYears.Name = "cboYears";
+            // 
+            // btnJanuary
+            // 
+            this.btnJanuary.Caption = "1月";
+            this.btnJanuary.Id = 7;
+            this.btnJanuary.Name = "btnJanuary";
+            this.btnJanuary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJanuary_ItemClick);
+            // 
+            // btnFebruary
+            // 
+            this.btnFebruary.Caption = "2月";
+            this.btnFebruary.Id = 8;
+            this.btnFebruary.Name = "btnFebruary";
+            this.btnFebruary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFebruary_ItemClick);
+            // 
+            // btnMarch
+            // 
+            this.btnMarch.Caption = "3月";
+            this.btnMarch.Id = 9;
+            this.btnMarch.Name = "btnMarch";
+            this.btnMarch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMarch_ItemClick);
+            // 
+            // btnApril
+            // 
+            this.btnApril.Caption = "4月";
+            this.btnApril.Id = 10;
+            this.btnApril.Name = "btnApril";
+            this.btnApril.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApril_ItemClick);
+            // 
+            // btnMay
+            // 
+            this.btnMay.Caption = "5月";
+            this.btnMay.Id = 11;
+            this.btnMay.Name = "btnMay";
+            this.btnMay.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMay_ItemClick);
+            // 
+            // btnJune
+            // 
+            this.btnJune.Caption = "6月";
+            this.btnJune.Id = 12;
+            this.btnJune.Name = "btnJune";
+            this.btnJune.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJune_ItemClick);
+            // 
+            // btnJuly
+            // 
+            this.btnJuly.Caption = "7月";
+            this.btnJuly.Id = 13;
+            this.btnJuly.Name = "btnJuly";
+            this.btnJuly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJuly_ItemClick);
+            // 
+            // btnAugust
+            // 
+            this.btnAugust.Caption = "8月";
+            this.btnAugust.Id = 14;
+            this.btnAugust.Name = "btnAugust";
+            this.btnAugust.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAugust_ItemClick);
+            // 
+            // btnSeptember
+            // 
+            this.btnSeptember.Caption = "9月";
+            this.btnSeptember.Id = 15;
+            this.btnSeptember.Name = "btnSeptember";
+            this.btnSeptember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSeptember_ItemClick);
+            // 
+            // btnOctober
+            // 
+            this.btnOctober.Caption = "10月";
+            this.btnOctober.Id = 16;
+            this.btnOctober.Name = "btnOctober";
+            this.btnOctober.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOctober_ItemClick);
+            // 
+            // btnNovember
+            // 
+            this.btnNovember.Caption = "11月";
+            this.btnNovember.Id = 17;
+            this.btnNovember.Name = "btnNovember";
+            this.btnNovember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNovember_ItemClick);
+            // 
+            // btnDecember
+            // 
+            this.btnDecember.Caption = "12月";
+            this.btnDecember.Id = 18;
+            this.btnDecember.Name = "btnDecember";
+            this.btnDecember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDecember_ItemClick);
+            // 
+            // deStartDate
+            // 
+            this.deStartDate.Caption = "开始时间：";
+            this.deStartDate.Edit = this.repositoryItemDateEdit1;
+            this.deStartDate.Id = 3;
+            this.deStartDate.Name = "deStartDate";
+            this.deStartDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.deStartDate.Width = 100;
             // 
             // repositoryItemDateEdit1
             // 
@@ -439,14 +552,21 @@
             this.repositoryItemDateEdit1.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             // 
-            // endDate
+            // deEndDate
             // 
-            this.endDate.Caption = "结束时间：";
-            this.endDate.Edit = this.repositoryItemDateEdit1;
-            this.endDate.Id = 5;
-            this.endDate.Name = "endDate";
-            this.endDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.endDate.Width = 100;
+            this.deEndDate.Caption = "结束时间：";
+            this.deEndDate.Edit = this.repositoryItemDateEdit1;
+            this.deEndDate.Id = 5;
+            this.deEndDate.Name = "deEndDate";
+            this.deEndDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.deEndDate.Width = 100;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Caption = "查询";
+            this.btnSearch.Id = 19;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearch_ItemClick);
             // 
             // gridViewBar
             // 
@@ -461,99 +581,11 @@
             this.gridViewBar.OptionsBar.UseWholeRow = true;
             this.gridViewBar.Text = "Custom 2";
             // 
-            // barEditItem1
-            // 
-            this.barEditItem1.Caption = "选择年份：";
-            this.barEditItem1.Edit = this.cboYears;
-            this.barEditItem1.Id = 6;
-            this.barEditItem1.Name = "barEditItem1";
-            this.barEditItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barEditItem1.Width = 75;
-            // 
-            // cboYears
-            // 
-            this.cboYears.AutoHeight = false;
-            this.cboYears.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboYears.Name = "cboYears";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "1月";
-            this.barButtonItem1.Id = 7;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "2月";
-            this.barButtonItem2.Id = 8;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "3月";
-            this.barButtonItem3.Id = 9;
-            this.barButtonItem3.Name = "barButtonItem3";
-            // 
-            // barButtonItem4
-            // 
-            this.barButtonItem4.Caption = "4月";
-            this.barButtonItem4.Id = 10;
-            this.barButtonItem4.Name = "barButtonItem4";
-            // 
-            // barButtonItem5
-            // 
-            this.barButtonItem5.Caption = "5月";
-            this.barButtonItem5.Id = 11;
-            this.barButtonItem5.Name = "barButtonItem5";
-            // 
-            // barButtonItem6
-            // 
-            this.barButtonItem6.Caption = "6月";
-            this.barButtonItem6.Id = 12;
-            this.barButtonItem6.Name = "barButtonItem6";
-            // 
-            // barButtonItem7
-            // 
-            this.barButtonItem7.Caption = "7月";
-            this.barButtonItem7.Id = 13;
-            this.barButtonItem7.Name = "barButtonItem7";
-            // 
-            // barButtonItem8
-            // 
-            this.barButtonItem8.Caption = "8月";
-            this.barButtonItem8.Id = 14;
-            this.barButtonItem8.Name = "barButtonItem8";
-            // 
-            // barButtonItem9
-            // 
-            this.barButtonItem9.Caption = "9月";
-            this.barButtonItem9.Id = 15;
-            this.barButtonItem9.Name = "barButtonItem9";
-            // 
-            // barButtonItem10
-            // 
-            this.barButtonItem10.Caption = "10月";
-            this.barButtonItem10.Id = 16;
-            this.barButtonItem10.Name = "barButtonItem10";
-            // 
-            // barButtonItem11
-            // 
-            this.barButtonItem11.Caption = "11月";
-            this.barButtonItem11.Id = 17;
-            this.barButtonItem11.Name = "barButtonItem11";
-            // 
-            // barButtonItem12
-            // 
-            this.barButtonItem12.Caption = "12月";
-            this.barButtonItem12.Id = 18;
-            this.barButtonItem12.Name = "barButtonItem12";
-            // 
             // frmBaseCommonReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1731, 757);
+            this.ClientSize = new System.Drawing.Size(1515, 589);
             this.Controls.Add(this.layoutControl1);
             this.Name = "frmBaseCommonReportForm";
             this.Text = "frmBaseCommonReportForm";
@@ -577,9 +609,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcGridBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -613,22 +645,23 @@
         protected DevExpress.XtraLayout.SplitterItem splitterItem;
         protected DevExpress.XtraLayout.LayoutControlItem lcList;
         protected DevExpress.XtraBars.BarButtonItem btnDeleteView;
-        private DevExpress.XtraBars.BarEditItem startDate;
+        private DevExpress.XtraBars.BarEditItem deStartDate;
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
-        private DevExpress.XtraBars.BarEditItem endDate;
-        private DevExpress.XtraBars.BarEditItem barEditItem1;
+        private DevExpress.XtraBars.BarEditItem deEndDate;
+        private DevExpress.XtraBars.BarEditItem cboSelectYear;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cboYears;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem11;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem12;
+        private DevExpress.XtraBars.BarButtonItem btnJanuary;
+        private DevExpress.XtraBars.BarButtonItem btnFebruary;
+        private DevExpress.XtraBars.BarButtonItem btnMarch;
+        private DevExpress.XtraBars.BarButtonItem btnApril;
+        private DevExpress.XtraBars.BarButtonItem btnMay;
+        private DevExpress.XtraBars.BarButtonItem btnJune;
+        private DevExpress.XtraBars.BarButtonItem btnJuly;
+        private DevExpress.XtraBars.BarButtonItem btnAugust;
+        private DevExpress.XtraBars.BarButtonItem btnSeptember;
+        private DevExpress.XtraBars.BarButtonItem btnOctober;
+        private DevExpress.XtraBars.BarButtonItem btnNovember;
+        private DevExpress.XtraBars.BarButtonItem btnDecember;
+        private DevExpress.XtraBars.BarButtonItem btnSearch;
     }
 }

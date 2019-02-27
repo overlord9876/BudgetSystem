@@ -37,20 +37,15 @@ namespace BudgetSystem.Report
             base.OperateHandled(operate, e);
         }
 
-        private void frmTestReport1_Load(object sender, EventArgs e)
+        private void frmBudgetReport_Load(object sender, EventArgs e)
         {
             InitShowStyle();
         }
 
-        public override void LoadData()
-        {
-            BudgetReport();
-        }
-
-        private void BudgetReport()
+        protected override void LoadDataByCondition(DateTime beginDate, DateTime endDate)
         {
             Bll.ReportManager um = new Bll.ReportManager();
-            var lst = um.GetBudgetReportList(new DateTime(2018, 1, 1), new DateTime(2020, 1, 1));
+            var lst = um.GetBudgetReportList(beginDate, endDate);
 
             this.pivotGridControl.DataSource = lst;
         }

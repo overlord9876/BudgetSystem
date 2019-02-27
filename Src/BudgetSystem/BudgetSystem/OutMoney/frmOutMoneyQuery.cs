@@ -10,6 +10,8 @@ using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using BudgetSystem.OutMoney;
 using BudgetSystem.Entity.QueryCondition;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using System.Reflection;
 
 namespace BudgetSystem
 {
@@ -20,11 +22,40 @@ namespace BudgetSystem
         const string COMMONQUERY_APPLICATIONFORPAYMENT = "申请付款";
         const string COMMONQUERY_BEPAID = "已付货款";
         const string COMMONQUERY_ALL = "所有付款单";
+        const string THE_SAME_DAY = "当天审批付款单";
+        const string THE_SAME_MONTH = "当月审批付款单";
+        const string THE_SAME_YEAR = "当年审批付款单";
 
         public frmOutMoneyQuery()
         {
             InitializeComponent();
+            this.gvOutMoney.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvOutMoney_CustomDrawGroupRow);
             this.Module = BusinessModules.OutMoneyManagement;
+        }
+
+        void gvOutMoney_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            GridGroupRowInfo GridGroupRowInfo = e.Info as GridGroupRowInfo;
+            string fullName = GridGroupRowInfo.EditValue == null ? string.Empty : GridGroupRowInfo.EditValue.ToString();
+            string columnFieldName = GridGroupRowInfo.Column.FieldName;
+
+            PropertyInfo propety = typeof(PaymentNotes).GetProperty(columnFieldName);
+            if (propety == null) return;
+
+            decimal totalCNY = 0;
+            List<PaymentNotes> allPayment = gvOutMoney.DataSource as List<PaymentNotes>;
+            foreach (PaymentNotes pn in allPayment)
+            {
+                object obj = propety.GetValue(pn, null);
+                string value = obj == null ? string.Empty : obj.ToString(); //对应的值
+                if (value == fullName)
+                {
+                    totalCNY += pn.CNY;
+                }
+            }
+
+            fullName = fullName + " (合计人民币：" + totalCNY + ")";
+            GridGroupRowInfo.GroupText = fullName;
         }
 
         protected override void InitModelOperate()
@@ -40,7 +71,7 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
 
-            this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_APPLICATIONFORPAYMENT, COMMONQUERY_BEPAID }, "付款查询");
+            this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_APPLICATIONFORPAYMENT, COMMONQUERY_BEPAID, THE_SAME_DAY, THE_SAME_MONTH, THE_SAME_YEAR }, "付款查询");
 
             this.RegeditPrintOperate();
 
@@ -94,6 +125,9 @@ namespace BudgetSystem
         {
             OutMoneyQueryCondition outMoneyCondition = new OutMoneyQueryCondition();
 
+            outMoneyCondition.BeginDate = DateTime.MinValue;
+            outMoneyCondition.EndDate = DateTime.MinValue;
+
             if (COMMONQUERY_APPLICATIONFORPAYMENT.Equals(queryName))
             {
                 outMoneyCondition.PayState = PaymentState.PendingPayment;
@@ -102,6 +136,22 @@ namespace BudgetSystem
             {
                 outMoneyCondition.PayState = PaymentState.Paid;
             }
+            else if (THE_SAME_DAY.Equals(queryName))
+            {
+                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+                outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddDays(1).AddSeconds(-1);
+            }
+            else if (THE_SAME_MONTH.Equals(queryName))
+            {
+                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+                outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddMonths(1).AddSeconds(-1);
+            }
+            else if (THE_SAME_YEAR.Equals(queryName))
+            {
+                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);
+                outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddYears(1).AddSeconds(-1);
+            }
+
             this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
             this.gvOutMoney.RefreshData();
         }

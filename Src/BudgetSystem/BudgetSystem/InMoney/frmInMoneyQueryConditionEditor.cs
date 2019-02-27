@@ -10,7 +10,7 @@ using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
-    public partial class frmInMoneyQueryConditionEditor : frmUserQueryConditionEditorTransit
+    public partial class frmInMoneyQueryConditionEditor : frmInMoneyQueryConditionEditorTransit
     {
         public frmInMoneyQueryConditionEditor()
         {

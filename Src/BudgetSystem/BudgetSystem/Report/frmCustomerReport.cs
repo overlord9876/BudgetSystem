@@ -42,16 +42,10 @@ namespace BudgetSystem.Report
             InitShowStyle();
         }
 
-        public override void LoadData()
-        {
-            CustomerReport();
-
-        }
-
-        private void CustomerReport()
+        protected override void LoadDataByCondition(DateTime beginDate, DateTime endDate)
         {
             Bll.ReportManager um = new Bll.ReportManager();
-            var lst = um.GetCustomerReportList(new DateTime(2018, 1, 1), new DateTime(2020, 1, 1));
+            var lst = um.GetCustomerReportList(beginDate, endDate);
 
             this.pivotGridControl.DataSource = lst;
         }

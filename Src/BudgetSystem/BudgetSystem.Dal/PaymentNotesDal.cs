@@ -73,11 +73,15 @@ namespace BudgetSystem.Dal
                 if (condition.BeginDate != DateTime.MinValue)
                 {
                     string approveCondition = string.Empty;
-                    if (string.IsNullOrEmpty(condition.ApproveUser))
+                    if (!string.IsNullOrEmpty(condition.ApproveUser))
                     {
-                        approveCondition = string.Format("NodeApproveUser='{0}' and ", condition.ApproveUser);
+                        approveCondition = string.Format(" NodeApproveUser=@NodeApproveUser and ");
+                        dp.Add("NodeApproveUser", condition.ApproveUser, null, null, null);
                     }
-                    selectSql += string.Format(" and f.ID in (SELECT ID from flowrunpoint where {0} NodeApproveDate BETWEEN '{1}' and '{2}')", approveCondition, condition.BeginDate.ToString("yyyy-MM-dd hh:mm:ss"), condition.EndDate.ToString("yyyy-MM-dd hh:mm:ss"));
+                    selectSql += string.Format(" and f.ID in (SELECT InstanceID from flowrunpoint where {0} NodeApproveDate BETWEEN @BeginDate and @EndDate)", approveCondition);
+
+                    dp.Add("BeginDate", condition.BeginDate.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
+                    dp.Add("EndDate", condition.EndDate.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
                 }
 
             }
