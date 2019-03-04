@@ -121,6 +121,17 @@ namespace BudgetSystem.InMoney
             BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
             if (currentRowBankSlip != null)
             {
+                currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip == null)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
+                if (currentRowBankSlip.State == 2)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单已经完成拆分，不允许再修改数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
                 frmInMoneyEdit form = new frmInMoneyEdit();
                 form.WorkModel = EditFormWorkModels.Modify;
                 form.CurrentBankSlip = currentRowBankSlip;

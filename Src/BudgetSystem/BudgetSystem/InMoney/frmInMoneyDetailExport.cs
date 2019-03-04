@@ -34,6 +34,7 @@ namespace BudgetSystem.InMoney
                 return;
             }
             this.gcInMoney.ExportToXls(saveFileDialog1.FileName);
+            XtraMessageBox.Show("导出成功。");
         }
     }
 }

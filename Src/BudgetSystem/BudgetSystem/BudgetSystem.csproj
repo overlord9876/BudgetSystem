@@ -722,7 +722,6 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>

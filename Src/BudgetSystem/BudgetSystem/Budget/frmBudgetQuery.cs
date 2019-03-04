@@ -55,7 +55,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinalAccount));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.NewPayment, "财务调账"));
 
-            this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> 
+            this.RegeditQueryOperate<BudgetQueryCondition>(true, new List<string> 
                                                                             { COMMONQUERY_MYCREATE,
                                                                               COMMONQUERY_MANAGERAPPROVAL,
                                                                               COMMONQUERY_GENERALMANAGERAPPROVAL,     

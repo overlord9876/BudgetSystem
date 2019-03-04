@@ -87,10 +87,11 @@
             this.layoutControl1.Controls.Add(this.labelControl1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(711, 489, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1209, 664);
+            this.layoutControl1.Size = new System.Drawing.Size(1382, 854);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -98,14 +99,14 @@
             // 
             this.textEdit_Number3.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number3.IsSupportNegative = false;
-            this.textEdit_Number3.Location = new System.Drawing.Point(821, 631);
-            this.textEdit_Number3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textEdit_Number3.Location = new System.Drawing.Point(939, 817);
             this.textEdit_Number3.Name = "textEdit_Number3";
             this.textEdit_Number3.Properties.Mask.EditMask = "n";
             this.textEdit_Number3.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number3.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.textEdit_Number3.Properties.NullText = "0";
-            this.textEdit_Number3.Size = new System.Drawing.Size(376, 21);
+            this.textEdit_Number3.Properties.ReadOnly = true;
+            this.textEdit_Number3.Size = new System.Drawing.Size(431, 25);
             this.textEdit_Number3.StyleController = this.layoutControl1;
             this.textEdit_Number3.TabIndex = 10;
             // 
@@ -113,14 +114,14 @@
             // 
             this.textEdit_Number2.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number2.IsSupportNegative = false;
-            this.textEdit_Number2.Location = new System.Drawing.Point(420, 631);
-            this.textEdit_Number2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textEdit_Number2.Location = new System.Drawing.Point(479, 817);
             this.textEdit_Number2.Name = "textEdit_Number2";
             this.textEdit_Number2.Properties.Mask.EditMask = "n";
             this.textEdit_Number2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number2.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.textEdit_Number2.Properties.NullText = "0";
-            this.textEdit_Number2.Size = new System.Drawing.Size(397, 21);
+            this.textEdit_Number2.Properties.ReadOnly = true;
+            this.textEdit_Number2.Size = new System.Drawing.Size(456, 25);
             this.textEdit_Number2.StyleController = this.layoutControl1;
             this.textEdit_Number2.TabIndex = 9;
             // 
@@ -128,33 +129,36 @@
             // 
             this.textEdit_Number1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textEdit_Number1.IsSupportNegative = false;
-            this.textEdit_Number1.Location = new System.Drawing.Point(12, 631);
-            this.textEdit_Number1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textEdit_Number1.Location = new System.Drawing.Point(12, 817);
             this.textEdit_Number1.Name = "textEdit_Number1";
             this.textEdit_Number1.Properties.Mask.EditMask = "n";
             this.textEdit_Number1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEdit_Number1.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.textEdit_Number1.Properties.NullText = "0";
-            this.textEdit_Number1.Size = new System.Drawing.Size(404, 21);
+            this.textEdit_Number1.Properties.ReadOnly = true;
+            this.textEdit_Number1.Size = new System.Drawing.Size(463, 25);
             this.textEdit_Number1.StyleController = this.layoutControl1;
             this.textEdit_Number1.TabIndex = 8;
             // 
             // lblBudgetNO
             // 
             this.lblBudgetNO.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lblBudgetNO.Location = new System.Drawing.Point(1161, 12);
+            this.lblBudgetNO.Location = new System.Drawing.Point(1325, 12);
+            this.lblBudgetNO.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblBudgetNO.Name = "lblBudgetNO";
-            this.lblBudgetNO.Size = new System.Drawing.Size(36, 14);
+            this.lblBudgetNO.Size = new System.Drawing.Size(45, 18);
             this.lblBudgetNO.StyleController = this.layoutControl1;
             this.lblBudgetNO.TabIndex = 7;
             this.lblBudgetNO.Text = "合同号";
             // 
             // gcAccountBill
             // 
-            this.gcAccountBill.Location = new System.Drawing.Point(12, 43);
+            this.gcAccountBill.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gcAccountBill.Location = new System.Drawing.Point(12, 49);
             this.gcAccountBill.MainView = this.gvAccountBill;
+            this.gcAccountBill.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gcAccountBill.Name = "gcAccountBill";
-            this.gcAccountBill.Size = new System.Drawing.Size(1185, 567);
+            this.gcAccountBill.Size = new System.Drawing.Size(1358, 743);
             this.gcAccountBill.TabIndex = 6;
             this.gcAccountBill.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAccountBill});
@@ -252,8 +256,9 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.labelControl1.Location = new System.Drawing.Point(12, 12);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(230, 27);
+            this.labelControl1.Size = new System.Drawing.Size(280, 33);
             this.labelControl1.StyleController = this.layoutControl1;
             this.labelControl1.TabIndex = 4;
             this.labelControl1.Text = "按合同号查询收付情况";
@@ -273,7 +278,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1209, 664);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1382, 854);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -283,7 +288,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(234, 31);
+            this.layoutControlItem1.Size = new System.Drawing.Size(284, 37);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -293,9 +298,9 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(234, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(284, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(915, 31);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(1029, 37);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -303,9 +308,9 @@
             // 
             this.layoutControlItem3.Control = this.gcAccountBill;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 31);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 37);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1189, 571);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1362, 747);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -316,9 +321,9 @@
             this.layoutControlItem2.Control = this.lblBudgetNO;
             this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(1149, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(1313, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(40, 31);
+            this.layoutControlItem2.Size = new System.Drawing.Size(49, 37);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Bottom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -329,41 +334,42 @@
             // 
             this.layoutControlItem4.Control = this.textEdit_Number1;
             this.layoutControlItem4.CustomizationFormText = "申请用款总额";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 602);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 784);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(408, 42);
+            this.layoutControlItem4.Size = new System.Drawing.Size(467, 50);
             this.layoutControlItem4.Text = "申请用款总额";
             this.layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(84, 14);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(105, 18);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.textEdit_Number2;
             this.layoutControlItem5.CustomizationFormText = "收款总金额";
-            this.layoutControlItem5.Location = new System.Drawing.Point(408, 602);
+            this.layoutControlItem5.Location = new System.Drawing.Point(467, 784);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(401, 42);
+            this.layoutControlItem5.Size = new System.Drawing.Size(460, 50);
             this.layoutControlItem5.Text = "收款总金额";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(84, 14);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(105, 18);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.textEdit_Number3;
             this.layoutControlItem6.CustomizationFormText = "折合人名币总额";
-            this.layoutControlItem6.Location = new System.Drawing.Point(809, 602);
+            this.layoutControlItem6.Location = new System.Drawing.Point(927, 784);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(380, 42);
+            this.layoutControlItem6.Size = new System.Drawing.Size(435, 50);
             this.layoutControlItem6.Text = "折合人名币总额";
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(84, 14);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(105, 18);
             // 
             // frmAccountBillView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 664);
+            this.ClientSize = new System.Drawing.Size(1382, 854);
             this.Controls.Add(this.layoutControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmAccountBillView";
             this.Text = "按合同号查询收付情况";
             this.Load += new System.EventHandler(this.frmAccountBillView_Load);

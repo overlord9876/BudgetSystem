@@ -49,14 +49,14 @@
             // gcInMoney
             // 
             this.gcInMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcInMoney.Location = new System.Drawing.Point(0, 0);
             this.gcInMoney.MainView = this.gvInMoney;
-            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2);
+            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcInMoney.Name = "gcInMoney";
             this.gcInMoney.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1});
-            this.gcInMoney.Size = new System.Drawing.Size(976, 597);
+            this.gcInMoney.Size = new System.Drawing.Size(1115, 768);
             this.gcInMoney.TabIndex = 1;
             this.gcInMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInMoney});
@@ -169,14 +169,15 @@
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.Filter = "\"Excel|*.xlsx|Excel2003|*.xls\"";
+            this.saveFileDialog1.Filter = "\"Excel2003|*.xls\"";
             // 
             // frmInMoneyDetailExport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 597);
+            this.ClientSize = new System.Drawing.Size(1115, 768);
             this.Controls.Add(this.gcInMoney);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInMoneyDetailExport";
             this.Text = "收款管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).EndInit();
