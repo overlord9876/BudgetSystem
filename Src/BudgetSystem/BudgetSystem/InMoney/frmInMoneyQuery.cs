@@ -163,6 +163,11 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("{0}收款单{1}，不允许重复提交。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState.ToString()));
                     return;
                 }
+                if (currentRowBankSlip.ReceiptState != ReceiptState.已拆分)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单不是已拆分状态，不需要提交修改申请。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
                 currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
                 currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
                 string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName);

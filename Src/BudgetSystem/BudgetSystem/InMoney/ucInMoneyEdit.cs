@@ -276,24 +276,28 @@ namespace BudgetSystem.InMoney
                 source.ForEach(o =>
                 {
                     o.ExchangeRate = txtExchangeRate.Value;
-                    if (WorkModel != EditFormWorkModels.SplitToBudget)
-                    {
-                        o.RelationBudget = new Budget();
-                        o.RelationBudget.ContractNO = o.ContractNO;
-                        o.RelationBudget.CustomerName = o.Customer;
-                        budgetList.Add(o.RelationBudget);
+                    o.RelationBudget = new Budget();
+                    o.RelationBudget.ContractNO = o.ContractNO;
+                    o.RelationBudget.CustomerName = o.Customer;
+                    budgetList.Add(o.RelationBudget);
+                    //if (WorkModel != EditFormWorkModels.SplitToBudget)
+                    //{
+                    //    o.RelationBudget = new Budget();
+                    //    o.RelationBudget.ContractNO = o.ContractNO;
+                    //    o.RelationBudget.CustomerName = o.Customer;
+                    //    budgetList.Add(o.RelationBudget);
 
-                    }
-                    else
-                    {
-                        o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
-                        if (o.RelationBudget != null)
-                        {
-                            var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
-                            o.Customer = cus != null ? cus.Name : string.Empty;
-                            o.Cus_ID = cus.ID;
-                        }
-                    }
+                    //}
+                    //else
+                    //{
+                    //    o.RelationBudget = budgetList != null ? budgetList.Find(bl => bl.ID.Equals(o.BudgetID)) : null;
+                    //    if (o.RelationBudget != null)
+                    //    {
+                    //        var cus = customerList.Find(c => c.ID.Equals(o.RelationBudget.CustomerID));
+                    //        o.Customer = cus != null ? cus.Name : string.Empty;
+                    //        o.Cus_ID = cus.ID;
+                    //    }
+                    //}
                 });
                 if (WorkModel != EditFormWorkModels.SplitToBudget)
                 {
@@ -621,6 +625,10 @@ namespace BudgetSystem.InMoney
                         budget.Cus_ID = customer.ID;
                         budget.Customer = customer.Name;
                     }
+                    else
+                    {
+                        budget.Customer = budget.RelationBudget.CustomerName;
+                    }
                 }
             }
         }
@@ -701,10 +709,23 @@ namespace BudgetSystem.InMoney
         void gvConstSplit_ShowingEditor(object sender, CancelEventArgs e)
         {
             BudgetBill item = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
-
-            if (item != null)
+            if (item == null || string.IsNullOrEmpty(item.Operator))
             {
-                e.Cancel = item.IsDelete;
+                e.Cancel = false;
+                return;
+            }
+            if (item.IsDelete)
+            {
+                e.Cancel = true;
+                return;
+            }
+            if (RunInfo.Instance.CurrentUser.UserName == item.Operator || RunInfo.Instance.CurrentUser.Role != StringUtil.SaleRoleCode)
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
 

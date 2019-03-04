@@ -253,7 +253,7 @@
             // txtPrintDateTime
             // 
             this.txtPrintDateTime.Location = new System.Drawing.Point(875, 744);
-            this.txtPrintDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrintDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrintDateTime.Name = "txtPrintDateTime";
             this.txtPrintDateTime.Size = new System.Drawing.Size(265, 25);
             this.txtPrintDateTime.StyleController = this.layoutControl1;
@@ -677,6 +677,7 @@
             this.bgcOperator.Caption = "认领人";
             this.bgcOperator.FieldName = "Operator";
             this.bgcOperator.Name = "bgcOperator";
+            this.bgcOperator.OptionsColumn.AllowEdit = false;
             this.bgcOperator.Visible = true;
             this.bgcOperator.Width = 48;
             // 
@@ -1311,7 +1312,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucInMoneyEdit";
             this.Size = new System.Drawing.Size(1152, 781);
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
