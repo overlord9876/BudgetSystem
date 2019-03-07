@@ -111,9 +111,12 @@ namespace BudgetSystem
                     XtraMessageBox.Show("请选择需要删除的项");
                     return;
                 }
-                pnm.DeletePaymentNote(currentRowPaymentNote.ID);
-                this.gvOutMoney.DeleteRow(this.gvOutMoney.FocusedRowHandle);
-                XtraMessageBox.Show("删除成功");
+                if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】付款单？删除后将无法恢复。", currentRowPaymentNote.VoucherNo), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    pnm.DeletePaymentNote(currentRowPaymentNote.ID);
+                    this.gvOutMoney.DeleteRow(this.gvOutMoney.FocusedRowHandle);
+                    XtraMessageBox.Show("删除成功");
+                }
             }
             else if (operate.Operate == OperateTypes.Confirm.ToString())
             {

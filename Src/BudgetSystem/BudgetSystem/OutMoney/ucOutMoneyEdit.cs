@@ -77,7 +77,7 @@ namespace BudgetSystem.OutMoney
                 txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
 
                 cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
-                cboDepartment.Tag = RunInfo.Instance.CurrentUser.Department;
+                cboDepartment.Tag = RunInfo.Instance.CurrentUser.DeptID;
 
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
@@ -86,6 +86,7 @@ namespace BudgetSystem.OutMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
+                this.chkIsIOU.Properties.ReadOnly = true;
                 SetReadOnly();
             }
             else if (this.WorkModel == EditFormWorkModels.View)
@@ -158,7 +159,7 @@ namespace BudgetSystem.OutMoney
             this.txtApplicant.EditValue = um.GetUser(payment.Applicant);
 
             this.cboDepartment.EditValue = payment.DepartmentName;
-            this.cboDepartment.Tag = payment.DepartmentCode;
+            this.cboDepartment.Tag = payment.DeptID;
 
             foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
             {
@@ -420,7 +421,7 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.Applicant = (this.txtApplicant.EditValue as User).UserName;
 
             this.CurrentPaymentNotes.DepartmentName = this.cboDepartment.EditValue.ToString();
-            this.CurrentPaymentNotes.DepartmentCode = this.cboDepartment.Tag.ToString();
+            this.CurrentPaymentNotes.DeptID = int.Parse(this.cboDepartment.Tag.ToString());
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
             this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
@@ -675,7 +676,7 @@ namespace BudgetSystem.OutMoney
                 }
                 else if (this.WorkModel != EditFormWorkModels.View)
                 {
-                    this.chkIsIOU.Properties.ReadOnly = false;
+                    //this.chkIsIOU.Properties.ReadOnly = false;
                     this.txtExpectedReturnDate.Properties.ReadOnly = false;
                 }
                 chkHasInvoice.Checked = selectedItem.ProvideInvoice;
