@@ -55,9 +55,28 @@ namespace BudgetSystem.Entity
         public string Salesman { get; set; }
 
         /// <summary>
+        /// 部门ID
+        /// </summary>
+        public int DeptID { get; set; }
+
+        /// <summary>
         /// 业务员所在部门
         /// </summary>
         public string Department { get; set; }
+
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 部门描述
+        /// </summary>
+        public string DepartmentDesc
+        {
+            get { return this.Department + this.DepartmentName; }
+        }
 
         /// <summary>
         /// 录入时间
@@ -228,24 +247,11 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Description { get; set; }
 
-
-        /// <summary>
-        /// 部门名称
-        /// </summary>
-        public string DepartmentName { get; set; }
-
         /// <summary>
         /// 业务员姓名
         /// </summary>
         public string SalesmanName { get; set; }
 
-        /// <summary>
-        /// 部门描述
-        /// </summary>
-        public string DepartmentDesc
-        {
-            get { return this.Department + this.DepartmentName; }
-        }
         /// <summary>
         /// 客户编号
         /// </summary>

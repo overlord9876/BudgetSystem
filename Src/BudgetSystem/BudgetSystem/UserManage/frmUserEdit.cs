@@ -99,23 +99,23 @@ namespace BudgetSystem.UserManage
 
                 foreach (Department department in this.cboDepartment.Properties.Items)
                 {
-                    if (department.Code == user.Department)
+                    if (department.ID == user.DeptID)
                     {
                         this.cboDepartment.SelectedItem = department;
                         break;
                     }
                 }
-             
+
             }
         }
 
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
-            
+
         }
 
-      
+
         private void CheckUserNameInput()
         {
             if (string.IsNullOrEmpty(this.txtUserName.Text.Trim()))
@@ -165,11 +165,11 @@ namespace BudgetSystem.UserManage
             user.RealName = this.txtRealName.Text.Trim();
             user.Password = Util.SHA256.ToSHA256(this.txtPasswrod.Text.Trim());
             user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
-            user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
+            user.DeptID = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).ID : -1;
             user.State = this.chkIsEnable.Checked;
             user.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-           
-            int result= um.CreateUser(user);
+
+            int result = um.CreateUser(user);
 
             if (result == 2)
             {
@@ -193,8 +193,8 @@ namespace BudgetSystem.UserManage
             user.UserName = this.txtUserName.Text.Trim();
             user.RealName = this.txtRealName.Text.Trim();
             user.Role = this.cboRole.SelectedItem as Role != null ? (this.cboRole.SelectedItem as Role).Code : "";
-            user.Department = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).Code : "";
-          
+            user.DeptID = this.cboDepartment.SelectedItem as Department != null ? (this.cboDepartment.SelectedItem as Department).ID : -1;
+
             um.ModifyUserInfo(user);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -223,7 +223,7 @@ namespace BudgetSystem.UserManage
             InitData();
             this.layoutControl1.ShowPrintPreview();
         }
-          
+
 
 
 

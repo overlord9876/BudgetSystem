@@ -143,7 +143,7 @@ namespace BudgetSystem.DepartmentManage
                 return;
             }
 
-            um.SetUserDepartment(users, currentDepartment.Code);
+            um.SetUserDepartment(users, currentDepartment.ID);
             BindDepartmentUsers();
             BindAllUsers();
         }
@@ -157,7 +157,7 @@ namespace BudgetSystem.DepartmentManage
                 return;
             }
 
-            um.SetUserDepartment(users, "");
+            um.SetUserDepartment(users, -1);
             BindDepartmentUsers();
             BindAllUsers();
         }

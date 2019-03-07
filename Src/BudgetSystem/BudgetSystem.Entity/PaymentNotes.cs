@@ -112,6 +112,11 @@ namespace BudgetSystem.Entity
         public string Description { get; set; }
 
         /// <summary>
+        /// 部门ID
+        /// </summary>
+        public int DeptID { get; set; }
+
+        /// <summary>
         /// 部门编号
         /// </summary>
         public string DepartmentCode { get; set; }

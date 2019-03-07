@@ -89,7 +89,7 @@ namespace BudgetSystem.FlowManage
             this.cboVersion.Properties.ReadOnly = true;
         }
 
-        
+
 
         private void BindFlow(string flowName, int flowVersion)
         {
@@ -207,7 +207,7 @@ namespace BudgetSystem.FlowManage
                 else
                 {
                     this.tabControl.SelectedTabPage = tpDepartment;
-                    this.cboNodeDepartment.SelectedItem = departmentList.SingleOrDefault(d => d.Code == node.NodeValue);
+                    this.cboNodeDepartment.SelectedItem = departmentList.SingleOrDefault(d => d.ID.ToString() == node.NodeValue || d.Code.ToString() == node.NodeValue);
                     this.rgNodeDepartmentUserType.EditValue = node.NodeConfig;
                     this.cboNodeUser.SelectedItem = null;
                 }
@@ -254,7 +254,7 @@ namespace BudgetSystem.FlowManage
                     return;
                 }
                 node.NodeConfig = (int)this.rgNodeDepartmentUserType.EditValue;
-                node.NodeValue = (this.cboNodeDepartment.SelectedItem as Department).Code;
+                node.NodeValue = (this.cboNodeDepartment.SelectedItem as Department).ID.ToString();
                 node.NodeValueDisplayValue = this.cboNodeDepartment.SelectedItem.ToString();
             }
 

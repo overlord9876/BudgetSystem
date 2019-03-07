@@ -22,7 +22,7 @@ namespace BudgetSystem.Entity.QueryCondition
         /// <summary>
         /// 所在部门
         /// </summary>
-        public string Department { get; set; }
+        public int DeptID { get; set; }
 
         /// <summary>
         /// 主客户名称
@@ -65,6 +65,11 @@ namespace BudgetSystem.Entity.QueryCondition
         {
             get { return isArchiveWarningQuery; }
             set { isArchiveWarningQuery = value; }
+        }
+
+        public BudgetQueryCondition()
+        {
+            DeptID = -1;
         }
 
     }

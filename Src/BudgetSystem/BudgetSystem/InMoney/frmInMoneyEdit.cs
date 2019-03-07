@@ -20,6 +20,7 @@ namespace BudgetSystem.InMoney
         public frmInMoneyEdit()
         {
             InitializeComponent();
+            this.Size = new Size(1024, 680);
             this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
         }
 

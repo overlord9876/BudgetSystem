@@ -13,20 +13,20 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<PaymentNotes> GetAllPaymentNotes(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN department d on pn.DeptID=d.`ID`
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString() }, tran);
         }
 
         public IEnumerable<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN department d on pn.DeptID=d.`ID`
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
             WHERE 1=1 ";
 
@@ -90,10 +90,10 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<PaymentNotes> GetTotalAmountPaymentMoneyByBudgetId(int budgetID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN department d on pn.DeptID=d.`ID`
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
             WHERE pn.BudgetID=@BudgetID";
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
@@ -101,10 +101,10 @@ namespace BudgetSystem.Dal
 
         public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DepartmentCode=d.`Code`
+						LEFT JOIN department d on pn.DeptID=d.`ID`
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
             Where pn.`ID` = @ID";
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), ID = id }, tran).SingleOrDefault();
@@ -112,7 +112,7 @@ namespace BudgetSystem.Dal
 
         public int AddPaymentNote(PaymentNotes addPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `paymentnotes` (`ID`,`CommitTime`,`CNY`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DepartmentCode`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`,`VatOption`,`UpdateTimestamp`,`BankName`,`BankNO`,`IsIOU`,`ExpectedReturnDate`,`RepayLoan`,`InvoiceNumber`,`PayingBank`) Values (@ID,@CommitTime,@CNY,@BudgetID,@SupplierID,@PaymentDate,@Description,@DepartmentCode,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency,@VatOption,@UpdateTimestamp,@BankName,@BankNO,@IsIOU,@ExpectedReturnDate,@RepayLoan,@InvoiceNumber,@PayingBank)";
+            string insertSql = "Insert Into `paymentnotes` (`ID`,`CommitTime`,`CNY`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DeptID`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`,`VatOption`,`UpdateTimestamp`,`BankName`,`BankNO`,`IsIOU`,`ExpectedReturnDate`,`RepayLoan`,`InvoiceNumber`,`PayingBank`) Values (@ID,@CommitTime,@CNY,@BudgetID,@SupplierID,@PaymentDate,@Description,@DeptID,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency,@VatOption,@UpdateTimestamp,@BankName,@BankNO,@IsIOU,@ExpectedReturnDate,@RepayLoan,@InvoiceNumber,@PayingBank)";
             int id = con.Insert(insertSql, addPaymentNote, tran);
             if (id > 0)
             {
@@ -132,7 +132,7 @@ namespace BudgetSystem.Dal
             }
             modifyPaymentNote.UpdateTimestamp = DateTime.Now;
 
-            string updateSql = "Update `paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DepartmentCode` = @DepartmentCode,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency,`VatOption` = @VatOption,`UpdateTimestamp` = @UpdateTimestamp,`BankName` = @BankName,`BankNO` = @BankNO,IsIOU=@IsIOU,ExpectedReturnDate=@ExpectedReturnDate,RepayLoan=@RepayLoan,InvoiceNumber =@InvoiceNumber,PayingBank=@PayingBank Where `ID` = @ID";
+            string updateSql = "Update `paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DeptID` = @DeptID,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency,`VatOption` = @VatOption,`UpdateTimestamp` = @UpdateTimestamp,`BankName` = @BankName,`BankNO` = @BankNO,IsIOU=@IsIOU,ExpectedReturnDate=@ExpectedReturnDate,RepayLoan=@RepayLoan,InvoiceNumber =@InvoiceNumber,PayingBank=@PayingBank Where `ID` = @ID";
             con.Execute(updateSql, modifyPaymentNote, tran);
 
             return GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");

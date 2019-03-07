@@ -12,6 +12,8 @@ namespace BudgetSystem.DepartmentManage
 {
     public partial class frmDepartmentEdit : frmBaseDialogForm
     {
+        private string departmentCode;
+
         public frmDepartmentEdit()
         {
             InitializeComponent();
@@ -40,9 +42,10 @@ namespace BudgetSystem.DepartmentManage
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 SetLayoutControlStyle(EditFormWorkModels.New);
-                this.txtCode.Properties.ReadOnly = true;
+                //this.txtCode.Properties.ReadOnly = true;
                 this.Text = "编辑部门信息";
-                BindDepartment(Department.Code);
+                departmentCode = Department.Code;
+                BindDepartment(Department.ID);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -56,16 +59,16 @@ namespace BudgetSystem.DepartmentManage
                 this.txtRemark.Properties.ReadOnly = true;
 
                 this.Text = "查看部门信息";
-                BindDepartment(Department.Code);
+                BindDepartment(Department.ID);
             }
 
         }
 
 
-        private void BindDepartment(string departmentCode)
+        private void BindDepartment(int deptID)
         {
 
-            Department department = dm.GetDepartment(departmentCode);
+            Department department = dm.GetDepartment(deptID);
 
             if (department != null)
             {
@@ -141,14 +144,14 @@ namespace BudgetSystem.DepartmentManage
             department.Manager = (this.cboManager.SelectedItem as User).UserName;
             department.AssistantManager = (this.cboAssistantManager.SelectedItem as User).UserName;
             department.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-
-            int result = dm.CreateDepartment(department);
-
-            if (result == 2)
+            if (dm.CheckDepartmentCode(department.ID, department.Code))
             {
-                XtraMessageBox.Show("创建失败，相同部门标识已存在，请检查！");
+                XtraMessageBox.Show("相同部门标识已存在，请检查！");
                 return;
             }
+
+            int result = dm.CreateDepartment(department);
+            department.ID = result;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -161,18 +164,19 @@ namespace BudgetSystem.DepartmentManage
             {
                 return;
             }
+            if (dm.CheckDepartmentCode(Department.ID, this.txtCode.Text.Trim()))
+            {
+                XtraMessageBox.Show("相同部门标识已存在，请检查！");
+                return;
+            }
+            this.Department.Code = this.txtCode.Text.Trim();
+            this.Department.Name = this.txtName.Text.Trim();
+            this.Department.Remark = this.txtRemark.Text.Trim();
+            this.Department.Manager = (this.cboManager.SelectedItem as User).UserName;
+            this.Department.AssistantManager = (this.cboAssistantManager.SelectedItem as User).UserName;
+            this.Department.CreateUser = RunInfo.Instance.CurrentUser.UserName;
 
-            Department department = new Department();
-            department.Code = this.txtCode.Text.Trim();
-            department.Name = this.txtName.Text.Trim();
-            department.Remark = this.txtRemark.Text.Trim();
-            department.Manager = (this.cboManager.SelectedItem as User).UserName;
-            department.AssistantManager = (this.cboAssistantManager.SelectedItem as User).UserName;
-            department.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-
-
-
-            dm.ModifyDepartmentInfo(department);
+            dm.ModifyDepartmentInfo(this.Department);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

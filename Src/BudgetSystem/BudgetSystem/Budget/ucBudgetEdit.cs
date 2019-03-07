@@ -96,7 +96,7 @@ namespace BudgetSystem
                 this.CurrentBudget = new Budget();
                 CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim();
                 CurrentBudget.CreateDate = DateTime.Now;
-                CurrentBudget.Department = RunInfo.Instance.CurrentUser.Department;
+                CurrentBudget.DeptID = RunInfo.Instance.CurrentUser.DeptID;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 CurrentBudget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
                 CurrentBudget.VATRate = this.vatOption;
@@ -1307,7 +1307,7 @@ namespace BudgetSystem
             }
             else
             {
-                this.txtContractNO.Text = this.txtContractNO.Text.TrimEnd(txtContractNO.Tag.ToString().ToCharArray())+tradeModeString;
+                this.txtContractNO.Text = this.txtContractNO.Text.TrimEnd(txtContractNO.Tag.ToString().ToCharArray()) + tradeModeString;
             }
             txtContractNO.Tag = tradeModeString;
         }

@@ -13,10 +13,10 @@ namespace BudgetSystem.Dal
 
         public User GetUser(string userName, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             where UserName=@UserName";
             return con.Query<User>(selectSql, new { UserName = userName }, tran).SingleOrDefault();
         }
@@ -25,39 +25,39 @@ namespace BudgetSystem.Dal
         {
 
 
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             where UserName=@UserName and Password=@Password";
             return con.Query<User>(selectSql, new { UserName = userName, Password = password }, tran).SingleOrDefault();
         }
 
         public IEnumerable<User> GetAllUser(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code";
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID";
             return con.Query<User>(selectSql, null, tran);
         }
 
         public IEnumerable<User> GetAllEnabledUser(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             where `State`=1";
             return con.Query<User>(selectSql, null, tran);
         }
 
         public IEnumerable<User> GetRoleUsers(string roleCode, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             Where `Role`=@Role";
             return con.Query<User>(selectSql, new { Role = roleCode }, tran);
 
@@ -65,10 +65,10 @@ namespace BudgetSystem.Dal
 
         public List<User> GetCustomerSalesmanList(int customerId, IDbConnection con, IDbTransaction tran = null)
         {
-            string salesmanSelectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string salesmanSelectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `CustomerSalesman` sm left join `User` on sm.Salesman=`User`.`UserName`
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             Where sm.`Customer` = @ID";
 
             return con.Query<User>(salesmanSelectSql, new { ID = customerId }, tran).ToList();
@@ -76,10 +76,10 @@ namespace BudgetSystem.Dal
 
         public List<User> GetBankSlipSalesmanList(int bsID, IDbConnection con, IDbTransaction tran = null)
         {
-            string salesmanSelectSql = @"Select `USER`.`UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string salesmanSelectSql = @"Select `USER`.`UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `ReceiptNotice` rn left join `User` on rn.UserName=`User`.`UserName`
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             Where rn.`BSID` = @ID";
 
             return con.Query<User>(salesmanSelectSql, new { ID = bsID }, tran).ToList();
@@ -87,10 +87,10 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<User> GetNotRoleUsers(string roleCode, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
             Where `Role`<>@Role";
             return con.Query<User>(selectSql, new { Role = roleCode }, tran);
 
@@ -99,29 +99,18 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<User> GetDepartmentUsers(string departmentCode, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
-            Where `Department`=@Department";
-            return con.Query<User>(selectSql, new { Department = departmentCode }, tran);
-
-        }
-
-        public IEnumerable<User> GetNotDepartmentUsers(string departmentCode, IDbConnection con, IDbTransaction tran)
-        {
-            string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,`Department`,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
-            From `User` 
-            Left Join `Role` on `User`.`Role` = `Role`.`Code` 
-            Left Join `Department` on `User`.`Department` = `Department`.Code
-            Where `Department`<>@Department";
-            return con.Query<User>(selectSql, new { Department = departmentCode }, tran);
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
+            Where Department.`Code`=@Code";
+            return con.Query<User>(selectSql, new { Code = departmentCode }, tran);
 
         }
 
         public void AddUser(User user, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `User` (`UserName`,`RealName`,`Role`,`Department`,`Password`,`State`,`CreateUser`,`UpdateDateTime`) Values (@UserName,@RealName,@Role,@Department,@Password,true,@CreateUser,now())";
+            string insertSql = "Insert Into `User` (`UserName`,`RealName`,`Role`,`DeptID`,`Password`,`State`,`CreateUser`,`UpdateDateTime`) Values (@UserName,@RealName,@Role,@DeptID,@Password,true,@CreateUser,now())";
             con.Execute(insertSql, user, tran);
         }
 
@@ -139,7 +128,7 @@ namespace BudgetSystem.Dal
 
         public void ModifyUser(User user, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `User` Set `RealName` = @RealName,`Role` = @Role,`Department` = @Department,`UpdateDateTime` = now() Where `UserName` = @UserName";
+            string updateSql = "Update `User` Set `RealName` = @RealName,`Role` = @Role,`DeptID` = @DeptID,`UpdateDateTime` = now() Where `UserName` = @UserName";
             con.Execute(updateSql, user, tran);
         }
 
@@ -157,14 +146,14 @@ namespace BudgetSystem.Dal
             con.Execute(updateSql, userList, tran);
         }
 
-        public void SetUsersDepartment(List<string> users, string departmentCode, IDbConnection con, IDbTransaction tran)
+        public void SetUsersDepartment(List<string> users, int deptID, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `User` Set `Department` = @Department ,`UpdateDateTime` = now() Where `UserName` = @UserName";
+            string updateSql = "Update `User` Set `DeptID` = @DeptID ,`UpdateDateTime` = now() Where `UserName` = @UserName";
 
             List<User> userList = new List<User>();
             foreach (string user in users)
             {
-                User u = new User() { UserName = user, Department = departmentCode };
+                User u = new User() { UserName = user, DeptID = deptID };
                 userList.Add(u);
             }
 

@@ -16,7 +16,7 @@ namespace BudgetSystem
     {
         public frmBudgetQueryConditionEditor()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
         private void frmBudgetQueryConditionEditor_Load(object sender, EventArgs e)
         {
@@ -25,9 +25,9 @@ namespace BudgetSystem
             {
                 departmentList = new List<Department>();
             }
-            departmentList.Insert(0, new Department() { Code = string.Empty, Name = string.Empty }); 
+            departmentList.Insert(0, new Department() { Code = string.Empty, Name = string.Empty });
             this.cboDepartment.Properties.Items.AddRange(departmentList);
-        } 
+        }
         public override bool CollectData()
         {
             BudgetQueryCondition c = new BudgetQueryCondition();
@@ -35,13 +35,13 @@ namespace BudgetSystem
             c.CustomerName = this.txtCustomerName.Text;
             if (this.cboDepartment.SelectedItem != null)
             {
-                c.Department = ((Department)this.cboDepartment.SelectedItem).Code;
+                c.DeptID = ((Department)this.cboDepartment.SelectedItem).ID;
             }
             this.QueryCondition = c;
-            return true;        
+            return true;
         }
 
-       
+
     }
 
 

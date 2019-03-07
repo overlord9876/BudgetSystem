@@ -45,7 +45,7 @@ namespace BudgetSystem
             this.cboSupplierType.Properties.Items.Add("其它供方");
             this.cboSupplierType.SelectedIndex = 1;
 
-            List<string> natureList=scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());
+            List<string> natureList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());
             this.cboNature.Properties.Items.Clear();
             if (natureList != null && natureList.Count > 0)
             {
@@ -97,7 +97,7 @@ namespace BudgetSystem
                 this.BindingBankInfoDetail(supplier.BankInfoDetail);
                 foreach (Department department in this.cboDepartment.Properties.Items)
                 {
-                    if (department.Code == supplier.DepartmentCode)
+                    if (department.ID == supplier.DeptID)
                     {
                         this.cboDepartment.SelectedItem = department;
                         break;
@@ -233,7 +233,9 @@ namespace BudgetSystem
             this.CurrentSupplier.Address = this.txtAddress.Text.Trim();
             this.CurrentSupplier.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             this.CurrentSupplier.Contacts = this.txtContacts.Text.Trim();
+            this.CurrentSupplier.DeptID = (this.cboDepartment.SelectedItem as Department).ID;
             this.CurrentSupplier.DepartmentCode = (this.cboDepartment.SelectedItem as Department).Code;
+            this.CurrentSupplier.DepartmentName = (this.cboDepartment.SelectedItem as Department).Name;
             this.CurrentSupplier.FaxNumber = this.txtFaxNumber.Text.Trim();
             this.CurrentSupplier.Legal = this.txtLegal.Text.Trim();
             this.CurrentSupplier.Nature = this.cboNature.Text;

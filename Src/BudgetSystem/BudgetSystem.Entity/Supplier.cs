@@ -69,6 +69,11 @@ namespace BudgetSystem.Entity
         public string Contacts { get; set; }
 
         /// <summary>
+        /// 部门ID
+        /// </summary>
+        public int DeptID { get; set; }
+
+        /// <summary>
         /// 所属部门？
         /// </summary>
         public string DepartmentCode { get; set; }
@@ -175,7 +180,7 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方)
                 {
                     if (this.EnumFlowState == EnumDataFlowState.审批通过
-                        && (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.AddDays(-15).Date <= DateTime.Now.Date))
+                        && (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate != DateTime.MinValue && this.BusinessEffectiveDate.Value.AddDays(-15).Date <= DateTime.Now.Date))
                     {
                         return true;
                     }

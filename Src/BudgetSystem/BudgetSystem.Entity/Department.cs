@@ -10,6 +10,11 @@ namespace BudgetSystem.Entity
     public class Department : IEntity
     {
         /// <summary>
+        /// 主键标识
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
         /// 标识
         /// </summary>
         public string Code { get; set; }

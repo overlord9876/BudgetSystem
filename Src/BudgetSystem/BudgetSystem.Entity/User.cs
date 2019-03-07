@@ -27,6 +27,8 @@ namespace BudgetSystem.Entity
 
         public string RoleName { get; set; }
 
+        public int DeptID { get; set; }
+
         /// <summary>
         /// 所属部门
         /// </summary>

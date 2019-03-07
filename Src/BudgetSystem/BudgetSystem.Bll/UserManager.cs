@@ -107,18 +107,6 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<User> GetNotDepartmentUsers(string departmentCode)
-        {
-            var lst = this.Query<User>((con) =>
-            {
-
-                var uList = dal.GetNotDepartmentUsers(departmentCode, con, null);
-                return uList;
-
-            });
-            return lst.ToList();
-        }
-
         public User GetUser(string userName)
         {
             var user = this.Query<User>((con) =>
@@ -186,11 +174,11 @@ namespace BudgetSystem.Bll
             });
         }
 
-        public void SetUserDepartment(List<string> userList, string departmentCode)
+        public void SetUserDepartment(List<string> userList, int deptID)
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                dal.SetUsersDepartment(userList, departmentCode, con, tran);
+                dal.SetUsersDepartment(userList, deptID, con, tran);
 
             });
         }

@@ -158,7 +158,7 @@ namespace BudgetSystem.Dal
                     selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
                             INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID AND rn.UserName=@Username
                             INNER JOIN `User` u on rn.UserName=u.UserName
-                            INNER JOIN `department` d on u.Department=d.`Code`
+                            INNER JOIN `department` d on u.DeptID=d.`ID`
                 LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType  AND f.IsRecent=1
                 WHERE 1=1 ";
                     strConditionList.Add(" rn.UserName=@Username or d.AssistantManager=@Username or d.Manager=@Username");
@@ -190,7 +190,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
-										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
+										LEFT JOIN department d on bb.DeptID=d.`ID`
                 Where bb.`BSID` = @BSID";
             return con.Query<BudgetBill>(selectSql, new { BSID = bsID }, tran);
         }
@@ -202,7 +202,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
-										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
+										LEFT JOIN department d on bb.DeptID=d.`ID`
                                 Where bb.`BudgetID` = @BudgetID";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
@@ -214,7 +214,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
-										LEFT JOIN department d on bb.DepartmentCode=d.`Code`
+										LEFT JOIN department d on bb.DeptID=d.`ID`
                                 Where 1=1";
             return con.Query<BudgetBill>(selectSql, new { }, tran);
         }
@@ -228,7 +228,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public int AddBudgetBill(BudgetBill addBudgetBill, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `BudgetBill` (`ID`,`BudgetID`,`BSID`,`Cus_ID`,`OriginalCoin`,`CNY`,`Operator`,`DepartmentCode`,`OperateTimestamp`,`IsDelete`,`Remark`,`Confirmed`) Values (@ID,@BudgetID,@BSID,@Cus_ID,@OriginalCoin,@CNY,@Operator,@DepartmentCode,@OperateTimestamp,@IsDelete,@Remark,@Confirmed)";
+            string insertSql = "Insert Into `BudgetBill` (`ID`,`BudgetID`,`BSID`,`Cus_ID`,`OriginalCoin`,`CNY`,`Operator`,`DeptID`,`OperateTimestamp`,`IsDelete`,`Remark`,`Confirmed`) Values (@ID,@BudgetID,@BSID,@Cus_ID,@OriginalCoin,@CNY,@Operator,@DeptID,@OperateTimestamp,@IsDelete,@Remark,@Confirmed)";
             int id = con.Insert(insertSql, addBudgetBill, tran);
             if (id > 0)
             {
@@ -252,7 +252,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public void ModifyBudgetBill(BudgetBill modifyBudgetBill, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,Cus_ID=@Cus_ID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DepartmentCode` = @DepartmentCode,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed Where `ID` = @ID";
+            string updateSql = "Update `BudgetBill` Set `BudgetID` = @BudgetID,`BSID` = @BSID,Cus_ID=@Cus_ID,`OriginalCoin` = @OriginalCoin,`CNY` = @CNY,`Operator` = @Operator,`DeptID` = @DeptID,`OperateTimestamp` = @OperateTimestamp,`IsDelete` = @IsDelete,`Remark` = @Remark,`Confirmed` = @Confirmed Where `ID` = @ID";
             int id = con.Execute(updateSql, modifyBudgetBill, tran);
         }
 
