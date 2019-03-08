@@ -57,6 +57,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("贸易方式", "TradeMode");
             base.CreateGridColumn("审批状态", "EnumFlowState");
             base.CreateGridColumn("合同金额", "TotalAmount");
+            base.CreateGridColumn("合同金额(美元)", "USDTotalAmount");
             base.CreateGridColumn("业务员", "SalesmanName");
             base.CreateGridColumn("业务员所在部门", "DepartmentDesc");
             base.CreateGridColumn("录入时间", "CreateDate");
@@ -68,11 +69,12 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("利润", "Profit");
             base.CreateGridColumn("交单金额", "Amount");
             base.CreateGridColumn("直接费用", "DirectCosts");
-            base.CreateGridColumn("盈利水平", "ProfitLevel");
+            base.CreateGridColumn("盈利水平", "ProfitLevel2");
             base.CreatePivotGridField("合同号", "ContractNO");
             base.CreatePivotGridField("客户名称", "CustomerName");
             base.CreatePivotGridField("贸易方式", "TradeMode");
             base.CreatePivotGridField("审批状态", "EnumFlowState");
+            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount");
             base.CreatePivotGridField("合同金额", "TotalAmount");
             base.CreatePivotGridField("业务员", "SalesmanName");
             base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
@@ -85,8 +87,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("利润", "Profit");
             base.CreatePivotGridField("交单金额", "Amount");
             base.CreatePivotGridField("直接费用", "DirectCosts");
-            base.CreatePivotGridField("盈利水平1", "ProfitLevel1");
-            base.CreatePivotGridField("盈利水平2", "ProfitLevel2");
+            base.CreatePivotGridField("盈利水平", "ProfitLevel2");
             base.CreatePivotGridField("收款金额", "TotalBudgetBill");
             base.CreatePivotGridField("付款金额", "TotalPayement");
             base.CreatePivotGridField("发票金额", "TotalInvoice");

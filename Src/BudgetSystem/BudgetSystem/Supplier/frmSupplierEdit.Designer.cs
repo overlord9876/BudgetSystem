@@ -37,6 +37,8 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -44,19 +46,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.ucSupplierEdit1);
             this.layoutControl1.Controls.Add(this.btnCancel);
+            this.layoutControl1.Controls.Add(this.btnSubmit);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(948, 265, 736, 350);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(125, 228, 736, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(891, 653);
+            this.layoutControl1.Size = new System.Drawing.Size(780, 508);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -66,27 +71,29 @@
             this.ucSupplierEdit1.Location = new System.Drawing.Point(12, 12);
             this.ucSupplierEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucSupplierEdit1.Name = "ucSupplierEdit1";
-            this.ucSupplierEdit1.Size = new System.Drawing.Size(867, 593);
+            this.ucSupplierEdit1.Size = new System.Drawing.Size(756, 448);
             this.ucSupplierEdit1.TabIndex = 19;
             this.ucSupplierEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(763, 609);
+            this.btnCancel.Location = new System.Drawing.Point(652, 464);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 32);
             this.btnCancel.StyleController = this.layoutControl1;
-            this.btnCancel.TabIndex = 18;
+            this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "取消";
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(643, 609);
+            this.btnSure.Location = new System.Drawing.Point(532, 464);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
-            this.btnSure.TabIndex = 17;
+            this.btnSure.TabIndex = 18;
             this.btnSure.Text = "确定";
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             // 
@@ -99,10 +106,11 @@
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.emptySpaceItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem4});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(891, 653);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(780, 508);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -110,7 +118,7 @@
             // 
             this.layoutControlItem1.Control = this.btnSure;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(631, 597);
+            this.layoutControlItem1.Location = new System.Drawing.Point(520, 452);
             this.layoutControlItem1.MaxSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem1.Name = "layoutControlItem1";
@@ -125,7 +133,7 @@
             // 
             this.layoutControlItem2.Control = this.btnCancel;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(751, 597);
+            this.layoutControlItem2.Location = new System.Drawing.Point(640, 452);
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
@@ -140,9 +148,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 597);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 452);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(631, 36);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(400, 36);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -152,21 +160,47 @@
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(871, 597);
+            this.layoutControlItem3.Size = new System.Drawing.Size(760, 452);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
             this.layoutControlItem3.TextVisible = false;
             // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(412, 464);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(116, 32);
+            this.btnSubmit.StyleController = this.layoutControl1;
+            this.btnSubmit.TabIndex = 17;
+            this.btnSubmit.Text = "提交";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnSubmit;
+            this.layoutControlItem4.CustomizationFormText = "提交";
+            this.layoutControlItem4.Location = new System.Drawing.Point(400, 452);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(0, 36);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(39, 26);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(120, 36);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem4.Text = "提交";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextToControlDistance = 0;
+            this.layoutControlItem4.TextVisible = false;
+            // 
             // frmSupplierEdit
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(891, 653);
+            this.ClientSize = new System.Drawing.Size(780, 508);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmSupplierEdit";
             this.Text = "供应商编辑";
             this.Load += new System.EventHandler(this.frmSupplierEdit_Load);
@@ -177,6 +211,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -192,6 +227,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private ucSupplierEdit ucSupplierEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SimpleButton btnSubmit;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
 
     }
 }

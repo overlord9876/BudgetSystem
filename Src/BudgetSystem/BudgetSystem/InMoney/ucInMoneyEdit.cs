@@ -536,28 +536,30 @@ namespace BudgetSystem.InMoney
         {
             string message = string.Empty;
             var dataSource = (IEnumerable<BudgetBill>)gvConstSplit.DataSource;
+            decimal splitCNY = 0;
+            decimal splitCoinMoney = 0;
             if (dataSource != null)
             {
-                decimal splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+                splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
 
-                decimal splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
-
-                if (splitCNY > txtCNY.Value)
-                {
-                    ErrorColumn = this.bgcConstCNY;
-                    return "拆分人民币金额不允许大于入帐单总额";
-                }
-                if (splitCoinMoney > txtOriginalCoin.Value)
-                {
-                    ErrorColumn = this.gcSplitConstOriginalCoin;
-                    return "拆分原币金额不允许大于入帐单总额";
-                }
-                txtAlreadySplitCNYMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
-                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
-
-                txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
-                txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
+                splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
             }
+            if (splitCNY > txtCNY.Value)
+            {
+                ErrorColumn = this.bgcConstCNY;
+                return "拆分人民币金额不允许大于入帐单总额";
+            }
+            if (splitCoinMoney > txtOriginalCoin.Value)
+            {
+                ErrorColumn = this.gcSplitConstOriginalCoin;
+                return "拆分原币金额不允许大于入帐单总额";
+            }
+            txtAlreadySplitCNYMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+            txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+
+            txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
+            txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
+
             return message;
         }
 
@@ -578,6 +580,7 @@ namespace BudgetSystem.InMoney
             item.OperatorModel = DataOperatorModel.Add;
             item.Operator = RunInfo.Instance.CurrentUser.UserName;
             item.DepartmentCode = RunInfo.Instance.CurrentUser.Department;
+            item.DeptID = RunInfo.Instance.CurrentUser.DeptID;
         }
 
         private DevExpress.XtraGrid.Columns.GridColumn ErrorColumn;
@@ -771,6 +774,11 @@ namespace BudgetSystem.InMoney
             this.chkState1.CheckedChanged -= new EventHandler(chkState1_CheckedChanged);
             this.chkState1.Checked = !chkState2.Checked;
             this.chkState1.CheckedChanged += new EventHandler(chkState1_CheckedChanged);
+        }
+
+        private void txtCNY_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcSplitMoney();
         }
 
     }

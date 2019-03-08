@@ -216,6 +216,7 @@ namespace BudgetSystem.InMoney
                     currentRowBankSlip.IsActive = true;
                     currentRowBankSlip.UpdateTimestamp = arm.ConfirmSplitAmount(currentRowBankSlip);
                     XtraMessageBox.Show("提交数据成功。");
+                    this.gvInMoney.RefreshRow(this.gvInMoney.FocusedRowHandle);
                 }
                 catch (Exception ex)
                 {

@@ -264,35 +264,34 @@
             this.layoutControl1.Controls.Add(this.cboPayingBank);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(440, 475, 678, 586);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1152, 781);
+            this.layoutControl1.Size = new System.Drawing.Size(864, 625);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // chkRepayLoan
             // 
-            this.chkRepayLoan.Location = new System.Drawing.Point(1027, 70);
-            this.chkRepayLoan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkRepayLoan.Location = new System.Drawing.Point(769, 63);
             this.chkRepayLoan.Name = "chkRepayLoan";
             this.chkRepayLoan.Properties.Caption = "借款归还";
             this.chkRepayLoan.Properties.ReadOnly = true;
-            this.chkRepayLoan.Size = new System.Drawing.Size(113, 23);
+            this.chkRepayLoan.Size = new System.Drawing.Size(83, 19);
             this.chkRepayLoan.StyleController = this.layoutControl1;
             this.chkRepayLoan.TabIndex = 217;
             // 
             // gridInvoiceNumber
             // 
-            this.gridInvoiceNumber.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridInvoiceNumber.Location = new System.Drawing.Point(165, 99);
+            this.gridInvoiceNumber.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridInvoiceNumber.Location = new System.Drawing.Point(135, 88);
             this.gridInvoiceNumber.MainView = this.gvInvoiceNumber;
-            this.gridInvoiceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gridInvoiceNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridInvoiceNumber.Name = "gridInvoiceNumber";
             this.gridInvoiceNumber.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.riLinkDelete});
-            this.gridInvoiceNumber.Size = new System.Drawing.Size(975, 136);
+            this.gridInvoiceNumber.Size = new System.Drawing.Size(717, 81);
             this.gridInvoiceNumber.TabIndex = 216;
             this.gridInvoiceNumber.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoiceNumber});
@@ -342,20 +341,19 @@
             this.lblMessage.Appearance.ForeColor = System.Drawing.Color.Red;
             this.lblMessage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.lblMessage.Location = new System.Drawing.Point(378, 500);
-            this.lblMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblMessage.Location = new System.Drawing.Point(267, 399);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(396, 21);
+            this.lblMessage.Size = new System.Drawing.Size(330, 17);
             this.lblMessage.StyleController = this.layoutControl1;
             this.lblMessage.TabIndex = 215;
             this.lblMessage.Text = "付款提醒：请尽快把纸质材料或者发票交至财务部";
             // 
             // btnShowBudgetHistory
             // 
-            this.btnShowBudgetHistory.Location = new System.Drawing.Point(443, 12);
-            this.btnShowBudgetHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnShowBudgetHistory.Location = new System.Drawing.Point(333, 12);
+            this.btnShowBudgetHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnShowBudgetHistory.Name = "btnShowBudgetHistory";
-            this.btnShowBudgetHistory.Size = new System.Drawing.Size(123, 25);
+            this.btnShowBudgetHistory.Size = new System.Drawing.Size(91, 22);
             this.btnShowBudgetHistory.StyleController = this.layoutControl1;
             this.btnShowBudgetHistory.TabIndex = 213;
             this.btnShowBudgetHistory.Text = "查看收支情况";
@@ -363,21 +361,21 @@
             // 
             // txtApplicant
             // 
-            this.txtApplicant.Location = new System.Drawing.Point(165, 413);
-            this.txtApplicant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtApplicant.Location = new System.Drawing.Point(135, 324);
+            this.txtApplicant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtApplicant.Name = "txtApplicant";
             this.txtApplicant.Properties.ReadOnly = true;
-            this.txtApplicant.Size = new System.Drawing.Size(402, 25);
+            this.txtApplicant.Size = new System.Drawing.Size(290, 21);
             this.txtApplicant.StyleController = this.layoutControl1;
             this.txtApplicant.TabIndex = 212;
             // 
             // chkIsIOU
             // 
-            this.chkIsIOU.Location = new System.Drawing.Point(927, 70);
-            this.chkIsIOU.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkIsIOU.Location = new System.Drawing.Point(694, 63);
+            this.chkIsIOU.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkIsIOU.Name = "chkIsIOU";
             this.chkIsIOU.Properties.Caption = "是否借款";
-            this.chkIsIOU.Size = new System.Drawing.Size(96, 23);
+            this.chkIsIOU.Size = new System.Drawing.Size(71, 19);
             this.chkIsIOU.StyleController = this.layoutControl1;
             this.chkIsIOU.TabIndex = 7;
             this.chkIsIOU.CheckedChanged += new System.EventHandler(this.chkIsIOU_CheckedChanged);
@@ -386,15 +384,15 @@
             // 
             this.txtActualRetention.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtActualRetention.IsSupportNegative = false;
-            this.txtActualRetention.Location = new System.Drawing.Point(165, 384);
-            this.txtActualRetention.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtActualRetention.Location = new System.Drawing.Point(135, 299);
+            this.txtActualRetention.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtActualRetention.Name = "txtActualRetention";
             this.txtActualRetention.Properties.Mask.EditMask = "n";
             this.txtActualRetention.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtActualRetention.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtActualRetention.Properties.NullText = "0";
             this.txtActualRetention.Properties.ReadOnly = true;
-            this.txtActualRetention.Size = new System.Drawing.Size(402, 25);
+            this.txtActualRetention.Size = new System.Drawing.Size(290, 21);
             this.txtActualRetention.StyleController = this.layoutControl1;
             this.txtActualRetention.TabIndex = 19;
             // 
@@ -402,15 +400,15 @@
             // 
             this.txtAdvancePayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAdvancePayment.IsSupportNegative = false;
-            this.txtAdvancePayment.Location = new System.Drawing.Point(724, 355);
-            this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAdvancePayment.Location = new System.Drawing.Point(552, 274);
+            this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Properties.Mask.EditMask = "n";
             this.txtAdvancePayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAdvancePayment.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtAdvancePayment.Properties.NullText = "0.00";
             this.txtAdvancePayment.Properties.ReadOnly = true;
-            this.txtAdvancePayment.Size = new System.Drawing.Size(416, 25);
+            this.txtAdvancePayment.Size = new System.Drawing.Size(300, 21);
             this.txtAdvancePayment.StyleController = this.layoutControl1;
             this.txtAdvancePayment.TabIndex = 23;
             // 
@@ -418,15 +416,15 @@
             // 
             this.txtAmountTaxRebate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountTaxRebate.IsSupportNegative = false;
-            this.txtAmountTaxRebate.Location = new System.Drawing.Point(165, 355);
-            this.txtAmountTaxRebate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAmountTaxRebate.Location = new System.Drawing.Point(135, 274);
+            this.txtAmountTaxRebate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAmountTaxRebate.Name = "txtAmountTaxRebate";
             this.txtAmountTaxRebate.Properties.Mask.EditMask = "n";
             this.txtAmountTaxRebate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAmountTaxRebate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtAmountTaxRebate.Properties.NullText = "0.00";
             this.txtAmountTaxRebate.Properties.ReadOnly = true;
-            this.txtAmountTaxRebate.Size = new System.Drawing.Size(402, 25);
+            this.txtAmountTaxRebate.Size = new System.Drawing.Size(290, 21);
             this.txtAmountTaxRebate.StyleController = this.layoutControl1;
             this.txtAmountTaxRebate.TabIndex = 22;
             // 
@@ -434,15 +432,15 @@
             // 
             this.txtAmountPaymentMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountPaymentMoney.IsSupportNegative = false;
-            this.txtAmountPaymentMoney.Location = new System.Drawing.Point(724, 326);
-            this.txtAmountPaymentMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAmountPaymentMoney.Location = new System.Drawing.Point(552, 249);
+            this.txtAmountPaymentMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAmountPaymentMoney.Name = "txtAmountPaymentMoney";
             this.txtAmountPaymentMoney.Properties.Mask.EditMask = "n";
             this.txtAmountPaymentMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAmountPaymentMoney.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtAmountPaymentMoney.Properties.NullText = "0.00";
             this.txtAmountPaymentMoney.Properties.ReadOnly = true;
-            this.txtAmountPaymentMoney.Size = new System.Drawing.Size(416, 25);
+            this.txtAmountPaymentMoney.Size = new System.Drawing.Size(300, 21);
             this.txtAmountPaymentMoney.StyleController = this.layoutControl1;
             this.txtAmountPaymentMoney.TabIndex = 211;
             // 
@@ -450,22 +448,22 @@
             // 
             this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
-            this.txtExchangeRate.Location = new System.Drawing.Point(400, 268);
-            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtExchangeRate.Location = new System.Drawing.Point(305, 198);
+            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Properties.Mask.EditMask = "(\\d|[1-9]\\d|100)(\\.\\d{1,6})?";
             this.txtExchangeRate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtExchangeRate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtExchangeRate.Properties.NullText = "0.000000";
-            this.txtExchangeRate.Size = new System.Drawing.Size(167, 25);
+            this.txtExchangeRate.Size = new System.Drawing.Size(120, 21);
             this.txtExchangeRate.StyleController = this.layoutControl1;
             this.txtExchangeRate.TabIndex = 13;
             this.txtExchangeRate.EditValueChanged += new System.EventHandler(this.txtExchangeRate_EditValueChanged);
             // 
             // cboCurrency
             // 
-            this.cboCurrency.Location = new System.Drawing.Point(165, 268);
-            this.cboCurrency.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboCurrency.Location = new System.Drawing.Point(135, 198);
+            this.cboCurrency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboCurrency.Name = "cboCurrency";
             this.cboCurrency.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -473,7 +471,7 @@
             "人民币",
             "美元"});
             this.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboCurrency.Size = new System.Drawing.Size(181, 25);
+            this.cboCurrency.Size = new System.Drawing.Size(125, 21);
             this.cboCurrency.StyleController = this.layoutControl1;
             this.cboCurrency.TabIndex = 12;
             this.cboCurrency.EditValueChanged += new System.EventHandler(this.cboCurrency_EditValueChanged);
@@ -482,14 +480,14 @@
             // 
             this.txtOriginalCoin.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtOriginalCoin.IsSupportNegative = false;
-            this.txtOriginalCoin.Location = new System.Drawing.Point(165, 297);
-            this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtOriginalCoin.Location = new System.Drawing.Point(135, 223);
+            this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtOriginalCoin.Name = "txtOriginalCoin";
             this.txtOriginalCoin.Properties.Mask.EditMask = "n";
             this.txtOriginalCoin.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtOriginalCoin.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtOriginalCoin.Properties.NullText = "0.00";
-            this.txtOriginalCoin.Size = new System.Drawing.Size(402, 25);
+            this.txtOriginalCoin.Size = new System.Drawing.Size(290, 21);
             this.txtOriginalCoin.StyleController = this.layoutControl1;
             this.txtOriginalCoin.TabIndex = 15;
             this.txtOriginalCoin.EditValueChanged += new System.EventHandler(this.txtOriginalCoin_EditValueChanged);
@@ -498,15 +496,15 @@
             // 
             this.txtAfterPaymentBalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAfterPaymentBalance.IsSupportNegative = false;
-            this.txtAfterPaymentBalance.Location = new System.Drawing.Point(724, 384);
-            this.txtAfterPaymentBalance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAfterPaymentBalance.Location = new System.Drawing.Point(552, 299);
+            this.txtAfterPaymentBalance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAfterPaymentBalance.Name = "txtAfterPaymentBalance";
             this.txtAfterPaymentBalance.Properties.Mask.EditMask = "n";
             this.txtAfterPaymentBalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtAfterPaymentBalance.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtAfterPaymentBalance.Properties.NullText = "0.00";
             this.txtAfterPaymentBalance.Properties.ReadOnly = true;
-            this.txtAfterPaymentBalance.Size = new System.Drawing.Size(416, 25);
+            this.txtAfterPaymentBalance.Size = new System.Drawing.Size(300, 21);
             this.txtAfterPaymentBalance.StyleController = this.layoutControl1;
             this.txtAfterPaymentBalance.TabIndex = 20;
             this.txtAfterPaymentBalance.EditValueChanged += new System.EventHandler(this.txtAfterPaymentBalance_EditValueChanged);
@@ -515,24 +513,24 @@
             // 
             this.txtReceiptAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtReceiptAmount.IsSupportNegative = false;
-            this.txtReceiptAmount.Location = new System.Drawing.Point(165, 326);
-            this.txtReceiptAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReceiptAmount.Location = new System.Drawing.Point(135, 249);
+            this.txtReceiptAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtReceiptAmount.Name = "txtReceiptAmount";
             this.txtReceiptAmount.Properties.Mask.EditMask = "n";
             this.txtReceiptAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtReceiptAmount.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtReceiptAmount.Properties.NullText = "0.00";
             this.txtReceiptAmount.Properties.ReadOnly = true;
-            this.txtReceiptAmount.Size = new System.Drawing.Size(402, 25);
+            this.txtReceiptAmount.Size = new System.Drawing.Size(290, 21);
             this.txtReceiptAmount.StyleController = this.layoutControl1;
             this.txtReceiptAmount.TabIndex = 18;
             // 
             // btnSearchMoney
             // 
-            this.btnSearchMoney.Location = new System.Drawing.Point(1059, 297);
-            this.btnSearchMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearchMoney.Location = new System.Drawing.Point(793, 223);
+            this.btnSearchMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSearchMoney.Name = "btnSearchMoney";
-            this.btnSearchMoney.Size = new System.Drawing.Size(81, 25);
+            this.btnSearchMoney.Size = new System.Drawing.Size(59, 22);
             this.btnSearchMoney.StyleController = this.layoutControl1;
             this.btnSearchMoney.TabIndex = 17;
             this.btnSearchMoney.Text = "用款查询";
@@ -542,14 +540,14 @@
             // 
             this.txtCNY.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCNY.IsSupportNegative = false;
-            this.txtCNY.Location = new System.Drawing.Point(724, 297);
-            this.txtCNY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCNY.Location = new System.Drawing.Point(552, 223);
+            this.txtCNY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCNY.Name = "txtCNY";
             this.txtCNY.Properties.Mask.EditMask = "c";
             this.txtCNY.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtCNY.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtCNY.Properties.NullText = "0.00";
-            this.txtCNY.Size = new System.Drawing.Size(331, 25);
+            this.txtCNY.Size = new System.Drawing.Size(237, 21);
             this.txtCNY.StyleController = this.layoutControl1;
             this.txtCNY.TabIndex = 16;
             this.txtCNY.EditValueChanged += new System.EventHandler(this.txtCNY_EditValueChanged);
@@ -557,44 +555,44 @@
             // deCommitTime
             // 
             this.deCommitTime.EditValue = null;
-            this.deCommitTime.Location = new System.Drawing.Point(165, 471);
-            this.deCommitTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deCommitTime.Location = new System.Drawing.Point(135, 374);
+            this.deCommitTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.deCommitTime.Name = "deCommitTime";
             this.deCommitTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deCommitTime.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deCommitTime.Size = new System.Drawing.Size(402, 25);
+            this.deCommitTime.Size = new System.Drawing.Size(290, 21);
             this.deCommitTime.StyleController = this.layoutControl1;
             this.deCommitTime.TabIndex = 28;
             // 
             // chkHasInvoice
             // 
-            this.chkHasInvoice.Location = new System.Drawing.Point(1011, 239);
-            this.chkHasInvoice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkHasInvoice.Location = new System.Drawing.Point(757, 173);
+            this.chkHasInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkHasInvoice.Name = "chkHasInvoice";
             this.chkHasInvoice.Properties.Caption = "收到货款发票";
-            this.chkHasInvoice.Size = new System.Drawing.Size(129, 23);
+            this.chkHasInvoice.Size = new System.Drawing.Size(95, 19);
             this.chkHasInvoice.StyleController = this.layoutControl1;
             this.chkHasInvoice.TabIndex = 11;
             // 
             // cboMoneyUsed
             // 
-            this.cboMoneyUsed.Location = new System.Drawing.Point(724, 70);
-            this.cboMoneyUsed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboMoneyUsed.Location = new System.Drawing.Point(552, 63);
+            this.cboMoneyUsed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboMoneyUsed.Name = "cboMoneyUsed";
             this.cboMoneyUsed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboMoneyUsed.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboMoneyUsed.Size = new System.Drawing.Size(199, 25);
+            this.cboMoneyUsed.Size = new System.Drawing.Size(138, 21);
             this.cboMoneyUsed.StyleController = this.layoutControl1;
             this.cboMoneyUsed.TabIndex = 6;
             this.cboMoneyUsed.EditValueChanged += new System.EventHandler(this.cboMoneyUsed_EditValueChanged);
             // 
             // cboPaymentMethod
             // 
-            this.cboPaymentMethod.Location = new System.Drawing.Point(165, 239);
-            this.cboPaymentMethod.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboPaymentMethod.Location = new System.Drawing.Point(135, 173);
+            this.cboPaymentMethod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboPaymentMethod.Name = "cboPaymentMethod";
             this.cboPaymentMethod.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -606,17 +604,17 @@
             "暂借划账",
             "暂借支票"});
             this.cboPaymentMethod.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboPaymentMethod.Size = new System.Drawing.Size(402, 25);
+            this.cboPaymentMethod.Size = new System.Drawing.Size(290, 21);
             this.cboPaymentMethod.StyleController = this.layoutControl1;
             this.cboPaymentMethod.TabIndex = 8;
             // 
             // chkIsDrawback
             // 
-            this.chkIsDrawback.Location = new System.Drawing.Point(857, 239);
-            this.chkIsDrawback.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkIsDrawback.Location = new System.Drawing.Point(642, 173);
+            this.chkIsDrawback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkIsDrawback.Name = "chkIsDrawback";
             this.chkIsDrawback.Properties.Caption = "是否退税";
-            this.chkIsDrawback.Size = new System.Drawing.Size(150, 23);
+            this.chkIsDrawback.Size = new System.Drawing.Size(111, 19);
             this.chkIsDrawback.StyleController = this.layoutControl1;
             this.chkIsDrawback.TabIndex = 10;
             this.chkIsDrawback.CheckedChanged += new System.EventHandler(this.chkIsDrawback_CheckedChanged);
@@ -624,27 +622,27 @@
             // txtDescription
             // 
             this.txtDescription.EditValue = "";
-            this.txtDescription.Location = new System.Drawing.Point(165, 525);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtDescription.Location = new System.Drawing.Point(135, 420);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(975, 244);
+            this.txtDescription.Size = new System.Drawing.Size(717, 193);
             this.txtDescription.StyleController = this.layoutControl1;
             this.txtDescription.TabIndex = 30;
             // 
             // txtVoucherNo
             // 
-            this.txtVoucherNo.Location = new System.Drawing.Point(723, 12);
-            this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtVoucherNo.Location = new System.Drawing.Point(551, 12);
+            this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtVoucherNo.Name = "txtVoucherNo";
             this.txtVoucherNo.Properties.ReadOnly = true;
-            this.txtVoucherNo.Size = new System.Drawing.Size(417, 25);
+            this.txtVoucherNo.Size = new System.Drawing.Size(301, 21);
             this.txtVoucherNo.StyleController = this.layoutControl1;
             this.txtVoucherNo.TabIndex = 2;
             // 
             // cboSupplier
             // 
-            this.cboSupplier.Location = new System.Drawing.Point(165, 41);
-            this.cboSupplier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboSupplier.Location = new System.Drawing.Point(135, 38);
+            this.cboSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboSupplier.Name = "cboSupplier";
             this.cboSupplier.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -653,7 +651,7 @@
             this.cboSupplier.Properties.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
             this.cboSupplier.Properties.View = this.gridLookUpEdit1View;
-            this.cboSupplier.Size = new System.Drawing.Size(402, 25);
+            this.cboSupplier.Size = new System.Drawing.Size(290, 21);
             this.cboSupplier.StyleController = this.layoutControl1;
             this.cboSupplier.TabIndex = 3;
             this.cboSupplier.EditValueChanged += new System.EventHandler(this.cboSupplier_EditValueChanged);
@@ -789,15 +787,15 @@
             // 
             // cboBudget
             // 
-            this.cboBudget.Location = new System.Drawing.Point(165, 12);
-            this.cboBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboBudget.Location = new System.Drawing.Point(135, 12);
+            this.cboBudget.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboBudget.Name = "cboBudget";
             this.cboBudget.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboBudget.Properties.NullText = "";
             this.cboBudget.Properties.PopupSizeable = false;
             this.cboBudget.Properties.View = this.gridView1;
-            this.cboBudget.Size = new System.Drawing.Size(274, 25);
+            this.cboBudget.Size = new System.Drawing.Size(194, 21);
             this.cboBudget.StyleController = this.layoutControl1;
             this.cboBudget.TabIndex = 1;
             this.cboBudget.EditValueChanged += new System.EventHandler(this.cboBudget_EditValueChanged);
@@ -928,8 +926,8 @@
             // txtPaymentDate
             // 
             this.txtPaymentDate.EditValue = null;
-            this.txtPaymentDate.Location = new System.Drawing.Point(724, 471);
-            this.txtPaymentDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPaymentDate.Location = new System.Drawing.Point(552, 374);
+            this.txtPaymentDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPaymentDate.Name = "txtPaymentDate";
             this.txtPaymentDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -938,30 +936,30 @@
             this.txtPaymentDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtPaymentDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtPaymentDate.Size = new System.Drawing.Size(416, 25);
+            this.txtPaymentDate.Size = new System.Drawing.Size(300, 21);
             this.txtPaymentDate.StyleController = this.layoutControl1;
             this.txtPaymentDate.TabIndex = 29;
             // 
             // cboDepartment
             // 
-            this.cboDepartment.Location = new System.Drawing.Point(724, 413);
-            this.cboDepartment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboDepartment.Location = new System.Drawing.Point(552, 324);
+            this.cboDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.ReadOnly = true;
-            this.cboDepartment.Size = new System.Drawing.Size(416, 25);
+            this.cboDepartment.Size = new System.Drawing.Size(300, 21);
             this.cboDepartment.StyleController = this.layoutControl1;
             this.cboDepartment.TabIndex = 27;
             // 
             // txtTaxRebateRate
             // 
-            this.txtTaxRebateRate.Location = new System.Drawing.Point(724, 239);
-            this.txtTaxRebateRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTaxRebateRate.Location = new System.Drawing.Point(552, 173);
+            this.txtTaxRebateRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
             this.txtTaxRebateRate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtTaxRebateRate.Properties.NullText = "0.00";
             this.txtTaxRebateRate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtTaxRebateRate.Size = new System.Drawing.Size(129, 25);
+            this.txtTaxRebateRate.Size = new System.Drawing.Size(86, 21);
             this.txtTaxRebateRate.StyleController = this.layoutControl1;
             this.txtTaxRebateRate.TabIndex = 9;
             this.txtTaxRebateRate.EditValueChanged += new System.EventHandler(this.txtTaxRebateRate_EditValueChanged);
@@ -969,8 +967,8 @@
             // txtExpectedReturnDate
             // 
             this.txtExpectedReturnDate.EditValue = null;
-            this.txtExpectedReturnDate.Location = new System.Drawing.Point(724, 268);
-            this.txtExpectedReturnDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtExpectedReturnDate.Location = new System.Drawing.Point(552, 198);
+            this.txtExpectedReturnDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtExpectedReturnDate.Name = "txtExpectedReturnDate";
             this.txtExpectedReturnDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -978,20 +976,20 @@
             this.txtExpectedReturnDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.txtExpectedReturnDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtExpectedReturnDate.Size = new System.Drawing.Size(416, 25);
+            this.txtExpectedReturnDate.Size = new System.Drawing.Size(300, 21);
             this.txtExpectedReturnDate.StyleController = this.layoutControl1;
             this.txtExpectedReturnDate.TabIndex = 14;
             // 
             // txtBankName
             // 
-            this.txtBankName.Location = new System.Drawing.Point(724, 41);
-            this.txtBankName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBankName.Location = new System.Drawing.Point(552, 38);
+            this.txtBankName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBankName.Name = "txtBankName";
             this.txtBankName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtBankName.Properties.NullText = "";
             this.txtBankName.Properties.View = this.searchLookUpEdit1View;
-            this.txtBankName.Size = new System.Drawing.Size(416, 25);
+            this.txtBankName.Size = new System.Drawing.Size(300, 21);
             this.txtBankName.StyleController = this.layoutControl1;
             this.txtBankName.TabIndex = 4;
             this.txtBankName.EditValueChanged += new System.EventHandler(this.txtBankName_EditValueChanged);
@@ -1024,23 +1022,22 @@
             // 
             // txtBankNO
             // 
-            this.txtBankNO.Location = new System.Drawing.Point(165, 70);
-            this.txtBankNO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBankNO.Location = new System.Drawing.Point(135, 63);
+            this.txtBankNO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBankNO.Name = "txtBankNO";
-            this.txtBankNO.Properties.ReadOnly = true;
-            this.txtBankNO.Size = new System.Drawing.Size(402, 25);
+            this.txtBankNO.Size = new System.Drawing.Size(290, 21);
             this.txtBankNO.StyleController = this.layoutControl1;
             this.txtBankNO.TabIndex = 5;
             // 
             // cboPayingBank
             // 
-            this.cboPayingBank.Location = new System.Drawing.Point(165, 442);
-            this.cboPayingBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboPayingBank.Location = new System.Drawing.Point(135, 349);
+            this.cboPayingBank.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboPayingBank.Name = "cboPayingBank";
             this.cboPayingBank.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboPayingBank.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboPayingBank.Size = new System.Drawing.Size(975, 25);
+            this.cboPayingBank.Size = new System.Drawing.Size(717, 21);
             this.cboPayingBank.StyleController = this.layoutControl1;
             this.cboPayingBank.TabIndex = 218;
             // 
@@ -1085,7 +1082,7 @@
             this.lciPayingBank});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1152, 781);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(864, 625);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -1093,31 +1090,31 @@
             // 
             this.layoutControlItem8.Control = this.txtDescription;
             this.layoutControlItem8.CustomizationFormText = "备注：";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 513);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 408);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1132, 248);
+            this.layoutControlItem8.Size = new System.Drawing.Size(844, 197);
             this.layoutControlItem8.Text = "备注：";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem16
             // 
             this.layoutControlItem16.Control = this.cboPaymentMethod;
             this.layoutControlItem16.CustomizationFormText = "付款方式";
-            this.layoutControlItem16.Location = new System.Drawing.Point(0, 227);
+            this.layoutControlItem16.Location = new System.Drawing.Point(0, 161);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem16.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem16.Text = "付款方式：";
-            this.layoutControlItem16.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem24
             // 
             this.layoutControlItem24.Control = this.txtReceiptAmount;
             this.layoutControlItem24.CustomizationFormText = "收款金额：";
-            this.layoutControlItem24.Location = new System.Drawing.Point(0, 314);
+            this.layoutControlItem24.Location = new System.Drawing.Point(0, 237);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem24.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem24.Text = "总收款金额：";
-            this.layoutControlItem24.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem24.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem14
             // 
@@ -1125,67 +1122,67 @@
             this.layoutControlItem14.CustomizationFormText = "合同号：";
             this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(431, 29);
+            this.layoutControlItem14.Size = new System.Drawing.Size(321, 26);
             this.layoutControlItem14.Text = "合同号：";
-            this.layoutControlItem14.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtVoucherNo;
             this.layoutControlItem7.CustomizationFormText = "状态";
-            this.layoutControlItem7.Location = new System.Drawing.Point(558, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(416, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(574, 29);
+            this.layoutControlItem7.Size = new System.Drawing.Size(428, 26);
             this.layoutControlItem7.Text = "付款单号：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.cboSupplier;
             this.layoutControlItem1.CustomizationFormText = "供应商名称：";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem1.Text = "供应商名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem18
             // 
             this.layoutControlItem18.Control = this.cboMoneyUsed;
             this.layoutControlItem18.CustomizationFormText = "用款类型";
-            this.layoutControlItem18.Location = new System.Drawing.Point(559, 58);
+            this.layoutControlItem18.Location = new System.Drawing.Point(417, 51);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(356, 29);
+            this.layoutControlItem18.Size = new System.Drawing.Size(265, 25);
             this.layoutControlItem18.Text = "用款类型：";
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.txtOriginalCoin;
             this.layoutControlItem12.CustomizationFormText = "币种";
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 285);
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 211);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem12.Size = new System.Drawing.Size(417, 26);
             this.layoutControlItem12.Text = "付款金额（原币）：";
-            this.layoutControlItem12.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.txtCNY;
             this.layoutControlItem6.CustomizationFormText = "付款金额：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(559, 285);
+            this.layoutControlItem6.Location = new System.Drawing.Point(417, 211);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(488, 29);
+            this.layoutControlItem6.Size = new System.Drawing.Size(364, 26);
             this.layoutControlItem6.Text = "付款金额（人民币）：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem23
             // 
             this.layoutControlItem23.Control = this.btnSearchMoney;
             this.layoutControlItem23.CustomizationFormText = "layoutControlItem23";
-            this.layoutControlItem23.Location = new System.Drawing.Point(1047, 285);
+            this.layoutControlItem23.Location = new System.Drawing.Point(781, 211);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(85, 29);
+            this.layoutControlItem23.Size = new System.Drawing.Size(63, 26);
             this.layoutControlItem23.Text = "layoutControlItem23";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem23.TextToControlDistance = 0;
@@ -1195,29 +1192,29 @@
             // 
             this.layoutControlItem27.Control = this.cboCurrency;
             this.layoutControlItem27.CustomizationFormText = "币种：";
-            this.layoutControlItem27.Location = new System.Drawing.Point(0, 256);
+            this.layoutControlItem27.Location = new System.Drawing.Point(0, 186);
             this.layoutControlItem27.Name = "layoutControlItem27";
-            this.layoutControlItem27.Size = new System.Drawing.Size(338, 29);
+            this.layoutControlItem27.Size = new System.Drawing.Size(252, 25);
             this.layoutControlItem27.Text = "币种：";
-            this.layoutControlItem27.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem27.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem17
             // 
             this.layoutControlItem17.Control = this.txtTaxRebateRate;
             this.layoutControlItem17.CustomizationFormText = "退税率：";
-            this.layoutControlItem17.Location = new System.Drawing.Point(559, 227);
+            this.layoutControlItem17.Location = new System.Drawing.Point(417, 161);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(286, 29);
+            this.layoutControlItem17.Size = new System.Drawing.Size(213, 25);
             this.layoutControlItem17.Text = "退税率：";
-            this.layoutControlItem17.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem15
             // 
             this.layoutControlItem15.Control = this.chkIsDrawback;
             this.layoutControlItem15.CustomizationFormText = "layoutControlItem15";
-            this.layoutControlItem15.Location = new System.Drawing.Point(845, 227);
+            this.layoutControlItem15.Location = new System.Drawing.Point(630, 161);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(154, 29);
+            this.layoutControlItem15.Size = new System.Drawing.Size(115, 25);
             this.layoutControlItem15.Text = "layoutControlItem15";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextToControlDistance = 0;
@@ -1227,79 +1224,79 @@
             // 
             this.layoutControlItem10.Control = this.txtPaymentDate;
             this.layoutControlItem10.CustomizationFormText = "付款日期";
-            this.layoutControlItem10.Location = new System.Drawing.Point(559, 459);
+            this.layoutControlItem10.Location = new System.Drawing.Point(417, 362);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem10.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem10.Text = "付款日期：";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem22
             // 
             this.layoutControlItem22.Control = this.cboDepartment;
             this.layoutControlItem22.CustomizationFormText = "部门：";
-            this.layoutControlItem22.Location = new System.Drawing.Point(559, 401);
+            this.layoutControlItem22.Location = new System.Drawing.Point(417, 312);
             this.layoutControlItem22.Name = "layoutControlItem22";
-            this.layoutControlItem22.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem22.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem22.Text = "部门：";
-            this.layoutControlItem22.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem22.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.deCommitTime;
             this.layoutControlItem4.CustomizationFormText = "申请时间：";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 459);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 362);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem4.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem4.Text = "申请时间：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem29
             // 
             this.layoutControlItem29.Control = this.txtAdvancePayment;
             this.layoutControlItem29.CustomizationFormText = "预付款";
-            this.layoutControlItem29.Location = new System.Drawing.Point(559, 343);
+            this.layoutControlItem29.Location = new System.Drawing.Point(417, 262);
             this.layoutControlItem29.Name = "layoutControlItem29";
-            this.layoutControlItem29.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem29.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem29.Text = "预付款";
-            this.layoutControlItem29.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem29.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.txtExpectedReturnDate;
             this.layoutControlItem9.CustomizationFormText = "确认时间";
-            this.layoutControlItem9.Location = new System.Drawing.Point(559, 256);
+            this.layoutControlItem9.Location = new System.Drawing.Point(417, 186);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem9.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem9.Text = "确认时间：";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem13
             // 
             this.layoutControlItem13.Control = this.txtBankNO;
             this.layoutControlItem13.CustomizationFormText = "银行账号";
-            this.layoutControlItem13.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem13.Location = new System.Drawing.Point(0, 51);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem13.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem13.Text = "银行账号：";
-            this.layoutControlItem13.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtBankName;
             this.layoutControlItem3.CustomizationFormText = "开户行";
-            this.layoutControlItem3.Location = new System.Drawing.Point(559, 29);
+            this.layoutControlItem3.Location = new System.Drawing.Point(417, 26);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem3.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem3.Text = "开户行：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem32
             // 
             this.layoutControlItem32.Control = this.chkIsIOU;
             this.layoutControlItem32.CustomizationFormText = "layoutControlItem32";
-            this.layoutControlItem32.Location = new System.Drawing.Point(915, 58);
+            this.layoutControlItem32.Location = new System.Drawing.Point(682, 51);
             this.layoutControlItem32.Name = "layoutControlItem32";
-            this.layoutControlItem32.Size = new System.Drawing.Size(100, 29);
+            this.layoutControlItem32.Size = new System.Drawing.Size(75, 25);
             this.layoutControlItem32.Text = "layoutControlItem32";
             this.layoutControlItem32.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem32.TextToControlDistance = 0;
@@ -1309,9 +1306,9 @@
             // 
             this.layoutControlItem19.Control = this.chkHasInvoice;
             this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
-            this.layoutControlItem19.Location = new System.Drawing.Point(999, 227);
+            this.layoutControlItem19.Location = new System.Drawing.Point(745, 161);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(133, 29);
+            this.layoutControlItem19.Size = new System.Drawing.Size(99, 25);
             this.layoutControlItem19.Text = "layoutControlItem19";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem19.TextToControlDistance = 0;
@@ -1321,59 +1318,59 @@
             // 
             this.layoutControlItem5.Control = this.txtApplicant;
             this.layoutControlItem5.CustomizationFormText = "申请人：";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 401);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 312);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem5.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem5.Text = "申请人：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem26
             // 
             this.layoutControlItem26.Control = this.txtAmountPaymentMoney;
             this.layoutControlItem26.CustomizationFormText = "总付款金额：";
-            this.layoutControlItem26.Location = new System.Drawing.Point(559, 314);
+            this.layoutControlItem26.Location = new System.Drawing.Point(417, 237);
             this.layoutControlItem26.Name = "layoutControlItem26";
-            this.layoutControlItem26.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem26.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem26.Text = "总付款金额：";
-            this.layoutControlItem26.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem26.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem28
             // 
             this.layoutControlItem28.Control = this.txtAmountTaxRebate;
             this.layoutControlItem28.CustomizationFormText = "退税金额：";
-            this.layoutControlItem28.Location = new System.Drawing.Point(0, 343);
+            this.layoutControlItem28.Location = new System.Drawing.Point(0, 262);
             this.layoutControlItem28.Name = "layoutControlItem28";
-            this.layoutControlItem28.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem28.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem28.Text = "退税金额：";
-            this.layoutControlItem28.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem28.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem30
             // 
             this.layoutControlItem30.Control = this.txtActualRetention;
             this.layoutControlItem30.CustomizationFormText = "应留利润：";
-            this.layoutControlItem30.Location = new System.Drawing.Point(0, 372);
+            this.layoutControlItem30.Location = new System.Drawing.Point(0, 287);
             this.layoutControlItem30.Name = "layoutControlItem30";
-            this.layoutControlItem30.Size = new System.Drawing.Size(559, 29);
+            this.layoutControlItem30.Size = new System.Drawing.Size(417, 25);
             this.layoutControlItem30.Text = "应留利润：";
-            this.layoutControlItem30.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem30.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem25
             // 
             this.layoutControlItem25.Control = this.txtAfterPaymentBalance;
             this.layoutControlItem25.CustomizationFormText = "支付后余额：";
-            this.layoutControlItem25.Location = new System.Drawing.Point(559, 372);
+            this.layoutControlItem25.Location = new System.Drawing.Point(417, 287);
             this.layoutControlItem25.Name = "layoutControlItem25";
-            this.layoutControlItem25.Size = new System.Drawing.Size(573, 29);
+            this.layoutControlItem25.Size = new System.Drawing.Size(427, 25);
             this.layoutControlItem25.Text = "支付后余额：";
-            this.layoutControlItem25.TextSize = new System.Drawing.Size(150, 18);
+            this.layoutControlItem25.TextSize = new System.Drawing.Size(120, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnShowBudgetHistory;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(431, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(321, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(127, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(95, 26);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -1384,9 +1381,9 @@
             this.lciMessage.Control = this.lblMessage;
             this.lciMessage.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.lciMessage.CustomizationFormText = "付款提示";
-            this.lciMessage.Location = new System.Drawing.Point(0, 488);
+            this.lciMessage.Location = new System.Drawing.Point(0, 387);
             this.lciMessage.Name = "lciMessage";
-            this.lciMessage.Size = new System.Drawing.Size(1132, 25);
+            this.lciMessage.Size = new System.Drawing.Size(844, 21);
             this.lciMessage.Text = "付款提示";
             this.lciMessage.TextLocation = DevExpress.Utils.Locations.Default;
             this.lciMessage.TextSize = new System.Drawing.Size(0, 0);
@@ -1397,19 +1394,19 @@
             // 
             this.lciInvoiceNumber.Control = this.gridInvoiceNumber;
             this.lciInvoiceNumber.CustomizationFormText = "发票信息";
-            this.lciInvoiceNumber.Location = new System.Drawing.Point(0, 87);
+            this.lciInvoiceNumber.Location = new System.Drawing.Point(0, 76);
             this.lciInvoiceNumber.Name = "lciInvoiceNumber";
-            this.lciInvoiceNumber.Size = new System.Drawing.Size(1132, 140);
+            this.lciInvoiceNumber.Size = new System.Drawing.Size(844, 85);
             this.lciInvoiceNumber.Text = "发票信息";
-            this.lciInvoiceNumber.TextSize = new System.Drawing.Size(150, 18);
+            this.lciInvoiceNumber.TextSize = new System.Drawing.Size(120, 14);
             // 
             // lciRepayLoan
             // 
             this.lciRepayLoan.Control = this.chkRepayLoan;
             this.lciRepayLoan.CustomizationFormText = "lciRepayLoan";
-            this.lciRepayLoan.Location = new System.Drawing.Point(1015, 58);
+            this.lciRepayLoan.Location = new System.Drawing.Point(757, 51);
             this.lciRepayLoan.Name = "lciRepayLoan";
-            this.lciRepayLoan.Size = new System.Drawing.Size(117, 29);
+            this.lciRepayLoan.Size = new System.Drawing.Size(87, 25);
             this.lciRepayLoan.Text = "lciRepayLoan";
             this.lciRepayLoan.TextSize = new System.Drawing.Size(0, 0);
             this.lciRepayLoan.TextToControlDistance = 0;
@@ -1419,23 +1416,23 @@
             // 
             this.layoutControlItem11.Control = this.txtExchangeRate;
             this.layoutControlItem11.CustomizationFormText = "汇率";
-            this.layoutControlItem11.Location = new System.Drawing.Point(338, 256);
+            this.layoutControlItem11.Location = new System.Drawing.Point(252, 186);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(221, 29);
+            this.layoutControlItem11.Size = new System.Drawing.Size(165, 25);
             this.layoutControlItem11.Text = "汇率：";
             this.layoutControlItem11.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(45, 18);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(36, 14);
             this.layoutControlItem11.TextToControlDistance = 5;
             // 
             // lciPayingBank
             // 
             this.lciPayingBank.Control = this.cboPayingBank;
             this.lciPayingBank.CustomizationFormText = "付款银行：";
-            this.lciPayingBank.Location = new System.Drawing.Point(0, 430);
+            this.lciPayingBank.Location = new System.Drawing.Point(0, 337);
             this.lciPayingBank.Name = "lciPayingBank";
-            this.lciPayingBank.Size = new System.Drawing.Size(1132, 29);
+            this.lciPayingBank.Size = new System.Drawing.Size(844, 25);
             this.lciPayingBank.Text = "付款银行：";
-            this.lciPayingBank.TextSize = new System.Drawing.Size(150, 18);
+            this.lciPayingBank.TextSize = new System.Drawing.Size(120, 14);
             // 
             // dxErrorProvider1
             // 
@@ -1447,12 +1444,12 @@
             // 
             // ucOutMoneyEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "ucOutMoneyEdit";
-            this.Size = new System.Drawing.Size(1152, 781);
+            this.Size = new System.Drawing.Size(864, 625);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkRepayLoan.Properties)).EndInit();

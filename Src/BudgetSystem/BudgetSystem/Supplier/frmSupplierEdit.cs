@@ -29,10 +29,10 @@ namespace BudgetSystem
         {
             this.ucSupplierEdit1.InitData();
             this.ucSupplierEdit1.CurrentSupplier = this.CurrentSupplier;
-            this.ucSupplierEdit1.WorkModel=this.WorkModel;
+            this.ucSupplierEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)
             {
-                this.Text = "创建供应商"; 
+                this.Text = "创建供应商";
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -43,9 +43,16 @@ namespace BudgetSystem
                 this.Text = "查看供应商信息";
             }
         }
+
+        private bool IsOk = false;
+
         private void btnSure_Click(object sender, EventArgs e)
         {
             SubmitDataByWorkModel();
+            if (IsOk)
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
         }
 
 
@@ -53,7 +60,7 @@ namespace BudgetSystem
         {
             base.SubmitNewData();
             bool result = this.ucSupplierEdit1.CheckInputData();
-            if (result==false)
+            if (result == false)
             {
                 return;
             }
@@ -61,10 +68,9 @@ namespace BudgetSystem
             int id = sm.AddSupplier(this.ucSupplierEdit1.CurrentSupplier);
             if (id <= 0)
             {
-                XtraMessageBox.Show("创建失败！");
-                return;
+                throw new Exception("创建失败！");
             }
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            IsOk = true;
         }
 
 
@@ -79,10 +85,33 @@ namespace BudgetSystem
             }
             this.ucSupplierEdit1.FillData();
             sm.ModifySupplier(this.ucSupplierEdit1.CurrentSupplier);
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            IsOk = true;
         }
 
-       
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            base.SubmitModifyData();
+            if (IsOk)
+            {
+                if (this.ucSupplierEdit1.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许重复提交。", this.ucSupplierEdit1.CurrentSupplier.Name, this.ucSupplierEdit1.CurrentSupplier.EnumFlowState.ToString()));
+                    return;
+                }
+                string message = sm.StartFlow(this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("提交流程成功。");
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+        }
+
+
 
     }
 }

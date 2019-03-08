@@ -116,6 +116,7 @@ namespace BudgetSystem.OutMoney
             if (payment == null)
             {
                 XtraMessageBox.Show("单据已经不存在。");
+                return;
             }
             this.CurrentPaymentNotes = payment;
             chkIsDrawback.EditValue = payment.IsDrawback;

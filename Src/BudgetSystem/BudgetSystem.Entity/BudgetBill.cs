@@ -61,6 +61,8 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Operator { get; set; }
 
+        public int DeptID { get; set; }
+
         /// <summary>
         /// 认领人所在部门
         /// </summary>
