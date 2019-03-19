@@ -365,6 +365,11 @@ namespace BudgetSystem
             return this._paymentList.Where(o => o.MoneyUsed == usageName).Sum(o => o.CNY);
         }
 
+        public decimal GetUsagePayMoney(List<string> usageNames)
+        {
+            return this._paymentList.Where(o => usageNames.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+        }
+
         #endregion
 
         #region Private Method

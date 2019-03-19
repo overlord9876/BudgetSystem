@@ -183,6 +183,12 @@ namespace BudgetSystem.Entity
         public string Applicant { get; set; }
 
         /// <summary>
+        /// 申请人姓名
+        /// </summary>
+        public string ApplicantRealName { get; set; }
+
+
+        /// <summary>
         /// 付款银行
         /// </summary>
         public string PayingBank { get; set; }

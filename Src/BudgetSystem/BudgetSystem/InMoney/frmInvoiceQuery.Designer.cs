@@ -30,6 +30,7 @@
         {
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
             this.gvInvoice = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,6 +41,7 @@
             this.gcTaxRebateRate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommission = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFeedMoney = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomsDeclaration = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTaxpayerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,8 +49,6 @@
             this.gcImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +90,15 @@
             this.gvInvoice.Name = "gvInvoice";
             this.gvInvoice.OptionsBehavior.Editable = false;
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcDepartmentCode
+            // 
+            this.gcDepartmentCode.Caption = "部门";
+            this.gcDepartmentCode.FieldName = "DepartmentCode";
+            this.gcDepartmentCode.Name = "gcDepartmentCode";
+            this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
+            this.gcDepartmentCode.Visible = true;
+            this.gcDepartmentCode.VisibleIndex = 0;
             // 
             // gcContractNO
             // 
@@ -175,6 +184,15 @@
             this.gcFeedMoney.Visible = true;
             this.gcFeedMoney.VisibleIndex = 10;
             // 
+            // gcTotalCost
+            // 
+            this.gcTotalCost.Caption = "成本";
+            this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.Name = "gcTotalCost";
+            this.gcTotalCost.OptionsColumn.AllowEdit = false;
+            this.gcTotalCost.Visible = true;
+            this.gcTotalCost.VisibleIndex = 11;
+            // 
             // gcCustomsDeclaration
             // 
             this.gcCustomsDeclaration.Caption = "报关单";
@@ -202,7 +220,7 @@
             // gcImportUserName
             // 
             this.gcImportUserName.Caption = "创建人";
-            this.gcImportUserName.FieldName = "ImportUser";
+            this.gcImportUserName.FieldName = "ImportUserName";
             this.gcImportUserName.Name = "gcImportUserName";
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
             this.gcImportUserName.Visible = true;
@@ -226,24 +244,6 @@
             // 
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
-            // 
-            // gcDepartmentCode
-            // 
-            this.gcDepartmentCode.Caption = "部门";
-            this.gcDepartmentCode.FieldName = "DepartmentCode";
-            this.gcDepartmentCode.Name = "gcDepartmentCode";
-            this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
-            this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 0;
-            // 
-            // gcTotalCost
-            // 
-            this.gcTotalCost.Caption = "成本";
-            this.gcTotalCost.FieldName = "TotalCost";
-            this.gcTotalCost.Name = "gcTotalCost";
-            this.gcTotalCost.OptionsColumn.AllowEdit = false;
-            this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 11;
             // 
             // frmInvoiceQuery
             // 

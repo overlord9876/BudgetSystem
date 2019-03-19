@@ -30,6 +30,9 @@
         {
             this.gridCustomer = new DevExpress.XtraGrid.GridControl();
             this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcContacts = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcEmail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,10 +45,6 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcEmail = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcContacts = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateUserName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -81,13 +80,36 @@
             this.gcPort,
             this.gcState,
             this.gcCreateUser,
-            this.gcCreateUserName,
             this.gcCreateDate});
             this.gvCustomer.GridControl = this.gridCustomer;
             this.gvCustomer.Name = "gvCustomer";
             this.gvCustomer.OptionsBehavior.Editable = false;
             this.gvCustomer.OptionsView.ShowDetailButtons = false;
             this.gvCustomer.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcCode
+            // 
+            this.gcCode.Caption = "编号";
+            this.gcCode.FieldName = "Code";
+            this.gcCode.Name = "gcCode";
+            this.gcCode.Visible = true;
+            this.gcCode.VisibleIndex = 0;
+            // 
+            // gcContacts
+            // 
+            this.gcContacts.Caption = "联系人";
+            this.gcContacts.FieldName = "Contacts";
+            this.gcContacts.Name = "gcContacts";
+            this.gcContacts.Visible = true;
+            this.gcContacts.VisibleIndex = 1;
+            // 
+            // gcEmail
+            // 
+            this.gcEmail.Caption = "联系方式";
+            this.gcEmail.FieldName = "Email";
+            this.gcEmail.Name = "gcEmail";
+            this.gcEmail.Visible = true;
+            this.gcEmail.VisibleIndex = 2;
             // 
             // gcName
             // 
@@ -135,7 +157,7 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 9;
+            this.gcCreateDate.VisibleIndex = 8;
             // 
             // layoutControl1
             // 
@@ -199,38 +221,6 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
-            // gcCode
-            // 
-            this.gcCode.Caption = "编号";
-            this.gcCode.FieldName = "Code";
-            this.gcCode.Name = "gcCode";
-            this.gcCode.Visible = true;
-            this.gcCode.VisibleIndex = 0;
-            // 
-            // gcEmail
-            // 
-            this.gcEmail.Caption = "联系方式";
-            this.gcEmail.FieldName = "Email";
-            this.gcEmail.Name = "gcEmail";
-            this.gcEmail.Visible = true;
-            this.gcEmail.VisibleIndex = 2;
-            // 
-            // gcContacts
-            // 
-            this.gcContacts.Caption = "联系人";
-            this.gcContacts.FieldName = "Contacts";
-            this.gcContacts.Name = "gcContacts";
-            this.gcContacts.Visible = true;
-            this.gcContacts.VisibleIndex = 1;
-            // 
-            // gcCreateUserName
-            // 
-            this.gcCreateUserName.Caption = "创建人姓名";
-            this.gcCreateUserName.FieldName = "CreateUserName";
-            this.gcCreateUserName.Name = "gcCreateUserName";
-            this.gcCreateUserName.Visible = true;
-            this.gcCreateUserName.VisibleIndex = 8;
-            // 
             // frmCustomerQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -272,6 +262,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcContacts;
         private DevExpress.XtraGrid.Columns.GridColumn gcEmail;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUserName;
     }
 }

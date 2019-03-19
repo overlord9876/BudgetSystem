@@ -34,12 +34,12 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDeclarationform)).BeginInit();
             this.SuspendLayout();
@@ -107,6 +107,14 @@
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 3;
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "汇率";
+            this.gridColumn10.FieldName = "ExchangeRate";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 4;
+            // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "出口日期";
@@ -134,7 +142,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "录入人";
-            this.gridColumn2.FieldName = "CreateUser";
+            this.gridColumn2.FieldName = "CreateUserRealName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 8;
@@ -146,14 +154,6 @@
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 9;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "汇率";
-            this.gridColumn10.FieldName = "ExchangeRate";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
             // 
             // frmVoucherNotesQuery
             // 

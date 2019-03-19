@@ -109,8 +109,9 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BankSlip> GetAllBankSlipListByCondition(InMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+            string selectSql = @"Select bs.*,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
                 LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType  AND f.IsRecent=1
+				LEFT JOIN `user` u on bs.CreateUser=u.UserName
                 WHERE 1=1 ";
 
             DynamicParameters dp = new DynamicParameters();
@@ -155,9 +156,10 @@ namespace BudgetSystem.Dal
 
                 if (!string.IsNullOrEmpty(condition.Salesman))
                 {
-                    selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                    selectSql = @"Select bs.*,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
                             INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID AND rn.UserName=@Username
                             INNER JOIN `User` u on rn.UserName=u.UserName
+				            LEFT JOIN `user` u2 on bs.CreateUser=u2.UserName
                             INNER JOIN `department` d on u.DeptID=d.`ID`
                 LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType  AND f.IsRecent=1
                 WHERE 1=1 ";

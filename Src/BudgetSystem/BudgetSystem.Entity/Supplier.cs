@@ -30,6 +30,8 @@ namespace BudgetSystem.Entity
         /// 0=合格供方
         /// 1=临时供方
         /// 2=其它供方
+        /// 3=货运供方
+        /// 4=佣金供方
         /// </summary>
         public int SupplierType { get; set; }
 

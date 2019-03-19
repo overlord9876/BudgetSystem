@@ -55,6 +55,11 @@ namespace BudgetSystem.Entity
         public string CreateUser { get; set; }
 
         /// <summary>
+        /// 录入人姓名
+        /// </summary>
+        public string CreateUserRealName { get; set; }
+
+        /// <summary>
         /// 录入时间
         /// </summary>
         public DateTime CreateDate { get; set; }

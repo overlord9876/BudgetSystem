@@ -43,6 +43,8 @@ namespace BudgetSystem
             this.cboSupplierType.Properties.Items.Add("合格供方");
             this.cboSupplierType.Properties.Items.Add("临时供方");
             this.cboSupplierType.Properties.Items.Add("其它供方");
+            //this.cboSupplierType.Properties.Items.Add("货运供方");
+            //this.cboSupplierType.Properties.Items.Add("佣金供方");
             this.cboSupplierType.SelectedIndex = 1;
 
             List<string> natureList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());

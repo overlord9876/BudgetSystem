@@ -498,12 +498,13 @@ namespace BudgetSystem.OutMoney
                         this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现佣金");
                         return;
                     }
-                    //decimal money = caculator.GetUsagePayMoney(umt.Name);
-                    //if (money + txtCNY.Value > this.currentBudget.Premium)
-                    //{
-                    //    this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
-                    //    return;
-                    //}
+                    //暂时先放开佣金付款超额
+                    decimal money = caculator.GetUsagePayMoney(CommissionUsageNameList);
+                    if (money + txtCNY.Value > this.currentBudget.Premium)
+                    {
+                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        return;
+                    }
                 }
             }
         }

@@ -12,7 +12,10 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<Declarationform> GetAllDeclarationform(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select d.*,b.ContractNO From `Declarationform` d join budget b on d.BudgetID=b.ID";
+            string selectSql = @"Select d.*,b.ContractNO ,u.RealName as CreateUserRealName
+                                From `Declarationform` d 
+                                INNER JOIN budget b on d.BudgetID=b.ID
+                                INNER JOIN `user` u on d.CreateUser=u.UserName";
             return con.Query<Declarationform>(selectSql, null, tran);
         }
 
@@ -24,7 +27,9 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Declarationform> GetDeclarationformByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select * From `Declarationform` Where `BudgetID` = @BudgetID";
+            string selectSql = @"Select d.*,u.RealName as CreateUserRealName
+                                From `Declarationform` d 
+                                INNER JOIN `user` u on d.CreateUser=u.UserName Where `BudgetID` = @BudgetID";
             return con.Query<Declarationform>(selectSql, new { BudgetID = budgetID }, tran);
         }
 

@@ -136,6 +136,11 @@ namespace BudgetSystem.Entity
         public string CreateUser { get; set; }
 
         /// <summary>
+        /// 录入人姓名
+        /// </summary>
+        public string CreateRealName { get; set; }
+
+        /// <summary>
         /// <summary>
         /// 交易附言
         /// </summary>

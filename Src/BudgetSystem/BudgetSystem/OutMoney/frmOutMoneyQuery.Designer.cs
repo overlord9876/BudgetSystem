@@ -159,7 +159,7 @@
             // gcApplicant
             // 
             this.gcApplicant.Caption = "付款申请人";
-            this.gcApplicant.FieldName = "Applicant";
+            this.gcApplicant.FieldName = "ApplicantRealName";
             this.gcApplicant.Name = "gcApplicant";
             this.gcApplicant.Visible = true;
             this.gcApplicant.VisibleIndex = 5;

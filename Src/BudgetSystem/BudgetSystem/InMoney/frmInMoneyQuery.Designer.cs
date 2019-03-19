@@ -200,7 +200,7 @@
             // gcCreateUser
             // 
             this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUser";
+            this.gcCreateUser.FieldName = "CreateRealName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
             this.gcCreateUser.VisibleIndex = 13;
