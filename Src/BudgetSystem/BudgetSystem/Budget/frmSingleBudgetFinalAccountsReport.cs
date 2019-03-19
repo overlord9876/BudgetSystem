@@ -150,7 +150,7 @@ namespace BudgetSystem
             dt.Columns.Add("DirectCosts", typeof(decimal));//直接费用 
 
             //公式列
-            dt.Columns.Add("OriginalCurrency", typeof(decimal));//  应收原币=TotalAmount*ExchangeRate
+            dt.Columns.Add("OriginalCurrency", typeof(decimal));//  应收原币=TotalAmount/ExchangeRate
             dt.Columns.Add("CostOfSales", typeof(decimal));//  销售成本=已收供方发票/(1+退税率0)=Payment/(1+TaxRebateRate)
             dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用
             dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
@@ -165,10 +165,10 @@ namespace BudgetSystem
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 row = dt.Rows[i];
-                //应收原币=TotalAmount*ExchangeRate 
-                if (!row.IsNull("TotalAmount") && !row.IsNull("TotalAmount"))
+                //应收原币=TotalAmount/ExchangeRate 
+                if (!row.IsNull("TotalAmount") && !row.IsNull("ExchangeRate") && GetDecimal(row, "ExchangeRate") != 0)
                 {
-                    row["OriginalCurrency"] = GetDecimal(row, "TotalAmount") * GetDecimal(row, "ExchangeRate");
+                    row["OriginalCurrency"] = GetDecimal(row, "TotalAmount") / GetDecimal(row, "ExchangeRate");
                 }
                 //销售成本=已收供方发票/(1+退税率)=Payment/(1+TaxRebateRate)
                 if (!row.IsNull("Payment") && !row.IsNull("TaxRebateRate"))

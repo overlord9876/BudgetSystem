@@ -108,7 +108,11 @@ namespace BudgetSystem.FlowManage
                 }
                 else
                 {
-                    node.NodeValueDisplayValue = departmentList.Single(s => s.Code.Equals(node.NodeValue)).ToString();
+                    Department department= departmentList.SingleOrDefault(s =>s.Code.Equals(node.NodeValue)|| s.ID.ToString().Equals(node.NodeValue));
+                    if (department != null)
+                    {
+                        node.NodeValueDisplayValue = department.ToString();
+                    }
                 }
             }
 

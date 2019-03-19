@@ -202,6 +202,7 @@ namespace BudgetSystem
             }
             List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;
+            this.gvBudget.BestFitColumns();
         }
 
         private void ShowBudgetAccountBillView()

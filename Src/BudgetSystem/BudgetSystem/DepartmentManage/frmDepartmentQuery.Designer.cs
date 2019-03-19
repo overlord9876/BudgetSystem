@@ -275,7 +275,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "部门经理";
-            this.gridColumn3.FieldName = "Manager";
+            this.gridColumn3.FieldName = "ManagerName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -283,7 +283,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "部门副经理";
-            this.gridColumn4.FieldName = "AssistantManager";
+            this.gridColumn4.FieldName = "AssistantManagerName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;

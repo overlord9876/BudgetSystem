@@ -14,26 +14,29 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Department> GetAllDepartment(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,`Department`.`UpdateDatetime` From `Department` 
-            Left Join `User` t1 on t1.UserName= `Department`.Manager 
-            Left Join `User` t2 on t2.UserName= `Department`.AssistantManager ";
+            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,t3.RealName as CreateUserRealName,`Department`.`UpdateDatetime` From `Department` 
+            LEFT JOIN `User` t1 on t1.UserName= `Department`.Manager 
+            LEFT JOIN `User` t2 on t2.UserName= `Department`.AssistantManager
+			LEFT JOIN `User` t3 on t3.UserName= department.CreateUser";
             return con.Query<Department>(selectSql, null, tran);
         }
         public Department GetDepartment(int deptID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,`Department`.`UpdateDatetime` From `Department` 
-            Left Join `User` t1 on t1.UserName= `Department`.Manager 
-            Left Join `User` t2 on t2.UserName= `Department`.AssistantManager 
-            Where `Department`.`ID`=@ID";
+            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,t3.RealName as CreateUserRealName,`Department`.`UpdateDatetime` From `Department` 
+            LEFT JOIN `User` t1 on t1.UserName= `Department`.Manager 
+            LEFT JOIN `User` t2 on t2.UserName= `Department`.AssistantManager
+            LEFT JOIN `User` t3 on t3.UserName= department.CreateUser
+            WHERE `Department`.`ID`=@ID";
             return con.Query<Department>(selectSql, new { ID = deptID }, tran).SingleOrDefault();
         }
 
         public Department GetDepartment(string departmentCode, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,`Department`.`UpdateDatetime` From `Department` 
-            Left Join `User` t1 on t1.UserName= `Department`.Manager 
-            Left Join `User` t2 on t2.UserName= `Department`.AssistantManager 
-            Where `Department`.`ID`=@ID";
+            string selectSql = @"Select `ID`,`Code`,`Name`,`Manager`,t1.RealName as ManagerName,`AssistantManager`,t2.RealName as AssistantManagerName,`Remark`,`Department`.`CreateUser`,t3.RealName as CreateUserRealName,`Department`.`UpdateDatetime` From `Department` 
+            LEFT JOIN `User` t1 on t1.UserName= `Department`.Manager 
+            LEFT JOIN `User` t2 on t2.UserName= `Department`.AssistantManager
+            LEFT JOIN `User` t3 on t3.UserName= department.CreateUser
+            WHERE `Department`.`ID`=@ID";
             return con.Query<Department>(selectSql, new { ID = departmentCode }, tran).SingleOrDefault();
         }
 

@@ -43,10 +43,12 @@
             // gdFlow
             // 
             this.gdFlow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdFlow.Location = new System.Drawing.Point(0, 0);
             this.gdFlow.MainView = this.gvFlow;
+            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdFlow.Name = "gdFlow";
-            this.gdFlow.Size = new System.Drawing.Size(916, 812);
+            this.gdFlow.Size = new System.Drawing.Size(733, 664);
             this.gdFlow.TabIndex = 0;
             this.gdFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFlow});
@@ -64,7 +66,6 @@
             this.gvFlow.Name = "gvFlow";
             this.gvFlow.OptionsBehavior.Editable = false;
             this.gvFlow.OptionsDetail.EnableMasterViewMode = false;
-
             // 
             // gcFlowName
             // 
@@ -79,7 +80,7 @@
             // gcEditor
             // 
             this.gcEditor.Caption = "创建人";
-            this.gcEditor.FieldName = "CreateUser";
+            this.gcEditor.FieldName = "CreateUserRealName";
             this.gcEditor.Name = "gcEditor";
             this.gcEditor.OptionsColumn.FixedWidth = true;
             this.gcEditor.Visible = true;
@@ -123,11 +124,11 @@
             // 
             // frmFlowQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 812);
+            this.ClientSize = new System.Drawing.Size(733, 664);
             this.Controls.Add(this.gdFlow);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmFlowQuery";
             this.Text = "流程配置";
             ((System.ComponentModel.ISupportInitialize)(this.gdFlow)).EndInit();

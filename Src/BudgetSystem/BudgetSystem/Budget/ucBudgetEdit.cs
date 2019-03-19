@@ -744,7 +744,24 @@ namespace BudgetSystem
                 this.txtUSDTotalAmount.EditValue = 0;
             }
         }
-
+        private void UpdateOutProductExchangeRate()
+        {
+            var exchangeRate = this.txtExchangeRate.Value;
+            bool isUpdate = false;
+            for (int i = 0; i < this.gvOutProductDetail.RowCount; i++)
+            {
+                if (this.gvOutProductDetail.GetRowCellValue(i, gcOriginalCurrency) != null
+                    && "usd".Equals(this.gvOutProductDetail.GetRowCellValue(i, gcOriginalCurrency).ToString().ToLower()))
+                {
+                    isUpdate = true;
+                    gvOutProductDetail.SetRowCellValue(i, gcExchangeRate, exchangeRate);
+                }
+            }
+            if (isUpdate == true)
+            {
+                this.gvOutProductDetail.RefreshData();
+            }
+        }
         #endregion
 
         #region Event Method
@@ -1199,6 +1216,7 @@ namespace BudgetSystem
         private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
         {
             this.txtExchangeRateView.EditValue = this.txtExchangeRate.Value;
+            UpdateOutProductExchangeRate();
             CalcNetIncome();
             CalcProfitLevel1();
             CalcUSDTotalAmount();

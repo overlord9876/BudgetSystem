@@ -91,7 +91,7 @@ namespace BudgetSystem.DepartmentManage
                         break;
                     }
                 }
-                this.txtCreateUser.Text = department.CreateUser;
+                this.txtCreateUser.Text = department.CreateUserRealName;
                 this.dtUpdateDate.EditValue = department.UpdateDatetime;
                 this.txtRemark.Text = department.Remark;
             }

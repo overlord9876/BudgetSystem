@@ -29,13 +29,19 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Manager { get; set; }
 
-        public string MaangerName { get; set; }
+        /// <summary>
+        /// 部门经理姓名
+        /// </summary>
+        public string ManagerName { get; set; }
 
         /// <summary>
         /// 部门副经理
         /// </summary>
         public string AssistantManager { get; set; }
 
+        /// <summary>
+        /// 部门副经理
+        /// </summary>
         public string AssistantManagerName { get; set; }
 
 
@@ -48,6 +54,11 @@ namespace BudgetSystem.Entity
         /// 创建人
         /// </summary>
         public string CreateUser { get; set; }
+
+        /// <summary>
+        /// 创建人姓名
+        /// </summary>
+        public string CreateUserRealName { get; set; }
 
         /// <summary>
         /// 更新时间
