@@ -11,6 +11,7 @@ namespace BudgetSystem.Bll
     {
         Dal.PaymentNotesDal dal = new Dal.PaymentNotesDal();
         Bll.FlowManager fm = new FlowManager();
+        Dal.FlowDal fDal = new Dal.FlowDal();
 
         public List<PaymentNotes> GetAllPaymentNotes()
         {
@@ -127,6 +128,8 @@ namespace BudgetSystem.Bll
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
+                fDal.DeleteFlowInstanceByDateItem(id, EnumFlowDataType.付款单.ToString(), con, tran);
+
                 dal.DeletePaymentNote(id, con, tran);
             });
         }

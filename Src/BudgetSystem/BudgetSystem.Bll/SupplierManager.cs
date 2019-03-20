@@ -12,6 +12,7 @@ namespace BudgetSystem.Bll
 
         Bll.FlowManager fm = new FlowManager();
         Dal.SupplierDal dal = new Dal.SupplierDal();
+        Dal.FlowDal fDal = new Dal.FlowDal();
 
         public List<Supplier> GetAllSupplier(SupplierQueryCondition condition = null)
         {
@@ -89,8 +90,10 @@ namespace BudgetSystem.Bll
 
         public void DeleteSupplier(int id)
         {
-            this.ExecuteWithoutTransaction((con) =>
+            this.ExecuteWithTransaction((con, tran) =>
             {
+                fDal.DeleteFlowInstanceByDateItem(id, EnumFlowDataType.供应商.ToString(), con, tran);
+
                 dal.DeleteSupplier(id, con);
             });
         }

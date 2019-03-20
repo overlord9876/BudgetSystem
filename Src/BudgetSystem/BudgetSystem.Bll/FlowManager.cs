@@ -119,7 +119,6 @@ namespace BudgetSystem.Bll
             });
         }
 
-
         /// <summary>
         /// 发起流程
         /// </summary>
@@ -169,7 +168,6 @@ namespace BudgetSystem.Bll
                 return FlowRunState.启动流程成功;
             });
         }
-
 
         /// <summary>
         /// 指向下一个运行点
@@ -257,9 +255,6 @@ namespace BudgetSystem.Bll
             return FlowRunState.创建运行点成功;
 
         }
-
-
-
 
         /// <summary>
         /// 提交流程
@@ -392,7 +387,6 @@ namespace BudgetSystem.Bll
 
         }
 
-
         /// <summary>
         /// 获取用户的待确认流程
         /// </summary>
@@ -407,7 +401,6 @@ namespace BudgetSystem.Bll
 
             }).ToList();
         }
-
 
         public List<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID)
         {
@@ -433,8 +426,6 @@ namespace BudgetSystem.Bll
 
         }
 
-
-
         //要获取数据项的RunPoint,用于处理是否已通过，或能否再发起审批
 
         //简单点处理，不考虑打回的，如果审批不通过，直接发回给原点。这里就有一个问题了，是手工重新发起流程，还是数据作废？
@@ -442,9 +433,6 @@ namespace BudgetSystem.Bll
         //1.如果直接作废，那引擎不需要再多的处理。在个人确认完成数据后，业务删除数据即可
         //2.如果手工再发起流程，业务那边可以加一个按钮，重新发起流程，引擎端提交接口处理，重新发起流程时检查未审批通过或未审批过。
         //目前先计划按方法2处理。
-
-
-
 
     }
 }

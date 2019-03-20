@@ -11,6 +11,7 @@ namespace BudgetSystem.Bll
     {
         Dal.ReceiptManagementDal dal = new Dal.ReceiptManagementDal();
         Bll.FlowManager fm = new FlowManager();
+        Dal.FlowDal fDal = new Dal.FlowDal();
 
         public List<BankSlip> GetAllBankSlipList(InMoneyQueryCondition condition)
         {
@@ -131,9 +132,12 @@ namespace BudgetSystem.Bll
         public void DeleteBankSlip(BankSlip modifyBankSlip)
         {
             this.ExecuteWithTransaction((con, tran) =>
-           {
-               dal.DeleteBankSlip(modifyBankSlip, con, tran);
-           });
+            {
+                fDal.DeleteFlowInstanceByDateItem(modifyBankSlip.BSID, EnumFlowDataType.收款单.ToString(), con, tran);
+
+                dal.DeleteBankSlip(modifyBankSlip, con, tran);
+
+            });
         }
 
         /// <summary>

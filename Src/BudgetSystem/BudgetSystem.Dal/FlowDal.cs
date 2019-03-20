@@ -146,6 +146,16 @@ namespace BudgetSystem.Dal
             return con.Insert(insertSql, new { NodeID = nodeID, NodeOrderNo = nodeOrderNo, InstanceID = instanceID, NodeApproveUser = approve }, tran);
         }
 
+        public void DeleteFlowInstanceByDateItem(int dataItemId, string dataItemType, IDbConnection con, IDbTransaction tran)
+        {
+            string flowRunpointSql = "DELETE from FlowRunpoint where InstanceID in (select ID from FlowInstance where DateItemID=@DateItemID  and DateItemType=@DateItemType)";
+
+            con.Execute(flowRunpointSql, new { DateItemID = dataItemId, DateItemType = dataItemType }, tran);
+
+            string flowInstanceSql = "DELETE from FlowInstance where DateItemID=@DateItemID  and DateItemType=@DateItemType;";
+            con.Execute(flowInstanceSql, new { DateItemID = dataItemId, DateItemType = dataItemType }, tran);
+
+        }
 
         public FlowRunPoint GetFlowRunPoint(int runPointID, IDbConnection con, IDbTransaction tran)
         {
@@ -175,10 +185,10 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<FlowItem> GetUnConfirmFlowByUser(string userName, IDbConnection con, IDbTransaction tran)
         {
-//            string sql = @"Select t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.DateItemText,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName
-//                        From `FlowInstance` t1
-//                        Left join `User` t2 on t1.CreateUser = t2.UserName
-//                        Where t1.`CreateUser` = @CreateUser and IsCreateUserConfirm=0";
+            //            string sql = @"Select t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.DateItemText,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName
+            //                        From `FlowInstance` t1
+            //                        Left join `User` t2 on t1.CreateUser = t2.UserName
+            //                        Where t1.`CreateUser` = @CreateUser and IsCreateUserConfirm=0";
 
             string sql = @"select t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName
                             from FlowRunpoint t1 

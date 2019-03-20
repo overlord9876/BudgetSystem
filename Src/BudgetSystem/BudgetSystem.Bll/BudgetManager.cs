@@ -16,6 +16,7 @@ namespace BudgetSystem.Bll
         Dal.InvoiceDal idal = new Dal.InvoiceDal();
         Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
+        Dal.FlowDal fmDal = new Dal.FlowDal();
 
         public List<Budget> GetAllBudget(BudgetQueryCondition condition = null)
         {
@@ -287,6 +288,7 @@ namespace BudgetSystem.Bll
                     return;
                 }
                 mmdal.DeleteModifyMark<Budget>(id, con, tran);
+                fmDal.DeleteFlowInstanceByDateItem(id, EnumFlowDataType.预算单.ToString(), con, tran);
                 dal.DeleteBudget(id, con, tran);
             });
             return message;
