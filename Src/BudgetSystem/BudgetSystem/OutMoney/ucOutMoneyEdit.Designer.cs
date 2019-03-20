@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.chkRepayLoan = new DevExpress.XtraEditors.CheckEdit();
@@ -264,7 +264,7 @@
             this.layoutControl1.Controls.Add(this.cboPayingBank);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(440, 475, 678, 586);
             this.layoutControl1.Root = this.layoutControlGroup1;
@@ -284,10 +284,10 @@
             // 
             // gridInvoiceNumber
             // 
-            this.gridInvoiceNumber.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridInvoiceNumber.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridInvoiceNumber.Location = new System.Drawing.Point(135, 88);
             this.gridInvoiceNumber.MainView = this.gvInvoiceNumber;
-            this.gridInvoiceNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridInvoiceNumber.Margin = new System.Windows.Forms.Padding(2);
             this.gridInvoiceNumber.Name = "gridInvoiceNumber";
             this.gridInvoiceNumber.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.riLinkDelete});
@@ -351,7 +351,7 @@
             // btnShowBudgetHistory
             // 
             this.btnShowBudgetHistory.Location = new System.Drawing.Point(333, 12);
-            this.btnShowBudgetHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnShowBudgetHistory.Margin = new System.Windows.Forms.Padding(2);
             this.btnShowBudgetHistory.Name = "btnShowBudgetHistory";
             this.btnShowBudgetHistory.Size = new System.Drawing.Size(91, 22);
             this.btnShowBudgetHistory.StyleController = this.layoutControl1;
@@ -362,7 +362,7 @@
             // txtApplicant
             // 
             this.txtApplicant.Location = new System.Drawing.Point(135, 324);
-            this.txtApplicant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtApplicant.Margin = new System.Windows.Forms.Padding(2);
             this.txtApplicant.Name = "txtApplicant";
             this.txtApplicant.Properties.ReadOnly = true;
             this.txtApplicant.Size = new System.Drawing.Size(290, 21);
@@ -372,7 +372,7 @@
             // chkIsIOU
             // 
             this.chkIsIOU.Location = new System.Drawing.Point(694, 63);
-            this.chkIsIOU.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsIOU.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsIOU.Name = "chkIsIOU";
             this.chkIsIOU.Properties.Caption = "是否借款";
             this.chkIsIOU.Size = new System.Drawing.Size(71, 19);
@@ -385,7 +385,7 @@
             this.txtActualRetention.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtActualRetention.IsSupportNegative = false;
             this.txtActualRetention.Location = new System.Drawing.Point(135, 299);
-            this.txtActualRetention.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtActualRetention.Margin = new System.Windows.Forms.Padding(2);
             this.txtActualRetention.Name = "txtActualRetention";
             this.txtActualRetention.Properties.Mask.EditMask = "n";
             this.txtActualRetention.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -401,7 +401,7 @@
             this.txtAdvancePayment.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAdvancePayment.IsSupportNegative = false;
             this.txtAdvancePayment.Location = new System.Drawing.Point(552, 274);
-            this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAdvancePayment.Margin = new System.Windows.Forms.Padding(2);
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Properties.Mask.EditMask = "n";
             this.txtAdvancePayment.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -417,7 +417,7 @@
             this.txtAmountTaxRebate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountTaxRebate.IsSupportNegative = false;
             this.txtAmountTaxRebate.Location = new System.Drawing.Point(135, 274);
-            this.txtAmountTaxRebate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAmountTaxRebate.Margin = new System.Windows.Forms.Padding(2);
             this.txtAmountTaxRebate.Name = "txtAmountTaxRebate";
             this.txtAmountTaxRebate.Properties.Mask.EditMask = "n";
             this.txtAmountTaxRebate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -433,7 +433,7 @@
             this.txtAmountPaymentMoney.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAmountPaymentMoney.IsSupportNegative = false;
             this.txtAmountPaymentMoney.Location = new System.Drawing.Point(552, 249);
-            this.txtAmountPaymentMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAmountPaymentMoney.Margin = new System.Windows.Forms.Padding(2);
             this.txtAmountPaymentMoney.Name = "txtAmountPaymentMoney";
             this.txtAmountPaymentMoney.Properties.Mask.EditMask = "n";
             this.txtAmountPaymentMoney.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -449,7 +449,7 @@
             this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtExchangeRate.IsSupportNegative = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(305, 198);
-            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(2);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Properties.Mask.EditMask = "(\\d|[1-9]\\d|100)(\\.\\d{1,6})?";
             this.txtExchangeRate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -463,7 +463,7 @@
             // cboCurrency
             // 
             this.cboCurrency.Location = new System.Drawing.Point(135, 198);
-            this.cboCurrency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboCurrency.Margin = new System.Windows.Forms.Padding(2);
             this.cboCurrency.Name = "cboCurrency";
             this.cboCurrency.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -481,7 +481,7 @@
             this.txtOriginalCoin.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtOriginalCoin.IsSupportNegative = false;
             this.txtOriginalCoin.Location = new System.Drawing.Point(135, 223);
-            this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOriginalCoin.Margin = new System.Windows.Forms.Padding(2);
             this.txtOriginalCoin.Name = "txtOriginalCoin";
             this.txtOriginalCoin.Properties.Mask.EditMask = "n";
             this.txtOriginalCoin.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -497,7 +497,7 @@
             this.txtAfterPaymentBalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtAfterPaymentBalance.IsSupportNegative = false;
             this.txtAfterPaymentBalance.Location = new System.Drawing.Point(552, 299);
-            this.txtAfterPaymentBalance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAfterPaymentBalance.Margin = new System.Windows.Forms.Padding(2);
             this.txtAfterPaymentBalance.Name = "txtAfterPaymentBalance";
             this.txtAfterPaymentBalance.Properties.Mask.EditMask = "n";
             this.txtAfterPaymentBalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -514,7 +514,7 @@
             this.txtReceiptAmount.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtReceiptAmount.IsSupportNegative = false;
             this.txtReceiptAmount.Location = new System.Drawing.Point(135, 249);
-            this.txtReceiptAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReceiptAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtReceiptAmount.Name = "txtReceiptAmount";
             this.txtReceiptAmount.Properties.Mask.EditMask = "n";
             this.txtReceiptAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -528,7 +528,7 @@
             // btnSearchMoney
             // 
             this.btnSearchMoney.Location = new System.Drawing.Point(793, 223);
-            this.btnSearchMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearchMoney.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearchMoney.Name = "btnSearchMoney";
             this.btnSearchMoney.Size = new System.Drawing.Size(59, 22);
             this.btnSearchMoney.StyleController = this.layoutControl1;
@@ -541,7 +541,7 @@
             this.txtCNY.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtCNY.IsSupportNegative = false;
             this.txtCNY.Location = new System.Drawing.Point(552, 223);
-            this.txtCNY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCNY.Margin = new System.Windows.Forms.Padding(2);
             this.txtCNY.Name = "txtCNY";
             this.txtCNY.Properties.Mask.EditMask = "c";
             this.txtCNY.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -556,7 +556,7 @@
             // 
             this.deCommitTime.EditValue = null;
             this.deCommitTime.Location = new System.Drawing.Point(135, 374);
-            this.deCommitTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deCommitTime.Margin = new System.Windows.Forms.Padding(2);
             this.deCommitTime.Name = "deCommitTime";
             this.deCommitTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -569,7 +569,7 @@
             // chkHasInvoice
             // 
             this.chkHasInvoice.Location = new System.Drawing.Point(757, 173);
-            this.chkHasInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHasInvoice.Margin = new System.Windows.Forms.Padding(2);
             this.chkHasInvoice.Name = "chkHasInvoice";
             this.chkHasInvoice.Properties.Caption = "收到货款发票";
             this.chkHasInvoice.Size = new System.Drawing.Size(95, 19);
@@ -579,7 +579,7 @@
             // cboMoneyUsed
             // 
             this.cboMoneyUsed.Location = new System.Drawing.Point(552, 63);
-            this.cboMoneyUsed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboMoneyUsed.Margin = new System.Windows.Forms.Padding(2);
             this.cboMoneyUsed.Name = "cboMoneyUsed";
             this.cboMoneyUsed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -592,7 +592,7 @@
             // cboPaymentMethod
             // 
             this.cboPaymentMethod.Location = new System.Drawing.Point(135, 173);
-            this.cboPaymentMethod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboPaymentMethod.Margin = new System.Windows.Forms.Padding(2);
             this.cboPaymentMethod.Name = "cboPaymentMethod";
             this.cboPaymentMethod.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -611,7 +611,7 @@
             // chkIsDrawback
             // 
             this.chkIsDrawback.Location = new System.Drawing.Point(642, 173);
-            this.chkIsDrawback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsDrawback.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsDrawback.Name = "chkIsDrawback";
             this.chkIsDrawback.Properties.Caption = "是否退税";
             this.chkIsDrawback.Size = new System.Drawing.Size(111, 19);
@@ -623,7 +623,7 @@
             // 
             this.txtDescription.EditValue = "";
             this.txtDescription.Location = new System.Drawing.Point(135, 420);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(717, 193);
             this.txtDescription.StyleController = this.layoutControl1;
@@ -632,7 +632,7 @@
             // txtVoucherNo
             // 
             this.txtVoucherNo.Location = new System.Drawing.Point(551, 12);
-            this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoucherNo.Name = "txtVoucherNo";
             this.txtVoucherNo.Properties.ReadOnly = true;
             this.txtVoucherNo.Size = new System.Drawing.Size(301, 21);
@@ -642,7 +642,7 @@
             // cboSupplier
             // 
             this.cboSupplier.Location = new System.Drawing.Point(135, 38);
-            this.cboSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboSupplier.Margin = new System.Windows.Forms.Padding(2);
             this.cboSupplier.Name = "cboSupplier";
             this.cboSupplier.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -680,19 +680,19 @@
             this.gcDescription,
             this.gcIsWarned});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            styleFormatCondition1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
-            styleFormatCondition1.Appearance.Options.UseBackColor = true;
-            styleFormatCondition1.Appearance.Options.UseFont = true;
-            styleFormatCondition1.Appearance.Options.UseForeColor = true;
-            styleFormatCondition1.ApplyToRow = true;
-            styleFormatCondition1.Column = this.gcIsWarned;
-            styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
-            styleFormatCondition1.Expression = "True";
-            styleFormatCondition1.Value1 = true;
+            styleFormatCondition2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            styleFormatCondition2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            styleFormatCondition2.Appearance.ForeColor = System.Drawing.Color.Red;
+            styleFormatCondition2.Appearance.Options.UseBackColor = true;
+            styleFormatCondition2.Appearance.Options.UseFont = true;
+            styleFormatCondition2.Appearance.Options.UseForeColor = true;
+            styleFormatCondition2.ApplyToRow = true;
+            styleFormatCondition2.Column = this.gcIsWarned;
+            styleFormatCondition2.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition2.Expression = "True";
+            styleFormatCondition2.Value1 = true;
             this.gridLookUpEdit1View.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition1});
+            styleFormatCondition2});
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsBehavior.Editable = false;
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -788,7 +788,7 @@
             // cboBudget
             // 
             this.cboBudget.Location = new System.Drawing.Point(135, 12);
-            this.cboBudget.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboBudget.Margin = new System.Windows.Forms.Padding(2);
             this.cboBudget.Name = "cboBudget";
             this.cboBudget.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -927,7 +927,7 @@
             // 
             this.txtPaymentDate.EditValue = null;
             this.txtPaymentDate.Location = new System.Drawing.Point(552, 374);
-            this.txtPaymentDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPaymentDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtPaymentDate.Name = "txtPaymentDate";
             this.txtPaymentDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -943,7 +943,7 @@
             // cboDepartment
             // 
             this.cboDepartment.Location = new System.Drawing.Point(552, 324);
-            this.cboDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.ReadOnly = true;
             this.cboDepartment.Size = new System.Drawing.Size(300, 21);
@@ -953,12 +953,12 @@
             // txtTaxRebateRate
             // 
             this.txtTaxRebateRate.Location = new System.Drawing.Point(552, 173);
-            this.txtTaxRebateRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTaxRebateRate.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
             this.txtTaxRebateRate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtTaxRebateRate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTaxRebateRate.Properties.NullText = "0.00";
-            this.txtTaxRebateRate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtTaxRebateRate.Size = new System.Drawing.Size(86, 21);
             this.txtTaxRebateRate.StyleController = this.layoutControl1;
             this.txtTaxRebateRate.TabIndex = 9;
@@ -968,7 +968,7 @@
             // 
             this.txtExpectedReturnDate.EditValue = null;
             this.txtExpectedReturnDate.Location = new System.Drawing.Point(552, 198);
-            this.txtExpectedReturnDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExpectedReturnDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtExpectedReturnDate.Name = "txtExpectedReturnDate";
             this.txtExpectedReturnDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -983,7 +983,7 @@
             // txtBankName
             // 
             this.txtBankName.Location = new System.Drawing.Point(552, 38);
-            this.txtBankName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBankName.Margin = new System.Windows.Forms.Padding(2);
             this.txtBankName.Name = "txtBankName";
             this.txtBankName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1023,7 +1023,7 @@
             // txtBankNO
             // 
             this.txtBankNO.Location = new System.Drawing.Point(135, 63);
-            this.txtBankNO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBankNO.Margin = new System.Windows.Forms.Padding(2);
             this.txtBankNO.Name = "txtBankNO";
             this.txtBankNO.Size = new System.Drawing.Size(290, 21);
             this.txtBankNO.StyleController = this.layoutControl1;
@@ -1032,7 +1032,7 @@
             // cboPayingBank
             // 
             this.cboPayingBank.Location = new System.Drawing.Point(135, 349);
-            this.cboPayingBank.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboPayingBank.Margin = new System.Windows.Forms.Padding(2);
             this.cboPayingBank.Name = "cboPayingBank";
             this.cboPayingBank.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1447,7 +1447,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "ucOutMoneyEdit";
             this.Size = new System.Drawing.Size(864, 625);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

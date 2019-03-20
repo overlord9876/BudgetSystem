@@ -45,7 +45,7 @@ namespace BudgetSystem.Dal
                 }
                 if (!string.IsNullOrEmpty(condition.Department))
                 {
-                    strConditionList.Add(" s.DepartmentCode=@Department");
+                    strConditionList.Add(" d.Code=@Department");
                     dp.Add("Department", condition.Department, null, null, null);
                 }
                 if (condition.SupplierType >= 0)

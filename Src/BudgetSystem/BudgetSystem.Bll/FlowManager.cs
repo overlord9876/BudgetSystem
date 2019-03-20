@@ -226,7 +226,7 @@ namespace BudgetSystem.Bll
                 if (nextNode.NodeValue == FlowConst.FlowCreateUserDepartment)
                 {
                     User user = userDal.GetUser(instanceCreateUser, con, tran);
-                    departMentCode = user.Department;
+                    departMentCode = user.DeptID.ToString();
 
                 }
                 else

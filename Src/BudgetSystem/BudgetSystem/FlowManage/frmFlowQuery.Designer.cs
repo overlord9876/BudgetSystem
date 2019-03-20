@@ -43,12 +43,12 @@
             // gdFlow
             // 
             this.gdFlow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gdFlow.Location = new System.Drawing.Point(0, 0);
             this.gdFlow.MainView = this.gvFlow;
-            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdFlow.Margin = new System.Windows.Forms.Padding(2);
             this.gdFlow.Name = "gdFlow";
-            this.gdFlow.Size = new System.Drawing.Size(733, 664);
+            this.gdFlow.Size = new System.Drawing.Size(641, 516);
             this.gdFlow.TabIndex = 0;
             this.gdFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFlow});
@@ -90,6 +90,8 @@
             // gcLastEditTime
             // 
             this.gcLastEditTime.Caption = "修改时间";
+            this.gcLastEditTime.DisplayFormat.FormatString = "g";
+            this.gcLastEditTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcLastEditTime.FieldName = "UpdateDate";
             this.gcLastEditTime.Name = "gcLastEditTime";
             this.gcLastEditTime.OptionsColumn.FixedWidth = true;
@@ -124,11 +126,10 @@
             // 
             // frmFlowQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 664);
+            this.ClientSize = new System.Drawing.Size(641, 516);
             this.Controls.Add(this.gdFlow);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmFlowQuery";
             this.Text = "流程配置";
             ((System.ComponentModel.ISupportInitialize)(this.gdFlow)).EndInit();

@@ -100,6 +100,8 @@
             // 
             this.gcSupplier.Caption = "供应商";
             this.gcSupplier.FieldName = "SupplierName";
+            this.gcSupplier.GroupFormat.FormatString = "g";
+            this.gcSupplier.GroupFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcSupplier.Name = "gcSupplier";
             this.gcSupplier.Visible = true;
             this.gcSupplier.VisibleIndex = 0;
@@ -167,10 +169,13 @@
             // gcCommitTime
             // 
             this.gcCommitTime.Caption = "提交时间";
+            this.gcCommitTime.DisplayFormat.FormatString = "g";
+            this.gcCommitTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCommitTime.FieldName = "CommitTime";
             this.gcCommitTime.Name = "gcCommitTime";
             this.gcCommitTime.Visible = true;
             this.gcCommitTime.VisibleIndex = 6;
+            this.gcCommitTime.Width = 120;
             // 
             // gcPaymentDate
             // 

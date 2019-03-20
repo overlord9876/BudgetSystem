@@ -23,5 +23,10 @@ namespace BudgetSystem.Entity.QueryCondition
         /// 客户编号
         /// </summary>
         public string Code { get; set; }
+
+        /// <summary>
+        /// 业务员
+        /// </summary>
+        public string Salesman { get; set; }
     }
 }

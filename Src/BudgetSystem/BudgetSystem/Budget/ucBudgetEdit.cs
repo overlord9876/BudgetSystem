@@ -118,7 +118,7 @@ namespace BudgetSystem
             CurrentBudget.PriceClause = this.cboPriceClause.Text;
             CurrentBudget.Port = this.luePort.Text;
             CurrentBudget.TotalAmount = txtTotalAmount.Value;
-            CurrentBudget.USDTotalAmount = txtUSDTotalAmount.Value;
+            CurrentBudget.USDTotalAmount = Math.Round(txtUSDTotalAmount.Value, 2);
             CurrentBudget.SignDate = dteSignDate.DateTime;
             CurrentBudget.Validity = dteValidity.DateTime;
             CurrentBudget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
@@ -175,11 +175,11 @@ namespace BudgetSystem
         public void InitData()
         {
             Bll.CustomerManager cm = new Bll.CustomerManager();
-            List<Customer> customers = cm.GetAllCustomer();
+            List<Customer> customers = cm.GetAllCustomer(new Entity.QueryCondition.CustomerQueryCondition() { Salesman = RunInfo.Instance.CurrentUser.UserName });
             this.ucCustomerSelected.SetDataSource(customers);
 
             Bll.SupplierManager sm = new Bll.SupplierManager();
-            List<Supplier> suppliers = sm.GetAllSupplier();
+            List<Supplier> suppliers = sm.GetAllSupplier(new Entity.QueryCondition.SupplierQueryCondition() { Department = RunInfo.Instance.CurrentUser.Department });
             this.ucSupplierSelected.SetDataSource(suppliers);
 
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();

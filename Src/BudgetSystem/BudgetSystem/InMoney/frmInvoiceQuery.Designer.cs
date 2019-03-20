@@ -56,12 +56,12 @@
             // gridInvoice
             // 
             this.gridInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridInvoice.Location = new System.Drawing.Point(0, 0);
             this.gridInvoice.MainView = this.gvInvoice;
-            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2);
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(1147, 723);
+            this.gridInvoice.Size = new System.Drawing.Size(1004, 562);
             this.gridInvoice.TabIndex = 1;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -99,6 +99,7 @@
             this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
             this.gcDepartmentCode.Visible = true;
             this.gcDepartmentCode.VisibleIndex = 0;
+            this.gcDepartmentCode.Width = 58;
             // 
             // gcContractNO
             // 
@@ -108,6 +109,7 @@
             this.gcContractNO.OptionsColumn.AllowEdit = false;
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 1;
+            this.gcContractNO.Width = 58;
             // 
             // gcCode
             // 
@@ -116,6 +118,7 @@
             this.gcCode.Name = "gcCode";
             this.gcCode.Visible = true;
             this.gcCode.VisibleIndex = 2;
+            this.gcCode.Width = 58;
             // 
             // gcNumber
             // 
@@ -125,6 +128,7 @@
             this.gcNumber.OptionsColumn.AllowEdit = false;
             this.gcNumber.Visible = true;
             this.gcNumber.VisibleIndex = 3;
+            this.gcNumber.Width = 58;
             // 
             // gcOriginalCoin
             // 
@@ -134,6 +138,7 @@
             this.gcOriginalCoin.OptionsColumn.AllowEdit = false;
             this.gcOriginalCoin.Visible = true;
             this.gcOriginalCoin.VisibleIndex = 4;
+            this.gcOriginalCoin.Width = 58;
             // 
             // gcPayment
             // 
@@ -143,6 +148,7 @@
             this.gcPayment.OptionsColumn.AllowEdit = false;
             this.gcPayment.Visible = true;
             this.gcPayment.VisibleIndex = 5;
+            this.gcPayment.Width = 58;
             // 
             // gcTaxAmount
             // 
@@ -151,6 +157,7 @@
             this.gcTaxAmount.Name = "gcTaxAmount";
             this.gcTaxAmount.Visible = true;
             this.gcTaxAmount.VisibleIndex = 6;
+            this.gcTaxAmount.Width = 58;
             // 
             // gcExchangeRate
             // 
@@ -159,6 +166,7 @@
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
             this.gcExchangeRate.VisibleIndex = 7;
+            this.gcExchangeRate.Width = 58;
             // 
             // gcTaxRebateRate
             // 
@@ -167,6 +175,7 @@
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
             this.gcTaxRebateRate.VisibleIndex = 8;
+            this.gcTaxRebateRate.Width = 58;
             // 
             // gcCommission
             // 
@@ -175,6 +184,7 @@
             this.gcCommission.Name = "gcCommission";
             this.gcCommission.Visible = true;
             this.gcCommission.VisibleIndex = 9;
+            this.gcCommission.Width = 58;
             // 
             // gcFeedMoney
             // 
@@ -183,6 +193,7 @@
             this.gcFeedMoney.Name = "gcFeedMoney";
             this.gcFeedMoney.Visible = true;
             this.gcFeedMoney.VisibleIndex = 10;
+            this.gcFeedMoney.Width = 58;
             // 
             // gcTotalCost
             // 
@@ -192,6 +203,7 @@
             this.gcTotalCost.OptionsColumn.AllowEdit = false;
             this.gcTotalCost.Visible = true;
             this.gcTotalCost.VisibleIndex = 11;
+            this.gcTotalCost.Width = 58;
             // 
             // gcCustomsDeclaration
             // 
@@ -200,6 +212,7 @@
             this.gcCustomsDeclaration.Name = "gcCustomsDeclaration";
             this.gcCustomsDeclaration.Visible = true;
             this.gcCustomsDeclaration.VisibleIndex = 12;
+            this.gcCustomsDeclaration.Width = 58;
             // 
             // gcTaxpayerID
             // 
@@ -208,6 +221,7 @@
             this.gcTaxpayerID.Name = "gcTaxpayerID";
             this.gcTaxpayerID.Visible = true;
             this.gcTaxpayerID.VisibleIndex = 13;
+            this.gcTaxpayerID.Width = 58;
             // 
             // gcSupplierName
             // 
@@ -216,6 +230,7 @@
             this.gcSupplierName.Name = "gcSupplierName";
             this.gcSupplierName.Visible = true;
             this.gcSupplierName.VisibleIndex = 14;
+            this.gcSupplierName.Width = 58;
             // 
             // gcImportUserName
             // 
@@ -225,15 +240,19 @@
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
             this.gcImportUserName.Visible = true;
             this.gcImportUserName.VisibleIndex = 15;
+            this.gcImportUserName.Width = 58;
             // 
             // gcImportDate
             // 
             this.gcImportDate.Caption = "创建时间";
             this.gcImportDate.FieldName = "ImportDate";
+            this.gcImportDate.GroupFormat.FormatString = "g";
+            this.gcImportDate.GroupFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcImportDate.Name = "gcImportDate";
             this.gcImportDate.OptionsColumn.AllowEdit = false;
             this.gcImportDate.Visible = true;
             this.gcImportDate.VisibleIndex = 16;
+            this.gcImportDate.Width = 120;
             // 
             // openFileDialog1
             // 
@@ -247,11 +266,10 @@
             // 
             // frmInvoiceQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 723);
+            this.ClientSize = new System.Drawing.Size(1004, 562);
             this.Controls.Add(this.gridInvoice);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInvoiceQuery";
             this.Text = "交单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();

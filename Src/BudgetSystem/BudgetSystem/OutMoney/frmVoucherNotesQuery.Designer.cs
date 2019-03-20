@@ -47,12 +47,12 @@
             // gcDeclarationform
             // 
             this.gcDeclarationform.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gcDeclarationform.Location = new System.Drawing.Point(0, 0);
             this.gcDeclarationform.MainView = this.gvDeclarationform;
-            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gcDeclarationform.Name = "gcDeclarationform";
-            this.gcDeclarationform.Size = new System.Drawing.Size(1147, 723);
+            this.gcDeclarationform.Size = new System.Drawing.Size(1004, 562);
             this.gcDeclarationform.TabIndex = 1;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -150,18 +150,20 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "录入时间";
+            this.gridColumn6.DisplayFormat.FormatString = "g";
+            this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn6.FieldName = "CreateDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 9;
+            this.gridColumn6.Width = 120;
             // 
             // frmVoucherNotesQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 723);
+            this.ClientSize = new System.Drawing.Size(1004, 562);
             this.Controls.Add(this.gcDeclarationform);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmVoucherNotesQuery";
             this.Text = "报关单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();

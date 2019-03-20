@@ -48,6 +48,13 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" s.Name Like @Name ");
                     dp.Add("Name", string.Format("%{0}%", condition.CustomName), null, null, null);
                 }
+                if (!string.IsNullOrEmpty(condition.Salesman))
+                {
+                    strConditionList.Add(" ID in (SELECT customer from customersalesman where salesman=@salesman) ");
+                    dp.Add("salesman", condition.Salesman, null, null, null);
+
+                }
+
                 if (strConditionList.Count > 0)
                 {
                     selectSql += string.Format(" where {0}", string.Join(" and ", strConditionList.ToArray()));

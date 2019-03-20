@@ -59,12 +59,12 @@
             // gridCustomer
             // 
             this.gridCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridCustomer.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridCustomer.Location = new System.Drawing.Point(0, 0);
             this.gridCustomer.MainView = this.gvCustomer;
-            this.gridCustomer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridCustomer.Name = "gridCustomer";
-            this.gridCustomer.Size = new System.Drawing.Size(1006, 564);
+            this.gridCustomer.Size = new System.Drawing.Size(880, 439);
             this.gridCustomer.TabIndex = 1;
             this.gridCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCustomer});
@@ -154,6 +154,8 @@
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.DisplayFormat.FormatString = "g";
+            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
@@ -173,17 +175,17 @@
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(105, 41);
+            this.textEdit2.Location = new System.Drawing.Point(87, 37);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(186, 21);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(105, 12);
+            this.textEdit1.Location = new System.Drawing.Point(87, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(186, 21);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -207,27 +209,26 @@
             this.layoutControlItem1.CustomizationFormText = "客户名称：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
             this.layoutControlItem1.Text = "客户名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "国家或地区：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 414);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 418);
             this.layoutControlItem2.Text = "国家或地区：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
             // 
             // frmCustomerQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 564);
+            this.ClientSize = new System.Drawing.Size(880, 439);
             this.Controls.Add(this.gridCustomer);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmCustomerQuery";
             this.Text = "客户查询";
             ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).EndInit();

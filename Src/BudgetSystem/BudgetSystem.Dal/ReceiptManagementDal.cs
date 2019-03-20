@@ -52,6 +52,21 @@ namespace BudgetSystem.Dal
         }
 
         /// <summary>
+        /// 删除入帐单信息
+        /// </summary>
+        /// <param name="deleteBankSlip"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        public void DeleteBankSlip(BankSlip deleteBankSlip, IDbConnection con, IDbTransaction tran)
+        {
+            string deleteReceiptnoticeSql = "delete from  receiptnotice where `BSID` = @BSID";
+            con.Execute(deleteReceiptnoticeSql, new { BSID = deleteBankSlip.BSID }, tran);
+
+            string deleteSql = "DELETE FROM `BankSlip` Where `BSID` = @BSID";
+            con.Execute(deleteSql, new { BSID = deleteBankSlip.BSID }, tran);
+        }
+
+        /// <summary>
         /// 修改入帐单信息
         /// </summary>
         /// <param name="modifyBankSlip"></param>

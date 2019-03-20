@@ -64,17 +64,17 @@
             // gridSupplier
             // 
             this.gridSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             gridLevelNode1.RelationName = "Level1";
             this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gridSupplier.Location = new System.Drawing.Point(0, 0);
             this.gridSupplier.MainView = this.gvSupplier;
-            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridSupplier.Name = "gridSupplier";
             this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
-            this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
+            this.gridSupplier.Size = new System.Drawing.Size(960, 523);
             this.gridSupplier.TabIndex = 2;
             this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSupplier});
@@ -205,6 +205,8 @@
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.DisplayFormat.FormatString = "g";
+            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
@@ -228,11 +230,11 @@
             // 
             // frmSupplierQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 672);
+            this.ClientSize = new System.Drawing.Size(960, 523);
             this.Controls.Add(this.gridSupplier);
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmSupplierQuery";
             this.Text = "供应商管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();

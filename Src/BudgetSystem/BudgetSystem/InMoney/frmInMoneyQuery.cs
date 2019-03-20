@@ -33,6 +33,7 @@ namespace BudgetSystem.InMoney
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "新增银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改银行水单"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除银行水单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SplitCost, "收汇进入合同"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "收汇确认"));
@@ -57,6 +58,10 @@ namespace BudgetSystem.InMoney
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
                 ModifyBankSlip();
+            }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                DeleteBankSlip();
             }
             else if (operate.Operate == OperateTypes.SplitCost.ToString())
             {
@@ -143,6 +148,36 @@ namespace BudgetSystem.InMoney
             else
             {
                 XtraMessageBox.Show("请选择需要修改的项");
+            }
+        }
+
+        private void DeleteBankSlip()
+        {
+            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (currentRowBankSlip != null)
+            {
+                currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+                if (currentRowBankSlip == null)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
+                if (currentRowBankSlip.State != 0)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单不是已发布状态，不允删除数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
+                if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】银行水单？删除后将无法恢复。", currentRowBankSlip.VoucherNo), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    this.arm.DeleteBankSlip(currentRowBankSlip);
+
+                    XtraMessageBox.Show("删除成功。");
+                    this.gvInMoney.DeleteRow(this.gvInMoney.FocusedRowHandle);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
             }
         }
 

@@ -59,14 +59,14 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(1377, 690);
+            this.gridBudget.Size = new System.Drawing.Size(1205, 537);
             this.gridBudget.TabIndex = 0;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBudget});
@@ -106,31 +106,31 @@
             // 
             this.gcContractNO.Caption = "合同号";
             this.gcContractNO.FieldName = "ContractNO";
-            this.gcContractNO.MinWidth = 80;
+            this.gcContractNO.MinWidth = 120;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
-            this.gcContractNO.Width = 80;
+            this.gcContractNO.Width = 120;
             // 
             // gcCustomerName
             // 
             this.gcCustomerName.Caption = "主买方名称";
             this.gcCustomerName.FieldName = "CustomerNameEx";
-            this.gcCustomerName.MinWidth = 80;
+            this.gcCustomerName.MinWidth = 120;
             this.gcCustomerName.Name = "gcCustomerName";
             this.gcCustomerName.Visible = true;
             this.gcCustomerName.VisibleIndex = 1;
-            this.gcCustomerName.Width = 80;
+            this.gcCustomerName.Width = 120;
             // 
             // gcFlowName
             // 
             this.gcFlowName.Caption = "当前流程";
             this.gcFlowName.FieldName = "FlowName";
-            this.gcFlowName.MinWidth = 80;
+            this.gcFlowName.MinWidth = 100;
             this.gcFlowName.Name = "gcFlowName";
             this.gcFlowName.Visible = true;
             this.gcFlowName.VisibleIndex = 2;
-            this.gcFlowName.Width = 80;
+            this.gcFlowName.Width = 100;
             // 
             // gcFlowState
             // 
@@ -262,12 +262,14 @@
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "录入时间";
+            this.gcCreateDate.DisplayFormat.FormatString = "g";
+            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.MinWidth = 80;
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 15;
-            this.gcCreateDate.Width = 80;
+            this.gcCreateDate.Width = 110;
             // 
             // gcSignDate
             // 
@@ -306,11 +308,11 @@
             // 
             // frmBudgetQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1377, 690);
+            this.ClientSize = new System.Drawing.Size(1205, 537);
             this.Controls.Add(this.gridBudget);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmBudgetQuery";
             this.Text = "预算单查询";
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();

@@ -125,6 +125,18 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 删除银行水单
+        /// </summary>
+        /// <param name="modifyBankSlip"></param>
+        public void DeleteBankSlip(BankSlip modifyBankSlip)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+           {
+               dal.DeleteBankSlip(modifyBankSlip, con, tran);
+           });
+        }
+
+        /// <summary>
         /// 修改入帐单状态
         /// </summary>
         /// <param name="modifyBankSlip"></param>

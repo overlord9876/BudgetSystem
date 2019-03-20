@@ -71,6 +71,7 @@
             this.gcUSDTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPurchasePrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalTaxRebate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -88,7 +89,6 @@
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.ucBudgetEdit1 = new BudgetSystem.ucBudgetEdit();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvOutProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvInProduct)).BeginInit();
@@ -184,7 +184,7 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             gridLevelNode1.LevelTemplate = this.gvOutProduct;
             gridLevelNode1.RelationName = "OutProductList";
             gridLevelNode2.LevelTemplate = this.bgvInProduct;
@@ -194,11 +194,11 @@
             gridLevelNode2});
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(1311, 823);
+            this.gridBudget.Size = new System.Drawing.Size(982, 656);
             this.gridBudget.TabIndex = 1;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bgvInProduct,
@@ -462,7 +462,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
-            this.gcContractNO.Width = 133;
+            this.gcContractNO.Width = 99;
             // 
             // gcCustomerName
             // 
@@ -471,7 +471,7 @@
             this.gcCustomerName.Name = "gcCustomerName";
             this.gcCustomerName.Visible = true;
             this.gcCustomerName.VisibleIndex = 1;
-            this.gcCustomerName.Width = 248;
+            this.gcCustomerName.Width = 184;
             // 
             // gcTotalAmount
             // 
@@ -480,7 +480,7 @@
             this.gcTotalAmount.Name = "gcTotalAmount";
             this.gcTotalAmount.Visible = true;
             this.gcTotalAmount.VisibleIndex = 2;
-            this.gcTotalAmount.Width = 110;
+            this.gcTotalAmount.Width = 82;
             // 
             // gcUSDTotalAmount
             // 
@@ -489,7 +489,7 @@
             this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
             this.gcUSDTotalAmount.Visible = true;
             this.gcUSDTotalAmount.VisibleIndex = 3;
-            this.gcUSDTotalAmount.Width = 105;
+            this.gcUSDTotalAmount.Width = 78;
             // 
             // gcPurchasePrice
             // 
@@ -498,7 +498,7 @@
             this.gcPurchasePrice.Name = "gcPurchasePrice";
             this.gcPurchasePrice.Visible = true;
             this.gcPurchasePrice.VisibleIndex = 4;
-            this.gcPurchasePrice.Width = 112;
+            this.gcPurchasePrice.Width = 83;
             // 
             // gcTotalTaxRebate
             // 
@@ -507,7 +507,16 @@
             this.gcTotalTaxRebate.Name = "gcTotalTaxRebate";
             this.gcTotalTaxRebate.Visible = true;
             this.gcTotalTaxRebate.VisibleIndex = 5;
-            this.gcTotalTaxRebate.Width = 124;
+            this.gcTotalTaxRebate.Width = 92;
+            // 
+            // gcTotalCost
+            // 
+            this.gcTotalCost.Caption = "总成本";
+            this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.Name = "gcTotalCost";
+            this.gcTotalCost.Visible = true;
+            this.gcTotalCost.VisibleIndex = 6;
+            this.gcTotalCost.Width = 89;
             // 
             // gcProfit
             // 
@@ -516,7 +525,7 @@
             this.gcProfit.Name = "gcProfit";
             this.gcProfit.Visible = true;
             this.gcProfit.VisibleIndex = 7;
-            this.gcProfit.Width = 119;
+            this.gcProfit.Width = 88;
             // 
             // gcProfitLevel2
             // 
@@ -525,16 +534,18 @@
             this.gcProfitLevel2.Name = "gcProfitLevel2";
             this.gcProfitLevel2.Visible = true;
             this.gcProfitLevel2.VisibleIndex = 8;
-            this.gcProfitLevel2.Width = 94;
+            this.gcProfitLevel2.Width = 70;
             // 
             // gcUpdateDate
             // 
             this.gcUpdateDate.Caption = "更新日期";
+            this.gcUpdateDate.DisplayFormat.FormatString = "g";
+            this.gcUpdateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcUpdateDate.FieldName = "UpdateDate";
             this.gcUpdateDate.Name = "gcUpdateDate";
             this.gcUpdateDate.Visible = true;
             this.gcUpdateDate.VisibleIndex = 9;
-            this.gcUpdateDate.Width = 128;
+            this.gcUpdateDate.Width = 120;
             // 
             // gcTradeMode
             // 
@@ -610,9 +621,10 @@
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1317, 854);
+            this.xtraTabControl1.Size = new System.Drawing.Size(988, 683);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -621,8 +633,9 @@
             // xtraTabPage1
             // 
             this.xtraTabPage1.Controls.Add(this.ucBudgetEdit1);
+            this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1311, 823);
+            this.xtraTabPage1.Size = new System.Drawing.Size(982, 656);
             this.xtraTabPage1.Text = "预算单";
             // 
             // ucBudgetEdit1
@@ -632,33 +645,25 @@
             this.ucBudgetEdit1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(2);
             this.ucBudgetEdit1.Name = "ucBudgetEdit1";
-            this.ucBudgetEdit1.Size = new System.Drawing.Size(1311, 823);
+            this.ucBudgetEdit1.Size = new System.Drawing.Size(982, 656);
             this.ucBudgetEdit1.TabIndex = 0;
             this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.gridBudget);
+            this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1311, 823);
+            this.xtraTabPage2.Size = new System.Drawing.Size(982, 656);
             this.xtraTabPage2.Text = "修改历史";
-            // 
-            // gcTotalCost
-            // 
-            this.gcTotalCost.Caption = "总成本";
-            this.gcTotalCost.FieldName = "TotalCost";
-            this.gcTotalCost.Name = "gcTotalCost";
-            this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 6;
-            this.gcTotalCost.Width = 120;
             // 
             // ucBudgetDetailView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
             this.Name = "ucBudgetDetailView";
-            this.Size = new System.Drawing.Size(1317, 854);
+            this.Size = new System.Drawing.Size(988, 683);
             ((System.ComponentModel.ISupportInitialize)(this.gvOutProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvInProduct)).EndInit();

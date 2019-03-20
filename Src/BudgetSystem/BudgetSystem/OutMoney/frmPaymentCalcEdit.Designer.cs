@@ -375,7 +375,7 @@
             this.txtTaxRebateRate2.Name = "txtTaxRebateRate2";
             this.txtTaxRebateRate2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtTaxRebateRate2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txtTaxRebateRate2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTaxRebateRate2.Size = new System.Drawing.Size(128, 21);
             this.txtTaxRebateRate2.StyleController = this.layoutControl1;
             this.txtTaxRebateRate2.TabIndex = 44;
@@ -861,8 +861,8 @@
             this.txtTaxRebateRate.Name = "txtTaxRebateRate";
             this.txtTaxRebateRate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtTaxRebateRate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtTaxRebateRate.Properties.NullText = "0";
-            this.txtTaxRebateRate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtTaxRebateRate.Size = new System.Drawing.Size(123, 21);
             this.txtTaxRebateRate.StyleController = this.layoutControl1;
             this.txtTaxRebateRate.TabIndex = 23;

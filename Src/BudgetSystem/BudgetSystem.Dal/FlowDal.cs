@@ -167,7 +167,7 @@ namespace BudgetSystem.Dal
                         from FlowRunpoint t1 
                         left join FlowInstance t2 on t1.InstanceID = t2.ID
                         left join `User` t3 on t2.CreateUser= t3.UserName
-                        where t1.NodeApproveUser=@NodeApproveUser and t1.State=0";
+                        where t1.NodeApproveUser=@NodeApproveUser and t1.State=0 and t2.IsClosed=0";
 
 
             return con.Query<FlowItem>(sql, new { NodeApproveUser = userName }, tran);

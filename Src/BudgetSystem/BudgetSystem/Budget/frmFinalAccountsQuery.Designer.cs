@@ -59,12 +59,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1079, 690);
+            this.gridControl1.Size = new System.Drawing.Size(1205, 537);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -134,6 +134,8 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "录入时间";
+            this.gridColumn6.DisplayFormat.FormatString = "g";
+            this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn6.FieldName = "CreateDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -233,7 +235,7 @@
             this.textEdit1.Location = new System.Drawing.Point(82, 3);
             this.textEdit1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(201, 25);
+            this.textEdit1.Size = new System.Drawing.Size(201, 21);
             this.textEdit1.TabIndex = 1;
             // 
             // labelControl1
@@ -266,18 +268,18 @@
             this.textEdit2.Location = new System.Drawing.Point(82, 27);
             this.textEdit2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(201, 25);
+            this.textEdit2.Size = new System.Drawing.Size(201, 21);
             this.textEdit2.TabIndex = 1;
             // 
             // frmFinalAccountsQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1377, 690);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ClientSize = new System.Drawing.Size(1205, 537);
+            this.Controls.Add(this.gridControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "frmFinalAccountsQuery";
             this.Text = "决算管理";
-            this.Controls.Add(this.gridControl1);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

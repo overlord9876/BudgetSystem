@@ -56,10 +56,10 @@
             // gcInMoney
             // 
             this.gcInMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcInMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gcInMoney.Location = new System.Drawing.Point(0, 0);
             this.gcInMoney.MainView = this.gvInMoney;
-            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcInMoney.Margin = new System.Windows.Forms.Padding(2);
             this.gcInMoney.Name = "gcInMoney";
             this.gcInMoney.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1});
@@ -88,10 +88,13 @@
             this.gcCreateTimestamp,
             this.gcDescription});
             this.gvInMoney.GridControl = this.gcInMoney;
+            this.gvInMoney.GroupCount = 1;
             this.gvInMoney.Name = "gvInMoney";
             this.gvInMoney.OptionsBehavior.Editable = false;
             this.gvInMoney.OptionsView.ShowDetailButtons = false;
             this.gvInMoney.OptionsView.ShowGroupPanel = false;
+            this.gvInMoney.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcState, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
             // gcVoucherNo
             // 
@@ -100,6 +103,7 @@
             this.gcVoucherNo.Name = "gcVoucherNo";
             this.gcVoucherNo.Visible = true;
             this.gcVoucherNo.VisibleIndex = 0;
+            this.gcVoucherNo.Width = 120;
             // 
             // gcState
             // 
@@ -108,6 +112,7 @@
             this.gcState.Name = "gcState";
             this.gcState.Visible = true;
             this.gcState.VisibleIndex = 1;
+            this.gcState.Width = 54;
             // 
             // gcBankName
             // 
@@ -115,7 +120,8 @@
             this.gcBankName.FieldName = "BankName";
             this.gcBankName.Name = "gcBankName";
             this.gcBankName.Visible = true;
-            this.gcBankName.VisibleIndex = 2;
+            this.gcBankName.VisibleIndex = 1;
+            this.gcBankName.Width = 54;
             // 
             // gcRemitter
             // 
@@ -123,7 +129,8 @@
             this.gcRemitter.FieldName = "Remitter";
             this.gcRemitter.Name = "gcRemitter";
             this.gcRemitter.Visible = true;
-            this.gcRemitter.VisibleIndex = 3;
+            this.gcRemitter.VisibleIndex = 2;
+            this.gcRemitter.Width = 54;
             // 
             // gcCurrency
             // 
@@ -131,7 +138,8 @@
             this.gcCurrency.FieldName = "Currency";
             this.gcCurrency.Name = "gcCurrency";
             this.gcCurrency.Visible = true;
-            this.gcCurrency.VisibleIndex = 4;
+            this.gcCurrency.VisibleIndex = 3;
+            this.gcCurrency.Width = 54;
             // 
             // gcEnumFlowState
             // 
@@ -139,7 +147,8 @@
             this.gcEnumFlowState.FieldName = "EnumFlowStateDisplayValue";
             this.gcEnumFlowState.Name = "gcEnumFlowState";
             this.gcEnumFlowState.Visible = true;
-            this.gcEnumFlowState.VisibleIndex = 5;
+            this.gcEnumFlowState.VisibleIndex = 4;
+            this.gcEnumFlowState.Width = 54;
             // 
             // gcOriginalCoin
             // 
@@ -147,7 +156,8 @@
             this.gcOriginalCoin.FieldName = "OriginalCoin";
             this.gcOriginalCoin.Name = "gcOriginalCoin";
             this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 6;
+            this.gcOriginalCoin.VisibleIndex = 5;
+            this.gcOriginalCoin.Width = 54;
             // 
             // gcExchangeRate
             // 
@@ -155,7 +165,8 @@
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 7;
+            this.gcExchangeRate.VisibleIndex = 6;
+            this.gcExchangeRate.Width = 54;
             // 
             // gcCNY
             // 
@@ -163,7 +174,8 @@
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
             this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 8;
+            this.gcCNY.VisibleIndex = 7;
+            this.gcCNY.Width = 54;
             // 
             // gcTradingPostscript
             // 
@@ -171,7 +183,8 @@
             this.gcTradingPostscript.FieldName = "TradingPostscript";
             this.gcTradingPostscript.Name = "gcTradingPostscript";
             this.gcTradingPostscript.Visible = true;
-            this.gcTradingPostscript.VisibleIndex = 9;
+            this.gcTradingPostscript.VisibleIndex = 8;
+            this.gcTradingPostscript.Width = 54;
             // 
             // gcExportName
             // 
@@ -179,7 +192,8 @@
             this.gcExportName.FieldName = "ExportName";
             this.gcExportName.Name = "gcExportName";
             this.gcExportName.Visible = true;
-            this.gcExportName.VisibleIndex = 10;
+            this.gcExportName.VisibleIndex = 9;
+            this.gcExportName.Width = 54;
             // 
             // gcPaymentMethod
             // 
@@ -187,7 +201,8 @@
             this.gcPaymentMethod.FieldName = "PaymentMethod";
             this.gcPaymentMethod.Name = "gcPaymentMethod";
             this.gcPaymentMethod.Visible = true;
-            this.gcPaymentMethod.VisibleIndex = 11;
+            this.gcPaymentMethod.VisibleIndex = 10;
+            this.gcPaymentMethod.Width = 54;
             // 
             // gcReceiptDate
             // 
@@ -195,7 +210,8 @@
             this.gcReceiptDate.FieldName = "ReceiptDate";
             this.gcReceiptDate.Name = "gcReceiptDate";
             this.gcReceiptDate.Visible = true;
-            this.gcReceiptDate.VisibleIndex = 12;
+            this.gcReceiptDate.VisibleIndex = 11;
+            this.gcReceiptDate.Width = 54;
             // 
             // gcCreateUser
             // 
@@ -203,15 +219,19 @@
             this.gcCreateUser.FieldName = "CreateRealName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 13;
+            this.gcCreateUser.VisibleIndex = 12;
+            this.gcCreateUser.Width = 54;
             // 
             // gcCreateTimestamp
             // 
             this.gcCreateTimestamp.Caption = "创建时间";
+            this.gcCreateTimestamp.DisplayFormat.FormatString = "g";
+            this.gcCreateTimestamp.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCreateTimestamp.FieldName = "CreateTimestamp";
             this.gcCreateTimestamp.Name = "gcCreateTimestamp";
             this.gcCreateTimestamp.Visible = true;
-            this.gcCreateTimestamp.VisibleIndex = 14;
+            this.gcCreateTimestamp.VisibleIndex = 13;
+            this.gcCreateTimestamp.Width = 110;
             // 
             // gcDescription
             // 
@@ -219,7 +239,8 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 15;
+            this.gcDescription.VisibleIndex = 14;
+            this.gcDescription.Width = 26;
             // 
             // repositoryItemComboBox1
             // 

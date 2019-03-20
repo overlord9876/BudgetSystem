@@ -220,7 +220,7 @@
             this.gcNodeValueRemark.Name = "gcNodeValueRemark";
             this.gcNodeValueRemark.Visible = true;
             this.gcNodeValueRemark.VisibleIndex = 2;
-            this.gcNodeValueRemark.Width = 54;
+            this.gcNodeValueRemark.Width = 85;
             // 
             // gcNodeApproveRemark
             // 
@@ -230,7 +230,7 @@
             this.gcNodeApproveRemark.Name = "gcNodeApproveRemark";
             this.gcNodeApproveRemark.Visible = true;
             this.gcNodeApproveRemark.VisibleIndex = 6;
-            this.gcNodeApproveRemark.Width = 349;
+            this.gcNodeApproveRemark.Width = 266;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -246,7 +246,7 @@
             this.gcNodeApproveDate.Name = "gcNodeApproveDate";
             this.gcNodeApproveDate.Visible = true;
             this.gcNodeApproveDate.VisibleIndex = 4;
-            this.gcNodeApproveDate.Width = 94;
+            this.gcNodeApproveDate.Width = 110;
             // 
             // repositoryItemDateEdit1
             // 
@@ -266,7 +266,7 @@
             this.gcRunPointCreateDate.Name = "gcRunPointCreateDate";
             this.gcRunPointCreateDate.Visible = true;
             this.gcRunPointCreateDate.VisibleIndex = 3;
-            this.gcRunPointCreateDate.Width = 92;
+            this.gcRunPointCreateDate.Width = 117;
             // 
             // gcNodeApproveResult
             // 
@@ -275,7 +275,7 @@
             this.gcNodeApproveResult.Name = "gcNodeApproveResult";
             this.gcNodeApproveResult.Visible = true;
             this.gcNodeApproveResult.VisibleIndex = 5;
-            this.gcNodeApproveResult.Width = 62;
+            this.gcNodeApproveResult.Width = 73;
             // 
             // txtCreateUserRealName
             // 
