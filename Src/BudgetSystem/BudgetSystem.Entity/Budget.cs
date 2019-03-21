@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace BudgetSystem.Entity
 {
@@ -23,8 +24,8 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 状态
         /// </summary>
-        public int State 
-        { 
+        public int State
+        {
             get
             {
                 return state;
@@ -34,9 +35,11 @@ namespace BudgetSystem.Entity
                 this.state = value;
             }
         }
+
         /// <summary>
         /// 枚举状态
         /// </summary>
+        [JsonIgnore]
         public EnumBudgetState EnumState
         {
             get { return this.State.ToEnumBudgetState(); }
@@ -44,6 +47,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 字符串状态
         /// </summary>
+        [JsonIgnore]
         public string StringState
         {
             get { return this.state.ToStringEnumBudgetState(); }
@@ -377,6 +381,12 @@ namespace BudgetSystem.Entity
             }
         }
 
+        /// <summary>
+        /// 验证消息
+        /// </summary>
+        [JsonIgnore]
+        public string Message { get; set; }
+
 
         /// <summary>
         /// 流程状态
@@ -393,7 +403,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public decimal TotalCost
         {
-            get 
+            get
             {
                 return PurchasePrice - TaxRebate;
             }
@@ -407,7 +417,7 @@ namespace BudgetSystem.Entity
         public string ToDesc()
         {
             return string.Format("主买方[{0}],合同金额[{1}],美元合同金额[{2}],总进价[{3}],出口退税[{4}],总成本[{5}],利润[{6}]",
-                                  CustomerNameEx, TotalAmount, USDTotalAmount, PurchasePrice, TaxRebate,TotalCost, Profit);
+                                  CustomerNameEx, TotalAmount, USDTotalAmount, PurchasePrice, TaxRebate, TotalCost, Profit);
         }
     }
 

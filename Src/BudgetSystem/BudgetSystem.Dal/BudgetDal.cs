@@ -39,6 +39,21 @@ namespace BudgetSystem.Dal
             return budget;
         }
 
+        public Budget GetBudgetByNo(string NO, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
+                                 FROM `Budget` b
+                                 LEFT JOIN `User` u ON b.Salesman=u.UserName 
+                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
+                                 LEFT JOIN `Department` d ON b.DeptID=d.ID
+                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID
+								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+                                 WHERE b.`ContractNO` = @ContractNO");
+            Budget budget = con.Query<Budget>(selectSql, new { ContractNO = NO, DateItemType = EnumFlowDataType.预算单.ToString() }, tran).SingleOrDefault();
+            return budget;
+        }
+
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
         {
             string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
@@ -120,7 +135,7 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.DeptID=d.ID
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID AND b.CustomerID=@CustomerID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                                 WHERE b.ID<>0 AND b.Salesman=@Salesman";
+                                 WHERE b.ID<>0 and b.State<>3 AND b.Salesman=@Salesman";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName, CustomerID = customerId, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
         }
@@ -147,7 +162,7 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.DeptID=d.ID
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType='预算单' AND f.IsRecent=1
-                                 WHERE b.ID<>0  AND b.Salesman=@Salesman";
+                                 WHERE b.ID<>0 and b.State<>3  AND b.Salesman=@Salesman";
 
             return con.Query<Budget>(selectSql, new { Salesman = userName }, tran);
         }

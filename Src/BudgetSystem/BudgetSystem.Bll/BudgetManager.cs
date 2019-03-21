@@ -68,6 +68,16 @@ namespace BudgetSystem.Bll
             return budget;
         }
 
+        public Budget GetBudgetByNo(string NO)
+        {
+            var budget = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetByNo(NO, con);
+                return uList;
+            });
+            return budget;
+        }
+
         public string GetBudgetDesc(int id)
         {
             Budget budget = this.GetBudget(id);
@@ -112,7 +122,7 @@ namespace BudgetSystem.Bll
             {
                 return "数据不存在";
             }
-            else if (!EnumFlowNames.预算单审批流程.ToString().Equals(oldBudget.FlowName) || oldBudget.EnumFlowState == EnumDataFlowState.审批通过)
+            else if (!EnumFlowNames.预算单审批流程.ToString().Equals(oldBudget.FlowName) || oldBudget.EnumFlowState != EnumDataFlowState.审批通过)
             {
                 return string.Format("预算单当前不满足{0}且审批状态为{1}，不能进行当前操作。", EnumFlowNames.预算单审批流程, EnumDataFlowState.审批通过);
             }

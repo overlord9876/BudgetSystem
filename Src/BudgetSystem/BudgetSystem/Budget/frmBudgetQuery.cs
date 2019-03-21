@@ -332,6 +332,11 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                     return;
                 }
+                else if (budget.State == (int)EnumBudgetState.已结束)
+                {
+                    XtraMessageBox.Show(string.Format("{0}的预算单{1}，不允许删除。", budget.ContractNO, (EnumBudgetState)budget.State));
+                    return;
+                }
                 string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName);
                 if (string.IsNullOrEmpty(message))
                 {
@@ -523,29 +528,49 @@ namespace BudgetSystem
         /// </summary>
         private void FinancialArchiveApply()
         {
-            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
-            if (budget != null)
+            frmFinancialArchiveApplyImport frm = new frmFinancialArchiveApplyImport();
+
+            if (frm.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                if (budget.EnumState != EnumBudgetState.进行中)
+                List<Budget> budgetList = gvBudget.DataSource as List<Budget>;
+                if (budgetList != null)
                 {
-                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许财务平账征求。", budget.StringState));
-                    return;
-                }
-                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务平账征求);
-                if (string.IsNullOrEmpty(message))
-                {
-                    XtraMessageBox.Show("财务平账征求成功。");
-                    LoadData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
+                    foreach (var budget in frm.BudgetList)
+                    {
+                        var findItem = budgetList.Find(o => o.ID.Equals(budget.ID));
+                        if (findItem != null)
+                        {
+                            findItem.State = (int)EnumBudgetState.财务平账征求;
+                        }
+                    }
+                    this.gvBudget.RefreshData();
                 }
             }
-            else
-            {
-                XtraMessageBox.Show("请选择需要财务平账征求的项");
-            }
+
+
+            //Budget budget = this.gvBudget.GetFocusedRow() as Budget;
+            //if (budget != null)
+            //{
+            //    if (budget.EnumState != EnumBudgetState.进行中)
+            //    {
+            //        XtraMessageBox.Show(string.Format("{0}状态的预算单不允许财务平账征求。", budget.StringState));
+            //        return;
+            //    }
+            //    string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务平账征求);
+            //    if (string.IsNullOrEmpty(message))
+            //    {
+            //        XtraMessageBox.Show("财务平账征求成功。");
+            //        LoadData();
+            //    }
+            //    else
+            //    {
+            //        XtraMessageBox.Show(message);
+            //    }
+            //}
+            //else
+            //{
+            //    XtraMessageBox.Show("请选择需要财务平账征求的项");
+            //}
         }
 
         /// <summary>
