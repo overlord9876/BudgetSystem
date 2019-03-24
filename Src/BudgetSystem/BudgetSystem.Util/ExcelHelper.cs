@@ -90,7 +90,7 @@ namespace BudgetSystem.Util
                                 }
                             }
                         }
-                        if (columnMapping.Count <= 1)
+                        if (columnMapping.Count <= 0)
                         {
                             message = "无有效数据";
                             return null;
@@ -181,14 +181,14 @@ namespace BudgetSystem.Util
                 }
                 ISheet sheet = workbook.CreateSheet();
                 IRow row = sheet.CreateRow(0);
-                int c = 0;  
+                int c = 0;
                 //通用单元格样式（加边框）
                 ICellStyle style = workbook.CreateCellStyle();
                 style.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
                 style.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
                 style.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
                 style.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
-               
+
                 ICellStyle cellStyle;
                 foreach (ExcelColumn column in columns)
                 {
@@ -216,7 +216,7 @@ namespace BudgetSystem.Util
                     {
                         row.CreateCell(c, column.ColumType);
                         cellStyle = workbook.CreateCellStyle();
-                        cellStyle.CloneStyleFrom(style); 
+                        cellStyle.CloneStyleFrom(style);
                         if (column.DataFormat == 176)
                         {
                             cellStyle.DataFormat = dataFormat.GetFormat("$#,##0.00");
