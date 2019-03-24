@@ -279,6 +279,7 @@
             this.advBandedGridView.OptionsView.ShowDetailButtons = false;
             this.advBandedGridView.OptionsView.ShowFooter = true;
             this.advBandedGridView.OptionsView.ShowGroupPanel = false;
+            this.advBandedGridView.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(this.advBandedGridView_CustomSummaryCalculate);
             // 
             // gridBand12
             // 
@@ -412,7 +413,7 @@
             this.gcOriginalCurrency.Caption = "应收原币";
             this.gcOriginalCurrency.DisplayFormat.FormatString = "N2";
             this.gcOriginalCurrency.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.gcOriginalCurrency.FieldName = "OriginalCurrency";
+            this.gcOriginalCurrency.FieldName = "OriginalCoin";
             this.gcOriginalCurrency.Name = "gcOriginalCurrency";
             this.gcOriginalCurrency.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
@@ -693,6 +694,7 @@
             this.gcTaxRebateRate.Caption = "退税率";
             this.gcTaxRebateRate.DisplayFormat.FormatString = "N2";
             this.gcTaxRebateRate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gcTaxRebateRate.FieldName = "TaxRebateRate";
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
             this.gcTaxRebateRate.Width = 83;
@@ -972,7 +974,7 @@
             this.gcBalance.FieldName = "Balance";
             this.gcBalance.Name = "gcBalance";
             this.gcBalance.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.gcBalance.Visible = true;
             this.gcBalance.Width = 130;
             // 

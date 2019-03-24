@@ -9,6 +9,7 @@ using System.Linq;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
+using DevExpress.XtraGrid;
 
 namespace BudgetSystem
 {
@@ -55,15 +56,14 @@ namespace BudgetSystem
                 this.txtProfit.EditValue = budget.Profit;
                 this.txtAdvancePayment.EditValue = budget.AdvancePayment;
                 DataTable dt = CreateDataTable();
-                //预算单表
-                DataRow row = dt.NewRow();
-                row["Date"] = budget.SignDate;
-                row["TotalAmount"] = budget.TotalAmount;
-                row["ExchangeRate"] = budget.ExchangeRate;
-                row["Premium"] = budget.Premium;
-                row["Commission"] = budget.Commission;
-                row["DirectCosts"] = budget.DirectCosts;
-                dt.Rows.Add(row);
+                DataRow row = null;
+                //预算单表(赞不计算预算单信息)
+                //row = dt.NewRow();
+                //row["Date"] = budget.SignDate;
+                //row["Premium"] = budget.Premium;
+                //row["Commission"] = budget.Commission;
+                //row["DirectCosts"] = budget.DirectCosts;
+                //dt.Rows.Add(row);
                 //报关单表
                 var dfList = new DeclarationformManager().GetDeclarationformByBudgetID(budget.ID);
                 foreach (Declarationform df in dfList)
@@ -112,6 +112,8 @@ namespace BudgetSystem
                     {
                         row["Date"] = invoice.ImportDate;
                     }
+                    row["OriginalCoin"] = invoice.OriginalCoin;
+                    row["ExchangeRate"] = invoice.ExchangeRate;
                     row["Payment"] = invoice.AccountsPayable;
                     row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
                     row["SupplierName"] = invoice.SupplierName;
@@ -130,9 +132,7 @@ namespace BudgetSystem
             //报关单表
             dt.Columns.Add("ExportAmount", typeof(decimal));//报关原币（出口金额）
             dt.Columns.Add("USAExportAmount", typeof(decimal));//报关原币折算美元
-            //预算单表
-            dt.Columns.Add("TotalAmount", typeof(decimal));//应收人民币
-            dt.Columns.Add("ExchangeRate", typeof(decimal));//汇率
+
             //实际收款单表+银行流水表
             dt.Columns.Add("BillOriginalCoin", typeof(decimal));//实收原币
             dt.Columns.Add("BillCNY", typeof(decimal));//实收人民币
@@ -140,7 +140,10 @@ namespace BudgetSystem
             dt.Columns.Add("BillRemitter", typeof(string));//付款公司
             //付款单表
             dt.Columns.Add("CNY", typeof(decimal));//已付货款
-            //发票表
+            //发票表 
+            dt.Columns.Add("OriginalCoin", typeof(decimal));//应收原币
+            dt.Columns.Add("ExchangeRate", typeof(decimal));//汇率
+
             dt.Columns.Add("Payment", typeof(decimal));//已收供方发票
             dt.Columns.Add("TaxRebateRate", typeof(decimal));//退税率
             dt.Columns.Add("SupplierName", typeof(string));//供货方名称
@@ -150,7 +153,7 @@ namespace BudgetSystem
             dt.Columns.Add("DirectCosts", typeof(decimal));//直接费用 
 
             //公式列
-            dt.Columns.Add("OriginalCurrency", typeof(decimal));//  应收原币=TotalAmount/ExchangeRate
+            dt.Columns.Add("TotalAmount", typeof(decimal));//  应收人民币=OriginalCoin*ExchangeRate
             dt.Columns.Add("CostOfSales", typeof(decimal));//  销售成本=已收供方发票/(1+退税率0)=Payment/(1+TaxRebateRate)
             dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用
             dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
@@ -163,40 +166,51 @@ namespace BudgetSystem
             DataRow row;
             decimal totalOriginalCurrency = 0;
             decimal AllTotalAmount = 0;
-            decimal totalPaymentCNY = 0;
+            decimal totalPaymentCNY = 0;//已付金额
+            decimal needPayment = 0;//已收发票
+            decimal totalProfit = 0;//总实际利润
+            decimal totalSalesProfit = 0;//总销售利润
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 row = dt.Rows[i];
-                //应收原币=TotalAmount/ExchangeRate 
-                if (!row.IsNull("TotalAmount") && !row.IsNull("ExchangeRate") && GetDecimal(row, "ExchangeRate") != 0)
+                //应收人民币=OriginalCoin*ExchangeRate
+                if (!row.IsNull("OriginalCoin") && !row.IsNull("ExchangeRate"))
                 {
-                    var originalCurrency = Math.Round(GetDecimal(row, "TotalAmount") / GetDecimal(row, "ExchangeRate"), 2);
-                    row["OriginalCurrency"] = originalCurrency;
-                    totalOriginalCurrency = totalOriginalCurrency + originalCurrency;
-                    AllTotalAmount = AllTotalAmount + GetDecimal(row, "TotalAmount");
+                    var totalAmount = Math.Round(GetDecimal(row, "OriginalCoin") * GetDecimal(row, "ExchangeRate"), 2);
+                    row["TotalAmount"] = totalAmount;
+                    totalOriginalCurrency = totalOriginalCurrency + GetDecimal(row, "OriginalCoin");
+                    AllTotalAmount = AllTotalAmount + totalAmount;
                 }
                 //销售成本=已收供方发票/(1+退税率)=Payment/(1+TaxRebateRate)
-                if (!row.IsNull("Payment") && !row.IsNull("TaxRebateRate"))
+                if (!row.IsNull("Payment"))
                 {
-                    row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
+                    needPayment = needPayment + Math.Round(GetDecimal(row, "Payment"));
+                    if (!row.IsNull("TaxRebateRate"))
+                    {
+                        row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
+                    }
                 }
                 //销售利润=应收人民币-销售成本-运保费-佣金-直接费用
-                row["SalesProfit"] = GetDecimal(row, "TotalAmount")
-                                 - GetDecimal(row, "CostOfSales")
-                                 - GetDecimal(row, "Premium")
-                                 - GetDecimal(row, "Commission")
-                                 - GetDecimal(row, "DirectCosts");
+                var salesProfit = GetDecimal(row, "TotalAmount")
+                                        - GetDecimal(row, "CostOfSales")
+                                        - GetDecimal(row, "Premium")
+                                        - GetDecimal(row, "Commission")
+                                        - GetDecimal(row, "DirectCosts");
+                row["SalesProfit"] = salesProfit;
 
+                totalSalesProfit += salesProfit;
 
-                //已付金额=已付货款-运保费-佣金-直接费用
+                //已付金额=已付货款+运保费+佣金+直接费用
                 var paymentMoney = GetDecimal(row, "CNY") + GetDecimal(row, "Premium") + GetDecimal(row, "Commission") + GetDecimal(row, "DirectCosts");
                 totalPaymentCNY = totalPaymentCNY + paymentMoney;
                 //实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
                 //TODO:此列值未计算“扣除利息后实际利润”
-                row["Profit"] = (GetDecimal(row, "BillCNY")
-                    - paymentMoney
-                                 + GetDecimal(row, "CNY") / (1 + 0) * GetDecimal(row, "TaxRebateRate")).ToString();
+                var profit = GetDecimal(row, "BillCNY")
+                        - paymentMoney
+                                     + GetDecimal(row, "CNY") / (1 + 0) * GetDecimal(row, "TaxRebateRate");
+                row["Profit"] = profit.ToString();
 
+                totalProfit += profit;
 
                 //收支余额=上一条收支余额+当前行实际利润
                 decimal preBalance = 0;
@@ -210,8 +224,8 @@ namespace BudgetSystem
 
             gridBand10.Caption = totalOriginalCurrency.ToString();//应收原币
             gridBand3.Caption = AllTotalAmount.ToString();//应收人名币
-            gridBand23.Caption = "应付余额";//应付余额=已付金额-发票金额
-            gridBand45.Caption = "";//"利润差值"实际利润-销售利润(Profit-SalesProfit)
+            gridBand23.Caption = (totalPaymentCNY - needPayment).ToString(); //应付余额=已付金额-发票金额
+            gridBand45.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             return dt;
         }
 
@@ -224,6 +238,22 @@ namespace BudgetSystem
             else
             {
                 return (decimal)row[column];
+            }
+        }
+
+        private void advBandedGridView_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            GridSummaryItem gridSummaryItem = e.Item as GridSummaryItem;
+            if (gridSummaryItem != null && "Balance".Equals(gridSummaryItem.FieldName) && e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
+            {
+                DataTable dt = this.gcReport.DataSource as DataTable;
+                decimal balance = 0;
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int dtCount = dt.Rows.Count;
+                    balance = GetDecimal(dt.Rows[dtCount - 1], "Balance", 0);
+                }
+                e.TotalValue = balance;
             }
         }
 
