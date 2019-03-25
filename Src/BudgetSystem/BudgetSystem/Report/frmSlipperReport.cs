@@ -58,7 +58,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("汇率", "ExchangeRate");
             base.CreateGridColumn("已收发票金额", "InvoiceTotal");
             base.CreatePivotGridField("供应商名称", "Name");
-            base.CreatePivotGridField("已付原币金额", "OriginalCoin");
+            base.CreatePivotGridField("已付原币金额", "OriginalCoin", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
             base.CreatePivotGridField("人民币", "TotalCNY");
             base.CreatePivotGridField("汇率", "ExchangeRate");
             base.CreatePivotGridField("已收发票金额", "InvoiceTotal");

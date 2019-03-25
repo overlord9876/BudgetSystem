@@ -74,7 +74,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("客户名称", "CustomerName");
             // base.CreatePivotGridField("贸易方式", "TradeMode");
             base.CreatePivotGridField("审批状态", "EnumFlowState");
-            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount", PivotArea.FilterArea, FormatType.None, "{0:T}");
+            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
             base.CreatePivotGridField("合同金额", "TotalAmount");
             base.CreatePivotGridField("业务员", "SalesmanName");
             base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
@@ -91,8 +91,9 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("收款金额", "TotalBudgetBill");
             base.CreatePivotGridField("付款金额", "TotalPayement");
             base.CreatePivotGridField("发票金额", "TotalInvoice");
-            base.CreatePivotGridField("报关金额", "TotalDeclarationform");
+            base.CreatePivotGridField("报关金额", "TotalDeclarationform", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
             base.CreatePivotGridDefaultRowField();
         }
+
     }
 }

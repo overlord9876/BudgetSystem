@@ -61,12 +61,10 @@
             // 
             // listBox
             // 
-            this.listBox.Size = new System.Drawing.Size(252, 708);
+            this.listBox.Size = new System.Drawing.Size(249, 708);
             // 
             // tabbedControlGroup1
             // 
-            this.tabbedControlGroup1.SelectedTabPage = this.lcgGrid;
-            this.tabbedControlGroup1.SelectedTabPageIndex = 0;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(1349, 791);
             // 
             // lcgGrid
@@ -83,8 +81,8 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Location = new System.Drawing.Point(261, 30);
-            this.layoutControlItem3.Size = new System.Drawing.Size(1064, 712);
+            this.layoutControlItem3.Location = new System.Drawing.Point(258, 30);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1067, 712);
             // 
             // lcStatBar
             // 
@@ -92,12 +90,12 @@
             // 
             // splitterItem
             // 
-            this.splitterItem.Location = new System.Drawing.Point(256, 30);
+            this.splitterItem.Location = new System.Drawing.Point(253, 30);
             this.splitterItem.Size = new System.Drawing.Size(5, 712);
             // 
             // lcList
             // 
-            this.lcList.Size = new System.Drawing.Size(256, 712);
+            this.lcList.Size = new System.Drawing.Size(253, 712);
             // 
             // frmBudgetReport
             // 

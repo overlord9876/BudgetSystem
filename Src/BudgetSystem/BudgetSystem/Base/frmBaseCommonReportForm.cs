@@ -32,7 +32,7 @@ namespace BudgetSystem.Base
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
-        { 
+        {
             //InitData();
             this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
         }
@@ -158,13 +158,24 @@ namespace BudgetSystem.Base
         }
 
 
-        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea, FormatType valueFormatType = FormatType.None, string valueFormatString = "")
+        protected PivotGridField CreatePivotGridField(string caption, string fieldName, PivotArea area = PivotArea.FilterArea, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
         {
             PivotGridField field = new PivotGridField(fieldName, area);
             field.Name = caption;
             field.Caption = caption;
             field.ValueFormat.FormatType = valueFormatType;
-            field.ValueFormat.FormatString = valueFormatString;
+            if (valueFormatType == FormatType.Custom)
+            {
+                field.ValueFormat.Format = formatProvider;
+                field.CellFormat.FormatType = valueFormatType;
+                field.CellFormat.Format = formatProvider;
+            }
+            else
+            {
+                field.ValueFormat.FormatString = valueFormatString;
+            }
+            field.CellFormat.FormatType = valueFormatType;
+            field.CellFormat.FormatString = valueFormatString;
             this.pivotGridControl.Fields.Add(field);
 
             return field;

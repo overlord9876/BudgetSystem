@@ -356,6 +356,7 @@
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="PrinterHelper.cs" />
+    <Compile Include="Report\FormatUtil.cs" />
     <Compile Include="Report\frmCustomerReport.cs">
       <SubType>Form</SubType>
     </Compile>
