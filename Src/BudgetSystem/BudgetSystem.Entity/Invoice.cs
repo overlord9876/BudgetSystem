@@ -127,9 +127,9 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.ContractNO) && this.ContractNO.Length > 6)
+                if (!string.IsNullOrEmpty(this.ContractNO) && this.ContractNO.Length > 7)
                 {
-                    return this.ContractNO.Substring(4, 2);
+                    return this.ContractNO.Substring(4, 3);
                 }
                 else
                 {

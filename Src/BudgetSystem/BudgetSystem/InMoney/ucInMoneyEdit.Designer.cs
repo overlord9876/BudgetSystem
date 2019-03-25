@@ -275,7 +275,7 @@
             this.chkState1.Location = new System.Drawing.Point(12, 744);
             this.chkState1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkState1.Name = "chkState1";
-            this.chkState1.Properties.Caption = "水单付款人余预算单买方不同备注";
+            this.chkState1.Properties.Caption = "水单付款人与预算单买方不同备注";
             this.chkState1.Size = new System.Drawing.Size(274, 23);
             this.chkState1.StyleController = this.layoutControl1;
             this.chkState1.TabIndex = 24;

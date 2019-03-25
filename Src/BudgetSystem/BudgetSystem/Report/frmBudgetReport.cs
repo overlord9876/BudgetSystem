@@ -18,13 +18,12 @@ namespace BudgetSystem.Report
         {
             InitializeComponent();
             this.Module = BusinessModules.BudgetReport;
+            InitBudgetReportGrid();
         }
 
         protected override void InitLayout()
         {
             base.InitModelOperate();
-
-            InitBudgetReportGrid();
         }
 
         protected override void InitModelOperate()
@@ -48,13 +47,14 @@ namespace BudgetSystem.Report
             var lst = um.GetBudgetReportList(beginDate, endDate);
 
             this.pivotGridControl.DataSource = lst;
+            this.gridControl.DataSource = lst;
         }
 
         private void InitBudgetReportGrid()
         {
             base.CreateGridColumn("合同号", "ContractNO");
             base.CreateGridColumn("客户名称", "CustomerName");
-            base.CreateGridColumn("贸易方式", "TradeMode");
+            //base.CreateGridColumn("贸易方式", "TradeMode");
             base.CreateGridColumn("审批状态", "EnumFlowState");
             base.CreateGridColumn("合同金额", "TotalAmount");
             base.CreateGridColumn("合同金额(美元)", "USDTotalAmount");
@@ -63,7 +63,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("录入时间", "CreateDate");
             base.CreateGridColumn("订约日期", "SignDate");
             base.CreateGridColumn("有效截止期", "Validity");
-            base.CreateGridColumn("贸易性质", "TradeNature");
+            //base.CreateGridColumn("贸易性质", "TradeNature");
             base.CreateGridColumn("目的港口", "Port");
             base.CreateGridColumn("预付金额", "AdvancePayment");
             base.CreateGridColumn("利润", "Profit");
@@ -72,16 +72,16 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("盈利水平", "ProfitLevel2");
             base.CreatePivotGridField("合同号", "ContractNO");
             base.CreatePivotGridField("客户名称", "CustomerName");
-            base.CreatePivotGridField("贸易方式", "TradeMode");
+            // base.CreatePivotGridField("贸易方式", "TradeMode");
             base.CreatePivotGridField("审批状态", "EnumFlowState");
-            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount");
+            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount", PivotArea.FilterArea, FormatType.None, "{0:T}");
             base.CreatePivotGridField("合同金额", "TotalAmount");
             base.CreatePivotGridField("业务员", "SalesmanName");
             base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
             base.CreatePivotGridField("录入时间", "CreateDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
             base.CreatePivotGridField("订约日期", "SignDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
             base.CreatePivotGridField("有效截止期", "Validity", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("贸易性质", "TradeNature");
+            // base.CreatePivotGridField("贸易性质", "TradeNature");
             base.CreatePivotGridField("目的港口", "Port");
             base.CreatePivotGridField("预付金额", "AdvancePayment");
             base.CreatePivotGridField("利润", "Profit");

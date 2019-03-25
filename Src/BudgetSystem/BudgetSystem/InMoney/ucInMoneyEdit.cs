@@ -304,6 +304,7 @@ namespace BudgetSystem.InMoney
                     this.gridBudget.DataSource = budgetList;
                 }
                 this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
+                CheckState1();
                 CalcSplitMoney();
             }
             catch (Exception ex)
@@ -432,7 +433,7 @@ namespace BudgetSystem.InMoney
             {
                 this.layoutControlItem21.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 this.layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                chkState1.Checked = true;
+                //chkState1.Checked = true;
 
                 this.cboCustomer.Properties.ReadOnly = true;
                 this.txtVoucherNo.Properties.ReadOnly = true;
@@ -634,6 +635,18 @@ namespace BudgetSystem.InMoney
                     }
                 }
             }
+            CheckState1();
+        }
+
+        private void CheckState1()
+        {
+            BindingList<BudgetBill> billList = this.gvConstSplit.DataSource as BindingList<BudgetBill>;
+            Customer c = this.cboCustomer.EditValue as Customer;
+            if (budgetList != null && c != null && billList.Any(o => o.Customer != c.Name))
+            {
+                chkState1.Checked = true;
+            }
+            else { chkState1.Checked = false; }
         }
 
         private void gvConstSplit_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)

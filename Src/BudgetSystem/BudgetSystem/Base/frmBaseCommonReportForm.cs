@@ -19,7 +19,6 @@ namespace BudgetSystem.Base
         public frmBaseCommonReportForm()
         {
             InitializeComponent();
-
             int year = DateTime.Now.Year - 2;
             for (int index = 0; index < 52; index++)
             {
@@ -30,13 +29,12 @@ namespace BudgetSystem.Base
             this.deStartDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime nextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             this.deEndDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
-
-            InitData();
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
-        {
-
+        { 
+            //InitData();
+            this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
         }
 
 

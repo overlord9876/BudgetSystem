@@ -18,13 +18,12 @@ namespace BudgetSystem.Report
         {
             InitializeComponent();
             this.Module = BusinessModules.SlipperReport;
+            InitSlipperReportGrid();
         }
 
         protected override void InitLayout()
         {
             base.InitModelOperate();
-
-            InitSlipperReportGrid();
         }
 
         protected override void InitModelOperate()
@@ -48,6 +47,7 @@ namespace BudgetSystem.Report
             var lst = um.GetSupplierReportList(beginDate, endDate);
 
             this.pivotGridControl.DataSource = lst;
+            this.gridControl.DataSource = lst;
         }
 
         private void InitSlipperReportGrid()

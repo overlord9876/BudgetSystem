@@ -65,6 +65,8 @@
             // 
             // tabbedControlGroup1
             // 
+            this.tabbedControlGroup1.SelectedTabPage = this.lcgGrid;
+            this.tabbedControlGroup1.SelectedTabPageIndex = 0;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(1349, 791);
             // 
             // lcgGrid

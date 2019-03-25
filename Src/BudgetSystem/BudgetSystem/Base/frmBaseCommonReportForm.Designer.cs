@@ -441,7 +441,6 @@
             this.cboSelectYear.Name = "cboSelectYear";
             this.cboSelectYear.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.cboSelectYear.Width = 75;
-            this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
             // 
             // cboYears
             // 
