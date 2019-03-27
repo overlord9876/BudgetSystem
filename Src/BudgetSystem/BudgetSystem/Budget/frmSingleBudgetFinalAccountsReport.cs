@@ -65,6 +65,8 @@ namespace BudgetSystem
                 //row["DirectCosts"] = budget.DirectCosts;
                 //dt.Rows.Add(row);
                 //报关单表
+                gridBand29.Caption = budget.Premium.ToString();// 预算运保费
+                gridBand32.Caption = budget.Commission.ToString();// 预算佣金
                 var dfList = new DeclarationformManager().GetDeclarationformByBudgetID(budget.ID);
                 foreach (Declarationform df in dfList)
                 {
@@ -165,7 +167,9 @@ namespace BudgetSystem
         {
             DataRow row;
             decimal totalOriginalCurrency = 0;
+            decimal BillOriginalCoin = 0;
             decimal AllTotalAmount = 0;
+            decimal BillCNY = 0;
             decimal totalPaymentCNY = 0;//已付金额
             decimal needPayment = 0;//已收发票
             decimal totalProfit = 0;//总实际利润
@@ -181,10 +185,12 @@ namespace BudgetSystem
                     totalOriginalCurrency = totalOriginalCurrency + GetDecimal(row, "OriginalCoin");
                     AllTotalAmount = AllTotalAmount + totalAmount;
                 }
+                BillOriginalCoin = BillOriginalCoin + GetDecimal(row, "BillOriginalCoin");
+                BillCNY = BillCNY + GetDecimal(row, "BillCNY");
                 //销售成本=已收供方发票/(1+退税率)=Payment/(1+TaxRebateRate)
                 if (!row.IsNull("Payment"))
                 {
-                    needPayment = needPayment + Math.Round(GetDecimal(row, "Payment"));
+                    needPayment = needPayment + Math.Round(GetDecimal(row, "Payment"), 2);
                     if (!row.IsNull("TaxRebateRate"))
                     {
                         row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
@@ -222,10 +228,10 @@ namespace BudgetSystem
                 row["Balance"] = preBalance + GetDecimal(row, "Profit");
             }
 
-            gridBand10.Caption = totalOriginalCurrency.ToString();//应收原币
-            gridBand3.Caption = AllTotalAmount.ToString();//应收人名币
+            gridBand10.Caption = (totalOriginalCurrency - BillOriginalCoin).ToString();//应收原币
+            gridBand3.Caption = (AllTotalAmount - BillCNY).ToString();//应收人名币
             gridBand23.Caption = (totalPaymentCNY - needPayment).ToString(); //应付余额=已付金额-发票金额
-            gridBand45.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
+            gridBand4.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             return dt;
         }
 

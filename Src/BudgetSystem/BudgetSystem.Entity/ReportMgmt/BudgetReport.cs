@@ -344,6 +344,18 @@ namespace BudgetSystem.Entity
             }
         }
 
+        public decimal SellingCost
+        {
+            get
+            {
+                if (PaymentList != null)
+                {
+                    return PaymentList.Sum(o => o.DeTaxationCNY);
+                }
+                else { return 0; }
+            }
+        }
+
         public List<Invoice> InvoiceList { get; set; }
 
         /// <summary>
@@ -363,6 +375,18 @@ namespace BudgetSystem.Entity
             }
         }
 
+        public decimal SupplierInvoice
+        {
+            get
+            {
+                if (InvoiceList != null)
+                {
+                    return InvoiceList.Sum(o => o.FeedMoney + o.Commission);
+                }
+                else { return 0; }
+            }
+        }
+
         public List<BudgetBill> BudgetBillList { get; set; }
         public decimal TotalBudgetBill
         {
@@ -371,6 +395,18 @@ namespace BudgetSystem.Entity
                 if (BudgetBillList != null)
                 {
                     return BudgetBillList.Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        public decimal TotalUSDBudgetBill
+        {
+            get
+            {
+                if (BudgetBillList != null)
+                {
+                    return BudgetBillList.Sum(o => o.OriginalCoin);
                 }
                 else { return 0; }
             }
@@ -386,6 +422,23 @@ namespace BudgetSystem.Entity
                     return DeclarationformList.Sum(o => o.ExportAmount);
                 }
                 else { return 0; }
+            }
+        }
+
+        public decimal SalesProfit
+        {
+            get
+            {
+                return TotalInvoice - SellingCost - Premium - Commission - DirectCosts;
+            }
+        }
+
+
+        public decimal ActualProfit
+        {
+            get
+            {
+                return TotalBudgetBill - SellingCost - Premium - Commission - DirectCosts;
             }
         }
     }

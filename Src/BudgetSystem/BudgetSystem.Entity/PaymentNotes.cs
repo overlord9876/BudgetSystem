@@ -45,6 +45,17 @@ namespace BudgetSystem.Entity
         public decimal CNY { get; set; }
 
         /// <summary>
+        /// 去税金额
+        /// </summary>
+        public decimal DeTaxationCNY
+        {
+            get
+            {
+                return CNY - Math.Round(CNY / (1 + VatOption / 100) * ((decimal)TaxRebateRate / 100), 2);
+            }
+        }
+
+        /// <summary>
         /// 修改时间
         /// </summary>
         public DateTime UpdateTimestamp { get; set; }
@@ -186,7 +197,6 @@ namespace BudgetSystem.Entity
         /// 申请人姓名
         /// </summary>
         public string ApplicantRealName { get; set; }
-
 
         /// <summary>
         /// 付款银行

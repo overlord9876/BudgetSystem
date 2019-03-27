@@ -61,7 +61,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("已收原币金额", "OriginalCoin", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
             base.CreatePivotGridField("人民币", "CNY");
             base.CreatePivotGridField("汇率", "ExchangeRate");
-            base.CreatePivotGridField("报关金额", "DeclarationformTotal");
+            base.CreatePivotGridField("报关金额", "DeclarationformTotal", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
             base.CreatePivotGridDefaultRowField();
         }
     }

@@ -52,14 +52,26 @@ namespace BudgetSystem.Report
 
         private void InitSalemenReportGrid()
         {
-            ClearColumns();
-
             base.CreateGridColumn("合同号", "ContractNO");
+            base.CreateGridColumn("合同金额（美元$）", "USDTotalAmount");
+            base.CreateGridColumn("报关金额（美元$）", "TotalDeclarationform");
+            base.CreateGridColumn("收汇金额（美元$）", "TotalUSDBudgetBill");
+            base.CreateGridColumn("实际收汇金额（人民币￥）", "TotalBudgetBill");
+            base.CreateGridColumn("销售金额（人民币￥）", "TotalInvoice");
+            base.CreateGridColumn("付款金额（人民币￥）", "TotalPayement");
+            base.CreateGridColumn("供方发票（人民币￥）", "SupplierInvoice");
+            base.CreateGridColumn("销售成本（人民币￥）", "SellingCost");
+            base.CreateGridColumn("运保费（人民币￥）", "Premium");
+            base.CreateGridColumn("运保费成本（人民币￥）", "Premium");
+            base.CreateGridColumn("佣金（￥）", "Commission");
+            base.CreateGridColumn("直接费用（￥）", "DirectCosts");
+            base.CreateGridColumn("销售利润（￥）", "SalesProfit");
+            base.CreateGridColumn("实际利润（￥）", "ActualProfit");
+
             base.CreateGridColumn("客户名称", "CustomerName");
             //base.CreateGridColumn("贸易方式", "TradeMode");
             base.CreateGridColumn("审批状态", "EnumFlowState");
             base.CreateGridColumn("合同金额", "TotalAmount");
-            base.CreateGridColumn("合同金额(美元)", "USDTotalAmount");
             base.CreateGridColumn("业务员", "SalesmanName");
             base.CreateGridColumn("业务员所在部门", "DepartmentDesc");
             base.CreateGridColumn("录入时间", "CreateDate");
@@ -70,13 +82,28 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("预付金额", "AdvancePayment");
             base.CreateGridColumn("利润", "Profit");
             base.CreateGridColumn("交单金额", "Amount");
-            base.CreateGridColumn("直接费用", "DirectCosts");
             base.CreateGridColumn("盈利水平", "ProfitLevel2");
+            base.CreateGridColumn("发票金额", "TotalInvoice");
+
             base.CreatePivotGridField("合同号", "ContractNO");
+            base.CreatePivotGridField("合同金额（美元$）", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            base.CreatePivotGridField("报关金额（美元$）", "TotalDeclarationform", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            base.CreatePivotGridField("收汇金额（美元$）", "TotalUSDBudgetBill", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            base.CreatePivotGridField("实际收汇金额（人民币￥）", "TotalBudgetBill");
+            base.CreatePivotGridField("销售金额（人民币￥）", "TotalInvoice");
+            base.CreatePivotGridField("付款金额（人民币￥）", "TotalPayement");
+            base.CreatePivotGridField("供方发票（人民币￥）", "SupplierInvoice");
+            base.CreatePivotGridField("销售成本（人民币￥）", "SellingCost");
+            base.CreatePivotGridField("运保费（人民币￥）", "Premium");
+            base.CreatePivotGridField("运保费成本（人民币￥）", "Premium");
+            base.CreatePivotGridField("佣金（￥）", "Commission");
+            base.CreatePivotGridField("直接费用（￥）", "DirectCosts");
+            base.CreatePivotGridField("销售利润（￥）", "SalesProfit");
+            base.CreatePivotGridField("实际利润（￥）", "ActualProfit");
+
             base.CreatePivotGridField("客户名称", "CustomerName");
             // base.CreatePivotGridField("贸易方式", "TradeMode");
             base.CreatePivotGridField("审批状态", "EnumFlowState");
-            base.CreatePivotGridField("合同金额(美元)", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
             base.CreatePivotGridField("合同金额", "TotalAmount");
             base.CreatePivotGridField("业务员", "SalesmanName");
             base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
@@ -88,12 +115,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("预付金额", "AdvancePayment");
             base.CreatePivotGridField("利润", "Profit");
             base.CreatePivotGridField("交单金额", "Amount");
-            base.CreatePivotGridField("直接费用", "DirectCosts");
             base.CreatePivotGridField("盈利水平", "ProfitLevel2");
-            base.CreatePivotGridField("收款金额", "TotalBudgetBill");
-            base.CreatePivotGridField("付款金额", "TotalPayement");
-            base.CreatePivotGridField("发票金额", "TotalInvoice");
-            base.CreatePivotGridField("报关金额", "TotalDeclarationform", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
             base.CreatePivotGridDefaultRowField();
         }
     }
