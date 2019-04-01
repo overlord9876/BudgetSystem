@@ -63,28 +63,21 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("供方发票（人民币￥）", "SupplierInvoice");
             base.CreateGridColumn("销售成本（人民币￥）", "SellingCost");
             base.CreateGridColumn("运保费（人民币￥）", "Premium");
-            base.CreateGridColumn("运保费成本（人民币￥）", "Premium");
+            base.CreateGridColumn("运保费成本（人民币￥）", "PremiumCost");
             base.CreateGridColumn("佣金（￥）", "Commission");
             base.CreateGridColumn("直接费用（￥）", "DirectCosts");
             base.CreateGridColumn("销售利润（￥）", "SalesProfit");
             base.CreateGridColumn("实际利润（￥）", "ActualProfit");
 
-            base.CreateGridColumn("客户名称", "CustomerName");
-            //base.CreateGridColumn("贸易方式", "TradeMode");
-            base.CreateGridColumn("审批状态", "EnumFlowState");
             base.CreateGridColumn("合同金额", "TotalAmount");
             base.CreateGridColumn("业务员", "SalesmanName");
             base.CreateGridColumn("业务员所在部门", "DepartmentDesc");
             base.CreateGridColumn("录入时间", "CreateDate");
             base.CreateGridColumn("订约日期", "SignDate");
             base.CreateGridColumn("有效截止期", "Validity");
-            //base.CreateGridColumn("贸易性质", "TradeNature");
-            base.CreateGridColumn("目的港口", "Port");
             base.CreateGridColumn("预付金额", "AdvancePayment");
             base.CreateGridColumn("利润", "Profit");
-            base.CreateGridColumn("交单金额", "Amount");
             base.CreateGridColumn("盈利水平", "ProfitLevel2");
-            base.CreateGridColumn("发票金额", "TotalInvoice");
 
             base.CreatePivotGridField("合同号", "ContractNO");
             base.CreatePivotGridField("合同金额（美元$）", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
@@ -102,20 +95,14 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("销售利润（￥）", "SalesProfit");
             base.CreatePivotGridField("实际利润（￥）", "ActualProfit");
 
-            base.CreatePivotGridField("客户名称", "CustomerName");
-            // base.CreatePivotGridField("贸易方式", "TradeMode");
-            base.CreatePivotGridField("审批状态", "EnumFlowState");
             base.CreatePivotGridField("合同金额", "TotalAmount");
             base.CreatePivotGridField("业务员", "SalesmanName");
             base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
             base.CreatePivotGridField("录入时间", "CreateDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
             base.CreatePivotGridField("订约日期", "SignDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
             base.CreatePivotGridField("有效截止期", "Validity", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            // base.CreatePivotGridField("贸易性质", "TradeNature");
-            base.CreatePivotGridField("目的港口", "Port");
             base.CreatePivotGridField("预付金额", "AdvancePayment");
             base.CreatePivotGridField("利润", "Profit");
-            base.CreatePivotGridField("交单金额", "Amount");
             base.CreatePivotGridField("盈利水平", "ProfitLevel2");
             base.CreatePivotGridDefaultRowField();
         }

@@ -1,6 +1,6 @@
 ﻿<XtraSerializer version="1.0" application="PivotGrid">
   <property name="#LayoutVersion" />
-  <property name="Fields" iskey="true" value="29">
+  <property name="Fields" iskey="true" value="25">
     <property name="Item1" isnull="true" iskey="true">
       <property name="Index">0</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
@@ -21,7 +21,7 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">2</property>
+      <property name="AreaIndex">1</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
@@ -217,7 +217,7 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">7</property>
+      <property name="AreaIndex">4</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
@@ -277,7 +277,7 @@
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
       </property>
-      <property name="FieldName">Premium</property>
+      <property name="FieldName">PremiumCost</property>
       <property name="FilterValues" isnull="true" iskey="true">
         <property name="Values">~Xtra#Array0, </property>
         <property name="ShowBlanks">true</property>
@@ -398,52 +398,6 @@
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
       </property>
-      <property name="FieldName">CustomerName</property>
-      <property name="FilterValues" isnull="true" iskey="true">
-        <property name="Values">~Xtra#Array0, </property>
-        <property name="ShowBlanks">true</property>
-        <property name="FilterType">Excluded</property>
-      </property>
-      <property name="Name">客户名称</property>
-      <property name="FieldEditName" />
-      <property name="ToolTips" isnull="true" iskey="true">
-        <property name="ValueText" />
-        <property name="HeaderText" />
-      </property>
-      <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">0</property>
-      <property name="ActualSortMode">Default</property>
-      <property name="SummaryVariation">None</property>
-    </property>
-    <property name="Item17" isnull="true" iskey="true">
-      <property name="Index">16</property>
-      <property name="SortBySummaryInfo" isnull="true" iskey="true">
-        <property name="FieldComponentName" />
-        <property name="Conditions" iskey="true" value="0" />
-      </property>
-      <property name="FieldName">EnumFlowState</property>
-      <property name="FilterValues" isnull="true" iskey="true">
-        <property name="Values">~Xtra#Array0, </property>
-        <property name="ShowBlanks">true</property>
-        <property name="FilterType">Excluded</property>
-      </property>
-      <property name="Name">审批状态</property>
-      <property name="FieldEditName" />
-      <property name="ToolTips" isnull="true" iskey="true">
-        <property name="ValueText" />
-        <property name="HeaderText" />
-      </property>
-      <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">1</property>
-      <property name="ActualSortMode">Default</property>
-      <property name="SummaryVariation">None</property>
-    </property>
-    <property name="Item18" isnull="true" iskey="true">
-      <property name="Index">17</property>
-      <property name="SortBySummaryInfo" isnull="true" iskey="true">
-        <property name="FieldComponentName" />
-        <property name="Conditions" iskey="true" value="0" />
-      </property>
       <property name="FieldName">TotalAmount</property>
       <property name="FilterValues" isnull="true" iskey="true">
         <property name="Values">~Xtra#Array0, </property>
@@ -457,12 +411,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">9</property>
+      <property name="AreaIndex">5</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item19" isnull="true" iskey="true">
-      <property name="Index">18</property>
+    <property name="Item17" isnull="true" iskey="true">
+      <property name="Index">16</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -474,19 +428,19 @@
         <property name="FilterType">Excluded</property>
       </property>
       <property name="Name">业务员</property>
-      <property name="Area">RowArea</property>
+      <property name="Area">ColumnArea</property>
       <property name="FieldEditName" />
       <property name="ToolTips" isnull="true" iskey="true">
         <property name="ValueText" />
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">1</property>
+      <property name="AreaIndex">0</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item20" isnull="true" iskey="true">
-      <property name="Index">19</property>
+    <property name="Item18" isnull="true" iskey="true">
+      <property name="Index">17</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -509,8 +463,8 @@
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item21" isnull="true" iskey="true">
-      <property name="Index">20</property>
+    <property name="Item19" isnull="true" iskey="true">
+      <property name="Index">18</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -536,12 +490,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">4</property>
+      <property name="AreaIndex">1</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item22" isnull="true" iskey="true">
-      <property name="Index">21</property>
+    <property name="Item20" isnull="true" iskey="true">
+      <property name="Index">19</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -567,12 +521,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">5</property>
+      <property name="AreaIndex">2</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item23" isnull="true" iskey="true">
-      <property name="Index">22</property>
+    <property name="Item21" isnull="true" iskey="true">
+      <property name="Index">20</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -598,35 +552,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">6</property>
+      <property name="AreaIndex">3</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item24" isnull="true" iskey="true">
-      <property name="Index">23</property>
-      <property name="SortBySummaryInfo" isnull="true" iskey="true">
-        <property name="FieldComponentName" />
-        <property name="Conditions" iskey="true" value="0" />
-      </property>
-      <property name="FieldName">Port</property>
-      <property name="FilterValues" isnull="true" iskey="true">
-        <property name="Values">~Xtra#Array0, </property>
-        <property name="ShowBlanks">true</property>
-        <property name="FilterType">Excluded</property>
-      </property>
-      <property name="Name">目的港口</property>
-      <property name="FieldEditName" />
-      <property name="ToolTips" isnull="true" iskey="true">
-        <property name="ValueText" />
-        <property name="HeaderText" />
-      </property>
-      <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">8</property>
-      <property name="ActualSortMode">Default</property>
-      <property name="SummaryVariation">None</property>
-    </property>
-    <property name="Item25" isnull="true" iskey="true">
-      <property name="Index">24</property>
+    <property name="Item22" isnull="true" iskey="true">
+      <property name="Index">21</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -644,12 +575,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">10</property>
+      <property name="AreaIndex">6</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item26" isnull="true" iskey="true">
-      <property name="Index">25</property>
+    <property name="Item23" isnull="true" iskey="true">
+      <property name="Index">22</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -667,35 +598,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">2</property>
+      <property name="AreaIndex">0</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item27" isnull="true" iskey="true">
-      <property name="Index">26</property>
-      <property name="SortBySummaryInfo" isnull="true" iskey="true">
-        <property name="FieldComponentName" />
-        <property name="Conditions" iskey="true" value="0" />
-      </property>
-      <property name="FieldName">Amount</property>
-      <property name="FilterValues" isnull="true" iskey="true">
-        <property name="Values">~Xtra#Array0, </property>
-        <property name="ShowBlanks">true</property>
-        <property name="FilterType">Excluded</property>
-      </property>
-      <property name="Name">交单金额</property>
-      <property name="FieldEditName" />
-      <property name="ToolTips" isnull="true" iskey="true">
-        <property name="ValueText" />
-        <property name="HeaderText" />
-      </property>
-      <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">3</property>
-      <property name="ActualSortMode">Default</property>
-      <property name="SummaryVariation">None</property>
-    </property>
-    <property name="Item28" isnull="true" iskey="true">
-      <property name="Index">27</property>
+    <property name="Item24" isnull="true" iskey="true">
+      <property name="Index">23</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -713,12 +621,12 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">11</property>
+      <property name="AreaIndex">7</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>
-    <property name="Item29" isnull="true" iskey="true">
-      <property name="Index">28</property>
+    <property name="Item25" isnull="true" iskey="true">
+      <property name="Index">24</property>
       <property name="SortBySummaryInfo" isnull="true" iskey="true">
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
@@ -741,7 +649,7 @@
         <property name="HeaderText" />
       </property>
       <property name="CustomTotals" iskey="true" value="0" />
-      <property name="AreaIndex">12</property>
+      <property name="AreaIndex">8</property>
       <property name="ActualSortMode">Default</property>
       <property name="SummaryVariation">None</property>
     </property>

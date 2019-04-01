@@ -786,6 +786,7 @@
             this.bandedGridColumn18.Caption = "运保费成本";
             this.bandedGridColumn18.DisplayFormat.FormatString = "N2";
             this.bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.bandedGridColumn18.FieldName = "PremiumConst";
             this.bandedGridColumn18.Name = "bandedGridColumn18";
             this.bandedGridColumn18.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
@@ -808,6 +809,7 @@
             this.bandedGridColumn19.Caption = "运保费税率";
             this.bandedGridColumn19.DisplayFormat.FormatString = "N2";
             this.bandedGridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.bandedGridColumn19.FieldName = "PremiumTaxRebateRate";
             this.bandedGridColumn19.Name = "bandedGridColumn19";
             this.bandedGridColumn19.Visible = true;
             this.bandedGridColumn19.Width = 48;

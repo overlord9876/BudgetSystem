@@ -277,7 +277,7 @@
         <property name="FieldComponentName" />
         <property name="Conditions" iskey="true" value="0" />
       </property>
-      <property name="FieldName">Premium</property>
+      <property name="FieldName">PremiumCost</property>
       <property name="FilterValues" isnull="true" iskey="true">
         <property name="Values">~Xtra#Array0, </property>
         <property name="ShowBlanks">true</property>

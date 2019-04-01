@@ -151,16 +151,6 @@ namespace BudgetSystem.Entity
         public int Days { get; set; }
 
         /// <summary>
-        /// 佣金
-        /// </summary>
-        public decimal Commission { get; set; }
-
-        /// <summary>
-        /// 运保费
-        /// </summary>
-        public decimal Premium { get; set; }
-
-        /// <summary>
         /// 银行费用
         /// </summary>
         public decimal BankCharges { get; set; }
@@ -184,37 +174,6 @@ namespace BudgetSystem.Entity
         /// 利润
         /// </summary>
         public decimal Profit { get; set; }
-
-        /// <summary>
-        /// 流程状态
-        /// </summary>
-        public int FlowState { get; set; }
-
-        /// <summary>
-        /// 流程状态
-        /// </summary>
-        public EnumDataFlowState EnumFlowState
-        {
-            get
-            {
-                return this.FlowState.ToEnumDataFlowState();
-            }
-        }
-
-        /// <summary>
-        /// 流程实例ID
-        /// </summary>
-        public int FlowInstanceID { get; set; }
-
-        /// <summary>
-        /// 流程名
-        /// </summary>
-        public string FlowName { get; set; }
-
-        /// <summary>
-        /// 盈利水平1
-        /// </summary>
-        public decimal ProfitLevel1 { get; set; }
 
         /// <summary>
         /// 盈利水平2
@@ -242,11 +201,6 @@ namespace BudgetSystem.Entity
         /// 客户编号
         /// </summary>
         public int CustomerID { get; set; }
-
-        /// <summary>
-        /// 目的港口
-        /// </summary>
-        public string Port { get; set; }
 
         /// <summary>
         ///  出口退税
@@ -284,22 +238,9 @@ namespace BudgetSystem.Entity
         public string UpdateUserName { get; set; }
 
         /// <summary>
-        /// 主客户名称
-        /// </summary>
-        public string CustomerName { get; set; }
-
-        /// <summary>
         /// 主客户国家/地区
         /// </summary>
         public string CustomerCountry { get; set; }
-
-        /// <summary>
-        /// 主客户名称（含国家/地区)
-        /// </summary>
-        public string CustomerNameEx
-        {
-            get { return string.Format("{0}({1})", this.CustomerName, this.CustomerCountry); }
-        }
 
         /// <summary>
         /// 贸易方式描述
@@ -332,18 +273,69 @@ namespace BudgetSystem.Entity
 
         public List<PaymentNotes> PaymentList { get; set; }
 
+        /// <summary>
+        /// 运保费
+        /// </summary>
+        public decimal Premium
+        {
+            get
+            {
+                if (PaymentList != null)
+                {
+                    return PaymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 运保费成本,去税运保费金额
+        /// </summary>
+        public decimal PremiumCost
+        {
+            get
+            {
+                if (PaymentList != null)
+                {
+                    return PaymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 佣金
+        /// </summary>
+        public decimal Commission
+        {
+            get
+            {
+                if (PaymentList != null)
+                {
+                    return PaymentList.Where(o => !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 付款金额
+        /// </summary>
         public decimal TotalPayement
         {
             get
             {
                 if (PaymentList != null)
                 {
-                    return PaymentList.Sum(o => o.CNY);
+                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
         }
 
+        /// <summary>
+        /// 销售成本（人民币￥）,等于付款去税金额
+        /// </summary>
         public decimal SellingCost
         {
             get
@@ -359,10 +351,8 @@ namespace BudgetSystem.Entity
         public List<Invoice> InvoiceList { get; set; }
 
         /// <summary>
-        /// 交单金额
+        /// 销售金额，等于所有发票金额
         /// </summary>
-        public decimal Amount { get; set; }
-
         public decimal TotalInvoice
         {
             get

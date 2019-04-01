@@ -372,20 +372,11 @@
     <Compile Include="Report\frmSalemenReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\frmSalemenReport.Designer.cs">
-      <DependentUpon>frmSalemenReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Report\frmDepartmentReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\frmDepartmentReport.Designer.cs">
-      <DependentUpon>frmDepartmentReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Report\frmCompanyReport.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report\frmCompanyReport.Designer.cs">
-      <DependentUpon>frmCompanyReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
       <SubType>Form</SubType>
@@ -767,21 +758,11 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmSalemenReport.resx">
-      <DependentUpon>frmSalemenReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmDepartmentReport.resx">
-      <DependentUpon>frmDepartmentReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\frmCompanyReport.resx">
-      <DependentUpon>frmCompanyReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>

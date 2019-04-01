@@ -447,8 +447,6 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
         }
 
-        private List<string> CommissionUsageNameList = new List<string>() { "佣金", "咨询费", "服务费", "费用支付审批单" };
-
         private void CheckUsage()
         {
             UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
@@ -491,7 +489,7 @@ namespace BudgetSystem.OutMoney
                         return;
                     }
                 }
-                else if (CommissionUsageNameList.Contains(umt.Name))
+                else if (Entity.Util.CommissionUsageNameList.Contains(umt.Name))
                 {
                     if (this.currentBudget.Commission == 0)
                     {
@@ -499,7 +497,7 @@ namespace BudgetSystem.OutMoney
                         return;
                     }
                     //暂时先放开佣金付款超额
-                    decimal money = caculator.GetUsagePayMoney(CommissionUsageNameList);
+                    decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
                     if (money + txtCNY.Value > this.currentBudget.Premium)
                     {
                         this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);

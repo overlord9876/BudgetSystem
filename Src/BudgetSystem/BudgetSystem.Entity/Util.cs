@@ -61,5 +61,16 @@ namespace BudgetSystem.Entity
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
 
+        /// <summary>
+        /// 运保费类型
+        /// </summary>
+        public static List<string> PremiumTextList = new List<string>() { "运杂费", "运保费" };
+
+        /// <summary>
+        /// 佣金类型
+        /// </summary>
+        public static List<string> CommissionUsageNameList = new List<string>() { "佣金", "咨询费", "服务费", "费用支付审批单" };
+
+
     }
 }

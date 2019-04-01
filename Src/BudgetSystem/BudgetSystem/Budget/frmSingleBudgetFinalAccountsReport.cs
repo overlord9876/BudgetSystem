@@ -98,7 +98,20 @@ namespace BudgetSystem
                 {
                     row = dt.NewRow();
                     row["Date"] = pn.PaymentDate;
-                    row["CNY"] = pn.CNY;
+                    if (BudgetSystem.Entity.Util.PremiumTextList.Contains(pn.MoneyUsed))
+                    {
+                        row["Premium"] = pn.CNY;
+                        row["PremiumConst"] = pn.DeTaxationCNY;
+                        row["PremiumTaxRebateRate"] = pn.TaxRebateRate;
+                    }
+                    else if (Entity.Util.CommissionUsageNameList.Contains(pn.MoneyUsed))
+                    {
+                        row["Commission"] = pn.CNY;
+                    }
+                    else
+                    {
+                        row["CNY"] = pn.CNY;
+                    }
                     dt.Rows.Add(row);
                 }
                 //发票表
@@ -151,6 +164,8 @@ namespace BudgetSystem
             dt.Columns.Add("SupplierName", typeof(string));//供货方名称
             //预算单表
             dt.Columns.Add("Premium", typeof(decimal));//运保费
+            dt.Columns.Add("PremiumConst", typeof(decimal));//运保费
+            dt.Columns.Add("PremiumTaxRebateRate", typeof(decimal));//运保费税率
             dt.Columns.Add("Commission", typeof(decimal));//佣金
             dt.Columns.Add("DirectCosts", typeof(decimal));//直接费用 
 

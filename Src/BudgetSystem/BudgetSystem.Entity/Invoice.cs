@@ -53,7 +53,7 @@ namespace BudgetSystem.Entity
         /// 退税率
         /// </summary>
         public float TaxRebateRate { get; set; }
-
+        
         /// <summary>
         /// 佣金
         /// </summary>
