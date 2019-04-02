@@ -154,6 +154,16 @@ namespace BudgetSystem.Entity
         public decimal CommissionRate { get; private set; }
 
         /// <summary>
+        /// 佣金余额
+        /// </summary>
+        public decimal CommissionBalance { get; private set; }
+
+        /// <summary>
+        /// 应付运保费余额
+        /// </summary>
+        public decimal Premiumbalance { get; private set; }
+
+        /// <summary>
         /// 净收入额
         /// </summary>
         public decimal NetIncomeCNY { get; private set; }
@@ -192,11 +202,21 @@ namespace BudgetSystem.Entity
             #region 1.佣金比率=((已付佣金总额-预算单佣金总额)/预算单佣金金额)*100%
 
             //已付佣金总额
-            decimal commissionTotal = _paymentList.Where(o => o.MoneyUsed == "佣金").Sum(o => o.CNY);
+            decimal commissionTotal = _paymentList.Where(o => Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+
+            decimal premiumTotal = _paymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
 
             if (this.CurrentBudget.Commission > 0)
             {
                 CommissionRate = Math.Round((commissionTotal - this.CurrentBudget.Commission) / this.CurrentBudget.Commission * 100, 2);
+
+                CommissionBalance = commissionTotal - this.CurrentBudget.Commission;
+            }
+
+            if (this.CurrentBudget.Premium > 0)
+            {
+                //应付运保费余额=已付运保费-预算运保费
+                Premiumbalance = premiumTotal - this.CurrentBudget.Premium;
             }
 
             #endregion

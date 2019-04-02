@@ -76,14 +76,17 @@ namespace BudgetSystem.OutMoney
             this.txtPercentage.EditValue = Caculator.Percentage;
             //收款超计划%
             this.txtSuperPaymentScheme.EditValue = Caculator.SuperPaymentScheme;
-            //佣金比率
-            this.txtCommissionRate.EditValue = Caculator.CommissionRate;
+            ////佣金比率
+            //this.txtCommissionRate.EditValue = Caculator.CommissionRate;
+            //佣金比率改为佣金余额
+            this.txtCommissionRate.EditValue = Caculator.CommissionBalance;
 
 
             this.txtApprovalState.EditValue = Caculator.CurrentBudget.State;
             this.txtFeedMoney.EditValue = Caculator.CurrentBudget.FeedMoney;
             this.txtCommission.EditValue = Caculator.CurrentBudget.Commission;
             this.txtPremium.EditValue = Caculator.CurrentBudget.Premium;
+            this.txtPremiumbalance.EditValue = Caculator.Premiumbalance;
 
             this.txtAccountBalance.EditValue = this.txtReceiptAmount.Value - this.txtPaymentMoneyAmount.Value;
 
