@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BudgetSystem
+namespace BudgetSystem.Entity
 {
     public static class CaculateUtil
     {

@@ -12,6 +12,9 @@ namespace BudgetSystem.Bll
         Dal.PaymentNotesDal dal = new Dal.PaymentNotesDal();
         Bll.FlowManager fm = new FlowManager();
         Dal.FlowDal fDal = new Dal.FlowDal();
+        Bll.ReceiptMgmtManager rm = new ReceiptMgmtManager();
+        Bll.BudgetManager bm = new BudgetManager();
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
         public List<PaymentNotes> GetAllPaymentNotes()
         {
@@ -55,6 +58,31 @@ namespace BudgetSystem.Bll
                 var uList = dal.GetPaymentNoteById(id, con, null);
                 return uList;
             });
+
+            return lst;
+        }
+
+        public PaymentNotes GetPaymentNoteDetailById(int id)
+        {
+            var lst = this.Query<PaymentNotes>((con) =>
+            {
+                var uList = dal.GetPaymentNoteById(id, con, null);
+                return uList;
+            });
+
+            if (lst != null)
+            {
+                var valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
+                var currentBudget = bm.GetBudget(lst.BudgetID);
+                if (currentBudget != null)
+                {
+                    var receiptList = rm.GetBudgetBillListByBudgetId(currentBudget.ID);
+                    var paymentNotes = GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+                    var caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+                    lst.AdvancePayment = currentBudget.AdvancePayment;
+                    lst.Balance = caculator.AccountBalance;
+                }
+            }
             return lst;
         }
 

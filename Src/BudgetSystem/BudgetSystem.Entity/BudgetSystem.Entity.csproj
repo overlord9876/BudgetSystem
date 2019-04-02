@@ -46,6 +46,7 @@
     <Compile Include="BankInfo.cs" />
     <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
+    <Compile Include="Util\CaculateUtil.cs" />
     <Compile Include="CodeType.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Declarationform.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceInfo.cs" />
     <Compile Include="ModifyMark.cs" />
+    <Compile Include="Util\OutMoneyCaculator.cs" />
     <Compile Include="OutProductDetail.cs" />
     <Compile Include="PaymentNotes.cs" />
     <Compile Include="Infrastructure\Permisson.cs" />

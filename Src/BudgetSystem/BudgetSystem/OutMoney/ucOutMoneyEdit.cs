@@ -261,10 +261,10 @@ namespace BudgetSystem.OutMoney
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
             }
 
-            //if (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
-            //{
-            //    this.dxErrorProvider1.SetError(cboBudget, "合同还未审批结束，不允许付款。");
-            //}
+            if (!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
+            {
+                this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单审批流程));
+            }
 
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))
             {
@@ -308,7 +308,11 @@ namespace BudgetSystem.OutMoney
                 }
             }
             CheckUsage();
-            if (txtAfterPaymentBalance.Value < 0)
+            if (txtAfterPaymentBalance.Value < 0 && string.IsNullOrEmpty(this.txtDescription.Text.Trim()))
+            {
+                this.dxErrorProvider1.SetError(txtDescription, "支付后余额小于0，请补充付款说明。");
+            }
+            else if (txtAfterPaymentBalance.Value < 0)
             {
                 XtraMessageBox.Show("【警告】支付后余额小于0");
             }

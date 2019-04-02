@@ -175,10 +175,11 @@ namespace BudgetSystem
             }
             else if (dataType == EnumFlowDataType.付款单.ToString())
             {
-                PaymentNotes pn = pm.GetPaymentNoteById(dataId);
+                PaymentNotes pn = pm.GetPaymentNoteDetailById(dataId);
                 if (pn != null)
                 {
                     item.Money = pn.CNY;
+
                     item.Desc = pn.ToDesc();
                 }
 

@@ -214,12 +214,22 @@ namespace BudgetSystem.Entity
             }
         }
 
+        /// <summary>
+        /// 预算单的预付款金额
+        /// </summary>
+        public decimal AdvancePayment { get; set; }
+
+        /// <summary>
+        /// 合同计算后的余额。
+        /// </summary>
+        public decimal Balance { get; set; }
+
         public int FlowState { get; set; }
 
         public string ToDesc()
         {
-            return string.Format("{0},于{1}申请向{2}付款人民币{3}",
-                this.Applicant, this.CommitTime.ToString("yyyy年MM月dd日"), this.SupplierName, this.CNY);
+            return string.Format("{0},于{1}申请向{2}用于{3}付款人民币{4}，预付款为：{5}，付款后余额为：{6}",
+                this.Applicant, this.CommitTime.ToString("yyyy年MM月dd日"), this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
         }
 
     }
