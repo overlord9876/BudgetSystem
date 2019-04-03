@@ -39,4 +39,43 @@ namespace BudgetSystem.Entity
         审批通过 = 2,//
     }
 
+    public class EnumCheckUtil
+    {
+        public static string CheckCurrentFlowStart(EnumFlowNames currentFlowName, EnumFlowNames oldFlowName, EnumDataFlowState oldFlowState)
+        {
+            if (currentFlowName == oldFlowName && oldFlowState == EnumDataFlowState.审批通过)
+            {
+                return string.Format("{0}已经{1},不允许重复提交", currentFlowName, oldFlowState);
+            }
+            if (currentFlowName == EnumFlowNames.预算单审批流程)
+            {
+                if ((oldFlowName == EnumFlowNames.预算单修改流程 || oldFlowName == EnumFlowNames.预算单删除流程) && oldFlowState == EnumDataFlowState.审批不通过)//预算单修改流程或预算单删除被驳回，实际上就是预算单审批通过状态
+                {
+                    return string.Format("{0}已经{1},不允许再次提交{2}", oldFlowName, oldFlowState, currentFlowName);
+                }
+                else if (oldFlowName == EnumFlowNames.预算单删除流程 && oldFlowState == EnumDataFlowState.审批通过)
+                {
+                    return string.Format("{0}已经{1},不允许再次提交{2}", oldFlowName, oldFlowState, currentFlowName);
+                }
+            }
+            else if (currentFlowName == EnumFlowNames.预算单修改流程)
+            {
+                if ((oldFlowName == EnumFlowNames.预算单审批流程 || oldFlowName == EnumFlowNames.预算单删除流程) && oldFlowState == EnumDataFlowState.审批不通过)//预算单修改流程或预算单删除被驳回，实际上就是预算单审批通过状态
+                {
+                    return string.Format("{0}已经{1},不允许再次提交{2}", oldFlowName, oldFlowState, currentFlowName);
+                }
+                else if (oldFlowName == EnumFlowNames.预算单删除流程 && oldFlowState == EnumDataFlowState.审批通过)//预算单已经通过删除流程，不允许再提交修改审批。
+                {
+                    return string.Format("{0}已经{1},不允许再次提交{2}", oldFlowName, oldFlowState, currentFlowName);
+                }
+            }
+            else if (currentFlowName == EnumFlowNames.预算单删除流程)
+            {
+               //应该任何时候都可以提出删除流程？
+            }
+            return string.Empty;
+        }
+    }
+
+
 }

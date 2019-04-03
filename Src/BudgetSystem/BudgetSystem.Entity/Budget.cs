@@ -259,7 +259,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 客户编号
         /// </summary>
-        public int CustomerID { get; set; }
+        public int? CustomerID { get; set; }
 
         /// <summary>
         /// 目的港口
@@ -316,7 +316,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string CustomerNameEx
         {
-            get { return string.Format("{0}({1})", this.CustomerName, this.CustomerCountry); }
+            get 
+            {
+                return string.IsNullOrEmpty(this.CustomerName)?string.Empty: string.Format("{0}({1})", this.CustomerName, this.CustomerCountry); 
+            }
         }
 
         /// <summary>
@@ -378,6 +381,21 @@ namespace BudgetSystem.Entity
                 {
                     return new List<OutProductDetail>();
                 }
+            }
+        }
+        private bool isValid = false;
+        /// <summary>
+        /// 数据是否验证通过
+        /// </summary>
+        public bool IsValid
+        {
+            get 
+            {
+                return isValid;
+            }
+            set
+            {
+                isValid = value;
             }
         }
 

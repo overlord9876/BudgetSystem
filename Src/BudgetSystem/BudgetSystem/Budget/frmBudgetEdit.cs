@@ -27,14 +27,14 @@ namespace BudgetSystem
         protected override void SubmitNewData()
         {
             base.SubmitNewData();
-
-            bool checkResult = this.ucBudgetEdit1.CheckInputData();
-            if (!checkResult)
+            bool requiredResult = true;
+            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow,out requiredResult);
+            if (!checkResult && isStartFlow || requiredResult==false)
             {
                 return;
             }
             this.ucBudgetEdit1.FillData();
-
+            this.ucBudgetEdit1.CurrentBudget.IsValid = checkResult;
             int result = bm.AddBudget(this.ucBudgetEdit1.CurrentBudget, isStartFlow);
             if (result <= 0)
             {
@@ -47,13 +47,14 @@ namespace BudgetSystem
         protected override void SubmitModifyData()
         {
             base.SubmitModifyData();
-            bool checkResult = this.ucBudgetEdit1.CheckInputData();
-            if (!checkResult)
+            bool requiredResult = true;
+            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow,out requiredResult);
+            if (!checkResult && isStartFlow || requiredResult==false)
             {
                 return;
             }
             this.ucBudgetEdit1.FillData();
-
+            this.ucBudgetEdit1.CurrentBudget.IsValid = checkResult;
             string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, isStartFlow);
             if (!string.IsNullOrEmpty(message))
             {

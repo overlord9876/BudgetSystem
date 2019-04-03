@@ -151,9 +151,16 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
+
+            string message = EnumCheckUtil.CheckCurrentFlowStart(flowName, (EnumFlowNames)Enum.Parse(typeof(EnumFlowNames), budge.FlowName), budge.EnumFlowState);
+            if (!string.IsNullOrEmpty(message)) { return message; }
             //当启动的流程为预算单审批流程才记录修改记录。
             if (flowName == EnumFlowNames.预算单审批流程)
             {
+                if (budge.IsValid == false)
+                {
+                    return "数据不完整，请修改补充后再提交";
+                }
                 this.ExecuteWithoutTransaction((con) =>
             {
                 mmdal.AddModifyMark<Budget>(budge, id, con);

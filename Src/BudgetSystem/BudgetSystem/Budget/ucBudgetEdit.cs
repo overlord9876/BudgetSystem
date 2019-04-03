@@ -63,29 +63,37 @@ namespace BudgetSystem
         {
             BindingBudget(dataID);
         }
-
-        public bool CheckInputData()
+        /// <summary>
+        /// 验证输入数据
+        /// </summary>
+        /// <param name="isShowError">是否显示错误提示</param>
+        /// <param name="requiredResult">必填项验证结果</param>
+        /// <returns></returns>
+        public bool CheckInputData(bool isShowError, out bool requiredResult)
         {
             this.dxErrorProvider1.ClearErrors();
-            this.CheckContractNOInput();
             this.CheckDateInput();
-            this.CheckCustomerInput();
             this.CheckSupplierInput();
             if (txtExchangeRate.Value <= 0)
             {
                 this.dxErrorProvider1.SetError(txtExchangeRate, "汇率值错误。");
             }
-
+            bool result = true;
             if (dxErrorProvider1.HasErrors
-                || CheckOutProductDetailInput() == false
-                || CheckInProductDetailInput() == false)
+                || CheckOutProductDetailInput(isShowError) == false
+                || CheckInProductDetailInput(isShowError) == false)
             {
-                return false;
+                if (!isShowError)
+                {
+                    dxErrorProvider1.ClearErrors();
+                }
+                result = false;
             }
-            else
-            {
-                return true;
-            }
+            requiredResult = this.CheckContractNOInput();
+            requiredResult = this.CheckCustomerInput() && requiredResult;
+            requiredResult = this.CheckTradeMode() && requiredResult;
+            result = result && requiredResult;
+            return result;
         }
 
         public void FillData()
@@ -94,22 +102,22 @@ namespace BudgetSystem
             {
                 //新增
                 this.CurrentBudget = new Budget();
-                CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim();
                 CurrentBudget.CreateDate = DateTime.Now;
                 CurrentBudget.DeptID = RunInfo.Instance.CurrentUser.DeptID;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 CurrentBudget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
                 CurrentBudget.VATRate = this.vatOption;
-                //主买方不允许修改，所以只有新增时获取选择值 
+                CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim().Substring(0, 4) + this.GetTradeModeString();
                 CurrentBudget.CustomerID = Convert.ToInt32(this.pceMainCustomer.Tag);
             }
+
             CurrentBudget.AdvancePayment = this.txtAdvancePayment.Value;
             CurrentBudget.BankCharges = this.txtBankCharges.Value;
             CurrentBudget.Commission = this.txtCommission.Value;
             CurrentBudget.Days = Convert.ToInt32(this.txtDays.EditValue);
             CurrentBudget.FeedMoney = this.txtFeedMoney.Value;
             CurrentBudget.DirectCosts = this.txtDirectCosts.Value;
-            CurrentBudget.InterestRate = Convert.ToSingle(txtInterestRate.EditValue);
+            CurrentBudget.InterestRate = txtInterestRate.FloatValue;
             CurrentBudget.OutSettlementMethod = this.cboOutSettlementMethod.Text;
             CurrentBudget.OutSettlementMethod2 = this.cboOutSettlementMethod2.Text;
             CurrentBudget.OutSettlementMethod3 = this.cboOutSettlementMethod3.Text;
@@ -478,6 +486,17 @@ namespace BudgetSystem
         }
 
         #region Check Method
+        private bool CheckTradeMode()
+        {
+            if (!this.chkTradeMode1.Checked && !this.chkTradeMode2.Checked
+              && !this.chkTradeMode3.Checked && !this.chkTradeMode4.Checked
+              && !this.chkTradeMode5.Checked)
+            {
+                this.dxErrorProvider1.SetError(this.chkTradeMode1, "请选择贸易方式");
+                return false;
+            }
+            return true;
+        }
         private void CheckDateInput()
         {
             if (this.dteSignDate.EditValue == null)
@@ -488,12 +507,7 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.dteValidity, "请输入有效期");
             }
-            if (!this.chkTradeMode1.Checked && !this.chkTradeMode2.Checked
-                && !this.chkTradeMode3.Checked && !this.chkTradeMode4.Checked
-                && !this.chkTradeMode5.Checked)
-            {
-                this.dxErrorProvider1.SetError(this.chkTradeMode1, "请选择贸易方式");
-            }
+
             if (this.dteSignDate.DateTime > this.dteValidity.DateTime)
             {
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
@@ -507,31 +521,37 @@ namespace BudgetSystem
                 }
             }
         }
-        private void CheckContractNOInput()
+        private bool CheckContractNOInput()
         {
             string contractNo = this.txtContractNO.Text.Trim();
             if (string.IsNullOrEmpty(contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同编号");
+                return false;
             }
             Match match = Regex.Match(contractNo, "^\\d{4}\\s?L?G?C?N?$");
             if (!match.Success)
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为4位数字加贸易方式字母");
+                return false;
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
             if (bm.CheckContractNO(id, this.lblContractNOPrefix + contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
+                return false;
             }
+            return true;
         }
 
-        private void CheckCustomerInput()
+        private bool CheckCustomerInput()
         {
             if (string.IsNullOrEmpty(this.pceMainCustomer.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.pceMainCustomer, "请选择主买方");
+                return false;
             }
+            return true;
         }
         private void CheckSupplierInput()
         {
@@ -543,34 +563,46 @@ namespace BudgetSystem
             }
         }
 
-        private bool CheckInProductDetailInput()
+        private bool CheckInProductDetailInput(bool isShowError)
         {
             var dataSource = (gridInProductDetail.DataSource as BindingList<InProductDetail>).ToList();
             if (dataSource == null || dataSource.Count == 0)
             {
-                XtraMessageBox.Show("请输入内贸部分信息！");
+                if (isShowError)
+                {
+                    XtraMessageBox.Show("请输入内贸部分信息！");
+                }
                 return false;
             }
             if (dataSource.Exists(d => d.Subtotal == 0))
             {
-                this.dxErrorProvider1.SetError(this.gridInProductDetail, "原料、辅料、加工应至少一项不为0");
-                this.bgvInProductDetail.SetColumnError(gcRawMaterials, "原料、辅料、加工应至少一项不为0");
+                if (isShowError)
+                {
+                    this.dxErrorProvider1.SetError(this.gridInProductDetail, "原料、辅料、加工应至少一项不为0");
+                    this.bgvInProductDetail.SetColumnError(gcRawMaterials, "原料、辅料、加工应至少一项不为0");
+                }
                 return false;
             }
             if (dataSource.Exists(d => d.TaxRebateRate == 0))
             {
-                this.bgvInProductDetail.SetColumnError(gcVat, "退税率应大于0");
+                if (isShowError)
+                {
+                    this.bgvInProductDetail.SetColumnError(gcVat, "退税率应大于0");
+                }
                 return false;
             }
             return true;
         }
 
-        private bool CheckOutProductDetailInput()
+        private bool CheckOutProductDetailInput(bool isShowError)
         {
             var dataSource = (gridOutProductDetail.DataSource as BindingList<OutProductDetail>).ToList();
             if (dataSource == null || dataSource.Count == 0)
             {
-                XtraMessageBox.Show("请输入外贸部分上商品信息！");
+                if (isShowError)
+                {
+                    XtraMessageBox.Show("请输入外贸部分上商品信息！");
+                }
                 return false;
             }
             return true;
