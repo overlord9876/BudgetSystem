@@ -62,8 +62,18 @@ namespace BudgetSystem
             Bll.BaseManager.SetConnectionString(connectionString, true);
 
 # else
-            string connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
-            Bll.BaseManager.SetConnectionString(connectionString, false);
+            bool isEncrypted = false;
+            string connectionString = string.Empty;
+            if (args.Length > 0)
+            {
+                connectionString = args[0];
+                isEncrypted = true;
+            }
+            else
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["connection"].ToString();
+            }
+            Bll.BaseManager.SetConnectionString(connectionString, isEncrypted);
 #endif
 
 

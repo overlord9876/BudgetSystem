@@ -228,8 +228,8 @@ namespace BudgetSystem.Entity
 
         public string ToDesc()
         {
-            return string.Format("{0},于{1}申请向{2}用于{3}付款人民币{4}，预付款为：{5}，付款后余额为：{6}",
-                this.Applicant, this.CommitTime.ToString("yyyy年MM月dd日"), this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
+            return string.Format("{0}向{1}用于{2}付款￥{3}，预付款为：{4}，付款后余额为：{5}",
+                this.ApplicantRealName,this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
         }
 
     }

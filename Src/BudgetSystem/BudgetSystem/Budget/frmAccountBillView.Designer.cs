@@ -337,9 +337,9 @@
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 784);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(467, 50);
-            this.layoutControlItem4.Text = "申请用款总额";
+            this.layoutControlItem4.Text = "申请用款总额(￥)";
             this.layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(150, 18);
             // 
             // layoutControlItem5
             // 
@@ -348,9 +348,9 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(467, 784);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(460, 50);
-            this.layoutControlItem5.Text = "收款总金额";
+            this.layoutControlItem5.Text = "收款总金额($)";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(150, 18);
             // 
             // layoutControlItem6
             // 
@@ -359,9 +359,9 @@
             this.layoutControlItem6.Location = new System.Drawing.Point(927, 784);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(435, 50);
-            this.layoutControlItem6.Text = "折合人名币总额";
+            this.layoutControlItem6.Text = "折合人名币总额（￥）";
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(105, 18);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(150, 18);
             // 
             // frmAccountBillView
             // 

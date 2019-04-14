@@ -103,10 +103,11 @@ namespace BudgetSystem.Dal
 
         public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
             From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
 						LEFT JOIN supplier s on pn.SupplierID=s.ID
 						LEFT JOIN department d on pn.DeptID=d.`ID`
+						LEFT JOIN `user` u on pn.Applicant=u.UserName
 						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
             Where pn.`ID` = @ID";
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), ID = id }, tran).SingleOrDefault();

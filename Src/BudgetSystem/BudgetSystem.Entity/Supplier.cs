@@ -216,6 +216,10 @@ namespace BudgetSystem.Entity
             }
         }
 
+        public Supplier()
+        {
+            FlowState = -1;
+        }
 
         public override string ToString()
         {

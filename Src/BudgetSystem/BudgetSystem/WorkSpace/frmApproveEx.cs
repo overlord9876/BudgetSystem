@@ -257,7 +257,7 @@ namespace BudgetSystem.WorkSpace
             }
 
 
-            FlowRunState state = fm.RevokeFlow(this.FlowItem.ID, true);
+            FlowRunState state = fm.RevokeFlow(this.FlowItem.ID, false);
             string info;
             if (state.Translate(out info))
             {

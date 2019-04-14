@@ -78,9 +78,15 @@ namespace BudgetSystem.Bll
                 {
                     var receiptList = rm.GetBudgetBillListByBudgetId(currentBudget.ID);
                     var paymentNotes = GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
-                    var caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+
+                    var pnList = paymentNotes.Where(o => !o.ID.Equals(lst.ID)).ToList<PaymentNotes>();
+                    var caculator = new OutMoneyCaculator(currentBudget, pnList, receiptList, valueAddedTaxRate);
+
+
+                    caculator.ApplyForPayment(lst.CNY, (decimal)lst.TaxRebateRate, lst.IsDrawback);
+
                     lst.AdvancePayment = currentBudget.AdvancePayment;
-                    lst.Balance = caculator.AccountBalance;
+                    lst.Balance = caculator.Balance;
                 }
             }
             return lst;

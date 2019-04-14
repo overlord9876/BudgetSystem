@@ -210,13 +210,13 @@ namespace BudgetSystem.Entity
             {
                 CommissionRate = Math.Round((commissionTotal - this.CurrentBudget.Commission) / this.CurrentBudget.Commission * 100, 2);
 
-                CommissionBalance = commissionTotal - this.CurrentBudget.Commission;
+                CommissionBalance = this.CurrentBudget.Commission - commissionTotal;
             }
 
             if (this.CurrentBudget.Premium > 0)
             {
                 //应付运保费余额=已付运保费-预算运保费
-                Premiumbalance = premiumTotal - this.CurrentBudget.Premium;
+                Premiumbalance = this.CurrentBudget.Premium - premiumTotal;
             }
 
             #endregion
@@ -361,7 +361,7 @@ namespace BudgetSystem.Entity
                 {
                     CurrentTaxes = 0;
                     //收到的钱小于或等于退税款，按实际收汇金额计算
-                    AllTaxes = (ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100);
+                    AllTaxes = Math.Round((ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100), 2);
                 }
 
                 //支付后余额=账上余额+共计退税款-现申请用款

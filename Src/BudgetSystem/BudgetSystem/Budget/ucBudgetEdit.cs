@@ -610,6 +610,14 @@ namespace BudgetSystem
         #endregion
 
         #region Calc Method
+        /// <summary>
+        /// 内贸数据发生改变
+        /// </summary>
+        private void OnInProductDataChanged()
+        {
+            CalcInProductTotalAmount();
+            CalcTaxRebateRateMoney();
+        }
 
         /// <summary>
         /// 计算外贸合同金额
@@ -1110,8 +1118,7 @@ namespace BudgetSystem
                || e.Column == gcVat
                || e.Column == gcTaxRebateRate)
             {
-                CalcInProductTotalAmount();
-                CalcTaxRebateRateMoney();
+                OnInProductDataChanged();
             }
         }
 
@@ -1335,6 +1342,7 @@ namespace BudgetSystem
                 }
                 gridInProductDetail.DataSource = inProductDetailDataSource;
                 gridInProductDetail.RefreshDataSource();
+                OnInProductDataChanged();
             }
         }
 

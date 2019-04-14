@@ -90,7 +90,7 @@ namespace BudgetSystem
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            base.SubmitModifyData();
+            base.SubmitDataByWorkModel();
             if (IsOk)
             {
                 if (this.ucSupplierEdit1.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批中)

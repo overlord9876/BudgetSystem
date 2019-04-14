@@ -310,7 +310,10 @@ namespace BudgetSystem.OutMoney
             CheckUsage();
             if (txtAfterPaymentBalance.Value < 0 && string.IsNullOrEmpty(this.txtDescription.Text.Trim()))
             {
-                this.dxErrorProvider1.SetError(txtDescription, "支付后余额小于0，请补充付款说明。");
+                string message = string.Format("这批付款后超支付余额{0}，如需付款请在备注中提交说明", Math.Abs(txtAfterPaymentBalance.Value));
+                XtraMessageBox.Show(message, "提示");
+                this.dxErrorProvider1.SetError(txtDescription, message);
+                this.txtDescription.Focus();
             }
             else if (txtAfterPaymentBalance.Value < 0)
             {
@@ -524,11 +527,12 @@ namespace BudgetSystem.OutMoney
                 //    currentBudget = null;
                 //    return;
                 //}
-                var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
+                var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID).ToList();
+
                 //过滤当前自己的单据
                 if (CurrentPaymentNotes != null)
                 {
-                    paymentNotes = paymentNotes.Where(o => o.ID != CurrentPaymentNotes.ID);
+                    paymentNotes = paymentNotes.Where(o => !(o.ID.Equals(CurrentPaymentNotes.ID))).ToList<PaymentNotes>();
                 }
                 var receiptList = rm.GetBudgetBillListByBudgetId(currentBudget.ID);
                 currentBudget = bm.GetBudget(currentBudget.ID);

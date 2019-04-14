@@ -41,10 +41,12 @@
             // gdBatchApproveData
             // 
             this.gdBatchApproveData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gdBatchApproveData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gdBatchApproveData.Location = new System.Drawing.Point(0, 0);
             this.gdBatchApproveData.MainView = this.gvBatchApproveData;
+            this.gdBatchApproveData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gdBatchApproveData.Name = "gdBatchApproveData";
-            this.gdBatchApproveData.Size = new System.Drawing.Size(951, 346);
+            this.gdBatchApproveData.Size = new System.Drawing.Size(1365, 375);
             this.gdBatchApproveData.TabIndex = 0;
             this.gdBatchApproveData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBatchApproveData});
@@ -57,6 +59,7 @@
             this.gcMoney,
             this.gcDescription});
             this.gvBatchApproveData.GridControl = this.gdBatchApproveData;
+            this.gvBatchApproveData.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvBatchApproveData.Name = "gvBatchApproveData";
             this.gvBatchApproveData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gvBatchApproveData.OptionsView.ShowFooter = true;
@@ -66,6 +69,8 @@
             // 
             this.gcIsSelected.Caption = "选择";
             this.gcIsSelected.FieldName = "IsSelected";
+            this.gcIsSelected.MaxWidth = 50;
+            this.gcIsSelected.MinWidth = 50;
             this.gcIsSelected.Name = "gcIsSelected";
             this.gcIsSelected.Visible = true;
             this.gcIsSelected.VisibleIndex = 0;
@@ -75,11 +80,12 @@
             // 
             this.gcText.Caption = "审批项";
             this.gcText.FieldName = "DataText";
+            this.gcText.MaxWidth = 120;
             this.gcText.Name = "gcText";
             this.gcText.OptionsColumn.AllowEdit = false;
             this.gcText.Visible = true;
             this.gcText.VisibleIndex = 1;
-            this.gcText.Width = 141;
+            this.gcText.Width = 115;
             // 
             // gcMoney
             // 
@@ -91,7 +97,7 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Money", "合计={0:n}")});
             this.gcMoney.Visible = true;
             this.gcMoney.VisibleIndex = 2;
-            this.gcMoney.Width = 157;
+            this.gcMoney.Width = 125;
             // 
             // gcDescription
             // 
@@ -101,15 +107,16 @@
             this.gcDescription.OptionsColumn.AllowEdit = false;
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 3;
-            this.gcDescription.Width = 575;
+            this.gcDescription.Width = 1057;
             // 
             // BatchDataControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gdBatchApproveData);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchDataControl";
-            this.Size = new System.Drawing.Size(951, 346);
+            this.Size = new System.Drawing.Size(1365, 375);
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).EndInit();
             this.ResumeLayout(false);

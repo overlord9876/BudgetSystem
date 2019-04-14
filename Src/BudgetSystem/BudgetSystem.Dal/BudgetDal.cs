@@ -216,6 +216,13 @@ namespace BudgetSystem.Dal
             AddBudgetCustomers(budget, con, tran);
         }
 
+        public void ModifyBudgetDescription(Budget budget, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Budget` Set `Description`=@Description
+                                Where `ID` = @ID";
+            con.Execute(updateSql, budget, tran);
+        }
+
         /// <summary>
         /// 验证合同编号是否存在
         /// </summary>

@@ -230,6 +230,7 @@ namespace BudgetSystem
                 this.CurrentSupplier.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                 this.CurrentSupplier.CreateUserName = RunInfo.Instance.CurrentUser.RealName;
                 this.CurrentSupplier.CreateDate = DateTime.Now;
+                this.CurrentSupplier.FlowState = -1;
             }
             this.CurrentSupplier.Name = this.txtName.Text.Trim();
             this.CurrentSupplier.Address = this.txtAddress.Text.Trim();

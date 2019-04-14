@@ -214,6 +214,14 @@ namespace BudgetSystem.Bll
             return message;
         }
 
+        public void ModifyBudgetDescription(Budget budget)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+              {
+                  dal.ModifyBudgetDescription(budget, con, tran);
+              });
+        }
+
         public List<AccountBill> GetAccountBillDetailByBudgetId(int budgetId)
         {
             var lst = this.Query<AccountBill>((con) =>

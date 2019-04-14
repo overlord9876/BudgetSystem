@@ -238,6 +238,12 @@
     <Compile Include="Budget\frmBudgetQueryConditionEditor.Designer.cs">
       <DependentUpon>frmBudgetQueryConditionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmBudgetUpdateDescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmBudgetUpdateDescription.Designer.cs">
+      <DependentUpon>frmBudgetUpdateDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Budget\frmFinancialArchiveApplyImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -702,6 +708,9 @@
     <EmbeddedResource Include="Budget\frmBudgetQueryConditionEditor.resx">
       <DependentUpon>frmBudgetQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmBudgetUpdateDescription.resx">
+      <DependentUpon>frmBudgetUpdateDescription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmFinancialArchiveApplyImport.resx">
       <DependentUpon>frmFinancialArchiveApplyImport.cs</DependentUpon>
     </EmbeddedResource>
@@ -756,6 +765,7 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>
