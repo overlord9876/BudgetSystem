@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtAddress = new DevExpress.XtraEditors.TextEdit();
             this.txtEmail = new DevExpress.XtraEditors.TextEdit();
@@ -88,7 +89,7 @@
             this.lcCountry = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcEmail = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcAddress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();

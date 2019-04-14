@@ -186,17 +186,17 @@ namespace BudgetSystem
 
         private void CheckContactsInput()
         {
-            if (string.IsNullOrEmpty(this.txtContacts.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtContacts, "请输入联系人");
-            }
+            //if (string.IsNullOrEmpty(this.txtContacts.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtContacts, "请输入联系人");
+            //}
         }
         private void CheckEmailInput()
         {
-            if (string.IsNullOrEmpty(this.txtEmail.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtEmail, "请输入联系方式");
-            }
+            //if (string.IsNullOrEmpty(this.txtEmail.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtEmail, "请输入联系方式");
+            //}
         }
 
         private void CheckPortInput()
