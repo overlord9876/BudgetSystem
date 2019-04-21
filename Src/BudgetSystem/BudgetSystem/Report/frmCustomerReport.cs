@@ -9,6 +9,7 @@ using DevExpress.XtraGrid.Columns;
 using BudgetSystem.Entity;
 using DevExpress.XtraPivotGrid;
 using DevExpress.Utils;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Report
 {
@@ -41,10 +42,11 @@ namespace BudgetSystem.Report
             InitShowStyle();
         }
 
-        protected override void LoadDataByCondition(DateTime beginDate, DateTime endDate)
+        protected override void LoadDataByCondition(BudgetQueryCondition condition)
         {
             Bll.ReportManager um = new Bll.ReportManager();
-            var lst = um.GetCustomerReportList(beginDate, endDate);
+
+            var lst = um.GetCustomerReportList(condition);
 
             this.pivotGridControl.DataSource = lst;
             this.gridControl.DataSource = lst;

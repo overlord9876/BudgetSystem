@@ -209,7 +209,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.None,"选项管理模块",1400),
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.Save,"选项管理-维护选项",1410),
                        
-                        new Permisson(BusinessModules.BudgetReport,OperateTypes.None,"统计管理模块",1500),
+                        new Permisson(BusinessModules.BudgetReport,OperateTypes.None,"合同管理模块",1500),
                         new Permisson(BusinessModules.SalemenReport,OperateTypes.None,"业务员管理",1600),
                         new Permisson(BusinessModules.DepartmentReport,OperateTypes.None,"部门管理",1700),
                         new Permisson(BusinessModules.CompanyReport,OperateTypes.None,"公司管理",1800),

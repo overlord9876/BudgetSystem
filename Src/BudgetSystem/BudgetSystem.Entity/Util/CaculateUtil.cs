@@ -15,7 +15,7 @@ namespace BudgetSystem.Entity
         {
             if (pn.IsDrawback)
             {
-                return pn.CNY / (1 + pn.VatOption / 100) * ((decimal)pn.TaxRebateRate / 100);
+                return Math.Round(pn.CNY / (1 + pn.VatOption / 100) * ((decimal)pn.TaxRebateRate / 100), 2);
             }
             else
             {

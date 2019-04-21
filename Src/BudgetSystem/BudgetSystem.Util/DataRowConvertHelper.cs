@@ -169,7 +169,7 @@ namespace BudgetSystem.Util
         /// datetime值
         /// 如果发生错误返回DateTime.MinValue;
         /// </returns>
-        public static DateTime GetDateTimeValue(DataRow r, string name)
+        public static DateTime GetDateTimeValue(DataRow r, string name, string ignore = "")
         {
             DateTime result = DateTime.MinValue;
 
@@ -177,7 +177,14 @@ namespace BudgetSystem.Util
             {
                 try
                 {
-                    result = Convert.ToDateTime(r[name]);
+                    if (!string.IsNullOrEmpty(ignore))
+                    {
+                        result = Convert.ToDateTime(r[name].ToString().Replace("\"", ""));
+                    }
+                    else
+                    {
+                        result = Convert.ToDateTime(r[name]);
+                    }
                 }
                 catch
                 {
@@ -187,7 +194,40 @@ namespace BudgetSystem.Util
 
             return result;
         }
+        /// <summary>
+        /// 获取的Datetime类型值
+        /// </summary>
+        /// <param name="r">所在行</param>
+        /// <param name="name">所在列</param>
+        /// <returns>
+        /// datetime值
+        /// 如果发生错误返回DateTime.MinValue;
+        /// </returns>
+        public static DateTime? GetDateTimeValue_AllowNull(DataRow r, string name, string ignore="")
+        {
+            DateTime? result = null;
 
+            if (r[name] != null && r[name] != DBNull.Value && !string.IsNullOrEmpty(r[name].ToString()))
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(ignore))
+                    {
+                        result = Convert.ToDateTime(r[name].ToString().Replace("\"",""));
+                    }
+                    else
+                    {
+                        result = Convert.ToDateTime(r[name]);
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+
+            return result;
+        }
         /// <summary>
         /// 获取的Bool类型值
         /// </summary>

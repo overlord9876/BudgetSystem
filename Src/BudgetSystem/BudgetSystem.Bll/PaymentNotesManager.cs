@@ -36,6 +36,17 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public FlowRunState Payemenent(PaymentNotes paymentNode, int runPointId)
+        {
+            paymentNode.PaymentDate = DateTime.Now;
+            this.ExecuteWithTransaction((con, tran) =>
+                 {
+                     dal.ModifyPayementNodeDate(paymentNode, con, tran);
+                 });
+
+            return fm.SubmitFlow(runPointId, true, "出纳打印付款单");
+        }
+
         /// <summary>
         /// 根据合同ID获取所有付款信息
         /// </summary>

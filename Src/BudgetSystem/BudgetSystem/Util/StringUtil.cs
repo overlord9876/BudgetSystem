@@ -8,7 +8,52 @@ namespace BudgetSystem
 {
     public static class StringUtil
     {
+        /// <summary>
+        /// 业务员
+        /// </summary>
         internal const string SaleRoleCode = "YWY";
+        /// <summary>
+        /// 业务部审批员
+        /// </summary>
+        internal const string SaleDepartmentRoleCode = "BMYWY";
+        /// <summary>
+        /// 财务人员
+        /// </summary>
+        internal const string CWRYRoleCode = "CWRY";
+        /// <summary>
+        /// 财务经理
+        /// </summary>
+        internal const string FinanceManagerRoleCode = "FinanceManager";
+        /// <summary>
+        /// 财务副经理
+        /// </summary>
+        internal const string FinancialAssistantManagerRoleCode = "FinancialAssistantManager";
+        /// <summary>
+        /// 贸管部职员
+        /// </summary>
+        internal const string TradeManagementRoleCode = "TradeManagement";
+        /// <summary>
+        /// 财务收汇确认人员
+        /// </summary>
+        internal const string CWReceiptRoleCode = "CWReceipt";
+        /// <summary>
+        /// 出纳
+        /// </summary>
+        internal const string CWCashierRoleCode = "CWCashier";
+        /// <summary>
+        /// 供应商审批员
+        /// </summary>
+        internal const string SupplierApprovalRoleCode = "SupplierApproval";
+        /// <summary>
+        /// 总经理
+        /// </summary>
+        internal const string GeneralManagerRoleCode = "GeneralManager";
+        /// <summary>
+        /// 超级管理员
+        /// </summary>
+        internal const string SuperManagerRoleCode = "Default";
+
+        
 
         public static string ToNameString(this List<Customer> customers)
         {

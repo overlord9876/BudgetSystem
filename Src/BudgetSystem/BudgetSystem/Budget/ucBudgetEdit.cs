@@ -384,12 +384,14 @@ namespace BudgetSystem
                                 this.txtFlowManager.Text = point.RealName;
                                 break;
                             case "贸管部经理":
+                            case "贸管部审批员":
                                 this.txtFlowTradeManager.Text = point.RealName;
                                 break;
                             case "财务经理":
+                            case "财务副经理":
                                 this.txtFlowFinanceManager.Text = point.RealName;
                                 break;
-                            case "总经办":
+                            case "总经理":
                                 this.txtFlowGeneralManager.Text = point.RealName;
                                 break;
                         }

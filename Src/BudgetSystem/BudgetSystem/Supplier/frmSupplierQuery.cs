@@ -20,7 +20,11 @@ namespace BudgetSystem
         {
             InitializeComponent();
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(frmSupplierQuery_KeyDown);
         }
+
+        
 
         protected override void InitModelOperate()
         {
@@ -33,6 +37,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
 
             this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "供应商查询");
+            
             this.ModelOperatePageName = "供应商管理";
         }
 
@@ -174,6 +179,15 @@ namespace BudgetSystem
         {
             this.gridViewAction.Add(this.gvSupplier, new ActionWithPermission() { MainAction = ModifySupplier, MainOperate = OperateTypes.Modify, SecondAction = ViewSupplier, SecondOperate = OperateTypes.View });
 
+        }
+
+        void frmSupplierQuery_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.I && e.Control)
+            {
+                frmSupplierImport frm = new frmSupplierImport();
+                frm.ShowDialog();
+            }
         }
     }
 }

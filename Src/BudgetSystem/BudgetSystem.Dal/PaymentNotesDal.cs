@@ -124,9 +124,24 @@ namespace BudgetSystem.Dal
             return id;
         }
 
+        public void ModifyPayementNodeDate(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
+        {
+            DateTime versionNumber = GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
+
+            if (this.CheckExpired(versionNumber, modifyPaymentNote.UpdateTimestamp))
+            {
+                throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
+            }
+            modifyPaymentNote.UpdateTimestamp = DateTime.Now;
+
+            string updateSql = "Update `paymentnotes` Set `PaymentDate` = @PaymentDate Where `ID` = @ID";
+            con.Execute(updateSql, modifyPaymentNote, tran);
+
+            GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
+        }
+
         public DateTime ModifyPaymentNote(PaymentNotes modifyPaymentNote, IDbConnection con, IDbTransaction tran)
         {
-
             DateTime versionNumber = GetModifyDateTimeByTable("`paymentnotes`", "`UpdateTimestamp`", modifyPaymentNote.ID, con, tran, "`ID`");
 
             if (this.CheckExpired(versionNumber, modifyPaymentNote.UpdateTimestamp))

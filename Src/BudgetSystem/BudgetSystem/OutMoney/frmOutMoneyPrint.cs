@@ -54,8 +54,10 @@ namespace BudgetSystem.OutMoney
 
                 OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, CurrentPaymentNotes.VatOption);
 
-                caculator.ApplyForPayment(this.CurrentPaymentNotes.CNY, (decimal)this.CurrentPaymentNotes.ExchangeRate, this.CurrentPaymentNotes.IsDrawback);
+                caculator.ApplyForPayment(this.CurrentPaymentNotes.CNY, (decimal)this.CurrentPaymentNotes.TaxRebateRate, this.CurrentPaymentNotes.IsDrawback);
 
+                labelControl3.Text = CurrentPaymentNotes.VoucherNo;
+                this.labelControl2.Text = this.CurrentPaymentNotes.CommitTime.ToString("yyyy年MM月dd日");
                 this.txtBudget.Text = this.CurrentPaymentNotes.ContractNO;
                 this.chkIsIOU.Checked = this.CurrentPaymentNotes.IsIOU;
                 this.txtMoneyUsed.Text = this.CurrentPaymentNotes.MoneyUsed;
@@ -101,10 +103,8 @@ namespace BudgetSystem.OutMoney
 
                 this.txtDescription.Text = this.CurrentPaymentNotes.Description;
                 textEdit18.Text = "SGGIEC/JL8.2-8";
-                textEdit19.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-
+                textEdit19.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             }
-
         }
 
         private void btnSure_Click(object sender, EventArgs e)
@@ -117,15 +117,11 @@ namespace BudgetSystem.OutMoney
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 
-
-
         public override void PrintData()
         {
-            
             this.Height -= 50;
             this.labelControl1.Focus();
-            PrinterHelper.PrintControl(true, this.layoutControl2);
-            
+            PrinterHelper.PrintControl(false, this.layoutControl2, false);
         }
     }
 }

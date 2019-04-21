@@ -260,8 +260,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
             }
-
-            if (!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
+            else if (!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
             {
                 this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单审批流程));
             }
@@ -310,7 +309,7 @@ namespace BudgetSystem.OutMoney
             CheckUsage();
             if (txtAfterPaymentBalance.Value < 0 && string.IsNullOrEmpty(this.txtDescription.Text.Trim()))
             {
-                string message = string.Format("这批付款后超支付余额{0}，如需付款请在备注中提交说明", Math.Abs(txtAfterPaymentBalance.Value));
+                string message = string.Format("这批付款后超支付余额{0}，如需付款请在备注中提交说明", Math.Round(Math.Abs(txtAfterPaymentBalance.Value), 2));
                 XtraMessageBox.Show(message, "提示");
                 this.dxErrorProvider1.SetError(txtDescription, message);
                 this.txtDescription.Focus();
@@ -547,7 +546,7 @@ namespace BudgetSystem.OutMoney
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 
                 //生成付款单号
-                this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO, cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
+                this.txtVoucherNo.Text = string.Format("{0}-{1}", currentBudget.ContractNO.Trim(), cm.GetNewCode(CodeType.PayementCode).ToString().PadLeft(4, '0'));
 
                 if (currentBudget == null) { return; }
 
@@ -575,8 +574,10 @@ namespace BudgetSystem.OutMoney
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }
-            caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate, this.chkIsDrawback.Checked);
-
+            if (this.txtCNY.Value != 0)
+            {
+                caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate, this.chkIsDrawback.Checked);
+            }
             //退税总金额=已付金额+当前付款退税金额
             this.txtAmountTaxRebate.EditValue = caculator.AllTaxes;
 

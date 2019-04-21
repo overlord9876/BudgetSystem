@@ -11,6 +11,7 @@ using DevExpress.XtraPivotGrid;
 using BudgetSystem.Entity;
 using DevExpress.Utils;
 using System.IO;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Base
 {
@@ -467,10 +468,18 @@ namespace BudgetSystem.Base
             startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, 0, 0, 0);
             DateTime endTime = (DateTime)deEndDate.EditValue;
             endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
-            LoadDataByCondition(startTime, endTime);
+            BudgetQueryCondition condition = new BudgetQueryCondition();
+
+
+            condition = RunInfo.Instance.GetBudgetCondition(condition);
+
+
+            condition.BeginTimestamp = startTime;
+            condition.EndTimestamp = endTime;
+            LoadDataByCondition(condition);
         }
 
-        protected virtual void LoadDataByCondition(DateTime beginDate, DateTime endDate)
+        protected virtual void LoadDataByCondition(BudgetQueryCondition condition)
         {
 
         }

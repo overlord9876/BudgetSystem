@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace BudgetSystem.Entity
 {
@@ -121,8 +122,6 @@ namespace BudgetSystem.Entity
         /// 价格条款
         /// </summary>
         public string PriceClause { get; set; }
-
-
 
         /// <summary>
         /// 对外结算方式1
@@ -269,7 +268,21 @@ namespace BudgetSystem.Entity
         /// <summary>
         ///  出口退税
         /// </summary>
-        public decimal TaxRebate { get; set; }
+        public decimal TaxRebate
+        {
+            get
+            {
+
+                if (InProductList != null)
+                {
+                    return Math.Round(InProductList.Sum(o => (o.TaxRebate)), 2);
+                }
+                else
+                {
+                    return decimal.Zero;
+                }
+            }
+        }
 
         /// <summary>
         /// 总进价
@@ -316,9 +329,9 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string CustomerNameEx
         {
-            get 
+            get
             {
-                return string.IsNullOrEmpty(this.CustomerName)?string.Empty: string.Format("{0}({1})", this.CustomerName, this.CustomerCountry); 
+                return string.IsNullOrEmpty(this.CustomerName) ? string.Empty : string.Format("{0}({1})", this.CustomerName, this.CustomerCountry);
             }
         }
 
@@ -389,7 +402,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public bool IsValid
         {
-            get 
+            get
             {
                 return isValid;
             }
@@ -434,8 +447,8 @@ namespace BudgetSystem.Entity
 
         public string ToDesc()
         {
-            return string.Format("主买方[{0}],合同金额[{1}],美元合同金额[{2}],总进价[{3}],出口退税[{4}],总成本[{5}],利润[{6}]",
-                                  CustomerNameEx, TotalAmount, USDTotalAmount, PurchasePrice, TaxRebate, TotalCost, Profit);
+            return string.Format("美元合同金额[${0}],合同金额[￥{1}],总进价[{2}],出口退税[{3}],总成本[{4}],利润[{5}]",
+                                USDTotalAmount, TotalAmount, PurchasePrice, TaxRebate, TotalCost, Profit);
         }
     }
 

@@ -155,14 +155,13 @@ namespace BudgetSystem
         private BatchApproveDataItemDesc GetItemDesc(string dataType, int dataId)
         {
             BatchApproveDataItemDesc item = new BatchApproveDataItemDesc();
-
-
+            
             if (dataType == EnumFlowDataType.预算单.ToString())
             {
                 Budget b = bm.GetBudget(dataId);
                 if (b != null)
                 {
-                    item.Money = b.TotalAmount;
+                    item.Money = b.USDTotalAmount;
                     item.Desc = b.ToDesc();
                 }
             }

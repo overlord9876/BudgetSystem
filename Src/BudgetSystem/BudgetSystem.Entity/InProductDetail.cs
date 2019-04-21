@@ -57,11 +57,11 @@ namespace BudgetSystem.Entity
             {
                 if (Vat == 0)
                 {
-                    return MoneySubtotal * TaxRebateRate / 100;
+                    return Math.Round(MoneySubtotal * TaxRebateRate / 100, 2);
                 }
                 else
                 {
-                    return MoneySubtotal / (1+Vat/100) * TaxRebateRate / 100;
+                    return Math.Round(MoneySubtotal / (1 + Vat / 100) * TaxRebateRate / 100, 2);
                 }
             }
         }

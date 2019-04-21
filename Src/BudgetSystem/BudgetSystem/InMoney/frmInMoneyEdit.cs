@@ -21,7 +21,13 @@ namespace BudgetSystem.InMoney
         {
             InitializeComponent();
             this.Size = new Size(1024, 680);
+            this.FormClosed += new FormClosedEventHandler(frmInMoneyEdit_FormClosed);
             this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+        }
+
+        void frmInMoneyEdit_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.ucInMoneyEdit1.ClearError();
         }
 
         public BankSlip CurrentBankSlip
@@ -100,7 +106,18 @@ namespace BudgetSystem.InMoney
 
         private void ucInMoneyEdit1_CanCommitEventHandler(object sender, EventArgs e)
         {
-            this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            ucInMoneyEdit unInmoneyEdit = sender as ucInMoneyEdit;
+            if (unInmoneyEdit != null)
+            {
+                if (unInmoneyEdit.NotSplitCNYMoney > 0)
+                {
+                    this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                else
+                {
+                    this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+            }
         }
 
         protected override void SubmitCustomData()
@@ -175,6 +192,7 @@ namespace BudgetSystem.InMoney
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.ucInMoneyEdit1.ClearError();
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 

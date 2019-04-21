@@ -192,14 +192,12 @@ namespace BudgetSystem
 
         private void LoadData(BudgetQueryCondition condition)
         {
-            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            if (condition == null)
             {
-                if (condition == null)
-                {
-                    condition = new BudgetQueryCondition();
-                }
-                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
+                condition = new BudgetQueryCondition();
             }
+            condition = RunInfo.Instance.GetBudgetCondition(condition);
+
             List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;
         }

@@ -33,6 +33,7 @@
             this.bgcIsDelete = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lblMesage = new DevExpress.XtraEditors.LabelControl();
             this.txtPrintDateTime = new DevExpress.XtraEditors.TextEdit();
             this.chkState2 = new DevExpress.XtraEditors.CheckEdit();
             this.chkState1 = new DevExpress.XtraEditors.CheckEdit();
@@ -120,6 +121,7 @@
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgConstSplit = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lciConstSplit = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciMessage = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -186,6 +188,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgConstSplit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciConstSplit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciMessage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
@@ -215,6 +218,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.lblMesage);
             this.layoutControl1.Controls.Add(this.txtPrintDateTime);
             this.layoutControl1.Controls.Add(this.chkState2);
             this.layoutControl1.Controls.Add(this.chkState1);
@@ -250,10 +254,21 @@
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // lblMesage
+            // 
+            this.lblMesage.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMesage.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.lblMesage.Location = new System.Drawing.Point(524, 706);
+            this.lblMesage.Name = "lblMesage";
+            this.lblMesage.Size = new System.Drawing.Size(103, 22);
+            this.lblMesage.StyleController = this.layoutControl1;
+            this.lblMesage.TabIndex = 27;
+            this.lblMesage.Text = "labelControl1";
+            // 
             // txtPrintDateTime
             // 
             this.txtPrintDateTime.Location = new System.Drawing.Point(875, 744);
-            this.txtPrintDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrintDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrintDateTime.Name = "txtPrintDateTime";
             this.txtPrintDateTime.Size = new System.Drawing.Size(265, 25);
             this.txtPrintDateTime.StyleController = this.layoutControl1;
@@ -385,7 +400,7 @@
             this.ritxtConstExchageRate,
             this.riLinkEditConstInDelete,
             this.gridBudget});
-            this.gcConstSplit.Size = new System.Drawing.Size(1104, 286);
+            this.gcConstSplit.Size = new System.Drawing.Size(1104, 260);
             this.gcConstSplit.TabIndex = 19;
             this.gcConstSplit.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvConstSplit});
@@ -493,7 +508,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "审批状态";
-            this.gridColumn2.FieldName = "State";
+            this.gridColumn2.FieldName = "EnumFlowState";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -501,7 +516,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "合同金额";
-            this.gridColumn3.FieldName = "TotalAmount";
+            this.gridColumn3.FieldName = "USDTotalAmount";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -675,7 +690,7 @@
             // bgcOperator
             // 
             this.bgcOperator.Caption = "认领人";
-            this.bgcOperator.FieldName = "Operator";
+            this.bgcOperator.FieldName = "OperatorRealName";
             this.bgcOperator.Name = "bgcOperator";
             this.bgcOperator.OptionsColumn.AllowEdit = false;
             this.bgcOperator.Visible = true;
@@ -1203,7 +1218,8 @@
             // 
             this.lcgConstSplit.CustomizationFormText = "金额分拆设置";
             this.lcgConstSplit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lciConstSplit});
+            this.lciConstSplit,
+            this.lciMessage});
             this.lcgConstSplit.Location = new System.Drawing.Point(0, 393);
             this.lcgConstSplit.Name = "lcgConstSplit";
             this.lcgConstSplit.Size = new System.Drawing.Size(1132, 339);
@@ -1215,11 +1231,24 @@
             this.lciConstSplit.CustomizationFormText = "layoutControlItem17";
             this.lciConstSplit.Location = new System.Drawing.Point(0, 0);
             this.lciConstSplit.Name = "lciConstSplit";
-            this.lciConstSplit.Size = new System.Drawing.Size(1108, 290);
+            this.lciConstSplit.Size = new System.Drawing.Size(1108, 264);
             this.lciConstSplit.Text = " ";
             this.lciConstSplit.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             this.lciConstSplit.TextSize = new System.Drawing.Size(0, 0);
             this.lciConstSplit.TextToControlDistance = 0;
+            // 
+            // lciMessage
+            // 
+            this.lciMessage.Control = this.lblMesage;
+            this.lciMessage.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lciMessage.CustomizationFormText = "lciMessage";
+            this.lciMessage.Location = new System.Drawing.Point(0, 264);
+            this.lciMessage.Name = "lciMessage";
+            this.lciMessage.Size = new System.Drawing.Size(1108, 26);
+            this.lciMessage.Text = "lciMessage";
+            this.lciMessage.TextSize = new System.Drawing.Size(0, 0);
+            this.lciMessage.TextToControlDistance = 0;
+            this.lciMessage.TextVisible = false;
             // 
             // layoutControlItem18
             // 
@@ -1314,7 +1343,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucInMoneyEdit";
             this.Size = new System.Drawing.Size(1152, 781);
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -1374,6 +1403,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgConstSplit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciConstSplit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciMessage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
@@ -1488,5 +1518,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
         private DevExpress.XtraEditors.TextEdit txtPrintDateTime;
         private DevExpress.XtraLayout.LayoutControlItem lciPrintTime;
+        private DevExpress.XtraEditors.LabelControl lblMesage;
+        private DevExpress.XtraLayout.LayoutControlItem lciMessage;
     }
 }

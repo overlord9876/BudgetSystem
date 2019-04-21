@@ -262,7 +262,56 @@ namespace BudgetSystem.Util
             }
         }
 
+        /// <summary>
+        /// 获取Excel中sheet名称列表
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="message"></param>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        public static List<string> GetEexelSheetNames(string fileName, out string message)
+        {
+            message = string.Empty;
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            {
+                message = "文件不存在";
+                return null;
+            }
+            string ext = Path.GetExtension(fileName).ToLower();
+            if (!".xlsx".Equals(ext) && !".xls".Equals(ext))
+            {
+                message = "不支持的文件格式";
+                return null;
+            }
 
+            try
+            {
+                List<string> result = new List<string>();
+                using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                {
+                    IWorkbook workbook = null;
+                    if (".xlsx".Equals(ext)) // 2007版本
+                    {
+                        workbook = new XSSFWorkbook(fs);
+                    }
+                    else  //".xls"// 2003版本
+                    {
+                        workbook = new HSSFWorkbook(fs);
+                    }
+                    for (int i = 0; i < workbook.NumberOfSheets; i++)
+                    {
+                        result.Add(workbook.GetSheetAt(i).SheetName);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return null;
+            }
+        }
 
     }
 

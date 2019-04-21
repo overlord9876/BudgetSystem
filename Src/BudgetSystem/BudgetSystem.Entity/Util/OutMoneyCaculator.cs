@@ -338,7 +338,7 @@ namespace BudgetSystem.Entity
             if (isDrawback)
             {
                 //暂计退税款=(现申请用款/(1+增值税率%/100))*(出口退税率%/100)
-                CurrentTaxes = paymentMoney / (1 + ValueAddedTaxRate / 100) * (exportRebateRate / 100);
+                CurrentTaxes = Math.Round(paymentMoney / (1 + ValueAddedTaxRate / 100) * (exportRebateRate / 100), 2);
             }
             else
             {
@@ -396,7 +396,10 @@ namespace BudgetSystem.Entity
 
         private void CalcAboutReceiptMoney()
         {
-            ReceiptMoneyAmount = _receiptList.Where(o => !o.IsDelete).Sum(o => o.CNY);
+            if (_receiptList != null)
+            {
+                ReceiptMoneyAmount = _receiptList.Where(o => !o.IsDelete).Sum(o => o.CNY);
+            }
         }
 
         private void CalcAboutPaymentMoney()

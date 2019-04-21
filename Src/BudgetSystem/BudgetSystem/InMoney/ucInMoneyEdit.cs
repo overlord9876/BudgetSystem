@@ -17,13 +17,17 @@ namespace BudgetSystem.InMoney
 {
     public partial class ucInMoneyEdit : DataControl
     {
+        private decimal valueAddedTaxRate;
         private ReceiptMgmtManager arm = new ReceiptMgmtManager();
         private Bll.CustomerManager cm = new Bll.CustomerManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private SystemConfigManager scm = new SystemConfigManager();
+        private PaymentNotesManager pnm = new PaymentNotesManager();
         private UserManager um = new UserManager();
         private List<User> allSalesmanList;
         private BankSlip _currentBankSlip;
+
+        public decimal NotSplitCNYMoney { get; private set; }
 
         public event EventHandler<EventArgs> CanCommitEventHandler;
 
@@ -93,7 +97,6 @@ namespace BudgetSystem.InMoney
                                 totalCNY = 0;
                             }
                             break;
-                        //consequent calculations 
                         case CustomSummaryProcess.Calculate:
                             if (e.FieldValue != null && e.FieldValue != DBNull.Value)
                             {
@@ -111,7 +114,6 @@ namespace BudgetSystem.InMoney
                                 }
                             }
                             break;
-                        //final summary value 
                         case CustomSummaryProcess.Finalize:
                             if (fieldName == this.gcSplitConstOriginalCoin.FieldName)
                             {
@@ -144,6 +146,8 @@ namespace BudgetSystem.InMoney
 
         public void InitData()
         {
+            valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
+
             List<MoneyType> mtList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
             if (mtList != null)
             {
@@ -313,6 +317,12 @@ namespace BudgetSystem.InMoney
             }
         }
 
+        public void ClearError()
+        {
+            this.gvConstSplit.ClearColumnErrors();
+            this.gvConstSplit.CloseEditor();
+            this.gvConstSplit.CancelUpdateCurrentRow();
+        }
 
         public void BindBankSlipByID(int bsID)
         {
@@ -385,6 +395,7 @@ namespace BudgetSystem.InMoney
             {
                 dxErrorProvider1.SetError(txtPaymentMethod, "请选择支付方式");
             }
+
             return !dxErrorProvider1.HasErrors;
         }
 
@@ -533,17 +544,27 @@ namespace BudgetSystem.InMoney
             this.cboSales.SetEditValue(salesman);
         }
 
-        private string CalcSplitMoney()
+        private string CalcSplitMoney(bool originalCoinChanged = false)
         {
             string message = string.Empty;
-            var dataSource = (IEnumerable<BudgetBill>)gvConstSplit.DataSource;
+            var dataSource = (IEnumerable<BudgetBill>)gcConstSplit.DataSource;
             decimal splitCNY = 0;
             decimal splitCoinMoney = 0;
             if (dataSource != null)
             {
-                splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
-
+                if (originalCoinChanged)
+                {
+                    splitCNY = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+                }
+                else
+                {
+                    splitCNY = Math.Round(dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin * o.ExchangeRate), 2);
+                }
                 splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+
+                txtAlreadySplitCNYMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
+                txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+
             }
             if (splitCNY > txtCNY.Value)
             {
@@ -555,8 +576,6 @@ namespace BudgetSystem.InMoney
                 ErrorColumn = this.gcSplitConstOriginalCoin;
                 return "拆分原币金额不允许大于入帐单总额";
             }
-            txtAlreadySplitCNYMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.CNY);
-            txtAlreadySplitOriginalCoinMoney.EditValue = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
 
             txtNotSplitCNYMoney.EditValue = txtCNY.Value - txtAlreadySplitCNYMoney.Value;
             txtNotSplitOriginalCoinMoney.EditValue = txtOriginalCoin.Value - txtAlreadySplitOriginalCoinMoney.Value;
@@ -598,7 +617,8 @@ namespace BudgetSystem.InMoney
             if (e.Column == gcSplitConstOriginalCoin
               || e.Column == bgcConstExchangeRate)
             {
-                if (string.IsNullOrEmpty(CalcSplitMoney()))
+                string message = CalcSplitMoney();
+                if (string.IsNullOrEmpty(message))
                 {
                     decimal originalCoin = (decimal)this.gvConstSplit.GetRowCellValue(e.RowHandle, gcSplitConstOriginalCoin);
 
@@ -608,10 +628,22 @@ namespace BudgetSystem.InMoney
 
                     this.gvConstSplit.SetRowCellValue(e.RowHandle, bgcConstCNY, CNY);
                 }
+                else
+                {
+                    gvConstSplit.SetColumnError(gcSplitConstOriginalCoin, message);
+                    XtraMessageBox.Show(message);
+                    return;
+                }
             }
             else if (e.Column == bgcConstCNY)
             {
-                CalcSplitMoney();
+                string message = CalcSplitMoney();
+                if (!string.IsNullOrEmpty(message))
+                {
+                    gvConstSplit.SetColumnError(gcSplitConstOriginalCoin, message);
+                    XtraMessageBox.Show(message);
+                    return;
+                }
             }
 
             BudgetBill budget = this.gvConstSplit.GetRow(e.RowHandle) as BudgetBill;
@@ -642,7 +674,7 @@ namespace BudgetSystem.InMoney
         {
             BindingList<BudgetBill> billList = this.gvConstSplit.DataSource as BindingList<BudgetBill>;
             Customer c = this.cboCustomer.EditValue as Customer;
-            if (budgetList != null && c != null && billList.Any(o => o.Customer != c.Name))
+            if (budgetList != null && c != null && billList != null && billList.Any(o => o.Customer != c.Name))
             {
                 chkState1.Checked = true;
             }
@@ -652,10 +684,16 @@ namespace BudgetSystem.InMoney
         private void gvConstSplit_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             Budget budget = this.gvConstSplit.GetRowCellValue(e.RowHandle, this.bgcBudget) as Budget;
-
+            BudgetBill budgetBill = e.Row as BudgetBill;
             if (budget == null)
             {
                 e.ErrorText = "请选择合同号";
+                e.Valid = false;
+                return;
+            }
+            if (budgetBill == null)
+            {
+                e.ErrorText = "当前数据行错误";
                 e.Valid = false;
                 return;
             }
@@ -665,6 +703,34 @@ namespace BudgetSystem.InMoney
             if (customer == null || string.IsNullOrEmpty(customer.ToString()))
             {
                 e.ErrorText = "请选择预算单买方名称";
+                e.Valid = false;
+                return;
+            }
+
+            var currentBudget = bm.GetBudget(budgetBill.BudgetID);
+            var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID).ToList();
+
+            var receiptList = arm.GetBudgetBillListByBudgetId(currentBudget.ID);
+
+            if (receiptList != null)
+            {
+                var receipt = receiptList.FirstOrDefault(o => o.ID == budgetBill.ID);
+                if (receipt != null)
+                {
+                    receipt.CNY = budgetBill.CNY;
+                    receipt.OriginalCoin = budgetBill.OriginalCoin;
+                }
+            }
+
+            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+
+            caculator.ApplyForPayment(0, 1, false);
+            if (caculator.Balance < 0)
+            {
+                string message = string.Format("修改入账后，合同余额为{0}，不允许删除", caculator.Balance);
+                XtraMessageBox.Show(message);
+
+                e.ErrorText = message;
                 e.Valid = false;
                 return;
             }
@@ -703,6 +769,25 @@ namespace BudgetSystem.InMoney
                 BudgetBill budgetBill = gvConstSplit.GetRow(gvConstSplit.FocusedRowHandle) as BudgetBill;
                 if (budgetBill != null && budgetBill.OperatorModel != DataOperatorModel.Add)
                 {
+                    var currentBudget = bm.GetBudget(budgetBill.BudgetID);
+                    var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID).ToList();
+
+                    var receiptList = arm.GetBudgetBillListByBudgetId(currentBudget.ID);
+                    IEnumerable<BudgetBill> removedReceiptList = null;
+                    if (receiptList != null)
+                    {
+                        removedReceiptList = receiptList.Where(o => o.ID != budgetBill.ID);
+                    }
+
+                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate);
+                    caculator.ApplyForPayment(0, 1, false);
+                    if (caculator.Balance < 0)
+                    {
+                        XtraMessageBox.Show(string.Format("删除入账后，合同余额为{0}，不允许删除", caculator.Balance));
+                        gvConstSplit.CloseEditor();
+                        gvConstSplit.CancelUpdateCurrentRow();
+                        return;
+                    }
                     //budgetBill.OriginalCoin = 0;
                     //budgetBill.CNY = 0;
                     budgetBill.IsDelete = true;
@@ -747,12 +832,19 @@ namespace BudgetSystem.InMoney
 
         private void txtNotSplitCNYMoney_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.txtNotSplitCNYMoney.Value == 0 && this.txtNotSplitOriginalCoinMoney.Value == 0)
+            NotSplitCNYMoney = this.txtNotSplitCNYMoney.Value;
+            if (NotSplitCNYMoney != 0)
             {
-                if (CanCommitEventHandler != null)
-                {
-                    CanCommitEventHandler(this, e); ;
-                }
+                lblMesage.Text = string.Format("还剩￥{0}未拆分，当前只能暂时收汇入合同，无法确定最终收汇。", NotSplitCNYMoney);
+                lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+            else
+            {
+                lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+            if (CanCommitEventHandler != null)
+            {
+                CanCommitEventHandler(this, e); ;
             }
         }
 

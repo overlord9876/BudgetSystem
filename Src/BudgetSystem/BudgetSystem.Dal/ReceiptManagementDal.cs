@@ -202,11 +202,12 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,u.RealName as OperatorRealName,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN `user` u on bb.Operator=u.UserName
 										LEFT JOIN department d on bb.DeptID=d.`ID`
                 Where bb.`BSID` = @BSID";
             return con.Query<BudgetBill>(selectSql, new { BSID = bsID }, tran);

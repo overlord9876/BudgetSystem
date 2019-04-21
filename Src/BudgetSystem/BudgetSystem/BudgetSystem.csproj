@@ -312,6 +312,12 @@
     <Compile Include="Customer\frmCustomerQueryConditionEditor.Designer.cs">
       <DependentUpon>frmCustomerQueryConditionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customer\frmCustomImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frmCustomImport.Designer.cs">
+      <DependentUpon>frmCustomImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customer\ucCustomerSelected.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -383,6 +389,12 @@
     </Compile>
     <Compile Include="Report\frmCompanyReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierImport.Designer.cs">
+      <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
       <SubType>Form</SubType>
@@ -741,6 +753,9 @@
     <EmbeddedResource Include="Customer\frmCustomerQueryConditionEditor.resx">
       <DependentUpon>frmCustomerQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frmCustomImport.resx">
+      <DependentUpon>frmCustomImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </EmbeddedResource>
@@ -765,12 +780,14 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierImport.resx">
+      <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
@@ -984,9 +1001,6 @@
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Default.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_Modify.xml" />
     <EmbeddedResource Include="FlowManage\frmFlowEdit_View.xml" />
-    <EmbeddedResource Include="InMoney\frmInvoiceEdit_Modify.xml" />
-    <EmbeddedResource Include="InMoney\frmInvoiceEdit_New.xml" />
-    <EmbeddedResource Include="InMoney\frmInvoiceEdit_View.xml" />
     <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_New.xml" />
     <EmbeddedResource Include="OutMoney\frmDeclarationformEdit_View.xml" />
     <Content Include="logo.ico" />

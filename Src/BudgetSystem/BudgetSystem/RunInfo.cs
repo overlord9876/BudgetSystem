@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
     public class RunInfo
     {
-        private  RunInfo()
+        private RunInfo()
         {
             this.Config = Config.Read();
             this.Logger = new Util.Logger(System.IO.Path.Combine(Environment.CurrentDirectory, "Log"));
@@ -15,7 +16,7 @@ namespace BudgetSystem
 
         private static object lockObj = new object();
         private static RunInfo instance = null;
-       
+
         public static RunInfo Instance
         {
             get
@@ -28,7 +29,7 @@ namespace BudgetSystem
                     }
                 }
                 return instance;
-            
+
             }
         }
 
@@ -43,14 +44,35 @@ namespace BudgetSystem
             get;
             set;
         }
-
+        /// <summary>
+        /// 当前用户所有部门
+        /// </summary>
+        public Department CurrentUserDepartment
+        {
+            get;
+            set;
+        }
         public List<string> UserPermission
         {
             get;
             set;
         }
 
-
+        public BudgetQueryCondition GetBudgetCondition(BudgetQueryCondition condition)
+        {
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
+            }
+            else if (CurrentUser.Role == StringUtil.SaleDepartmentRoleCode)
+            {
+                condition.DeptID = RunInfo.Instance.CurrentUser.DeptID;
+            }
+            else
+            {
+            }
+            return condition;
+        }
 
 
         private FlowApproveNameConfigCollection flowAppreveNameConfigs = null;

@@ -46,13 +46,14 @@
             this.gdBatchApproveData.MainView = this.gvBatchApproveData;
             this.gdBatchApproveData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gdBatchApproveData.Name = "gdBatchApproveData";
-            this.gdBatchApproveData.Size = new System.Drawing.Size(1365, 375);
+            this.gdBatchApproveData.Size = new System.Drawing.Size(1545, 474);
             this.gdBatchApproveData.TabIndex = 0;
             this.gdBatchApproveData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBatchApproveData});
             // 
             // gvBatchApproveData
             // 
+            this.gvBatchApproveData.BestFitMaxRowCount = 3;
             this.gvBatchApproveData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcIsSelected,
             this.gcText,
@@ -61,9 +62,9 @@
             this.gvBatchApproveData.GridControl = this.gdBatchApproveData;
             this.gvBatchApproveData.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvBatchApproveData.Name = "gvBatchApproveData";
-            this.gvBatchApproveData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gvBatchApproveData.OptionsView.ShowFooter = true;
             this.gvBatchApproveData.OptionsView.ShowGroupPanel = false;
+            this.gvBatchApproveData.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             // 
             // gcIsSelected
             // 
@@ -116,7 +117,7 @@
             this.Controls.Add(this.gdBatchApproveData);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchDataControl";
-            this.Size = new System.Drawing.Size(1365, 375);
+            this.Size = new System.Drawing.Size(1545, 474);
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).EndInit();
             this.ResumeLayout(false);

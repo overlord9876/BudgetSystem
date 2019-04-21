@@ -11,7 +11,7 @@ namespace BudgetSystem.Dal
 {
     public class ReportDal
     {
-        public IEnumerable<BudgetReport> GetBudgetReportList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<BudgetReport> GetBudgetReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT b.*,u.RealName  AS SalesmanName,d.`Code` AS DepartmentCode,d.`Name` AS DepartmentName
                                  FROM `Budget` b                                     
@@ -23,16 +23,28 @@ namespace BudgetSystem.Dal
                                 UNION
                                 select DISTINCT BudgetID from Declarationform  where CreateDate BETWEEN @BeginTime and @EndTime
                                 UNION
-                                select DISTINCT BudgetID from BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime) and b.ID<>0;");
+                                select DISTINCT BudgetID from BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime) and b.ID<>0 ");
+
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " and b.DeptID=@DeptID";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            if (condition.DeptID >= 0)
+            {
+                selectSql += " and b.Salesman=@Salesman";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
             IEnumerable<BudgetReport> budgetList = con.Query<BudgetReport>(selectSql, dp, tran);
 
-            IEnumerable<PaymentNotes> pnList = GetPaymentNotesList(beginTime, endTime, con, tran);
-            IEnumerable<Invoice> iList = GetInvoiceList(beginTime, endTime, con, tran);
-            IEnumerable<BudgetBill> bbList = GetBudgetBillList(beginTime, endTime, con, tran);
-            IEnumerable<Declarationform> dList = GetDeclarationformList(beginTime, endTime, con, tran);
+            IEnumerable<PaymentNotes> pnList = GetPaymentNotesList(condition, con, tran);
+            IEnumerable<Invoice> iList = GetInvoiceList(condition, con, tran);
+            IEnumerable<BudgetBill> bbList = GetBudgetBillList(condition, con, tran);
+            IEnumerable<Declarationform> dList = GetDeclarationformList(condition, con, tran);
             if (budgetList != null)
             {
                 foreach (BudgetReport report in budgetList)
@@ -46,50 +58,50 @@ namespace BudgetSystem.Dal
             return budgetList;
         }
 
-        public IEnumerable<PaymentNotes> GetPaymentNotesList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<PaymentNotes> GetPaymentNotesList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT * from PaymentNotes where CommitTime BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<PaymentNotes>(selectSql, dp, tran);
         }
 
-        public IEnumerable<Invoice> GetInvoiceList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<Invoice> GetInvoiceList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"select * from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<Invoice>(selectSql, dp, tran);
         }
 
-        public IEnumerable<BudgetBill> GetBudgetBillList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<BudgetBill> GetBudgetBillList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT * FROM BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<BudgetBill>(selectSql, dp, tran);
         }
 
-        public IEnumerable<Declarationform> GetDeclarationformList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<Declarationform> GetDeclarationformList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT * FROM Declarationform  where CreateDate BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<Declarationform>(selectSql, dp, tran);
         }
 
-        public IEnumerable<SupplierReport> GetSupplierReportList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,pn.ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
 where pn.CommitTime BETWEEN @BeginTime AND @EndTime
 GROUP BY s.`Name`;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             IEnumerable<SupplierReport> result = con.Query<SupplierReport>(selectSql, dp, tran);
 
             selectSql = string.Format(@"select i.* from Invoice i
@@ -108,14 +120,14 @@ GROUP BY s.`Name`;");
         }
 
 
-        public IEnumerable<CustomerReport> GetCustomerReportList(DateTime beginTime, DateTime endTime, IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
+        public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT c.`Name`,sum(bs.CNY) as CNY,sum(bs.OriginalCoin) as OriginalCoin,bs.ExchangeRate from customer as c join BankSlip bs on c.`Name`=bs.Remitter
 where CreateTimestamp BETWEEN @BeginTime AND @EndTime
 group by c.`Name`;");
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", beginTime, null, null, null);
-            dp.Add("EndTime", endTime, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             IEnumerable<CustomerReport> result = con.Query<CustomerReport>(selectSql, dp, tran);
 
             selectSql = string.Format(@"select c.`Name`,d.* from Declarationform d join budget b on d.BudgetID=b.ID join customer c on b.CustomerID=c.ID

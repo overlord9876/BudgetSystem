@@ -21,6 +21,7 @@ namespace BudgetSystem.WorkSpace
 
 
         FlowManager manager = new FlowManager();
+        PaymentNotesManager pnm = new PaymentNotesManager();
         public frmApprovalListQuery()
         {
             InitializeComponent();
@@ -74,37 +75,47 @@ namespace BudgetSystem.WorkSpace
         {
             if (this.gvPendingFlow.FocusedRowHandle >= 0)
             {
-                FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
-                if (item != null)
+                int[] rowIndexList = this.gvPendingFlow.GetSelectedRows();
+                Dictionary<int, FlowItem> flowItems = new Dictionary<int, FlowItem>();
+                foreach (int rowIndex in rowIndexList)
                 {
-                    if (item.DateItemType != EnumFlowDataType.付款单.ToString())
+                    FlowItem item = this.gvPendingFlow.GetRow(rowIndex) as FlowItem;
+                    if (item != null)
                     {
-                        XtraMessageBox.Show("当前审批流程不属于付款单类型，不允许直接打印通过审批");
-                        return;
+                        if (item.DateItemType != EnumFlowDataType.付款单.ToString())
+                        {
+                            XtraMessageBox.Show(string.Format("当前{0}审批流程不属于付款单类型，不允许直接打印通过审批", item.DateItemText));
+                            break;
+                        }
+                        flowItems.Add(rowIndex, item);
                     }
+                }
+                if (flowItems.Count > 0)
+                {
                     PaymentNotesManager pnm = new PaymentNotesManager();
-                    PaymentNotes currentItem = pnm.GetPaymentNoteById(item.DateItemID);
-                    if (currentItem == null)
+                    foreach (int rowIndex in flowItems.Keys)
                     {
-                        XtraMessageBox.Show("当前数据已经不存在。");
-                        return;
-                    }
-                    frmOutMoneyPrint form = new frmOutMoneyPrint();
-                    form.WorkModel = EditFormWorkModels.View;
-                    form.CurrentPaymentNotes = currentItem;
-                    form.PrintItem();
-
-                    FlowRunState state = manager.SubmitFlow(item.RunPointID, true, "出纳打印付款单");
-                    string info;
-                    if (state.Translate(out info))
-                    {
-                        currentItem.PaymentDate = DateTime.Now;
-                        pnm.ModifyPaymentNote(currentItem);
-                        this.gvPendingFlow.DeleteRow(this.gvPendingFlow.FocusedRowHandle);
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show(info);
+                        FlowItem item = flowItems[rowIndex];
+                        PaymentNotes currentItem = pnm.GetPaymentNoteById(item.DateItemID);
+                        if (currentItem == null)
+                        {
+                            XtraMessageBox.Show("当前数据已经不存在。");
+                            return;
+                        }
+                        frmOutMoneyPrint form = new frmOutMoneyPrint();
+                        form.WorkModel = EditFormWorkModels.View;
+                        form.CurrentPaymentNotes = currentItem;
+                        form.PrintItem();
+                        FlowRunState state = pnm.Payemenent(currentItem, item.RunPointID);
+                        string info;
+                        if (state.Translate(out info))
+                        {
+                            this.gvPendingFlow.DeleteRow(rowIndex);
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show(info);
+                        }
                     }
                 }
 

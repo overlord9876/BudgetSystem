@@ -200,6 +200,7 @@ namespace BudgetSystem.InMoney
             Budget budget = (Budget)this.cboBudget.EditValue;
             CurrentInvoice.ContractNO = budget.ContractNO;
             CurrentInvoice.BudgetID = budget.ID;
+            CurrentInvoice.Code = txtCode.Text.Trim();
             CurrentInvoice.Number = this.txtNumber.Text.Trim();
             CurrentInvoice.OriginalCoin = this.txtOriginalCoin.Value;
             CurrentInvoice.ExchangeRate = this.txtExchangeRate.FloatValue;
@@ -207,8 +208,14 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.TaxRebateRate = this.txtTaxRebateRate.FloatValue;
             CurrentInvoice.Commission = this.txtCommission.Value;
             CurrentInvoice.FeedMoney = this.txtFeedMoney.Value;
+            CurrentInvoice.SupplierName = this.txtSupplierName.Text.Trim();
+            CurrentInvoice.TaxpayerID = this.txtTaxpayerID.Text.Trim();
+            CurrentInvoice.Payment = this.txtPayment.Value;
             CurrentInvoice.ImportUser = RunInfo.Instance.CurrentUser.UserName;
+            CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
+            CurrentInvoice.TaxAmount = this.txtTaxAmount.Value;
             CurrentInvoice.ImportDate = DateTime.Now;
+            CurrentInvoice.FinanceImportDate = DateTime.Now;
         }
 
         public override void PrintData()

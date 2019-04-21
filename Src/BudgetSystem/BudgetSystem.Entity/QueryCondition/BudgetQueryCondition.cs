@@ -49,6 +49,7 @@ namespace BudgetSystem.Entity.QueryCondition
             set { isManagerApproval = value; }
         }
         private EnumBudgetState state = (EnumBudgetState)(-1);
+
         /// <summary>
         /// 状态
         /// </summary>
@@ -58,6 +59,7 @@ namespace BudgetSystem.Entity.QueryCondition
             set { state = value; }
         }
         private bool isArchiveWarningQuery = false;
+
         /// <summary>
         /// 是否归档预警查询 
         /// </summary>
@@ -67,8 +69,13 @@ namespace BudgetSystem.Entity.QueryCondition
             set { isArchiveWarningQuery = value; }
         }
 
+        public DateTime BeginTimestamp { get; set; }
+        public DateTime EndTimestamp { get; set; }
+
         public BudgetQueryCondition()
         {
+            BeginTimestamp = DateTime.MinValue;
+            EndTimestamp = DateTime.MinValue;
             DeptID = -1;
         }
 

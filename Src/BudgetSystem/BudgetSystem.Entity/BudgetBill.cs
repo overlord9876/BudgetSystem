@@ -61,6 +61,11 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Operator { get; set; }
 
+        /// <summary>
+        /// 操作人姓名
+        /// </summary>
+        public string OperatorRealName { get; set; }
+
         public int DeptID { get; set; }
 
         /// <summary>

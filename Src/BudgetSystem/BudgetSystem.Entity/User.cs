@@ -60,7 +60,7 @@ namespace BudgetSystem.Entity
 
         public override string ToString()
         {
-            return string.Format("[{0}]-[{1}]", RealName, UserName);
+            return string.Format("[{0}]-[{1}]", UserName, RealName);
         }
     }
 }
