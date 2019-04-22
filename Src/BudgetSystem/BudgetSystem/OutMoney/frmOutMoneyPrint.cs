@@ -89,9 +89,11 @@ namespace BudgetSystem.OutMoney
                     currencyChar = "$";
                 }
 
+                UserManager um = new UserManager();
                 this.txtOriginalCoinBig.Text = currency + StringUtil.MoneyToUpper(Math.Round(this.CurrentPaymentNotes.OriginalCoin, 2).ToString());
                 this.txtOriginalCoin.Text = currencyChar + Math.Round(this.CurrentPaymentNotes.OriginalCoin, 2).ToString();
-                this.txtApplicant.Text = this.CurrentPaymentNotes.Applicant;
+                User u = um.GetUser(CurrentPaymentNotes.Applicant);
+                this.txtApplicant.Text = u != null ? u.ToString() : CurrentPaymentNotes.Applicant;
                 this.txtPayingBank.Text = this.CurrentPaymentNotes.PayingBank;
                 List<FlowRunPoint> points = fm.GetFlowRunPointsByData(CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString());
                 string applyList = string.Empty;

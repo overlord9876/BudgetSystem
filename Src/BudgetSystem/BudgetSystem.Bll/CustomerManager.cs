@@ -9,7 +9,6 @@ namespace BudgetSystem.Bll
 {
     public class CustomerManager : BaseManager
     {
-
         Dal.CustomerDal dal = new Dal.CustomerDal();
 
         public List<Customer> GetAllCustomer(CustomerQueryCondition condition = null)
@@ -40,6 +39,7 @@ namespace BudgetSystem.Bll
                 return id;
             });
         }
+
         public void ModifyCustomer(Customer Customer)
         {
             this.ExecuteWithTransaction((con,tran) =>

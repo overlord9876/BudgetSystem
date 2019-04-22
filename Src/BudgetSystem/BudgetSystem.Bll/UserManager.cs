@@ -95,12 +95,12 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<User> GetDepartmentUsers(string departmentCode)
+        public List<User> GetDepartmentUsers(int deptId)
         {
             var lst = this.Query<User>((con) =>
             {
 
-                var uList = dal.GetDepartmentUsers(departmentCode, con, null);
+                var uList = dal.GetDepartmentUsers(deptId, con, null);
                 return uList;
 
             });

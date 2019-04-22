@@ -21,6 +21,8 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.Module = BusinessModules.CustomerManagement;
+            this.KeyPreview = true;
+            KeyDown += new KeyEventHandler(frmCustomerQuery_KeyDown);
         }
 
         protected override void InitModelOperate()
@@ -168,11 +170,20 @@ namespace BudgetSystem
             LoadData(null);
         }
 
-
         protected override void InitGridViewAction()
         {
             this.gridViewAction.Add(this.gvCustomer, new ActionWithPermission() { MainAction = ModifyCustomer, MainOperate = OperateTypes.Modify, SecondAction = ViewCustomer, SecondOperate = OperateTypes.View });
 
         }
+
+        private void frmCustomerQuery_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.I && e.Control)
+            {
+                frmCustomImport frm = new frmCustomImport();
+                frm.ShowDialog();
+            }
+        }
+
     }
 }

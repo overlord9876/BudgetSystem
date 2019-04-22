@@ -23,8 +23,6 @@ namespace BudgetSystem.Dal
 
         public User GetUser(string userName, string password, IDbConnection con, IDbTransaction tran)
         {
-
-
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
@@ -97,14 +95,14 @@ namespace BudgetSystem.Dal
         }
 
 
-        public IEnumerable<User> GetDepartmentUsers(string departmentCode, IDbConnection con, IDbTransaction tran)
+        public IEnumerable<User> GetDepartmentUsers(int deptId, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`DeptID` = `Department`.ID
-            Where Department.`Code`=@Code";
-            return con.Query<User>(selectSql, new { Code = departmentCode }, tran);
+            Where `User`.`DeptID`=@DeptID";
+            return con.Query<User>(selectSql, new { DeptID = deptId }, tran);
 
         }
 

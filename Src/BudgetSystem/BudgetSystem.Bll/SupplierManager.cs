@@ -76,7 +76,19 @@ namespace BudgetSystem.Bll
             {
                 return "数据不存在";
             }
-            else if (supplier.EnumFlowState == EnumDataFlowState.审批中)
+            if (supplier.BusinessEffectiveDate < DateTime.Now)
+            {
+                return "经营截止期不能小于当前日期";
+            }
+            if (supplier.AgreementDate < DateTime.Now)
+            {
+                return "代理协议有效期不能小于当前日期";
+            }
+            if (!supplier.ExistsAgentAgreement)
+            {
+                return "必须有合格供方代理协议";
+            }
+            if (supplier.EnumFlowState == EnumDataFlowState.审批中)
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }

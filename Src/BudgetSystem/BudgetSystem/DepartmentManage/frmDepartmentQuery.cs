@@ -121,7 +121,7 @@ namespace BudgetSystem.DepartmentManage
             Department currentDepartment = this.gvDepartment.GetFocusedRow() as Department;
             if (currentDepartment != null)
             {
-                List<User> departmentUsers = um.GetDepartmentUsers(currentDepartment.Code);
+                List<User> departmentUsers = um.GetDepartmentUsers(currentDepartment.ID);
                 this.gdDepartmentUser.DataSource = departmentUsers;
 
             }

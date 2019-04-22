@@ -31,13 +31,13 @@ namespace BudgetSystem.Dal
 
             if (!string.IsNullOrEmpty(condition.Salesman))
             {
-                selectSql += " and b.DeptID=@DeptID";
-                dp.Add("DeptID", condition.DeptID, null, null, null);
+                selectSql += " and b.Salesman=@Salesman";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
             }
             if (condition.DeptID >= 0)
             {
-                selectSql += " and b.Salesman=@Salesman";
-                dp.Add("Salesman", condition.Salesman, null, null, null);
+                selectSql += " and b.DeptID=@DeptID";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
             }
             IEnumerable<BudgetReport> budgetList = con.Query<BudgetReport>(selectSql, dp, tran);
 
@@ -97,11 +97,22 @@ namespace BudgetSystem.Dal
         public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,pn.ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
-where pn.CommitTime BETWEEN @BeginTime AND @EndTime
-GROUP BY s.`Name`;");
+where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND Applicant=@Applicant ";
+                dp.Add("Applicant", condition.Salesman, null, null, null);
+            }
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += "  AND Applicant in (SELECT UserName from `user` where DeptID=@DeptID) ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+
+            selectSql += " GROUP BY s.`Name`;";
             IEnumerable<SupplierReport> result = con.Query<SupplierReport>(selectSql, dp, tran);
 
             selectSql = string.Format(@"select i.* from Invoice i
@@ -123,11 +134,22 @@ GROUP BY s.`Name`;");
         public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT c.`Name`,sum(bs.CNY) as CNY,sum(bs.OriginalCoin) as OriginalCoin,bs.ExchangeRate from customer as c join BankSlip bs on c.`Name`=bs.Remitter
-where CreateTimestamp BETWEEN @BeginTime AND @EndTime
-group by c.`Name`;");
+where CreateTimestamp BETWEEN @BeginTime AND @EndTime ");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.username=@Salesman ) ";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.DeptID=@DeptID) ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+
+            selectSql += "group by c.`Name`";
             IEnumerable<CustomerReport> result = con.Query<CustomerReport>(selectSql, dp, tran);
 
             selectSql = string.Format(@"select c.`Name`,d.* from Declarationform d join budget b on d.BudgetID=b.ID join customer c on b.CustomerID=c.ID

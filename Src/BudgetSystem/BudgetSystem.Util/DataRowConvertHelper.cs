@@ -20,7 +20,7 @@ namespace BudgetSystem.Util
         {
             Guid result = Guid.Empty;
 
-            if (r[name] != null && r[name] != DBNull.Value&&!string.IsNullOrEmpty(r[name].ToString()))
+            if (r[name] != null && r[name] != DBNull.Value && !string.IsNullOrEmpty(r[name].ToString()))
             {
                 try
                 {
@@ -106,7 +106,7 @@ namespace BudgetSystem.Util
             }
             return result;
         }
-       
+
 
         /// <summary>
         /// Decimal
@@ -121,7 +121,7 @@ namespace BudgetSystem.Util
         {
             decimal result = 0;
 
-            if (r[name] != null && r[name] != DBNull.Value&&!string.IsNullOrEmpty(r[name].ToString()))
+            if (r[name] != null && r[name] != DBNull.Value && !string.IsNullOrEmpty(r[name].ToString()))
             {
                 try
                 {
@@ -147,7 +147,7 @@ namespace BudgetSystem.Util
         {
             float result = 0;
 
-            if (r[name] != null && r[name] != DBNull.Value&&!string.IsNullOrEmpty(r[name].ToString()))
+            if (r[name] != null && r[name] != DBNull.Value && !string.IsNullOrEmpty(r[name].ToString()))
             {
                 try
                 {
@@ -203,17 +203,21 @@ namespace BudgetSystem.Util
         /// datetime值
         /// 如果发生错误返回DateTime.MinValue;
         /// </returns>
-        public static DateTime? GetDateTimeValue_AllowNull(DataRow r, string name, string ignore="")
+        public static DateTime? GetDateTimeValue_AllowNull(DataRow r, string name, string ignore = "")
         {
             DateTime? result = null;
-
             if (r[name] != null && r[name] != DBNull.Value && !string.IsNullOrEmpty(r[name].ToString()))
             {
                 try
                 {
+                    if (r[name].ToString().Trim().StartsWith("***"))
+                    {
+                        return new DateTime(2199, 1, 1);
+                    }
+
                     if (!string.IsNullOrEmpty(ignore))
                     {
-                        result = Convert.ToDateTime(r[name].ToString().Replace("\"",""));
+                        result = Convert.ToDateTime(r[name].ToString().Replace("\"", ""));
                     }
                     else
                     {

@@ -64,17 +64,37 @@ namespace BudgetSystem
                         break;
                     }
                     supplier.TaxpayerID = DataRowConvertHelper.GetStringValue(row, "纳税人识别号").Trim();
-                    supplier.SupplierType = (int)DataRowConvertHelper.GetEnumValue<EnumSupplierType>(row, "供应商类型");
+                    if (row["供应商类型"] != null && row["供应商类型"] != DBNull.Value && !string.IsNullOrEmpty(row["供应商类型"].ToString()))
+                    {
+                        supplier.SupplierType = (int)DataRowConvertHelper.GetEnumValue<EnumSupplierType>(row, "供应商类型");
+                    }
+                    else
+                    {
+                        supplier.SupplierType = 1;
+                    }
                     supplier.RegistrationDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "工商登记日期", "\"");
                     supplier.BusinessEffectiveDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "经营截至日期", "\"");
                     supplier.ExistsAgentAgreement = "代理".Equals(DataRowConvertHelper.GetStringValue(row, "存在合格供方代理").Trim()) ? true : false;
                     supplier.Discredited = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否失信企业").Trim()) ? true : false;
                     supplier.AgreementDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "代理协议有效期");
+
                     supplier.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
+                    if (supplier.CreateDate <= DateTime.MinValue)
+                    {
+                        supplier.CreateDate = DateTime.Now;
+                    }
                     userName = DataRowConvertHelper.GetStringValue(row, "创建人").Trim();
                     user = users.FirstOrDefault(u => u.RealName == userName);
-                    supplier.CreateUser = user.UserName;
-                    supplier.CreateUserName = userName;
+                    if (user != null)
+                    {
+                        supplier.CreateUser = user.UserName;
+                        supplier.CreateUserName = userName;
+                    }
+                    else
+                    {
+                        supplier.CreateUser = department.Manager;
+                        supplier.CreateUserName = department.ManagerName;
+                    }
                     supplier.Description = DataRowConvertHelper.GetStringValue(row, "备注").Trim();
                     supplier.DeptID = department.ID;
                     //银行信息暂用默认
@@ -132,11 +152,19 @@ namespace BudgetSystem
                     Bll.SupplierManager sm = new Bll.SupplierManager();
                     foreach (Supplier supplier in list)
                     {
-                        sm.AddSupplier(supplier);
+                        supplier.ID = sm.AddSupplier(supplier);
+                        if (supplier.SupplierType == 0)
+                        {
+                            string message = sm.StartFlow(supplier.ID, supplier.CreateUser);
+                            if (string.IsNullOrEmpty(message))
+                            {
+
+                            }
+                        }
                     }
                     if (isContinue)
                     {
-                        this.gridSupplier.DataSource =null;
+                        this.gridSupplier.DataSource = null;
                         this.gridSupplier.RefreshDataSource();
                     }
                     else

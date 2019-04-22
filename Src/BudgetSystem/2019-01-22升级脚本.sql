@@ -6,3 +6,5 @@ insert into rolepermission(RoleCode,Permission) values('YWY','BuggetManagement.C
 insert into rolepermission(RoleCode,Permission) values('CW','BuggetManagement.RejectedAccount');
 insert into rolepermission(RoleCode,Permission) values('CW','BuggetManagement.FinancialArchiveApply');
 insert into rolepermission(RoleCode,Permission) values('CW','BuggetManagement.Archive');
+
+alter table customer convert to character set utf8mb4 collate utf8mb4_bin

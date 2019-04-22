@@ -451,11 +451,11 @@
             this.lueCountry.Name = "lueCountry";
             this.lueCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lueCountry.Properties.DisplayMember = "Code";
+            this.lueCountry.Properties.DisplayMember = "Name";
             this.lueCountry.Properties.MaxLength = 50;
             this.lueCountry.Properties.NullText = "";
             this.lueCountry.Properties.ShowFooter = false;
-            this.lueCountry.Properties.ValueMember = "Code";
+            this.lueCountry.Properties.ValueMember = "Name";
             this.lueCountry.Properties.View = this.searchLookUpEdit1View;
             this.lueCountry.Size = new System.Drawing.Size(376, 25);
             this.lueCountry.StyleController = this.layoutControl1;
@@ -518,10 +518,10 @@
             this.luePort.Name = "luePort";
             this.luePort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.luePort.Properties.DisplayMember = "EnName";
+            this.luePort.Properties.DisplayMember = "Name";
             this.luePort.Properties.NullText = "";
             this.luePort.Properties.ShowFooter = false;
-            this.luePort.Properties.ValueMember = "EnName";
+            this.luePort.Properties.ValueMember = "Name";
             this.luePort.Properties.View = this.gridView1;
             this.luePort.Size = new System.Drawing.Size(379, 25);
             this.luePort.StyleController = this.layoutControl1;

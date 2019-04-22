@@ -10,19 +10,9 @@ namespace BudgetSystem.Entity.QueryCondition
     public class BudgetQueryCondition : BaseQueryCondition
     {
         /// <summary>
-        /// 业务员
-        /// </summary>
-        public string Salesman { get; set; }
-
-        /// <summary>
         /// 合同号
         /// </summary>
         public string ContractNO { get; set; }
-
-        /// <summary>
-        /// 所在部门
-        /// </summary>
-        public int DeptID { get; set; }
 
         /// <summary>
         /// 主客户名称

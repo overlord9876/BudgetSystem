@@ -60,14 +60,14 @@
             // gdPendingFlow
             // 
             this.gdPendingFlow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gdPendingFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdPendingFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gdPendingFlow.Location = new System.Drawing.Point(0, 0);
             this.gdPendingFlow.MainView = this.gvPendingFlow;
-            this.gdPendingFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdPendingFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gdPendingFlow.Name = "gdPendingFlow";
             this.gdPendingFlow.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemImageComboBox1});
-            this.gdPendingFlow.Size = new System.Drawing.Size(880, 439);
+            this.gdPendingFlow.Size = new System.Drawing.Size(1006, 564);
             this.gdPendingFlow.TabIndex = 1;
             this.gdPendingFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPendingFlow});
@@ -178,17 +178,17 @@
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(87, 37);
+            this.textEdit2.Location = new System.Drawing.Point(105, 41);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(186, 21);
+            this.textEdit2.Size = new System.Drawing.Size(168, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(87, 12);
+            this.textEdit1.Location = new System.Drawing.Point(105, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(186, 21);
+            this.textEdit1.Size = new System.Drawing.Size(168, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -212,26 +212,27 @@
             this.layoutControlItem1.CustomizationFormText = "客户名称：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem1.Text = "客户名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "国家或地区：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 418);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 414);
             this.layoutControlItem2.Text = "国家或地区：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
             // frmApprovalListQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 439);
+            this.ClientSize = new System.Drawing.Size(1006, 564);
             this.Controls.Add(this.gdPendingFlow);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmApprovalListQuery";
             this.Text = "待审流程";
             ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).EndInit();

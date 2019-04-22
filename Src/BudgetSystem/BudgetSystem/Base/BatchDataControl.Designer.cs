@@ -34,8 +34,10 @@
             this.gcText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cckAll = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cckAll.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gdBatchApproveData
@@ -110,16 +112,27 @@
             this.gcDescription.VisibleIndex = 3;
             this.gcDescription.Width = 1057;
             // 
+            // cckAll
+            // 
+            this.cckAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cckAll.Location = new System.Drawing.Point(17, 425);
+            this.cckAll.Name = "cckAll";
+            this.cckAll.Properties.Caption = "全选";
+            this.cckAll.Size = new System.Drawing.Size(75, 23);
+            this.cckAll.TabIndex = 2;
+            // 
             // BatchDataControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cckAll);
             this.Controls.Add(this.gdBatchApproveData);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchDataControl";
             this.Size = new System.Drawing.Size(1545, 474);
             ((System.ComponentModel.ISupportInitialize)(this.gdBatchApproveData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBatchApproveData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cckAll.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -132,5 +145,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraGrid.Columns.GridColumn gcMoney;
         private DevExpress.XtraGrid.Columns.GridColumn gcIsSelected;
+        private DevExpress.XtraEditors.CheckEdit cckAll;
     }
 }

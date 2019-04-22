@@ -24,7 +24,7 @@ namespace BudgetSystem
             this.KeyDown += new KeyEventHandler(frmSupplierQuery_KeyDown);
         }
 
-        
+
 
         protected override void InitModelOperate()
         {
@@ -37,7 +37,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
 
             this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "供应商查询");
-            
+
             this.ModelOperatePageName = "供应商管理";
         }
 
@@ -99,6 +99,16 @@ namespace BudgetSystem
 
         private void LoadData(SupplierQueryCondition condition)
         {
+            if (condition == null)
+            {
+                condition = new SupplierQueryCondition();
+            }
+
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                condition.DeptID = RunInfo.Instance.CurrentUser.DeptID;
+            }
+
             var list = sm.GetAllSupplier(condition);
             this.gridSupplier.DataSource = list;
         }

@@ -34,20 +34,16 @@
             this.btnRead = new DevExpress.XtraEditors.SimpleButton();
             this.cboDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnFileName = new DevExpress.XtraEditors.ButtonEdit();
-            this.gridSupplier = new DevExpress.XtraGrid.GridControl();
-            this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridCustomer = new DevExpress.XtraGrid.GridControl();
+            this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.cboSheet = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -67,8 +63,8 @@
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFileName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSheet.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -90,7 +86,7 @@
             this.layoutControl1.Controls.Add(this.btnRead);
             this.layoutControl1.Controls.Add(this.cboDepartment);
             this.layoutControl1.Controls.Add(this.btnFileName);
-            this.layoutControl1.Controls.Add(this.gridSupplier);
+            this.layoutControl1.Controls.Add(this.gridCustomer);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Controls.Add(this.cboSheet);
@@ -148,64 +144,59 @@
             // 
             // gridSupplier
             // 
-            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             gridLevelNode1.RelationName = "Level1";
-            this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            this.gridCustomer.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gridSupplier.Location = new System.Drawing.Point(12, 70);
-            this.gridSupplier.MainView = this.gvSupplier;
-            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridSupplier.Name = "gridSupplier";
-            this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.gridCustomer.Location = new System.Drawing.Point(12, 70);
+            this.gridCustomer.MainView = this.gvCustomer;
+            this.gridCustomer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridCustomer.Name = "gridSupplier";
+            this.gridCustomer.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
-            this.gridSupplier.Size = new System.Drawing.Size(1442, 446);
-            this.gridSupplier.TabIndex = 3;
-            this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvSupplier});
+            this.gridCustomer.Size = new System.Drawing.Size(1442, 446);
+            this.gridCustomer.TabIndex = 3;
+            this.gridCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvCustomer});
             // 
             // gvSupplier
             // 
-            this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvCustomer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gcCode,
             this.gcName,
-            this.gcv纳税人识别号,
-            this.gcSupplierType,
-            this.gcRegistrationDate,
-            this.gcBusinessEffectiveDate,
-            this.gcExistsAgentAgreement,
-            this.gcDiscredited,
-            this.gcAgreementDate,
+            this.gcCountry,
+            this.gcPort,
+            this.gcState,
             this.gcCreateDate,
-            this.gcCreateUser,
-            this.gcDescription});
-            this.gvSupplier.GridControl = this.gridSupplier;
-            this.gvSupplier.Name = "gvSupplier";
-            this.gvSupplier.OptionsBehavior.Editable = false;
-            this.gvSupplier.OptionsView.ShowGroupPanel = false;
+            this.gcCreateUser});
+            this.gvCustomer.GridControl = this.gridCustomer;
+            this.gvCustomer.Name = "gvSupplier";
+            this.gvCustomer.OptionsBehavior.Editable = false;
+            this.gvCustomer.OptionsView.ShowGroupPanel = false;
+            // 
+            // gcCode
+            // 
+            this.gcCode.Caption = "编号";
+            this.gcCode.FieldName = "Code";
+            this.gcCode.Name = "gcCode";
+            this.gcCode.Visible = true;
+            this.gcCode.VisibleIndex = 0;
             // 
             // gcName
             // 
-            this.gcName.Caption = "供应商名称";
+            this.gcName.Caption = "客户名称";
             this.gcName.FieldName = "Name";
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 0;
+            this.gcName.VisibleIndex = 1;
             // 
-            // gcv纳税人识别号
+            // gcCountry
             // 
-            this.gcv纳税人识别号.Caption = "纳税人识别号";
-            this.gcv纳税人识别号.FieldName = "TaxpayerID";
-            this.gcv纳税人识别号.Name = "gcv纳税人识别号";
-            this.gcv纳税人识别号.Visible = true;
-            this.gcv纳税人识别号.VisibleIndex = 1;
-            // 
-            // gcSupplierType
-            // 
-            this.gcSupplierType.Caption = "供应商类型";
-            this.gcSupplierType.ColumnEdit = this.rilueSupplierType;
-            this.gcSupplierType.FieldName = "SupplierType";
-            this.gcSupplierType.Name = "gcSupplierType";
-            this.gcSupplierType.Visible = true;
-            this.gcSupplierType.VisibleIndex = 2;
+            this.gcCountry.Caption = "国家或地区";
+            this.gcCountry.FieldName = "Country";
+            this.gcCountry.Name = "gcCountry";
+            this.gcCountry.Visible = true;
+            this.gcCountry.VisibleIndex = 2;
             // 
             // rilueSupplierType
             // 
@@ -214,45 +205,21 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.rilueSupplierType.Name = "rilueSupplierType";
             // 
-            // gcRegistrationDate
+            // gcPort
             // 
-            this.gcRegistrationDate.Caption = "工商登记日期";
-            this.gcRegistrationDate.FieldName = "RegistrationDate";
-            this.gcRegistrationDate.Name = "gcRegistrationDate";
-            this.gcRegistrationDate.Visible = true;
-            this.gcRegistrationDate.VisibleIndex = 3;
+            this.gcPort.Caption = "港口";
+            this.gcPort.FieldName = "Port";
+            this.gcPort.Name = "gcPort";
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 3;
             // 
-            // gcBusinessEffectiveDate
+            // gcState
             // 
-            this.gcBusinessEffectiveDate.Caption = "经营截至日期";
-            this.gcBusinessEffectiveDate.FieldName = "BusinessEffectiveDate";
-            this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
-            this.gcBusinessEffectiveDate.Visible = true;
-            this.gcBusinessEffectiveDate.VisibleIndex = 4;
-            // 
-            // gcExistsAgentAgreement
-            // 
-            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
-            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Visible = true;
-            this.gcExistsAgentAgreement.VisibleIndex = 5;
-            // 
-            // gcDiscredited
-            // 
-            this.gcDiscredited.Caption = "是否失信企业";
-            this.gcDiscredited.FieldName = "Discredited";
-            this.gcDiscredited.Name = "gcDiscredited";
-            this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 6;
-            // 
-            // gcAgreementDate
-            // 
-            this.gcAgreementDate.Caption = "代理协议有效期";
-            this.gcAgreementDate.FieldName = "AgreementDate";
-            this.gcAgreementDate.Name = "gcAgreementDate";
-            this.gcAgreementDate.Visible = true;
-            this.gcAgreementDate.VisibleIndex = 7;
+            this.gcState.Caption = "可用状态";
+            this.gcState.FieldName = "State";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 4;
             // 
             // gcCreateDate
             // 
@@ -262,7 +229,7 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 8;
+            this.gcCreateDate.VisibleIndex = 5;
             // 
             // gcCreateUser
             // 
@@ -270,15 +237,7 @@
             this.gcCreateUser.FieldName = "CreateUserName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 9;
-            // 
-            // gcDescription
-            // 
-            this.gcDescription.Caption = "备注";
-            this.gcDescription.FieldName = "Description";
-            this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 10;
+            this.gcCreateUser.VisibleIndex = 6;
             // 
             // btnCancel
             // 
@@ -374,7 +333,7 @@
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.gridSupplier;
+            this.layoutControlItem1.Control = this.gridCustomer;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem1.Name = "layoutControlItem1";
@@ -468,7 +427,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1466, 568);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmCustomImport";
             this.Text = "导入供方信息";
             this.Load += new System.EventHandler(this.frmCustomImport_Load);
@@ -476,8 +435,8 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFileName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSheet.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -506,20 +465,16 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem32;
         private DevExpress.XtraEditors.ButtonEdit btnFileName;
-        private DevExpress.XtraGrid.GridControl gridSupplier;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSupplier;
+        private DevExpress.XtraGrid.GridControl gridCustomer;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvCustomer;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
-        private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCountry;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
-        private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
-        private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
-        private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPort;
+        private DevExpress.XtraGrid.Columns.GridColumn gcState;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
-        private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;

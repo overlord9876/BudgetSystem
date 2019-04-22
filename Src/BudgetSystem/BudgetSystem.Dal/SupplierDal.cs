@@ -56,8 +56,15 @@ namespace BudgetSystem.Dal
                 if (!string.IsNullOrEmpty(condition.SupplierName))
                 {
                     strConditionList.Add("s.Name like @Name");
-                    dp.Add("Name",  string.Format("%{0}%",condition.SupplierName), null, null, null);
+                    dp.Add("Name", string.Format("%{0}%", condition.SupplierName), null, null, null);
                 }
+
+                if (condition.DeptID > 0)
+                {
+                    strConditionList.Add(" s.DeptID=@TheDeptID ");
+                    dp.Add("TheDeptID", condition.DeptID, null, null, null);
+                }
+
                 if (strConditionList.Count > 0)
                 {
                     selectSql += string.Format(" where {0}", string.Join(" and ", strConditionList.ToArray()));
@@ -75,7 +82,7 @@ namespace BudgetSystem.Dal
                                  INNER JOIN BudgetSuppliers bs on s.ID=bs.Sup_ID and (bs.ID=@BudgetID or  SupplierType=1)
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
-                                 LEFT JOIN `Department` d ON s.DeptID=d.`ID`  
+                                 LEFT JOIN `Department` d ON s.DeptID=d.`ID` 
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
             return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), BudgetID = budgetId }, tran);
         }

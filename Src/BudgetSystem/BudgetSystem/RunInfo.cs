@@ -58,7 +58,7 @@ namespace BudgetSystem
             set;
         }
 
-        public BudgetQueryCondition GetBudgetCondition(BudgetQueryCondition condition)
+        public BaseQueryCondition GetConditionByCurrentUser(BaseQueryCondition condition)
         {
             if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
             {

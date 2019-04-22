@@ -12,11 +12,21 @@ namespace BudgetSystem.Entity.QueryCondition
             set;
         }
 
-
         public override string ToString()
         {
             return this.Name;
         }
+
+        /// <summary>
+        /// 所在部门
+        /// </summary>
+        public int DeptID { get; set; }
+
+        /// <summary>
+        /// 业务员
+        /// </summary>
+        public string Salesman { get; set; }
+
     }
 
 }

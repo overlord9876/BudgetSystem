@@ -19,6 +19,7 @@ namespace BudgetSystem
             this.gvBatchApproveData.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(gvBatchApproveData_CellValueChanging);
 
             this.gvBatchApproveData.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gvBatchApproveData_CustomSummaryCalculate);
+            this.cckAll.CheckedChanged += new EventHandler(cckAll_CheckedChanged);
         }
 
         void gvBatchApproveData_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -79,7 +80,6 @@ namespace BudgetSystem
 
             foreach (FlowItem item in items)
             {
-                decimal money = 0;
                 BatchApproveDataItemDesc iv = GetItemDesc(item.DateItemType, item.DateItemID);
                 dt.Rows.Add(item.ID, false, item.DateItemText, iv.Desc, iv.Money);
             }
@@ -155,7 +155,7 @@ namespace BudgetSystem
         private BatchApproveDataItemDesc GetItemDesc(string dataType, int dataId)
         {
             BatchApproveDataItemDesc item = new BatchApproveDataItemDesc();
-            
+
             if (dataType == EnumFlowDataType.预算单.ToString())
             {
                 Budget b = bm.GetBudget(dataId);
@@ -196,7 +196,17 @@ namespace BudgetSystem
             return item;
         }
 
-
+        void cckAll_CheckedChanged(object sender, EventArgs e)
+        {
+            DataTable dt = this.gdBatchApproveData.DataSource as DataTable;
+            if (dt != null)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    row["IsSelected"] = cckAll.Checked ? 1 : 0;
+                }
+            }
+        }
 
         private class BatchApproveDataItemDesc
         {

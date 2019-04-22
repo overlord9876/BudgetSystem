@@ -183,11 +183,13 @@ namespace BudgetSystem
         public void InitData()
         {
             Bll.CustomerManager cm = new Bll.CustomerManager();
-            List<Customer> customers = cm.GetAllCustomer(new Entity.QueryCondition.CustomerQueryCondition() { Salesman = RunInfo.Instance.CurrentUser.UserName });
+            Entity.QueryCondition.CustomerQueryCondition condition = new Entity.QueryCondition.CustomerQueryCondition();
+            RunInfo.Instance.GetConditionByCurrentUser(condition);
+            List<Customer> customers = cm.GetAllCustomer(condition);
             this.ucCustomerSelected.SetDataSource(customers);
 
             Bll.SupplierManager sm = new Bll.SupplierManager();
-            List<Supplier> suppliers = sm.GetAllSupplier(new Entity.QueryCondition.SupplierQueryCondition() { Department = RunInfo.Instance.CurrentUser.Department });
+            List<Supplier> suppliers = sm.GetAllSupplier(new Entity.QueryCondition.SupplierQueryCondition() { DeptID = RunInfo.Instance.CurrentUser.DeptID });
             this.ucSupplierSelected.SetDataSource(suppliers);
 
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();

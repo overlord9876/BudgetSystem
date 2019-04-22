@@ -23,7 +23,7 @@ namespace BudgetSystem.Util
         /// <param name="sheetName">excel工作薄sheet的名称</param>
         /// <param name="requiredColumns">必须存在的列，当缺少列时不读取</param>
         /// <returns>返回的DataTable</returns>
-        public static DataTable ReadExcelToDataTable(string fileName, out string message, string sheetName = "", List<string> requiredColumns = null)
+        public static DataTable ReadExcelToDataTable(string fileName, out string message, string sheetName = "", List<string> requiredColumns = null, int firstRowIndex = 0)
         {
             message = string.Empty;
             if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
@@ -72,7 +72,7 @@ namespace BudgetSystem.Util
                     }
                     else
                     {
-                        IRow firstRow = sheet.GetRow(0);
+                        IRow firstRow = sheet.GetRow(firstRowIndex);
                         int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数 
                         Dictionary<int, string> columnMapping = new Dictionary<int, string>();
                         DataTable data = new DataTable();
@@ -110,7 +110,7 @@ namespace BudgetSystem.Util
                         int rowCount = sheet.LastRowNum;
                         int countNull = 0;
                         string strVal;
-                        for (int i = 1; i <= rowCount; ++i)
+                        for (int i = firstRowIndex + 1; i <= rowCount; ++i)
                         {
                             IRow row = sheet.GetRow(i);
                             if (row == null || row.FirstCellNum == -1) continue; //没有数据的行默认是null　　　　　　　

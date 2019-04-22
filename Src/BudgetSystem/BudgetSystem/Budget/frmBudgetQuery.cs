@@ -196,7 +196,7 @@ namespace BudgetSystem
             {
                 condition = new BudgetQueryCondition();
             }
-            condition = RunInfo.Instance.GetBudgetCondition(condition);
+            RunInfo.Instance.GetConditionByCurrentUser(condition);
 
             List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;

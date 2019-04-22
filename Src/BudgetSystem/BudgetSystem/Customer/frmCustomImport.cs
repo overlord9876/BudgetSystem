@@ -30,20 +30,18 @@ namespace BudgetSystem
             Bll.DepartmentManager dm = new Bll.DepartmentManager();
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
-
-            CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
         }
 
         private bool ReadData()
         {
             DevExpress.Utils.WaitDialogForm sdf = new DevExpress.Utils.WaitDialogForm("正在读取数据……");
-            List<Supplier> list = new List<Supplier>();
+            List<Customer> list = new List<Customer>();
             try
             {
                 string message = string.Empty;
                 //"是否合格供应商",
-                List<string> columns = new List<string> { "供应商名称", "纳税人识别号", "供应商类型", "工商登记日期", "经营截至日期", "存在合格供方代理", "是否失信企业", "代理协议有效期", "创建时间", "创建人", "备注" };
-                DataTable dt = ExcelHelper.ReadExcelToDataTable(this.btnFileName.Text, out message, cboSheet.SelectedItem.ToString(), columns);
+                List<string> columns = new List<string> { "编号", "客户名称", "国家或地区", "港口", "可用状态", "创建人", "创建时间" };
+                DataTable dt = ExcelHelper.ReadExcelToDataTable(this.btnFileName.Text, out message, cboSheet.SelectedItem.ToString(), columns, 2);
                 if (!string.IsNullOrEmpty(message))
                 {
                     sdf.Close();
@@ -51,38 +49,47 @@ namespace BudgetSystem
                     return false;
                 }
                 List<User> users = new Bll.UserManager().GetAllUser();
-                Supplier supplier = null;
-                User user = null;
+                Customer Customer = null;
                 Department department = this.cboDepartment.SelectedItem as Department;
+                User user = null;
                 string userName = string.Empty;
                 foreach (DataRow row in dt.Rows)
                 {
-                    supplier = new Supplier();
-                    supplier.Name = DataRowConvertHelper.GetStringValue(row, "供应商名称").Trim();
-                    if (string.IsNullOrEmpty(supplier.Name))
+                    Customer = new Customer();
+                    Customer.Code = DataRowConvertHelper.GetStringValue(row, "编号").Trim();
+                    if (string.IsNullOrEmpty(Customer.Code))
                     {
                         break;
                     }
-                    supplier.TaxpayerID = DataRowConvertHelper.GetStringValue(row, "纳税人识别号").Trim();
-                    supplier.SupplierType = (int)DataRowConvertHelper.GetEnumValue<EnumSupplierType>(row, "供应商类型");
-                    supplier.RegistrationDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "工商登记日期", "\"");
-                    supplier.BusinessEffectiveDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "经营截至日期", "\"");
-                    supplier.ExistsAgentAgreement = "代理".Equals(DataRowConvertHelper.GetStringValue(row, "存在合格供方代理").Trim()) ? true : false;
-                    supplier.Discredited = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否失信企业").Trim()) ? true : false;
-                    supplier.AgreementDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "代理协议有效期");
-                    supplier.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
+                    Customer.Name = DataRowConvertHelper.GetStringValue(row, "客户名称").Trim().Replace("                               ", " ");
+                    if (string.IsNullOrEmpty(Customer.Name))
+                    {
+                        break;
+                    }
+                    Customer.Country = DataRowConvertHelper.GetStringValue(row, "国家或地区");
+                    Customer.Port = DataRowConvertHelper.GetStringValue(row, "港口");
+                    Customer.State = DataRowConvertHelper.GetStringValue(row, "可用状态") == "√";
                     userName = DataRowConvertHelper.GetStringValue(row, "创建人").Trim();
                     user = users.FirstOrDefault(u => u.RealName == userName);
-                    supplier.CreateUser = user.UserName;
-                    supplier.CreateUserName = userName;
-                    supplier.Description = DataRowConvertHelper.GetStringValue(row, "备注").Trim();
-                    supplier.DeptID = department.ID;
-                    //银行信息暂用默认
-                    supplier.BankInfoDetail = "[{\"Name\":\"中国银行\",\"Account\":\"\"}]";
-                    list.Add(supplier);
+                    if (user == null)
+                    {
+                        Customer.CreateUser = department.Manager;
+                        Customer.CreateUserName = department.ManagerName;
+                    }
+                    else
+                    {
+                        Customer.CreateUser = user.UserName;
+                        Customer.CreateUserName = userName;
+                    }
+                    Customer.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
+                    if (Customer.CreateDate <= DateTime.MinValue)
+                    {
+                        Customer.CreateDate = DateTime.Now;
+                    }
+                    list.Add(Customer);
                 }
-                this.gridSupplier.DataSource = new BindingList<Supplier>(list);
-                this.gridSupplier.RefreshDataSource();
+                this.gridCustomer.DataSource = new BindingList<Customer>(list);
+                this.gridCustomer.RefreshDataSource();
                 sdf.Close();
                 return true;
             }
@@ -119,25 +126,43 @@ namespace BudgetSystem
         }
         private void Import(bool isContinue = false)
         {
-            if (gridSupplier.DataSource == null)
+            if (gridCustomer.DataSource == null)
             {
                 XtraMessageBox.Show("请先读取数据");
                 return;
             }
-            List<Supplier> list = (gridSupplier.DataSource as BindingList<Supplier>).ToList();
+            List<Customer> list = (gridCustomer.DataSource as BindingList<Customer>).ToList();
             if (list != null)
             {
                 try
                 {
-                    Bll.SupplierManager sm = new Bll.SupplierManager();
-                    foreach (Supplier supplier in list)
+                    Department department = this.cboDepartment.SelectedItem as Department;
+                    Bll.UserManager um = new Bll.UserManager();
+                    Bll.CustomerManager sm = new Bll.CustomerManager();
+
+                    List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
+                    var users = um.GetDepartmentUsers(department.ID);
+                    if (users != null && users.Count > 0)
                     {
-                        sm.AddSupplier(supplier);
+                        users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
+                    }
+
+                    foreach (Customer customer in list)
+                    {
+                        try
+                        {
+                            customer.SalesmanList = salesmans;
+                            sm.AddCustomer(customer);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
                     if (isContinue)
                     {
-                        this.gridSupplier.DataSource =null;
-                        this.gridSupplier.RefreshDataSource();
+                        this.gridCustomer.DataSource = null;
+                        this.gridCustomer.RefreshDataSource();
                     }
                     else
                     {
