@@ -41,6 +41,7 @@
             this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gridRemitter = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcInMoney)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInMoney)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
@@ -70,6 +71,7 @@
             this.gcBankName,
             this.gcContractNO,
             this.gcOriginalCoin,
+            this.gridRemitter,
             this.gcCurrency,
             this.gcExchangeRate,
             this.gcPaymentMethod});
@@ -130,7 +132,7 @@
             this.gcOriginalCoin.FieldName = "OriginalCoin";
             this.gcOriginalCoin.Name = "gcOriginalCoin";
             this.gcOriginalCoin.Visible = true;
-            this.gcOriginalCoin.VisibleIndex = 6;
+            this.gcOriginalCoin.VisibleIndex = 7;
             this.gcOriginalCoin.Width = 84;
             // 
             // gcCurrency
@@ -148,7 +150,7 @@
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 7;
+            this.gcExchangeRate.VisibleIndex = 8;
             this.gcExchangeRate.Width = 84;
             // 
             // gcPaymentMethod
@@ -157,7 +159,7 @@
             this.gcPaymentMethod.FieldName = "PaymentMethod";
             this.gcPaymentMethod.Name = "gcPaymentMethod";
             this.gcPaymentMethod.Visible = true;
-            this.gcPaymentMethod.VisibleIndex = 8;
+            this.gcPaymentMethod.VisibleIndex = 9;
             this.gcPaymentMethod.Width = 103;
             // 
             // repositoryItemComboBox1
@@ -170,6 +172,14 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "\"Excel2003|*.xls\"";
+            // 
+            // gridRemitter
+            // 
+            this.gridRemitter.Caption = "客户名称";
+            this.gridRemitter.FieldName = "Remitter";
+            this.gridRemitter.Name = "gridRemitter";
+            this.gridRemitter.Visible = true;
+            this.gridRemitter.VisibleIndex = 6;
             // 
             // frmInMoneyDetailExport
             // 
@@ -202,5 +212,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRemitter;
     }
 }

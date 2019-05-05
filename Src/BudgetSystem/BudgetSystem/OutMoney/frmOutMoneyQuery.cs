@@ -111,6 +111,16 @@ namespace BudgetSystem
                     XtraMessageBox.Show("请选择需要删除的项");
                     return;
                 }
+                currentRowPaymentNote = pnm.GetPaymentNoteById(currentRowPaymentNote.ID);
+                if (currentRowPaymentNote == null)
+                {
+                    XtraMessageBox.Show("您选择的项已经不存在，请刷新后重试。");
+                    return;
+                }
+                if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批通过 || currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("当前【{0}】付款单{1}，不允许删除。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState));
+                }
                 if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】付款单？删除后将无法恢复。", currentRowPaymentNote.VoucherNo), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     pnm.DeletePaymentNote(currentRowPaymentNote.ID);
@@ -155,15 +165,14 @@ namespace BudgetSystem
                 outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddYears(1).AddSeconds(-1);
             }
 
-            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
-            this.gvOutMoney.RefreshData();
+            LoadData(outMoneyCondition);
         }
 
         protected override void DoConditionQuery(BaseQueryCondition condition)
         {
             OutMoneyQueryCondition outMoneyCondition = condition as OutMoneyQueryCondition;
-            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
-            this.gvOutMoney.RefreshData();
+
+            LoadData(outMoneyCondition);
         }
 
         protected override QueryConditionEditorForm CreateConditionEditorForm()
@@ -269,7 +278,20 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            this.gcOutMoney.DataSource = pnm.GetAllPaymentNotes();
+            var outMoneyCondition = RunInfo.Instance.GetConditionByCurrentUser(new OutMoneyQueryCondition()) as OutMoneyQueryCondition;
+
+            LoadData(outMoneyCondition);
+        }
+
+        private void LoadData(OutMoneyQueryCondition condition)
+        {
+            if (condition == null)
+            {
+                condition = new OutMoneyQueryCondition();
+            }
+            var outMoneyCondition = RunInfo.Instance.GetConditionByCurrentUser(condition) as OutMoneyQueryCondition;
+
+            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
             this.gvOutMoney.RefreshData();
         }
 

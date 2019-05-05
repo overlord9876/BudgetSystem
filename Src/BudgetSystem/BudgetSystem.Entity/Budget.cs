@@ -315,6 +315,11 @@ namespace BudgetSystem.Entity
         public string UpdateUserName { get; set; }
 
         /// <summary>
+        /// 主客户编号
+        /// </summary>
+        public string CustomerCode { get; set; }
+
+        /// <summary>
         /// 主客户名称
         /// </summary>
         public string CustomerName { get; set; }
@@ -331,7 +336,7 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                return string.IsNullOrEmpty(this.CustomerName) ? string.Empty : string.Format("{0}({1})", this.CustomerName, this.CustomerCountry);
+                return string.IsNullOrEmpty(this.CustomerName) ? string.Empty : string.Format("{0}/{1}({2})", this.CustomerCode, this.CustomerName, this.CustomerCountry);
             }
         }
 
@@ -447,8 +452,8 @@ namespace BudgetSystem.Entity
 
         public string ToDesc()
         {
-            return string.Format("美元合同金额[${0}],合同金额[￥{1}],总进价[{2}],出口退税[{3}],总成本[{4}],利润[{5}]",
-                                USDTotalAmount, TotalAmount, PurchasePrice, TaxRebate, TotalCost, Profit);
+            return string.Format("美元合同金额[${0}],合同金额[￥{1}],总进价[{2}],出口退税[{3}],总成本[{4}],利润[{5}],预付款[{6}]",
+                                USDTotalAmount, TotalAmount, PurchasePrice, TaxRebate, TotalCost, Profit, AdvancePayment);
         }
     }
 

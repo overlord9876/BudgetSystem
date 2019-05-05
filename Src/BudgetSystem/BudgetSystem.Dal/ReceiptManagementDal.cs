@@ -151,12 +151,12 @@ namespace BudgetSystem.Dal
                 }
                 if (condition.ReceiptDateBegin != DateTime.MinValue)
                 {
-                    strConditionList.Add(" bs.ReceiptDate bs.ReceiptDate >@ReceiptDateBegin ");
+                    strConditionList.Add(" bs.ReceiptDate >@ReceiptDateBegin ");
                     dp.Add("ReceiptDateBegin", condition.ReceiptDateBegin.ToString("yyyy-MM-dd"), null, null, null);
                 }
                 if (condition.ReceiptDateEnd != DateTime.MinValue)
                 {
-                    strConditionList.Add(" bs.ReceiptDate bs.ReceiptDate <@ReceiptDateEnd ");
+                    strConditionList.Add(" bs.ReceiptDate <@ReceiptDateEnd ");
                     dp.Add("ReceiptDateEnd", condition.ReceiptDateEnd.ToString("yyyy-MM-dd"), null, null, null);
                 }
 

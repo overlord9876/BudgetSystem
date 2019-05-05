@@ -223,7 +223,7 @@ namespace BudgetSystem
 
                 //已付金额=已付货款+运保费+佣金+直接费用
                 var paymentMoney = GetDecimal(row, "CNY") + GetDecimal(row, "Premium") + GetDecimal(row, "Commission") + GetDecimal(row, "DirectCosts");
-                totalPaymentCNY = totalPaymentCNY + paymentMoney;
+                totalPaymentCNY = totalPaymentCNY + GetDecimal(row, "CNY");
                 //实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
                 //TODO:此列值未计算“扣除利息后实际利润”
                 var profit = GetDecimal(row, "BillCNY")

@@ -256,7 +256,10 @@ namespace BudgetSystem.InMoney
             this.deReceiptDate.EditValue = CurrentBankSlip.ReceiptDate;
             this.cboNatureOfMoney.EditValue = CurrentBankSlip.NatureOfMoney;
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
-            this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
+            if (CurrentBankSlip.TradeNature >= 0)
+            {
+                this.cboTradeNature.EditValue = (BankSlipTradeNature)CurrentBankSlip.TradeNature;
+            }
             this.txtExportName.EditValue = CurrentBankSlip.ExportName;
 
             this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
@@ -277,13 +280,23 @@ namespace BudgetSystem.InMoney
                     this.txtTradingPostscript.Text = CurrentBankSlip.TradingPostscript;
                     this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
                 }
+
                 source.ForEach(o =>
                 {
                     o.ExchangeRate = txtExchangeRate.Value;
-                    o.RelationBudget = new Budget();
-                    o.RelationBudget.ContractNO = o.ContractNO;
-                    o.RelationBudget.CustomerName = o.Customer;
-                    budgetList.Add(o.RelationBudget);
+                    var budget = budgetList.Find(b => b.ID == o.BudgetID);
+                    if (budget == null)
+                    {
+                        o.RelationBudget = new Budget();
+                        o.RelationBudget.ID = o.BudgetID;
+                        o.RelationBudget.ContractNO = o.ContractNO;
+                        o.RelationBudget.CustomerName = o.Customer;
+                        budgetList.Add(o.RelationBudget);
+                    }
+                    else
+                    {
+                        o.RelationBudget = budget;
+                    }
                     //if (WorkModel != EditFormWorkModels.SplitToBudget)
                     //{
                     //    o.RelationBudget = new Budget();

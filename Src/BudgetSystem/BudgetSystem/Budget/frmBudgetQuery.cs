@@ -40,7 +40,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交流程"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyApply, "申请修改"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.DeleteApply, "申请删除"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
+            //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ClosingAccountApply, "结账申请"));
@@ -196,7 +196,7 @@ namespace BudgetSystem
             {
                 condition = new BudgetQueryCondition();
             }
-            RunInfo.Instance.GetConditionByCurrentUser(condition);
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
 
             List<Budget> budgetList = bm.GetAllBudget(condition);
             this.gridBudget.DataSource = budgetList;
@@ -593,6 +593,12 @@ namespace BudgetSystem
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
             {
+                budget = bm.GetBudget(budget.ID);
+                if (budget == null)
+                {
+                    XtraMessageBox.Show("您选择的项已经不存在");
+                    return;
+                }
                 if (budget.EnumState != EnumBudgetState.结账申请)
                 {
                     XtraMessageBox.Show(string.Format("{0}状态的预算单不允许归档。", budget.StringState));

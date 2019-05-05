@@ -11,17 +11,6 @@ namespace BudgetSystem.Dal
 {
     public class PaymentNotesDal : DalBase
     {
-        public IEnumerable<PaymentNotes> GetAllPaymentNotes(IDbConnection con, IDbTransaction tran)
-        {
-            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
-            From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
-						LEFT JOIN supplier s on pn.SupplierID=s.ID
-						LEFT JOIN department d on pn.DeptID=d.`ID`
-						LEFT JOIN `user` u on pn.Applicant=u.UserName
-						LEFT JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
-            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString() }, tran);
-        }
-
         public IEnumerable<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
@@ -47,11 +36,17 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" b.ContractNO like @BudgetNO ");
                     dp.Add("BudgetNO", string.Format("%{0}%", condition.BudgetNO), null, null, null);
                 }
-                if (!string.IsNullOrEmpty(condition.Applicant))
+                if (!string.IsNullOrEmpty(condition.Salesman))
                 {
                     strConditionList.Add(" pn.Applicant = @Applicant  ");
-                    dp.Add("Applicant", condition.Applicant, null, null, null);
+                    dp.Add("Applicant", condition.Salesman, null, null, null);
                 }
+                if (condition.DeptID >= 0)
+                {
+                    strConditionList.Add(" pn.DeptID=@DeptID  ");
+                    dp.Add("DeptID", condition.DeptID, null, null, null);
+                }
+
                 if (!string.IsNullOrEmpty(condition.Supplier))
                 {
                     strConditionList.Add(" s.`NAME` = @Supplier  ");

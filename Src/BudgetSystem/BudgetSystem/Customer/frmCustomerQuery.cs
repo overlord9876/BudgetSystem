@@ -161,7 +161,12 @@ namespace BudgetSystem
         private void LoadData(CustomerQueryCondition condition)
         {
             currentCondition = condition;
-            var list = cm.GetAllCustomer(condition);
+            if (condition == null)
+            {
+                condition = new CustomerQueryCondition();
+            }
+            var conditionNew = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
+            var list = cm.GetAllCustomer(conditionNew);
             this.gridCustomer.DataSource = list;
         }
 

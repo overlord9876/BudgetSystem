@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
 using System.Text.RegularExpressions;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
@@ -183,8 +184,8 @@ namespace BudgetSystem
         public void InitData()
         {
             Bll.CustomerManager cm = new Bll.CustomerManager();
-            Entity.QueryCondition.CustomerQueryCondition condition = new Entity.QueryCondition.CustomerQueryCondition();
-            RunInfo.Instance.GetConditionByCurrentUser(condition);
+            CustomerQueryCondition condition = new CustomerQueryCondition();
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
             List<Customer> customers = cm.GetAllCustomer(condition);
             this.ucCustomerSelected.SetDataSource(customers);
 
@@ -540,7 +541,7 @@ namespace BudgetSystem
                 return false;
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
-            if (bm.CheckContractNO(id, this.lblContractNOPrefix + contractNo))
+            if (bm.CheckContractNO(id, this.lblContractNOPrefix.Text + contractNo))
             {
                 this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
                 return false;
@@ -882,8 +883,6 @@ namespace BudgetSystem
             PopupContainerEdit popupedit = (PopupContainerEdit)sender;
             popupedit.Tag = suppliers;
         }
-
-
 
         private void gridOutProductDetail_Leave(object sender, EventArgs e)
         {
@@ -1373,6 +1372,7 @@ namespace BudgetSystem
             }
             txtContractNO.Tag = tradeModeString;
         }
+
         #endregion
 
 

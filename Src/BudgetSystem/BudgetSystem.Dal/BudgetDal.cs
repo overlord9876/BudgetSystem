@@ -13,7 +13,7 @@ namespace BudgetSystem.Dal
     {
         public Budget GetBudget(int id, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -41,7 +41,7 @@ namespace BudgetSystem.Dal
 
         public Budget GetBudgetByNo(string NO, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -56,7 +56,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetAllBudget(IDbConnection con, IDbTransaction tran = null, BudgetQueryCondition condition = null)
         {
-            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+            string selectSql = string.Format(@"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -127,7 +127,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetBudgetListByCustomerId(string userName, int customerId, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -154,7 +154,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Budget> GetBudgetListBySaleman(string userName, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,
+            string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
                                                       IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
                                  FROM `Budget` b
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 

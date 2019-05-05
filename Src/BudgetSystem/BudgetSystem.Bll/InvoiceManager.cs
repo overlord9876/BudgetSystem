@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -10,14 +11,14 @@ namespace BudgetSystem.Bll
     {
         Dal.InvoiceDal invoiceDal = new Dal.InvoiceDal();
         Dal.BudgetDal budgetDal = new Dal.BudgetDal();
-        public List<Invoice> GetAllInvoice()
+        public List<Invoice> GetAllInvoice(InvoiceQueryCondition condition)
         {
-            var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoice(con, null); });
+            var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoice(condition, con, null); });
             return lst.ToList();
         }
         public List<Invoice> GetAllInvoiceByBudgetID(int budgetID)
         {
-            var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoiceByBudgetID(budgetID,con, null); });
+            var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoiceByBudgetID(budgetID, con, null); });
             return lst.ToList();
         }
         public Invoice GetInvoice(int id)

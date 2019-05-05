@@ -558,7 +558,7 @@
             // gcBillExchangeRate
             // 
             this.gcBillExchangeRate.Caption = "汇率";
-            this.gcBillExchangeRate.DisplayFormat.FormatString = "N2";
+            this.gcBillExchangeRate.DisplayFormat.FormatString = "N6";
             this.gcBillExchangeRate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcBillExchangeRate.FieldName = "BillExchangeRate";
             this.gcBillExchangeRate.Name = "gcBillExchangeRate";

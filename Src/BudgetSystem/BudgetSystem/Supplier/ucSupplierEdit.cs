@@ -206,18 +206,18 @@ namespace BudgetSystem
             }
 
 
-            if (string.IsNullOrEmpty(this.txtAddress.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtAddress, "请输入地址");
-            }
-            if (string.IsNullOrEmpty(this.txtTell.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtTell, "请输入联系电话");
-            }
-            if (string.IsNullOrEmpty(this.txtContacts.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtContacts, "请输入联系人");
-            }
+            //if (string.IsNullOrEmpty(this.txtAddress.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtAddress, "请输入地址");
+            //}
+            //if (string.IsNullOrEmpty(this.txtTell.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtTell, "请输入联系电话");
+            //}
+            //if (string.IsNullOrEmpty(this.txtContacts.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtContacts, "请输入联系人");
+            //}
             return !this.dxErrorProvider1.HasErrors;
         }
 

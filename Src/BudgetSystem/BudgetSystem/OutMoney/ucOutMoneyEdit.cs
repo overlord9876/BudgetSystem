@@ -10,6 +10,7 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using Newtonsoft.Json;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.OutMoney
 {
@@ -108,6 +109,7 @@ namespace BudgetSystem.OutMoney
         public void BandPaymentNotes(int id)
         {
             PaymentNotes payment = pnm.GetPaymentNoteById(id);
+
             BandPaymentNotes(payment);
         }
 
@@ -118,6 +120,20 @@ namespace BudgetSystem.OutMoney
                 XtraMessageBox.Show("单据已经不存在。");
                 return;
             }
+            if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print)
+            {
+                if (budgetList == null)
+                {
+                    budgetList = new List<Budget>();
+                }
+                var budget = bm.GetBudget(payment.BudgetID);
+                if (budget != null)
+                {
+                    budgetList.Add(budget);
+                }
+                this.cboBudget.Properties.DataSource = budgetList;
+            }
+
             this.CurrentPaymentNotes = payment;
             chkIsDrawback.EditValue = payment.IsDrawback;
             this.vatOption = payment.VatOption;
@@ -134,15 +150,15 @@ namespace BudgetSystem.OutMoney
             {
                 foreach (BankInfo info in bankInfoList)
                 {
-                    if (info.Account.Equals(payment.BankNO))
+                    if (info.Name.Equals(payment.BankName))
                     {
                         this.txtBankName.EditValue = info;
-                        this.txtBankNO.EditValue = info.Account;
                         break;
                     }
                 }
             }
 
+            this.txtBankNO.EditValue = payment.BankNO;
             BindingBankInfoDetail(payment.InvoiceNumber);
 
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
@@ -354,14 +370,9 @@ namespace BudgetSystem.OutMoney
                         cboPayingBank.Properties.Items.Add(bankName);
                     }
                 }
-                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-                {
-                    budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
-                }
-                else
-                {
-                    budgetList = bm.GetAllBudget();
-                }
+                BudgetQueryCondition condition = new BudgetQueryCondition();
+                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
+                budgetList = bm.GetAllBudget(condition);
                 this.cboBudget.Properties.DataSource = budgetList;
 
                 supplierList = sm.GetAllSupplier();
@@ -477,7 +488,7 @@ namespace BudgetSystem.OutMoney
                     decimal money = caculator.GetUsagePayMoney(umt.Name);
                     if (money + txtCNY.Value > this.currentBudget.Premium)
                     {
-                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
                         return;
                     }
                 }
@@ -491,7 +502,7 @@ namespace BudgetSystem.OutMoney
                     decimal money = caculator.GetUsagePayMoney(umt.Name);
                     if (money + txtCNY.Value > this.currentBudget.Premium)
                     {
-                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
                         return;
                     }
                 }
@@ -671,6 +682,7 @@ namespace BudgetSystem.OutMoney
                 }
                 if (needInvoiceUsageNameList.Contains(selectedItem.Name))
                 {
+                    gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>();
                     lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
                 else

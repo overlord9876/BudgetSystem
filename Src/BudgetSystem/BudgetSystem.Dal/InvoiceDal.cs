@@ -6,29 +6,42 @@ using System.Data;
 
 using Dapper_NET20;
 using BudgetSystem.Entity;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Dal
 {
     public class InvoiceDal
     {
-        string selectSql = @"SELECT i.*,c.`Name` CustomerName,u1.RealName ImportUserName,u2.RealName FinanceImportUserName,b.ContractNO FROM `Invoice` i
+        private const string selectSql = @"SELECT i.*,c.`Name` CustomerName,u1.RealName ImportUserName,u2.RealName FinanceImportUserName,b.ContractNO FROM `Invoice` i
                              LEFT JOIN `Budget` b ON i.BudgetID=b.ID
 							 LEFT JOIN `Customer` c ON b.CustomerID =c.ID
                              LEFT JOIN `User` u1 ON i.ImportUser=u1.UserName
-                             LEFT JOIN `user` u2 on i.FinanceImportUser =u2.UserName ";
-        public IEnumerable<Invoice> GetAllInvoice(IDbConnection con, IDbTransaction tran)
+                             LEFT JOIN `user` u2 on i.FinanceImportUser =u2.UserName
+                             WHERE 1=1 ";
+        public IEnumerable<Invoice> GetAllInvoice(InvoiceQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            return con.Query<Invoice>(selectSql, null, tran);
+            List<string> strConditionList = new List<string>();
+            DynamicParameters dp = new DynamicParameters();
+            string sql = selectSql;
+            if (condition != null)
+            {
+                if (condition.DeptID >= 0)
+                {
+                    sql += " and i.ImportUser in (select UserName from `user` where DeptID=@DeptID)";
+                    dp.Add("DeptID", condition.DeptID, DbType.Int32, ParameterDirection.Input, null);
+                }
+            }
+            return con.Query<Invoice>(sql, dp, tran);
         }
 
         public IEnumerable<Invoice> GetAllInvoiceByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
         {
-            string sql = selectSql + " WHERE b.ID=@ID";
-            return con.Query<Invoice>(sql,new { ID = budgetID }, tran);
+            string sql = selectSql + " and b.ID=@ID";
+            return con.Query<Invoice>(sql, new { ID = budgetID }, tran);
         }
         public Invoice GetInvoice(int id, IDbConnection con, IDbTransaction tran)
         {
-            string sql = selectSql + " WHERE i.ID=@ID";
+            string sql = selectSql + " and i.ID=@ID";
             return con.Query<Invoice>(sql, new { ID = id }, tran).SingleOrDefault();
         }
 

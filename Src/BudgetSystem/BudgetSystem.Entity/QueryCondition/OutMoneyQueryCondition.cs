@@ -9,7 +9,6 @@ namespace BudgetSystem.Entity.QueryCondition
         public string Supplier { get; set; }
         public string BudgetNO { get; set; }
         public string VoucherNo { get; set; }
-        public string Applicant { get; set; }
         public PaymentState PayState { get; set; }
         public string ApproveUser { get; set; }
         public DateTime BeginDate { get; set; }

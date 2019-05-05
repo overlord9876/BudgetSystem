@@ -137,7 +137,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.New,"预算单管理-新增预算单",710),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Modify,"预算单管理-修改预算单",720),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Delete, "预算单管理-删除预算单",730),
-                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.Close,"预算单管理-关闭预算单",740),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Close,"预算单管理-关闭预算单",740),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.DeleteApply,"预算单管理-申请删除",740),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.ModifyApply, "预算单管理-申请修改",750),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.View,"预算单管理-查看预算单",760),

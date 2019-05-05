@@ -16,16 +16,6 @@ namespace BudgetSystem.Bll
         Bll.BudgetManager bm = new BudgetManager();
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
-        public List<PaymentNotes> GetAllPaymentNotes()
-        {
-            var lst = this.Query<PaymentNotes>((con) =>
-            {
-                var uList = dal.GetAllPaymentNotes(con, null);
-                return uList;
-            });
-            return lst.ToList();
-        }
-
         public List<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition)
         {
             var lst = this.Query<PaymentNotes>((con) =>

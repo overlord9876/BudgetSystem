@@ -175,6 +175,11 @@ namespace BudgetSystem.Entity
         /// </summary>
         public int RemarkState { get; set; }
 
+        public BankSlip()
+        {
+            TradeNature = -1;
+        }
+
         public string ToDesc()
         {
             return string.Format("{0}水单,需要修改合同入账",

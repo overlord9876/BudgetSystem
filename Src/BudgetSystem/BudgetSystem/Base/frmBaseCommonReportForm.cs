@@ -471,7 +471,7 @@ namespace BudgetSystem.Base
             BudgetQueryCondition condition = new BudgetQueryCondition();
 
 
-            RunInfo.Instance.GetConditionByCurrentUser(condition);
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
 
 
             condition.BeginTimestamp = startTime;

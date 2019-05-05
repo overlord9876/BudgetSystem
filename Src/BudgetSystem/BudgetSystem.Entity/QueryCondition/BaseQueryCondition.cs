@@ -27,6 +27,11 @@ namespace BudgetSystem.Entity.QueryCondition
         /// </summary>
         public string Salesman { get; set; }
 
+        public BaseQueryCondition()
+        {
+            DeptID = -1;
+        }
+
     }
 
 }

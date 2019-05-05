@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Util;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.InMoney
 {
@@ -81,7 +82,20 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            var list = im.GetAllInvoice();
+            InvoiceQueryCondition condition = new InvoiceQueryCondition();
+
+            LoadData(condition);
+        }
+
+        private void LoadData(InvoiceQueryCondition condition)
+        {
+            if (condition == null)
+            {
+                condition = new InvoiceQueryCondition();
+            }
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InvoiceQueryCondition;
+
+            var list = im.GetAllInvoice(condition);
             this.gridInvoice.DataSource = list;
         }
 
@@ -151,7 +165,10 @@ namespace BudgetSystem.InMoney
             DevExpress.Utils.WaitDialogForm sdf = new DevExpress.Utils.WaitDialogForm("正在读取数据……");
             try
             {
-                List<Invoice> list = this.im.GetAllInvoice();
+                InvoiceQueryCondition condition = new InvoiceQueryCondition();
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InvoiceQueryCondition;
+
+                List<Invoice> list = this.im.GetAllInvoice(condition);
                 if (list == null || list.Count == 0)
                 {
                     sdf.Close();
@@ -222,9 +239,9 @@ namespace BudgetSystem.InMoney
         }
 
         private void PrintSignatureForm()
-        { 
-            List<Invoice> dataSource= this.gridInvoice.DataSource as List<Invoice>;
-            frmSignatureForm frm=new frmSignatureForm();
+        {
+            List<Invoice> dataSource = this.gridInvoice.DataSource as List<Invoice>;
+            frmSignatureForm frm = new frmSignatureForm();
             frm.PrintData(dataSource);
         }
 

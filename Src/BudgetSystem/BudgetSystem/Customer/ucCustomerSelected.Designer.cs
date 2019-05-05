@@ -31,6 +31,7 @@
             this.gridCustomer = new DevExpress.XtraGrid.GridControl();
             this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,8 +53,10 @@
             // 
             // gridCustomer
             // 
+            this.gridCustomer.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridCustomer.Location = new System.Drawing.Point(12, 12);
             this.gridCustomer.MainView = this.gvCustomer;
+            this.gridCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridCustomer.Name = "gridCustomer";
             this.gridCustomer.Size = new System.Drawing.Size(784, 455);
             this.gridCustomer.TabIndex = 0;
@@ -64,6 +67,7 @@
             // 
             this.gvCustomer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcIsSelected,
+            this.gcCode,
             this.gcName,
             this.gcCountry,
             this.gcState});
@@ -99,6 +103,15 @@
             this.gcIsSelected.VisibleIndex = 0;
             this.gcIsSelected.Width = 66;
             // 
+            // gcCode
+            // 
+            this.gcCode.Caption = "编号";
+            this.gcCode.FieldName = "Code";
+            this.gcCode.Name = "gcCode";
+            this.gcCode.OptionsColumn.AllowEdit = false;
+            this.gcCode.Visible = true;
+            this.gcCode.VisibleIndex = 1;
+            // 
             // gcName
             // 
             this.gcName.Caption = "名称";
@@ -106,7 +119,7 @@
             this.gcName.Name = "gcName";
             this.gcName.OptionsColumn.AllowEdit = false;
             this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 1;
+            this.gcName.VisibleIndex = 2;
             // 
             // gcCountry
             // 
@@ -115,7 +128,7 @@
             this.gcCountry.Name = "gcCountry";
             this.gcCountry.OptionsColumn.AllowEdit = false;
             this.gcCountry.Visible = true;
-            this.gcCountry.VisibleIndex = 2;
+            this.gcCountry.VisibleIndex = 3;
             // 
             // gcState
             // 
@@ -124,7 +137,7 @@
             this.gcState.Name = "gcState";
             this.gcState.OptionsColumn.AllowEdit = false;
             this.gcState.Visible = true;
-            this.gcState.VisibleIndex = 3;
+            this.gcState.VisibleIndex = 4;
             // 
             // layoutControl1
             // 
@@ -132,6 +145,7 @@
             this.layoutControl1.Controls.Add(this.gridCustomer);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(409, 281, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
@@ -142,6 +156,7 @@
             // btnSure
             // 
             this.btnSure.Location = new System.Drawing.Point(680, 471);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(116, 32);
             this.btnSure.StyleController = this.layoutControl1;
@@ -206,6 +221,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucCustomerSelected";
             this.Size = new System.Drawing.Size(808, 515);
             ((System.ComponentModel.ISupportInitialize)(this.gridCustomer)).EndInit();
@@ -236,5 +252,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSure;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCode;
     }
 }

@@ -138,6 +138,8 @@ namespace BudgetSystem.Entity
         /// </summary>
         public DateTime ReceiptDate { get; set; }
 
+        public string BankName { get; set; }
+
     }
 
     public enum DataOperatorModel

@@ -93,6 +93,7 @@
             this.txtCNY = new BudgetSystem.CommonControl.TextEdit_Number();
             this.cboCustomer = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnState = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -903,6 +904,7 @@
             // searchLookUpEdit1View
             // 
             this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridCode,
             this.gcName,
             this.gcCountry,
             this.gridColumnState});
@@ -912,13 +914,21 @@
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
+            // gridCode
+            // 
+            this.gridCode.Caption = "编号";
+            this.gridCode.FieldName = "Code";
+            this.gridCode.Name = "gridCode";
+            this.gridCode.Visible = true;
+            this.gridCode.VisibleIndex = 0;
+            // 
             // gcName
             // 
             this.gcName.Caption = "名称";
             this.gcName.FieldName = "Name";
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 0;
+            this.gcName.VisibleIndex = 1;
             // 
             // gcCountry
             // 
@@ -926,7 +936,7 @@
             this.gcCountry.FieldName = "Country";
             this.gcCountry.Name = "gcCountry";
             this.gcCountry.Visible = true;
-            this.gcCountry.VisibleIndex = 1;
+            this.gcCountry.VisibleIndex = 2;
             // 
             // gridColumnState
             // 
@@ -934,7 +944,7 @@
             this.gridColumnState.FieldName = "State";
             this.gridColumnState.Name = "gridColumnState";
             this.gridColumnState.Visible = true;
-            this.gridColumnState.VisibleIndex = 2;
+            this.gridColumnState.VisibleIndex = 3;
             // 
             // txtPaymentMethod
             // 
@@ -1520,5 +1530,6 @@
         private DevExpress.XtraLayout.LayoutControlItem lciPrintTime;
         private DevExpress.XtraEditors.LabelControl lblMesage;
         private DevExpress.XtraLayout.LayoutControlItem lciMessage;
+        private DevExpress.XtraGrid.Columns.GridColumn gridCode;
     }
 }

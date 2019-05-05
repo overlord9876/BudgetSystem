@@ -24,7 +24,7 @@ namespace BudgetSystem
         public override bool CollectData()
         {
             OutMoneyQueryCondition c = new OutMoneyQueryCondition();
-            c.Applicant = this.txtApplicant.Text;
+            c.Salesman = this.txtApplicant.Text;
             c.BudgetNO = this.txtBudgetNO.Text;
             c.Supplier = this.txtSupplier.Text;
             c.VoucherNo = this.txtVoucherNo.Text;

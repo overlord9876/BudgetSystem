@@ -275,7 +275,7 @@ namespace BudgetSystem.Entity
             decimal totalCost = CurrentBudget.TotalCost - taxRebateRateMoney;
 
             //利润=折合人名币（净收入额）-总成本
-            PlannedProfit = NetIncomeCNY - totalCost - interest;
+            PlannedProfit = currentBudget.Profit;
 
             if (NetIncomeUSD != 0)
             {
@@ -287,9 +287,13 @@ namespace BudgetSystem.Entity
 
             #region 5.应留实际利润=预算单（预算）利润/预算单合同金额*已收汇（人民币）金额
 
-            if (TotalAmount != 0)
+            if (TotalAmount != 0 && ReceiptMoneyAmount != 0)
             {
                 ActualProfit = Math.Round(PlannedProfit / TotalAmount * ReceiptMoneyAmount, 2);
+            }
+            else
+            {
+                ActualProfit = PlannedProfit;
             }
 
             #endregion
