@@ -762,6 +762,8 @@ namespace BudgetSystem.InMoney
             Customer c = this.cboCustomer.EditValue as Customer;
             if (c != null)
             {
+                txtTradingPostscript.EditValue = c.Country;
+
                 List<User> salesmanList = um.GetCustomerSalesmanList(c.ID);
 
                 SalemanValue(salesmanList);

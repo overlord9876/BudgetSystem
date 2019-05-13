@@ -969,6 +969,7 @@
             this.txtTradingPostscript.Location = new System.Drawing.Point(183, 252);
             this.txtTradingPostscript.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTradingPostscript.Name = "txtTradingPostscript";
+            this.txtTradingPostscript.Properties.ReadOnly = true;
             this.txtTradingPostscript.Size = new System.Drawing.Size(391, 25);
             this.txtTradingPostscript.StyleController = this.layoutControl1;
             this.txtTradingPostscript.TabIndex = 15;

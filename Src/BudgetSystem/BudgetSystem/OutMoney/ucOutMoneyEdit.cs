@@ -597,6 +597,8 @@ namespace BudgetSystem.OutMoney
 
             //支付后余额
             this.txtAfterPaymentBalance.EditValue = caculator.Balance;
+            //支付后留利余额
+            this.txtRetainedInterestBalance.EditValue = caculator.RetainedInterestBalance;
 
         }
 
