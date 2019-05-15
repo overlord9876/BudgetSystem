@@ -20,7 +20,7 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public int AddBankSlip(BankSlip addBankSlip, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Remitter`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`,`NatureOfMoney`,`IsActive`,`RemarkState`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Remitter,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp,@NatureOfMoney,@IsActive,@RemarkState)";
+            string insertSql = "Insert Into `BankSlip` (`BSID`,`VoucherNo`,`Description`,`TradingPostscript`,`Cus_ID`,`CreateUser`,`OriginalCoin`,`CreateTimestamp`,`CNY`,`ReceiptDate`,`PaymentMethod`,`CNY2`,`ExchangeRate`,`BankName`,`Currency`,`State`,`TradeNature`,`ExportName`,`UpdateTimestamp`,`NatureOfMoney`,`IsActive`,`RemarkState`) Values (@BSID,@VoucherNo,@Description,@TradingPostscript,@Cus_ID,@CreateUser,@OriginalCoin,@CreateTimestamp,@CNY,@ReceiptDate,@PaymentMethod,@CNY2,@ExchangeRate,@BankName,@Currency,@State,@TradeNature,@ExportName,@UpdateTimestamp,@NatureOfMoney,@IsActive,@RemarkState)";
             int id = con.Insert(insertSql, addBankSlip, tran);
             if (id > 0)
             {
@@ -82,7 +82,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
             modifyBankSlip.UpdateTimestamp = DateTime.Now;
-            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Remitter` = @Remitter,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney,IsActive=@IsActive,RemarkState=@RemarkState Where `BSID` = @BSID";
+            string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Cus_ID` = @Cus_ID,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney,IsActive=@IsActive,RemarkState=@RemarkState Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
@@ -124,7 +124,8 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BankSlip> GetAllBankSlipListByCondition(InMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bs.*,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+            string selectSql = @"Select bs.*,c.Name as Remitter,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                LEFT JOIN Customer c on bs.Cus_ID=c.ID
                 LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType  AND f.IsRecent=1
 				LEFT JOIN `user` u on bs.CreateUser=u.UserName
                 WHERE 1=1 ";
@@ -146,7 +147,7 @@ namespace BudgetSystem.Dal
                 }
                 if (!string.IsNullOrEmpty(condition.Customer))
                 {
-                    strConditionList.Add(" bs.Remitter like @Customer ");
+                    strConditionList.Add(" bs.Cus_ID in (SELECT ID from customer where `Name` like @Customer)");
                     dp.Add("Customer", string.Format("%{0}%", condition.Customer), null, null, null);
                 }
                 if (condition.ReceiptDateBegin != DateTime.MinValue)
@@ -171,7 +172,8 @@ namespace BudgetSystem.Dal
 
                 if (!string.IsNullOrEmpty(condition.Salesman))
                 {
-                    selectSql = @"Select bs.*,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                    selectSql = @"Select bs.*,c.Name as Remitter,u.RealName as CreateRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState  From `bankslip` bs	
+                            LEFT JOIN Customer c on bs.Cus_ID=c.ID
                             INNER JOIN ReceiptNotice rn ON bs.BSID=rn.BSID AND rn.UserName=@Username
                             INNER JOIN `User` u on rn.UserName=u.UserName
 				            LEFT JOIN `user` u2 on bs.CreateUser=u2.UserName
@@ -192,8 +194,9 @@ namespace BudgetSystem.Dal
 
         public BankSlip GetBankSlipByBSID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bs.*,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            string selectSql = @"Select bs.*,c.Name as Remitter,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
                                 From `bankslip` bs 
+                                    LEFT JOIN Customer c on bs.Cus_ID=c.ID
                                     LEFT JOIN `FlowInstance` f ON f.DateItemID=bs.BSID AND f.DateItemType=@DateItemType AND f.IsRecent=1
                                 Where `BSID` = @BSID";
 
@@ -202,7 +205,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,u.RealName as OperatorRealName,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,u.RealName as OperatorRealName,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
@@ -215,7 +218,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
@@ -227,7 +230,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByCondition(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,bs.Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName 
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName 
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID

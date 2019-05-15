@@ -194,6 +194,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.OriginalCoin = decimal.Parse(this.txtOriginalCoin.Text);
             CurrentBankSlip.PaymentMethod = this.txtPaymentMethod.SelectedItem.ToString();
             CurrentBankSlip.Remitter = (cboCustomer.EditValue as Customer).Name;
+            CurrentBankSlip.Cus_ID = (cboCustomer.EditValue as Customer).ID;
             CurrentBankSlip.CNY = this.txtCNY.Value;
             CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem == null ? string.Empty : this.cboNatureOfMoney.SelectedItem.ToString();
             CurrentBankSlip.VoucherNo = this.txtVoucherNo.Text.Trim();
@@ -241,7 +242,7 @@ namespace BudgetSystem.InMoney
             this.cboCurrency.EditValue = CurrentBankSlip.Currency;
             foreach (Customer customer in this.cboCustomer.Properties.DataSource as List<Customer>)
             {
-                if (customer.Name == CurrentBankSlip.Remitter)
+                if (customer.ID == CurrentBankSlip.Cus_ID)
                 {
                     this.cboCustomer.EditValue = customer;
                     break;

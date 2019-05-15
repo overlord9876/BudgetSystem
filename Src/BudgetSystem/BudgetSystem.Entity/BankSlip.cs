@@ -24,6 +24,8 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Remitter { get; set; }
 
+        public int Cus_ID { get; set; }
+
         /// <summary>
         /// 实收原币金额
         /// </summary>
