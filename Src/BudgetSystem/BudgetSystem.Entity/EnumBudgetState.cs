@@ -9,9 +9,9 @@ namespace BudgetSystem.Entity
     /// </summary>
     public enum EnumBudgetState
     {
-        进行中=0,
-        结账申请=1,
-        财务平账征求=2,
-        已结束=3,
+        进行中 = 1,
+        驳回归档征求 = 2,
+        财务归档征求 = 4,
+        已结束 = 8
     }
 }

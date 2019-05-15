@@ -147,9 +147,9 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.SubmitApply,"预算单管理-提交审批流程",791),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.ExportData,"预算单管理-导出预算单",792),
 
-                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.ClosingAccountApply,"预算单管理-结账申请",793),
-                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.RejectedAccount,"预算单管理-驳回结账申请",794),
-                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.FinancialArchiveApply,"预算单管理-财务平账征求",795),
+                        //new Permisson(BusinessModules.BuggetManagement,OperateTypes.ClosingAccountApply,"预算单管理-结账申请",793),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.RejectedAccount,"预算单管理-驳回归档征求",794),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.FinancialArchiveApply,"预算单管理-财务归档征求",795),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Archive,"预算单管理-归档",796),
                         
 

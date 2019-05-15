@@ -99,6 +99,8 @@
             this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand42 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gcProfit = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand14 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand44 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand45 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand46 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -218,7 +220,7 @@
             this.labelControl2.Size = new System.Drawing.Size(65, 18);
             this.labelControl2.StyleController = this.layoutControl1;
             this.labelControl2.TabIndex = 9;
-            this.labelControl2.Text = "单元： 元";
+            this.labelControl2.Text = "单位： 元";
             // 
             // gcReport
             // 
@@ -271,7 +273,8 @@
             this.gcBalance,
             this.bandedGridColumn25,
             this.bandedGridColumn26,
-            this.bandedGridColumn27});
+            this.bandedGridColumn27,
+            this.bandedGridColumn1});
             this.advBandedGridView.GridControl = this.gcReport;
             this.advBandedGridView.Name = "advBandedGridView";
             this.advBandedGridView.OptionsBehavior.Editable = false;
@@ -592,13 +595,13 @@
             this.gridBand23});
             this.gridBand18.MinWidth = 20;
             this.gridBand18.Name = "gridBand18";
-            this.gridBand18.Width = 399;
+            this.gridBand18.Width = 419;
             // 
             // gridBand20
             // 
             this.gridBand20.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand20.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand20.Caption = "应付余额";
+            this.gridBand20.Caption = "应付人民币余额";
             this.gridBand20.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand22,
             this.gridBand21});
@@ -609,7 +612,7 @@
             // 
             this.gridBand22.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand22.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand22.Caption = "已付货款";
+            this.gridBand22.Caption = "已付供方货款";
             this.gridBand22.Columns.Add(this.gcCNY);
             this.gridBand22.Name = "gridBand22";
             this.gridBand22.Width = 100;
@@ -658,7 +661,7 @@
             this.gridBand25,
             this.gridBand26});
             this.gridBand23.Name = "gridBand23";
-            this.gridBand23.Width = 215;
+            this.gridBand23.Width = 235;
             // 
             // gridBand24
             // 
@@ -688,7 +691,7 @@
             this.gridBand25.Caption = "退税率";
             this.gridBand25.Columns.Add(this.gcTaxRebateRate);
             this.gridBand25.Name = "gridBand25";
-            this.gridBand25.Width = 45;
+            this.gridBand25.Width = 65;
             // 
             // gcTaxRebateRate
             // 
@@ -698,13 +701,13 @@
             this.gcTaxRebateRate.FieldName = "TaxRebateRate";
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
-            this.gcTaxRebateRate.Width = 45;
+            this.gcTaxRebateRate.Width = 65;
             // 
             // gridBand26
             // 
             this.gridBand26.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand26.Caption = "供货方名称";
+            this.gridBand26.Caption = "公司单位名称";
             this.gridBand26.Columns.Add(this.gcSupplierName);
             this.gridBand26.Name = "gridBand26";
             this.gridBand26.Width = 86;
@@ -883,7 +886,7 @@
             this.gridBand4});
             this.gridBand39.MinWidth = 20;
             this.gridBand39.Name = "gridBand39";
-            this.gridBand39.Width = 338;
+            this.gridBand39.Width = 384;
             // 
             // gridBand40
             // 
@@ -894,7 +897,7 @@
             this.gridBand40.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand41});
             this.gridBand40.Name = "gridBand40";
-            this.gridBand40.Width = 189;
+            this.gridBand40.Width = 176;
             // 
             // gridBand41
             // 
@@ -903,7 +906,7 @@
             this.gridBand41.Caption = "销售利润";
             this.gridBand41.Columns.Add(this.gcSalesProfit);
             this.gridBand41.Name = "gridBand41";
-            this.gridBand41.Width = 189;
+            this.gridBand41.Width = 176;
             // 
             // gcSalesProfit
             // 
@@ -915,14 +918,15 @@
             this.gcSalesProfit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcSalesProfit.Visible = true;
-            this.gcSalesProfit.Width = 189;
+            this.gcSalesProfit.Width = 176;
             // 
             // gridBand4
             // 
             this.gridBand4.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand42});
+            this.gridBand42,
+            this.gridBand14});
             this.gridBand4.Name = "gridBand4";
-            this.gridBand4.Width = 149;
+            this.gridBand4.Width = 208;
             // 
             // gridBand42
             // 
@@ -931,7 +935,7 @@
             this.gridBand42.Caption = "实际利润";
             this.gridBand42.Columns.Add(this.gcProfit);
             this.gridBand42.Name = "gridBand42";
-            this.gridBand42.Width = 149;
+            this.gridBand42.Width = 123;
             // 
             // gcProfit
             // 
@@ -943,7 +947,28 @@
             this.gcProfit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcProfit.Visible = true;
-            this.gcProfit.Width = 149;
+            this.gcProfit.Width = 123;
+            // 
+            // gridBand14
+            // 
+            this.gridBand14.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand14.Caption = "出口退税额";
+            this.gridBand14.Columns.Add(this.bandedGridColumn1);
+            this.gridBand14.Name = "gridBand14";
+            this.gridBand14.Width = 85;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "出口退税额";
+            this.bandedGridColumn1.DisplayFormat.FormatString = "N2";
+            this.bandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.bandedGridColumn1.FieldName = "TaxRebate";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 85;
             // 
             // gridBand44
             // 
@@ -1382,6 +1407,7 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn25;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn26;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn27;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand12;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand33;
@@ -1423,6 +1449,7 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand41;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand42;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand14;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand44;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand45;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand46;

@@ -112,6 +112,7 @@ namespace BudgetSystem
                     {
                         row["CNY"] = pn.CNY;
                     }
+                    row["SupplierName"] = pn.SupplierName;
                     dt.Rows.Add(row);
                 }
                 //发票表
@@ -175,6 +176,7 @@ namespace BudgetSystem
             dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用
             dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
             dt.Columns.Add("Balance", typeof(decimal));// 收支余
+            dt.Columns.Add("TaxRebate", typeof(decimal));//出口退税额=已收供方发票-销售成本
             return dt;
         }
 
@@ -210,6 +212,8 @@ namespace BudgetSystem
                     {
                         row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
                     }
+                    //出口退税额=已收供方发票-销售成本
+                    row["TaxRebate"] = Math.Round(GetDecimal(row, "Payment") - GetDecimal(row, "CostOfSales"), 2);
                 }
                 //销售利润=应收人民币-销售成本-运保费-佣金-直接费用
                 var salesProfit = GetDecimal(row, "TotalAmount")
@@ -245,7 +249,7 @@ namespace BudgetSystem
 
             gridBand10.Caption = (totalOriginalCurrency - BillOriginalCoin).ToString();//应收原币
             gridBand3.Caption = (AllTotalAmount - BillCNY).ToString();//应收人名币
-            gridBand23.Caption = (totalPaymentCNY - needPayment).ToString(); //应付余额=已付金额-发票金额
+            gridBand23.Caption = (needPayment - totalPaymentCNY).ToString(); //应付余额=已付金额-发票金额
             gridBand4.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             return dt;
         }

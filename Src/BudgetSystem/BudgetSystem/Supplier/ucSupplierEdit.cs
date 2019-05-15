@@ -136,6 +136,7 @@ namespace BudgetSystem
                 SetReadOnly();
                 this.gvBankInfoDetail.Columns.Remove(this.colDelete);
                 this.gvBankInfoDetail.OptionsBehavior.Editable = false;
+                
                 if (CurrentSupplier != null)
                 {
                     Supplier supplier = sm.GetSupplier(CurrentSupplier.ID);

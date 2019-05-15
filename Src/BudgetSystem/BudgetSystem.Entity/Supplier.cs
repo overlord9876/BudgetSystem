@@ -179,10 +179,10 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (SupplierType == (int)EnumSupplierType.合格供方)
+                if (SupplierType == (int)EnumSupplierType.合格供方 && this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if (this.EnumFlowState == EnumDataFlowState.审批通过
-                        && (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate != DateTime.MinValue && this.BusinessEffectiveDate.Value.AddDays(-15).Date <= DateTime.Now.Date))
+                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate != DateTime.MinValue && this.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
+                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate != DateTime.MinValue && this.AgreementDate.Value.AddDays(-30).Date < DateTime.Now.Date))
                     {
                         return true;
                     }

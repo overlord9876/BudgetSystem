@@ -50,6 +50,8 @@
             this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcArchiveApplyDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcArchiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
@@ -59,14 +61,14 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(1205, 537);
+            this.gridBudget.Size = new System.Drawing.Size(1377, 690);
             this.gridBudget.TabIndex = 0;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBudget});
@@ -92,11 +94,14 @@
             this.gcCreateDate,
             this.gcSignDate,
             this.gcValidity,
-            this.gcPort});
+            this.gcPort,
+            this.gcArchiveApplyDate,
+            this.gcArchiveDate});
             this.gvBudget.GridControl = this.gridBudget;
             this.gvBudget.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvBudget.Name = "gvBudget";
             this.gvBudget.OptionsBehavior.Editable = false;
+            this.gvBudget.OptionsView.ColumnAutoWidth = false;
             this.gvBudget.OptionsView.ShowDetailButtons = false;
             this.gvBudget.OptionsView.ShowGroupPanel = false;
             this.gvBudget.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
@@ -106,6 +111,7 @@
             // 
             this.gcContractNO.Caption = "合同号";
             this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gcContractNO.MinWidth = 120;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
@@ -150,6 +156,7 @@
             this.gcState.Name = "gcState";
             this.gcState.Visible = true;
             this.gcState.VisibleIndex = 4;
+            this.gcState.Width = 85;
             // 
             // gcTotalAmount
             // 
@@ -301,6 +308,23 @@
             this.gcPort.VisibleIndex = 18;
             this.gcPort.Width = 80;
             // 
+            // gcArchiveApplyDate
+            // 
+            this.gcArchiveApplyDate.Caption = "归档征求日期";
+            this.gcArchiveApplyDate.FieldName = "ArchiveApplyDate";
+            this.gcArchiveApplyDate.Name = "gcArchiveApplyDate";
+            this.gcArchiveApplyDate.Visible = true;
+            this.gcArchiveApplyDate.VisibleIndex = 19;
+            this.gcArchiveApplyDate.Width = 85;
+            // 
+            // gcArchiveDate
+            // 
+            this.gcArchiveDate.Caption = "归档日期";
+            this.gcArchiveDate.FieldName = "ArchiveDate";
+            this.gcArchiveDate.Name = "gcArchiveDate";
+            this.gcArchiveDate.Visible = true;
+            this.gcArchiveDate.VisibleIndex = 20;
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
@@ -308,11 +332,11 @@
             // 
             // frmBudgetQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1205, 537);
+            this.ClientSize = new System.Drawing.Size(1377, 690);
             this.Controls.Add(this.gridBudget);
-            this.Margin = new System.Windows.Forms.Padding(3);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmBudgetQuery";
             this.Text = "预算单查询";
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
@@ -347,5 +371,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraGrid.Columns.GridColumn gcState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcArchiveApplyDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcArchiveDate;
     }
 }

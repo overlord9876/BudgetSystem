@@ -85,10 +85,26 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" frp.State=0 and fn.NodeValueRemark='部门经理' and f.FlowName=@FlowName");
                     dp.Add("FlowName", EnumFlowNames.预算单审批流程.ToString(), DbType.String, null, null);
                 }
-                if ((int)condition.State != -1)
+                if ((int)condition.State != 0)
                 {
-                    strConditionList.Add(" b.`State`=@State ");
-                    dp.Add("State", condition.State, DbType.Int32, ParameterDirection.Input, null);
+                    List<string> strStateConditionList = new List<string>();
+                    if ((condition.State & (int)EnumBudgetState.已结束) != 0)
+                    {
+                        strStateConditionList.Add(string.Format(" b.`State`= {0} ", (int)EnumBudgetState.已结束));
+                    }
+                    if ((condition.State & (int)EnumBudgetState.进行中) != 0)
+                    {
+                        strStateConditionList.Add(string.Format(" b.`State`= {0} ", (int)EnumBudgetState.进行中));
+                    }
+                    if ((condition.State & (int)EnumBudgetState.财务归档征求) != 0)
+                    {
+                        strStateConditionList.Add(string.Format(" b.`State`= {0} ", (int)EnumBudgetState.财务归档征求));
+                    }
+                    if ((condition.State & (int)EnumBudgetState.驳回归档征求) != 0)
+                    {
+                        strStateConditionList.Add(string.Format(" b.`State`= {0} ", (int)EnumBudgetState.驳回归档征求));
+                    }
+                    strConditionList.Add(string.Format(" ( {0} ) ", string.Join(" OR ", strStateConditionList.ToArray()))); 
                 }
                 if (condition.IsArchiveWarningQuery)
                 {
@@ -275,7 +291,20 @@ namespace BudgetSystem.Dal
 
         public void ModifyBudgetState(int id, EnumBudgetState state, IDbConnection con, IDbTransaction tran = null)
         {
-            string updateSql = "Update `Budget` Set  `State` = @State  Where `ID` = @ID";
+            string updateSql = string.Empty;
+            string sqlFormat= "Update `Budget` Set  `State` = @State  {0} Where `ID` = @ID";
+            if (state == EnumBudgetState.财务归档征求)
+            {
+                updateSql = string.Format(sqlFormat, ",`ArchiveApplyDate`=now()");
+            }
+            else if (state == EnumBudgetState.已结束)
+            {
+                updateSql = string.Format(sqlFormat, ",`ArchiveDate`=now()");
+            }
+            else
+            {
+                updateSql = string.Format(sqlFormat, string.Empty);
+            }
             con.Execute(updateSql, new { ID = id, State = state }, tran);
         }
 

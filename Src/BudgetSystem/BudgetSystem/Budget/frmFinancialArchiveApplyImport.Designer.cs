@@ -300,7 +300,7 @@
             this.Controls.Add(this.layoutControl1);
             this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmFinancialArchiveApplyImport";
-            this.Text = "导入财务平账征求信息";
+            this.Text = "导入财务归档征求信息";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcBudgetList)).EndInit();

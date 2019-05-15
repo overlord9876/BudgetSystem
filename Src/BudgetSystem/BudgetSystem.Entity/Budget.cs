@@ -423,7 +423,22 @@ namespace BudgetSystem.Entity
         [JsonIgnore]
         public string Message { get; set; }
 
-
+        /// <summary>
+        /// 归档征求日期
+        /// </summary>
+        public DateTime? ArchiveApplyDate
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// 归档日期
+        /// </summary>
+        public DateTime? ArchiveDate
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// 流程状态
         /// </summary>

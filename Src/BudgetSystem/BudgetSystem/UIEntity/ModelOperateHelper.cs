@@ -234,7 +234,7 @@ namespace BudgetSystem
             }
             else if (operate == OperateTypes.FinancialArchiveApply)
             {
-                text = "财务平账征求";
+                text = "财务归档征求";
                 group = "操作";
                 imageIndex = 11;
             }

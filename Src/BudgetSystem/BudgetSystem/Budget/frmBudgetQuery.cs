@@ -23,7 +23,8 @@ namespace BudgetSystem
         private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "已完成审批预算单列表";
         private const string COMMONQUERY_MANAGERAPPROVAL = "未完成审批预算单列表";
         private const string COMMONQUERY_ARCHIVEWARNINGQUERY = "预算单归档预警";
-        private const string COMMONQUERY_FINANCEQUERY = "财务平账征求";
+        private const string COMMONQUERY_FINANCEQUERY = "财务归档征求";
+        private const string COMMONQUERY_FINANCEQUERYANDREJECTED = "财务归档征求及驳回归档";
         private const string COMMONQUERY_ARCHIVEQUERY = "预算单已归档合同列表";
         public frmBudgetQuery()
         {
@@ -43,10 +44,9 @@ namespace BudgetSystem
             //this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Close));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除"));
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ClosingAccountApply, "结账申请"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.RejectedAccount, "驳回结账申请"));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinancialArchiveApply, "财务平账征求"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinancialArchiveApply, "财务归档征求"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Archive, "归档"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.RejectedAccount, "驳回归档征求"));
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
@@ -61,6 +61,7 @@ namespace BudgetSystem
                                                                               COMMONQUERY_GENERALMANAGERAPPROVAL,     
                                                                               COMMONQUERY_ARCHIVEWARNINGQUERY,
                                                                               COMMONQUERY_FINANCEQUERY,
+                                                                              COMMONQUERY_FINANCEQUERYANDREJECTED,
                                                                               COMMONQUERY_ARCHIVEQUERY
                                                                               }, "预算单查询");
 
@@ -114,10 +115,6 @@ namespace BudgetSystem
             {
                 ExportDataBudget();
             }
-            else if (operate.Operate == OperateTypes.ClosingAccountApply.ToString())
-            {
-                ClosingAccountApply();
-            }
             else if (operate.Operate == OperateTypes.RejectedAccount.ToString())
             {
                 RejectedAccount();
@@ -159,7 +156,7 @@ namespace BudgetSystem
             }
             else if (COMMONQUERY_ARCHIVEQUERY.Equals(queryName))
             {
-                BudgetQueryCondition condition = new BudgetQueryCondition() { State = EnumBudgetState.已结束 };
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.已结束 };
                 LoadData(condition);
             }
             else if (COMMONQUERY_ARCHIVEWARNINGQUERY.Equals(queryName))
@@ -169,7 +166,12 @@ namespace BudgetSystem
             }
             else if (COMMONQUERY_FINANCEQUERY.Equals(queryName))
             {
-                BudgetQueryCondition condition = new BudgetQueryCondition() { State = EnumBudgetState.财务平账征求 };
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.财务归档征求 };
+                LoadData(condition);
+            }
+            else if (COMMONQUERY_FINANCEQUERYANDREJECTED.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
                 LoadData(condition);
             }
         }
@@ -474,36 +476,6 @@ namespace BudgetSystem
             }
         }
 
-        /// <summary>
-        /// 结账申请
-        /// </summary>
-        private void ClosingAccountApply()
-        {
-            Budget budget = this.gvBudget.GetFocusedRow() as Budget;
-            if (budget != null)
-            {
-                if (budget.EnumState != EnumBudgetState.进行中 && budget.EnumState != EnumBudgetState.财务平账征求)
-                {
-                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许结账申请。", budget.StringState));
-                    return;
-                }
-                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.结账申请);
-                if (string.IsNullOrEmpty(message))
-                {
-                    XtraMessageBox.Show("结账申请成功。");
-                    LoadData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
-                }
-            }
-            else
-            {
-                XtraMessageBox.Show("请选择需要结账申请的项");
-            }
-
-        }
 
         /// <summary>
         /// 驳回申请
@@ -513,15 +485,15 @@ namespace BudgetSystem
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
             if (budget != null)
             {
-                if (budget.EnumState != EnumBudgetState.结账申请)
+                if (budget.EnumState != EnumBudgetState.财务归档征求)
                 {
-                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许驳回结账申请。", budget.StringState));
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许驳回归档征求。", budget.StringState));
                     return;
                 }
-                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.进行中);
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.驳回归档征求);
                 if (string.IsNullOrEmpty(message))
                 {
-                    XtraMessageBox.Show("驳回结账申请成功。");
+                    XtraMessageBox.Show("驳回归档征求成功。");
                     LoadData();
                 }
                 else
@@ -536,7 +508,7 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 财务平账征求
+        /// 财务归档征求
         /// </summary>
         private void FinancialArchiveApply()
         {
@@ -552,7 +524,8 @@ namespace BudgetSystem
                         var findItem = budgetList.Find(o => o.ID.Equals(budget.ID));
                         if (findItem != null)
                         {
-                            findItem.State = (int)EnumBudgetState.财务平账征求;
+                            findItem.State = (int)EnumBudgetState.财务归档征求;
+                            findItem.ArchiveApplyDate = DateTime.Now;
                         }
                     }
                     this.gvBudget.RefreshData();
@@ -565,13 +538,13 @@ namespace BudgetSystem
             //{
             //    if (budget.EnumState != EnumBudgetState.进行中)
             //    {
-            //        XtraMessageBox.Show(string.Format("{0}状态的预算单不允许财务平账征求。", budget.StringState));
+            //        XtraMessageBox.Show(string.Format("{0}状态的预算单不允许财务归档征求。", budget.StringState));
             //        return;
             //    }
-            //    string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务平账征求);
+            //    string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务归档征求);
             //    if (string.IsNullOrEmpty(message))
             //    {
-            //        XtraMessageBox.Show("财务平账征求成功。");
+            //        XtraMessageBox.Show("财务归档征求成功。");
             //        LoadData();
             //    }
             //    else
@@ -581,7 +554,7 @@ namespace BudgetSystem
             //}
             //else
             //{
-            //    XtraMessageBox.Show("请选择需要财务平账征求的项");
+            //    XtraMessageBox.Show("请选择需要财务归档征求的项");
             //}
         }
 
@@ -599,7 +572,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show("您选择的项已经不存在");
                     return;
                 }
-                if (budget.EnumState != EnumBudgetState.结账申请)
+                if (budget.EnumState != EnumBudgetState.财务归档征求)
                 {
                     XtraMessageBox.Show(string.Format("{0}状态的预算单不允许归档。", budget.StringState));
                     return;

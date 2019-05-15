@@ -676,7 +676,7 @@ namespace BudgetSystem
         /// </summary>
         private void CalcTotalCost()
         {
-            txtTotalCost.EditValue = txtPurchasePrice.Value - txtTaxRebateRateMoney.Value;
+            txtTotalCost.EditValue = txtPurchasePrice.Value - txtTaxRebateRateMoney.Value + txtFeedMoney.Value;
         }
 
         /// <summary>
@@ -1253,6 +1253,10 @@ namespace BudgetSystem
         {
             this.CalcInproductInterest();
             this.CalcBudgetSubtotal();
+            if (sender == this.txtFeedMoney)
+            {
+                this.CalcTotalCost();
+            }
         }
 
         private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)

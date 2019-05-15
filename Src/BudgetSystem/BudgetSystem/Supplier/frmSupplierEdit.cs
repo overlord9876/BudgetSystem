@@ -106,6 +106,7 @@ namespace BudgetSystem
                 else
                 {
                     XtraMessageBox.Show(message);
+                    return;
                 }
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }

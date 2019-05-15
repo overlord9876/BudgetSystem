@@ -38,12 +38,12 @@ namespace BudgetSystem.Entity.QueryCondition
             get { return isManagerApproval; }
             set { isManagerApproval = value; }
         }
-        private EnumBudgetState state = (EnumBudgetState)(-1);
+        private int state = 0;
 
         /// <summary>
         /// 状态
         /// </summary>
-        public EnumBudgetState State
+        public int State
         {
             get { return state; }
             set { state = value; }

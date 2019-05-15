@@ -69,9 +69,9 @@ namespace BudgetSystem
                             b.ContractNO = contractNo;
                             b.Message = "合同号不存在";
                         }
-                        else if (b.EnumState != EnumBudgetState.进行中)
+                        else if (b.EnumState != EnumBudgetState.进行中&& b.EnumState!= EnumBudgetState.驳回归档征求)
                         {
-                            b.Message = string.Format("{0}状态的预算单不允许财务平账征求。", b.EnumState);
+                            b.Message = string.Format("{0}状态的预算单不允许财务归档征求。", b.EnumState);
                         }
                         else if (!EnumFlowNames.预算单审批流程.ToString().Equals(b.FlowName) || b.EnumFlowState != EnumDataFlowState.审批通过)
                         {
@@ -120,7 +120,7 @@ namespace BudgetSystem
                 }
                 foreach (var budget in list)
                 {
-                    bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务平账征求);
+                    bm.ModifyBudgetState(budget.ID, EnumBudgetState.财务归档征求);
                 }
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
@@ -164,9 +164,9 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
-            else if (budget.EnumState != EnumBudgetState.进行中)
+            else if (budget.EnumState != EnumBudgetState.进行中&& budget.EnumState!= EnumBudgetState.驳回归档征求)
             {
-                e.ErrorText = string.Format("{0}状态的预算单不允许财务平账征求。", budget.EnumState);
+                e.ErrorText = string.Format("{0}状态的预算单不允许财务归档征求。", budget.EnumState);
                 df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
