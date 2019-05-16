@@ -370,9 +370,8 @@ namespace BudgetSystem.OutMoney
                         cboPayingBank.Properties.Items.Add(bankName);
                     }
                 }
-                BudgetQueryCondition condition = new BudgetQueryCondition();
-                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
-                budgetList = bm.GetAllBudget(condition);
+                budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
+
                 this.cboBudget.Properties.DataSource = budgetList;
 
                 supplierList = sm.GetAllSupplier();

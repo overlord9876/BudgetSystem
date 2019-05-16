@@ -10,12 +10,13 @@ using BudgetSystem.Entity;
 using DevExpress.XtraPivotGrid;
 using DevExpress.Utils;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem.Report
 {
     public partial class frmSlipperReport : Base.frmBaseCommonReportForm
     {
-        public frmSlipperReport()
+        public frmSlipperReport():base()
         {
             InitializeComponent();
             this.Module = BusinessModules.SlipperReport;
@@ -26,6 +27,7 @@ namespace BudgetSystem.Report
         {
             base.InitModelOperate();
         }
+
 
         protected override void InitModelOperate()
         {
@@ -40,14 +42,30 @@ namespace BudgetSystem.Report
         private void frmTestReport1_Load(object sender, EventArgs e)
         {
             InitShowStyle();
+
+            try
+            {
+                BudgetManager bm = new BudgetManager();
+                BudgetQueryCondition condition = new BudgetQueryCondition();
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+                List<Budget> budgetList = bm.GetAllBudget(condition);
+                this.repositoryItemGridLookUpEdit1.DataSource = budgetList;
+            }
+            catch (Exception ex)
+            {
+                RunInfo.Instance.Logger.LogError(ex);
+            }
         }
 
         protected override void LoadDataByCondition(BudgetQueryCondition condition)
         {
             Bll.ReportManager um = new Bll.ReportManager();
-
+            if (this.beiContractNO.EditValue != null)
+            { 
+                condition.ID=(this.beiContractNO.EditValue as Budget).ID;                
+            }
             var lst = um.GetSupplierReportList(condition);
-
+           
             this.pivotGridControl.DataSource = lst;
             this.gridControl.DataSource = lst;
         }

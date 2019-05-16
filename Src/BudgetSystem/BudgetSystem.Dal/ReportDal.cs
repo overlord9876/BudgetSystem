@@ -106,10 +106,16 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
                 selectSql += " AND Applicant=@Applicant ";
                 dp.Add("Applicant", condition.Salesman, null, null, null);
             }
+           
             else if (condition.DeptID >= 0)
             {
                 selectSql += "  AND Applicant in (SELECT UserName from `user` where DeptID=@DeptID) ";
                 dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            if (condition.ID > 0)
+            {
+                selectSql += " AND pn.BudgetID=@BudgetID AND EXISTS(SELECT 1 FROM BudgetSuppliers WHERE Sup_ID=s.ID and ID=@BudgetID) ";
+                dp.Add("BudgetID", condition.ID, null, null, null);
             }
 
             selectSql += " GROUP BY s.`Name`;";

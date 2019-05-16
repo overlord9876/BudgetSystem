@@ -9,6 +9,8 @@ namespace BudgetSystem.Entity.QueryCondition
     /// </summary>
     public class BudgetQueryCondition : BaseQueryCondition
     {
+        public int ID { get; set; }
+
         /// <summary>
         /// 合同号
         /// </summary>

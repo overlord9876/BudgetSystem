@@ -335,7 +335,7 @@ namespace BudgetSystem
             if (form == null)
             {
                 form = new Report.frmSlipperReport();
-                form.RefreshData();
+                //form.RefreshData();
             }
             else
             {
