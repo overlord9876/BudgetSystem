@@ -34,7 +34,18 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 付款原币金额
         /// </summary>
-        public decimal OriginalCoin { get; set; }
+        public decimal TotalOriginalCoin { get; set; }
+
+        /// <summary>
+        /// 应付人民币余额
+        /// </summary>
+        public decimal BalanceDue 
+        {
+            get
+            {
+                return InvoiceTotal - TotalCNY;
+            }
+        }
 
         public List<Invoice> InvoiceList { get; set; }
         public decimal InvoiceTotal

@@ -45,7 +45,6 @@
             this.gcSeaport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
-
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -63,66 +62,65 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
-            this.barManager1.Items.Add(this.beiContractNO);
-            this.pivotViewBar.LinksPersistInfo.Insert(3, new DevExpress.XtraBars.LinkPersistInfo(this.beiContractNO));
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(829, 657, 552, 529);
-            this.layoutControl1.Size = new System.Drawing.Size(1369, 811);
+            this.layoutControl1.Size = new System.Drawing.Size(1759, 811);
             this.layoutControl1.Controls.SetChildIndex(this.listBox, 0);
             // 
             // layoutControlGroup1
             // 
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1369, 811);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1759, 811);
             // 
             // lcgPivote
             // 
-            this.lcgPivote.Size = new System.Drawing.Size(1325, 742);
+            this.lcgPivote.Size = new System.Drawing.Size(1715, 742);
             // 
             // listBox
             // 
-            this.listBox.Size = new System.Drawing.Size(252, 708);
+            this.listBox.Size = new System.Drawing.Size(327, 708);
             // 
             // tabbedControlGroup1
             // 
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(1349, 791);
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(1739, 791);
             // 
             // lcgGrid
             // 
-            this.lcgGrid.Size = new System.Drawing.Size(1325, 742);
+            this.lcgGrid.Size = new System.Drawing.Size(1715, 742);
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Size = new System.Drawing.Size(1325, 712);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1715, 712);
             // 
             // lcGridBar
             // 
-            this.lcGridBar.Size = new System.Drawing.Size(1325, 30);
+            this.lcGridBar.Size = new System.Drawing.Size(1715, 30);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Location = new System.Drawing.Point(261, 30);
-            this.layoutControlItem3.Size = new System.Drawing.Size(1064, 712);
+            this.layoutControlItem3.Location = new System.Drawing.Point(336, 30);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1379, 712);
             // 
             // lcStatBar
             // 
-            this.lcStatBar.Size = new System.Drawing.Size(1325, 30);
+            this.lcStatBar.Size = new System.Drawing.Size(1715, 30);
             // 
             // splitterItem
             // 
-            this.splitterItem.Location = new System.Drawing.Point(256, 30);
+            this.splitterItem.Location = new System.Drawing.Point(331, 30);
             this.splitterItem.Size = new System.Drawing.Size(5, 712);
             // 
             // lcList
             // 
-            this.lcList.Size = new System.Drawing.Size(256, 712);
+            this.lcList.Size = new System.Drawing.Size(331, 712);
             // 
             // beiContractNO
             // 
             this.beiContractNO.Caption = "选择合同：";
             this.beiContractNO.Edit = this.repositoryItemGridLookUpEdit1;
+            this.beiContractNO.EditValue = "";
             this.beiContractNO.Id = 20;
             this.beiContractNO.Name = "beiContractNO";
             this.beiContractNO.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
@@ -130,13 +128,18 @@
             // 
             // repositoryItemGridLookUpEdit1
             // 
+            this.repositoryItemGridLookUpEdit1.ActionButtonIndex = 1;
+            this.repositoryItemGridLookUpEdit1.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.repositoryItemGridLookUpEdit1.AutoHeight = false;
             this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
             this.repositoryItemGridLookUpEdit1.NullText = "";
             this.repositoryItemGridLookUpEdit1.View = this.repositoryItemGridLookUpEdit1View;
-            this.repositoryItemGridLookUpEdit1.AllowNullInput =  DevExpress.Utils.DefaultBoolean.True;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
             this.repositoryItemGridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcContractNO,
             this.gcState,
@@ -159,9 +162,6 @@
             this.repositoryItemGridLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
             this.repositoryItemGridLookUpEdit1View.OptionsView.ShowDetailButtons = false;
             this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-
-
-
             // 
             // gcContractNO
             // 
@@ -261,14 +261,12 @@
             this.gcProfit.Caption = "利润";
             this.gcProfit.FieldName = "Profit";
             this.gcProfit.Name = "gcProfit";
-
-
             // 
             // frmSlipperReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 811);
+            this.ClientSize = new System.Drawing.Size(1759, 811);
             this.Name = "frmSlipperReport";
             this.Text = "供应商管理";
             this.Load += new System.EventHandler(this.frmTestReport1_Load);
@@ -295,8 +293,7 @@
 
         #endregion
 
-        private DevExpress.XtraBars.BarEditItem beiContractNO;
-        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
+        private DevExpress.XtraBars.BarEditItem beiContractNO; 
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
         private DevExpress.XtraGrid.Columns.GridColumn gcState;
@@ -312,5 +309,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcSeaport;
         private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
     }
 }
