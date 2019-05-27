@@ -36,6 +36,7 @@ namespace BudgetSystem
         public ucSupplierEdit()
         {
             InitializeComponent();
+            Detail();
         }
 
         public void InitData()
@@ -136,7 +137,7 @@ namespace BudgetSystem
                 SetReadOnly();
                 this.gvBankInfoDetail.Columns.Remove(this.colDelete);
                 this.gvBankInfoDetail.OptionsBehavior.Editable = false;
-                
+
                 if (CurrentSupplier != null)
                 {
                     Supplier supplier = sm.GetSupplier(CurrentSupplier.ID);
@@ -309,6 +310,18 @@ namespace BudgetSystem
             {
                 return "";
             }
+        }
+
+        private void Detail()
+        {
+            dateEdit1.EditValue = DateTime.Now;
+            dateEdit2.EditValue = DateTime.Now;
+            comboBoxEdit1.SelectedIndex = 0;
+            comboBoxEdit2.SelectedIndex = 0;
+            comboBoxEdit3.SelectedIndex = 0;
+            comboBoxEdit4.SelectedIndex = 0;
+            comboBoxEdit5.SelectedIndex = 0;
+            comboBoxEdit6.SelectedIndex = 0;
         }
 
         private void gvBankInfoDetail_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
