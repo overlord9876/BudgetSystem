@@ -47,6 +47,7 @@
     <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="QueryCondition\InvoiceQueryCondition.cs" />
+    <Compile Include="ReportMgmt\RecieptCapital.cs" />
     <Compile Include="Util\CaculateUtil.cs" />
     <Compile Include="CodeType.cs" />
     <Compile Include="Config.cs" />

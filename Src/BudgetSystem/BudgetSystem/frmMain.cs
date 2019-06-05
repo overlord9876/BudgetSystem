@@ -406,6 +406,23 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BudgetSystem.Report.frmCapitalReport form = GetExistForm<BudgetSystem.Report.frmCapitalReport>(BudgetSystem.Entity.BusinessModules.RecieptCapital.ToString());
+            if (form == null)
+            {
+                form = new BudgetSystem.Report.frmCapitalReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = Entity.BusinessModules.RecieptCapital;
+            ShowForm(form);
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             RunInfo.Instance.MainForm = this;
@@ -447,6 +464,5 @@ namespace BudgetSystem
 
 
         }
-
     }
 }

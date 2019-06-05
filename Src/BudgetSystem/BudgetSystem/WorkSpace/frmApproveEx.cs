@@ -118,14 +118,16 @@ namespace BudgetSystem.WorkSpace
 
         private void Submit(bool result)
         {
+            result = true;//审批通过
+            result = false;//审批不通过
 
             if (result)
             {
                 if (!DoFlowExtEvent())
                 {
-
-                    return;
+                    result = false;
                 }
+                result = true;
             }
 
             FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, this.txtMyInfo.Text.Trim());
@@ -193,7 +195,7 @@ namespace BudgetSystem.WorkSpace
             {
                 return true;
             }
-
+            //A\B\C resul Ok，D result Cancel
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 return true;

@@ -59,6 +59,7 @@
             this.btnDepartmentReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnCompanyReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnFinalAccount = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -117,10 +118,11 @@
             this.bsiLoginInfo,
             this.btnDepartmentReport,
             this.btnCompanyReport,
-            this.btnFinalAccount});
+            this.btnFinalAccount,
+            this.barButtonItem2});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 47;
+            this.ribbonControl1.MaxItemId = 48;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -461,6 +463,16 @@
             this.btnFinalAccount.Tag = "FinalAccount";
             this.btnFinalAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFinalAccount_ItemClick);
             // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "资金管理（收汇）";
+            this.barButtonItem2.Id = 47;
+            this.barButtonItem2.ImageIndex = 21;
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem2.Tag = "RecieptCapital";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -504,6 +516,7 @@
             this.rpGroup.ItemLinks.Add(this.btnSalemenReport);
             this.rpGroup.ItemLinks.Add(this.btnDepartmentReport);
             this.rpGroup.ItemLinks.Add(this.btnCompanyReport);
+            this.rpGroup.ItemLinks.Add(this.barButtonItem2);
             this.rpGroup.Name = "rpGroup";
             this.rpGroup.Text = "统计管理";
             // 
@@ -660,6 +673,7 @@
         private DevExpress.XtraBars.BarButtonItem btnDepartmentReport;
         private DevExpress.XtraBars.BarButtonItem btnCompanyReport;
         private DevExpress.XtraBars.BarButtonItem btnFinalAccount;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }
 

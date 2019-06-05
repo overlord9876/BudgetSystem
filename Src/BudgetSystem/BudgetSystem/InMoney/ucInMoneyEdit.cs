@@ -613,6 +613,7 @@ namespace BudgetSystem.InMoney
             item.ExchangeRate = txtExchangeRate.Value;
             item.OperatorModel = DataOperatorModel.Add;
             item.Operator = RunInfo.Instance.CurrentUser.UserName;
+            item.OperateTimestamp = DateTime.Now;
             item.DepartmentCode = RunInfo.Instance.CurrentUser.Department;
             item.DeptID = RunInfo.Instance.CurrentUser.DeptID;
         }
@@ -665,6 +666,7 @@ namespace BudgetSystem.InMoney
             {
                 if (budget.OperatorModel != DataOperatorModel.Add)
                 {
+                    budget.OperateTimestamp = DateTime.Now;
                     budget.OperatorModel = DataOperatorModel.Modify;
                 }
                 if (e.Column == bgcBudget && budget.RelationBudget != null)

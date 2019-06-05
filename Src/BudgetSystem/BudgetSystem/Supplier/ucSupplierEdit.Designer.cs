@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.calcEdit1 = new DevExpress.XtraEditors.CalcEdit();
             this.checkEdit5 = new DevExpress.XtraEditors.CheckEdit();
             this.gridBankInfoDetail = new DevExpress.XtraGrid.GridControl();
             this.gvBankInfoDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -66,12 +67,10 @@
             this.lcSupplierType = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRegisterCapital = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcAddress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTell = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFaxNumber = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcContacts = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDepartment = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDescription = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcLegal = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -85,6 +84,9 @@
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcTell = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -115,7 +117,6 @@
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
@@ -187,6 +188,7 @@
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBankInfoDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBankInfoDetail)).BeginInit();
@@ -223,12 +225,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSupplierType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRegisterCapital)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTell)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFaxNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLegal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -242,6 +242,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcTell)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -269,7 +272,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
             this.panel2.SuspendLayout();
@@ -329,6 +331,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.calcEdit1);
             this.layoutControl1.Controls.Add(this.checkEdit5);
             this.layoutControl1.Controls.Add(this.gridBankInfoDetail);
             this.layoutControl1.Controls.Add(this.txtUpdateUser);
@@ -363,6 +366,16 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // calcEdit1
+            // 
+            this.calcEdit1.Location = new System.Drawing.Point(482, 125);
+            this.calcEdit1.Name = "calcEdit1";
+            this.calcEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.calcEdit1.Size = new System.Drawing.Size(278, 21);
+            this.calcEdit1.StyleController = this.layoutControl1;
+            this.calcEdit1.TabIndex = 39;
+            // 
             // checkEdit5
             // 
             this.checkEdit5.Location = new System.Drawing.Point(520, 52);
@@ -375,11 +388,11 @@
             // gridBankInfoDetail
             // 
             this.gridBankInfoDetail.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.gridBankInfoDetail.Location = new System.Drawing.Point(26, 228);
+            this.gridBankInfoDetail.Location = new System.Drawing.Point(26, 253);
             this.gridBankInfoDetail.MainView = this.gvBankInfoDetail;
             this.gridBankInfoDetail.Margin = new System.Windows.Forms.Padding(2);
             this.gridBankInfoDetail.Name = "gridBankInfoDetail";
-            this.gridBankInfoDetail.Size = new System.Drawing.Size(731, 211);
+            this.gridBankInfoDetail.Size = new System.Drawing.Size(731, 186);
             this.gridBankInfoDetail.TabIndex = 37;
             this.gridBankInfoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBankInfoDetail});
@@ -533,7 +546,7 @@
             // 
             // txtPostalCode
             // 
-            this.txtPostalCode.Location = new System.Drawing.Point(482, 125);
+            this.txtPostalCode.Location = new System.Drawing.Point(482, 175);
             this.txtPostalCode.Margin = new System.Windows.Forms.Padding(2);
             this.txtPostalCode.Name = "txtPostalCode";
             this.txtPostalCode.Properties.MaxLength = 10;
@@ -543,7 +556,7 @@
             // 
             // txtContacts
             // 
-            this.txtContacts.Location = new System.Drawing.Point(101, 200);
+            this.txtContacts.Location = new System.Drawing.Point(101, 225);
             this.txtContacts.Margin = new System.Windows.Forms.Padding(2);
             this.txtContacts.Name = "txtContacts";
             this.txtContacts.Properties.MaxLength = 50;
@@ -553,11 +566,11 @@
             // 
             // txtFaxNumber
             // 
-            this.txtFaxNumber.Location = new System.Drawing.Point(482, 175);
+            this.txtFaxNumber.Location = new System.Drawing.Point(101, 200);
             this.txtFaxNumber.Margin = new System.Windows.Forms.Padding(2);
             this.txtFaxNumber.Name = "txtFaxNumber";
             this.txtFaxNumber.Properties.MaxLength = 20;
-            this.txtFaxNumber.Size = new System.Drawing.Size(278, 21);
+            this.txtFaxNumber.Size = new System.Drawing.Size(659, 21);
             this.txtFaxNumber.StyleController = this.layoutControl1;
             this.txtFaxNumber.TabIndex = 11;
             // 
@@ -671,7 +684,7 @@
             // 
             // cboDepartment
             // 
-            this.cboDepartment.Location = new System.Drawing.Point(482, 200);
+            this.cboDepartment.Location = new System.Drawing.Point(482, 225);
             this.cboDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -693,12 +706,10 @@
             this.lcSupplierType,
             this.lcRegisterCapital,
             this.lcAddress,
-            this.lcTell,
             this.lcFaxNumber,
             this.lcContacts,
             this.lcDepartment,
             this.lcName,
-            this.lcPostalCode,
             this.lcDescription,
             this.lcLegal,
             this.layoutControlItem4,
@@ -710,7 +721,10 @@
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlGroup2,
-            this.layoutControlItem15});
+            this.layoutControlItem15,
+            this.lcTell,
+            this.lcPostalCode,
+            this.layoutControlItem16});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -778,23 +792,13 @@
             this.lcAddress.Text = "地址：";
             this.lcAddress.TextSize = new System.Drawing.Size(96, 14);
             // 
-            // lcTell
-            // 
-            this.lcTell.Control = this.txtTell;
-            this.lcTell.CustomizationFormText = "联系电话：";
-            this.lcTell.Location = new System.Drawing.Point(0, 173);
-            this.lcTell.Name = "lcTell";
-            this.lcTell.Size = new System.Drawing.Size(381, 25);
-            this.lcTell.Text = "联系电话：";
-            this.lcTell.TextSize = new System.Drawing.Size(96, 14);
-            // 
             // lcFaxNumber
             // 
             this.lcFaxNumber.Control = this.txtFaxNumber;
             this.lcFaxNumber.CustomizationFormText = "传真/Email：";
-            this.lcFaxNumber.Location = new System.Drawing.Point(381, 173);
+            this.lcFaxNumber.Location = new System.Drawing.Point(0, 198);
             this.lcFaxNumber.Name = "lcFaxNumber";
-            this.lcFaxNumber.Size = new System.Drawing.Size(381, 25);
+            this.lcFaxNumber.Size = new System.Drawing.Size(762, 25);
             this.lcFaxNumber.Text = "传真/Email：";
             this.lcFaxNumber.TextSize = new System.Drawing.Size(96, 14);
             // 
@@ -802,7 +806,7 @@
             // 
             this.lcContacts.Control = this.txtContacts;
             this.lcContacts.CustomizationFormText = "主要联系人：";
-            this.lcContacts.Location = new System.Drawing.Point(0, 198);
+            this.lcContacts.Location = new System.Drawing.Point(0, 223);
             this.lcContacts.Name = "lcContacts";
             this.lcContacts.Size = new System.Drawing.Size(381, 25);
             this.lcContacts.Text = "联系人：";
@@ -812,7 +816,7 @@
             // 
             this.lcDepartment.Control = this.cboDepartment;
             this.lcDepartment.CustomizationFormText = "所属部门：";
-            this.lcDepartment.Location = new System.Drawing.Point(381, 198);
+            this.lcDepartment.Location = new System.Drawing.Point(381, 223);
             this.lcDepartment.Name = "lcDepartment";
             this.lcDepartment.Size = new System.Drawing.Size(381, 25);
             this.lcDepartment.Text = "所属部门：";
@@ -827,16 +831,6 @@
             this.lcName.Size = new System.Drawing.Size(762, 25);
             this.lcName.Text = "名称：";
             this.lcName.TextSize = new System.Drawing.Size(96, 14);
-            // 
-            // lcPostalCode
-            // 
-            this.lcPostalCode.Control = this.txtPostalCode;
-            this.lcPostalCode.CustomizationFormText = "邮编：";
-            this.lcPostalCode.Location = new System.Drawing.Point(381, 123);
-            this.lcPostalCode.Name = "lcPostalCode";
-            this.lcPostalCode.Size = new System.Drawing.Size(381, 25);
-            this.lcPostalCode.Text = "邮编：";
-            this.lcPostalCode.TextSize = new System.Drawing.Size(96, 14);
             // 
             // lcDescription
             // 
@@ -947,10 +941,10 @@
             this.layoutControlGroup2.CustomizationFormText = "银行账号";
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem8});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 223);
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 248);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 221);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 196);
             this.layoutControlGroup2.Text = "银行账号";
             this.layoutControlGroup2.TextLocation = DevExpress.Utils.Locations.Left;
             // 
@@ -960,7 +954,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(735, 215);
+            this.layoutControlItem8.Size = new System.Drawing.Size(735, 190);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -977,6 +971,36 @@
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextToControlDistance = 0;
             this.layoutControlItem15.TextVisible = false;
+            // 
+            // lcTell
+            // 
+            this.lcTell.Control = this.txtTell;
+            this.lcTell.CustomizationFormText = "联系电话：";
+            this.lcTell.Location = new System.Drawing.Point(0, 173);
+            this.lcTell.Name = "lcTell";
+            this.lcTell.Size = new System.Drawing.Size(381, 25);
+            this.lcTell.Text = "联系电话：";
+            this.lcTell.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // lcPostalCode
+            // 
+            this.lcPostalCode.Control = this.txtPostalCode;
+            this.lcPostalCode.CustomizationFormText = "邮编：";
+            this.lcPostalCode.Location = new System.Drawing.Point(381, 173);
+            this.lcPostalCode.Name = "lcPostalCode";
+            this.lcPostalCode.Size = new System.Drawing.Size(381, 25);
+            this.lcPostalCode.Text = "邮编：";
+            this.lcPostalCode.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.calcEdit1;
+            this.layoutControlItem16.CustomizationFormText = "年审日期：";
+            this.layoutControlItem16.Location = new System.Drawing.Point(381, 123);
+            this.layoutControlItem16.Name = "layoutControlItem16";
+            this.layoutControlItem16.Size = new System.Drawing.Size(381, 25);
+            this.layoutControlItem16.Text = "年审日期：";
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(96, 14);
             // 
             // dxErrorProvider1
             // 
@@ -1279,7 +1303,6 @@
             this.tableLayoutPanel1.Controls.Add(this.labelControl12, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelControl13, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textEdit4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textEdit5, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelControl16, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelControl17, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelControl18, 2, 1);
@@ -1374,18 +1397,12 @@
             // textEdit4
             // 
             this.textEdit4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit4.Location = new System.Drawing.Point(3, 29);
+            this.textEdit4.EditValue = "总共：10 批次";
+            this.textEdit4.Location = new System.Drawing.Point(3, 41);
             this.textEdit4.Name = "textEdit4";
+            this.tableLayoutPanel1.SetRowSpan(this.textEdit4, 2);
             this.textEdit4.Size = new System.Drawing.Size(114, 21);
             this.textEdit4.TabIndex = 7;
-            // 
-            // textEdit5
-            // 
-            this.textEdit5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit5.Location = new System.Drawing.Point(3, 55);
-            this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Size = new System.Drawing.Size(114, 21);
-            this.textEdit5.TabIndex = 7;
             // 
             // labelControl16
             // 
@@ -1491,7 +1508,8 @@
             // textEdit6
             // 
             this.textEdit6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textEdit6.Location = new System.Drawing.Point(3, -1);
+            this.textEdit6.EditValue = "6";
+            this.textEdit6.Location = new System.Drawing.Point(3, 0);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Size = new System.Drawing.Size(81, 21);
             this.textEdit6.TabIndex = 7;
@@ -1500,7 +1518,7 @@
             // 
             this.labelControl30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl30.Appearance.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl30.Location = new System.Drawing.Point(85, 1);
+            this.labelControl30.Location = new System.Drawing.Point(85, 2);
             this.labelControl30.Name = "labelControl30";
             this.labelControl30.Size = new System.Drawing.Size(56, 17);
             this.labelControl30.TabIndex = 4;
@@ -1519,7 +1537,8 @@
             // textEdit7
             // 
             this.textEdit7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textEdit7.Location = new System.Drawing.Point(3, -1);
+            this.textEdit7.EditValue = "4";
+            this.textEdit7.Location = new System.Drawing.Point(3, 0);
             this.textEdit7.Name = "textEdit7";
             this.textEdit7.Size = new System.Drawing.Size(65, 21);
             this.textEdit7.TabIndex = 7;
@@ -1528,7 +1547,7 @@
             // 
             this.labelControl31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl31.Appearance.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl31.Location = new System.Drawing.Point(69, 1);
+            this.labelControl31.Location = new System.Drawing.Point(69, 2);
             this.labelControl31.Name = "labelControl31";
             this.labelControl31.Size = new System.Drawing.Size(70, 17);
             this.labelControl31.TabIndex = 4;
@@ -1579,7 +1598,8 @@
             // textEdit11
             // 
             this.textEdit11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textEdit11.Location = new System.Drawing.Point(0, -1);
+            this.textEdit11.EditValue = "4";
+            this.textEdit11.Location = new System.Drawing.Point(0, 0);
             this.textEdit11.Name = "textEdit11";
             this.textEdit11.Size = new System.Drawing.Size(78, 21);
             this.textEdit11.TabIndex = 7;
@@ -1588,7 +1608,7 @@
             // 
             this.labelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Location = new System.Drawing.Point(82, 1);
+            this.labelControl2.Location = new System.Drawing.Point(82, 2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(28, 17);
             this.labelControl2.TabIndex = 4;
@@ -1639,7 +1659,8 @@
             // textEdit12
             // 
             this.textEdit12.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textEdit12.Location = new System.Drawing.Point(3, -1);
+            this.textEdit12.EditValue = "4";
+            this.textEdit12.Location = new System.Drawing.Point(3, 0);
             this.textEdit12.Name = "textEdit12";
             this.textEdit12.Size = new System.Drawing.Size(81, 21);
             this.textEdit12.TabIndex = 7;
@@ -1648,7 +1669,7 @@
             // 
             this.labelControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl3.Location = new System.Drawing.Point(85, 3);
+            this.labelControl3.Location = new System.Drawing.Point(85, 4);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(56, 17);
             this.labelControl3.TabIndex = 4;
@@ -2183,10 +2204,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "ucSupplierEdit";
             this.Size = new System.Drawing.Size(768, 600);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.calcEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBankInfoDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBankInfoDetail)).EndInit();
@@ -2223,12 +2246,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSupplierType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRegisterCapital)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTell)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFaxNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLegal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -2242,6 +2263,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcTell)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
@@ -2270,7 +2294,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
@@ -2421,7 +2444,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl14;
         private DevExpress.XtraEditors.LabelControl labelControl13;
         private DevExpress.XtraEditors.TextEdit textEdit4;
-        private DevExpress.XtraEditors.TextEdit textEdit5;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl labelControl17;
         private DevExpress.XtraEditors.LabelControl labelControl18;
@@ -2492,6 +2514,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.CheckEdit checkEdit5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraEditors.CalcEdit calcEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
 
     }
 }

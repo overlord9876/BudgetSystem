@@ -27,7 +27,8 @@ namespace BudgetSystem.Entity
         FlowManagement,
 
         OptionManagement,
-
+        RecieptCapital,
+        PaymentCapital,
         BudgetReport,
         CustomerReport,
         SlipperReport,

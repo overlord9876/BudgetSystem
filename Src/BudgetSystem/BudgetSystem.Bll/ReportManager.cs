@@ -49,5 +49,16 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+
+        public List<RecieptCapital> GetRecieptCapital()
+        {
+            var lst = this.Query<RecieptCapital>((con) =>
+            {
+                var uList = dal.GetRecieptCapital(con);
+                return uList;
+            });
+
+            return lst.ToList();
+        }
     }
 }

@@ -30,7 +30,10 @@ namespace BudgetSystem.Base
             {
                 form = new frmTestFlowEventForm();
             }
-
+            else if (extEventName == "初评评审")
+            {
+                form = new frmTestFlowEventForm();
+            }
             if (form != null)
             {
                 form.ReleateFlowItems = items;

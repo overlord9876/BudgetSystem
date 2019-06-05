@@ -106,7 +106,7 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
                 selectSql += " AND Applicant=@Applicant ";
                 dp.Add("Applicant", condition.Salesman, null, null, null);
             }
-           
+
             else if (condition.DeptID >= 0)
             {
                 selectSql += "  AND Applicant in (SELECT UserName from `user` where DeptID=@DeptID) ";
@@ -136,10 +136,9 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
             return result;
         }
 
-
         public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT c.`Name`,sum(bs.CNY) as CNY,sum(bs.OriginalCoin) as OriginalCoin,bs.ExchangeRate from customer as c join BankSlip bs on c.`Name`=bs.Remitter
+            string selectSql = string.Format(@"SELECT c.`Name`,sum(bs.CNY) as CNY,sum(bs.OriginalCoin) as OriginalCoin,bs.ExchangeRate from customer as c join BankSlip bs on c.ID=bs.Cus_ID
 where CreateTimestamp BETWEEN @BeginTime AND @EndTime ");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
@@ -172,5 +171,17 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime;");
 
             return result;
         }
+
+        public IEnumerable<RecieptCapital> GetRecieptCapital(IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
+LEFT JOIN department d on bb.DeptID=d.ID
+GROUP BY DeptID,bs.BankName,bs.PaymentMethod
+UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip GROUP BY BankName,PaymentMethod";
+
+            return con.Query<RecieptCapital>(selectSql, null, tran);
+        }
+
     }
 }
