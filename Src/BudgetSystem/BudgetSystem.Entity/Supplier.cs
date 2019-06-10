@@ -139,6 +139,28 @@ namespace BudgetSystem.Entity
         /// 代理协议有效期
         /// </summary>
         public DateTime? AgreementDate { get; set; }
+
+        /// <summary>
+        /// 年审日期
+        /// </summary>
+        public DateTime? ReviewDate { get; set; }
+
+        /// <summary>
+        /// 营业执照复印件
+        /// </summary>
+        public bool ExistsLicenseCopy { get; set; }
+
+        /// <summary>
+        /// 初审内容
+        /// </summary>
+        public string FirstReviewContents { get; set; }
+
+        /// <summary>
+        /// 复审内容
+        /// </summary>
+        public string ReviewContents { get; set; }
+        
+
         /// <summary>
         /// 更新日期
         /// </summary>
@@ -166,6 +188,15 @@ namespace BudgetSystem.Entity
         }
 
         public int FlowState { get; set; }
+        /// <summary>
+        /// 流程实例ID
+        /// </summary>
+        public int FlowInstanceID { get; set; }
+
+        /// <summary>
+        /// 流程名
+        /// </summary>
+        public string FlowName { get; set; }
 
         /// <summary>
         /// 是否选择
@@ -182,7 +213,8 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方 && this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
                     if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate != DateTime.MinValue && this.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
-                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate != DateTime.MinValue && this.AgreementDate.Value.AddDays(-30).Date < DateTime.Now.Date))
+                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate != DateTime.MinValue && this.AgreementDate.Value.AddDays(-30).Date < DateTime.Now.Date)
+                        ||(this.ReviewDate!=null&&this.ReviewDate!= DateTime.MinValue&&this.ReviewDate.Value.Date>=DateTime.Now.Date&& this.ReviewDate.Value.AddDays(-30)<=DateTime.Now.Date))
                     {
                         return true;
                     }
@@ -202,7 +234,8 @@ namespace BudgetSystem.Entity
                 {
                     if (this.EnumFlowState != EnumDataFlowState.审批通过
                         || (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date < DateTime.Now.Date)
-                        || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date < DateTime.Now.Date))
+                        || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date < DateTime.Now.Date)
+                        || (this.ReviewDate!=null &&  this.ReviewDate.Value.Date.AddDays(-30) < DateTime.Now.Date))
                     {
                         return false;
                     }

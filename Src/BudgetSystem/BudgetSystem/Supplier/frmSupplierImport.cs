@@ -155,10 +155,10 @@ namespace BudgetSystem
                         supplier.ID = sm.AddSupplier(supplier);
                         if (supplier.SupplierType == 0)
                         {
-                            string message = sm.StartFlow(supplier.ID, supplier.CreateUser);
-                            if (string.IsNullOrEmpty(message))
+                            string message = sm.StartFlow(EnumFlowNames.供应商审批流程, supplier.ID, supplier.CreateUser);
+                            if (!string.IsNullOrEmpty(message))
                             {
-
+                                //TODO启动流程失败
                             }
                         }
                     }

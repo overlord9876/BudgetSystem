@@ -14,7 +14,8 @@ namespace BudgetSystem.Entity
         付款审批流程,
         入账审修改批流程,
         预算单删除流程,
-        预算单修改流程
+        预算单修改流程,
+        供应商复审流程,
     }
 
     /// <summary>

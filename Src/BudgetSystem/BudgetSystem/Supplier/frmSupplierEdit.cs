@@ -14,7 +14,9 @@ namespace BudgetSystem
 {
     public partial class frmSupplierEdit : frmBaseDialogForm
     {
-        public Bll.SupplierManager sm = new Bll.SupplierManager();
+        private Bll.SupplierManager sm = new Bll.SupplierManager();
+        private bool saveSucceed = false;
+        private bool isStartFlow = false;
         public Supplier CurrentSupplier
         {
             get;
@@ -44,12 +46,18 @@ namespace BudgetSystem
             }
         }
 
-        private bool IsOk = false;
+        
 
         private void btnSure_Click(object sender, EventArgs e)
         {
+            if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                XtraMessageBox.Show("复审审批申请，请提交流程审批");
+                return;
+            }
+            isStartFlow = false;
             SubmitDataByWorkModel();
-            if (IsOk)
+            if (saveSucceed)
             {
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
@@ -59,7 +67,7 @@ namespace BudgetSystem
         protected override void SubmitNewData()
         {
             base.SubmitNewData();
-            bool result = this.ucSupplierEdit1.CheckInputData();
+            bool result = this.ucSupplierEdit1.CheckInputData(isStartFlow);
             if (result == false)
             {
                 return;
@@ -70,7 +78,20 @@ namespace BudgetSystem
             {
                 throw new Exception("创建失败！");
             }
-            IsOk = true;
+            saveSucceed = true;
+        }
+        protected override void SubmitCustomData()
+        {
+            base.SubmitCustomData();
+            //复审
+            bool result = this.ucSupplierEdit1.CheckInputData(isStartFlow);
+            if (result == false)
+            {
+                return;
+            }
+            this.ucSupplierEdit1.FillData();
+            sm.ModifySupplier(this.ucSupplierEdit1.CurrentSupplier);
+            saveSucceed = true;
         }
 
 
@@ -78,27 +99,33 @@ namespace BudgetSystem
         protected override void SubmitModifyData()
         {
             base.SubmitModifyData();
-            bool result = this.ucSupplierEdit1.CheckInputData();
+            bool result = this.ucSupplierEdit1.CheckInputData(isStartFlow);
             if (result == false)
             {
                 return;
             }
             this.ucSupplierEdit1.FillData();
             sm.ModifySupplier(this.ucSupplierEdit1.CurrentSupplier);
-            IsOk = true;
+            saveSucceed = true;
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            isStartFlow = true;
             SubmitDataByWorkModel();
-            if (IsOk)
+            if (saveSucceed)
             {
                 if (this.ucSupplierEdit1.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批中)
                 {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许重复提交。", this.ucSupplierEdit1.CurrentSupplier.Name, this.ucSupplierEdit1.CurrentSupplier.EnumFlowState.ToString()));
+                    XtraMessageBox.Show("审批中不允许重复提交。");
                     return;
                 }
-                string message = sm.StartFlow(this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName);
+                EnumFlowNames flowName = EnumFlowNames.供应商审批流程;
+                if (this.WorkModel == EditFormWorkModels.Custom)
+                {
+                    flowName = EnumFlowNames.供应商复审流程;
+                }
+                string message = sm.StartFlow(flowName,this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");

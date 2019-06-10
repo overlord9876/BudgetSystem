@@ -19,6 +19,7 @@ namespace BudgetSystem
         public frmSupplierQuery()
         {
             InitializeComponent();
+            this.Module = BusinessModules.SupplierManagement;
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(frmSupplierQuery_KeyDown);
@@ -34,7 +35,9 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交审批"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Approve, "提交复评审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看复评历史记录"));
 
             this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "供应商查询");
 
@@ -58,6 +61,10 @@ namespace BudgetSystem
             {
                 CommitSupplier();
             }
+            else if (operate.Operate == OperateTypes.Approve.ToString())
+            {
+                ReviewSupplier();
+            }
             else if (operate.Operate == OperateTypes.Enabled.ToString())
             {
                 XtraMessageBox.Show("启用供应商，如果是合格供商则发启合格供商发启流程。");
@@ -69,6 +76,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewSupplier();
+            }
+            else if (operate.Operate == OperateTypes.ViewApply.ToString())
+            {
+                ViewApply();
             }
         }
 
@@ -146,12 +157,18 @@ namespace BudgetSystem
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
             {
-                if (supplier.EnumFlowState == EnumDataFlowState.审批中)
+                if (supplier.EnumFlowState != EnumDataFlowState.未审批&&supplier.EnumFlowState!= EnumDataFlowState.审批不通过)
                 {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许重复提交。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交审批。", supplier.Name, supplier.EnumFlowState.ToString()));
                     return;
                 }
-                string message = sm.StartFlow(supplier.ID, RunInfo.Instance.CurrentUser.UserName);
+                if (supplier.FlowName == EnumFlowNames.供应商复审流程.ToString())
+                {
+                    XtraMessageBox.Show(string.Format("{0}供方不允许提交审批。", supplier.Name));
+                    return;
+                }
+                
+                string message = sm.StartFlow(EnumFlowNames.供应商审批流程, supplier.ID, RunInfo.Instance.CurrentUser.UserName);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");
@@ -167,7 +184,40 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要提交审批的项");
             }
         }
-
+        private void ReviewSupplier()
+        {
+            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (supplier != null)
+            {
+                if ((supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批)
+                    || (EnumFlowNames.供应商审批流程.ToString() == supplier.FlowName && supplier.EnumFlowState == EnumDataFlowState.审批不通过))
+                {
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许复评审批申请。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    return;
+                }
+                if ((supplier.ReviewDate != null && supplier.ReviewDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
+                    || (supplier.AgreementDate != null && supplier.AgreementDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
+                    || (supplier.BusinessEffectiveDate != null && supplier.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date))
+                {
+                    frmSupplierEdit form = new frmSupplierEdit();
+                    form.WorkModel = EditFormWorkModels.Custom;
+                    form.CurrentSupplier = supplier;
+                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        this.RefreshData();
+                    }
+                }
+                else
+                {
+                    XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许复评审批申请。", supplier.Name));
+                    return;
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要复评审批申请的项");
+            }
+        }
         private void ViewSupplier()
         {
             Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
@@ -184,6 +234,29 @@ namespace BudgetSystem
             }
         }
 
+        private void ViewApply()
+        {
+            Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (currentRowSupplier != null)
+            {
+                if (string.IsNullOrEmpty(currentRowSupplier.FlowName)
+                    || currentRowSupplier.FlowName == EnumFlowNames.供应商审批流程.ToString())
+                {
+                    XtraMessageBox.Show("当前选择供应商不存在复评历史记录");
+                }
+                else
+                {
+                    frmSupplierReviewHistory form = new frmSupplierReviewHistory(currentRowSupplier.ID);
+                    form.WorkModel = EditFormWorkModels.View; 
+                    form.ShowDialog(this);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要查看复评历史记录的项");
+            }
+            
+        }
 
         protected override void InitGridViewAction()
         {

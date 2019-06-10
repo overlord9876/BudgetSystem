@@ -402,6 +402,12 @@
     <Compile Include="Supplier\frmSupplierImport.Designer.cs">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Supplier\frmSupplierManagerFirstReviewEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierManagerFirstReviewEventForm.Designer.cs">
+      <DependentUpon>frmSupplierManagerFirstReviewEventForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -610,6 +616,30 @@
     <Compile Include="Supplier\ucSupplierSelected.Designer.cs">
       <DependentUpon>ucSupplierSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="Supplier\frmSupplierLeaderFirstReviewEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierLeaderFirstReviewEventForm.Designer.cs">
+      <DependentUpon>frmSupplierLeaderFirstReviewEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierManagerReviewEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierManagerReviewEventForm.Designer.cs">
+      <DependentUpon>frmSupplierManagerReviewEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierLeaderReviewEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierLeaderReviewEventForm.Designer.cs">
+      <DependentUpon>frmSupplierLeaderReviewEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierReviewHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierReviewHistory.Designer.cs">
+      <DependentUpon>frmSupplierReviewHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEntity\DataControlCreator.cs" />
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\IDataControl.cs" />
@@ -799,6 +829,9 @@
     <EmbeddedResource Include="Supplier\frmSupplierImport.resx">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierManagerFirstReviewEventForm.resx">
+      <DependentUpon>frmSupplierManagerFirstReviewEventForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -913,6 +946,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\ucSupplierSelected.resx">
       <DependentUpon>ucSupplierSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierLeaderFirstReviewEventForm.resx">
+      <DependentUpon>frmSupplierLeaderFirstReviewEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierManagerReviewEventForm.resx">
+      <DependentUpon>frmSupplierManagerReviewEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierLeaderReviewEventForm.resx">
+      <DependentUpon>frmSupplierLeaderReviewEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierReviewHistory.resx">
+      <DependentUpon>frmSupplierReviewHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>

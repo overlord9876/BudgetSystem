@@ -92,11 +92,13 @@ namespace BudgetSystem.Dal
             string insertSql = @"Insert Into `Supplier` (`Name`,`BankInfoDetail`,`SupplierType`,`CreateDate`,
                                                          `Nature`,`RegisterCapital`,`Address`,`Tell`,`FaxNumber`,`Contacts`,
                                                          `DeptID`,`PostalCode`,`Legal`,`CreateUser`,`Description`,`UpdateDate`,`UpdateUser`,
-                                                         `TaxpayerID`,`Discredited`,`ExistsAgentAgreement`,`RegistrationDate`,`BusinessEffectiveDate`,`AgreementDate`) 
+                                                         `TaxpayerID`,`Discredited`,`ExistsAgentAgreement`,`RegistrationDate`,`BusinessEffectiveDate`,
+                                                         `AgreementDate`,`ReviewDate`,`ExistsLicenseCopy`,`FirstReviewContents`,`ReviewContents`) 
                                                Values (@Name,@BankInfoDetail,@SupplierType,now(),
                                                        @Nature,@RegisterCapital,@Address,@Tell,@FaxNumber,@Contacts,
                                                        @DeptID,@PostalCode,@Legal,@CreateUser,@Description,now(),@UpdateUser,
-                                                       @TaxpayerID,@Discredited,@ExistsAgentAgreement,@RegistrationDate,@BusinessEffectiveDate,@AgreementDate)";
+                                                       @TaxpayerID,@Discredited,@ExistsAgentAgreement,@RegistrationDate,@BusinessEffectiveDate,
+                                                       @AgreementDate,@ReviewDate,@ExistsLicenseCopy,@FirstReviewContents,@ReviewContents)";
             int id = con.Insert(insertSql, supplier, tran);
             if (id > 0)
             {
@@ -113,14 +115,57 @@ namespace BudgetSystem.Dal
                                     `PostalCode` = @PostalCode,`Legal` = @Legal ,`Description`=@Description ,
                                     `TaxpayerID`=@TaxpayerID,`Discredited`=@Discredited,`ExistsAgentAgreement`=@ExistsAgentAgreement,
                                     `RegistrationDate`=@RegistrationDate,`BusinessEffectiveDate`=@BusinessEffectiveDate,`AgreementDate`=@AgreementDate,
-                                    `UpdateDate`=now(),`UpdateUser`=@UpdateUser
+                                    `UpdateDate`=now(),`UpdateUser`=@UpdateUser,`ReviewDate`=@ReviewDate,
+                                    `ExistsLicenseCopy`=@ExistsLicenseCopy,`FirstReviewContents`=@FirstReviewContents,`ReviewContents`=@ReviewContents
                                     Where `ID` = @ID";
             con.Execute(updateSql, supplier, tran);
+        }
+
+        public void ModifySupplierFirstReviewContents(int id,string firstReviewContents, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Supplier` 
+                                 Set `FirstReviewContents`=@FirstReviewContents
+                                    Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = id, FirstReviewContents =firstReviewContents}, tran);
+        }
+        public void ModifySupplierReviewContents(int id, string reviewContents, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Supplier` 
+                                 Set `ReviewContents`=@ReviewContents
+                                    Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = id, ReviewContents = reviewContents }, tran);
         }
         public void DeleteSupplier(int id, IDbConnection con, IDbTransaction tran = null)
         {
             string deleteSql = "Delete From `Supplier` Where `ID` = @ID";
             con.Execute(deleteSql, new { ID = id }, tran);
         }
+
+        /// <summary>
+        /// 验证名称是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckName(string name,int id , IDbConnection con)
+        {
+            string selectSql = @"SELECT  s.id FROM `Supplier` s 
+                                    WHERE ID<>@ID and `Name`=@Name";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name",name));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

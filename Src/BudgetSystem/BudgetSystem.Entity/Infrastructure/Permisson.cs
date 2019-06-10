@@ -204,7 +204,10 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.SupplierManagement,OperateTypes.Enabled,"供应商管理-启用供应商",1330),
                         new Permisson(BusinessModules.SupplierManagement,OperateTypes.Disabled,"供应商管理-停用供应商",1340),
                         new Permisson(BusinessModules.SupplierManagement,OperateTypes.View,"供应商管理-查看详情",1350),
-                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.SubmitApply,"供应商管理-提交审批申请",1360),
+                        new Permisson(BusinessModules.SupplierManagement,OperateTypes.SubmitApply,"供应商管理-提交审批申请",1360),                        
+                        new Permisson(BusinessModules.SupplierManagement, OperateTypes.Approve,"供应商管理-复评审批申请",1370),
+                        new Permisson(BusinessModules.SupplierManagement, OperateTypes.ViewApply,"供应商管理-查看复评历史记录",1380),
+
             
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.None,"选项管理模块",1400),
                         new Permisson(BusinessModules.OptionManagement,OperateTypes.Save,"选项管理-维护选项",1410),

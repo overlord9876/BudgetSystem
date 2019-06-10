@@ -47,6 +47,7 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -64,17 +65,17 @@
             // gridSupplier
             // 
             this.gridSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             gridLevelNode1.RelationName = "Level1";
             this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gridSupplier.Location = new System.Drawing.Point(0, 0);
             this.gridSupplier.MainView = this.gvSupplier;
-            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridSupplier.Name = "gridSupplier";
             this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
-            this.gridSupplier.Size = new System.Drawing.Size(960, 523);
+            this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
             this.gridSupplier.TabIndex = 2;
             this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSupplier});
@@ -85,6 +86,7 @@
             this.gcName,
             this.gcv纳税人识别号,
             this.gcSupplierType,
+            this.gcFlowName,
             this.gcFlowState,
             this.gcIsQualified,
             this.gcRegistrationDate,
@@ -121,6 +123,7 @@
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 0;
+            this.gcName.Width = 77;
             // 
             // gcv纳税人识别号
             // 
@@ -129,6 +132,7 @@
             this.gcv纳税人识别号.Name = "gcv纳税人识别号";
             this.gcv纳税人识别号.Visible = true;
             this.gcv纳税人识别号.VisibleIndex = 1;
+            this.gcv纳税人识别号.Width = 77;
             // 
             // gcSupplierType
             // 
@@ -138,6 +142,7 @@
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 2;
+            this.gcSupplierType.Width = 77;
             // 
             // rilueSupplierType
             // 
@@ -152,7 +157,8 @@
             this.gcFlowState.FieldName = "EnumFlowState";
             this.gcFlowState.Name = "gcFlowState";
             this.gcFlowState.Visible = true;
-            this.gcFlowState.VisibleIndex = 3;
+            this.gcFlowState.VisibleIndex = 4;
+            this.gcFlowState.Width = 82;
             // 
             // gcIsQualified
             // 
@@ -160,7 +166,8 @@
             this.gcIsQualified.FieldName = "IsQualified";
             this.gcIsQualified.Name = "gcIsQualified";
             this.gcIsQualified.Visible = true;
-            this.gcIsQualified.VisibleIndex = 4;
+            this.gcIsQualified.VisibleIndex = 5;
+            this.gcIsQualified.Width = 74;
             // 
             // gcRegistrationDate
             // 
@@ -168,7 +175,8 @@
             this.gcRegistrationDate.FieldName = "RegistrationDate";
             this.gcRegistrationDate.Name = "gcRegistrationDate";
             this.gcRegistrationDate.Visible = true;
-            this.gcRegistrationDate.VisibleIndex = 5;
+            this.gcRegistrationDate.VisibleIndex = 6;
+            this.gcRegistrationDate.Width = 74;
             // 
             // gcBusinessEffectiveDate
             // 
@@ -176,7 +184,8 @@
             this.gcBusinessEffectiveDate.FieldName = "BusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Visible = true;
-            this.gcBusinessEffectiveDate.VisibleIndex = 6;
+            this.gcBusinessEffectiveDate.VisibleIndex = 7;
+            this.gcBusinessEffectiveDate.Width = 74;
             // 
             // gcExistsAgentAgreement
             // 
@@ -184,7 +193,8 @@
             this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
             this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
             this.gcExistsAgentAgreement.Visible = true;
-            this.gcExistsAgentAgreement.VisibleIndex = 7;
+            this.gcExistsAgentAgreement.VisibleIndex = 8;
+            this.gcExistsAgentAgreement.Width = 74;
             // 
             // gcDiscredited
             // 
@@ -192,7 +202,8 @@
             this.gcDiscredited.FieldName = "Discredited";
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 8;
+            this.gcDiscredited.VisibleIndex = 9;
+            this.gcDiscredited.Width = 74;
             // 
             // gcAgreementDate
             // 
@@ -200,7 +211,8 @@
             this.gcAgreementDate.FieldName = "AgreementDate";
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
-            this.gcAgreementDate.VisibleIndex = 9;
+            this.gcAgreementDate.VisibleIndex = 10;
+            this.gcAgreementDate.Width = 74;
             // 
             // gcCreateDate
             // 
@@ -210,7 +222,8 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 10;
+            this.gcCreateDate.VisibleIndex = 11;
+            this.gcCreateDate.Width = 74;
             // 
             // gcCreateUser
             // 
@@ -218,7 +231,8 @@
             this.gcCreateUser.FieldName = "CreateUserName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 11;
+            this.gcCreateUser.VisibleIndex = 12;
+            this.gcCreateUser.Width = 74;
             // 
             // gcDescription
             // 
@@ -226,15 +240,25 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 12;
+            this.gcDescription.VisibleIndex = 13;
+            this.gcDescription.Width = 79;
+            // 
+            // gcFlowName
+            // 
+            this.gcFlowName.Caption = "当前流程";
+            this.gcFlowName.FieldName = "FlowName";
+            this.gcFlowName.Name = "gcFlowName";
+            this.gcFlowName.Visible = true;
+            this.gcFlowName.VisibleIndex = 3;
+            this.gcFlowName.Width = 95;
             // 
             // frmSupplierQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 523);
+            this.ClientSize = new System.Drawing.Size(1097, 672);
             this.Controls.Add(this.gridSupplier);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmSupplierQuery";
             this.Text = "供应商管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
@@ -264,6 +288,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcTaxpayerIdentificationNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
 
 
     }

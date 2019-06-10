@@ -85,7 +85,7 @@ namespace BudgetSystem.WorkSpace
 
             string dcType = this.CustomWorkModel == BatchApproveModel ? "BatchApprove" : FlowItem.DateItemType;
 
-            DataControl dc = DataControlCreator.CreateDataControl(dcType);
+            DataControl dc = DataControlCreator.CreateDataControl(FlowItem.FlowName, dcType);
             string layoutItemName;
             if (dc is BatchDataControl)
             {
@@ -118,16 +118,14 @@ namespace BudgetSystem.WorkSpace
 
         private void Submit(bool result)
         {
-            result = true;//审批通过
-            result = false;//审批不通过
-
             if (result)
             {
-                if (!DoFlowExtEvent())
+                bool? eventResult = DoFlowExtEvent();
+                if (eventResult == null)
                 {
-                    result = false;
+                    return;
                 }
-                result = true;
+                result = eventResult.Value;
             }
 
             FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, this.txtMyInfo.Text.Trim());
@@ -146,11 +144,12 @@ namespace BudgetSystem.WorkSpace
         {
             if (result)
             {
-                if (!DoFlowExtEvent())
+                bool?eventResult=DoFlowExtEvent();
+                if (eventResult == null)
                 {
-
                     return;
                 }
+                result = eventResult.Value;
             }
             string info;
 
@@ -180,7 +179,7 @@ namespace BudgetSystem.WorkSpace
             }
         }
 
-        private bool DoFlowExtEvent()
+        private bool? DoFlowExtEvent()
         {
             FlowItem item = this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems[0] : this.FlowItem;
             FlowNode node = fm.GetFlowNode(item.RunPointID);
@@ -195,13 +194,12 @@ namespace BudgetSystem.WorkSpace
             {
                 return true;
             }
-            //A\B\C resul Ok，D result Cancel
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                return true;
+                return form.EventResult;
             }
 
-            return false;
+            return null;
         }
 
 

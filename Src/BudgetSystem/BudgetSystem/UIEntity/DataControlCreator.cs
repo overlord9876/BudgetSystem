@@ -8,7 +8,7 @@ namespace BudgetSystem.UIEntity
 {
     public class DataControlCreator
     {
-        public static DataControl CreateDataControl(string dataItemType)
+        public static DataControl CreateDataControl(string flowName, string dataItemType)
         {
             if (dataItemType == EnumFlowDataType.付款单.ToString())
             {
@@ -17,7 +17,13 @@ namespace BudgetSystem.UIEntity
                 edit.Height = 400;
                 return edit;
             }
-            else if (dataItemType == EnumFlowDataType.供应商.ToString())
+            else if (dataItemType == EnumFlowDataType.供应商.ToString()&&flowName== EnumFlowNames.供应商审批流程.ToString())
+            {
+                BudgetSystem.ucSupplierEdit edit = new BudgetSystem.ucSupplierEdit();
+                edit.WorkModel = EditFormWorkModels.View;
+                return edit;
+            }
+            else if (dataItemType == EnumFlowDataType.供应商.ToString() && flowName == EnumFlowNames.供应商复审流程.ToString())
             {
                 BudgetSystem.ucSupplierEdit edit = new BudgetSystem.ucSupplierEdit();
                 edit.WorkModel = EditFormWorkModels.View;
