@@ -10,6 +10,7 @@ using BudgetSystem.Entity;
 using DevExpress.XtraPivotGrid;
 using DevExpress.Utils;
 using BudgetSystem.Entity.QueryCondition;
+using System.IO;
 
 namespace BudgetSystem.Report
 {
@@ -53,6 +54,15 @@ namespace BudgetSystem.Report
 
             var lst = um.GetRecieptCapital();
 
+            var usdLst = lst.FindAll(o => o.Currency.ToUpper().Equals("USD"));
+            decimal exchangeRate = 0;
+            if (usdLst.Count > 0)
+            {
+                decimal allExchangeRate = 0;
+                usdLst.ForEach(o => { allExchangeRate += (decimal)o.ExchangeRate; });
+                exchangeRate = allExchangeRate / usdLst.Count;
+            }
+
             DataTable dt = new DataTable();
             if (!dic.ContainsKey(DepartmentCaption))
             {
@@ -65,6 +75,8 @@ namespace BudgetSystem.Report
             for (int index = 0; index < lst.Count; index++)
             {
                 RecieptCapital rc = lst[index];
+
+                rc.OriginalCoin = Math.Round(rc.CNY / exchangeRate, 2);
                 if (!dic.ContainsKey(rc.BankCode))
                 {
                     dic.Add(rc.BankCode, string.Format("code{0}", index));
@@ -100,7 +112,11 @@ namespace BudgetSystem.Report
                     dt.Rows.Add(newRow);
                 }
             }
-
+            string defaultFileName = base.GetDefaultLayoutXmlFile();
+            if (File.Exists(defaultFileName))
+            {
+                this.pivotGridControl.RestoreLayoutFromXml(defaultFileName);
+            }
 
             this.pivotGridControl.DataSource = dt;
             this.gridControl.DataSource = dt;

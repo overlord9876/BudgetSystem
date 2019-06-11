@@ -16,8 +16,13 @@ namespace BudgetSystem.Base
         {
             InitializeComponent();
         }
-        [DefaultValue(true)]
-        public bool EventResult
+        /// <summary>
+        /// 执行结果
+        /// null：取消审批（关闭窗体、保存数据异常、DialogResult = DialogResult.Cancel）
+        /// true：表示审批通过
+        /// false：审批驳回
+        /// </summary>
+        public bool? EventResult
         {
             get;
             set;

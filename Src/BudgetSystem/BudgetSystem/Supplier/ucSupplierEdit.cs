@@ -53,17 +53,17 @@ namespace BudgetSystem
                 }
             }
             this.rgResult.SelectedIndexChanged += new EventHandler(rgResult_SelectedIndexChanged);
-            this.txtPassedBatch.EditValueChanged+=new EventHandler(Batch_EditValueChanged);
+            this.txtPassedBatch.EditValueChanged += new EventHandler(Batch_EditValueChanged);
             this.txtRejectedBatch.EditValueChanged += new EventHandler(Batch_EditValueChanged);
         }
 
-       
+
 
         void dteRegistrationDate_EditValueChanged(object sender, EventArgs e)
         {
             if (this.WorkModel == EditFormWorkModels.New
-                ||(this.WorkModel== EditFormWorkModels.Modify
-                   && (this.CurrentSupplier.EnumFlowState== EnumDataFlowState.未审批||this.CurrentSupplier.EnumFlowState== EnumDataFlowState.审批不通过)))
+                || (this.WorkModel == EditFormWorkModels.Modify
+                   && (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)))
             {
                 this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(DateTime.Now.Year - this.dteRegistrationDate.DateTime.Year + 1);
             }
@@ -72,7 +72,7 @@ namespace BudgetSystem
         {
             if (this.WorkModel == EditFormWorkModels.New
                 || (this.WorkModel == EditFormWorkModels.Modify
-                   && (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批||this.CurrentSupplier.EnumFlowState== EnumDataFlowState.审批不通过)))
+                   && (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)))
             {
                 int result = 0; int maxResult = 3;
                 int currentResult = 0;
@@ -80,7 +80,7 @@ namespace BudgetSystem
                 {
                     if (control is RadioGroup && control.Tag != null)
                     {
-                        currentResult= (control as RadioGroup).SelectedIndex;
+                        currentResult = (control as RadioGroup).SelectedIndex;
                         if (currentResult > result)
                         {
                             result = currentResult;
@@ -110,10 +110,10 @@ namespace BudgetSystem
             {
                 count += int.Parse(this.txtRejectedBatch.Text.Trim());
             }
-            this.txtTotalBatch.Text =string.Format("总共:{0}批次", count.ToString());
+            this.txtTotalBatch.Text = string.Format("总共:{0}批次", count.ToString());
             this.txtTotalBatch.Tag = count;
         }
-        
+
         public void InitData()
         {
             this.cboSupplierType.Properties.Items.Add("合格供方");
@@ -173,20 +173,59 @@ namespace BudgetSystem
                 this.dteAgreementDate.EditValue = supplier.AgreementDate;
                 this.dteBusinessEffectiveDate.EditValue = supplier.BusinessEffectiveDate;
                 this.dteRegistrationDate.EditValue = supplier.RegistrationDate;
+                this.dteReviewDate.EditValue = supplier.ReviewDate;
                 this.BindingBankInfoDetail(supplier.BankInfoDetail);
-                this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+               
+
                 if (this.WorkModel == EditFormWorkModels.Custom)
-                {
+                {   
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     this.BindingReviewHistory(supplier.ID);
                     this.BindingReviewDetail(string.Empty);
                 }
-                else
+                else if (this.WorkModel == EditFormWorkModels.View)
                 {
-                    if (EnumFlowNames.供应商复审流程.ToString() == supplier.FlowName)
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString())
+                    {
+                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
+                    }
+                    else
                     {
                         this.BindingReviewHistory(supplier.ID);
+                        this.BindingReviewDetail(supplier.ReviewContents);
                     }
-                    this.BindingReviewDetail(supplier.ReviewContents);
+                }
+                else if (this.WorkModel == EditFormWorkModels.Modify)
+                { 
+                    if (supplier.EnumFlowState!= EnumDataFlowState.审批不通过
+                        && supplier.EnumFlowState != EnumDataFlowState.未审批
+                        && supplier.SupplierType == (int)EnumSupplierType.合格供方)
+                    {
+                        SetReadOnly();
+                        SetReviewControlReadOnly();
+                    }
+                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString())
+                    {
+                        if (supplier.EnumFlowState == EnumDataFlowState.审批不通过)
+                        {
+                            this.BindingFirstReviewDetail("");
+                        }
+                        else
+                        {
+                            this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                        }
+                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
+                    }
+                    else
+                    {
+                        this.BindingReviewHistory(supplier.ID);
+                        this.BindingReviewDetail(supplier.ReviewContents);
+                    }
                 }
                 foreach (Department department in this.cboDepartment.Properties.Items)
                 {
@@ -212,54 +251,19 @@ namespace BudgetSystem
 
                 this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
                 BindingBankInfoDetail(string.Empty);
-            }
-            else if (this.WorkModel == EditFormWorkModels.Modify)
-            {
-                Supplier supplier = sm.GetSupplier(CurrentSupplier.ID);
-                if (supplier != null)
-                {
-                    BindingSupplier(supplier);
-                    if (supplier.EnumFlowState != EnumDataFlowState.未审批 && supplier.SupplierType == (int)EnumSupplierType.合格供方)
-                    {
-                        SetReadOnly();
-                        SetReviewControlReadOnly();
-                    }
-                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString()) 
-                    {
-                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                    }
-                }
-
-            }
+            } 
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetReadOnly();
                 SetReviewControlReadOnly();
                 this.gvBankInfoDetail.Columns.Remove(this.colDelete);
                 this.gvBankInfoDetail.OptionsBehavior.Editable = false;
-
-                Supplier supplier = sm.GetSupplier(CurrentSupplier.ID);
-                if (supplier != null)
-                {
-                    BindingSupplier(supplier);
-                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString())
-                    {
-                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                    }
-                }
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 SetReadOnly();
-                Supplier supplier = sm.GetSupplier(CurrentSupplier.ID);
-                if (supplier != null)
-                {
-                    BindingSupplier(supplier);
-                }
+                dteAgreementDate.Properties.ReadOnly = false;
+                dteBusinessEffectiveDate.Properties.ReadOnly = false; 
             }
         }
 
@@ -279,7 +283,7 @@ namespace BudgetSystem
                     (control as BaseEdit).Properties.ReadOnly = true;
                 }
             }
-            
+
         }
         private void SetReviewControlReadOnly()
         {
@@ -322,7 +326,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("非合格供方不需要提交审批流程", "提示");
                 return false;
             }
-            if (cboSupplierType.SelectedIndex != 0||!isStartFlow)
+            if (cboSupplierType.SelectedIndex != 0 || !isStartFlow)
             {
                 //非合格供应商或不提交流程时，其它项不需要验证
                 return !this.dxErrorProvider1.HasErrors;
@@ -344,7 +348,7 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
             }
-            else if (this.dteAgreementDate.DateTime.AddDays(30).Date < DateTime.Now.Date)
+            else if (this.dteAgreementDate.DateTime.Date < DateTime.Now.AddDays(30).Date)
             {
                 this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
             }
@@ -369,11 +373,11 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "请输入经营截至日期");
             }
-            else if (dteRegistrationDate.EditValue != null && dteBusinessEffectiveDate.DateTime < dteRegistrationDate.DateTime)
+            else if (dteRegistrationDate.EditValue != null && dteBusinessEffectiveDate.DateTime.Date < dteRegistrationDate.DateTime.Date)
             {
                 this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于工商登记日期");
             }
-            else if (dteBusinessEffectiveDate.DateTime.AddDays(30).Date < DateTime.Now.Date)
+            else if (dteBusinessEffectiveDate.DateTime.Date < DateTime.Now.AddDays(30).Date)
             {
                 this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
             }
@@ -393,9 +397,9 @@ namespace BudgetSystem
             {
                 foreach (Control control in this.layoutControl2.Controls)
                 {
-                    if (control is RadioGroup && control.Tag != null&& (control as RadioGroup).SelectedIndex == -1)
+                    if (control is RadioGroup && control.Tag != null && (control as RadioGroup).SelectedIndex == -1)
                     {
-                        this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价",control.Tag));
+                        this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价", control.Tag));
                     }
                 }
                 if (rgResult.SelectedIndex == 3)
@@ -472,20 +476,22 @@ namespace BudgetSystem
                 reviewContents.AgreementDate = agreementDate;
                 reviewContents.BusinessEffectiveDate = businesseffectiveDate;
                 reviewContents.RegistrationDate = registrationDate;
-                reviewContents.PassedBatch=int.Parse(txtPassedBatch.Text.Trim()) ;
+                reviewContents.PassedBatch = int.Parse(txtPassedBatch.Text.Trim());
                 reviewContents.RejectedBatch = int.Parse(txtRejectedBatch.Text.Trim());
-                reviewContents.RectificationPassedBatch=int.Parse(txtRectificationPassedBatch.Text.Trim());
-                reviewContents.RectificationBatch=int.Parse(txtRectificationBatch.Text.Trim());
-                reviewContents.RectificationResult=rgRectificationResult.SelectedIndex==0?true:false;
-                reviewContents.SalesmanResult = cboReviewSalesmanResult.SelectedIndex == 0 ? true : false;
-                reviewContents.Salesman = RunInfo.Instance.CurrentUser.UserName;
+                reviewContents.TotalBatch = reviewContents.PassedBatch + reviewContents.RejectedBatch;
+                reviewContents.RectificationPassedBatch = int.Parse(txtRectificationPassedBatch.Text.Trim());
+                reviewContents.RectificationBatch = int.Parse(txtRectificationBatch.Text.Trim());
+                reviewContents.RectificationResult = rgRectificationResult.SelectedIndex == 0 ? true : false;
+                reviewContents.SalesmanResult =  true ;
+                reviewContents.Salesman = RunInfo.Instance.CurrentUser.RealName;
+                reviewContents.Discredited = false;
                 this.CurrentSupplier.ReviewContents = reviewContents.ToJson();
             }
             else
             {
-                this.CurrentSupplier.RegistrationDate=registrationDate;
-                this.CurrentSupplier.AgreementDate= agreementDate;
-                this.CurrentSupplier.BusinessEffectiveDate= businesseffectiveDate;
+                this.CurrentSupplier.RegistrationDate = registrationDate;
+                this.CurrentSupplier.AgreementDate = agreementDate;
+                this.CurrentSupplier.BusinessEffectiveDate = businesseffectiveDate;
                 if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批
                     || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
@@ -499,9 +505,9 @@ namespace BudgetSystem
                             reviewContents.ReviewItems.Add(control.Tag.ToString(), (control as RadioGroup).SelectedIndex);
                         }
                     }
-                    reviewContents.Salesman = RunInfo.Instance.CurrentUser.UserName;
+                    reviewContents.Salesman = RunInfo.Instance.CurrentUser.RealName;
                     reviewContents.SalesmanResult = this.cboSalesmanResult.SelectedIndex;
-                    this.CurrentSupplier.FirstReviewContents=reviewContents.ToJson();
+                    this.CurrentSupplier.FirstReviewContents = reviewContents.ToJson();
                 }
             }
 
@@ -542,12 +548,18 @@ namespace BudgetSystem
                 }
                 rgResult.SelectedIndex = firstReviewContents.Result;
                 cboSalesmanResult.SelectedIndex = firstReviewContents.SalesmanResult;
-                txtSalesman.Text = firstReviewContents.Salesman;                
-                cboManagerResult.SelectedIndex = firstReviewContents.ManagerResult;
-                txtManager.Text = firstReviewContents.Manager;
-                cboLeaderResult.SelectedIndex = firstReviewContents.LeaderResult;
-                txtLeader.Text = firstReviewContents.Leader;
-                dteFirstReviewResultDate.EditValue = firstReviewContents.ResultDate;
+                txtSalesman.Text = firstReviewContents.Salesman;
+                if (!string.IsNullOrEmpty(firstReviewContents.Manager))
+                {
+                    cboManagerResult.SelectedIndex = firstReviewContents.ManagerResult;
+                    txtManager.Text = firstReviewContents.Manager;
+                    if (!string.IsNullOrEmpty(firstReviewContents.Leader))
+                    {
+                        cboLeaderResult.SelectedIndex = firstReviewContents.LeaderResult;
+                        txtLeader.Text = firstReviewContents.Leader;
+                        dteFirstReviewResultDate.EditValue = firstReviewContents.ResultDate;
+                    }
+                }
             }
         }
         private void BindingReviewDetail(string detail)
@@ -557,6 +569,7 @@ namespace BudgetSystem
                 SupplierReviewContents reviewContents = detail.ToObjectList<SupplierReviewContents>();
                 txtPassedBatch.EditValue = reviewContents.PassedBatch;
                 txtRejectedBatch.EditValue = reviewContents.RejectedBatch;
+                txtTotalBatch.Text = string.Format("总共:{0}批次", reviewContents.TotalBatch);
                 txtRectificationPassedBatch.EditValue = reviewContents.RectificationPassedBatch;
                 txtRectificationBatch.EditValue = reviewContents.RectificationBatch;
                 rgDiscredited.SelectedIndex = reviewContents.Discredited ? 1 : 0;
@@ -583,7 +596,7 @@ namespace BudgetSystem
         public void BindingReviewHistory(int id)
         {
             Bll.ModifyMarkManager mm = new Bll.ModifyMarkManager();
-            List<SupplierReviewContents> list= mm.GetAllModifyMark<SupplierReviewContents>(id);
+            List<SupplierReviewContents> list = mm.GetAllModifyMark<SupplierReviewContents>(id);
             this.gridSupplier.DataSource = list;
         }
         private string GetBankInfoDetailString()
@@ -669,8 +682,6 @@ namespace BudgetSystem
         {
             e.DisplayText = "删除";
         }
-
-        
 
     }
 }

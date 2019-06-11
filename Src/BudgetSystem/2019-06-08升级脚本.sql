@@ -43,14 +43,16 @@ INSERT INTO flownode(`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`
 -- 新增供应商复审流程
 DELETE FROM flownode WHERE `Name`='供应商复审流程';
 DELETE FROM flow WHERE `Name`='供应商复审流程';
-INSERT INTO Flow(`Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`IsEnabled`) VALUES('供应商复审流程',0,'admin',NOW(),1);
+INSERT INTO Flow(`Name`,`VersionNumber`,`CreateUser`,`UpdateDate`,`IsEnabled`) VALUES('供应商复审流程',1,'admin',NOW(),1);
 INSERT INTO flownode(`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`)
-            VALUES('供应商复审流程',0,1,1,'%StartUserDepartment%','部门经理','供应商复审部门经理审批');
+            VALUES('供应商复审流程',1,1,1,'%StartUserDepartment%','部门经理','供应商复审部门经理审批');
 INSERT INTO flownode(`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`)
-            VALUES('供应商复审流程',0,2,0,'0150','贸管部审批人','供应商复审贸管部审批');
+            VALUES('供应商复审流程',1,2,0,'0150','贸管部审批人','供应商复审贸管部审批');
 
 END??
 DELIMITER ;
 CALL schema_change();
  
+-- 修改ModifyMark 表 DateItemType 长度
+alter table ModifyMark modify column DateItemType varchar(60) not null comment '数据类型';
  

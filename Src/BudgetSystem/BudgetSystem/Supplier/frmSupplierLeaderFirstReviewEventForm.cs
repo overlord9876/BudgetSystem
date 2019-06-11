@@ -23,16 +23,13 @@ namespace BudgetSystem
         {
             try
             {
-                int result = this.cboItem.SelectedIndex;
-                if (result == 3)
-                {
-                    this.EventResult = false;
-                }
+                int result = this.cboItem.SelectedIndex; 
+                this.EventResult = result != 3; 
                 int dataID = ReleateFlowItems.FirstOrDefault().DateItemID;
-                SupplierManager sm=new SupplierManager();
+                SupplierManager sm = new SupplierManager();
                 Supplier supplier = sm.GetSupplier(dataID);
                 SupplierFirstReviewContents reviewContents = supplier.FirstReviewContents.ToObjectList<SupplierFirstReviewContents>();
-                reviewContents.Leader = RunInfo.Instance.CurrentUser.UserName;
+                reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
                 reviewContents.LeaderResult = result;
                 reviewContents.ResultDate = DateTime.Now;
                 sm.ModifySupplierFirstReviewContents(dataID, reviewContents.ToJson());
@@ -41,9 +38,10 @@ namespace BudgetSystem
             {
                 RunInfo.Instance.Logger.LogError(ex);
                 XtraMessageBox.Show("保存失败。");
+                this.EventResult = null;
                 this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
                 return;
-            }
+            }            
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }

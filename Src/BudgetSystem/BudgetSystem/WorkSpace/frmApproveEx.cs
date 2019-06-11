@@ -83,21 +83,21 @@ namespace BudgetSystem.WorkSpace
 
             lcDataGroup.Clear();
 
-            string dcType = this.CustomWorkModel == BatchApproveModel ? "BatchApprove" : FlowItem.DateItemType;
-
-            DataControl dc = DataControlCreator.CreateDataControl(FlowItem.FlowName, dcType);
+            DataControl dc = null;
             string layoutItemName;
-            if (dc is BatchDataControl)
+            if (this.CustomWorkModel == BatchApproveModel)
             {
-                dataControl = dc as BatchDataControl;
+                dataControl = DataControlCreator.CreateDataControl(this.BatchFlowItems[0].FlowName, "BatchApprove") as BatchDataControl;
                 dataControl.BindingBachData(this.BatchFlowItems);
                 layoutItemName = "批量审批-" + this.BatchFlowItems[0].FlowName;
+                dc = dataControl;
             }
             else
             {
+                dc = DataControlCreator.CreateDataControl(FlowItem.FlowName, FlowItem.DateItemType);
                 dc.BindingData(FlowItem.DateItemID);
                 layoutItemName = FlowItem.DateItemText;
-            }
+            } 
 
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
@@ -194,12 +194,8 @@ namespace BudgetSystem.WorkSpace
             {
                 return true;
             }
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                return form.EventResult;
-            }
-
-            return null;
+            form.ShowDialog();
+            return form.EventResult;
         }
 
 

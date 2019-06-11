@@ -62,9 +62,11 @@ namespace BudgetSystem.Base
             {
                 RunInfo.Instance.Logger.LogError(ex);
                 XtraMessageBox.Show("保存失败。");
+                this.EventResult = null;
                 this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
                 return;
             }
+            this.EventResult = true;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
         }

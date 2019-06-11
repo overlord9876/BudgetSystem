@@ -1,0 +1,360 @@
+﻿<XtraSerializer version="1.0" application="PivotGrid">
+  <property name="#LayoutVersion" />
+  <property name="Fields" iskey="true" value="11">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Index">0</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">departmentCode</property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">部门</property>
+      <property name="Area">RowArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">0</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Index">1</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code0</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">光大银行20260L/C</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">0</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">111</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Index">2</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code1</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">光大银行20260T/T</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">1</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">114</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Index">3</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code2</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">上海银行8120L/C</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">3</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">104</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Index">4</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code3</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">上海银行8120T/T</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">4</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">107</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Index">5</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code4</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">上行美元11829L/C</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">6</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">111</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Index">6</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code5</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">上行美元11829T/T</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">7</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">114</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Index">7</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code6</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">中行美元64483T/T</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">8</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">114</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Index">8</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code8</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">上海银行8120划账</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">5</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">110</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Index">9</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="FieldName">code14</property>
+      <property name="ValueFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Custom</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="Name">光大银行20260现金</property>
+      <property name="Area">DataArea</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">2</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+      <property name="Width">117</property>
+    </property>
+    <property name="Item11" isnull="true" iskey="true">
+      <property name="Index">10</property>
+      <property name="SortBySummaryInfo" isnull="true" iskey="true">
+        <property name="FieldComponentName" />
+        <property name="Conditions" iskey="true" value="0" />
+      </property>
+      <property name="UnboundFieldName">CC</property>
+      <property name="UnboundType">Integer</property>
+      <property name="CellFormat" isnull="true" iskey="true">
+        <property name="FormatString" />
+        <property name="FormatType">Numeric</property>
+      </property>
+      <property name="FilterValues" isnull="true" iskey="true">
+        <property name="Values">~Xtra#Array0, </property>
+        <property name="ShowBlanks">true</property>
+        <property name="FilterType">Excluded</property>
+      </property>
+      <property name="UnboundExpression">1</property>
+      <property name="FieldEditName" />
+      <property name="ToolTips" isnull="true" iskey="true">
+        <property name="ValueText" />
+        <property name="HeaderText" />
+      </property>
+      <property name="CustomTotals" iskey="true" value="0" />
+      <property name="AreaIndex">0</property>
+      <property name="ActualSortMode">Default</property>
+      <property name="SummaryVariation">None</property>
+    </property>
+  </property>
+  <property name="Prefilter" isnull="true" iskey="true">
+    <property name="Enabled">true</property>
+    <property name="Criteria" isnull="true" />
+  </property>
+  <property name="Groups" iskey="true" value="0" />
+  <property name="FormatConditions" iskey="true" value="0" />
+</XtraSerializer>

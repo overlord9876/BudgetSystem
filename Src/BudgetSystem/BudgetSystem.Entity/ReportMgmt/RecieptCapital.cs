@@ -24,6 +24,9 @@ namespace BudgetSystem.Entity
 
         public int DeptID { get; set; }
 
+        public string Currency { get; set; }
+        public float ExchangeRate { get; set; }
+
         /// <summary>
         /// 部门编号
         /// </summary>

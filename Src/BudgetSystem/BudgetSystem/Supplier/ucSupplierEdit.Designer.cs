@@ -197,9 +197,7 @@
             this.gcRectificationResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcManager = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLeader = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -712,8 +710,6 @@
             this.dteReviewDate.Name = "dteReviewDate";
             this.dteReviewDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dteReviewDate.Properties.Mask.EditMask = "";
-            this.dteReviewDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.dteReviewDate.Properties.ReadOnly = true;
             this.dteReviewDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1281,7 +1277,6 @@
             // 
             // cboReviewSalesmanResult
             // 
-            this.cboReviewSalesmanResult.EditValue = "合格";
             this.cboReviewSalesmanResult.Location = new System.Drawing.Point(904, 661);
             this.cboReviewSalesmanResult.Margin = new System.Windows.Forms.Padding(4);
             this.cboReviewSalesmanResult.Name = "cboReviewSalesmanResult";
@@ -2337,9 +2332,7 @@
             this.gcRectificationResult,
             this.gcDiscredited,
             this.gcSalesman,
-            this.gcDepartmentDesc,
             this.gcManager,
-            this.gcSignDate,
             this.gcLeader});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
@@ -2457,32 +2450,14 @@
             this.gcSalesman.VisibleIndex = 11;
             this.gcSalesman.Width = 39;
             // 
-            // gcDepartmentDesc
-            // 
-            this.gcDepartmentDesc.Caption = "业务员所在部门";
-            this.gcDepartmentDesc.FieldName = "DepartmentDesc";
-            this.gcDepartmentDesc.Name = "gcDepartmentDesc";
-            this.gcDepartmentDesc.Visible = true;
-            this.gcDepartmentDesc.VisibleIndex = 12;
-            this.gcDepartmentDesc.Width = 50;
-            // 
             // gcManager
             // 
             this.gcManager.Caption = "部门经理";
             this.gcManager.FieldName = "Manager";
             this.gcManager.Name = "gcManager";
             this.gcManager.Visible = true;
-            this.gcManager.VisibleIndex = 15;
+            this.gcManager.VisibleIndex = 13;
             this.gcManager.Width = 59;
-            // 
-            // gcSignDate
-            // 
-            this.gcSignDate.Caption = "订约日期";
-            this.gcSignDate.FieldName = "SignDate";
-            this.gcSignDate.Name = "gcSignDate";
-            this.gcSignDate.Visible = true;
-            this.gcSignDate.VisibleIndex = 13;
-            this.gcSignDate.Width = 37;
             // 
             // gcLeader
             // 
@@ -2490,7 +2465,7 @@
             this.gcLeader.FieldName = "Leader";
             this.gcLeader.Name = "gcLeader";
             this.gcLeader.Visible = true;
-            this.gcLeader.VisibleIndex = 14;
+            this.gcLeader.VisibleIndex = 12;
             this.gcLeader.Width = 31;
             // 
             // layoutControlItem24
@@ -2861,9 +2836,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcRectificationResult;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
-        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentDesc;
         private DevExpress.XtraGrid.Columns.GridColumn gcManager;
-        private DevExpress.XtraGrid.Columns.GridColumn gcSignDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcLeader; 
       
 

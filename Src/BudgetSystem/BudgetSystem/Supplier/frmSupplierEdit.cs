@@ -39,10 +39,17 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 this.Text = "编辑供应商信息";
+                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
+                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
                 this.Text = "查看供应商信息";
+            }
+            else if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
+                this.Text = "提交复审审批";
             }
         }
 
@@ -52,7 +59,7 @@ namespace BudgetSystem
         {
             if (this.WorkModel == EditFormWorkModels.Custom)
             {
-                XtraMessageBox.Show("复审审批申请，请提交流程审批");
+                XtraMessageBox.Show("复评审批申请，请提交流程审批");
                 return;
             }
             isStartFlow = false;

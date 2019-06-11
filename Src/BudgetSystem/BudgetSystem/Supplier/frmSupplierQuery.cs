@@ -200,8 +200,8 @@ namespace BudgetSystem
                     || (supplier.BusinessEffectiveDate != null && supplier.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date))
                 {
                     frmSupplierEdit form = new frmSupplierEdit();
-                    form.WorkModel = EditFormWorkModels.Custom;
                     form.CurrentSupplier = supplier;
+                    form.WorkModel = EditFormWorkModels.Custom;
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();

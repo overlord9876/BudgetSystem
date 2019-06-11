@@ -278,7 +278,7 @@ namespace BudgetSystem.Base
 
         List<ReportConfig> reportConfigs;
 
-        private string GetDefaultLayoutXmlFile()
+        protected string GetDefaultLayoutXmlFile()
         {
             string fileName = System.IO.Path.Combine(Environment.CurrentDirectory, "Report");
             if (!System.IO.Directory.Exists(fileName))

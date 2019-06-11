@@ -37,6 +37,7 @@
             this.gcv纳税人识别号 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFlowState = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,7 +48,7 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcFlowName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcReviewDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -91,6 +92,7 @@
             this.gcIsQualified,
             this.gcRegistrationDate,
             this.gcBusinessEffectiveDate,
+            this.gcReviewDate,
             this.gcExistsAgentAgreement,
             this.gcDiscredited,
             this.gcAgreementDate,
@@ -151,6 +153,15 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.rilueSupplierType.Name = "rilueSupplierType";
             // 
+            // gcFlowName
+            // 
+            this.gcFlowName.Caption = "当前流程";
+            this.gcFlowName.FieldName = "FlowName";
+            this.gcFlowName.Name = "gcFlowName";
+            this.gcFlowName.Visible = true;
+            this.gcFlowName.VisibleIndex = 3;
+            this.gcFlowName.Width = 95;
+            // 
             // gcFlowState
             // 
             this.gcFlowState.Caption = "审批状态";
@@ -193,7 +204,7 @@
             this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
             this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
             this.gcExistsAgentAgreement.Visible = true;
-            this.gcExistsAgentAgreement.VisibleIndex = 8;
+            this.gcExistsAgentAgreement.VisibleIndex = 9;
             this.gcExistsAgentAgreement.Width = 74;
             // 
             // gcDiscredited
@@ -202,7 +213,7 @@
             this.gcDiscredited.FieldName = "Discredited";
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 9;
+            this.gcDiscredited.VisibleIndex = 10;
             this.gcDiscredited.Width = 74;
             // 
             // gcAgreementDate
@@ -211,7 +222,7 @@
             this.gcAgreementDate.FieldName = "AgreementDate";
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
-            this.gcAgreementDate.VisibleIndex = 10;
+            this.gcAgreementDate.VisibleIndex = 11;
             this.gcAgreementDate.Width = 74;
             // 
             // gcCreateDate
@@ -222,7 +233,7 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 11;
+            this.gcCreateDate.VisibleIndex = 12;
             this.gcCreateDate.Width = 74;
             // 
             // gcCreateUser
@@ -231,7 +242,7 @@
             this.gcCreateUser.FieldName = "CreateUserName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 12;
+            this.gcCreateUser.VisibleIndex = 13;
             this.gcCreateUser.Width = 74;
             // 
             // gcDescription
@@ -240,17 +251,16 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 13;
+            this.gcDescription.VisibleIndex = 14;
             this.gcDescription.Width = 79;
             // 
-            // gcFlowName
+            // gcReviewDate
             // 
-            this.gcFlowName.Caption = "当前流程";
-            this.gcFlowName.FieldName = "FlowName";
-            this.gcFlowName.Name = "gcFlowName";
-            this.gcFlowName.Visible = true;
-            this.gcFlowName.VisibleIndex = 3;
-            this.gcFlowName.Width = 95;
+            this.gcReviewDate.Caption = "年审日期";
+            this.gcReviewDate.FieldName = "ReviewDate";
+            this.gcReviewDate.Name = "gcReviewDate";
+            this.gcReviewDate.Visible = true;
+            this.gcReviewDate.VisibleIndex = 8;
             // 
             // frmSupplierQuery
             // 
@@ -289,6 +299,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcReviewDate;
 
 
     }

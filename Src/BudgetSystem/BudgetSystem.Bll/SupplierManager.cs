@@ -128,6 +128,12 @@ namespace BudgetSystem.Bll
             {
                 return "非合格供方不能提交审批";
             }
+            else if (supplier.EnumFlowState == EnumDataFlowState.审批通过
+               && supplier.FlowName == EnumFlowNames.供应商审批流程.ToString()
+               && flowName == EnumFlowNames.供应商审批流程)
+            {
+                return "供应商审批流程不能多次提交";
+            }
             string message = string.Empty;
             if (flowName == EnumFlowNames.供应商复审流程)
             {
@@ -181,7 +187,7 @@ namespace BudgetSystem.Bll
             {
                 return "请补充代理协议有效期";
             }
-            else if (supplier.AgreementDate.Value.AddDays(30) < DateTime.Now.Date)
+            else if (supplier.AgreementDate.Value.Date < DateTime.Now.AddDays(30).Date)
             {
                 return "代理协议有效期应大于当前日期30天";
             }
@@ -197,7 +203,7 @@ namespace BudgetSystem.Bll
             {
                 return "请补充工商登记日期";
             }
-            else if (supplier.RegistrationDate.Value > DateTime.Now.Date)
+            else if (supplier.RegistrationDate.Value.Date > DateTime.Now.Date)
             {
                 return "工商登记日期应小于当前日期";
             }
@@ -206,11 +212,11 @@ namespace BudgetSystem.Bll
             {
                 return "请补充经营截至日期";
             }
-            else if (supplier.RegistrationDate != null && supplier.BusinessEffectiveDate < supplier.RegistrationDate)
+            else if (supplier.RegistrationDate != null && supplier.BusinessEffectiveDate.Value.Date < supplier.RegistrationDate.Value.Date)
             {
                 return "经营截至日期应大于工商登记日期";
             }
-            else if (supplier.BusinessEffectiveDate.Value.AddDays(30).Date < DateTime.Now.Date)
+            else if (supplier.BusinessEffectiveDate.Value.Date < DateTime.Now.AddDays(30).Date)
             {
                 return "经营截至日期应大于当前日期30天";
             }
@@ -251,7 +257,7 @@ namespace BudgetSystem.Bll
             {
                 return "合格供方需要营业执照复印件";
             }
-            if (!supplier.Discredited)
+            if (supplier.Discredited)
             {
                 return "合格供方需为非经营异常企业";
             }
@@ -270,7 +276,7 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充代理协议有效期";
                 }
-                else if (reviewContents.AgreementDate.Value.AddDays(30) < DateTime.Now.Date)
+                else if (reviewContents.AgreementDate.Value.Date < DateTime.Now.AddDays(30).Date)
                 {
                     return "代理协议有效期应大于当前日期30天";
                 }
@@ -279,7 +285,7 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充工商登记日期";
                 }
-                else if (reviewContents.RegistrationDate.Value > DateTime.Now.Date)
+                else if (reviewContents.RegistrationDate.Value.Date > DateTime.Now.Date)
                 {
                     return "工商登记日期应小于当前日期";
                 }
@@ -292,7 +298,7 @@ namespace BudgetSystem.Bll
                 {
                     return "经营截至日期应大于工商登记日期";
                 }
-                else if (reviewContents.BusinessEffectiveDate.Value.AddDays(30).Date < DateTime.Now.Date)
+                else if (reviewContents.BusinessEffectiveDate.Value.Date < DateTime.Now.AddDays(30).Date)
                 {
                     return "经营截至日期应大于当前日期30天";
                 }

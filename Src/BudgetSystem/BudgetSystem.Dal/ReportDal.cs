@@ -174,7 +174,7 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime;");
 
         public IEnumerable<RecieptCapital> GetRecieptCapital(IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.Currency,bs.ExchangeRate,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
 LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
 LEFT JOIN department d on bb.DeptID=d.ID
 GROUP BY DeptID,bs.BankName,bs.PaymentMethod

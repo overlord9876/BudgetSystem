@@ -42,9 +42,7 @@
             this.gcRectificationResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcManager = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLeader = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
@@ -78,9 +76,7 @@
             this.gcRectificationResult,
             this.gcDiscredited,
             this.gcSalesman,
-            this.gcDepartmentDesc,
             this.gcManager,
-            this.gcSignDate,
             this.gcLeader});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
@@ -198,32 +194,14 @@
             this.gcSalesman.VisibleIndex = 11;
             this.gcSalesman.Width = 34;
             // 
-            // gcDepartmentDesc
-            // 
-            this.gcDepartmentDesc.Caption = "业务员所在部门";
-            this.gcDepartmentDesc.FieldName = "DepartmentDesc";
-            this.gcDepartmentDesc.Name = "gcDepartmentDesc";
-            this.gcDepartmentDesc.Visible = true;
-            this.gcDepartmentDesc.VisibleIndex = 12;
-            this.gcDepartmentDesc.Width = 44;
-            // 
             // gcManager
             // 
             this.gcManager.Caption = "部门经理";
             this.gcManager.FieldName = "Manager";
             this.gcManager.Name = "gcManager";
             this.gcManager.Visible = true;
-            this.gcManager.VisibleIndex = 15;
+            this.gcManager.VisibleIndex = 13;
             this.gcManager.Width = 72;
-            // 
-            // gcSignDate
-            // 
-            this.gcSignDate.Caption = "订约日期";
-            this.gcSignDate.FieldName = "SignDate";
-            this.gcSignDate.Name = "gcSignDate";
-            this.gcSignDate.Visible = true;
-            this.gcSignDate.VisibleIndex = 13;
-            this.gcSignDate.Width = 31;
             // 
             // gcLeader
             // 
@@ -231,7 +209,7 @@
             this.gcLeader.FieldName = "Leader";
             this.gcLeader.Name = "gcLeader";
             this.gcLeader.Visible = true;
-            this.gcLeader.VisibleIndex = 14;
+            this.gcLeader.VisibleIndex = 12;
             this.gcLeader.Width = 26;
             // 
             // frmSupplierReviewHistory
@@ -266,9 +244,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcRectificationResult;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
-        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentDesc;
         private DevExpress.XtraGrid.Columns.GridColumn gcManager;
-        private DevExpress.XtraGrid.Columns.GridColumn gcSignDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcLeader;
 
     }
