@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem.Report
 {
-    partial class frmCapitalReport
+    partial class frmPaymentReport
     {
         /// <summary>
         /// Required designer variable.
@@ -97,13 +97,13 @@
             // 
             this.lcList.Size = new System.Drawing.Size(253, 712);
             // 
-            // frmCapitalReport
+            // frmPaymentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1369, 811);
-            this.Name = "frmCapitalReport";
-            this.Text = "资金管理（收汇）";
+            this.Name = "frmPaymentReport";
+            this.Text = "资金管理（付款）";
             this.Load += new System.EventHandler(this.frmBudgetReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

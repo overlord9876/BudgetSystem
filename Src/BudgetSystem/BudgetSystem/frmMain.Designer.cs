@@ -59,7 +59,7 @@
             this.btnDepartmentReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnCompanyReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnFinalAccount = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRecieptCapital = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -75,6 +75,7 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPaymentCapital = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -119,10 +120,11 @@
             this.btnDepartmentReport,
             this.btnCompanyReport,
             this.btnFinalAccount,
-            this.barButtonItem2});
+            this.btnRecieptCapital,
+            this.btnPaymentCapital});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 48;
+            this.ribbonControl1.MaxItemId = 49;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -133,7 +135,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1515, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1720, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -463,15 +465,15 @@
             this.btnFinalAccount.Tag = "FinalAccount";
             this.btnFinalAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFinalAccount_ItemClick);
             // 
-            // barButtonItem2
+            // btnRecieptCapital
             // 
-            this.barButtonItem2.Caption = "资金管理（收汇）";
-            this.barButtonItem2.Id = 47;
-            this.barButtonItem2.ImageIndex = 21;
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.barButtonItem2.Tag = "RecieptCapital";
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            this.btnRecieptCapital.Caption = "资金管理（收汇）";
+            this.btnRecieptCapital.Id = 47;
+            this.btnRecieptCapital.ImageIndex = 21;
+            this.btnRecieptCapital.Name = "btnRecieptCapital";
+            this.btnRecieptCapital.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnRecieptCapital.Tag = "RecieptCapital";
+            this.btnRecieptCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRecieptCapital_ItemClick);
             // 
             // rpMain
             // 
@@ -516,7 +518,8 @@
             this.rpGroup.ItemLinks.Add(this.btnSalemenReport);
             this.rpGroup.ItemLinks.Add(this.btnDepartmentReport);
             this.rpGroup.ItemLinks.Add(this.btnCompanyReport);
-            this.rpGroup.ItemLinks.Add(this.barButtonItem2);
+            this.rpGroup.ItemLinks.Add(this.btnRecieptCapital);
+            this.rpGroup.ItemLinks.Add(this.btnPaymentCapital);
             this.rpGroup.Name = "rpGroup";
             this.rpGroup.Text = "统计管理";
             // 
@@ -552,7 +555,7 @@
             this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1515, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1720, 34);
             // 
             // documentManager1
             // 
@@ -600,11 +603,21 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // btnPaymentCapital
+            // 
+            this.btnPaymentCapital.Caption = "资金管理（付款）";
+            this.btnPaymentCapital.Id = 48;
+            this.btnPaymentCapital.ImageIndex = 21;
+            this.btnPaymentCapital.Name = "btnPaymentCapital";
+            this.btnPaymentCapital.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnPaymentCapital.Tag = "PaymentCapital";
+            this.btnPaymentCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPaymentCapital_ItemClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1515, 908);
+            this.ClientSize = new System.Drawing.Size(1720, 908);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -673,7 +686,8 @@
         private DevExpress.XtraBars.BarButtonItem btnDepartmentReport;
         private DevExpress.XtraBars.BarButtonItem btnCompanyReport;
         private DevExpress.XtraBars.BarButtonItem btnFinalAccount;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem btnRecieptCapital;
+        private DevExpress.XtraBars.BarButtonItem btnPaymentCapital;
     }
 }
 

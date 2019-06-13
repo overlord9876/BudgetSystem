@@ -12,12 +12,13 @@ namespace BudgetSystem.Dal
         public static int Insert(this IDbConnection con, string sql, object param, IDbTransaction transaction = null)
         {
             con.Execute(sql, param, transaction);
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = "Select LAST_INSERT_ID() id";
-            command.Transaction = transaction;
-            object obj = command.ExecuteScalar();
-            return Convert.ToInt32(obj);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = "Select LAST_INSERT_ID() id";
+                command.Transaction = transaction;
+                object obj = command.ExecuteScalar();
+                return Convert.ToInt32(obj);
+            }
         }
-
     }
 }

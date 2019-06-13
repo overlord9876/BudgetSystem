@@ -407,7 +407,7 @@ namespace BudgetSystem
         }
 
 
-        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnRecieptCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             BudgetSystem.Report.frmCapitalReport form = GetExistForm<BudgetSystem.Report.frmCapitalReport>(BudgetSystem.Entity.BusinessModules.RecieptCapital.ToString());
             if (form == null)
@@ -420,6 +420,23 @@ namespace BudgetSystem
                 FormActivited(form);
             }
             form.Module = Entity.BusinessModules.RecieptCapital;
+            ShowForm(form);
+        }
+
+
+        private void btnPaymentCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BudgetSystem.Report.frmPaymentReport form = GetExistForm<BudgetSystem.Report.frmPaymentReport>(BudgetSystem.Entity.BusinessModules.PaymentCapital.ToString());
+            if (form == null)
+            {
+                form = new BudgetSystem.Report.frmPaymentReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = Entity.BusinessModules.PaymentCapital;
             ShowForm(form);
         }
 

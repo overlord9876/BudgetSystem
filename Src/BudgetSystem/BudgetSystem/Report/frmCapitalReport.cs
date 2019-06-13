@@ -52,16 +52,9 @@ namespace BudgetSystem.Report
 
             base.ClearColumns();
 
-            var lst = um.GetRecieptCapital();
-
-            var usdLst = lst.FindAll(o => o.Currency.ToUpper().Equals("USD"));
-            decimal exchangeRate = 0;
-            if (usdLst.Count > 0)
-            {
-                decimal allExchangeRate = 0;
-                usdLst.ForEach(o => { allExchangeRate += (decimal)o.ExchangeRate; });
-                exchangeRate = allExchangeRate / usdLst.Count;
-            }
+            decimal exchangeRate = um.GetAverageUSDExchange(condition);
+            if (exchangeRate == 0) { return; }
+            var lst = um.GetRecieptCapital(condition);
 
             DataTable dt = new DataTable();
             if (!dic.ContainsKey(DepartmentCaption))
@@ -121,63 +114,5 @@ namespace BudgetSystem.Report
             this.pivotGridControl.DataSource = dt;
             this.gridControl.DataSource = dt;
         }
-
-        private void InitBudgetReportGrid()
-        {
-            base.ClearColumns();
-            base.CreateGridColumn("合同号", "ContractNO");
-            base.CreateGridColumn("合同金额（美元$）", "USDTotalAmount");
-            base.CreateGridColumn("报关金额（美元$）", "TotalDeclarationform");
-            base.CreateGridColumn("收汇金额（美元$）", "TotalUSDBudgetBill");
-            base.CreateGridColumn("实际收汇金额（人民币￥）", "TotalBudgetBill");
-            base.CreateGridColumn("销售金额（人民币￥）", "TotalInvoice");
-            base.CreateGridColumn("付款金额（人民币￥）", "TotalPayement");
-            base.CreateGridColumn("供方发票（人民币￥）", "SupplierInvoice");
-            base.CreateGridColumn("销售成本（人民币￥）", "SellingCost");
-            base.CreateGridColumn("运保费（人民币￥）", "Premium");
-            base.CreateGridColumn("运保费成本（人民币￥）", "PremiumCost");
-            base.CreateGridColumn("佣金（￥）", "Commission");
-            base.CreateGridColumn("直接费用（￥）", "DirectCosts");
-            base.CreateGridColumn("销售利润（￥）", "SalesProfit");
-            base.CreateGridColumn("实际利润（￥）", "ActualProfit");
-
-            base.CreateGridColumn("合同金额", "TotalAmount");
-            base.CreateGridColumn("业务员", "SalesmanName");
-            base.CreateGridColumn("业务员所在部门", "DepartmentDesc");
-            base.CreateGridColumn("录入时间", "CreateDate");
-            base.CreateGridColumn("订约日期", "SignDate");
-            base.CreateGridColumn("有效截止期", "Validity");
-            base.CreateGridColumn("预付金额", "AdvancePayment");
-            base.CreateGridColumn("利润", "Profit");
-            base.CreateGridColumn("盈利水平", "ProfitLevel2");
-
-            base.CreatePivotGridField("合同号", "ContractNO");
-            base.CreatePivotGridField("合同金额（美元$）", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("报关金额（美元$）", "TotalDeclarationform", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("收汇金额（美元$）", "TotalUSDBudgetBill", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("实际收汇金额（人民币￥）", "TotalBudgetBill");
-            base.CreatePivotGridField("销售金额（人民币￥）", "TotalInvoice");
-            base.CreatePivotGridField("付款金额（人民币￥）", "TotalPayement");
-            base.CreatePivotGridField("供方发票（人民币￥）", "SupplierInvoice");
-            base.CreatePivotGridField("销售成本（人民币￥）", "SellingCost");
-            base.CreatePivotGridField("运保费（人民币￥）", "Premium");
-            base.CreatePivotGridField("运保费成本（人民币￥）", "Premium");
-            base.CreatePivotGridField("佣金（￥）", "Commission");
-            base.CreatePivotGridField("直接费用（￥）", "DirectCosts");
-            base.CreatePivotGridField("销售利润（￥）", "SalesProfit");
-            base.CreatePivotGridField("实际利润（￥）", "ActualProfit");
-
-            base.CreatePivotGridField("合同金额", "TotalAmount");
-            base.CreatePivotGridField("业务员", "SalesmanName");
-            base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
-            base.CreatePivotGridField("录入时间", "CreateDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("订约日期", "SignDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("有效截止期", "Validity", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("预付金额", "AdvancePayment");
-            base.CreatePivotGridField("利润", "Profit");
-            base.CreatePivotGridField("盈利水平", "ProfitLevel2");
-            base.CreatePivotGridDefaultRowField();
-        }
-
     }
 }

@@ -396,6 +396,12 @@
     <Compile Include="Report\frmCapitalReport.Designer.cs">
       <DependentUpon>frmCapitalReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmPaymentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmPaymentReport.Designer.cs">
+      <DependentUpon>frmPaymentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Supplier\frmSupplierImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -816,7 +822,6 @@
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmCustomerReport.resx">
       <DependentUpon>frmCustomerReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -825,6 +830,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmCapitalReport.resx">
       <DependentUpon>frmCapitalReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmPaymentReport.resx">
+      <DependentUpon>frmPaymentReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierImport.resx">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
@@ -1047,6 +1055,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Report\SlipperReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\PaymentCapital.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml" />

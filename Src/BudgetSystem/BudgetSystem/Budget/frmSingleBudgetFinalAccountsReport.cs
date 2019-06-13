@@ -191,6 +191,7 @@ namespace BudgetSystem
             decimal needPayment = 0;//已收发票
             decimal totalProfit = 0;//总实际利润
             decimal totalSalesProfit = 0;//总销售利润
+            decimal taxRebate = 0;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 row = dt.Rows[i];
@@ -213,7 +214,8 @@ namespace BudgetSystem
                         row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
                     }
                     //出口退税额=已收供方发票-销售成本
-                    row["TaxRebate"] = Math.Round(GetDecimal(row, "Payment") - GetDecimal(row, "CostOfSales"), 2);
+                    taxRebate = Math.Round(GetDecimal(row, "Payment") - GetDecimal(row, "CostOfSales"), 2);
+                    row["TaxRebate"] = taxRebate;
                 }
                 //销售利润=应收人民币-销售成本-运保费-佣金-直接费用
                 var salesProfit = GetDecimal(row, "TotalAmount")
@@ -232,7 +234,7 @@ namespace BudgetSystem
                 //TODO:此列值未计算“扣除利息后实际利润”
                 var profit = GetDecimal(row, "BillCNY")
                         - paymentMoney
-                                     + GetDecimal(row, "CNY") / (1 + 0) * GetDecimal(row, "TaxRebateRate");
+                                     + GetDecimal(row, "CNY") / (1 + 0) * GetDecimal(row, "TaxRebateRate") + taxRebate;
                 row["Profit"] = profit.ToString();
 
                 totalProfit += profit;

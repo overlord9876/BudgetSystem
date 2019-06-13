@@ -16,16 +16,13 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                return string.Format("{0}{1}", BankName.Trim(), PaymentMethod.Trim());
+                return string.Format("{0}{1}", BankName.Trim(), string.IsNullOrEmpty(PaymentMethod) ? "" : PaymentMethod.Trim());
             }
         }
 
         public string PaymentMethod { get; set; }
 
         public int DeptID { get; set; }
-
-        public string Currency { get; set; }
-        public float ExchangeRate { get; set; }
 
         /// <summary>
         /// 部门编号

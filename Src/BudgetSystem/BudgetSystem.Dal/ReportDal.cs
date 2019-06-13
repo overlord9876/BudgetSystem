@@ -172,16 +172,89 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime;");
             return result;
         }
 
-        public IEnumerable<RecieptCapital> GetRecieptCapital(IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<RecieptCapital> GetRecieptCapital(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.Currency,bs.ExchangeRate,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
 LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
-LEFT JOIN department d on bb.DeptID=d.ID
+LEFT JOIN department d on bb.DeptID=d.ID 
 GROUP BY DeptID,bs.BankName,bs.PaymentMethod
 UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip GROUP BY BankName,PaymentMethod";
+            DynamicParameters dp = new DynamicParameters();
+            if (condition != null)
+            {
+                selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
+LEFT JOIN department d on bb.DeptID=d.ID 
+where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime)
+GROUP BY DeptID,bs.BankName,bs.PaymentMethod
+UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime 
+GROUP BY BankName,PaymentMethod";
+                dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
+                dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);
+            }
 
-            return con.Query<RecieptCapital>(selectSql, null, tran);
+            return con.Query<RecieptCapital>(selectSql, dp, tran);
         }
 
+        public IEnumerable<RecieptCapital> GetPayementCapital(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`  from paymentnotes pn
+LEFT JOIN department d on pn.DeptID=d.ID 
+GROUP BY DeptID,PayingBank";
+            DynamicParameters dp = new DynamicParameters();
+            if (condition != null)
+            {
+                selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`  from paymentnotes pn
+LEFT JOIN department d on pn.DeptID=d.ID 
+WHERE PaymentDate BETWEEN @beginTime and @endTime 
+GROUP BY DeptID,PayingBank";
+                dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
+                dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);
+            }
+
+            return con.Query<RecieptCapital>(selectSql, dp, tran);
+        }
+
+        public decimal GetAverageUSDExchange(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
+        {
+            decimal useExchange = 0;
+
+            string selectSql = @"SELECT SUM(ExchangeRate)/COUNT(ExchangeRate) from bankslip where 1=1 ";
+
+            DynamicParameters dp = new DynamicParameters();
+            selectSql += " and Currency=@Currency ";
+            if (condition != null)
+            {
+                selectSql += " and ReceiptDate BETWEEN @beginTimestamp and @endTimestamp ";
+            }
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter parameter = command.CreateParameter();
+                parameter.ParameterName = "Currency";
+                parameter.DbType = DbType.String;
+                parameter.Value = "USD";
+                command.Parameters.Add(parameter);
+                if (condition != null)
+                {
+                    IDbDataParameter beginTimestampParameter = command.CreateParameter();
+                    beginTimestampParameter.ParameterName = "beginTimestamp";
+                    beginTimestampParameter.DbType = DbType.DateTime;
+                    beginTimestampParameter.Value = condition.BeginTimestamp;
+                    command.Parameters.Add(beginTimestampParameter);
+
+                    IDbDataParameter endTimestampParameter = command.CreateParameter();
+                    endTimestampParameter.ParameterName = "endTimestamp";
+                    endTimestampParameter.DbType = DbType.DateTime;
+                    endTimestampParameter.Value = condition.EndTimestamp;
+                    command.Parameters.Add(endTimestampParameter);
+
+                }
+                object result = command.ExecuteScalar();
+                decimal.TryParse(result.ToString(), out useExchange);
+            }
+            return useExchange;
+        }
     }
 }
