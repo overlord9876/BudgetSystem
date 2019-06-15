@@ -104,7 +104,7 @@ namespace BudgetSystem.Dal
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
             modifyBankSlip.UpdateTimestamp = DateTime.Now;
-            string updateSql = "Update `BankSlip` Set `State` = @State Where `BSID` = @BSID";
+            string updateSql = "Update `BankSlip` Set `State` = @State,Description=@Description Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");

@@ -84,5 +84,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         public bool IsRecent { get; set; }
 
+        /// <summary>
+        /// 发起流程备注字段
+        /// </summary>
+        public string Description { get; set; }
+
     }
 }

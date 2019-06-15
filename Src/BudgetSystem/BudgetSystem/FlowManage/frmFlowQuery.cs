@@ -26,7 +26,7 @@ namespace BudgetSystem.FlowManage
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm,"流程引擎测试"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "流程引擎测试"));
             this.ModelOperatePageName = "流程管理";
         }
 
@@ -53,11 +53,11 @@ namespace BudgetSystem.FlowManage
             int dataID = 888;
             string dataType = "测试业务数据";
             Bll.FlowManager fm = new FlowManager();
-            FlowRunState state = fm.StartFlow(flowName, dataID,"测试用的数据项", dataType,RunInfo.Instance.CurrentUser.UserName);
- 
+            FlowRunState state = fm.StartFlow(flowName, dataID, "测试用的数据项", dataType, RunInfo.Instance.CurrentUser.UserName, "");
+
         }
 
-       
+
 
         private void ModifyFlow()
         {
@@ -91,7 +91,7 @@ namespace BudgetSystem.FlowManage
 
         protected override void InitGridViewAction()
         {
-            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = ModifyFlow, MainOperate = OperateTypes.Modify , SecondAction= ViewFlow, SecondOperate=  OperateTypes.View});
+            this.gridViewAction.Add(this.gvFlow, new ActionWithPermission() { MainAction = ModifyFlow, MainOperate = OperateTypes.Modify, SecondAction = ViewFlow, SecondOperate = OperateTypes.View });
 
         }
 

@@ -166,7 +166,7 @@
             this.ClientSize = new System.Drawing.Size(1097, 462);
             this.Controls.Add(this.layoutControl1);
             this.Name = "frmBudgetUpdateDescription";
-            this.Text = "填写申请修改备注";
+            this.Text = "填写申请修改说明";
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

@@ -126,13 +126,14 @@ namespace BudgetSystem.Bll
         /// <param name="dataType">数据项类型</param>
         /// <param name="CreateUser">发起人</param>
         /// <param name="flowName">流程名称</param>
+        /// <param name="description">发起流程说明</param>
         /// <returns>
         /// 1 启动成功
         /// 2 当前数据项已存在相同流程的未完成实例 
         /// 3 流程还未配置审批过程
         /// 4 创建运行点时失败，用户部门未配置。
         /// </returns>
-        public FlowRunState StartFlow(string flowName, int dataID, string dataText, string dataType, string currentUser)
+        public FlowRunState StartFlow(string flowName, int dataID, string dataText, string dataType, string currentUser, string description)
         {
 
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
@@ -154,7 +155,7 @@ namespace BudgetSystem.Bll
                 //更新数据已关联流程实例的IsRecent属性为false
                 dal.UpdateFlowInstanceIsRecent(dataType, dataID, false, con, tran);
                 //创建流程实例 
-                int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataText, dataType, currentUser, con, tran);
+                int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataText, dataType, currentUser, description, con, tran);
 
                 //创建运行点
                 FlowRunState createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, null, currentUser, con, tran);

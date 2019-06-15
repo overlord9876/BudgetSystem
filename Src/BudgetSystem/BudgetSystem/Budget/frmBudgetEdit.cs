@@ -28,8 +28,8 @@ namespace BudgetSystem
         {
             base.SubmitNewData();
             bool requiredResult = true;
-            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow,out requiredResult);
-            if (!checkResult && isStartFlow || requiredResult==false)
+            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow, out requiredResult);
+            if (!checkResult && isStartFlow || requiredResult == false)
             {
                 return;
             }
@@ -48,14 +48,24 @@ namespace BudgetSystem
         {
             base.SubmitModifyData();
             bool requiredResult = true;
-            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow,out requiredResult);
-            if (!checkResult && isStartFlow || requiredResult==false)
+            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow, out requiredResult);
+            if (!checkResult && isStartFlow || requiredResult == false)
             {
                 return;
             }
             this.ucBudgetEdit1.FillData();
             this.ucBudgetEdit1.CurrentBudget.IsValid = checkResult;
-            string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, isStartFlow);
+            string description = string.Empty;
+            if (isStartFlow)
+            {
+                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
+                if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    description = frmBudget.Description;
+                }
+                else { return; }
+            }
+            string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, description, isStartFlow);
             if (!string.IsNullOrEmpty(message))
             {
                 XtraMessageBox.Show(message, "提示");

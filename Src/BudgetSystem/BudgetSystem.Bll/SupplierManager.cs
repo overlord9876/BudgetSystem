@@ -70,7 +70,7 @@ namespace BudgetSystem.Bll
                dal.ModifySupplierFirstReviewContents(id, firstReviewContents, con, tran);
            });
         }
-       
+
         public void ModifySupplierReviewContents(int id, SupplierReviewContents reviewContents)
         {
             this.ExecuteWithTransaction((con, tran) =>
@@ -84,14 +84,14 @@ namespace BudgetSystem.Bll
                     Supplier supplier = GetSupplier(id);
                     supplier.ReviewContents = reviewContents.ToJson();
                     supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
-                    supplier.AgreementDate= reviewContents.AgreementDate;
-                    supplier.BusinessEffectiveDate= reviewContents.BusinessEffectiveDate;
+                    supplier.AgreementDate = reviewContents.AgreementDate;
+                    supplier.BusinessEffectiveDate = reviewContents.BusinessEffectiveDate;
                     dal.ModifySupplier(supplier, con, tran);
-                    mmdal.AddModifyMark<SupplierReviewContents>(reviewContents, id, con, tran);                     
+                    mmdal.AddModifyMark<SupplierReviewContents>(reviewContents, id, con, tran);
                 }
             });
         }
-    
+
         /// <summary>
         /// 验证名称是否存在
         /// </summary>
@@ -152,7 +152,7 @@ namespace BudgetSystem.Bll
                 return message;
             }
 
-            FlowRunState state = fm.StartFlow(flowName.ToString(), id, supplier.Name, EnumFlowDataType.供应商.ToString(), currentUser);
+            FlowRunState state = fm.StartFlow(flowName.ToString(), id, supplier.Name, EnumFlowDataType.供应商.ToString(), currentUser, "");
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

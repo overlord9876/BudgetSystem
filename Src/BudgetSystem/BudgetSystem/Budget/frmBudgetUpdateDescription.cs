@@ -19,9 +19,21 @@ namespace BudgetSystem
             this.Icon = BudgetSystem.Properties.Resources.logo;
         }
 
+        public frmBudgetUpdateDescription(string title, string lable)
+            : this()
+        {
+            this.Text = title;
+            this.layoutControlItem1.Text = lable;
+        }
+
         private void btn_Commit_Click(object sender, EventArgs e)
         {
             this.Description = this.txtDescription.Text.Trim();
+            if (string.IsNullOrEmpty(Description))
+            {
+                XtraMessageBox.Show("请输入修改备注。");
+                return;
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

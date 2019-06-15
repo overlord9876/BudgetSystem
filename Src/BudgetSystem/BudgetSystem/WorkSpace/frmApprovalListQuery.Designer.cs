@@ -45,6 +45,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -82,6 +83,7 @@
             this.gcCreateDate,
             this.gcCreateUserRealName,
             this.gcSate,
+            this.gcDescription,
             this.gcID});
             this.gvPendingFlow.GridControl = this.gdPendingFlow;
             this.gvPendingFlow.GroupCount = 1;
@@ -146,7 +148,7 @@
             this.gcSate.Name = "gcSate";
             this.gcSate.Visible = true;
             this.gcSate.VisibleIndex = 3;
-            this.gcSate.Width = 265;
+            this.gcSate.Width = 137;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -226,6 +228,14 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
+            // gcDescription
+            // 
+            this.gcDescription.Caption = "流程说明";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            this.gcDescription.Visible = true;
+            this.gcDescription.VisibleIndex = 4;
+            // 
             // frmApprovalListQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -268,5 +278,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDateText;
         private DevExpress.XtraGrid.Columns.GridColumn gcSate;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDescription;
     }
 }

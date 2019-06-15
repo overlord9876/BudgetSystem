@@ -203,17 +203,21 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("{0}收款单不是已拆分状态，不需要提交修改申请。", currentRowBankSlip.VoucherNo));
                     return;
                 }
-                currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
-                currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
-                string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName);
-                if (string.IsNullOrEmpty(message))
+                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
+                if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    XtraMessageBox.Show("提交流程成功。");
-                    LoadData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
+                    currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
+                    currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
+                    string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
+                    if (string.IsNullOrEmpty(message))
+                    {
+                        XtraMessageBox.Show("提交流程成功。");
+                        LoadData();
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(message);
+                    }
                 }
             }
         }

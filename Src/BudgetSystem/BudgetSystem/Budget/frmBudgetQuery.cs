@@ -278,7 +278,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                     return;
                 }
-                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName);
+                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName, budget.Description);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");
@@ -311,9 +311,7 @@ namespace BudgetSystem
                     frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
-                        budget.Description += "\r\n" + frmBudget.Description;
-                        bm.ModifyBudgetDescription(budget);
-                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName);
+                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
                         if (string.IsNullOrEmpty(message))
                         {
                             XtraMessageBox.Show("提交流程成功。");
@@ -351,15 +349,19 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单{1}，不允许删除。", budget.ContractNO, (EnumBudgetState)budget.State));
                     return;
                 }
-                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName);
-                if (string.IsNullOrEmpty(message))
+                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription("填写申请删除说明", "删除说明");
+                if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    XtraMessageBox.Show("提交流程成功。");
-                    LoadData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
+                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
+                    if (string.IsNullOrEmpty(message))
+                    {
+                        XtraMessageBox.Show("提交流程成功。");
+                        LoadData();
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(message);
+                    }
                 }
             }
             else

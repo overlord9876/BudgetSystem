@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BudgetSystem.Entity
 {
-    public class FlowItem:FlowInstance
+    public class FlowItem : FlowInstance
     {
 
         /// <summary>

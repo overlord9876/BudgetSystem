@@ -30,6 +30,13 @@ namespace BudgetSystem.Base
             this.deStartDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime nextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             this.deEndDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+
+            this.lcList.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            this.splitterItem.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+            this.btnSaveView.Visibility = BarItemVisibility.Never;
+            this.btnDeleteView.Visibility = BarItemVisibility.Never;
+            this.btnShowOrVisible.Visibility = BarItemVisibility.Never;
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)

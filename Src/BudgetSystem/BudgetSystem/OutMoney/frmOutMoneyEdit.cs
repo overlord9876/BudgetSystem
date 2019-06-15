@@ -115,7 +115,7 @@ namespace BudgetSystem.OutMoney
                 this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
             }
 
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName, "");
             XtraMessageBox.Show(state.ToString());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

@@ -140,7 +140,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(int id, string currentUser)
+        public string StartFlow(int id, string currentUser, string description)
         {
             PaymentNotes payment = this.GetPaymentNoteById(id);
             if (payment == null)
@@ -151,7 +151,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser, description);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();
