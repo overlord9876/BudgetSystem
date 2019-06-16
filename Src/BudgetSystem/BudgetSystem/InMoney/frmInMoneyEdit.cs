@@ -109,7 +109,7 @@ namespace BudgetSystem.InMoney
             ucInMoneyEdit unInmoneyEdit = sender as ucInMoneyEdit;
             if (unInmoneyEdit != null)
             {
-                if (unInmoneyEdit.NotSplitCNYMoney > 0)
+                if (unInmoneyEdit.NotSplitCNYMoney != 0)
                 {
                     this.lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }

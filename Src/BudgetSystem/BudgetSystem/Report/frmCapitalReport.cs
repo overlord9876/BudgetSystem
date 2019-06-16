@@ -64,6 +64,10 @@ namespace BudgetSystem.Report
 
             base.ClearColumns();
 
+            columnDic.Clear();
+            paymentmethodDic.Clear();
+            bankDic.Clear();
+
             exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
             if (exchangeRate == 0) { return; }
 

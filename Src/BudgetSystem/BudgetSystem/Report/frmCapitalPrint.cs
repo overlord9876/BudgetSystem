@@ -42,6 +42,9 @@ namespace BudgetSystem.Report
             if (rcList == null) { return; }
 
             DataTable dt = new DataTable();
+            columnDic.Clear();
+            paymentmethodDic.Clear();
+            bankDic.Clear();
 
             //增加部门、合计列
             CreateColumn(dt, frmCapitalReport.DepartmentCaption, "departmentCode", typeof(string));

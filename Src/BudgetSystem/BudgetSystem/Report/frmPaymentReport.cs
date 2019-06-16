@@ -60,6 +60,10 @@ namespace BudgetSystem.Report
 
             base.ClearColumns();
 
+            columnDic.Clear();
+            paymentmethodDic.Clear();
+            bankDic.Clear();
+
             count = um.GetPaymentCapitalTotalCount(condition);
 
             if (count == 0) { return; }
