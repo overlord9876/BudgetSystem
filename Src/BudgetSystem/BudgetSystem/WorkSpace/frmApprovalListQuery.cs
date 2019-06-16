@@ -77,8 +77,9 @@ namespace BudgetSystem.WorkSpace
             {
                 int[] rowIndexList = this.gvPendingFlow.GetSelectedRows();
                 Dictionary<int, FlowItem> flowItems = new Dictionary<int, FlowItem>();
-                foreach (int rowIndex in rowIndexList)
+                for (int index = rowIndexList.Length - 1; index >= 0; index--)
                 {
+                    int rowIndex = rowIndexList[index];
                     FlowItem item = this.gvPendingFlow.GetRow(rowIndex) as FlowItem;
                     if (item != null)
                     {

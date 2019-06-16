@@ -79,7 +79,7 @@ namespace BudgetSystem.Report
                 RecieptCapital rc = rcList[index];
 
                 rc.OriginalCoin = rc.CNY;
-               
+
                 //if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
                 //{
                 //    paymentmethodDic.Add(rc.PaymentMethod, 0);
@@ -102,12 +102,12 @@ namespace BudgetSystem.Report
                 //创建银行列
                 if (!dt.Columns.Contains(columnDic[rc.BankCode]))
                 {
-                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
+                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
                     dt.Columns.Add(columnDic[rc.BankCode], typeof(decimal));
                 }
             }
 
-            CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
 
             //行列数据转换
             foreach (RecieptCapital rc in rcList)

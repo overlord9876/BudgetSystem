@@ -19,6 +19,7 @@ namespace BudgetSystem.WorkSpace
         public frmApproveEx()
         {
             InitializeComponent();
+            memoEdit1.Properties.ReadOnly = true;
         }
 
         private BatchDataControl dataControl;
@@ -94,10 +95,11 @@ namespace BudgetSystem.WorkSpace
             }
             else
             {
+                memoEdit1.Text = FlowItem.Description;
                 dc = DataControlCreator.CreateDataControl(FlowItem.FlowName, FlowItem.DateItemType);
                 dc.BindingData(FlowItem.DateItemID);
                 layoutItemName = FlowItem.DateItemText;
-            } 
+            }
 
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
@@ -144,7 +146,7 @@ namespace BudgetSystem.WorkSpace
         {
             if (result)
             {
-                bool?eventResult=DoFlowExtEvent();
+                bool? eventResult = DoFlowExtEvent();
                 if (eventResult == null)
                 {
                     return;

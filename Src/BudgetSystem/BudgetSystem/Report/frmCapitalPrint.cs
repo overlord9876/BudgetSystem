@@ -48,11 +48,11 @@ namespace BudgetSystem.Report
             IFormatProvider provider = null;
             if (isReciept)
             {
-                provider = new MyDollarFormat();
+                provider = new MyDecimalFormat();
             }
             else
             {
-                provider = new MyCNYFormat();
+                provider = new MyDecimalFormat();
             }
             //统计银行列。
             for (int index = 0; index < rcList.Count; index++)
