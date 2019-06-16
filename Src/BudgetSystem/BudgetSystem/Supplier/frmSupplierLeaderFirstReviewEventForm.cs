@@ -32,7 +32,7 @@ namespace BudgetSystem
                 reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
                 reviewContents.LeaderResult = result;
                 reviewContents.ResultDate = DateTime.Now;
-                sm.ModifySupplierFirstReviewContents(dataID, reviewContents.ToJson());
+                sm.ModifySupplierFirstReviewContents(dataID, reviewContents);
             }
             catch (Exception ex)
             {

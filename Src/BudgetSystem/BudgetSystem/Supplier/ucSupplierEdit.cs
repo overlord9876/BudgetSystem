@@ -63,18 +63,14 @@ namespace BudgetSystem
 
         void dteRegistrationDate_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.WorkModel == EditFormWorkModels.New
-                || (this.WorkModel == EditFormWorkModels.Modify
-                   && (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)))
+            if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
             {
                 this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(DateTime.Now.Year - this.dteRegistrationDate.DateTime.Year + 1);
             }
         }
         void FirstReviewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.WorkModel == EditFormWorkModels.New
-                || (this.WorkModel == EditFormWorkModels.Modify
-                   && (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)))
+            if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
             {
                 int result = 0; int maxResult = 3;
                 int currentResult = 0;
@@ -135,6 +131,7 @@ namespace BudgetSystem
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
             this.rgResult.SelectedIndex = -1;
+            this.txtSalesman.Text = RunInfo.Instance.CurrentUser.RealName;
             // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
 
         }
@@ -185,12 +182,7 @@ namespace BudgetSystem
                         break;
                     }
                 }
-                if (supplier.SupplierType != (int)EnumSupplierType.合格供方&&supplier.EnumFlowState!= EnumDataFlowState.未审批)
-                {
-                    this.xtraTabControl1.TabPages.Remove(this.xtraTabPage2);
-                    this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                    return;
-                }
+               
                 if (this.WorkModel == EditFormWorkModels.Review)
                 {
                     //初审,供应商类型不允许修改
@@ -198,24 +190,33 @@ namespace BudgetSystem
                     this.BindingFirstReviewDetail(string.Empty);
                     this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
                 }
                 else if (this.WorkModel == EditFormWorkModels.Custom)
                 {   
-                    //年审,除年审信息外其它信息不允许修改
+                    //年审
                     this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     this.BindingReviewHistory(supplier.ID);
                     this.BindingReviewDetail(string.Empty);
                 }
                 else if (this.WorkModel == EditFormWorkModels.View)
                 {                    
-                    if (supplier.EnumFlowState == EnumDataFlowState.未审批)
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    if (supplier.EnumFlowState == EnumDataFlowState.未审批 || string.IsNullOrEmpty(supplier.ReviewContents))
                     {
                         this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                        return;
                     }
-                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    else
+                    {
+                        this.BindingReviewHistory(supplier.ID);
+                        this.BindingReviewDetail(string.Empty);                        
+                    }
+                    
+                }
+                else if (this.WorkModel == EditFormWorkModels.Modify)
+                {
                     if (!string.IsNullOrEmpty(supplier.ReviewContents))
                     {
                         this.BindingReviewHistory(supplier.ID);
@@ -227,15 +228,11 @@ namespace BudgetSystem
                         this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
                     }
-                }
-                else if (this.WorkModel == EditFormWorkModels.Modify)
-                {
-                    this.BindingReviewHistory(supplier.ID);
-                    this.BindingReviewDetail(supplier.ReviewContents);
                     this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     if (supplier.EnumFlowState != EnumDataFlowState.未审批)
                     { 
                         //只要关联有流程则流程审批相关字段不能修改
+                        this.cboSupplierType.Properties.ReadOnly = true;
                         this.txtName.Properties.ReadOnly = true;
                         this.txtTaxpayerID.Properties.ReadOnly = true;
                         this.txtLegal.Properties.ReadOnly = true;
@@ -253,6 +250,7 @@ namespace BudgetSystem
                             }
                         }
                         this.rgResult.Properties.ReadOnly = true;
+                        this.cboSalesmanResult.Properties.ReadOnly = true;
                     }
                 }               
             }
@@ -260,6 +258,10 @@ namespace BudgetSystem
 
         private void InitControlState()
         {
+            if (this.WorkModel == EditFormWorkModels.Default)
+            {
+                return;
+            }
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.lcCreateDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -325,6 +327,7 @@ namespace BudgetSystem
         public bool CheckInputData(bool isStartFlow)
         {
             this.dxErrorProvider1.ClearErrors();
+            bool baseError = false;
             if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 //复审
@@ -417,7 +420,7 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
                 }
-
+                baseError = this.dxErrorProvider1.HasErrors;
                 if(isStartFlow)
                 {
                     foreach (Control control in this.layoutControl2.Controls)
@@ -427,13 +430,28 @@ namespace BudgetSystem
                             this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价", control.Tag));
                         }
                     }
+                    
                     if (rgResult.SelectedIndex == 3)
                     {
                         this.dxErrorProvider1.SetError(this.rgResult, "评价结论为D不能提交审批");
                     }
+                    if (cboSalesmanResult.SelectedIndex == 3)
+                    {
+                        this.dxErrorProvider1.SetError(this.cboSalesmanResult, "初评结论为D不能提交审批");
+                    }
                 }
             }
-           
+            if (this.dxErrorProvider1.HasErrors)
+            {
+                if (baseError)
+                {
+                    this.xtraTabControl1.SelectedTabPageIndex = 0;
+                }
+                else
+                {
+                    this.xtraTabControl1.SelectedTabPageIndex = 1;
+                }
+            }
             return !this.dxErrorProvider1.HasErrors;
         }
 
@@ -530,7 +548,7 @@ namespace BudgetSystem
             else
             {               
                 if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批
-                    || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)
+                    || this.WorkModel  == EditFormWorkModels.Review)
                 {
                     SupplierFirstReviewContents reviewContents = new SupplierFirstReviewContents();
                     reviewContents.Result = this.rgResult.SelectedIndex;
@@ -595,6 +613,16 @@ namespace BudgetSystem
                         cboLeaderResult.SelectedIndex = firstReviewContents.LeaderResult;
                         txtLeader.Text = firstReviewContents.Leader;
                         dteFirstReviewResultDate.EditValue = firstReviewContents.ResultDate;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Control control in this.layoutControl2.Controls)
+                {
+                    if (control is RadioGroup && control.Tag != null)
+                    {
+                        (control as RadioGroup).SelectedIndex = -1;
                     }
                 }
             }

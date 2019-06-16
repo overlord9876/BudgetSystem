@@ -20,6 +20,7 @@ namespace BudgetSystem.Report
         private Dictionary<string, decimal> paymentmethodDic = new Dictionary<string, decimal>();
         private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
         private decimal exchangeRate = 0;
+        private int count = 0;//收钱笔数
         private List<RecieptCapital> rcList;
         private DateTime beginTimestamp = DateTime.MinValue;
         private DateTime endTimestamp = DateTime.MaxValue;
@@ -65,8 +66,11 @@ namespace BudgetSystem.Report
 
             exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
             if (exchangeRate == 0) { return; }
-            rcList = um.GetRecieptCapital(condition);
 
+            count = um.GetRecieptCapitalTotalCount(condition);
+            if (count == 0) { return; }
+
+            rcList = um.GetRecieptCapital(condition);
             if (rcList == null) { return; }
 
             DataTable dt = new DataTable();
@@ -183,6 +187,11 @@ namespace BudgetSystem.Report
             totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
             totalMoneyRow[1] = totalMoney;
 
+            //汇总收款批次
+            DataRow totalCountRow = dt.NewRow();
+            dt.Rows.Add(totalCountRow);
+            totalCountRow[columnDic[frmCapitalReport.DepartmentCaption]] = "汇总收款批次";
+            totalCountRow[1] = count;
 
             this.gridControl.DataSource = dt;
         }
@@ -201,7 +210,7 @@ namespace BudgetSystem.Report
         public override void Print()
         {
             frmCapitalPrint print = new frmCapitalPrint("部门收款明细报表", string.Format("{0}-{1}", beginTimestamp.ToString("yyyy年MM月dd日"), endTimestamp.ToString("yyyy年MM月dd日")), "单位：万美元");
-            print.BindData(exchangeRate, rcList);
+            print.BindData(exchangeRate, rcList, count);
             print.PrintItem();
         }
 

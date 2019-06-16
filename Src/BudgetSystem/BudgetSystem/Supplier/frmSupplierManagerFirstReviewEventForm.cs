@@ -31,7 +31,7 @@ namespace BudgetSystem
                 SupplierFirstReviewContents reviewContents = supplier.FirstReviewContents.ToObjectList<SupplierFirstReviewContents>();
                 reviewContents.Manager = RunInfo.Instance.CurrentUser.RealName;
                 reviewContents.ManagerResult = result;
-                sm.ModifySupplierFirstReviewContents(dataID, reviewContents.ToJson());
+                sm.ModifySupplierFirstReviewContents(dataID, reviewContents);
             }
             catch (Exception ex)
             {

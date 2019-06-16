@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,16 +74,13 @@
             // 
             this.gridSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            gridLevelNode1.RelationName = "Level1";
-            this.gridSupplier.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
             this.gridSupplier.Location = new System.Drawing.Point(0, 0);
             this.gridSupplier.MainView = this.gvSupplier;
             this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridSupplier.Name = "gridSupplier";
             this.gridSupplier.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueSupplierType});
-            this.gridSupplier.Size = new System.Drawing.Size(1097, 672);
+            this.gridSupplier.Size = new System.Drawing.Size(1353, 672);
             this.gridSupplier.TabIndex = 2;
             this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSupplier});
@@ -102,8 +98,8 @@
             this.gcBusinessEffectiveDate,
             this.gcReviewDate,
             this.gcExistsAgentAgreement,
-            this.gcDiscredited,
             this.gcAgreementDate,
+            this.gcDiscredited,
             this.gcCreateDate,
             this.gcCreateUser,
             this.gcDescription,
@@ -133,6 +129,7 @@
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
+            this.gvSupplier.OptionsView.ColumnAutoWidth = false;
             this.gvSupplier.OptionsView.ShowGroupPanel = false;
             // 
             // gcName
@@ -142,7 +139,7 @@
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 0;
-            this.gcName.Width = 77;
+            this.gcName.Width = 183;
             // 
             // gcv纳税人识别号
             // 
@@ -151,7 +148,7 @@
             this.gcv纳税人识别号.Name = "gcv纳税人识别号";
             this.gcv纳税人识别号.Visible = true;
             this.gcv纳税人识别号.VisibleIndex = 1;
-            this.gcv纳税人识别号.Width = 77;
+            this.gcv纳税人识别号.Width = 159;
             // 
             // gcSupplierType
             // 
@@ -161,7 +158,7 @@
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 2;
-            this.gcSupplierType.Width = 77;
+            this.gcSupplierType.Width = 108;
             // 
             // rilueSupplierType
             // 
@@ -177,7 +174,7 @@
             this.gcFlowName.Name = "gcFlowName";
             this.gcFlowName.Visible = true;
             this.gcFlowName.VisibleIndex = 3;
-            this.gcFlowName.Width = 95;
+            this.gcFlowName.Width = 129;
             // 
             // gcFlowState
             // 
@@ -186,7 +183,7 @@
             this.gcFlowState.Name = "gcFlowState";
             this.gcFlowState.Visible = true;
             this.gcFlowState.VisibleIndex = 4;
-            this.gcFlowState.Width = 82;
+            this.gcFlowState.Width = 99;
             // 
             // gcIsQualified
             // 
@@ -195,7 +192,7 @@
             this.gcIsQualified.Name = "gcIsQualified";
             this.gcIsQualified.Visible = true;
             this.gcIsQualified.VisibleIndex = 5;
-            this.gcIsQualified.Width = 74;
+            this.gcIsQualified.Width = 114;
             // 
             // gcRegistrationDate
             // 
@@ -204,7 +201,7 @@
             this.gcRegistrationDate.Name = "gcRegistrationDate";
             this.gcRegistrationDate.Visible = true;
             this.gcRegistrationDate.VisibleIndex = 6;
-            this.gcRegistrationDate.Width = 74;
+            this.gcRegistrationDate.Width = 114;
             // 
             // gcBusinessEffectiveDate
             // 
@@ -213,7 +210,7 @@
             this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 7;
-            this.gcBusinessEffectiveDate.Width = 74;
+            this.gcBusinessEffectiveDate.Width = 117;
             // 
             // gcReviewDate
             // 
@@ -225,12 +222,12 @@
             // 
             // gcExistsAgentAgreement
             // 
-            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
+            this.gcExistsAgentAgreement.Caption = "存在代理协议";
             this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
             this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
             this.gcExistsAgentAgreement.Visible = true;
             this.gcExistsAgentAgreement.VisibleIndex = 9;
-            this.gcExistsAgentAgreement.Width = 74;
+            this.gcExistsAgentAgreement.Width = 102;
             // 
             // gcDiscredited
             // 
@@ -238,8 +235,8 @@
             this.gcDiscredited.FieldName = "Discredited";
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 10;
-            this.gcDiscredited.Width = 74;
+            this.gcDiscredited.VisibleIndex = 11;
+            this.gcDiscredited.Width = 107;
             // 
             // gcAgreementDate
             // 
@@ -247,8 +244,8 @@
             this.gcAgreementDate.FieldName = "AgreementDate";
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
-            this.gcAgreementDate.VisibleIndex = 11;
-            this.gcAgreementDate.Width = 74;
+            this.gcAgreementDate.VisibleIndex = 10;
+            this.gcAgreementDate.Width = 80;
             // 
             // gcCreateDate
             // 
@@ -259,7 +256,7 @@
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 12;
-            this.gcCreateDate.Width = 74;
+            this.gcCreateDate.Width = 80;
             // 
             // gcCreateUser
             // 
@@ -268,7 +265,7 @@
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
             this.gcCreateUser.VisibleIndex = 13;
-            this.gcCreateUser.Width = 74;
+            this.gcCreateUser.Width = 80;
             // 
             // gcDescription
             // 
@@ -277,13 +274,13 @@
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 14;
-            this.gcDescription.Width = 79;
+            this.gcDescription.Width = 80;
             // 
             // frmSupplierQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 672);
+            this.ClientSize = new System.Drawing.Size(1353, 672);
             this.Controls.Add(this.gridSupplier);
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "frmSupplierQuery";

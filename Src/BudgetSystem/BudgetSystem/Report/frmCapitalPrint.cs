@@ -36,7 +36,7 @@ namespace BudgetSystem.Report
             layoutControlItem3.Text = unitName;
         }
 
-        public void BindData(decimal exchangeRate, List<RecieptCapital> rcList, bool isReciept = true)
+        public void BindData(decimal exchangeRate, List<RecieptCapital> rcList, int count, bool isReciept = true)
         {
             this.isReciept = isReciept;
             if (rcList == null) { return; }
@@ -171,6 +171,12 @@ namespace BudgetSystem.Report
             dt.Rows.Add(totalMoneyRow);
             totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
             totalMoneyRow[1] = totalMoney;
+
+            //总批次
+            DataRow totalCountRow = dt.NewRow();
+            dt.Rows.Add(totalCountRow);
+            totalCountRow[columnDic[frmCapitalReport.DepartmentCaption]] = isReciept ? "汇总收款批次" : "汇总付款批次";
+            totalCountRow[1] = count;
 
             this.gridControl.DataSource = dt;
         }

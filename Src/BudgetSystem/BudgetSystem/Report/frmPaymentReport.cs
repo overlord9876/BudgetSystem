@@ -22,6 +22,7 @@ namespace BudgetSystem.Report
         private List<RecieptCapital> rcList;
         private DateTime beginTimestamp = DateTime.MinValue;
         private DateTime endTimestamp = DateTime.MaxValue;
+        private int count = 0;//付款笔数
 
         public frmPaymentReport()
         {
@@ -59,8 +60,11 @@ namespace BudgetSystem.Report
 
             base.ClearColumns();
 
-            var lst = um.GetPayementCapital(condition);
-            rcList = um.GetRecieptCapital(condition);
+            count = um.GetPaymentCapitalTotalCount(condition);
+
+            if (count == 0) { return; }
+
+            rcList = um.GetPaymentCapital(condition);
 
             if (rcList == null) { return; }
 
@@ -75,11 +79,12 @@ namespace BudgetSystem.Report
                 RecieptCapital rc = rcList[index];
 
                 rc.OriginalCoin = rc.CNY;
-                if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
-                {
-                    paymentmethodDic.Add(rc.PaymentMethod, 0);
-                }
-                paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
+               
+                //if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
+                //{
+                //    paymentmethodDic.Add(rc.PaymentMethod, 0);
+                //}
+                //paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
 
                 //银行总数合计
                 if (!bankDic.ContainsKey(rc.BankCode))
@@ -172,6 +177,12 @@ namespace BudgetSystem.Report
             totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
             totalMoneyRow[1] = totalMoney;
 
+            //汇总付款批次
+            DataRow totalCountRow = dt.NewRow();
+            dt.Rows.Add(totalCountRow);
+            totalCountRow[columnDic[frmCapitalReport.DepartmentCaption]] = "汇总付款批次";
+            totalCountRow[1] = count;
+
             this.gridControl.DataSource = dt;
         }
 
@@ -190,7 +201,7 @@ namespace BudgetSystem.Report
         public override void Print()
         {
             frmCapitalPrint print = new frmCapitalPrint("部门付款明细报表", string.Format("{0}-{1}", beginTimestamp.ToString("yyyy年MM月dd日"), endTimestamp.ToString("yyyy年MM月dd日")), "单位：元");
-            print.BindData(1, rcList, false);
+            print.BindData(1, rcList, count, false);
             print.PrintItem();
         }
     }

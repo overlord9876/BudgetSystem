@@ -63,11 +63,24 @@ namespace BudgetSystem.Bll
                 dal.ModifySupplier(supplier, con, tran);
             });
         }
-        public void ModifySupplierFirstReviewContents(int id, string firstReviewContents)
+        public void ModifySupplierFirstReviewContents(int id, SupplierFirstReviewContents firstReviewContents)
         {
             this.ExecuteWithTransaction((con, tran) =>
            {
-               dal.ModifySupplierFirstReviewContents(id, firstReviewContents, con, tran);
+               if (firstReviewContents.ResultDate != null)
+               {
+                   Supplier supplier = GetSupplier(id);
+                   supplier.FirstReviewContents = firstReviewContents.ToJson();
+                   if (firstReviewContents.LeaderResult != 3)
+                   {
+                       supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
+                   }
+                   dal.ModifySupplier(supplier, con, tran);
+               }
+               else
+               {
+                   dal.ModifySupplierFirstReviewContents(id, firstReviewContents.ToJson(), con, tran);
+               }
            });
         }
 

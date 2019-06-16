@@ -34,7 +34,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交审批"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交初评审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Approve, "提交复评审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看复评历史记录"));
@@ -157,24 +157,24 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 提交审批（初评）
+        /// 提交初评审批（初评）
         /// </summary>
         private void CommitSupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
             {
-                //提交审批需要满足的条件
+                //提交初评审批需要满足的条件
                 //1、是合格供方 
                 //2、当前流程状态为非审批中
                 if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
                 {
-                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交审批。", EnumSupplierType.合格供方));
+                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交初评审批。", EnumSupplierType.合格供方));
                     return;
                 }
                 if (supplier.EnumFlowState == EnumDataFlowState.审批中)
                 {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交审批。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交初评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
                     return;
                 }
 
@@ -188,7 +188,7 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("请选择需要提交审批的项");
+                XtraMessageBox.Show("请选择需要提交初评审批的项");
             }
         }
         /// <summary>

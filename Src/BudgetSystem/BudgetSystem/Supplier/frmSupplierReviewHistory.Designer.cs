@@ -44,6 +44,7 @@
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcManager = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLeader = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcLeaderResult = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             this.SuspendLayout();
@@ -77,13 +78,15 @@
             this.gcDiscredited,
             this.gcSalesman,
             this.gcManager,
-            this.gcLeader});
+            this.gcLeader,
+            this.gcLeaderResult});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
             this.gvSupplier.OptionsCustomization.AllowSort = false;
             this.gvSupplier.OptionsDetail.SmartDetailExpand = false;
+            this.gvSupplier.OptionsView.ColumnAutoWidth = false;
             this.gvSupplier.OptionsView.ShowGroupPanel = false;
             // 
             // gcRegistrationDate
@@ -93,7 +96,7 @@
             this.gcRegistrationDate.Name = "gcRegistrationDate";
             this.gcRegistrationDate.Visible = true;
             this.gcRegistrationDate.VisibleIndex = 0;
-            this.gcRegistrationDate.Width = 85;
+            this.gcRegistrationDate.Width = 99;
             // 
             // gcBusinessEffectiveDate
             // 
@@ -111,7 +114,7 @@
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
             this.gcAgreementDate.VisibleIndex = 2;
-            this.gcAgreementDate.Width = 73;
+            this.gcAgreementDate.Width = 94;
             // 
             // gcResultDate
             // 
@@ -120,7 +123,7 @@
             this.gcResultDate.Name = "gcResultDate";
             this.gcResultDate.Visible = true;
             this.gcResultDate.VisibleIndex = 3;
-            this.gcResultDate.Width = 70;
+            this.gcResultDate.Width = 106;
             // 
             // gcTotalBatch
             // 
@@ -129,7 +132,7 @@
             this.gcTotalBatch.Name = "gcTotalBatch";
             this.gcTotalBatch.Visible = true;
             this.gcTotalBatch.VisibleIndex = 4;
-            this.gcTotalBatch.Width = 74;
+            this.gcTotalBatch.Width = 61;
             // 
             // gcPassedBatch
             // 
@@ -147,7 +150,7 @@
             this.gcRejectedBatch.Name = "gcRejectedBatch";
             this.gcRejectedBatch.Visible = true;
             this.gcRejectedBatch.VisibleIndex = 6;
-            this.gcRejectedBatch.Width = 79;
+            this.gcRejectedBatch.Width = 98;
             // 
             // gcRectificationBatch
             // 
@@ -165,7 +168,7 @@
             this.gcRectificationPassedBatch.Name = "gcRectificationPassedBatch";
             this.gcRectificationPassedBatch.Visible = true;
             this.gcRectificationPassedBatch.VisibleIndex = 8;
-            this.gcRectificationPassedBatch.Width = 62;
+            this.gcRectificationPassedBatch.Width = 104;
             // 
             // gcRectificationResult
             // 
@@ -174,7 +177,7 @@
             this.gcRectificationResult.Name = "gcRectificationResult";
             this.gcRectificationResult.Visible = true;
             this.gcRectificationResult.VisibleIndex = 9;
-            this.gcRectificationResult.Width = 108;
+            this.gcRectificationResult.Width = 80;
             // 
             // gcDiscredited
             // 
@@ -183,7 +186,7 @@
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
             this.gcDiscredited.VisibleIndex = 10;
-            this.gcDiscredited.Width = 44;
+            this.gcDiscredited.Width = 83;
             // 
             // gcSalesman
             // 
@@ -192,7 +195,7 @@
             this.gcSalesman.Name = "gcSalesman";
             this.gcSalesman.Visible = true;
             this.gcSalesman.VisibleIndex = 11;
-            this.gcSalesman.Width = 34;
+            this.gcSalesman.Width = 82;
             // 
             // gcManager
             // 
@@ -201,7 +204,7 @@
             this.gcManager.Name = "gcManager";
             this.gcManager.Visible = true;
             this.gcManager.VisibleIndex = 13;
-            this.gcManager.Width = 72;
+            this.gcManager.Width = 80;
             // 
             // gcLeader
             // 
@@ -210,7 +213,16 @@
             this.gcLeader.Name = "gcLeader";
             this.gcLeader.Visible = true;
             this.gcLeader.VisibleIndex = 12;
-            this.gcLeader.Width = 26;
+            this.gcLeader.Width = 80;
+            // 
+            // gcLeaderResult
+            // 
+            this.gcLeaderResult.Caption = "审批通过";
+            this.gcLeaderResult.FieldName = "LeaderResult";
+            this.gcLeaderResult.Name = "gcLeaderResult";
+            this.gcLeaderResult.Visible = true;
+            this.gcLeaderResult.VisibleIndex = 14;
+            this.gcLeaderResult.Width = 80;
             // 
             // frmSupplierReviewHistory
             // 
@@ -246,6 +258,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
         private DevExpress.XtraGrid.Columns.GridColumn gcManager;
         private DevExpress.XtraGrid.Columns.GridColumn gcLeader;
+        private DevExpress.XtraGrid.Columns.GridColumn gcLeaderResult;
 
     }
 }

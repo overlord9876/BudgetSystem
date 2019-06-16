@@ -199,7 +199,9 @@
     <Compile Include="Base\frmCustomQueryEditor.Designer.cs">
       <DependentUpon>frmCustomQueryEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base\frmDescription.cs" />
+    <Compile Include="Base\frmDescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Base\frmDescription.Designer.cs">
       <DependentUpon>frmDescription.cs</DependentUpon>
     </Compile>

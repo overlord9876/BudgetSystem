@@ -46,6 +46,7 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 this.btnSubmit.Enabled = false;
+                this.btnSure.Enabled = false;
                 this.Text = "查看供应商信息";
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)

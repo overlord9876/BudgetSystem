@@ -48,7 +48,7 @@ namespace BudgetSystem.Bll
 
             return lst.ToList();
         }
-        
+
         public List<RecieptCapital> GetRecieptCapital(BudgetQueryCondition condition)
         {
             var lst = this.Query<RecieptCapital>((con) =>
@@ -60,11 +60,11 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<RecieptCapital> GetPayementCapital(BudgetQueryCondition condition)
+        public List<RecieptCapital> GetPaymentCapital(BudgetQueryCondition condition)
         {
             var lst = this.Query<RecieptCapital>((con) =>
             {
-                var uList = dal.GetPayementCapital(condition, con);
+                var uList = dal.GetPaymentCapital(condition, con);
                 return uList;
             });
 
@@ -78,5 +78,22 @@ namespace BudgetSystem.Bll
                     return dal.GetAverageUSDExchange(condition, con);
                 });
         }
+
+        public int GetPaymentCapitalTotalCount(BudgetQueryCondition condition)
+        {
+            return this.Query<int>((con) =>
+            {
+                return dal.GetPaymentCapitalTotalCount(condition, con);
+            });
+        }
+
+        public int GetRecieptCapitalTotalCount(BudgetQueryCondition condition)
+        {
+            return this.Query<int>((con) =>
+            {
+                return dal.GetRecieptCapitalTotalCount(condition, con);
+            });
+        }
+
     }
 }

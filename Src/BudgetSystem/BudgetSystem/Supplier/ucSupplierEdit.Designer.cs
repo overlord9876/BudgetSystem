@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.chkExistsLicenseCopy = new DevExpress.XtraEditors.CheckEdit();
             this.gridBankInfoDetail = new DevExpress.XtraGrid.GridControl();
@@ -87,7 +86,7 @@
             this.lcTell = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
@@ -199,6 +198,7 @@
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcManager = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcLeader = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcLeaderResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -387,11 +387,11 @@
             // 
             // chkExistsLicenseCopy
             // 
-            this.chkExistsLicenseCopy.Location = new System.Drawing.Point(694, 60);
+            this.chkExistsLicenseCopy.Location = new System.Drawing.Point(669, 60);
             this.chkExistsLicenseCopy.Margin = new System.Windows.Forms.Padding(4);
             this.chkExistsLicenseCopy.Name = "chkExistsLicenseCopy";
             this.chkExistsLicenseCopy.Properties.Caption = "营业执照复印件";
-            this.chkExistsLicenseCopy.Size = new System.Drawing.Size(190, 23);
+            this.chkExistsLicenseCopy.Size = new System.Drawing.Size(170, 23);
             this.chkExistsLicenseCopy.StyleController = this.layoutControl1;
             this.chkExistsLicenseCopy.TabIndex = 38;
             // 
@@ -402,7 +402,7 @@
             this.gridBankInfoDetail.MainView = this.gvBankInfoDetail;
             this.gridBankInfoDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridBankInfoDetail.Name = "gridBankInfoDetail";
-            this.gridBankInfoDetail.Size = new System.Drawing.Size(983, 262);
+            this.gridBankInfoDetail.Size = new System.Drawing.Size(983, 264);
             this.gridBankInfoDetail.TabIndex = 37;
             this.gridBankInfoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBankInfoDetail});
@@ -464,7 +464,7 @@
             // 
             // txtUpdateUser
             // 
-            this.txtUpdateUser.Location = new System.Drawing.Point(634, 593);
+            this.txtUpdateUser.Location = new System.Drawing.Point(634, 595);
             this.txtUpdateUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUpdateUser.Name = "txtUpdateUser";
             this.txtUpdateUser.Properties.ReadOnly = true;
@@ -474,7 +474,7 @@
             // 
             // txtUpdateDate
             // 
-            this.txtUpdateDate.Location = new System.Drawing.Point(125, 593);
+            this.txtUpdateDate.Location = new System.Drawing.Point(125, 595);
             this.txtUpdateDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUpdateDate.Name = "txtUpdateDate";
             this.txtUpdateDate.Properties.ReadOnly = true;
@@ -530,27 +530,27 @@
             this.chkExistsAgentAgreement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkExistsAgentAgreement.Name = "chkExistsAgentAgreement";
             this.chkExistsAgentAgreement.Properties.Caption = "代理协议书";
-            this.chkExistsAgentAgreement.Size = new System.Drawing.Size(179, 23);
+            this.chkExistsAgentAgreement.Size = new System.Drawing.Size(154, 23);
             this.chkExistsAgentAgreement.StyleController = this.layoutControl1;
             this.chkExistsAgentAgreement.TabIndex = 20;
             // 
             // chkDiscredited
             // 
-            this.chkDiscredited.Location = new System.Drawing.Point(888, 60);
+            this.chkDiscredited.Location = new System.Drawing.Point(843, 60);
             this.chkDiscredited.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkDiscredited.Name = "chkDiscredited";
             this.chkDiscredited.Properties.Caption = "经营异常企业";
-            this.chkDiscredited.Size = new System.Drawing.Size(128, 23);
+            this.chkDiscredited.Size = new System.Drawing.Size(173, 23);
             this.chkDiscredited.StyleController = this.layoutControl1;
             this.chkDiscredited.TabIndex = 19;
             // 
             // meDescription
             // 
-            this.meDescription.Location = new System.Drawing.Point(125, 622);
+            this.meDescription.Location = new System.Drawing.Point(125, 624);
             this.meDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.meDescription.Name = "meDescription";
             this.meDescription.Properties.MaxLength = 1024;
-            this.meDescription.Size = new System.Drawing.Size(891, 95);
+            this.meDescription.Size = new System.Drawing.Size(891, 93);
             this.meDescription.StyleController = this.layoutControl1;
             this.meDescription.TabIndex = 16;
             // 
@@ -639,7 +639,7 @@
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(634, 564);
+            this.txtCreateUser.Location = new System.Drawing.Point(634, 566);
             this.txtCreateUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Properties.ReadOnly = true;
@@ -649,7 +649,7 @@
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(125, 564);
+            this.txtCreateDate.Location = new System.Drawing.Point(125, 566);
             this.txtCreateDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Properties.ReadOnly = true;
@@ -769,7 +769,7 @@
             // 
             this.lcCreateDate.Control = this.txtCreateDate;
             this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(0, 562);
+            this.lcCreateDate.Location = new System.Drawing.Point(0, 564);
             this.lcCreateDate.Name = "lcCreateDate";
             this.lcCreateDate.Size = new System.Drawing.Size(509, 29);
             this.lcCreateDate.Text = "创建时间：";
@@ -779,7 +779,7 @@
             // 
             this.lcCreateUser.Control = this.txtCreateUser;
             this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(509, 562);
+            this.lcCreateUser.Location = new System.Drawing.Point(509, 564);
             this.lcCreateUser.Name = "lcCreateUser";
             this.lcCreateUser.Size = new System.Drawing.Size(509, 29);
             this.lcCreateUser.Text = "创建人：";
@@ -859,9 +859,9 @@
             // 
             this.lcDescription.Control = this.meDescription;
             this.lcDescription.CustomizationFormText = "备注：";
-            this.lcDescription.Location = new System.Drawing.Point(0, 620);
+            this.lcDescription.Location = new System.Drawing.Point(0, 622);
             this.lcDescription.Name = "lcDescription";
-            this.lcDescription.Size = new System.Drawing.Size(1018, 99);
+            this.lcDescription.Size = new System.Drawing.Size(1018, 97);
             this.lcDescription.Text = "备注：";
             this.lcDescription.TextSize = new System.Drawing.Size(120, 18);
             // 
@@ -881,7 +881,7 @@
             this.layoutControlItem4.CustomizationFormText = "代理协议书";
             this.layoutControlItem4.Location = new System.Drawing.Point(509, 58);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(183, 29);
+            this.layoutControlItem4.Size = new System.Drawing.Size(158, 29);
             this.layoutControlItem4.Text = "代理协议书";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -901,9 +901,9 @@
             // 
             this.layoutControlItem3.Control = this.chkDiscredited;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(886, 58);
+            this.layoutControlItem3.Location = new System.Drawing.Point(841, 58);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(132, 29);
+            this.layoutControlItem3.Size = new System.Drawing.Size(177, 29);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -923,7 +923,7 @@
             // 
             this.lcUpdateDate.Control = this.txtUpdateDate;
             this.lcUpdateDate.CustomizationFormText = "修改时间：";
-            this.lcUpdateDate.Location = new System.Drawing.Point(0, 591);
+            this.lcUpdateDate.Location = new System.Drawing.Point(0, 593);
             this.lcUpdateDate.Name = "lcUpdateDate";
             this.lcUpdateDate.Size = new System.Drawing.Size(509, 29);
             this.lcUpdateDate.Text = "修改时间：";
@@ -933,7 +933,7 @@
             // 
             this.lcUpdateUser.Control = this.txtUpdateUser;
             this.lcUpdateUser.CustomizationFormText = "修改人：";
-            this.lcUpdateUser.Location = new System.Drawing.Point(509, 591);
+            this.lcUpdateUser.Location = new System.Drawing.Point(509, 593);
             this.lcUpdateUser.Name = "lcUpdateUser";
             this.lcUpdateUser.Size = new System.Drawing.Size(509, 29);
             this.lcUpdateUser.Text = "修改人：";
@@ -967,7 +967,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 290);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1018, 272);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1018, 274);
             this.layoutControlGroup2.Text = "银行账号";
             this.layoutControlGroup2.TextLocation = DevExpress.Utils.Locations.Left;
             // 
@@ -977,7 +977,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(987, 266);
+            this.layoutControlItem8.Size = new System.Drawing.Size(987, 268);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -987,9 +987,9 @@
             // 
             this.layoutControlItem15.Control = this.chkExistsLicenseCopy;
             this.layoutControlItem15.CustomizationFormText = "营业执照复印件";
-            this.layoutControlItem15.Location = new System.Drawing.Point(692, 58);
+            this.layoutControlItem15.Location = new System.Drawing.Point(667, 58);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(194, 29);
+            this.layoutControlItem15.Size = new System.Drawing.Size(174, 29);
             this.layoutControlItem15.Text = "营业执照复印件";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextToControlDistance = 0;
@@ -1109,6 +1109,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "B"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "C"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "D")});
+            this.rgResult.Properties.ReadOnly = true;
             this.rgResult.Size = new System.Drawing.Size(885, 25);
             this.rgResult.StyleController = this.layoutControl2;
             this.rgResult.TabIndex = 38;
@@ -1790,7 +1791,6 @@
             "B",
             "C",
             "D"});
-            this.cboSalesmanResult.Properties.ReadOnly = true;
             this.cboSalesmanResult.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboSalesmanResult.Size = new System.Drawing.Size(75, 25);
             this.cboSalesmanResult.StyleController = this.layoutControl2;
@@ -2333,13 +2333,15 @@
             this.gcDiscredited,
             this.gcSalesman,
             this.gcManager,
-            this.gcLeader});
+            this.gcLeader,
+            this.gcLeaderResult});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
             this.gvSupplier.OptionsCustomization.AllowSort = false;
             this.gvSupplier.OptionsDetail.SmartDetailExpand = false;
+            this.gvSupplier.OptionsView.ColumnAutoWidth = false;
             this.gvSupplier.OptionsView.ShowGroupPanel = false;
             // 
             // gcRegistrationDate
@@ -2358,7 +2360,7 @@
             this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 1;
-            this.gcBusinessEffectiveDate.Width = 184;
+            this.gcBusinessEffectiveDate.Width = 108;
             // 
             // gcAgreementDate
             // 
@@ -2367,7 +2369,7 @@
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
             this.gcAgreementDate.VisibleIndex = 2;
-            this.gcAgreementDate.Width = 82;
+            this.gcAgreementDate.Width = 103;
             // 
             // gcResultDate
             // 
@@ -2376,7 +2378,7 @@
             this.gcResultDate.Name = "gcResultDate";
             this.gcResultDate.Visible = true;
             this.gcResultDate.VisibleIndex = 3;
-            this.gcResultDate.Width = 78;
+            this.gcResultDate.Width = 104;
             // 
             // gcTotalBatch
             // 
@@ -2385,7 +2387,7 @@
             this.gcTotalBatch.Name = "gcTotalBatch";
             this.gcTotalBatch.Visible = true;
             this.gcTotalBatch.VisibleIndex = 4;
-            this.gcTotalBatch.Width = 83;
+            this.gcTotalBatch.Width = 70;
             // 
             // gcPassedBatch
             // 
@@ -2394,7 +2396,6 @@
             this.gcPassedBatch.Name = "gcPassedBatch";
             this.gcPassedBatch.Visible = true;
             this.gcPassedBatch.VisibleIndex = 5;
-            this.gcPassedBatch.Width = 92;
             // 
             // gcRejectedBatch
             // 
@@ -2421,7 +2422,7 @@
             this.gcRectificationPassedBatch.Name = "gcRectificationPassedBatch";
             this.gcRectificationPassedBatch.Visible = true;
             this.gcRectificationPassedBatch.VisibleIndex = 8;
-            this.gcRectificationPassedBatch.Width = 70;
+            this.gcRectificationPassedBatch.Width = 98;
             // 
             // gcRectificationResult
             // 
@@ -2430,7 +2431,7 @@
             this.gcRectificationResult.Name = "gcRectificationResult";
             this.gcRectificationResult.Visible = true;
             this.gcRectificationResult.VisibleIndex = 9;
-            this.gcRectificationResult.Width = 120;
+            this.gcRectificationResult.Width = 78;
             // 
             // gcDiscredited
             // 
@@ -2439,7 +2440,7 @@
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
             this.gcDiscredited.VisibleIndex = 10;
-            this.gcDiscredited.Width = 51;
+            this.gcDiscredited.Width = 74;
             // 
             // gcSalesman
             // 
@@ -2448,7 +2449,7 @@
             this.gcSalesman.Name = "gcSalesman";
             this.gcSalesman.Visible = true;
             this.gcSalesman.VisibleIndex = 11;
-            this.gcSalesman.Width = 39;
+            this.gcSalesman.Width = 80;
             // 
             // gcManager
             // 
@@ -2457,7 +2458,7 @@
             this.gcManager.Name = "gcManager";
             this.gcManager.Visible = true;
             this.gcManager.VisibleIndex = 13;
-            this.gcManager.Width = 59;
+            this.gcManager.Width = 80;
             // 
             // gcLeader
             // 
@@ -2466,7 +2467,16 @@
             this.gcLeader.Name = "gcLeader";
             this.gcLeader.Visible = true;
             this.gcLeader.VisibleIndex = 12;
-            this.gcLeader.Width = 31;
+            this.gcLeader.Width = 80;
+            // 
+            // gcLeaderResult
+            // 
+            this.gcLeaderResult.Caption = "评审通过";
+            this.gcLeaderResult.FieldName = "LeaderResult";
+            this.gcLeaderResult.Name = "gcLeaderResult";
+            this.gcLeaderResult.Visible = true;
+            this.gcLeaderResult.VisibleIndex = 14;
+            this.gcLeaderResult.Width = 80;
             // 
             // layoutControlItem24
             // 
@@ -2837,7 +2847,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
         private DevExpress.XtraGrid.Columns.GridColumn gcManager;
-        private DevExpress.XtraGrid.Columns.GridColumn gcLeader; 
+        private DevExpress.XtraGrid.Columns.GridColumn gcLeader;
+        private DevExpress.XtraGrid.Columns.GridColumn gcLeaderResult; 
       
 
     }
