@@ -308,7 +308,7 @@ namespace BudgetSystem
                         XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                         return;
                     }
-                    frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
+                    frmDescription frmBudget = new frmDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
@@ -349,7 +349,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单{1}，不允许删除。", budget.ContractNO, (EnumBudgetState)budget.State));
                     return;
                 }
-                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription("填写申请删除说明", "删除说明");
+                frmDescription frmBudget = new frmDescription("填写申请删除说明", "删除说明");
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);

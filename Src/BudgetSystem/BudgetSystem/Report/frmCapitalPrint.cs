@@ -5,87 +5,74 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Columns;
+using System.Linq;
+using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
-using DevExpress.XtraPivotGrid;
+using BudgetSystem.Bll;
+using Newtonsoft.Json;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.Utils;
-using BudgetSystem.Entity.QueryCondition;
-using System.IO;
 
 namespace BudgetSystem.Report
 {
-    public partial class frmCapitalReport : Base.frmBaseCommonReportForm
+    public partial class frmCapitalPrint : frmBaseDialogForm
     {
+        private bool isReciept = false;
         private Dictionary<string, string> columnDic = new Dictionary<string, string>();
         private Dictionary<string, decimal> paymentmethodDic = new Dictionary<string, decimal>();
         private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
-        private decimal exchangeRate = 0;
-        private List<RecieptCapital> rcList;
-        private DateTime beginTimestamp = DateTime.MinValue;
-        private DateTime endTimestamp = DateTime.MaxValue;
 
-        public frmCapitalReport()
+        private frmCapitalPrint()
         {
             InitializeComponent();
-            this.Module = BusinessModules.RecieptCapital;
         }
 
-        protected override void InitLayout()
+        public frmCapitalPrint(string title, string timestamp, string unitName)
+            : this()
         {
-            base.InitModelOperate();
+            this.Text = title;
+            labelControl2.Text = title;
+            labelControl4.Text = timestamp;
+            layoutControlItem3.Text = unitName;
         }
 
-        protected override void InitModelOperate()
+        public void BindData(decimal exchangeRate, List<RecieptCapital> rcList, bool isReciept = true)
         {
-            this.supportPivotGrid = false;
-            this.supportPivotGridSaveView = false;
-            base.supportPrint = true;
-        }
-
-        public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
-        {
-            base.OperateHandled(operate, e);
-        }
-
-        private void frmBudgetReport_Load(object sender, EventArgs e)
-        {
-            InitShowStyle();
-        }
-
-        public const string DepartmentCaption = "部门";
-        public const string TotalCaption = "合计";
-
-        protected override void LoadDataByCondition(BudgetQueryCondition condition)
-        {
-            beginTimestamp = condition.BeginTimestamp;
-            endTimestamp = condition.EndTimestamp;
-            Bll.ReportManager um = new Bll.ReportManager();
-
-            base.ClearColumns();
-
-            exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
-            if (exchangeRate == 0) { return; }
-            rcList = um.GetRecieptCapital(condition);
-
+            this.isReciept = isReciept;
             if (rcList == null) { return; }
 
             DataTable dt = new DataTable();
 
             //增加部门、合计列
             CreateColumn(dt, frmCapitalReport.DepartmentCaption, "departmentCode", typeof(string));
-
+            IFormatProvider provider = null;
+            if (isReciept)
+            {
+                provider = new MyDollarFormat();
+            }
+            else
+            {
+                provider = new MyCNYFormat();
+            }
             //统计银行列。
             for (int index = 0; index < rcList.Count; index++)
             {
                 RecieptCapital rc = rcList[index];
 
-                rc.OriginalCoin = Math.Round(rc.CNY / exchangeRate, 2);
-                if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
+                if (isReciept && !string.IsNullOrEmpty(rc.PaymentMethod))//如果是收款、并且支付方式不为空。
                 {
-                    paymentmethodDic.Add(rc.PaymentMethod, 0);
+                    rc.OriginalCoin = Math.Round(rc.CNY / exchangeRate, 2);
+                    if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
+                    {
+                        paymentmethodDic.Add(rc.PaymentMethod, 0);
+                    }
+                    paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
                 }
-                paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
-
+                else
+                {
+                    //付款。
+                    rc.OriginalCoin = rc.CNY;
+                }
                 //银行总数合计
                 if (!bankDic.ContainsKey(rc.BankCode))
                 {
@@ -102,12 +89,12 @@ namespace BudgetSystem.Report
                 //创建银行列
                 if (!dt.Columns.Contains(columnDic[rc.BankCode]))
                 {
-                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: provider);
                     dt.Columns.Add(columnDic[rc.BankCode], typeof(decimal));
                 }
             }
 
-            CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: provider);
 
             //行列数据转换
             foreach (RecieptCapital rc in rcList)
@@ -161,21 +148,23 @@ namespace BudgetSystem.Report
                 }
                 row[columnDic[frmCapitalReport.TotalCaption]] = rowTotal;
             }
-
-            //付款方式合计
-            foreach (string paymentMethod in paymentmethodDic.Keys)
+            if (isReciept)
             {
-                DataRow paymentMethodRow = dt.NewRow();
-                dt.Rows.Add(paymentMethodRow);
-                paymentMethodRow[0] = paymentMethod;
-                paymentMethodRow[1] = paymentmethodDic[paymentMethod];
-            }
+                //付款方式合计
+                foreach (string paymentMethod in paymentmethodDic.Keys)
+                {
+                    DataRow paymentMethodRow = dt.NewRow();
+                    dt.Rows.Add(paymentMethodRow);
+                    paymentMethodRow[0] = paymentMethod;
+                    paymentMethodRow[1] = paymentmethodDic[paymentMethod];
+                }
 
-            //平均汇率
-            DataRow exchangeRateRow = dt.NewRow();
-            dt.Rows.Add(exchangeRateRow);
-            exchangeRateRow[columnDic[frmCapitalReport.DepartmentCaption]] = "平均汇率";
-            exchangeRateRow[1] = exchangeRate;
+                //平均汇率
+                DataRow exchangeRateRow = dt.NewRow();
+                dt.Rows.Add(exchangeRateRow);
+                exchangeRateRow[columnDic[frmCapitalReport.DepartmentCaption]] = "平均汇率";
+                exchangeRateRow[1] = exchangeRate;
+            }
 
             //合计总数
             DataRow totalMoneyRow = dt.NewRow();
@@ -183,9 +172,14 @@ namespace BudgetSystem.Report
             totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
             totalMoneyRow[1] = totalMoney;
 
-
             this.gridControl.DataSource = dt;
         }
+
+        private void frmCapitalPrint_Load(object sender, EventArgs e)
+        {
+        }
+
+        int i;
 
         private void CreateColumn(DataTable dt, string caption, string fieldName, Type t, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
         {
@@ -198,12 +192,42 @@ namespace BudgetSystem.Report
             CreateGridColumn(caption, fieldName, valueFormatType: valueFormatType, formatProvider: formatProvider);
         }
 
-        public override void Print()
+        private GridColumn CreateGridColumn(string caption, string fieldName, int width = 0, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
         {
-            frmCapitalPrint print = new frmCapitalPrint("部门收款明细报表", string.Format("{0}-{1}", beginTimestamp.ToString("yyyy年MM月dd日"), endTimestamp.ToString("yyyy年MM月dd日")), "单位：万美元");
-            print.BindData(exchangeRate, rcList);
-            print.PrintItem();
+            GridColumn gc = new GridColumn();
+            gc.Name = caption;
+            gc.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
+            gc.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
+            gc.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+            gc.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gc.Caption = caption;
+            gc.FieldName = fieldName;
+            gc.DisplayFormat.FormatType = valueFormatType;
+            if (valueFormatType == FormatType.Custom)
+            {
+                gc.DisplayFormat.Format = formatProvider;
+                gc.DisplayFormat.FormatType = valueFormatType;
+                gc.DisplayFormat.Format = formatProvider;
+            }
+            else
+            {
+                gc.DisplayFormat.FormatString = valueFormatString;
+            }
+            if (width > 0)
+            {
+                gc.Width = width;
+            }
+            gc.Visible = true;
+            gc.VisibleIndex = i++;
+            this.gridView.Columns.Add(gc);
+            return gc;
         }
 
+        public override void PrintData()
+        {
+            this.Height -= 50;
+            this.labelControl1.Focus();
+            PrinterHelper.PrintControl(true, this.layoutControl2, true);
+        }
     }
 }

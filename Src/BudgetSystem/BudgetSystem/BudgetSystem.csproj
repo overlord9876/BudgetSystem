@@ -199,6 +199,10 @@
     <Compile Include="Base\frmCustomQueryEditor.Designer.cs">
       <DependentUpon>frmCustomQueryEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmDescription.cs" />
+    <Compile Include="Base\frmDescription.Designer.cs">
+      <DependentUpon>frmDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -380,6 +384,12 @@
     </Compile>
     <Compile Include="Report\frmBudgetReport.Designer.cs">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmCapitalPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmCapitalPrint.Designer.cs">
+      <DependentUpon>frmCapitalPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\frmSalemenReport.cs">
       <SubType>Form</SubType>
@@ -744,6 +754,9 @@
     <EmbeddedResource Include="Base\frmCustomQueryEditor.resx">
       <DependentUpon>frmCustomQueryEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmDescription.resx">
+      <DependentUpon>frmDescription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmInput.resx">
       <DependentUpon>frmInput.cs</DependentUpon>
     </EmbeddedResource>
@@ -831,6 +844,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmCapitalReport.resx">
       <DependentUpon>frmCapitalReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmCapitalPrint.resx">
+      <DependentUpon>frmCapitalPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmPaymentReport.resx">
       <DependentUpon>frmPaymentReport.cs</DependentUpon>

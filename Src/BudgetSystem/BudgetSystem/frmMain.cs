@@ -36,7 +36,7 @@ namespace BudgetSystem
 
         private void btnbudgetQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(Entity.BusinessModules.BuggetManagement.ToString());
+            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(Entity.BusinessModules.BuggetManagement);
             if (form == null)
             {
                 form = new frmBudgetQuery();
@@ -392,7 +392,7 @@ namespace BudgetSystem
 
         private void btnFinalAccount_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(BudgetSystem.Entity.BusinessModules.FinalAccount.ToString());
+            frmBudgetQuery form = GetExistForm<frmBudgetQuery>(BudgetSystem.Entity.BusinessModules.FinalAccount);
             if (form == null)
             {
                 form = new frmBudgetQuery();
@@ -409,7 +409,7 @@ namespace BudgetSystem
 
         private void btnRecieptCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            BudgetSystem.Report.frmCapitalReport form = GetExistForm<BudgetSystem.Report.frmCapitalReport>(BudgetSystem.Entity.BusinessModules.RecieptCapital.ToString());
+            BudgetSystem.Report.frmCapitalReport form = GetExistForm<BudgetSystem.Report.frmCapitalReport>(BudgetSystem.Entity.BusinessModules.RecieptCapital);
             if (form == null)
             {
                 form = new BudgetSystem.Report.frmCapitalReport();
@@ -426,7 +426,7 @@ namespace BudgetSystem
 
         private void btnPaymentCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            BudgetSystem.Report.frmPaymentReport form = GetExistForm<BudgetSystem.Report.frmPaymentReport>(BudgetSystem.Entity.BusinessModules.PaymentCapital.ToString());
+            BudgetSystem.Report.frmPaymentReport form = GetExistForm<BudgetSystem.Report.frmPaymentReport>(BudgetSystem.Entity.BusinessModules.PaymentCapital);
             if (form == null)
             {
                 form = new BudgetSystem.Report.frmPaymentReport();

@@ -37,6 +37,7 @@ namespace BudgetSystem.Base
             this.btnSaveView.Visibility = BarItemVisibility.Never;
             this.btnDeleteView.Visibility = BarItemVisibility.Never;
             this.btnShowOrVisible.Visibility = BarItemVisibility.Never;
+            this.btn_Print.Visibility = BarItemVisibility.Never;
         }
 
         private void frmBaseCommonReportForm_Load(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace BudgetSystem.Base
 
         protected bool supportPivotGrid = true;
         protected bool supportPivotGridSaveView = true;
-
+        protected bool supportPrint = false;
 
         protected Dictionary<string, Action> GridToolBarActions = new Dictionary<string, Action>();
         protected Dictionary<string, Action> PrivotToolBarActions = new Dictionary<string, Action>();
@@ -62,6 +63,11 @@ namespace BudgetSystem.Base
 
         protected void InitShowStyle()
         {
+            if (supportPrint)
+            {
+                this.btn_Print.Visibility = BarItemVisibility.Always;
+            }
+
             if (!supportPivotGrid)
             {
                 this.lcgPivote.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -149,12 +155,23 @@ namespace BudgetSystem.Base
         }
 
         int i;
-        protected GridColumn CreateGridColumn(string caption, string fieldName, int width = 0)
+        protected GridColumn CreateGridColumn(string caption, string fieldName, int width = 0, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
         {
             GridColumn gc = new GridColumn();
             gc.Name = caption;
             gc.Caption = caption;
             gc.FieldName = fieldName;
+            gc.DisplayFormat.FormatType = valueFormatType;
+            if (valueFormatType == FormatType.Custom)
+            {
+                gc.DisplayFormat.Format = formatProvider;
+                gc.DisplayFormat.FormatType = valueFormatType;
+                gc.DisplayFormat.Format = formatProvider;
+            }
+            else
+            {
+                gc.DisplayFormat.FormatString = valueFormatString;
+            }
             if (width > 0)
             {
                 gc.Width = width;
@@ -490,6 +507,13 @@ namespace BudgetSystem.Base
         {
 
         }
+
+        private void btn_Print_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Print();
+        }
+
+        public virtual void Print() { }
 
     }
 }

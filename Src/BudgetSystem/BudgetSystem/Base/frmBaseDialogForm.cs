@@ -189,7 +189,7 @@ namespace BudgetSystem
         {
             this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.LookAndFeel.SkinName = "Whiteprint";
-            this.Visible = false;
+            this.Visible = true;
             this.Show();
             this.PrintData();
             this.Close();

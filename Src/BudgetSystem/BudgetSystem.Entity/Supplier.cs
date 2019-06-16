@@ -210,11 +210,34 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (SupplierType == (int)EnumSupplierType.合格供方 && this.EnumFlowState == EnumDataFlowState.审批通过)
+                if (SupplierType == (int)EnumSupplierType.合格供方&& EnumFlowState== EnumDataFlowState.审批通过)
                 {
-                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate != DateTime.MinValue && this.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
-                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate != DateTime.MinValue && this.AgreementDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
-                        ||(this.ReviewDate!=null&& (this.ReviewDate.Value<=DateTime.Now.Date||this.ReviewDate.Value.AddDays(30)<=DateTime.Now.Date)))
+                    if ((this.BusinessEffectiveDate != null &&this.BusinessEffectiveDate.Value>DateTime.MinValue.AddDays(30)
+                         && this.BusinessEffectiveDate.Value.Date.AddDays(-30)<=DateTime.Now.Date  && DateTime.Now.Date<= this.BusinessEffectiveDate.Value.Date)
+                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
+                           && this.AgreementDate.Value.Date.AddDays(-30) <= DateTime.Now.Date&& DateTime.Now.Date<=this.AgreementDate.Value.Date) 
+                       ||(this.ReviewDate!=null&& this.ReviewDate.Value<DateTime.MaxValue.AddDays(-30)
+                          && this.ReviewDate.Value.Date<=DateTime.Now.Date && DateTime.Now.Date<=this.ReviewDate.Value.AddDays(30).Date))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 是否超过审批警告日期任然没有提交审批
+        /// </summary>
+        public bool IsExpires
+        {
+            get
+            {
+                if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
+                {
+                    if ((this.BusinessEffectiveDate != null && DateTime.Now.Date>this.BusinessEffectiveDate.Value.Date)
+                       || (this.ExistsAgentAgreement && this.AgreementDate != null && DateTime.Now.Date>this.AgreementDate.Value.Date)
+                       || (this.ReviewDate != null && DateTime.Now.Date.AddDays(-30)>this.ReviewDate.Value.Date))
                     {
                         return true;
                     }
@@ -230,19 +253,14 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (SupplierType == (int)EnumSupplierType.合格供方)
+                if (SupplierType == (int)EnumSupplierType.合格供方&&this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if (this.EnumFlowState != EnumDataFlowState.审批通过
-                        || (this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date < DateTime.Now.Date)
-                        || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date < DateTime.Now.Date)
-                        || (this.ReviewDate!=null && this.ReviewDate.Value.Date.AddDays(30) <DateTime.Now.Date))
-                    {
-                        return false;
-                    }
-                    else
+                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date >= DateTime.Now.Date)
+                        && (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
+                        && (this.ReviewDate!=null && this.ReviewDate.Value.Date>=  DateTime.Now.Date.AddDays(-30)))
                     {
                         return true;
-                    }
+                    } 
                 }
 
                 return false;

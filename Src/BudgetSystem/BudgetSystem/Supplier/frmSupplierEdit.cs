@@ -35,33 +35,35 @@ namespace BudgetSystem
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "创建供应商";
+                return;
             }
-            else if (this.WorkModel == EditFormWorkModels.Modify)
+            this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
+            if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                this.Text = "编辑供应商信息";
-                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
+                this.btnSubmit.Enabled = this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批;
+                this.Text = "编辑供应商信息";                
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
-                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
+                this.btnSubmit.Enabled = false;
                 this.Text = "查看供应商信息";
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
-                this.ucSupplierEdit1.BindingData(this.CurrentSupplier.ID);
+                this.btnSure.Enabled = false;
                 this.Text = "提交复审审批";
+            }
+            else if (this.WorkModel == EditFormWorkModels.Review)
+            {
+                this.btnSure.Enabled = false;
+                this.Text = "提交审批";
             }
         }
 
         
 
         private void btnSure_Click(object sender, EventArgs e)
-        {
-            if (this.WorkModel == EditFormWorkModels.Custom)
-            {
-                XtraMessageBox.Show("复评审批申请，请提交流程审批");
-                return;
-            }
+        { 
             isStartFlow = false;
             SubmitDataByWorkModel();
             if (saveSucceed)
@@ -87,22 +89,7 @@ namespace BudgetSystem
             }
             saveSucceed = true;
         }
-        protected override void SubmitCustomData()
-        {
-            base.SubmitCustomData();
-            //复审
-            bool result = this.ucSupplierEdit1.CheckInputData(isStartFlow);
-            if (result == false)
-            {
-                return;
-            }
-            this.ucSupplierEdit1.FillData();
-            sm.ModifySupplier(this.ucSupplierEdit1.CurrentSupplier);
-            saveSucceed = true;
-        }
-
-
-
+       
         protected override void SubmitModifyData()
         {
             base.SubmitModifyData();
@@ -115,7 +102,18 @@ namespace BudgetSystem
             sm.ModifySupplier(this.ucSupplierEdit1.CurrentSupplier);
             saveSucceed = true;
         }
-
+        protected override  void SubmitDataByWorkModel()
+        {
+            if (this.WorkModel == EditFormWorkModels.New)
+            {
+                SubmitNewData();
+            }
+            else
+            {
+                //修改、初评、复评
+                SubmitModifyData();
+            }
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             isStartFlow = true;
@@ -128,11 +126,21 @@ namespace BudgetSystem
                     return;
                 }
                 EnumFlowNames flowName = EnumFlowNames.供应商审批流程;
+                string description = string.Empty;
                 if (this.WorkModel == EditFormWorkModels.Custom)
                 {
                     flowName = EnumFlowNames.供应商复审流程;
+                    if (this.ucSupplierEdit1.CurrentSupplier.Discredited)
+                    {
+                        frmDescription frm = new frmDescription("当前供应商为经营异常企业，请填写提交说明", "提交说明");
+                        if (frm.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                        {
+                            return;
+                        }
+                        description = frm.Description;
+                    }
                 }
-                string message = sm.StartFlow(flowName,this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName);
+                string message = sm.StartFlow(flowName, this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName, description);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");

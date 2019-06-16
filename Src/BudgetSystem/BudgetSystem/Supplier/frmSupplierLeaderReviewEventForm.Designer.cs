@@ -73,7 +73,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(529, 125);
+            this.btnCancel.Location = new System.Drawing.Point(529, 136);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 39);
@@ -83,7 +83,7 @@
             // btnSure
             // 
             this.btnSure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSure.Location = new System.Drawing.Point(418, 125);
+            this.btnSure.Location = new System.Drawing.Point(418, 136);
             this.btnSure.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(98, 39);
@@ -106,8 +106,7 @@
             this.rgDiscredited.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "非失信企业"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "失信企业")});
-            this.rgDiscredited.Properties.ReadOnly = true;
-            this.rgDiscredited.Size = new System.Drawing.Size(322, 27);
+            this.rgDiscredited.Size = new System.Drawing.Size(322, 30);
             this.rgDiscredited.TabIndex = 11;
             // 
             // labelControl2
@@ -125,7 +124,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(668, 176);
+            this.ClientSize = new System.Drawing.Size(668, 187);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.rgDiscredited);
             this.Controls.Add(this.labelControl1);

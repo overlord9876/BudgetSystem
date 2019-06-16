@@ -38,10 +38,12 @@ namespace BudgetSystem
             InitializeComponent();
             this.Load += new System.EventHandler(this.ucSupplierEdit_Load);
         }
+
         private void ucSupplierEdit_Load(object sender, EventArgs e)
         {
             RegisterEvent();
         }
+      
         private void RegisterEvent()
         {
             this.dteRegistrationDate.EditValueChanged += new EventHandler(dteRegistrationDate_EditValueChanged);
@@ -132,7 +134,7 @@ namespace BudgetSystem
             }
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
-
+            this.rgResult.SelectedIndex = -1;
             // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
 
         }
@@ -175,58 +177,6 @@ namespace BudgetSystem
                 this.dteRegistrationDate.EditValue = supplier.RegistrationDate;
                 this.dteReviewDate.EditValue = supplier.ReviewDate;
                 this.BindingBankInfoDetail(supplier.BankInfoDetail);
-               
-
-                if (this.WorkModel == EditFormWorkModels.Custom)
-                {   
-                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
-                    this.BindingReviewHistory(supplier.ID);
-                    this.BindingReviewDetail(string.Empty);
-                }
-                else if (this.WorkModel == EditFormWorkModels.View)
-                {
-                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
-                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString())
-                    {
-                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                    }
-                    else
-                    {
-                        this.BindingReviewHistory(supplier.ID);
-                        this.BindingReviewDetail(supplier.ReviewContents);
-                    }
-                }
-                else if (this.WorkModel == EditFormWorkModels.Modify)
-                { 
-                    if (supplier.EnumFlowState!= EnumDataFlowState.审批不通过
-                        && supplier.EnumFlowState != EnumDataFlowState.未审批
-                        && supplier.SupplierType == (int)EnumSupplierType.合格供方)
-                    {
-                        SetReadOnly();
-                        SetReviewControlReadOnly();
-                    }
-                    if (supplier.FlowName != EnumFlowNames.供应商复审流程.ToString())
-                    {
-                        if (supplier.EnumFlowState == EnumDataFlowState.审批不通过)
-                        {
-                            this.BindingFirstReviewDetail("");
-                        }
-                        else
-                        {
-                            this.BindingFirstReviewDetail(supplier.FirstReviewContents);
-                        }
-                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
-                    }
-                    else
-                    {
-                        this.BindingReviewHistory(supplier.ID);
-                        this.BindingReviewDetail(supplier.ReviewContents);
-                    }
-                }
                 foreach (Department department in this.cboDepartment.Properties.Items)
                 {
                     if (department.ID == supplier.DeptID)
@@ -235,6 +185,76 @@ namespace BudgetSystem
                         break;
                     }
                 }
+                if (supplier.SupplierType != (int)EnumSupplierType.合格供方&&supplier.EnumFlowState!= EnumDataFlowState.未审批)
+                {
+                    this.xtraTabControl1.TabPages.Remove(this.xtraTabPage2);
+                    this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
+                    return;
+                }
+                if (this.WorkModel == EditFormWorkModels.Review)
+                {
+                    //初审,供应商类型不允许修改
+                    this.cboSupplierType.Properties.ReadOnly = true;
+                    this.BindingFirstReviewDetail(string.Empty);
+                    this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                else if (this.WorkModel == EditFormWorkModels.Custom)
+                {   
+                    //年审,除年审信息外其它信息不允许修改
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    this.BindingReviewHistory(supplier.ID);
+                    this.BindingReviewDetail(string.Empty);
+                }
+                else if (this.WorkModel == EditFormWorkModels.View)
+                {                    
+                    if (supplier.EnumFlowState == EnumDataFlowState.未审批)
+                    {
+                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
+                        return;
+                    }
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    if (!string.IsNullOrEmpty(supplier.ReviewContents))
+                    {
+                        this.BindingReviewHistory(supplier.ID);
+                        this.BindingReviewDetail(supplier.ReviewContents);
+                    }
+                    else
+                    {
+                        this.lcgReviewContents.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.lcgReviewResult.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
+                    }
+                }
+                else if (this.WorkModel == EditFormWorkModels.Modify)
+                {
+                    this.BindingReviewHistory(supplier.ID);
+                    this.BindingReviewDetail(supplier.ReviewContents);
+                    this.BindingFirstReviewDetail(supplier.FirstReviewContents);
+                    if (supplier.EnumFlowState != EnumDataFlowState.未审批)
+                    { 
+                        //只要关联有流程则流程审批相关字段不能修改
+                        this.txtName.Properties.ReadOnly = true;
+                        this.txtTaxpayerID.Properties.ReadOnly = true;
+                        this.txtLegal.Properties.ReadOnly = true;
+                        this.chkExistsAgentAgreement.Properties.ReadOnly = true;
+                        this.chkExistsLicenseCopy.Properties.ReadOnly = true;
+                        this.chkDiscredited.Properties.ReadOnly = true;
+                        this.dteAgreementDate.Properties.ReadOnly = true;
+                        this.dteBusinessEffectiveDate.Properties.ReadOnly = true;
+                        this.dteRegistrationDate.Properties.ReadOnly = true;
+                        foreach (Control control in this.layoutControl2.Controls)
+                        {
+                            if (control is RadioGroup && control.Tag != null)
+                            {
+                                (control as RadioGroup).Properties.ReadOnly = true;
+                            }
+                        }
+                        this.rgResult.Properties.ReadOnly = true;
+                    }
+                }               
             }
         }
 
@@ -251,19 +271,25 @@ namespace BudgetSystem
 
                 this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
                 BindingBankInfoDetail(string.Empty);
-            } 
-            else if (this.WorkModel == EditFormWorkModels.View)
+            }
+            else if (this.WorkModel != EditFormWorkModels.Modify)
             {
-                SetReadOnly();
-                SetReviewControlReadOnly();
                 this.gvBankInfoDetail.Columns.Remove(this.colDelete);
                 this.gvBankInfoDetail.OptionsBehavior.Editable = false;
+                if (this.WorkModel == EditFormWorkModels.Custom)
+                {
+                    this.xtraTabControl1.SelectedTabPageIndex = 1;
+                    SetReadOnly();
+                }
+                if (this.WorkModel == EditFormWorkModels.View)
+                {
+                    this.SetReadOnly();
+                    SetReviewControlReadOnly();
+                }
             }
-            else if (this.WorkModel == EditFormWorkModels.Custom)
+            else
             {
-                SetReadOnly();
-                dteAgreementDate.Properties.ReadOnly = false;
-                dteBusinessEffectiveDate.Properties.ReadOnly = false; 
+                SetReviewControlReadOnly();
             }
         }
 
@@ -285,6 +311,7 @@ namespace BudgetSystem
             }
 
         }
+
         private void SetReviewControlReadOnly()
         {
             txtPassedBatch.Properties.ReadOnly = true;
@@ -298,89 +325,6 @@ namespace BudgetSystem
         public bool CheckInputData(bool isStartFlow)
         {
             this.dxErrorProvider1.ClearErrors();
-            if (string.IsNullOrEmpty(this.txtName.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtName, "请输入名称");
-            }
-            else
-            {
-                int id = this.CurrentSupplier == null ? 0 : this.CurrentSupplier.ID;
-                if (sm.CheckName(this.txtName.Text.Trim(), id))
-                {
-                    this.dxErrorProvider1.SetError(this.txtName, "名称已存在");
-                }
-            }
-
-            if (string.IsNullOrEmpty(this.cboDepartment.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.cboDepartment, "请选择所属部门");
-            }
-            var dataSource = (gridBankInfoDetail.DataSource as BindingList<BankInfo>).ToList();
-            if (dataSource == null || dataSource.Count == 0)
-            {
-                XtraMessageBox.Show("至少输入一条银行账号信息", "提示");
-                return false;
-            }
-            if (cboSupplierType.SelectedIndex != 0 && isStartFlow)
-            {
-                XtraMessageBox.Show("非合格供方不需要提交审批流程", "提示");
-                return false;
-            }
-            if (cboSupplierType.SelectedIndex != 0 || !isStartFlow)
-            {
-                //非合格供应商或不提交流程时，其它项不需要验证
-                return !this.dxErrorProvider1.HasErrors;
-            }
-
-            if (string.IsNullOrEmpty(this.txtTaxpayerID.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtTaxpayerID, "请输入纳税人识别号");
-            }
-            if (string.IsNullOrEmpty(this.txtLegal.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtLegal, "请输入法人代表");
-            }
-            if (!this.chkExistsAgentAgreement.Checked)
-            {
-                this.dxErrorProvider1.SetError(this.chkExistsAgentAgreement, "合格供方需要代理协议");
-            }
-            if (this.dteAgreementDate.EditValue == null)
-            {
-                this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
-            }
-            else if (this.dteAgreementDate.DateTime.Date < DateTime.Now.AddDays(30).Date)
-            {
-                this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
-            }
-            if (!chkExistsLicenseCopy.Checked)
-            {
-                this.dxErrorProvider1.SetError(this.chkExistsLicenseCopy, "合格供方需要营业执照复印件");
-            }
-            if (chkDiscredited.Checked)
-            {
-                this.dxErrorProvider1.SetError(this.chkDiscredited, "合格供方需为非经营异常企业");
-            }
-            if (dteRegistrationDate.EditValue == null)
-            {
-                this.dxErrorProvider1.SetError(this.dteRegistrationDate, "请输入工商登记日期");
-            }
-            else if (this.dteRegistrationDate.DateTime.Date > DateTime.Now.Date)
-            {
-                this.dxErrorProvider1.SetError(this.dteRegistrationDate, "工商登记日期应小于当前日期");
-            }
-
-            if (dteBusinessEffectiveDate.EditValue == null)
-            {
-                this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "请输入经营截至日期");
-            }
-            else if (dteRegistrationDate.EditValue != null && dteBusinessEffectiveDate.DateTime.Date < dteRegistrationDate.DateTime.Date)
-            {
-                this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于工商登记日期");
-            }
-            else if (dteBusinessEffectiveDate.DateTime.Date < DateTime.Now.AddDays(30).Date)
-            {
-                this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
-            }
             if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 //复审
@@ -395,18 +339,101 @@ namespace BudgetSystem
             }
             else
             {
-                foreach (Control control in this.layoutControl2.Controls)
+                if (string.IsNullOrEmpty(this.txtName.Text.Trim()))
                 {
-                    if (control is RadioGroup && control.Tag != null && (control as RadioGroup).SelectedIndex == -1)
+                    this.dxErrorProvider1.SetError(this.txtName, "请输入名称");
+                }
+                else
+                {
+                    int id = this.CurrentSupplier == null ? 0 : this.CurrentSupplier.ID;
+                    if (sm.CheckName(this.txtName.Text.Trim(), id))
                     {
-                        this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价", control.Tag));
+                        this.dxErrorProvider1.SetError(this.txtName, "名称已存在");
                     }
                 }
-                if (rgResult.SelectedIndex == 3)
+
+                if (string.IsNullOrEmpty(this.cboDepartment.Text.Trim()))
                 {
-                    this.dxErrorProvider1.SetError(this.rgResult, "评价结论为D不能提交审批");
+                    this.dxErrorProvider1.SetError(this.cboDepartment, "请选择所属部门");
+                }
+
+                if (cboSupplierType.SelectedIndex != 0 && isStartFlow)
+                {
+                    XtraMessageBox.Show("非合格供方不需要提交审批流程", "提示");
+                    return false;
+                }
+                if (cboSupplierType.SelectedIndex != 0 || !isStartFlow)
+                {
+                    //非合格供应商或不提交流程时，其它项不需要验证
+                    return !this.dxErrorProvider1.HasErrors;
+                }
+
+                if (string.IsNullOrEmpty(this.txtTaxpayerID.Text.Trim()))
+                {
+                    this.dxErrorProvider1.SetError(this.txtTaxpayerID, "请输入纳税人识别号");
+                }
+                if (string.IsNullOrEmpty(this.txtLegal.Text.Trim()))
+                {
+                    this.dxErrorProvider1.SetError(this.txtLegal, "请输入法人代表");
+                }
+                if (!this.chkExistsAgentAgreement.Checked)
+                {
+                    this.dxErrorProvider1.SetError(this.chkExistsAgentAgreement, "合格供方需要代理协议");
+                }
+                if (this.dteAgreementDate.EditValue == null)
+                {
+                    this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
+                }
+                else if (this.dteAgreementDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+                {
+                    this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
+                }
+                if (!chkExistsLicenseCopy.Checked)
+                {
+                    this.dxErrorProvider1.SetError(this.chkExistsLicenseCopy, "合格供方需要营业执照复印件");
+                }
+                if (chkDiscredited.Checked&&this.CurrentSupplier!=null&&!string.IsNullOrEmpty(this.CurrentSupplier.FlowName))
+                {
+                    this.dxErrorProvider1.SetError(this.chkDiscredited, "合格供方需为非经营异常企业");
+                }
+                if (dteRegistrationDate.EditValue == null)
+                {
+                    this.dxErrorProvider1.SetError(this.dteRegistrationDate, "请输入工商登记日期");
+                }
+                else if (this.dteRegistrationDate.DateTime.Date > DateTime.Now.Date)
+                {
+                    this.dxErrorProvider1.SetError(this.dteRegistrationDate, "工商登记日期应小于当前日期");
+                }
+
+                if (dteBusinessEffectiveDate.EditValue == null)
+                {
+                    this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "请输入经营截至日期");
+                }
+                else if (dteRegistrationDate.EditValue != null && dteBusinessEffectiveDate.DateTime.Date < dteRegistrationDate.DateTime.Date)
+                {
+                    this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于工商登记日期");
+                }
+                else if (dteBusinessEffectiveDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+                {
+                    this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
+                }
+
+                if(isStartFlow)
+                {
+                    foreach (Control control in this.layoutControl2.Controls)
+                    {
+                        if (control is RadioGroup && control.Tag != null && (control as RadioGroup).SelectedIndex == -1)
+                        {
+                            this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价", control.Tag));
+                        }
+                    }
+                    if (rgResult.SelectedIndex == 3)
+                    {
+                        this.dxErrorProvider1.SetError(this.rgResult, "评价结论为D不能提交审批");
+                    }
                 }
             }
+           
             return !this.dxErrorProvider1.HasErrors;
         }
 
@@ -437,50 +464,63 @@ namespace BudgetSystem
             this.CurrentSupplier.Tell = this.txtTell.Text.Trim();
             this.CurrentSupplier.Discredited = this.chkDiscredited.Checked;
             this.CurrentSupplier.ExistsAgentAgreement = this.chkExistsAgentAgreement.Checked;
-            this.CurrentSupplier.Description = this.meDescription.Text.Trim();
-            this.CurrentSupplier.ReviewDate = this.dteReviewDate.DateTime;
+            this.CurrentSupplier.Description = this.meDescription.Text.Trim();            
+           
             this.CurrentSupplier.ExistsLicenseCopy = this.chkExistsLicenseCopy.Checked;
             this.CurrentSupplier.BankInfoDetail = this.GetBankInfoDetailString();
-
-            DateTime? registrationDate;
-            DateTime? agreementDate;
-            DateTime? businesseffectiveDate;
-            if (this.dteRegistrationDate.EditValue == null)
+            if (this.dteReviewDate.EditValue != null)
             {
-                registrationDate = null;
+                this.CurrentSupplier.ReviewDate = this.dteReviewDate.DateTime;
+            }
+            if (this.dteRegistrationDate.EditValue != null)
+            {
+                this.CurrentSupplier.RegistrationDate = this.dteRegistrationDate.DateTime;
             }
             else
             {
-                registrationDate = this.dteRegistrationDate.DateTime;
+                this.CurrentSupplier.RegistrationDate = null;
             }
-            if (this.dteAgreementDate.EditValue == null)
+            if (this.dteAgreementDate.EditValue != null)
             {
-                agreementDate = null;
+                this.CurrentSupplier.AgreementDate = this.dteAgreementDate.DateTime;
             }
             else
             {
-                agreementDate = this.dteAgreementDate.DateTime;
+                this.CurrentSupplier.AgreementDate = null;
             }
-            if (this.dteBusinessEffectiveDate.EditValue == null)
+            if (this.dteBusinessEffectiveDate.EditValue != null)
             {
-                businesseffectiveDate = null;
+                this.CurrentSupplier.BusinessEffectiveDate = this.dteBusinessEffectiveDate.DateTime;
             }
             else
             {
-                businesseffectiveDate = this.dteBusinessEffectiveDate.DateTime;
-            }
+                this.CurrentSupplier.BusinessEffectiveDate = null;
+            } 
+             
             if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 //复审
                 SupplierReviewContents reviewContents = new SupplierReviewContents();
-                reviewContents.AgreementDate = agreementDate;
-                reviewContents.BusinessEffectiveDate = businesseffectiveDate;
-                reviewContents.RegistrationDate = registrationDate;
-                reviewContents.PassedBatch = int.Parse(txtPassedBatch.Text.Trim());
-                reviewContents.RejectedBatch = int.Parse(txtRejectedBatch.Text.Trim());
+                reviewContents.AgreementDate = this.CurrentSupplier.AgreementDate;
+                reviewContents.BusinessEffectiveDate = this.CurrentSupplier.BusinessEffectiveDate;
+                reviewContents.RegistrationDate = this.CurrentSupplier.RegistrationDate;
+                if (!string.IsNullOrEmpty(txtPassedBatch.Text.Trim()))
+                {
+                    reviewContents.PassedBatch = int.Parse(txtPassedBatch.Text.Trim());
+                }
+                if (!string.IsNullOrEmpty(txtRejectedBatch.Text.Trim()))
+                {
+                    reviewContents.RejectedBatch = int.Parse(txtRejectedBatch.Text.Trim());
+                }
                 reviewContents.TotalBatch = reviewContents.PassedBatch + reviewContents.RejectedBatch;
-                reviewContents.RectificationPassedBatch = int.Parse(txtRectificationPassedBatch.Text.Trim());
-                reviewContents.RectificationBatch = int.Parse(txtRectificationBatch.Text.Trim());
+                if (!string.IsNullOrEmpty(txtRectificationPassedBatch.Text.Trim()))
+                {
+                    reviewContents.RectificationPassedBatch = int.Parse(txtRectificationPassedBatch.Text.Trim());
+                }
+                if (!string.IsNullOrEmpty(txtRectificationBatch.Text.Trim()))
+                {
+                    reviewContents.RectificationBatch = int.Parse(txtRectificationBatch.Text.Trim());
+                }
                 reviewContents.RectificationResult = rgRectificationResult.SelectedIndex == 0 ? true : false;
                 reviewContents.SalesmanResult =  true ;
                 reviewContents.Salesman = RunInfo.Instance.CurrentUser.RealName;
@@ -488,10 +528,7 @@ namespace BudgetSystem
                 this.CurrentSupplier.ReviewContents = reviewContents.ToJson();
             }
             else
-            {
-                this.CurrentSupplier.RegistrationDate = registrationDate;
-                this.CurrentSupplier.AgreementDate = agreementDate;
-                this.CurrentSupplier.BusinessEffectiveDate = businesseffectiveDate;
+            {               
                 if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批
                     || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
@@ -576,9 +613,6 @@ namespace BudgetSystem
                 rgRectificationResult.SelectedIndex = reviewContents.RectificationResult ? 0 : 1;
                 cboReviewSalesmanResult.SelectedIndex = reviewContents.SalesmanResult ? 0 : 1;
                 txtReviewSalesman.Text = reviewContents.Salesman;
-                dteRegistrationDate.EditValue = reviewContents.RegistrationDate;
-                dteAgreementDate.EditValue = reviewContents.AgreementDate;
-                dteBusinessEffectiveDate.EditValue = reviewContents.BusinessEffectiveDate;
                 if (reviewContents.ManagerResult != null)
                 {
                     txtReviewManager.Text = reviewContents.Manager;

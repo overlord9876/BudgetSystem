@@ -30,7 +30,9 @@
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
+            DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition2 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcIsExpires = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridSupplier = new DevExpress.XtraGrid.GridControl();
             this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,13 +44,13 @@
             this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcReviewDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcReviewDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -62,6 +64,12 @@
             this.gcIsWarned.OptionsColumn.AllowMove = false;
             this.gcIsWarned.OptionsColumn.AllowShowHide = false;
             this.gcIsWarned.OptionsColumn.ShowInCustomizationForm = false;
+            // 
+            // gcIsExpires
+            // 
+            this.gcIsExpires.Caption = "审批信息是否已过期";
+            this.gcIsExpires.FieldName = "IsExpires";
+            this.gcIsExpires.Name = "gcIsExpires";
             // 
             // gridSupplier
             // 
@@ -99,7 +107,8 @@
             this.gcCreateDate,
             this.gcCreateUser,
             this.gcDescription,
-            this.gcIsWarned});
+            this.gcIsWarned,
+            this.gcIsExpires});
             styleFormatCondition1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             styleFormatCondition1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             styleFormatCondition1.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -111,8 +120,16 @@
             styleFormatCondition1.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
             styleFormatCondition1.Expression = "True";
             styleFormatCondition1.Value1 = true;
+            styleFormatCondition2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            styleFormatCondition2.Appearance.Options.UseBackColor = true;
+            styleFormatCondition2.ApplyToRow = true;
+            styleFormatCondition2.Column = this.gcIsExpires;
+            styleFormatCondition2.Condition = DevExpress.XtraGrid.FormatConditionEnum.Equal;
+            styleFormatCondition2.Expression = "True";
+            styleFormatCondition2.Value1 = true;
             this.gvSupplier.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] {
-            styleFormatCondition1});
+            styleFormatCondition1,
+            styleFormatCondition2});
             this.gvSupplier.GridControl = this.gridSupplier;
             this.gvSupplier.Name = "gvSupplier";
             this.gvSupplier.OptionsBehavior.Editable = false;
@@ -198,6 +215,14 @@
             this.gcBusinessEffectiveDate.VisibleIndex = 7;
             this.gcBusinessEffectiveDate.Width = 74;
             // 
+            // gcReviewDate
+            // 
+            this.gcReviewDate.Caption = "年审日期";
+            this.gcReviewDate.FieldName = "ReviewDate";
+            this.gcReviewDate.Name = "gcReviewDate";
+            this.gcReviewDate.Visible = true;
+            this.gcReviewDate.VisibleIndex = 8;
+            // 
             // gcExistsAgentAgreement
             // 
             this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
@@ -254,14 +279,6 @@
             this.gcDescription.VisibleIndex = 14;
             this.gcDescription.Width = 79;
             // 
-            // gcReviewDate
-            // 
-            this.gcReviewDate.Caption = "年审日期";
-            this.gcReviewDate.FieldName = "ReviewDate";
-            this.gcReviewDate.Name = "gcReviewDate";
-            this.gcReviewDate.Visible = true;
-            this.gcReviewDate.VisibleIndex = 8;
-            // 
             // frmSupplierQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -300,6 +317,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
         private DevExpress.XtraGrid.Columns.GridColumn gcReviewDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcIsExpires;
 
 
     }

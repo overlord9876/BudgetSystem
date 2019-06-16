@@ -133,6 +133,10 @@ namespace BudgetSystem
                 this.RefreshData();
             }
         }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
         private void ModifySupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
@@ -152,31 +156,34 @@ namespace BudgetSystem
             }
         }
 
+        /// <summary>
+        /// 提交审批（初评）
+        /// </summary>
         private void CommitSupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
             {
-                if (supplier.EnumFlowState != EnumDataFlowState.未审批&&supplier.EnumFlowState!= EnumDataFlowState.审批不通过)
+                //提交审批需要满足的条件
+                //1、是合格供方 
+                //2、当前流程状态为非审批中
+                if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
+                {
+                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交审批。", EnumSupplierType.合格供方));
+                    return;
+                }
+                if (supplier.EnumFlowState == EnumDataFlowState.审批中)
                 {
                     XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交审批。", supplier.Name, supplier.EnumFlowState.ToString()));
                     return;
                 }
-                if (supplier.FlowName == EnumFlowNames.供应商复审流程.ToString())
+
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.WorkModel = EditFormWorkModels.Review;
+                form.CurrentSupplier = supplier;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    XtraMessageBox.Show(string.Format("{0}供方不允许提交审批。", supplier.Name));
-                    return;
-                }
-                
-                string message = sm.StartFlow(EnumFlowNames.供应商审批流程, supplier.ID, RunInfo.Instance.CurrentUser.UserName);
-                if (string.IsNullOrEmpty(message))
-                {
-                    XtraMessageBox.Show("提交流程成功。");
-                    RefreshData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
+                    this.RefreshData();
                 }
             }
             else
@@ -184,20 +191,28 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要提交审批的项");
             }
         }
+        /// <summary>
+        ///  提交复评（年审）
+        /// </summary>
         private void ReviewSupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
             if (supplier != null)
             {
-                if ((supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批)
-                    || (EnumFlowNames.供应商审批流程.ToString() == supplier.FlowName && supplier.EnumFlowState == EnumDataFlowState.审批不通过))
+                if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
+                {
+                    XtraMessageBox.Show(string.Format("非{0}供方不允许复评审批申请。", EnumSupplierType.合格供方));
+                    return;
+                }
+                if (supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批
+                    ||(EnumFlowNames.供应商审批流程.ToString().Equals(supplier.FlowName)&&supplier.EnumFlowState== EnumDataFlowState.审批不通过)
+                    )
                 {
                     XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许复评审批申请。", supplier.Name, supplier.EnumFlowState.ToString()));
                     return;
                 }
-                if ((supplier.ReviewDate != null && supplier.ReviewDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
-                    || (supplier.AgreementDate != null && supplier.AgreementDate.Value.AddDays(-30).Date <= DateTime.Now.Date)
-                    || (supplier.BusinessEffectiveDate != null && supplier.BusinessEffectiveDate.Value.AddDays(-30).Date <= DateTime.Now.Date))
+               
+                if (supplier.ReviewDate != null &&DateTime.Now.Date>= supplier.ReviewDate.Value.Date)
                 {
                     frmSupplierEdit form = new frmSupplierEdit();
                     form.CurrentSupplier = supplier;
@@ -218,6 +233,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要复评审批申请的项");
             }
         }
+
         private void ViewSupplier()
         {
             Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
@@ -247,7 +263,7 @@ namespace BudgetSystem
                 else
                 {
                     frmSupplierReviewHistory form = new frmSupplierReviewHistory(currentRowSupplier.ID);
-                    form.WorkModel = EditFormWorkModels.View; 
+                    form.WorkModel = EditFormWorkModels.View;
                     form.ShowDialog(this);
                 }
             }
@@ -255,7 +271,7 @@ namespace BudgetSystem
             {
                 XtraMessageBox.Show("请选择需要查看复评历史记录的项");
             }
-            
+
         }
 
         protected override void InitGridViewAction()

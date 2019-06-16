@@ -323,16 +323,10 @@ namespace BudgetSystem.OutMoney
                 }
             }
             CheckUsage();
-            if (txtAfterPaymentBalance.Value < 0 && string.IsNullOrEmpty(this.txtDescription.Text.Trim()))
-            {
-                string message = string.Format("这批付款后超支付余额{0}，如需付款请在备注中提交说明", Math.Round(Math.Abs(txtAfterPaymentBalance.Value), 2));
-                XtraMessageBox.Show(message, "提示");
-                this.dxErrorProvider1.SetError(txtDescription, message);
-                this.txtDescription.Focus();
-            }
-            else if (txtAfterPaymentBalance.Value < 0)
+            if (txtAfterPaymentBalance.Value < 0)
             {
                 XtraMessageBox.Show("【警告】支付后余额小于0");
+                this.dxErrorProvider1.SetError(txtAfterPaymentBalance, "【警告】支付后余额小于0");
             }
 
             return dxErrorProvider1.HasErrors;

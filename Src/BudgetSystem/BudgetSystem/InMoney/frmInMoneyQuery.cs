@@ -203,7 +203,7 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("{0}收款单不是已拆分状态，不需要提交修改申请。", currentRowBankSlip.VoucherNo));
                     return;
                 }
-                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
+                frmDescription frmBudget = new frmDescription();
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     currentRowBankSlip.ReceiptState = ReceiptState.拆分中;

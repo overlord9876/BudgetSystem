@@ -42,11 +42,11 @@ namespace BudgetSystem
             return null;
         }
 
-        private T GetExistForm<T>(string formText) where T : Form
+        private T GetExistForm<T>(BusinessModules module) where T : frmBaseQueryForm
         {
-            foreach (Form form in this.MdiChildren)
+            foreach (frmBaseQueryForm form in this.MdiChildren)
             {
-                if (typeof(T) == form.GetType() && form.Text == formText)
+                if (typeof(T) == form.GetType() && form.Module == module)
                 {
                     return (T)form;
 

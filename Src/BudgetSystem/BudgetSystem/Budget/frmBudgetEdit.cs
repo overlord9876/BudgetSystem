@@ -58,7 +58,7 @@ namespace BudgetSystem
             string description = string.Empty;
             if (isStartFlow)
             {
-                frmBudgetUpdateDescription frmBudget = new frmBudgetUpdateDescription();
+                frmDescription frmBudget = new frmDescription();
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     description = frmBudget.Description;

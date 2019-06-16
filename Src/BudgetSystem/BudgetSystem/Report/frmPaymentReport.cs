@@ -16,6 +16,13 @@ namespace BudgetSystem.Report
 {
     public partial class frmPaymentReport : Base.frmBaseCommonReportForm
     {
+        private Dictionary<string, string> columnDic = new Dictionary<string, string>();
+        private Dictionary<string, decimal> paymentmethodDic = new Dictionary<string, decimal>();
+        private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
+        private List<RecieptCapital> rcList;
+        private DateTime beginTimestamp = DateTime.MinValue;
+        private DateTime endTimestamp = DateTime.MaxValue;
+
         public frmPaymentReport()
         {
             InitializeComponent();
@@ -29,8 +36,9 @@ namespace BudgetSystem.Report
 
         protected override void InitModelOperate()
         {
-            this.supportPivotGrid = true;
-            this.supportPivotGridSaveView = true;
+            this.supportPivotGrid = false;
+            this.supportPivotGridSaveView = false;
+            this.supportPrint = true;
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
@@ -43,132 +51,147 @@ namespace BudgetSystem.Report
             InitShowStyle();
         }
 
-        const string DepartmentCaption = "部门";
-        private Dictionary<string, string> dic = new Dictionary<string, string>();
-
         protected override void LoadDataByCondition(BudgetQueryCondition condition)
         {
+            beginTimestamp = condition.BeginTimestamp;
+            endTimestamp = condition.EndTimestamp;
             Bll.ReportManager um = new Bll.ReportManager();
 
             base.ClearColumns();
 
             var lst = um.GetPayementCapital(condition);
+            rcList = um.GetRecieptCapital(condition);
+
+            if (rcList == null) { return; }
 
             DataTable dt = new DataTable();
-            if (!dic.ContainsKey(DepartmentCaption))
-            {
-                dic.Add(DepartmentCaption, "departmentCode");
-            }
-            dt.Columns.Add(dic[DepartmentCaption], typeof(string));
 
-            base.CreateGridColumn(DepartmentCaption, dic[DepartmentCaption]);
-            base.CreatePivotGridField(DepartmentCaption, dic[DepartmentCaption]);
-            for (int index = 0; index < lst.Count; index++)
+            //增加部门、合计列
+            CreateColumn(dt, frmCapitalReport.DepartmentCaption, "departmentCode", typeof(string));
+
+            //统计银行列。
+            for (int index = 0; index < rcList.Count; index++)
             {
-                RecieptCapital rc = lst[index];
+                RecieptCapital rc = rcList[index];
 
                 rc.OriginalCoin = rc.CNY;
-                if (!dic.ContainsKey(rc.BankCode))
+                if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
                 {
-                    dic.Add(rc.BankCode, string.Format("code{0}", index));
+                    paymentmethodDic.Add(rc.PaymentMethod, 0);
+                }
+                paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
+
+                //银行总数合计
+                if (!bankDic.ContainsKey(rc.BankCode))
+                {
+                    bankDic.Add(rc.BankCode, 0);
+                }
+                bankDic[rc.BankCode] += rc.OriginalCoin;
+
+                //银行名称与Field对应关系维护
+                if (!columnDic.ContainsKey(rc.BankCode))
+                {
+                    columnDic.Add(rc.BankCode, string.Format("code{0}", index));
                 }
 
-                if (!dt.Columns.Contains(dic[rc.BankCode]))
+                //创建银行列
+                if (!dt.Columns.Contains(columnDic[rc.BankCode]))
                 {
-                    base.CreateGridColumn(rc.BankCode, dic[rc.BankCode]);
-                    base.CreatePivotGridField(rc.BankCode, dic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-                    dt.Columns.Add(dic[rc.BankCode], typeof(decimal));
+                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
+                    dt.Columns.Add(columnDic[rc.BankCode], typeof(decimal));
                 }
             }
 
-            base.CreatePivotGridDefaultRowField();
+            CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
 
-            foreach (RecieptCapital rc in lst)
+            //行列数据转换
+            foreach (RecieptCapital rc in rcList)
             {
-                DataRow[] rows = dt.Select(string.Format("{0}='{1}'", dic[DepartmentCaption], rc.Department));
+                DataRow[] rows = dt.Select(string.Format("{0}='{1}'", columnDic[frmCapitalReport.DepartmentCaption], rc.Department));
                 if (rows != null && rows.Length > 0)
                 {
                     decimal money = 0;
-                    if (!(rows[0][dic[rc.BankCode]] is System.DBNull))
+                    if (!(rows[0][columnDic[rc.BankCode]] is System.DBNull))
                     {
-                        money = (decimal)rows[0][dic[rc.BankCode]];
+                        money = (decimal)rows[0][columnDic[rc.BankCode]];
                     }
-                    rows[0][dic[rc.BankCode]] = money + rc.OriginalCoin;
+                    rows[0][columnDic[rc.BankCode]] = money + rc.OriginalCoin;
                 }
                 else
                 {
                     DataRow newRow = dt.NewRow();
-                    newRow[dic[DepartmentCaption]] = rc.Department;
-                    newRow[dic[rc.BankCode]] = rc.OriginalCoin;
+                    newRow[columnDic[frmCapitalReport.DepartmentCaption]] = rc.Department;
+                    newRow[columnDic[rc.BankCode]] = rc.OriginalCoin;
                     dt.Rows.Add(newRow);
                 }
             }
-            string defaultFileName = base.GetDefaultLayoutXmlFile();
-            if (File.Exists(defaultFileName))
+
+            //银行总数合计行
+            DataRow totalRow = dt.NewRow();
+            dt.Rows.Add(totalRow);
+            decimal totalMoney = 0;
+            totalRow[columnDic[frmCapitalReport.DepartmentCaption]] = "合计";
+            foreach (string bankCode in bankDic.Keys)
             {
-                this.pivotGridControl.RestoreLayoutFromXml(defaultFileName);
+                if (dt.Columns.Contains(columnDic[bankCode]))
+                {
+                    totalRow[columnDic[bankCode]] = bankDic[bankCode];
+                    totalMoney += bankDic[bankCode];
+                }
             }
 
-            this.pivotGridControl.DataSource = dt;
+            //合计每行数据
+            decimal rowTotal = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                rowTotal = 0;
+                for (int columnIndex = 1; columnIndex < dt.Columns.Count - 1; columnIndex++)
+                {
+                    if (row[columnIndex] is System.DBNull)
+                    {
+                        row[columnIndex] = 0;
+                        continue;
+                    }
+                    rowTotal += ((decimal)row[columnIndex]);
+                }
+                row[columnDic[frmCapitalReport.TotalCaption]] = rowTotal;
+            }
+
+            ////付款方式合计
+            //foreach (string paymentMethod in paymentmethodDic.Keys)
+            //{
+            //    DataRow paymentMethodRow = dt.NewRow();
+            //    dt.Rows.Add(paymentMethodRow);
+            //    paymentMethodRow[0] = paymentMethod;
+            //    paymentMethodRow[1] = paymentmethodDic[paymentMethod];
+            //}
+
+            //合计总数
+            DataRow totalMoneyRow = dt.NewRow();
+            dt.Rows.Add(totalMoneyRow);
+            totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
+            totalMoneyRow[1] = totalMoney;
+
             this.gridControl.DataSource = dt;
         }
 
-        private void InitBudgetReportGrid()
+
+        private void CreateColumn(DataTable dt, string caption, string fieldName, Type t, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
         {
-            base.ClearColumns();
-            base.CreateGridColumn("合同号", "ContractNO");
-            base.CreateGridColumn("合同金额（美元$）", "USDTotalAmount");
-            base.CreateGridColumn("报关金额（美元$）", "TotalDeclarationform");
-            base.CreateGridColumn("收汇金额（美元$）", "TotalUSDBudgetBill");
-            base.CreateGridColumn("实际收汇金额（人民币￥）", "TotalBudgetBill");
-            base.CreateGridColumn("销售金额（人民币￥）", "TotalInvoice");
-            base.CreateGridColumn("付款金额（人民币￥）", "TotalPayement");
-            base.CreateGridColumn("供方发票（人民币￥）", "SupplierInvoice");
-            base.CreateGridColumn("销售成本（人民币￥）", "SellingCost");
-            base.CreateGridColumn("运保费（人民币￥）", "Premium");
-            base.CreateGridColumn("运保费成本（人民币￥）", "PremiumCost");
-            base.CreateGridColumn("佣金（￥）", "Commission");
-            base.CreateGridColumn("直接费用（￥）", "DirectCosts");
-            base.CreateGridColumn("销售利润（￥）", "SalesProfit");
-            base.CreateGridColumn("实际利润（￥）", "ActualProfit");
+            if (!columnDic.ContainsKey(caption))
+            {
+                columnDic.Add(caption, fieldName);
+            }
 
-            base.CreateGridColumn("合同金额", "TotalAmount");
-            base.CreateGridColumn("业务员", "SalesmanName");
-            base.CreateGridColumn("业务员所在部门", "DepartmentDesc");
-            base.CreateGridColumn("录入时间", "CreateDate");
-            base.CreateGridColumn("订约日期", "SignDate");
-            base.CreateGridColumn("有效截止期", "Validity");
-            base.CreateGridColumn("预付金额", "AdvancePayment");
-            base.CreateGridColumn("利润", "Profit");
-            base.CreateGridColumn("盈利水平", "ProfitLevel2");
-
-            base.CreatePivotGridField("合同号", "ContractNO");
-            base.CreatePivotGridField("合同金额（美元$）", "USDTotalAmount", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("报关金额（美元$）", "TotalDeclarationform", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("收汇金额（美元$）", "TotalUSDBudgetBill", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
-            base.CreatePivotGridField("实际收汇金额（人民币￥）", "TotalBudgetBill");
-            base.CreatePivotGridField("销售金额（人民币￥）", "TotalInvoice");
-            base.CreatePivotGridField("付款金额（人民币￥）", "TotalPayement");
-            base.CreatePivotGridField("供方发票（人民币￥）", "SupplierInvoice");
-            base.CreatePivotGridField("销售成本（人民币￥）", "SellingCost");
-            base.CreatePivotGridField("运保费（人民币￥）", "Premium");
-            base.CreatePivotGridField("运保费成本（人民币￥）", "Premium");
-            base.CreatePivotGridField("佣金（￥）", "Commission");
-            base.CreatePivotGridField("直接费用（￥）", "DirectCosts");
-            base.CreatePivotGridField("销售利润（￥）", "SalesProfit");
-            base.CreatePivotGridField("实际利润（￥）", "ActualProfit");
-
-            base.CreatePivotGridField("合同金额", "TotalAmount");
-            base.CreatePivotGridField("业务员", "SalesmanName");
-            base.CreatePivotGridField("业务员所在部门", "DepartmentDesc");
-            base.CreatePivotGridField("录入时间", "CreateDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("订约日期", "SignDate", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("有效截止期", "Validity", valueFormatType: FormatType.DateTime, valueFormatString: "D");
-            base.CreatePivotGridField("预付金额", "AdvancePayment");
-            base.CreatePivotGridField("利润", "Profit");
-            base.CreatePivotGridField("盈利水平", "ProfitLevel2");
-            base.CreatePivotGridDefaultRowField();
+            dt.Columns.Add(fieldName, t);
+            CreateGridColumn(caption, fieldName, valueFormatType: valueFormatType, formatProvider: formatProvider);
         }
 
+        public override void Print()
+        {
+            frmCapitalPrint print = new frmCapitalPrint("部门付款明细报表", string.Format("{0}-{1}", beginTimestamp.ToString("yyyy年MM月dd日"), endTimestamp.ToString("yyyy年MM月dd日")), "单位：元");
+            print.BindData(1, rcList, false);
+            print.PrintItem();
+        }
     }
 }

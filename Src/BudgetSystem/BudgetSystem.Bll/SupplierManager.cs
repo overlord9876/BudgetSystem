@@ -75,7 +75,7 @@ namespace BudgetSystem.Bll
         {
             this.ExecuteWithTransaction((con, tran) =>
             {
-                if (reviewContents.LeaderResult == null || reviewContents.LeaderResult == false)
+                if (reviewContents.LeaderResult == null)
                 {
                     dal.ModifySupplierReviewContents(id, reviewContents.ToJson(), con, tran);
                 }
@@ -83,9 +83,11 @@ namespace BudgetSystem.Bll
                 {
                     Supplier supplier = GetSupplier(id);
                     supplier.ReviewContents = reviewContents.ToJson();
-                    supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
-                    supplier.AgreementDate = reviewContents.AgreementDate;
-                    supplier.BusinessEffectiveDate = reviewContents.BusinessEffectiveDate;
+                    if (reviewContents.LeaderResult == true)
+                    {
+                        supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
+                    }
+                    supplier.Discredited = reviewContents.Discredited;
                     dal.ModifySupplier(supplier, con, tran);
                     mmdal.AddModifyMark<SupplierReviewContents>(reviewContents, id, con, tran);
                 }
@@ -113,7 +115,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(EnumFlowNames flowName, int id, string currentUser)
+        public string StartFlow(EnumFlowNames flowName, int id, string currentUser, string description="")
         {
             Supplier supplier = this.GetSupplier(id);
             if (supplier == null)
@@ -128,12 +130,7 @@ namespace BudgetSystem.Bll
             {
                 return "非合格供方不能提交审批";
             }
-            else if (supplier.EnumFlowState == EnumDataFlowState.审批通过
-               && supplier.FlowName == EnumFlowNames.供应商审批流程.ToString()
-               && flowName == EnumFlowNames.供应商审批流程)
-            {
-                return "供应商审批流程不能多次提交";
-            }
+
             string message = string.Empty;
             if (flowName == EnumFlowNames.供应商复审流程)
             {
@@ -152,7 +149,7 @@ namespace BudgetSystem.Bll
                 return message;
             }
 
-            FlowRunState state = fm.StartFlow(flowName.ToString(), id, supplier.Name, EnumFlowDataType.供应商.ToString(), currentUser, "");
+            FlowRunState state = fm.StartFlow(flowName.ToString(), id, supplier.Name, EnumFlowDataType.供应商.ToString(), currentUser, description);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();
@@ -187,7 +184,7 @@ namespace BudgetSystem.Bll
             {
                 return "请补充代理协议有效期";
             }
-            else if (supplier.AgreementDate.Value.Date < DateTime.Now.AddDays(30).Date)
+            else if (supplier.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
             {
                 return "代理协议有效期应大于当前日期30天";
             }
@@ -216,7 +213,7 @@ namespace BudgetSystem.Bll
             {
                 return "经营截至日期应大于工商登记日期";
             }
-            else if (supplier.BusinessEffectiveDate.Value.Date < DateTime.Now.AddDays(30).Date)
+            else if (supplier.BusinessEffectiveDate.Value.Date <= DateTime.Now.AddDays(30).Date)
             {
                 return "经营截至日期应大于当前日期30天";
             }
@@ -257,10 +254,7 @@ namespace BudgetSystem.Bll
             {
                 return "合格供方需要营业执照复印件";
             }
-            if (supplier.Discredited)
-            {
-                return "合格供方需为非经营异常企业";
-            }
+          
             if (string.IsNullOrEmpty(supplier.ReviewContents))
             {
                 return "请补充供方行为和年度重新评价信息";
@@ -276,7 +270,7 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充代理协议有效期";
                 }
-                else if (reviewContents.AgreementDate.Value.Date < DateTime.Now.AddDays(30).Date)
+                else if (reviewContents.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
                 {
                     return "代理协议有效期应大于当前日期30天";
                 }
@@ -298,7 +292,7 @@ namespace BudgetSystem.Bll
                 {
                     return "经营截至日期应大于工商登记日期";
                 }
-                else if (reviewContents.BusinessEffectiveDate.Value.Date < DateTime.Now.AddDays(30).Date)
+                else if (reviewContents.BusinessEffectiveDate.Value.Date <= DateTime.Now.AddDays(30).Date)
                 {
                     return "经营截至日期应大于当前日期30天";
                 }
