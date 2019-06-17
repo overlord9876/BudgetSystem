@@ -129,7 +129,14 @@ namespace BudgetSystem
             CurrentBudget.TotalAmount = txtTotalAmount.Value;
             CurrentBudget.USDTotalAmount = Math.Round(txtUSDTotalAmount.Value, 2);
             CurrentBudget.SignDate = dteSignDate.DateTime;
-            CurrentBudget.Validity = dteValidity.DateTime;
+            if (dteValidity.EditValue != null)
+            {
+                CurrentBudget.Validity = dteValidity.DateTime;
+            }
+            else
+            {
+                CurrentBudget.Validity = null;
+            }
             CurrentBudget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
             CurrentBudget.SupplierList = new List<Supplier>();
             List<Supplier> suppliers = this.pceQualifiedSupplier.Tag as List<Supplier>;
@@ -349,7 +356,7 @@ namespace BudgetSystem
                 this.pceTempSupplier.Text = tempSuppliers.ToNameString();
                 this.pceTempSupplier.Tag = tempSuppliers;
 
-                List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType == (int)EnumSupplierType.其它供方);
+                List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType != (int)EnumSupplierType.临时供方&&!s.IsQualified);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
                 this.pceOtherSupplier.Tag = otherSuppliers;
 
@@ -606,7 +613,7 @@ namespace BudgetSystem
             {
                 if (isShowError)
                 {
-                    XtraMessageBox.Show("请输入外贸部分上商品信息！");
+                    XtraMessageBox.Show("请输入外贸部分的商品信息！");
                 }
                 return false;
             }

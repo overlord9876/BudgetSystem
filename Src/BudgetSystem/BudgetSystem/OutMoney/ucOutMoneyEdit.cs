@@ -259,7 +259,6 @@ namespace BudgetSystem.OutMoney
         public bool CheckInputData()
         {
             this.dxErrorProvider1.ClearErrors();
-            this.dxErrorProvider2.ClearErrors();
             Supplier currentSupplier = cboSupplier.EditValue as Supplier;
             if (cboSupplier.EditValue as Supplier == null)
             {
@@ -323,10 +322,15 @@ namespace BudgetSystem.OutMoney
                 }
             }
             CheckUsage();
-            if (txtAfterPaymentBalance.Value < 0)
+            if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value <= 0)
             {
                 XtraMessageBox.Show("【警告】支付后余额小于0");
                 this.dxErrorProvider1.SetError(txtAfterPaymentBalance, "【警告】支付后余额小于0");
+            }
+            else if (txtCNY.Value > txtAdvancePayment2.Value)
+            {
+                XtraMessageBox.Show("【警告】支付后余额小于0，且支付金额大于压缩后预付款");
+                this.dxErrorProvider1.SetError(txtAfterPaymentBalance, "【警告】支付后余额小于0，且支付金额大于压缩后预付款");
             }
 
             return dxErrorProvider1.HasErrors;
@@ -495,7 +499,7 @@ namespace BudgetSystem.OutMoney
                     decimal money = caculator.GetUsagePayMoney(umt.Name);
                     if (money + txtCNY.Value > this.currentBudget.Premium)
                     {
-                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
                         return;
                     }
                 }
@@ -510,7 +514,7 @@ namespace BudgetSystem.OutMoney
                     decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
                     if (money + txtCNY.Value > this.currentBudget.Premium)
                     {
-                        this.dxErrorProvider2.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money), DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning);
+                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
                         return;
                     }
                 }
@@ -562,6 +566,7 @@ namespace BudgetSystem.OutMoney
 
                 //应留利润计算
                 txtActualRetention.EditValue = caculator.ActualProfit;
+
                 CalcPaymentTaxRebate();
             }
             else
@@ -592,6 +597,9 @@ namespace BudgetSystem.OutMoney
             this.txtAfterPaymentBalance.EditValue = caculator.Balance;
             //支付后留利余额
             this.txtRetainedInterestBalance.EditValue = caculator.RetainedInterestBalance;
+            //压缩后预付款。
+            txtAdvancePayment2.EditValue = caculator.CompressAdvancePayment;
+
 
         }
 

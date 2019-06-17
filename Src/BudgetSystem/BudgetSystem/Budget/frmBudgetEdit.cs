@@ -55,17 +55,7 @@ namespace BudgetSystem
             }
             this.ucBudgetEdit1.FillData();
             this.ucBudgetEdit1.CurrentBudget.IsValid = checkResult;
-            string description = string.Empty;
-            if (isStartFlow)
-            {
-                frmDescription frmBudget = new frmDescription();
-                if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    description = frmBudget.Description;
-                }
-                else { return; }
-            }
-            string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, description, isStartFlow);
+            string message = bm.ModifyBudget(this.ucBudgetEdit1.CurrentBudget, string.Empty, isStartFlow);
             if (!string.IsNullOrEmpty(message))
             {
                 XtraMessageBox.Show(message, "提示");

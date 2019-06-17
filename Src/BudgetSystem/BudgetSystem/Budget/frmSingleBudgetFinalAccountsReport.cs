@@ -251,7 +251,7 @@ namespace BudgetSystem
 
             gridBand10.Caption = (totalOriginalCurrency - BillOriginalCoin).ToString();//应收原币
             gridBand3.Caption = (AllTotalAmount - BillCNY).ToString();//应收人名币
-            gridBand23.Caption = (needPayment - totalPaymentCNY).ToString(); //应付余额=已付金额-发票金额
+            gridBand23.Caption = (needPayment - totalPaymentCNY).ToString(); //应付余额=已收供方发票-已付供方货款
             gridBand4.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             return dt;
         }

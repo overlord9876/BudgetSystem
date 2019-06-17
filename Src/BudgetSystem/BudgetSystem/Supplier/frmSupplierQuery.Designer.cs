@@ -45,8 +45,8 @@
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcReviewDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -131,6 +131,8 @@
             this.gvSupplier.OptionsBehavior.Editable = false;
             this.gvSupplier.OptionsView.ColumnAutoWidth = false;
             this.gvSupplier.OptionsView.ShowGroupPanel = false;
+            this.gvSupplier.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcCreateDate, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gcName
             // 
@@ -229,15 +231,6 @@
             this.gcExistsAgentAgreement.VisibleIndex = 9;
             this.gcExistsAgentAgreement.Width = 102;
             // 
-            // gcDiscredited
-            // 
-            this.gcDiscredited.Caption = "是否失信企业";
-            this.gcDiscredited.FieldName = "Discredited";
-            this.gcDiscredited.Name = "gcDiscredited";
-            this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 11;
-            this.gcDiscredited.Width = 107;
-            // 
             // gcAgreementDate
             // 
             this.gcAgreementDate.Caption = "代理协议有效期";
@@ -247,6 +240,15 @@
             this.gcAgreementDate.VisibleIndex = 10;
             this.gcAgreementDate.Width = 80;
             // 
+            // gcDiscredited
+            // 
+            this.gcDiscredited.Caption = "是否失信企业";
+            this.gcDiscredited.FieldName = "Discredited";
+            this.gcDiscredited.Name = "gcDiscredited";
+            this.gcDiscredited.Visible = true;
+            this.gcDiscredited.VisibleIndex = 11;
+            this.gcDiscredited.Width = 107;
+            // 
             // gcCreateDate
             // 
             this.gcCreateDate.Caption = "创建时间";
@@ -254,6 +256,7 @@
             this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 12;
             this.gcCreateDate.Width = 80;

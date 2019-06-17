@@ -43,7 +43,7 @@ namespace BudgetSystem
         {
             RegisterEvent();
         }
-      
+
         private void RegisterEvent()
         {
             this.dteRegistrationDate.EditValueChanged += new EventHandler(dteRegistrationDate_EditValueChanged);
@@ -63,14 +63,14 @@ namespace BudgetSystem
 
         void dteRegistrationDate_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
+            if (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
             {
                 this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(DateTime.Now.Year - this.dteRegistrationDate.DateTime.Year + 1);
             }
         }
         void FirstReviewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
+            if (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
             {
                 int result = 0; int maxResult = 3;
                 int currentResult = 0;
@@ -182,7 +182,7 @@ namespace BudgetSystem
                         break;
                     }
                 }
-               
+
                 if (this.WorkModel == EditFormWorkModels.Review)
                 {
                     //初审,供应商类型不允许修改
@@ -193,14 +193,14 @@ namespace BudgetSystem
                     this.xtraTabControl1.TabPages.Remove(this.xtraTabPage3);
                 }
                 else if (this.WorkModel == EditFormWorkModels.Custom)
-                {   
+                {
                     //年审
                     this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     this.BindingReviewHistory(supplier.ID);
                     this.BindingReviewDetail(string.Empty);
                 }
                 else if (this.WorkModel == EditFormWorkModels.View)
-                {                    
+                {
                     this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     if (supplier.EnumFlowState == EnumDataFlowState.未审批 || string.IsNullOrEmpty(supplier.ReviewContents))
                     {
@@ -211,9 +211,9 @@ namespace BudgetSystem
                     else
                     {
                         this.BindingReviewHistory(supplier.ID);
-                        this.BindingReviewDetail(string.Empty);                        
+                        this.BindingReviewDetail(supplier.ReviewContents);
                     }
-                    
+
                 }
                 else if (this.WorkModel == EditFormWorkModels.Modify)
                 {
@@ -230,7 +230,7 @@ namespace BudgetSystem
                     }
                     this.BindingFirstReviewDetail(supplier.FirstReviewContents);
                     if (supplier.EnumFlowState != EnumDataFlowState.未审批)
-                    { 
+                    {
                         //只要关联有流程则流程审批相关字段不能修改
                         this.cboSupplierType.Properties.ReadOnly = true;
                         this.txtName.Properties.ReadOnly = true;
@@ -252,7 +252,7 @@ namespace BudgetSystem
                         this.rgResult.Properties.ReadOnly = true;
                         this.cboSalesmanResult.Properties.ReadOnly = true;
                     }
-                }               
+                }
             }
         }
 
@@ -395,7 +395,7 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.chkExistsLicenseCopy, "合格供方需要营业执照复印件");
                 }
-                if (chkDiscredited.Checked&&this.CurrentSupplier!=null&&!string.IsNullOrEmpty(this.CurrentSupplier.FlowName))
+                if (chkDiscredited.Checked && this.CurrentSupplier != null && !string.IsNullOrEmpty(this.CurrentSupplier.FlowName))
                 {
                     this.dxErrorProvider1.SetError(this.chkDiscredited, "合格供方需为非经营异常企业");
                 }
@@ -421,8 +421,13 @@ namespace BudgetSystem
                     this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
                 }
                 baseError = this.dxErrorProvider1.HasErrors;
-                if(isStartFlow)
+                if (isStartFlow)
                 {
+                    if (this.chkDiscredited.Checked && (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批))
+                    {
+                        baseError = true;
+                        this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "合格供方需为非经营异常企业");
+                    }
                     foreach (Control control in this.layoutControl2.Controls)
                     {
                         if (control is RadioGroup && control.Tag != null && (control as RadioGroup).SelectedIndex == -1)
@@ -430,8 +435,11 @@ namespace BudgetSystem
                             this.dxErrorProvider1.SetError(control, string.Format("请选择{0}评价", control.Tag));
                         }
                     }
-                    
-                    if (rgResult.SelectedIndex == 3)
+                    if (rgResult.SelectedIndex == -1)
+                    {
+                        this.dxErrorProvider1.SetError(rgResult, string.Format("必须选择评价结论"));
+                    }
+                    else if (rgResult.SelectedIndex == 3)
                     {
                         this.dxErrorProvider1.SetError(this.rgResult, "评价结论为D不能提交审批");
                     }
@@ -482,8 +490,8 @@ namespace BudgetSystem
             this.CurrentSupplier.Tell = this.txtTell.Text.Trim();
             this.CurrentSupplier.Discredited = this.chkDiscredited.Checked;
             this.CurrentSupplier.ExistsAgentAgreement = this.chkExistsAgentAgreement.Checked;
-            this.CurrentSupplier.Description = this.meDescription.Text.Trim();            
-           
+            this.CurrentSupplier.Description = this.meDescription.Text.Trim();
+
             this.CurrentSupplier.ExistsLicenseCopy = this.chkExistsLicenseCopy.Checked;
             this.CurrentSupplier.BankInfoDetail = this.GetBankInfoDetailString();
             if (this.dteReviewDate.EditValue != null)
@@ -513,8 +521,8 @@ namespace BudgetSystem
             else
             {
                 this.CurrentSupplier.BusinessEffectiveDate = null;
-            } 
-             
+            }
+
             if (this.WorkModel == EditFormWorkModels.Custom)
             {
                 //复审
@@ -540,15 +548,15 @@ namespace BudgetSystem
                     reviewContents.RectificationBatch = int.Parse(txtRectificationBatch.Text.Trim());
                 }
                 reviewContents.RectificationResult = rgRectificationResult.SelectedIndex == 0 ? true : false;
-                reviewContents.SalesmanResult =  true ;
+                reviewContents.SalesmanResult = true;
                 reviewContents.Salesman = RunInfo.Instance.CurrentUser.RealName;
                 reviewContents.Discredited = false;
                 this.CurrentSupplier.ReviewContents = reviewContents.ToJson();
             }
             else
-            {               
+            {
                 if (this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批
-                    || this.WorkModel  == EditFormWorkModels.Review)
+                    || this.WorkModel == EditFormWorkModels.Review)
                 {
                     SupplierFirstReviewContents reviewContents = new SupplierFirstReviewContents();
                     reviewContents.Result = this.rgResult.SelectedIndex;

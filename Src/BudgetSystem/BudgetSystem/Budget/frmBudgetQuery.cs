@@ -308,6 +308,11 @@ namespace BudgetSystem
                         XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                         return;
                     }
+                    if (budget.EnumFlowState == EnumDataFlowState.未审批)
+                    {
+                        XtraMessageBox.Show(string.Format("{0}的预算单未审批，不需要提交申请修改。", budget.ContractNO));
+                        return;
+                    }
                     frmDescription frmBudget = new frmDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {

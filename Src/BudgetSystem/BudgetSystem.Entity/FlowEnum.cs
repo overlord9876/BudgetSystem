@@ -42,8 +42,12 @@ namespace BudgetSystem.Entity
 
     public class EnumCheckUtil
     {
-        public static string CheckCurrentFlowStart(EnumFlowNames currentFlowName, EnumFlowNames oldFlowName, EnumDataFlowState oldFlowState)
+        public static string CheckCurrentFlowStart(EnumFlowNames currentFlowName, EnumFlowNames? oldFlowName, EnumDataFlowState oldFlowState)
         {
+            if (oldFlowName == null)
+            {
+                return string.Empty;
+            }
             if (currentFlowName == oldFlowName && oldFlowState == EnumDataFlowState.审批通过)
             {
                 return string.Format("{0}已经{1},不允许重复提交", currentFlowName, oldFlowState);

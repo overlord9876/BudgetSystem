@@ -21,7 +21,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string ContractNO { get; set; }
 
-        private int state = 0;
+        private int state = 1;
         /// <summary>
         /// 状态
         /// </summary>
@@ -96,7 +96,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 有效截止期
         /// </summary>
-        public DateTime Validity { get; set; }
+        public DateTime? Validity { get; set; }
 
         /// <summary>
         /// 一般贸易 = 1

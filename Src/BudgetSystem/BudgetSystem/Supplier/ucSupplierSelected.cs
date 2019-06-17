@@ -67,9 +67,13 @@ namespace BudgetSystem
                     {
                         this.dataSource.ForEach(s => { if (s.IsQualified == true) { newDataSource.Add(s); } });
                     }
-                    else
+                    else if (type == EnumSupplierType.临时供方)
                     {
                         this.dataSource.ForEach(s => { if (s.SupplierType == (int)type) { newDataSource.Add(s); } });
+                    }
+                    else
+                    {
+                        this.dataSource.ForEach(s => { if (s.SupplierType != (int)EnumSupplierType.临时供方 && s.IsQualified == false) { newDataSource.Add(s); } });
                     }
                     suppliers = new BindingList<Supplier>(newDataSource);
                 }

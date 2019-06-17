@@ -2174,11 +2174,11 @@
             // layoutControlItem27
             // 
             this.layoutControlItem27.Control = this.dteReviewResultDate;
-            this.layoutControlItem27.CustomizationFormText = "复评结论日期：";
+            this.layoutControlItem27.CustomizationFormText = "复评结论日期";
             this.layoutControlItem27.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem27.Name = "layoutControlItem27";
             this.layoutControlItem27.Size = new System.Drawing.Size(312, 29);
-            this.layoutControlItem27.Text = "复评结论日期：";
+            this.layoutControlItem27.Text = "复评结论日期";
             this.layoutControlItem27.TextSize = new System.Drawing.Size(120, 18);
             // 
             // layoutControlItem28
