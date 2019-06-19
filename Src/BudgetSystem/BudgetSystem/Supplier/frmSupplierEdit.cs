@@ -29,7 +29,6 @@ namespace BudgetSystem
 
         private void frmSupplierEdit_Load(object sender, EventArgs e)
         {
-            this.ucSupplierEdit1.InitData();
             this.ucSupplierEdit1.CurrentSupplier = this.CurrentSupplier;
             this.ucSupplierEdit1.WorkModel = this.WorkModel;
             if (this.WorkModel == EditFormWorkModels.New)

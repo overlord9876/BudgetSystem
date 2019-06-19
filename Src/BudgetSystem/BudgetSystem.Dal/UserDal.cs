@@ -50,14 +50,33 @@ namespace BudgetSystem.Dal
             return con.Query<User>(selectSql, null, tran);
         }
 
-        public IEnumerable<User> GetRoleUsers(string roleCode, IDbConnection con, IDbTransaction tran)
+        public IEnumerable<User> GetRoleUsers(List<string> roleCodes, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
             From `User` 
             Left Join `Role` on `User`.`Role` = `Role`.`Code` 
             Left Join `Department` on `User`.`DeptID` = `Department`.ID
-            Where `Role`=@Role";
-            return con.Query<User>(selectSql, new { Role = roleCode }, tran);
+            Where `Role`=@Role ";
+
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("@Role", roleCodes[0], DbType.String, null, null);
+            if (roleCodes.Count > 1)
+            {
+                string roleCodeParamName = string.Empty;
+                for (int index = 1; index < roleCodes.Count; index++)
+                {
+                    roleCodeParamName = "@RoleCode" + index;
+                    string roleCode = roleCodes[index];
+                    selectSql += @" union
+            Select `UserName`,`RealName`,`Role`,`Role`.`Name` as RoleName,DeptID,`Department`.Code as Department,`Department`.`Name` as DepartmentName,`State`,`User`.`CreateUser`, `User`.`UpdateDateTime` 
+            From `User` 
+            Left Join `Role` on `User`.`Role` = `Role`.`Code` 
+            Left Join `Department` on `User`.`DeptID` = `Department`.ID
+            Where `Role`=" + roleCodeParamName;
+                    dp.Add(roleCodeParamName, roleCode, DbType.String, null, null);
+                }
+            }
+            return con.Query<User>(selectSql, dp, tran);
 
         }
 

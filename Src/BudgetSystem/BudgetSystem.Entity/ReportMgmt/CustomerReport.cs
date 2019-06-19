@@ -22,9 +22,14 @@ namespace BudgetSystem.Entity
         public string Name { get; set; }
 
         /// <summary>
-        /// 付款人民币
+        /// 总人民币金额
         /// </summary>
         public decimal CNY { get; set; }
+
+        /// <summary>
+        /// 未拆分人民币
+        /// </summary>
+        public decimal CNY2 { get; set; }
 
         /// <summary>
         /// 汇率
@@ -32,9 +37,14 @@ namespace BudgetSystem.Entity
         public decimal ExchangeRate { get; set; }
 
         /// <summary>
-        /// 付款原币金额
+        /// 总原币金额
         /// </summary>
         public decimal OriginalCoin { get; set; }
+
+        /// <summary>
+        /// 未拆分原币金额
+        /// </summary>
+        public decimal OriginalCoin2 { get; set; }
 
         public List<Declarationform> DeclarationformList { get; set; }
         public decimal DeclarationformTotal

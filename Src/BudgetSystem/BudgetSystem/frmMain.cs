@@ -316,22 +316,19 @@ namespace BudgetSystem
 
         private void btnCustomerReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Report.frmCustomerReport form = GetExistForm<Report.frmCustomerReport>();
-            if (form == null)
-            {
-                form = new Report.frmCustomerReport();
-                form.RefreshData();
-            }
-            else
-            {
-                FormActivited(form);
-            }
-            ShowForm(form);
-        }
+            //Report.frmCustomerReport form = GetExistForm<Report.frmCustomerReport>();
+            //if (form == null)
+            //{
+            //    form = new Report.frmCustomerReport();
+            //    form.RefreshData();
+            //}
+            //else
+            //{
+            //    FormActivited(form);
+            //}
+            //ShowForm(form);
 
-        private void btnSlipperReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Report.frmSlipperReport form = GetExistForm<Report.frmSlipperReport>();
+            Report.frmSlipperReport form = GetExistForm<Report.frmSlipperReport>(BudgetSystem.Entity.BusinessModules.CustomerReport);
             if (form == null)
             {
                 form = new Report.frmSlipperReport();
@@ -341,6 +338,23 @@ namespace BudgetSystem
             {
                 FormActivited(form);
             }
+            form.Module = BudgetSystem.Entity.BusinessModules.CustomerReport;
+            ShowForm(form);
+        }
+
+        private void btnSlipperReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Report.frmSlipperReport form = GetExistForm<Report.frmSlipperReport>(BudgetSystem.Entity.BusinessModules.SlipperReport);
+            if (form == null)
+            {
+                form = new Report.frmSlipperReport();
+                //form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = BudgetSystem.Entity.BusinessModules.SlipperReport;
             ShowForm(form);
         }
 

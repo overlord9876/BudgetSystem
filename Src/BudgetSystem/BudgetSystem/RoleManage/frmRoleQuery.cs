@@ -55,7 +55,7 @@ namespace BudgetSystem.RoleManage
 
             BindAllUsers();
             BindAllPermissions();
-         
+
         }
 
         private void gvRoleList_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -104,7 +104,7 @@ namespace BudgetSystem.RoleManage
             Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
             if (currentRole != null)
             {
-                List<User> roleUser = um.GetRoleUsers(currentRole.Code);
+                List<User> roleUser = um.GetRoleUsers(new List<string>() { currentRole.Code });
                 this.gdRoleUsers.DataSource = roleUser;
 
             }
@@ -126,9 +126,9 @@ namespace BudgetSystem.RoleManage
                     {
                         pList.Add(p);
                     }
-                   
+
                 }
-                pList= pList.OrderBy(s => s.DisplayOrder).ToList();
+                pList = pList.OrderBy(s => s.DisplayOrder).ToList();
                 this.gdRolePermissions.DataSource = pList;
                 this.gvRolePermissons.ExpandAllGroups();
             }
@@ -138,7 +138,7 @@ namespace BudgetSystem.RoleManage
         private void btnAddUserToRole_Click(object sender, EventArgs e)
         {
             Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
-            if (currentRole==null)
+            if (currentRole == null)
             {
                 XtraMessageBox.Show("请选中待分配角色");
                 return;
@@ -250,7 +250,7 @@ namespace BudgetSystem.RoleManage
                     result.AddRange(GetGroupedRow(row, view).ToArray());
                 }
 
-             
+
             }
             return result.Distinct().ToList();
         }
@@ -267,8 +267,8 @@ namespace BudgetSystem.RoleManage
                 result.Add(p.Code);
             }
             return result;
-        
-        
+
+
         }
 
 
@@ -280,8 +280,8 @@ namespace BudgetSystem.RoleManage
             {
                 GridGroupRowInfo.GroupText = Permisson.Permissions.Single(s => s.DisplayOrder == (int)GridGroupRowInfo.EditValue).DisplayName;
             }
-        
-      
+
+
         }
 
 

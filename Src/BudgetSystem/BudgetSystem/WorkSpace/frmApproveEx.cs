@@ -19,7 +19,7 @@ namespace BudgetSystem.WorkSpace
         public frmApproveEx()
         {
             InitializeComponent();
-            memoEdit1.Properties.ReadOnly = true;
+            txtDescription.Properties.ReadOnly = true;
         }
 
         private BatchDataControl dataControl;
@@ -51,15 +51,34 @@ namespace BudgetSystem.WorkSpace
 
         private void frmApproveEx_Load(object sender, EventArgs e)
         {
-            SetLayoutControlStyle();
+            //SetLayoutControlStyle();
             this.WindowState = FormWindowState.Maximized;
             CreateView();
 
             if (this.CustomWorkModel == ApproveModel || this.CustomWorkModel == BatchApproveModel)
             {
                 this.Text = "流程审批";
-                string flowName = this.CustomWorkModel == BatchApproveModel ? BatchFlowItems[0].FlowName : FlowItem.FlowName;
+                if (this.CustomWorkModel == ApproveModel)
+                {
+                    lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//审批意见：
+                    lciViewHistory.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查询审批记录
+                    lciViewFlow.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查看流程
+                }
+                else
+                {
+                    lciDescription.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//流程说明
+                    lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//审批意见：
+                    emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    lciViewHistory.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//查询审批记录
+                    lciViewFlow.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//查看流程
+                }
+                lciAccept.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//审批通过
+                lciReturn.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//驳回
+                lciConfirm.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//确认审批结果
+                lciRevoke.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//撤回审批
+                lciExit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//退出
 
+                string flowName = this.CustomWorkModel == BatchApproveModel ? BatchFlowItems[0].FlowName : FlowItem.FlowName;
 
                 this.btnAccept.Text = RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayAcceptName(flowName);
                 this.btnAcceptAndPrint.Caption = this.btnAccept.Text + "并打印";
@@ -68,10 +87,31 @@ namespace BudgetSystem.WorkSpace
             }
             else if (this.CustomWorkModel == ViewModel)
             {
+                lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//审批意见：
+                lciAccept.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//审批通过
+                lciReturn.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//驳回
+                emptySpaceItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lciConfirm.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//确认审批结果
+                lciRevoke.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//撤回审批
+                emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lciViewHistory.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查询审批记录
+                lciViewFlow.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查看流程
+                lciExit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//退出
+
                 this.Text = "查看审批数据";
             }
             else if (this.CustomWorkModel == ConfirmOrRevokeModel)
             {
+                lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//审批意见：
+                lciAccept.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//审批通过
+                lciReturn.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//驳回
+                emptySpaceItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lciConfirm.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//确认审批结果
+                lciRevoke.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//撤回审批
+                lciViewHistory.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查询审批记录
+                lciViewFlow.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//查看流程
+                lciExit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//退出
+
                 this.Text = "流程发起人确认或撤回";
             }
 
@@ -95,10 +135,18 @@ namespace BudgetSystem.WorkSpace
             }
             else
             {
-                memoEdit1.Text = FlowItem.Description;
+                txtDescription.Text = FlowItem.Description;
                 dc = DataControlCreator.CreateDataControl(FlowItem.FlowName, FlowItem.DateItemType);
                 dc.BindingData(FlowItem.DateItemID);
                 layoutItemName = FlowItem.DateItemText;
+            }
+            if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
+            {
+                lciDescription.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//流程说明
+            }
+            else
+            {
+                lciDescription.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;//流程说明
             }
 
             this.Top = 0;
@@ -113,7 +161,7 @@ namespace BudgetSystem.WorkSpace
             temp.MaxSize = new Size(0, dc.Height);
             temp.MinSize = new Size(0, dc.Height);
             this.Width = dc.Width + 20;
-            this.lcDataGroup.Remove(emptySpaceItem1);
+            this.lcDataGroup.Remove(emptySpaceItem3);
             lcDataGroup.EndUpdate();
 
         }

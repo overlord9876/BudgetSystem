@@ -166,8 +166,9 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            allSalesmanList = um.GetRoleUsers(StringUtil.SaleRoleCode);
-
+            allSalesmanList = um.GetRoleUsers(new List<string>() { StringUtil.SaleRoleCode, StringUtil.SaleDepartmentRoleCode });
+            if (allSalesmanList != null)
+                allSalesmanList = allSalesmanList.OrderBy(o => o.UserName).ToList();
             cboSales.Properties.Items.Clear();
 
             cboSales.Properties.Items.AddRange(allSalesmanList.ToArray());

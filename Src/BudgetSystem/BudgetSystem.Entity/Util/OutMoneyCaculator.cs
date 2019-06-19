@@ -109,6 +109,11 @@ namespace BudgetSystem.Entity
         public decimal PaymentMoneyAmount { get; private set; }
 
         /// <summary>
+        /// 不含运杂费
+        /// </summary>
+        public decimal IgnoreTransportationExpensesPaymentMoneyAmount { get; private set; }
+
+        /// <summary>
         /// 出口退税%(率)
         /// </summary>
         public List<decimal> TaxRebateRateList
@@ -411,9 +416,13 @@ namespace BudgetSystem.Entity
             TaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
 
             PaymentMoneyAmount = _paymentList.Sum(o => o.CNY);
+            IgnoreTransportationExpensesPaymentMoneyAmount = _paymentList.Where(o => !o.MoneyUsed.Equals(TransportationExpensesCaption)).Sum(o => o.CNY);
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());
         }
 
         #endregion
+
+        public const string TransportationExpensesCaption = "运杂费";
+
     }
 }

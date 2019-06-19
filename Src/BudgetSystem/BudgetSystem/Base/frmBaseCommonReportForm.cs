@@ -71,6 +71,7 @@ namespace BudgetSystem.Base
             if (!supportPivotGrid)
             {
                 this.lcgPivote.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
             }
 
             if (supportPivotGrid && !supportPivotGridSaveView)

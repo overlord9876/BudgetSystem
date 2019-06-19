@@ -275,7 +275,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
             }
-            else if (!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
+            else if ((!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName)) || (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过)))
             {
                 this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单审批流程));
             }
@@ -309,10 +309,6 @@ namespace BudgetSystem.OutMoney
             //{
             //    this.dxErrorProvider1.SetError(cboPayingBank, "请输入付款银行。");
             //}
-            if (!(cboMoneyUsed.EditValue is UseMoneyType))
-            {
-                this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
-            }
             if (currentSupplier != null && currentSupplier.SupplierType == (int)EnumSupplierType.临时供方)
             {
                 decimal totalAmount = txtCNY.Value + temporarySupplierPaymenttotalAmount;
@@ -321,20 +317,34 @@ namespace BudgetSystem.OutMoney
                     this.dxErrorProvider1.SetError(txtCNY, string.Format("当前临时供方已付款{0}，加上当前付款金额已超过最大限制。", temporarySupplierPaymenttotalAmount));
                 }
             }
-            CheckUsage();
-            if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value <= 0)
+            UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
+            if (umt == null || string.IsNullOrEmpty(umt.Name.Trim()))
             {
-                XtraMessageBox.Show("【警告】支付后余额小于0");
-                this.dxErrorProvider1.SetError(txtAfterPaymentBalance, "【警告】支付后余额小于0");
+                this.dxErrorProvider1.SetError(cboMoneyUsed, "请选择用款类型。");
             }
-            else if (txtCNY.Value > txtAdvancePayment2.Value)
+            else
             {
-                XtraMessageBox.Show("【警告】支付后余额小于0，且支付金额大于压缩后预付款");
-                this.dxErrorProvider1.SetError(txtAfterPaymentBalance, "【警告】支付后余额小于0，且支付金额大于压缩后预付款");
+                CheckUsage(umt.Name);
+                if (!OutMoneyCaculator.TransportationExpensesCaption.Equals(umt.Name) && !dxErrorProvider1.HasErrors)
+                {
+                    if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value <= 0)
+                    {
+                        XtraMessageBox.Show(WarningMessage2);
+                        this.dxErrorProvider1.SetError(txtAfterPaymentBalance, WarningMessage2);
+                    }
+                    else if (txtAdvancePayment.Value - txtIgnoreTransportationExpensesPaymentMoneyAmount.Value < 0)
+                    {
+                        XtraMessageBox.Show(WarningMessage);
+                        this.dxErrorProvider1.SetError(txtIgnoreTransportationExpensesPaymentMoneyAmount, WarningMessage);
+                        this.dxErrorProvider1.SetError(txtAdvancePayment, WarningMessage);
+                    }
+                }
             }
-
             return dxErrorProvider1.HasErrors;
         }
+
+        const string WarningMessage2 = "不能支付，支付后余额小于0";
+        const string WarningMessage = "不能支付，支付后余额小于0，且累计支付金额（不含运杂费）大于预付款";
 
         private void SetReadOnly()
         {
@@ -461,62 +471,73 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
         }
 
-        private void CheckUsage()
+        private void CheckUsage(string usageName)
         {
-            UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
-            if (umt != null)
+            string message = string.Empty;
+            if (usageName == "辅料款")
             {
-                if (umt.Name == "辅料款")
+                decimal price = this.currentBudget.InProductList.Sum(o => o.RawMaterials + o.SubsidiaryMaterials);
+                if (price == 0)
                 {
-                    decimal price = this.currentBudget.InProductList.Sum(o => o.RawMaterials + o.SubsidiaryMaterials);
-                    if (price == 0)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现原料、辅料价格");
-                    }
+                    message = "不能支付，预算单中没有体现原料、辅料价格，如需付款请修改预算单。";
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                }
+                return;
+            }
+            else if (usageName == OutMoneyCaculator.TransportationExpensesCaption)
+            {
+                if (this.currentBudget.Premium == 0)
+                {
+                    message = "不能支付，预算单中没有体现运杂费，如需付款请修改预算单。";
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
                     return;
                 }
-                else if (umt.Name == "运杂费")
+                decimal money = caculator.GetUsagePayMoney(usageName);
+                if (money + txtCNY.Value > this.currentBudget.Premium)
                 {
-                    if (this.currentBudget.Premium == 0)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现运杂费");
-                        return;
-                    }
-                    decimal money = caculator.GetUsagePayMoney(umt.Name);
-                    if (money + txtCNY.Value > this.currentBudget.Premium)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
-                        return;
-                    }
+                    message = string.Format("不能支付，预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                    return;
                 }
-                else if (umt.Name == "进料款")
+            }
+            else if (usageName == "进料款")
+            {
+                if (this.currentBudget.FeedMoney == 0)
                 {
-                    if (this.currentBudget.FeedMoney == 0)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现进料款");
-                        return;
-                    }
-                    decimal money = caculator.GetUsagePayMoney(umt.Name);
-                    if (money + txtCNY.Value > this.currentBudget.Premium)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
-                        return;
-                    }
+                    message = "不能支付，预算单中没有体现进料款，如需付款请修改预算单。";
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                    return;
                 }
-                else if (Entity.Util.CommissionUsageNameList.Contains(umt.Name))
+                decimal money = caculator.GetUsagePayMoney(usageName);
+                if (money + txtCNY.Value > this.currentBudget.Premium)
                 {
-                    if (this.currentBudget.Commission == 0)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, "预算单中没有体现佣金");
-                        return;
-                    }
-                    //暂时先放开佣金付款超额
-                    decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
-                    if (money + txtCNY.Value > this.currentBudget.Premium)
-                    {
-                        this.dxErrorProvider1.SetError(cboMoneyUsed, string.Format("预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额", this.currentBudget.Premium, money)/*, DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning*/);
-                        return;
-                    }
+                    message = string.Format("不能支付，预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                    return;
+                }
+            }
+            else if (Entity.Util.CommissionUsageNameList.Contains(usageName))
+            {
+                if (this.currentBudget.Commission == 0)
+                {
+                    message = "不能支付，预算单中没有体现佣金，如需付款请修改预算单。";
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                    return;
+                }
+                //暂时先放开佣金付款超额
+                decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
+                if (money + txtCNY.Value > this.currentBudget.Premium)
+                {
+                    message = string.Format("不能支付，预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    this.dxErrorProvider1.SetError(cboMoneyUsed, message);
+                    XtraMessageBox.Show(message);
+                    return;
                 }
             }
         }
@@ -583,7 +604,7 @@ namespace BudgetSystem.OutMoney
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }
-            if (this.txtCNY.Value != 0)
+            if (this.txtCNY.Value >= 0)//(this.txtCNY.Value != 0)如果为0需要还原计算处理。
             {
                 caculator.ApplyForPayment(this.txtCNY.Value, taxRebateRate, this.chkIsDrawback.Checked);
             }
@@ -597,10 +618,19 @@ namespace BudgetSystem.OutMoney
             this.txtAfterPaymentBalance.EditValue = caculator.Balance;
             //支付后留利余额
             this.txtRetainedInterestBalance.EditValue = caculator.RetainedInterestBalance;
-            //压缩后预付款。
-            txtAdvancePayment2.EditValue = caculator.CompressAdvancePayment;
 
+            UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
 
+            if (umt == null || string.IsNullOrEmpty(umt.Name) || umt.Name.Equals(OutMoneyCaculator.TransportationExpensesCaption))
+            {
+                //不含运费付款金额。
+                txtIgnoreTransportationExpensesPaymentMoneyAmount.EditValue = caculator.IgnoreTransportationExpensesPaymentMoneyAmount;
+            }
+            else
+            {
+                //不含运费付款金额。
+                txtIgnoreTransportationExpensesPaymentMoneyAmount.EditValue = caculator.IgnoreTransportationExpensesPaymentMoneyAmount + this.txtCNY.Value;
+            }
         }
 
         private decimal temporarySupplierPaymenttotalAmount;

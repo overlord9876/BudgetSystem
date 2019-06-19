@@ -36,6 +36,10 @@ namespace BudgetSystem
         public ucSupplierEdit()
         {
             InitializeComponent();
+            if (!frmBaseForm.IsDesignMode)
+            {
+                this.InitData();
+            }
             this.Load += new System.EventHandler(this.ucSupplierEdit_Load);
         }
 
@@ -131,6 +135,13 @@ namespace BudgetSystem
             List<Department> departmentList = dm.GetAllDepartment();
             this.cboDepartment.Properties.Items.AddRange(departmentList);
             this.rgResult.SelectedIndex = -1;
+            foreach (Control control in this.layoutControl2.Controls)
+            {
+                if (control is RadioGroup && control.Tag != null)
+                {
+                    (control as RadioGroup).SelectedIndex = -1;
+                }
+            }
             this.txtSalesman.Text = RunInfo.Instance.CurrentUser.RealName;
             // this.layoutControl1.RestoreLayoutFromStream(this.GetResourceFileByCurrentWorkModel());
 
@@ -426,7 +437,7 @@ namespace BudgetSystem
                     if (this.chkDiscredited.Checked && (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批))
                     {
                         baseError = true;
-                        this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "合格供方需为非经营异常企业");
+                        this.dxErrorProvider1.SetError(this.chkDiscredited, "合格供方需为非经营异常企业");
                     }
                     foreach (Control control in this.layoutControl2.Controls)
                     {

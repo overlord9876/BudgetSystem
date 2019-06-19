@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.chkExistsLicenseCopy = new DevExpress.XtraEditors.CheckEdit();
             this.gridBankInfoDetail = new DevExpress.XtraGrid.GridControl();
@@ -86,7 +87,7 @@
             this.lcTell = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
@@ -402,7 +403,7 @@
             this.gridBankInfoDetail.MainView = this.gvBankInfoDetail;
             this.gridBankInfoDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridBankInfoDetail.Name = "gridBankInfoDetail";
-            this.gridBankInfoDetail.Size = new System.Drawing.Size(983, 264);
+            this.gridBankInfoDetail.Size = new System.Drawing.Size(983, 294);
             this.gridBankInfoDetail.TabIndex = 37;
             this.gridBankInfoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBankInfoDetail});
@@ -464,7 +465,7 @@
             // 
             // txtUpdateUser
             // 
-            this.txtUpdateUser.Location = new System.Drawing.Point(634, 595);
+            this.txtUpdateUser.Location = new System.Drawing.Point(634, 625);
             this.txtUpdateUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUpdateUser.Name = "txtUpdateUser";
             this.txtUpdateUser.Properties.ReadOnly = true;
@@ -474,7 +475,7 @@
             // 
             // txtUpdateDate
             // 
-            this.txtUpdateDate.Location = new System.Drawing.Point(125, 595);
+            this.txtUpdateDate.Location = new System.Drawing.Point(125, 625);
             this.txtUpdateDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUpdateDate.Name = "txtUpdateDate";
             this.txtUpdateDate.Properties.ReadOnly = true;
@@ -546,11 +547,11 @@
             // 
             // meDescription
             // 
-            this.meDescription.Location = new System.Drawing.Point(125, 624);
+            this.meDescription.Location = new System.Drawing.Point(125, 654);
             this.meDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.meDescription.Name = "meDescription";
             this.meDescription.Properties.MaxLength = 1024;
-            this.meDescription.Size = new System.Drawing.Size(891, 93);
+            this.meDescription.Size = new System.Drawing.Size(891, 63);
             this.meDescription.StyleController = this.layoutControl1;
             this.meDescription.TabIndex = 16;
             // 
@@ -639,7 +640,7 @@
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(634, 566);
+            this.txtCreateUser.Location = new System.Drawing.Point(634, 596);
             this.txtCreateUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Properties.ReadOnly = true;
@@ -649,7 +650,7 @@
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(125, 566);
+            this.txtCreateDate.Location = new System.Drawing.Point(125, 596);
             this.txtCreateDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Properties.ReadOnly = true;
@@ -733,7 +734,6 @@
             this.lcContacts,
             this.lcDepartment,
             this.lcName,
-            this.lcDescription,
             this.lcLegal,
             this.layoutControlItem4,
             this.lcNature,
@@ -747,7 +747,8 @@
             this.layoutControlItem15,
             this.lcTell,
             this.lcPostalCode,
-            this.layoutControlItem16});
+            this.layoutControlItem16,
+            this.lcDescription});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -769,7 +770,7 @@
             // 
             this.lcCreateDate.Control = this.txtCreateDate;
             this.lcCreateDate.CustomizationFormText = "创建时间：";
-            this.lcCreateDate.Location = new System.Drawing.Point(0, 564);
+            this.lcCreateDate.Location = new System.Drawing.Point(0, 594);
             this.lcCreateDate.Name = "lcCreateDate";
             this.lcCreateDate.Size = new System.Drawing.Size(509, 29);
             this.lcCreateDate.Text = "创建时间：";
@@ -779,7 +780,7 @@
             // 
             this.lcCreateUser.Control = this.txtCreateUser;
             this.lcCreateUser.CustomizationFormText = "创建人";
-            this.lcCreateUser.Location = new System.Drawing.Point(509, 564);
+            this.lcCreateUser.Location = new System.Drawing.Point(509, 594);
             this.lcCreateUser.Name = "lcCreateUser";
             this.lcCreateUser.Size = new System.Drawing.Size(509, 29);
             this.lcCreateUser.Text = "创建人：";
@@ -859,9 +860,9 @@
             // 
             this.lcDescription.Control = this.meDescription;
             this.lcDescription.CustomizationFormText = "备注：";
-            this.lcDescription.Location = new System.Drawing.Point(0, 622);
+            this.lcDescription.Location = new System.Drawing.Point(0, 652);
             this.lcDescription.Name = "lcDescription";
-            this.lcDescription.Size = new System.Drawing.Size(1018, 97);
+            this.lcDescription.Size = new System.Drawing.Size(1018, 67);
             this.lcDescription.Text = "备注：";
             this.lcDescription.TextSize = new System.Drawing.Size(120, 18);
             // 
@@ -923,7 +924,7 @@
             // 
             this.lcUpdateDate.Control = this.txtUpdateDate;
             this.lcUpdateDate.CustomizationFormText = "修改时间：";
-            this.lcUpdateDate.Location = new System.Drawing.Point(0, 593);
+            this.lcUpdateDate.Location = new System.Drawing.Point(0, 623);
             this.lcUpdateDate.Name = "lcUpdateDate";
             this.lcUpdateDate.Size = new System.Drawing.Size(509, 29);
             this.lcUpdateDate.Text = "修改时间：";
@@ -933,7 +934,7 @@
             // 
             this.lcUpdateUser.Control = this.txtUpdateUser;
             this.lcUpdateUser.CustomizationFormText = "修改人：";
-            this.lcUpdateUser.Location = new System.Drawing.Point(509, 593);
+            this.lcUpdateUser.Location = new System.Drawing.Point(509, 623);
             this.lcUpdateUser.Name = "lcUpdateUser";
             this.lcUpdateUser.Size = new System.Drawing.Size(509, 29);
             this.lcUpdateUser.Text = "修改人：";
@@ -967,7 +968,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 290);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1018, 274);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1018, 304);
             this.layoutControlGroup2.Text = "银行账号";
             this.layoutControlGroup2.TextLocation = DevExpress.Utils.Locations.Left;
             // 
@@ -977,7 +978,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(987, 268);
+            this.layoutControlItem8.Size = new System.Drawing.Size(987, 298);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;

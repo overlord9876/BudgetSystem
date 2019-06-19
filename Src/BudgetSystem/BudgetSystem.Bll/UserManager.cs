@@ -48,12 +48,12 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<User> GetRoleUsers(string roleCode)
+        public List<User> GetRoleUsers(List<string> roleCodes)
         {
             var lst = this.Query<User>((con) =>
             {
 
-                var uList = dal.GetRoleUsers(roleCode, con, null);
+                var uList = dal.GetRoleUsers(roleCodes, con, null);
                 return uList;
 
             });

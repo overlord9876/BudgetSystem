@@ -138,36 +138,87 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
 
         public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT c.`Name`,sum(bs.CNY) as CNY,sum(bs.OriginalCoin) as OriginalCoin,bs.ExchangeRate from customer as c join BankSlip bs on c.ID=bs.Cus_ID
-where CreateTimestamp BETWEEN @BeginTime AND @EndTime ");
+            IEnumerable<CustomerReport> result = null;
+            string selectSql = string.Empty;
             DynamicParameters dp = new DynamicParameters();
-            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
-            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
-            if (!string.IsNullOrEmpty(condition.Salesman))
+            if (condition == null || condition.ID <= 0)
             {
-                selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.username=@Salesman ) ";
-                dp.Add("Salesman", condition.Salesman, null, null, null);
-            }
-            else if (condition.DeptID >= 0)
-            {
-                selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.DeptID=@DeptID) ";
-                dp.Add("DeptID", condition.DeptID, null, null, null);
-            }
+                selectSql = string.Format(@"SELECT c.`Name`,SUM(bs.CNY) as CNY,SUM(bs.OriginalCoin) as OriginalCoin ,AVG(bs.ExchangeRate) as ExchangeRate,SUM(bs.CNY2) as CNY2,SUM(bs.OriginalCoin2) as OriginalCoin2
+from bankslip bs join customer c on bs.Cus_ID=c.ID where CreateTimestamp BETWEEN @BeginTime AND @EndTime ");
 
-            selectSql += "group by c.`Name`";
-            IEnumerable<CustomerReport> result = con.Query<CustomerReport>(selectSql, dp, tran);
+                dp.Add("BeginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
+                dp.Add("EndTime", condition.EndTimestamp, DbType.DateTime, null, null);
+                if (!string.IsNullOrEmpty(condition.Salesman))
+                {
+                    selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.username=@Salesman ) ";
+                    dp.Add("Salesman", condition.Salesman, DbType.String, null, null);
+                }
+                else if (condition.DeptID >= 0)
+                {
+                    selectSql += " AND ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.DeptID=@DeptID) ";
+                    dp.Add("DeptID", condition.DeptID, null, null, null);
+                }
 
-            selectSql = string.Format(@"select c.`Name`,d.* from Declarationform d join budget b on d.BudgetID=b.ID join customer c on b.CustomerID=c.ID
+                selectSql += " group by c.`Name`";
+                result = con.Query<CustomerReport>(selectSql, dp, tran);
+
+                selectSql = string.Format(@"select c.`Name`,d.* from Declarationform d join budget b on d.BudgetID=b.ID join customer c on b.CustomerID=c.ID
 where d.CreateDate BETWEEN @BeginTime AND @EndTime;");
 
-            IEnumerable<Declarationform> customerReportList = con.Query<Declarationform>(selectSql, dp, tran);
-            if (result != null)
-            {
-                foreach (CustomerReport report in result)
+                IEnumerable<Declarationform> customerReportList = con.Query<Declarationform>(selectSql, dp, tran);
+                if (result != null)
                 {
-                    report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
+                    foreach (CustomerReport report in result)
+                    {
+                        report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
+                    }
                 }
             }
+            else
+            {
+                selectSql = string.Format(@"SELECT c.`Name`,SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin ,AVG(bs.ExchangeRate) as ExchangeRate ,0 as CNY2 ,0 as OriginalCoin2
+from budgetbill bb LEFT JOIN bankslip  bs on bb.BSID=bs.BSID
+LEFT JOIN customer c on bb.Cus_ID=c.ID
+WHERE bb.Confirmed=1 AND bb.OperateTimestamp BETWEEN @BeginTime AND @EndTime ");
+
+                dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+                dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+                if (!string.IsNullOrEmpty(condition.Salesman))
+                {
+                    selectSql += " AND bb.Cus_ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.username=@Salesman ) ";
+                    dp.Add("Salesman", condition.Salesman, null, null, null);
+                }
+                else if (condition.DeptID >= 0)
+                {
+                    selectSql += " AND bb.Cus_ID in (SELECT cs.Customer from customersalesman cs JOIN `user` u on cs.salesman=u.username WHERE u.DeptID=@DeptID) ";
+                    dp.Add("DeptID", condition.DeptID, null, null, null);
+                }
+                if (condition.ID > 0)
+                {
+                    selectSql += " AND bb.BudgetID =@BudgetID";
+                    dp.Add("BudgetID", condition.ID, null, null, null);
+                }
+                selectSql += " group by c.`Name`";
+                result = con.Query<CustomerReport>(selectSql, dp, tran);
+
+                selectSql = string.Format(@"select c.`Name`,d.* from Declarationform d join budget b on d.BudgetID=b.ID join customer c on b.CustomerID=c.ID
+where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
+
+                if (condition.ID > 0)
+                {
+                    selectSql += " AND d.BudgetID=@BudgetID";
+                    dp.Add("BudgetID", condition.ID, null, null, null);
+                }
+                IEnumerable<Declarationform> customerReportList = con.Query<Declarationform>(selectSql, dp, tran);
+                if (result != null)
+                {
+                    foreach (CustomerReport report in result)
+                    {
+                        report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
+                    }
+                }
+            }
+
 
             return result;
         }
