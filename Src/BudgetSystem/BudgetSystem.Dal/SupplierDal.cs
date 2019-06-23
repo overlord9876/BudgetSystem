@@ -92,12 +92,12 @@ namespace BudgetSystem.Dal
             string insertSql = @"Insert Into `Supplier` (`Name`,`BankInfoDetail`,`SupplierType`,`CreateDate`,
                                                          `Nature`,`RegisterCapital`,`Address`,`Tell`,`FaxNumber`,`Contacts`,
                                                          `DeptID`,`PostalCode`,`Legal`,`CreateUser`,`Description`,`UpdateDate`,`UpdateUser`,
-                                                         `TaxpayerID`,`Discredited`,`ExistsAgentAgreement`,`RegistrationDate`,`BusinessEffectiveDate`,
+                                                         `TaxpayerID`,`Discredited`,`AgentType`,`RegistrationDate`,`BusinessEffectiveDate`,
                                                          `AgreementDate`,`ReviewDate`,`ExistsLicenseCopy`,`FirstReviewContents`,`ReviewContents`) 
                                                Values (@Name,@BankInfoDetail,@SupplierType,now(),
                                                        @Nature,@RegisterCapital,@Address,@Tell,@FaxNumber,@Contacts,
                                                        @DeptID,@PostalCode,@Legal,@CreateUser,@Description,now(),@UpdateUser,
-                                                       @TaxpayerID,@Discredited,@ExistsAgentAgreement,@RegistrationDate,@BusinessEffectiveDate,
+                                                       @TaxpayerID,@Discredited,@AgentType,@RegistrationDate,@BusinessEffectiveDate,
                                                        @AgreementDate,@ReviewDate,@ExistsLicenseCopy,@FirstReviewContents,@ReviewContents)";
             int id = con.Insert(insertSql, supplier, tran);
             if (id > 0)
@@ -113,7 +113,7 @@ namespace BudgetSystem.Dal
                                     `Nature` = @Nature,`RegisterCapital` = @RegisterCapital,`Address` = @Address,`Tell` = @Tell,
                                     `FaxNumber` = @FaxNumber,`Contacts` = @Contacts,`DeptID` = @DeptID,
                                     `PostalCode` = @PostalCode,`Legal` = @Legal ,`Description`=@Description ,
-                                    `TaxpayerID`=@TaxpayerID,`Discredited`=@Discredited,`ExistsAgentAgreement`=@ExistsAgentAgreement,
+                                    `TaxpayerID`=@TaxpayerID,`Discredited`=@Discredited,`AgentType`=@AgentType,
                                     `RegistrationDate`=@RegistrationDate,`BusinessEffectiveDate`=@BusinessEffectiveDate,`AgreementDate`=@AgreementDate,
                                     `UpdateDate`=now(),`UpdateUser`=@UpdateUser,`ReviewDate`=@ReviewDate,
                                     `ExistsLicenseCopy`=@ExistsLicenseCopy,`FirstReviewContents`=@FirstReviewContents,`ReviewContents`=@ReviewContents

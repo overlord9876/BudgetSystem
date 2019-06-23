@@ -125,6 +125,12 @@ namespace BudgetSystem
             //this.cboSupplierType.Properties.Items.Add("佣金供方");
             this.cboSupplierType.SelectedIndex = 1;
 
+            this.cboAgentType.Properties.Items.Add(EnumAgentType.无);
+            this.cboAgentType.Properties.Items.Add(EnumAgentType.代理);
+            this.cboAgentType.Properties.Items.Add(EnumAgentType.自营);
+            this.cboAgentType.Properties.Items.Add(EnumAgentType.货代);
+            this.cboAgentType.SelectedIndex = 0;
+
             List<string> natureList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.企业性质.ToString());
             this.cboNature.Properties.Items.Clear();
             if (natureList != null && natureList.Count > 0)
@@ -174,7 +180,7 @@ namespace BudgetSystem
                 this.meDescription.Text = supplier.Description;
                 this.chkDiscredited.Checked = supplier.Discredited;
                 this.chkExistsLicenseCopy.Checked = supplier.ExistsLicenseCopy;
-                this.chkExistsAgentAgreement.Checked = supplier.ExistsAgentAgreement;
+                this.cboAgentType.SelectedItem = (EnumAgentType) supplier.AgentType;
                 this.dteAgreementDate.EditValue = supplier.AgreementDate;
                 this.dteBusinessEffectiveDate.EditValue = supplier.BusinessEffectiveDate;
                 this.dteRegistrationDate.EditValue = supplier.RegistrationDate;
@@ -247,7 +253,7 @@ namespace BudgetSystem
                         this.txtName.Properties.ReadOnly = true;
                         this.txtTaxpayerID.Properties.ReadOnly = true;
                         this.txtLegal.Properties.ReadOnly = true;
-                        this.chkExistsAgentAgreement.Properties.ReadOnly = true;
+                        this.cboAgentType.Properties.ReadOnly = true;
                         this.chkExistsLicenseCopy.Properties.ReadOnly = true;
                         this.chkDiscredited.Properties.ReadOnly = true;
                         this.dteAgreementDate.Properties.ReadOnly = true;
@@ -376,6 +382,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show("非合格供方不需要提交审批流程", "提示");
                     return false;
                 }
+
                 if (cboSupplierType.SelectedIndex != 0 || !isStartFlow)
                 {
                     //非合格供应商或不提交流程时，其它项不需要验证
@@ -390,17 +397,25 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.txtLegal, "请输入法人代表");
                 }
-                if (!this.chkExistsAgentAgreement.Checked)
+                if ((EnumAgentType)this.cboAgentType.SelectedItem== EnumAgentType.无)
                 {
-                    this.dxErrorProvider1.SetError(this.chkExistsAgentAgreement, "合格供方需要代理协议");
+                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方需要选择代理类型");
                 }
-                if (this.dteAgreementDate.EditValue == null)
+                else if ((EnumAgentType)this.cboAgentType.SelectedItem == EnumAgentType.货代)
                 {
-                    this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
+                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方代理类型不能为" + EnumAgentType.货代);
                 }
-                else if (this.dteAgreementDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+
+                if ((EnumAgentType)this.cboAgentType.SelectedItem == EnumAgentType.代理)
                 {
-                    this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
+                    if (this.dteAgreementDate.EditValue == null)
+                    {
+                        this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
+                    }
+                    else if (this.dteAgreementDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+                    {
+                        this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
+                    }
                 }
                 if (!chkExistsLicenseCopy.Checked)
                 {
@@ -500,7 +515,7 @@ namespace BudgetSystem
             this.CurrentSupplier.SupplierType = this.cboSupplierType.SelectedIndex;
             this.CurrentSupplier.Tell = this.txtTell.Text.Trim();
             this.CurrentSupplier.Discredited = this.chkDiscredited.Checked;
-            this.CurrentSupplier.ExistsAgentAgreement = this.chkExistsAgentAgreement.Checked;
+            this.CurrentSupplier.AgentType = (int)(EnumAgentType)this.cboAgentType.SelectedItem;
             this.CurrentSupplier.Description = this.meDescription.Text.Trim();
 
             this.CurrentSupplier.ExistsLicenseCopy = this.chkExistsLicenseCopy.Checked;

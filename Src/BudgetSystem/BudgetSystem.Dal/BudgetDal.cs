@@ -27,7 +27,7 @@ namespace BudgetSystem.Dal
             if (budget != null)
             {
                 string supplierSelectSql = string.Format(@"SELECT s.ID,s.`Name`,s.SupplierType ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState ,
-                                                            s.BusinessEffectiveDate,s.ExistsAgentAgreement ,s.AgreementDate ,s.ReviewDate 
+                                                            s.BusinessEffectiveDate,s.AgentType ,s.AgreementDate ,s.ReviewDate 
                                                 FROM  Supplier s
                                                 INNER JOIN BudgetSuppliers bs ON s.ID=bs.Sup_ID
                                                 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType='{0}' AND f.IsRecent=1

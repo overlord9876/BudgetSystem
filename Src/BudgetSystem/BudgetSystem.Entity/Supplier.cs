@@ -123,7 +123,12 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 是否有合格供方代理协议
         /// </summary>
-        public bool ExistsAgentAgreement { get; set; }
+        public int AgentType{get;set;}
+
+        public EnumAgentType EnumAgentType 
+        {
+            get { return (EnumAgentType)AgentType; }
+        }
 
         /// <summary>
         /// 经营登记日期
@@ -214,7 +219,7 @@ namespace BudgetSystem.Entity
                 {
                     if ((this.BusinessEffectiveDate != null &&this.BusinessEffectiveDate.Value>DateTime.MinValue.AddDays(30)
                          && this.BusinessEffectiveDate.Value.Date.AddDays(-30)<=DateTime.Now.Date  && DateTime.Now.Date<= this.BusinessEffectiveDate.Value.Date)
-                       || (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
+                       || (this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
                            && this.AgreementDate.Value.Date.AddDays(-30) <= DateTime.Now.Date&& DateTime.Now.Date<=this.AgreementDate.Value.Date) 
                        ||(this.ReviewDate!=null&& this.ReviewDate.Value<DateTime.MaxValue.AddDays(-30)
                           && this.ReviewDate.Value.Date<=DateTime.Now.Date && DateTime.Now.Date<=this.ReviewDate.Value.AddDays(30).Date))
@@ -236,7 +241,7 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
                 {
                     if ((this.BusinessEffectiveDate != null && DateTime.Now.Date>this.BusinessEffectiveDate.Value.Date)
-                       || (this.ExistsAgentAgreement && this.AgreementDate != null && DateTime.Now.Date>this.AgreementDate.Value.Date)
+                       || (this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && DateTime.Now.Date>this.AgreementDate.Value.Date)
                        || (this.ReviewDate != null && DateTime.Now.Date.AddDays(-30)>this.ReviewDate.Value.Date))
                     {
                         return true;
@@ -256,7 +261,8 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方&&this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
                     if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date >= DateTime.Now.Date)
-                        && (this.ExistsAgentAgreement && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
+                        && ((this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
+                            || this.AgentType == (int)EnumAgentType.货代 || this.AgentType == (int)EnumAgentType.自营)
                         && (this.ReviewDate!=null && this.ReviewDate.Value.Date>=  DateTime.Now.Date.AddDays(-30)))
                     {
                         return true;
@@ -270,6 +276,7 @@ namespace BudgetSystem.Entity
         public Supplier()
         {
             FlowState = -1;
+            AgentType = (int)EnumAgentType.无;
         }
 
         public override string ToString()
@@ -279,8 +286,8 @@ namespace BudgetSystem.Entity
 
         public string ToDesc()
         {
-            return string.Format("名称[{0}],法人[{1}],有合格供方代理协议[{2}],经营异常企业[{3}],联系人[{4}],所属部门[{5}]",
-                this.Name, this.Legal, ExistsAgentAgreement ? "是" : "否", Discredited ? "是" : "否", Contacts, DepartmentCode + "-" + DepartmentName);
+            return string.Format("名称[{0}],法人[{1}],合格供方代理协议类型[{2}],经营异常企业[{3}],联系人[{4}],所属部门[{5}]",
+                this.Name, this.Legal,AgentType, Discredited ? "是" : "否", Contacts, DepartmentCode + "-" + DepartmentName);
         }
 
     }
@@ -290,5 +297,15 @@ namespace BudgetSystem.Entity
         合格供方 = 0,
         临时供方 = 1,
         其它供方 = 2
+    }
+    /// <summary>
+    /// 供应商代理类型
+    /// </summary>
+    public enum EnumAgentType
+    {
+        无 = 0,
+        代理 = 1,
+        自营 = 2,
+        货代 = 3
     }
 }

@@ -74,7 +74,14 @@ namespace BudgetSystem
                     }
                     supplier.RegistrationDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "工商登记日期", "\"");
                     supplier.BusinessEffectiveDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "经营截至日期", "\"");
-                    supplier.ExistsAgentAgreement = "代理".Equals(DataRowConvertHelper.GetStringValue(row, "存在合格供方代理").Trim()) ? true : false;
+                    if (row["存在合格供方代理"] != null && row["存在合格供方代理"] != DBNull.Value && !string.IsNullOrEmpty(row["存在合格供方代理"].ToString()))
+                    {
+                        supplier.AgentType = (int)DataRowConvertHelper.GetEnumValue<EnumAgentType>(row, "存在合格供方代理");
+                    }
+                    else
+                    {
+                        supplier.AgentType = (int)EnumAgentType.无;
+                    } 
                     supplier.Discredited = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否失信企业").Trim()) ? true : false;
                     supplier.AgreementDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "代理协议有效期");
 

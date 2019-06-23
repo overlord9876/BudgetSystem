@@ -44,7 +44,7 @@
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcReviewDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAgentType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -97,7 +97,7 @@
             this.gcRegistrationDate,
             this.gcBusinessEffectiveDate,
             this.gcReviewDate,
-            this.gcExistsAgentAgreement,
+            this.gcAgentType,
             this.gcAgreementDate,
             this.gcDiscredited,
             this.gcCreateDate,
@@ -160,7 +160,7 @@
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 2;
-            this.gcSupplierType.Width = 108;
+            this.gcSupplierType.Width = 92;
             // 
             // rilueSupplierType
             // 
@@ -176,7 +176,7 @@
             this.gcFlowName.Name = "gcFlowName";
             this.gcFlowName.Visible = true;
             this.gcFlowName.VisibleIndex = 3;
-            this.gcFlowName.Width = 129;
+            this.gcFlowName.Width = 120;
             // 
             // gcFlowState
             // 
@@ -185,7 +185,7 @@
             this.gcFlowState.Name = "gcFlowState";
             this.gcFlowState.Visible = true;
             this.gcFlowState.VisibleIndex = 4;
-            this.gcFlowState.Width = 99;
+            this.gcFlowState.Width = 87;
             // 
             // gcIsQualified
             // 
@@ -203,7 +203,7 @@
             this.gcRegistrationDate.Name = "gcRegistrationDate";
             this.gcRegistrationDate.Visible = true;
             this.gcRegistrationDate.VisibleIndex = 6;
-            this.gcRegistrationDate.Width = 114;
+            this.gcRegistrationDate.Width = 106;
             // 
             // gcBusinessEffectiveDate
             // 
@@ -212,7 +212,7 @@
             this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 7;
-            this.gcBusinessEffectiveDate.Width = 117;
+            this.gcBusinessEffectiveDate.Width = 101;
             // 
             // gcReviewDate
             // 
@@ -221,15 +221,16 @@
             this.gcReviewDate.Name = "gcReviewDate";
             this.gcReviewDate.Visible = true;
             this.gcReviewDate.VisibleIndex = 8;
+            this.gcReviewDate.Width = 85;
             // 
-            // gcExistsAgentAgreement
+            // gcAgentType
             // 
-            this.gcExistsAgentAgreement.Caption = "存在代理协议";
-            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Visible = true;
-            this.gcExistsAgentAgreement.VisibleIndex = 9;
-            this.gcExistsAgentAgreement.Width = 102;
+            this.gcAgentType.Caption = "代理类型";
+            this.gcAgentType.FieldName = "EnumAgentType";
+            this.gcAgentType.Name = "gcAgentType";
+            this.gcAgentType.Visible = true;
+            this.gcAgentType.VisibleIndex = 9;
+            this.gcAgentType.Width = 76;
             // 
             // gcAgreementDate
             // 
@@ -238,7 +239,7 @@
             this.gcAgreementDate.Name = "gcAgreementDate";
             this.gcAgreementDate.Visible = true;
             this.gcAgreementDate.VisibleIndex = 10;
-            this.gcAgreementDate.Width = 80;
+            this.gcAgreementDate.Width = 109;
             // 
             // gcDiscredited
             // 
@@ -310,7 +311,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcIsWarned;
         private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgentType;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcTaxpayerIdentificationNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;

@@ -72,7 +72,7 @@
             this.gcIsQualified = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAgentType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -712,7 +712,7 @@
             this.gcIsQualified,
             this.gcRegistrationDate,
             this.gcBusinessEffectiveDate,
-            this.gcExistsAgentAgreement,
+            this.gcAgentType,
             this.gcAgreementDate,
             this.gridColumn1,
             this.gcCreateUser,
@@ -792,11 +792,11 @@
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 5;
             // 
-            // gcExistsAgentAgreement
+            // gcAgentType
             // 
-            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
-            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
+            this.gcAgentType.Caption = "代理类型";
+            this.gcAgentType.FieldName = "EnumAgentType";
+            this.gcAgentType.Name = "gcAgentType";
             // 
             // gcAgreementDate
             // 
@@ -1739,7 +1739,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcIsQualified;
         private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgentType;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gcIsWarned;

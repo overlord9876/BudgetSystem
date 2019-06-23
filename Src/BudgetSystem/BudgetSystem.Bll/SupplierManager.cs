@@ -189,18 +189,26 @@ namespace BudgetSystem.Bll
             {
                 return "请补充法人代表";
             }
-            if (!supplier.ExistsAgentAgreement)
+            if (supplier.AgentType==(int) EnumAgentType.无)
             {
                 return "合格供方需要代理协议";
             }
-            if (supplier.AgreementDate == null)
+            else if (supplier.AgentType == (int)EnumAgentType.货代)
             {
-                return "请补充代理协议有效期";
+                return "合格供方代理类型不能为" + EnumAgentType.货代;
             }
-            else if (supplier.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+            if (supplier.AgentType == (int)EnumAgentType.代理)
             {
-                return "代理协议有效期应大于当前日期30天";
+                if (supplier.AgreementDate == null)
+                {
+                    return "请补充代理协议有效期";
+                }
+                else if (supplier.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+                {
+                    return "代理协议有效期应大于当前日期30天";
+                }
             }
+            
             if (!supplier.ExistsLicenseCopy)
             {
                 return "合格供方需要营业执照复印件";
@@ -250,24 +258,7 @@ namespace BudgetSystem.Bll
             return string.Empty;
         }
         private string CheckReviewData(Supplier supplier)
-        {
-            if (string.IsNullOrEmpty(supplier.TaxpayerID))
-            {
-                return "请补充纳税人识别号";
-            }
-            if (string.IsNullOrEmpty(supplier.Legal))
-            {
-                return "请补充法人代表";
-            }
-            if (!supplier.ExistsAgentAgreement)
-            {
-                return "合格供方需要代理协议";
-            }
-            if (!supplier.ExistsLicenseCopy)
-            {
-                return "合格供方需要营业执照复印件";
-            }
-          
+        {            
             if (string.IsNullOrEmpty(supplier.ReviewContents))
             {
                 return "请补充供方行为和年度重新评价信息";

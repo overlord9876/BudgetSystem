@@ -42,7 +42,7 @@
             this.rilueSupplierType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcRegistrationDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcBusinessEffectiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExistsAgentAgreement = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAgentType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDiscredited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAgreementDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -176,7 +176,7 @@
             this.gcSupplierType,
             this.gcRegistrationDate,
             this.gcBusinessEffectiveDate,
-            this.gcExistsAgentAgreement,
+            this.gcAgentType,
             this.gcDiscredited,
             this.gcAgreementDate,
             this.gcCreateDate,
@@ -235,13 +235,13 @@
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 4;
             // 
-            // gcExistsAgentAgreement
+            // gcAgentType
             // 
-            this.gcExistsAgentAgreement.Caption = "存在合格供方代理协议";
-            this.gcExistsAgentAgreement.FieldName = "ExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Name = "gcExistsAgentAgreement";
-            this.gcExistsAgentAgreement.Visible = true;
-            this.gcExistsAgentAgreement.VisibleIndex = 5;
+            this.gcAgentType.Caption = "代理类型";
+            this.gcAgentType.FieldName = "EnumAgentType";
+            this.gcAgentType.Name = "gcAgentType";
+            this.gcAgentType.Visible = true;
+            this.gcAgentType.VisibleIndex = 5;
             // 
             // gcDiscredited
             // 
@@ -522,7 +522,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit rilueSupplierType;
         private DevExpress.XtraGrid.Columns.GridColumn gcRegistrationDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcExistsAgentAgreement;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgentType;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
