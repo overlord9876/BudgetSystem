@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NotUseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -414,11 +414,11 @@
     <Compile Include="Supplier\frmSupplierImport.Designer.cs">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Supplier\frmSupplierManagerFirstReviewEventForm.cs">
+    <Compile Include="Supplier\frmSupplierFirstReviewEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Supplier\frmSupplierManagerFirstReviewEventForm.Designer.cs">
-      <DependentUpon>frmSupplierManagerFirstReviewEventForm.cs</DependentUpon>
+    <Compile Include="Supplier\frmSupplierFirstReviewEventForm.Designer.cs">
+      <DependentUpon>frmSupplierFirstReviewEventForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmSupplierQueryConditionEditor.cs">
       <SubType>Form</SubType>
@@ -627,12 +627,6 @@
     </Compile>
     <Compile Include="Supplier\ucSupplierSelected.Designer.cs">
       <DependentUpon>ucSupplierSelected.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Supplier\frmSupplierLeaderFirstReviewEventForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Supplier\frmSupplierLeaderFirstReviewEventForm.Designer.cs">
-      <DependentUpon>frmSupplierLeaderFirstReviewEventForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmSupplierManagerReviewEventForm.cs">
       <SubType>Form</SubType>
@@ -846,8 +840,8 @@
     <EmbeddedResource Include="Supplier\frmSupplierImport.resx">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Supplier\frmSupplierManagerFirstReviewEventForm.resx">
-      <DependentUpon>frmSupplierManagerFirstReviewEventForm.cs</DependentUpon>
+    <EmbeddedResource Include="Supplier\frmSupplierFirstReviewEventForm.resx">
+      <DependentUpon>frmSupplierFirstReviewEventForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierQueryConditionEditor.resx">
       <DependentUpon>frmSupplierQueryConditionEditor.cs</DependentUpon>
@@ -963,9 +957,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\ucSupplierSelected.resx">
       <DependentUpon>ucSupplierSelected.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Supplier\frmSupplierLeaderFirstReviewEventForm.resx">
-      <DependentUpon>frmSupplierLeaderFirstReviewEventForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierManagerReviewEventForm.resx">
       <DependentUpon>frmSupplierManagerReviewEventForm.cs</DependentUpon>

@@ -790,11 +790,11 @@
             // lcSupplierType
             // 
             this.lcSupplierType.Control = this.cboSupplierType;
-            this.lcSupplierType.CustomizationFormText = "类型：";
+            this.lcSupplierType.CustomizationFormText = "供应商类型：";
             this.lcSupplierType.Location = new System.Drawing.Point(0, 58);
             this.lcSupplierType.Name = "lcSupplierType";
             this.lcSupplierType.Size = new System.Drawing.Size(505, 29);
-            this.lcSupplierType.Text = "类型：";
+            this.lcSupplierType.Text = "供应商类型：";
             this.lcSupplierType.TextSize = new System.Drawing.Size(120, 18);
             // 
             // lcRegisterCapital
@@ -988,11 +988,11 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.cboAgentType;
-            this.layoutControlItem4.CustomizationFormText = "代理类型：";
+            this.layoutControlItem4.CustomizationFormText = "贸易方式类型：";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(505, 29);
-            this.layoutControlItem4.Text = "代理类型：";
+            this.layoutControlItem4.Text = "贸易方式类型：";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(120, 18);
             // 
             // layoutControlItem16

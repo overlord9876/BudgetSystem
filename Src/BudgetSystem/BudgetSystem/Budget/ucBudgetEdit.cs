@@ -193,6 +193,7 @@ namespace BudgetSystem
             Bll.CustomerManager cm = new Bll.CustomerManager();
             CustomerQueryCondition condition = new CustomerQueryCondition();
             condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
+            condition.State = 1;//过滤停用的客户
             List<Customer> customers = cm.GetAllCustomer(condition);
             this.ucCustomerSelected.SetDataSource(customers);
 
@@ -356,7 +357,7 @@ namespace BudgetSystem
                 this.pceTempSupplier.Text = tempSuppliers.ToNameString();
                 this.pceTempSupplier.Tag = tempSuppliers;
 
-                List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType != (int)EnumSupplierType.临时供方&&!s.IsQualified);
+                List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType != (int)EnumSupplierType.临时供方 && !s.IsQualified);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
                 this.pceOtherSupplier.Tag = otherSuppliers;
 
@@ -745,11 +746,11 @@ namespace BudgetSystem
         }
 
         /// <summary>
-        /// 销售利润=销售收入（人民币）-销售成本-（运保、佣金、直接费用）小计-利息
+        /// 销售利润=销售收入（人民币）-销售成本-（运保、佣金、直接费用）小计-利息+进料款
         /// </summary>
         private void CalcProfit()
         {
-            txtProfit.EditValue = txtNetIncomeCNY.Value - txtTotalCost.Value - txtInterest.Value;
+            txtProfit.EditValue = txtNetIncomeCNY.Value - txtTotalCost.Value - txtInterest.Value + txtFeedMoney.Value;
         }
 
         /// <summary>

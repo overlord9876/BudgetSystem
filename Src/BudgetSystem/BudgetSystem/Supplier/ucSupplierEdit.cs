@@ -399,11 +399,11 @@ namespace BudgetSystem
                 }
                 if ((EnumAgentType)this.cboAgentType.SelectedItem== EnumAgentType.无)
                 {
-                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方需要选择代理类型");
+                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方需要选择贸易方式类型");
                 }
                 else if ((EnumAgentType)this.cboAgentType.SelectedItem == EnumAgentType.货代)
                 {
-                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方代理类型不能为" + EnumAgentType.货代);
+                    this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方贸易方式类型不能为" + EnumAgentType.货代);
                 }
 
                 if ((EnumAgentType)this.cboAgentType.SelectedItem == EnumAgentType.代理)

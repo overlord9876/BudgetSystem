@@ -112,31 +112,38 @@ namespace BudgetSystem.Util
                         string strVal;
                         for (int i = firstRowIndex + 1; i <= rowCount; ++i)
                         {
-                            IRow row = sheet.GetRow(i);
-                            if (row == null || row.FirstCellNum == -1) continue; //没有数据的行默认是null　　　　　　　
+                            try
+                            {
+                                IRow row = sheet.GetRow(i);
+                                if (row == null || row.FirstCellNum == -1) continue; //没有数据的行默认是null　　　　　　　
 
-                            DataRow dataRow = data.NewRow();
-                            countNull = 0;
-                            for (int j = row.FirstCellNum; j < cellCount; ++j)
-                            {
-                                cell = row.GetCell(j);
-                                if (cell != null) //同理，没有数据的单元格都默认是null
+                                DataRow dataRow = data.NewRow();
+                                countNull = 0;
+                                for (int j = row.FirstCellNum; j < cellCount; ++j)
                                 {
-                                    strVal = cell.ToString();
-                                    dataRow[j] = strVal;
-                                    countNull += string.IsNullOrEmpty(strVal) ? 1 : 0;
+                                    cell = row.GetCell(j);
+                                    if (cell != null) //同理，没有数据的单元格都默认是null
+                                    {
+                                        strVal = cell.ToString();
+                                        dataRow[j] = strVal;
+                                        countNull += string.IsNullOrEmpty(strVal) ? 1 : 0;
+                                    }
+                                    else
+                                    {
+                                        countNull++;
+                                    }
                                 }
-                                else
+                                if (countNull == cellCount)
                                 {
-                                    countNull++;
+                                    //空行不再读取
+                                    break;
                                 }
+                                data.Rows.Add(dataRow);
                             }
-                            if (countNull == cellCount)
+                            catch (Exception ex)
                             {
-                                //空行不再读取
-                                break;
+
                             }
-                            data.Rows.Add(dataRow);
                         }
                         return data;
                     }

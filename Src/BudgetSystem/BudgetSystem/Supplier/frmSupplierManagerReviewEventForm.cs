@@ -14,9 +14,13 @@ namespace BudgetSystem
 {
     public partial class frmSupplierManagerReviewEventForm : BudgetSystem.Base.frmBaseFlowEventForm
     {
-        public frmSupplierManagerReviewEventForm()
+        private string caption;
+
+        public frmSupplierManagerReviewEventForm(string caption)
         {
             InitializeComponent();
+            this.Text = caption;
+            this.caption = caption;
         }
 
         private void btnSure_Click(object sender, EventArgs e)
@@ -25,13 +29,17 @@ namespace BudgetSystem
             {
                 int result = this.cboItem.SelectedIndex;
                 this.EventResult = result != 1;
-                int dataID = ReleateFlowItems.FirstOrDefault().DateItemID;
-                SupplierManager sm = new SupplierManager();
-                Supplier supplier = sm.GetSupplier(dataID);
-                SupplierReviewContents reviewContents = supplier.ReviewContents.ToObjectList<SupplierReviewContents>();
-                reviewContents.Manager = RunInfo.Instance.CurrentUser.RealName;
-                reviewContents.ManagerResult = result == 0 ? true : false;
-                sm.ModifySupplierReviewContents(dataID, reviewContents);
+                foreach (var releateFlowItem in ReleateFlowItems)
+                {
+                    int dataID = releateFlowItem.DateItemID;
+                    SupplierManager sm = new SupplierManager();
+                    Supplier supplier = sm.GetSupplier(dataID);
+                    SupplierReviewContents reviewContents = supplier.ReviewContents.ToObjectList<SupplierReviewContents>();
+
+                    reviewContents.Manager = RunInfo.Instance.CurrentUser.RealName;
+                    reviewContents.ManagerResult = result == 0 ? true : false;
+                    sm.ModifySupplierReviewContents(dataID, reviewContents);
+                }
             }
             catch (Exception ex)
             {

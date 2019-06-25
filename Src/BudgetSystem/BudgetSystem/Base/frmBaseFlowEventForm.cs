@@ -40,21 +40,17 @@ namespace BudgetSystem.Base
             {
                 form = new frmTestFlowEventForm();
             }
-            else if (extEventName == "供应商初审部门经理审批")
+            else if (extEventName == FirstReviewManager || extEventName == FirstReviewLeader)
             {
-                form = new frmSupplierManagerFirstReviewEventForm ();
+                form = new frmSupplierFirstReviewEventForm(extEventName);
             }
-            else if (extEventName == "供应商初审贸管部审批")
+            else if (extEventName == ReviewManager)
             {
-                form = new frmSupplierLeaderFirstReviewEventForm();
+                form = new frmSupplierManagerReviewEventForm(extEventName);
             }
-            else if (extEventName == "供应商复审部门经理审批")
+            else if (extEventName == ReviewLeader)
             {
-                form = new frmSupplierManagerReviewEventForm();
-            }
-            else if (extEventName == "供应商复审贸管部审批")
-            {
-                form = new frmSupplierLeaderReviewEventForm();
+                form = new frmSupplierLeaderReviewEventForm(extEventName);
             }
             if (form != null)
             {
@@ -62,5 +58,10 @@ namespace BudgetSystem.Base
             }
             return form;
         }
+
+        public const string FirstReviewManager = "供应商初审部门经理审批";
+        public const string FirstReviewLeader = "供应商初审贸管部审批";
+        public const string ReviewManager = "供应商复审部门经理审批";
+        public const string ReviewLeader = "供应商复审贸管部审批";
     }
 }

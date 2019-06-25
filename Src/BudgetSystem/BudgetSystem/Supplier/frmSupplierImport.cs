@@ -42,7 +42,7 @@ namespace BudgetSystem
             {
                 string message = string.Empty;
                 //"是否合格供应商",
-                List<string> columns = new List<string> { "供应商名称", "纳税人识别号", "供应商类型", "工商登记日期", "经营截至日期", "存在合格供方代理", "是否失信企业", "代理协议有效期", "创建时间", "创建人", "备注" };
+                List<string> columns = new List<string> { "供应商名称", "法人代表", "是否有营业执照复印件", "纳税人识别号", "供应商类型", "工商登记日期", "经营截至日期", "存在合格供方代理", "是否失信企业", "代理协议有效期", "创建时间", "创建人", "备注" };
                 DataTable dt = ExcelHelper.ReadExcelToDataTable(this.btnFileName.Text, out message, cboSheet.SelectedItem.ToString(), columns);
                 if (!string.IsNullOrEmpty(message))
                 {
@@ -72,6 +72,10 @@ namespace BudgetSystem
                     {
                         supplier.SupplierType = 1;
                     }
+                    supplier.Legal = DataRowConvertHelper.GetStringValue(row, "法人代表").Trim();
+
+                    supplier.ExistsLicenseCopy = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否有营业执照复印件").Trim()) ? true : false; ;
+
                     supplier.RegistrationDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "工商登记日期", "\"");
                     supplier.BusinessEffectiveDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "经营截至日期", "\"");
                     if (row["存在合格供方代理"] != null && row["存在合格供方代理"] != DBNull.Value && !string.IsNullOrEmpty(row["存在合格供方代理"].ToString()))
@@ -81,7 +85,7 @@ namespace BudgetSystem
                     else
                     {
                         supplier.AgentType = (int)EnumAgentType.无;
-                    } 
+                    }
                     supplier.Discredited = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否失信企业").Trim()) ? true : false;
                     supplier.AgreementDate = DataRowConvertHelper.GetDateTimeValue_AllowNull(row, "代理协议有效期");
 
@@ -101,6 +105,12 @@ namespace BudgetSystem
                     {
                         supplier.CreateUser = department.Manager;
                         supplier.CreateUserName = department.ManagerName;
+                    }
+                    supplier.UpdateUser = supplier.CreateUser;
+                    supplier.UpdateUserName = supplier.CreateUserName;
+                    if (supplier.SupplierType == (int)EnumSupplierType.合格供方)
+                    {
+                        supplier.FirstReviewContents = "{\"ReviewItems\":{\"交付\":1,\"服务\":1,\"价格\":1,\"技术力量\":1,\"生产设备\":1,\"产品质量\":1,\"质量管理体系\":1,\"社会责任表现\":1,\"社会责任承诺\":1},\"Result\":1,\"Salesman\":\"" + supplier.CreateUserName + "\",\"SalesmanResult\":1,\"Manager\":null,\"ManagerResult\":0,\"Leader\":null,\"LeaderResult\":0,\"ResultDate\":null}";
                     }
                     supplier.Description = DataRowConvertHelper.GetStringValue(row, "备注").Trim();
                     supplier.DeptID = department.ID;

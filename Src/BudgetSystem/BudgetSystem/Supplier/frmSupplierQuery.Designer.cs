@@ -225,7 +225,7 @@
             // 
             // gcAgentType
             // 
-            this.gcAgentType.Caption = "代理类型";
+            this.gcAgentType.Caption = "贸易方式类型";
             this.gcAgentType.FieldName = "EnumAgentType";
             this.gcAgentType.Name = "gcAgentType";
             this.gcAgentType.Visible = true;

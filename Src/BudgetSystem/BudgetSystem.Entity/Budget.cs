@@ -336,7 +336,7 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                return string.IsNullOrEmpty(this.CustomerName) ? string.Empty : string.Format("{0}/{1}({2})", this.CustomerCode, this.CustomerName, this.CustomerCountry);
+                return string.IsNullOrEmpty(this.CustomerName) ? string.Empty : string.Format("{0}({1})", this.CustomerName, this.CustomerCountry);
             }
         }
 

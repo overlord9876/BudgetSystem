@@ -70,7 +70,15 @@ namespace BudgetSystem
                     Customer.Port = DataRowConvertHelper.GetStringValue(row, "港口");
                     Customer.State = DataRowConvertHelper.GetStringValue(row, "可用状态") == "√";
                     userName = DataRowConvertHelper.GetStringValue(row, "创建人").Trim();
-                    user = users.FirstOrDefault(u => u.RealName == userName);
+                    string[] userNameArray = userName.Split(new char[] { '，', '/' });
+                    if (userNameArray.Length > 0)
+                    {
+                        user = users.FirstOrDefault(u => u.RealName == userNameArray[0].Trim());
+                    }
+                    else
+                    {
+                        user = null;
+                    }
                     if (user == null)
                     {
                         Customer.CreateUser = department.Manager;
@@ -80,6 +88,21 @@ namespace BudgetSystem
                     {
                         Customer.CreateUser = user.UserName;
                         Customer.CreateUserName = userName;
+                    }
+
+                    Customer.SalesmanList = new List<CustomerSalesman>();
+                    Customer.SalesmanList.Add(new CustomerSalesman() { Salesman = Customer.CreateUser });//salesmans;
+                    if (userNameArray.Length > 1)
+                    {
+                        Customer.SalesmanList.Clear();
+                        foreach (string salesName in userNameArray)
+                        {
+                            var salesMan = users.FirstOrDefault(u => u.RealName == salesName.Trim());
+                            if (salesMan != null)
+                            {
+                                Customer.SalesmanList.Add(new CustomerSalesman() { Salesman = salesMan.UserName });//salesmans;
+                            }
+                        }
                     }
                     Customer.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
                     if (Customer.CreateDate <= DateTime.MinValue)
@@ -140,23 +163,22 @@ namespace BudgetSystem
                     Bll.UserManager um = new Bll.UserManager();
                     Bll.CustomerManager sm = new Bll.CustomerManager();
 
-                    List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
-                    var users = um.GetDepartmentUsers(department.ID);
-                    if (users != null && users.Count > 0)
-                    {
-                        users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
-                    }
+                    //List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
+                    //var users = um.GetDepartmentUsers(department.ID);
+                    //if (users != null && users.Count > 0)
+                    //{
+                    //users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
+                    //}
 
                     foreach (Customer customer in list)
                     {
                         try
                         {
-                            customer.SalesmanList = salesmans;
                             sm.AddCustomer(customer);
                         }
                         catch (Exception ex)
                         {
-
+                            //XtraMessageBox.Show(ex.Message);
                         }
                     }
                     if (isContinue)

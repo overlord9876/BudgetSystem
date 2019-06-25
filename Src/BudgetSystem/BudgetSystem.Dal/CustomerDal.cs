@@ -62,6 +62,11 @@ namespace BudgetSystem.Dal
                     dp.Add("DeptID", condition.DeptID, null, null, null);
                 }
 
+                if (condition.State >= 0)
+                {
+                    strConditionList.Add(" s.State>=@State ");
+                    dp.Add("State", condition.State, null, null, null);
+                }
                 if (strConditionList.Count > 0)
                 {
                     selectSql += string.Format(" where {0}", string.Join(" and ", strConditionList.ToArray()));

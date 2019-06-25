@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmSupplierLeaderFirstReviewEventForm
+    partial class frmSupplierFirstReviewEventForm
     {
         /// <summary>
         /// Required designer variable.

@@ -12,41 +12,41 @@ using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
-    public partial class frmSupplierLeaderReviewEventForm : BudgetSystem.Base.frmBaseFlowEventForm
+    public partial class frmSupplierFirstReviewEventForm : BudgetSystem.Base.frmBaseFlowEventForm
     {
-        public frmSupplierLeaderReviewEventForm(string caption)
+        private string caption;
+
+        public frmSupplierFirstReviewEventForm(string caption)
         {
             InitializeComponent();
             this.Text = caption;
+            this.caption = caption;
         }
 
         private void btnSure_Click(object sender, EventArgs e)
         {
-            if (this.cboItem.SelectedIndex == 0 && this.rgDiscredited.SelectedIndex == 1)
-            {
-                XtraMessageBox.Show("复审合格时应为非失信企业。");
-                return;
-            }
-            if (this.rgDiscredited.SelectedIndex == -1)
-            {
-                XtraMessageBox.Show("请选择企业信用信息。");
-                return;
-            }
             try
             {
                 int result = this.cboItem.SelectedIndex;
-                this.EventResult = (result != 1 && rgDiscredited.SelectedIndex != 1);
+                this.EventResult = result != 3;
                 foreach (var releateFlowItem in ReleateFlowItems)
                 {
                     int dataID = releateFlowItem.DateItemID;
                     SupplierManager sm = new SupplierManager();
                     Supplier supplier = sm.GetSupplier(dataID);
-                    SupplierReviewContents reviewContents = supplier.ReviewContents.ToObjectList<SupplierReviewContents>();
-                    reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
-                    reviewContents.LeaderResult = this.cboItem.SelectedIndex == 0;
-                    reviewContents.ResultDate = DateTime.Now;
-                    reviewContents.Discredited = this.rgDiscredited.SelectedIndex == 1;
-                    sm.ModifySupplierReviewContents(dataID, reviewContents);
+                    SupplierFirstReviewContents reviewContents = supplier.FirstReviewContents.ToObjectList<SupplierFirstReviewContents>();
+                    if (caption == BudgetSystem.Base.frmBaseFlowEventForm.FirstReviewManager)
+                    {
+                        reviewContents.Manager = RunInfo.Instance.CurrentUser.RealName;
+                        reviewContents.ManagerResult = result;
+                    }
+                    else if (caption == BudgetSystem.Base.frmBaseFlowEventForm.FirstReviewLeader)
+                    {
+                        reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
+                        reviewContents.LeaderResult = result;
+                        reviewContents.ResultDate = DateTime.Now;
+                    }
+                    sm.ModifySupplierFirstReviewContents(dataID, reviewContents);
                 }
             }
             catch (Exception ex)
