@@ -65,7 +65,7 @@ namespace BudgetSystem.UserManage
                 this.dtCreateDate.Properties.ReadOnly = true;
                 this.cboDepartment.Properties.ReadOnly = true;
                 this.cboRole.Properties.ReadOnly = true;
-
+                this.chkIsEnable.Properties.ReadOnly = true;
                 this.Text = "查看用户信息";
                 BindUser(User.UserName);
             }

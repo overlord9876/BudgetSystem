@@ -17,5 +17,10 @@ namespace BudgetSystem
             point.NodeApproveResultWithState = point.State ? (point.NodeApproveResult ? RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayAcceptName(flowName) : RunInfo.Instance.FlowAppreveNameConfigs.GetDisplayRefuseName(flowName)) : ""; ;
         }
 
+        public static void SetRunPointFlowNodeApproveResultWithStateDisplayName(FlowRunPoint point)
+        {
+            SetRunPointFlowNodeApproveResultWithStateDisplayName(point, string.Empty);
+        }
+
     }
 }

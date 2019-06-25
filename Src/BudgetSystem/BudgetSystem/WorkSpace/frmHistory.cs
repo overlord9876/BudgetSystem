@@ -63,6 +63,10 @@ namespace BudgetSystem.WorkSpace
             else
             {
                 this.layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                foreach (FlowRunPoint point in Points)
+                {
+                    FlowApproveDisplayHelper.SetRunPointFlowNodeApproveResultWithStateDisplayName(point);
+                }
                 this.gdApproveList.DataSource = Points;
             }
         }

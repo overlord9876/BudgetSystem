@@ -201,14 +201,14 @@ namespace BudgetSystem
             {
                 if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
                 {
-                    XtraMessageBox.Show(string.Format("非{0}供方不允许复评审批申请。", EnumSupplierType.合格供方));
+                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交复评审批。", EnumSupplierType.合格供方));
                     return;
                 }
                 if (supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批
                     ||(EnumFlowNames.供应商审批流程.ToString().Equals(supplier.FlowName)&&supplier.EnumFlowState== EnumDataFlowState.审批不通过)
                     )
                 {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许复评审批申请。", supplier.Name, supplier.EnumFlowState.ToString()));
+                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交复评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
                     return;
                 }
                
@@ -224,13 +224,13 @@ namespace BudgetSystem
                 }
                 else
                 {
-                    XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许复评审批申请。", supplier.Name));
+                    XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许提交复评审批。", supplier.Name));
                     return;
                 }
             }
             else
             {
-                XtraMessageBox.Show("请选择需要复评审批申请的项");
+                XtraMessageBox.Show("请选择需要提交复评审批的项");
             }
         }
 

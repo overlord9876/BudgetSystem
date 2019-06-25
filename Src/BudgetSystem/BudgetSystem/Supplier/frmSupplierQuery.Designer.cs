@@ -141,7 +141,7 @@
             this.gcName.Name = "gcName";
             this.gcName.Visible = true;
             this.gcName.VisibleIndex = 0;
-            this.gcName.Width = 183;
+            this.gcName.Width = 200;
             // 
             // gcv纳税人识别号
             // 
@@ -150,7 +150,7 @@
             this.gcv纳税人识别号.Name = "gcv纳税人识别号";
             this.gcv纳税人识别号.Visible = true;
             this.gcv纳税人识别号.VisibleIndex = 1;
-            this.gcv纳税人识别号.Width = 159;
+            this.gcv纳税人识别号.Width = 140;
             // 
             // gcSupplierType
             // 
@@ -160,7 +160,7 @@
             this.gcSupplierType.Name = "gcSupplierType";
             this.gcSupplierType.Visible = true;
             this.gcSupplierType.VisibleIndex = 2;
-            this.gcSupplierType.Width = 92;
+            this.gcSupplierType.Width = 80;
             // 
             // rilueSupplierType
             // 
@@ -176,7 +176,7 @@
             this.gcFlowName.Name = "gcFlowName";
             this.gcFlowName.Visible = true;
             this.gcFlowName.VisibleIndex = 3;
-            this.gcFlowName.Width = 120;
+            this.gcFlowName.Width = 90;
             // 
             // gcFlowState
             // 
@@ -185,7 +185,7 @@
             this.gcFlowState.Name = "gcFlowState";
             this.gcFlowState.Visible = true;
             this.gcFlowState.VisibleIndex = 4;
-            this.gcFlowState.Width = 87;
+            this.gcFlowState.Width = 70;
             // 
             // gcIsQualified
             // 
@@ -194,7 +194,7 @@
             this.gcIsQualified.Name = "gcIsQualified";
             this.gcIsQualified.Visible = true;
             this.gcIsQualified.VisibleIndex = 5;
-            this.gcIsQualified.Width = 114;
+            this.gcIsQualified.Width = 100;
             // 
             // gcRegistrationDate
             // 
@@ -203,7 +203,7 @@
             this.gcRegistrationDate.Name = "gcRegistrationDate";
             this.gcRegistrationDate.Visible = true;
             this.gcRegistrationDate.VisibleIndex = 6;
-            this.gcRegistrationDate.Width = 106;
+            this.gcRegistrationDate.Width = 100;
             // 
             // gcBusinessEffectiveDate
             // 
@@ -212,7 +212,7 @@
             this.gcBusinessEffectiveDate.Name = "gcBusinessEffectiveDate";
             this.gcBusinessEffectiveDate.Visible = true;
             this.gcBusinessEffectiveDate.VisibleIndex = 7;
-            this.gcBusinessEffectiveDate.Width = 101;
+            this.gcBusinessEffectiveDate.Width = 90;
             // 
             // gcReviewDate
             // 
@@ -221,7 +221,7 @@
             this.gcReviewDate.Name = "gcReviewDate";
             this.gcReviewDate.Visible = true;
             this.gcReviewDate.VisibleIndex = 8;
-            this.gcReviewDate.Width = 85;
+            this.gcReviewDate.Width = 70;
             // 
             // gcAgentType
             // 
@@ -230,7 +230,7 @@
             this.gcAgentType.Name = "gcAgentType";
             this.gcAgentType.Visible = true;
             this.gcAgentType.VisibleIndex = 9;
-            this.gcAgentType.Width = 76;
+            this.gcAgentType.Width = 90;
             // 
             // gcAgreementDate
             // 
@@ -248,7 +248,7 @@
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
             this.gcDiscredited.VisibleIndex = 11;
-            this.gcDiscredited.Width = 107;
+            this.gcDiscredited.Width = 91;
             // 
             // gcCreateDate
             // 
@@ -260,7 +260,7 @@
             this.gcCreateDate.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 12;
-            this.gcCreateDate.Width = 80;
+            this.gcCreateDate.Width = 109;
             // 
             // gcCreateUser
             // 
@@ -269,7 +269,7 @@
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
             this.gcCreateUser.VisibleIndex = 13;
-            this.gcCreateUser.Width = 80;
+            this.gcCreateUser.Width = 55;
             // 
             // gcDescription
             // 
@@ -278,7 +278,7 @@
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
             this.gcDescription.VisibleIndex = 14;
-            this.gcDescription.Width = 80;
+            this.gcDescription.Width = 90;
             // 
             // frmSupplierQuery
             // 

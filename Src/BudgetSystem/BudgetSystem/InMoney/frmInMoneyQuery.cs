@@ -278,14 +278,14 @@ namespace BudgetSystem.InMoney
                 }
                 if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中 || currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批不通过)
                 {
-                    XtraMessageBox.Show("当前不属于未审批通过状态，不允许直接进行拆分。");
+                    XtraMessageBox.Show("当前属于未审批通过状态，不允许直接进行拆分。");
                     return;
                 }
                 else
                 {
                     if (currentRowBankSlip.ReceiptState == ReceiptState.已拆分)
                     {
-                        XtraMessageBox.Show("当前不属于已拆分状态，不允许再次进行拆分。");
+                        XtraMessageBox.Show("当前属于已拆分状态，不允许再次进行拆分。");
                         return;
                     }
                 }
