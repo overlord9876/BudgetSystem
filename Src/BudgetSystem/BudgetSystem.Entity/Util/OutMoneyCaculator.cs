@@ -104,6 +104,11 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
+        /// 共计退税款
+        /// </summary>
+        public decimal TotalTaxPayment { get; private set; }
+
+        /// <summary>
         /// 总收款（收汇）人民币
         /// </summary>
         public decimal ReceiptMoneyAmount { get; private set; }
@@ -436,6 +441,7 @@ namespace BudgetSystem.Entity
             TaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
 
             PaymentMoneyAmount = _paymentList.Sum(o => o.CNY);
+            TotalTaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
             //AVGExportRebateRate = (decimal)_paymentList.Where(o => o.IsDrawback).Average(o => o.TaxRebateRate);
 
             IgnoreTransportationExpensesPaymentMoneyAmount = _paymentList.Where(o => !o.MoneyUsed.Equals(TransportationExpensesCaption)).Sum(o => o.CNY);

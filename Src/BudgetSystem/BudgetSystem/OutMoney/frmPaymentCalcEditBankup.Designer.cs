@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem.OutMoney
 {
-    partial class frmPaymentCalcEdit
+    partial class frmPaymentCalcEditBankup
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.txtPremiumbalance = new BudgetSystem.CommonControl.TextEdit_Number();
             this.btnShowBudgetHistory = new DevExpress.XtraEditors.SimpleButton();
             this.txtCommissionRate = new BudgetSystem.CommonControl.TextEdit_Number();
             this.txtPremium = new BudgetSystem.CommonControl.TextEdit_Number();
@@ -107,15 +106,14 @@
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem39 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem41 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem42 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcg_NotHasAdvancePayment = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem27 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -134,9 +132,10 @@
             this.layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem37 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtPremiumbalance = new BudgetSystem.CommonControl.TextEdit_Number();
+            this.layoutControlItem42 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPremiumbalance.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommissionRate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).BeginInit();
@@ -199,15 +198,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem39)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem40)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcg_NotHasAdvancePayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem27)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
@@ -226,6 +224,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem37)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem38)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPremiumbalance.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -281,21 +281,6 @@
             this.layoutControl1.Size = new System.Drawing.Size(1152, 937);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
-            // 
-            // txtPremiumbalance
-            // 
-            this.txtPremiumbalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtPremiumbalance.IsSupportNegative = false;
-            this.txtPremiumbalance.Location = new System.Drawing.Point(1012, 330);
-            this.txtPremiumbalance.Name = "txtPremiumbalance";
-            this.txtPremiumbalance.Properties.Mask.EditMask = "n";
-            this.txtPremiumbalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtPremiumbalance.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtPremiumbalance.Properties.NullText = "0";
-            this.txtPremiumbalance.Properties.ReadOnly = true;
-            this.txtPremiumbalance.Size = new System.Drawing.Size(116, 25);
-            this.txtPremiumbalance.StyleController = this.layoutControl1;
-            this.txtPremiumbalance.TabIndex = 51;
             // 
             // btnShowBudgetHistory
             // 
@@ -1136,28 +1121,20 @@
             this.layoutControlItem2.Control = this.txtTaxPaymentA;
             this.layoutControlItem2.CustomizationFormText = "计税款A";
             this.layoutControlItem2.Location = new System.Drawing.Point(554, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(554, 29);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(554, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(554, 29);
-            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "计税款（收款）";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(165, 18);
-            this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.txtTaxRefundA;
             this.layoutControlItem4.CustomizationFormText = "退税款A";
             this.layoutControlItem4.Location = new System.Drawing.Point(554, 29);
-            this.layoutControlItem4.MaxSize = new System.Drawing.Size(554, 29);
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(554, 29);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(554, 29);
-            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.Text = "退税款（收款）";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(165, 18);
-            this.layoutControlItem4.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem6
             // 
@@ -1316,6 +1293,16 @@
             this.layoutControlItem18.Text = "已收汇（人民币）金额：";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(165, 18);
             // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.txtNetIncome;
+            this.layoutControlItem20.CustomizationFormText = "净收金额：";
+            this.layoutControlItem20.Location = new System.Drawing.Point(554, 145);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(554, 29);
+            this.layoutControlItem20.Text = "净收金额：";
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(165, 18);
+            // 
             // layoutControlItem21
             // 
             this.layoutControlItem21.Control = this.txtTotalAmount;
@@ -1325,6 +1312,16 @@
             this.layoutControlItem21.Size = new System.Drawing.Size(554, 29);
             this.layoutControlItem21.Text = "合同计划款：";
             this.layoutControlItem21.TextSize = new System.Drawing.Size(165, 18);
+            // 
+            // layoutControlItem22
+            // 
+            this.layoutControlItem22.Control = this.txtSupplier;
+            this.layoutControlItem22.CustomizationFormText = "预算单工厂：";
+            this.layoutControlItem22.Location = new System.Drawing.Point(554, 174);
+            this.layoutControlItem22.Name = "layoutControlItem22";
+            this.layoutControlItem22.Size = new System.Drawing.Size(554, 29);
+            this.layoutControlItem22.Text = "预算单工厂：";
+            this.layoutControlItem22.TextSize = new System.Drawing.Size(165, 18);
             // 
             // layoutControlItem23
             // 
@@ -1356,6 +1353,16 @@
             this.layoutControlItem40.Text = "佣   金：";
             this.layoutControlItem40.TextSize = new System.Drawing.Size(165, 18);
             // 
+            // layoutControlItem41
+            // 
+            this.layoutControlItem41.Control = this.txtPremium;
+            this.layoutControlItem41.CustomizationFormText = "运保费：";
+            this.layoutControlItem41.Location = new System.Drawing.Point(554, 116);
+            this.layoutControlItem41.Name = "layoutControlItem41";
+            this.layoutControlItem41.Size = new System.Drawing.Size(309, 29);
+            this.layoutControlItem41.Text = "运保费：";
+            this.layoutControlItem41.TextSize = new System.Drawing.Size(165, 18);
+            // 
             // layoutControlItem24
             // 
             this.layoutControlItem24.AppearanceItemCaption.Options.UseTextOptions = true;
@@ -1369,48 +1376,6 @@
             this.layoutControlItem24.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem24.TextSize = new System.Drawing.Size(105, 18);
             this.layoutControlItem24.TextToControlDistance = 5;
-            // 
-            // layoutControlItem41
-            // 
-            this.layoutControlItem41.Control = this.txtPremium;
-            this.layoutControlItem41.CustomizationFormText = "运保费：";
-            this.layoutControlItem41.Location = new System.Drawing.Point(554, 116);
-            this.layoutControlItem41.Name = "layoutControlItem41";
-            this.layoutControlItem41.Size = new System.Drawing.Size(309, 29);
-            this.layoutControlItem41.Text = "运保费：";
-            this.layoutControlItem41.TextSize = new System.Drawing.Size(165, 18);
-            // 
-            // layoutControlItem22
-            // 
-            this.layoutControlItem22.Control = this.txtSupplier;
-            this.layoutControlItem22.CustomizationFormText = "预算单工厂：";
-            this.layoutControlItem22.Location = new System.Drawing.Point(554, 174);
-            this.layoutControlItem22.Name = "layoutControlItem22";
-            this.layoutControlItem22.Size = new System.Drawing.Size(554, 29);
-            this.layoutControlItem22.Text = "预算单工厂：";
-            this.layoutControlItem22.TextSize = new System.Drawing.Size(165, 18);
-            // 
-            // layoutControlItem20
-            // 
-            this.layoutControlItem20.Control = this.txtNetIncome;
-            this.layoutControlItem20.CustomizationFormText = "净收金额：";
-            this.layoutControlItem20.Location = new System.Drawing.Point(554, 145);
-            this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(554, 29);
-            this.layoutControlItem20.Text = "净收金额：";
-            this.layoutControlItem20.TextSize = new System.Drawing.Size(165, 18);
-            // 
-            // layoutControlItem42
-            // 
-            this.layoutControlItem42.Control = this.txtPremiumbalance;
-            this.layoutControlItem42.CustomizationFormText = "应付运保费余额：";
-            this.layoutControlItem42.Location = new System.Drawing.Point(863, 116);
-            this.layoutControlItem42.Name = "layoutControlItem42";
-            this.layoutControlItem42.Size = new System.Drawing.Size(245, 29);
-            this.layoutControlItem42.Text = "应付运保费余额：";
-            this.layoutControlItem42.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.layoutControlItem42.TextSize = new System.Drawing.Size(120, 18);
-            this.layoutControlItem42.TextToControlDistance = 5;
             // 
             // lcg_NotHasAdvancePayment
             // 
@@ -1633,6 +1598,33 @@
             this.layoutControlItem38.TextSize = new System.Drawing.Size(195, 18);
             this.layoutControlItem38.TextToControlDistance = 5;
             // 
+            // txtPremiumbalance
+            // 
+            this.txtPremiumbalance.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtPremiumbalance.IsSupportNegative = false;
+            this.txtPremiumbalance.Location = new System.Drawing.Point(1012, 330);
+            this.txtPremiumbalance.Name = "txtPremiumbalance";
+            this.txtPremiumbalance.Properties.Mask.EditMask = "n";
+            this.txtPremiumbalance.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtPremiumbalance.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtPremiumbalance.Properties.NullText = "0";
+            this.txtPremiumbalance.Properties.ReadOnly = true;
+            this.txtPremiumbalance.Size = new System.Drawing.Size(116, 25);
+            this.txtPremiumbalance.StyleController = this.layoutControl1;
+            this.txtPremiumbalance.TabIndex = 51;
+            // 
+            // layoutControlItem42
+            // 
+            this.layoutControlItem42.Control = this.txtPremiumbalance;
+            this.layoutControlItem42.CustomizationFormText = "应付运保费余额：";
+            this.layoutControlItem42.Location = new System.Drawing.Point(863, 116);
+            this.layoutControlItem42.Name = "layoutControlItem42";
+            this.layoutControlItem42.Size = new System.Drawing.Size(245, 29);
+            this.layoutControlItem42.Text = "应付运保费余额：";
+            this.layoutControlItem42.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.layoutControlItem42.TextSize = new System.Drawing.Size(120, 18);
+            this.layoutControlItem42.TextToControlDistance = 5;
+            // 
             // frmPaymentCalcEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -1645,7 +1637,6 @@
             this.Load += new System.EventHandler(this.frmPaymentCalcEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtPremiumbalance.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommissionRate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPremium.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCommission.Properties)).EndInit();
@@ -1708,15 +1699,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem39)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem40)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcg_NotHasAdvancePayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem27)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
@@ -1735,6 +1725,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem37)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem38)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPremiumbalance.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -13,14 +13,14 @@ using BudgetSystem.CommonControl;
 
 namespace BudgetSystem.OutMoney
 {
-    public partial class frmPaymentCalcEdit : frmBaseDialogForm
+    public partial class frmPaymentCalcEditBankup : frmBaseDialogForm
     {
         private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
         public List<Budget> BudgetList { get; set; }
         private Budget selectedBudget;
 
-        public frmPaymentCalcEdit()
+        public frmPaymentCalcEditBankup()
         {
             InitializeComponent();
         }
@@ -154,28 +154,26 @@ namespace BudgetSystem.OutMoney
 
             if (Caculator.AdvancePayment > 0)//有预付款的情况
             {
-                //if (Caculator.IsReceiptGreaterThanTaxPayment(usageMoney))
-                //{
-                //    this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）< 收款时)";
-                //    this.txtTaxPayment.EditValue = Caculator.TaxPayment;
-                //    this.txtTaxRefund.EditValue = Caculator.TaxRefund;
-                //    this.txtTaxPaymentA.EditValue = 0;
-                //    this.txtTaxRefundA.EditValue = 0;
-                //    this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%)*出口退税率%";
-                //    this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款";
-                //}
-                //else
-                //{
-                this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏";//(所有可退税货款（辅料款）> 收款时)";
-                this.txtTaxPayment.EditValue = 0;
-                this.txtTaxRefund.EditValue = 0;
-                //txtTaxPaymentA.EditValue = Caculator.TotalTaxPayment;
-                //txtTaxRefundA.EditValue = Caculator.AllTaxes;
-                this.txtTaxPayment.EditValue = Caculator.TotalTaxPayment;
-                this.txtTaxRefund.EditValue = Caculator.AllTaxes;
-                this.txtCurrentTaxes2.ToolTip = "收款<付款，暂计退税款为0";
-                this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%)* 出口退税率%";
-                //}
+                if (Caculator.IsReceiptGreaterThanTaxPayment(usageMoney))
+                {
+                    this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）< 收款时)";
+                    this.txtTaxPayment.EditValue = Caculator.TaxPayment;
+                    this.txtTaxRefund.EditValue = Caculator.TaxRefund;
+                    this.txtTaxPaymentA.EditValue = 0;
+                    this.txtTaxRefundA.EditValue = 0;
+                    this.txtCurrentTaxes2.ToolTip = "暂计退税款=(现申请用款/(1+增值税率%)*出口退税率%";
+                    this.txtAllTaxes2.ToolTip = "共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款";
+                }
+                else
+                {
+                    this.lcg_HasAdvancePayment.Text = "有预付款情况下计算栏(所有可退税货款（辅料款）> 收款时)";
+                    this.txtTaxPayment.EditValue = 0;
+                    this.txtTaxRefund.EditValue = 0;
+                    txtTaxPaymentA.EditValue = Caculator.ReceiptMoneyAmount;
+                    txtTaxRefundA.EditValue = Caculator.AllTaxes;
+                    this.txtCurrentTaxes2.ToolTip = "收款<付款，暂计退税款为0";
+                    this.txtAllTaxes2.ToolTip = "收款<付款，已收汇人民币/(1+增值税率%)* 出口退税率%";
+                }
 
                 txtCurrentTaxes2.EditValue = Caculator.CurrentTaxes;
                 this.txtAllTaxes2.EditValue = Caculator.AllTaxes;
