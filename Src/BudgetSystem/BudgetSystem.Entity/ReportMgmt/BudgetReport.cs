@@ -312,7 +312,7 @@ namespace BudgetSystem.Entity
             {
                 if (PaymentList != null)
                 {
-                    return PaymentList.Where(o => !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                    return PaymentList.Where(o => Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
@@ -342,7 +342,7 @@ namespace BudgetSystem.Entity
             {
                 if (PaymentList != null)
                 {
-                    return PaymentList.Sum(o => o.DeTaxationCNY);
+                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
                 }
                 else { return 0; }
             }

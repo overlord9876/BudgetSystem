@@ -332,7 +332,7 @@ namespace BudgetSystem.OutMoney
                         XtraMessageBox.Show(WarningMessage2);
                         this.dxErrorProvider1.SetError(txtAfterPaymentBalance, WarningMessage2);
                     }
-                    else if (txtAdvancePayment.Value - txtIgnoreTransportationExpensesPaymentMoneyAmount.Value < 0)
+                    else if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value - txtIgnoreTransportationExpensesPaymentMoneyAmount.Value < 0)
                     {
                         XtraMessageBox.Show(WarningMessage);
                         this.dxErrorProvider1.SetError(txtIgnoreTransportationExpensesPaymentMoneyAmount, WarningMessage);
@@ -513,9 +513,9 @@ namespace BudgetSystem.OutMoney
                     return;
                 }
                 decimal money = caculator.GetUsagePayMoney(usageName);
-                if (money + txtCNY.Value > this.currentBudget.Premium)
+                if (money + txtCNY.Value > this.currentBudget.FeedMoney)
                 {
-                    message = string.Format("不能支付，预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    message = string.Format("不能支付，预算单中进料款为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.FeedMoney, money);
                     this.dxErrorProvider1.SetError(cboMoneyUsed, message);
                     XtraMessageBox.Show(message);
                     return;
@@ -532,9 +532,9 @@ namespace BudgetSystem.OutMoney
                 }
                 //暂时先放开佣金付款超额
                 decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
-                if (money + txtCNY.Value > this.currentBudget.Premium)
+                if (money + txtCNY.Value > this.currentBudget.Commission)
                 {
-                    message = string.Format("不能支付，预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    message = string.Format("不能支付，预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Commission, money);
                     this.dxErrorProvider1.SetError(cboMoneyUsed, message);
                     XtraMessageBox.Show(message);
                     return;
@@ -600,7 +600,7 @@ namespace BudgetSystem.OutMoney
         {
             if (caculator == null) { return; }
             decimal taxRebateRate = 0;
-            if (txtTaxRebateRate.EditValue != null)
+            if (txtTaxRebateRate.EditValue != null && chkIsDrawback.Checked)
             {
                 decimal.TryParse(txtTaxRebateRate.EditValue.ToString(), out taxRebateRate);
             }

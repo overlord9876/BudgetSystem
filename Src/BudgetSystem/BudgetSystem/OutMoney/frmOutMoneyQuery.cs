@@ -120,6 +120,7 @@ namespace BudgetSystem
                 if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批通过 || currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中)
                 {
                     XtraMessageBox.Show(string.Format("当前【{0}】付款单{1}，不允许删除。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState));
+                    return;
                 }
                 if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】付款单？删除后将无法恢复。", currentRowPaymentNote.VoucherNo), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {

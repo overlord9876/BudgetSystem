@@ -51,7 +51,14 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                return CNY - Math.Round(CNY / (1 + VatOption / 100) * ((decimal)TaxRebateRate / 100), 2);
+                if (IsDrawback)
+                {
+                    return CNY - Math.Round(CNY / (1 + VatOption / 100) * ((decimal)TaxRebateRate / 100), 2);
+                }
+                else
+                {
+                    return CNY;
+                }
             }
         }
 
@@ -229,7 +236,7 @@ namespace BudgetSystem.Entity
         public string ToDesc()
         {
             return string.Format("{0}向{1}用于{2}付款￥{3}，预付款为：{4}，付款后余额为：{5}",
-                this.ApplicantRealName,this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
+                this.ApplicantRealName, this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
         }
 
     }

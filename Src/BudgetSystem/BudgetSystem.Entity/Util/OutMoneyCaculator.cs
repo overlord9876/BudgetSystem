@@ -27,11 +27,16 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
+        /// 平均退税率
+        /// </summary>
+        public decimal AVGExportRebateRate { get; private set; }
+
+        /// <summary>
         /// 收款大于付款金额
         /// </summary>
         public bool IsReceiptGreaterThanTaxPayment(decimal NewPayementMoney)
         {
-            return ReceiptMoneyAmount > this.PaymentMoneyAmount + NewPayementMoney;
+            return ReceiptMoneyAmount > this.IgnoreTransportationExpensesPaymentMoneyAmount + NewPayementMoney;
         }
 
         /// <summary>
@@ -362,16 +367,31 @@ namespace BudgetSystem.Entity
             }
             else
             {
-                if (IsReceiptGreaterThanTaxPayment(paymentMoney))//合同有预付款（所有可退税货款（辅料款）< 收款时）
-                {
-                    AllTaxes = TaxRefund + CurrentTaxes;
-                }
-                else//合同有预付款（所有可退税货款（辅料款）> 收款，或两者都为零时）
-                {
-                    CurrentTaxes = 0;
-                    //收到的钱小于或等于退税款，按实际收汇金额计算
-                    AllTaxes = Math.Round((ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100), 2);
-                }
+                #region  2019-06-26调整，退税款都按照付款（可退税）金额来计算，即：共计退税款=Sum(单笔付款金额/ (1+增值税率%)*出口退税率%)+ 暂计退税款
+
+                #region 旧规则
+
+                //if (IsReceiptGreaterThanTaxPayment(paymentMoney))//合同有预付款（所有可退税货款（辅料款）< 收款时）
+                //{
+                //    AllTaxes = TaxRefund + CurrentTaxes;
+                //}
+                //else//合同有预付款（所有可退税货款（辅料款）> 收款，或两者都为零时）
+                //{
+                //    CurrentTaxes = 0;
+                //    if (exportRebateRate == 0)
+                //    {
+                //        exportRebateRate = AVGExportRebateRate;
+                //    }
+                //    //收到的钱小于或等于退税款，按实际收汇金额计算
+                //    AllTaxes = Math.Round((ReceiptMoneyAmount / (1 + ValueAddedTaxRate / 100)) * (exportRebateRate / 100), 2);
+                //}
+
+                #endregion
+
+                AllTaxes = TaxRefund + CurrentTaxes;
+
+                #endregion
+
 
                 //支付后余额=账上余额+共计退税款-现申请用款
                 this.Balance = AccountBalance + AllTaxes - paymentMoney;
@@ -416,6 +436,8 @@ namespace BudgetSystem.Entity
             TaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
 
             PaymentMoneyAmount = _paymentList.Sum(o => o.CNY);
+            //AVGExportRebateRate = (decimal)_paymentList.Where(o => o.IsDrawback).Average(o => o.TaxRebateRate);
+
             IgnoreTransportationExpensesPaymentMoneyAmount = _paymentList.Where(o => !o.MoneyUsed.Equals(TransportationExpensesCaption)).Sum(o => o.CNY);
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());
         }
