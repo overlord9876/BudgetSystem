@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -372,6 +372,12 @@
     </Compile>
     <Compile Include="OutMoney\frmOutMoneyPrint.Designer.cs">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutMoney\frmPaymentCalcEditBankup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmPaymentCalcEditBankup.Designer.cs">
+      <DependentUpon>frmPaymentCalcEditBankup.cs</DependentUpon>
     </Compile>
     <Compile Include="PrinterHelper.cs" />
     <Compile Include="Report\FormatUtil.cs" />
@@ -824,6 +830,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyPrint.resx">
       <DependentUpon>frmOutMoneyPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmPaymentCalcEditBankup.resx">
+      <DependentUpon>frmPaymentCalcEditBankup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>

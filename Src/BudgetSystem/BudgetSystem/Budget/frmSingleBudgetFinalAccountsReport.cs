@@ -130,9 +130,10 @@ namespace BudgetSystem
                     }
                     row["OriginalCoin"] = invoice.OriginalCoin;
                     row["ExchangeRate"] = invoice.ExchangeRate;
-                    row["Payment"] = invoice.AccountsPayable;
+                    row["Payment"] = invoice.Payment;
                     row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
                     row["SupplierName"] = invoice.SupplierName;
+                    row["FeedMoney"] = invoice.FeedMoney;
                     dt.Rows.Add(row);
                 }
                 dt.DefaultView.Sort = "Date";
@@ -159,10 +160,10 @@ namespace BudgetSystem
             //发票表 
             dt.Columns.Add("OriginalCoin", typeof(decimal));//应收原币
             dt.Columns.Add("ExchangeRate", typeof(decimal));//汇率
-
             dt.Columns.Add("Payment", typeof(decimal));//已收供方发票
             dt.Columns.Add("TaxRebateRate", typeof(decimal));//退税率
             dt.Columns.Add("SupplierName", typeof(string));//供货方名称
+            dt.Columns.Add("FeedMoney", typeof(decimal));//供货方名称
             //预算单表
             dt.Columns.Add("Premium", typeof(decimal));//运保费
             dt.Columns.Add("PremiumConst", typeof(decimal));//运保费
@@ -173,7 +174,7 @@ namespace BudgetSystem
             //公式列
             dt.Columns.Add("TotalAmount", typeof(decimal));//  应收人民币=OriginalCoin*ExchangeRate
             dt.Columns.Add("CostOfSales", typeof(decimal));//  销售成本=已收供方发票/(1+退税率0)=Payment/(1+TaxRebateRate)
-            dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用
+            dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用-进料款
             dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
             dt.Columns.Add("Balance", typeof(decimal));// 收支余
             dt.Columns.Add("TaxRebate", typeof(decimal));//出口退税额=已收供方发票-销售成本
@@ -208,7 +209,7 @@ namespace BudgetSystem
                 //销售成本=已收供方发票/(1+退税率)=Payment/(1+TaxRebateRate)
                 if (!row.IsNull("Payment"))
                 {
-                    needPayment = needPayment + Math.Round(GetDecimal(row, "Payment"), 2);
+                    needPayment = needPayment + Math.Round(GetDecimal(row, "Payment"), 2) + Math.Round(GetDecimal(row, "FeedMoney"), 2);
                     if (!row.IsNull("TaxRebateRate"))
                     {
                         row["CostOfSales"] = Math.Round(GetDecimal(row, "Payment") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
@@ -217,12 +218,13 @@ namespace BudgetSystem
                     taxRebate = Math.Round(GetDecimal(row, "Payment") - GetDecimal(row, "CostOfSales"), 2);
                     row["TaxRebate"] = taxRebate;
                 }
-                //销售利润=应收人民币-销售成本-运保费-佣金-直接费用
+                //销售利润=应收人民币-销售成本-运保费-佣金-直接费用-进料款
                 var salesProfit = GetDecimal(row, "TotalAmount")
                                         - GetDecimal(row, "CostOfSales")
                                         - GetDecimal(row, "Premium")
                                         - GetDecimal(row, "Commission")
-                                        - GetDecimal(row, "DirectCosts");
+                                        - GetDecimal(row, "DirectCosts")
+                                        - GetDecimal(row, "FeedMoney");
                 row["SalesProfit"] = salesProfit;
 
                 totalSalesProfit += salesProfit;
