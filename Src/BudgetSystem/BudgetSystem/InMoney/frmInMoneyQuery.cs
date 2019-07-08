@@ -335,11 +335,11 @@ namespace BudgetSystem.InMoney
 
             if (condition == null)
             {
-                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-                {
-                    condition = new InMoneyQueryCondition();
-                    condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
-                }
+                condition = new InMoneyQueryCondition();
+            }
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            {
+                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
             }
             List<BankSlip> bsList = arm.GetAllBankSlipList(condition);
 

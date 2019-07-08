@@ -162,19 +162,31 @@ namespace BudgetSystem
                     Department department = this.cboDepartment.SelectedItem as Department;
                     Bll.UserManager um = new Bll.UserManager();
                     Bll.CustomerManager sm = new Bll.CustomerManager();
-
+                    List<Customer> customers= sm.GetAllCustomer();
                     //List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
                     //var users = um.GetDepartmentUsers(department.ID);
                     //if (users != null && users.Count > 0)
                     //{
                     //users.ForEach(u => salesmans.Add(new CustomerSalesman() { Salesman = u.UserName }));
                     //}
-
+                    Customer oldCustomer = null;
                     foreach (Customer customer in list)
                     {
                         try
                         {
-                            sm.AddCustomer(customer);
+                            oldCustomer = customers.FirstOrDefault(c => c.Code == customer.Code&& c.Name==customer.Name);
+                            if (oldCustomer != null)
+                            {
+                                oldCustomer.SalesmanList = customer.SalesmanList;
+                                oldCustomer.Country = customer.Country;
+                                oldCustomer.Port = customer.Port;
+                                oldCustomer.State = customer.State;
+                                sm.ModifyCustomer(oldCustomer);
+                            }
+                            else
+                            {
+                                sm.AddCustomer(customer);
+                            }
                         }
                         catch (Exception ex)
                         {
