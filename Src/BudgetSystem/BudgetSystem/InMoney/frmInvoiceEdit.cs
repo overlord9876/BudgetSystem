@@ -30,10 +30,7 @@ namespace BudgetSystem.InMoney
         private void frmInvoiceEdit_Load(object sender, EventArgs e)
         {
             BudgetQueryCondition condition = new BudgetQueryCondition();
-            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-            {
-                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
-            }
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition; 
             List<Budget> budgetList = bm.GetAllBudget(condition);
 
             cboBudget.Properties.DataSource = budgetList;

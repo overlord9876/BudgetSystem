@@ -11,6 +11,7 @@ namespace BudgetSystem.Bll
     {
         Dal.InvoiceDal invoiceDal = new Dal.InvoiceDal();
         Dal.BudgetDal budgetDal = new Dal.BudgetDal();
+        Dal.SupplierDal supplierDal = new Dal.SupplierDal();
         public List<Invoice> GetAllInvoice(InvoiceQueryCondition condition)
         {
             var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoice(condition, con, null); });
@@ -85,6 +86,11 @@ namespace BudgetSystem.Bll
                         if (string.IsNullOrEmpty(invoice.SupplierName.Trim()))
                         {
                             invoice.Message += "销方名称不能为空;";
+                            result = false;
+                        }
+                        else if(!supplierDal.CheckName(invoice.SupplierName.Trim(),-1,con))
+                        {
+                            invoice.Message += "销方名称不存在;";
                             result = false;
                         }
                         if (invoice.Payment <= 0)

@@ -115,7 +115,8 @@ namespace BudgetSystem
                 condition = new SupplierQueryCondition();
             }
 
-            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
+            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode
+                || RunInfo.Instance.CurrentUser.Role == StringUtil.SaleDepartmentRoleCode)
             {
                 condition.DeptID = RunInfo.Instance.CurrentUser.DeptID;
             }

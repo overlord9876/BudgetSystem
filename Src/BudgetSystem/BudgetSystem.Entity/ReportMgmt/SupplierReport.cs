@@ -54,14 +54,14 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Sum(o => o.CNY);
+                    return InvoiceList.Sum(o => o.Payment);
                 }
                 else
                 {
                     return 0;
                 }
             }
-        }
+        } 
 
     }
 }

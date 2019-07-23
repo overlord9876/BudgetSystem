@@ -68,15 +68,20 @@ namespace BudgetSystem
                 gridBand29.Caption = budget.Premium.ToString();// 预算运保费
                 gridBand32.Caption = budget.Commission.ToString();// 预算佣金
                 var dfList = new DeclarationformManager().GetDeclarationformByBudgetID(budget.ID);
+                decimal originalExchangeRate = 0;//预算单原币汇率，取外贸部门商品的第一条商品信息原币汇率
+                if (budget.OutProductList != null && budget.OutProductList.Count > 0)
+                {
+                    originalExchangeRate = budget.OutProductList[0].ExchangeRate;
+                }
                 foreach (Declarationform df in dfList)
                 {
                     row = dt.NewRow();
                     row["Date"] = df.ExportDate;
                     row["ExportAmount"] = df.ExportAmount;
-                    if (df.ExchangeRate != 0)
+                    if (budget.ExchangeRate != 0 && originalExchangeRate!=0)
                     {
-                        //TODO:折算美元，这里先按照报关原币（出口金额）/汇率*预算单汇率 来计算
-                        row["USAExportAmount"] = Math.Round(df.ExportAmount / (decimal)df.ExchangeRate * (decimal)budget.ExchangeRate, 2);
+                        //折算成美元=报关原币*预算表原币汇率/预算表美元汇率  
+                        row["USAExportAmount"] = Math.Round(df.ExportAmount * originalExchangeRate / (decimal)budget.ExchangeRate, 2);
                     }
                     dt.Rows.Add(row);
                 }

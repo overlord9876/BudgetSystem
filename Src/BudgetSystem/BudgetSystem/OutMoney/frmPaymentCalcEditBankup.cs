@@ -10,6 +10,7 @@ using BudgetSystem.Entity;
 using System.Linq;
 using BudgetSystem.Bll;
 using BudgetSystem.CommonControl;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.OutMoney
 {
@@ -29,14 +30,9 @@ namespace BudgetSystem.OutMoney
         {
             if (BudgetList == null)
             {
-                if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-                {
-                    BudgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
-                }
-                else
-                {
-                    BudgetList = bm.GetAllBudget();
-                }
+                BudgetQueryCondition condition = new BudgetQueryCondition();
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+                BudgetList = bm.GetAllBudget(condition);
             }
 
             this.txtBudgetNo.Properties.DataSource = BudgetList;

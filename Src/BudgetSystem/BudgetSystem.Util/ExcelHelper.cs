@@ -38,7 +38,7 @@ namespace BudgetSystem.Util
                 return null;
             }
             try
-            {
+            { 
                 using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                 {
                     ISheet sheet = null;
@@ -124,6 +124,14 @@ namespace BudgetSystem.Util
                                     cell = row.GetCell(j);
                                     if (cell != null) //同理，没有数据的单元格都默认是null
                                     {
+                                        if (cell.CellType == CellType.Numeric)
+                                        {
+                                            if (HSSFDateUtil.IsCellDateFormatted(cell))//日期类型(这里主要是2003中有些日期类型读取错误问题修复）
+                                            {
+                                                dataRow[j] = cell.DateCellValue;
+                                                continue;
+                                            }
+                                        }
                                         strVal = cell.ToString();
                                         dataRow[j] = strVal;
                                         countNull += string.IsNullOrEmpty(strVal) ? 1 : 0;

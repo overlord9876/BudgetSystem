@@ -37,7 +37,6 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
@@ -47,12 +46,12 @@
             // gcDeclarationform
             // 
             this.gcDeclarationform.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcDeclarationform.Location = new System.Drawing.Point(0, 0);
             this.gcDeclarationform.MainView = this.gvDeclarationform;
-            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcDeclarationform.Name = "gcDeclarationform";
-            this.gcDeclarationform.Size = new System.Drawing.Size(1004, 562);
+            this.gcDeclarationform.Size = new System.Drawing.Size(1147, 723);
             this.gcDeclarationform.TabIndex = 1;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -67,7 +66,6 @@
             this.gridColumn10,
             this.gridColumn7,
             this.gridColumn8,
-            this.gridColumn9,
             this.gridColumn2,
             this.gridColumn6});
             this.gvDeclarationform.GridControl = this.gcDeclarationform;
@@ -131,21 +129,13 @@
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 6;
             // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "是否已报告延期收款";
-            this.gridColumn9.FieldName = "IsReport";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 7;
-            // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "录入人";
             this.gridColumn2.FieldName = "CreateUserRealName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn2.VisibleIndex = 7;
             // 
             // gridColumn6
             // 
@@ -155,15 +145,16 @@
             this.gridColumn6.FieldName = "CreateDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 9;
+            this.gridColumn6.VisibleIndex = 8;
             this.gridColumn6.Width = 120;
             // 
             // frmVoucherNotesQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 562);
+            this.ClientSize = new System.Drawing.Size(1147, 723);
             this.Controls.Add(this.gcDeclarationform);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmVoucherNotesQuery";
             this.Text = "报关单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();
@@ -182,7 +173,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;

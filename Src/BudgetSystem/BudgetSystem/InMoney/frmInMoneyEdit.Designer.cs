@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lblTitle = new DevExpress.XtraEditors.LabelControl();
             this.ucInMoneyEdit1 = new BudgetSystem.InMoney.ucInMoneyEdit();
             this.btnCommit = new DevExpress.XtraEditors.SimpleButton();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
@@ -39,6 +40,9 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lci_CommitButton = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciTitle = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -48,11 +52,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lci_CommitButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.lblTitle);
             this.layoutControl1.Controls.Add(this.ucInMoneyEdit1);
             this.layoutControl1.Controls.Add(this.btnCommit);
             this.layoutControl1.Controls.Add(this.btnSure);
@@ -60,18 +68,28 @@
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(768, 286, 480, 566);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(49, 189, 480, 566);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1152, 824);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // lblTitle
+            // 
+            this.lblTitle.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Location = new System.Drawing.Point(415, 12);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(395, 29);
+            this.lblTitle.StyleController = this.layoutControl1;
+            this.lblTitle.TabIndex = 103;
+            this.lblTitle.Text = "    上海服装集团进出口有限公司      ";
+            // 
             // ucInMoneyEdit1
             // 
-            this.ucInMoneyEdit1.Location = new System.Drawing.Point(12, 12);
-            this.ucInMoneyEdit1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ucInMoneyEdit1.Location = new System.Drawing.Point(12, 45);
+            this.ucInMoneyEdit1.Margin = new System.Windows.Forms.Padding(5);
             this.ucInMoneyEdit1.Name = "ucInMoneyEdit1";
-            this.ucInMoneyEdit1.Size = new System.Drawing.Size(1128, 764);
+            this.ucInMoneyEdit1.Size = new System.Drawing.Size(1128, 731);
             this.ucInMoneyEdit1.TabIndex = 41;
             this.ucInMoneyEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
@@ -118,11 +136,14 @@
             this.layoutControlItem15,
             this.emptySpaceItem2,
             this.lci_CommitButton,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.lciTitle,
+            this.emptySpaceItem1,
+            this.emptySpaceItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1152, 824);
-            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem14
@@ -184,13 +205,46 @@
             // 
             this.layoutControlItem1.Control = this.ucInMoneyEdit1;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 33);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1132, 768);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1132, 735);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // lciTitle
+            // 
+            this.lciTitle.Control = this.lblTitle;
+            this.lciTitle.CustomizationFormText = "layoutControlItem2";
+            this.lciTitle.Location = new System.Drawing.Point(403, 0);
+            this.lciTitle.Name = "lciTitle";
+            this.lciTitle.Size = new System.Drawing.Size(399, 33);
+            this.lciTitle.Text = "lciTitle";
+            this.lciTitle.TextSize = new System.Drawing.Size(0, 0);
+            this.lciTitle.TextToControlDistance = 0;
+            this.lciTitle.TextVisible = false;
+            this.lciTitle.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(403, 33);
+            this.emptySpaceItem1.Text = "emptySpaceItem1";
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
+            this.emptySpaceItem3.Location = new System.Drawing.Point(802, 0);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(330, 33);
+            this.emptySpaceItem3.Text = "emptySpaceItem3";
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem22
             // 
@@ -220,6 +274,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lci_CommitButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
             this.ResumeLayout(false);
 
@@ -239,5 +296,9 @@
         public DevExpress.XtraLayout.LayoutControlItem lci_CommitButton;
         private ucInMoneyEdit ucInMoneyEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.LabelControl lblTitle;
+        private DevExpress.XtraLayout.LayoutControlItem lciTitle;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
     }
 }

@@ -188,6 +188,7 @@ namespace BudgetSystem.InMoney
             {
                 CurrentBankSlip = new BankSlip();
                 CurrentBankSlip.UpdateTimestamp = DateTime.Now;
+                CurrentBankSlip.CreateUser = RunInfo.Instance.CurrentUser.UserName;
             }
             CurrentBankSlip.BankName = this.cboBankName.SelectedItem.ToString().Trim();
             CurrentBankSlip.Description = this.txtDescription.Text.Trim();
@@ -199,7 +200,7 @@ namespace BudgetSystem.InMoney
             CurrentBankSlip.CNY = this.txtCNY.Value;
             CurrentBankSlip.NatureOfMoney = this.cboNatureOfMoney.SelectedItem == null ? string.Empty : this.cboNatureOfMoney.SelectedItem.ToString();
             CurrentBankSlip.VoucherNo = this.txtVoucherNo.Text.Trim();
-            CurrentBankSlip.CreateUser = this.txtCreateUser.Text.Trim();
+            
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentBankSlip.Currency = this.cboCurrency.EditValue.ToString();
             CurrentBankSlip.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
@@ -254,7 +255,7 @@ namespace BudgetSystem.InMoney
 
             this.txtCNY.Text = CurrentBankSlip.CNY.ToString();
             this.txtVoucherNo.Text = CurrentBankSlip.VoucherNo;
-            this.txtCreateUser.Text = CurrentBankSlip.CreateUser;
+            this.txtCreateUser.Text =string.Format("[{0}]-[{1}]", CurrentBankSlip.CreateUser,CurrentBankSlip.CreateRealName);
             this.deReceiptDate.EditValue = CurrentBankSlip.ReceiptDate;
             this.cboNatureOfMoney.EditValue = CurrentBankSlip.NatureOfMoney;
             this.deCreateTimestamp.EditValue = CurrentBankSlip.CreateTimestamp;
@@ -410,7 +411,26 @@ namespace BudgetSystem.InMoney
             {
                 dxErrorProvider1.SetError(txtPaymentMethod, "请选择支付方式");
             }
+            if (this.WorkModel == EditFormWorkModels.Modify)
+            {
+                var dataSource = (IEnumerable<BudgetBill>)gcConstSplit.DataSource;
+                decimal splitCNY = 0;
+                decimal splitCoinMoney = 0;
+                if (dataSource != null)
+                {
+                    splitCNY = Math.Round(dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin * o.ExchangeRate), 2);
 
+                    splitCoinMoney = dataSource.Where(o => !o.IsDelete).Sum(o => o.OriginalCoin);
+                }
+                if (splitCNY > txtCNY.Value)
+                {
+                    dxErrorProvider1.SetError(txtCNY, string.Format("人民币金额不允许小于已拆分人民币金额[{0}]",splitCNY));
+                }
+                if (splitCoinMoney > txtOriginalCoin.Value)
+                {
+                    dxErrorProvider1.SetError(txtOriginalCoin, string.Format("原币金额不允许小于已拆分原币金额[{0}]",splitCoinMoney));
+                }
+            }
             return !dxErrorProvider1.HasErrors;
         }
 
@@ -422,7 +442,7 @@ namespace BudgetSystem.InMoney
             this.gcConstSplit.DataSource = new BindingList<BudgetBill>();
             if (this.WorkModel == EditFormWorkModels.New)
             {
-                this.txtCreateUser.Text = RunInfo.Instance.CurrentUser.UserName;
+                this.txtCreateUser.Text =string.Format("[{0}]-[{1}]",RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName);
                 this.deReceiptDate.EditValue = DateTime.Now;
                 this.deCreateTimestamp.EditValue = DateTime.Now;
                 this.layoutControlItem13.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -724,7 +744,16 @@ namespace BudgetSystem.InMoney
                 return;
             }
 
-            var currentBudget = bm.GetBudget(budgetBill.BudgetID);
+            Budget currentBudget = null;
+            if (budgetBill.BudgetID != 0)
+            {
+                currentBudget = bm.GetBudget(budgetBill.BudgetID);
+            }
+            else if (budgetBill.RelationBudget != null)
+            {
+                currentBudget = bm.GetBudget(budgetBill.RelationBudget.ID);
+            }
+            
             var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID).ToList();
 
             var receiptList = arm.GetBudgetBillListByBudgetId(currentBudget.ID);
@@ -737,14 +766,19 @@ namespace BudgetSystem.InMoney
                     receipt.CNY = budgetBill.CNY;
                     receipt.OriginalCoin = budgetBill.OriginalCoin;
                 }
+                if (budgetBill.OperatorModel == DataOperatorModel.Add)
+                {
+                    receiptList.Add(budgetBill);
+                }
             }
-
+           
             OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
-
+           
             caculator.ApplyForPayment(0, 1, false);
-            if (caculator.Balance < 0)
+            //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
+            if (caculator.Balance + currentBudget.AdvancePayment < 0)
             {
-                string message = string.Format("修改入账后，合同余额为{0}，不允许删除", caculator.Balance);
+                string message = string.Format("修改入账后，合同余额为{0}，不允许修改", caculator.Balance);
                 XtraMessageBox.Show(message);
 
                 e.ErrorText = message;
@@ -800,7 +834,8 @@ namespace BudgetSystem.InMoney
 
                     OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate);
                     caculator.ApplyForPayment(0, 1, false);
-                    if (caculator.Balance < 0)
+                    //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
+                    if (caculator.Balance+currentBudget.AdvancePayment < 0)
                     {
                         XtraMessageBox.Show(string.Format("删除入账后，合同余额为{0}，不允许删除", caculator.Balance));
                         gvConstSplit.CloseEditor();

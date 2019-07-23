@@ -596,11 +596,11 @@ namespace BudgetSystem
                 }
                 return false;
             }
-            if (dataSource.Exists(d => d.TaxRebateRate == 0))
+            if (dataSource.Exists(d => d.TaxRebateRate < 0))
             {
                 if (isShowError)
                 {
-                    this.bgvInProductDetail.SetColumnError(gcVat, "退税率应大于0");
+                    this.bgvInProductDetail.SetColumnError(gcTaxRebateRate, "退税率应大于等于0");
                 }
                 return false;
             }
@@ -615,6 +615,15 @@ namespace BudgetSystem
                 if (isShowError)
                 {
                     XtraMessageBox.Show("请输入外贸部分的商品信息！");
+                }
+                return false;
+            }
+            if (dataSource.GroupBy(p => p.OriginalCurrency).Count() > 1
+                || dataSource.GroupBy(p => p.ExchangeRate).Count() > 1)
+            {
+                if (isShowError)
+                {
+                    XtraMessageBox.Show("外贸合约部分商品信息中原币类型只能有一种，且原币汇率也相同！");
                 }
                 return false;
             }
@@ -1169,12 +1178,7 @@ namespace BudgetSystem
                 {
                     e.ErrorText = "原料、辅料、加工应至少一项不为0";
                     bgvInProductDetail.SetColumnError(gcSubtotal, e.ErrorText);
-                }
-                else if (bgvInProductDetail.FocusedColumn == gcTaxRebateRate)
-                {
-                    e.ErrorText = "退税率应大于等于0";
-                    bgvInProductDetail.SetColumnError(gcTaxRebateRate, e.ErrorText);
-                }
+                }                
                 else if (bgvInProductDetail.FocusedColumn == gcVat)
                 {
                     e.ErrorText = "增值税税率应大于0";

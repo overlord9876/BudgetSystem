@@ -70,7 +70,10 @@ namespace BudgetSystem.Entity
         /// 佣金类型
         /// </summary>
         public static List<string> CommissionUsageNameList = new List<string>() { "佣金", "咨询费", "服务费", "费用支付审批单" };
-
-
+        
+        /// <summary>
+        /// 直接费用类型
+        /// </summary>
+        public static List<string> DirectCostsTextList = new List<string>() { "海关关税","海关增值税","海关保证金","快递费","其他" };
     }
 }

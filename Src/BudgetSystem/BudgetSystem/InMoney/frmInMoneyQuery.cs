@@ -337,10 +337,7 @@ namespace BudgetSystem.InMoney
             {
                 condition = new InMoneyQueryCondition();
             }
-            if (RunInfo.Instance.CurrentUser.Role == StringUtil.SaleRoleCode)
-            {
-                condition.Salesman = RunInfo.Instance.CurrentUser.UserName;
-            }
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InMoneyQueryCondition; 
             List<BankSlip> bsList = arm.GetAllBankSlipList(condition);
 
             this.gcInMoney.DataSource = bsList;

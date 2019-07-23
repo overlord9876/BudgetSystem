@@ -110,6 +110,28 @@ namespace BudgetSystem.Entity
         public string OutSettlementMethod3 { get; set; }
 
         /// <summary>
+        /// 外贸商品详单
+        /// </summary>
+        public string OutProductDetail { get; set; }
+        /// <summary>
+        /// 外贸商品详单
+        /// </summary>
+        public List<OutProductDetail> OutProductList
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.OutProductDetail))
+                {
+                    return this.OutProductDetail.ToObjectList<List<OutProductDetail>>();
+                }
+                else
+                {
+                    return new List<OutProductDetail>();
+                }
+            }
+        }
+
+        /// <summary>
         /// 合同金额？
         /// </summary>
         public decimal TotalAmount { get; set; }
@@ -158,7 +180,17 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 直接费用
         /// </summary>
-        public decimal DirectCosts { get; set; }
+        public decimal DirectCosts
+        {
+            get
+            {
+                if (PaymentList != null)
+                {
+                    return PaymentList.Where(o => Util.DirectCostsTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
 
         /// <summary>
         /// 进料款
@@ -342,7 +374,7 @@ namespace BudgetSystem.Entity
             {
                 if (PaymentList != null)
                 {
-                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
+                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed) && !Util.DirectCostsTextList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
                 }
                 else { return 0; }
             }
@@ -394,9 +426,9 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (BudgetBillList != null)
+                if (ExchangeRate != 0)
                 {
-                    return BudgetBillList.Sum(o => o.OriginalCoin);
+                    return Math.Round(TotalBudgetBill / (decimal)ExchangeRate, 2);
                 }
                 else { return 0; }
             }
@@ -407,9 +439,14 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (DeclarationformList != null)
+                if (DeclarationformList != null && ExchangeRate != 0)
                 {
-                    return DeclarationformList.Sum(o => o.ExportAmount);
+                    decimal originalExchangeRate = 0;//预算单原币汇率，取外贸部门商品的第一条商品信息原币汇率
+                    if (OutProductList.Count > 0)
+                    {
+                        originalExchangeRate = OutProductList[0].ExchangeRate;
+                    }
+                    return Math.Round(DeclarationformList.Sum(o => o.ExportAmount) * originalExchangeRate / (decimal)ExchangeRate, 2);
                 }
                 else { return 0; }
             }

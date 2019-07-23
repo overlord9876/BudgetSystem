@@ -53,7 +53,6 @@ namespace BudgetSystem
                 this.txtExportAmount.Properties.ReadOnly = true;
                 this.txtExportDate.Properties.ReadOnly = true;
                 this.cboCurrency.Properties.ReadOnly = true;
-                this.chkIsReport.Properties.ReadOnly = true;
             }
         }
 
@@ -72,9 +71,7 @@ namespace BudgetSystem
             this.txtExchangeRate.EditValue = CurrentDeclarationform.ExchangeRate;
             this.textEdit5.EditValue = CurrentDeclarationform.CreateDate;
             this.textEdit6.EditValue = CurrentDeclarationform.CreateUser;
-            this.cboCurrency.EditValue = CurrentDeclarationform.Currency;
-            this.chkIsReport.EditValue = CurrentDeclarationform.IsReport;
-
+            this.cboCurrency.Text = CurrentDeclarationform.Currency;
         }
 
         private void CheckInputData()
@@ -129,7 +126,6 @@ namespace BudgetSystem
             CurrentDeclarationform.CreateDate = DateTime.Parse(this.textEdit5.EditValue.ToString());
             CurrentDeclarationform.CreateUser = this.textEdit6.Text;
             CurrentDeclarationform.Currency = this.cboCurrency.EditValue.ToString();
-            CurrentDeclarationform.IsReport = this.chkIsReport.Checked;
             CurrentDeclarationform.BudgetID = (this.cboBudget.EditValue as Budget).ID;
 
 

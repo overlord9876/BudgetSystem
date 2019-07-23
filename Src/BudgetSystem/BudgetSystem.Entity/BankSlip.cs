@@ -177,6 +177,11 @@ namespace BudgetSystem.Entity
         /// </summary>
         public int RemarkState { get; set; }
 
+        /// <summary>
+        /// 拆分信息描述
+        /// </summary>
+        public string SplitInfo { get; set; }
+
         public BankSlip()
         {
             TradeNature = -1;

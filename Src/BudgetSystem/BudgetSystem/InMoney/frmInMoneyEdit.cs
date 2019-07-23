@@ -127,6 +127,10 @@ namespace BudgetSystem.InMoney
 
         private void frmInMemoryEdit_Load(object sender, EventArgs e)
         {
+            if (IsDesignMode)
+            {
+                return;
+            }
             this.ucInMoneyEdit1.WorkModel = this.WorkModel;
             lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.SplitToBudget)
@@ -152,6 +156,7 @@ namespace BudgetSystem.InMoney
             else if (this.WorkModel == EditFormWorkModels.Print)
             {
                 this.Text = "打印";
+                this.lciTitle.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 this.ucInMoneyEdit1.BindBankSlip(this.CurrentBankSlip);
 
                 lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;

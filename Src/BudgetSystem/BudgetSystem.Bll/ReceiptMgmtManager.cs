@@ -44,7 +44,7 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public IEnumerable<BudgetBill> GetBudgetBillListByBudgetId(int budgetId)
+        public List<BudgetBill> GetBudgetBillListByBudgetId(int budgetId)
         {
             var lst = this.Query<BudgetBill>((con) =>
             {
@@ -166,6 +166,7 @@ namespace BudgetSystem.Bll
             return this.ExecuteWithTransaction<DateTime>((con, tran) =>
             {
                 modifyBankSlip.IsActive = confirmed;
+                modifyBankSlip.SplitInfo = GetSplitInfo(budgetBillList);
                 DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
                 if (confirmed && modifyBankSlip.CNY2 != 0)
                 {
@@ -230,6 +231,18 @@ namespace BudgetSystem.Bll
                  return dal.GetTotalAmountOriginalCoinByBudgetId(budgetId, con, tran);
              });
 
+        }
+
+        private string GetSplitInfo(List<BudgetBill> budgetBillList)
+        {
+            string info = string.Empty;
+            if (budgetBillList != null&&budgetBillList.Count>0)
+            {
+                List<string> infoList = new List<string>();
+                budgetBillList.ForEach(b=>infoList.Add(string.Format("[{0}:￥{1}]", b.RelationBudget==null?"":b.RelationBudget.ContractNO, b.CNY)));
+                info=string.Join("；",infoList.ToArray());
+            }
+            return info;
         }
     }
 }
