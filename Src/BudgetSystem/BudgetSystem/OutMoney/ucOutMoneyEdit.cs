@@ -120,7 +120,7 @@ namespace BudgetSystem.OutMoney
                 XtraMessageBox.Show("单据已经不存在。");
                 return;
             }
-            if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print)
+            if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print || this.WorkModel == EditFormWorkModels.Custom)
             {
                 if (budgetList == null)
                 {

@@ -203,6 +203,12 @@ namespace BudgetSystem
                 return;
             }
 
+            currentRowPaymentNote = pnm.GetPaymentNoteById(currentRowPaymentNote.ID);
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("您选择的项已经不存在，请刷新后重试。");
+                return;
+            }
             if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中
               || currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批通过)
             {
@@ -227,9 +233,26 @@ namespace BudgetSystem
                 return;
             }
 
+            currentRowPaymentNote = pnm.GetPaymentNoteById(currentRowPaymentNote.ID);
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("您选择的项已经不存在，请刷新后重试。");
+                return;
+            }
+
             if (!currentRowPaymentNote.IsIOU)
             {
                 XtraMessageBox.Show(string.Format("该付款不是借款类型。"));
+                return;
+            }
+            //if (currentRowPaymentNote.EnumFlowState != EnumDataFlowState.审批通过)
+            //{
+            //    XtraMessageBox.Show(string.Format("{0}付款单{1}不能确认归还借款。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
+            //    return;
+            //}
+            if (currentRowPaymentNote.RepayLoan)
+            {
+                XtraMessageBox.Show(string.Format("该付款已归还借款。"));
                 return;
             }
             frmOutMoneyEdit form = new frmOutMoneyEdit();

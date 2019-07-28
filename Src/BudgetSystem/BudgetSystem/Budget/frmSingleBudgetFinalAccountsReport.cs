@@ -78,7 +78,7 @@ namespace BudgetSystem
                     row = dt.NewRow();
                     row["Date"] = df.ExportDate;
                     row["ExportAmount"] = df.ExportAmount;
-                    if (budget.ExchangeRate != 0 && originalExchangeRate!=0)
+                    if (budget.ExchangeRate != 0 && originalExchangeRate != 0)
                     {
                         //折算成美元=报关原币*预算表原币汇率/预算表美元汇率  
                         row["USAExportAmount"] = Math.Round(df.ExportAmount * originalExchangeRate / (decimal)budget.ExchangeRate, 2);
@@ -112,6 +112,10 @@ namespace BudgetSystem
                     else if (Entity.Util.CommissionUsageNameList.Contains(pn.MoneyUsed))
                     {
                         row["Commission"] = pn.CNY;
+                    }
+                    else if (Entity.Util.DirectCostsTextList.Contains(pn.MoneyUsed))
+                    {
+                        row["DirectCosts"] = pn.CNY;                        
                     }
                     else
                     {
