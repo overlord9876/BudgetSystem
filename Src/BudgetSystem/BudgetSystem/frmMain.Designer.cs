@@ -60,6 +60,7 @@
             this.btnCompanyReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnFinalAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnRecieptCapital = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPaymentCapital = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -75,7 +76,6 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPaymentCapital = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -123,7 +123,7 @@
             this.btnRecieptCapital,
             this.btnPaymentCapital});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ribbonControl1.MaxItemId = 49;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
@@ -135,7 +135,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1720, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1505, 151);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -475,6 +475,16 @@
             this.btnRecieptCapital.Tag = "RecieptCapital";
             this.btnRecieptCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRecieptCapital_ItemClick);
             // 
+            // btnPaymentCapital
+            // 
+            this.btnPaymentCapital.Caption = "资金管理（付款）";
+            this.btnPaymentCapital.Id = 48;
+            this.btnPaymentCapital.ImageIndex = 21;
+            this.btnPaymentCapital.Name = "btnPaymentCapital";
+            this.btnPaymentCapital.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnPaymentCapital.Tag = "PaymentCapital";
+            this.btnPaymentCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPaymentCapital_ItemClick);
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -551,11 +561,11 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 874);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 675);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1720, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1505, 31);
             // 
             // documentManager1
             // 
@@ -603,26 +613,16 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
-            // btnPaymentCapital
-            // 
-            this.btnPaymentCapital.Caption = "资金管理（付款）";
-            this.btnPaymentCapital.Id = 48;
-            this.btnPaymentCapital.ImageIndex = 21;
-            this.btnPaymentCapital.Name = "btnPaymentCapital";
-            this.btnPaymentCapital.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btnPaymentCapital.Tag = "PaymentCapital";
-            this.btnPaymentCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPaymentCapital_ItemClick);
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1720, 908);
+            this.ClientSize = new System.Drawing.Size(1505, 706);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

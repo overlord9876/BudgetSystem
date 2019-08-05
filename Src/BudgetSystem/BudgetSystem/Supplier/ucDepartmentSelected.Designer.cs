@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class ucSupplierSelected
+    partial class ucDepartmentSelected
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridSupplier = new DevExpress.XtraGrid.GridControl();
-            this.gvSupplier = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridDepartment = new DevExpress.XtraGrid.GridControl();
+            this.gvDepartment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcSupplierType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcLegal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAssistantManagerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDepartment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -50,45 +51,46 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridSupplier
+            // gridDepartment
             // 
-            this.gridSupplier.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gridSupplier.Location = new System.Drawing.Point(12, 12);
-            this.gridSupplier.MainView = this.gvSupplier;
-            this.gridSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gridSupplier.Name = "gridSupplier";
-            this.gridSupplier.Size = new System.Drawing.Size(582, 352);
-            this.gridSupplier.TabIndex = 0;
-            this.gridSupplier.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvSupplier});
+            this.gridDepartment.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridDepartment.Location = new System.Drawing.Point(12, 12);
+            this.gridDepartment.MainView = this.gvDepartment;
+            this.gridDepartment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridDepartment.Name = "gridDepartment";
+            this.gridDepartment.Size = new System.Drawing.Size(582, 352);
+            this.gridDepartment.TabIndex = 0;
+            this.gridDepartment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvDepartment});
             // 
-            // gvSupplier
+            // gvDepartment
             // 
-            this.gvSupplier.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvDepartment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcIsSelected,
+            this.gcCode,
             this.gcName,
-            this.gcSupplierType,
-            this.gcLegal});
-            this.gvSupplier.GridControl = this.gridSupplier;
-            this.gvSupplier.GroupCount = 1;
-            this.gvSupplier.GroupFormat = " {2}";
-            this.gvSupplier.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            this.gcManagerName,
+            this.gcAssistantManagerName});
+            this.gvDepartment.GridControl = this.gridDepartment;
+            this.gvDepartment.GroupCount = 1;
+            this.gvDepartment.GroupFormat = " {2}";
+            this.gvDepartment.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "IsSelected", null, "")});
-            this.gvSupplier.Name = "gvSupplier";
-            this.gvSupplier.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSupplier.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gvSupplier.OptionsBehavior.AutoExpandAllGroups = true;
-            this.gvSupplier.OptionsDetail.EnableMasterViewMode = false;
-            this.gvSupplier.OptionsDetail.ShowDetailTabs = false;
-            this.gvSupplier.OptionsDetail.SmartDetailExpand = false;
-            this.gvSupplier.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
-            this.gvSupplier.OptionsFind.AlwaysVisible = true;
-            this.gvSupplier.OptionsView.ShowGroupedColumns = true;
-            this.gvSupplier.OptionsView.ShowGroupPanel = false;
-            this.gvSupplier.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            this.gvDepartment.Name = "gvDepartment";
+            this.gvDepartment.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvDepartment.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gvDepartment.OptionsBehavior.AutoExpandAllGroups = true;
+            this.gvDepartment.OptionsDetail.EnableMasterViewMode = false;
+            this.gvDepartment.OptionsDetail.ShowDetailTabs = false;
+            this.gvDepartment.OptionsDetail.SmartDetailExpand = false;
+            this.gvDepartment.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
+            this.gvDepartment.OptionsFind.AlwaysVisible = true;
+            this.gvDepartment.OptionsView.ShowGroupedColumns = true;
+            this.gvDepartment.OptionsView.ShowGroupPanel = false;
+            this.gvDepartment.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcIsSelected, DevExpress.Data.ColumnSortOrder.Descending)});
-            this.gvSupplier.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSupplier_CustomDrawGroupRow);
-            this.gvSupplier.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvSupplier_CellValueChanging);
+            this.gvDepartment.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvDepartment_CustomDrawGroupRow);
+            this.gvDepartment.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvDepartment_CellValueChanging);
             // 
             // gcIsSelected
             // 
@@ -99,40 +101,50 @@
             this.gcIsSelected.VisibleIndex = 0;
             this.gcIsSelected.Width = 61;
             // 
+            // gcCode
+            // 
+            this.gcCode.Caption = "部门标识";
+            this.gcCode.FieldName = "Code";
+            this.gcCode.Name = "gcCode";
+            this.gcCode.OptionsColumn.AllowEdit = false;
+            this.gcCode.Visible = true;
+            this.gcCode.VisibleIndex = 1;
+            this.gcCode.Width = 241;
+            // 
             // gcName
             // 
-            this.gcName.Caption = "名称";
+            this.gcName.Caption = "部门名称";
             this.gcName.FieldName = "Name";
             this.gcName.Name = "gcName";
             this.gcName.OptionsColumn.AllowEdit = false;
             this.gcName.Visible = true;
-            this.gcName.VisibleIndex = 1;
-            this.gcName.Width = 241;
+            this.gcName.VisibleIndex = 2;
+            this.gcName.Width = 150;
             // 
-            // gcSupplierType
+            // gcManagerName
             // 
-            this.gcSupplierType.Caption = "是否合格供应商";
-            this.gcSupplierType.FieldName = "IsQualified";
-            this.gcSupplierType.Name = "gcSupplierType";
-            this.gcSupplierType.OptionsColumn.AllowEdit = false;
-            this.gcSupplierType.Visible = true;
-            this.gcSupplierType.VisibleIndex = 2;
-            this.gcSupplierType.Width = 150;
+            this.gcManagerName.Caption = "部门经理";
+            this.gcManagerName.FieldName = "ManagerName";
+            this.gcManagerName.Name = "gcManagerName";
+            this.gcManagerName.OptionsColumn.AllowEdit = false;
+            this.gcManagerName.Visible = true;
+            this.gcManagerName.VisibleIndex = 3;
+            this.gcManagerName.Width = 150;
             // 
-            // gcLegal
+            // gcAssistantManagerName
             // 
-            this.gcLegal.Caption = "法人代表";
-            this.gcLegal.FieldName = "Legal";
-            this.gcLegal.Name = "gcLegal";
-            this.gcLegal.OptionsColumn.AllowEdit = false;
-            this.gcLegal.Visible = true;
-            this.gcLegal.VisibleIndex = 3;
-            this.gcLegal.Width = 150;
+            this.gcAssistantManagerName.Caption = "部门副经理";
+            this.gcAssistantManagerName.FieldName = "AssistantManagerName";
+            this.gcAssistantManagerName.Name = "gcAssistantManagerName";
+            this.gcAssistantManagerName.OptionsColumn.AllowEdit = false;
+            this.gcAssistantManagerName.Visible = true;
+            this.gcAssistantManagerName.VisibleIndex = 4;
+            this.gcAssistantManagerName.Width = 100;
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.btnSure);
-            this.layoutControl1.Controls.Add(this.gridSupplier);
+            this.layoutControl1.Controls.Add(this.gridDepartment);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -170,7 +182,7 @@
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.gridSupplier;
+            this.layoutControlItem1.Control = this.gridDepartment;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
@@ -205,16 +217,16 @@
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
             // 
-            // ucSupplierSelected
+            // ucDepartmentSelected
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "ucSupplierSelected";
+            this.Name = "ucDepartmentSelected";
             this.Size = new System.Drawing.Size(606, 412);
-            ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDepartment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -227,12 +239,13 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridSupplier;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSupplier;
+        private DevExpress.XtraGrid.GridControl gridDepartment;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvDepartment;
         private DevExpress.XtraGrid.Columns.GridColumn gcIsSelected;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcSupplierType;
-        private DevExpress.XtraGrid.Columns.GridColumn gcLegal;
+        private DevExpress.XtraGrid.Columns.GridColumn gcManagerName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAssistantManagerName;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.SimpleButton btnSure;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;

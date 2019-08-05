@@ -41,6 +41,8 @@
             this.ritxtExportAmount = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcExportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcIsReport = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ritxtExchangeRate = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDelete = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,8 +58,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ritxtOriginalCoin = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ritxtExchangeRate = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
@@ -65,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ritxtContractNO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtNO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtExportAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtExchangeRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.riLinkDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
@@ -73,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ritxtExchangeRate)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -211,6 +211,20 @@
             this.gcIsReport.Visible = true;
             this.gcIsReport.VisibleIndex = 6;
             this.gcIsReport.Width = 85;
+            // 
+            // gcExchangeRate
+            // 
+            this.gcExchangeRate.Caption = "汇率";
+            this.gcExchangeRate.ColumnEdit = this.ritxtExchangeRate;
+            this.gcExchangeRate.FieldName = "ExchangeRate";
+            this.gcExchangeRate.Name = "gcExchangeRate";
+            this.gcExchangeRate.Visible = true;
+            this.gcExchangeRate.VisibleIndex = 7;
+            // 
+            // ritxtExchangeRate
+            // 
+            this.ritxtExchangeRate.AutoHeight = false;
+            this.ritxtExchangeRate.Name = "ritxtExchangeRate";
             // 
             // gcCreateUser
             // 
@@ -366,20 +380,6 @@
             this.gcContractNO.VisibleIndex = 1;
             this.gcContractNO.Width = 85;
             // 
-            // gcExchangeRate
-            // 
-            this.gcExchangeRate.Caption = "汇率";
-            this.gcExchangeRate.ColumnEdit = this.ritxtExchangeRate;
-            this.gcExchangeRate.FieldName = "ExchangeRate";
-            this.gcExchangeRate.Name = "gcExchangeRate";
-            this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 7;
-            // 
-            // ritxtExchangeRate
-            // 
-            this.ritxtExchangeRate.AutoHeight = false;
-            this.ritxtExchangeRate.Name = "ritxtExchangeRate";
-            // 
             // frmDeclarationformImport
             // 
             this.AcceptButton = this.btnSure;
@@ -390,7 +390,7 @@
             this.Controls.Add(this.layoutControl1);
             this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmDeclarationformImport";
-            this.Text = "导入交单信息";
+            this.Text = "导入报关单信息";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();
@@ -398,6 +398,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ritxtContractNO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtNO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtExportAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtExchangeRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.riLinkDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
@@ -406,7 +407,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ritxtExchangeRate)).EndInit();
             this.ResumeLayout(false);
 
         }

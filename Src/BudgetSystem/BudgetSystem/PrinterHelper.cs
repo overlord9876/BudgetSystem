@@ -5,12 +5,13 @@ using BudgetSystem.Entity;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraGrid;
 using DevExpress.LookAndFeel;
+using System.Drawing.Printing;
 
 namespace BudgetSystem
 {
     public class PrinterHelper
     {
-        public static void PrintControl(bool isPrintLandscape, IPrintable printControl, bool isShowPreview = true)
+        public static void PrintControl(bool isPrintLandscape, IPrintable printControl, bool isShowPreview = true, PaperKind paperKind = PaperKind.A4)
         {
             //if (printControl is ISupportLookAndFeel)
             //{
@@ -31,8 +32,18 @@ namespace BudgetSystem
             printableComponentLink.Component = printControl;
             // Set the paper orientation to Landscape.
             printableComponentLink.Landscape = isPrintLandscape;
-            printableComponentLink.PaperKind = System.Drawing.Printing.PaperKind.A4;
-            printableComponentLink.Margins = new System.Drawing.Printing.Margins(10, 10, 10, 10);
+            printableComponentLink.PaperKind = paperKind;
+            if (paperKind == PaperKind.Custom)
+            {
+                printableComponentLink.PaperKind = PaperKind.Custom;
+                printableComponentLink.CustomPaperSize = new System.Drawing.Size((int)(210 * 100 / 25.4), (int)(139.8 * 100 / 25.4 ));
+
+                printableComponentLink.Margins = new System.Drawing.Printing.Margins(50, 10, 10, 10);
+            }
+            else
+            {
+                printableComponentLink.Margins = new System.Drawing.Printing.Margins(10, 10, 10, 10);
+            }
             if (isShowPreview)
             {
                 printableComponentLink.ShowPreview();

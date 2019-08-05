@@ -123,7 +123,7 @@ namespace BudgetSystem.OutMoney
         {
             this.Height -= 50;
             this.labelControl1.Focus();
-            PrinterHelper.PrintControl(false, this.layoutControl2, false);
+            PrinterHelper.PrintControl(false, this.layoutControl2, false, System.Drawing.Printing.PaperKind.Custom);
         }
     }
 }

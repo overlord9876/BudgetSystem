@@ -37,10 +37,5 @@ namespace BudgetSystem.Entity.QueryCondition
                 supplierType = value;
             }
         }
-
-        /// <summary>
-        /// 所属部门
-        /// </summary>
-        public string Department { get; set; }
     }
 }

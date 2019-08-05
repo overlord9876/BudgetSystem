@@ -113,7 +113,7 @@ namespace BudgetSystem
                         supplier.FirstReviewContents = "{\"ReviewItems\":{\"交付\":1,\"服务\":1,\"价格\":1,\"技术力量\":1,\"生产设备\":1,\"产品质量\":1,\"质量管理体系\":1,\"社会责任表现\":1,\"社会责任承诺\":1},\"Result\":1,\"Salesman\":\"" + supplier.CreateUserName + "\",\"SalesmanResult\":1,\"Manager\":null,\"ManagerResult\":0,\"Leader\":null,\"LeaderResult\":0,\"ResultDate\":null}";
                     }
                     supplier.Description = DataRowConvertHelper.GetStringValue(row, "备注").Trim();
-                    supplier.DeptID = department.ID;
+                    supplier.Departments.Add(department);
                     //银行信息暂用默认
                     supplier.BankInfoDetail = "[{\"Name\":\"中国银行\",\"Account\":\"\"}]";
                     list.Add(supplier);

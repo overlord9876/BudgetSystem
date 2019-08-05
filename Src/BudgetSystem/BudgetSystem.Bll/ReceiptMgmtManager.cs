@@ -99,7 +99,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.入账审修改批流程.ToString(), bsID, bankSlip.VoucherNo, EnumFlowDataType.收款单.ToString(), currentUser, description);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.入账修改审批流程.ToString(), bsID, bankSlip.VoucherNo, EnumFlowDataType.收款单.ToString(), currentUser, description);
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

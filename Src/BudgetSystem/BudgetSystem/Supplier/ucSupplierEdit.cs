@@ -41,6 +41,8 @@ namespace BudgetSystem
                 this.InitData();
             }
             this.Load += new System.EventHandler(this.ucSupplierEdit_Load);
+            this.pceDepartment.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(pceDepartment_QueryResultValue);
+            this.pceDepartment.QueryPopUp += new CancelEventHandler(pceDepartment_QueryPopUp);
         }
 
         private void ucSupplierEdit_Load(object sender, EventArgs e)
@@ -72,6 +74,7 @@ namespace BudgetSystem
                 this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(DateTime.Now.Year - this.dteRegistrationDate.DateTime.Year + 1);
             }
         }
+
         void FirstReviewItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
@@ -96,10 +99,12 @@ namespace BudgetSystem
                 this.rgResult.SelectedIndex = result;
             }
         }
+
         void rgResult_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.cboSalesmanResult.SelectedIndex = this.rgResult.SelectedIndex;
         }
+
         void Batch_EditValueChanged(object sender, EventArgs e)
         {
             int pass = 0;
@@ -114,6 +119,23 @@ namespace BudgetSystem
             }
             this.txtTotalBatch.Text = string.Format("总共:{0}批次", count.ToString());
             this.txtTotalBatch.Tag = count;
+        }
+
+        void pceDepartment_QueryPopUp(object sender, CancelEventArgs e)
+        {
+            PopupContainerEdit popupedit = (PopupContainerEdit)sender;
+            popupedit.Properties.PopupControl = this.pccDepartment;
+            this.ucDepartmentSelected1.SetSelectedItems(popupedit.Tag as List<Department>);
+            pccDepartment.Width = popupedit.Width;
+            pccDepartment.Height = 300;
+        }
+
+        void pceDepartment_QueryResultValue(object sender, DevExpress.XtraEditors.Controls.QueryResultValueEventArgs e)
+        {
+            List<Department> departments = this.ucDepartmentSelected1.SelectedDepartments;
+            e.Value = departments.ToNameString();
+            PopupContainerEdit popupedit = (PopupContainerEdit)sender;
+            popupedit.Tag = departments;
         }
 
         public void InitData()
@@ -139,7 +161,8 @@ namespace BudgetSystem
                 this.cboNature.SelectedIndex = 0;
             }
             List<Department> departmentList = dm.GetAllDepartment();
-            this.cboDepartment.Properties.Items.AddRange(departmentList);
+
+            this.ucDepartmentSelected1.SetDataSource(departmentList);
             this.rgResult.SelectedIndex = -1;
             foreach (Control control in this.layoutControl2.Controls)
             {
@@ -180,7 +203,7 @@ namespace BudgetSystem
                 this.meDescription.Text = supplier.Description;
                 this.chkDiscredited.Checked = supplier.Discredited;
                 this.chkExistsLicenseCopy.Checked = supplier.ExistsLicenseCopy;
-                this.cboAgentType.SelectedItem = (EnumAgentType) supplier.AgentType;
+                this.cboAgentType.SelectedItem = (EnumAgentType)supplier.AgentType;
                 this.dteAgreementDate.EditValue = supplier.AgreementDate;
                 this.dteBusinessEffectiveDate.EditValue = supplier.BusinessEffectiveDate;
                 this.dteRegistrationDate.EditValue = supplier.RegistrationDate;
@@ -191,14 +214,9 @@ namespace BudgetSystem
                 this.dteRegistrationDate.EditValue = supplier.RegistrationDate;
                 this.dteReviewDate.EditValue = supplier.ReviewDate;
                 this.BindingBankInfoDetail(supplier.BankInfoDetail);
-                foreach (Department department in this.cboDepartment.Properties.Items)
-                {
-                    if (department.ID == supplier.DeptID)
-                    {
-                        this.cboDepartment.SelectedItem = department;
-                        break;
-                    }
-                }
+
+                this.pceDepartment.Text = supplier.Departments.ToNameString();
+                this.pceDepartment.Tag = supplier.Departments;
 
                 if (this.WorkModel == EditFormWorkModels.Review)
                 {
@@ -372,9 +390,9 @@ namespace BudgetSystem
                     }
                 }
 
-                if (string.IsNullOrEmpty(this.cboDepartment.Text.Trim()))
+                if (string.IsNullOrEmpty(this.pceDepartment.Text.Trim()))
                 {
-                    this.dxErrorProvider1.SetError(this.cboDepartment, "请选择所属部门");
+                    this.dxErrorProvider1.SetError(this.pceDepartment, "请选择所属部门");
                 }
 
                 if (cboSupplierType.SelectedIndex != 0 && isStartFlow)
@@ -397,7 +415,7 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.txtLegal, "请输入法人代表");
                 }
-                if ((EnumAgentType)this.cboAgentType.SelectedItem== EnumAgentType.无)
+                if ((EnumAgentType)this.cboAgentType.SelectedItem == EnumAgentType.无)
                 {
                     this.dxErrorProvider1.SetError(this.cboAgentType, "合格供方需要选择贸易方式类型");
                 }
@@ -504,9 +522,8 @@ namespace BudgetSystem
             this.CurrentSupplier.Address = this.txtAddress.Text.Trim();
             this.CurrentSupplier.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             this.CurrentSupplier.Contacts = this.txtContacts.Text.Trim();
-            this.CurrentSupplier.DeptID = (this.cboDepartment.SelectedItem as Department).ID;
-            this.CurrentSupplier.DepartmentCode = (this.cboDepartment.SelectedItem as Department).Code;
-            this.CurrentSupplier.DepartmentName = (this.cboDepartment.SelectedItem as Department).Name;
+            List<Department> departments = pceDepartment.Tag as List<Department>;
+            this.CurrentSupplier.Departments.AddRange(departments);
             this.CurrentSupplier.FaxNumber = this.txtFaxNumber.Text.Trim();
             this.CurrentSupplier.Legal = this.txtLegal.Text.Trim();
             this.CurrentSupplier.Nature = this.cboNature.Text;

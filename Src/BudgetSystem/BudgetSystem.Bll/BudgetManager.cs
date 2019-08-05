@@ -153,10 +153,10 @@ namespace BudgetSystem.Bll
             }
             EnumFlowNames? oldFlowName = null;
             if (!string.IsNullOrEmpty(budge.FlowName))
-            { 
-                oldFlowName=(EnumFlowNames)Enum.Parse(typeof(EnumFlowNames), budge.FlowName);
+            {
+                oldFlowName = (EnumFlowNames)Enum.Parse(typeof(EnumFlowNames), budge.FlowName);
             }
-            string message = EnumCheckUtil.CheckCurrentFlowStart(flowName,oldFlowName , budge.EnumFlowState);
+            string message = EnumCheckUtil.CheckCurrentFlowStart(flowName, oldFlowName, budge.EnumFlowState);
             if (!string.IsNullOrEmpty(message)) { return message; }
             //当启动的流程为预算单审批流程才记录修改记录。
             if (flowName == EnumFlowNames.预算单审批流程)
@@ -295,10 +295,13 @@ namespace BudgetSystem.Bll
             {
                 return "数据不存在";
             }
-            else if (!EnumFlowNames.预算单删除流程.ToString().Equals(budget.FlowName)
-                      || budget.EnumFlowState != EnumDataFlowState.审批通过)
+            else if ((!string.IsNullOrEmpty(budget.FlowName)) && !EnumFlowNames.预算单删除流程.ToString().Equals(budget.FlowName))
             {
-                return string.Format("{0}没有审批通过，不能删除。", EnumFlowNames.预算单删除流程.ToString());
+                return string.Format("流程单正处于{0}，不能删除。", budget.FlowName);
+            }
+            else if (EnumFlowNames.预算单删除流程.ToString().Equals(budget.FlowName) && budget.EnumFlowState != EnumDataFlowState.审批通过)
+            {
+                return string.Format("{0}未审批通过，不能删除。", EnumFlowNames.预算单删除流程);
             }
             string message = string.Empty;
             bool checkResult = false;

@@ -10,6 +10,8 @@ namespace BudgetSystem.Entity
     /// </summary>
     public class Supplier : IEntity
     {
+        private List<Department> departments = new List<Department>();
+
         /// <summary>
         /// ID
         /// </summary>
@@ -71,9 +73,9 @@ namespace BudgetSystem.Entity
         public string Contacts { get; set; }
 
         /// <summary>
-        /// 部门ID
+        /// 部门列表
         /// </summary>
-        public int DeptID { get; set; }
+        public List<Department> Departments { get { return this.departments; } }
 
         /// <summary>
         /// 所属部门？
@@ -123,9 +125,9 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 是否有合格供方代理协议
         /// </summary>
-        public int AgentType{get;set;}
+        public int AgentType { get; set; }
 
-        public EnumAgentType EnumAgentType 
+        public EnumAgentType EnumAgentType
         {
             get { return (EnumAgentType)AgentType; }
         }
@@ -164,7 +166,7 @@ namespace BudgetSystem.Entity
         /// 复审内容
         /// </summary>
         public string ReviewContents { get; set; }
-        
+
 
         /// <summary>
         /// 更新日期
@@ -215,14 +217,14 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (SupplierType == (int)EnumSupplierType.合格供方&& EnumFlowState== EnumDataFlowState.审批通过)
+                if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if ((this.BusinessEffectiveDate != null &&this.BusinessEffectiveDate.Value>DateTime.MinValue.AddDays(30)
-                         && this.BusinessEffectiveDate.Value.Date.AddDays(-30)<=DateTime.Now.Date  && DateTime.Now.Date<= this.BusinessEffectiveDate.Value.Date)
-                       || (this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
-                           && this.AgreementDate.Value.Date.AddDays(-30) <= DateTime.Now.Date&& DateTime.Now.Date<=this.AgreementDate.Value.Date) 
-                       ||(this.ReviewDate!=null&& this.ReviewDate.Value<DateTime.MaxValue.AddDays(-30)
-                          && this.ReviewDate.Value.Date<=DateTime.Now.Date && DateTime.Now.Date<=this.ReviewDate.Value.AddDays(30).Date))
+                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value > DateTime.MinValue.AddDays(30)
+                         && this.BusinessEffectiveDate.Value.Date.AddDays(-30) <= DateTime.Now.Date && DateTime.Now.Date <= this.BusinessEffectiveDate.Value.Date)
+                       || (this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
+                           && this.AgreementDate.Value.Date.AddDays(-30) <= DateTime.Now.Date && DateTime.Now.Date <= this.AgreementDate.Value.Date)
+                       || (this.ReviewDate != null && this.ReviewDate.Value < DateTime.MaxValue.AddDays(-30)
+                          && this.ReviewDate.Value.Date <= DateTime.Now.Date && DateTime.Now.Date <= this.ReviewDate.Value.AddDays(30).Date))
                     {
                         return true;
                     }
@@ -240,9 +242,9 @@ namespace BudgetSystem.Entity
             {
                 if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if ((this.BusinessEffectiveDate != null && DateTime.Now.Date>this.BusinessEffectiveDate.Value.Date)
-                       || (this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && DateTime.Now.Date>this.AgreementDate.Value.Date)
-                       || (this.ReviewDate != null && DateTime.Now.Date.AddDays(-30)>this.ReviewDate.Value.Date))
+                    if ((this.BusinessEffectiveDate != null && DateTime.Now.Date > this.BusinessEffectiveDate.Value.Date)
+                       || (this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && DateTime.Now.Date > this.AgreementDate.Value.Date)
+                       || (this.ReviewDate != null && DateTime.Now.Date.AddDays(-30) > this.ReviewDate.Value.Date))
                     {
                         return true;
                     }
@@ -258,15 +260,15 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (SupplierType == (int)EnumSupplierType.合格供方&&this.EnumFlowState == EnumDataFlowState.审批通过)
+                if (SupplierType == (int)EnumSupplierType.合格供方 && this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
                     if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date >= DateTime.Now.Date)
-                        && ((this.AgentType== (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
+                        && ((this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
                             || this.AgentType == (int)EnumAgentType.货代 || this.AgentType == (int)EnumAgentType.自营)
-                        && (this.ReviewDate!=null && this.ReviewDate.Value.Date>=  DateTime.Now.Date.AddDays(-30)))
+                        && (this.ReviewDate != null && this.ReviewDate.Value.Date >= DateTime.Now.Date.AddDays(-30)))
                     {
                         return true;
-                    } 
+                    }
                 }
 
                 return false;
@@ -287,7 +289,7 @@ namespace BudgetSystem.Entity
         public string ToDesc()
         {
             return string.Format("名称[{0}],法人[{1}],合格供方代理协议类型[{2}],经营异常企业[{3}],联系人[{4}],所属部门[{5}]",
-                this.Name, this.Legal,AgentType, Discredited ? "是" : "否", Contacts, DepartmentCode + "-" + DepartmentName);
+                this.Name, this.Legal, AgentType, Discredited ? "是" : "否", Contacts, DepartmentCode + "-" + DepartmentName);
         }
 
     }

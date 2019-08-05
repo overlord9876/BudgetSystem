@@ -194,10 +194,10 @@ namespace BudgetSystem.OutMoney
             if (isApprovalView)
             {
                 lblMessage.Text = string.Empty;
-                if (findedItem != null && findedItem.EnumFlowState != EnumDataFlowState.审批通过)
-                {
-                    lblMessage.Text = "预算单还未审批通过";
-                }
+                //if (findedItem != null && findedItem.EnumFlowState != EnumDataFlowState.审批通过)
+                //{
+                //    lblMessage.Text = "预算单还未审批通过";
+                //}
                 if (txtAfterPaymentBalance.Value < 0)
                 {
                     if (!string.IsNullOrEmpty(lblMessage.Text))
@@ -275,9 +275,17 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(cboBudget, "请选择合同信息。");
             }
-            else if ((!EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName)) || (!selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过)))
+            else if (EnumFlowNames.预算单审批流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批通过))
             {
                 this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单审批流程));
+            }
+            else if (EnumFlowNames.预算单修改流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批不通过))
+            {
+                this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单修改流程));
+            }
+            else if (EnumFlowNames.预算单删除流程.ToString().Equals(selectedBudget.FlowName) && !selectedBudget.EnumFlowState.Equals(EnumDataFlowState.审批不通过))
+            {
+                this.dxErrorProvider1.SetError(cboBudget, string.Format("{0}还未审批结束，不允许付款。", EnumFlowNames.预算单删除流程));
             }
 
             if (cboPaymentMethod.EditValue == null || string.IsNullOrEmpty(cboPaymentMethod.EditValue.ToString()))

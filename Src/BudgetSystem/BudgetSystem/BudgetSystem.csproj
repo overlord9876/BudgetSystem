@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NotUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -652,6 +652,12 @@
     <Compile Include="Supplier\frmSupplierReviewHistory.Designer.cs">
       <DependentUpon>frmSupplierReviewHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Supplier\ucDepartmentSelected.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Supplier\ucDepartmentSelected.Designer.cs">
+      <DependentUpon>ucDepartmentSelected.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEntity\DataControlCreator.cs" />
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\IDataControl.cs" />
@@ -834,6 +840,7 @@
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEditBankup.resx">
       <DependentUpon>frmPaymentCalcEditBankup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -975,6 +982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierReviewHistory.resx">
       <DependentUpon>frmSupplierReviewHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\ucDepartmentSelected.resx">
+      <DependentUpon>ucDepartmentSelected.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManage\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>

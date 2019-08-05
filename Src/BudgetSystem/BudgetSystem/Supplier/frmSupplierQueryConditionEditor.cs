@@ -33,6 +33,7 @@ namespace BudgetSystem
             this.cboType.Properties.Items.Add("临时供方");
             this.cboType.Properties.Items.Add("其它供方");
         }
+
         public override bool CollectData()
         {
             SupplierQueryCondition c = new SupplierQueryCondition();
@@ -47,13 +48,11 @@ namespace BudgetSystem
             }
             if (this.cboDepartment.SelectedItem != null)
             {
-                c.Department = ((Department)this.cboDepartment.SelectedItem).Code;
+                c.DeptID = ((Department)this.cboDepartment.SelectedItem).ID;
             }
             this.QueryCondition = c;
             return true;
         }
-
-
     }
 
 
