@@ -39,6 +39,19 @@ namespace BudgetSystem
                 }
             }
         }
+
+        /// <summary>
+        /// 是否可以编辑
+        /// </summary>
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool CanEdit
+        {
+            set
+            {
+                this.gvSupplier.OptionsBehavior.Editable = value;
+            }
+        }
+
         public void SetDataSource(List<Supplier> dataSource)
         {
             this.gridSupplier.DataSource = new BindingList<Supplier>(dataSource);

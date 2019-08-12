@@ -26,8 +26,8 @@ namespace BudgetSystem
         }
         public override void BindingData(int dataID)
         {
-            this.ucBudgetEdit1.InitData();
             this.ucBudgetEdit1.WorkModel = WorkModel;
+            this.ucBudgetEdit1.InitData();
             this.ucBudgetEdit1.BindingData(dataID);
             List<Budget> historyData = mmm.GetAllModifyMark<Budget>(dataID);
             if (historyData != null)

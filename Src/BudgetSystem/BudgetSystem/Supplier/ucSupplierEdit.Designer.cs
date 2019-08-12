@@ -68,7 +68,6 @@
             this.lcSupplierType = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRegisterCapital = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcAddress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcContacts = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcLegal = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -88,6 +87,8 @@
             this.lcPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFaxNumber = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcContacts = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ucDepartmentSelected1 = new BudgetSystem.ucDepartmentSelected();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -204,11 +205,9 @@
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ucDepartmentSelected1 = new BudgetSystem.ucDepartmentSelected();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pccDepartment)).BeginInit();
-            this.pccDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pceDepartment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboAgentType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkExistsLicenseCopy.Properties)).BeginInit();
@@ -247,7 +246,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSupplierType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRegisterCapital)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLegal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -267,6 +265,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFaxNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -391,18 +390,17 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // popupContainerControl1
+            // pccDepartment
             // 
-            this.pccDepartment.Controls.Add(this.ucDepartmentSelected1);
             this.pccDepartment.Location = new System.Drawing.Point(62, 300);
-            this.pccDepartment.Name = "popupContainerControl1";
+            this.pccDepartment.Name = "pccDepartment";
             this.pccDepartment.Size = new System.Drawing.Size(275, 143);
             this.pccDepartment.TabIndex = 26;
             // 
-            // popupContainerEdit1
+            // pceDepartment
             // 
             this.pceDepartment.Location = new System.Drawing.Point(101, 227);
-            this.pceDepartment.Name = "popupContainerEdit1";
+            this.pceDepartment.Name = "pceDepartment";
             this.pceDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.pceDepartment.Properties.PopupControl = this.pccDepartment;
@@ -828,16 +826,6 @@
             this.lcAddress.Text = "地址：";
             this.lcAddress.TextSize = new System.Drawing.Size(96, 14);
             // 
-            // lcContacts
-            // 
-            this.lcContacts.Control = this.txtContacts;
-            this.lcContacts.CustomizationFormText = "主要联系人：";
-            this.lcContacts.Location = new System.Drawing.Point(378, 175);
-            this.lcContacts.Name = "lcContacts";
-            this.lcContacts.Size = new System.Drawing.Size(378, 25);
-            this.lcContacts.Text = "联系人：";
-            this.lcContacts.TextSize = new System.Drawing.Size(96, 14);
-            // 
             // lcName
             // 
             this.lcName.Control = this.txtName;
@@ -1035,6 +1023,25 @@
             this.layoutControlItem17.Size = new System.Drawing.Size(756, 25);
             this.layoutControlItem17.Text = "所属部门：";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // lcContacts
+            // 
+            this.lcContacts.Control = this.txtContacts;
+            this.lcContacts.CustomizationFormText = "主要联系人：";
+            this.lcContacts.Location = new System.Drawing.Point(378, 175);
+            this.lcContacts.Name = "lcContacts";
+            this.lcContacts.Size = new System.Drawing.Size(378, 25);
+            this.lcContacts.Text = "联系人：";
+            this.lcContacts.TextSize = new System.Drawing.Size(96, 14);
+            // 
+            // ucDepartmentSelected1
+            // 
+            this.ucDepartmentSelected1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDepartmentSelected1.Location = new System.Drawing.Point(0, 0);
+            this.ucDepartmentSelected1.Margin = new System.Windows.Forms.Padding(2);
+            this.ucDepartmentSelected1.Name = "ucDepartmentSelected1";
+            this.ucDepartmentSelected1.Size = new System.Drawing.Size(275, 143);
+            this.ucDepartmentSelected1.TabIndex = 0;
             // 
             // dxErrorProvider1
             // 
@@ -2465,15 +2472,6 @@
             this.layoutControlItem12.TextSize = new System.Drawing.Size(96, 14);
             this.layoutControlItem12.TextToControlDistance = 5;
             // 
-            // ucDepartmentSelected1
-            // 
-            this.ucDepartmentSelected1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDepartmentSelected1.Location = new System.Drawing.Point(0, 0);
-            this.ucDepartmentSelected1.Margin = new System.Windows.Forms.Padding(2);
-            this.ucDepartmentSelected1.Name = "ucDepartmentSelected1";
-            this.ucDepartmentSelected1.Size = new System.Drawing.Size(275, 143);
-            this.ucDepartmentSelected1.TabIndex = 0;
-            // 
             // ucSupplierEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2485,7 +2483,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pccDepartment)).EndInit();
-            this.pccDepartment.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pceDepartment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboAgentType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkExistsLicenseCopy.Properties)).EndInit();
@@ -2524,7 +2521,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSupplierType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRegisterCapital)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLegal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -2544,6 +2540,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcPostalCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFaxNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcContacts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);

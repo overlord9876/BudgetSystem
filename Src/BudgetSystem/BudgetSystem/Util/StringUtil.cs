@@ -83,21 +83,6 @@ namespace BudgetSystem
             }
         }
 
-        public static string ToNameString(this List<Supplier> suppliers)
-        {
-            if (suppliers != null && suppliers.Any())
-            {
-                List<string> names = new List<string>();
-                suppliers.ForEach(c => names.Add(c.Name));
-                return string.Join(",", names.ToArray());
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
-
         /// <summary>
         /// 金额转换成中文大写金额
         /// </summary>

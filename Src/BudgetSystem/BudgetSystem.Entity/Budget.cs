@@ -351,6 +351,26 @@ namespace BudgetSystem.Entity
         public List<Supplier> SupplierList { get; set; }
 
         /// <summary>
+        /// 合格供应商名称
+        /// </summary>
+        public string QualifiedSupplier
+        {
+            get
+            {
+                string returnResult = string.Empty;
+                if (SupplierList != null)
+                {
+                    var qualifiedSupplierList = SupplierList.FindAll(s => s.IsQualified);
+                    if (qualifiedSupplierList.Any())
+                    {
+                        returnResult = qualifiedSupplierList.ToNameString();
+                    }
+                }
+                return returnResult;
+            }
+        }
+
+        /// <summary>
         /// 贸易方式描述
         /// </summary>
         public string TradeModeDesc

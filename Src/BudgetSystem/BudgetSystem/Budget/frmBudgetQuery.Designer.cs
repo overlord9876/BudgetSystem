@@ -53,6 +53,7 @@
             this.gcArchiveApplyDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcArchiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).BeginInit();
@@ -61,14 +62,14 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(1377, 690);
+            this.gridBudget.Size = new System.Drawing.Size(1205, 537);
             this.gridBudget.TabIndex = 0;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBudget});
@@ -90,6 +91,7 @@
             this.gcTradeNature,
             this.gcTradeMode,
             this.gcSalesman,
+            this.gcSupplier,
             this.gcDepartmentDesc,
             this.gcCreateDate,
             this.gcSignDate,
@@ -263,7 +265,7 @@
             this.gcDepartmentDesc.MinWidth = 80;
             this.gcDepartmentDesc.Name = "gcDepartmentDesc";
             this.gcDepartmentDesc.Visible = true;
-            this.gcDepartmentDesc.VisibleIndex = 14;
+            this.gcDepartmentDesc.VisibleIndex = 15;
             this.gcDepartmentDesc.Width = 80;
             // 
             // gcCreateDate
@@ -275,7 +277,7 @@
             this.gcCreateDate.MinWidth = 80;
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 15;
+            this.gcCreateDate.VisibleIndex = 16;
             this.gcCreateDate.Width = 110;
             // 
             // gcSignDate
@@ -285,7 +287,7 @@
             this.gcSignDate.MinWidth = 80;
             this.gcSignDate.Name = "gcSignDate";
             this.gcSignDate.Visible = true;
-            this.gcSignDate.VisibleIndex = 16;
+            this.gcSignDate.VisibleIndex = 17;
             this.gcSignDate.Width = 80;
             // 
             // gcValidity
@@ -295,7 +297,7 @@
             this.gcValidity.MinWidth = 80;
             this.gcValidity.Name = "gcValidity";
             this.gcValidity.Visible = true;
-            this.gcValidity.VisibleIndex = 17;
+            this.gcValidity.VisibleIndex = 18;
             this.gcValidity.Width = 80;
             // 
             // gcPort
@@ -305,7 +307,7 @@
             this.gcPort.MinWidth = 80;
             this.gcPort.Name = "gcPort";
             this.gcPort.Visible = true;
-            this.gcPort.VisibleIndex = 18;
+            this.gcPort.VisibleIndex = 19;
             this.gcPort.Width = 80;
             // 
             // gcArchiveApplyDate
@@ -314,7 +316,7 @@
             this.gcArchiveApplyDate.FieldName = "ArchiveApplyDate";
             this.gcArchiveApplyDate.Name = "gcArchiveApplyDate";
             this.gcArchiveApplyDate.Visible = true;
-            this.gcArchiveApplyDate.VisibleIndex = 19;
+            this.gcArchiveApplyDate.VisibleIndex = 20;
             this.gcArchiveApplyDate.Width = 85;
             // 
             // gcArchiveDate
@@ -323,20 +325,28 @@
             this.gcArchiveDate.FieldName = "ArchiveDate";
             this.gcArchiveDate.Name = "gcArchiveDate";
             this.gcArchiveDate.Visible = true;
-            this.gcArchiveDate.VisibleIndex = 20;
+            this.gcArchiveDate.VisibleIndex = 21;
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
             // 
+            // gcSupplier
+            // 
+            this.gcSupplier.Caption = "合格供应商";
+            this.gcSupplier.FieldName = "QualifiedSupplier";
+            this.gcSupplier.Name = "gcSupplier";
+            this.gcSupplier.Visible = true;
+            this.gcSupplier.VisibleIndex = 14;
+            // 
             // frmBudgetQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1377, 690);
+            this.ClientSize = new System.Drawing.Size(1205, 537);
             this.Controls.Add(this.gridBudget);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "frmBudgetQuery";
             this.Text = "预算单查询";
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
@@ -373,5 +383,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcState;
         private DevExpress.XtraGrid.Columns.GridColumn gcArchiveApplyDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcArchiveDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSupplier;
     }
 }

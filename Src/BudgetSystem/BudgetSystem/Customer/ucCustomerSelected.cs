@@ -51,6 +51,18 @@ namespace BudgetSystem
             }
         }
 
+        /// <summary>
+        /// 是否可以编辑
+        /// </summary>
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool CanEdit
+        {
+            set
+            {
+                this.gvCustomer.OptionsBehavior.Editable = value;
+            }
+        }
+
         public ucCustomerSelected()
         {
             InitializeComponent();
@@ -183,7 +195,7 @@ namespace BudgetSystem
 
         private void btnSure_Click(object sender, EventArgs e)
         {
-            if(this.Parent is DevExpress.XtraEditors.PopupContainerControl)
+            if (this.Parent is DevExpress.XtraEditors.PopupContainerControl)
             {
                 (this.Parent as DevExpress.XtraEditors.PopupContainerControl).OwnerEdit.ClosePopup();
             }

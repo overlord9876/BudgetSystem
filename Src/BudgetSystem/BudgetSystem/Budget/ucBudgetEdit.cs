@@ -190,17 +190,6 @@ namespace BudgetSystem
 
         public void InitData()
         {
-            Bll.CustomerManager cm = new Bll.CustomerManager();
-            CustomerQueryCondition condition = new CustomerQueryCondition();
-            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
-            condition.State = 1;//过滤停用的客户
-            List<Customer> customers = cm.GetAllCustomer(condition);
-            this.ucCustomerSelected.SetDataSource(customers);
-
-            Bll.SupplierManager sm = new Bll.SupplierManager();
-            List<Supplier> suppliers = sm.GetAllSupplier(new Entity.QueryCondition.SupplierQueryCondition() { DeptID = RunInfo.Instance.CurrentUser.DeptID });
-            this.ucSupplierSelected.SetDataSource(suppliers);
-
             Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
             this.interestRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.年利率.ToString());
@@ -268,6 +257,10 @@ namespace BudgetSystem
         {
             foreach (var control in this.layoutControl1.Controls)
             {
+                if (control == pceCustomer || control == pceQualifiedSupplier || control == pceTempSupplier || control == pceOtherSupplier)
+                {
+                    continue;
+                }
                 if (control is BaseEdit)
                 {
                     (control as BaseEdit).Properties.ReadOnly = true;
@@ -280,6 +273,13 @@ namespace BudgetSystem
 
             this.bgvInProductDetail.Columns.Remove(this.gcInDelete);
             this.bgvInProductDetail.OptionsBehavior.Editable = false;
+            SetColumnSelectedReadonly();
+        }
+
+        private void SetColumnSelectedReadonly()
+        {
+            ucCustomerSelected.CanEdit = false;
+            ucSupplierSelected.CanEdit = false;
         }
 
         private void BindingBudgetDefaultInfo()
@@ -360,6 +360,31 @@ namespace BudgetSystem
                 List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType != (int)EnumSupplierType.临时供方 && !s.IsQualified);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
                 this.pceOtherSupplier.Tag = otherSuppliers;
+                List<Customer> customers = null;
+                List<Supplier> suppliers = null;
+                if (WorkModel == EditFormWorkModels.New || WorkModel == EditFormWorkModels.Modify)
+                {
+                    Bll.CustomerManager cm = new Bll.CustomerManager();
+                    CustomerQueryCondition condition = new CustomerQueryCondition();
+                    condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
+                    condition.State = 1;//过滤停用的客户
+                    customers = cm.GetAllCustomer(condition);
+
+                    Bll.SupplierManager sm = new Bll.SupplierManager();
+                    suppliers = sm.GetAllSupplier(new SupplierQueryCondition() { DeptID = RunInfo.Instance.CurrentUser.DeptID });
+                }
+                else
+                {
+                    suppliers = new List<Supplier>();
+                    suppliers.AddRange(qualifiedSuppliers);
+                    suppliers.AddRange(tempSuppliers);
+                    suppliers.AddRange(tempSuppliers);
+
+                    customers = new List<Customer>();
+                    customers.Add(new Customer() { ID = budget.CustomerID.Value, Name = budget.CustomerName });
+                }
+                this.ucCustomerSelected.SetDataSource(customers);
+                this.ucSupplierSelected.SetDataSource(suppliers);
 
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
@@ -1178,7 +1203,7 @@ namespace BudgetSystem
                 {
                     e.ErrorText = "原料、辅料、加工应至少一项不为0";
                     bgvInProductDetail.SetColumnError(gcSubtotal, e.ErrorText);
-                }                
+                }
                 else if (bgvInProductDetail.FocusedColumn == gcVat)
                 {
                     e.ErrorText = "增值税税率应大于0";

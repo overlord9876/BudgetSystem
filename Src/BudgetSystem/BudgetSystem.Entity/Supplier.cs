@@ -18,6 +18,11 @@ namespace BudgetSystem.Entity
         public int ID { get; set; }
 
         /// <summary>
+        /// 合同号（只查询时候用）
+        /// </summary>
+        public int BudgetID { get; set; }
+
+        /// <summary>
         /// 供应商名称
         /// </summary>
         public string Name { get; set; }

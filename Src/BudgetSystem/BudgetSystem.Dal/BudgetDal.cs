@@ -106,7 +106,7 @@ namespace BudgetSystem.Dal
                     {
                         strStateConditionList.Add(string.Format(" b.`State`= {0} ", (int)EnumBudgetState.驳回归档征求));
                     }
-                    strConditionList.Add(string.Format(" ( {0} ) ", string.Join(" OR ", strStateConditionList.ToArray()))); 
+                    strConditionList.Add(string.Format(" ( {0} ) ", string.Join(" OR ", strStateConditionList.ToArray())));
                 }
                 if (condition.IsArchiveWarningQuery)
                 {
@@ -140,7 +140,29 @@ namespace BudgetSystem.Dal
                 }
             }
 
-            return con.Query<Budget>(selectSql, dp, tran);
+            var budgetList = con.Query<Budget>(selectSql, dp, tran);
+            string budgetIds = string.Empty;
+            if (budgetList.Any())
+            {
+                foreach (var b in budgetList)
+                {
+                    budgetIds = budgetIds + string.Format("{0},", b.ID);
+                }
+                if (budgetIds.EndsWith(","))
+                {
+                    budgetIds = budgetIds.Substring(0, budgetIds.Length - 1);
+                }
+                var supplierList = con.Query<Supplier>(string.Format(@"SELECT s.ID,s.`Name`,s.SupplierType,bs.ID as BudgetID,s.SupplierType ,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState ,
+                                                            s.BusinessEffectiveDate,s.AgentType ,s.AgreementDate ,s.ReviewDate FROM  Supplier s
+                                                INNER JOIN BudgetSuppliers bs ON s.ID=bs.Sup_ID
+                                                LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType='{0}' AND f.IsRecent=1
+where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, tran).ToList();
+                foreach (var b in budgetList)
+                {
+                    b.SupplierList = supplierList.Where(s => s.BudgetID.Equals(b.ID)).ToList();
+                }
+            }
+            return budgetList;
         }
 
         public IEnumerable<Budget> GetBudgetListByCustomerId(string userName, int customerId, IDbConnection con, IDbTransaction tran = null)
@@ -294,7 +316,7 @@ namespace BudgetSystem.Dal
         public void ModifyBudgetState(int id, EnumBudgetState state, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = string.Empty;
-            string sqlFormat= "Update `Budget` Set  `State` = @State  {0} Where `ID` = @ID";
+            string sqlFormat = "Update `Budget` Set  `State` = @State  {0} Where `ID` = @ID";
             if (state == EnumBudgetState.财务归档征求)
             {
                 updateSql = string.Format(sqlFormat, ",`ArchiveApplyDate`=now()");
