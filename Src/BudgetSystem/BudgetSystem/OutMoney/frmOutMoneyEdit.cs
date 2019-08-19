@@ -108,6 +108,11 @@ namespace BudgetSystem.OutMoney
         {
             if (this.ucOutMoneyEdit1.CheckInputData()) { return; }
             this.ucOutMoneyEdit1.FillEditData();
+            if (!RunInfo.Instance.CurrentUser.UserName.Equals(this.ucOutMoneyEdit1.CurrentPaymentNotes.Applicant))
+            {
+                XtraMessageBox.Show(string.Format("当前付款单由{0}创建，不允许由{1}提交流程。", this.ucOutMoneyEdit1.CurrentPaymentNotes.ApplicantRealName, RunInfo.Instance.CurrentUser.RealName));
+                return;
+            }
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 
             if (this.WorkModel == EditFormWorkModels.New)
@@ -118,7 +123,6 @@ namespace BudgetSystem.OutMoney
             {
                 this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
             }
-
             FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName, "");
             XtraMessageBox.Show(state.ToString());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;

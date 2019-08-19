@@ -392,7 +392,7 @@
             // 
             // pccDepartment
             // 
-            this.pccDepartment.Location = new System.Drawing.Point(62, 300);
+            this.pccDepartment.Location = new System.Drawing.Point(93, 303);
             this.pccDepartment.Name = "pccDepartment";
             this.pccDepartment.Size = new System.Drawing.Size(275, 143);
             this.pccDepartment.TabIndex = 26;

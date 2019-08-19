@@ -18,6 +18,7 @@ namespace BudgetSystem
     public partial class frmOutMoneyQuery : frmBaseQueryForm
     {
         PaymentNotesManager pnm = new PaymentNotesManager();
+        UserManager um = new UserManager();
 
         const string COMMONQUERY_APPLICATIONFORPAYMENT = "申请付款";
         const string COMMONQUERY_BEPAID = "已付货款";
@@ -266,23 +267,37 @@ namespace BudgetSystem
         {
             PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
 
-            if (currentRowPaymentNote != null)
+            if (currentRowPaymentNote == null)
             {
-                if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中)
-                {
-                    XtraMessageBox.Show(string.Format("{0}付款单{1}，不允许重复提交。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
-                    return;
-                }
-                string message = pnm.StartFlow(currentRowPaymentNote.ID, RunInfo.Instance.CurrentUser.UserName, "");
-                if (string.IsNullOrEmpty(message))
-                {
-                    XtraMessageBox.Show("提交流程成功。");
-                    LoadData();
-                }
-                else
-                {
-                    XtraMessageBox.Show(message);
-                }
+                XtraMessageBox.Show("请选择需要提交流程的项");
+                return;
+            }
+            currentRowPaymentNote = pnm.GetPaymentNoteById(currentRowPaymentNote.ID);
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("当前选择提交流程的项不存在，请刷新数据后再试。");
+                return;
+            }
+            if (!currentRowPaymentNote.Applicant.Equals(RunInfo.Instance.CurrentUser))
+            {
+                User u = um.GetUser(currentRowPaymentNote.Applicant);
+                XtraMessageBox.Show(string.Format("当前付款单由{0}创建，不允许由{1}提交流程。", u.RealName, RunInfo.Instance.CurrentUser.RealName));
+                return;
+            }
+            if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中)
+            {
+                XtraMessageBox.Show(string.Format("{0}付款单{1}，不允许重复提交。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
+                return;
+            }
+            string message = pnm.StartFlow(currentRowPaymentNote.ID, RunInfo.Instance.CurrentUser.UserName, "");
+            if (string.IsNullOrEmpty(message))
+            {
+                XtraMessageBox.Show("提交流程成功。");
+                LoadData();
+            }
+            else
+            {
+                XtraMessageBox.Show(message);
             }
         }
 

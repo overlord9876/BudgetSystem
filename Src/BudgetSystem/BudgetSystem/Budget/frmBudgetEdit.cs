@@ -69,9 +69,9 @@ namespace BudgetSystem
         #region Event Method
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
-            this.ucBudgetEdit1.InitData();
             this.ucBudgetEdit1.CurrentBudget = this.CurrentBudget;
             this.ucBudgetEdit1.WorkModel = this.WorkModel;
+            this.ucBudgetEdit1.InitData();
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "创建预算单";
@@ -110,7 +110,17 @@ namespace BudgetSystem
 
         public override void PrintData()
         {
-            this.Height += 200;
+            int SH = Screen.PrimaryScreen.Bounds.Height;
+            if (SH < 800)
+            {
+                SH = 800;
+            }
+            else if (SH > 800)
+            {
+                SH = 719;
+            }
+            //this.Height = SH;
+            //this.Height += 100;
             PrinterHelper.PrintControl(true, this.layoutControl1);
         }
     }

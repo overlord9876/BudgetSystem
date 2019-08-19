@@ -138,9 +138,12 @@ namespace BudgetSystem.Bll
         /// 启动审批流程
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="flowName"></param>
         /// <param name="currentUser"></param>
+        /// <param name="currentUserName"></param>
+        /// <param name="description"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(int id, EnumFlowNames flowName, string currentUser, string description)
+        public string StartFlow(int id, EnumFlowNames flowName, string currentUser, string currentUserName, string description)
         {
             Budget budge = this.GetBudget(id);
             if (budge == null)
@@ -150,6 +153,10 @@ namespace BudgetSystem.Bll
             else if (budge.EnumFlowState == EnumDataFlowState.审批中)
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+            }
+            else if (!budge.UpdateUser.Equals(currentUser))
+            {
+                return string.Format("当前预算单由{0}创建，不允许由{1}提交流程", budge.UpdateUserName, currentUserName);
             }
             EnumFlowNames? oldFlowName = null;
             if (!string.IsNullOrEmpty(budge.FlowName))

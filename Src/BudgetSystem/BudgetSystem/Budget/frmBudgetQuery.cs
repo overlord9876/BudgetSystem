@@ -278,7 +278,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                     return;
                 }
-                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName, budget.Description);
+                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, budget.Description);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");
@@ -316,7 +316,7 @@ namespace BudgetSystem
                     frmDescription frmBudget = new frmDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
-                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
+                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, frmBudget.Description);
                         if (string.IsNullOrEmpty(message))
                         {
                             XtraMessageBox.Show("提交流程成功。");
@@ -357,7 +357,7 @@ namespace BudgetSystem
                 frmDescription frmBudget = new frmDescription("填写申请删除说明", "删除说明");
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
+                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, frmBudget.Description);
                     if (string.IsNullOrEmpty(message))
                     {
                         XtraMessageBox.Show("提交流程成功。");

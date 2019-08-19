@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -840,7 +840,6 @@
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEditBankup.resx">
       <DependentUpon>frmPaymentCalcEditBankup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
     </EmbeddedResource>

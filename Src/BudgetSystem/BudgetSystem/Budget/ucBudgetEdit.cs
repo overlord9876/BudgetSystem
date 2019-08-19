@@ -215,7 +215,20 @@ namespace BudgetSystem
                 cboOutSettlementMethod2.Properties.Items.AddRange(outSettlementMethodList);
                 cboOutSettlementMethod3.Properties.Items.AddRange(outSettlementMethodList);
             }
+            if (WorkModel == EditFormWorkModels.New)
+            {
+                Bll.CustomerManager cm = new Bll.CustomerManager();
+                CustomerQueryCondition condition = new CustomerQueryCondition();
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
+                condition.State = 1;//过滤停用的客户
+                var customers = cm.GetAllCustomer(condition);
 
+                Bll.SupplierManager sm = new Bll.SupplierManager();
+                var suppliers = sm.GetAllSupplier(new SupplierQueryCondition() { DeptID = RunInfo.Instance.CurrentUser.DeptID });
+
+                this.ucCustomerSelected.SetDataSource(customers);
+                this.ucSupplierSelected.SetDataSource(suppliers);
+            }
             List<string> unitList = scm.GetSystemConfigValue<List<string>>(EnumSystemConfigNames.商品单位.ToString());
             this.ricboUnit.Items.Clear();
             this.ricboInUnit.Items.Clear();

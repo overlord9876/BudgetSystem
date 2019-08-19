@@ -163,33 +163,42 @@ namespace BudgetSystem
         private void CommitSupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
-            if (supplier != null)
-            {
-                //提交初评审批需要满足的条件
-                //1、是合格供方 
-                //2、当前流程状态为非审批中
-                if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
-                {
-                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交初评审批。", EnumSupplierType.合格供方));
-                    return;
-                }
-                if (supplier.EnumFlowState == EnumDataFlowState.审批中)
-                {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交初评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
-                    return;
-                }
-
-                frmSupplierEdit form = new frmSupplierEdit();
-                form.WorkModel = EditFormWorkModels.Review;
-                form.CurrentSupplier = supplier;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
-            }
-            else
+            if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要提交初评审批的项");
+                return;
+            }
+            supplier = sm.GetSupplier(supplier.ID);
+            if (supplier == null)
+            {
+                XtraMessageBox.Show("您选择的项不存在，请刷新数据。");
+                return;
+            }
+            //提交初评审批需要满足的条件
+            //1、是合格供方 
+            //2、当前流程状态为非审批中
+
+            if (!supplier.Departments.Exists(o => o.ID == RunInfo.Instance.CurrentUser.DeptID))
+            {
+                XtraMessageBox.Show(string.Format("当前供应商不属于{0}所在部门维护，不允许提交流程", RunInfo.Instance.CurrentUser.RealName));
+                return;
+            }
+            if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
+            {
+                XtraMessageBox.Show(string.Format("非{0}供方不允许提交初评审批。", EnumSupplierType.合格供方));
+                return;
+            }
+            if (supplier.EnumFlowState == EnumDataFlowState.审批中)
+            {
+                XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交初评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
+                return;
+            }
+            frmSupplierEdit form = new frmSupplierEdit();
+            form.WorkModel = EditFormWorkModels.Review;
+            form.CurrentSupplier = supplier;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
             }
         }
         /// <summary>
@@ -198,40 +207,51 @@ namespace BudgetSystem
         private void ReviewSupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
-            if (supplier != null)
+            if (supplier == null)
             {
-                if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
+                XtraMessageBox.Show("请选择需要提交复评审批的项");
+                return;
+            }
+            supplier = sm.GetSupplier(supplier.ID);
+            if (supplier == null)
+            {
+                XtraMessageBox.Show("您选择的项不存在，请刷新数据。");
+                return;
+            }
+
+            if (!supplier.Departments.Exists(o => o.ID == RunInfo.Instance.CurrentUser.DeptID))
+            {
+                XtraMessageBox.Show(string.Format("当前供应商不属于【{0}】所在的部门维护，不允许提交流程", RunInfo.Instance.CurrentUser.RealName));
+                return;
+            }
+
+            if (supplier.SupplierType != (int)EnumSupplierType.合格供方)
+            {
+                XtraMessageBox.Show(string.Format("非{0}供方不允许提交复评审批。", EnumSupplierType.合格供方));
+                return;
+            }
+            if (supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批
+                || (EnumFlowNames.供应商审批流程.ToString().Equals(supplier.FlowName) && supplier.EnumFlowState == EnumDataFlowState.审批不通过)
+                )
+            {
+                XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交复评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
+                return;
+            }
+
+            if (supplier.ReviewDate != null && DateTime.Now.Date >= supplier.ReviewDate.Value.Date)
+            {
+                frmSupplierEdit form = new frmSupplierEdit();
+                form.CurrentSupplier = supplier;
+                form.WorkModel = EditFormWorkModels.Custom;
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    XtraMessageBox.Show(string.Format("非{0}供方不允许提交复评审批。", EnumSupplierType.合格供方));
-                    return;
-                }
-                if (supplier.EnumFlowState == EnumDataFlowState.审批中 || supplier.EnumFlowState == EnumDataFlowState.未审批
-                    ||(EnumFlowNames.供应商审批流程.ToString().Equals(supplier.FlowName)&&supplier.EnumFlowState== EnumDataFlowState.审批不通过)
-                    )
-                {
-                    XtraMessageBox.Show(string.Format("{0}的供方{1}，不允许提交复评审批。", supplier.Name, supplier.EnumFlowState.ToString()));
-                    return;
-                }
-               
-                if (supplier.ReviewDate != null &&DateTime.Now.Date>= supplier.ReviewDate.Value.Date)
-                {
-                    frmSupplierEdit form = new frmSupplierEdit();
-                    form.CurrentSupplier = supplier;
-                    form.WorkModel = EditFormWorkModels.Custom;
-                    if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                    {
-                        this.RefreshData();
-                    }
-                }
-                else
-                {
-                    XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许提交复评审批。", supplier.Name));
-                    return;
+                    this.RefreshData();
                 }
             }
             else
             {
-                XtraMessageBox.Show("请选择需要提交复评审批的项");
+                XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许提交复评审批。", supplier.Name));
+                return;
             }
         }
 

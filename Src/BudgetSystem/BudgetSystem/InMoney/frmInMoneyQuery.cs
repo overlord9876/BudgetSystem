@@ -17,7 +17,7 @@ namespace BudgetSystem.InMoney
     public partial class frmInMoneyQuery : frmBaseQueryForm
     {
         ReceiptMgmtManager arm = new ReceiptMgmtManager();
-
+        UserManager um = new UserManager();
         const string COMMONQUERY_TOBECONFIRMED = "未确认银行水单";
         const string COMMONQUERY_CONFIRMED = "已确认银行水单";
         const string COMMONQUERY_ALL = "所有银行水单";
@@ -188,9 +188,16 @@ namespace BudgetSystem.InMoney
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
+
                 if (currentRowBankSlip == null)
                 {
                     XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
+                    return;
+                }
+                List<User> salesMans = um.GetBankSlipSalesmanList(currentRowBankSlip.BSID);
+                if (!salesMans.Exists(o => o.UserName.Equals(RunInfo.Instance.CurrentUser.UserName)))
+                {
+                    XtraMessageBox.Show(string.Format("当前银行水单不属于【{0}】，不允许提交流程", RunInfo.Instance.CurrentUser.RealName));
                     return;
                 }
                 if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中)
@@ -337,7 +344,7 @@ namespace BudgetSystem.InMoney
             {
                 condition = new InMoneyQueryCondition();
             }
-            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InMoneyQueryCondition; 
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InMoneyQueryCondition;
             List<BankSlip> bsList = arm.GetAllBankSlipList(condition);
 
             this.gcInMoney.DataSource = bsList;

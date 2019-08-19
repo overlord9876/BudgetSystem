@@ -60,6 +60,7 @@ namespace BudgetSystem.OutMoney
 
             this.cboBudget.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             this.cboSupplier.Properties.PopupFormSize = new Size(this.Width / 2, 300);
+            this.txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
             if (!frmBaseForm.IsDesignMode)
             {
                 InitData();
@@ -76,6 +77,7 @@ namespace BudgetSystem.OutMoney
                 this.deCommitTime.EditValue = DateTime.Now;
                 this.txtExpectedReturnDate.EditValue = DateTime.Now;
                 txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
+                this.txtPaymentDate.EditValue = DateTime.Now;
 
                 cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
                 cboDepartment.Tag = RunInfo.Instance.CurrentUser.DeptID;

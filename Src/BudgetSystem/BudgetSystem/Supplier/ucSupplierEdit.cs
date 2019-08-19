@@ -40,9 +40,12 @@ namespace BudgetSystem
             {
                 this.InitData();
             }
+            this.pccDepartment.Controls.Add(ucDepartmentSelected1);
             this.Load += new System.EventHandler(this.ucSupplierEdit_Load);
+            this.pceDepartment.Properties.PopupControl = this.pccDepartment;
             this.pceDepartment.QueryResultValue += new DevExpress.XtraEditors.Controls.QueryResultValueEventHandler(pceDepartment_QueryResultValue);
             this.pceDepartment.QueryPopUp += new CancelEventHandler(pceDepartment_QueryPopUp);
+
         }
 
         private void ucSupplierEdit_Load(object sender, EventArgs e)
