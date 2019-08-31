@@ -74,10 +74,11 @@ namespace BudgetSystem.OutMoney
             lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.New)
             {
-                this.deCommitTime.EditValue = DateTime.Now;
-                this.txtExpectedReturnDate.EditValue = DateTime.Now;
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                this.deCommitTime.EditValue = datetimeNow;
+                this.txtExpectedReturnDate.EditValue = datetimeNow;
                 txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
-                this.txtPaymentDate.EditValue = DateTime.Now;
+                this.txtPaymentDate.EditValue = datetimeNow;
 
                 cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
                 cboDepartment.Tag = RunInfo.Instance.CurrentUser.DeptID;
@@ -85,7 +86,7 @@ namespace BudgetSystem.OutMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                this.txtPaymentDate.EditValue = DateTime.Now;
+                this.txtPaymentDate.EditValue = cm.GetDateTimeNow();
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
@@ -161,7 +162,6 @@ namespace BudgetSystem.OutMoney
             }
 
             this.txtBankNO.EditValue = payment.BankNO;
-            BindingBankInfoDetail(payment.InvoiceNumber);
 
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
             this.txtDescription.Text = payment.Description;
@@ -190,6 +190,7 @@ namespace BudgetSystem.OutMoney
             }
             txtDescription.Text = payment.Description;
             chkHasInvoice.EditValue = payment.HasInvoice;
+            BindingBankInfoDetail(payment.InvoiceNumber);
             chkIsIOU.EditValue = payment.IsIOU;
             chkRepayLoan.EditValue = payment.RepayLoan;
             txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
@@ -241,7 +242,7 @@ namespace BudgetSystem.OutMoney
             }
 
             this.gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>(invoiceInfoList);
-            this.gridInvoiceNumber.RefreshDataSource();
+            this.gvInvoiceNumber.RefreshData();
         }
 
         private string GetInvoiceNumberDetailString()

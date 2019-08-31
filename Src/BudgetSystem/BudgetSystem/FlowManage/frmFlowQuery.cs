@@ -53,7 +53,7 @@ namespace BudgetSystem.FlowManage
             int dataID = 888;
             string dataType = "测试业务数据";
             Bll.FlowManager fm = new FlowManager();
-            FlowRunState state = fm.StartFlow(flowName, dataID, "测试用的数据项", dataType, RunInfo.Instance.CurrentUser.UserName, "");
+            FlowRunState state = fm.StartFlow(flowName, dataID, "测试用的数据项", dataType, RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}", flowName));
 
         }
 

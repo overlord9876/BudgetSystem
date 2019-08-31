@@ -35,7 +35,7 @@ namespace BudgetSystem.Dal
             paramter.Value = id;
             command.Parameters.Add(paramter);
             object obj = command.ExecuteScalar();
-            DateTime versionNumber = DateTime.Now;
+            DateTime versionNumber = DateTime.MinValue.AddDays(1);
             if (obj != null)
             {
                 DateTime.TryParse(obj.ToString(), out versionNumber);

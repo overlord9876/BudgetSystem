@@ -176,11 +176,21 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.txtCode, "请输入客户编号");
             }
         }
+
         private void CheckNameInput()
         {
             if (string.IsNullOrEmpty(this.txtName.Text.Trim()))
             {
                 this.dxErrorProvider1.SetError(this.txtName, "请输入客户名称");
+            }
+            int customerID = -1;
+            if (Customer != null)
+            {
+                customerID = Customer.ID;
+            }
+            if (cm.CheckName(this.txtName.Text.Trim(), customerID))
+            {
+                this.dxErrorProvider1.SetError(this.txtName, "客户名称重复");
             }
         }
 

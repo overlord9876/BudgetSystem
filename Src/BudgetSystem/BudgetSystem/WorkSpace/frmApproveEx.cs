@@ -66,8 +66,8 @@ namespace BudgetSystem.WorkSpace
                 }
                 else
                 {
+                    lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     lciDescription.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//流程说明
-                    lciMyInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//审批意见：
                     emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     lciViewHistory.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//查询审批记录
                     lciViewFlow.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;//查看流程
@@ -177,8 +177,8 @@ namespace BudgetSystem.WorkSpace
                 }
                 result = eventResult.Value;
             }
-
-            FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, this.txtMyInfo.Text.Trim());
+            string rmarkMessage = GetApprovalRemark(result, this.txtMyInfo.Text.Trim());
+            FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, rmarkMessage);
             string info;
             if (state.Translate(out info))
             {
@@ -203,13 +203,15 @@ namespace BudgetSystem.WorkSpace
             }
             string info;
 
+            string myInfo = GetApprovalRemark(result, this.txtMyInfo.Text.Trim());
+
             List<int> idList = dataControl.GetSelectedItems();
 
             List<FlowItem> selectedItems = this.BatchFlowItems.FindAll(o => idList.Contains(o.ID));
 
             foreach (FlowItem item in selectedItems)
             {
-                FlowRunState state = fm.SubmitFlow(item.RunPointID, result, this.txtMyInfo.Text.Trim());
+                FlowRunState state = fm.SubmitFlow(item.RunPointID, result, myInfo);
                 if (!state.Translate(out info))
                 {
                     idList.Remove(item.ID);
@@ -227,6 +229,36 @@ namespace BudgetSystem.WorkSpace
                 XtraMessageBox.Show("操作成功");
                 this.txtMyInfo.Text = string.Empty;
             }
+        }
+
+        private string GetApprovalRemark(bool result, string remark)
+        {
+            string remarkMessage = string.Empty;
+            if (result)
+            {
+                remarkMessage = "同意";
+                if (string.IsNullOrEmpty(remark))
+                {
+                    remarkMessage += "。";
+                }
+                else
+                {
+                    remarkMessage += string.Format("，{0}。", remark);
+                }
+            }
+            else
+            {
+                remarkMessage = "驳回";
+                if (string.IsNullOrEmpty(remark))
+                {
+                    remarkMessage += "。";
+                }
+                else
+                {
+                    remarkMessage += string.Format("，{0}。", remark);
+                }
+            }
+            return remarkMessage;
         }
 
         private bool? DoFlowExtEvent()

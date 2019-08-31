@@ -10,14 +10,19 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Util;
 using System.IO;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
     public partial class frmCustomImport : frmBaseDialogForm
     {
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
+
         public frmCustomImport()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
         }
 
         private void frmCustomImport_Load(object sender, EventArgs e)
@@ -107,7 +112,7 @@ namespace BudgetSystem
                     Customer.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
                     if (Customer.CreateDate <= DateTime.MinValue)
                     {
-                        Customer.CreateDate = DateTime.Now;
+                        Customer.CreateDate = datetimeNow;
                     }
                     list.Add(Customer);
                 }
@@ -162,7 +167,7 @@ namespace BudgetSystem
                     Department department = this.cboDepartment.SelectedItem as Department;
                     Bll.UserManager um = new Bll.UserManager();
                     Bll.CustomerManager sm = new Bll.CustomerManager();
-                    List<Customer> customers= sm.GetAllCustomer();
+                    List<Customer> customers = sm.GetAllCustomer();
                     //List<CustomerSalesman> salesmans = new List<CustomerSalesman>();
                     //var users = um.GetDepartmentUsers(department.ID);
                     //if (users != null && users.Count > 0)
@@ -174,7 +179,7 @@ namespace BudgetSystem
                     {
                         try
                         {
-                            oldCustomer = customers.FirstOrDefault(c => c.Code == customer.Code&& c.Name==customer.Name);
+                            oldCustomer = customers.FirstOrDefault(c => c.Code == customer.Code && c.Name == customer.Name);
                             if (oldCustomer != null)
                             {
                                 oldCustomer.SalesmanList = customer.SalesmanList;

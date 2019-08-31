@@ -18,6 +18,7 @@ namespace BudgetSystem
     public partial class frmOutMoneyQuery : frmBaseQueryForm
     {
         PaymentNotesManager pnm = new PaymentNotesManager();
+        CommonManager cm = new CommonManager();
         UserManager um = new UserManager();
 
         const string COMMONQUERY_APPLICATIONFORPAYMENT = "申请付款";
@@ -153,17 +154,20 @@ namespace BudgetSystem
             }
             else if (THE_SAME_DAY.Equals(queryName))
             {
-                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                outMoneyCondition.BeginDate = new DateTime(datetimeNow.Year, datetimeNow.Month, datetimeNow.Day, 0, 0, 0);
                 outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddDays(1).AddSeconds(-1);
             }
             else if (THE_SAME_MONTH.Equals(queryName))
             {
-                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                outMoneyCondition.BeginDate = new DateTime(datetimeNow.Year, datetimeNow.Month, 1, 0, 0, 0);
                 outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddMonths(1).AddSeconds(-1);
             }
             else if (THE_SAME_YEAR.Equals(queryName))
             {
-                outMoneyCondition.BeginDate = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                outMoneyCondition.BeginDate = new DateTime(datetimeNow.Year, 1, 1, 0, 0, 0);
                 outMoneyCondition.EndDate = outMoneyCondition.BeginDate.AddYears(1).AddSeconds(-1);
             }
 
@@ -278,7 +282,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("当前选择提交流程的项不存在，请刷新数据后再试。");
                 return;
             }
-            if (!currentRowPaymentNote.Applicant.Equals(RunInfo.Instance.CurrentUser))
+            if (!currentRowPaymentNote.Applicant.Equals(RunInfo.Instance.CurrentUser.UserName))
             {
                 User u = um.GetUser(currentRowPaymentNote.Applicant);
                 XtraMessageBox.Show(string.Format("当前付款单由{0}创建，不允许由{1}提交流程。", u.RealName, RunInfo.Instance.CurrentUser.RealName));
@@ -289,7 +293,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show(string.Format("{0}付款单{1}，不允许重复提交。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
                 return;
             }
-            string message = pnm.StartFlow(currentRowPaymentNote.ID, RunInfo.Instance.CurrentUser.UserName, "");
+            string message = pnm.StartFlow(currentRowPaymentNote.ID, RunInfo.Instance.CurrentUser.UserName);
             if (string.IsNullOrEmpty(message))
             {
                 XtraMessageBox.Show("提交流程成功。");

@@ -45,7 +45,6 @@
             this.btnVoucherNotesQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnApprovalList = new DevExpress.XtraBars.BarButtonItem();
             this.btnMyOrder = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.btnFlowConfig = new DevExpress.XtraBars.BarButtonItem();
             this.btnDepartment = new DevExpress.XtraBars.BarButtonItem();
             this.btnRoleManager = new DevExpress.XtraBars.BarButtonItem();
@@ -106,7 +105,6 @@
             this.btnVoucherNotesQuery,
             this.btnApprovalList,
             this.btnMyOrder,
-            this.barButtonItem4,
             this.btnFlowConfig,
             this.btnDepartment,
             this.btnRoleManager,
@@ -123,7 +121,7 @@
             this.btnRecieptCapital,
             this.btnPaymentCapital});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonControl1.MaxItemId = 49;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
@@ -135,7 +133,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1505, 151);
+            this.ribbonControl1.Size = new System.Drawing.Size(1720, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -331,15 +329,6 @@
             this.btnMyOrder.Tag = "MySubmitFlowManagement";
             this.btnMyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyOrder_ItemClick);
             // 
-            // barButtonItem4
-            // 
-            this.barButtonItem4.Caption = "决算管理";
-            this.barButtonItem4.Id = 32;
-            this.barButtonItem4.ImageIndex = 46;
-            this.barButtonItem4.Name = "barButtonItem4";
-            this.barButtonItem4.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
-            // 
             // btnFlowConfig
             // 
             this.btnFlowConfig.Caption = "流程配置";
@@ -515,7 +504,6 @@
             // 
             this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
             this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem4);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "我的工作";
             // 
@@ -561,11 +549,11 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 675);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 874);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1505, 31);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1720, 34);
             // 
             // documentManager1
             // 
@@ -615,14 +603,14 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1505, 706);
+            this.ClientSize = new System.Drawing.Size(1720, 908);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -645,7 +633,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rpMain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
@@ -671,7 +658,6 @@
         private DevExpress.XtraBars.BarButtonItem btnVoucherNotesQuery;
         private DevExpress.XtraBars.BarButtonItem btnApprovalList;
         private DevExpress.XtraBars.BarButtonItem btnMyOrder;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem btnFlowConfig;
         private DevExpress.XtraBars.BarButtonItem btnDepartment;
         private DevExpress.XtraBars.BarButtonItem btnRoleManager;
@@ -688,6 +674,7 @@
         private DevExpress.XtraBars.BarButtonItem btnFinalAccount;
         private DevExpress.XtraBars.BarButtonItem btnRecieptCapital;
         private DevExpress.XtraBars.BarButtonItem btnPaymentCapital;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     }
 }
 

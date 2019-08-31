@@ -99,10 +99,10 @@ namespace BudgetSystem.Bll
                 if (isStartFlow == true)
                 {
                     mmdal.AddModifyMark<Budget>(budget, id, con, tran);
-                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), id, budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman, budget.Description);
-                    if (state != FlowRunState.启动流程成功)
+                    string message = StartFlow(id, EnumFlowNames.预算单审批流程, budget.UpdateUser, budget.UpdateUserName, string.Format("发起{0}", EnumFlowNames.预算单审批流程));
+                    if (!string.IsNullOrEmpty(message))
                     {
-                        throw new Exception(string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString()));
+                        throw new Exception(string.Format("提交{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), message));
                     }
                 }
                 return id;
@@ -215,10 +215,10 @@ namespace BudgetSystem.Bll
                 if (isStartFlow == true)
                 {
                     mmdal.AddModifyMark<Budget>(budget, budget.ID, con, tran);
-                    FlowRunState state = fm.StartFlow(EnumFlowNames.预算单审批流程.ToString(), budget.ID, budget.ContractNO, EnumFlowDataType.预算单.ToString(), budget.Salesman, description);
-                    if (state != FlowRunState.启动流程成功)
+                    string flowMessage = StartFlow(budget.ID, EnumFlowNames.预算单审批流程, budget.Salesman, budget.SalesmanName, string.Format("发起{0}", EnumFlowNames.预算单审批流程));
+                    if (!string.IsNullOrEmpty(flowMessage))
                     {
-                        message = string.Format("创建{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), state.ToString());
+                        message = string.Format("提交{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), flowMessage);
                     }
                 }
             });

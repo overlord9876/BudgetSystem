@@ -81,7 +81,7 @@ namespace BudgetSystem.Dal
             {
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
-            modifyBankSlip.UpdateTimestamp = DateTime.Now;
+            modifyBankSlip.UpdateTimestamp = new CommonDal().GetDateTimeNow(con);
             string updateSql = "Update `BankSlip` Set `VoucherNo` = @VoucherNo,`Description` = @Description,`TradingPostscript` = @TradingPostscript,`Cus_ID` = @Cus_ID,`CreateUser` = @CreateUser,`OriginalCoin` = @OriginalCoin,`CreateTimestamp` = @CreateTimestamp,`CNY` = @CNY,`ReceiptDate` = @ReceiptDate,`PaymentMethod` = @PaymentMethod,`CNY2` = @CNY2,`OriginalCoin2`=OriginalCoin2,`ExchangeRate` = @ExchangeRate,`BankName` = @BankName,`Currency` = @Currency,`State` = @State,`TradeNature` = @TradeNature,`ExportName` = @ExportName,`UpdateTimestamp` = @UpdateTimestamp,`NatureOfMoney`=@NatureOfMoney,IsActive=@IsActive,RemarkState=@RemarkState, `SplitInfo`=@SplitInfo Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
@@ -103,7 +103,7 @@ namespace BudgetSystem.Dal
             {
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
-            modifyBankSlip.UpdateTimestamp = DateTime.Now;
+            modifyBankSlip.UpdateTimestamp = new CommonDal().GetDateTimeNow(con);
             string updateSql = "Update `BankSlip` Set `State` = @State,Description=@Description Where `BSID` = @BSID";
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
@@ -171,18 +171,18 @@ namespace BudgetSystem.Dal
                 }
 
                 if (!string.IsNullOrEmpty(condition.Salesman))
-                { 
-                        strConditionList.Add(@" EXISTS( SELECT 1 FROM ReceiptNotice rn  
+                {
+                    strConditionList.Add(@" EXISTS( SELECT 1 FROM ReceiptNotice rn  
                                                         INNER JOIN `User` u2 on rn.UserName=u2.UserName 
                                                         WHERE bs.BSID=rn.BSID   and  rn.UserName=@Username  ) ");
-                        dp.Add("Username", condition.Salesman, null, null, null);                    
+                    dp.Add("Username", condition.Salesman, null, null, null);
                 }
                 if (condition.DeptID > 0)
-                {                     
+                {
                     strConditionList.Add(@" EXISTS( SELECT 1 FROM ReceiptNotice rn  
                                                     INNER JOIN `User` u2 on rn.UserName=u2.UserName 
                                                     WHERE bs.BSID=rn.BSID   and  u2.DeptID=@DeptID  )");
-                    dp.Add("DeptID", condition.DeptID, null, null, null);   
+                    dp.Add("DeptID", condition.DeptID, null, null, null);
                 }
 
                 if (strConditionList.Count > 0)

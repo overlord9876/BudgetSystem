@@ -58,8 +58,8 @@ namespace BudgetSystem.Tools
 
             Bll.FileManager fileBll = new Bll.FileManager();
             Bll.VersionInfoManager versionBll = new Bll.VersionInfoManager();
-
-            SystemInfo si = new SystemInfo() { Version = this.txtVersion.Text.Trim(), Remark = this.txtRemark.Text.Trim(), PublishDate = DateTime.Now };
+            Bll.CommonManager cm = new Bll.CommonManager();
+            SystemInfo si = new SystemInfo() { Version = this.txtVersion.Text.Trim(), Remark = this.txtRemark.Text.Trim(), PublishDate = cm.GetDateTimeNow() };
 
 
             if (string.IsNullOrEmpty(si.Version))

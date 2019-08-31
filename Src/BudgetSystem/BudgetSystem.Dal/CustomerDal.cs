@@ -6,6 +6,7 @@ using BudgetSystem.Entity.QueryCondition;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
+using MySql.Data.MySqlClient;
 namespace BudgetSystem.Dal
 {
     public class CustomerDal
@@ -75,6 +76,31 @@ namespace BudgetSystem.Dal
             return con.Query<Customer>(selectSql, dp, tran);
         }
 
+        /// <summary>
+        /// 验证名称是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contractNo"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckName(string name, int id, IDbConnection con)
+        {
+            string selectSql = @"SELECT  id FROM `customer`  WHERE ID<>@ID and `Name`=@Name";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", id));
+            command.Parameters.Add(new MySqlParameter("Name", name));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int AddCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)
         {
             string insertSql = @"Insert Into `Customer` (`Name`,`Country`,`CreateDate`,`CreateUser`,`Description`,`State`,
@@ -90,6 +116,63 @@ namespace BudgetSystem.Dal
             }
             return id;
         }
+
+        public bool IsUsed(Customer customer, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = @"SELECT Cus_ID from budgetcustomers where Cus_ID=@ID;";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+
+            selectSql = @"SELECT CustomerID from Budget WHERE CustomerID=@ID;";
+            command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+            obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+
+            selectSql = @"SELECT Cus_ID from BudgetBill where Cus_ID=@ID;";
+            command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+            obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+
+            selectSql = @"SELECT Cus_ID from BankSlip where Cus_ID=@ID;";
+            command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+            obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void DeleteCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)
+        {
+            string salesmanDeleteSql = "Delete From `CustomerSalesman` Where `Customer` = @Customer";
+            con.Execute(salesmanDeleteSql, new { Customer = customer.ID }, tran);
+
+            string updateSql = @"delete from `Customer` Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = customer.ID }, tran);
+        }
+
         public void ModifyCustomer(Customer customer, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = @"Update `Customer` 

@@ -67,6 +67,12 @@ ALTER TABLE supplier
 drop column DeptID;
 END IF; 
 
+IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE table_schema = DATABASE()  AND table_name = 'FlowNode' AND column_name = 'IsStartNode') THEN
+
+ALTER TABLE supplier
+add IsStartNode bit;
+END IF; 
+
 END??
 DELIMITER ;
 CALL schema_change();

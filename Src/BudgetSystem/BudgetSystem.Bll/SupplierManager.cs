@@ -9,7 +9,7 @@ namespace BudgetSystem.Bll
 {
     public class SupplierManager : BaseManager
     {
-
+        private CommonManager cm = new CommonManager();
         Bll.FlowManager fm = new FlowManager();
         Dal.SupplierDal dal = new Dal.SupplierDal();
         Dal.FlowDal fDal = new Dal.FlowDal();
@@ -47,6 +47,25 @@ namespace BudgetSystem.Bll
             return supplier;
         }
 
+        public bool IsUsed(Supplier supplier)
+        {
+            return this.ExecuteWithTransaction<bool>((con, tran) =>
+            {
+                bool isUsed = dal.IsUsed(supplier, con, tran);
+                return isUsed;
+            });
+
+        }
+
+        public void DeleteSupplier(Supplier supplier)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.DeleteSupplier(supplier, con, tran);
+            });
+
+        }
+
         public int AddSupplier(Supplier supplier)
         {
             return this.ExecuteWithTransaction<int>((con, tran) =>
@@ -65,6 +84,7 @@ namespace BudgetSystem.Bll
         }
         public void ModifySupplierFirstReviewContents(int id, SupplierFirstReviewContents firstReviewContents)
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             this.ExecuteWithTransaction((con, tran) =>
            {
                if (firstReviewContents.ResultDate != null)
@@ -73,7 +93,7 @@ namespace BudgetSystem.Bll
                    supplier.FirstReviewContents = firstReviewContents.ToJson();
                    if (firstReviewContents.LeaderResult != 3)
                    {
-                       supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
+                       supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(datetimeNow.Year - supplier.RegistrationDate.Value.Year + 1);
                    }
                    dal.ModifySupplier(supplier, con, tran);
                }
@@ -86,6 +106,7 @@ namespace BudgetSystem.Bll
 
         public void ModifySupplierReviewContents(int id, SupplierReviewContents reviewContents)
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             this.ExecuteWithTransaction((con, tran) =>
             {
                 if (reviewContents.LeaderResult == null)
@@ -98,7 +119,7 @@ namespace BudgetSystem.Bll
                     supplier.ReviewContents = reviewContents.ToJson();
                     if (reviewContents.LeaderResult == true)
                     {
-                        supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(DateTime.Now.Year - supplier.RegistrationDate.Value.Year + 1);
+                        supplier.ReviewDate = supplier.RegistrationDate.Value.AddYears(datetimeNow.Year - supplier.RegistrationDate.Value.Year + 1);
                     }
                     supplier.Discredited = reviewContents.Discredited;
                     dal.ModifySupplier(supplier, con, tran);
@@ -128,7 +149,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(EnumFlowNames flowName, int id, string currentUser, string description="")
+        public string StartFlow(EnumFlowNames flowName, int id, string currentUser, string description = "")
         {
             Supplier supplier = this.GetSupplier(id);
             if (supplier == null)
@@ -181,6 +202,7 @@ namespace BudgetSystem.Bll
         }
         private string CheckFirstReviewData(Supplier supplier)
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             if (string.IsNullOrEmpty(supplier.TaxpayerID))
             {
                 return "请补充纳税人识别号";
@@ -189,7 +211,7 @@ namespace BudgetSystem.Bll
             {
                 return "请补充法人代表";
             }
-            if (supplier.AgentType==(int) EnumAgentType.无)
+            if (supplier.AgentType == (int)EnumAgentType.无)
             {
                 return "合格供方需要代理协议";
             }
@@ -203,12 +225,12 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充代理协议有效期";
                 }
-                else if (supplier.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+                else if (supplier.AgreementDate.Value.Date <= datetimeNow.AddDays(30).Date)
                 {
                     return "代理协议有效期应大于当前日期30天";
                 }
             }
-            
+
             if (!supplier.ExistsLicenseCopy)
             {
                 return "合格供方需要营业执照复印件";
@@ -221,7 +243,7 @@ namespace BudgetSystem.Bll
             {
                 return "请补充工商登记日期";
             }
-            else if (supplier.RegistrationDate.Value.Date > DateTime.Now.Date)
+            else if (supplier.RegistrationDate.Value.Date > datetimeNow.Date)
             {
                 return "工商登记日期应小于当前日期";
             }
@@ -234,7 +256,7 @@ namespace BudgetSystem.Bll
             {
                 return "经营截至日期应大于工商登记日期";
             }
-            else if (supplier.BusinessEffectiveDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+            else if (supplier.BusinessEffectiveDate.Value.Date <= datetimeNow.AddDays(30).Date)
             {
                 return "经营截至日期应大于当前日期30天";
             }
@@ -258,7 +280,8 @@ namespace BudgetSystem.Bll
             return string.Empty;
         }
         private string CheckReviewData(Supplier supplier)
-        {            
+        {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             if (string.IsNullOrEmpty(supplier.ReviewContents))
             {
                 return "请补充供方行为和年度重新评价信息";
@@ -274,7 +297,7 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充代理协议有效期";
                 }
-                else if (reviewContents.AgreementDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+                else if (reviewContents.AgreementDate.Value.Date <= datetimeNow.AddDays(30).Date)
                 {
                     return "代理协议有效期应大于当前日期30天";
                 }
@@ -283,7 +306,7 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充工商登记日期";
                 }
-                else if (reviewContents.RegistrationDate.Value.Date > DateTime.Now.Date)
+                else if (reviewContents.RegistrationDate.Value.Date > datetimeNow.Date)
                 {
                     return "工商登记日期应小于当前日期";
                 }
@@ -296,7 +319,7 @@ namespace BudgetSystem.Bll
                 {
                     return "经营截至日期应大于工商登记日期";
                 }
-                else if (reviewContents.BusinessEffectiveDate.Value.Date <= DateTime.Now.AddDays(30).Date)
+                else if (reviewContents.BusinessEffectiveDate.Value.Date <= datetimeNow.AddDays(30).Date)
                 {
                     return "经营截至日期应大于当前日期30天";
                 }

@@ -14,9 +14,12 @@ namespace BudgetSystem
 {
     public partial class frmSupplierLeaderReviewEventForm : BudgetSystem.Base.frmBaseFlowEventForm
     {
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
         public frmSupplierLeaderReviewEventForm(string caption)
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
             this.Text = caption;
         }
 
@@ -44,7 +47,7 @@ namespace BudgetSystem
                     SupplierReviewContents reviewContents = supplier.ReviewContents.ToObjectList<SupplierReviewContents>();
                     reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
                     reviewContents.LeaderResult = this.cboItem.SelectedIndex == 0;
-                    reviewContents.ResultDate = DateTime.Now;
+                    reviewContents.ResultDate = datetimeNow;
                     reviewContents.Discredited = this.rgDiscredited.SelectedIndex == 1;
                     sm.ModifySupplierReviewContents(dataID, reviewContents);
                 }

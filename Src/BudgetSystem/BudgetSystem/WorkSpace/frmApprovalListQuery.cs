@@ -103,14 +103,14 @@ namespace BudgetSystem.WorkSpace
                             XtraMessageBox.Show("当前数据已经不存在。");
                             return;
                         }
-                        frmOutMoneyPrint form = new frmOutMoneyPrint();
-                        form.WorkModel = EditFormWorkModels.View;
-                        form.CurrentPaymentNotes = currentItem;
-                        form.PrintItem();
                         FlowRunState state = pnm.Payemenent(currentItem, item.RunPointID);
                         string info;
                         if (state.Translate(out info))
                         {
+                            frmOutMoneyPrint form = new frmOutMoneyPrint();
+                            form.WorkModel = EditFormWorkModels.View;
+                            form.CurrentPaymentNotes = currentItem;
+                            form.PrintItem();
                             this.gvPendingFlow.DeleteRow(rowIndex);
                         }
                         else

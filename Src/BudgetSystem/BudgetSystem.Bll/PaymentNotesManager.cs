@@ -9,6 +9,7 @@ namespace BudgetSystem.Bll
 {
     public class PaymentNotesManager : BaseManager
     {
+        CommonManager cm = new CommonManager();
         Dal.PaymentNotesDal dal = new Dal.PaymentNotesDal();
         Bll.FlowManager fm = new FlowManager();
         Dal.FlowDal fDal = new Dal.FlowDal();
@@ -28,7 +29,7 @@ namespace BudgetSystem.Bll
 
         public FlowRunState Payemenent(PaymentNotes paymentNode, int runPointId)
         {
-            paymentNode.PaymentDate = DateTime.Now;
+            paymentNode.PaymentDate = cm.GetDateTimeNow();
             this.ExecuteWithTransaction((con, tran) =>
                  {
                      dal.ModifyPayementNodeDate(paymentNode, con, tran);
@@ -47,6 +48,21 @@ namespace BudgetSystem.Bll
             var lst = this.Query<PaymentNotes>((con) =>
             {
                 var uList = dal.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        /// <summary>
+        /// 获取所有已经审批通过的付款金额。
+        /// </summary>
+        /// <param name="budgetID"></param>
+        /// <returns></returns>
+        public IEnumerable<PaymentNotes> GetTotalIsApprovaledAmountPaymentMoneyByBudgetId(int budgetID)
+        {
+            var lst = this.Query<PaymentNotes>((con) =>
+            {
+                var uList = dal.GetTotalIsApprovaledAmountPaymentMoneyByBudgetId(budgetID, con, null);
                 return uList;
             });
             return lst.ToList();
@@ -140,7 +156,7 @@ namespace BudgetSystem.Bll
         /// <param name="id"></param>
         /// <param name="currentUser"></param>
         /// <returns>返回string.Empty为成功，否则为失败原因</returns>
-        public string StartFlow(int id, string currentUser, string description)
+        public string StartFlow(int id, string currentUser)
         {
             PaymentNotes payment = this.GetPaymentNoteById(id);
             if (payment == null)
@@ -151,7 +167,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser, description);
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser, string.Format("发起{0}", EnumFlowNames.付款审批流程));
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

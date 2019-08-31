@@ -34,7 +34,7 @@ namespace BudgetSystem
         private decimal taxRebateRate = 0;
 
         private decimal totalOriginalCurrency = 0;
-
+        private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private EditFormWorkModels _workModel;
 
@@ -99,11 +99,12 @@ namespace BudgetSystem
 
         public void FillData()
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             if (this.CurrentBudget == null)
             {
                 //新增
                 this.CurrentBudget = new Budget();
-                CurrentBudget.CreateDate = DateTime.Now;
+                CurrentBudget.CreateDate = datetimeNow;
                 CurrentBudget.DeptID = RunInfo.Instance.CurrentUser.DeptID;
                 CurrentBudget.Salesman = RunInfo.Instance.CurrentUser.UserName;
                 CurrentBudget.SalesmanName = RunInfo.Instance.CurrentUser.RealName;
@@ -183,7 +184,7 @@ namespace BudgetSystem
             CurrentBudget.OutProductDetail = this.GetOutProductDetailString();
             CurrentBudget.InProductDetail = this.GetInProductDetailString();
             CurrentBudget.PurchasePrice = this.txtPurchasePrice.Value;
-            CurrentBudget.UpdateDate = DateTime.Now;
+            CurrentBudget.UpdateDate = datetimeNow;
             CurrentBudget.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentBudget.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
         }
@@ -297,10 +298,11 @@ namespace BudgetSystem
 
         private void BindingBudgetDefaultInfo()
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             this.txtDepartment.Text = RunInfo.Instance.CurrentUser.Department + RunInfo.Instance.CurrentUser.DepartmentName;
             this.txtSalesman.Text = RunInfo.Instance.CurrentUser.RealName;
-            this.lblContractNOPrefix.Text = DateTime.Now.ToString("yy") + "G-" + RunInfo.Instance.CurrentUser.Department + "-";
-            this.dteSignDate.EditValue = DateTime.Now;
+            this.lblContractNOPrefix.Text = datetimeNow.ToString("yy") + "G-" + RunInfo.Instance.CurrentUser.Department + "-";
+            this.dteSignDate.EditValue = datetimeNow;
             this.txtInterestRate.EditValue = this.interestRate;
             //this.txtContractNO.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             //this.txtContractNO.Properties.Mask.EditMask = "("+contractNoPrefix+")\\d{4}";
@@ -394,7 +396,9 @@ namespace BudgetSystem
                     suppliers.AddRange(tempSuppliers);
 
                     customers = new List<Customer>();
-                    customers.Add(new Customer() { ID = budget.CustomerID.Value, Name = budget.CustomerName });
+                    customers.Add(new Customer() { ID = budget.CustomerID.Value, Name = budget.CustomerName, Code = budget.CustomerCode, Country = budget.Country });
+                    if (budget.CustomerList != null)
+                        customers.AddRange(budget.CustomerList);
                 }
                 this.ucCustomerSelected.SetDataSource(customers);
                 this.ucSupplierSelected.SetDataSource(suppliers);

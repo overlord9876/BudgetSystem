@@ -12,24 +12,30 @@ using BudgetSystem.Entity;
 using DevExpress.Utils;
 using System.IO;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem.Base
 {
     public partial class frmBaseCommonReportForm : frmBaseQueryForm
     {
+        private CommonManager cm = new CommonManager();
+
+        protected DateTime datetimeNow = DateTime.MinValue;
+
         public frmBaseCommonReportForm()
         {
             InitializeComponent();
-            int year = DateTime.Now.Year - 2;
+            datetimeNow = cm.GetDateTimeNow();
+            int year = datetimeNow.Year - 2;
             for (int index = 0; index < 52; index++)
             {
                 cboYears.Items.Add((year + index));
             }
-            this.cboSelectYear.EditValue = DateTime.Now.Year;
+            this.cboSelectYear.EditValue = datetimeNow.Year;
 
-            this.deStartDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime nextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            this.deEndDate.EditValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+            this.deStartDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+            DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+            this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
 
             this.lcList.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             this.splitterItem.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;

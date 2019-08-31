@@ -13,6 +13,8 @@ namespace BudgetSystem
 {
     public partial class frmVoucherNotesEdit : frmBaseDialogForm
     {
+        private DateTime datetimeNow = DateTime.MinValue;
+        private CommonManager cm = new CommonManager();
         BudgetManager bm = new BudgetManager();
         private SystemConfigManager scm = new SystemConfigManager();
         DeclarationformManager dm = new DeclarationformManager();
@@ -21,6 +23,7 @@ namespace BudgetSystem
         public frmVoucherNotesEdit()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
         }
 
         private void frmDeclarationformEdit_Load(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace BudgetSystem
             {
                 this.Text = "新增报关单信息";
 
-                this.textEdit5.EditValue = DateTime.Now;
+                this.textEdit5.EditValue = datetimeNow;
                 this.textEdit6.Text = RunInfo.Instance.CurrentUser.UserName;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)

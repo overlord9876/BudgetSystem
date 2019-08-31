@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.StyleFormatCondition styleFormatCondition1 = new DevExpress.XtraGrid.StyleFormatCondition();
             this.gcIsWarned = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -138,8 +139,8 @@
             this.layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem29 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtIgnoreTransportationExpensesPaymentMoneyAmount.Properties)).BeginInit();
@@ -1434,7 +1435,7 @@
             this.lciInvoiceNumber.Control = this.gridInvoiceNumber;
             this.lciInvoiceNumber.CustomizationFormText = "发票信息";
             this.lciInvoiceNumber.Location = new System.Drawing.Point(0, 87);
-            this.lciInvoiceNumber.MinSize = new System.Drawing.Size(257, 40);
+            this.lciInvoiceNumber.MinSize = new System.Drawing.Size(257, 80);
             this.lciInvoiceNumber.Name = "lciInvoiceNumber";
             this.lciInvoiceNumber.Size = new System.Drawing.Size(1132, 146);
             this.lciInvoiceNumber.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;

@@ -225,11 +225,11 @@ namespace BudgetSystem.Entity
                 if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
                 {
                     if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value > DateTime.MinValue.AddDays(30)
-                         && this.BusinessEffectiveDate.Value.Date.AddDays(-30) <= DateTime.Now.Date && DateTime.Now.Date <= this.BusinessEffectiveDate.Value.Date)
+                         && this.BusinessEffectiveDate.Value.Date.AddDays(-30) <= DateTimeNow.Date && DateTimeNow.Date <= this.BusinessEffectiveDate.Value.Date)
                        || (this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value > DateTime.MinValue.AddDays(30)
-                           && this.AgreementDate.Value.Date.AddDays(-30) <= DateTime.Now.Date && DateTime.Now.Date <= this.AgreementDate.Value.Date)
+                           && this.AgreementDate.Value.Date.AddDays(-30) <= DateTimeNow.Date && DateTimeNow.Date <= this.AgreementDate.Value.Date)
                        || (this.ReviewDate != null && this.ReviewDate.Value < DateTime.MaxValue.AddDays(-30)
-                          && this.ReviewDate.Value.Date <= DateTime.Now.Date && DateTime.Now.Date <= this.ReviewDate.Value.AddDays(30).Date))
+                          && this.ReviewDate.Value.Date <= DateTimeNow.Date && DateTimeNow.Date <= this.ReviewDate.Value.AddDays(30).Date))
                     {
                         return true;
                     }
@@ -247,9 +247,9 @@ namespace BudgetSystem.Entity
             {
                 if (SupplierType == (int)EnumSupplierType.合格供方 && EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if ((this.BusinessEffectiveDate != null && DateTime.Now.Date > this.BusinessEffectiveDate.Value.Date)
-                       || (this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && DateTime.Now.Date > this.AgreementDate.Value.Date)
-                       || (this.ReviewDate != null && DateTime.Now.Date.AddDays(-30) > this.ReviewDate.Value.Date))
+                    if ((this.BusinessEffectiveDate != null && DateTimeNow.Date > this.BusinessEffectiveDate.Value.Date)
+                       || (this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && DateTimeNow.Date > this.AgreementDate.Value.Date)
+                       || (this.ReviewDate != null && DateTimeNow.Date.AddDays(-30) > this.ReviewDate.Value.Date))
                     {
                         return true;
                     }
@@ -267,10 +267,10 @@ namespace BudgetSystem.Entity
             {
                 if (SupplierType == (int)EnumSupplierType.合格供方 && this.EnumFlowState == EnumDataFlowState.审批通过)
                 {
-                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date >= DateTime.Now.Date)
-                        && ((this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTime.Now.Date)
+                    if ((this.BusinessEffectiveDate != null && this.BusinessEffectiveDate.Value.Date >= DateTimeNow.Date)
+                        && ((this.AgentType == (int)EnumAgentType.代理 && this.AgreementDate != null && this.AgreementDate.Value.Date >= DateTimeNow.Date)
                             || this.AgentType == (int)EnumAgentType.货代 || this.AgentType == (int)EnumAgentType.自营)
-                        && (this.ReviewDate != null && this.ReviewDate.Value.Date >= DateTime.Now.Date.AddDays(-30)))
+                        && (this.ReviewDate != null && this.ReviewDate.Value.Date >= DateTimeNow.Date.AddDays(-30)))
                     {
                         return true;
                     }
@@ -284,7 +284,16 @@ namespace BudgetSystem.Entity
         {
             FlowState = -1;
             AgentType = (int)EnumAgentType.无;
+            DateTimeNow = new DateTime(2000, 1, 1);
         }
+
+        public Supplier(DateTime datetimeNow)
+            : this()
+        {
+            this.DateTimeNow = datetimeNow;
+        }
+
+        public DateTime DateTimeNow { get; set; }
 
         public override string ToString()
         {

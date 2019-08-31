@@ -55,5 +55,15 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string NodeExtEvent { get; set; }
 
+        /// <summary>
+        /// 是否为发起人节点。
+        /// </summary>
+        public bool IsStartNode { get; set; }
+
+        public FlowNode()
+        {
+            IsStartNode = false;
+        }
+
     }
 }

@@ -140,7 +140,7 @@ namespace BudgetSystem
                         description = frm.Description;
                     }
                 }
-                string message = sm.StartFlow(flowName, this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName, description);
+                string message = sm.StartFlow(flowName, this.ucSupplierEdit1.CurrentSupplier.ID, RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}", flowName));
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");

@@ -10,14 +10,19 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Util;
 using System.IO;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
     public partial class frmSupplierImport : frmBaseDialogForm
     {
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
+
         public frmSupplierImport()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
         }
 
         private void frmInvoiceImport_Load(object sender, EventArgs e)
@@ -57,7 +62,7 @@ namespace BudgetSystem
                 string userName = string.Empty;
                 foreach (DataRow row in dt.Rows)
                 {
-                    supplier = new Supplier();
+                    supplier = new Supplier(datetimeNow);
                     supplier.Name = DataRowConvertHelper.GetStringValue(row, "供应商名称").Trim();
                     if (string.IsNullOrEmpty(supplier.Name))
                     {
@@ -92,7 +97,7 @@ namespace BudgetSystem
                     supplier.CreateDate = DataRowConvertHelper.GetDateTimeValue(row, "创建时间", "\"");
                     if (supplier.CreateDate <= DateTime.MinValue)
                     {
-                        supplier.CreateDate = DateTime.Now;
+                        supplier.CreateDate = datetimeNow;
                     }
                     userName = DataRowConvertHelper.GetStringValue(row, "创建人").Trim();
                     user = users.FirstOrDefault(u => u.RealName == userName);
@@ -172,7 +177,7 @@ namespace BudgetSystem
                         supplier.ID = sm.AddSupplier(supplier);
                         if (supplier.SupplierType == 0)
                         {
-                            string message = sm.StartFlow(EnumFlowNames.供应商审批流程, supplier.ID, supplier.CreateUser);
+                            string message = sm.StartFlow(EnumFlowNames.供应商审批流程, supplier.ID, supplier.CreateUser, string.Format("发起{0}", EnumFlowNames.供应商审批流程));
                             if (!string.IsNullOrEmpty(message))
                             {
                                 //TODO启动流程失败

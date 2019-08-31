@@ -13,6 +13,8 @@ namespace BudgetSystem
 {
     public partial class frmDeclarationformEdit : frmBaseDialogForm
     {
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
         BudgetManager bm = new BudgetManager();
         private SystemConfigManager scm = new SystemConfigManager();
         DeclarationformManager dm = new DeclarationformManager();
@@ -21,7 +23,8 @@ namespace BudgetSystem
         public frmDeclarationformEdit()
         {
             InitializeComponent();
-            txtExportDate.EditValue = DateTime.Now;
+            datetimeNow = cm.GetDateTimeNow();
+            txtExportDate.EditValue = datetimeNow;
         }
 
         private void frmDeclarationformEdit_Load(object sender, EventArgs e)
@@ -35,7 +38,7 @@ namespace BudgetSystem
             {
                 this.Text = "新增报关单信息";
 
-                this.textEdit5.EditValue = DateTime.Now;
+                this.textEdit5.EditValue = datetimeNow;
                 this.textEdit6.Text = RunInfo.Instance.CurrentUser.UserName;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)

@@ -14,6 +14,7 @@ namespace BudgetSystem
 {
     public partial class frmSupplierFirstReviewEventForm : BudgetSystem.Base.frmBaseFlowEventForm
     {
+        private CommonManager cm = new CommonManager();
         private string caption;
 
         public frmSupplierFirstReviewEventForm(string caption)
@@ -44,7 +45,7 @@ namespace BudgetSystem
                     {
                         reviewContents.Leader = RunInfo.Instance.CurrentUser.RealName;
                         reviewContents.LeaderResult = result;
-                        reviewContents.ResultDate = DateTime.Now;
+                        reviewContents.ResultDate = cm.GetDateTimeNow();
                     }
                     sm.ModifySupplierFirstReviewContents(dataID, reviewContents);
                 }

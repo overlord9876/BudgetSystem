@@ -6,6 +6,7 @@ using BudgetSystem.Entity.QueryCondition;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
+using MySql.Data.MySqlClient;
 
 namespace BudgetSystem.Dal
 {
@@ -13,6 +14,8 @@ namespace BudgetSystem.Dal
     {
         public Supplier GetSupplier(int id, IDbConnection con, IDbTransaction tran = null)
         {
+            DateTime datetimeNow = new CommonDal().GetDateTimeNow(con);
+
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,u2.RealName AS UpdateUserName, 
                                         IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
@@ -23,6 +26,7 @@ namespace BudgetSystem.Dal
             var s = con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), ID = id }, tran).SingleOrDefault();
             if (s != null)
             {
+                s.DateTimeNow = datetimeNow;
                 string departmentSelectSql = @"SELECT d.* from SupplierRelationDepartment srd JOIN department d on srd.Dep_ID=d.ID where srd.ID=@ID";
                 var deptList = con.Query<Department>(departmentSelectSql, new { ID = id }, tran).ToList();
                 if (deptList != null)
@@ -35,6 +39,8 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Supplier> GetAllSupplier(IDbConnection con, IDbTransaction tran = null, SupplierQueryCondition condition = null)
         {
+            DateTime datetimeNow = new CommonDal().GetDateTimeNow(con);
+
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,u2.RealName AS UpdateUserName, 
                                         IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
@@ -74,11 +80,17 @@ namespace BudgetSystem.Dal
                 }
             }
 
-            return con.Query<Supplier>(selectSql, dp, tran);
+            var result = con.Query<Supplier>(selectSql, dp, tran);
+            foreach (var supplier in result)
+            {
+                supplier.DateTimeNow = datetimeNow;
+            }
+            return result;
         }
 
         public IEnumerable<Supplier> GetSupplierListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null)
         {
+            DateTime datetimeNow = new CommonDal().GetDateTimeNow(con);
             string selectSql = @"SELECT s.*,u.RealName AS CreateUserName,u2.RealName AS UpdateUserName,
                                         IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName 
                                  FROM `Supplier` s
@@ -86,7 +98,48 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `User` u ON s.CreateUser=u.UserName
                                  LEFT JOIN `User` u2 ON s.UpdateUser=u2.UserName
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=s.id AND f.DateItemType=@DateItemType AND f.IsRecent=1";
-            return con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), BudgetID = budgetId }, tran);
+            var result = con.Query<Supplier>(selectSql, new { DateItemType = EnumFlowDataType.供应商.ToString(), BudgetID = budgetId }, tran);
+            foreach (var supplier in result)
+            {
+                supplier.DateTimeNow = datetimeNow;
+            }
+            return result;
+        }
+
+        public bool IsUsed(Supplier suppplier, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = @"SELECT SupplierID from PaymentNotes where SupplierID=@ID;";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+
+            selectSql = @"SELECT Sup_ID from BudgetSuppliers WHERE Sup_ID=@ID;";
+            command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
+            obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void DeleteSupplier(Supplier supplier, IDbConnection con, IDbTransaction tran = null)
+        {
+            string salesmanDeleteSql = "Delete From `supplierrelationdepartment` Where `ID` = @ID";
+            con.Execute(salesmanDeleteSql, new { ID = supplier.ID }, tran);
+
+            string updateSql = @"delete from `Supplier` Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = supplier.ID }, tran);
         }
 
         public int AddSupplier(Supplier supplier, IDbConnection con, IDbTransaction tran = null)

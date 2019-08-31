@@ -31,6 +31,7 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
@@ -49,6 +50,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
                 this.ModifyCustomer();
+            }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                this.DeleteCustomer();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
@@ -96,24 +101,58 @@ namespace BudgetSystem
                 this.RefreshData();
             }
         }
+
         private void ModifyCustomer()
         {
             Customer customer = this.gvCustomer.GetFocusedRow() as Customer;
-            if (customer != null)
-            {
-                frmCustomerEdit form = new frmCustomerEdit();
-                form.WorkModel = EditFormWorkModels.Modify;
-                form.Customer = customer;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
-            }
-            else
+            if (customer == null)
             {
                 XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            customer = cm.GetCustomer(customer.ID);
+            if (customer == null)
+            {
+
+                XtraMessageBox.Show("您选择修改的项已经不存在，请刷新数据");
+                return;
+            }
+            frmCustomerEdit form = new frmCustomerEdit();
+            form.WorkModel = EditFormWorkModels.Modify;
+            form.Customer = customer;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
             }
         }
+
+        private void DeleteCustomer()
+        {
+            Customer customer = this.gvCustomer.GetFocusedRow() as Customer;
+            if (customer == null)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+
+            customer = cm.GetCustomer(customer.ID);
+            if (customer == null)
+            {
+                XtraMessageBox.Show("您选择删除的项已经不存在，请刷新数据");
+                return;
+            }
+
+            if (cm.IsUsed(customer))
+            {
+                XtraMessageBox.Show("您选择删除的项已经被使用，不允许删除");
+                return;
+            }
+
+            cm.DeleteCustomer(customer);
+
+            this.gvCustomer.DeleteRow(this.gvCustomer.FocusedRowHandle);
+        }
+
         private void ViewCustomer()
         {
             Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
@@ -129,6 +168,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看详情的项");
             }
         }
+
         private void EnableCustomer()
         {
             Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
@@ -143,6 +183,7 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要启用的项");
             }
         }
+
         private void DisabledCustomer()
         {
             Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;

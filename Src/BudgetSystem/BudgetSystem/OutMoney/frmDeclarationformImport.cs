@@ -14,12 +14,15 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmDeclarationformImport : frmBaseDialogForm
     {
+        private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private Bll.DeclarationformManager dm = new Bll.DeclarationformManager();
+        private DateTime datetimeNow = DateTime.MinValue;
 
         public frmDeclarationformImport()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
             RegisterEventHandler();
         }
 
@@ -67,7 +70,7 @@ namespace BudgetSystem.InMoney
                     df.ExportAmount = DataRowConvertHelper.GetDecimalValue(row, "出口金额");
                     df.ExportDate = DataRowConvertHelper.GetDateTimeValue(row, "出口日期");
                     df.CreateUser = RunInfo.Instance.CurrentUser.UserName;
-                    df.CreateDate = DateTime.Now;
+                    df.CreateDate = datetimeNow;
                     list.Add(df);
                 }
 

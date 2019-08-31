@@ -29,5 +29,13 @@ namespace BudgetSystem.Bll
                 return codeValue;
             });
         }
+
+        public DateTime GetDateTimeNow()
+        {
+            return this.ExecuteWithTransaction<DateTime>((con, tran) =>
+            {
+                return dal.GetDateTimeNow(con);
+            });
+        }
     }
 }

@@ -256,12 +256,6 @@
     <Compile Include="Budget\frmFinancialArchiveApplyImport.Designer.cs">
       <DependentUpon>frmFinancialArchiveApplyImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Budget\frmFinalAccountsQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Budget\frmFinalAccountsQuery.Designer.cs">
-      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="Budget\frmMoneyInOutDetailEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -291,6 +285,12 @@
     </Compile>
     <Compile Include="Budget\ucBudgetEdit.Designer.cs">
       <DependentUpon>ucBudgetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Budget\frmBudgetDatail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmBudgetDatail.Designer.cs">
+      <DependentUpon>frmBudgetDatail.cs</DependentUpon>
     </Compile>
     <Compile Include="CommonControl\LookUpEditHelper.cs" />
     <Compile Include="CommonControl\RepositoryItemTextEdit_Number.cs">
@@ -713,12 +713,6 @@
     <Compile Include="WorkSpace\frmMyFlowListQuery.Designer.cs">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkSpace\frmApprovalEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorkSpace\frmApprovalEdit.Designer.cs">
-      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserManage\frmUserQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -783,9 +777,6 @@
     <EmbeddedResource Include="Budget\frmFinancialArchiveApplyImport.resx">
       <DependentUpon>frmFinancialArchiveApplyImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Budget\frmFinalAccountsQuery.resx">
-      <DependentUpon>frmFinalAccountsQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Budget\frmMoneyInOutDetailEdit.resx">
       <DependentUpon>frmMoneyInOutDetailEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -800,6 +791,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Budget\ucBudgetEdit.resx">
       <DependentUpon>ucBudgetEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmBudgetDatail.resx">
+      <DependentUpon>frmBudgetDatail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
@@ -1006,9 +1000,6 @@
     <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorkSpace\frmApprovalEdit.resx">
-      <DependentUpon>frmApprovalEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -1072,7 +1063,9 @@
     <Content Include="Report\SlipperReport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml" />
+    <EmbeddedResource Include="WorkSpace\frmApproveEx_BatchApprove.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmApproveEx_Approve.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

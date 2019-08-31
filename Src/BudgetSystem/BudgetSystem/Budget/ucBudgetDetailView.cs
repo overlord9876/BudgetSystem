@@ -24,6 +24,7 @@ namespace BudgetSystem
             InitializeComponent();
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
+      
         public override void BindingData(int dataID)
         {
             this.ucBudgetEdit1.WorkModel = WorkModel;

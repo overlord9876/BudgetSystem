@@ -19,6 +19,9 @@ namespace BudgetSystem
     {
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
+
         private const string COMMONQUERY_MYCREATE = "我负责的";
         private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "已完成审批预算单列表";
         private const string COMMONQUERY_MANAGERAPPROVAL = "未完成审批预算单列表";
@@ -26,9 +29,11 @@ namespace BudgetSystem
         private const string COMMONQUERY_FINANCEQUERY = "财务归档征求";
         private const string COMMONQUERY_FINANCEQUERYANDREJECTED = "财务归档征求及驳回归档";
         private const string COMMONQUERY_ARCHIVEQUERY = "预算单已归档合同列表";
+
         public frmBudgetQuery()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
             this.Module = BusinessModules.BuggetManagement;
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
@@ -278,7 +283,7 @@ namespace BudgetSystem
                     XtraMessageBox.Show(string.Format("{0}的预算单正在审批，不允许重复提交。", budget.ContractNO));
                     return;
                 }
-                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, budget.Description);
+                string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单审批流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}", EnumFlowNames.预算单审批流程));
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("提交流程成功。");
@@ -316,7 +321,7 @@ namespace BudgetSystem
                     frmDescription frmBudget = new frmDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
-                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, frmBudget.Description);
+                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单修改流程, frmBudget.Description));
                         if (string.IsNullOrEmpty(message))
                         {
                             XtraMessageBox.Show("提交流程成功。");
@@ -357,7 +362,7 @@ namespace BudgetSystem
                 frmDescription frmBudget = new frmDescription("填写申请删除说明", "删除说明");
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, frmBudget.Description);
+                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单删除流程, frmBudget.Description));
                     if (string.IsNullOrEmpty(message))
                     {
                         XtraMessageBox.Show("提交流程成功。");
@@ -378,20 +383,21 @@ namespace BudgetSystem
         private void ViewBudget()
         {
             Budget budget = this.gvBudget.GetFocusedRow() as Budget;
-            if (budget != null)
-            {
-                frmBudgetEdit form = new frmBudgetEdit();
-                form.WorkModel = EditFormWorkModels.View;
-                form.CurrentBudget = budget;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
-            }
-            else
+            if (budget == null)
             {
                 XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
             }
+            budget = bm.GetBudget(budget.ID);
+            if (budget == null)
+            {
+                XtraMessageBox.Show("您选择查看详情的项不存在，请刷新数据。");
+                return;
+            }
+            frmBudgetDatail form = new frmBudgetDatail();
+            form.WorkModel = EditFormWorkModels.View;
+            form.CurrentBudget = budget;
+            form.ShowDialog(this);
         }
 
         private void ViewApplyHistory()
@@ -532,7 +538,7 @@ namespace BudgetSystem
                         if (findItem != null)
                         {
                             findItem.State = (int)EnumBudgetState.财务归档征求;
-                            findItem.ArchiveApplyDate = DateTime.Now;
+                            findItem.ArchiveApplyDate = datetimeNow;
                         }
                     }
                     this.gvBudget.RefreshData();

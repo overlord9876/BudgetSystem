@@ -55,7 +55,14 @@ namespace BudgetSystem.Dal
             return con.Execute(updateSql, new { CodeType = (int)ct, CodeValue = codeValue }, tran);
         }
 
-
+        public DateTime GetDateTimeNow(IDbConnection con)
+        {
+            string selectSql = "SELECT NOW();";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            object obj = command.ExecuteScalar();
+            return Convert.ToDateTime(obj);
+        }
 
 
     }

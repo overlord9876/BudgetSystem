@@ -276,21 +276,6 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
-        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            frmFinalAccountsQuery form = GetExistForm<frmFinalAccountsQuery>();
-            if (form == null)
-            {
-                form = new frmFinalAccountsQuery();
-                form.RefreshData();
-            }
-            else
-            {
-                FormActivited(form);
-            }
-            ShowForm(form);
-        }
-
         private void btnModifyPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmUserEdit editor = new frmUserEdit();

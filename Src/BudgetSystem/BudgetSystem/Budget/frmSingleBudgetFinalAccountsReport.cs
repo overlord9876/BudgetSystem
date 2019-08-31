@@ -98,7 +98,7 @@ namespace BudgetSystem
                     dt.Rows.Add(row);
                 }
                 //付款单表
-                var pnData = new PaymentNotesManager().GetTotalAmountPaymentMoneyByBudgetId(budget.ID);
+                var pnData = new PaymentNotesManager().GetTotalIsApprovaledAmountPaymentMoneyByBudgetId(budget.ID);
                 foreach (PaymentNotes pn in pnData)
                 {
                     row = dt.NewRow();

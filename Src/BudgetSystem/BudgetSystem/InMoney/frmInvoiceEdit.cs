@@ -8,14 +8,19 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem.InMoney
 {
     public partial class frmInvoiceEdit : frmBaseDialogForm
     {
+        private CommonManager cm = new CommonManager();
+        private DateTime datetimeNow = DateTime.MinValue;
+
         public frmInvoiceEdit()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
         }
 
 
@@ -30,7 +35,7 @@ namespace BudgetSystem.InMoney
         private void frmInvoiceEdit_Load(object sender, EventArgs e)
         {
             BudgetQueryCondition condition = new BudgetQueryCondition();
-            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition; 
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
             List<Budget> budgetList = bm.GetAllBudget(condition);
 
             cboBudget.Properties.DataSource = budgetList;
@@ -211,8 +216,8 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.ImportUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentInvoice.TaxAmount = this.txtTaxAmount.Value;
-            CurrentInvoice.ImportDate = DateTime.Now;
-            CurrentInvoice.FinanceImportDate = DateTime.Now;
+            CurrentInvoice.ImportDate = datetimeNow;
+            CurrentInvoice.FinanceImportDate = datetimeNow;
         }
 
         public override void PrintData()

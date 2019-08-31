@@ -18,6 +18,7 @@ namespace BudgetSystem
             get;
             set;
         }
+        private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.SupplierManager sm = new Bll.SupplierManager();
         private Bll.DepartmentManager dm = new Bll.DepartmentManager();
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
@@ -74,7 +75,7 @@ namespace BudgetSystem
         {
             if (this.CurrentSupplier == null || this.CurrentSupplier.EnumFlowState == EnumDataFlowState.未审批 || this.WorkModel == EditFormWorkModels.Review)
             {
-                this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(DateTime.Now.Year - this.dteRegistrationDate.DateTime.Year + 1);
+                this.dteReviewDate.EditValue = this.dteRegistrationDate.DateTime.AddYears(cm.GetDateTimeNow().Year - this.dteRegistrationDate.DateTime.Year + 1);
             }
         }
 
@@ -364,6 +365,7 @@ namespace BudgetSystem
 
         public bool CheckInputData(bool isStartFlow)
         {
+            DateTime datetimeNow = cm.GetDateTimeNow();
             this.dxErrorProvider1.ClearErrors();
             bool baseError = false;
             if (this.WorkModel == EditFormWorkModels.Custom)
@@ -433,7 +435,7 @@ namespace BudgetSystem
                     {
                         this.dxErrorProvider1.SetError(this.dteAgreementDate, "请输入代理协议有效期");
                     }
-                    else if (this.dteAgreementDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+                    else if (this.dteAgreementDate.DateTime.Date <= datetimeNow.AddDays(30).Date)
                     {
                         this.dxErrorProvider1.SetError(this.dteAgreementDate, "代理协议有效期应大于当前日期30天");
                     }
@@ -450,7 +452,7 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.dteRegistrationDate, "请输入工商登记日期");
                 }
-                else if (this.dteRegistrationDate.DateTime.Date > DateTime.Now.Date)
+                else if (this.dteRegistrationDate.DateTime.Date > datetimeNow.Date)
                 {
                     this.dxErrorProvider1.SetError(this.dteRegistrationDate, "工商登记日期应小于当前日期");
                 }
@@ -463,7 +465,7 @@ namespace BudgetSystem
                 {
                     this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于工商登记日期");
                 }
-                else if (dteBusinessEffectiveDate.DateTime.Date <= DateTime.Now.AddDays(30).Date)
+                else if (dteBusinessEffectiveDate.DateTime.Date <= datetimeNow.AddDays(30).Date)
                 {
                     this.dxErrorProvider1.SetError(this.dteBusinessEffectiveDate, "经营截至日期应大于当前日期30天");
                 }
@@ -514,17 +516,20 @@ namespace BudgetSystem
         {
             if (this.CurrentSupplier == null)
             {
+                DateTime datetimeNow = cm.GetDateTimeNow();
                 //新增
-                this.CurrentSupplier = new Supplier();
+                this.CurrentSupplier = new Supplier(datetimeNow);
+
                 this.CurrentSupplier.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                 this.CurrentSupplier.CreateUserName = RunInfo.Instance.CurrentUser.RealName;
-                this.CurrentSupplier.CreateDate = DateTime.Now;
+                this.CurrentSupplier.CreateDate = datetimeNow;
                 this.CurrentSupplier.FlowState = -1;
             }
             this.CurrentSupplier.Name = this.txtName.Text.Trim();
             this.CurrentSupplier.Address = this.txtAddress.Text.Trim();
             this.CurrentSupplier.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             this.CurrentSupplier.Contacts = this.txtContacts.Text.Trim();
+            this.CurrentSupplier.Departments.Clear();
             List<Department> departments = pceDepartment.Tag as List<Department>;
             this.CurrentSupplier.Departments.AddRange(departments);
             this.CurrentSupplier.FaxNumber = this.txtFaxNumber.Text.Trim();
@@ -622,7 +627,7 @@ namespace BudgetSystem
 
             this.CurrentSupplier.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
             this.CurrentSupplier.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
-            this.CurrentSupplier.UpdateDate = DateTime.Now;
+            this.CurrentSupplier.UpdateDate = cm.GetDateTimeNow();
         }
 
         private void BindingBankInfoDetail(string detail)

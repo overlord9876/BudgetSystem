@@ -15,6 +15,7 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyPrint : frmBaseDialogForm
     {
+        CommonManager cm = new CommonManager();
         Bll.FlowManager fm = new FlowManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
         BudgetManager bm = new BudgetManager();
@@ -65,6 +66,26 @@ namespace BudgetSystem.OutMoney
                 this.chkIsDrawback_No.Checked = !this.CurrentPaymentNotes.IsDrawback;
                 this.chkHasInvoice_Yes.Checked = this.CurrentPaymentNotes.HasInvoice;
                 this.chkHasInvoice_No.Checked = !this.CurrentPaymentNotes.HasInvoice;
+
+                if (!string.IsNullOrEmpty(this.CurrentPaymentNotes.InvoiceNumber))
+                {
+                    List<InvoiceInfo> invoiceInfoList = this.CurrentPaymentNotes.InvoiceNumber.ToObjectList<List<InvoiceInfo>>();
+                    string invoiceInfo = string.Empty;
+                    foreach (var invoice in invoiceInfoList)
+                    {
+                        invoiceInfo = invoiceInfo + invoice.InvoiceNumber + ",";
+                    }
+                    if (invoiceInfo.EndsWith(","))
+                    {
+                        invoiceInfo = invoiceInfo.Substring(0, invoiceInfo.Length - 1);
+                    }
+                    txtInvoiceNumber.Text = invoiceInfo;
+                }
+                else
+                {
+                    lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+
                 this.txtSupplier.Text = this.CurrentPaymentNotes.SupplierName;
                 this.txtBankName.Text = this.CurrentPaymentNotes.BankName;
                 this.txtBankNO.Text = this.CurrentPaymentNotes.BankNO;
@@ -95,17 +116,20 @@ namespace BudgetSystem.OutMoney
                 User u = um.GetUser(CurrentPaymentNotes.Applicant);
                 this.txtApplicant.Text = u != null ? u.ToString() : CurrentPaymentNotes.Applicant;
                 this.txtPayingBank.Text = this.CurrentPaymentNotes.PayingBank;
-                List<FlowRunPoint> points = fm.GetFlowRunPointsByData(CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString());
+                List<FlowRunPoint> points = fm.GetIsRecentFlowRunPointsByData(CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString());
                 string applyList = string.Empty;
                 foreach (FlowRunPoint frp in points)
                 {
-                    applyList += string.Format("{0}-{1}【{2}】,{3}", frp.NodeValueRemark, frp.NodeApproveUser, frp.RealName, frp.NodeApproveResultWithState) + "\r\n";
+                    if (frp.State)
+                    {
+                        applyList += string.Format("{0}-{1}【{2}】,{3}", frp.NodeValueRemark, frp.NodeApproveUser, frp.RealName, frp.NodeApproveResultWithState) + "\r\n";
+                    }
                 }
                 this.txtApplyList.Text = applyList;
 
                 this.txtDescription.Text = this.CurrentPaymentNotes.Description;
                 textEdit18.Text = "SGGIEC/JL8.2-8";
-                textEdit19.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                textEdit19.Text = cm.GetDateTimeNow().ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 

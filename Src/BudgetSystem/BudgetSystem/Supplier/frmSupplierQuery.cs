@@ -14,11 +14,14 @@ namespace BudgetSystem
 {
     public partial class frmSupplierQuery : frmBaseQueryForm
     {
+        private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.SupplierManager sm = new Bll.SupplierManager();
+        private DateTime datetimeNow = DateTime.MinValue;
         private const string COMMONQUERY_MYCREATE = "我创建的";
         public frmSupplierQuery()
         {
             InitializeComponent();
+            datetimeNow = cm.GetDateTimeNow();
             this.Module = BusinessModules.SupplierManagement;
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
             this.KeyPreview = true;
@@ -32,6 +35,7 @@ namespace BudgetSystem
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交初评审批"));
@@ -56,6 +60,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
                 ModifySupplier();
+            }
+            if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                DeleteSupplier();
             }
             else if (operate.Operate == OperateTypes.SubmitApply.ToString())
             {
@@ -141,20 +149,55 @@ namespace BudgetSystem
         private void ModifySupplier()
         {
             Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
-            if (supplier != null)
-            {
-                frmSupplierEdit form = new frmSupplierEdit();
-                form.WorkModel = EditFormWorkModels.Modify;
-                form.CurrentSupplier = supplier;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
-            }
-            else
+            if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要修改的项");
+                return;
             }
+            supplier = sm.GetSupplier(supplier.ID);
+            if (supplier == null)
+            {
+                XtraMessageBox.Show("您选择修改的项已经不存在，请刷新数据");
+                return;
+            }
+
+            frmSupplierEdit form = new frmSupplierEdit();
+            form.WorkModel = EditFormWorkModels.Modify;
+            form.CurrentSupplier = supplier;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                this.RefreshData();
+            }
+        }
+
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        private void DeleteSupplier()
+        {
+            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (supplier == null)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+            supplier = sm.GetSupplier(supplier.ID);
+            if (supplier == null)
+            {
+                XtraMessageBox.Show("您选择删除的项已经不存在，请刷新数据");
+                return;
+            }
+
+            if (sm.IsUsed(supplier))
+            {
+                XtraMessageBox.Show("您选择删除的项已经被使用，不允许删除");
+                return;
+            }
+
+            sm.DeleteSupplier(supplier);
+
+            this.gvSupplier.DeleteRow(this.gvSupplier.FocusedRowHandle);
         }
 
         /// <summary>
@@ -238,7 +281,7 @@ namespace BudgetSystem
                 return;
             }
 
-            if (supplier.ReviewDate != null && DateTime.Now.Date >= supplier.ReviewDate.Value.Date)
+            if (supplier.ReviewDate != null && datetimeNow.Date >= supplier.ReviewDate.Value.Date)
             {
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.CurrentSupplier = supplier;

@@ -156,9 +156,30 @@ namespace BudgetSystem.Bll
                 dal.UpdateFlowInstanceIsRecent(dataType, dataID, false, con, tran);
                 //创建流程实例 
                 int instanceID = dal.AddFlowInstance(flow.Name, flow.VersionNumber, dataID, dataText, dataType, currentUser, description, con, tran);
+                int nextRunPointId = -1;
 
-                //创建运行点
-                FlowRunState createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, null, currentUser, con, tran);
+                //创建第一个运行点
+                FlowRunState createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, null, currentUser, out nextRunPointId, con, tran);
+
+                //如果运行点返回是3的，关闭实例 
+                if (createRunpointResult == FlowRunState.流程发起人未配置部门)
+                {
+                    dal.UpdateFlowInstanceCloseInfo(instanceID, false, FlowConst.FlowNotApprovedMessage, con, tran);
+                    return FlowRunState.流程发起人未配置部门;
+                }
+
+                if (nextRunPointId > 0)
+                {
+                    //更新第一个运行点结果，即填写发起人备注、
+                    dal.UpdateFlowRunPointApproveInfo(nextRunPointId, true, description, con, tran);
+                }
+
+                //获取运行点
+                FlowRunPoint runPoint = dal.GetFlowRunPoint(nextRunPointId, con, tran);
+
+                //创建第二个运行点，这才是实际第一个审批节点。
+                createRunpointResult = ToNextRunPoint(flow.Name, flow.VersionNumber, instanceID, runPoint, currentUser, out nextRunPointId, con, tran);
+
 
                 //如果运行点返回是3的，关闭实例 
                 if (createRunpointResult == FlowRunState.流程发起人未配置部门)
@@ -184,9 +205,9 @@ namespace BudgetSystem.Bll
         /// 2 下一个运行点不存在，流程运行完了
         /// 3 创建运行点时失败，用户部门未配置。
         /// </returns>
-        private FlowRunState ToNextRunPoint(string flowName, int flowVersion, int instanceID, FlowRunPoint runPoint, string instanceCreateUser, IDbConnection con, IDbTransaction tran)
+        private FlowRunState ToNextRunPoint(string flowName, int flowVersion, int instanceID, FlowRunPoint runPoint, string instanceCreateUser, out int nextRunPointId, IDbConnection con, IDbTransaction tran)
         {
-
+            nextRunPointId = -1;
             int orderNo = 1;
 
 
@@ -251,7 +272,7 @@ namespace BudgetSystem.Bll
                 }
             }
 
-            dal.AddFlowRunPoint(nextNode.ID, nextNode.OrderNo, instanceID, nextApprove, con, tran);
+            nextRunPointId = dal.AddFlowRunPoint(nextNode.ID, nextNode.OrderNo, instanceID, nextApprove, con, tran);
 
             return FlowRunState.创建运行点成功;
 
@@ -294,8 +315,8 @@ namespace BudgetSystem.Bll
 
                 //准备创建下一个运行点
                 FlowInstance instance = dal.GetFlowInstance(runPoint.InstanceID, con, tran);
-
-                FlowRunState jumpResult = ToNextRunPoint(instance.FlowName, instance.FlowVersionNumber, instance.ID, runPoint, instance.CreateUser, con, tran);
+                int nextRunPointId = -1;
+                FlowRunState jumpResult = ToNextRunPoint(instance.FlowName, instance.FlowVersionNumber, instance.ID, runPoint, instance.CreateUser, out nextRunPointId, con, tran);
 
                 if (jumpResult == FlowRunState.流程审批完成)
                 {
@@ -421,6 +442,18 @@ namespace BudgetSystem.Bll
             {
 
                 var fList = dal.GetFlowRunPointsByData(dataID, dataType, con, null);
+                return fList;
+
+            }).ToList();
+
+        }
+
+        public List<FlowRunPoint> GetIsRecentFlowRunPointsByData(int dataID, string dataType)
+        {
+            return this.Query<FlowRunPoint>((con) =>
+            {
+
+                var fList = dal.GetIsRecentFlowRunPointsByData(dataID, dataType, con, null);
                 return fList;
 
             }).ToList();

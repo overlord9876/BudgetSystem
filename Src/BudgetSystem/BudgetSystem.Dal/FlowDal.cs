@@ -46,19 +46,19 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<FlowNode> GetFlowDetial(string name, int version, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber ORDER BY OrderNo";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
         }
 
         public FlowNode GetFlowNode(string name, int version, int order, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version, OrderNo = order }, tran).SingleOrDefault();
         }
 
         public FlowNode GetFlowNode(int nodeID, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent` From `FlowNode` Where`ID` = @ID";
+            string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`ID` = @ID";
             return con.Query<FlowNode>(selectSql, new { ID = nodeID }, tran).SingleOrDefault();
         }
 
@@ -82,7 +82,7 @@ namespace BudgetSystem.Dal
 
         public void AddFlowDetial(List<FlowNode> nodes, IDbConnection con, IDbTransaction tran)
         {
-            string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark,@NodeExtEvent)";
+            string insertSql = "Insert Into `FlowNode` (`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode`) Values (@Name,@VersionNumber,@OrderNo,@NodeConfig,@NodeValue,@NodeValueRemark,@NodeExtEvent,@IsStartNode)";
             con.Execute(insertSql, nodes, tran);
         }
 
@@ -225,6 +225,18 @@ namespace BudgetSystem.Dal
 						LEFT JOIN flownode fn on frp.NodeID=fn.ID
 						LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
                         Where t1.`DateItemID` = @DateItemID and t1.DateItemType=@DateItemType
+                        ORDER BY  t1.IsRecent,frp.NodeOrderNo";
+            return con.Query<FlowRunPoint>(sql, new { DateItemID = dataID, DateItemType = dataType }, tran);
+        }
+
+        public IEnumerable<FlowRunPoint> GetIsRecentFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName
+                    From `FlowInstance` t1  
+						LEFT JOIN `FlowRunPoint` frp on t1.ID = frp.InstanceID 
+						LEFT JOIN flownode fn on frp.NodeID=fn.ID
+						LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
+                        Where t1.`DateItemID` = @DateItemID and t1.DateItemType=@DateItemType  AND IsRecent=1
                         ORDER BY  t1.IsRecent,frp.NodeOrderNo";
             return con.Query<FlowRunPoint>(sql, new { DateItemID = dataID, DateItemType = dataType }, tran);
         }

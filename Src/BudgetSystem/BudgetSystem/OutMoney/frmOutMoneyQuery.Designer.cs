@@ -56,12 +56,12 @@
             // gcOutMoney
             // 
             this.gcOutMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Location = new System.Drawing.Point(0, 0);
             this.gcOutMoney.MainView = this.gvOutMoney;
-            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.gcOutMoney.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.gcOutMoney.Name = "gcOutMoney";
-            this.gcOutMoney.Size = new System.Drawing.Size(1008, 729);
+            this.gcOutMoney.Size = new System.Drawing.Size(1152, 937);
             this.gcOutMoney.TabIndex = 1;
             this.gcOutMoney.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvOutMoney});
@@ -182,6 +182,8 @@
             this.gcPaymentDate.Caption = "付款日期";
             this.gcPaymentDate.FieldName = "PaymentDate";
             this.gcPaymentDate.Name = "gcPaymentDate";
+            this.gcPaymentDate.Visible = true;
+            this.gcPaymentDate.VisibleIndex = 10;
             // 
             // gcDescription
             // 
@@ -218,8 +220,6 @@
             this.gcExpectedReturnDate.Caption = "预计归还时间";
             this.gcExpectedReturnDate.FieldName = "ExpectedReturnDate";
             this.gcExpectedReturnDate.Name = "gcExpectedReturnDate";
-            this.gcExpectedReturnDate.Visible = true;
-            this.gcExpectedReturnDate.VisibleIndex = 10;
             // 
             // gcIsDrawback
             // 
@@ -241,11 +241,11 @@
             // 
             // frmOutMoneyQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1152, 937);
             this.Controls.Add(this.gcOutMoney);
-            this.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.Margin = new System.Windows.Forms.Padding(1, 4, 1, 4);
             this.Name = "frmOutMoneyQuery";
             this.Text = "付款管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).EndInit();

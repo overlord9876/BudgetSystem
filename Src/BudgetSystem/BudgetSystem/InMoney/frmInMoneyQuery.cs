@@ -215,7 +215,7 @@ namespace BudgetSystem.InMoney
                 {
                     currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
                     currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
-                    string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName, frmBudget.Description);
+                    string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}，{}", EnumFlowNames.入账修改审批流程, frmBudget.Description));
                     if (string.IsNullOrEmpty(message))
                     {
                         XtraMessageBox.Show("提交流程成功。");

@@ -11,6 +11,8 @@ namespace BudgetSystem.Dal
 {
     public class PaymentNotesDal : DalBase
     {
+        private CommonDal commonDal = new CommonDal();
+
         public IEnumerable<PaymentNotes> GetAllPaymentNoteByCondition(OutMoneyQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
@@ -96,6 +98,24 @@ namespace BudgetSystem.Dal
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
         }
 
+        /// <summary>
+        /// 获取所有已经审批通过的付款金额。
+        /// </summary>
+        /// <param name="budgetID"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public IEnumerable<PaymentNotes> GetTotalIsApprovaledAmountPaymentMoneyByBudgetId(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
+						JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+						LEFT JOIN supplier s on pn.SupplierID=s.ID
+						LEFT JOIN department d on pn.DeptID=d.`ID`
+            WHERE pn.BudgetID=@BudgetID  AND f.IsClosed=1 AND f.ApproveResult=1";
+            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
+        }
+
         public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
@@ -127,7 +147,7 @@ namespace BudgetSystem.Dal
             {
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
-            modifyPaymentNote.UpdateTimestamp = DateTime.Now;
+            modifyPaymentNote.UpdateTimestamp = commonDal.GetDateTimeNow(con);
 
             string updateSql = "Update `paymentnotes` Set `PaymentDate` = @PaymentDate Where `ID` = @ID";
             con.Execute(updateSql, modifyPaymentNote, tran);
@@ -143,7 +163,7 @@ namespace BudgetSystem.Dal
             {
                 throw new VersionNumberException("当前数据已过期，请刷新数据之后再完成修改。");
             }
-            modifyPaymentNote.UpdateTimestamp = DateTime.Now;
+            modifyPaymentNote.UpdateTimestamp = commonDal.GetDateTimeNow(con);
 
             string updateSql = "Update `paymentnotes` Set `CommitTime` = @CommitTime,`CNY` = @CNY,`BudgetID` = @BudgetID,`SupplierID` = @SupplierID,`PaymentDate` = @PaymentDate,`Description` = @Description,`DeptID` = @DeptID,`MoneyUsed` = @MoneyUsed,`IsDrawback` = @IsDrawback,`HasInvoice` = @HasInvoice,`PaymentMethod` = @PaymentMethod,`VoucherNo` = @VoucherNo,`TaxRebateRate` = @TaxRebateRate,`Applicant` = @Applicant,`OriginalCoin` = @OriginalCoin,`ExchangeRate` = @ExchangeRate,`Currency` = @Currency,`VatOption` = @VatOption,`UpdateTimestamp` = @UpdateTimestamp,`BankName` = @BankName,`BankNO` = @BankNO,IsIOU=@IsIOU,ExpectedReturnDate=@ExpectedReturnDate,RepayLoan=@RepayLoan,InvoiceNumber =@InvoiceNumber,PayingBank=@PayingBank Where `ID` = @ID";
             con.Execute(updateSql, modifyPaymentNote, tran);
@@ -155,7 +175,7 @@ namespace BudgetSystem.Dal
         public void ModifyPaymentNotePayingBankName(int paymentId, string bankName, IDbConnection con, IDbTransaction tran)
         {
             string updateSql = "Update `paymentnotes` Set `UpdateTimestamp` = @UpdateTimestamp,PayingBank=@PayingBank Where `ID` = @ID";
-            con.Execute(updateSql, new { UpdateTimestamp = DateTime.Now, PayingBank = bankName, ID = paymentId }, tran);
+            con.Execute(updateSql, new { UpdateTimestamp = commonDal.GetDateTimeNow(con), PayingBank = bankName, ID = paymentId }, tran);
         }
 
         public void DeletePaymentNote(int id, IDbConnection con, IDbTransaction tran)

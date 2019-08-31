@@ -100,6 +100,8 @@ namespace BudgetSystem.FlowManage
             this.dtUpdateDate.EditValue = currentFlow.UpdateDate;
 
             currentFlowDetial = fm.GetFlowDetail(flowName, flowVersion);
+            currentFlowDetial.RemoveAll(o => o.IsStartNode);
+
             foreach (var node in currentFlowDetial)
             {
                 if (node.NodeConfig == 0)
@@ -108,7 +110,7 @@ namespace BudgetSystem.FlowManage
                 }
                 else
                 {
-                    Department department= departmentList.SingleOrDefault(s =>s.Code.Equals(node.NodeValue)|| s.ID.ToString().Equals(node.NodeValue));
+                    Department department = departmentList.SingleOrDefault(s => s.Code.Equals(node.NodeValue) || s.ID.ToString().Equals(node.NodeValue));
                     if (department != null)
                     {
                         node.NodeValueDisplayValue = department.ToString();
@@ -163,6 +165,7 @@ namespace BudgetSystem.FlowManage
             flow.CreateUser = RunInfo.Instance.CurrentUser.UserName;
 
             flow.Details = new List<FlowNode>();
+            currentFlowDetial.Insert(0, new FlowNode() { IsStartNode = true, Name = Flow.Name, NodeConfig = 0, NodeValue = "%StartUser%", NodeValueRemark = "业务发起人" });
             flow.Details.AddRange(currentFlowDetial);
 
             fm.SaveFlow(flow);

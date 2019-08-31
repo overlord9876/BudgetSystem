@@ -159,7 +159,9 @@ namespace BudgetSystem
 
             if (info.EditValue is bool)
             {
-                info.GroupText = (Convert.ToBoolean(info.EditValue) ? "已选择" : "未选择") + info.GroupText;
+                string text = info.GroupText.Replace("已选择", "").Replace("未选择", "");
+
+                info.GroupText = (Convert.ToBoolean(info.EditValue) ? "已选择" : "未选择") + text;
             }
         }
 
