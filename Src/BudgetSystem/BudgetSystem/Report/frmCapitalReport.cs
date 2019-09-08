@@ -21,7 +21,7 @@ namespace BudgetSystem.Report
         private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
         private decimal exchangeRate = 0;
         private int count = 0;//收钱笔数
-        private List<RecieptCapital> rcList;
+        private List<RecieptCapital> rcList = new List<RecieptCapital>();
         private DateTime beginTimestamp = DateTime.MinValue;
         private DateTime endTimestamp = DateTime.MaxValue;
 
@@ -67,52 +67,30 @@ namespace BudgetSystem.Report
             columnDic.Clear();
             paymentmethodDic.Clear();
             bankDic.Clear();
+            rcList.Clear();
 
             exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
             if (exchangeRate == 0) { return; }
 
-            count = um.GetRecieptCapitalTotalCount(condition);
-            if (count == 0) { return; }
-
-            rcList = um.GetRecieptCapital(condition);
-            if (rcList == null) { return; }
+            var withUSDRCList = um.GetRecieptCapitalWithUSD(condition);
+            if (withUSDRCList == null || withUSDRCList.Count == 0)
+            { return; }
+            rcList.AddRange(withUSDRCList);
 
             DataTable dt = new DataTable();
 
             //增加部门、合计列
             CreateColumn(dt, frmCapitalReport.DepartmentCaption, "departmentCode", typeof(string));
 
+
             //统计银行列。
-            for (int index = 0; index < rcList.Count; index++)
+            CalcOriginalCoin(dt, withUSDRCList, 0);
+
+            var withoutUSDRCList = um.GetRecieptCapitalWithOutUSD(condition);
+            if (withoutUSDRCList != null && withoutUSDRCList.Count > 0)
             {
-                RecieptCapital rc = rcList[index];
-
-                rc.OriginalCoin = Math.Round(rc.CNY / exchangeRate, 2);
-                if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
-                {
-                    paymentmethodDic.Add(rc.PaymentMethod, 0);
-                }
-                paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
-
-                //银行总数合计
-                if (!bankDic.ContainsKey(rc.BankCode))
-                {
-                    bankDic.Add(rc.BankCode, 0);
-                }
-                bankDic[rc.BankCode] += rc.OriginalCoin;
-
-                //银行名称与Field对应关系维护
-                if (!columnDic.ContainsKey(rc.BankCode))
-                {
-                    columnDic.Add(rc.BankCode, string.Format("code{0}", index));
-                }
-
-                //创建银行列
-                if (!dt.Columns.Contains(columnDic[rc.BankCode]))
-                {
-                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
-                    dt.Columns.Add(columnDic[rc.BankCode], typeof(decimal));
-                }
+                rcList.AddRange(withoutUSDRCList);
+                CalcOriginalCoin(dt, withoutUSDRCList, exchangeRate);
             }
 
             CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
@@ -209,6 +187,45 @@ namespace BudgetSystem.Report
 
             dt.Columns.Add(fieldName, t);
             CreateGridColumn(caption, fieldName, valueFormatType: valueFormatType, formatProvider: formatProvider);
+        }
+
+        private void CalcOriginalCoin(DataTable dt, List<RecieptCapital> rcList, decimal exchangeRate)
+        {
+
+            //统计银行列。
+            for (int index = 0; index < rcList.Count; index++)
+            {
+                RecieptCapital rc = rcList[index];
+                if (exchangeRate > 0)
+                {
+                    rc.OriginalCoin = Math.Round(rc.CNY / exchangeRate, 2);
+                }
+                if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
+                {
+                    paymentmethodDic.Add(rc.PaymentMethod, 0);
+                }
+                paymentmethodDic[rc.PaymentMethod] += rc.OriginalCoin;
+
+                //银行总数合计
+                if (!bankDic.ContainsKey(rc.BankCode))
+                {
+                    bankDic.Add(rc.BankCode, 0);
+                }
+                bankDic[rc.BankCode] += rc.OriginalCoin;
+
+                //银行名称与Field对应关系维护
+                if (!columnDic.ContainsKey(rc.BankCode))
+                {
+                    columnDic.Add(rc.BankCode, string.Format("code{0}", Guid.NewGuid().ToString().Replace("-", "")));
+                }
+
+                //创建银行列
+                if (!dt.Columns.Contains(columnDic[rc.BankCode]))
+                {
+                    CreateGridColumn(rc.BankCode, columnDic[rc.BankCode], valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
+                    dt.Columns.Add(columnDic[rc.BankCode], typeof(decimal));
+                }
+            }
         }
 
         public override void Print()

@@ -49,11 +49,22 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<RecieptCapital> GetRecieptCapital(BudgetQueryCondition condition)
+        public List<RecieptCapital> GetRecieptCapitalWithUSD(BudgetQueryCondition condition)
         {
             var lst = this.Query<RecieptCapital>((con) =>
             {
-                var uList = dal.GetRecieptCapital(condition, con);
+                var uList = dal.GetRecieptCapitalWithUSD(condition, con);
+                return uList;
+            });
+
+            return lst.ToList();
+        }
+
+        public List<RecieptCapital> GetRecieptCapitalWithOutUSD(BudgetQueryCondition condition)
+        {
+            var lst = this.Query<RecieptCapital>((con) =>
+            {
+                var uList = dal.GetRecieptCapitalWithOutUSD(condition, con);
                 return uList;
             });
 

@@ -33,7 +33,7 @@ namespace BudgetSystem.OutMoney
         const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
 
         private bool isApprovalView = false;
-        private List<Supplier> supplierList;
+        private List<Supplier> supplierList = new List<Supplier>();
 
         public PaymentNotes CurrentPaymentNotes
         {
@@ -140,6 +140,12 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes = payment;
             chkIsDrawback.EditValue = payment.IsDrawback;
             this.vatOption = payment.VatOption;
+            Supplier supplier = sm.GetSupplier(payment.SupplierID);
+            if (supplier != null)
+            {
+                this.supplierList.Add(supplier);
+            }
+
             Budget findedItem = SelectedBudgetById(payment.BudgetID);
             List<Supplier> supplierList = (List<Supplier>)this.cboSupplier.Properties.DataSource;
             if (supplierList != null)
@@ -214,6 +220,8 @@ namespace BudgetSystem.OutMoney
 
         public Budget SelectedBudgetById(int budgetId)
         {
+
+
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
             Budget findedItem = null;
             if (budgetList != null)
@@ -392,8 +400,6 @@ namespace BudgetSystem.OutMoney
                 budgetList = bm.GetBudgetListBySaleman(RunInfo.Instance.CurrentUser.UserName);
 
                 this.cboBudget.Properties.DataSource = budgetList;
-
-                supplierList = sm.GetAllSupplier();
             }
             catch (Exception ex)
             {
@@ -578,7 +584,7 @@ namespace BudgetSystem.OutMoney
 
                 List<Supplier> budgetSupplierList = sm.GetSupplierListByBudgetId(currentBudget.ID);
                 budgetSupplierList.RemoveAll(o => !o.IsQualified);
-                budgetSupplierList.AddRange(supplierList.Where(o => !o.IsQualified));
+                budgetSupplierList.AddRange(supplierList.Where(o => !budgetSupplierList.Exists(bs => o.ID.Equals(bs.ID))));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
 
                 caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);

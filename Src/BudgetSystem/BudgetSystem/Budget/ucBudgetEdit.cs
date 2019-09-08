@@ -393,7 +393,7 @@ namespace BudgetSystem
                     suppliers = new List<Supplier>();
                     suppliers.AddRange(qualifiedSuppliers);
                     suppliers.AddRange(tempSuppliers);
-                    suppliers.AddRange(tempSuppliers);
+                    suppliers.AddRange(otherSuppliers);
 
                     customers = new List<Customer>();
                     customers.Add(new Customer() { ID = budget.CustomerID.Value, Name = budget.CustomerName, Code = budget.CustomerCode, Country = budget.Country });

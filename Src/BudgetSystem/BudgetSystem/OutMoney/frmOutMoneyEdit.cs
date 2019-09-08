@@ -60,12 +60,6 @@ namespace BudgetSystem.OutMoney
             }
         }
 
-        public void SelectedBudget(int budgetId)
-        {
-            this.ucOutMoneyEdit1.SelectedBudgetById(budgetId);
-            this.ucOutMoneyEdit1.SetBudgetEditable();
-        }
-
         protected override void SubmitNewData()
         {
             base.SubmitNewData();
