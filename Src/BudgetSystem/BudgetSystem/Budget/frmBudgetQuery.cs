@@ -253,6 +253,10 @@ namespace BudgetSystem
                 {
                     message = string.Format("{0}未审批通过不能修改。", EnumFlowNames.预算单修改流程.ToString());
                 }
+                if (!RunInfo.Instance.CurrentUser.UserName.Equals(budget.Salesman))
+                {
+                    message = string.Format("当前为{0}的预算单，{1}不能修改。", RunInfo.Instance.CurrentUser.RealName, budget.SalesmanName);
+                }
                 if (!string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show(message, "提示");

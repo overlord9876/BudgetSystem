@@ -107,7 +107,8 @@
             this.gvBudget.OptionsView.ShowDetailButtons = false;
             this.gvBudget.OptionsView.ShowGroupPanel = false;
             this.gvBudget.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcContractNO, DevExpress.Data.ColumnSortOrder.Descending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowState, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcCreateDate, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gcContractNO
             // 

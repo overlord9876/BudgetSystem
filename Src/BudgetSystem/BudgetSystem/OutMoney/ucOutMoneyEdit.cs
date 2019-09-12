@@ -72,13 +72,13 @@ namespace BudgetSystem.OutMoney
             lciPayingBank.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            txtPaymentDate.Properties.ReadOnly = true;
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 DateTime datetimeNow = cm.GetDateTimeNow();
                 this.deCommitTime.EditValue = datetimeNow;
                 this.txtExpectedReturnDate.EditValue = datetimeNow;
                 txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
-                this.txtPaymentDate.EditValue = datetimeNow;
 
                 cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
                 cboDepartment.Tag = RunInfo.Instance.CurrentUser.DeptID;
@@ -86,7 +86,6 @@ namespace BudgetSystem.OutMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
-                this.txtPaymentDate.EditValue = cm.GetDateTimeNow();
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
@@ -583,7 +582,7 @@ namespace BudgetSystem.OutMoney
                 currentBudget = bm.GetBudget(currentBudget.ID);
 
                 List<Supplier> budgetSupplierList = sm.GetSupplierListByBudgetId(currentBudget.ID);
-                budgetSupplierList.RemoveAll(o => !o.IsQualified);
+                //budgetSupplierList.RemoveAll(o => !o.IsQualified);
                 budgetSupplierList.AddRange(supplierList.Where(o => !budgetSupplierList.Exists(bs => o.ID.Equals(bs.ID))));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
 

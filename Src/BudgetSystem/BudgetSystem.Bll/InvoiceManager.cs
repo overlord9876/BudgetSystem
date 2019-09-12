@@ -88,7 +88,7 @@ namespace BudgetSystem.Bll
                             invoice.Message += "销方名称不能为空;";
                             result = false;
                         }
-                        else if(!supplierDal.CheckName(invoice.SupplierName.Trim(),-1,con))
+                        else if (!supplierDal.CheckName(invoice.SupplierName.Trim(), -1, con))
                         {
                             invoice.Message += "销方名称不存在;";
                             result = false;
@@ -137,9 +137,9 @@ namespace BudgetSystem.Bll
                             invoice.Message += "发票号已存在;";
                             result = false;
                         }
-                        if (invoice.ExchangeRate <= 0)
+                        if (invoice.ExchangeRate <= 0 && invoice.OriginalCoin > 0)
                         {
-                            invoice.Message += "汇率应大于0;";
+                            invoice.Message += "当原币大于0时，汇率应也大于0;";
                             result = false;
                         }
                         if (string.IsNullOrEmpty(invoice.CustomsDeclaration.Trim()))

@@ -154,7 +154,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
-            else if (!budge.UpdateUser.Equals(currentUser))
+            else if (!budge.Salesman.Equals(currentUser))
             {
                 return string.Format("当前预算单由{0}创建，不允许由{1}提交流程", budge.UpdateUserName, currentUserName);
             }

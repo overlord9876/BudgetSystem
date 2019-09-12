@@ -269,7 +269,7 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
                             LEFT JOIN department d on bb.DeptID=d.ID 
                             where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime) and  bs.Currency<>'USD'
                             GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency='USD'
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency<>'USD'
                             GROUP BY BankName,PaymentMethod";
                 dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
                 dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);

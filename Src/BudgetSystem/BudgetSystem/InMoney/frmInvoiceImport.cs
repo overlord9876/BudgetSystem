@@ -99,7 +99,7 @@ namespace BudgetSystem.InMoney
                         invoice = new Invoice();
                         invoice.ContractNO = DataRowConvertHelper.GetStringValue(row, "合同号").Trim();
                         invoice.OriginalCoin = DataRowConvertHelper.GetDecimalValue(row, "原币");
-                        invoice.ExchangeRate = DataRowConvertHelper.GetFloatValue(row, "汇率");
+                        invoice.ExchangeRate = DataRowConvertHelper.GetDecimalValue(row, "汇率");
                         invoice.CustomsDeclaration = DataRowConvertHelper.GetStringValue(row, "报关单").Trim();
                         invoice.Number = DataRowConvertHelper.GetStringValue(row, "发票号").Trim();
                         invoice.TaxRebateRate = DataRowConvertHelper.GetFloatValue(row, "退税率");

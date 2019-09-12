@@ -96,7 +96,8 @@
             this.gvInMoney.OptionsView.ShowDetailButtons = false;
             this.gvInMoney.OptionsView.ShowGroupPanel = false;
             this.gvInMoney.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcState, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcState, DevExpress.Data.ColumnSortOrder.Ascending),            
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcReceiptDate, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gcVoucherNo
             // 

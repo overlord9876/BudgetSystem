@@ -471,7 +471,7 @@
             // gcExchangeRate
             // 
             this.gcExchangeRate.Caption = "记账汇率";
-            this.gcExchangeRate.DisplayFormat.FormatString = "N2";
+            this.gcExchangeRate.DisplayFormat.FormatString = "N6";
             this.gcExchangeRate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";

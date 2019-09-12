@@ -251,6 +251,11 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("金额未分拆完成，此时不允许确认入账。"));
                     return;
                 }
+                if (currentRowBankSlip.OriginalCoin2 != 0)
+                {
+                    XtraMessageBox.Show(string.Format("原币金额未分拆完成，此时不允许确认入账。"));
+                    return;
+                }
                 if (currentRowBankSlip.State == 2)
                 {
                     XtraMessageBox.Show(string.Format("{0}收款单已经被拆分，不允许重复拆分。", currentRowBankSlip.VoucherNo));

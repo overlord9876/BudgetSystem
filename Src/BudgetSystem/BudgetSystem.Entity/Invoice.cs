@@ -42,7 +42,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 汇率
         /// </summary>
-        public float ExchangeRate { get; set; }
+        public decimal ExchangeRate { get; set; }
 
         /// <summary>
         /// 报关单

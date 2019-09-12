@@ -168,7 +168,7 @@ namespace BudgetSystem.Bll
                 modifyBankSlip.IsActive = confirmed;
                 modifyBankSlip.SplitInfo = GetSplitInfo(budgetBillList);
                 DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
-                if (confirmed && modifyBankSlip.CNY2 != 0)
+                if (confirmed && modifyBankSlip.CNY2 != 0 && modifyBankSlip.OriginalCoin2 != 0)
                 {
                     throw new MessageException("未拆分人民币金额不等于0，不允许保存数据。");
                 }
@@ -197,7 +197,7 @@ namespace BudgetSystem.Bll
             return this.ExecuteWithTransaction<DateTime>((con, tran) =>
             {
                 DateTime versionNumber = dal.ModifyBankSlipAmountMoney(modifyBankSlip, con, tran);
-                bool confirmed = (modifyBankSlip.CNY2 == 0);
+                bool confirmed = (modifyBankSlip.CNY2 == 0 && modifyBankSlip.OriginalCoin2 == 0);
                 dal.ConfirmSplitBankSlip(modifyBankSlip.BSID, con, tran);
                 return versionNumber;
             });
@@ -236,11 +236,11 @@ namespace BudgetSystem.Bll
         private string GetSplitInfo(List<BudgetBill> budgetBillList)
         {
             string info = string.Empty;
-            if (budgetBillList != null&&budgetBillList.Count>0)
+            if (budgetBillList != null && budgetBillList.Count > 0)
             {
                 List<string> infoList = new List<string>();
-                budgetBillList.ForEach(b=>infoList.Add(string.Format("[{0}:￥{1}]", b.RelationBudget==null?"":b.RelationBudget.ContractNO, b.CNY)));
-                info=string.Join("；",infoList.ToArray());
+                budgetBillList.ForEach(b => infoList.Add(string.Format("[{0}:￥{1}]", b.RelationBudget == null ? "" : b.RelationBudget.ContractNO, b.CNY)));
+                info = string.Join("；", infoList.ToArray());
             }
             return info;
         }

@@ -205,7 +205,7 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.Code = txtCode.Text.Trim();
             CurrentInvoice.Number = this.txtNumber.Text.Trim();
             CurrentInvoice.OriginalCoin = this.txtOriginalCoin.Value;
-            CurrentInvoice.ExchangeRate = this.txtExchangeRate.FloatValue;
+            CurrentInvoice.ExchangeRate = this.txtExchangeRate.Value;
             CurrentInvoice.CustomsDeclaration = this.txtCustomsDeclaration.Text.Trim();
             CurrentInvoice.TaxRebateRate = this.txtTaxRebateRate.FloatValue;
             CurrentInvoice.Commission = this.txtCommission.Value;

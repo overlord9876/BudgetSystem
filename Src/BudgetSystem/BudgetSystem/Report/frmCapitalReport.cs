@@ -69,6 +69,8 @@ namespace BudgetSystem.Report
             bankDic.Clear();
             rcList.Clear();
 
+            count = um.GetRecieptCapitalTotalCount(condition);
+
             exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
             if (exchangeRate == 0) { return; }
 

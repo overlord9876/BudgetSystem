@@ -359,8 +359,6 @@ namespace BudgetSystem
                 this.txtUSDTotalAmount.EditValue = budget.USDTotalAmount;
                 this.dteSignDate.EditValue = budget.SignDate;
                 this.dteValidity.EditValue = budget.Validity;
-                this.pceCustomer.Text = budget.CustomerList.ToNameAndCountryString();
-                this.pceCustomer.Tag = budget.CustomerList;
                 this.pceMainCustomer.Text = budget.CustomerNameEx;
                 this.pceMainCustomer.Tag = budget.CustomerID;
 
@@ -400,9 +398,12 @@ namespace BudgetSystem
                     if (budget.CustomerList != null)
                         customers.AddRange(budget.CustomerList);
                 }
+                this.pceCustomer.Text = budget.CustomerList.ToNameAndCountryString();
+                this.pceCustomer.Tag = budget.CustomerList;
                 this.ucCustomerSelected.SetDataSource(customers);
                 this.ucSupplierSelected.SetDataSource(suppliers);
 
+                this.ucCustomerSelected.SetSelectedItems(budget.CustomerList);
                 this.rgTradeNature.EditValue = budget.TradeNature;
                 this.meDescription.Text = budget.Description;
                 this.txtExchangeRate.EditValue = budget.ExchangeRate;

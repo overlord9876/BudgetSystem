@@ -204,7 +204,7 @@ namespace BudgetSystem.InMoney
 
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentBankSlip.Currency = this.cboCurrency.EditValue.ToString();
-            CurrentBankSlip.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
+            CurrentBankSlip.CreateTimestamp = (DateTime)this.deReceiptDate.EditValue;
             CurrentBankSlip.TradingPostscript = this.txtTradingPostscript.Text.Trim();
 
             if (this.chkState1.Checked)
@@ -232,6 +232,7 @@ namespace BudgetSystem.InMoney
             this.SpliDetail = (this.gvConstSplit.DataSource as BindingList<BudgetBill>).ToList();
             GetSalesmanValues();
             this.CurrentBankSlip.CNY2 = txtNotSplitCNYMoney.Value;
+            this.CurrentBankSlip.OriginalCoin2 = txtNotSplitOriginalCoinMoney.Value;
         }
 
         public void BindBankSlip(BankSlip item)
