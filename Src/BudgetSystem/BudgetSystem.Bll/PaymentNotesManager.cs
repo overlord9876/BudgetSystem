@@ -165,7 +165,11 @@ namespace BudgetSystem.Bll
             }
             else if (payment.EnumFlowState == EnumDataFlowState.审批中)
             {
-                return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+                return string.Format("{0}的数据不能重新启动流程", EnumDataFlowState.审批中);
+            }
+            else if (payment.EnumFlowState == EnumDataFlowState.审批通过)
+            {
+                return string.Format("{0}的数据不能重新启动流程", EnumDataFlowState.审批通过);
             }
             FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser, string.Format("发起{0}", EnumFlowNames.付款审批流程));
             if (state != FlowRunState.启动流程成功)

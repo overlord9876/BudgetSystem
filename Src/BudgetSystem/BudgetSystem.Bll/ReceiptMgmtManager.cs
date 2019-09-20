@@ -156,6 +156,17 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public void ModifyBankSlipState(List<FlowItem> bankslipFlowItems, int state)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+           {
+               foreach (var flowItem in bankslipFlowItems)
+               {
+                   dal.ModifyBankSlipState(flowItem.DateItemID, state, con, tran);
+               }
+           });
+        }
+
         /// <summary>
         /// 拆分金额
         /// </summary>

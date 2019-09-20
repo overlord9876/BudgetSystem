@@ -152,6 +152,7 @@ namespace BudgetSystem.InMoney
                 lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Print)
             {
@@ -162,6 +163,7 @@ namespace BudgetSystem.InMoney
                 lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.New)
             {
@@ -203,7 +205,7 @@ namespace BudgetSystem.InMoney
 
         public override void PrintData()
         {
-            this.Height -= 50;
+            //this.Height -= 50;
             PrinterHelper.PrintControl(true, this.layoutControl1);
         }
     }

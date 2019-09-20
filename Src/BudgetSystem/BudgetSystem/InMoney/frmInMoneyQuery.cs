@@ -132,6 +132,11 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
                     return;
                 }
+                if (currentRowBankSlip.EnumFlowState == EnumDataFlowState.审批中)
+                {
+                    XtraMessageBox.Show(string.Format("{0}收款单在{1}，不允许再修改数据。", currentRowBankSlip.VoucherNo, currentRowBankSlip.EnumFlowState));
+                    return;
+                }
                 if (currentRowBankSlip.State == 2)
                 {
                     XtraMessageBox.Show(string.Format("{0}收款单已经完成拆分，不允许再修改数据。", currentRowBankSlip.VoucherNo));
@@ -162,11 +167,11 @@ namespace BudgetSystem.InMoney
                     XtraMessageBox.Show(string.Format("{0}收款单，已经被删除，请刷新数据。", currentRowBankSlip.VoucherNo));
                     return;
                 }
-                if (currentRowBankSlip.State != 0)
-                {
-                    XtraMessageBox.Show(string.Format("{0}收款单不是已发布状态，不允删除数据。", currentRowBankSlip.VoucherNo));
-                    return;
-                }
+                //if (currentRowBankSlip.State != 0)
+                //{
+                //    XtraMessageBox.Show(string.Format("{0}收款单不是已发布状态，不允删除数据。", currentRowBankSlip.VoucherNo));
+                //    return;
+                //}
                 if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】银行水单？删除后将无法恢复。", currentRowBankSlip.VoucherNo), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     this.arm.DeleteBankSlip(currentRowBankSlip);

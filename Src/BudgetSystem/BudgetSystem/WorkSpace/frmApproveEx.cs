@@ -24,6 +24,7 @@ namespace BudgetSystem.WorkSpace
 
         private BatchDataControl dataControl;
         private Bll.FlowManager fm = new Bll.FlowManager();
+        private Bll.ReceiptMgmtManager rm = new Bll.ReceiptMgmtManager();
 
         public FlowItem FlowItem
         {
@@ -168,15 +169,13 @@ namespace BudgetSystem.WorkSpace
 
         private void Submit(bool result)
         {
-            if (result)
+            bool? eventResult = DoFlowExtEvent(result);
+            if (eventResult == null)
             {
-                bool? eventResult = DoFlowExtEvent();
-                if (eventResult == null)
-                {
-                    return;
-                }
-                result = eventResult.Value;
+                return;
             }
+            result = eventResult.Value;
+
             string rmarkMessage = GetApprovalRemark(result, this.txtMyInfo.Text.Trim());
             FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, rmarkMessage);
             string info;
@@ -192,15 +191,13 @@ namespace BudgetSystem.WorkSpace
 
         private void BatchSubmit(bool result)
         {
-            if (result)
+            bool? eventResult = DoFlowExtEvent(result);
+            if (eventResult == null)
             {
-                bool? eventResult = DoFlowExtEvent();
-                if (eventResult == null)
-                {
-                    return;
-                }
-                result = eventResult.Value;
+                return;
             }
+            result = eventResult.Value;
+
             string info;
 
             string myInfo = GetApprovalRemark(result, this.txtMyInfo.Text.Trim());
@@ -261,7 +258,7 @@ namespace BudgetSystem.WorkSpace
             return remarkMessage;
         }
 
-        private bool? DoFlowExtEvent()
+        private bool? DoFlowExtEvent(bool submitResult)
         {
             FlowItem item = this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems[0] : this.FlowItem;
             FlowNode node = fm.GetFlowNode(item.RunPointID);
@@ -270,14 +267,40 @@ namespace BudgetSystem.WorkSpace
             {
                 return true;
             }
-            frmBaseFlowEventForm form = frmBaseFlowEventForm.GetFlowExtEventForm(extEvent, this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems : new List<FlowItem>() { this.FlowItem });
-
-            if (form == null)
+            var releateFlowItems = this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems : new List<FlowItem>() { this.FlowItem };
+            if (extEvent.Equals("付款状态"))
             {
-                return true;
+                try
+                {
+                    //因为发起流程时，已经修改收款单状态为拆分中（1），如果同意（是为同意修改）保持当前状态不动。如果不同意，还原为拆分完成状态（2）
+                    if (!submitResult)
+                    {
+                        int state = 2;
+                        rm.ModifyBankSlipState(releateFlowItems, state);
+                    }
+                    return submitResult;
+                }
+                catch (Exception ex)
+                {
+                    RunInfo.Instance.Logger.LogError(ex);
+                    return null;
+                }
             }
-            form.ShowDialog();
-            return form.EventResult;
+            else
+            {
+                if (submitResult)
+                {
+                    frmBaseFlowEventForm form = frmBaseFlowEventForm.GetFlowExtEventForm(extEvent, releateFlowItems);
+
+                    if (form == null)
+                    {
+                        return true;
+                    }
+                    form.ShowDialog();
+                    return form.EventResult;
+                }
+                else { return submitResult; }
+            }
         }
 
 

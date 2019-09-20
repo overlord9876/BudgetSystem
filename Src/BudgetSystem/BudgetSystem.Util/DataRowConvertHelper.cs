@@ -125,7 +125,9 @@ namespace BudgetSystem.Util
             {
                 try
                 {
-                    result = Convert.ToDecimal(r[name]);
+                    string value = r[name].ToString();
+                    value = value.Replace("$", "").Replace("￥", "");
+                    result = Convert.ToDecimal(value);
                 }
                 catch
                 {

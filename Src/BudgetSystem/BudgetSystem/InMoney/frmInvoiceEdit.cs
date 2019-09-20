@@ -94,9 +94,11 @@ namespace BudgetSystem.InMoney
                 this.txtExchangeRate.EditValue = invoice.ExchangeRate;
                 this.txtFeedMoney.EditValue = invoice.FeedMoney;
                 this.txtFinanceImportDate.EditValue = invoice.FinanceImportDate;
-                this.txtFinanceImportUser.EditValue = invoice.FinanceImportUserName;
+
+                this.txtFinanceImportUser.EditValue = new User() { UserName = invoice.FinanceImportUser, RealName = invoice.FinanceImportUserName };
                 this.txtImportDate.EditValue = invoice.ImportDate;
-                this.txtImportUser.EditValue = invoice.ImportUserName;
+
+                this.txtImportUser.EditValue = new User() { UserName = invoice.ImportUser, RealName = invoice.ImportUserName };
                 this.txtNumber.EditValue = invoice.Number;
                 this.txtOriginalCoin.EditValue = invoice.OriginalCoin;
                 this.txtPayment.EditValue = invoice.Payment;
@@ -145,22 +147,22 @@ namespace BudgetSystem.InMoney
         private void CheckModifyInput()
         {
             this.CheckNewInput();
-            if (string.IsNullOrEmpty(this.txtCode.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtCode, "请输入发票代码");
-            }
-            if (string.IsNullOrEmpty(this.txtTaxpayerID.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtTaxpayerID, "请输入销方税号");
-            }
-            if (string.IsNullOrEmpty(this.txtSupplierName.Text.Trim()))
-            {
-                this.dxErrorProvider1.SetError(this.txtSupplierName, "请输入销方名称");
-            }
-            if (this.txtPayment.Value <= 0)
-            {
-                this.dxErrorProvider1.SetError(this.txtPayment, "金额应大于0");
-            }
+            //if (string.IsNullOrEmpty(this.txtCode.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtCode, "请输入发票代码");
+            //}
+            //if (string.IsNullOrEmpty(this.txtTaxpayerID.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtTaxpayerID, "请输入销方税号");
+            //}
+            //if (string.IsNullOrEmpty(this.txtSupplierName.Text.Trim()))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtSupplierName, "请输入销方名称");
+            //}
+            //if (this.txtPayment.Value <= 0)
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtPayment, "金额应大于0");
+            //}
         }
 
         protected override void SubmitNewData()
@@ -213,7 +215,9 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.SupplierName = this.txtSupplierName.Text.Trim();
             CurrentInvoice.TaxpayerID = this.txtTaxpayerID.Text.Trim();
             CurrentInvoice.Payment = this.txtPayment.Value;
-            CurrentInvoice.ImportUser = RunInfo.Instance.CurrentUser.UserName;
+            User importUser = (User)this.txtImportUser.EditValue;
+            CurrentInvoice.ImportUser = importUser != null ? importUser.UserName : RunInfo.Instance.CurrentUser.UserName;
+
             CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentInvoice.TaxAmount = this.txtTaxAmount.Value;
             CurrentInvoice.ImportDate = datetimeNow;

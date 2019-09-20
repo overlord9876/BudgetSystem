@@ -62,6 +62,9 @@ namespace BudgetSystem.Dal
             string deleteReceiptnoticeSql = "delete from  receiptnotice where `BSID` = @BSID";
             con.Execute(deleteReceiptnoticeSql, new { BSID = deleteBankSlip.BSID }, tran);
 
+            string deleteBudgetbillSql = "delete from  budgetbill where `BSID` = @BSID";
+            con.Execute(deleteBudgetbillSql, new { BSID = deleteBankSlip.BSID }, tran);
+
             string deleteSql = "DELETE FROM `BankSlip` Where `BSID` = @BSID";
             con.Execute(deleteSql, new { BSID = deleteBankSlip.BSID }, tran);
         }
@@ -108,6 +111,19 @@ namespace BudgetSystem.Dal
             int id = con.Execute(updateSql, modifyBankSlip, tran);
 
             return GetModifyDateTimeByTable("`BankSlip`", "`UpdateTimestamp`", modifyBankSlip.BSID, con, tran, "`BSID`");
+        }
+
+        /// <summary>
+        /// 修改入帐单信息
+        /// </summary>
+        /// <param name="modifyBankSlip"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public void ModifyBankSlipState(int bsId, int state, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = "Update `BankSlip` Set `State` = @State Where `BSID` = @BSID";
+            con.Execute(updateSql, new { State = state, BSID = bsId }, tran);
         }
 
         public void AddReceiptNotice(int bsID, string userName, IDbConnection con, IDbTransaction tran)
