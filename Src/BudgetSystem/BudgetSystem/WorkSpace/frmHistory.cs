@@ -50,8 +50,10 @@ namespace BudgetSystem.WorkSpace
                     this.dtEndDate.EditValue=this.FlowItem.CloseDateTime;
                     this.txtResult.Text = this.FlowItem.InstanceStateWithEmptyState;
                 }
-                //List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
-                List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
+                //显示所有运行点
+                List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
+                //显示当前运行点。
+                //List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
 
                 foreach (FlowRunPoint point in points)
                 {

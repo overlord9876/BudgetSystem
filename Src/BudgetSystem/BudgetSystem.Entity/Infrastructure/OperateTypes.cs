@@ -22,6 +22,7 @@ namespace BudgetSystem.Entity
         DeleteApply,
         SubmitApply,
         Modify,
+        ModifyEx,
         Delete,
         Revoke,
         Disabled,

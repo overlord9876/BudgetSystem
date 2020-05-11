@@ -82,6 +82,15 @@ namespace BudgetSystem.Bll
                 dal.ModifySupplier(supplier, con, tran);
             });
         }
+
+        public void ModifySupplierByName(Supplier supplier)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.ModifySupplierByName(supplier, con, tran);
+            });
+        }
+
         public void ModifySupplierFirstReviewContents(int id, SupplierFirstReviewContents firstReviewContents)
         {
             DateTime datetimeNow = cm.GetDateTimeNow();
@@ -143,6 +152,22 @@ namespace BudgetSystem.Bll
            });
             return result;
         }
+
+        /// <summary>
+        /// 根据名字判断是否存在。
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool CheckExistsByName(string name)
+        {
+            bool result = this.ExecuteWithoutTransaction<bool>((con) =>
+            {
+                return dal.CheckExistsByName(name, con);
+            });
+            return result;
+        }
+
+
         /// <summary>
         /// 启动审批流程
         /// </summary>
@@ -293,15 +318,17 @@ namespace BudgetSystem.Bll
                 {
                     return "请补充供方行为和年度重新评价信息";
                 }
-                if (reviewContents.AgreementDate == null)
+                if (supplier.AgentType == (int)EnumAgentType.代理)
                 {
-                    return "请补充代理协议有效期";
+                    if (reviewContents.AgreementDate == null)
+                    {
+                        return "请补充代理协议有效期";
+                    }
+                    else if (reviewContents.AgreementDate.Value.Date <= datetimeNow.AddDays(30).Date)
+                    {
+                        return "代理协议有效期应大于当前日期30天";
+                    }
                 }
-                else if (reviewContents.AgreementDate.Value.Date <= datetimeNow.AddDays(30).Date)
-                {
-                    return "代理协议有效期应大于当前日期30天";
-                }
-
                 if (reviewContents.RegistrationDate == null)
                 {
                     return "请补充工商登记日期";

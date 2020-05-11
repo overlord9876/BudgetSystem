@@ -101,18 +101,19 @@ namespace BudgetSystem.RoleManage
 
         private void BindRoleUsers()
         {
-            Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
+            if (this.gvRoleList.FocusedRowHandle < 0) { return; }
+            Role currentRole = this.gvRoleList.GetRow(this.gvRoleList.FocusedRowHandle) as Role;
             if (currentRole != null)
             {
                 List<User> roleUser = um.GetRoleUsers(new List<string>() { currentRole.Code });
                 this.gdRoleUsers.DataSource = roleUser;
-
             }
         }
 
         private void BindRolePermissions()
         {
-            Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
+            if (this.gvRoleList.FocusedRowHandle < 0) { return; }
+            Role currentRole = this.gvRoleList.GetRow(this.gvRoleList.FocusedRowHandle) as Role;
             if (currentRole != null)
             {
                 List<string> rolePermission = rm.GetRolePermissions(currentRole.Code);
@@ -137,7 +138,12 @@ namespace BudgetSystem.RoleManage
 
         private void btnAddUserToRole_Click(object sender, EventArgs e)
         {
-            Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
+            if (this.gvRoleList.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中待分配角色");
+                return;
+            }
+            Role currentRole = this.gvRoleList.GetRow(this.gvRoleList.FocusedRowHandle) as Role;
             if (currentRole == null)
             {
                 XtraMessageBox.Show("请选中待分配角色");
@@ -175,7 +181,12 @@ namespace BudgetSystem.RoleManage
 
         private void btnAddPermissionToRole_Click(object sender, EventArgs e)
         {
-            Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
+            if (this.gvRoleList.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中待分配角色");
+                return;
+            }
+            Role currentRole = this.gvRoleList.GetRow(this.gvRoleList.FocusedRowHandle) as Role;
             if (currentRole == null)
             {
                 XtraMessageBox.Show("请选中待分配角色");
@@ -199,7 +210,12 @@ namespace BudgetSystem.RoleManage
 
         private void btnRemvePermissionFromRole_Click(object sender, EventArgs e)
         {
-            Role currentRole = this.gvRoleList.GetFocusedRow() as Role;
+            if (this.gvRoleList.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中待分配角色");
+                return;
+            }
+            Role currentRole = this.gvRoleList.GetRow(this.gvRoleList.FocusedRowHandle) as Role;
             if (currentRole == null)
             {
                 XtraMessageBox.Show("请选中待分配角色");

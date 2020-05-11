@@ -16,6 +16,7 @@ namespace BudgetSystem.Entity
 
         MyPendingFlowManagement,
         MySubmitFlowManagement,
+        MyApprovalFlowManagement,
 
         CustomerManagement,
         SupplierManagement,

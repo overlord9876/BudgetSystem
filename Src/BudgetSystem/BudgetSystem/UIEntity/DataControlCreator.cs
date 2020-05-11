@@ -14,10 +14,10 @@ namespace BudgetSystem.UIEntity
             {
                 BudgetSystem.OutMoney.ucOutMoneyEdit edit = new BudgetSystem.OutMoney.ucOutMoneyEdit();
                 edit.WorkModel = EditFormWorkModels.View;
-                edit.Height = 400;
+                edit.Height = 400 + 150;
                 return edit;
             }
-            else if (dataItemType == EnumFlowDataType.供应商.ToString()&&flowName== EnumFlowNames.供应商审批流程.ToString())
+            else if (dataItemType == EnumFlowDataType.供应商.ToString() && flowName == EnumFlowNames.供应商审批流程.ToString())
             {
                 BudgetSystem.ucSupplierEdit edit = new BudgetSystem.ucSupplierEdit();
                 edit.WorkModel = EditFormWorkModels.View;

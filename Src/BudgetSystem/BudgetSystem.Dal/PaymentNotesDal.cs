@@ -128,6 +128,17 @@ namespace BudgetSystem.Dal
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), ID = id }, tran).SingleOrDefault();
         }
 
+        public bool IsPay(int budgetId, int supplierId, IDbConnection con)
+        {
+            string selectSql = string.Format(@"SELECT COUNT(1) from paymentnotes where BudgetID={0} and SupplierID={1};", budgetId, supplierId);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                object obj = command.ExecuteScalar();
+                return Convert.ToInt32(obj) > 0;
+            }
+        }
+
         public int AddPaymentNote(PaymentNotes addPaymentNote, IDbConnection con, IDbTransaction tran)
         {
             string insertSql = "Insert Into `paymentnotes` (`ID`,`CommitTime`,`CNY`,`BudgetID`,`SupplierID`,`PaymentDate`,`Description`,`DeptID`,`MoneyUsed`,`IsDrawback`,`HasInvoice`,`PaymentMethod`,`VoucherNo`,`TaxRebateRate`,`Applicant`,`OriginalCoin`,`ExchangeRate`,`Currency`,`VatOption`,`UpdateTimestamp`,`BankName`,`BankNO`,`IsIOU`,`ExpectedReturnDate`,`RepayLoan`,`InvoiceNumber`,`PayingBank`) Values (@ID,@CommitTime,@CNY,@BudgetID,@SupplierID,@PaymentDate,@Description,@DeptID,@MoneyUsed,@IsDrawback,@HasInvoice,@PaymentMethod,@VoucherNo,@TaxRebateRate,@Applicant,@OriginalCoin,@ExchangeRate,@Currency,@VatOption,@UpdateTimestamp,@BankName,@BankNO,@IsIOU,@ExpectedReturnDate,@RepayLoan,@InvoiceNumber,@PayingBank)";

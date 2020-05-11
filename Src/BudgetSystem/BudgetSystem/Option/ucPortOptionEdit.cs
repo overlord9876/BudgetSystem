@@ -19,7 +19,7 @@ namespace BudgetSystem
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.港口信息.ToString(); 
+            this.OptionName = EnumSystemConfigNames.港口信息.ToString();
         }
 
         protected override void RegisterEvent()
@@ -51,19 +51,20 @@ namespace BudgetSystem
         public override bool Save()
         {
             this.gvPort.CloseEditor();
-            Port port = this.gvPort.GetFocusedRow() as Port;
+            if (this.gvPort.FocusedRowHandle < 0) { return false; }
+            Port port = this.gvPort.GetRow(this.gvPort.FocusedRowHandle) as Port;
             string msg = CheckData(port);
             if (!string.IsNullOrEmpty(msg))
             {
                 XtraMessageBox.Show(msg + "，请填写后再保存。");
                 return false;
             }
-           
+
             var dataSource = (IEnumerable<Port>)gridPort.DataSource;
             this.scm.ModifySystemConfig<IEnumerable<Port>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
-        } 
+        }
         private void gvPort_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             gvPort.SetColumnError(null, e.ErrorText);
@@ -77,7 +78,7 @@ namespace BudgetSystem
             if (!string.IsNullOrEmpty(e.ErrorText))
             {
                 e.Valid = false;
-            } 
+            }
         }
 
         private void riHyperLinkEditDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
@@ -104,12 +105,12 @@ namespace BudgetSystem
             this.IsChanged = true;
         }
 
-        private string CheckData(Port port) 
+        private string CheckData(Port port)
         {
             if (port == null)
             {
                 return string.Empty;
-            } 
+            }
             if (string.IsNullOrEmpty(port.Name))
             {
                 return "名称不能为空";

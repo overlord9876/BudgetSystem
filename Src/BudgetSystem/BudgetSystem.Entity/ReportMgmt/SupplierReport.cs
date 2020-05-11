@@ -39,7 +39,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 应付人民币余额
         /// </summary>
-        public decimal BalanceDue 
+        public decimal BalanceDue
         {
             get
             {
@@ -54,14 +54,14 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Sum(o => o.Payment);
+                    return InvoiceList.Sum(o => (o.Payment + o.TaxAmount));
                 }
                 else
                 {
                     return 0;
                 }
             }
-        } 
+        }
 
     }
 }

@@ -174,7 +174,7 @@ namespace BudgetSystem.Entity
         public decimal CommissionBalance { get; private set; }
 
         /// <summary>
-        /// 应付运保费余额
+        /// 应付运杂费余额
         /// </summary>
         public decimal Premiumbalance { get; private set; }
 
@@ -217,9 +217,9 @@ namespace BudgetSystem.Entity
             #region 1.佣金比率=((已付佣金总额-预算单佣金总额)/预算单佣金金额)*100%
 
             //已付佣金总额
-            decimal commissionTotal = _paymentList.Where(o => Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+            decimal commissionTotal = _paymentList.Where(o => Util.PaymentUseCommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
 
-            decimal premiumTotal = _paymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+            decimal premiumTotal = _paymentList.Where(o => Util.PaymentUsePremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
 
             if (this.CurrentBudget.Commission > 0)
             {
@@ -230,7 +230,7 @@ namespace BudgetSystem.Entity
 
             if (this.CurrentBudget.Premium > 0)
             {
-                //应付运保费余额=已付运保费-预算运保费
+                //应付运杂费余额=已付运杂费-预算运杂费
                 Premiumbalance = this.CurrentBudget.Premium - premiumTotal;
             }
 
@@ -240,7 +240,7 @@ namespace BudgetSystem.Entity
 
             if (TotalAmount != 0 && ReceiptMoneyAmount <= TotalAmount)
             {
-                CompressAdvancePayment = (1 - (ReceiptMoneyAmount / TotalAmount)) * AdvancePayment;
+                CompressAdvancePayment = Math.Round((1 - (ReceiptMoneyAmount / TotalAmount)) * AdvancePayment, 2);
             }
 
             #endregion

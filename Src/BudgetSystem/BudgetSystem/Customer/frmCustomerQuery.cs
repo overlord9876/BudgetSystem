@@ -104,7 +104,12 @@ namespace BudgetSystem
 
         private void ModifyCustomer()
         {
-            Customer customer = this.gvCustomer.GetFocusedRow() as Customer;
+            if (this.gvCustomer.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            Customer customer = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
             if (customer == null)
             {
                 XtraMessageBox.Show("请选择需要修改的项");
@@ -128,7 +133,12 @@ namespace BudgetSystem
 
         private void DeleteCustomer()
         {
-            Customer customer = this.gvCustomer.GetFocusedRow() as Customer;
+            if (this.gvCustomer.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+            Customer customer = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
             if (customer == null)
             {
                 XtraMessageBox.Show("请选择需要删除的项");
@@ -155,12 +165,17 @@ namespace BudgetSystem
 
         private void ViewCustomer()
         {
-            Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
-            if (currentRowCustomer != null)
+            if (this.gvCustomer.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
+            }
+            Customer customer = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
+            if (customer != null)
             {
                 frmCustomerEdit form = new frmCustomerEdit();
                 form.WorkModel = EditFormWorkModels.View;
-                form.Customer = currentRowCustomer;
+                form.Customer = customer;
                 form.ShowDialog(this);
             }
             else
@@ -171,10 +186,15 @@ namespace BudgetSystem
 
         private void EnableCustomer()
         {
-            Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
-            if (currentRowCustomer != null)
+            if (this.gvCustomer.FocusedRowHandle < 0)
             {
-                cm.ModifyCustomerState(currentRowCustomer.ID, true);
+                XtraMessageBox.Show("请选择需要启用的项");
+                return;
+            }
+            Customer customer = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
+            if (customer != null)
+            {
+                cm.ModifyCustomerState(customer.ID, true);
                 this.RefreshData();
                 XtraMessageBox.Show("启用成功");
             }
@@ -186,10 +206,15 @@ namespace BudgetSystem
 
         private void DisabledCustomer()
         {
-            Customer currentRowCustomer = this.gvCustomer.GetFocusedRow() as Customer;
-            if (currentRowCustomer != null)
+            if (this.gvCustomer.FocusedRowHandle < 0)
             {
-                cm.ModifyCustomerState(currentRowCustomer.ID, false);
+                XtraMessageBox.Show("请选择需要停用的项");
+                return;
+            }
+            Customer customer = this.gvCustomer.GetRow(this.gvCustomer.FocusedRowHandle) as Customer;
+            if (customer != null)
+            {
+                cm.ModifyCustomerState(customer.ID, false);
                 this.RefreshData();
                 XtraMessageBox.Show("停用成功");
             }

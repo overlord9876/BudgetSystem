@@ -1373,11 +1373,11 @@
             // layoutControlItem41
             // 
             this.layoutControlItem41.Control = this.txtPremium;
-            this.layoutControlItem41.CustomizationFormText = "运保费：";
+            this.layoutControlItem41.CustomizationFormText = "运杂费：";
             this.layoutControlItem41.Location = new System.Drawing.Point(554, 116);
             this.layoutControlItem41.Name = "layoutControlItem41";
             this.layoutControlItem41.Size = new System.Drawing.Size(309, 29);
-            this.layoutControlItem41.Text = "运保费：";
+            this.layoutControlItem41.Text = "运杂费：";
             this.layoutControlItem41.TextSize = new System.Drawing.Size(165, 18);
             // 
             // layoutControlItem22
@@ -1403,11 +1403,11 @@
             // layoutControlItem42
             // 
             this.layoutControlItem42.Control = this.txtPremiumbalance;
-            this.layoutControlItem42.CustomizationFormText = "应付运保费余额：";
+            this.layoutControlItem42.CustomizationFormText = "应付运杂费余额：";
             this.layoutControlItem42.Location = new System.Drawing.Point(863, 116);
             this.layoutControlItem42.Name = "layoutControlItem42";
             this.layoutControlItem42.Size = new System.Drawing.Size(245, 29);
-            this.layoutControlItem42.Text = "应付运保费余额：";
+            this.layoutControlItem42.Text = "应付运杂费余额：";
             this.layoutControlItem42.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem42.TextSize = new System.Drawing.Size(120, 18);
             this.layoutControlItem42.TextToControlDistance = 5;

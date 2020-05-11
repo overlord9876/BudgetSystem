@@ -127,7 +127,7 @@ namespace BudgetSystem.WorkSpace
         {
             if (this.gvPendingFlow.FocusedRowHandle >= 0)
             {
-                FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
+                FlowItem item = this.gvPendingFlow.GetRow(this.gvPendingFlow.FocusedRowHandle) as FlowItem;
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ViewModel };
@@ -141,7 +141,7 @@ namespace BudgetSystem.WorkSpace
         {
             if (this.gvPendingFlow.FocusedRowHandle >= 0)
             {
-                FlowItem item = this.gvPendingFlow.GetFocusedRow() as FlowItem;
+                FlowItem item = this.gvPendingFlow.GetRow(this.gvPendingFlow.FocusedRowHandle) as FlowItem;
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ApproveModel };

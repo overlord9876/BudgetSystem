@@ -50,6 +50,7 @@
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcNature = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueSupplierType)).BeginInit();
@@ -99,6 +100,7 @@
             this.gcReviewDate,
             this.gcAgentType,
             this.gcAgreementDate,
+            this.gcNature,
             this.gcDiscredited,
             this.gcCreateDate,
             this.gcCreateUser,
@@ -247,7 +249,7 @@
             this.gcDiscredited.FieldName = "Discredited";
             this.gcDiscredited.Name = "gcDiscredited";
             this.gcDiscredited.Visible = true;
-            this.gcDiscredited.VisibleIndex = 11;
+            this.gcDiscredited.VisibleIndex = 12;
             this.gcDiscredited.Width = 91;
             // 
             // gcCreateDate
@@ -259,7 +261,7 @@
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 12;
+            this.gcCreateDate.VisibleIndex = 13;
             this.gcCreateDate.Width = 109;
             // 
             // gcCreateUser
@@ -268,7 +270,7 @@
             this.gcCreateUser.FieldName = "CreateUserName";
             this.gcCreateUser.Name = "gcCreateUser";
             this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 13;
+            this.gcCreateUser.VisibleIndex = 14;
             this.gcCreateUser.Width = 55;
             // 
             // gcDescription
@@ -277,8 +279,16 @@
             this.gcDescription.FieldName = "Description";
             this.gcDescription.Name = "gcDescription";
             this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 14;
+            this.gcDescription.VisibleIndex = 15;
             this.gcDescription.Width = 90;
+            // 
+            // gcNature
+            // 
+            this.gcNature.Caption = "企业性质";
+            this.gcNature.FieldName = "Nature";
+            this.gcNature.Name = "gcNature";
+            this.gcNature.Visible = true;
+            this.gcNature.VisibleIndex = 11;
             // 
             // frmSupplierQuery
             // 
@@ -319,6 +329,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;
         private DevExpress.XtraGrid.Columns.GridColumn gcReviewDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcIsExpires;
+        private DevExpress.XtraGrid.Columns.GridColumn gcNature;
 
 
     }

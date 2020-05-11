@@ -127,6 +127,10 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.BatchApprove,"我的待审批流程-批量审批",515),
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.View,"我的待审批流程-查看",520),
                         new Permisson(BusinessModules.MyPendingFlowManagement, OperateTypes.Print,"我的待审批流程-打印付款单",530),
+                        
+                        new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.None,"我审批的流程",2400),
+                        new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.ConfirmOrRevoke,"我审批的流程-撤回付款审批",2410),                        
+                        new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.View,"我审批的流程-查看",2420),
 
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.None,"我提交的流程",600),
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.ConfirmOrRevoke,"我提交的流程-确认/撤回",610),                        
@@ -136,6 +140,7 @@ namespace BudgetSystem.Entity
 
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.New,"预算单管理-新增预算单",710),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Modify,"预算单管理-修改预算单",720),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.ModifyEx,"预算单管理-修改预算单供应商",721),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Delete, "预算单管理-删除预算单",730),
                         //new Permisson(BusinessModules.BuggetManagement,OperateTypes.Close,"预算单管理-关闭预算单",740),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.DeleteApply,"预算单管理-申请删除",740),
@@ -172,11 +177,12 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.SubmitApply, "付款管理-提交付款申请",950),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.View, "付款管理-查看详情",960),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Print,"付款管理-打印",970), 
-                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-借款归还确认",980), 
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Confirm,"付款管理-借条归还确认",980), 
 
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.None,"交单管理模块",1000),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.New,"交单管理-新增交单记录",1010),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Modify,"交单管理-修改交单记录",1020),
+                        new Permisson(BusinessModules.InvoiceManagement,OperateTypes.Delete,"交单管理-删除交单记录",1021),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData, "交单管理-部门导入交单记录",1030),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.ImportData2, "交单管理-财务导入认证记录",1040),
                         new Permisson(BusinessModules.InvoiceManagement,OperateTypes.View, "交单管理-查看详情",1050),

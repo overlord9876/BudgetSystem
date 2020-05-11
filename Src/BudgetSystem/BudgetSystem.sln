@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚�
 		2019-08-05升级脚本.sql = 2019-08-05升级脚本.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpgradeTool", "UpgradeTool\UpgradeTool.csproj", "{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,16 @@ Global
 		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|x86.ActiveCfg = Release|x86
 		{25D91AC5-EC4D-4384-B5A1-51FFC4FCC47B}.Release|x86.Build.0 = Release|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Debug|x86.ActiveCfg = Debug|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Debug|x86.Build.0 = Debug|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Release|Any CPU.ActiveCfg = Release|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Release|Mixed Platforms.Build.0 = Release|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Release|x86.ActiveCfg = Release|x86
+		{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,6 +35,14 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public void DeleteInvoice(Invoice invoice)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                invoiceDal.DeleteInvoice(invoice, con, tran);
+            });
+        }
+
         public void ModifyInvoice(Invoice invoice)
         {
             this.ExecuteWithTransaction((con, tran) =>
@@ -127,12 +135,13 @@ namespace BudgetSystem.Bll
                                 invoice.BudgetID = budgetId;
                             }
                         }
-                        if (string.IsNullOrEmpty(invoice.Number.Trim()))
+                        /*if (string.IsNullOrEmpty(invoice.Number.Trim()))
                         {
                             invoice.Message += "发票号不能为空;";
                             result = false;
                         }
-                        else if (invoiceDal.CheckNumber(0, invoice.Number, con, null))
+                        else */
+                        if (!string.IsNullOrEmpty(invoice.Number.Trim()) && invoiceDal.CheckNumber(0, invoice.Number, con, null))
                         {
                             invoice.Message += "发票号已存在;";
                             result = false;
@@ -142,11 +151,11 @@ namespace BudgetSystem.Bll
                             invoice.Message += "当原币大于0时，汇率应也大于0;";
                             result = false;
                         }
-                        if (string.IsNullOrEmpty(invoice.CustomsDeclaration.Trim()))
-                        {
-                            invoice.Message += "报关单不能为空;";
-                            result = false;
-                        }
+                        //if (string.IsNullOrEmpty(invoice.CustomsDeclaration.Trim()))
+                        //{
+                        //    invoice.Message += "报关单不能为空;";
+                        //    result = false;
+                        //}
                         if (invoice.TaxRebateRate < 0)
                         {
                             invoice.Message += "退税率应大于等于0;";

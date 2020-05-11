@@ -93,20 +93,22 @@ namespace BudgetSystem.Bll
 
         public int AddBudget(Budget budget, bool isStartFlow = false)
         {
-            return this.ExecuteWithTransaction<int>((con, tran) =>
+            int budgetID = this.ExecuteWithTransaction<int>((con, tran) =>
             {
                 int id = dal.AddBudget(budget, con, tran);
-                if (isStartFlow == true)
-                {
-                    mmdal.AddModifyMark<Budget>(budget, id, con, tran);
-                    string message = StartFlow(id, EnumFlowNames.预算单审批流程, budget.UpdateUser, budget.UpdateUserName, string.Format("发起{0}", EnumFlowNames.预算单审批流程));
-                    if (!string.IsNullOrEmpty(message))
-                    {
-                        throw new Exception(string.Format("提交{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), message));
-                    }
-                }
+                mmdal.AddModifyMark<Budget>(budget, id, con, tran);
                 return id;
             });
+
+            if (isStartFlow == true)
+            {
+                string message = StartFlow(budgetID, EnumFlowNames.预算单审批流程, budget.UpdateUser, budget.UpdateUserName, string.Format("发起{0}", EnumFlowNames.预算单审批流程));
+                if (!string.IsNullOrEmpty(message))
+                {
+                    throw new Exception(string.Format("提交{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), message));
+                }
+            }
+            return budgetID;
         }
 
         /// <summary>
@@ -221,6 +223,41 @@ namespace BudgetSystem.Bll
                         message = string.Format("提交{0}失败，{1}。", EnumFlowNames.预算单审批流程.ToString(), flowMessage);
                     }
                 }
+            });
+            return message;
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="budgetList"></param>
+        public void ModifyBudgetContractNO(List<Budget> budgetList)
+        {
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                foreach (var budget in budgetList)
+                {
+                    dal.ModifyBudgetContractNO(budget, con, tran);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="budget"></param>
+        /// <returns>修改成功返回string.Empty,否则返回失败原因</returns>
+        public string ModifyBudgetOtherSuppliers(Budget budget)
+        {
+            Budget oldBudget = this.GetBudget(budget.ID);
+            if (oldBudget == null)
+            {
+                return "数据不存在";
+            }
+            string message = string.Empty;
+            this.ExecuteWithTransaction((con, tran) =>
+            {
+                dal.ModifyBudgetOtherSuppliers(budget, con, tran);
             });
             return message;
         }

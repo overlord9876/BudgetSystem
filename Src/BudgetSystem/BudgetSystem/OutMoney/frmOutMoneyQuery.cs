@@ -31,6 +31,9 @@ namespace BudgetSystem
         public frmOutMoneyQuery()
         {
             InitializeComponent();
+            this.gcRepayLoanText.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.gcRepayLoanText.DisplayFormat.Format = new RepayLoanTextFormat();
+
             this.gvOutMoney.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvOutMoney_CustomDrawGroupRow);
             this.Module = BusinessModules.OutMoneyManagement;
         }
@@ -71,7 +74,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewMoneyDetail, "用款查询"));
 
-            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借款归还确认"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Confirm, "借条归还确认"));
 
             this.RegeditQueryOperate<OutMoneyQueryCondition>(true, new List<string> { COMMONQUERY_ALL, COMMONQUERY_APPLICATIONFORPAYMENT, COMMONQUERY_BEPAID, THE_SAME_DAY, THE_SAME_MONTH, THE_SAME_YEAR }, "付款查询");
 
@@ -107,7 +110,12 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.Delete.ToString())
             {
-                PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+                if (this.gvOutMoney.FocusedRowHandle < 0)
+                {
+                    XtraMessageBox.Show("请选择需要删除的项");
+                    return;
+                }
+                PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
                 if (currentRowPaymentNote == null)
                 {
                     XtraMessageBox.Show("请选择需要删除的项");
@@ -190,18 +198,20 @@ namespace BudgetSystem
 
         private void CreatePaymentNote()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
-            {
-                frmOutMoneyEdit form = new frmOutMoneyEdit();
-                form.WorkModel = EditFormWorkModels.New;
-                form.ShowDialog(this);
-            }
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.New;
+            form.ShowDialog(this);
             LoadData();
         }
 
         private void ModifyPaymentNote()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (this.gvOutMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
             if (currentRowPaymentNote == null)
             {
                 XtraMessageBox.Show("请选择需要修改的项");
@@ -212,6 +222,11 @@ namespace BudgetSystem
             if (currentRowPaymentNote == null)
             {
                 XtraMessageBox.Show("您选择的项已经不存在，请刷新后重试。");
+                return;
+            }
+            if (!RunInfo.Instance.CurrentUser.UserName.Equals(currentRowPaymentNote.Applicant))
+            {
+                XtraMessageBox.Show(string.Format("当前付款人为【{0}】，不允许由【{1}】修改。", currentRowPaymentNote.ApplicantRealName, RunInfo.Instance.CurrentUser.RealName));
                 return;
             }
             if (currentRowPaymentNote.EnumFlowState == EnumDataFlowState.审批中
@@ -231,7 +246,12 @@ namespace BudgetSystem
 
         private void RepayLoanPaymentNote()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (this.gvOutMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要确认归还的项");
+                return;
+            }
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
             if (currentRowPaymentNote == null)
             {
                 XtraMessageBox.Show("请选择需要确认归还的项");
@@ -245,31 +265,42 @@ namespace BudgetSystem
                 return;
             }
 
-            if (!currentRowPaymentNote.IsIOU)
-            {
-                XtraMessageBox.Show(string.Format("该付款不是借款类型。"));
-                return;
-            }
+            //if (!currentRowPaymentNote.IsIOU)
+            //{
+            //    XtraMessageBox.Show(string.Format("该付款不是借款类型。"));
+            //    return;
+            //}
             //if (currentRowPaymentNote.EnumFlowState != EnumDataFlowState.审批通过)
             //{
             //    XtraMessageBox.Show(string.Format("{0}付款单{1}不能确认归还借款。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
             //    return;
             //}
-            if (currentRowPaymentNote.RepayLoan)
-            {
-                XtraMessageBox.Show(string.Format("该付款已归还借款。"));
-                return;
-            }
+            //if (currentRowPaymentNote.RepayLoan)
+            //{
+            //    XtraMessageBox.Show(string.Format("该付款已归还借款。"));
+            //    return;
+            //}
             frmOutMoneyEdit form = new frmOutMoneyEdit();
             form.WorkModel = EditFormWorkModels.Custom;
             form.CurrentPaymentNotes = currentRowPaymentNote;
-            form.ShowDialog(this);
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                frmOutMoneyPrint printForm = new frmOutMoneyPrint();
+                printForm.WorkModel = EditFormWorkModels.View;
+                printForm.CurrentPaymentNotes = currentRowPaymentNote;
+                printForm.PrintItem();
+            }
 
         }
 
         private void StartFlow()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (this.gvOutMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要提交流程的项");
+                return;
+            }
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
 
             if (currentRowPaymentNote == null)
             {
@@ -307,7 +338,9 @@ namespace BudgetSystem
 
         private void ViewPaymentNote()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (this.gvOutMoney.FocusedRowHandle < 0) { return; }
+
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
             if (currentRowPaymentNote == null)
             {
                 XtraMessageBox.Show("请选择需要查看详情的项");
@@ -344,10 +377,14 @@ namespace BudgetSystem
 
         }
 
-
         protected override void PrintItem()
         {
-            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetFocusedRow() as PaymentNotes;
+            if (this.gvOutMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要打印项");
+                return;
+            }
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
             if (currentRowPaymentNote == null)
             {
                 XtraMessageBox.Show("请选择需要打印项");
@@ -358,6 +395,40 @@ namespace BudgetSystem
             form.CurrentPaymentNotes = currentRowPaymentNote;
             form.PrintItem();
         }
-
     }
+
+    public class RepayLoanTextFormat : IFormatProvider, ICustomFormatter
+    {
+        public string NumberToDollar(decimal num)
+        {
+            return string.Format("${0}", num);
+        }
+
+        public object GetFormat(Type formatType)
+        {
+            if (formatType == typeof(ICustomFormatter))
+            {
+                return this;
+            }
+            else return null;
+        }
+
+        public string Format(string format, object arg, IFormatProvider formatProvider)
+        {
+            int value = 0;
+            if (int.TryParse(arg + "", out value))
+            {
+                if (value == 1)
+                {
+                    return "已归还借条的发票";
+                }
+                else if (value == -1)
+                {
+                    return "未归还借条的发票";
+                }
+            }
+            return "";
+        }
+    }
+
 }

@@ -55,6 +55,8 @@
             this.btnSaveView = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteView = new DevExpress.XtraBars.BarButtonItem();
             this.btnShowOrVisible = new DevExpress.XtraBars.BarButtonItem();
+            this.barSelected = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.cboSelectYear = new DevExpress.XtraBars.BarEditItem();
             this.cboYears = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnJanuary = new DevExpress.XtraBars.BarButtonItem();
@@ -74,6 +76,7 @@
             this.deEndDate = new DevExpress.XtraBars.BarEditItem();
             this.btnSearch = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Print = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.gridViewBar = new DevExpress.XtraBars.Bar();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -94,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
@@ -114,30 +118,27 @@
             this.layoutControlItem7,
             this.lcGridBar});
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(189, -100, 552, 529);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1515, 589);
+            this.layoutControl1.Size = new System.Drawing.Size(1731, 757);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // listBox
             // 
-            this.listBox.Location = new System.Drawing.Point(24, 75);
-            this.listBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listBox.Location = new System.Drawing.Point(24, 79);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(288, 490);
+            this.listBox.Size = new System.Drawing.Size(331, 654);
             this.listBox.StyleController = this.layoutControl1;
             this.listBox.TabIndex = 12;
             this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
             // pivotGridControl
             // 
-            this.pivotGridControl.Location = new System.Drawing.Point(321, 75);
-            this.pivotGridControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pivotGridControl.Location = new System.Drawing.Point(364, 79);
             this.pivotGridControl.Name = "pivotGridControl";
-            this.pivotGridControl.Size = new System.Drawing.Size(1170, 490);
+            this.pivotGridControl.Size = new System.Drawing.Size(1343, 654);
             this.pivotGridControl.TabIndex = 6;
             // 
             // gridControl
@@ -151,12 +152,10 @@
             this.gridControl.EmbeddedNavigator.Buttons.NextPage.Visible = false;
             this.gridControl.EmbeddedNavigator.Buttons.PrevPage.Visible = false;
             this.gridControl.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gridControl.Location = new System.Drawing.Point(24, 75);
+            this.gridControl.Location = new System.Drawing.Point(24, 79);
             this.gridControl.MainView = this.gridView;
-            this.gridControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(1467, 490);
+            this.gridControl.Size = new System.Drawing.Size(1683, 654);
             this.gridControl.TabIndex = 4;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -175,32 +174,28 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(132, 57);
-            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlLeft.Location = new System.Drawing.Point(151, 73);
             this.barDockControlLeft.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(132, 38);
-            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlRight.Location = new System.Drawing.Point(151, 49);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(21, 38);
-            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1473, 29);
+            this.barDockControlBottom.Location = new System.Drawing.Point(24, 57);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1683, 29);
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Location = new System.Drawing.Point(12, 12);
-            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.barDockControlTop.Size = new System.Drawing.Size(1491, 26);
+            this.barDockControlTop.Size = new System.Drawing.Size(1707, 26);
             // 
             // layoutControlItem6
             // 
@@ -249,7 +244,7 @@
             this.lcStatBar});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1515, 589);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1731, 757);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -258,9 +253,9 @@
             this.tabbedControlGroup1.CustomizationFormText = "TabControl";
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 30);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.lcgPivote;
-            this.tabbedControlGroup1.SelectedTabPageIndex = 1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(1495, 539);
+            this.tabbedControlGroup1.SelectedTabPage = this.lcgGrid;
+            this.tabbedControlGroup1.SelectedTabPageIndex = 0;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(1711, 707);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgGrid,
             this.lcgPivote});
@@ -273,7 +268,7 @@
             this.layoutControlItem1});
             this.lcgGrid.Location = new System.Drawing.Point(0, 0);
             this.lcgGrid.Name = "lcgGrid";
-            this.lcgGrid.Size = new System.Drawing.Size(1471, 494);
+            this.lcgGrid.Size = new System.Drawing.Size(1687, 658);
             this.lcgGrid.Text = "表格视图";
             // 
             // layoutControlItem1
@@ -282,7 +277,7 @@
             this.layoutControlItem1.CustomizationFormText = "表格";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1471, 494);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1687, 658);
             this.layoutControlItem1.Text = "表格";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -297,16 +292,16 @@
             this.splitterItem});
             this.lcgPivote.Location = new System.Drawing.Point(0, 0);
             this.lcgPivote.Name = "lcgPivote";
-            this.lcgPivote.Size = new System.Drawing.Size(1471, 494);
+            this.lcgPivote.Size = new System.Drawing.Size(1687, 658);
             this.lcgPivote.Text = "统计视图";
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.pivotGridControl;
             this.layoutControlItem3.CustomizationFormText = "统计表";
-            this.layoutControlItem3.Location = new System.Drawing.Point(297, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(340, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1174, 494);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1347, 658);
             this.layoutControlItem3.Text = "统计表";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -318,7 +313,7 @@
             this.lcList.CustomizationFormText = "统计视表列表";
             this.lcList.Location = new System.Drawing.Point(0, 0);
             this.lcList.Name = "lcList";
-            this.lcList.Size = new System.Drawing.Size(292, 494);
+            this.lcList.Size = new System.Drawing.Size(335, 658);
             this.lcList.Text = "统计视表列表";
             this.lcList.TextSize = new System.Drawing.Size(0, 0);
             this.lcList.TextToControlDistance = 0;
@@ -328,9 +323,9 @@
             // 
             this.splitterItem.AllowHotTrack = true;
             this.splitterItem.CustomizationFormText = "splitterItem1";
-            this.splitterItem.Location = new System.Drawing.Point(292, 0);
+            this.splitterItem.Location = new System.Drawing.Point(335, 0);
             this.splitterItem.Name = "splitterItem";
-            this.splitterItem.Size = new System.Drawing.Size(5, 494);
+            this.splitterItem.Size = new System.Drawing.Size(5, 658);
             // 
             // lcStatBar
             // 
@@ -340,7 +335,7 @@
             this.lcStatBar.MaxSize = new System.Drawing.Size(0, 30);
             this.lcStatBar.MinSize = new System.Drawing.Size(1, 30);
             this.lcStatBar.Name = "lcStatBar";
-            this.lcStatBar.Size = new System.Drawing.Size(1495, 30);
+            this.lcStatBar.Size = new System.Drawing.Size(1711, 30);
             this.lcStatBar.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcStatBar.Text = "lcStatBar";
             this.lcStatBar.TextSize = new System.Drawing.Size(0, 0);
@@ -377,11 +372,14 @@
             this.btnNovember,
             this.btnDecember,
             this.btnSearch,
-            this.btn_Print});
-            this.barManager1.MaxItemId = 21;
+            this.btn_Print,
+            this.btnExportExcel,
+            this.barSelected});
+            this.barManager1.MaxItemId = 23;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
-            this.cboYears});
+            this.cboYears,
+            this.repositoryItemComboBox1});
             // 
             // pivotViewBar
             // 
@@ -394,7 +392,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveView),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteView),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnShowOrVisible, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.cboSelectYear, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSelected, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.cboSelectYear),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnJanuary),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnFebruary),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnMarch),
@@ -410,7 +409,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.deStartDate),
             new DevExpress.XtraBars.LinkPersistInfo(this.deEndDate),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSearch),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btn_Print)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btn_Print),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExportExcel)});
             this.pivotViewBar.OptionsBar.AllowQuickCustomization = false;
             this.pivotViewBar.OptionsBar.DisableCustomization = true;
             this.pivotViewBar.OptionsBar.DrawDragBorder = false;
@@ -437,6 +437,23 @@
             this.btnShowOrVisible.Id = 0;
             this.btnShowOrVisible.Name = "btnShowOrVisible";
             this.btnShowOrVisible.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnShowOrVisible_ItemClick);
+            // 
+            // barSelected
+            // 
+            this.barSelected.Edit = this.repositoryItemComboBox1;
+            this.barSelected.Id = 22;
+            this.barSelected.Name = "barSelected";
+            this.barSelected.Width = 119;
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Items.AddRange(new object[] {
+            "",
+            "T/T和L/C 收汇"});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // cboSelectYear
             // 
@@ -579,6 +596,13 @@
             this.btn_Print.Name = "btn_Print";
             this.btn_Print.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Print_ItemClick);
             // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "导出";
+            this.btnExportExcel.Id = 21;
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
             // gridViewBar
             // 
             this.gridViewBar.BarName = "Custom 2";
@@ -594,10 +618,11 @@
             // 
             // frmBaseCommonReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1515, 589);
+            this.ClientSize = new System.Drawing.Size(1731, 757);
             this.Controls.Add(this.layoutControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmBaseCommonReportForm";
             this.Text = "frmBaseCommonReportForm";
             this.Load += new System.EventHandler(this.frmBaseCommonReportForm_Load);
@@ -620,6 +645,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
@@ -675,5 +701,8 @@
         private DevExpress.XtraBars.BarButtonItem btnDecember;
         private DevExpress.XtraBars.BarButtonItem btnSearch;
         protected DevExpress.XtraBars.BarButtonItem btn_Print;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
+        private DevExpress.XtraBars.BarEditItem barSelected;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
     }
 }

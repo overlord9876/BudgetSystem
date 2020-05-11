@@ -202,7 +202,11 @@ namespace BudgetSystem.FlowManage
 
         private void repositoryItemPopupContainerEdit1_QueryPopUp(object sender, CancelEventArgs e)
         {
-            FlowNode node = this.gvNodes.GetFocusedRow() as FlowNode;
+            if (this.gvNodes.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            FlowNode node = this.gvNodes.GetRow(this.gvNodes.FocusedRowHandle) as FlowNode;
             if (node != null)
             {
                 if (node.NodeConfig == 0)
@@ -224,7 +228,11 @@ namespace BudgetSystem.FlowManage
 
         private void btnSureNodeValue_Click(object sender, EventArgs e)
         {
-            FlowNode node = this.gvNodes.GetFocusedRow() as FlowNode;
+            if (this.gvNodes.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            FlowNode node = this.gvNodes.GetRow(this.gvNodes.FocusedRowHandle) as FlowNode;
             if (node != null)
             {
                 CheckAndCollectNodeInput(ref node);

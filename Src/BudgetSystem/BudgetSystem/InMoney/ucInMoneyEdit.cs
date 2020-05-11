@@ -76,7 +76,7 @@ namespace BudgetSystem.InMoney
 
         decimal totalOriginalCoin = 0;
         decimal totalCNY = 0;
-        void gvConstSplit_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        private void gvConstSplit_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
         {
             if (e.Item != null)
             {
@@ -326,6 +326,7 @@ namespace BudgetSystem.InMoney
                     this.gridBudget.DataSource = budgetList;
                 }
                 this.gcConstSplit.DataSource = new BindingList<BudgetBill>(source);
+                this.SpliDetail = source;
                 CheckState1();
                 CalcSplitMoney();
             }
@@ -788,6 +789,15 @@ namespace BudgetSystem.InMoney
                 e.Valid = false;
                 return;
             }
+            if (caculator.SuperPaymentScheme > 30)
+            {
+                string message = string.Format("修改入账后，收汇超过预算单合同金额的130%，请申请修改合同金额或者换合同入账。", caculator.Balance);
+                XtraMessageBox.Show(message,"收汇超计划告知单");
+
+                e.ErrorText = message;
+                e.Valid = false;
+                return;
+            }
 
             string messsage = CalcSplitMoney();
             if (!string.IsNullOrEmpty(messsage))
@@ -864,7 +874,7 @@ namespace BudgetSystem.InMoney
             e.DisplayText = "删除";
         }
 
-        void gvConstSplit_ShowingEditor(object sender, CancelEventArgs e)
+        private void gvConstSplit_ShowingEditor(object sender, CancelEventArgs e)
         {
             BudgetBill item = this.gvConstSplit.GetRow(this.gvConstSplit.FocusedRowHandle) as BudgetBill;
             if (item == null || string.IsNullOrEmpty(item.Operator))

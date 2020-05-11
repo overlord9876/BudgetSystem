@@ -5,6 +5,7 @@ using BudgetSystem.Entity;
 using BudgetSystem.Dal;
 using System.Linq;
 using System.Data;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -366,6 +367,42 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public FlowRunState RevokePaymentFlow(int instanceID, string approvalUser, bool checkFlowNotApproved)
+        {
+            return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
+            {
+
+                FlowInstance instance = dal.GetFlowInstance(instanceID, con, tran);
+                if (instance.IsClosed)
+                {
+                    var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
+                    if (runPoints.ElementAt(runPoints.Count() - 1).NodeApproveUser != approvalUser)
+                    {
+                        return FlowRunState.最后一个审批不是当前用户;
+                    }
+                    dal.RevokePaymentFlowClosedInstance(instanceID, con, tran);
+                    var runPoint = runPoints.ElementAt(runPoints.Count() - 1);
+                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+                    return FlowRunState.撤回成功;
+                }
+
+                if (checkFlowNotApproved)
+                {
+                    var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
+                    if (runPoints.ElementAt(runPoints.Count() - 2).NodeApproveUser != approvalUser)
+                    {
+                        return FlowRunState.最后一个审批不是当前用户;
+                    }
+                    dal.DeleteLastRunPointById(runPoints.ElementAt(runPoints.Count() - 1).ID, con, tran);
+                    var runPoint = runPoints.ElementAt(runPoints.Count() - 2);
+                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+                }
+
+                return FlowRunState.撤回成功;
+
+            });
+        }
+
         /// <summary>
         /// 发起人确认流程结果
         /// </summary>
@@ -406,7 +443,6 @@ namespace BudgetSystem.Bll
                 return fList;
 
             }).ToList();
-
         }
 
         /// <summary>
@@ -419,6 +455,20 @@ namespace BudgetSystem.Bll
             {
 
                 var fList = dal.GetUnConfirmFlowByUser(userName, con, null);
+                return fList;
+
+            }).ToList();
+        }
+
+        /// <summary>
+        /// 获取用户审批过的流程
+        /// </summary>
+        /// <returns></returns>
+        public List<FlowItem> GetAprrovalFlowByCondition(ApprovalFlowQueryCondition condition)
+        {
+            return this.Query<FlowItem>((con) =>
+            {
+                var fList = dal.GetAprrovalFlowByCondition(condition, con);
                 return fList;
 
             }).ToList();

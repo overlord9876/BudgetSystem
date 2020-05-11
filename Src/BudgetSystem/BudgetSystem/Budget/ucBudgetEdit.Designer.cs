@@ -900,7 +900,7 @@
             this.txtSubtotal.Size = new System.Drawing.Size(205, 21);
             this.txtSubtotal.StyleController = this.layoutControl1;
             this.txtSubtotal.TabIndex = 37;
-            this.txtSubtotal.ToolTip = "小计=佣金+运保费+银行费用+直接费用+进料款";
+            this.txtSubtotal.ToolTip = "小计=佣金+运杂费+银行费用+直接费用+进料款";
             this.txtSubtotal.EditValueChanged += new System.EventHandler(this.txtSubtotal_EditValueChanged);
             // 
             // gridOutProductDetail
@@ -2333,12 +2333,12 @@
             this.layoutControlItem38.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem38.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem38.Control = this.txtPremium;
-            this.layoutControlItem38.CustomizationFormText = "运保费";
+            this.layoutControlItem38.CustomizationFormText = "运杂费";
             this.layoutControlItem38.Location = new System.Drawing.Point(264, 0);
             this.layoutControlItem38.Name = "layoutControlItem38";
             this.layoutControlItem38.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlItem38.Size = new System.Drawing.Size(130, 38);
-            this.layoutControlItem38.Text = "运保费";
+            this.layoutControlItem38.Text = "运杂费";
             this.layoutControlItem38.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem38.TextSize = new System.Drawing.Size(108, 14);
             // 

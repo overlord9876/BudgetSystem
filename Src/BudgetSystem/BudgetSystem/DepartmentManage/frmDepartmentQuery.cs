@@ -16,7 +16,7 @@ namespace BudgetSystem.DepartmentManage
     {
         private Bll.DepartmentManager dm = new Bll.DepartmentManager();
         private Bll.UserManager um = new Bll.UserManager();
- 
+
 
         public frmDepartmentQuery()
         {
@@ -59,7 +59,7 @@ namespace BudgetSystem.DepartmentManage
 
         private void CreateDepartment()
         {
-            
+
             frmDepartmentEdit form = new frmDepartmentEdit() { WorkModel = EditFormWorkModels.New };
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
@@ -67,24 +67,32 @@ namespace BudgetSystem.DepartmentManage
             }
         }
 
-      
+
         private void ModifyDepartment()
         {
-            Department currentRowDepartment = this.gvDepartment.GetFocusedRow() as Department;
+            if (this.gvDepartment.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            Department currentRowDepartment = this.gvDepartment.GetRow(this.gvDepartment.FocusedRowHandle) as Department;
             if (currentRowDepartment != null)
             {
-                frmDepartmentEdit form = new frmDepartmentEdit() { WorkModel = EditFormWorkModels.Modify,Department = currentRowDepartment };
+                frmDepartmentEdit form = new frmDepartmentEdit() { WorkModel = EditFormWorkModels.Modify, Department = currentRowDepartment };
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     this.RefreshData();
                 }
             }
-            
+
         }
 
         private void ViewDepartment()
         {
-            Department currentRowDepartment = this.gvDepartment.GetFocusedRow() as Department;
+            if (this.gvDepartment.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            Department currentRowDepartment = this.gvDepartment.GetRow(this.gvDepartment.FocusedRowHandle) as Department;
             if (currentRowDepartment != null)
             {
                 frmDepartmentEdit form = new frmDepartmentEdit() { WorkModel = EditFormWorkModels.View, Department = currentRowDepartment };
@@ -118,10 +126,14 @@ namespace BudgetSystem.DepartmentManage
 
         private void BindDepartmentUsers()
         {
-            Department currentDepartment = this.gvDepartment.GetFocusedRow() as Department;
-            if (currentDepartment != null)
+            if (this.gvDepartment.FocusedRowHandle < 0)
             {
-                List<User> departmentUsers = um.GetDepartmentUsers(currentDepartment.ID);
+                return;
+            }
+            Department currentRowDepartment = this.gvDepartment.GetRow(this.gvDepartment.FocusedRowHandle) as Department;
+            if (currentRowDepartment != null)
+            {
+                List<User> departmentUsers = um.GetDepartmentUsers(currentRowDepartment.ID);
                 this.gdDepartmentUser.DataSource = departmentUsers;
 
             }
@@ -129,8 +141,13 @@ namespace BudgetSystem.DepartmentManage
 
         private void btnAddToDepartment_Click(object sender, EventArgs e)
         {
-            Department currentDepartment = this.gvDepartment.GetFocusedRow() as Department;
-            if (currentDepartment == null)
+            if (this.gvDepartment.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中待分配部门");
+                return;
+            }
+            Department currentRowDepartment = this.gvDepartment.GetRow(this.gvDepartment.FocusedRowHandle) as Department;
+            if (currentRowDepartment == null)
             {
                 XtraMessageBox.Show("请选中待分配部门");
                 return;
@@ -143,7 +160,7 @@ namespace BudgetSystem.DepartmentManage
                 return;
             }
 
-            um.SetUserDepartment(users, currentDepartment.ID);
+            um.SetUserDepartment(users, currentRowDepartment.ID);
             BindDepartmentUsers();
             BindAllUsers();
         }
@@ -179,7 +196,7 @@ namespace BudgetSystem.DepartmentManage
 
         protected override void InitGridViewAction()
         {
-            this.gridViewAction.Add(this.gvDepartment, new ActionWithPermission() { MainAction = ModifyDepartment , MainOperate = OperateTypes.Modify, SecondAction= ViewDepartment, SecondOperate=  OperateTypes.View });
+            this.gridViewAction.Add(this.gvDepartment, new ActionWithPermission() { MainAction = ModifyDepartment, MainOperate = OperateTypes.Modify, SecondAction = ViewDepartment, SecondOperate = OperateTypes.View });
 
         }
     }

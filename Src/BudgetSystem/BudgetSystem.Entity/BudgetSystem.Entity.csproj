@@ -47,6 +47,7 @@
     <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="QueryCondition\InvoiceQueryCondition.cs" />
+    <Compile Include="QueryCondition\ApprovalFlowQueryCondition.cs" />
     <Compile Include="ReportMgmt\RecieptCapital.cs" />
     <Compile Include="StringUtil.cs" />
     <Compile Include="SupplierFirstReviewContents.cs" />

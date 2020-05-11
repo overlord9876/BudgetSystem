@@ -61,7 +61,12 @@ namespace BudgetSystem
 
         private void btnAddSalesman_Click(object sender, EventArgs e)
         {
-            User currentUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中待选业务员");
+                return;
+            }
+            User currentUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentUser == null)
             {
                 XtraMessageBox.Show("请选中待选业务员");
@@ -83,7 +88,12 @@ namespace BudgetSystem
 
         private void btnRemoveSalesman_Click(object sender, EventArgs e)
         {
-            User currentUser = this.gvSalesman.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选中跟单业务员");
+                return;
+            }
+            User currentUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentUser == null)
             {
                 XtraMessageBox.Show("请选中跟单业务员");

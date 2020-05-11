@@ -216,6 +216,21 @@ namespace BudgetSystem
 
         }
 
+        private void btnMyApprovalFlow_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmMyApprovalFlowListQuery form = GetExistForm<frmMyApprovalFlowListQuery>();
+            if (form == null)
+            {
+                form = new frmMyApprovalFlowListQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
         private void btnMyOrder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmMyFlowListQuery form = GetExistForm<frmMyFlowListQuery>();
@@ -480,5 +495,6 @@ namespace BudgetSystem
 
 
         }
+
     }
 }

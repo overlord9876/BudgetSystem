@@ -77,6 +77,7 @@ namespace BudgetSystem
                     {
                         supplier.SupplierType = 1;
                     }
+                    supplier.Nature = "有限责任公司";
                     supplier.Legal = DataRowConvertHelper.GetStringValue(row, "法人代表").Trim();
 
                     supplier.ExistsLicenseCopy = "是".Equals(DataRowConvertHelper.GetStringValue(row, "是否有营业执照复印件").Trim()) ? true : false; ;
@@ -159,6 +160,7 @@ namespace BudgetSystem
             }
             this.ReadData();
         }
+
         private void Import(bool isContinue = false)
         {
             if (gridSupplier.DataSource == null)
@@ -200,10 +202,12 @@ namespace BudgetSystem
                 }
             }
         }
+
         private void btnContinue_Click(object sender, EventArgs e)
         {
             Import(true);
         }
+
         private void btnSure_Click(object sender, EventArgs e)
         {
             Import();

@@ -51,8 +51,8 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.DeptID=d.ID
                                  LEFT JOIN `Customer` c ON b.CustomerID=c.ID
 								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                                 WHERE b.`ContractNO` = @ContractNO");
-            Budget budget = con.Query<Budget>(selectSql, new { ContractNO = NO, DateItemType = EnumFlowDataType.预算单.ToString() }, tran).SingleOrDefault();
+                                 WHERE b.`ContractNO` like @ContractNO");
+            Budget budget = con.Query<Budget>(selectSql, new { ContractNO = string.Format("{0}%", NO), DateItemType = EnumFlowDataType.预算单.ToString() }, tran).SingleOrDefault();
             return budget;
         }
 
@@ -254,6 +254,22 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
             con.Execute(deleteSql, new { ID = budget.ID }, tran);
             AddBudgetSuppliers(budget, con, tran);
             AddBudgetCustomers(budget, con, tran);
+        }
+
+        public void ModifyBudgetContractNO(Budget budget, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Budget` Set `ContractNO` = @ContractNO Where `ID` = @ID";
+            con.Execute(updateSql, budget, tran);
+        }
+
+        public void ModifyBudgetOtherSuppliers(Budget budget, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Budget` Set `UpdateDate`=now(),`UpdateUser`=@UpdateUser 
+                                Where `ID` = @ID";
+            con.Execute(updateSql, budget, tran);
+            string deleteSql = @"Delete From `BudgetSuppliers` Where `ID` = @ID;  ";
+            con.Execute(deleteSql, new { ID = budget.ID }, tran);
+            AddBudgetSuppliers(budget, con, tran);
         }
 
         public void ModifyBudgetDescription(Budget budget, IDbConnection con, IDbTransaction tran = null)

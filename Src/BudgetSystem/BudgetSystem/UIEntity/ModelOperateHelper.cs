@@ -58,6 +58,12 @@ namespace BudgetSystem
                 group = "编辑";
                 imageIndex = 49;
             }
+            else if (operate == OperateTypes.ModifyEx)
+            {
+                text = "修改";
+                group = "编辑";
+                imageIndex = 49;
+            }
             else if (operate == OperateTypes.Delete)
             {
                 text = "删除";

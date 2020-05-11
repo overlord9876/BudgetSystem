@@ -199,6 +199,7 @@ namespace BudgetSystem.InMoney
             if (CurrentInvoice == null)
             {
                 CurrentInvoice = new Invoice();
+                CurrentInvoice.ImportDate = datetimeNow;
             }
 
             Budget budget = (Budget)this.cboBudget.EditValue;
@@ -220,7 +221,6 @@ namespace BudgetSystem.InMoney
 
             CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
             CurrentInvoice.TaxAmount = this.txtTaxAmount.Value;
-            CurrentInvoice.ImportDate = datetimeNow;
             CurrentInvoice.FinanceImportDate = datetimeNow;
         }
 

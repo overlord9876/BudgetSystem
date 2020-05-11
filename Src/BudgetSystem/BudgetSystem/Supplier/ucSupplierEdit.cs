@@ -320,7 +320,8 @@ namespace BudgetSystem
                 if (this.WorkModel == EditFormWorkModels.Custom)
                 {
                     this.xtraTabControl1.SelectedTabPageIndex = 1;
-                    SetReadOnly();
+                    //SetReadOnly();
+                    //txtLegal.Properties.ReadOnly = false;
                 }
                 if (this.WorkModel == EditFormWorkModels.View)
                 {

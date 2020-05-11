@@ -19,7 +19,7 @@ namespace BudgetSystem
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.币种.ToString(); 
+            this.OptionName = EnumSystemConfigNames.币种.ToString();
         }
 
         protected override void RegisterEvent()
@@ -50,7 +50,8 @@ namespace BudgetSystem
         public override bool Save()
         {
             this.gvMoneyType.CloseEditor();
-            MoneyType data = this.gvMoneyType.GetFocusedRow() as MoneyType;
+            if (this.gvMoneyType.FocusedRowHandle < 0) { return false; }
+            MoneyType data = this.gvMoneyType.GetRow(this.gvMoneyType.FocusedRowHandle) as MoneyType;
             string msg = CheckData(data);
             if (!string.IsNullOrEmpty(msg))
             {
@@ -62,7 +63,7 @@ namespace BudgetSystem
             this.scm.ModifySystemConfig<IEnumerable<MoneyType>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
-        } 
+        }
         private void gvMoneyType_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             gvMoneyType.SetColumnError(null, e.ErrorText);
@@ -76,7 +77,7 @@ namespace BudgetSystem
             if (!string.IsNullOrEmpty(e.ErrorText))
             {
                 e.Valid = false;
-            } 
+            }
         }
 
         private void riHyperLinkEditDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
@@ -104,7 +105,7 @@ namespace BudgetSystem
         }
 
         private string CheckData(MoneyType data)
-        { 
+        {
             if (data == null)
             {
                 return string.Empty;

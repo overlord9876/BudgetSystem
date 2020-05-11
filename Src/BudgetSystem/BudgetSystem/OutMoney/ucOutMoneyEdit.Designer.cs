@@ -136,7 +136,7 @@
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciPaymentBalance = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem29 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
@@ -217,7 +217,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciPaymentBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem29)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
@@ -317,8 +317,7 @@
             this.chkRepayLoan.Location = new System.Drawing.Point(1027, 70);
             this.chkRepayLoan.Margin = new System.Windows.Forms.Padding(4);
             this.chkRepayLoan.Name = "chkRepayLoan";
-            this.chkRepayLoan.Properties.Caption = "借款归还";
-            this.chkRepayLoan.Properties.ReadOnly = true;
+            this.chkRepayLoan.Properties.Caption = "借条归还";
             this.chkRepayLoan.Size = new System.Drawing.Size(113, 23);
             this.chkRepayLoan.StyleController = this.layoutControl1;
             this.chkRepayLoan.TabIndex = 217;
@@ -416,7 +415,7 @@
             this.chkIsIOU.Location = new System.Drawing.Point(927, 70);
             this.chkIsIOU.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkIsIOU.Name = "chkIsIOU";
-            this.chkIsIOU.Properties.Caption = "是否借款";
+            this.chkIsIOU.Properties.Caption = "是否借条";
             this.chkIsIOU.Size = new System.Drawing.Size(96, 23);
             this.chkIsIOU.StyleController = this.layoutControl1;
             this.chkIsIOU.TabIndex = 7;
@@ -511,7 +510,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboCurrency.Properties.Items.AddRange(new object[] {
             "人民币",
-            "美元"});
+            "美元",
+            "欧元",
+            "港元",
+            "日元",
+            "澳元",
+            "英磅",
+            "加元"});
             this.cboCurrency.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboCurrency.Size = new System.Drawing.Size(228, 25);
             this.cboCurrency.StyleController = this.layoutControl1;
@@ -643,8 +648,9 @@
             "现金报销",
             "汇票",
             "支票",
-            "暂借划账",
-            "暂借支票"});
+            "划账",
+            "暂借支票",
+            "其它"});
             this.cboPaymentMethod.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboPaymentMethod.Size = new System.Drawing.Size(402, 25);
             this.cboPaymentMethod.StyleController = this.layoutControl1;
@@ -1129,7 +1135,7 @@
             this.layoutControlItem22,
             this.layoutControlItem20,
             this.layoutControlItem30,
-            this.layoutControlItem25,
+            this.lciPaymentBalance,
             this.layoutControlItem21,
             this.layoutControlItem29});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
@@ -1145,8 +1151,10 @@
             this.layoutControlItem8.Control = this.txtDescription;
             this.layoutControlItem8.CustomizationFormText = "备注：";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 548);
+            this.layoutControlItem8.MinSize = new System.Drawing.Size(50, 25);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(1132, 213);
+            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem8.Text = "备注：";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(150, 18);
             // 
@@ -1528,17 +1536,17 @@
             this.layoutControlItem30.Text = "应留利润：";
             this.layoutControlItem30.TextSize = new System.Drawing.Size(150, 18);
             // 
-            // layoutControlItem25
+            // lciPaymentBalance
             // 
-            this.layoutControlItem25.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem25.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem25.Control = this.txtAfterPaymentBalance;
-            this.layoutControlItem25.CustomizationFormText = "支付后余额：";
-            this.layoutControlItem25.Location = new System.Drawing.Point(559, 378);
-            this.layoutControlItem25.Name = "layoutControlItem25";
-            this.layoutControlItem25.Size = new System.Drawing.Size(573, 29);
-            this.layoutControlItem25.Text = "支付后余额：";
-            this.layoutControlItem25.TextSize = new System.Drawing.Size(150, 18);
+            this.lciPaymentBalance.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.lciPaymentBalance.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lciPaymentBalance.Control = this.txtAfterPaymentBalance;
+            this.lciPaymentBalance.CustomizationFormText = "支付后余额：";
+            this.lciPaymentBalance.Location = new System.Drawing.Point(559, 378);
+            this.lciPaymentBalance.Name = "lciPaymentBalance";
+            this.lciPaymentBalance.Size = new System.Drawing.Size(573, 29);
+            this.lciPaymentBalance.Text = "支付后余额：";
+            this.lciPaymentBalance.TextSize = new System.Drawing.Size(150, 18);
             // 
             // layoutControlItem21
             // 
@@ -1652,7 +1660,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciPaymentBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem29)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
@@ -1719,7 +1727,7 @@
         private CommonControl.TextEdit_Number txtReceiptAmount;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private CommonControl.TextEdit_Number txtAfterPaymentBalance;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
+        private DevExpress.XtraLayout.LayoutControlItem lciPaymentBalance;
         private CommonControl.TextEdit_Number txtOriginalCoin;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraEditors.ComboBoxEdit cboCurrency;

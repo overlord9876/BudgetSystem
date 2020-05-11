@@ -79,6 +79,15 @@ namespace BudgetSystem.Bll
             return lst;
         }
 
+        public bool IsPay(int budgetId, int supplierId)
+        {
+            return this.Query<bool>((con) =>
+            {
+                return dal.IsPay(budgetId, supplierId, con);
+            });
+
+        }
+
         public PaymentNotes GetPaymentNoteDetailById(int id)
         {
             var lst = this.Query<PaymentNotes>((con) =>
@@ -171,7 +180,7 @@ namespace BudgetSystem.Bll
             {
                 return string.Format("{0}的数据不能重新启动流程", EnumDataFlowState.审批通过);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.VoucherNo, EnumFlowDataType.付款单.ToString(), currentUser, string.Format("发起{0}", EnumFlowNames.付款审批流程));
+            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), id, payment.ToDesc2(), EnumFlowDataType.付款单.ToString(), currentUser, string.Format("发起{0}", EnumFlowNames.付款审批流程));
             if (state != FlowRunState.启动流程成功)
             {
                 return state.ToString();

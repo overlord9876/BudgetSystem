@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -48,32 +49,35 @@
             // layoutControl1
             // 
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(829, 657, 552, 529);
-            this.layoutControl1.Size = new System.Drawing.Size(1369, 811);
+            this.layoutControl1.Size = new System.Drawing.Size(1427, 811);
             this.layoutControl1.Controls.SetChildIndex(this.listBox, 0);
             // 
             // layoutControlGroup1
             // 
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1369, 811);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1427, 811);
             // 
             // lcgPivote
             // 
-            this.lcgPivote.Size = new System.Drawing.Size(1325, 742);
+            this.lcgPivote.Size = new System.Drawing.Size(1383, 712);
             // 
             // listBox
             // 
-            this.listBox.Size = new System.Drawing.Size(249, 708);
+            this.listBox.Location = new System.Drawing.Point(1353, 79);
+            this.listBox.Size = new System.Drawing.Size(50, 708);
             // 
             // tabbedControlGroup1
             // 
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(1349, 791);
+            this.tabbedControlGroup1.SelectedTabPage = this.lcgGrid;
+            this.tabbedControlGroup1.SelectedTabPageIndex = 0;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(1407, 761);
             // 
             // lcgGrid
             // 
-            this.lcgGrid.Size = new System.Drawing.Size(1325, 742);
+            this.lcgGrid.Size = new System.Drawing.Size(1383, 712);
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Size = new System.Drawing.Size(1325, 712);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1383, 712);
             // 
             // lcGridBar
             // 
@@ -81,27 +85,34 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Location = new System.Drawing.Point(258, 30);
-            this.layoutControlItem3.Size = new System.Drawing.Size(1067, 712);
+            this.layoutControlItem3.Location = new System.Drawing.Point(5, 0);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1324, 712);
             // 
             // lcStatBar
             // 
-            this.lcStatBar.Size = new System.Drawing.Size(1325, 30);
+            this.lcStatBar.Size = new System.Drawing.Size(1407, 30);
             // 
             // splitterItem
             // 
-            this.splitterItem.Location = new System.Drawing.Point(253, 30);
+            this.splitterItem.Location = new System.Drawing.Point(0, 0);
             this.splitterItem.Size = new System.Drawing.Size(5, 712);
             // 
             // lcList
             // 
-            this.lcList.Size = new System.Drawing.Size(253, 712);
+            this.lcList.Location = new System.Drawing.Point(1329, 0);
+            this.lcList.Size = new System.Drawing.Size(54, 712);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 21;
+            this.barButtonItem1.Name = "barButtonItem1";
             // 
             // frmCapitalReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 811);
+            this.ClientSize = new System.Drawing.Size(1427, 811);
             this.Name = "frmCapitalReport";
             this.Text = "资金管理（收汇）";
             this.Load += new System.EventHandler(this.frmBudgetReport_Load);
@@ -125,5 +136,7 @@
         }
 
         #endregion
+
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

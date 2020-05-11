@@ -265,7 +265,7 @@ namespace BudgetSystem.WorkSpace
             string extEvent = node.NodeExtEvent;
             if (string.IsNullOrEmpty(extEvent))
             {
-                return true;
+                return submitResult;
             }
             var releateFlowItems = this.CustomWorkModel == BatchApproveModel ? this.BatchFlowItems : new List<FlowItem>() { this.FlowItem };
             if (extEvent.Equals("付款状态"))

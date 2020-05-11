@@ -34,6 +34,15 @@ namespace BudgetSystem.Bll
             return lst;
         }
 
+        public bool IsReceipt(int budgetId, int customerId)
+        {
+            return this.Query<bool>((con) =>
+            {
+                return dal.IsReceipt(budgetId, customerId, con);
+            });
+
+        }
+
         public List<BudgetBill> GetBudgetBillListByBankSlipID(int bsID)
         {
             var lst = this.Query<BudgetBill>((con) =>

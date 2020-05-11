@@ -125,9 +125,12 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要删除的项");
                 return;
             }
-            dm.DeleteDeclarationformById(selectedItem.ID);
-            XtraMessageBox.Show("删除成功。");
-            this.gvDeclarationform.DeleteRow(this.gvDeclarationform.FocusedRowHandle);
+            if (XtraMessageBox.Show("确认删除吗？", "删除提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                dm.DeleteDeclarationformById(selectedItem.ID);
+                XtraMessageBox.Show("删除成功。");
+                this.gvDeclarationform.DeleteRow(this.gvDeclarationform.FocusedRowHandle);
+            }
 
         }
 

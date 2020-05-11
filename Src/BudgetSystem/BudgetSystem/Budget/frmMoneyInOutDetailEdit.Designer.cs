@@ -277,14 +277,14 @@
             // 
             this.gridBand10.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand10.Caption = "运保费";
+            this.gridBand10.Caption = "运杂费";
             this.gridBand10.Columns.Add(this.gridColumn9);
             this.gridBand10.Name = "gridBand10";
             this.gridBand10.Width = 75;
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "运保费";
+            this.gridColumn9.Caption = "运杂费";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             // 

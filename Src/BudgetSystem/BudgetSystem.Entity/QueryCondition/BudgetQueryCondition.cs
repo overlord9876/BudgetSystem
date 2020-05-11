@@ -32,6 +32,8 @@ namespace BudgetSystem.Entity.QueryCondition
         }
         private bool isManagerApproval = false;
 
+        public string A { get; set; }
+
         /// <summary>
         /// 是否部门经理审批查询 
         /// </summary>

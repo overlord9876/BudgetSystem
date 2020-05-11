@@ -38,6 +38,7 @@
             this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
@@ -45,7 +46,6 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gdPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPendingFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -103,10 +103,11 @@
             // 
             this.gcDateText.Caption = "待审批项";
             this.gcDateText.FieldName = "DateItemText";
+            this.gcDateText.MinWidth = 200;
             this.gcDateText.Name = "gcDateText";
             this.gcDateText.Visible = true;
             this.gcDateText.VisibleIndex = 0;
-            this.gcDateText.Width = 215;
+            this.gcDateText.Width = 300;
             // 
             // gcFlowName
             // 
@@ -129,26 +130,29 @@
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 1;
-            this.gcCreateDate.Width = 120;
+            this.gcCreateDate.Width = 130;
             // 
             // gcCreateUserRealName
             // 
             this.gcCreateUserRealName.Caption = "流程发起人";
             this.gcCreateUserRealName.FieldName = "CreateUserRealName";
+            this.gcCreateUserRealName.MaxWidth = 100;
             this.gcCreateUserRealName.Name = "gcCreateUserRealName";
             this.gcCreateUserRealName.Visible = true;
             this.gcCreateUserRealName.VisibleIndex = 2;
-            this.gcCreateUserRealName.Width = 262;
+            this.gcCreateUserRealName.Width = 80;
             // 
             // gcSate
             // 
             this.gcSate.Caption = "审批状态";
             this.gcSate.ColumnEdit = this.repositoryItemImageComboBox1;
             this.gcSate.FieldName = "IsClosed";
+            this.gcSate.MaxWidth = 80;
+            this.gcSate.MinWidth = 80;
             this.gcSate.Name = "gcSate";
             this.gcSate.Visible = true;
             this.gcSate.VisibleIndex = 3;
-            this.gcSate.Width = 137;
+            this.gcSate.Width = 80;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -159,6 +163,15 @@
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("已完成", true, -1),
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("进行中", false, -1)});
             this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
+            // 
+            // gcDescription
+            // 
+            this.gcDescription.Caption = "流程说明";
+            this.gcDescription.FieldName = "Description";
+            this.gcDescription.Name = "gcDescription";
+            this.gcDescription.Visible = true;
+            this.gcDescription.VisibleIndex = 4;
+            this.gcDescription.Width = 122;
             // 
             // gcID
             // 
@@ -227,14 +240,6 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(265, 414);
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
-            // 
-            // gcDescription
-            // 
-            this.gcDescription.Caption = "流程说明";
-            this.gcDescription.FieldName = "Description";
-            this.gcDescription.Name = "gcDescription";
-            this.gcDescription.Visible = true;
-            this.gcDescription.VisibleIndex = 4;
             // 
             // frmApprovalListQuery
             // 

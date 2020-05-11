@@ -184,6 +184,20 @@ namespace BudgetSystem.Dal
             AddSupplierDepartments(supplier, con, tran);
         }
 
+        public void ModifySupplierByName(Supplier supplier, IDbConnection con, IDbTransaction tran = null)
+        {
+            string updateSql = @"Update `Supplier` 
+                                 Set `Nature` = @Nature,`Legal` = @Legal ,`Description`=@Description
+                                    Where `Name` = @Name";
+            con.Execute(updateSql, supplier, tran);
+
+
+            string deleteSql = @"Delete From `SupplierRelationDepartment` Where `ID` = @ID;";
+            con.Execute(deleteSql, new { ID = supplier.ID }, tran);
+
+            AddSupplierDepartments(supplier, con, tran);
+        }
+
         public void ModifySupplierFirstReviewContents(int id, string firstReviewContents, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = @"Update `Supplier` 
@@ -224,6 +238,29 @@ namespace BudgetSystem.Dal
             IDbCommand command = con.CreateCommand();
             command.CommandText = selectSql;
             command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
+            object obj = command.ExecuteScalar();
+            if (obj != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 验证名称是否存在
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public bool CheckExistsByName(string name, IDbConnection con)
+        {
+            string selectSql = @"SELECT  id FROM `Supplier` where `Name`=@Name";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
             command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
             object obj = command.ExecuteScalar();
             if (obj != null)

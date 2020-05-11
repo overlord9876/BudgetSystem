@@ -64,8 +64,8 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("付款金额（人民币￥）", "TotalPayement");
             base.CreateGridColumn("供方发票（人民币￥）", "SupplierInvoice");
             base.CreateGridColumn("销售成本（人民币￥）", "SellingCost");
-            base.CreateGridColumn("运保费（人民币￥）", "Premium");
-            base.CreateGridColumn("运保费成本（人民币￥）", "PremiumCost");
+            base.CreateGridColumn("运杂费（人民币￥）", "Premium");
+            base.CreateGridColumn("运杂费成本（人民币￥）", "PremiumCost");
             base.CreateGridColumn("佣金（￥）", "Commission");
             base.CreateGridColumn("直接费用（￥）", "DirectCosts");
             base.CreateGridColumn("销售利润（￥）", "SalesProfit");
@@ -90,8 +90,8 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("付款金额（人民币￥）", "TotalPayement");
             base.CreatePivotGridField("供方发票（人民币￥）", "SupplierInvoice");
             base.CreatePivotGridField("销售成本（人民币￥）", "SellingCost");
-            base.CreatePivotGridField("运保费（人民币￥）", "Premium");
-            base.CreatePivotGridField("运保费成本（人民币￥）", "Premium");
+            base.CreatePivotGridField("运杂费（人民币￥）", "Premium");
+            base.CreatePivotGridField("运杂费成本（人民币￥）", "Premium");
             base.CreatePivotGridField("佣金（￥）", "Commission");
             base.CreatePivotGridField("直接费用（￥）", "DirectCosts");
             base.CreatePivotGridField("销售利润（￥）", "SalesProfit");

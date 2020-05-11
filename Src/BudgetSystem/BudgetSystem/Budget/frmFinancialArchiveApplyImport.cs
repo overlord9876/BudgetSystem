@@ -62,14 +62,19 @@ namespace BudgetSystem
                     foreach (DataRow row in dt.Rows)
                     {
                         string contractNo = DataRowConvertHelper.GetStringValue(row, "合同号").Trim();
-                        Budget b = bm.GetBudgetByNo(contractNo);
+                        if (contractNo.Length < 12)
+                        {
+                            continue;
+                        }
+                        string contractNoNew = contractNo.Substring(0, 12);
+                        Budget b = bm.GetBudgetByNo(contractNoNew);
                         if (b == null)
                         {
                             b = new Budget();
                             b.ContractNO = contractNo;
                             b.Message = "合同号不存在";
                         }
-                        else if (b.EnumState != EnumBudgetState.进行中&& b.EnumState!= EnumBudgetState.驳回归档征求)
+                        else if (b.EnumState != EnumBudgetState.进行中 && b.EnumState != EnumBudgetState.驳回归档征求)
                         {
                             b.Message = string.Format("{0}状态的预算单不允许财务归档征求。", b.EnumState);
                         }
@@ -149,6 +154,13 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
+            else if (df.ContractNO.Length < 12)
+            {
+                e.ErrorText = "合同编号不能少于12位字符";
+                df.Message = e.ErrorText;
+                e.Valid = false;
+                return;
+            }
             else if (list.Count(i => i.ContractNO == df.ContractNO) > 1)
             {
                 e.ErrorText = "合同编号存在重复";
@@ -156,7 +168,8 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
-            var budget = bm.GetBudgetByNo(df.ContractNO);
+            string contractNoNew = df.ContractNO.Substring(0, 12);
+            var budget = bm.GetBudgetByNo(contractNoNew);
             if (budget == null)
             {
                 e.ErrorText = "合同编号不存在";
@@ -164,7 +177,7 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
-            else if (budget.EnumState != EnumBudgetState.进行中&& budget.EnumState!= EnumBudgetState.驳回归档征求)
+            else if (budget.EnumState != EnumBudgetState.进行中 && budget.EnumState != EnumBudgetState.驳回归档征求)
             {
                 e.ErrorText = string.Format("{0}状态的预算单不允许财务归档征求。", budget.EnumState);
                 df.Message = e.ErrorText;

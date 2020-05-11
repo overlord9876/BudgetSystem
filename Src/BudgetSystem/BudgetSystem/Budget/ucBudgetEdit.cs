@@ -16,7 +16,7 @@ namespace BudgetSystem
 {
     public partial class ucBudgetEdit : DataControl
     {
-        public Budget CurrentBudget { get; set; }
+        public Budget CurrentBudget { get; private set; }
 
         /// <summary>
         /// 增值税配置项值 
@@ -34,6 +34,7 @@ namespace BudgetSystem
         private decimal taxRebateRate = 0;
 
         private decimal totalOriginalCurrency = 0;
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private EditFormWorkModels _workModel;
@@ -45,6 +46,7 @@ namespace BudgetSystem
             {
                 this._workModel = value;
                 InitControlState();
+                InitData();
             }
         }
 
@@ -62,7 +64,8 @@ namespace BudgetSystem
 
         public override void BindingData(int dataID)
         {
-            BindingBudget(dataID);
+            Budget budget = bm.GetBudget(dataID);
+            BindingBudget(budget);
         }
         /// <summary>
         /// 验证输入数据
@@ -189,11 +192,9 @@ namespace BudgetSystem
             CurrentBudget.UpdateUserName = RunInfo.Instance.CurrentUser.RealName;
         }
 
-        public void InitData()
+        private void InitData()
         {
-            Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
             this.vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
-            this.interestRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.年利率.ToString());
             this.taxRebateRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.退税率.ToString());
             List<MoneyType> moneyTypeList = scm.GetSystemConfigValue<List<MoneyType>>(EnumSystemConfigNames.币种.ToString());
             this.ricboOriginalCurrency.Items.Clear();
@@ -255,15 +256,15 @@ namespace BudgetSystem
                 this.chkTradeMode3.Properties.ReadOnly = true;
                 this.chkTradeMode4.Properties.ReadOnly = true;
                 this.chkTradeMode5.Properties.ReadOnly = true;
-                BindingBudget(CurrentBudget.ID);
+            }
+            else if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                SetReadOnly();
+                this.pceOtherSupplier.Properties.ReadOnly = false;
             }
             else if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print)
             {
                 SetReadOnly();
-                if (CurrentBudget != null)
-                {
-                    BindingBudget(CurrentBudget.ID);
-                }
             }
         }
 
@@ -298,6 +299,7 @@ namespace BudgetSystem
 
         private void BindingBudgetDefaultInfo()
         {
+            this.interestRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.年利率.ToString());
             DateTime datetimeNow = cm.GetDateTimeNow();
             this.txtDepartment.Text = RunInfo.Instance.CurrentUser.Department + RunInfo.Instance.CurrentUser.DepartmentName;
             this.txtSalesman.Text = RunInfo.Instance.CurrentUser.RealName;
@@ -312,9 +314,9 @@ namespace BudgetSystem
             BindingInProductDetail(string.Empty);
         }
 
-        private void BindingBudget(int id)
+        public void BindingBudget(Budget budget)
         {
-            Budget budget = bm.GetBudget(id);
+            this.CurrentBudget = budget;
             if (budget != null)
             {
                 EnumTradeMode tradeMode = (EnumTradeMode)Enum.Parse(typeof(EnumTradeMode), budget.TradeMode.ToString());
@@ -375,7 +377,7 @@ namespace BudgetSystem
                 this.pceOtherSupplier.Tag = otherSuppliers;
                 List<Customer> customers = null;
                 List<Supplier> suppliers = null;
-                if (WorkModel == EditFormWorkModels.New || WorkModel == EditFormWorkModels.Modify)
+                if (WorkModel == EditFormWorkModels.New || WorkModel == EditFormWorkModels.Modify || WorkModel == EditFormWorkModels.Custom)
                 {
                     Bll.CustomerManager cm = new Bll.CustomerManager();
                     CustomerQueryCondition condition = new CustomerQueryCondition();
@@ -528,7 +530,7 @@ namespace BudgetSystem
             }
             if (this.chkTradeMode3.Checked)
             {
-                tradeMode += "G";
+                tradeMode += "J";
             }
             if (this.chkTradeMode4.Checked)
             {
@@ -582,19 +584,23 @@ namespace BudgetSystem
             string contractNo = this.txtContractNO.Text.Trim();
             if (string.IsNullOrEmpty(contractNo))
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "请输入合同编号");
+                XtraMessageBox.Show("请输入合同编号");
+                this.txtContractNO.Focus();
                 return false;
             }
-            Match match = Regex.Match(contractNo, "^\\d{4}\\s?L?G?C?N?$");
+            Match match = Regex.Match(contractNo, "^\\d{4}\\s?L?J?C?N?$");
             if (!match.Success)
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号格式应为4位数字加贸易方式字母");
+                string message = "合同编号格式应为4位数字加贸易方式字母";
+                this.txtContractNO.Focus();
+                XtraMessageBox.Show(message);
                 return false;
             }
             int id = this.CurrentBudget == null ? 0 : this.CurrentBudget.ID;
             if (bm.CheckContractNO(id, this.lblContractNOPrefix.Text + contractNo))
             {
-                this.dxErrorProvider1.SetError(this.txtContractNO, "合同编号已存在");
+                XtraMessageBox.Show("合同编号已存在");
+                this.txtContractNO.Focus();
                 return false;
             }
             return true;
@@ -829,7 +835,7 @@ namespace BudgetSystem
         /// </summary>
         private void CalcBudgetSubtotal()
         {
-            //小计=佣金+运保费+银行费用+直接费用+进料款
+            //小计=佣金+运杂费+银行费用+直接费用+进料款
             this.txtSubtotal.EditValue = txtCommission.Value + txtPremium.Value + txtBankCharges.Value + txtDirectCosts.Value + txtFeedMoney.Value;
         }
 
@@ -920,18 +926,31 @@ namespace BudgetSystem
             EnumSupplierType type = EnumSupplierType.合格供方;
             if (popupedit == this.pceOtherSupplier)
             {
+                if (WorkModel == EditFormWorkModels.Custom)
+                {
+                    ucSupplierSelected.CanEdit = true;
+                }
                 type = EnumSupplierType.其它供方;
             }
             else if (popupedit == this.pceTempSupplier)
             {
+                if (WorkModel == EditFormWorkModels.Custom)
+                {
+                    ucSupplierSelected.CanEdit = false;
+                }
                 type = EnumSupplierType.临时供方;
             }
             else
             {
+                if (WorkModel == EditFormWorkModels.Custom)
+                {
+                    ucSupplierSelected.CanEdit = false;
+                }
                 type = EnumSupplierType.合格供方;
             }
             bool isQualified = (popupedit == this.pceQualifiedSupplier);
-            this.ucSupplierSelected.SetSelectedItems(popupedit.Tag as List<Supplier>, type);
+            int budgetId = this.CurrentBudget == null ? -1 : this.CurrentBudget.ID;
+            this.ucSupplierSelected.SetSelectedItems(budgetId, popupedit.Tag as List<Supplier>, type);
             pccSupplier.Width = popupedit.Width;
             pccSupplier.Height = 300;
         }

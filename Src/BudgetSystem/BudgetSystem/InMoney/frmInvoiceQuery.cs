@@ -27,6 +27,7 @@ namespace BudgetSystem.InMoney
             base.InitModelOperate();
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete));
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData, "部门导入交单记录"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ImportData2, "财务导入认证记录"));
@@ -57,6 +58,10 @@ namespace BudgetSystem.InMoney
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewInvoice();
+            }
+            else if (operate.Operate == OperateTypes.Delete.ToString())
+            {
+                DeleteInvoice();
             }
             else if (operate.Operate == OperateTypes.ImportData.ToString())
             {
@@ -124,7 +129,12 @@ namespace BudgetSystem.InMoney
 
         private void ModifyInvoice()
         {
-            Invoice invoice = this.gvInvoice.GetFocusedRow() as Invoice;
+            if (this.gvInvoice.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            Invoice invoice = this.gvInvoice.GetRow(this.gvInvoice.FocusedRowHandle) as Invoice;
             if (invoice != null)
             {
                 frmInvoiceEdit form = new frmInvoiceEdit();
@@ -143,7 +153,12 @@ namespace BudgetSystem.InMoney
 
         private void ViewInvoice()
         {
-            Invoice invoice = this.gvInvoice.GetFocusedRow() as Invoice;
+            if (this.gvInvoice.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
+            }
+            Invoice invoice = this.gvInvoice.GetRow(this.gvInvoice.FocusedRowHandle) as Invoice;
             if (invoice != null)
             {
                 frmInvoiceEdit form = new frmInvoiceEdit();
@@ -157,6 +172,28 @@ namespace BudgetSystem.InMoney
             else
             {
                 XtraMessageBox.Show("请选择需要查看详情的项");
+            }
+        }
+
+        private void DeleteInvoice()
+        {
+            if (this.gvInvoice.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+            Invoice invoice = this.gvInvoice.GetRow(this.gvInvoice.FocusedRowHandle) as Invoice;
+            if (invoice != null)
+            {
+                if (XtraMessageBox.Show("确认删除吗？", "删除提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    this.im.DeleteInvoice(invoice);
+                    this.RefreshData();
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
             }
         }
 
@@ -259,7 +296,12 @@ namespace BudgetSystem.InMoney
 
         protected override void PrintItem()
         {
-            Invoice invoice = this.gvInvoice.GetFocusedRow() as Invoice;
+            if (this.gvInvoice.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要打印的项");
+                return;
+            }
+            Invoice invoice = this.gvInvoice.GetRow(this.gvInvoice.FocusedRowHandle) as Invoice;
             if (invoice != null)
             {
                 frmInvoiceEdit form = new frmInvoiceEdit();

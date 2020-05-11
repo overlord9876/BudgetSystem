@@ -19,7 +19,7 @@ namespace BudgetSystem
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.用款类型.ToString(); 
+            this.OptionName = EnumSystemConfigNames.用款类型.ToString();
         }
 
         protected override void RegisterEvent()
@@ -51,7 +51,8 @@ namespace BudgetSystem
         public override bool Save()
         {
             this.gvPort.CloseEditor();
-            UseMoneyType type = this.gvPort.GetFocusedRow() as UseMoneyType;
+            if (this.gvPort.FocusedRowHandle < 0) { return false; }
+            UseMoneyType type = this.gvPort.GetRow(this.gvPort.FocusedRowHandle) as UseMoneyType;
             string msg = CheckData(type);
             if (!string.IsNullOrEmpty(msg))
             {
@@ -63,7 +64,7 @@ namespace BudgetSystem
             this.scm.ModifySystemConfig<IEnumerable<UseMoneyType>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
-        } 
+        }
         private void gvPort_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             gvPort.SetColumnError(null, e.ErrorText);
@@ -77,7 +78,7 @@ namespace BudgetSystem
             if (!string.IsNullOrEmpty(e.ErrorText))
             {
                 e.Valid = false;
-            } 
+            }
         }
 
         private void riHyperLinkEditDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
@@ -104,12 +105,12 @@ namespace BudgetSystem
             this.IsChanged = true;
         }
 
-        private string CheckData(UseMoneyType type) 
+        private string CheckData(UseMoneyType type)
         {
             if (type == null)
             {
                 return string.Empty;
-            } 
+            }
             if (string.IsNullOrEmpty(type.Name))
             {
                 return "名称不能为空";

@@ -95,6 +95,7 @@
             this.gvOutMoney.OptionsView.ShowGroupPanel = false;
             this.gvOutMoney.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcEnumFlowState, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcRepayLoanText, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcPaymentDate, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gcSupplier
@@ -157,7 +158,7 @@
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
             this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 5;
+            this.gcCNY.VisibleIndex = 4;
             // 
             // gcApplicant
             // 
@@ -165,7 +166,7 @@
             this.gcApplicant.FieldName = "ApplicantRealName";
             this.gcApplicant.Name = "gcApplicant";
             this.gcApplicant.Visible = true;
-            this.gcApplicant.VisibleIndex = 6;
+            this.gcApplicant.VisibleIndex = 5;
             // 
             // gcCommitTime
             // 
@@ -175,7 +176,7 @@
             this.gcCommitTime.FieldName = "CommitTime";
             this.gcCommitTime.Name = "gcCommitTime";
             this.gcCommitTime.Visible = true;
-            this.gcCommitTime.VisibleIndex = 7;
+            this.gcCommitTime.VisibleIndex = 6;
             this.gcCommitTime.Width = 120;
             // 
             // gcPaymentDate
@@ -186,7 +187,7 @@
             this.gcPaymentDate.FieldName = "PaymentDate";
             this.gcPaymentDate.Name = "gcPaymentDate";
             this.gcPaymentDate.Visible = true;
-            this.gcPaymentDate.VisibleIndex = 8;
+            this.gcPaymentDate.VisibleIndex = 7;
             // 
             // gcDescription
             // 
@@ -200,7 +201,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 9;
+            this.gcDepartmentCode.VisibleIndex = 8;
             // 
             // gcMoneyUsed
             // 
@@ -208,15 +209,15 @@
             this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 10;
+            this.gcMoneyUsed.VisibleIndex = 9;
             // 
             // gcRepayLoanText
             // 
-            this.gcRepayLoanText.Caption = "借款信息";
+            this.gcRepayLoanText.Caption = "借条信息";
             this.gcRepayLoanText.FieldName = "RepayLoanText";
             this.gcRepayLoanText.Name = "gcRepayLoanText";
             this.gcRepayLoanText.Visible = true;
-            this.gcRepayLoanText.VisibleIndex = 11;
+            this.gcRepayLoanText.VisibleIndex = 10;
             // 
             // gcExpectedReturnDate
             // 

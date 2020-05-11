@@ -61,7 +61,11 @@ namespace BudgetSystem.FlowManage
 
         private void ModifyFlow()
         {
-            Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
+            if (this.gvFlow.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            Flow currentRowFlow = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as Flow;
             if (currentRowFlow != null)
             {
                 frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.Modify, Flow = currentRowFlow };
@@ -74,7 +78,11 @@ namespace BudgetSystem.FlowManage
 
         private void ViewFlow()
         {
-            Flow currentRowFlow = this.gvFlow.GetFocusedRow() as Flow;
+            if (this.gvFlow.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            Flow currentRowFlow = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as Flow;
             if (currentRowFlow != null)
             {
                 frmFlowEdit form = new frmFlowEdit() { WorkModel = EditFormWorkModels.View, Flow = currentRowFlow };

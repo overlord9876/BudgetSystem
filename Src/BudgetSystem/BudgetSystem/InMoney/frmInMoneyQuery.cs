@@ -123,7 +123,12 @@ namespace BudgetSystem.InMoney
 
         private void ModifyBankSlip()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
@@ -158,7 +163,12 @@ namespace BudgetSystem.InMoney
 
         private void DeleteBankSlip()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
@@ -188,8 +198,11 @@ namespace BudgetSystem.InMoney
 
         private void StartFlow()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
-
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
@@ -220,7 +233,7 @@ namespace BudgetSystem.InMoney
                 {
                     currentRowBankSlip.ReceiptState = ReceiptState.拆分中;
                     currentRowBankSlip.UpdateTimestamp = arm.ModifyBankSlipState(currentRowBankSlip);
-                    string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}，{}", EnumFlowNames.入账修改审批流程, frmBudget.Description));
+                    string message = arm.StartFlow(currentRowBankSlip.BSID, RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}，{1}", EnumFlowNames.入账修改审批流程, frmBudget.Description));
                     if (string.IsNullOrEmpty(message))
                     {
                         XtraMessageBox.Show("提交流程成功。");
@@ -236,8 +249,11 @@ namespace BudgetSystem.InMoney
 
         private void Confirm()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
-
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
@@ -284,7 +300,12 @@ namespace BudgetSystem.InMoney
 
         private void SplitConstMoneyBankSlip()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要费用拆分的项");
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 currentRowBankSlip = arm.GetBankSlipByBSID(currentRowBankSlip.BSID);
@@ -322,7 +343,12 @@ namespace BudgetSystem.InMoney
 
         private void ViewBankSlip()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();
@@ -370,7 +396,12 @@ namespace BudgetSystem.InMoney
 
         protected override void PrintItem()
         {
-            BankSlip currentRowBankSlip = this.gvInMoney.GetFocusedRow() as BankSlip;
+            if (this.gvInMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要打印的项");
+                return;
+            }
+            BankSlip currentRowBankSlip = this.gvInMoney.GetRow(this.gvInMoney.FocusedRowHandle) as BankSlip;
             if (currentRowBankSlip != null)
             {
                 frmInMoneyEdit form = new frmInMoneyEdit();

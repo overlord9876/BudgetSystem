@@ -258,7 +258,7 @@
         <property name="ShowBlanks">true</property>
         <property name="FilterType">Excluded</property>
       </property>
-      <property name="Name">运保费（人民币￥）</property>
+      <property name="Name">运杂费（人民币￥）</property>
       <property name="Area">DataArea</property>
       <property name="FieldEditName" />
       <property name="ToolTips" isnull="true" iskey="true">
@@ -283,7 +283,7 @@
         <property name="ShowBlanks">true</property>
         <property name="FilterType">Excluded</property>
       </property>
-      <property name="Name">运保费成本（人民币￥）</property>
+      <property name="Name">运杂费成本（人民币￥）</property>
       <property name="Area">DataArea</property>
       <property name="FieldEditName" />
       <property name="ToolTips" isnull="true" iskey="true">

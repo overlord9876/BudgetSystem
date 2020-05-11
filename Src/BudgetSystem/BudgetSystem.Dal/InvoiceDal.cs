@@ -53,6 +53,13 @@ namespace BudgetSystem.Dal
                                           @TaxpayerID,@SupplierName, @Payment,@TaxAmount,@ImportUser,now(),@FinanceImportUser,@FinanceImportDate)";
             con.Insert(insertSql, invoice, tran);
         }
+
+        public void DeleteInvoice(Invoice invoice, IDbConnection con, IDbTransaction tran)
+        {
+            string insertSql = @"DELETE FROM `Invoice` WHERE ID = @ID";
+            con.Execute(insertSql, new { ID = invoice.ID }, tran);
+        }
+
         public int ModifyFinanceData(Invoice invoice, IDbConnection con, IDbTransaction tran)
         {
             string sql = @"UPDATE `Invoice` Set `Code` = @Code,`TaxpayerID` = @TaxpayerID,`SupplierName` = @SupplierName,`Payment` = @Payment,

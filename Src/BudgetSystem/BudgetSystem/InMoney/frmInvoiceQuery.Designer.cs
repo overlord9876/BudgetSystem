@@ -49,6 +49,7 @@
             this.gcImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gcFinanceImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +86,8 @@
             this.gcTotalCost,
             this.gcDepartmentCode,
             this.gcImportUserName,
-            this.gcImportDate});
+            this.gcImportDate,
+            this.gcFinanceImportDate});
             this.gvInvoice.GridControl = this.gridInvoice;
             this.gvInvoice.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvInvoice.Name = "gvInvoice";
@@ -244,6 +246,8 @@
             // gcImportUserName
             // 
             this.gcImportUserName.Caption = "创建人";
+            this.gcImportUserName.DisplayFormat.FormatString = "g";
+            this.gcImportUserName.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcImportUserName.FieldName = "ImportUserName";
             this.gcImportUserName.Name = "gcImportUserName";
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
@@ -272,6 +276,18 @@
             // 
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
+            // 
+            // gcFinanceImportDate
+            // 
+            this.gcFinanceImportDate.Caption = "财务导入时间";
+            this.gcFinanceImportDate.DisplayFormat.FormatString = "g";
+            this.gcFinanceImportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcFinanceImportDate.FieldName = "FinanceImportDate";
+            this.gcFinanceImportDate.MinWidth = 75;
+            this.gcFinanceImportDate.Name = "gcFinanceImportDate";
+            this.gcFinanceImportDate.Visible = true;
+            this.gcFinanceImportDate.VisibleIndex = 17;
+            this.gcFinanceImportDate.Width = 80;
             // 
             // frmInvoiceQuery
             // 
@@ -311,5 +327,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFinanceImportDate;
     }
 }

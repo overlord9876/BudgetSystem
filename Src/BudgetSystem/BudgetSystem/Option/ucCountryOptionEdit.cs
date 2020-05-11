@@ -15,10 +15,11 @@ namespace BudgetSystem
     /// </summary>
     public partial class ucCountryOptionEdit : ucOptionEditBase
     {
-        public ucCountryOptionEdit():base()
+        public ucCountryOptionEdit()
+            : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.国家地区.ToString(); 
+            this.OptionName = EnumSystemConfigNames.国家地区.ToString();
         }
 
         protected override void RegisterEvent()
@@ -51,18 +52,23 @@ namespace BudgetSystem
         public override bool Save()
         {
             this.gvCountry.CloseEditor();
-            Country country = this.gvCountry.GetFocusedRow() as Country;
+
+            if (this.gvCountry.FocusedRowHandle < 0)
+            {
+                return false;
+            }
+            Country country = this.gvCountry.GetRow(this.gvCountry.FocusedRowHandle) as Country;
             string msg = CheckData(country);
             if (!string.IsNullOrEmpty(msg))
             {
-                XtraMessageBox.Show(msg+"，请填写后再保存。");
+                XtraMessageBox.Show(msg + "，请填写后再保存。");
                 return false;
             }
             var dataSource = (IEnumerable<Country>)gridCountry.DataSource;
             this.scm.ModifySystemConfig<IEnumerable<Country>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
-        } 
+        }
         private void gvCountry_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             gvCountry.SetColumnError(null, e.ErrorText);
@@ -76,7 +82,7 @@ namespace BudgetSystem
             if (!string.IsNullOrEmpty(e.ErrorText))
             {
                 e.Valid = false;
-            } 
+            }
         }
 
         private void riHyperLinkEditDelete_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
@@ -100,7 +106,7 @@ namespace BudgetSystem
 
         private void gvCountry_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            this.IsChanged = true; 
+            this.IsChanged = true;
         }
 
         private string CheckData(Country country)
@@ -111,19 +117,19 @@ namespace BudgetSystem
             }
             if (string.IsNullOrEmpty(country.Code))
             {
-               return "编码不能为空"; 
+                return "编码不能为空";
             }
             if (string.IsNullOrEmpty(country.Name))
             {
-                return "名称不能为空"; 
+                return "名称不能为空";
             }
             if (string.IsNullOrEmpty(country.EnName))
             {
-                return  "英文名称不能为空"; 
+                return "英文名称不能为空";
             }
             return string.Empty;
         }
 
-       
+
     }
 }

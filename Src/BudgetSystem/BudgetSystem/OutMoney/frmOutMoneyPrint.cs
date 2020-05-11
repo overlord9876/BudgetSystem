@@ -60,7 +60,7 @@ namespace BudgetSystem.OutMoney
                 labelControl3.Text = CurrentPaymentNotes.VoucherNo;
                 this.labelControl2.Text = this.CurrentPaymentNotes.CommitTime.ToString("yyyy年MM月dd日");
                 this.txtBudget.Text = this.CurrentPaymentNotes.ContractNO;
-                this.chkIsIOU.Checked = this.CurrentPaymentNotes.IsIOU;
+                this.chkIsIOU.Checked = this.CurrentPaymentNotes.IsIOU && !this.CurrentPaymentNotes.RepayLoan;
                 this.txtMoneyUsed.Text = this.CurrentPaymentNotes.MoneyUsed;
                 this.chkIsDrawback_Yes.Checked = this.CurrentPaymentNotes.IsDrawback;
                 this.chkIsDrawback_No.Checked = !this.CurrentPaymentNotes.IsDrawback;
@@ -102,13 +102,13 @@ namespace BudgetSystem.OutMoney
                 this.txtAmountTaxRebate.Text = Math.Round(caculator.AllTaxes, 2).ToString();
 
                 this.txtPaymentMethod.Text = this.CurrentPaymentNotes.PaymentMethod;
-                string currency = "人民币";
-                string currencyChar = "￥";
-                if (!string.IsNullOrEmpty(this.CurrentPaymentNotes.Currency) && this.CurrentPaymentNotes.Currency.Equals("USD"))
-                {
-                    currency = "美元";
-                    currencyChar = "$";
-                }
+                string currency = this.CurrentPaymentNotes.Currency;
+                string currencyChar = "";//"￥";
+                //if (!string.IsNullOrEmpty(this.CurrentPaymentNotes.Currency) && this.CurrentPaymentNotes.Currency.Equals("USD"))
+                //{
+                //    currency = "美元";
+                //    currencyChar = "$";
+                //}
 
                 UserManager um = new UserManager();
                 this.txtOriginalCoinBig.Text = currency + StringUtil.MoneyToUpper(Math.Round(this.CurrentPaymentNotes.OriginalCoin, 2).ToString());
@@ -118,17 +118,23 @@ namespace BudgetSystem.OutMoney
                 this.txtPayingBank.Text = this.CurrentPaymentNotes.PayingBank;
                 List<FlowRunPoint> points = fm.GetIsRecentFlowRunPointsByData(CurrentPaymentNotes.ID, EnumFlowDataType.付款单.ToString());
                 string applyList = string.Empty;
-                foreach (FlowRunPoint frp in points)
+                for (int index = 0; index < points.Count; index++)
                 {
+                    FlowRunPoint frp = points[index];
                     if (frp.State)
                     {
-                        applyList += string.Format("{0}-{1}【{2}】,{3}", frp.NodeValueRemark, frp.NodeApproveUser, frp.RealName, frp.NodeApproveResultWithState) + "\r\n";
+                        FlowApproveDisplayHelper.SetRunPointFlowNodeApproveResultWithStateDisplayName(frp, string.Empty);
+                        applyList += string.Format("{0}-{1}【{2}】", frp.NodeValueRemark, frp.NodeApproveUser, frp.RealName);
+                        if (index < points.Count - 1)
+                        {
+                            applyList += "-->";
+                        }
                     }
                 }
                 this.txtApplyList.Text = applyList;
 
                 this.txtDescription.Text = this.CurrentPaymentNotes.Description;
-                textEdit18.Text = "SGGIEC/JL8.2-8";
+                textEdit18.Text = "QR-211-02";
                 textEdit19.Text = cm.GetDateTimeNow().ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
@@ -145,7 +151,7 @@ namespace BudgetSystem.OutMoney
 
         public override void PrintData()
         {
-            this.Height -= 50;
+            //this.Height -= 50;
             this.labelControl1.Focus();
             PrinterHelper.PrintControl(false, this.layoutControl2, false, System.Drawing.Printing.PaperKind.Custom);
         }

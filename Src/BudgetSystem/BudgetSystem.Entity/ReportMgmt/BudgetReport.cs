@@ -57,7 +57,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 业务员所在部门
         /// </summary>
-        public string Department { get; set; }
+        public string DepartmentCode { get; set; }
 
         /// <summary>
         /// 录入时间
@@ -227,7 +227,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string DepartmentDesc
         {
-            get { return this.Department + this.DepartmentName; }
+            get { return this.DepartmentCode + this.DepartmentName; }
         }
         /// <summary>
         /// 客户编号
@@ -306,7 +306,7 @@ namespace BudgetSystem.Entity
         public List<PaymentNotes> PaymentList { get; set; }
 
         /// <summary>
-        /// 运保费
+        /// 运杂费
         /// </summary>
         public decimal Premium
         {
@@ -321,7 +321,7 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
-        /// 运保费成本,去税运保费金额
+        /// 运杂费成本,去税运杂费金额
         /// </summary>
         public decimal PremiumCost
         {

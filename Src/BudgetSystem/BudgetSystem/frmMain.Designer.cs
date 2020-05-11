@@ -60,6 +60,7 @@
             this.btnFinalAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnRecieptCapital = new DevExpress.XtraBars.BarButtonItem();
             this.btnPaymentCapital = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMyApprovalFlow = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -119,10 +120,11 @@
             this.btnCompanyReport,
             this.btnFinalAccount,
             this.btnRecieptCapital,
-            this.btnPaymentCapital});
+            this.btnPaymentCapital,
+            this.btnMyApprovalFlow});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 49;
+            this.ribbonControl1.MaxItemId = 50;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -474,6 +476,17 @@
             this.btnPaymentCapital.Tag = "PaymentCapital";
             this.btnPaymentCapital.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPaymentCapital_ItemClick);
             // 
+            // btnMyApprovalFlow
+            // 
+            this.btnMyApprovalFlow.Caption = "我审批的单子";
+            this.btnMyApprovalFlow.Id = 49;
+            this.btnMyApprovalFlow.ImageIndex = 46;
+            this.btnMyApprovalFlow.ImageIndexDisabled = 46;
+            this.btnMyApprovalFlow.Name = "btnMyApprovalFlow";
+            this.btnMyApprovalFlow.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnMyApprovalFlow.Tag = "MyApprovalFlowManagement";
+            this.btnMyApprovalFlow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyApprovalFlow_ItemClick);
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -503,6 +516,7 @@
             // ribbonPageGroup5
             // 
             this.ribbonPageGroup5.ItemLinks.Add(this.btnApprovalList);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnMyApprovalFlow);
             this.ribbonPageGroup5.ItemLinks.Add(this.btnMyOrder);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "我的工作";
@@ -675,6 +689,7 @@
         private DevExpress.XtraBars.BarButtonItem btnRecieptCapital;
         private DevExpress.XtraBars.BarButtonItem btnPaymentCapital;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem btnMyApprovalFlow;
     }
 }
 

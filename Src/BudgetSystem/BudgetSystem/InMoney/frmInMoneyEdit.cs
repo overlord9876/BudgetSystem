@@ -133,6 +133,7 @@ namespace BudgetSystem.InMoney
             }
             this.ucInMoneyEdit1.WorkModel = this.WorkModel;
             lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (this.WorkModel == EditFormWorkModels.SplitToBudget)
             {
                 this.Text = "收汇进入合同";
@@ -152,7 +153,8 @@ namespace BudgetSystem.InMoney
                 lci_CommitButton.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem15.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 layoutControlItem14.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                //emptySpaceItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.Print)
             {
@@ -203,10 +205,33 @@ namespace BudgetSystem.InMoney
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                PrinterHelper.PrintControl(true, this.layoutControl1);
+            }
+            finally
+            {
+                this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+        }
+
         public override void PrintData()
         {
-            //this.Height -= 50;
+            int count = 0;
+            if (this.ucInMoneyEdit1.SpliDetail != null)
+            {
+                count = this.ucInMoneyEdit1.SpliDetail.Count;
+            }
+            if (count > 5)
+            {
+                int h = count - 5;
+                this.Height += h * 50;
+            }
             PrinterHelper.PrintControl(true, this.layoutControl1);
         }
+
     }
 }

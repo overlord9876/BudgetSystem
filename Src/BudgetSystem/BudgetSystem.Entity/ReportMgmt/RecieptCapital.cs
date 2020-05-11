@@ -6,6 +6,8 @@ namespace BudgetSystem.Entity
 {
     public class RecieptCapital : IEntity
     {
+        private string code;
+
         public decimal CNY { get; set; }
 
         public decimal OriginalCoin { get; set; }
@@ -27,13 +29,37 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 部门编号
         /// </summary>
-        public string Code { get; set; }
+        public string Code
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(code) && Name == "余额")
+                {
+                    return "999";
+                }
+                return code;
+            }
+            set { code = value; }
+        }
 
         /// <summary>
         /// 部门名称
         /// </summary>
         public string Name { get; set; }
 
-        public string Department { get { return string.Format("{0}{1}", Code, Name); } }
+        public string Department
+        {
+            get
+            {
+                if (Name == "余额")
+                {
+                    return Name;
+                }
+                else
+                {
+                    return string.Format("{0}{1}", Code, Name);
+                }
+            }
+        }
     }
 }

@@ -37,8 +37,6 @@ namespace BudgetSystem
             }
         }
 
-
-
         public override void LoadData()
         {
             if (this.CurrentBudget == null)
@@ -65,7 +63,7 @@ namespace BudgetSystem
                 //row["DirectCosts"] = budget.DirectCosts;
                 //dt.Rows.Add(row);
                 //报关单表
-                gridBand29.Caption = budget.Premium.ToString();// 预算运保费
+                gridBand29.Caption = budget.Premium.ToString();// 预算运杂费
                 gridBand32.Caption = budget.Commission.ToString();// 预算佣金
                 var dfList = new DeclarationformManager().GetDeclarationformByBudgetID(budget.ID);
                 decimal originalExchangeRate = 0;//预算单原币汇率，取外贸部门商品的第一条商品信息原币汇率
@@ -102,12 +100,13 @@ namespace BudgetSystem
                 foreach (PaymentNotes pn in pnData)
                 {
                     row = dt.NewRow();
+                    dt.Rows.Add(row);
                     row["Date"] = pn.PaymentDate;
+
                     if (BudgetSystem.Entity.Util.PremiumTextList.Contains(pn.MoneyUsed))
                     {
                         row["Premium"] = pn.CNY;
                         row["PremiumConst"] = pn.DeTaxationCNY;
-                        row["PremiumTaxRebateRate"] = pn.TaxRebateRate;
                     }
                     else if (Entity.Util.CommissionUsageNameList.Contains(pn.MoneyUsed))
                     {
@@ -115,14 +114,27 @@ namespace BudgetSystem
                     }
                     else if (Entity.Util.DirectCostsTextList.Contains(pn.MoneyUsed))
                     {
-                        row["DirectCosts"] = pn.CNY;                        
+                        row["DirectCosts"] = pn.CNY;
                     }
                     else
                     {
                         row["CNY"] = pn.CNY;
                     }
+                    row["TaxRebateRate"] = Math.Round(pn.TaxRebateRate / 100, 2);
                     row["SupplierName"] = pn.SupplierName;
-                    dt.Rows.Add(row);
+                    //if (pn.HasInvoice)//如果付款中已经提交发票，则这部分钱是为发票内容。
+                    //{
+                    //    row = dt.NewRow();
+
+                    //    row["Date"] = pn.CommitTime;
+                    //    row["OriginalCoin"] = pn.OriginalCoin;
+                    //    row["ExchangeRate"] = pn.ExchangeRate;
+                    //    row["Payment"] = pn.CNY;
+                    //    row["TaxRebateRate"] = pn.TaxRebateRate / 100;
+                    //    row["SupplierName"] = string.Format("{0}(付款已收发票)", pn.SupplierName);
+                    //    row["FeedMoney"] = 0;
+                    //    dt.Rows.Add(row);
+                    //}
                 }
                 //发票表
                 var invoiceData = new InvoiceManager().GetAllInvoiceByBudgetID(budget.ID);
@@ -139,7 +151,7 @@ namespace BudgetSystem
                     }
                     row["OriginalCoin"] = invoice.OriginalCoin;
                     row["ExchangeRate"] = invoice.ExchangeRate;
-                    row["Payment"] = invoice.Payment;
+                    row["Payment"] = invoice.Payment + invoice.TaxAmount;
                     row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
                     row["SupplierName"] = invoice.SupplierName;
                     row["FeedMoney"] = invoice.FeedMoney;
@@ -174,17 +186,17 @@ namespace BudgetSystem
             dt.Columns.Add("SupplierName", typeof(string));//供货方名称
             dt.Columns.Add("FeedMoney", typeof(decimal));//供货方名称
             //预算单表
-            dt.Columns.Add("Premium", typeof(decimal));//运保费
-            dt.Columns.Add("PremiumConst", typeof(decimal));//运保费
-            dt.Columns.Add("PremiumTaxRebateRate", typeof(decimal));//运保费税率
+            dt.Columns.Add("Premium", typeof(decimal));//运杂费
+            dt.Columns.Add("PremiumConst", typeof(decimal));//运杂费
+            dt.Columns.Add("PremiumTaxRebateRate", typeof(decimal));//运杂费税率
             dt.Columns.Add("Commission", typeof(decimal));//佣金
             dt.Columns.Add("DirectCosts", typeof(decimal));//直接费用 
 
             //公式列
             dt.Columns.Add("TotalAmount", typeof(decimal));//  应收人民币=OriginalCoin*ExchangeRate
             dt.Columns.Add("CostOfSales", typeof(decimal));//  销售成本=已收供方发票/(1+退税率0)=Payment/(1+TaxRebateRate)
-            dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运保费-佣金-直接费用-进料款
-            dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
+            dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运杂费-佣金-直接费用-进料款
+            dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运杂费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
             dt.Columns.Add("Balance", typeof(decimal));// 收支余
             dt.Columns.Add("TaxRebate", typeof(decimal));//出口退税额=已收供方发票-销售成本
             return dt;
@@ -227,7 +239,7 @@ namespace BudgetSystem
                     taxRebate = Math.Round(GetDecimal(row, "Payment") - GetDecimal(row, "CostOfSales"), 2);
                     row["TaxRebate"] = taxRebate;
                 }
-                //销售利润=应收人民币-销售成本-运保费-佣金-直接费用-进料款
+                //销售利润=应收人民币-销售成本-运杂费-佣金-直接费用-进料款
                 var salesProfit = GetDecimal(row, "TotalAmount")
                                         - GetDecimal(row, "CostOfSales")
                                         - GetDecimal(row, "Premium")
@@ -238,14 +250,19 @@ namespace BudgetSystem
 
                 totalSalesProfit += salesProfit;
 
-                //已付金额=已付货款+运保费+佣金+直接费用
+                //已付金额=已付货款+运杂费+佣金+直接费用
                 var paymentMoney = GetDecimal(row, "CNY") + GetDecimal(row, "Premium") + GetDecimal(row, "Commission") + GetDecimal(row, "DirectCosts");
                 totalPaymentCNY = totalPaymentCNY + GetDecimal(row, "CNY");
-                //实际利润=实收人民币-已付货款-运保费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
+                //实际利润=实收人民币-已付货款-运杂费-佣金-直接费用+(已付货款/(1+扣除利息后实际利润)*退税率)
                 //TODO:此列值未计算“扣除利息后实际利润”
+                decimal TaxRebate = 0;
+                if (GetDecimal(row, "TaxRebateRate") > 0)
+                {
+                    TaxRebate = GetDecimal(row, "CNY") - Math.Round(GetDecimal(row, "CNY") / (1 + GetDecimal(row, "TaxRebateRate")), 2);
+                }
                 var profit = GetDecimal(row, "BillCNY")
-                        - paymentMoney
-                                     + GetDecimal(row, "CNY") / (1 + 0) * GetDecimal(row, "TaxRebateRate") + taxRebate;
+                        - paymentMoney + TaxRebate;
+
                 row["Profit"] = profit.ToString();
 
                 totalProfit += profit;

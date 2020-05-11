@@ -658,6 +658,12 @@
     <Compile Include="Supplier\ucDepartmentSelected.Designer.cs">
       <DependentUpon>ucDepartmentSelected.cs</DependentUpon>
     </Compile>
+    <Compile Include="Supplier\frmSupplierImport2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frmSupplierImport2.Designer.cs">
+      <DependentUpon>frmSupplierImport2.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEntity\DataControlCreator.cs" />
     <Compile Include="UIEntity\EditFormWorkModels.cs" />
     <Compile Include="UIEntity\IDataControl.cs" />
@@ -695,6 +701,12 @@
     <Compile Include="WorkSpace\frmApprovalListQuery.Designer.cs">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkSpace\frmApprovalFlowQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmApprovalFlowQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmApprovalFlowQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorkSpace\frmHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -718,6 +730,12 @@
     </Compile>
     <Compile Include="UserManage\frmUserQueryConditionEditor.Designer.cs">
       <DependentUpon>frmUserQueryConditionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyApprovalFlowListQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkSpace\frmMyApprovalFlowListQuery.Designer.cs">
+      <DependentUpon>frmMyApprovalFlowListQuery.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Base\BatchDataControl.resx">
       <DependentUpon>BatchDataControl.cs</DependentUpon>
@@ -872,6 +890,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyEdit.resx">
       <DependentUpon>frmInMoneyEdit.cs</DependentUpon>
@@ -979,6 +998,9 @@
     <EmbeddedResource Include="Supplier\ucDepartmentSelected.resx">
       <DependentUpon>ucDepartmentSelected.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frmSupplierImport2.resx">
+      <DependentUpon>frmSupplierImport2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserManage\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -991,6 +1013,9 @@
     <EmbeddedResource Include="WorkSpace\frmApprovalListQuery.resx">
       <DependentUpon>frmApprovalListQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmApprovalFlowQueryConditionEditor.resx">
+      <DependentUpon>frmApprovalFlowQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmHistory.resx">
       <DependentUpon>frmHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -999,6 +1024,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace\frmMyFlowListQuery.resx">
       <DependentUpon>frmMyFlowListQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkSpace\frmMyApprovalFlowListQuery.resx">
+      <DependentUpon>frmMyApprovalFlowListQuery.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

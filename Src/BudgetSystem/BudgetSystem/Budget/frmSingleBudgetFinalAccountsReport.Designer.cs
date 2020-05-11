@@ -785,7 +785,7 @@
             this.gridBand28.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand28.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand28.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridBand28.Caption = "预算运保费";
+            this.gridBand28.Caption = "预算运杂费";
             this.gridBand28.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand34});
             this.gridBand28.Name = "gridBand28";
@@ -795,14 +795,14 @@
             // 
             this.gridBand34.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand34.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand34.Caption = "运保费";
+            this.gridBand34.Caption = "运杂费";
             this.gridBand34.Columns.Add(this.gcPremium);
             this.gridBand34.Name = "gridBand34";
             this.gridBand34.Width = 95;
             // 
             // gcPremium
             // 
-            this.gcPremium.Caption = "运保费";
+            this.gcPremium.Caption = "运杂费";
             this.gcPremium.DisplayFormat.FormatString = "N2";
             this.gcPremium.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gcPremium.FieldName = "Premium";
@@ -825,14 +825,14 @@
             this.gridBand35.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand35.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand35.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridBand35.Caption = "运保费成本";
+            this.gridBand35.Caption = "运杂费成本";
             this.gridBand35.Columns.Add(this.bandedGridColumn18);
             this.gridBand35.Name = "gridBand35";
             this.gridBand35.Width = 99;
             // 
             // bandedGridColumn18
             // 
-            this.bandedGridColumn18.Caption = "运保费成本";
+            this.bandedGridColumn18.Caption = "运杂费成本";
             this.bandedGridColumn18.DisplayFormat.FormatString = "N2";
             this.bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.bandedGridColumn18.FieldName = "PremiumConst";
@@ -847,7 +847,7 @@
             this.gridBand36.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand36.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand36.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridBand36.Caption = "运保费税率";
+            this.gridBand36.Caption = "运杂费税率";
             this.gridBand36.Columns.Add(this.bandedGridColumn19);
             this.gridBand36.Name = "gridBand36";
             this.gridBand36.RowCount = 2;
@@ -855,7 +855,7 @@
             // 
             // bandedGridColumn19
             // 
-            this.bandedGridColumn19.Caption = "运保费税率";
+            this.bandedGridColumn19.Caption = "运杂费税率";
             this.bandedGridColumn19.DisplayFormat.FormatString = "N2";
             this.bandedGridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.bandedGridColumn19.FieldName = "PremiumTaxRebateRate";

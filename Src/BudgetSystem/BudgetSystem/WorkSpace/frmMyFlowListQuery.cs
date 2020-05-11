@@ -44,7 +44,7 @@ namespace BudgetSystem.WorkSpace
             else if (operate.Operate == OperateTypes.View.ToString())
             {
                 ViewFlowData();
-              //  ViewFlowItem();
+                //  ViewFlowItem();
             }
         }
 
@@ -52,11 +52,11 @@ namespace BudgetSystem.WorkSpace
         {
             if (this.gvFlow.FocusedRowHandle >= 0)
             {
-                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                FlowItem item = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as FlowItem;
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ViewModel };
-                
+
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
@@ -69,11 +69,11 @@ namespace BudgetSystem.WorkSpace
         {
             if (this.gvFlow.FocusedRowHandle >= 0)
             {
-                FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+                FlowItem item = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as FlowItem;
                 if (item != null)
                 {
                     frmApproveEx form = new frmApproveEx() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApproveEx.ConfirmOrRevokeModel };
-                
+
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
@@ -86,7 +86,7 @@ namespace BudgetSystem.WorkSpace
         //{
         //    if (this.gvFlow.FocusedRowHandle >= 0)
         //    {
-        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        FlowItem item = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as FlowItem;
         //        if (item != null)
         //        {
         //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmViewModel };
@@ -101,7 +101,7 @@ namespace BudgetSystem.WorkSpace
         //{
         //    if (this.gvFlow.FocusedRowHandle >= 0)
         //    {
-        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        FlowItem item = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as FlowItem;
         //        if (item != null)
         //        {
         //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.ConfirmModel };
@@ -117,7 +117,7 @@ namespace BudgetSystem.WorkSpace
         //{
         //    if (this.gvFlow.FocusedRowHandle >= 0)
         //    {
-        //        FlowItem item = this.gvFlow.GetFocusedRow() as FlowItem;
+        //        FlowItem item = this.gvFlow.GetRow(this.gvFlow.FocusedRowHandle) as FlowItem;
         //        if (item != null)
         //        {
         //            frmApprove form = new frmApprove() { FlowItem = item, WorkModel = EditFormWorkModels.Custom, CustomWorkModel = frmApprove.RevokeModel };
@@ -134,7 +134,7 @@ namespace BudgetSystem.WorkSpace
             var lst = manager.GetUnConfirmFlowByUser(RunInfo.Instance.CurrentUser.UserName);
             lst.ForEach(FlowApproveDisplayHelper.SetFlowItemInstanceStateWithEmptyStateDisplayName);
             this.gdFlow.DataSource = lst;
-            
+
             this.gvFlow.ExpandAllGroups();
         }
 

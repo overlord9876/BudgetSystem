@@ -82,15 +82,23 @@ namespace BudgetSystem.OutMoney
 
                 cboDepartment.Text = RunInfo.Instance.CurrentUser.DepartmentName;
                 cboDepartment.Tag = RunInfo.Instance.CurrentUser.DeptID;
-
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
-                this.chkIsIOU.Properties.ReadOnly = true;
-                SetReadOnly();
+                foreach (var control in this.layoutControl1.Controls)
+                {
+                    if (control == chkIsDrawback || control == chkHasInvoice || control == chkIsIOU || control == chkRepayLoan)//如果是出纳，这几个修改项允许放开。
+                    {
+                        continue;
+                    }
+                    if (control is BaseEdit)
+                    {
+                        (control as BaseEdit).Properties.ReadOnly = true;
+                    }
+                }
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
@@ -166,6 +174,15 @@ namespace BudgetSystem.OutMoney
                 }
             }
 
+            foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
+            {
+                if (umt.Name == payment.MoneyUsed)
+                {
+                    this.cboMoneyUsed.SelectedItem = umt;
+                    break;
+                }
+            }
+
             this.txtBankNO.EditValue = payment.BankNO;
 
             this.txtExpectedReturnDate.EditValue = payment.ExpectedReturnDate;
@@ -185,14 +202,6 @@ namespace BudgetSystem.OutMoney
             this.cboDepartment.EditValue = payment.DepartmentName;
             this.cboDepartment.Tag = payment.DeptID;
 
-            foreach (UseMoneyType umt in this.cboMoneyUsed.Properties.Items)
-            {
-                if (umt.Name == payment.MoneyUsed)
-                {
-                    this.cboMoneyUsed.SelectedItem = umt;
-                    break;
-                }
-            }
             txtDescription.Text = payment.Description;
             chkHasInvoice.EditValue = payment.HasInvoice;
             BindingBankInfoDetail(payment.InvoiceNumber);
@@ -212,7 +221,14 @@ namespace BudgetSystem.OutMoney
                     {
                         lblMessage.Text += "\r\n";
                     }
-                    lblMessage.Text += "【警告】支付后余额小于0";
+                    if (this.caculator.AdvancePayment > 0)
+                    {
+                        lblMessage.Text += "【警告】启用压缩后预付款支付后余额小于0";
+                    }
+                    else
+                    {
+                        lblMessage.Text += "【警告】支付后余额小于0";
+                    }
                 }
             }
         }
@@ -275,10 +291,10 @@ namespace BudgetSystem.OutMoney
                 this.dxErrorProvider1.SetError(cboSupplier, "请选择供应商。");
             }
 
-            if (txtBankName.EditValue as BankInfo == null)
-            {
-                this.dxErrorProvider1.SetError(txtBankName, "请选择付款开户行。");
-            }
+            //if (txtBankName.EditValue as BankInfo == null)
+            //{
+            //    this.dxErrorProvider1.SetError(txtBankName, "请选择付款开户行。");
+            //}
 
             Budget selectedBudget = cboBudget.EditValue as Budget;
             if (selectedBudget == null)
@@ -307,7 +323,7 @@ namespace BudgetSystem.OutMoney
             {
                 this.dxErrorProvider1.SetError(txtTaxRebateRate, "请选择退税率。");
             }
-            if (txtOriginalCoin.Value <= 0)
+            if (txtOriginalCoin.Value == 0)
             {
                 this.dxErrorProvider1.SetError(txtOriginalCoin, "请输入付款金额（原币）。");
             }
@@ -343,25 +359,32 @@ namespace BudgetSystem.OutMoney
             else
             {
                 CheckUsage(umt.Name);
-                if (!OutMoneyCaculator.TransportationExpensesCaption.Equals(umt.Name) && !dxErrorProvider1.HasErrors)
+                if (!OutMoneyCaculator.TransportationExpensesCaption.Equals(umt.Name) && !Entity.Util.PaymentUseCommissionUsageNameList.Contains(umt.Name)
+                    && !dxErrorProvider1.HasErrors)
                 {
-                    if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value <= 0)
+                    if (txtAfterPaymentBalance.Value < 0)
                     {
-                        XtraMessageBox.Show(WarningMessage2);
-                        this.dxErrorProvider1.SetError(txtAfterPaymentBalance, WarningMessage2);
+                        string message = WarningMessage2;
+                        if (this.caculator.AdvancePayment > 0)
+                        {
+                            message = WarningMessage3;
+                        }
+                        XtraMessageBox.Show(message);
+                        this.dxErrorProvider1.SetError(txtAfterPaymentBalance, message);
                     }
-                    else if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value - txtIgnoreTransportationExpensesPaymentMoneyAmount.Value < 0)
-                    {
-                        XtraMessageBox.Show(WarningMessage);
-                        this.dxErrorProvider1.SetError(txtIgnoreTransportationExpensesPaymentMoneyAmount, WarningMessage);
-                        this.dxErrorProvider1.SetError(txtAdvancePayment, WarningMessage);
-                    }
+                    //else if (txtAfterPaymentBalance.Value < 0 && txtAdvancePayment.Value - txtIgnoreTransportationExpensesPaymentMoneyAmount.Value < 0)
+                    //{
+                    //    XtraMessageBox.Show(WarningMessage);
+                    //    this.dxErrorProvider1.SetError(txtIgnoreTransportationExpensesPaymentMoneyAmount, WarningMessage);
+                    //    this.dxErrorProvider1.SetError(txtAdvancePayment, WarningMessage);
+                    //}
                 }
             }
             return dxErrorProvider1.HasErrors;
         }
 
-        const string WarningMessage2 = "不能支付，支付后余额小于0";
+        const string WarningMessage2 = "不能支付，付款后的支付后余额小于0";
+        const string WarningMessage3 = "不能支付，付款后的启用压缩后预付款支付后余额小于0";
         const string WarningMessage = "不能支付，支付后余额小于0，且累计支付金额（不含运杂费）大于预付款";
 
         private void SetReadOnly()
@@ -465,7 +488,9 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.DeptID = int.Parse(this.cboDepartment.Tag.ToString());
 
             this.CurrentPaymentNotes.SupplierID = (this.cboSupplier.EditValue as Supplier).ID;
-            this.CurrentPaymentNotes.BudgetID = (this.cboBudget.EditValue as Budget).ID;
+            Budget budget = this.cboBudget.EditValue as Budget;
+            this.CurrentPaymentNotes.BudgetID = budget.ID;
+            this.CurrentPaymentNotes.ContractNO = budget.ContractNO;
             if (cboPayingBank.SelectedItem != null)
             {
                 this.CurrentPaymentNotes.PayingBank = this.cboPayingBank.SelectedItem.ToString();
@@ -478,11 +503,16 @@ namespace BudgetSystem.OutMoney
             this.CurrentPaymentNotes.HasInvoice = (bool)chkHasInvoice.EditValue;
             this.CurrentPaymentNotes.IsDrawback = (bool)chkIsDrawback.EditValue;
             this.CurrentPaymentNotes.VatOption = this.vatOption;
-
-            this.CurrentPaymentNotes.BankName = (this.txtBankName.EditValue as BankInfo).Name;
+            BankInfo bankInfo = this.txtBankName.EditValue as BankInfo;
+            if (bankInfo != null)
+            {
+                this.CurrentPaymentNotes.BankName = bankInfo.Name;
+            }
             this.CurrentPaymentNotes.BankNO = this.txtBankNO.Text;
 
             this.CurrentPaymentNotes.IsIOU = this.chkIsIOU.Checked;
+            this.CurrentPaymentNotes.RepayLoan = this.chkRepayLoan.Checked;
+
             this.CurrentPaymentNotes.InvoiceNumber = GetInvoiceNumberDetailString();
             this.CurrentPaymentNotes.ExpectedReturnDate = DateTime.Parse(this.txtExpectedReturnDate.EditValue.ToString());
         }
@@ -513,7 +543,7 @@ namespace BudgetSystem.OutMoney
                 decimal money = caculator.GetUsagePayMoney(usageName);
                 if (money + txtCNY.Value > this.currentBudget.Premium)
                 {
-                    message = string.Format("不能支付，预算单中运保费为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
+                    message = string.Format("不能支付，预算单中运杂费为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Premium, money);
                     this.dxErrorProvider1.SetError(cboMoneyUsed, message);
                     XtraMessageBox.Show(message);
                     return;
@@ -537,7 +567,7 @@ namespace BudgetSystem.OutMoney
                     return;
                 }
             }
-            else if (Entity.Util.CommissionUsageNameList.Contains(usageName))
+            else if (Entity.Util.PaymentUseCommissionUsageNameList.Contains(usageName))
             {
                 if (this.currentBudget.Commission == 0)
                 {
@@ -547,7 +577,7 @@ namespace BudgetSystem.OutMoney
                     return;
                 }
                 //暂时先放开佣金付款超额
-                decimal money = caculator.GetUsagePayMoney(Entity.Util.CommissionUsageNameList);
+                decimal money = caculator.GetUsagePayMoney(Entity.Util.PaymentUseCommissionUsageNameList);
                 if (money + txtCNY.Value > this.currentBudget.Commission)
                 {
                     message = string.Format("不能支付，预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Commission, money);
@@ -630,8 +660,17 @@ namespace BudgetSystem.OutMoney
             //总付款金额=已付金额+当前付款金额
             txtAmountPaymentMoney.EditValue = caculator.PaymentMoneyAmount + this.txtCNY.Value;
 
-            //支付后余额
-            this.txtAfterPaymentBalance.EditValue = caculator.Balance;
+            //支付后余额（2020-03-17改为启用预付款支付后余额）
+            if (caculator.AdvancePayment > 0)
+            {
+                this.txtAfterPaymentBalance.EditValue = caculator.EnablingAdvancePayment;//caculator.Balance;
+                lciPaymentBalance.Text = "启用预付款支付后余额";
+            }
+            else
+            {
+                this.txtAfterPaymentBalance.EditValue = caculator.Balance;
+                lciPaymentBalance.Text = "支付后余额";
+            }
             //支付后留利余额
             this.txtRetainedInterestBalance.EditValue = caculator.RetainedInterestBalance;
 
@@ -711,8 +750,6 @@ namespace BudgetSystem.OutMoney
 
         private List<string> ignoreMessageUsageNameList = new List<string>() { "货款", "辅料款", "预付货款", "预付辅料款" };
 
-        private List<string> needInvoiceUsageNameList = new List<string>() { "运杂费", "咨询费", "服务费", "快递费", "海关关税", "海关增值税" };
-
         private void cboMoneyUsed_EditValueChanged(object sender, EventArgs e)
         {
             UseMoneyType selectedItem = this.cboMoneyUsed.EditValue as UseMoneyType;
@@ -729,7 +766,7 @@ namespace BudgetSystem.OutMoney
                         lciMessage.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     }
                 }
-                if (needInvoiceUsageNameList.Contains(selectedItem.Name))
+                if (selectedItem.ProvideInvoice)
                 {
                     gridInvoiceNumber.DataSource = new BindingList<InvoiceInfo>();
                     lciInvoiceNumber.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -820,14 +857,14 @@ namespace BudgetSystem.OutMoney
 
         private void chkIsIOU_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.chkIsIOU.Checked)
-            {
-                lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            }
-            else
-            {
-                lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            }
+            //if (this.chkIsIOU.Checked)
+            //{
+            //    lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            //}
+            //else
+            //{
+            //    lciRepayLoan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            //}
         }
 
     }

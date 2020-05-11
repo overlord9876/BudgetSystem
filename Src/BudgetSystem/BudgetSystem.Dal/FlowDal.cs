@@ -5,6 +5,7 @@ using BudgetSystem.Entity;
 using System.Data;
 using Dapper_NET20;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Dal
 {
@@ -206,6 +207,29 @@ namespace BudgetSystem.Dal
             return con.Query<FlowItem>(sql, new { CreateUser = userName }, tran);
         }
 
+        public IEnumerable<FlowItem> GetAprrovalFlowByCondition(ApprovalFlowQueryCondition condition, IDbConnection con)
+        {
+            string sql = @"SELECT t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t1.NodeApproveDate,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName,t2.Description
+                            FROM FlowRunpoint t1
+                            LEFT JOIN FlowInstance t2 on t1.InstanceID = t2.ID
+                            LEFT JOIN `User` t3 on t2.CreateUser= t3.UserName
+                            LEFT JOIN `User` t4 on t1.NodeApproveUser = t4.UserName
+                            WHERE t1.State=1 ";
+            DynamicParameters dp = new DynamicParameters();
+            if (condition != null)
+            {
+                sql += " AND NodeApproveUser=@NodeApproveUser ";
+                dp.Add("NodeApproveUser", condition.CurrentUer, DbType.String, ParameterDirection.Input, null);
+                if (!condition.BeginTimestamp.Equals(condition.EndTimestamp))
+                {
+                    sql += "AND NodeApproveDate BETWEEN @BeginTime and @EndTime ";
+                    dp.Add("BeginTime", condition.BeginTimestamp, DbType.DateTime, ParameterDirection.Input, null);
+                    dp.Add("EndTime", condition.EndTimestamp, DbType.DateTime, ParameterDirection.Input, null);
+                }
+            }
+            return con.Query<FlowItem>(sql, dp);
+        }
+
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
             string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName
@@ -215,6 +239,25 @@ namespace BudgetSystem.Dal
                     Where`InstanceID` = @InstanceID
                     ORDER BY NodeOrderNo";
             return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
+        }
+
+        public bool DeleteLastRunPointById(int runPointID, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"DELETE FROM FlowRunPoint where ID=@ID";
+            return con.Execute(sql, new { ID = runPointID }, tran) > 0;
+        }
+
+        public bool ModifyCurrentUserRunPoint(int runPointID, string nodeApproveUser, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = @"Update FlowRunPoint set  NodeApproveResult=null,NodeApproveRemark=NULL,State=0,RunPointCreateDate=NOW(),NodeApproveDate=NULL where ID=@ID AND NodeApproveUser=@NodeApproveUser;";
+            return con.Execute(sql, new { ID = runPointID, NodeApproveUser = nodeApproveUser }, tran) > 0;
+        }
+
+        public void RevokePaymentFlowClosedInstance(int instanceID, IDbConnection con, IDbTransaction tran)
+        {
+            string updateSql = @"Update `FlowInstance` Set `ApproveResult` = 0,`IsClosed` = 0,`CloseReason`=null,`CloseDateTime` = null Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = instanceID }, tran);
+
         }
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)

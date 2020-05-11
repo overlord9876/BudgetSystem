@@ -45,5 +45,10 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
+        /// <summary>
+        /// 审批时间。
+        /// </summary>
+        public DateTime NodeApproveDate { get; set; }
     }
 }

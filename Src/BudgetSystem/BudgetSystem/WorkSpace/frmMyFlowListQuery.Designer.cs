@@ -78,17 +78,17 @@
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(87, 37);
+            this.textEdit2.Location = new System.Drawing.Point(105, 41);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(186, 21);
+            this.textEdit2.Size = new System.Drawing.Size(168, 25);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(87, 12);
+            this.textEdit1.Location = new System.Drawing.Point(105, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(186, 21);
+            this.textEdit1.Size = new System.Drawing.Size(168, 25);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -112,32 +112,32 @@
             this.layoutControlItem1.CustomizationFormText = "客户名称：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
             this.layoutControlItem1.Text = "客户名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "国家或地区：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 418);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 414);
             this.layoutControlItem2.Text = "国家或地区：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
             // 
             // gdFlow
             // 
             this.gdFlow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gdFlow.Location = new System.Drawing.Point(0, 0);
             this.gdFlow.MainView = this.gvFlow;
-            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gdFlow.Name = "gdFlow";
             this.gdFlow.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
             this.repositoryItemImageComboBox1});
-            this.gdFlow.Size = new System.Drawing.Size(880, 439);
+            this.gdFlow.Size = new System.Drawing.Size(1006, 564);
             this.gdFlow.TabIndex = 2;
             this.gdFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFlow});
@@ -158,11 +158,12 @@
             this.gcCloseDateTime,
             this.gcID});
             this.gvFlow.GridControl = this.gdFlow;
-            this.gvFlow.GroupCount = 1;
             this.gvFlow.Name = "gvFlow";
             this.gvFlow.OptionsBehavior.Editable = false;
+            this.gvFlow.OptionsView.ShowGroupPanel = false;
             this.gvFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcFlowName, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcApproveResult, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcCreateDate, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
             // gcDateItemID
             // 
@@ -176,13 +177,15 @@
             this.gcDateItemText.FieldName = "DateItemText";
             this.gcDateItemText.Name = "gcDateItemText";
             this.gcDateItemText.Visible = true;
-            this.gcDateItemText.VisibleIndex = 0;
+            this.gcDateItemText.VisibleIndex = 1;
             // 
             // gcFlowName
             // 
             this.gcFlowName.Caption = "审批流程";
             this.gcFlowName.FieldName = "FlowName";
             this.gcFlowName.Name = "gcFlowName";
+            this.gcFlowName.Visible = true;
+            this.gcFlowName.VisibleIndex = 0;
             // 
             // gcFlowVersionNumber
             // 
@@ -196,7 +199,7 @@
             this.gcCreateUserRealName.FieldName = "CreateUserRealName";
             this.gcCreateUserRealName.Name = "gcCreateUserRealName";
             this.gcCreateUserRealName.Visible = true;
-            this.gcCreateUserRealName.VisibleIndex = 1;
+            this.gcCreateUserRealName.VisibleIndex = 2;
             // 
             // gcCreateDate
             // 
@@ -206,7 +209,7 @@
             this.gcCreateDate.FieldName = "CreateDate";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 2;
+            this.gcCreateDate.VisibleIndex = 3;
             // 
             // gcIsClosed
             // 
@@ -215,7 +218,7 @@
             this.gcIsClosed.FieldName = "IsClosed";
             this.gcIsClosed.Name = "gcIsClosed";
             this.gcIsClosed.Visible = true;
-            this.gcIsClosed.VisibleIndex = 3;
+            this.gcIsClosed.VisibleIndex = 4;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -233,7 +236,7 @@
             this.gcNextUserRealName.FieldName = "NextUserRealName";
             this.gcNextUserRealName.Name = "gcNextUserRealName";
             this.gcNextUserRealName.Visible = true;
-            this.gcNextUserRealName.VisibleIndex = 4;
+            this.gcNextUserRealName.VisibleIndex = 5;
             // 
             // gcApproveResult
             // 
@@ -241,7 +244,7 @@
             this.gcApproveResult.FieldName = "InstanceStateWithEmptyState";
             this.gcApproveResult.Name = "gcApproveResult";
             this.gcApproveResult.Visible = true;
-            this.gcApproveResult.VisibleIndex = 5;
+            this.gcApproveResult.VisibleIndex = 6;
             // 
             // gcCloseReason
             // 
@@ -249,7 +252,7 @@
             this.gcCloseReason.FieldName = "CloseReason";
             this.gcCloseReason.Name = "gcCloseReason";
             this.gcCloseReason.Visible = true;
-            this.gcCloseReason.VisibleIndex = 6;
+            this.gcCloseReason.VisibleIndex = 7;
             // 
             // gcCloseDateTime
             // 
@@ -260,7 +263,7 @@
             this.gcCloseDateTime.FieldName = "CloseDateTime";
             this.gcCloseDateTime.Name = "gcCloseDateTime";
             this.gcCloseDateTime.Visible = true;
-            this.gcCloseDateTime.VisibleIndex = 7;
+            this.gcCloseDateTime.VisibleIndex = 8;
             // 
             // repositoryItemDateEdit1
             // 
@@ -280,10 +283,11 @@
             // 
             // frmMyFlowListQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 439);
+            this.ClientSize = new System.Drawing.Size(1006, 564);
             this.Controls.Add(this.gdFlow);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMyFlowListQuery";
             this.Text = "我提交的流程";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

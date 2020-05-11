@@ -191,7 +191,7 @@ namespace BudgetSystem.Entity
         public decimal Commission { get; set; }
 
         /// <summary>
-        /// 运保费
+        /// 运杂费
         /// </summary>
         public decimal Premium { get; set; }
 

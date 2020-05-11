@@ -148,7 +148,12 @@ namespace BudgetSystem
         /// </summary>
         private void ModifySupplier()
         {
-            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (this.gvSupplier.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
             if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要修改的项");
@@ -176,7 +181,12 @@ namespace BudgetSystem
         /// </summary>
         private void DeleteSupplier()
         {
-            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (this.gvSupplier.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要删除的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
             if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要删除的项");
@@ -194,10 +204,12 @@ namespace BudgetSystem
                 XtraMessageBox.Show("您选择删除的项已经被使用，不允许删除");
                 return;
             }
+            if (XtraMessageBox.Show(string.Format("是否真的要删除【{0}】供应商？删除后将无法恢复。", supplier.Name), "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                sm.DeleteSupplier(supplier);
 
-            sm.DeleteSupplier(supplier);
-
-            this.gvSupplier.DeleteRow(this.gvSupplier.FocusedRowHandle);
+                this.gvSupplier.DeleteRow(this.gvSupplier.FocusedRowHandle);
+            }
         }
 
         /// <summary>
@@ -205,7 +217,12 @@ namespace BudgetSystem
         /// </summary>
         private void CommitSupplier()
         {
-            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (this.gvSupplier.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要提交初评审批的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
             if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要提交初评审批的项");
@@ -249,7 +266,12 @@ namespace BudgetSystem
         /// </summary>
         private void ReviewSupplier()
         {
-            Supplier supplier = this.gvSupplier.GetFocusedRow() as Supplier;
+            if (this.gvSupplier.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要提交复评审批的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
             if (supplier == null)
             {
                 XtraMessageBox.Show("请选择需要提交复评审批的项");
@@ -281,31 +303,36 @@ namespace BudgetSystem
                 return;
             }
 
-            if (supplier.ReviewDate != null && datetimeNow.Date >= supplier.ReviewDate.Value.Date)
+            //if (supplier.ReviewDate == null || datetimeNow.Date >= supplier.ReviewDate.Value.Date)
+            //{
+            frmSupplierEdit form = new frmSupplierEdit();
+            form.CurrentSupplier = supplier;
+            form.WorkModel = EditFormWorkModels.Custom;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                frmSupplierEdit form = new frmSupplierEdit();
-                form.CurrentSupplier = supplier;
-                form.WorkModel = EditFormWorkModels.Custom;
-                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                {
-                    this.RefreshData();
-                }
+                this.RefreshData();
             }
-            else
-            {
-                XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许提交复评审批。", supplier.Name));
-                return;
-            }
+            //}
+            //else
+            //{
+            //    XtraMessageBox.Show(string.Format("{0}的供方，不满足复评时间要求，不允许提交复评审批。", supplier.Name));
+            //    return;
+            //}
         }
 
         private void ViewSupplier()
         {
-            Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
-            if (currentRowSupplier != null)
+            if (this.gvSupplier.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要查看详情的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
+            if (supplier != null)
             {
                 frmSupplierEdit form = new frmSupplierEdit();
                 form.WorkModel = EditFormWorkModels.View;
-                form.CurrentSupplier = currentRowSupplier;
+                form.CurrentSupplier = supplier;
                 form.ShowDialog(this);
             }
             else
@@ -316,17 +343,22 @@ namespace BudgetSystem
 
         private void ViewApply()
         {
-            Supplier currentRowSupplier = this.gvSupplier.GetFocusedRow() as Supplier;
-            if (currentRowSupplier != null)
+            if (this.gvSupplier.FocusedRowHandle < 0)
             {
-                if (string.IsNullOrEmpty(currentRowSupplier.FlowName)
-                    || currentRowSupplier.FlowName == EnumFlowNames.供应商审批流程.ToString())
+                XtraMessageBox.Show("请选择需要查看复评历史记录的项");
+                return;
+            }
+            Supplier supplier = this.gvSupplier.GetRow(this.gvSupplier.FocusedRowHandle) as Supplier;
+            if (supplier != null)
+            {
+                if (string.IsNullOrEmpty(supplier.FlowName)
+                    || supplier.FlowName == EnumFlowNames.供应商审批流程.ToString())
                 {
                     XtraMessageBox.Show("当前选择供应商不存在复评历史记录");
                 }
                 else
                 {
-                    frmSupplierReviewHistory form = new frmSupplierReviewHistory(currentRowSupplier.ID);
+                    frmSupplierReviewHistory form = new frmSupplierReviewHistory(supplier.ID);
                     form.WorkModel = EditFormWorkModels.View;
                     form.ShowDialog(this);
                 }
@@ -349,6 +381,7 @@ namespace BudgetSystem
             if (e.KeyCode == Keys.I && e.Control)
             {
                 frmSupplierImport frm = new frmSupplierImport();
+                //frmSupplierImport2 frm = new frmSupplierImport2();
                 frm.ShowDialog();
             }
         }

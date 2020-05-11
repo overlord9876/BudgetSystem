@@ -8,16 +8,23 @@ using System.Linq;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
     public partial class ucSupplierSelected : UserControl
     {
         private EnumSupplierType supplierType = EnumSupplierType.临时供方;
+        private PaymentNotesManager pnm = new PaymentNotesManager();
         List<Supplier> dataSource = null;
+        private int budgetId;
         public ucSupplierSelected()
         {
             InitializeComponent();
+
+            gcIsSelected.OptionsColumn.ShowCaption = false;
+            gcIsSelected.ColumnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            RegisterEventHandler();
         }
         /// <summary>
         /// 获取当前视图选择的供应商列表。
@@ -67,8 +74,9 @@ namespace BudgetSystem
             }
         }
 
-        public void SetSelectedItems(List<Supplier> selectedItems, EnumSupplierType type)
+        public void SetSelectedItems(int budgetId, List<Supplier> selectedItems, EnumSupplierType type)
         {
+            this.budgetId = budgetId;
             var suppliers = this.gridSupplier.DataSource as BindingList<Supplier>;
 
             if (suppliers != null)
@@ -112,6 +120,15 @@ namespace BudgetSystem
             this.gridSupplier.RefreshDataSource();
         }
 
+        private void RegisterEventHandler()
+        {
+            this.gvSupplier.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSupplier_CustomDrawGroupRow);
+            this.gvSupplier.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvSupplier_CellValueChanging);
+            this.gvSupplier.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(gvSupplier_CustomDrawColumnHeader);
+            this.gvSupplier.Click += new EventHandler(gvSupplier_Click);
+            this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
+        }
+
         void gvSupplier_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
         {
             GridGroupRowInfo info = e.Info as GridGroupRowInfo;
@@ -129,10 +146,21 @@ namespace BudgetSystem
         {
             if (e.Column == gcIsSelected)
             {
+                //Supplier supplier = this.gvSupplier.GetRow(e.RowHandle) as Supplier;
+                //if (supplier != null)
+                //{
+                //    if (pnm.IsPay(budgetId, supplier.ID) && (bool)e.Value == false)
+                //    {
+                //        this.gvSupplier.SetRowCellValue(e.RowHandle, e.Column, true);
+                //    }
+                //    else
+                //    {
                 this.gvSupplier.SetRowCellValue(e.RowHandle, e.Column, e.Value);
+                //}
                 int rowHandle = this.gvSupplier.FocusedRowHandle;
                 this.gvSupplier.RefreshData();// (rowHandle);
                 this.gvSupplier.FocusedRowHandle = rowHandle;
+                //}
             }
         }
 
@@ -143,5 +171,81 @@ namespace BudgetSystem
                 (this.Parent as DevExpress.XtraEditors.PopupContainerControl).OwnerEdit.ClosePopup();
             }
         }
+
+
+        #region GridControl 全选
+
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        private bool chkState = false;
+
+        private void gvSupplier_Click(object sender, EventArgs e)
+        {
+            if (ClickGridCheckBox(this.gvSupplier, chkState))
+            {
+                chkState = !chkState;
+            }
+        }
+
+        private void gvSupplier_CustomDrawColumnHeader(object sender, DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e)
+        {
+            if (e.Column != null && e.Column == gcIsSelected)
+            {
+                e.Info.InnerElements.Clear();
+                e.Painter.DrawObject(e.Info);
+                DrawCheckBox(e, chkState);
+                e.Handled = true;
+            }
+        }
+
+        private void DrawCheckBox(DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e, bool chk)
+        {
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryCheck = e.Column.ColumnEdit as DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit;
+            if (repositoryCheck != null)
+            {
+                System.Drawing.Graphics g = e.Graphics;
+                System.Drawing.Rectangle r = e.Bounds;
+
+                DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo info;
+                DevExpress.XtraEditors.Drawing.CheckEditPainter painter;
+                DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs args;
+                info = repositoryCheck.CreateViewInfo() as DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo;
+
+                painter = repositoryCheck.CreatePainter() as DevExpress.XtraEditors.Drawing.CheckEditPainter;
+                info.EditValue = chk;
+                info.Bounds = r;
+                info.CalcViewInfo(g);
+                args = new DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs(info, new DevExpress.Utils.Drawing.GraphicsCache(g), r);
+                painter.Draw(args);
+                args.Cache.Dispose();
+            }
+        }
+
+        private bool ClickGridCheckBox(DevExpress.XtraGrid.Views.Grid.GridView gridView, bool currentStatus)
+        {
+            bool result = false;
+            if (gridView != null)
+            {
+                //禁止排序 
+                gridView.ClearSorting();
+
+                gridView.PostEditor();
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+                System.Drawing.Point pt = gridView.GridControl.PointToClient(Control.MousePosition);
+                info = gridView.CalcHitInfo(pt);
+                if (info.InColumn && info.Column != null && info.Column == gcIsSelected)
+                {
+                    for (int i = 0; i < gridView.RowCount; i++)
+                    {
+                        gridView.SetRowCellValue(i, gcIsSelected, !currentStatus);
+                    }
+                    return true;
+                }
+            }
+            return result;
+        }
+
+        #endregion
     }
 }

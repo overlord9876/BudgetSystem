@@ -22,21 +22,27 @@ namespace BudgetSystem.Base
 
         protected DateTime datetimeNow = DateTime.MinValue;
 
+        protected virtual bool ShowFirstCombobox { get; set; }
+
         public frmBaseCommonReportForm()
         {
             InitializeComponent();
-            datetimeNow = cm.GetDateTimeNow();
-            int year = datetimeNow.Year - 2;
-            for (int index = 0; index < 52; index++)
+            if (!IsDesignMode)
             {
-                cboYears.Items.Add((year + index));
+                datetimeNow = cm.GetDateTimeNow();
+                int year = datetimeNow.Year - 2;
+                for (int index = 0; index < 52; index++)
+                {
+                    cboYears.Items.Add((year + index));
+                }
+                this.cboSelectYear.EditValue = datetimeNow.Year;
+
+                this.deStartDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+                DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+                this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
             }
-            this.cboSelectYear.EditValue = datetimeNow.Year;
-
-            this.deStartDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
-            DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
-            this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
-
+            this.barSelected.EditValue = "";
+            this.barSelected.Visibility = ShowFirstCombobox ? BarItemVisibility.Always : BarItemVisibility.Never;
             this.lcList.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             this.splitterItem.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
@@ -50,8 +56,8 @@ namespace BudgetSystem.Base
         {
             //InitData();
             this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
+            this.barSelected.EditValueChanged += new EventHandler(cboSelectYear_EditValueChanged);
         }
-
 
         protected bool supportPivotGrid = true;
         protected bool supportPivotGridSaveView = true;
@@ -118,10 +124,7 @@ namespace BudgetSystem.Base
             {
                 this.lcStatBar.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
-
         }
-
-
 
         private bool GetBarShowState(Bar bar)
         {
@@ -495,6 +498,12 @@ namespace BudgetSystem.Base
         public override void LoadData()
         {
             base.LoadData();
+            string str = string.Empty;
+            if (this.barSelected.EditValue != null)
+            {
+                str = this.barSelected.EditValue.ToString();
+            }
+
             DateTime startTime = (DateTime)deStartDate.EditValue;
             startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, 0, 0, 0);
             DateTime endTime = (DateTime)deEndDate.EditValue;
@@ -504,9 +513,9 @@ namespace BudgetSystem.Base
 
             condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
 
-
             condition.BeginTimestamp = startTime;
             condition.EndTimestamp = endTime;
+            condition.A = str;
             LoadDataByCondition(condition);
         }
 
@@ -518,6 +527,24 @@ namespace BudgetSystem.Base
         private void btn_Print_ItemClick(object sender, ItemClickEventArgs e)
         {
             Print();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ExportExcel();
+        }
+
+        public virtual void ExportExcel()
+        {
+            using (FileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Title = "选择保存路径";
+                dialog.Filter = "excel文件|*.xls";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.gridView.ExportToXls(dialog.FileName);
+                }
+            }
         }
 
         public virtual void Print() { }

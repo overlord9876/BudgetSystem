@@ -14,8 +14,13 @@ namespace BudgetSystem.InMoney
 {
     public partial class frmInvoiceImport : frmBaseDialogForm
     {
-        bool isFinanceImport = false;
-        string fileName = string.Empty;
+        private bool isFinanceImport = false;
+        private string fileName = string.Empty;
+        private DateTime datetimeNow;
+        private Bll.CommonManager cm = new Bll.CommonManager();
+        private Bll.InvoiceManager im = new Bll.InvoiceManager();
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
+
         public frmInvoiceImport(string fileName, bool isFinanceImport = false)
         {
             InitializeComponent();
@@ -23,8 +28,6 @@ namespace BudgetSystem.InMoney
             this.isFinanceImport = isFinanceImport;
         }
 
-        private Bll.InvoiceManager im = new Bll.InvoiceManager();
-        private Bll.BudgetManager bm = new Bll.BudgetManager();
         private void frmInvoiceImport_Load(object sender, EventArgs e)
         {
             if (this.isFinanceImport == true)
@@ -79,6 +82,7 @@ namespace BudgetSystem.InMoney
                 Invoice invoice = null;
                 if (isFinanceImport)
                 {
+                    datetimeNow = cm.GetDateTimeNow();
                     foreach (DataRow row in dt.Rows)
                     {
                         invoice = new Invoice();
@@ -89,6 +93,7 @@ namespace BudgetSystem.InMoney
                         invoice.Payment = DataRowConvertHelper.GetDecimalValue(row, "金额");
                         invoice.TaxAmount = DataRowConvertHelper.GetDecimalValue(row, "税额");
                         invoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
+                        invoice.FinanceImportDate = datetimeNow;
                         list.Add(invoice);
                     }
                 }
@@ -102,6 +107,14 @@ namespace BudgetSystem.InMoney
                         invoice.ExchangeRate = DataRowConvertHelper.GetDecimalValue(row, "汇率");
                         invoice.CustomsDeclaration = DataRowConvertHelper.GetStringValue(row, "报关单").Trim();
                         invoice.Number = DataRowConvertHelper.GetStringValue(row, "发票号").Trim();
+                        if (!string.IsNullOrEmpty(invoice.Number))
+                        {
+                            DataRow[] rows = dt.Select(string.Format("发票号='{0}'", invoice.Number));
+                            if (rows.Length > 1)
+                            {
+                                invoice.Message = string.Format("发票号在当前表格存在{0}个重复号", rows.Length);
+                            }
+                        }
                         invoice.TaxRebateRate = DataRowConvertHelper.GetFloatValue(row, "退税率");
                         invoice.Commission = DataRowConvertHelper.GetDecimalValue(row, "佣金");
                         invoice.FeedMoney = DataRowConvertHelper.GetDecimalValue(row, "进料款");
@@ -233,9 +246,20 @@ namespace BudgetSystem.InMoney
                         invoice.BudgetID = budgetId;
                     }
                 }
+                int repeatCount = 0;
+                if (list != null && !string.IsNullOrEmpty(invoice.Number.Trim()))
+                {
+                    repeatCount = list.Count(o => o.Number == invoice.Number);
+                }
                 if (string.IsNullOrEmpty(invoice.Number.Trim()))
                 {
                     e.ErrorText = "发票号不能为空;";
+                    e.Valid = false;
+                    return;
+                }
+                else if (repeatCount > 1)
+                {
+                    e.ErrorText = string.Format("发票号当前表格存在{0}个重复号", repeatCount);
                     e.Valid = false;
                     return;
                 }

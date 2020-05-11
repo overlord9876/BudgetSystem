@@ -26,7 +26,7 @@ namespace BudgetSystem.UserManage
         protected override void InitModelOperate()
         {
             base.InitModelOperate();
-            
+
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
@@ -36,8 +36,8 @@ namespace BudgetSystem.UserManage
 
 
             //注册查询我在基类里处理了，如果业务模块需要使用查询功能，可以像这里一样注册就行了
-           // this.RegeditQueryOperate<UserQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
-           // this.RegeditPrintOperate();
+            // this.RegeditQueryOperate<UserQueryCondition>(true, new List<string> { "默认", "查询1", "查询2" });
+            // this.RegeditPrintOperate();
 
             this.ModelOperatePageName = "用户管理";
 
@@ -101,7 +101,11 @@ namespace BudgetSystem.UserManage
 
         private void EnableUser()
         {
-            User currentRowUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            User currentRowUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentRowUser != null)
             {
                 um.ModifyUserState(currentRowUser.UserName, true);
@@ -112,7 +116,11 @@ namespace BudgetSystem.UserManage
 
         private void DisableUser()
         {
-            User currentRowUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            User currentRowUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentRowUser != null)
             {
                 um.ModifyUserState(currentRowUser.UserName, false);
@@ -123,7 +131,11 @@ namespace BudgetSystem.UserManage
 
         private void ReSetUserPassword()
         {
-            User currentRowUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            User currentRowUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentRowUser != null)
             {
                 um.ModifyUserPassword(currentRowUser.UserName, Util.SHA256.ToSHA256("1"));
@@ -142,8 +154,11 @@ namespace BudgetSystem.UserManage
         }
         private void ModifyUser()
         {
-
-            User currentRowUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            User currentRowUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
             if (currentRowUser != null)
             {
                 frmUserEdit form = new frmUserEdit();
@@ -158,7 +173,12 @@ namespace BudgetSystem.UserManage
 
         private void ViewUser()
         {
-            User currentRowUser = this.gvUser.GetFocusedRow() as User;
+            if (this.gvUser.FocusedRowHandle < 0)
+            {
+                return;
+            }
+            User currentRowUser = this.gvUser.GetRow(this.gvUser.FocusedRowHandle) as User;
+            if (currentRowUser != null)
             {
                 frmUserEdit form = new frmUserEdit();
                 form.WorkModel = EditFormWorkModels.View;

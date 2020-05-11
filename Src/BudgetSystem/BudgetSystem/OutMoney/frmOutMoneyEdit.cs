@@ -15,7 +15,6 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyEdit : frmBaseDialogForm
     {
-        Bll.FlowManager fm = new FlowManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
 
         public PaymentNotes CurrentPaymentNotes { get; set; }
@@ -55,7 +54,8 @@ namespace BudgetSystem.OutMoney
             }
             else if (this.WorkModel == EditFormWorkModels.Custom)
             {
-                this.Text = "借款归还确认";
+                this.Text = "借条归还确认";
+                this.btnSure.Text = "保存并打印";
                 this.lciCommit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
@@ -92,7 +92,7 @@ namespace BudgetSystem.OutMoney
             this.ucOutMoneyEdit1.FillEditData();
             this.CurrentPaymentNotes = ucOutMoneyEdit1.CurrentPaymentNotes;
 
-            CurrentPaymentNotes.RepayLoan = true;
+            //CurrentPaymentNotes.RepayLoan = true;
 
             CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(CurrentPaymentNotes);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -111,15 +111,22 @@ namespace BudgetSystem.OutMoney
 
             if (this.WorkModel == EditFormWorkModels.New)
             {
-                pnm.AddPaymentNote(this.CurrentPaymentNotes);
+                this.CurrentPaymentNotes.ID = pnm.AddPaymentNote(this.CurrentPaymentNotes);
             }
             else
             {
                 this.CurrentPaymentNotes.UpdateTimestamp = pnm.ModifyPaymentNote(this.CurrentPaymentNotes);
             }
-            FlowRunState state = fm.StartFlow(EnumFlowNames.付款审批流程.ToString(), CurrentPaymentNotes.ID, CurrentPaymentNotes.VoucherNo, EnumFlowDataType.付款单.ToString(), RunInfo.Instance.CurrentUser.UserName, string.Format("发起{0}", EnumFlowNames.付款审批流程));
-            XtraMessageBox.Show(state.ToString());
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            string message = pnm.StartFlow(this.CurrentPaymentNotes.ID, RunInfo.Instance.CurrentUser.UserName);
+            if (string.IsNullOrEmpty(message))
+            {
+                XtraMessageBox.Show("提交流程成功。");
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                XtraMessageBox.Show(message);
+            }
         }
 
         private void btnSure_Click(object sender, EventArgs e)

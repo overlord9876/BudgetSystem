@@ -78,7 +78,6 @@
             // 
             // ucBudgetEdit1
             // 
-            this.ucBudgetEdit1.CurrentBudget = null;
             this.ucBudgetEdit1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetEdit1.Name = "ucBudgetEdit1";

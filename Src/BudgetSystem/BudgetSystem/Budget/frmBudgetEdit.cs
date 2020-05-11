@@ -66,12 +66,37 @@ namespace BudgetSystem
             }
         }
 
+        protected override void SubmitCustomData()
+        {
+            base.SubmitCustomData();
+            bool requiredResult = true;
+            bool checkResult = this.ucBudgetEdit1.CheckInputData(isStartFlow, out requiredResult);
+            if (!checkResult && requiredResult == false)
+            {
+                return;
+            }
+            this.ucBudgetEdit1.FillData();
+            this.ucBudgetEdit1.CurrentBudget.IsValid = checkResult;
+            string message = bm.ModifyBudgetOtherSuppliers(this.ucBudgetEdit1.CurrentBudget);
+            if (!string.IsNullOrEmpty(message))
+            {
+                XtraMessageBox.Show(message, "提示");
+            }
+            else
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+        }
+
         #region Event Method
+
         private void frmBudgetEditEx_Load(object sender, EventArgs e)
         {
-            this.ucBudgetEdit1.CurrentBudget = this.CurrentBudget;
             this.ucBudgetEdit1.WorkModel = this.WorkModel;
-            this.ucBudgetEdit1.InitData();
+            if (CurrentBudget != null)
+            {
+                this.ucBudgetEdit1.BindingBudget(CurrentBudget);
+            }
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "创建预算单";
@@ -79,6 +104,11 @@ namespace BudgetSystem
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
                 this.Text = "编辑预算单信息";
+            }
+            else if (this.WorkModel == EditFormWorkModels.Custom)
+            {
+                this.Text = "编辑预算单信息（其他供应商）";
+                this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             else if (this.WorkModel == EditFormWorkModels.View)
             {

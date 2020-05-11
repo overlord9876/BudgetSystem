@@ -11,6 +11,7 @@ using DevExpress.XtraPivotGrid;
 using DevExpress.Utils;
 using BudgetSystem.Entity.QueryCondition;
 using System.IO;
+using System.Linq;
 
 namespace BudgetSystem.Report
 {
@@ -114,7 +115,7 @@ namespace BudgetSystem.Report
             CreateColumn(dt, frmCapitalReport.TotalCaption, "totalcaption", typeof(decimal), valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
 
             //行列数据转换
-            foreach (RecieptCapital rc in rcList)
+            foreach (RecieptCapital rc in rcList.OrderBy(o => o.Code))
             {
                 DataRow[] rows = dt.Select(string.Format("{0}='{1}'", columnDic[frmCapitalReport.DepartmentCaption], rc.Department));
                 if (rows != null && rows.Length > 0)

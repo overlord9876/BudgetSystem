@@ -82,15 +82,19 @@ namespace BudgetSystem.Entity
         /// </summary>
         public bool RepayLoan { get; set; }
 
-        public string RepayLoanText
+        public int RepayLoanText
         {
             get
             {
                 if (IsIOU)
                 {
-                    return RepayLoan ? "借款已归还" : "未归还借款";
+                    return RepayLoan ? 0 : -1;
                 }
-                else { return string.Empty; }
+                else if (RepayLoan)
+                {
+                    return 0;
+                }
+                else { return 0; }
             }
         }
 
@@ -239,5 +243,10 @@ namespace BudgetSystem.Entity
                 this.ApplicantRealName, this.SupplierName, this.MoneyUsedDesc, this.CNY, this.AdvancePayment, this.Balance);
         }
 
+        public string ToDesc2()
+        {
+            return string.Format("合同号【{0}】付款金额【￥{1}】用途：【{2}】",
+                this.ContractNO.Trim() , this.CNY, this.MoneyUsedDesc);
+        }
     }
 }

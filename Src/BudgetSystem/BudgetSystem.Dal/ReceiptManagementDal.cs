@@ -221,6 +221,17 @@ namespace BudgetSystem.Dal
             return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), BSID = @bsID }, tran).SingleOrDefault();
         }
 
+        public bool IsReceipt(int budgetId, int customerId, IDbConnection con)
+        {
+            string selectSql = string.Format(@"SELECT count(1) from budgetbill WHERE Cus_ID={0} and BudgetID={1};", customerId, budgetId);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                object obj = command.ExecuteScalar();
+                return Convert.ToInt32(obj) > 0;
+            }
+        }
+
         public IEnumerable<BudgetBill> GetBudgetBillListByBankSlipID(int bsID, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select bb.*,u.RealName as OperatorRealName,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
@@ -242,7 +253,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
-                                Where bb.`BudgetID` = @BudgetID";
+                                Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
 
@@ -254,7 +265,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
-                                Where 1=1";
+                                Where bb.IsDelete=0 ";
             return con.Query<BudgetBill>(selectSql, new { }, tran);
         }
 
