@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmBudgetDatail
+    partial class frmRevokeDescription
     {
         /// <summary>
         /// Required designer variable.
@@ -29,47 +29,57 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.ucBudgetDetailView1 = new BudgetSystem.ucBudgetDetailView();
+            this.btnOK = new DevExpress.XtraEditors.SimpleButton();
+            this.txtApplyDetail = new DevExpress.XtraEditors.MemoEdit();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtApplyDetail = new DevExpress.XtraEditors.MemoEdit();
             this.lciApplyDetail = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciOK = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyDetail.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtApplyDetail.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciApplyDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciOK)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnOK);
             this.layoutControl1.Controls.Add(this.txtApplyDetail);
-            this.layoutControl1.Controls.Add(this.ucBudgetDetailView1);
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-82, 280, 1151, 769);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(40, 67, 1151, 769);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1029, 750);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // ucBudgetDetailView1
+            // btnOK
             // 
-            this.ucBudgetDetailView1.Location = new System.Drawing.Point(2, 2);
-            this.ucBudgetDetailView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ucBudgetDetailView1.Name = "ucBudgetDetailView1";
-            this.ucBudgetDetailView1.Size = new System.Drawing.Size(1025, 587);
-            this.ucBudgetDetailView1.TabIndex = 59;
-            this.ucBudgetDetailView1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
+            this.btnOK.Location = new System.Drawing.Point(791, 722);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(116, 26);
+            this.btnOK.StyleController = this.layoutControl1;
+            this.btnOK.TabIndex = 56;
+            this.btnOK.Text = "确定";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // txtApplyDetail
+            // 
+            this.txtApplyDetail.Location = new System.Drawing.Point(112, 2);
+            this.txtApplyDetail.Name = "txtApplyDetail";
+            this.txtApplyDetail.Size = new System.Drawing.Size(915, 716);
+            this.txtApplyDetail.StyleController = this.layoutControl1;
+            this.txtApplyDetail.TabIndex = 60;
             // 
             // btnCancel
             // 
@@ -81,6 +91,7 @@
             this.btnCancel.StyleController = this.layoutControl1;
             this.btnCancel.TabIndex = 55;
             this.btnCancel.Text = "取消";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // layoutControlGroup1
             // 
@@ -90,8 +101,8 @@
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem50,
             this.emptySpaceItem2,
-            this.layoutControlItem1,
-            this.lciApplyDetail});
+            this.lciApplyDetail,
+            this.lciOK});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -120,45 +131,40 @@
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 720);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(909, 30);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(789, 30);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.ucBudgetDetailView1;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1029, 591);
-            this.layoutControlItem1.Text = "layoutControlItem1";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // txtApplyDetail
-            // 
-            this.txtApplyDetail.Location = new System.Drawing.Point(82, 593);
-            this.txtApplyDetail.Name = "txtApplyDetail";
-            this.txtApplyDetail.Size = new System.Drawing.Size(945, 125);
-            this.txtApplyDetail.StyleController = this.layoutControl1;
-            this.txtApplyDetail.TabIndex = 60;
             // 
             // lciApplyDetail
             // 
             this.lciApplyDetail.Control = this.txtApplyDetail;
             this.lciApplyDetail.CustomizationFormText = "审批记录：";
-            this.lciApplyDetail.Location = new System.Drawing.Point(0, 591);
+            this.lciApplyDetail.Location = new System.Drawing.Point(0, 0);
             this.lciApplyDetail.MinSize = new System.Drawing.Size(92, 70);
             this.lciApplyDetail.Name = "lciApplyDetail";
-            this.lciApplyDetail.Size = new System.Drawing.Size(1029, 129);
+            this.lciApplyDetail.Size = new System.Drawing.Size(1029, 720);
             this.lciApplyDetail.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lciApplyDetail.Text = "审批记录：";
+            this.lciApplyDetail.Text = "退回修改意见：";
             this.lciApplyDetail.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lciApplyDetail.TextSize = new System.Drawing.Size(75, 18);
+            this.lciApplyDetail.TextSize = new System.Drawing.Size(105, 18);
             this.lciApplyDetail.TextToControlDistance = 5;
             // 
-            // frmBudgetDatail
+            // lciOK
+            // 
+            this.lciOK.Control = this.btnOK;
+            this.lciOK.CustomizationFormText = "lciOK";
+            this.lciOK.Location = new System.Drawing.Point(789, 720);
+            this.lciOK.MaxSize = new System.Drawing.Size(120, 30);
+            this.lciOK.MinSize = new System.Drawing.Size(120, 30);
+            this.lciOK.Name = "lciOK";
+            this.lciOK.Size = new System.Drawing.Size(120, 30);
+            this.lciOK.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lciOK.Text = "lciOK";
+            this.lciOK.TextSize = new System.Drawing.Size(0, 0);
+            this.lciOK.TextToControlDistance = 0;
+            this.lciOK.TextVisible = false;
+            // 
+            // frmRevokeDescription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,17 +172,17 @@
             this.ClientSize = new System.Drawing.Size(1029, 750);
             this.Controls.Add(this.layoutControl1);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Name = "frmBudgetDatail";
-            this.Text = "预算单";
-            this.Load += new System.EventHandler(this.frmBudgetDatail_Load);
+            this.Name = "frmRevokeDescription";
+            this.Text = "退回修改";
+            this.Load += new System.EventHandler(this.frmRevokeDescription_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtApplyDetail.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem50)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtApplyDetail.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciApplyDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciOK)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,9 +194,9 @@
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem50;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private ucBudgetDetailView ucBudgetDetailView1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.MemoEdit txtApplyDetail;
         private DevExpress.XtraLayout.LayoutControlItem lciApplyDetail;
+        private DevExpress.XtraEditors.SimpleButton btnOK;
+        private DevExpress.XtraLayout.LayoutControlItem lciOK;
     }
 }

@@ -17,6 +17,7 @@ namespace BudgetSystem
     {
         public Budget CurrentBudget { get; set; }
 
+        private Bll.FlowManager fm = new Bll.FlowManager();
         private bool isStartFlow = false;
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         public frmBudgetEdit()
@@ -96,6 +97,21 @@ namespace BudgetSystem
             if (CurrentBudget != null)
             {
                 this.ucBudgetEdit1.BindingBudget(CurrentBudget);
+
+                var runPoints = fm.GetFlowRunPointsByData(CurrentBudget.ID, EnumFlowDataType.预算单.ToString());
+                if (runPoints != null && runPoints.Any())
+                {
+                    lciApplyDetail.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    txtApplyDetail.Text = txtApplyDetail.Text = FlowApproveDisplayHelper.GetRunPointFlowNodeApproveResultWithStateDisplayName(runPoints);
+                }
+                else
+                {
+                    lciApplyDetail.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+            }
+            else
+            {
+                lciApplyDetail.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
             if (this.WorkModel == EditFormWorkModels.New)
             {

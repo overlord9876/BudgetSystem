@@ -30,6 +30,23 @@ namespace BudgetSystem.Dal
                     sql += " and i.ImportUser in (select UserName from `user` where DeptID=@DeptID)";
                     dp.Add("DeptID", condition.DeptID, DbType.Int32, ParameterDirection.Input, null);
                 }
+                if (!string.IsNullOrEmpty(condition.ContractNO))
+                {
+                    sql += " AND i.BudgetID in (SELECT ID FROM budget where ContractNO LIKE @ContractNO)";
+                    dp.Add("@ContractNO", string.Format("%{0}%", condition.ContractNO), DbType.String, ParameterDirection.Input, null);
+                }
+
+                if (!string.IsNullOrEmpty(condition.Code))
+                {
+                    sql += @" AND i.BudgetID in (SELECT b.ID FROM budget b JOIN `Customer` c  on b.CustomerID=c.ID WHERE c.`Name` LIKE @Name)";
+                    dp.Add("@Name", string.Format("%{0}%", condition.Code), DbType.String, ParameterDirection.Input, null);
+                }
+                if (condition.BeginTimestamp > new DateTime(1995, 1, 1) || condition.EndTimestamp > new DateTime(1995, 1, 1))
+                {
+                    sql += @" AND i.ImportDate BETWEEN @BeginTimestamp AND @EndTimestamp";
+                    dp.Add("@BeginTimestamp", condition.BeginTimestamp, DbType.DateTime, ParameterDirection.Input, null);
+                    dp.Add("@EndTimestamp", condition.EndTimestamp, DbType.DateTime, ParameterDirection.Input, null);
+                }
             }
             return con.Query<Invoice>(sql, dp, tran);
         }

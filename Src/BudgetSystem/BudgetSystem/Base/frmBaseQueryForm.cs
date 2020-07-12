@@ -54,12 +54,10 @@ namespace BudgetSystem
             set;
         }
 
-
         protected virtual void InitModelOperate()
         {
             this.ModelOperateRegistry = new List<ModelOperate>();
         }
-
 
         public virtual bool CanRefreshData
         {

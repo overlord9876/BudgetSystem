@@ -11,6 +11,8 @@ namespace BudgetSystem.Entity
     /// </summary>
     public class SupplierReport : IEntity
     {
+        private decimal exchangeRate;
+
         /// <summary>
         /// ID
         /// </summary>
@@ -29,7 +31,14 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 汇率
         /// </summary>
-        public decimal ExchangeRate { get; set; }
+        public decimal ExchangeRate
+        {
+            get
+            {
+                return Math.Round(this.exchangeRate, 2);
+            }
+            set { this.exchangeRate = value; }
+        }
 
         /// <summary>
         /// 付款原币金额

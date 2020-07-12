@@ -10,16 +10,55 @@ using BudgetSystem.Entity;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Util;
 using BudgetSystem.Entity.QueryCondition;
+using DevExpress.XtraBars;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem.InMoney
 {
     public partial class frmInvoiceQuery : frmBaseQueryForm
     {
+        private InvoiceQueryCondition currentCondition = null;
+        private CommonManager cm = new CommonManager();
+        private BudgetManager bm = new BudgetManager();
+        private DateTime datetimeNow = DateTime.MinValue;
         private Bll.InvoiceManager im = new Bll.InvoiceManager();
+
+        private const string COMMONQUERY_MYCREATE = "我创建的";
+
         public frmInvoiceQuery()
         {
             InitializeComponent();
+            if (!IsDesignMode)
+            {
+                datetimeNow = cm.GetDateTimeNow();
+                int year = datetimeNow.Year - 2;
+                for (int index = 0; index < 52; index++)
+                {
+                    cboYears.Items.Add((year + index));
+                }
+                this.cboSelectYear.EditValue = datetimeNow.Year;
+
+                this.deStartDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+                DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+                this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+
+                BudgetQueryCondition condition = new BudgetQueryCondition();
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+                List<Budget> budgetList = bm.GetAllBudget(condition);
+                this.repositoryItemGridLookUpEdit1.DataSource = budgetList;
+            }
+            this.repositoryItemGridLookUpEdit1.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(repositoryItemGridLookUpEdit1_ButtonClick);
             this.Module = BusinessModules.InvoiceManagement;
+            this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
+            this.barSelected.EditValueChanged += new EventHandler(cboSelectYear_EditValueChanged);
+        }
+
+        private void repositoryItemGridLookUpEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Kind == DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)
+            {
+                this.barSelected.EditValue = null;
+            }
         }
 
         protected override void InitModelOperate()
@@ -39,9 +78,24 @@ namespace BudgetSystem.InMoney
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.PrintSignatureForm));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.PrintCostForm));
 
+            this.RegeditQueryOperate<InvoiceQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "交单查询");
+
             this.ModelOperatePageName = "交单管理";
         }
 
+        protected override void DoCommonQuery(string queryName)
+        {
+            if (COMMONQUERY_MYCREATE.Equals(queryName))
+            {
+                InvoiceQueryCondition condition = new InvoiceQueryCondition() { CreateUser = RunInfo.Instance.CurrentUser.UserName };
+                LoadData(condition);
+            }
+        }
+
+        protected override void DoConditionQuery(BudgetSystem.Entity.QueryCondition.BaseQueryCondition condition)
+        {
+            this.LoadData((InvoiceQueryCondition)condition);
+        }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
@@ -87,18 +141,32 @@ namespace BudgetSystem.InMoney
 
         public override void LoadData()
         {
-            InvoiceQueryCondition condition = new InvoiceQueryCondition();
-
-            LoadData(condition);
+            LoadData(null);
         }
 
         private void LoadData(InvoiceQueryCondition condition)
         {
+            currentCondition = condition;
             if (condition == null)
             {
                 condition = new InvoiceQueryCondition();
+
+                DateTime startTime = (DateTime)deStartDate.EditValue;
+                startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, 0, 0, 0);
+                DateTime endTime = (DateTime)deEndDate.EditValue;
+                endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
+
+                condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InvoiceQueryCondition;
+
+                condition.BeginTimestamp = startTime;
+                condition.EndTimestamp = endTime;
+
+                var selectedValue = this.barSelected.EditValue as Budget;
+                if (selectedValue != null)
+                {
+                    condition.ContractNO = selectedValue.ContractNO.Trim();
+                }
             }
-            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InvoiceQueryCondition;
 
             var list = im.GetAllInvoice(condition);
             this.gridInvoice.DataSource = list;
@@ -117,6 +185,15 @@ namespace BudgetSystem.InMoney
                 this.RefreshData();
             }
         }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmInvoiceQueryConditionEditor form = new frmInvoiceQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            form.QueryCondition = this.currentCondition;
+            return form;
+        }
+
         private void CreateInvoice()
         {
             frmInvoiceEdit form = new frmInvoiceEdit();
@@ -314,5 +391,110 @@ namespace BudgetSystem.InMoney
                 XtraMessageBox.Show("请选择需要打印的项");
             }
         }
+
+        #region Search
+
+        private void btnJanuary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(1);
+        }
+
+        private void btnFebruary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(2);
+        }
+
+        private void btnMarch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(3);
+        }
+
+        private void btnApril_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(4);
+        }
+
+        private void btnMay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(5);
+        }
+
+        private void btnJune_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(6);
+        }
+
+        private void btnJuly_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(7);
+        }
+
+        private void btnAugust_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(8);
+        }
+
+        private void btnSeptember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(9);
+        }
+
+        private void btnOctober_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(10);
+        }
+
+        private void btnNovember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(11);
+        }
+
+        private void btnDecember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(12);
+        }
+
+        private void cboSelectYear_EditValueChanged(object sender, EventArgs e)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            deStartDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0);
+            deEndDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0).AddYears(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void ChangedMonth(int month)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            DateTime beginDate = new DateTime(year, month, 1, 0, 0, 0);
+            deStartDate.EditValue = beginDate;
+            deEndDate.EditValue = beginDate.AddMonths(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void btnSearch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btn_Print_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            PrinterHelper.PrintControl(true, this.gridInvoice, false, System.Drawing.Printing.PaperKind.A4);
+        }
+
+        private void btnExportExcel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (FileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Title = "选择保存路径";
+                dialog.Filter = "excel文件|*.xls";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.gvInvoice.ExportToXls(dialog.FileName);
+                }
+            }
+        }
+
+        #endregion
+
     }
 }

@@ -234,6 +234,23 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
             return id;
         }
 
+
+        public void ModifyBudgetDescription(int budgetId, string description, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = @"SELECT b.* FROM `Budget` b WHERE b.ID=@ID;";
+
+            var budget = con.Query<Budget>(selectSql, new { ID = budgetId }, tran).FirstOrDefault();
+            if (budget != null)
+            {
+                if (!string.IsNullOrEmpty(budget.Description))
+                {
+                    description = budget.Description + "\r\n" + description;
+                }
+                string updateSql = @"Update `Budget` Set `Description`=@Description Where `ID` = @ID";
+                con.Execute(updateSql, new { Description = description, ID = budgetId }, tran);
+            }
+        }
+
         public void ModifyBudget(Budget budget, IDbConnection con, IDbTransaction tran = null)
         {
             string updateSql = @"Update `Budget` Set `ContractNO` = @ContractNO,`State` = @State,`Salesman` = @Salesman,`DeptID` = @DeptID,

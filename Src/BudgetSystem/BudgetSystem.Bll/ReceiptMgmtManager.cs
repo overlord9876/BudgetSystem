@@ -259,7 +259,7 @@ namespace BudgetSystem.Bll
             if (budgetBillList != null && budgetBillList.Count > 0)
             {
                 List<string> infoList = new List<string>();
-                budgetBillList.ForEach(b => infoList.Add(string.Format("[{0}:￥{1}]", b.RelationBudget == null ? "" : b.RelationBudget.ContractNO, b.CNY)));
+                budgetBillList.ForEach(b => infoList.Add(string.Format("[{0}:￥{1}，操作人：{2}]", b.RelationBudget == null ? "" : b.RelationBudget.ContractNO, b.CNY, b.OperatorRealName)));
                 info = string.Join("；", infoList.ToArray());
             }
             return info;

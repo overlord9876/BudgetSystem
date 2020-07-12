@@ -29,33 +29,33 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.deReceiptDateEnd = new DevExpress.XtraEditors.DateEdit();
+            this.deReceiptDateBegin = new DevExpress.XtraEditors.DateEdit();
+            this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.txtBudgetNO = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherNo = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.deReceiptDateBegin = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.deReceiptDateEnd = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.panMain)).BeginInit();
             this.panMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBudgetNO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,6 +77,40 @@
             this.layoutControl1.Size = new System.Drawing.Size(712, 365);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // deReceiptDateEnd
+            // 
+            this.deReceiptDateEnd.EditValue = null;
+            this.deReceiptDateEnd.Location = new System.Drawing.Point(496, 99);
+            this.deReceiptDateEnd.Name = "deReceiptDateEnd";
+            this.deReceiptDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deReceiptDateEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deReceiptDateEnd.Size = new System.Drawing.Size(204, 25);
+            this.deReceiptDateEnd.StyleController = this.layoutControl1;
+            this.deReceiptDateEnd.TabIndex = 9;
+            // 
+            // deReceiptDateBegin
+            // 
+            this.deReceiptDateBegin.EditValue = null;
+            this.deReceiptDateBegin.Location = new System.Drawing.Point(150, 99);
+            this.deReceiptDateBegin.Name = "deReceiptDateBegin";
+            this.deReceiptDateBegin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deReceiptDateBegin.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deReceiptDateBegin.Size = new System.Drawing.Size(204, 25);
+            this.deReceiptDateBegin.StyleController = this.layoutControl1;
+            this.deReceiptDateBegin.TabIndex = 8;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Location = new System.Drawing.Point(150, 70);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(550, 25);
+            this.txtCustomer.StyleController = this.layoutControl1;
+            this.txtCustomer.TabIndex = 7;
             // 
             // txtBudgetNO
             // 
@@ -131,14 +165,6 @@
             this.layoutControlItem3.Text = "银行凭证号：";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(135, 18);
             // 
-            // txtCustomer
-            // 
-            this.txtCustomer.Location = new System.Drawing.Point(150, 70);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(550, 25);
-            this.txtCustomer.StyleController = this.layoutControl1;
-            this.txtCustomer.TabIndex = 7;
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtCustomer;
@@ -149,19 +175,6 @@
             this.layoutControlItem1.Text = "客户名称:";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(135, 18);
             // 
-            // deReceiptDateBegin
-            // 
-            this.deReceiptDateBegin.EditValue = null;
-            this.deReceiptDateBegin.Location = new System.Drawing.Point(150, 99);
-            this.deReceiptDateBegin.Name = "deReceiptDateBegin";
-            this.deReceiptDateBegin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deReceiptDateBegin.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deReceiptDateBegin.Size = new System.Drawing.Size(204, 25);
-            this.deReceiptDateBegin.StyleController = this.layoutControl1;
-            this.deReceiptDateBegin.TabIndex = 8;
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.deReceiptDateBegin;
@@ -171,19 +184,6 @@
             this.layoutControlItem4.Size = new System.Drawing.Size(346, 258);
             this.layoutControlItem4.Text = "收款日期（开始）：";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(135, 18);
-            // 
-            // deReceiptDateEnd
-            // 
-            this.deReceiptDateEnd.EditValue = null;
-            this.deReceiptDateEnd.Location = new System.Drawing.Point(496, 99);
-            this.deReceiptDateEnd.Name = "deReceiptDateEnd";
-            this.deReceiptDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deReceiptDateEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deReceiptDateEnd.Size = new System.Drawing.Size(204, 25);
-            this.deReceiptDateEnd.StyleController = this.layoutControl1;
-            this.deReceiptDateEnd.TabIndex = 9;
             // 
             // layoutControlItem5
             // 
@@ -205,18 +205,18 @@
             this.panMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBudgetNO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 

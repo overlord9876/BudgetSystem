@@ -90,5 +90,15 @@ namespace BudgetSystem.Entity
         /// 真实姓名
         /// </summary>
         public string RealName { get; set; }
+
+        /// <summary>
+        /// 流程名字
+        /// </summary>
+        public string FlowName { get; set; }
+
+        /// <summary>
+        /// 关闭原因。
+        /// </summary>
+        public string CloseReason { get; set; }
     }
 }

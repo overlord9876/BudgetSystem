@@ -101,16 +101,16 @@ namespace BudgetSystem.Bll
                             invoice.Message += "销方名称不存在;";
                             result = false;
                         }
-                        if (invoice.Payment <= 0)
-                        {
-                            invoice.Message += "金额应大于0;";
-                            result = false;
-                        }
-                        if (invoice.TaxAmount < 0)
-                        {
-                            invoice.Message += "税额应大于等于0;";
-                            result = false;
-                        }
+                        //if (invoice.Payment <= 0)
+                        //{
+                        //    invoice.Message += "金额应大于0;";
+                        //    result = false;
+                        //}
+                        //if (invoice.TaxAmount < 0)
+                        //{
+                        //    invoice.Message += "税额应大于等于0;";
+                        //    result = false;
+                        //}
                     }
                 }
                 else
@@ -146,9 +146,14 @@ namespace BudgetSystem.Bll
                             invoice.Message += "发票号已存在;";
                             result = false;
                         }
-                        if (invoice.ExchangeRate <= 0 && invoice.OriginalCoin > 0)
+                        //if (invoice.ExchangeRate <= 0 && invoice.OriginalCoin > 0)
+                        //{
+                        //    invoice.Message += "当原币大于0时，汇率应也大于0;";
+                        //    result = false;
+                        //}
+                        if (invoice.ExchangeRate <= 0 && invoice.OriginalCoin != 0)
                         {
-                            invoice.Message += "当原币大于0时，汇率应也大于0;";
+                            invoice.Message += "当原币不等于0时，汇率应也大于0;";
                             result = false;
                         }
                         //if (string.IsNullOrEmpty(invoice.CustomsDeclaration.Trim()))
@@ -161,16 +166,16 @@ namespace BudgetSystem.Bll
                             invoice.Message += "退税率应大于等于0;";
                             result = false;
                         }
-                        if (invoice.Commission < 0)
-                        {
-                            invoice.Message += "佣金应大于等于0;";
-                            result = false;
-                        }
-                        if (invoice.FeedMoney < 0)
-                        {
-                            invoice.Message += "进料款应大于等于0;";
-                            result = false;
-                        }
+                        //if (invoice.Commission < 0)
+                        //{
+                        //    invoice.Message += "佣金应大于等于0;";
+                        //    result = false;
+                        //}
+                        //if (invoice.FeedMoney < 0)
+                        //{
+                        //    invoice.Message += "进料款应大于等于0;";
+                        //    result = false;
+                        //}
                     }
                 }
 

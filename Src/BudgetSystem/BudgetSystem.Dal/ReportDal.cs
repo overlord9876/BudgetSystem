@@ -129,7 +129,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,pn.ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
+            string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,SUM(pn.ExchangeRate)/COUNT(1) as ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
 where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
@@ -163,19 +163,24 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
             }
 
             List<Invoice> invoiceList = con.Query<Invoice>(selectSql, dp, tran).ToList();
-            //TODO:暂时先不将付款作为交单信息。
-            //string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1 AND CommitTime BETWEEN @BeginTime and @EndTime ");
-            //dp = new DynamicParameters();
-            //dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
-            //dp.Add("EndTime", condition.EndTimestamp, null, null, null);
-            //if (condition.ID > 0)
-            //{
-            //    selectPaymentNotesSql += " AND BudgetID=@BudgetID ";
-            //    dp.Add("BudgetID", condition.ID, null, null, null);
-            //}
-            //var paymentNodes = con.Query<PaymentNotes>(selectPaymentNotesSql, dp, tran);
+            //将付款作为交单信息。
+            string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1  AND MoneyUsed ='运杂费' AND CommitTime BETWEEN @BeginTime and @EndTime ");
+            dp = new DynamicParameters();
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (condition.ID > 0)
+            {
+                selectPaymentNotesSql += " AND BudgetID=@BudgetID ";
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+            if (condition.DeptID >= 0)
+            {
+                selectPaymentNotesSql += " and DeptID=@DeptID ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            var paymentNodes = con.Query<PaymentNotes>(selectPaymentNotesSql, dp, tran);
 
-            //invoiceList.AddRange(PaymentToInvoice(paymentNodes.ToList()));
+            invoiceList.AddRange(PaymentToInvoice(paymentNodes.ToList()));
 
             if (result != null)
             {

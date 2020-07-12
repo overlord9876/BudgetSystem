@@ -13,6 +13,8 @@ namespace BudgetSystem.Bll
     {
 
         private FlowDal dal = new FlowDal();
+
+        private BudgetDal budgetDal = new BudgetDal();
         private UserDal uDal;
         private DepartmentDal dDal;
 
@@ -367,6 +369,14 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public FlowInstance GetFlowInstanceByDateItem(int dateItemId, EnumFlowDataType flowDateType)
+        {
+            return this.Query<FlowInstance>((con) =>
+            {
+                return dal.GetFlowInstanceByDateItem(dateItemId, flowDateType, con, null);
+            });
+        }
+
         public FlowRunState RevokePaymentFlow(int instanceID, string approvalUser, bool checkFlowNotApproved)
         {
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
@@ -396,6 +406,45 @@ namespace BudgetSystem.Bll
                     dal.DeleteLastRunPointById(runPoints.ElementAt(runPoints.Count() - 1).ID, con, tran);
                     var runPoint = runPoints.ElementAt(runPoints.Count() - 2);
                     dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+                }
+
+                return FlowRunState.撤回成功;
+
+            });
+        }
+
+        public FlowRunState RevokeBudgetFlow(int instanceID, string approvalUser, string description, bool checkFlowNotApproved)
+        {
+            return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
+            {
+
+                FlowInstance instance = dal.GetFlowInstance(instanceID, con, tran);
+                if (instance.IsClosed)
+                {
+                    var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
+                    if (runPoints.ElementAt(runPoints.Count() - 1).NodeApproveUser != approvalUser)
+                    {
+                        return FlowRunState.最后一个审批不是当前用户;
+                    }
+                    dal.RevokePaymentFlowClosedInstance(instanceID, con, tran);
+                    var runPoint = runPoints.ElementAt(runPoints.Count() - 1);
+                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+                    budgetDal.ModifyBudgetDescription(instance.DateItemID, description, con, tran);
+                    return FlowRunState.撤回成功;
+                }
+
+                if (checkFlowNotApproved)
+                {
+                    var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
+                    if (runPoints.ElementAt(runPoints.Count() - 2).NodeApproveUser != approvalUser)
+                    {
+                        return FlowRunState.最后一个审批不是当前用户;
+                    }
+                    dal.DeleteLastRunPointById(runPoints.ElementAt(runPoints.Count() - 1).ID, con, tran);
+                    var runPoint = runPoints.ElementAt(runPoints.Count() - 2);
+                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+
+                    budgetDal.ModifyBudgetDescription(instance.DateItemID, description, con, tran);
                 }
 
                 return FlowRunState.撤回成功;

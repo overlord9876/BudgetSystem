@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -292,6 +292,12 @@
     <Compile Include="Budget\frmBudgetDatail.Designer.cs">
       <DependentUpon>frmBudgetDatail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\frmRevokeDescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Budget\frmRevokeDescription.Designer.cs">
+      <DependentUpon>frmRevokeDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonControl\LookUpEditHelper.cs" />
     <Compile Include="CommonControl\RepositoryItemTextEdit_Number.cs">
       <SubType>Component</SubType>
@@ -331,6 +337,12 @@
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowApproveDisplayHelper.cs" />
+    <Compile Include="InMoney\frmInvoiceQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InMoney\frmInvoiceQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmInvoiceQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="InMoney\frmInMoneyQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -813,6 +825,9 @@
     <EmbeddedResource Include="Budget\frmBudgetDatail.resx">
       <DependentUpon>frmBudgetDatail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Budget\frmRevokeDescription.resx">
+      <DependentUpon>frmRevokeDescription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\frmCustomerQuery.resx">
       <DependentUpon>frmCustomerQuery.cs</DependentUpon>
     </EmbeddedResource>
@@ -827,6 +842,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\ucCustomerSelected.resx">
       <DependentUpon>ucCustomerSelected.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InMoney\frmInvoiceQueryConditionEditor.resx">
+      <DependentUpon>frmInvoiceQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InMoney\frmInMoneyQueryConditionEditor.resx">
       <DependentUpon>frmInMoneyQueryConditionEditor.cs</DependentUpon>

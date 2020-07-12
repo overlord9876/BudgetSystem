@@ -53,6 +53,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinancialArchiveApply, "财务归档征求"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Archive, "归档"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.RejectedAccount, "驳回归档征求"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ConfirmOrRevoke, "退回修改"));
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
@@ -145,6 +146,10 @@ namespace BudgetSystem
             {
                 AddPaymentNote();
             }
+            else if (operate.Operate == OperateTypes.ConfirmOrRevoke.ToString())
+            {
+                DoConfirmOrRevoke();
+            }
         }
 
         protected override void DoCommonQuery(string queryName)
@@ -197,6 +202,7 @@ namespace BudgetSystem
             form.QueryName = this.GetType().ToString();
             return form;
         }
+
         public override void LoadData()
         {
             LoadData(null);
@@ -278,7 +284,7 @@ namespace BudgetSystem
             }
             if (!RunInfo.Instance.CurrentUser.UserName.Equals(budget.Salesman))
             {
-                message = string.Format("当前为{0}的预算单，{1}不能修改。", RunInfo.Instance.CurrentUser.RealName, budget.SalesmanName);
+                message = string.Format("当前为{0}的预算单，{1}不能修改。", budget.SalesmanName, RunInfo.Instance.CurrentUser.RealName);
             }
             if (!string.IsNullOrEmpty(message))
             {
@@ -748,5 +754,53 @@ namespace BudgetSystem
             //form.ShowDialog(this);
         }
 
+        private void DoConfirmOrRevoke()
+        {
+            if (this.gvBudget.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择退回修改的项");
+                return;
+            }
+            Budget budget = this.gvBudget.GetRow(this.gvBudget.FocusedRowHandle) as Budget;
+            if (budget == null)
+            {
+                XtraMessageBox.Show("请选择退回修改的项");
+                return;
+            }
+            budget = bm.GetBudget(budget.ID);
+            if (budget == null)
+            {
+                XtraMessageBox.Show("选择退回修改的项已经不存在。");
+                return;
+            }
+            string message = string.Empty;
+            if (budget.EnumFlowState != EnumDataFlowState.审批通过)
+            {
+                message = string.Format("{0}的预算单不能退回修改。", budget.EnumFlowState.ToString());
+            }
+            if (!string.IsNullOrEmpty(message))
+            {
+                XtraMessageBox.Show(message, "提示");
+                return;
+            }
+            var flowItem = fm.GetFlowInstanceByDateItem(budget.ID, EnumFlowDataType.预算单);
+            if (flowItem == null)
+            {
+                XtraMessageBox.Show("流程不存在，请刷新后再试！", "提示");
+                return;
+            }
+            frmRevokeDescription frm = new frmRevokeDescription();
+            frm.CurrentBudget = budget;
+            if (frm.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                FlowRunState state = fm.RevokeBudgetFlow(flowItem.ID, RunInfo.Instance.CurrentUser.UserName, frm.Description(), true);
+
+                if (state == FlowRunState.撤回成功)
+                {
+                    budget.FlowState = (int)EnumDataFlowState.审批中;
+                    this.gvBudget.RefreshRow(this.gvBudget.FocusedRowHandle);
+                }
+            }
+        }
     }
 }

@@ -211,18 +211,18 @@ namespace BudgetSystem.InMoney
                     e.Valid = false;
                     return;
                 }
-                if (invoice.Payment <= 0)
-                {
-                    e.ErrorText = "金额应大于0";
-                    e.Valid = false;
-                    return;
-                }
-                if (invoice.TaxAmount < 0)
-                {
-                    e.ErrorText = "税额应大于等于0";
-                    e.Valid = false;
-                    return;
-                }
+                //if (invoice.Payment <= 0)
+                //{
+                //    e.ErrorText = "金额应大于0";
+                //    e.Valid = false;
+                //    return;
+                //}
+                //if (invoice.TaxAmount < 0)
+                //{
+                //    e.ErrorText = "税额应大于等于0";
+                //    e.Valid = false;
+                //    return;
+                //}
             }
             else
             {
@@ -287,18 +287,18 @@ namespace BudgetSystem.InMoney
                     e.Valid = false;
                     return;
                 }
-                if (invoice.Commission < 0)
-                {
-                    e.ErrorText = "佣金应大于等于0";
-                    e.Valid = false;
-                    return;
-                }
-                if (invoice.FeedMoney < 0)
-                {
-                    e.ErrorText = "进料款应大于等于0";
-                    e.Valid = false;
-                    return;
-                }
+                //if (invoice.Commission < 0)
+                //{
+                //    e.ErrorText = "佣金应大于等于0";
+                //    e.Valid = false;
+                //    return;
+                //}
+                //if (invoice.FeedMoney < 0)
+                //{
+                //    e.ErrorText = "进料款应大于等于0";
+                //    e.Valid = false;
+                //    return;
+                //}
             }
             invoice.Message = string.Empty;
         }

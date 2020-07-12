@@ -184,6 +184,16 @@ namespace BudgetSystem.Dal
             return con.Query<FlowItem>(sql, new { NodeApproveUser = userName }, tran);
         }
 
+        public FlowInstance GetFlowInstanceByDateItem(int dateItemId, EnumFlowDataType dateItemType, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select `ID`,`FlowName`,`FlowVersionNumber`,`DateItemID`,`DateItemText`,`DateItemType`,`CreateDate`,`CreateUser`,`ApproveResult`,`IsClosed`,`CloseReason`,`CloseDateTime`,`IsCreateUserConfirm`,`ConfirmDateTime`,Description 
+                                    From `FlowInstance` 
+                                    Where DateItemID=@DateItemID AND DateItemType=@DateItemType AND IsRecent=1";
+
+
+            return con.Query<FlowItem>(selectSql, new { DateItemID = dateItemId, DateItemType = dateItemType.ToString() }, tran).FirstOrDefault();
+        }
+
         public IEnumerable<FlowItem> GetUnConfirmFlowByUser(string userName, IDbConnection con, IDbTransaction tran)
         {
             //            string sql = @"Select t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.DateItemText,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName
@@ -262,7 +272,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName
+            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,t1.FlowName,t1.CloseReason
                     From `FlowInstance` t1  
 						LEFT JOIN `FlowRunPoint` frp on t1.ID = frp.InstanceID 
 						LEFT JOIN flownode fn on frp.NodeID=fn.ID

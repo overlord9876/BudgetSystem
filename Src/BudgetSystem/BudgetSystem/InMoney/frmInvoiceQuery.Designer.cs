@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gridInvoice = new DevExpress.XtraGrid.GridControl();
             this.gvInvoice = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,25 +45,78 @@
             this.gcCommission = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcFeedMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcGrossProfit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcImportUserName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFinanceImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.gcFinanceImportDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.pivotViewBar = new DevExpress.XtraBars.Bar();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar1 = new DevExpress.XtraBars.Bar();
+            this.barSelected = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcValidity = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCustomerNames = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSeaport = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cboSelectYear = new DevExpress.XtraBars.BarEditItem();
+            this.cboYears = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnJanuary = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFebruary = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMarch = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApril = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMay = new DevExpress.XtraBars.BarButtonItem();
+            this.btnJune = new DevExpress.XtraBars.BarButtonItem();
+            this.btnJuly = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAugust = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSeptember = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOctober = new DevExpress.XtraBars.BarButtonItem();
+            this.btnNovember = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDecember = new DevExpress.XtraBars.BarButtonItem();
+            this.deStartDate = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.deEndDate = new DevExpress.XtraBars.BarEditItem();
+            this.btnSearch = new DevExpress.XtraBars.BarButtonItem();
+            this.btn_Print = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridInvoice
             // 
             this.gridInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridInvoice.Location = new System.Drawing.Point(0, 0);
+            this.gridInvoice.Location = new System.Drawing.Point(0, 34);
             this.gridInvoice.MainView = this.gvInvoice;
             this.gridInvoice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(1470, 723);
+            this.gridInvoice.Size = new System.Drawing.Size(1470, 689);
             this.gridInvoice.TabIndex = 1;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -84,14 +138,16 @@
             this.gcCommission,
             this.gcFeedMoney,
             this.gcTotalCost,
+            this.gcGrossProfit,
             this.gcDepartmentCode,
             this.gcImportUserName,
             this.gcImportDate,
             this.gcFinanceImportDate});
             this.gvInvoice.GridControl = this.gridInvoice;
-            this.gvInvoice.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvInvoice.Name = "gvInvoice";
             this.gvInvoice.OptionsBehavior.Editable = false;
+            this.gvInvoice.OptionsBehavior.SummariesIgnoreNullValues = true;
+            this.gvInvoice.OptionsView.ShowFooter = true;
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
             // 
             // gcContractNO
@@ -102,6 +158,8 @@
             this.gcContractNO.MinWidth = 100;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.OptionsColumn.AllowEdit = false;
+            this.gcContractNO.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计")});
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
             this.gcContractNO.Width = 100;
@@ -114,7 +172,7 @@
             this.gcCode.Name = "gcCode";
             this.gcCode.Visible = true;
             this.gcCode.VisibleIndex = 1;
-            this.gcCode.Width = 100;
+            this.gcCode.Width = 102;
             // 
             // gcNumber
             // 
@@ -125,7 +183,7 @@
             this.gcNumber.OptionsColumn.AllowEdit = false;
             this.gcNumber.Visible = true;
             this.gcNumber.VisibleIndex = 2;
-            this.gcNumber.Width = 103;
+            this.gcNumber.Width = 105;
             // 
             // gcCustomsDeclaration
             // 
@@ -135,7 +193,7 @@
             this.gcCustomsDeclaration.Name = "gcCustomsDeclaration";
             this.gcCustomsDeclaration.Visible = true;
             this.gcCustomsDeclaration.VisibleIndex = 3;
-            this.gcCustomsDeclaration.Width = 106;
+            this.gcCustomsDeclaration.Width = 108;
             // 
             // gcOriginalCoin
             // 
@@ -144,9 +202,11 @@
             this.gcOriginalCoin.MinWidth = 60;
             this.gcOriginalCoin.Name = "gcOriginalCoin";
             this.gcOriginalCoin.OptionsColumn.AllowEdit = false;
+            this.gcOriginalCoin.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcOriginalCoin.Visible = true;
             this.gcOriginalCoin.VisibleIndex = 4;
-            this.gcOriginalCoin.Width = 60;
+            this.gcOriginalCoin.Width = 61;
             // 
             // gcTaxpayerID
             // 
@@ -156,7 +216,7 @@
             this.gcTaxpayerID.Name = "gcTaxpayerID";
             this.gcTaxpayerID.Visible = true;
             this.gcTaxpayerID.VisibleIndex = 5;
-            this.gcTaxpayerID.Width = 60;
+            this.gcTaxpayerID.Width = 69;
             // 
             // gcSupplierName
             // 
@@ -166,26 +226,32 @@
             this.gcSupplierName.Name = "gcSupplierName";
             this.gcSupplierName.Visible = true;
             this.gcSupplierName.VisibleIndex = 6;
-            this.gcSupplierName.Width = 60;
+            this.gcSupplierName.Width = 72;
             // 
             // gcPayment
             // 
             this.gcPayment.Caption = "金额";
             this.gcPayment.FieldName = "Payment";
-            this.gcPayment.MinWidth = 75;
+            this.gcPayment.MinWidth = 85;
             this.gcPayment.Name = "gcPayment";
             this.gcPayment.OptionsColumn.AllowEdit = false;
+            this.gcPayment.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcPayment.Visible = true;
             this.gcPayment.VisibleIndex = 7;
+            this.gcPayment.Width = 85;
             // 
             // gcTaxAmount
             // 
             this.gcTaxAmount.Caption = "税额";
             this.gcTaxAmount.FieldName = "TaxAmount";
+            this.gcTaxAmount.MinWidth = 70;
             this.gcTaxAmount.Name = "gcTaxAmount";
+            this.gcTaxAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcTaxAmount.Visible = true;
             this.gcTaxAmount.VisibleIndex = 8;
-            this.gcTaxAmount.Width = 50;
+            this.gcTaxAmount.Width = 70;
             // 
             // gcExchangeRate
             // 
@@ -194,7 +260,7 @@
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
             this.gcExchangeRate.VisibleIndex = 9;
-            this.gcExchangeRate.Width = 50;
+            this.gcExchangeRate.Width = 46;
             // 
             // gcTaxRebateRate
             // 
@@ -203,35 +269,55 @@
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
             this.gcTaxRebateRate.VisibleIndex = 10;
-            this.gcTaxRebateRate.Width = 50;
+            this.gcTaxRebateRate.Width = 65;
             // 
             // gcCommission
             // 
             this.gcCommission.Caption = "佣金";
             this.gcCommission.FieldName = "Commission";
+            this.gcCommission.MinWidth = 60;
             this.gcCommission.Name = "gcCommission";
+            this.gcCommission.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcCommission.Visible = true;
             this.gcCommission.VisibleIndex = 11;
-            this.gcCommission.Width = 50;
+            this.gcCommission.Width = 60;
             // 
             // gcFeedMoney
             // 
             this.gcFeedMoney.Caption = "进料款";
             this.gcFeedMoney.FieldName = "FeedMoney";
+            this.gcFeedMoney.MinWidth = 50;
             this.gcFeedMoney.Name = "gcFeedMoney";
+            this.gcFeedMoney.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcFeedMoney.Visible = true;
             this.gcFeedMoney.VisibleIndex = 12;
-            this.gcFeedMoney.Width = 50;
+            this.gcFeedMoney.Width = 61;
             // 
             // gcTotalCost
             // 
             this.gcTotalCost.Caption = "成本";
             this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.MinWidth = 80;
             this.gcTotalCost.Name = "gcTotalCost";
             this.gcTotalCost.OptionsColumn.AllowEdit = false;
+            this.gcTotalCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcTotalCost.Visible = true;
             this.gcTotalCost.VisibleIndex = 13;
-            this.gcTotalCost.Width = 50;
+            this.gcTotalCost.Width = 80;
+            // 
+            // gcGrossProfit
+            // 
+            this.gcGrossProfit.Caption = "毛利";
+            this.gcGrossProfit.FieldName = "GrossProfit";
+            this.gcGrossProfit.MinWidth = 75;
+            this.gcGrossProfit.Name = "gcGrossProfit";
+            this.gcGrossProfit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcGrossProfit.Visible = true;
+            this.gcGrossProfit.VisibleIndex = 14;
             // 
             // gcDepartmentCode
             // 
@@ -240,8 +326,8 @@
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 14;
-            this.gcDepartmentCode.Width = 54;
+            this.gcDepartmentCode.VisibleIndex = 15;
+            this.gcDepartmentCode.Width = 45;
             // 
             // gcImportUserName
             // 
@@ -252,8 +338,8 @@
             this.gcImportUserName.Name = "gcImportUserName";
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
             this.gcImportUserName.Visible = true;
-            this.gcImportUserName.VisibleIndex = 15;
-            this.gcImportUserName.Width = 90;
+            this.gcImportUserName.VisibleIndex = 16;
+            this.gcImportUserName.Width = 81;
             // 
             // gcImportDate
             // 
@@ -264,8 +350,20 @@
             this.gcImportDate.Name = "gcImportDate";
             this.gcImportDate.OptionsColumn.AllowEdit = false;
             this.gcImportDate.Visible = true;
-            this.gcImportDate.VisibleIndex = 16;
-            this.gcImportDate.Width = 69;
+            this.gcImportDate.VisibleIndex = 17;
+            this.gcImportDate.Width = 71;
+            // 
+            // gcFinanceImportDate
+            // 
+            this.gcFinanceImportDate.Caption = "财务导入时间";
+            this.gcFinanceImportDate.DisplayFormat.FormatString = "g";
+            this.gcFinanceImportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcFinanceImportDate.FieldName = "FinanceImportDate";
+            this.gcFinanceImportDate.MinWidth = 75;
+            this.gcFinanceImportDate.Name = "gcFinanceImportDate";
+            this.gcFinanceImportDate.Visible = true;
+            this.gcFinanceImportDate.VisibleIndex = 18;
+            this.gcFinanceImportDate.Width = 96;
             // 
             // openFileDialog1
             // 
@@ -277,17 +375,416 @@
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
             // 
-            // gcFinanceImportDate
+            // pivotViewBar
             // 
-            this.gcFinanceImportDate.Caption = "财务导入时间";
-            this.gcFinanceImportDate.DisplayFormat.FormatString = "g";
-            this.gcFinanceImportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gcFinanceImportDate.FieldName = "FinanceImportDate";
-            this.gcFinanceImportDate.MinWidth = 75;
-            this.gcFinanceImportDate.Name = "gcFinanceImportDate";
-            this.gcFinanceImportDate.Visible = true;
-            this.gcFinanceImportDate.VisibleIndex = 17;
-            this.gcFinanceImportDate.Width = 80;
+            this.pivotViewBar.BarName = "Custom 7";
+            this.pivotViewBar.DockCol = 0;
+            this.pivotViewBar.DockRow = 0;
+            this.pivotViewBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.pivotViewBar.FloatSize = new System.Drawing.Size(1324, 34);
+            this.pivotViewBar.OptionsBar.AllowQuickCustomization = false;
+            this.pivotViewBar.OptionsBar.DisableCustomization = true;
+            this.pivotViewBar.OptionsBar.DrawDragBorder = false;
+            this.pivotViewBar.OptionsBar.UseWholeRow = true;
+            this.pivotViewBar.Text = "Custom 7";
+            // 
+            // barManager1
+            // 
+            this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.bar1});
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.deStartDate,
+            this.deEndDate,
+            this.cboSelectYear,
+            this.btnJanuary,
+            this.btnFebruary,
+            this.btnMarch,
+            this.btnApril,
+            this.btnMay,
+            this.btnJune,
+            this.btnJuly,
+            this.btnAugust,
+            this.btnSeptember,
+            this.btnOctober,
+            this.btnNovember,
+            this.btnDecember,
+            this.btnSearch,
+            this.btn_Print,
+            this.btnExportExcel,
+            this.barSelected});
+            this.barManager1.MaxItemId = 23;
+            this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemDateEdit1,
+            this.cboYears,
+            this.repositoryItemComboBox1,
+            this.repositoryItemGridLookUpEdit1});
+            // 
+            // bar1
+            // 
+            this.bar1.BarName = "Custom 7";
+            this.bar1.DockCol = 0;
+            this.bar1.DockRow = 0;
+            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.FloatSize = new System.Drawing.Size(1324, 34);
+            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSelected, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.cboSelectYear),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJanuary),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFebruary),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMarch),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnApril),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMay),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJune),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnJuly),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAugust),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSeptember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnOctober),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnNovember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDecember),
+            new DevExpress.XtraBars.LinkPersistInfo(this.deStartDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.deEndDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSearch),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btn_Print),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExportExcel)});
+            this.bar1.OptionsBar.AllowQuickCustomization = false;
+            this.bar1.OptionsBar.DisableCustomization = true;
+            this.bar1.OptionsBar.DrawDragBorder = false;
+            this.bar1.OptionsBar.UseWholeRow = true;
+            this.bar1.Text = "Custom 7";
+            // 
+            // barSelected
+            // 
+            this.barSelected.Caption = "选择合同：";
+            this.barSelected.Edit = this.repositoryItemGridLookUpEdit1;
+            this.barSelected.Id = 22;
+            this.barSelected.Name = "barSelected";
+            this.barSelected.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barSelected.Width = 119;
+            // 
+            // repositoryItemGridLookUpEdit1
+            // 
+            this.repositoryItemGridLookUpEdit1.AutoHeight = false;
+            this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
+            this.repositoryItemGridLookUpEdit1.NullText = "";
+            this.repositoryItemGridLookUpEdit1.View = this.repositoryItemGridLookUpEdit1View;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gcState,
+            this.gcTotalAmount,
+            this.gcSalesman,
+            this.gcDepartmentDesc,
+            this.gcCreateDate,
+            this.gcSignDate,
+            this.gcValidity,
+            this.gcCustomerNames,
+            this.gcTradeMode,
+            this.gcTradeNature,
+            this.gcSeaport,
+            this.gcAdvancePayment,
+            this.gcProfit});
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsBehavior.Editable = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowDetailButtons = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "合同号";
+            this.gridColumn1.FieldName = "ContractNO";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 150;
+            // 
+            // gcState
+            // 
+            this.gcState.Caption = "审批状态";
+            this.gcState.FieldName = "EnumFlowState";
+            this.gcState.Name = "gcState";
+            this.gcState.Visible = true;
+            this.gcState.VisibleIndex = 1;
+            this.gcState.Width = 80;
+            // 
+            // gcTotalAmount
+            // 
+            this.gcTotalAmount.Caption = "合同金额";
+            this.gcTotalAmount.FieldName = "TotalAmount";
+            this.gcTotalAmount.Name = "gcTotalAmount";
+            this.gcTotalAmount.Visible = true;
+            this.gcTotalAmount.VisibleIndex = 2;
+            this.gcTotalAmount.Width = 80;
+            // 
+            // gcSalesman
+            // 
+            this.gcSalesman.Caption = "业务员";
+            this.gcSalesman.FieldName = "SalesmanName";
+            this.gcSalesman.Name = "gcSalesman";
+            this.gcSalesman.Visible = true;
+            this.gcSalesman.VisibleIndex = 3;
+            this.gcSalesman.Width = 34;
+            // 
+            // gcDepartmentDesc
+            // 
+            this.gcDepartmentDesc.Caption = "业务员所在部门";
+            this.gcDepartmentDesc.FieldName = "DepartmentDesc";
+            this.gcDepartmentDesc.Name = "gcDepartmentDesc";
+            this.gcDepartmentDesc.Visible = true;
+            this.gcDepartmentDesc.VisibleIndex = 4;
+            this.gcDepartmentDesc.Width = 40;
+            // 
+            // gcCreateDate
+            // 
+            this.gcCreateDate.Caption = "录入时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            // 
+            // gcSignDate
+            // 
+            this.gcSignDate.Caption = "订约日期";
+            this.gcSignDate.FieldName = "SignDate";
+            this.gcSignDate.Name = "gcSignDate";
+            // 
+            // gcValidity
+            // 
+            this.gcValidity.Caption = "有效截止期";
+            this.gcValidity.FieldName = "Validity";
+            this.gcValidity.Name = "gcValidity";
+            // 
+            // gcCustomerNames
+            // 
+            this.gcCustomerNames.Caption = "客户名称";
+            this.gcCustomerNames.FieldName = "CustomerNames";
+            this.gcCustomerNames.Name = "gcCustomerNames";
+            // 
+            // gcTradeMode
+            // 
+            this.gcTradeMode.Caption = "贸易方式";
+            this.gcTradeMode.FieldName = "TradeMode";
+            this.gcTradeMode.Name = "gcTradeMode";
+            // 
+            // gcTradeNature
+            // 
+            this.gcTradeNature.Caption = "贸易性质";
+            this.gcTradeNature.FieldName = "TradeNature";
+            this.gcTradeNature.Name = "gcTradeNature";
+            // 
+            // gcSeaport
+            // 
+            this.gcSeaport.Caption = "交货口岸";
+            this.gcSeaport.FieldName = "Seaport";
+            this.gcSeaport.Name = "gcSeaport";
+            // 
+            // gcAdvancePayment
+            // 
+            this.gcAdvancePayment.Caption = "预付金额";
+            this.gcAdvancePayment.FieldName = "AdvancePayment";
+            this.gcAdvancePayment.Name = "gcAdvancePayment";
+            // 
+            // gcProfit
+            // 
+            this.gcProfit.Caption = "利润";
+            this.gcProfit.FieldName = "Profit";
+            this.gcProfit.Name = "gcProfit";
+            // 
+            // cboSelectYear
+            // 
+            this.cboSelectYear.Caption = "选择年份：";
+            this.cboSelectYear.Edit = this.cboYears;
+            this.cboSelectYear.Id = 6;
+            this.cboSelectYear.Name = "cboSelectYear";
+            this.cboSelectYear.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.cboSelectYear.Width = 75;
+            // 
+            // cboYears
+            // 
+            this.cboYears.AutoHeight = false;
+            this.cboYears.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboYears.Name = "cboYears";
+            this.cboYears.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // btnJanuary
+            // 
+            this.btnJanuary.Caption = "1月";
+            this.btnJanuary.Id = 7;
+            this.btnJanuary.Name = "btnJanuary";
+            this.btnJanuary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJanuary_ItemClick);
+            // 
+            // btnFebruary
+            // 
+            this.btnFebruary.Caption = "2月";
+            this.btnFebruary.Id = 8;
+            this.btnFebruary.Name = "btnFebruary";
+            this.btnFebruary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFebruary_ItemClick);
+            // 
+            // btnMarch
+            // 
+            this.btnMarch.Caption = "3月";
+            this.btnMarch.Id = 9;
+            this.btnMarch.Name = "btnMarch";
+            this.btnMarch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMarch_ItemClick);
+            // 
+            // btnApril
+            // 
+            this.btnApril.Caption = "4月";
+            this.btnApril.Id = 10;
+            this.btnApril.Name = "btnApril";
+            this.btnApril.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApril_ItemClick);
+            // 
+            // btnMay
+            // 
+            this.btnMay.Caption = "5月";
+            this.btnMay.Id = 11;
+            this.btnMay.Name = "btnMay";
+            this.btnMay.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMay_ItemClick);
+            // 
+            // btnJune
+            // 
+            this.btnJune.Caption = "6月";
+            this.btnJune.Id = 12;
+            this.btnJune.Name = "btnJune";
+            this.btnJune.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJune_ItemClick);
+            // 
+            // btnJuly
+            // 
+            this.btnJuly.Caption = "7月";
+            this.btnJuly.Id = 13;
+            this.btnJuly.Name = "btnJuly";
+            this.btnJuly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJuly_ItemClick);
+            // 
+            // btnAugust
+            // 
+            this.btnAugust.Caption = "8月";
+            this.btnAugust.Id = 14;
+            this.btnAugust.Name = "btnAugust";
+            this.btnAugust.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAugust_ItemClick);
+            // 
+            // btnSeptember
+            // 
+            this.btnSeptember.Caption = "9月";
+            this.btnSeptember.Id = 15;
+            this.btnSeptember.Name = "btnSeptember";
+            this.btnSeptember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSeptember_ItemClick);
+            // 
+            // btnOctober
+            // 
+            this.btnOctober.Caption = "10月";
+            this.btnOctober.Id = 16;
+            this.btnOctober.Name = "btnOctober";
+            this.btnOctober.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOctober_ItemClick);
+            // 
+            // btnNovember
+            // 
+            this.btnNovember.Caption = "11月";
+            this.btnNovember.Id = 17;
+            this.btnNovember.Name = "btnNovember";
+            this.btnNovember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNovember_ItemClick);
+            // 
+            // btnDecember
+            // 
+            this.btnDecember.Caption = "12月";
+            this.btnDecember.Id = 18;
+            this.btnDecember.Name = "btnDecember";
+            this.btnDecember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDecember_ItemClick);
+            // 
+            // deStartDate
+            // 
+            this.deStartDate.Caption = "开始时间：";
+            this.deStartDate.Edit = this.repositoryItemDateEdit1;
+            this.deStartDate.Id = 3;
+            this.deStartDate.Name = "deStartDate";
+            this.deStartDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.deStartDate.Width = 100;
+            // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
+            this.repositoryItemDateEdit1.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            // 
+            // deEndDate
+            // 
+            this.deEndDate.Caption = "结束时间：";
+            this.deEndDate.Edit = this.repositoryItemDateEdit1;
+            this.deEndDate.Id = 5;
+            this.deEndDate.Name = "deEndDate";
+            this.deEndDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.deEndDate.Width = 100;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Caption = "查询";
+            this.btnSearch.Id = 19;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearch_ItemClick);
+            // 
+            // btn_Print
+            // 
+            this.btn_Print.Caption = "打印";
+            this.btn_Print.Id = 20;
+            this.btn_Print.Name = "btn_Print";
+            this.btn_Print.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Print_ItemClick);
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "导出";
+            this.btnExportExcel.Id = 21;
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1470, 34);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 723);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1470, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 34);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 689);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1470, 34);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 689);
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Items.AddRange(new object[] {
+            "",
+            "T/T和L/C 收汇"});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // frmInvoiceQuery
             // 
@@ -295,11 +792,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1470, 723);
             this.Controls.Add(this.gridInvoice);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInvoiceQuery";
             this.Text = "交单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -328,5 +836,51 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentCode;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
         private DevExpress.XtraGrid.Columns.GridColumn gcFinanceImportDate;
+        protected DevExpress.XtraBars.Bar pivotViewBar;
+        protected DevExpress.XtraBars.BarManager barManager1;
+        protected DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.BarEditItem barSelected;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraBars.BarEditItem cboSelectYear;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cboYears;
+        private DevExpress.XtraBars.BarButtonItem btnJanuary;
+        private DevExpress.XtraBars.BarButtonItem btnFebruary;
+        private DevExpress.XtraBars.BarButtonItem btnMarch;
+        private DevExpress.XtraBars.BarButtonItem btnApril;
+        private DevExpress.XtraBars.BarButtonItem btnMay;
+        private DevExpress.XtraBars.BarButtonItem btnJune;
+        private DevExpress.XtraBars.BarButtonItem btnJuly;
+        private DevExpress.XtraBars.BarButtonItem btnAugust;
+        private DevExpress.XtraBars.BarButtonItem btnSeptember;
+        private DevExpress.XtraBars.BarButtonItem btnOctober;
+        private DevExpress.XtraBars.BarButtonItem btnNovember;
+        private DevExpress.XtraBars.BarButtonItem btnDecember;
+        private DevExpress.XtraBars.BarEditItem deStartDate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
+        private DevExpress.XtraBars.BarEditItem deEndDate;
+        private DevExpress.XtraBars.BarButtonItem btnSearch;
+        protected DevExpress.XtraBars.BarButtonItem btn_Print;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcState;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTotalAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSalesman;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDepartmentDesc;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSignDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcValidity;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCustomerNames;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTradeMode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTradeNature;
+        private DevExpress.XtraGrid.Columns.GridColumn gcSeaport;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
+        private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
+        private DevExpress.XtraGrid.Columns.GridColumn gcGrossProfit;
     }
 }

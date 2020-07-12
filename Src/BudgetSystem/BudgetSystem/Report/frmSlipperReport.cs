@@ -110,6 +110,7 @@ namespace BudgetSystem.Report
 
         private void InitSlipperReportGrid()
         {
+            base.ClearColumns();
             base.CreateGridColumn("供应商名称", "Name");
             base.CreateGridColumn("已付原币金额", "TotalOriginalCoin");
             base.CreateGridColumn("己付人民币金额", "TotalCNY");
@@ -129,6 +130,7 @@ namespace BudgetSystem.Report
 
         private void InitCustomerReportGrid()
         {
+            base.ClearColumns();
             base.CreateGridColumn("客户名称", "Name");
             base.CreateGridColumn("已收原币金额", "OriginalCoin");
             base.CreateGridColumn("人民币", "CNY");

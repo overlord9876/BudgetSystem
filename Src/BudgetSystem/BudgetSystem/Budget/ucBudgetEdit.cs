@@ -37,6 +37,7 @@ namespace BudgetSystem
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private Bll.CommonManager cm = new Bll.CommonManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
+        private Bll.FlowManager fm = new Bll.FlowManager();
         private EditFormWorkModels _workModel;
 
         public EditFormWorkModels WorkModel
@@ -45,6 +46,10 @@ namespace BudgetSystem
             set
             {
                 this._workModel = value;
+                if (frmBaseForm.IsDesignMode)
+                {
+                    return;
+                }
                 InitControlState();
                 InitData();
             }
@@ -53,6 +58,8 @@ namespace BudgetSystem
         public ucBudgetEdit()
         {
             InitializeComponent();
+            if (frmBaseForm.IsDesignMode)
+            { return; }
             this.rgTradeNature.EditValue = 1;
             this.bgvInProductDetail.DataSourceChanged += new EventHandler(bgvInProductDetail_DataSourceChanged);
         }
@@ -419,7 +426,6 @@ namespace BudgetSystem
                 this.txtFlowSalesman.Text = budget.SalesmanName;
                 if (budget.FlowName == EnumFlowNames.预算单审批流程.ToString())
                 {
-                    Bll.FlowManager fm = new Bll.FlowManager();
                     List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(budget.FlowInstanceID).ToList();
                     if (points == null || points.Count == 0)
                     {

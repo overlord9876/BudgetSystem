@@ -128,6 +128,6 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 新增支付
         /// </summary>
-        NewPayment,
+        NewPayment
     }
 }

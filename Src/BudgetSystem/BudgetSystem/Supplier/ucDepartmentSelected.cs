@@ -13,11 +13,13 @@ namespace BudgetSystem
 {
     public partial class ucDepartmentSelected : UserControl
     {
+        private bool singleSelected = false;
         List<Department> dataSource = null;
         public ucDepartmentSelected()
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// 获取当前视图选择的部门列表。
         /// </summary>
@@ -25,20 +27,35 @@ namespace BudgetSystem
         {
             get
             {
-                //保存更改
-                this.gvDepartment.CloseEditor();
-                var dataSource = (IEnumerable<Department>)gridDepartment.DataSource;
-                if (dataSource != null)
-                {
-                    return dataSource.Where(r => r.IsSelected).ToList();
+                if (!singleSelected)
+                {  //保存更改
+                    this.gvDepartment.CloseEditor();
+                    var dataSource = (IEnumerable<Department>)gridDepartment.DataSource;
+                    if (dataSource != null)
+                    {
+                        return dataSource.Where(r => r.IsSelected).ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
-                    return null;
+                    if (this.gvDepartment.FocusedRowHandle >= 0)
+                    {
+                        var d = this.gvDepartment.GetRow(this.gvDepartment.FocusedRowHandle) as Department;
+                        return new List<Department>() { d };
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
         }
-        public void SetDataSource(List<Department> dataSource)
+
+        public void SetDataSource(List<Department> dataSource, bool singleSelected = false)
         {
             this.gridDepartment.DataSource = new BindingList<Department>(dataSource);
             this.gridDepartment.RefreshDataSource();
@@ -50,6 +67,10 @@ namespace BudgetSystem
             else
             {
                 this.dataSource = null;
+            }
+            if (singleSelected)
+            {
+                gcIsSelected.Visible = false;
             }
         }
 

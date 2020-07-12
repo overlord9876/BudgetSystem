@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace BudgetSystem.Entity
 {
-    public class FlowApproveNameConfigCollection:List<FlowApproveNameConfig>
+    public class FlowApproveNameConfigCollection : List<FlowApproveNameConfig>
     {
         public string GetDisplayAcceptName(string flowName)
         {
             FlowApproveNameConfig fc = this.SingleOrDefault(s => s.FlowName == flowName);
             return fc == null ? "同意" : fc.AcceptDisplayName;
-        
+
         }
 
 
