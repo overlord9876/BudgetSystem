@@ -323,7 +323,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcBusinessEffectiveDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgentType;
         private DevExpress.XtraGrid.Columns.GridColumn gcAgreementDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gcTaxpayerIdentificationNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gcDiscredited;
         private DevExpress.XtraGrid.Columns.GridColumn gcv纳税人识别号;
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowName;

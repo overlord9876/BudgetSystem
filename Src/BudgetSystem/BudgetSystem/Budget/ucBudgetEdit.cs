@@ -17,7 +17,8 @@ namespace BudgetSystem
     public partial class ucBudgetEdit : DataControl
     {
         public Budget CurrentBudget { get; private set; }
-
+        private List<Customer> customers = null;
+        private List<Supplier> suppliers = null;
         /// <summary>
         /// 增值税配置项值 
         /// </summary>
@@ -121,6 +122,13 @@ namespace BudgetSystem
                 CurrentBudget.VATRate = this.vatOption;
                 CurrentBudget.ContractNO = this.lblContractNOPrefix.Text + this.txtContractNO.Text.Trim().Substring(0, 4) + this.GetTradeModeString();
                 CurrentBudget.CustomerID = Convert.ToInt32(this.pceMainCustomer.Tag);
+                var custom = customers.FirstOrDefault(o => o.ID.Equals(CurrentBudget.CustomerID));
+                if (custom != null)
+                {
+                    CurrentBudget.CustomerName = custom.Name;
+                    CurrentBudget.CustomerCode = custom.Code;
+                    CurrentBudget.CustomerCountry = custom.Country;
+                }
             }
 
             CurrentBudget.AdvancePayment = this.txtAdvancePayment.Value;
@@ -230,7 +238,7 @@ namespace BudgetSystem
                 CustomerQueryCondition condition = new CustomerQueryCondition();
                 condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as CustomerQueryCondition;
                 condition.State = 1;//过滤停用的客户
-                var customers = cm.GetAllCustomer(condition);
+                this.customers = cm.GetAllCustomer(condition);
 
                 Bll.SupplierManager sm = new Bll.SupplierManager();
                 var suppliers = sm.GetAllSupplier(new SupplierQueryCondition() { DeptID = RunInfo.Instance.CurrentUser.DeptID });
@@ -382,8 +390,7 @@ namespace BudgetSystem
                 List<Supplier> otherSuppliers = budget.SupplierList.FindAll(s => s.SupplierType != (int)EnumSupplierType.临时供方 && !s.IsQualified);
                 this.pceOtherSupplier.Text = otherSuppliers.ToNameString();
                 this.pceOtherSupplier.Tag = otherSuppliers;
-                List<Customer> customers = null;
-                List<Supplier> suppliers = null;
+
                 if (WorkModel == EditFormWorkModels.New || WorkModel == EditFormWorkModels.Modify || WorkModel == EditFormWorkModels.Custom)
                 {
                     Bll.CustomerManager cm = new Bll.CustomerManager();

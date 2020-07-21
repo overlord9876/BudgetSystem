@@ -207,7 +207,14 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.BudgetID = budget.ID;
             CurrentInvoice.Code = txtCode.Text.Trim();
             CurrentInvoice.Number = this.txtNumber.Text.Trim();
-            CurrentInvoice.OriginalCoin = this.txtOriginalCoin.Value;
+            if (this.txtOriginalCoin.EditValue != null)
+            {
+                CurrentInvoice.OriginalCoin = (decimal)this.txtOriginalCoin.EditValue;
+            }
+            else
+            {
+                CurrentInvoice.OriginalCoin = 0;
+            }
             CurrentInvoice.ExchangeRate = this.txtExchangeRate.Value;
             CurrentInvoice.CustomsDeclaration = this.txtCustomsDeclaration.Text.Trim();
             CurrentInvoice.TaxRebateRate = this.txtTaxRebateRate.FloatValue;
@@ -215,12 +222,26 @@ namespace BudgetSystem.InMoney
             CurrentInvoice.FeedMoney = this.txtFeedMoney.Value;
             CurrentInvoice.SupplierName = this.txtSupplierName.Text.Trim();
             CurrentInvoice.TaxpayerID = this.txtTaxpayerID.Text.Trim();
-            CurrentInvoice.Payment = this.txtPayment.Value;
+            if (this.txtPayment.EditValue != null)
+            {
+                CurrentInvoice.Payment = (decimal)this.txtPayment.EditValue;
+            }
+            else
+            {
+                CurrentInvoice.Payment = 0;
+            }
             User importUser = (User)this.txtImportUser.EditValue;
             CurrentInvoice.ImportUser = importUser != null ? importUser.UserName : RunInfo.Instance.CurrentUser.UserName;
 
             CurrentInvoice.FinanceImportUser = RunInfo.Instance.CurrentUser.UserName;
-            CurrentInvoice.TaxAmount = this.txtTaxAmount.Value;
+            if (this.txtTaxAmount.EditValue != null)
+            {
+                CurrentInvoice.TaxAmount = (decimal)this.txtTaxAmount.EditValue;
+            }
+            else
+            {
+                CurrentInvoice.TaxAmount = 0;
+            }
             CurrentInvoice.FinanceImportDate = datetimeNow;
         }
 

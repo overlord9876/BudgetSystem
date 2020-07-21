@@ -66,7 +66,9 @@
             this.gcTaxRebate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gvBudget = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCustomerDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcUSDTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPurchasePrice = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,7 +76,7 @@
             this.gcTotalCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcProfitLevel2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcQualifiedSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -184,7 +186,7 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             gridLevelNode1.LevelTemplate = this.gvOutProduct;
             gridLevelNode1.RelationName = "OutProductList";
             gridLevelNode2.LevelTemplate = this.bgvInProduct;
@@ -194,11 +196,11 @@
             gridLevelNode2});
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(982, 656);
+            this.gridBudget.Size = new System.Drawing.Size(1180, 844);
             this.gridBudget.TabIndex = 1;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bgvInProduct,
@@ -428,7 +430,9 @@
             // 
             this.gvBudget.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcContractNO,
+            this.gcUpdateDate,
             this.gcCustomerName,
+            this.gcCustomerDesc,
             this.gcTotalAmount,
             this.gcUSDTotalAmount,
             this.gcPurchasePrice,
@@ -436,7 +440,7 @@
             this.gcTotalCost,
             this.gcProfit,
             this.gcProfitLevel2,
-            this.gcUpdateDate,
+            this.gcQualifiedSupplier,
             this.gcTradeMode,
             this.gcSalesman,
             this.gcDepartmentDesc,
@@ -452,7 +456,12 @@
             this.gvBudget.OptionsBehavior.Editable = false;
             this.gvBudget.OptionsCustomization.AllowSort = false;
             this.gvBudget.OptionsDetail.SmartDetailExpand = false;
+            this.gvBudget.OptionsView.ColumnAutoWidth = false;
+            this.gvBudget.OptionsView.ShowDetailButtons = false;
             this.gvBudget.OptionsView.ShowGroupPanel = false;
+            this.gvBudget.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcUpdateDate, DevExpress.Data.ColumnSortOrder.Descending)});
+            this.gvBudget.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gvBudget.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gvBudget_CustomDrawCell);
             // 
             // gcContractNO
@@ -462,79 +471,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
-            this.gcContractNO.Width = 99;
-            // 
-            // gcCustomerName
-            // 
-            this.gcCustomerName.Caption = "主买方";
-            this.gcCustomerName.FieldName = "CustomerNameEx";
-            this.gcCustomerName.Name = "gcCustomerName";
-            this.gcCustomerName.Visible = true;
-            this.gcCustomerName.VisibleIndex = 1;
-            this.gcCustomerName.Width = 184;
-            // 
-            // gcTotalAmount
-            // 
-            this.gcTotalAmount.Caption = "合同金额";
-            this.gcTotalAmount.FieldName = "TotalAmount";
-            this.gcTotalAmount.Name = "gcTotalAmount";
-            this.gcTotalAmount.Visible = true;
-            this.gcTotalAmount.VisibleIndex = 2;
-            this.gcTotalAmount.Width = 82;
-            // 
-            // gcUSDTotalAmount
-            // 
-            this.gcUSDTotalAmount.Caption = "美元合同金额";
-            this.gcUSDTotalAmount.FieldName = "USDTotalAmount";
-            this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
-            this.gcUSDTotalAmount.Visible = true;
-            this.gcUSDTotalAmount.VisibleIndex = 3;
-            this.gcUSDTotalAmount.Width = 78;
-            // 
-            // gcPurchasePrice
-            // 
-            this.gcPurchasePrice.Caption = "总进价";
-            this.gcPurchasePrice.FieldName = "PurchasePrice";
-            this.gcPurchasePrice.Name = "gcPurchasePrice";
-            this.gcPurchasePrice.Visible = true;
-            this.gcPurchasePrice.VisibleIndex = 4;
-            this.gcPurchasePrice.Width = 83;
-            // 
-            // gcTotalTaxRebate
-            // 
-            this.gcTotalTaxRebate.Caption = "出口退税";
-            this.gcTotalTaxRebate.FieldName = "TaxRebate";
-            this.gcTotalTaxRebate.Name = "gcTotalTaxRebate";
-            this.gcTotalTaxRebate.Visible = true;
-            this.gcTotalTaxRebate.VisibleIndex = 5;
-            this.gcTotalTaxRebate.Width = 92;
-            // 
-            // gcTotalCost
-            // 
-            this.gcTotalCost.Caption = "总成本";
-            this.gcTotalCost.FieldName = "TotalCost";
-            this.gcTotalCost.Name = "gcTotalCost";
-            this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 6;
-            this.gcTotalCost.Width = 89;
-            // 
-            // gcProfit
-            // 
-            this.gcProfit.Caption = "利润";
-            this.gcProfit.FieldName = "Profit";
-            this.gcProfit.Name = "gcProfit";
-            this.gcProfit.Visible = true;
-            this.gcProfit.VisibleIndex = 7;
-            this.gcProfit.Width = 88;
-            // 
-            // gcProfitLevel2
-            // 
-            this.gcProfitLevel2.Caption = "盈利水平";
-            this.gcProfitLevel2.FieldName = "ProfitLevel2";
-            this.gcProfitLevel2.Name = "gcProfitLevel2";
-            this.gcProfitLevel2.Visible = true;
-            this.gcProfitLevel2.VisibleIndex = 8;
-            this.gcProfitLevel2.Width = 70;
+            this.gcContractNO.Width = 91;
             // 
             // gcUpdateDate
             // 
@@ -542,16 +479,110 @@
             this.gcUpdateDate.DisplayFormat.FormatString = "g";
             this.gcUpdateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcUpdateDate.FieldName = "UpdateDate";
+            this.gcUpdateDate.MinWidth = 110;
             this.gcUpdateDate.Name = "gcUpdateDate";
+            this.gcUpdateDate.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gcUpdateDate.Visible = true;
-            this.gcUpdateDate.VisibleIndex = 9;
-            this.gcUpdateDate.Width = 120;
+            this.gcUpdateDate.VisibleIndex = 1;
+            this.gcUpdateDate.Width = 110;
+            // 
+            // gcCustomerName
+            // 
+            this.gcCustomerName.Caption = "主买方";
+            this.gcCustomerName.FieldName = "CustomerNameEx";
+            this.gcCustomerName.Name = "gcCustomerName";
+            this.gcCustomerName.Visible = true;
+            this.gcCustomerName.VisibleIndex = 2;
+            this.gcCustomerName.Width = 170;
+            // 
+            // gcCustomerDesc
+            // 
+            this.gcCustomerDesc.Caption = "客户列表";
+            this.gcCustomerDesc.FieldName = "CustomerDesc";
+            this.gcCustomerDesc.Name = "gcCustomerDesc";
+            this.gcCustomerDesc.Visible = true;
+            this.gcCustomerDesc.VisibleIndex = 3;
+            this.gcCustomerDesc.Width = 69;
+            // 
+            // gcTotalAmount
+            // 
+            this.gcTotalAmount.Caption = "合同金额";
+            this.gcTotalAmount.FieldName = "TotalAmount";
+            this.gcTotalAmount.Name = "gcTotalAmount";
+            this.gcTotalAmount.Visible = true;
+            this.gcTotalAmount.VisibleIndex = 4;
+            // 
+            // gcUSDTotalAmount
+            // 
+            this.gcUSDTotalAmount.Caption = "美元合同金额";
+            this.gcUSDTotalAmount.FieldName = "USDTotalAmount";
+            this.gcUSDTotalAmount.Name = "gcUSDTotalAmount";
+            this.gcUSDTotalAmount.Visible = true;
+            this.gcUSDTotalAmount.VisibleIndex = 5;
+            this.gcUSDTotalAmount.Width = 112;
+            // 
+            // gcPurchasePrice
+            // 
+            this.gcPurchasePrice.Caption = "总进价";
+            this.gcPurchasePrice.FieldName = "PurchasePrice";
+            this.gcPurchasePrice.Name = "gcPurchasePrice";
+            this.gcPurchasePrice.Visible = true;
+            this.gcPurchasePrice.VisibleIndex = 6;
+            this.gcPurchasePrice.Width = 72;
+            // 
+            // gcTotalTaxRebate
+            // 
+            this.gcTotalTaxRebate.Caption = "出口退税";
+            this.gcTotalTaxRebate.FieldName = "TaxRebate";
+            this.gcTotalTaxRebate.Name = "gcTotalTaxRebate";
+            this.gcTotalTaxRebate.Visible = true;
+            this.gcTotalTaxRebate.VisibleIndex = 7;
+            this.gcTotalTaxRebate.Width = 80;
+            // 
+            // gcTotalCost
+            // 
+            this.gcTotalCost.Caption = "总成本";
+            this.gcTotalCost.FieldName = "TotalCost";
+            this.gcTotalCost.Name = "gcTotalCost";
+            this.gcTotalCost.Visible = true;
+            this.gcTotalCost.VisibleIndex = 8;
+            this.gcTotalCost.Width = 77;
+            // 
+            // gcProfit
+            // 
+            this.gcProfit.Caption = "利润";
+            this.gcProfit.FieldName = "Profit";
+            this.gcProfit.Name = "gcProfit";
+            this.gcProfit.Visible = true;
+            this.gcProfit.VisibleIndex = 9;
+            this.gcProfit.Width = 76;
+            // 
+            // gcProfitLevel2
+            // 
+            this.gcProfitLevel2.Caption = "盈利水平";
+            this.gcProfitLevel2.FieldName = "ProfitLevel2";
+            this.gcProfitLevel2.Name = "gcProfitLevel2";
+            this.gcProfitLevel2.Visible = true;
+            this.gcProfitLevel2.VisibleIndex = 10;
+            this.gcProfitLevel2.Width = 97;
+            // 
+            // gcQualifiedSupplier
+            // 
+            this.gcQualifiedSupplier.Caption = "合格供方";
+            this.gcQualifiedSupplier.FieldName = "QualifiedSupplier";
+            this.gcQualifiedSupplier.Name = "gcQualifiedSupplier";
+            this.gcQualifiedSupplier.Visible = true;
+            this.gcQualifiedSupplier.VisibleIndex = 11;
+            this.gcQualifiedSupplier.Width = 210;
             // 
             // gcTradeMode
             // 
             this.gcTradeMode.Caption = "贸易方式";
             this.gcTradeMode.FieldName = "TradeModeDesc";
             this.gcTradeMode.Name = "gcTradeMode";
+            this.gcTradeMode.Visible = true;
+            this.gcTradeMode.VisibleIndex = 17;
+            this.gcTradeMode.Width = 79;
             // 
             // gcSalesman
             // 
@@ -579,14 +610,18 @@
             this.gcSignDate.Caption = "订约日期";
             this.gcSignDate.FieldName = "SignDate";
             this.gcSignDate.Name = "gcSignDate";
-            this.gcSignDate.Width = 54;
+            this.gcSignDate.Visible = true;
+            this.gcSignDate.VisibleIndex = 13;
+            this.gcSignDate.Width = 79;
             // 
             // gcValidity
             // 
             this.gcValidity.Caption = "有效截止期";
             this.gcValidity.FieldName = "Validity";
             this.gcValidity.Name = "gcValidity";
-            this.gcValidity.Width = 45;
+            this.gcValidity.Visible = true;
+            this.gcValidity.VisibleIndex = 12;
+            this.gcValidity.Width = 90;
             // 
             // gcTradeNature
             // 
@@ -594,7 +629,9 @@
             this.gcTradeNature.ColumnEdit = this.rilueTradeNature;
             this.gcTradeNature.FieldName = "TradeNature";
             this.gcTradeNature.Name = "gcTradeNature";
-            this.gcTradeNature.Width = 59;
+            this.gcTradeNature.Visible = true;
+            this.gcTradeNature.VisibleIndex = 16;
+            this.gcTradeNature.Width = 84;
             // 
             // rilueTradeNature
             // 
@@ -608,23 +645,27 @@
             this.gcPort.Caption = "目的港口";
             this.gcPort.FieldName = "Port";
             this.gcPort.Name = "gcPort";
-            this.gcPort.Width = 54;
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 14;
+            this.gcPort.Width = 72;
             // 
             // gcAdvancePayment
             // 
             this.gcAdvancePayment.Caption = "预付金额";
             this.gcAdvancePayment.FieldName = "AdvancePayment";
             this.gcAdvancePayment.Name = "gcAdvancePayment";
-            this.gcAdvancePayment.Width = 52;
+            this.gcAdvancePayment.Visible = true;
+            this.gcAdvancePayment.VisibleIndex = 15;
+            this.gcAdvancePayment.Width = 70;
             // 
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(988, 683);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1186, 875);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -633,36 +674,37 @@
             // xtraTabPage1
             // 
             this.xtraTabPage1.Controls.Add(this.ucBudgetEdit1);
-            this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(982, 656);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1180, 844);
             this.xtraTabPage1.Text = "预算单";
             // 
             // ucBudgetEdit1
             // 
             this.ucBudgetEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetEdit1.Location = new System.Drawing.Point(0, 0);
-            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(2);
+            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucBudgetEdit1.Name = "ucBudgetEdit1";
-            this.ucBudgetEdit1.Size = new System.Drawing.Size(982, 656);
+            this.ucBudgetEdit1.Size = new System.Drawing.Size(1180, 844);
             this.ucBudgetEdit1.TabIndex = 0;
             this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.gridBudget);
-            this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(982, 656);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1180, 844);
             this.xtraTabPage2.Text = "修改历史";
             // 
             // ucBudgetDetailView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucBudgetDetailView";
-            this.Size = new System.Drawing.Size(988, 683);
+            this.Size = new System.Drawing.Size(1186, 875);
             ((System.ComponentModel.ISupportInitialize)(this.gvOutProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvInProduct)).EndInit();
@@ -737,5 +779,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalTaxRebate;
         private DevExpress.XtraGrid.Columns.GridColumn gcUpdateDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcTotalCost;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCustomerDesc;
+        private DevExpress.XtraGrid.Columns.GridColumn gcQualifiedSupplier;
     }
 }

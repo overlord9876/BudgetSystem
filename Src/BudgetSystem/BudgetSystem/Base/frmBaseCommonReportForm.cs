@@ -165,7 +165,7 @@ namespace BudgetSystem.Base
         }
 
         int i;
-        protected GridColumn CreateGridColumn(string caption, string fieldName, int width = 0, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
+        protected GridColumn CreateGridColumn(string caption, string fieldName, int width = 0, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null, DevExpress.XtraGrid.GridSummaryItem summaryItem = null)
         {
             GridColumn gc = new GridColumn();
             gc.Name = caption;
@@ -185,6 +185,11 @@ namespace BudgetSystem.Base
             if (width > 0)
             {
                 gc.Width = width;
+            }
+            if (summaryItem != null)
+            {
+                this.gridView.OptionsView.ShowFooter = true;
+                gc.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { summaryItem });
             }
             gc.Visible = true;
             gc.VisibleIndex = i++;

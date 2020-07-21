@@ -341,6 +341,18 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
+        /// 户名称（含国家/地区)
+        /// </summary>
+        public string CustomerDesc
+        {
+            get
+            {
+                if (CustomerList == null) { return string.Empty; }
+                return string.Join("，", CustomerList.Select(o => string.Format("{0}({1})", o.Name, o.Country)).ToArray());
+            }
+        }
+
+        /// <summary>
         /// 客户列表
         /// </summary>
         public List<Customer> CustomerList { get; set; }

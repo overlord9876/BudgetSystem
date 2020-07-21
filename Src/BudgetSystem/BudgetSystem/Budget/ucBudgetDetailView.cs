@@ -24,26 +24,26 @@ namespace BudgetSystem
             InitializeComponent();
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
-      
+
         public override void BindingData(int dataID)
         {
             this.ucBudgetEdit1.WorkModel = WorkModel;
             this.ucBudgetEdit1.BindingData(dataID);
             List<Budget> historyData = mmm.GetAllModifyMark<Budget>(dataID);
-            if (historyData != null)
-            {
-                historyData.ForEach(h => { h.SupplierList = null; h.CustomerList = null; });
-            }
+            //if (historyData != null)
+            //{
+            //    historyData.ForEach(h => { h.SupplierList = null; h.CustomerList = null; });
+            //}
             this.gridBudget.DataSource = historyData;
         }
 
         private void gvBudget_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            if (e.Column == gcContractNO || e.Column == gcCustomerName ||e.Column==gcUpdateDate || e.RowHandle <= 0)
+            if (e.Column == gcContractNO || e.Column == gcCustomerName || e.Column == gcUpdateDate || e.RowHandle <= 0)
             {
                 return;
             }
-            else if ((decimal)e.CellValue !=(decimal) gvBudget.GetRowCellValue(e.RowHandle - 1, e.Column))
+            else if (!e.CellValue.Equals(gvBudget.GetRowCellValue(e.RowHandle - 1, e.Column)))
             {
                 e.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
                 e.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -51,5 +51,6 @@ namespace BudgetSystem
                 e.Appearance.Options.UseForeColor = true;
             }
         }
+
     }
 }

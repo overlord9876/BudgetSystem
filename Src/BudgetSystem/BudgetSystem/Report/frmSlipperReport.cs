@@ -111,12 +111,12 @@ namespace BudgetSystem.Report
         private void InitSlipperReportGrid()
         {
             base.ClearColumns();
-            base.CreateGridColumn("供应商名称", "Name");
-            base.CreateGridColumn("已付原币金额", "TotalOriginalCoin");
-            base.CreateGridColumn("己付人民币金额", "TotalCNY");
+            base.CreateGridColumn("供应商名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计"));
+            base.CreateGridColumn("已付原币金额", "TotalOriginalCoin", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("己付人民币金额", "TotalCNY", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("汇率", "ExchangeRate");
-            base.CreateGridColumn("已收发票金额", "InvoiceTotal");
-            base.CreateGridColumn("应付人民币余额", "BalanceDue");
+            base.CreateGridColumn("已收发票金额", "InvoiceTotal", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("应付人民币余额", "BalanceDue", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
 
             base.CreatePivotGridField("供应商名称", "Name");
             base.CreatePivotGridField("已付原币金额", "TotalOriginalCoin", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
@@ -131,11 +131,11 @@ namespace BudgetSystem.Report
         private void InitCustomerReportGrid()
         {
             base.ClearColumns();
-            base.CreateGridColumn("客户名称", "Name");
-            base.CreateGridColumn("已收原币金额", "OriginalCoin");
-            base.CreateGridColumn("人民币", "CNY");
+            base.CreateGridColumn("客户名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计"));
+            base.CreateGridColumn("已收原币金额", "OriginalCoin", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("人民币", "CNY", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("汇率", "ExchangeRate");
-            base.CreateGridColumn("报关金额", "DeclarationformTotal");
+            base.CreateGridColumn("报关金额", "DeclarationformTotal", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreatePivotGridField("客户名称", "Name");
             base.CreatePivotGridField("已收原币金额", "OriginalCoin", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
             base.CreatePivotGridField("人民币", "CNY");

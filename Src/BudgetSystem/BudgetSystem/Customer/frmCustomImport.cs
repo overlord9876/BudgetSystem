@@ -195,6 +195,7 @@ namespace BudgetSystem
                         }
                         catch (Exception ex)
                         {
+                            RunInfo.Instance.Logger.LogInfomation(ex.ToString()); 
                             //XtraMessageBox.Show(ex.Message);
                         }
                     }

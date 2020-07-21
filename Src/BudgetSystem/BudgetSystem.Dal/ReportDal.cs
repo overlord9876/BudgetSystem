@@ -91,7 +91,7 @@ namespace BudgetSystem.Dal
                             ExchangeRate = (decimal)pn.ExchangeRate,
                             SupplierName = pn.SupplierName,
                             Payment = pn.OriginalCoin,
-                            TaxAmount = (decimal)pn.ExchangeRate,
+                            //TaxAmount = (decimal)pn.ExchangeRate,
                             TaxRebateRate = pn.TaxRebateRate,
                         });
                     }

@@ -398,7 +398,7 @@ namespace BudgetSystem
                     frmDescription frmBudget = new frmDescription();
                     if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
-                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单修改流程, frmBudget.Description));
+                        string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单修改流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单修改流程, frmBudget.Description), false);
                         if (string.IsNullOrEmpty(message))
                         {
                             XtraMessageBox.Show("提交流程成功。");
@@ -444,7 +444,7 @@ namespace BudgetSystem
                 frmDescription frmBudget = new frmDescription("填写申请删除说明", "删除说明");
                 if (frmBudget.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单删除流程, frmBudget.Description));
+                    string message = bm.StartFlow(budget.ID, EnumFlowNames.预算单删除流程, RunInfo.Instance.CurrentUser.UserName, RunInfo.Instance.CurrentUser.RealName, string.Format("发起{0}，{1}", EnumFlowNames.预算单删除流程, frmBudget.Description), false);
                     if (string.IsNullOrEmpty(message))
                     {
                         XtraMessageBox.Show("提交流程成功。");
