@@ -167,6 +167,7 @@
             this.gridView.OptionsBehavior.Editable = false;
             this.gridView.OptionsDetail.ShowDetailTabs = false;
             this.gridView.OptionsDetail.SmartDetailExpand = false;
+            this.gridView.OptionsView.ColumnAutoWidth = false;
             this.gridView.OptionsView.ShowDetailButtons = false;
             this.gridView.OptionsView.ShowGroupPanel = false;
             // 
@@ -452,7 +453,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Items.AddRange(new object[] {
             "",
-            "T/T和L/C 收汇"});
+            "T/T和L/C 收汇",
+            "人民币"});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // cboSelectYear

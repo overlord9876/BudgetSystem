@@ -61,5 +61,10 @@ namespace BudgetSystem.Entity
                 }
             }
         }
+
+        /// <summary>
+        /// 款项性质
+        /// </summary>
+        public string NatureOfMoney { get; set; }
     }
 }

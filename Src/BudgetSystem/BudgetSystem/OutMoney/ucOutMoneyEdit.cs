@@ -29,6 +29,7 @@ namespace BudgetSystem.OutMoney
         ReceiptMgmtManager rm = new ReceiptMgmtManager();
         private EditFormWorkModels _workModel;
         private PaymentNotes _paymentNote;
+        private List<UseMoneyType> umtList;
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
 
@@ -359,7 +360,7 @@ namespace BudgetSystem.OutMoney
             else
             {
                 CheckUsage(umt.Name);
-                if (!OutMoneyCaculator.TransportationExpensesCaption.Equals(umt.Name) && !Entity.Util.PaymentUseCommissionUsageNameList.Contains(umt.Name)
+                if (!umtList.Where(ut => ut.Type == PaymentType.运杂费).Any(o => o.Name.Equals(umt.Name)) && !umtList.Where(ut => ut.Type == PaymentType.佣金).Any(o => o.Name.Equals(umt.Name))
                     && !dxErrorProvider1.HasErrors)
                 {
                     if (txtAfterPaymentBalance.Value < 0)
@@ -404,7 +405,7 @@ namespace BudgetSystem.OutMoney
             {
                 valueAddedTaxRate = vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
-                List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+                umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
                 this.cboMoneyUsed.Properties.Items.Clear();
                 if (umtList != null)
                 {
@@ -531,7 +532,7 @@ namespace BudgetSystem.OutMoney
                 }
                 return;
             }
-            else if (usageName == OutMoneyCaculator.TransportationExpensesCaption)
+            else if (umtList.Where(o => o.Type == PaymentType.运杂费).Any(t => t.Name == usageName))
             {
                 if (this.currentBudget.Premium == 0)
                 {
@@ -567,7 +568,7 @@ namespace BudgetSystem.OutMoney
                     return;
                 }
             }
-            else if (Entity.Util.PaymentUseCommissionUsageNameList.Contains(usageName))
+            else if (umtList.Where(o => o.Type == PaymentType.佣金).Any(o => o.Name == usageName))
             {
                 if (this.currentBudget.Commission == 0)
                 {
@@ -577,7 +578,7 @@ namespace BudgetSystem.OutMoney
                     return;
                 }
                 //暂时先放开佣金付款超额
-                decimal money = caculator.GetUsagePayMoney(Entity.Util.PaymentUseCommissionUsageNameList);
+                decimal money = caculator.GetUsagePayMoney(umtList.Where(o => o.Type == PaymentType.佣金).Select(o => o.Name).ToList());
                 if (money + txtCNY.Value > this.currentBudget.Commission)
                 {
                     message = string.Format("不能支付，预算单中佣金为[{0}]，加上当前付款金额即将超支预算金额，如需付款请修改预算单。", this.currentBudget.Commission, money);
@@ -616,7 +617,7 @@ namespace BudgetSystem.OutMoney
                 budgetSupplierList.AddRange(supplierList.Where(o => !budgetSupplierList.Exists(bs => o.ID.Equals(bs.ID))));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
 
-                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, umtList);
 
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 
@@ -676,7 +677,7 @@ namespace BudgetSystem.OutMoney
 
             UseMoneyType umt = cboMoneyUsed.EditValue as UseMoneyType;
 
-            if (umt == null || string.IsNullOrEmpty(umt.Name) || umt.Name.Equals(OutMoneyCaculator.TransportationExpensesCaption))
+            if (umt == null || string.IsNullOrEmpty(umt.Name) || umtList.Where(o => o.Type == PaymentType.运杂费).Any(t => t.Name == umt.Name))
             {
                 //不含运费付款金额。
                 txtIgnoreTransportationExpensesPaymentMoneyAmount.EditValue = caculator.IgnoreTransportationExpensesPaymentMoneyAmount;

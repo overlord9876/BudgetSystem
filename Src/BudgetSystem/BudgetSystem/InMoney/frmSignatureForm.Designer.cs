@@ -86,7 +86,7 @@
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
             this.gcDepartmentCode.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "DepartmentCode", "合计")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DepartmentCode", "合计：{0:d}")});
             this.gcDepartmentCode.Visible = true;
             this.gcDepartmentCode.VisibleIndex = 0;
             this.gcDepartmentCode.Width = 83;

@@ -16,10 +16,12 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEditBankup : frmBaseDialogForm
     {
+        private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
         public List<Budget> BudgetList { get; set; }
         private Budget selectedBudget;
+        private List<UseMoneyType> useMoneTypeList;
 
         public frmPaymentCalcEditBankup()
         {
@@ -28,6 +30,7 @@ namespace BudgetSystem.OutMoney
 
         private void frmPaymentCalcEdit_Load(object sender, EventArgs e)
         {
+            useMoneTypeList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
             if (BudgetList == null)
             {
                 BudgetQueryCondition condition = new BudgetQueryCondition();
@@ -291,7 +294,7 @@ namespace BudgetSystem.OutMoney
                 decimal valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
                 var receiptList = rm.GetBudgetBillListByBudgetId(selectedBudget.ID);
-                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate);
+                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneTypeList);
 
                 InitBudgetMoneyDetail();
             }

@@ -373,6 +373,12 @@
     <Compile Include="Option\ucStringListOptionEdit.Designer.cs">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Option\ucInMoneyTypeOptionEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Option\ucInMoneyTypeOptionEdit.Designer.cs">
+      <DependentUpon>ucInMoneyTypeOptionEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -860,6 +866,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Option\ucStringListOptionEdit.resx">
       <DependentUpon>ucStringListOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option\ucInMoneyTypeOptionEdit.resx">
+      <DependentUpon>ucInMoneyTypeOptionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>

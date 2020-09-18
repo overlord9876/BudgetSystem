@@ -99,6 +99,7 @@ namespace BudgetSystem.Bll
             if (lst != null)
             {
                 var valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
+                var useMoneTypeList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
                 var currentBudget = bm.GetBudget(lst.BudgetID);
                 if (currentBudget != null)
                 {
@@ -106,7 +107,7 @@ namespace BudgetSystem.Bll
                     var paymentNotes = GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
 
                     var pnList = paymentNotes.Where(o => !o.ID.Equals(lst.ID)).ToList<PaymentNotes>();
-                    var caculator = new OutMoneyCaculator(currentBudget, pnList, receiptList, valueAddedTaxRate);
+                    var caculator = new OutMoneyCaculator(currentBudget, pnList, receiptList, valueAddedTaxRate, useMoneTypeList);
 
 
                     caculator.ApplyForPayment(lst.CNY, (decimal)lst.TaxRebateRate, lst.IsDrawback);
@@ -196,6 +197,16 @@ namespace BudgetSystem.Bll
 
                 dal.DeletePaymentNote(id, con, tran);
             });
+        }
+
+        public bool ExistsPaymentMoneyUsed(string moneyUsed)
+        {
+            var result = this.Query<bool>((con) =>
+            {
+                var used = dal.ExistsPaymentMoneyUsed(moneyUsed, con, null);
+                return used;
+            });
+            return result;
         }
     }
 }

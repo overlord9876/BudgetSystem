@@ -11,13 +11,13 @@ namespace BudgetSystem.Dal
 {
     public class ReportDal
     {
-        public IEnumerable<BudgetReport> GetBudgetReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<BudgetReport> GetBudgetReportList(BudgetQueryCondition condition, List<UseMoneyType> umtList, List<InMoneyType> imtList, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT b.*,u.RealName  AS SalesmanName,d.`Code` AS DepartmentCode,d.`Name` AS DepartmentName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
                                  LEFT JOIN `Department` d ON b.DeptID=d.ID
-                                where b.ID in (SELECT DISTINCT BudgetID from PaymentNotes where CommitTime BETWEEN @BeginTime and @EndTime
+                                where b.ID in (SELECT DISTINCT BudgetID from PaymentNotes where PaymentDate BETWEEN @BeginTime and @EndTime
                                 UNION
                                 select DISTINCT BudgetID from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime
                                 UNION
@@ -46,6 +46,7 @@ namespace BudgetSystem.Dal
             //iList.AddRange(PaymentToInvoice(pnList.ToList()));
             IEnumerable<BudgetBill> bbList = GetBudgetBillList(condition, con, tran);
             IEnumerable<Declarationform> dList = GetDeclarationformList(condition, con, tran);
+
             if (budgetList != null)
             {
                 foreach (BudgetReport report in budgetList)
@@ -56,7 +57,8 @@ namespace BudgetSystem.Dal
                         report.USDTotalAmount = 0;
                         report.TotalAmount = 0;
                     }
-
+                    report.UMTList = umtList;
+                    report.IMTList = imtList;
                     report.PaymentList = pnList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                     report.InvoiceList = iList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                     report.BudgetBillList = bbList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
@@ -68,7 +70,7 @@ namespace BudgetSystem.Dal
 
         private IEnumerable<PaymentNotes> GetPaymentNotesList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT * from PaymentNotes where CommitTime BETWEEN @BeginTime and @EndTime;");
+            string selectSql = string.Format(@"SELECT * from PaymentNotes where PaymentDate BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
@@ -102,7 +104,8 @@ namespace BudgetSystem.Dal
 
         private IEnumerable<Invoice> GetInvoiceList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"select * from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime;");
+            //2020-09-17 计算交单信息，纳入财务未审核，并且交单时间为业务员交单信息，在统计信息里去除这些查询信息。
+            string selectSql = string.Format(@"select * from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime  or (FinanceImportDate IS NULL and FinanceImportUser IS NULL AND ImportDate BETWEEN @BeginTime AND @EndTime) ;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
@@ -111,7 +114,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime;");
+            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.ReceiptDate BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
@@ -127,7 +130,7 @@ namespace BudgetSystem.Dal
             return con.Query<Declarationform>(selectSql, dp, tran);
         }
 
-        public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
+        public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, List<UseMoneyType> typeList, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,SUM(pn.ExchangeRate)/COUNT(1) as ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
 where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
@@ -162,10 +165,13 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
                 dp.Add("BudgetID", condition.ID, null, null, null);
             }
 
+            string typeString = string.Join(",", typeList.Select(o => string.Format("'o.Name'")).ToArray());
+
             List<Invoice> invoiceList = con.Query<Invoice>(selectSql, dp, tran).ToList();
             //将付款作为交单信息。
-            string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1  AND MoneyUsed ='运杂费' AND CommitTime BETWEEN @BeginTime and @EndTime ");
+            string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1  AND MoneyUsed in (@MoneyUsed) AND CommitTime BETWEEN @BeginTime and @EndTime ");
             dp = new DynamicParameters();
+            dp.Add("MoneyUsed", typeString, null, null, null);
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             if (condition.ID > 0)
@@ -282,33 +288,33 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
 
         public IEnumerable<RecieptCapital> GetRecieptCapitalWithUSD(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                                 LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                                 LEFT JOIN department d on bb.DeptID=d.ID 
                                 WHERE  bs.Currency='USD'
-                                GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                                UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip
+                                GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                                UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip
                                 where Currency='USD'
-                                GROUP BY BankName,PaymentMethod";
+                                GROUP BY BankName,PaymentMethod,NatureOfMoney";
             DynamicParameters dp = new DynamicParameters();
             if (condition != null)
             {
-                selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+                selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.NatureOfMoney,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                             LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                             LEFT JOIN department d on bb.DeptID=d.ID 
                             where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime) and  bs.Currency='USD'
-                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency='USD'
-                            GROUP BY BankName,PaymentMethod";
+                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,NatureOfMoney,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency='USD'
+                            GROUP BY BankName,PaymentMethod,NatureOfMoney";
                 if (!string.IsNullOrEmpty(condition.A))
                 {
-                    selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+                    selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                             LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                             LEFT JOIN department d on bb.DeptID=d.ID 
                             where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND PaymentMethod in ('T/T','L/C')) and  bs.Currency='USD'
-                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency='USD' AND PaymentMethod in ('T/T','L/C')
-                            GROUP BY BankName,PaymentMethod";
+                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency='USD' AND PaymentMethod in ('T/T','L/C')
+                            GROUP BY BankName,PaymentMethod,NatureOfMoney";
                 }
                 dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
                 dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);
@@ -320,33 +326,46 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
         public IEnumerable<RecieptCapital> GetRecieptCapitalWithOutUSD(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
 
-            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+            string selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                                 LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                                 LEFT JOIN department d on bb.DeptID=d.ID 
                                 WHERE  bs.Currency='USD'
-                                GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                                UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip
+                                GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                                UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip
                                 where Currency<>'USD'
-                                GROUP BY BankName,PaymentMethod";
+                                GROUP BY BankName,PaymentMethod,NatureOfMoney";
             DynamicParameters dp = new DynamicParameters();
             if (condition != null)
             {
-                selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+                selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                             LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                             LEFT JOIN department d on bb.DeptID=d.ID 
                             where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime) and  bs.Currency<>'USD'
-                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency<>'USD'
-                            GROUP BY BankName,PaymentMethod";
+                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency<>'USD'
+                            GROUP BY BankName,PaymentMethod,NatureOfMoney";
                 if (!string.IsNullOrEmpty(condition.A))
                 {
-                    selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+                    if (condition.A == "人民币")
+                    {
+                        selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
+                            LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
+                            LEFT JOIN department d on bb.DeptID=d.ID 
+                            where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency = 'CNY') and  bs.Currency='CNY'
+                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime  AND Currency = 'CNY'
+                            GROUP BY BankName,PaymentMethod,NatureOfMoney";
+                    }
+                    else
+                    {
+                        selectSql = @"select  SUM(bb.CNY) as CNY,SUM(bb.OriginalCoin) as OriginalCoin,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney,DeptID,d.`Code`,d.`Name` from budgetbill bb 
                             LEFT JOIN bankslip bs on bb.BSID=bs.BSID  
                             LEFT JOIN department d on bb.DeptID=d.ID 
                             where bb.BSID in (SELECT BSID from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND PaymentMethod in ('T/T','L/C')) and  bs.Currency<>'USD'
-                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod
-                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency<>'USD' AND PaymentMethod in ('T/T','L/C')
-                            GROUP BY BankName,PaymentMethod";
+                            GROUP BY DeptID,bs.BankName,bs.PaymentMethod,bs.NatureOfMoney
+                            UNION SELECT SUM(CNY2) as CNY,SUM(OriginalCoin2) as OriginalCoin,BankName,PaymentMethod,NatureOfMoney,-1,'','余额' from bankslip where ReceiptDate BETWEEN @beginTime and @endTime AND Currency<>'USD' AND PaymentMethod in ('T/T','L/C')
+                            GROUP BY BankName,PaymentMethod,NatureOfMoney";
+                    }
                 }
                 dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
                 dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);
@@ -357,17 +376,17 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
 
         public IEnumerable<RecieptCapital> GetPaymentCapital(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`  from paymentnotes pn
+            string selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`,pn.MoneyUsed as NatureOfMoney  from paymentnotes pn
 LEFT JOIN department d on pn.DeptID=d.ID 
 WHERE PayingBank is not null
-GROUP BY DeptID,PayingBank";
+GROUP BY DeptID,PayingBank,pn.MoneyUsed";
             DynamicParameters dp = new DynamicParameters();
             if (condition != null)
             {
-                selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`  from paymentnotes pn
+                selectSql = @"SELECT sum(CNY) as CNY,PayingBank as BankName,DeptID,d.`Code`,d.`Name`,pn.MoneyUsed as NatureOfMoney   from paymentnotes pn
 LEFT JOIN department d on pn.DeptID=d.ID 
 WHERE PaymentDate BETWEEN @beginTime and @endTime AND  PayingBank is not null
-GROUP BY DeptID,PayingBank";
+GROUP BY DeptID,PayingBank,pn.MoneyUsed";
                 dp.Add("beginTime", condition.BeginTimestamp, DbType.DateTime, null, null);
                 dp.Add("endTime", condition.EndTimestamp, DbType.DateTime, null, null);
             }

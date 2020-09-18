@@ -166,22 +166,18 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" bs.Cus_ID in (SELECT ID from customer where `Name` like @Customer)");
                     dp.Add("Customer", string.Format("%{0}%", condition.Customer), null, null, null);
                 }
-                if (condition.ReceiptDateBegin != DateTime.MinValue)
+                if (condition.ReceiptDateBegin != DateTime.MinValue&&condition.ReceiptDateEnd != DateTime.MinValue)
                 {
-                    strConditionList.Add(" bs.ReceiptDate >@ReceiptDateBegin ");
-                    dp.Add("ReceiptDateBegin", condition.ReceiptDateBegin.ToString("yyyy-MM-dd"), null, null, null);
-                }
-                if (condition.ReceiptDateEnd != DateTime.MinValue)
-                {
-                    strConditionList.Add(" bs.ReceiptDate <@ReceiptDateEnd ");
-                    dp.Add("ReceiptDateEnd", condition.ReceiptDateEnd.ToString("yyyy-MM-dd"), null, null, null);
+                    strConditionList.Add(" bs.ReceiptDate BETWEEN @ReceiptDateBegin AND @ReceiptDateEnd");
+                    dp.Add("ReceiptDateBegin", condition.ReceiptDateBegin.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
+                    dp.Add("ReceiptDateEnd", condition.ReceiptDateEnd.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
                 }
 
-                if (condition.State == QueryReceiptState.Confirmed)
+                if (condition.State == QueryReceiptState.已确认银行水单)
                 {
                     strConditionList.Add(" bs.State=2 ");
                 }
-                else if (condition.State == QueryReceiptState.ToBeConfirmed)
+                else if (condition.State == QueryReceiptState.未确认银行水单)
                 {
                     strConditionList.Add(" bs.State<>2 ");
                 }
@@ -247,11 +243,12 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
                                 Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
@@ -259,11 +256,12 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListByCondition(IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName 
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
                                 Where bb.IsDelete=0 ";
             return con.Query<BudgetBill>(selectSql, new { }, tran);
@@ -383,5 +381,23 @@ namespace BudgetSystem.Dal
             return totalAmount;
         }
 
+        public bool ExistsTypeName(string typeName, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"SELECT COUNT(BSID) from bankslip WHERE NatureOfMoney=@NatureOfMoney;";
+
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Transaction = tran;
+            IDbDataParameter budgetIDParamter = command.CreateParameter();
+            budgetIDParamter.DbType = DbType.String;
+            budgetIDParamter.ParameterName = "NatureOfMoney";
+            budgetIDParamter.Value = typeName;
+            command.Parameters.Add(budgetIDParamter);
+
+            object obj = command.ExecuteScalar();
+            int count = 0;
+            int.TryParse(obj.ToString(), out count);
+            return count > 0;
+        }
     }
 }

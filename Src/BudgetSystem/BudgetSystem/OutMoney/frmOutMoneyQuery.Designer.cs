@@ -38,6 +38,7 @@
             this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcApplicant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCommitTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -77,6 +78,7 @@
             this.gcCurrency,
             this.gcExchangeRate,
             this.gcCNY,
+            this.gcType,
             this.gcApplicant,
             this.gcCommitTime,
             this.gcPaymentDate,
@@ -92,6 +94,7 @@
             this.gvOutMoney.GroupCount = 1;
             this.gvOutMoney.Name = "gvOutMoney";
             this.gvOutMoney.OptionsBehavior.Editable = false;
+            this.gvOutMoney.OptionsView.ShowFooter = true;
             this.gvOutMoney.OptionsView.ShowGroupPanel = false;
             this.gvOutMoney.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcEnumFlowState, DevExpress.Data.ColumnSortOrder.Ascending),
@@ -105,6 +108,8 @@
             this.gcSupplier.GroupFormat.FormatString = "g";
             this.gcSupplier.GroupFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcSupplier.Name = "gcSupplier";
+            this.gcSupplier.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "SupplierName", "合计：{0:d}")});
             this.gcSupplier.Visible = true;
             this.gcSupplier.VisibleIndex = 0;
             // 
@@ -129,6 +134,8 @@
             this.gcOriginalCoin.Caption = "付款原币金额";
             this.gcOriginalCoin.FieldName = "OriginalCoin";
             this.gcOriginalCoin.Name = "gcOriginalCoin";
+            this.gcOriginalCoin.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcOriginalCoin.Visible = true;
             this.gcOriginalCoin.VisibleIndex = 3;
             // 
@@ -137,8 +144,6 @@
             this.gcEnumFlowState.Caption = "付款单审批状态";
             this.gcEnumFlowState.FieldName = "EnumFlowState";
             this.gcEnumFlowState.Name = "gcEnumFlowState";
-            this.gcEnumFlowState.Visible = true;
-            this.gcEnumFlowState.VisibleIndex = 4;
             // 
             // gcCurrency
             // 
@@ -157,8 +162,18 @@
             this.gcCNY.Caption = "付款人民币金额";
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
+            this.gcCNY.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcCNY.Visible = true;
             this.gcCNY.VisibleIndex = 4;
+            // 
+            // gcType
+            // 
+            this.gcType.Caption = "付款类型";
+            this.gcType.FieldName = "PaymentType";
+            this.gcType.Name = "gcType";
+            this.gcType.Visible = true;
+            this.gcType.VisibleIndex = 8;
             // 
             // gcApplicant
             // 
@@ -201,7 +216,7 @@
             this.gcDepartmentCode.FieldName = "DepartmentName";
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 8;
+            this.gcDepartmentCode.VisibleIndex = 9;
             // 
             // gcMoneyUsed
             // 
@@ -209,7 +224,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 9;
+            this.gcMoneyUsed.VisibleIndex = 10;
             // 
             // gcRepayLoanText
             // 
@@ -217,7 +232,7 @@
             this.gcRepayLoanText.FieldName = "RepayLoanText";
             this.gcRepayLoanText.Name = "gcRepayLoanText";
             this.gcRepayLoanText.Visible = true;
-            this.gcRepayLoanText.VisibleIndex = 10;
+            this.gcRepayLoanText.VisibleIndex = 11;
             // 
             // gcExpectedReturnDate
             // 
@@ -281,5 +296,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
         private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
         private DevExpress.XtraGrid.Columns.GridColumn gcRepayLoanText;
+        private DevExpress.XtraGrid.Columns.GridColumn gcType;
     }
 }

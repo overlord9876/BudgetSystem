@@ -17,6 +17,7 @@ namespace BudgetSystem.Report
 {
     public partial class frmPaymentReport : Base.frmBaseCommonReportForm
     {
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private Dictionary<string, string> columnDic = new Dictionary<string, string>();
         private Dictionary<string, decimal> paymentmethodDic = new Dictionary<string, decimal>();
         private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
@@ -24,11 +25,14 @@ namespace BudgetSystem.Report
         private DateTime beginTimestamp = DateTime.MinValue;
         private DateTime endTimestamp = DateTime.MaxValue;
         private int count = 0;//付款笔数
+        private decimal ProvisionalPayment = 0;//暂付款
+        private IEnumerable<UseMoneyType> umtList;
 
         public frmPaymentReport()
         {
             InitializeComponent();
             this.Module = BusinessModules.PaymentCapital;
+            this.umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString()).Where(o => o.Type == PaymentType.暂付款);
         }
 
         protected override void InitLayout()
@@ -55,6 +59,7 @@ namespace BudgetSystem.Report
 
         protected override void LoadDataByCondition(BudgetQueryCondition condition)
         {
+            ProvisionalPayment = 0;
             beginTimestamp = condition.BeginTimestamp;
             endTimestamp = condition.EndTimestamp;
             Bll.ReportManager um = new Bll.ReportManager();
@@ -83,8 +88,11 @@ namespace BudgetSystem.Report
             {
                 RecieptCapital rc = rcList[index];
 
+                if (umtList.Any(o => o.Name == rc.NatureOfMoney))
+                {
+                    ProvisionalPayment += rc.CNY;
+                }
                 rc.OriginalCoin = rc.CNY;
-
                 //if (!paymentmethodDic.ContainsKey(rc.PaymentMethod))
                 //{
                 //    paymentmethodDic.Add(rc.PaymentMethod, 0);
@@ -150,6 +158,12 @@ namespace BudgetSystem.Report
                 }
             }
 
+            //暂付款
+            DataRow ProvisionalPaymentRow = dt.NewRow();
+            dt.Rows.Add(ProvisionalPaymentRow);
+            ProvisionalPaymentRow[columnDic[frmCapitalReport.DepartmentCaption]] = "暂付款";
+            ProvisionalPaymentRow[1] = ProvisionalPayment;
+
             //合计每行数据
             decimal rowTotal = 0;
             foreach (DataRow row in dt.Rows)
@@ -179,7 +193,7 @@ namespace BudgetSystem.Report
             //合计总数
             DataRow totalMoneyRow = dt.NewRow();
             dt.Rows.Add(totalMoneyRow);
-            totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
+            totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计（人民币）";
             totalMoneyRow[1] = totalMoney;
 
             //汇总付款批次
@@ -189,6 +203,7 @@ namespace BudgetSystem.Report
             totalCountRow[1] = count;
 
             this.gridControl.DataSource = dt;
+            base.gridView.BestFitColumns();
         }
 
 

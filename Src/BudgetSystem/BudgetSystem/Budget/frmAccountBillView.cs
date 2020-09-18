@@ -17,6 +17,7 @@ namespace BudgetSystem
     {
         BudgetManager bm = new BudgetManager();
         public Budget CurrentBudget { get; set; }
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
         public List<AccountBill> AccountBillList { get; set; }
 
@@ -27,11 +28,38 @@ namespace BudgetSystem
 
         private void frmAccountBillView_Load(object sender, EventArgs e)
         {
+            var imtList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
+            var umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+
             this.Text = "按合同号查询收付情况";
             List<AccountBill> dataSource = bm.GetAccountBillDetailByBudgetId(CurrentBudget.ID);
+            if (dataSource != null)
+            {
+                InMoneyType imt = null;
+                UseMoneyType umt = null;
+                foreach (var bs in dataSource)
+                {
+                    if (!string.IsNullOrEmpty(bs.NatureOfMoney))
+                    {
+                        imt = imtList.Where(o => o.Name == bs.NatureOfMoney).FirstOrDefault();
+                        if (imt != null)
+                        {
+                            bs.UseType = imt.Type.ToString();
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(bs.MoneyUsed))
+                    {
+                        umt = umtList.Where(o => o.Name == bs.MoneyUsed).FirstOrDefault();
+                        if (umt != null)
+                        {
+                            bs.UseType = umt.Type.ToString();
+                        }
+                    }
+                }
+            }
             this.gcAccountBill.DataSource = dataSource;
             this.gcAccountBill.RefreshDataSource();
-
+            this.gvAccountBill.BestFitColumns();
             this.lblBudgetNO.Text = CurrentBudget.ContractNO;
 
             this.textEdit_Number1.EditValue = dataSource.Sum(o => o.PaymentMoney);

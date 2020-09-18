@@ -30,7 +30,7 @@ namespace BudgetSystem
             CheckUserPermission();
 #endif
 
-            bsiLoginInfo.Caption = string.Format("当前登录用户为：{0}{1}", RunInfo.Instance.CurrentUser.DepartmentName, RunInfo.Instance.CurrentUser.ToString());
+            bsiLoginInfo.Caption = string.Format("当前登录用户为：{0}{1}  ", RunInfo.Instance.CurrentUser.DepartmentName, RunInfo.Instance.CurrentUser.ToString());
 
         }
 

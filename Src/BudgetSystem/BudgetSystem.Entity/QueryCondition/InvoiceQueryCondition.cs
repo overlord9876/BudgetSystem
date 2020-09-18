@@ -14,6 +14,8 @@ namespace BudgetSystem.Entity.QueryCondition
 
         public DateTime EndTimestamp { get; set; }
 
+        public InvoiceViewMode ViewMode { get; set; }
+
         public string CreateUser { get; set; }
     }
 }

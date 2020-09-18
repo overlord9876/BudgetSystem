@@ -184,11 +184,27 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (PaymentList != null)
+                if (PaymentList != null && UMTList != null)
                 {
-                    return PaymentList.Where(o => Util.DirectCostsTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                    var typeList = UMTList.Where(umt => umt.Type == PaymentType.直接费用);
+                    return PaymentList.Where(o => typeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
                 }
                 else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 未交单直接费用
+        /// </summary>
+        public decimal UnInvoiceDirectCosts
+        {
+            get
+            {
+                if ((TotalInvoice - InvoiceSellingCost) < DirectCosts)
+                {
+                    return DirectCosts;
+                }
+                return 0;
             }
         }
 
@@ -303,6 +319,15 @@ namespace BudgetSystem.Entity
             }
         }
 
+        /// <summary>
+        /// 用款类型
+        /// </summary>
+        public List<UseMoneyType> UMTList { get; set; }
+        /// <summary>
+        /// 收款类型
+        /// </summary>
+        public List<InMoneyType> IMTList { get; set; }
+
         public List<PaymentNotes> PaymentList { get; set; }
 
         /// <summary>
@@ -312,9 +337,10 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (PaymentList != null)
+                if (PaymentList != null && UMTList != null)
                 {
-                    return PaymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                    var permiumList = UMTList.Where(umt => umt.Type == PaymentType.运杂费);
+                    return PaymentList.Where(o => permiumList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
@@ -327,9 +353,10 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (PaymentList != null)
+                if (PaymentList != null && UMTList != null)
                 {
-                    return PaymentList.Where(o => Util.PremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
+                    var permiumList = UMTList.Where(umt => umt.Type == PaymentType.运杂费);
+                    return PaymentList.Where(o => permiumList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
                 }
                 else { return 0; }
             }
@@ -342,9 +369,86 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (PaymentList != null)
+                if (PaymentList != null && UMTList != null)
                 {
-                    return PaymentList.Where(o => Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                    var commissionList = UMTList.Where(umt => umt.Type == PaymentType.佣金);
+                    return PaymentList.Where(o => commissionList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 佣金(付)
+        /// </summary>
+        public decimal PCommission
+        {
+            get
+            {
+                if (PaymentList != null && UMTList != null)
+                {
+                    var commissionList = UMTList.Where(umt => umt.Type == PaymentType.佣金);
+                    return PaymentList.Where(o => commissionList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 佣金（交）
+        /// </summary>
+        public decimal ICommission
+        {
+            get
+            {
+                if (InvoiceList != null)
+                {
+                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.Commission);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 销售毛利润
+        /// </summary>
+        public decimal GrossProfit
+        {
+            get
+            {
+                if (InvoiceList != null)
+                {
+                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.GrossProfit);
+                }
+                else { return 0; }
+            }
+        }
+        /// <summary>
+        /// 进料款(付)
+        /// </summary>
+        public decimal PFeedMoney
+        {
+            get
+            {
+                if (PaymentList != null && UMTList != null)
+                {
+                    var feedList = UMTList.Where(umt => umt.Type == PaymentType.进料款);
+                    return PaymentList.Where(o => feedList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 进料款（交）
+        /// </summary>
+        public decimal IFeedMoney
+        {
+            get
+            {
+                if (InvoiceList != null)
+                {
+                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.FeedMoney);
                 }
                 else { return 0; }
             }
@@ -359,22 +463,26 @@ namespace BudgetSystem.Entity
             {
                 if (PaymentList != null)
                 {
-                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+                    //var typeList = UMTList.Where(umt => umt.Type == PaymentType.运杂费 || umt.Type == PaymentType.佣金);
+                    //return PaymentList.Where(o => !typeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
+                    return PaymentList.Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
         }
 
         /// <summary>
-        /// 销售成本（人民币￥）,等于付款去税金额
+        /// 付款不含税成本（人民币￥）,等于付款不含税成本
         /// </summary>
         public decimal SellingCost
         {
             get
             {
-                if (PaymentList != null)
+                if (PaymentList != null && UMTList != null)
                 {
-                    return PaymentList.Where(o => !Util.PremiumTextList.Contains(o.MoneyUsed) && !Util.CommissionUsageNameList.Contains(o.MoneyUsed) && !Util.DirectCostsTextList.Contains(o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
+                    var typeList = UMTList.Where(umt => umt.Type == PaymentType.运杂费 || umt.Type == PaymentType.佣金 || umt.Type == PaymentType.直接费用 || umt.Type == PaymentType.暂付款);
+                    int count = typeList.Count();
+                    return PaymentList.Where(o => !typeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.DeTaxationCNY);
                 }
                 else { return 0; }
             }
@@ -391,32 +499,40 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Sum(o => o.CNY);
+                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
         }
 
-        public decimal SupplierInvoice
+        /// <summary>
+        /// 销售成本（人民币￥）,等于交单成本
+        /// </summary>
+        public decimal InvoiceSellingCost
         {
             get
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Sum(o => o.FeedMoney + o.Commission);
+                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.TotalCost);
                 }
                 else { return 0; }
             }
         }
 
         public List<BudgetBill> BudgetBillList { get; set; }
+
+        /// <summary>
+        /// 总收款金额
+        /// </summary>
         public decimal TotalBudgetBill
         {
             get
             {
-                if (BudgetBillList != null)
+                if (BudgetBillList != null && IMTList != null)
                 {
-                    return BudgetBillList.Sum(o => o.CNY);
+                    var typeList = IMTList.Where(o => o.Type == IMType.暂收款);
+                    return BudgetBillList.Where(o => !typeList.Any(t => t.Name == o.NatureOfMoney)).Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
@@ -452,21 +568,101 @@ namespace BudgetSystem.Entity
             }
         }
 
+        /// <summary>
+        /// 销售利润（SalesProfit）=销售金额—销售成本—运杂费成本—直接费用
+        /// </summary>
         public decimal SalesProfit
         {
             get
             {
-                return TotalInvoice - SellingCost - Premium - Commission - DirectCosts;
+                //return TotalInvoice - SellingCost - Premium - Commission - DirectCosts;           
+                return TotalInvoice - InvoiceSellingCost - PremiumCost - DirectCosts;
             }
         }
 
-
+        /// <summary>
+        /// 实际利润（ActualProfit）=付款金额—付款不含税成本—运杂费—进料款(付)—佣金(付)—直接费用
+        /// </summary>
         public decimal ActualProfit
         {
             get
             {
-                return TotalBudgetBill - SellingCost - Premium - Commission - DirectCosts;
+                return TotalBudgetBill - SellingCost - Premium - PFeedMoney - PCommission - DirectCosts;
             }
         }
+
+        /// <summary>
+        /// 为在财务提出归档征询意见后，（才计算产生）
+        /// 汇兑损益 = 应收人民币—实收人民币 = 应收人民币余额
+        /// 2020-09-10
+        /// </summary>
+        public decimal ExchangeGains
+        {
+            get
+            {
+                if (State >= 4)
+                {
+                    var totalBudgetBill = BudgetBillList.Sum(o => o.CNY);
+                    var totalInvoice = InvoiceList.Sum(o => Math.Round(o.OriginalCoin * o.ExchangeRate, 2));
+                    return totalInvoice - totalBudgetBill;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 调整后销售利润
+        /// 该列数据，当没有损益时为原值
+        /// 调整后销售利润 = 销售利润—汇兑损益
+        /// 2020-09-10
+        /// </summary>
+        public decimal AdjustedSalesProfit { get { return SalesProfit - ExchangeGains; } }
+
+        /// <summary>
+        /// 暂收款
+        /// 暂收款为当发生暂收款时计入数值
+        /// 2020-09-10
+        /// </summary>
+        public decimal ProvisionalReceipt
+        {
+            get
+            {
+                if (BudgetBillList != null && IMTList != null)
+                {
+                    var typeList = IMTList.Where(o => o.Type == IMType.暂收款);
+                    return BudgetBillList.Where(o => typeList.Any(t => t.Name == o.NatureOfMoney)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 暂付款
+        /// 暂付款为当发生暂付款时计入数值
+        /// 2020-09-10
+        /// </summary>
+        public decimal ProvisionalPayment
+        {
+            get
+            {
+                if (PaymentList != null && UMTList != null)
+                {
+                    var typeList = UMTList.Where(umt => umt.Type == PaymentType.暂付款);
+                    return PaymentList.Where(o => typeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
+                }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// 暂收付款差额
+        /// 暂收款—暂付款 = 差额
+        /// 2020-09-10
+        /// </summary>
+        public decimal ProvisionalImbalance { get { return ProvisionalReceipt - ProvisionalPayment; } }
+
     }
 }

@@ -17,11 +17,13 @@ namespace BudgetSystem.Bll
             var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoice(condition, con, null); });
             return lst.ToList();
         }
+
         public List<Invoice> GetAllInvoiceByBudgetID(int budgetID)
         {
             var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoiceByBudgetID(budgetID, con, null); });
             return lst.ToList();
         }
+
         public Invoice GetInvoice(int id)
         {
             return this.Query<Invoice>((con) => { return invoiceDal.GetInvoice(id, con, null); });

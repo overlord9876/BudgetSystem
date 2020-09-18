@@ -13,6 +13,17 @@ namespace BudgetSystem.Entity.QueryCondition
         public string ApproveUser { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public DateTime CommitBeginDate { get; set; }
+        public DateTime CommitEndDate { get; set; }
+
+        public OutMoneyQueryCondition()
+        {
+            CommitBeginDate = DateTime.MinValue;
+            CommitEndDate = DateTime.MinValue;
+            BeginDate = DateTime.MinValue;
+            EndDate = DateTime.MinValue;
+        }
     }
 
     public enum PaymentState

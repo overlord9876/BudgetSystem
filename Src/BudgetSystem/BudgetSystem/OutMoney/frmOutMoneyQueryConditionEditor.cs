@@ -32,6 +32,25 @@ namespace BudgetSystem
             {
                 c.ApproveUser = (cboApproveUser.EditValue as User).UserName;
             }
+
+            if (this.deDateBegin.EditValue != null)
+            {
+                var commitBeginDate = (DateTime)this.deDateBegin.EditValue;
+                c.CommitBeginDate = new DateTime(commitBeginDate.Year, commitBeginDate.Month, commitBeginDate.Day, 0, 0, 0);
+            }
+            else
+            {
+                c.CommitBeginDate = DateTime.MinValue;
+            }
+            if (this.deDateEnd.EditValue != null)
+            {
+                var commitEndDate = (DateTime)this.deDateEnd.EditValue;
+                c.CommitEndDate = new DateTime(commitEndDate.Year, commitEndDate.Month, commitEndDate.Day).AddDays(1).AddMilliseconds(-1);
+            }
+            else
+            {
+                c.CommitEndDate = DateTime.MinValue;
+            }
             this.QueryCondition = c;
             return true;
 

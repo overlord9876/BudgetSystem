@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Bll;
@@ -11,6 +12,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
 using BudgetSystem.Util;
+using System.Reflection;
 
 namespace BudgetSystem.InMoney
 {
@@ -18,14 +20,41 @@ namespace BudgetSystem.InMoney
     {
         ReceiptMgmtManager arm = new ReceiptMgmtManager();
         UserManager um = new UserManager();
-        const string COMMONQUERY_TOBECONFIRMED = "未确认银行水单";
-        const string COMMONQUERY_CONFIRMED = "已确认银行水单";
-        const string COMMONQUERY_ALL = "所有银行水单";
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
+        readonly string COMMONQUERY_TOBECONFIRMED = QueryReceiptState.未确认银行水单.ToString();
+        readonly string COMMONQUERY_CONFIRMED = QueryReceiptState.已确认银行水单.ToString();
+        readonly string COMMONQUERY_ALL = QueryReceiptState.所有银行水单.ToString();
 
         public frmInMoneyQuery()
         {
             InitializeComponent();
+            this.gvInMoney.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(gvInMoney_CustomDrawGroupRow);
             this.Module = BusinessModules.InMoneyManagement;
+        }
+
+        private void gvInMoney_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            GridGroupRowInfo GridGroupRowInfo = e.Info as GridGroupRowInfo;
+            string fullName = GridGroupRowInfo.EditValue == null ? string.Empty : GridGroupRowInfo.EditValue.ToString();
+            string columnFieldName = GridGroupRowInfo.Column.FieldName;
+
+            PropertyInfo propety = typeof(BankSlip).GetProperty(columnFieldName);
+            if (propety == null) return;
+
+            decimal totalCNY = 0;
+            List<BankSlip> bsList = gvInMoney.DataSource as List<BankSlip>;
+            foreach (BankSlip bs in bsList)
+            {
+                object obj = propety.GetValue(bs, null);
+                string value = obj == null ? string.Empty : obj.ToString(); //对应的值
+                if (value == fullName)
+                {
+                    totalCNY += bs.CNY;
+                }
+            }
+
+            fullName = fullName + " (合计人民币：" + totalCNY + ")";
+            GridGroupRowInfo.GroupText = fullName;
         }
 
         protected override void InitModelOperate()
@@ -90,11 +119,11 @@ namespace BudgetSystem.InMoney
             InMoneyQueryCondition condition = new InMoneyQueryCondition();
             if (COMMONQUERY_TOBECONFIRMED.Equals(queryName))
             {
-                condition.State = QueryReceiptState.ToBeConfirmed;
+                condition.State = QueryReceiptState.未确认银行水单;
             }
             else if (COMMONQUERY_CONFIRMED.Equals(queryName))
             {
-                condition.State = QueryReceiptState.Confirmed;
+                condition.State = QueryReceiptState.已确认银行水单;
             }
             LoadData(condition);
         }
@@ -380,9 +409,23 @@ namespace BudgetSystem.InMoney
             {
                 condition = new InMoneyQueryCondition();
             }
+
+            var imtList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
+
             condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InMoneyQueryCondition;
             List<BankSlip> bsList = arm.GetAllBankSlipList(condition);
-
+            if (bsList != null)
+            {
+                InMoneyType imt = null;
+                foreach (var bs in bsList)
+                {
+                    imt = imtList.Where(o => o.Name == bs.NatureOfMoney).FirstOrDefault();
+                    if (imt != null)
+                    {
+                        bs.IMType = imt.Type;
+                    }
+                }
+            }
             this.gcInMoney.DataSource = bsList;
 
             this.gvInMoney.BestFitColumns();

@@ -52,6 +52,11 @@ namespace BudgetSystem.Entity
         public decimal ExchangeRate { get; set; }
 
         /// <summary>
+        /// 款项性质
+        /// </summary>
+        public string NatureOfMoney { get; set; }
+
+        /// <summary>
         /// 人民币金额
         /// </summary>
         public decimal CNY { get; set; }

@@ -45,6 +45,11 @@ namespace BudgetSystem.Entity
         public string Company { get; set; }
 
         /// <summary>
+        /// 真实付款客户
+        /// </summary>
+        public string Company2 { get; set; }
+
+        /// <summary>
         /// 凭证号
         /// </summary>
         public string VoucherNo { get; set; }
@@ -54,6 +59,13 @@ namespace BudgetSystem.Entity
         /// 用途
         /// </summary>
         public string MoneyUsed { get; set; }
+
+        /// <summary>
+        /// 款项性质
+        /// </summary>
+        public string NatureOfMoney { get; set; }
+
+        public string UseType { get; set; }
 
         /// <summary>
         /// 是否退税
@@ -128,7 +140,9 @@ namespace BudgetSystem.Entity
                     MoneyUsed = receipt.Remark,
                     CNY = receipt.CNY,
                     RecieptMoney = receipt.OriginalCoin,
-                    Company = receipt.Remitter
+                    Company = receipt.Remitter,
+                    Company2 = receipt.Customer,
+                    NatureOfMoney = receipt.NatureOfMoney,
                 };
         }
 

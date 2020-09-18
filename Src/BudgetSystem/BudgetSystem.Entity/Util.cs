@@ -60,38 +60,5 @@ namespace BudgetSystem.Entity
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
-
-        /// <summary>
-        /// 运杂费类型
-        /// </summary>
-        public static List<string> PremiumTextList = new List<string>() { "运杂费" };
-
-        /// <summary>
-        /// (付款累计用)运杂费类型
-        /// 2019-12-04提出单一决算和付款累计有区分。
-        /// </summary>
-        public static List<string> PaymentUsePremiumTextList = new List<string>() { "运杂费" };
-
-        /// <summary>
-        /// 佣金类型
-        /// </summary>
-        public static List<string> CommissionUsageNameList = new List<string>() { "支付国内佣金", "咨询费", "服务费" };
-
-        /// <summary>
-        /// (付款累计用)佣金类型
-        /// 2019-12-04提出单一决算和付款累计有区分。
-        /// </summary>
-        public static List<string> PaymentUseCommissionUsageNameList = new List<string>() { "支付国内佣金", "咨询费", "服务费", "支付国外佣金" };
-
-        /// <summary>
-        /// 直接费用类型
-        /// </summary>
-        public static List<string> DirectCostsTextList = new List<string>() { "海关进口关税", "快递费", "检测费", "进口单证费", "产地证费用", "其他" };
-
-        /// <summary>
-        /// (付款累计用)直接费用类型
-        /// 2019-12-04提出单一决算和付款累计有区分。
-        /// </summary>
-        public static List<string> PaymentUseDirectCostsTextList = new List<string>() { "海关进口关税", "快递费", "检测费", "进口单证费", "产地证费用", "其他" };
     }
 }

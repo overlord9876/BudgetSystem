@@ -25,9 +25,6 @@ namespace BudgetSystem
             InitModelOperate();
             this.ModelOperatePageName = "操作页";
             this.FormID = Guid.NewGuid().ToString("N");
-
-
-
         }
 
         List<GridView> gridViewList = null;
@@ -156,7 +153,10 @@ namespace BudgetSystem
 
         private void frmBaseQueryForm_Load(object sender, EventArgs e)
         {
+            //this.LoadGridViews()[0].IndicatorWidth = 45;
+            //this.LoadGridViews()[0].CustomDrawRowIndicator += new RowIndicatorCustomDrawEventHandler(frmBaseQueryForm_CustomDrawRowIndicator);
             this.InitGridViewAction();
+
             if (this.AutoRegeditGridViewDoubleClick)
             {
                 List<GridView> gvList = LoadGridViews();
@@ -200,6 +200,13 @@ namespace BudgetSystem
             hInfo = gv.CalcHitInfo(e.Y, e.Y);
         }
 
+        private void frmBaseQueryForm_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator && e.RowHandle > -1)
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
+        }
 
         private List<GridView> LoadGridViews()
         {
@@ -213,7 +220,6 @@ namespace BudgetSystem
             }
             return this.gridViewList;
         }
-
 
         private void GetGridViews(ref  List<GridView> list, Control control)
         {
@@ -268,9 +274,7 @@ namespace BudgetSystem
                 this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.QueryManager));
             }
         }
-
-
-
+        
         protected void RegeditPrintOperate(bool isPrintLandscape = true, bool supposePrintItem = true, GridView printListGridView = null)
         {
             this.isPrintLandscape = isPrintLandscape;

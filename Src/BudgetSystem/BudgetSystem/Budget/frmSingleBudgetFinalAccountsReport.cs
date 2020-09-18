@@ -15,10 +15,17 @@ namespace BudgetSystem
 {
     public partial class frmSingleBudgetFinalAccountsReport : frmBaseQueryForm
     {
+        private SystemConfigManager scm = new SystemConfigManager();
+        private List<InMoneyType> inMoneyTypeList;
+        private List<UseMoneyType> useMoneyTypeList;
         public Budget CurrentBudget { get; set; }
+        private decimal ExchangeRate;
         public frmSingleBudgetFinalAccountsReport()
         {
             InitializeComponent();
+            inMoneyTypeList = this.scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
+            useMoneyTypeList = this.scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+
             this.Load += new EventHandler(frmSingleBudgetFinalAccountsReport_Load);
             this.advBandedGridView.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(bgvReport_CustomDrawCell);
         }
@@ -91,6 +98,10 @@ namespace BudgetSystem
                     row["Date"] = bill.ReceiptDate;
                     row["BillOriginalCoin"] = bill.OriginalCoin;
                     row["BillCNY"] = bill.CNY;
+                    if (bill.Currency == "USD")
+                    {
+                        ExchangeRate = bill.ExchangeRate;
+                    }
                     row["BillExchangeRate"] = bill.ExchangeRate;
                     row["BillRemitter"] = bill.Remitter;
                     dt.Rows.Add(row);
@@ -103,16 +114,16 @@ namespace BudgetSystem
                     dt.Rows.Add(row);
                     row["Date"] = pn.PaymentDate;
 
-                    if (BudgetSystem.Entity.Util.PremiumTextList.Contains(pn.MoneyUsed))
+                    if (useMoneyTypeList.Where(o => o.Type == PaymentType.运杂费).Any(o => o.Name == pn.MoneyUsed))
                     {
                         row["Premium"] = pn.CNY;
                         row["PremiumConst"] = pn.DeTaxationCNY;
                     }
-                    else if (Entity.Util.CommissionUsageNameList.Contains(pn.MoneyUsed))
+                    else if (useMoneyTypeList.Where(o => o.Type == PaymentType.佣金).Any(o => o.Name == pn.MoneyUsed))
                     {
                         row["Commission"] = pn.CNY;
                     }
-                    else if (Entity.Util.DirectCostsTextList.Contains(pn.MoneyUsed))
+                    else if (useMoneyTypeList.Where(o => o.Type == PaymentType.直接费用).Any(o => o.Name == pn.MoneyUsed))
                     {
                         row["DirectCosts"] = pn.CNY;
                     }
@@ -159,6 +170,10 @@ namespace BudgetSystem
                 }
                 dt.DefaultView.Sort = "Date";
                 dt = dt.DefaultView.ToTable();
+                if (ExchangeRate <= 0)
+                {
+                    ExchangeRate = (decimal)budget.ExchangeRate;
+                }
                 this.gcReport.DataSource = CalcFormulaColumnData(dt);
             }
         }
@@ -276,9 +291,10 @@ namespace BudgetSystem
                 //TODO:此列值未计算“扣除利息后实际利润”
                 row["Balance"] = preBalance + GetDecimal(row, "Profit");
             }
-
-            gridBand10.Caption = (totalOriginalCurrency - BillOriginalCoin).ToString();//应收原币
-            gridBand3.Caption = (AllTotalAmount - BillCNY).ToString();//应收人名币
+            //gridBand10.Caption = (totalOriginalCurrency - BillOriginalCoin).ToString();//应收原币      
+            //2020-09-08 应收原币应该将原币换算成人民币，再换算会美元，如果收付款里没有美元，则采用预算单的美元汇率。
+            gridBand10.Caption = (Math.Round((AllTotalAmount - BillCNY) / ExchangeRate, 2)).ToString();//应收原币
+            gridBand3.Caption = (AllTotalAmount - BillCNY).ToString();//应收人民币
             gridBand23.Caption = (needPayment - totalPaymentCNY).ToString(); //应付余额=已收供方发票-已付供方货款
             gridBand4.Caption = (totalProfit - totalSalesProfit).ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             return dt;

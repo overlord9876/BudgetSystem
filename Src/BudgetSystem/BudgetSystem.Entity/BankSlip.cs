@@ -46,6 +46,8 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string NatureOfMoney { get; set; }
 
+        public IMType IMType { get; set; }
+
         /// <summary>
         /// 汇款方式
         /// </summary>

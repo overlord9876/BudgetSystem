@@ -253,6 +253,14 @@ namespace BudgetSystem.Bll
 
         }
 
+        public bool ExistsTypeName(string typeName)
+        {
+            return this.ExecuteWithTransaction<bool>((con, tran) =>
+            {
+                return dal.ExistsTypeName(typeName, con, tran);
+            });
+        }
+
         private string GetSplitInfo(List<BudgetBill> budgetBillList)
         {
             string info = string.Empty;

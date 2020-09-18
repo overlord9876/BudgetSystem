@@ -8,50 +8,49 @@ using System.Linq;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
+using BudgetSystem.Bll;
 
 namespace BudgetSystem
 {
     /// <summary>
     /// 用款类型配置界面
     /// </summary>
-    public partial class ucUseMoneyTypeOptionEdit : ucOptionEditBase
+    public partial class ucInMoneyTypeOptionEdit : ucOptionEditBase
     {
-        private Bll.PaymentNotesManager pnm = new Bll.PaymentNotesManager();
+        private ReceiptMgmtManager rm = new ReceiptMgmtManager();
 
-        public ucUseMoneyTypeOptionEdit()
+        public ucInMoneyTypeOptionEdit()
             : base()
         {
             InitializeComponent();
-            this.OptionName = EnumSystemConfigNames.用款类型.ToString();
+            this.OptionName = EnumSystemConfigNames.收款类型.ToString();
 
-            this.cboType.Items.AddRange(Enum.GetNames(typeof(PaymentType)).Select(o => o.Trim()).ToList());
+            this.cboType.Items.AddRange(Enum.GetNames(typeof(IMType)).Select(o => o.Trim()).ToList());
         }
 
         protected override void RegisterEvent()
         {
             this.gvPort.CellValueChanged += gvPort_CellValueChanged;
             this.gvPort.ValidateRow += gvPort_ValidateRow;
-            this.gvPort.InvalidRowException += gvPort_InvalidRowException;
             this.gvPort.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(gvPort_FocusedRowChanged);
+            this.gvPort.InvalidRowException += gvPort_InvalidRowException;
             this.riHyperLinkEditDelete.Click += riHyperLinkEditDelete_Click;
             this.riHyperLinkEditDelete.CustomDisplayText += riHyperLinkEditDelete_CustomDisplayText;
         }
-
         protected override void BindingOption()
         {
             if (!AllowEdit)
             {
                 this.gvPort.Columns.Remove(this.gcDelete);
                 this.gcName.OptionsColumn.AllowEdit = false;
-                this.gcProvideInvoice.OptionsColumn.AllowEdit = false;
                 this.gvPort.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
             }
-            List<UseMoneyType> typeList = this.scm.GetSystemConfigValue<List<UseMoneyType>>(this.OptionName);
+            List<InMoneyType> typeList = this.scm.GetSystemConfigValue<List<InMoneyType>>(this.OptionName);
             if (typeList == null)
             {
-                typeList = new List<UseMoneyType>();
+                typeList = new List<InMoneyType>();
             }
-            BindingList<UseMoneyType> dataSource = new BindingList<UseMoneyType>(typeList);
+            BindingList<InMoneyType> dataSource = new BindingList<InMoneyType>(typeList);
             this.gridPort.DataSource = dataSource;
             this.gridPort.RefreshDataSource();
         }
@@ -61,7 +60,7 @@ namespace BudgetSystem
             if (this.gvPort.HasColumnErrors) { return false; }
             if (this.gvPort.FocusedRowHandle >= 0)
             {
-                UseMoneyType type = this.gvPort.GetRow(this.gvPort.FocusedRowHandle) as UseMoneyType;
+                InMoneyType type = this.gvPort.GetRow(this.gvPort.FocusedRowHandle) as InMoneyType;
                 string msg = CheckData(type);
                 if (!string.IsNullOrEmpty(msg))
                 {
@@ -69,8 +68,9 @@ namespace BudgetSystem
                     return false;
                 }
             }
-            var dataSource = (IEnumerable<UseMoneyType>)gridPort.DataSource;
-            this.scm.ModifySystemConfig<IEnumerable<UseMoneyType>>(this.OptionName, dataSource);
+
+            var dataSource = (IEnumerable<InMoneyType>)gridPort.DataSource;
+            this.scm.ModifySystemConfig<IEnumerable<InMoneyType>>(this.OptionName, dataSource);
             this.IsChanged = false;
             return true;
         }
@@ -82,7 +82,7 @@ namespace BudgetSystem
 
         private void gvPort_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            var data = e.Row as UseMoneyType;
+            var data = e.Row as InMoneyType;
             e.ErrorText = CheckData(data);
             if (!string.IsNullOrEmpty(e.ErrorText))
             {
@@ -105,8 +105,8 @@ namespace BudgetSystem
             }
             else
             {
-                UseMoneyType umt = gvPort.GetRow(gvPort.FocusedRowHandle) as UseMoneyType;
-                if (umt == null || pnm.ExistsPaymentMoneyUsed(umt.Name))
+                InMoneyType imt = gvPort.GetRow(gvPort.FocusedRowHandle) as InMoneyType;
+                if (imt == null || rm.ExistsTypeName(imt.Name))
                 {
                     XtraMessageBox.Show("名称已经被使用，不允许删除");
                     gvPort.CloseEditor();
@@ -120,15 +120,10 @@ namespace BudgetSystem
             }
         }
 
-        private void gvPort_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            this.IsChanged = true;
-        }
-
         private void gvPort_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            UseMoneyType umt = gvPort.GetRow(e.FocusedRowHandle) as UseMoneyType;
-            if (umt != null && pnm.ExistsPaymentMoneyUsed(umt.Name))
+            InMoneyType imt = gvPort.GetRow(e.FocusedRowHandle) as InMoneyType;
+            if (imt != null && rm.ExistsTypeName(imt.Name))
             {
                 gvPort.OptionsBehavior.Editable = false;
             }
@@ -138,7 +133,12 @@ namespace BudgetSystem
             }
         }
 
-        private string CheckData(UseMoneyType type)
+        private void gvPort_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            this.IsChanged = true;
+        }
+
+        private string CheckData(InMoneyType type)
         {
             if (type == null)
             {
@@ -148,7 +148,7 @@ namespace BudgetSystem
             {
                 return "名称不能为空";
             }
-            var source = (IEnumerable<UseMoneyType>)gridPort.DataSource;
+            var source = (IEnumerable<InMoneyType>)gridPort.DataSource;
             if (source != null && source.Where(o => o != type).Any(o => o.Name == type.Name))
             {
                 return "名称不允许重复";

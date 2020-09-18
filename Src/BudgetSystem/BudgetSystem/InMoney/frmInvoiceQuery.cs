@@ -46,11 +46,20 @@ namespace BudgetSystem.InMoney
                 condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
                 List<Budget> budgetList = bm.GetAllBudget(condition);
                 this.repositoryItemGridLookUpEdit1.DataSource = budgetList;
+                repositoryItemComboBox2.Items.Add(InvoiceViewMode.部门交单);
+                repositoryItemComboBox2.Items.Add(InvoiceViewMode.财务交单);
+                repositoryItemComboBox2.Items.Add(InvoiceViewMode.未核销交单);
+                if (RunInfo.Instance.CurrentUser.UserName == "0007")
+                {
+                    repositoryItemComboBox2.Items.Add(InvoiceViewMode.滞期核销交单);
+                }
+                barSelectedMode.EditValue = InvoiceViewMode.部门交单;
             }
             this.repositoryItemGridLookUpEdit1.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(repositoryItemGridLookUpEdit1_ButtonClick);
             this.Module = BusinessModules.InvoiceManagement;
             this.cboSelectYear.EditValueChanged += new System.EventHandler(this.cboSelectYear_EditValueChanged);
             this.barSelected.EditValueChanged += new EventHandler(cboSelectYear_EditValueChanged);
+            this.barSelectedMode.EditValueChanged += new EventHandler(barSelectedMode_EditValueChanged);
         }
 
         private void repositoryItemGridLookUpEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -158,6 +167,10 @@ namespace BudgetSystem.InMoney
 
                 condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as InvoiceQueryCondition;
 
+
+                InvoiceViewMode viewMode = InvoiceViewMode.部门交单;
+                viewMode = (InvoiceViewMode)Enum.Parse(typeof(InvoiceViewMode), this.barSelectedMode.EditValue.ToString());
+                condition.ViewMode = viewMode;
                 condition.BeginTimestamp = startTime;
                 condition.EndTimestamp = endTime;
 
@@ -170,6 +183,7 @@ namespace BudgetSystem.InMoney
 
             var list = im.GetAllInvoice(condition);
             this.gridInvoice.DataSource = list;
+            this.gvInvoice.BestFitColumns();
         }
 
         private void ImportInvoice(bool isFinaceImport)
@@ -331,7 +345,7 @@ namespace BudgetSystem.InMoney
                     new ExcelColumn("工厂成本",4660,-1,2,"IF(I{0}=\"\",\"\",I{0}+M{0}+P{0})",7),	               	
                     new ExcelColumn("佣金",4660,9,1,"",7),	
                     new ExcelColumn("进料款",4660,10,1,"",7),
-                    new ExcelColumn("毛利",4660,-1,2,"C{0}-N{0}-O{0}",7),
+                    new ExcelColumn("销售毛利润",4660,-1,2,"C{0}-N{0}-O{0}",7),
                 };
                 string message = string.Empty;
                 int count = ExcelHelper.DataTableToExcel(dt, saveFileDialog1.FileName, columns, out message);
@@ -459,6 +473,11 @@ namespace BudgetSystem.InMoney
             int year = (int)cboSelectYear.EditValue;
             deStartDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0);
             deEndDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0).AddYears(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void barSelectedMode_EditValueChanged(object sender, EventArgs e)
+        {
             LoadData();
         }
 

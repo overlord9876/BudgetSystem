@@ -69,7 +69,8 @@ namespace BudgetSystem.Dal
                 {
                     selectSql += string.Format(" and {0}", string.Join(" and ", strConditionList.ToArray()));
                 }
-                if (condition.BeginDate != DateTime.MinValue)
+                DateTime minDateTime = new DateTime(1900, 1, 1);
+                if (condition.BeginDate > minDateTime)
                 {
                     string approveCondition = string.Empty;
                     if (!string.IsNullOrEmpty(condition.ApproveUser))
@@ -83,6 +84,13 @@ namespace BudgetSystem.Dal
                     dp.Add("EndDate", condition.EndDate.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
                 }
 
+                if (condition.CommitBeginDate > minDateTime && condition.CommitEndDate > minDateTime)
+                {
+                    selectSql += " AND pn.PaymentDate BETWEEN @CommitBeginDate AND @CommitEndDate ";
+
+                    dp.Add("CommitBeginDate", condition.CommitBeginDate.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
+                    dp.Add("CommitEndDate", condition.CommitEndDate.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
+                }
             }
             return con.Query<PaymentNotes>(selectSql, dp, tran);
         }
@@ -227,6 +235,25 @@ INNER JOIN Supplier s on pn.SupplierID=s.ID and s.SupplierType=1 and s.ID=@Suppl
             decimal totalPaymentAmount = 0;
             decimal.TryParse(obj.ToString(), out totalPaymentAmount);
             return totalPaymentAmount;
+        }
+
+        public bool ExistsPaymentMoneyUsed(string moneyUsed, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"SELECT COUNT(ID) from PaymentNotes WHERE moneyused=@moneyused;";
+
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            command.Transaction = tran;
+            IDbDataParameter budgetIDParamter = command.CreateParameter();
+            budgetIDParamter.DbType = DbType.String;
+            budgetIDParamter.ParameterName = "moneyused";
+            budgetIDParamter.Value = moneyUsed;
+            command.Parameters.Add(budgetIDParamter);
+
+            object obj = command.ExecuteScalar();
+            int count = 0;
+            int.TryParse(obj.ToString(), out count);
+            return count > 0;
         }
 
         /// <summary>

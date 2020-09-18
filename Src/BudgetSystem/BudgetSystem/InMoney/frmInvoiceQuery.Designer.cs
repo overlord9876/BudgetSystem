@@ -36,6 +36,7 @@
             this.gcNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomsDeclaration = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcOriginalCoin = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTaxpayerID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPayment = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -89,6 +90,8 @@
             this.deStartDate = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.deEndDate = new DevExpress.XtraBars.BarEditItem();
+            this.barSelectedMode = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnSearch = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Print = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
@@ -96,6 +99,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInvoice)).BeginInit();
@@ -105,18 +109,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridInvoice
             // 
             this.gridInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.gridInvoice.Location = new System.Drawing.Point(0, 34);
+            this.gridInvoice.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridInvoice.Location = new System.Drawing.Point(0, 31);
             this.gridInvoice.MainView = this.gvInvoice;
-            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gridInvoice.Margin = new System.Windows.Forms.Padding(2);
             this.gridInvoice.Name = "gridInvoice";
-            this.gridInvoice.Size = new System.Drawing.Size(1470, 689);
+            this.gridInvoice.Size = new System.Drawing.Size(1286, 531);
             this.gridInvoice.TabIndex = 1;
             this.gridInvoice.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInvoice});
@@ -129,6 +134,7 @@
             this.gcNumber,
             this.gcCustomsDeclaration,
             this.gcOriginalCoin,
+            this.gcCNY,
             this.gcTaxpayerID,
             this.gcSupplierName,
             this.gcPayment,
@@ -147,6 +153,7 @@
             this.gvInvoice.Name = "gvInvoice";
             this.gvInvoice.OptionsBehavior.Editable = false;
             this.gvInvoice.OptionsBehavior.SummariesIgnoreNullValues = true;
+            this.gvInvoice.OptionsView.ColumnAutoWidth = false;
             this.gvInvoice.OptionsView.ShowFooter = true;
             this.gvInvoice.OptionsView.ShowGroupPanel = false;
             // 
@@ -159,7 +166,7 @@
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.OptionsColumn.AllowEdit = false;
             this.gcContractNO.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ContractNO", "合计：{0:d}")});
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 0;
             this.gcContractNO.Width = 100;
@@ -208,6 +215,16 @@
             this.gcOriginalCoin.VisibleIndex = 4;
             this.gcOriginalCoin.Width = 61;
             // 
+            // gcCNY
+            // 
+            this.gcCNY.Caption = "交单金额（￥）";
+            this.gcCNY.FieldName = "CNY";
+            this.gcCNY.Name = "gcCNY";
+            this.gcCNY.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcCNY.Visible = true;
+            this.gcCNY.VisibleIndex = 5;
+            // 
             // gcTaxpayerID
             // 
             this.gcTaxpayerID.Caption = "销方税号";
@@ -215,7 +232,7 @@
             this.gcTaxpayerID.MinWidth = 60;
             this.gcTaxpayerID.Name = "gcTaxpayerID";
             this.gcTaxpayerID.Visible = true;
-            this.gcTaxpayerID.VisibleIndex = 5;
+            this.gcTaxpayerID.VisibleIndex = 6;
             this.gcTaxpayerID.Width = 69;
             // 
             // gcSupplierName
@@ -225,7 +242,7 @@
             this.gcSupplierName.MinWidth = 60;
             this.gcSupplierName.Name = "gcSupplierName";
             this.gcSupplierName.Visible = true;
-            this.gcSupplierName.VisibleIndex = 6;
+            this.gcSupplierName.VisibleIndex = 7;
             this.gcSupplierName.Width = 72;
             // 
             // gcPayment
@@ -238,7 +255,7 @@
             this.gcPayment.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcPayment.Visible = true;
-            this.gcPayment.VisibleIndex = 7;
+            this.gcPayment.VisibleIndex = 8;
             this.gcPayment.Width = 85;
             // 
             // gcTaxAmount
@@ -250,7 +267,7 @@
             this.gcTaxAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcTaxAmount.Visible = true;
-            this.gcTaxAmount.VisibleIndex = 8;
+            this.gcTaxAmount.VisibleIndex = 9;
             this.gcTaxAmount.Width = 70;
             // 
             // gcExchangeRate
@@ -259,7 +276,7 @@
             this.gcExchangeRate.FieldName = "ExchangeRate";
             this.gcExchangeRate.Name = "gcExchangeRate";
             this.gcExchangeRate.Visible = true;
-            this.gcExchangeRate.VisibleIndex = 9;
+            this.gcExchangeRate.VisibleIndex = 10;
             this.gcExchangeRate.Width = 46;
             // 
             // gcTaxRebateRate
@@ -268,7 +285,7 @@
             this.gcTaxRebateRate.FieldName = "TaxRebateRate";
             this.gcTaxRebateRate.Name = "gcTaxRebateRate";
             this.gcTaxRebateRate.Visible = true;
-            this.gcTaxRebateRate.VisibleIndex = 10;
+            this.gcTaxRebateRate.VisibleIndex = 11;
             this.gcTaxRebateRate.Width = 65;
             // 
             // gcCommission
@@ -280,7 +297,7 @@
             this.gcCommission.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcCommission.Visible = true;
-            this.gcCommission.VisibleIndex = 11;
+            this.gcCommission.VisibleIndex = 12;
             this.gcCommission.Width = 60;
             // 
             // gcFeedMoney
@@ -292,12 +309,12 @@
             this.gcFeedMoney.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcFeedMoney.Visible = true;
-            this.gcFeedMoney.VisibleIndex = 12;
+            this.gcFeedMoney.VisibleIndex = 13;
             this.gcFeedMoney.Width = 61;
             // 
             // gcTotalCost
             // 
-            this.gcTotalCost.Caption = "成本";
+            this.gcTotalCost.Caption = "销售成本";
             this.gcTotalCost.FieldName = "TotalCost";
             this.gcTotalCost.MinWidth = 80;
             this.gcTotalCost.Name = "gcTotalCost";
@@ -305,19 +322,19 @@
             this.gcTotalCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcTotalCost.Visible = true;
-            this.gcTotalCost.VisibleIndex = 13;
+            this.gcTotalCost.VisibleIndex = 14;
             this.gcTotalCost.Width = 80;
             // 
             // gcGrossProfit
             // 
-            this.gcGrossProfit.Caption = "毛利";
+            this.gcGrossProfit.Caption = "销售毛利润";
             this.gcGrossProfit.FieldName = "GrossProfit";
             this.gcGrossProfit.MinWidth = 75;
             this.gcGrossProfit.Name = "gcGrossProfit";
             this.gcGrossProfit.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
             this.gcGrossProfit.Visible = true;
-            this.gcGrossProfit.VisibleIndex = 14;
+            this.gcGrossProfit.VisibleIndex = 15;
             // 
             // gcDepartmentCode
             // 
@@ -326,7 +343,7 @@
             this.gcDepartmentCode.Name = "gcDepartmentCode";
             this.gcDepartmentCode.OptionsColumn.AllowEdit = false;
             this.gcDepartmentCode.Visible = true;
-            this.gcDepartmentCode.VisibleIndex = 15;
+            this.gcDepartmentCode.VisibleIndex = 16;
             this.gcDepartmentCode.Width = 45;
             // 
             // gcImportUserName
@@ -338,7 +355,7 @@
             this.gcImportUserName.Name = "gcImportUserName";
             this.gcImportUserName.OptionsColumn.AllowEdit = false;
             this.gcImportUserName.Visible = true;
-            this.gcImportUserName.VisibleIndex = 16;
+            this.gcImportUserName.VisibleIndex = 17;
             this.gcImportUserName.Width = 81;
             // 
             // gcImportDate
@@ -350,7 +367,7 @@
             this.gcImportDate.Name = "gcImportDate";
             this.gcImportDate.OptionsColumn.AllowEdit = false;
             this.gcImportDate.Visible = true;
-            this.gcImportDate.VisibleIndex = 17;
+            this.gcImportDate.VisibleIndex = 18;
             this.gcImportDate.Width = 71;
             // 
             // gcFinanceImportDate
@@ -362,7 +379,7 @@
             this.gcFinanceImportDate.MinWidth = 75;
             this.gcFinanceImportDate.Name = "gcFinanceImportDate";
             this.gcFinanceImportDate.Visible = true;
-            this.gcFinanceImportDate.VisibleIndex = 18;
+            this.gcFinanceImportDate.VisibleIndex = 19;
             this.gcFinanceImportDate.Width = 96;
             // 
             // openFileDialog1
@@ -416,13 +433,16 @@
             this.btnSearch,
             this.btn_Print,
             this.btnExportExcel,
-            this.barSelected});
-            this.barManager1.MaxItemId = 23;
+            this.barSelected,
+            this.barCheckItem1,
+            this.barSelectedMode});
+            this.barManager1.MaxItemId = 25;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
             this.cboYears,
             this.repositoryItemComboBox1,
-            this.repositoryItemGridLookUpEdit1});
+            this.repositoryItemGridLookUpEdit1,
+            this.repositoryItemComboBox2});
             // 
             // bar1
             // 
@@ -448,6 +468,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDecember),
             new DevExpress.XtraBars.LinkPersistInfo(this.deStartDate),
             new DevExpress.XtraBars.LinkPersistInfo(this.deEndDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSelectedMode),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSearch),
             new DevExpress.XtraBars.LinkPersistInfo(this.btn_Print),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnExportExcel)});
@@ -727,6 +748,22 @@
             this.deEndDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.deEndDate.Width = 100;
             // 
+            // barSelectedMode
+            // 
+            this.barSelectedMode.Caption = "bar";
+            this.barSelectedMode.Edit = this.repositoryItemComboBox2;
+            this.barSelectedMode.Id = 24;
+            this.barSelectedMode.Name = "barSelectedMode";
+            this.barSelectedMode.Width = 107;
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
+            this.repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // btnSearch
             // 
             this.btnSearch.Caption = "查询";
@@ -753,28 +790,38 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1470, 34);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlTop.Size = new System.Drawing.Size(1286, 31);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 723);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1470, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1286, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 34);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 689);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 31);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 531);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1470, 34);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 689);
+            this.barDockControlRight.Location = new System.Drawing.Point(1286, 31);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 531);
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Id = 23;
+            this.barCheckItem1.Name = "barCheckItem1";
             // 
             // repositoryItemComboBox1
             // 
@@ -788,15 +835,14 @@
             // 
             // frmInvoiceQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1470, 723);
+            this.ClientSize = new System.Drawing.Size(1286, 562);
             this.Controls.Add(this.gridInvoice);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmInvoiceQuery";
             this.Text = "交单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gridInvoice)).EndInit();
@@ -807,6 +853,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -882,5 +929,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcAdvancePayment;
         private DevExpress.XtraGrid.Columns.GridColumn gcProfit;
         private DevExpress.XtraGrid.Columns.GridColumn gcGrossProfit;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarEditItem barSelectedMode;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCNY;
     }
 }

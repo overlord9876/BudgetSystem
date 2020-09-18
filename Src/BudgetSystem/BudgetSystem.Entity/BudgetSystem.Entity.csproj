@@ -52,6 +52,7 @@
     <Compile Include="StringUtil.cs" />
     <Compile Include="SupplierFirstReviewContents.cs" />
     <Compile Include="SupplierReviewContents.cs" />
+    <Compile Include="SystemConfig\InMoneyType.cs" />
     <Compile Include="Util\CaculateUtil.cs" />
     <Compile Include="CodeType.cs" />
     <Compile Include="Config.cs" />

@@ -27,6 +27,8 @@ namespace BudgetSystem.InMoney
         private CommonManager commonManager = new CommonManager();
         private List<User> allSalesmanList;
         private BankSlip _currentBankSlip;
+        private List<InMoneyType> imTypeList;
+        private List<UseMoneyType> useMoneyTypeList;
 
         public decimal NotSplitCNYMoney { get; private set; }
 
@@ -164,6 +166,16 @@ namespace BudgetSystem.InMoney
                 foreach (var bankName in bankNameList)
                 {
                     cboBankName.Properties.Items.Add(bankName);
+                }
+            }
+            useMoneyTypeList = this.scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+            cboNatureOfMoney.Properties.Items.Clear();
+            imTypeList = this.scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
+            if (imTypeList != null)
+            {
+                foreach (var inType in imTypeList)
+                {
+                    cboNatureOfMoney.Properties.Items.Add(inType.Name);
                 }
             }
 
@@ -776,7 +788,7 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate);
+            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList);
 
             caculator.ApplyForPayment(0, 1, false);
             //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
@@ -792,7 +804,7 @@ namespace BudgetSystem.InMoney
             if (caculator.SuperPaymentScheme > 30)
             {
                 string message = string.Format("修改入账后，收汇超过预算单合同金额的130%，请申请修改合同金额或者换合同入账。", caculator.Balance);
-                XtraMessageBox.Show(message,"收汇超计划告知单");
+                XtraMessageBox.Show(message, "收汇超计划告知单");
 
                 e.ErrorText = message;
                 e.Valid = false;
@@ -845,7 +857,7 @@ namespace BudgetSystem.InMoney
                         removedReceiptList = receiptList.Where(o => o.ID != budgetBill.ID);
                     }
 
-                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate);
+                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate, useMoneyTypeList);
                     caculator.ApplyForPayment(0, 1, false);
                     //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
                     if (caculator.Balance + currentBudget.AdvancePayment < 0)

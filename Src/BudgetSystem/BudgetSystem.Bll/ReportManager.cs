@@ -11,13 +11,17 @@ namespace BudgetSystem.Bll
 {
     public class ReportManager : BaseManager
     {
+        private SystemConfigManager scm = new SystemConfigManager();
         private ReportDal dal = new ReportDal();
+
 
         public List<BudgetReport> GetBudgetReportList(BudgetQueryCondition condition)
         {
+            List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+            List<InMoneyType> imtList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
             var lst = this.Query<BudgetReport>((con) =>
             {
-                var uList = dal.GetBudgetReportList(condition, con);
+                var uList = dal.GetBudgetReportList(condition, umtList, imtList, con);
                 return uList;
             });
 
@@ -27,9 +31,10 @@ namespace BudgetSystem.Bll
 
         public List<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition)
         {
+            List<UseMoneyType> umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
             var lst = this.Query<SupplierReport>((con) =>
             {
-                var uList = dal.GetSupplierReportList(condition, con);
+                var uList = dal.GetSupplierReportList(condition, umtList, con);
                 return uList;
             });
 

@@ -174,6 +174,8 @@ namespace BudgetSystem.Entity
             }
         }
 
+        public PaymentType PaymentType { get; set; }
+
         /// <summary>
         /// 是否退税
         /// </summary>
@@ -246,7 +248,7 @@ namespace BudgetSystem.Entity
         public string ToDesc2()
         {
             return string.Format("合同号【{0}】付款金额【￥{1}】用途：【{2}】",
-                this.ContractNO.Trim() , this.CNY, this.MoneyUsedDesc);
+                this.ContractNO.Trim(), this.CNY, this.MoneyUsedDesc);
         }
     }
 }

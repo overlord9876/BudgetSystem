@@ -5,9 +5,9 @@ using System.Text;
 namespace BudgetSystem.Entity
 {
     /// <summary>
-    /// 用款类型配置
+    /// 收款类型配置
     /// </summary>
-    public class UseMoneyType
+    public class InMoneyType
     {
         /// <summary>
         /// 名称
@@ -19,18 +19,9 @@ namespace BudgetSystem.Entity
         }
 
         /// <summary>
-        /// 类型
+        /// 收款类型
         /// </summary>
-        public PaymentType Type { get; set; }
-
-        /// <summary>
-        /// 提供发票
-        /// </summary>
-        public bool ProvideInvoice
-        {
-            get;
-            set;
-        }
+        public IMType Type { get; set; }
 
         public override string ToString()
         {
@@ -38,13 +29,12 @@ namespace BudgetSystem.Entity
         }
     }
 
-    public enum PaymentType
+    /// <summary>
+    /// 收款类型
+    /// </summary>
+    public enum IMType
     {
         货款 = 1,
-        进料款 = 2,
-        佣金 = 4,
-        运杂费 = 8,
-        直接费用 = 16,
-        暂付款 = 32
+        暂收款 = 2
     }
 }

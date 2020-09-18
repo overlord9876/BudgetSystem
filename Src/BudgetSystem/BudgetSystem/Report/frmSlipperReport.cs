@@ -106,12 +106,13 @@ namespace BudgetSystem.Report
                 this.pivotGridControl.DataSource = lst;
                 this.gridControl.DataSource = lst;
             }
+            base.gridView.BestFitColumns();
         }
 
         private void InitSlipperReportGrid()
         {
             base.ClearColumns();
-            base.CreateGridColumn("供应商名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计"));
+            base.CreateGridColumn("供应商名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ContractNO", "合计：{0:d}"));
             base.CreateGridColumn("已付原币金额", "TotalOriginalCoin", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("己付人民币金额", "TotalCNY", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("汇率", "ExchangeRate");
@@ -131,7 +132,7 @@ namespace BudgetSystem.Report
         private void InitCustomerReportGrid()
         {
             base.ClearColumns();
-            base.CreateGridColumn("客户名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ContractNO", "合计"));
+            base.CreateGridColumn("客户名称", "Name", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ContractNO", "合计：{0:d}"));
             base.CreateGridColumn("已收原币金额", "OriginalCoin", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("人民币", "CNY", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("汇率", "ExchangeRate");

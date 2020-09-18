@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class ucUseMoneyTypeOptionEdit
+    partial class ucInMoneyTypeOptionEdit
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -33,7 +33,6 @@
             this.gcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cboType = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.gcProvideInvoice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDelete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.riHyperLinkEditDelete = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPort)).BeginInit();
@@ -61,7 +60,6 @@
             this.gvPort.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcName,
             this.gcType,
-            this.gcProvideInvoice,
             this.gcDelete});
             this.gvPort.GridControl = this.gridPort;
             this.gvPort.Name = "gvPort";
@@ -104,19 +102,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboType.Name = "cboType";
             // 
-            // gcProvideInvoice
-            // 
-            this.gcProvideInvoice.Caption = "是否必须提供发票";
-            this.gcProvideInvoice.FieldName = "ProvideInvoice";
-            this.gcProvideInvoice.MaxWidth = 150;
-            this.gcProvideInvoice.Name = "gcProvideInvoice";
-            this.gcProvideInvoice.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.gcProvideInvoice.OptionsColumn.AllowMove = false;
-            this.gcProvideInvoice.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
-            this.gcProvideInvoice.OptionsColumn.ShowInCustomizationForm = false;
-            this.gcProvideInvoice.Visible = true;
-            this.gcProvideInvoice.VisibleIndex = 2;
-            // 
             // gcDelete
             // 
             this.gcDelete.Caption = " ";
@@ -128,7 +113,7 @@
             this.gcDelete.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.gcDelete.OptionsColumn.ShowInCustomizationForm = false;
             this.gcDelete.Visible = true;
-            this.gcDelete.VisibleIndex = 3;
+            this.gcDelete.VisibleIndex = 2;
             this.gcDelete.Width = 80;
             // 
             // riHyperLinkEditDelete
@@ -138,12 +123,12 @@
             this.riHyperLinkEditDelete.Name = "riHyperLinkEditDelete";
             this.riHyperLinkEditDelete.SingleClick = true;
             // 
-            // ucUseMoneyTypeOptionEdit
+            // ucInMoneyTypeOptionEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridPort);
-            this.Name = "ucUseMoneyTypeOptionEdit";
+            this.Name = "ucInMoneyTypeOptionEdit";
             this.Size = new System.Drawing.Size(1046, 549);
             ((System.ComponentModel.ISupportInitialize)(this.gridPort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPort)).EndInit();
@@ -158,7 +143,6 @@
         private DevExpress.XtraGrid.GridControl gridPort;
         private DevExpress.XtraGrid.Views.Grid.GridView gvPort;
         private DevExpress.XtraGrid.Columns.GridColumn gcName;
-        private DevExpress.XtraGrid.Columns.GridColumn gcProvideInvoice;
         private DevExpress.XtraGrid.Columns.GridColumn gcDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit riHyperLinkEditDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gcType;

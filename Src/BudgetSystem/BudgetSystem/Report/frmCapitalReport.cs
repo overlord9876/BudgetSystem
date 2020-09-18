@@ -17,19 +17,24 @@ namespace BudgetSystem.Report
 {
     public partial class frmCapitalReport : Base.frmBaseCommonReportForm
     {
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private Dictionary<string, string> columnDic = new Dictionary<string, string>();
         private Dictionary<string, decimal> paymentmethodDic = new Dictionary<string, decimal>();
-        private Dictionary<string, decimal> bankDic = new Dictionary<string, decimal>();
+        private Dictionary<string, CapitalMoney> bankDic = new Dictionary<string, CapitalMoney>();
         private decimal exchangeRate = 0;
+        private decimal temporaryReceipt = 0;
         private int count = 0;//收钱笔数
         private List<RecieptCapital> rcList = new List<RecieptCapital>();
         private DateTime beginTimestamp = DateTime.MinValue;
         private DateTime endTimestamp = DateTime.MaxValue;
+        private IEnumerable<InMoneyType> imtList;
 
         public frmCapitalReport()
         {
             InitializeComponent();
             this.Module = BusinessModules.RecieptCapital;
+
+            this.imtList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString()).Where(o => o.Type == IMType.暂收款);
         }
 
         protected override void InitLayout()
@@ -75,19 +80,21 @@ namespace BudgetSystem.Report
             exchangeRate = Math.Round(um.GetAverageUSDExchange(condition), 6);
             if (exchangeRate == 0) { return; }
 
-            var withUSDRCList = um.GetRecieptCapitalWithUSD(condition);
-            if (withUSDRCList == null || withUSDRCList.Count == 0)
-            { return; }
-            rcList.AddRange(withUSDRCList);
-
             DataTable dt = new DataTable();
 
             //增加部门、合计列
             CreateColumn(dt, frmCapitalReport.DepartmentCaption, "departmentCode", typeof(string));
 
 
-            //统计银行列。
-            CalcOriginalCoin(dt, withUSDRCList, 0);
+            if (condition.A != "人民币")
+            {
+                var withUSDRCList = um.GetRecieptCapitalWithUSD(condition);
+                if (withUSDRCList == null || withUSDRCList.Count == 0)
+                { return; }
+                rcList.AddRange(withUSDRCList);
+                //统计银行列。
+                CalcOriginalCoin(dt, withUSDRCList, 0);
+            }
 
             var withoutUSDRCList = um.GetRecieptCapitalWithOutUSD(condition);
             if (withoutUSDRCList != null && withoutUSDRCList.Count > 0)
@@ -124,13 +131,15 @@ namespace BudgetSystem.Report
             DataRow totalRow = dt.NewRow();
             dt.Rows.Add(totalRow);
             decimal totalMoney = 0;
+            decimal totalCNYMoney = 0;
             totalRow[columnDic[frmCapitalReport.DepartmentCaption]] = "合计";
             foreach (string bankCode in bankDic.Keys)
             {
                 if (dt.Columns.Contains(columnDic[bankCode]))
                 {
-                    totalRow[columnDic[bankCode]] = bankDic[bankCode];
-                    totalMoney += bankDic[bankCode];
+                    totalRow[columnDic[bankCode]] = bankDic[bankCode].OriginalCoin;
+                    totalMoney += bankDic[bankCode].OriginalCoin;
+                    totalCNYMoney += bankDic[bankCode].CNY;
                 }
             }
 
@@ -160,6 +169,13 @@ namespace BudgetSystem.Report
                 paymentMethodRow[1] = paymentmethodDic[paymentMethod];
             }
 
+
+            //平均汇率
+            DataRow temporaryReceiptRow = dt.NewRow();
+            dt.Rows.Add(temporaryReceiptRow);
+            temporaryReceiptRow[columnDic[frmCapitalReport.DepartmentCaption]] = "暂收款";
+            temporaryReceiptRow[1] = temporaryReceipt;
+
             //平均汇率
             DataRow exchangeRateRow = dt.NewRow();
             dt.Rows.Add(exchangeRateRow);
@@ -169,8 +185,14 @@ namespace BudgetSystem.Report
             //合计总数
             DataRow totalMoneyRow = dt.NewRow();
             dt.Rows.Add(totalMoneyRow);
-            totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计";
+            totalMoneyRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计（美元）";
             totalMoneyRow[1] = totalMoney;
+
+            //合计总数
+            DataRow totalMoneyCNYRow = dt.NewRow();
+            dt.Rows.Add(totalMoneyCNYRow);
+            totalMoneyCNYRow[columnDic[frmCapitalReport.DepartmentCaption]] = "本月合计（人民币）";
+            totalMoneyCNYRow[1] = totalCNYMoney;
 
             //汇总收款批次
             DataRow totalCountRow = dt.NewRow();
@@ -179,6 +201,7 @@ namespace BudgetSystem.Report
             totalCountRow[1] = count;
 
             this.gridControl.DataSource = dt;
+            this.gridView.BestFitColumns();
         }
 
         private void CreateColumn(DataTable dt, string caption, string fieldName, Type t, FormatType valueFormatType = FormatType.None, string valueFormatString = "", IFormatProvider formatProvider = null)
@@ -194,6 +217,7 @@ namespace BudgetSystem.Report
 
         private void CalcOriginalCoin(DataTable dt, List<RecieptCapital> rcList, decimal exchangeRate)
         {
+            temporaryReceipt = 0;
 
             //统计银行列。
             for (int index = 0; index < rcList.Count; index++)
@@ -212,9 +236,14 @@ namespace BudgetSystem.Report
                 //银行总数合计
                 if (!bankDic.ContainsKey(rc.BankCode))
                 {
-                    bankDic.Add(rc.BankCode, 0);
+                    bankDic.Add(rc.BankCode, new CapitalMoney() { OriginalCoin = 0, CNY = 0 });
                 }
-                bankDic[rc.BankCode] += rc.OriginalCoin;
+                bankDic[rc.BankCode].OriginalCoin += rc.OriginalCoin;
+                bankDic[rc.BankCode].CNY += rc.CNY;
+                if (imtList.Any(o => o.Name == rc.NatureOfMoney))
+                {
+                    temporaryReceipt += rc.CNY;
+                }
 
                 //银行名称与Field对应关系维护
                 if (!columnDic.ContainsKey(rc.BankCode))
@@ -246,4 +275,10 @@ namespace BudgetSystem.Report
             }
         }
     }
+    public class CapitalMoney
+    {
+        public decimal OriginalCoin { get; set; }
+        public decimal CNY { get; set; }
+    }
+
 }

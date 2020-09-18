@@ -53,7 +53,7 @@ namespace BudgetSystem.Entity
         /// 退税率
         /// </summary>
         public float TaxRebateRate { get; set; }
-        
+
         /// <summary>
         /// 佣金
         /// </summary>
@@ -119,7 +119,7 @@ namespace BudgetSystem.Entity
         /// </summary>
         public string Message { get; set; }
 
-       
+
         /// <summary>
         /// 部门编号（从合同编号中提取）
         /// </summary>
@@ -208,7 +208,8 @@ namespace BudgetSystem.Entity
             }
         }
         /// <summary>
-        /// 成本(成本=金额+进项转出+进料款) 
+        /// 销售成本（成本=金额+佣金(交）+进料款（交））2020-09-01
+        /// 销售成本= 金额（不含税金额）+佣金(交）+进料款（交）+进项转出	进项转出，当退税率为0，进项转出为0，当退税率>0，则进项转出为税额-出口退税。2020-09-11
         /// </summary>
         public decimal TotalCost
         {
@@ -216,25 +217,33 @@ namespace BudgetSystem.Entity
             {
                 if (this.TaxRebateRate == 0)
                 {
-                    return Payment + FeedMoney;
+                    return Payment + Commission + FeedMoney;
                 }
                 else
                 {
-                    return Payment + IncomeExits + FeedMoney ;
+                    return Payment + IncomeExits + Commission + FeedMoney;
                 }
             }
         }
-        /// <summary>
-        /// 毛利
-        /// 毛利=人民币销售-成本-佣金
+        /// <summary>        
+        /// 销售毛利润=人民币销售-成本-佣金
+        /// 销售毛利润=销售金额—销售成本—佣金（交）—进料款（交）2020-7-24文档要求修改。实际是一致的。
+        /// 销售毛利润=原币X汇率—销售成本。
         /// </summary>
         public decimal GrossProfit
         {
             get
             {
-                return CNY - TotalCost - Commission;
+                return CNY - TotalCost;
             }
         }
     }
 
+    public enum InvoiceViewMode
+    {
+        部门交单 = 0,
+        财务交单 = 1,
+        未核销交单 = 2,
+        滞期核销交单 = 3
+    }
 }

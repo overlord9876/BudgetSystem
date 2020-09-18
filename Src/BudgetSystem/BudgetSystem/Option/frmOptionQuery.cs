@@ -115,6 +115,10 @@ namespace BudgetSystem
             {
                 this.currentOptionEdit = new ucUseMoneyTypeOptionEdit();
             }
+            else if (EnumSystemConfigNames.收款类型.ToString().Equals(this.lbcType.SelectedItem))
+            {
+                this.currentOptionEdit = new ucInMoneyTypeOptionEdit();
+            }
             else if (EnumSystemConfigNames.价格条款.ToString().Equals(this.lbcType.SelectedItem))
             {
                 this.currentOptionEdit = new ucStringListOptionEdit(EnumSystemConfigNames.价格条款);

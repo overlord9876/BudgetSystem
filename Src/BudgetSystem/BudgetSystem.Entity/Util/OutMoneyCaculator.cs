@@ -195,6 +195,8 @@ namespace BudgetSystem.Entity
 
         public decimal SuperPaymentScheme { get; private set; }
 
+        private List<UseMoneyType> useMoneyTypeList;
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -202,10 +204,9 @@ namespace BudgetSystem.Entity
         /// <param name="paymentList">付款记录</param>
         /// <param name="receiptList">收款记录</param>
         /// <param name="vatOption">增值税率</param>
-        public OutMoneyCaculator(Budget currentBudget, IEnumerable<PaymentNotes> paymentList, IEnumerable<BudgetBill> receiptList, decimal vatOption)
+        public OutMoneyCaculator(Budget currentBudget, IEnumerable<PaymentNotes> paymentList, IEnumerable<BudgetBill> receiptList, decimal vatOption, List<UseMoneyType> useMoneyTypeList)
         {
-
-
+            this.useMoneyTypeList = useMoneyTypeList;
             this.vatOption = vatOption;
             this._currentBudget = currentBudget;
             this._paymentList = paymentList;
@@ -216,10 +217,12 @@ namespace BudgetSystem.Entity
 
             #region 1.佣金比率=((已付佣金总额-预算单佣金总额)/预算单佣金金额)*100%
 
+            var commissionType = useMoneyTypeList.Where(um => um.Type == PaymentType.佣金);
             //已付佣金总额
-            decimal commissionTotal = _paymentList.Where(o => Util.PaymentUseCommissionUsageNameList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+            decimal commissionTotal = _paymentList.Where(o => commissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
 
-            decimal premiumTotal = _paymentList.Where(o => Util.PaymentUsePremiumTextList.Contains(o.MoneyUsed)).Sum(o => o.CNY);
+            var premiumType = useMoneyTypeList.Where(um => um.Type == PaymentType.运杂费);
+            decimal premiumTotal = _paymentList.Where(o => premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
 
             if (this.CurrentBudget.Commission > 0)
             {
@@ -443,14 +446,11 @@ namespace BudgetSystem.Entity
             PaymentMoneyAmount = _paymentList.Sum(o => o.CNY);
             TotalTaxPayment = _paymentList.Where(o => o.IsDrawback).Sum(o => o.CNY);
             //AVGExportRebateRate = (decimal)_paymentList.Where(o => o.IsDrawback).Average(o => o.TaxRebateRate);
-
-            IgnoreTransportationExpensesPaymentMoneyAmount = _paymentList.Where(o => !o.MoneyUsed.Equals(TransportationExpensesCaption)).Sum(o => o.CNY);
+            var umtTypeList = useMoneyTypeList.Where(umt => umt.Type == PaymentType.运杂费);
+            IgnoreTransportationExpensesPaymentMoneyAmount = _paymentList.Where(o => !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());
         }
 
         #endregion
-
-        public const string TransportationExpensesCaption = "运杂费";
-
     }
 }

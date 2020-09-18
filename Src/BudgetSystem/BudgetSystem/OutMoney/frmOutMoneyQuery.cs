@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -20,6 +21,7 @@ namespace BudgetSystem
         PaymentNotesManager pnm = new PaymentNotesManager();
         CommonManager cm = new CommonManager();
         UserManager um = new UserManager();
+        Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
         const string COMMONQUERY_APPLICATIONFORPAYMENT = "申请付款";
         const string COMMONQUERY_BEPAID = "已付货款";
@@ -151,6 +153,9 @@ namespace BudgetSystem
 
             outMoneyCondition.BeginDate = DateTime.MinValue;
             outMoneyCondition.EndDate = DateTime.MinValue;
+
+            outMoneyCondition.CommitBeginDate = DateTime.MinValue;
+            outMoneyCondition.CommitEndDate = DateTime.MinValue;
 
             if (COMMONQUERY_APPLICATIONFORPAYMENT.Equals(queryName))
             {
@@ -365,9 +370,23 @@ namespace BudgetSystem
             {
                 condition = new OutMoneyQueryCondition();
             }
-            var outMoneyCondition = RunInfo.Instance.GetConditionByCurrentUser(condition) as OutMoneyQueryCondition;
+            var umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
 
-            this.gcOutMoney.DataSource = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
+            var outMoneyCondition = RunInfo.Instance.GetConditionByCurrentUser(condition) as OutMoneyQueryCondition;
+            var paymentNotes = pnm.GetAllPaymentNoteByCondition(outMoneyCondition);
+            if (paymentNotes != null)
+            {
+                UseMoneyType umt = null;
+                foreach (var pn in paymentNotes)
+                {
+                    umt = umtList.Where(o => o.Name == pn.MoneyUsed).FirstOrDefault();
+                    if (umt != null)
+                    {
+                        pn.PaymentType = umt.Type;
+                    }
+                }
+            }
+            this.gcOutMoney.DataSource = paymentNotes;
             this.gvOutMoney.RefreshData();
         }
 

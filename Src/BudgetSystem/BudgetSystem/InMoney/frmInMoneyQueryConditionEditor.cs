@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity.QueryCondition;
@@ -15,6 +16,8 @@ namespace BudgetSystem
         public frmInMoneyQueryConditionEditor()
         {
             InitializeComponent();
+            this.txtState.Properties.Items.AddRange(Enum.GetNames(typeof(QueryReceiptState)).Select(o => o.Trim()).ToArray());
+            this.txtState.SelectedIndex = 0;
         }
 
 
@@ -22,10 +25,26 @@ namespace BudgetSystem
         {
             InMoneyQueryCondition c = new InMoneyQueryCondition();
             c.Customer = this.txtCustomer.Text;
+
             if (this.deReceiptDateBegin.EditValue != null)
-                c.ReceiptDateBegin = (DateTime)this.deReceiptDateBegin.EditValue;
+            {
+                var commitBeginDate = (DateTime)this.deReceiptDateBegin.EditValue;
+                c.ReceiptDateBegin = new DateTime(commitBeginDate.Year, commitBeginDate.Month, commitBeginDate.Day, 0, 0, 0);
+            }
+            else
+            {
+                c.ReceiptDateBegin = DateTime.MinValue;
+            }
             if (this.deReceiptDateEnd.EditValue != null)
-                c.ReceiptDateEnd = (DateTime)this.deReceiptDateEnd.EditValue;
+            {
+                var commitEndDate = (DateTime)this.deReceiptDateEnd.EditValue;
+                c.ReceiptDateEnd = new DateTime(commitEndDate.Year, commitEndDate.Month, commitEndDate.Day).AddDays(1).AddMilliseconds(-1);
+            }
+            else
+            {
+                c.ReceiptDateEnd = DateTime.MinValue;
+            }
+            c.State = (QueryReceiptState)Enum.Parse(typeof(QueryReceiptState), txtState.EditValue.ToString());
             c.VoucherNo = this.txtVoucherNo.Text;
             c.BudgetNO = this.txtBudgetNO.Text;
             this.QueryCondition = c;

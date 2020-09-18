@@ -16,8 +16,8 @@ namespace BudgetSystem.Entity.QueryCondition
 
     public enum QueryReceiptState
     {
-        ALL,
-        ToBeConfirmed,
-        Confirmed
+        所有银行水单,
+        未确认银行水单,
+        已确认银行水单
     }
 }

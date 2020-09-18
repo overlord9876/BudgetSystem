@@ -43,7 +43,22 @@ namespace BudgetSystem.Dal
                 }
                 if (condition.BeginTimestamp > new DateTime(1995, 1, 1) || condition.EndTimestamp > new DateTime(1995, 1, 1))
                 {
-                    sql += @" AND i.ImportDate BETWEEN @BeginTimestamp AND @EndTimestamp";
+                    if (condition.ViewMode == InvoiceViewMode.部门交单)
+                    {
+                        sql += @" AND i.ImportDate BETWEEN @BeginTimestamp AND @EndTimestamp";
+                    }
+                    else if (condition.ViewMode == InvoiceViewMode.财务交单)
+                    {
+                        sql += @" AND i.FinanceImportDate BETWEEN @BeginTimestamp AND @EndTimestamp";
+                    }
+                    else if (condition.ViewMode == InvoiceViewMode.未核销交单)
+                    {
+                        sql += @" AND i.ImportDate BETWEEN @BeginTimestamp AND @EndTimestamp AND i.ID NOT IN (SELECT ID from invoice WHERE FinanceImportDate BETWEEN @BeginTimestamp AND @EndTimestamp)";
+                    }
+                    else
+                    {
+                        sql += @" AND i.FinanceImportDate BETWEEN @BeginTimestamp AND @EndTimestamp AND i.ID NOT IN (SELECT ID from invoice WHERE ImportDate BETWEEN @BeginTimestamp AND @EndTimestamp)";
+                    }
                     dp.Add("@BeginTimestamp", condition.BeginTimestamp, DbType.DateTime, ParameterDirection.Input, null);
                     dp.Add("@EndTimestamp", condition.EndTimestamp, DbType.DateTime, ParameterDirection.Input, null);
                 }
@@ -53,7 +68,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Invoice> GetAllInvoiceByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
         {
-            string sql = selectSql + " and b.ID=@ID";
+            string sql = selectSql + " and b.ID=@ID ";
             return con.Query<Invoice>(sql, new { ID = budgetID }, tran);
         }
         public Invoice GetInvoice(int id, IDbConnection con, IDbTransaction tran)
