@@ -114,6 +114,11 @@ namespace BudgetSystem.Entity
         public decimal ReceiptMoneyAmount { get; private set; }
 
         /// <summary>
+        /// 总收款（收汇）人民币,忽略暂收款
+        /// </summary>
+        public decimal ReceiptMoneyAmountIgnoreProvisionalMoney { get; private set; }
+
+        /// <summary>
         /// 总付款人民币
         /// </summary>
         public decimal PaymentMoneyAmount { get; private set; }
@@ -196,6 +201,8 @@ namespace BudgetSystem.Entity
         public decimal SuperPaymentScheme { get; private set; }
 
         private List<UseMoneyType> useMoneyTypeList;
+        private List<InMoneyType> imTypeList;
+        private List<UseMoneyType> CommissionType = new List<UseMoneyType>() { new UseMoneyType() { Name = "支付国内佣金", Type = PaymentType.佣金 }, new UseMoneyType() { Name = "咨询费", Type = PaymentType.佣金 }, new UseMoneyType() { Name = "服务费", Type = PaymentType.佣金 } };
 
         /// <summary>
         /// 构造函数
@@ -204,8 +211,9 @@ namespace BudgetSystem.Entity
         /// <param name="paymentList">付款记录</param>
         /// <param name="receiptList">收款记录</param>
         /// <param name="vatOption">增值税率</param>
-        public OutMoneyCaculator(Budget currentBudget, IEnumerable<PaymentNotes> paymentList, IEnumerable<BudgetBill> receiptList, decimal vatOption, List<UseMoneyType> useMoneyTypeList)
+        public OutMoneyCaculator(Budget currentBudget, IEnumerable<PaymentNotes> paymentList, IEnumerable<BudgetBill> receiptList, decimal vatOption, List<UseMoneyType> useMoneyTypeList, List<InMoneyType> imTypeList)
         {
+            this.imTypeList = imTypeList;
             this.useMoneyTypeList = useMoneyTypeList;
             this.vatOption = vatOption;
             this._currentBudget = currentBudget;
@@ -217,9 +225,10 @@ namespace BudgetSystem.Entity
 
             #region 1.佣金比率=((已付佣金总额-预算单佣金总额)/预算单佣金金额)*100%
 
-            var commissionType = useMoneyTypeList.Where(um => um.Type == PaymentType.佣金);
+            CommissionType.AddRange(useMoneyTypeList.Where(o => o.Type == PaymentType.佣金));
+
             //已付佣金总额
-            decimal commissionTotal = _paymentList.Where(o => commissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
+            decimal commissionTotal = _paymentList.Where(o => CommissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
 
             var premiumType = useMoneyTypeList.Where(um => um.Type == PaymentType.运杂费);
             decimal premiumTotal = _paymentList.Where(o => premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
@@ -436,6 +445,8 @@ namespace BudgetSystem.Entity
             if (_receiptList != null)
             {
                 ReceiptMoneyAmount = _receiptList.Where(o => !o.IsDelete).Sum(o => o.CNY);
+                var typeList = imTypeList.Where(o => o.Type == IMType.暂收款);
+                ReceiptMoneyAmountIgnoreProvisionalMoney = _receiptList.Where(o => !o.IsDelete && !typeList.Any(t => t.Name == o.NatureOfMoney)).Sum(o => o.CNY);
             }
         }
 

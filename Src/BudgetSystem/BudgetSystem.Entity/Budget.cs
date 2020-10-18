@@ -471,6 +471,12 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
+        /// <summary>
+        /// 是否延期？
+        /// </summary>
+        public bool IsDelay { get; set; }
+
         /// <summary>
         /// 流程状态
         /// </summary>

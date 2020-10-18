@@ -403,7 +403,7 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.Commission);
+                    return InvoiceList.Sum(o => o.Commission);
                 }
                 else { return 0; }
             }
@@ -418,7 +418,7 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.GrossProfit);
+                    return InvoiceList.Sum(o => o.GrossProfit);
                 }
                 else { return 0; }
             }
@@ -448,7 +448,7 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.FeedMoney);
+                    return InvoiceList.Sum(o => o.FeedMoney);
                 }
                 else { return 0; }
             }
@@ -490,6 +490,8 @@ namespace BudgetSystem.Entity
 
         public List<Invoice> InvoiceList { get; set; }
 
+        public List<Invoice> InvoiceSingleBudgetFinalAccountsList { get; set; }
+
         /// <summary>
         /// 销售金额，等于所有发票金额
         /// </summary>
@@ -499,7 +501,7 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.CNY);
+                    return InvoiceList.Sum(o => o.CNY);
                 }
                 else { return 0; }
             }
@@ -514,13 +516,15 @@ namespace BudgetSystem.Entity
             {
                 if (InvoiceList != null)
                 {
-                    return InvoiceList.Where(o => !string.IsNullOrEmpty(o.FinanceImportUser)).Sum(o => o.TotalCost);
+                    return InvoiceList.Sum(o => o.TotalCost);
                 }
                 else { return 0; }
             }
         }
 
         public List<BudgetBill> BudgetBillList { get; set; }
+
+        public List<BudgetBill> BBSingleBudgetFinalAccountsList { get; set; }
 
         /// <summary>
         /// 总收款金额
@@ -600,10 +604,15 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (State >= 4)
+                if (State >= 4 && !ContractNO.Trim().ToUpper().Contains("C"))
                 {
-                    var totalBudgetBill = BudgetBillList.Sum(o => o.CNY);
-                    var totalInvoice = InvoiceList.Sum(o => Math.Round(o.OriginalCoin * o.ExchangeRate, 2));
+                    var totalBudgetBill = BBSingleBudgetFinalAccountsList.Sum(o => o.CNY);
+                    var totalInvoice = InvoiceSingleBudgetFinalAccountsList.Sum(o => Math.Round(o.OriginalCoin * o.ExchangeRate, 2));
+                    string contractNo = "19G-006-0309";
+                    if (ContractNO.Trim().Equals(contractNo))
+                    {
+
+                    }
                     return totalInvoice - totalBudgetBill;
                 }
                 else

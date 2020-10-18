@@ -22,6 +22,14 @@ namespace BudgetSystem.Report
             InitBudgetReportGrid();
         }
 
+        protected override bool ShowViewMode
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         protected override void InitLayout()
         {
             base.InitModelOperate();

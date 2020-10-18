@@ -30,6 +30,7 @@ namespace BudgetSystem.OutMoney
         private EditFormWorkModels _workModel;
         private PaymentNotes _paymentNote;
         private List<UseMoneyType> umtList;
+        private List<InMoneyType> imtList;
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         const decimal temporarySupplierPaymenttotalAmountMaxValue = 10000;
 
@@ -406,6 +407,7 @@ namespace BudgetSystem.OutMoney
                 valueAddedTaxRate = vatOption = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
 
                 umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
+                imtList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
                 this.cboMoneyUsed.Properties.Items.Clear();
                 if (umtList != null)
                 {
@@ -617,7 +619,7 @@ namespace BudgetSystem.OutMoney
                 budgetSupplierList.AddRange(supplierList.Where(o => !budgetSupplierList.Exists(bs => o.ID.Equals(bs.ID))));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
 
-                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, umtList);
+                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, umtList, imtList);
 
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 

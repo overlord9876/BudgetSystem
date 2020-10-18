@@ -216,14 +216,14 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
                                            `InProductDetail`,`AdvancePayment`,`InterestRate`,
                                            `Days`,`Commission`,`Premium`,`BankCharges`,`DirectCosts`,`FeedMoney`,`ExchangeRate`,
                                            `Description`,`CustomerID`,`Port`,`TaxRebate`,`PurchasePrice`,`Profit`,
-                                           `ProfitLevel1`,`ProfitLevel2`,`USDTotalAmount`,`UpdateDate`,`UpdateUser`,`VATRate`,`IsValid`)
+                                           `ProfitLevel1`,`ProfitLevel2`,`USDTotalAmount`,`UpdateDate`,`UpdateUser`,`VATRate`,`IsValid`,`IsDelay`)
                                     Values (@ContractNO,@State,@Salesman,@DeptID,now(),@SignDate,@Validity,
                                             @TradeMode,@TradeNature,@OutProductDetail,@PriceClause,@OutSettlementMethod,
                                             @OutSettlementMethod2,@OutSettlementMethod3,@TotalAmount,@Country,@IsQualifiedSupplier,
                                             @InProductDetail,@AdvancePayment,@InterestRate,
                                             @Days,@Commission,@Premium,@BankCharges,@DirectCosts,@FeedMoney,@ExchangeRate,
                                             @Description,@CustomerID,@Port,@TaxRebate,@PurchasePrice,@Profit,
-                                            @ProfitLevel1,@ProfitLevel2,@USDTotalAmount,now(),@UpdateUser,@VATRate,@IsValid)";
+                                            @ProfitLevel1,@ProfitLevel2,@USDTotalAmount,now(),@UpdateUser,@VATRate,@IsValid,@IsDelay)";
             int id = con.Insert(insertSql, budget, tran);
             if (id > 0)
             {
@@ -263,7 +263,7 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
                                          `DirectCosts` = @DirectCosts,`FeedMoney` = @FeedMoney,`ExchangeRate` = @ExchangeRate ,`Description`=@Description,
                                          `CustomerID`=@CustomerID,`Port`=@Port,`TaxRebate`=@TaxRebate ,`PurchasePrice`=@PurchasePrice,Profit=@Profit,
                                          `ProfitLevel1`=@ProfitLevel1,`ProfitLevel2`=@ProfitLevel2 ,`USDTotalAmount`=@USDTotalAmount,
-                                         `UpdateDate`=now(),`UpdateUser`=@UpdateUser ,`VATRate`=@VATRate,`IsValid`=@IsValid 
+                                         `UpdateDate`=now(),`UpdateUser`=@UpdateUser ,`VATRate`=@VATRate,`IsValid`=@IsValid,`IsDelay`=@IsDelay 
                                 Where `ID` = @ID";
             con.Execute(updateSql, budget, tran);
             string deleteSql = @"Delete From `BudgetCustomers` Where `Bud_ID` = @ID;

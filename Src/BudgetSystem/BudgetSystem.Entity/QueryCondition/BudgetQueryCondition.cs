@@ -66,6 +66,8 @@ namespace BudgetSystem.Entity.QueryCondition
         public DateTime BeginTimestamp { get; set; }
         public DateTime EndTimestamp { get; set; }
 
+        public InvoiceViewMode ViewMode { get; set; }
+
         public BudgetQueryCondition()
         {
             BeginTimestamp = DateTime.MinValue;

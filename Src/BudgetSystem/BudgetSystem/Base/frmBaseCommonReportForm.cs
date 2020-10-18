@@ -24,6 +24,8 @@ namespace BudgetSystem.Base
 
         protected virtual bool ShowFirstCombobox { get; set; }
 
+        protected virtual bool ShowViewMode { get; set; }
+
         public frmBaseCommonReportForm()
         {
             InitializeComponent();
@@ -41,6 +43,21 @@ namespace BudgetSystem.Base
                 DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
                 this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
             }
+            if (ShowViewMode)
+            {
+                repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+                repositoryItemComboBox2.Items.Add(InvoiceViewMode.部门交单);
+                repositoryItemComboBox2.Items.Add(InvoiceViewMode.财务交单);
+                //repositoryItemComboBox2.Items.Add(InvoiceViewMode.未核销交单);
+                //if (RunInfo.Instance.CurrentUser.UserName == "0007")
+                //{
+                //    repositoryItemComboBox2.Items.Add(InvoiceViewMode.滞期核销交单);
+                //}
+
+                barSelectMode.EditValue = InvoiceViewMode.部门交单;
+            }
+            barSelectMode.Visibility = ShowViewMode ? BarItemVisibility.Always : BarItemVisibility.Never;
+
             this.barSelected.EditValue = "";
             this.barSelected.Visibility = ShowFirstCombobox ? BarItemVisibility.Always : BarItemVisibility.Never;
             this.lcList.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -515,8 +532,15 @@ namespace BudgetSystem.Base
             endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
             BudgetQueryCondition condition = new BudgetQueryCondition();
 
-
             condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+
+            condition.ViewMode = InvoiceViewMode.财务交单;
+            if (ShowViewMode)
+            {
+                InvoiceViewMode viewMode = InvoiceViewMode.部门交单;
+                viewMode = (InvoiceViewMode)Enum.Parse(typeof(InvoiceViewMode), this.barSelectMode.EditValue.ToString());
+                condition.ViewMode = viewMode;
+            }
 
             condition.BeginTimestamp = startTime;
             condition.EndTimestamp = endTime;

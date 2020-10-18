@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace BudgetSystem
     public partial class ucBudgetDetailView : DataControl
     {
         Bll.ModifyMarkManager mmm = new Bll.ModifyMarkManager();
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
 
         public EditFormWorkModels WorkModel
         {
@@ -22,19 +24,30 @@ namespace BudgetSystem
         public ucBudgetDetailView()
         {
             InitializeComponent();
+            xtraTabControl1.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl1_SelectedPageChanged);
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
         }
 
         public override void BindingData(int dataID)
         {
             this.ucBudgetEdit1.WorkModel = WorkModel;
-            this.ucBudgetEdit1.BindingData(dataID);
-            List<Budget> historyData = mmm.GetAllModifyMark<Budget>(dataID);
+            Budget budget = bm.GetBudget(dataID);
+            this.ucBudgetEdit1.BindingBudget(budget);
+            xtraTabControl1.TabPages[0].Tag = budget;
+            var historyData = mmm.GetAllModifyMark<Budget>(dataID).OrderBy(o => o.UpdateDate);
             //if (historyData != null)
             //{
             //    historyData.ForEach(h => { h.SupplierList = null; h.CustomerList = null; });
             //}
-            this.gridBudget.DataSource = historyData;
+            for (int index = 0; index < historyData.Count() - 1; index++)
+            {
+                DevExpress.XtraTab.XtraTabPage xtp = new DevExpress.XtraTab.XtraTabPage();
+                xtp.Text = string.Format("{0}（{1}）", historyData.ElementAt(index).ContractNO, index + 1);
+                xtp.Tag = historyData.ElementAt(index);
+                this.xtraTabControl1.TabPages.Add(xtp);
+            }
+            this.gridBudget.DataSource = historyData.ToList();
+            this.gvBudget.BestFitColumns();
         }
 
         private void gvBudget_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -49,6 +62,16 @@ namespace BudgetSystem
                 e.Appearance.ForeColor = System.Drawing.Color.Red;
                 e.Appearance.Options.UseFont = true;
                 e.Appearance.Options.UseForeColor = true;
+            }
+        }
+
+        private void xtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            var budget = e.Page.Tag as Budget;
+            if (budget != null)
+            {
+                e.Page.Controls.Add(ucBudgetEdit1);
+                ucBudgetEdit1.BindingBudget(budget);
             }
         }
 

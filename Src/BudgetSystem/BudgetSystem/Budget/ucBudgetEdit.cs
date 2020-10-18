@@ -62,7 +62,36 @@ namespace BudgetSystem
             if (frmBaseForm.IsDesignMode)
             { return; }
             this.rgTradeNature.EditValue = 1;
+            this.dteSignDate.EditValueChanged += new System.EventHandler(this.dteSignDate_EditValueChanged);
+            this.dteValidity.EditValueChanged += new EventHandler(dteValidity_EditValueChanged);
             this.bgvInProductDetail.DataSourceChanged += new EventHandler(bgvInProductDetail_DataSourceChanged);
+            this.chkIsDelay.CheckedChanged += new EventHandler(chkIsDelay_CheckedChanged);
+        }
+
+        private void chkIsDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            CalcMaxValidity(chkIsDelay.Checked, dteSignDate.DateTime);
+        }
+
+        private void CalcMaxValidity(bool isDelay, DateTime SignDate)
+        {
+            int year = 1;
+
+            if (isDelay)
+            {
+                year++;
+            }
+            this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(year).AddDays(-1);
+
+        }
+
+        private void CalcIsDelayEnabled(DateTime signDate, DateTime ValidityDate)
+        {
+            var day = (ValidityDate - signDate.AddYears(1).AddDays(-1)).TotalDays;
+            if (day > 0)
+            {
+                chkIsDelay.Enabled = false;
+            }
         }
 
         private void bgvInProductDetail_DataSourceChanged(object sender, EventArgs e)
@@ -156,6 +185,7 @@ namespace BudgetSystem
             {
                 CurrentBudget.Validity = null;
             }
+            CurrentBudget.IsDelay = this.chkIsDelay.Checked;
             CurrentBudget.CustomerList = this.ucCustomerSelected.SelectedCustomers;
             CurrentBudget.SupplierList = new List<Supplier>();
             List<Supplier> suppliers = this.pceQualifiedSupplier.Tag as List<Supplier>;
@@ -375,6 +405,7 @@ namespace BudgetSystem
                 this.txtTotalAmount.EditValue = budget.TotalAmount;
                 this.txtUSDTotalAmount.EditValue = budget.USDTotalAmount;
                 this.dteSignDate.EditValue = budget.SignDate;
+                this.chkIsDelay.Checked = budget.IsDelay;
                 this.dteValidity.EditValue = budget.Validity;
                 this.pceMainCustomer.Text = budget.CustomerNameEx;
                 this.pceMainCustomer.Tag = budget.CustomerID;
@@ -584,14 +615,20 @@ namespace BudgetSystem
                 this.dxErrorProvider1.SetError(this.dteSignDate, "签约日期应早于有效期");
             }
 
-            if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批)
+            //if (this.CurrentBudget == null || this.CurrentBudget.EnumFlowState == EnumDataFlowState.未审批)
+            //{
+            int year = 1;
+            if (chkIsDelay.Checked)
             {
-                if (this.dteSignDate.DateTime.AddYears(1) <= this.dteValidity.DateTime)
-                {
-                    this.dxErrorProvider1.SetError(this.dteValidity, "有效期最大阈值不能超过1年");
-                }
+                year++;
             }
+            if ((this.dteSignDate.DateTime.AddYears(year).AddDays(-1) - this.dteValidity.DateTime).TotalDays < 0)
+            {
+                this.dxErrorProvider1.SetError(this.dteValidity, string.Format("有效期最大阈值不能超过{0}年", year));
+            }
+            //}
         }
+
         private bool CheckContractNOInput()
         {
             string contractNo = this.txtContractNO.Text.Trim();
@@ -1442,8 +1479,12 @@ namespace BudgetSystem
 
         private void dteSignDate_EditValueChanged(object sender, EventArgs e)
         {
-            this.dteValidity.Properties.MinValue = this.dteSignDate.DateTime;
-            this.dteValidity.Properties.MaxValue = this.dteSignDate.DateTime.AddYears(1).AddDays(-1);
+            CalcMaxValidity(chkIsDelay.Checked, this.dteSignDate.DateTime);
+        }
+
+        private void dteValidity_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcIsDelayEnabled(dteSignDate.DateTime, this.dteValidity.DateTime);
         }
 
         private void chkTradeMode_CheckedChanged(object sender, EventArgs e)

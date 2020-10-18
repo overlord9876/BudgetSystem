@@ -788,11 +788,11 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList);
+            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList);
 
             caculator.ApplyForPayment(0, 1, false);
             //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
-            if (caculator.Balance + currentBudget.AdvancePayment < 0)
+            if (budgetBill.OperatorModel != DataOperatorModel.Add && caculator.Balance + currentBudget.AdvancePayment < 0)
             {
                 string message = string.Format("修改入账后，合同余额为{0}，不允许修改", caculator.Balance);
                 XtraMessageBox.Show(message);
@@ -857,7 +857,7 @@ namespace BudgetSystem.InMoney
                         removedReceiptList = receiptList.Where(o => o.ID != budgetBill.ID);
                     }
 
-                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate, useMoneyTypeList);
+                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList);
                     caculator.ApplyForPayment(0, 1, false);
                     //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
                     if (caculator.Balance + currentBudget.AdvancePayment < 0)

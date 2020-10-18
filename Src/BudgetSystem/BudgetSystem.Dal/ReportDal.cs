@@ -19,11 +19,11 @@ namespace BudgetSystem.Dal
                                  LEFT JOIN `Department` d ON b.DeptID=d.ID
                                 where b.ID in (SELECT DISTINCT BudgetID from PaymentNotes where PaymentDate BETWEEN @BeginTime and @EndTime
                                 UNION
-                                select DISTINCT BudgetID from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime
+                                select DISTINCT BudgetID from Invoice where {0} BETWEEN @BeginTime and @EndTime
                                 UNION
                                 select DISTINCT BudgetID from Declarationform  where CreateDate BETWEEN @BeginTime and @EndTime
                                 UNION
-                                select DISTINCT BudgetID from BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime) and b.ID<>0 ");//OR b.SignDate BETWEEN @BeginTime and @EndTime");
+                                select DISTINCT BudgetID from BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime) and b.ID<>0 ", condition.ViewMode == InvoiceViewMode.财务交单 ? "FinanceImportDate" : "ImportDate");//OR b.SignDate BETWEEN @BeginTime and @EndTime");
 
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
@@ -40,11 +40,22 @@ namespace BudgetSystem.Dal
                 dp.Add("DeptID", condition.DeptID, null, null, null);
             }
             IEnumerable<BudgetReport> budgetList = con.Query<BudgetReport>(selectSql, dp, tran);
+            if (!budgetList.Any())
+            {
+                return budgetList;
+            }
+            string budgetIds = string.Join(",", budgetList.Select(o => string.Format("{0}", o.ID)).ToArray());
 
             IEnumerable<PaymentNotes> pnList = GetPaymentNotesList(condition, con, tran);
             List<Invoice> iList = GetInvoiceList(condition, con, tran).ToList();
+
+            List<Invoice> iSingleBudgetFinalAccountsList = GetInvoiceList(budgetIds, con, tran).ToList();
+
             //iList.AddRange(PaymentToInvoice(pnList.ToList()));
             IEnumerable<BudgetBill> bbList = GetBudgetBillList(condition, con, tran);
+
+            IEnumerable<BudgetBill> bbSingleBudgetFinalAccountsList = GetBudgetBillList(budgetIds, con, tran);
+
             IEnumerable<Declarationform> dList = GetDeclarationformList(condition, con, tran);
 
             if (budgetList != null)
@@ -62,6 +73,8 @@ namespace BudgetSystem.Dal
                     report.PaymentList = pnList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                     report.InvoiceList = iList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                     report.BudgetBillList = bbList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
+                    report.InvoiceSingleBudgetFinalAccountsList = iSingleBudgetFinalAccountsList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
+                    report.BBSingleBudgetFinalAccountsList = bbSingleBudgetFinalAccountsList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                     report.DeclarationformList = dList.Where(o => o.BudgetID.Equals(report.ID)).ToList();
                 }
             }
@@ -104,21 +117,35 @@ namespace BudgetSystem.Dal
 
         private IEnumerable<Invoice> GetInvoiceList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            //2020-09-17 计算交单信息，纳入财务未审核，并且交单时间为业务员交单信息，在统计信息里去除这些查询信息。
-            string selectSql = string.Format(@"select * from Invoice where FinanceImportDate BETWEEN @BeginTime and @EndTime  or (FinanceImportDate IS NULL and FinanceImportUser IS NULL AND ImportDate BETWEEN @BeginTime AND @EndTime) ;");
+            string selectSql = string.Format(@"select * from Invoice where {0} BETWEEN @BeginTime and @EndTime;", condition.ViewMode == InvoiceViewMode.财务交单 ? "FinanceImportDate" : "ImportDate");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<Invoice>(selectSql, dp, tran);
         }
 
+        private IEnumerable<Invoice> GetInvoiceList(string budgetIds, IDbConnection con, IDbTransaction tran = null)
+        {
+            //2020-09-17 计算交单信息，纳入财务未审核，并且交单时间为业务员交单信息，在统计信息里去除这些查询信息。
+            string selectSql = string.Format(@"select * from Invoice where BudgetID in ({0}) ;", budgetIds);
+
+            return con.Query<Invoice>(selectSql, null, tran);
+        }
+
         public IEnumerable<BudgetBill> GetBudgetBillList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.ReceiptDate BETWEEN @BeginTime and @EndTime;");
+            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.ReceiptDate BETWEEN @BeginTime and @EndTime AND bb.IsDelete=0;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
             return con.Query<BudgetBill>(selectSql, dp, tran);
+        }
+
+        private IEnumerable<BudgetBill> GetBudgetBillList(string budgetIds, IDbConnection con, IDbTransaction tran = null)
+        {
+            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID WHERE BudgetID in ({0}) and  bb.IsDelete=0;", budgetIds);
+
+            return con.Query<BudgetBill>(selectSql, null, tran);
         }
 
         public IEnumerable<Declarationform> GetDeclarationformList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
