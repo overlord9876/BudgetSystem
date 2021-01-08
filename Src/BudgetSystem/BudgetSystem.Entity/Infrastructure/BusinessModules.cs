@@ -19,6 +19,7 @@ namespace BudgetSystem.Entity
         MyApprovalFlowManagement,
 
         CustomerManagement,
+        AccountAdjustmentManagement,
         SupplierManagement,
 
         UserManagement,
@@ -36,6 +37,7 @@ namespace BudgetSystem.Entity
         SalemenReport,
         DepartmentReport,
         CompanyReport,
+        AccountAdjustmentReport,
         FinalAccount
     }
 }

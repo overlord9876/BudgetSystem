@@ -37,5 +37,15 @@ namespace BudgetSystem.Bll
                 return dal.GetDateTimeNow(con);
             });
         }
+
+        public List<DateExchangeRate> GetDateExchanges()
+        {
+            var lst = this.Query<DateExchangeRate>((con) =>
+            {
+                var uList = dal.GetDateExchanges(con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
     }
 }

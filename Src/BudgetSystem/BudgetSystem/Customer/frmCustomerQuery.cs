@@ -35,6 +35,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Enabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Disabled));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出数据"));
 
             this.RegeditQueryOperate<CustomerQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "客户查询");
 
@@ -66,6 +67,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Disabled.ToString())
             {
                 DisabledCustomer();
+            }
+            else if (operate.Operate == OperateTypes.ExportData.ToString())
+            {
+                ExportData();
             }
 
         }
@@ -221,6 +226,25 @@ namespace BudgetSystem
             else
             {
                 XtraMessageBox.Show("请选择需要停用的项");
+            }
+        }
+
+        private void ExportData()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel|*.xlsx|Excel2003|*.xls";
+            saveFileDialog.Title = "保存";
+            if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+            if (saveFileDialog.FileName.ToLower().EndsWith(".xls"))
+            {
+                this.gvCustomer.Export(DevExpress.XtraPrinting.ExportTarget.Xls, saveFileDialog.FileName);
+            }
+            else
+            {
+                this.gvCustomer.Export(DevExpress.XtraPrinting.ExportTarget.Xlsx, saveFileDialog.FileName);
             }
         }
 

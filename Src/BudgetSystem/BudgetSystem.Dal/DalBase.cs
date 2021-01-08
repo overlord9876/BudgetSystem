@@ -43,5 +43,13 @@ namespace BudgetSystem.Dal
             return versionNumber;
         }
 
+        public DateTime GetDateTimeNow(IDbConnection con)
+        {
+            string selectSql = "SELECT NOW();";
+            IDbCommand command = con.CreateCommand();
+            command.CommandText = selectSql;
+            object obj = command.ExecuteScalar();
+            return Convert.ToDateTime(obj);
+        }
     }
 }

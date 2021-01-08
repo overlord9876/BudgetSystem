@@ -68,6 +68,23 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        /// <summary>
+        /// 获取所有已经审批通过的付款金额,并且未进行拆分的付款金额。
+        /// </summary>
+        /// <param name="budgetID"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public List<PaymentNotes> GetApprovaledAmountPaymentWithOutAdjustmentByBudgetId(int budgetID)
+        {
+            var lst = this.Query<PaymentNotes>((con) =>
+            {
+                var uList = dal.GetApprovaledAmountPaymentWithOutAdjustmentByBudgetId(budgetID, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
         public PaymentNotes GetPaymentNoteById(int id)
         {
             var lst = this.Query<PaymentNotes>((con) =>

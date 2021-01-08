@@ -12,16 +12,20 @@ using BudgetSystem.CommonControl;
 using BudgetSystem.Bll;
 using BudgetSystem.WorkSpace;
 using BudgetSystem.Entity.QueryCondition;
+using DevExpress.Utils;
 
 namespace BudgetSystem
 {
     public partial class frmBudgetQuery : frmBaseQueryForm
     {
+
+        private ToolTipController toolTipController;
         private FlowManager fm = new FlowManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private CommonManager cm = new CommonManager();
         private DateTime datetimeNow = DateTime.MinValue;
 
+        private const string COMMONQUERY_All = "全部预算单";
         private const string COMMONQUERY_MYCREATE = "我负责的";
         private const string COMMONQUERY_GENERALMANAGERAPPROVAL = "已完成审批预算单列表";
         private const string COMMONQUERY_MANAGERAPPROVAL = "未完成审批预算单列表";
@@ -33,9 +37,61 @@ namespace BudgetSystem
         public frmBudgetQuery()
         {
             InitializeComponent();
-            datetimeNow = cm.GetDateTimeNow();
+            this.toolTipController = new ToolTipController();
+            this.gridBudget.ToolTipController = this.toolTipController;
+            this.toolTipController.GetActiveObjectInfo += ToolTipController_GetActiveObjectInfo;
+            this.datetimeNow = cm.GetDateTimeNow();
             this.Module = BusinessModules.BuggetManagement;
             LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueTradeNature, typeof(EnumTradeNature));
+            this.gvBudget.RowCellStyle += GvBudget_RowCellStyle;
+
+        }
+
+        private void ToolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
+        {
+            GridHitInfo hitInfo = gvBudget.CalcHitInfo(e.ControlMousePosition);
+
+            if (hitInfo.RowHandle < 0 || hitInfo.Column == null || hitInfo.HitTest != GridHitTest.RowCell)
+            {
+                toolTipController.HideHint();
+                return;
+            }
+
+            Budget budget = gvBudget.GetRow(hitInfo.RowHandle) as Budget;
+            if (budget != null)
+            {
+                DateTime validity = budget.Validity ?? DateTime.MinValue;
+                int days = (datetimeNow - validity).Days;
+                if (days > 0)
+                {
+                    if (days > 30)
+                    {
+                        e.Info = new ToolTipControlInfo("", $"合同已过期并且超过30天，已经锁定。", ToolTipIconType.Warning);
+                    }
+                    else
+                    {
+                        e.Info = new ToolTipControlInfo("", $"合同已过期，即将在{30 - days}天后锁定。", ToolTipIconType.Information);
+                    }
+                }
+            }
+        }
+
+        private void GvBudget_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            Budget budget = gvBudget.GetRow(e.RowHandle) as Budget;
+            if (budget != null)
+            {
+                DateTime validity = budget.Validity ?? DateTime.MinValue;
+                int days = (datetimeNow - validity).Days;
+                if (days > 0)
+                {
+                    e.Appearance.ForeColor = Color.Red;//改变字体颜色
+                    if (days > 30)
+                    {
+                        e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                    }
+                }
+            }
         }
 
         protected override void InitModelOperate()
@@ -61,21 +117,23 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.BudgetAccountBill));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinalAccount));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.NewPayment, "财务调账"));
-
-            this.RegeditQueryOperate<BudgetQueryCondition>(true, new List<string> 
+            var search = new List<string>
                                                                             { COMMONQUERY_MYCREATE,
                                                                               COMMONQUERY_MANAGERAPPROVAL,
-                                                                              COMMONQUERY_GENERALMANAGERAPPROVAL,     
+                                                                              COMMONQUERY_GENERALMANAGERAPPROVAL,
                                                                               COMMONQUERY_ARCHIVEWARNINGQUERY,
                                                                               COMMONQUERY_FINANCEQUERY,
                                                                               COMMONQUERY_FINANCEQUERYANDREJECTED,
                                                                               COMMONQUERY_ARCHIVEQUERY
-                                                                              }, "预算单查询");
+                                                                              };
+
+            search.Insert(0, COMMONQUERY_All);
+
+            this.RegeditQueryOperate<BudgetQueryCondition>(true, search, "预算单查询");
 
             this.RegeditPrintOperate();
 
             this.ModelOperatePageName = "预算单";
-
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
@@ -189,6 +247,11 @@ namespace BudgetSystem
                 BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
                 LoadData(condition);
             }
+            else if (COMMONQUERY_All.Equals(queryName))
+            {
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.进行中 | (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
+                LoadData(condition);
+            }
         }
 
         protected override void DoConditionQuery(BaseQueryCondition condition)
@@ -205,7 +268,8 @@ namespace BudgetSystem
 
         public override void LoadData()
         {
-            LoadData(null);
+            BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.进行中 | (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
+            LoadData(condition);
         }
 
         private void LoadData(BudgetQueryCondition condition)

@@ -13,6 +13,7 @@ namespace BudgetSystem.Bll
         Dal.BudgetDal dal = new Dal.BudgetDal();
         Dal.ReceiptManagementDal rmDal = new Dal.ReceiptManagementDal();
         Dal.PaymentNotesDal pnd = new Dal.PaymentNotesDal();
+        Dal.AccountAdjustmentDal aaDal = new Dal.AccountAdjustmentDal();
         Dal.InvoiceDal idal = new Dal.InvoiceDal();
         Dal.ModifyMarkDal mmdal = new Dal.ModifyMarkDal();
         Bll.FlowManager fm = new FlowManager();
@@ -33,6 +34,36 @@ namespace BudgetSystem.Bll
             var lst = this.Query<Budget>((con) =>
             {
                 var uList = dal.GetBudgetListByCustomerId(userName, customerId, con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<Budget> GetBudgetListByCustomerId(int customerId)
+        {
+            var lst = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetListByCustomerId(customerId, con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<Budget> GetBudgetListBySupperId(int supperId)
+        {
+            var lst = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetListBySupperId(supperId, con);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<Budget> GetBudgetListBySupperName(string supperName)
+        {
+            var lst = this.Query<Budget>((con) =>
+            {
+                var uList = dal.GetBudgetListByInvoiceId(supperName, con);
                 return uList;
             });
             return lst.ToList();
@@ -280,9 +311,14 @@ namespace BudgetSystem.Bll
             var lst = this.Query<AccountBill>((con) =>
             {
                 var arList = rmDal.GetBudgetBillListByBudgetId(budgetId, con, null);
-                var abList = arList.ToAccountBillList();
                 var pmList = pnd.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
+                var adjustmentList = aaDal.GetBalanceAccountAdjustmentByBudgetId(budgetId, con, includInvoice: false);
+                var adjustmentDetailList = aaDal.GetBalanceAccountAdjustmentDetailByBudgetId(budgetId, con, includInvoice: false);
+
+                var abList = arList.ToAccountBillList();
                 abList.AddRange(pmList.ToAccountBillList());
+                abList.AddRange(adjustmentList.ToAccountBillList());
+                abList.AddRange(adjustmentDetailList.ToAccountBillList());
                 return abList.OrderBy(o => o.CreateDate);
             });
             return lst.ToList();

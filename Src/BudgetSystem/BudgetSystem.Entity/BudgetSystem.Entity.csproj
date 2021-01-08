@@ -46,9 +46,14 @@
     <Compile Include="BankInfo.cs" />
     <Compile Include="BankSlip.cs" />
     <Compile Include="Budget.cs" />
+    <Compile Include="AccountAdjustment.cs" />
+    <Compile Include="AccountAdjustmentDetail.cs" />
+    <Compile Include="DateExchange.cs" />
+    <Compile Include="QueryCondition\AccountAdjustmentQueryCondition.cs" />
     <Compile Include="QueryCondition\InvoiceQueryCondition.cs" />
     <Compile Include="QueryCondition\ApprovalFlowQueryCondition.cs" />
     <Compile Include="ReportMgmt\RecieptCapital.cs" />
+    <Compile Include="ReportMgmt\AccountAdjustmentReport.cs" />
     <Compile Include="StringUtil.cs" />
     <Compile Include="SupplierFirstReviewContents.cs" />
     <Compile Include="SupplierReviewContents.cs" />

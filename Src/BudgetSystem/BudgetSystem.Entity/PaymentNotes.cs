@@ -45,6 +45,11 @@ namespace BudgetSystem.Entity
         public decimal CNY { get; set; }
 
         /// <summary>
+        /// 折合美金。
+        /// </summary>
+        public decimal USD { get; set; }
+
+        /// <summary>
         /// 去税金额
         /// </summary>
         public decimal DeTaxationCNY

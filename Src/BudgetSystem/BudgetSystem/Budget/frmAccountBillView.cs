@@ -15,7 +15,8 @@ namespace BudgetSystem
 {
     public partial class frmAccountBillView : frmBaseDialogForm
     {
-        BudgetManager bm = new BudgetManager();
+        private CommonManager cm = new CommonManager();
+        private BudgetManager bm = new BudgetManager();
         public Budget CurrentBudget { get; set; }
         Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
 
@@ -24,6 +25,28 @@ namespace BudgetSystem
         public frmAccountBillView()
         {
             InitializeComponent();
+            this.gvAccountBill.RowCellStyle += GvAccountBill_RowCellStyle;
+        }
+
+        private void GvAccountBill_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            AccountBill row = gvAccountBill.GetRow(e.RowHandle) as AccountBill;
+            if (row != null)
+            {
+                int adjustmentType = row.AdjustmentType;
+                if (adjustmentType == 0)
+                {
+
+                }
+                else if (adjustmentType == ((int)AdjustmentType.付款 + 1) || adjustmentType == ((int)AdjustmentType.收款 + 1) || adjustmentType == ((int)AdjustmentType.交单 + 1))
+                {
+                    e.Appearance.ForeColor = Color.Red;//改变字体颜色
+                }
+                else
+                {
+                    e.Appearance.ForeColor = Color.Blue;//改变字体颜色
+                }
+            }
         }
 
         private void frmAccountBillView_Load(object sender, EventArgs e)
@@ -32,6 +55,7 @@ namespace BudgetSystem
             var umtList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
 
             this.Text = "按合同号查询收付情况";
+            List<DateExchangeRate> dateExchanges = cm.GetDateExchanges();
             List<AccountBill> dataSource = bm.GetAccountBillDetailByBudgetId(CurrentBudget.ID);
             if (dataSource != null)
             {
@@ -55,6 +79,11 @@ namespace BudgetSystem
                             bs.UseType = umt.Type.ToString();
                         }
                     }
+                    if (!bs.IsUSD)
+                    {
+                        bs.ExchangeRate = ExchageRateUtil.GetExchageRate(bs.Date, dateExchanges, (decimal)CurrentBudget.ExchangeRate);
+                        bs.USD = Math.Round(bs.CNY / bs.ExchangeRate, 2);
+                    }
                 }
             }
             this.gcAccountBill.DataSource = dataSource;
@@ -62,11 +91,10 @@ namespace BudgetSystem
             this.gvAccountBill.BestFitColumns();
             this.lblBudgetNO.Text = CurrentBudget.ContractNO;
 
-            this.textEdit_Number1.EditValue = dataSource.Sum(o => o.PaymentMoney);
-            this.textEdit_Number2.EditValue = dataSource.Sum(o => o.RecieptMoney);
+            this.textEdit_Number1.EditValue = dataSource.Where(o => o.IsPayment).Sum(o => o.PaymentMoney);
+            this.textEdit_Number2.EditValue = dataSource.Where(o => !o.IsPayment).Sum(o => o.RecieptMoney);
             this.textEdit_Number3.EditValue = dataSource.Sum(o => o.CNY);
         }
-
 
     }
 }

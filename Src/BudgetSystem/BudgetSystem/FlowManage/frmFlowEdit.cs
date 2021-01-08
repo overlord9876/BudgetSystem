@@ -43,7 +43,7 @@ namespace BudgetSystem.FlowManage
             userList.Insert(0, new User() { UserName = FlowConst.FlowCreateUser, RealName = FlowConst.FlowCreateUserDisplayName, State = true });
 
             departmentList = dm.GetAllDepartment();
-            departmentList.Insert(0, new Department() { Code = FlowConst.FlowCreateUserDepartment, Name = FlowConst.FlowCreateUserDepartmentDisplayName });
+            departmentList.Insert(0, new Department() { Code = FlowConst.FlowCreateUserDepartment, Name = FlowConst.FlowCreateUserDepartmentDisplayName, ID = -1 });
 
 
             if (this.WorkModel == EditFormWorkModels.Modify)
@@ -269,7 +269,15 @@ namespace BudgetSystem.FlowManage
                     return;
                 }
                 node.NodeConfig = (int)this.rgNodeDepartmentUserType.EditValue;
-                node.NodeValue = (this.cboNodeDepartment.SelectedItem as Department).ID.ToString();
+                int deptId = (this.cboNodeDepartment.SelectedItem as Department).ID;
+                if (deptId == -1)
+                {
+                    node.NodeValue = (this.cboNodeDepartment.SelectedItem as Department).Code.ToString();
+                }
+                else
+                {
+                    node.NodeValue = deptId.ToString();
+                }
                 node.NodeValueDisplayValue = this.cboNodeDepartment.SelectedItem.ToString();
             }
 

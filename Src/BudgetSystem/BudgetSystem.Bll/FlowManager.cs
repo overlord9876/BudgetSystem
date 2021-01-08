@@ -213,7 +213,6 @@ namespace BudgetSystem.Bll
             nextRunPointId = -1;
             int orderNo = 1;
 
-
             //如果传进来的运行点是空的，说明是新实例 ，orderNo取1，否则获取这个运行点对应节点顺序号+1
             if (runPoint != null)
             {
@@ -244,13 +243,11 @@ namespace BudgetSystem.Bll
             }
             else
             {
-
                 string departMentCode;
                 if (nextNode.NodeValue == FlowConst.FlowCreateUserDepartment)
                 {
                     User user = userDal.GetUser(instanceCreateUser, con, tran);
                     departMentCode = user.DeptID.ToString();
-
                 }
                 else
                 {

@@ -124,6 +124,25 @@ namespace BudgetSystem.Dal
             return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
         }
 
+        /// <summary>
+        /// 获取所有已经审批通过的付款金额,并且未进行拆分的付款金额。
+        /// </summary>
+        /// <param name="budgetID"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        public IEnumerable<PaymentNotes> GetApprovaledAmountPaymentWithOutAdjustmentByBudgetId(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState
+            From `PaymentNotes` pn LEFT JOIN Budget b on pn.BudgetID=b.ID
+						JOIN `FlowInstance` f ON f.DateItemID=pn.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+						LEFT JOIN supplier s on pn.SupplierID=s.ID
+						LEFT JOIN department d on pn.DeptID=d.`ID`
+            WHERE pn.BudgetID=@BudgetID  AND f.IsClosed=1 AND f.ApproveResult=1
+						AND pn.ID not in (select RelationID from paymentaccountadjustment where BudgetID=@BudgetID);";
+            return con.Query<PaymentNotes>(selectSql, new { DateItemType = EnumFlowDataType.付款单.ToString(), BudgetID = budgetID }, tran);
+        }
+
         public PaymentNotes GetPaymentNoteById(int id, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"Select pn.*,b.ContractNO,s.`Name` as SupplierName,d.`Name` as DepartmentName,d.`ID` as DeptID,u.RealName as ApplicantRealName,IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState

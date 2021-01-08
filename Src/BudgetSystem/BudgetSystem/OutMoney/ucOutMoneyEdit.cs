@@ -56,6 +56,10 @@ namespace BudgetSystem.OutMoney
         {
             InitializeComponent();
 
+            if (frmBaseForm.IsDesignMode)
+            {
+                return;
+            }
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
             this.riLinkDelete.Click += new EventHandler(riLinkDelete_Click);
             this.riLinkDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
@@ -63,10 +67,8 @@ namespace BudgetSystem.OutMoney
             this.cboBudget.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             this.cboSupplier.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             this.txtApplicant.EditValue = RunInfo.Instance.CurrentUser;
-            if (!frmBaseForm.IsDesignMode)
-            {
-                InitData();
-            }
+
+            InitData();
         }
 
         private void InitEditStyle()
@@ -361,8 +363,8 @@ namespace BudgetSystem.OutMoney
             else
             {
                 CheckUsage(umt.Name);
-                if (!umtList.Where(ut => ut.Type == PaymentType.运杂费).Any(o => o.Name.Equals(umt.Name)) && !umtList.Where(ut => ut.Type == PaymentType.佣金).Any(o => o.Name.Equals(umt.Name))
-                    && !dxErrorProvider1.HasErrors)
+                var ignoreUmtList = umtList.Where(ut => ut.Type == PaymentType.运杂费 ||/* ut.Type == PaymentType.佣金 ||*/ ut.Type == PaymentType.暂付款);
+                if (!ignoreUmtList.Any(o => o.Name.Equals(umt.Name)) && !dxErrorProvider1.HasErrors)
                 {
                     if (txtAfterPaymentBalance.Value < 0)
                     {
@@ -724,6 +726,25 @@ namespace BudgetSystem.OutMoney
             }
         }
 
+        private void btn_budgetView_Click(object sender, EventArgs e)
+        {
+            if (currentBudget == null)
+            {
+                XtraMessageBox.Show("请选择合同");
+                return;
+            }
+            var budget = bm.GetBudget(currentBudget.ID);
+            if (budget == null)
+            {
+                XtraMessageBox.Show("您选择查看详情的项不存在，请刷新数据。");
+                return;
+            }
+            frmBudgetDatail form = new frmBudgetDatail();
+            form.WorkModel = EditFormWorkModels.View;
+            form.CurrentBudget = budget;
+            form.ShowDialog(this);
+        }
+
         private void txtExchangeRate_EditValueChanged(object sender, EventArgs e)
         {
             CalcCNY();
@@ -818,6 +839,17 @@ namespace BudgetSystem.OutMoney
             form.ShowDialog(this);
         }
 
+        private void btnSingleBudgetFinalAccount_Click(object sender, EventArgs e)
+        {
+            if (currentBudget == null)
+            {
+                XtraMessageBox.Show("请选择合同");
+                return;
+            }
+            frmSingleBudgetFinalAccountsReport finalAccountReportForm = new frmSingleBudgetFinalAccountsReport();
+            finalAccountReportForm.CurrentBudget = currentBudget;
+            finalAccountReportForm.ShowDialog();
+        }
         private void cboCurrency_EditValueChanged(object sender, EventArgs e)
         {
             if (cboCurrency.EditValue != null && (cboCurrency.EditValue.ToString().Equals("CNY") || cboCurrency.EditValue.ToString().Equals("人民币")))

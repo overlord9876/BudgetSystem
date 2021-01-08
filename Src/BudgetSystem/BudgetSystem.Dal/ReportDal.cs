@@ -13,6 +13,8 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<BudgetReport> GetBudgetReportList(BudgetQueryCondition condition, List<UseMoneyType> umtList, List<InMoneyType> imtList, IDbConnection con, IDbTransaction tran = null)
         {
+            CommonDal dal = new CommonDal();
+
             string selectSql = string.Format(@"SELECT b.*,u.RealName  AS SalesmanName,d.`Code` AS DepartmentCode,d.`Name` AS DepartmentName
                                  FROM `Budget` b                                     
                                  LEFT JOIN `User` u ON b.Salesman=u.UserName 
@@ -46,16 +48,53 @@ namespace BudgetSystem.Dal
             }
             string budgetIds = string.Join(",", budgetList.Select(o => string.Format("{0}", o.ID)).ToArray());
 
+            var dataExchangeRates = dal.GetDateExchanges(con, tran);
+
             IEnumerable<PaymentNotes> pnList = GetPaymentNotesList(condition, con, tran);
+            decimal exchangeRate = 0;
+            foreach (var pn in pnList)
+            {
+                if (pn.Currency == "美元")
+                {
+                    pn.USD = pn.OriginalCoin;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(pn.PaymentDate, dataExchangeRates, (decimal)pn.ExchangeRate);
+                    pn.USD = Math.Round(pn.CNY / exchangeRate, 2);
+                }
+            }
             List<Invoice> iList = GetInvoiceList(condition, con, tran).ToList();
 
             List<Invoice> iSingleBudgetFinalAccountsList = GetInvoiceList(budgetIds, con, tran).ToList();
 
             //iList.AddRange(PaymentToInvoice(pnList.ToList()));
             IEnumerable<BudgetBill> bbList = GetBudgetBillList(condition, con, tran);
-
+            foreach (BudgetBill bb in bbList)
+            {
+                if (bb.Currency == "USD")
+                {
+                    bb.USD = bb.OriginalCoin;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(bb.ReceiptDate, dataExchangeRates, bb.ExchangeRate);
+                    bb.USD = Math.Round(bb.CNY / exchangeRate, 2);
+                }
+            }
             IEnumerable<BudgetBill> bbSingleBudgetFinalAccountsList = GetBudgetBillList(budgetIds, con, tran);
-
+            foreach (BudgetBill bb in bbSingleBudgetFinalAccountsList)
+            {
+                if (bb.Currency == "USD")
+                {
+                    bb.USD = bb.OriginalCoin;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(bb.ReceiptDate, dataExchangeRates, bb.ExchangeRate);
+                    bb.USD = Math.Round(bb.CNY / exchangeRate, 2);
+                }
+            }
             IEnumerable<Declarationform> dList = GetDeclarationformList(condition, con, tran);
 
             if (budgetList != null)
@@ -134,7 +173,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.ReceiptDate BETWEEN @BeginTime and @EndTime AND bb.IsDelete=0;");
+            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney,bs.ReceiptDate FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID where bs.ReceiptDate BETWEEN @BeginTime and @EndTime AND bb.IsDelete=0;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
@@ -143,7 +182,7 @@ namespace BudgetSystem.Dal
 
         private IEnumerable<BudgetBill> GetBudgetBillList(string budgetIds, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID WHERE BudgetID in ({0}) and  bb.IsDelete=0;", budgetIds);
+            string selectSql = string.Format(@"SELECT bb.*,bs.ExchangeRate,bs.NatureOfMoney,bs.ReceiptDate FROM BudgetBill bb LEFT JOIN BankSlip bs on bb.BSID=bs.BSID WHERE BudgetID in ({0}) and  bb.IsDelete=0;", budgetIds);
 
             return con.Query<BudgetBill>(selectSql, null, tran);
         }
@@ -192,11 +231,11 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
                 dp.Add("BudgetID", condition.ID, null, null, null);
             }
 
-            string typeString = string.Join(",", typeList.Select(o => string.Format("'o.Name'")).ToArray());
+            string typeString = string.Join(",", typeList.Select(o => string.Format($"'{o.Name}'")).ToArray());
 
             List<Invoice> invoiceList = con.Query<Invoice>(selectSql, dp, tran).ToList();
             //将付款作为交单信息。
-            string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1  AND MoneyUsed in (@MoneyUsed) AND CommitTime BETWEEN @BeginTime and @EndTime ");
+            string selectPaymentNotesSql = string.Format(@"SELECT *,s.`Name` as SupplierName from PaymentNotes pn INNER JOIN supplier s on pn.SupplierID=s.ID where HasInvoice=1   AND FIND_IN_SET(MoneyUsed ,@MoneyUsed) AND CommitTime BETWEEN @BeginTime and @EndTime ");
             dp = new DynamicParameters();
             dp.Add("MoneyUsed", typeString, null, null, null);
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);

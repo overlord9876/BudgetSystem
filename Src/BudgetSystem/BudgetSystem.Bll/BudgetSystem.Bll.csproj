@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
     <Compile Include="BudgetManager.cs" />
+    <Compile Include="AccountAdjustmentManager.cs" />
     <Compile Include="DepartmentManager.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="FlowManager.cs" />

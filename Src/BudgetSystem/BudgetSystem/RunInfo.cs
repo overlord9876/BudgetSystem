@@ -74,7 +74,6 @@ namespace BudgetSystem
             return condition;
         }
 
-
         private FlowApproveNameConfigCollection flowAppreveNameConfigs = null;
         public FlowApproveNameConfigCollection FlowAppreveNameConfigs
         {
@@ -92,6 +91,18 @@ namespace BudgetSystem
                 }
                 return flowAppreveNameConfigs;
 
+            }
+        }
+
+        public AdjustmentRole GetAdjustmentRole()
+        {
+            if (CurrentUser.Role == StringUtil.SaleRoleCode || CurrentUser.Role == StringUtil.SaleDepartmentRoleCode)
+            {
+                return AdjustmentRole.业务员调账;
+            }
+            else
+            {
+                return AdjustmentRole.财务调账;
             }
         }
 

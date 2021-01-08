@@ -47,6 +47,11 @@ namespace BudgetSystem.Entity
         public decimal OriginalCoin { get; set; }
 
         /// <summary>
+        /// 折合美元。
+        /// </summary>
+        public decimal USD { get; set; }
+
+        /// <summary>
         /// 汇率
         /// </summary>
         public decimal ExchangeRate { get; set; }

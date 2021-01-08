@@ -216,7 +216,7 @@ namespace BudgetSystem.InMoney
 
             CurrentBankSlip.ReceiptDate = (DateTime)this.deReceiptDate.EditValue;
             CurrentBankSlip.Currency = this.cboCurrency.EditValue.ToString();
-            CurrentBankSlip.CreateTimestamp = (DateTime)this.deReceiptDate.EditValue;
+            CurrentBankSlip.CreateTimestamp = (DateTime)this.deCreateTimestamp.EditValue;
             CurrentBankSlip.TradingPostscript = this.txtTradingPostscript.Text.Trim();
 
             if (this.chkState1.Checked)

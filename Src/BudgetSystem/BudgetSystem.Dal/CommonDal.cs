@@ -64,6 +64,16 @@ namespace BudgetSystem.Dal
             return Convert.ToDateTime(obj);
         }
 
+        public IEnumerable<DateExchangeRate> GetDateExchanges(IDbConnection con, IDbTransaction tran = null)
+        {
+            string sql = @"SELECT item.date, round(AVG(item.ExchangeRate), 6) as ExchangeRate from(
+                         SELECT DATE_FORMAT(ReceiptDate, '%Y-%m-%d') as date, ExchangeRate FROM bankslip WHERE Currency = 'USD'
+                         UNION
+                         SELECT DATE_FORMAT(PaymentDate, '%Y-%m-%d') as date, ExchangeRate from paymentnotes WHERE Currency = '美元') item
+                         GROUP BY item.date
+                         ORDER BY item.date";
+            return con.Query<DateExchangeRate>(sql, null, tran);
+        }
 
     }
 }

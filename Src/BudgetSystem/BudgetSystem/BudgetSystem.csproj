@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;IgnorePermission2,UseDeploy</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -139,6 +139,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountAdjustment\BudgetSingleReport.cs" />
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentQuery.Designer.cs">
+      <DependentUpon>frmAccountAdjustmentQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentEdit.Designer.cs">
+      <DependentUpon>frmAccountAdjustmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmAccountAdjustmentQueryConditionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountAdjustment\ucAccountAdjustmentEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AccountAdjustment\ucAccountAdjustmentEdit.Designer.cs">
+      <DependentUpon>ucAccountAdjustmentEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\BatchDataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -274,6 +299,7 @@
     <Compile Include="Budget\frmSingleBudgetFinalAccountsReport.Designer.cs">
       <DependentUpon>frmSingleBudgetFinalAccountsReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Budget\SingleBudgetReportHelper.cs" />
     <Compile Include="Budget\ucBudgetDetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -431,6 +457,12 @@
     </Compile>
     <Compile Include="Report\frmPaymentReport.Designer.cs">
       <DependentUpon>frmPaymentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmAccountAdjustmentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmAccountAdjustmentReport.Designer.cs">
+      <DependentUpon>frmAccountAdjustmentReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmSupplierImport.cs">
       <SubType>Form</SubType>
@@ -712,6 +744,7 @@
       <DependentUpon>frmUserQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="Util\ExchageRateUtil.cs" />
     <Compile Include="WorkSpace\FlowRunStateTranslator.cs" />
     <Compile Include="WorkSpace\frmApprovalListQuery.cs">
       <SubType>Form</SubType>
@@ -755,6 +788,18 @@
     <Compile Include="WorkSpace\frmMyApprovalFlowListQuery.Designer.cs">
       <DependentUpon>frmMyApprovalFlowListQuery.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AccountAdjustment\frmAccountAdjustmentQuery.resx">
+      <DependentUpon>frmAccountAdjustmentQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountAdjustment\frmAccountAdjustmentEdit.resx">
+      <DependentUpon>frmAccountAdjustmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountAdjustment\frmAccountAdjustmentQueryConditionEditor.resx">
+      <DependentUpon>frmAccountAdjustmentQueryConditionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountAdjustment\ucAccountAdjustmentEdit.resx">
+      <DependentUpon>ucAccountAdjustmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\BatchDataControl.resx">
       <DependentUpon>BatchDataControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -890,6 +935,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmPaymentReport.resx">
       <DependentUpon>frmPaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmAccountAdjustmentReport.resx">
+      <DependentUpon>frmAccountAdjustmentReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmSupplierImport.resx">
       <DependentUpon>frmSupplierImport.cs</DependentUpon>
@@ -1100,6 +1148,9 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Report\AccountAdjustmentReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Report\BudgetReport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

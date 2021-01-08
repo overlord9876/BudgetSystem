@@ -24,6 +24,12 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
+        public List<Invoice> GetAllInvoiceWithoutAdjustmentByBudgetID(int budgetID)
+        {
+            var lst = this.Query<Invoice>((con) => { return invoiceDal.GetAllInvoiceWithoutAdjustmentByBudgetID(budgetID, con, null); });
+            return lst.ToList();
+        }
+
         public Invoice GetInvoice(int id)
         {
             return this.Query<Invoice>((con) => { return invoiceDal.GetInvoice(id, con, null); });

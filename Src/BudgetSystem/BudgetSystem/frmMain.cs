@@ -155,6 +155,21 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+        private void BtnAccountAdjustmentQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            frmAccountAdjustmentQuery form = GetExistForm<frmAccountAdjustmentQuery>();
+            if (form == null)
+            {
+                form = new frmAccountAdjustmentQuery();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            ShowForm(form);
+        }
+
         private void btnVoucherNotesQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             frmVoucherNotesQuery form = GetExistForm<frmVoucherNotesQuery>();
@@ -437,6 +452,21 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+        private void btnAccountAdjustmentReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BudgetSystem.Report.frmAccountAdjustmentReport form = GetExistForm<BudgetSystem.Report.frmAccountAdjustmentReport>(BudgetSystem.Entity.BusinessModules.AccountAdjustmentReport);
+            if (form == null)
+            {
+                form = new BudgetSystem.Report.frmAccountAdjustmentReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = Entity.BusinessModules.AccountAdjustmentReport;
+            ShowForm(form);
+        }
 
         private void btnPaymentCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -495,6 +525,5 @@ namespace BudgetSystem
 
 
         }
-
     }
 }

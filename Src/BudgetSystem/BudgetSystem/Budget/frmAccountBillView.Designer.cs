@@ -41,11 +41,14 @@
             this.gcBudgetNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRecieptMoney = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExchangeRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUSD = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCompany = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCompany2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcVoucherNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcMoneyUsed = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -56,7 +59,6 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcType = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -171,7 +173,9 @@
             this.gcBudgetNO,
             this.gcPaymentMoney,
             this.gcRecieptMoney,
+            this.gcUSD,
             this.gcCNY,
+            this.gcExchangeRate,
             this.gcCurrency,
             this.gcCompany,
             this.gcCompany2,
@@ -207,6 +211,7 @@
             this.gcPaymentMoney.Name = "gcPaymentMoney";
             this.gcPaymentMoney.Visible = true;
             this.gcPaymentMoney.VisibleIndex = 2;
+            this.gcPaymentMoney.Width = 88;
             // 
             // gcRecieptMoney
             // 
@@ -216,21 +221,37 @@
             this.gcRecieptMoney.Visible = true;
             this.gcRecieptMoney.VisibleIndex = 3;
             // 
+            // gcExchangeRate
+            // 
+            this.gcExchangeRate.Caption = "美元汇率";
+            this.gcExchangeRate.FieldName = "ExchangeRate";
+            this.gcExchangeRate.Name = "gcExchangeRate";
+            this.gcExchangeRate.Visible = true;
+            this.gcExchangeRate.VisibleIndex = 6;
+            // 
+            // gcUSD
+            // 
+            this.gcUSD.Caption = "折合美元";
+            this.gcUSD.FieldName = "USD";
+            this.gcUSD.Name = "gcUSD";
+            this.gcUSD.Visible = true;
+            this.gcUSD.VisibleIndex = 4;
+            // 
             // gcCNY
             // 
             this.gcCNY.Caption = "折合人民币";
             this.gcCNY.FieldName = "CNY";
             this.gcCNY.Name = "gcCNY";
             this.gcCNY.Visible = true;
-            this.gcCNY.VisibleIndex = 4;
+            this.gcCNY.VisibleIndex = 5;
             // 
             // gcCurrency
             // 
-            this.gcCurrency.Caption = "币制";
+            this.gcCurrency.Caption = "币种";
             this.gcCurrency.FieldName = "Currency";
             this.gcCurrency.Name = "gcCurrency";
             this.gcCurrency.Visible = true;
-            this.gcCurrency.VisibleIndex = 5;
+            this.gcCurrency.VisibleIndex = 7;
             // 
             // gcCompany
             // 
@@ -238,7 +259,7 @@
             this.gcCompany.FieldName = "Company";
             this.gcCompany.Name = "gcCompany";
             this.gcCompany.Visible = true;
-            this.gcCompany.VisibleIndex = 6;
+            this.gcCompany.VisibleIndex = 8;
             // 
             // gcCompany2
             // 
@@ -246,7 +267,7 @@
             this.gcCompany2.FieldName = "Company2";
             this.gcCompany2.Name = "gcCompany2";
             this.gcCompany2.Visible = true;
-            this.gcCompany2.VisibleIndex = 7;
+            this.gcCompany2.VisibleIndex = 9;
             // 
             // gcVoucherNo
             // 
@@ -254,7 +275,15 @@
             this.gcVoucherNo.FieldName = "VoucherNo";
             this.gcVoucherNo.Name = "gcVoucherNo";
             this.gcVoucherNo.Visible = true;
-            this.gcVoucherNo.VisibleIndex = 8;
+            this.gcVoucherNo.VisibleIndex = 10;
+            // 
+            // gcType
+            // 
+            this.gcType.Caption = "款项分类";
+            this.gcType.FieldName = "UseType";
+            this.gcType.Name = "gcType";
+            this.gcType.Visible = true;
+            this.gcType.VisibleIndex = 11;
             // 
             // gcMoneyUsed
             // 
@@ -262,7 +291,7 @@
             this.gcMoneyUsed.FieldName = "MoneyUsedDesc";
             this.gcMoneyUsed.Name = "gcMoneyUsed";
             this.gcMoneyUsed.Visible = true;
-            this.gcMoneyUsed.VisibleIndex = 10;
+            this.gcMoneyUsed.VisibleIndex = 12;
             // 
             // labelControl1
             // 
@@ -374,14 +403,6 @@
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(120, 14);
             // 
-            // gcType
-            // 
-            this.gcType.Caption = "款项分类";
-            this.gcType.FieldName = "UseType";
-            this.gcType.Name = "gcType";
-            this.gcType.Visible = true;
-            this.gcType.VisibleIndex = 9;
-            // 
             // frmAccountBillView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -441,5 +462,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraGrid.Columns.GridColumn gcCompany2;
         private DevExpress.XtraGrid.Columns.GridColumn gcType;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExchangeRate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcUSD;
     }
 }

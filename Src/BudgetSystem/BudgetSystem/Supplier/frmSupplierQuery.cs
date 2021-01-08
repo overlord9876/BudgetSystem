@@ -42,6 +42,7 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Approve, "提交复评审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ViewApply, "查看复评历史记录"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ExportData, "导出数据"));
 
             this.RegeditQueryOperate<SupplierQueryCondition>(true, new List<string> { COMMONQUERY_MYCREATE }, "供应商查询");
 
@@ -88,6 +89,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.ViewApply.ToString())
             {
                 ViewApply();
+            }
+            else if (operate.Operate == OperateTypes.ExportData.ToString())
+            {
+                ExportData();
             }
         }
 
@@ -368,6 +373,25 @@ namespace BudgetSystem
                 XtraMessageBox.Show("请选择需要查看复评历史记录的项");
             }
 
+        }
+
+        private void ExportData()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel|*.xlsx|Excel2003|*.xls";
+            saveFileDialog.Title = "保存";
+            if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+            if (saveFileDialog.FileName.ToLower().EndsWith(".xls"))
+            {
+                this.gvSupplier.Export(DevExpress.XtraPrinting.ExportTarget.Xls, saveFileDialog.FileName);
+            }
+            else
+            {
+                this.gvSupplier.Export(DevExpress.XtraPrinting.ExportTarget.Xlsx, saveFileDialog.FileName);
+            }
         }
 
         protected override void InitGridViewAction()

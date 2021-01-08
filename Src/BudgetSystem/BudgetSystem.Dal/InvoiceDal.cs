@@ -71,6 +71,13 @@ namespace BudgetSystem.Dal
             string sql = selectSql + " and b.ID=@ID ";
             return con.Query<Invoice>(sql, new { ID = budgetID }, tran);
         }
+
+        public IEnumerable<Invoice> GetAllInvoiceWithoutAdjustmentByBudgetID(int budgetID, IDbConnection con, IDbTransaction tran)
+        {
+            string sql = selectSql + " and b.ID=@BudgetID AND i.ID NOT IN (SELECT RelationID FROM invoiceaccountadjustment WHERE BudgetID=@BudgetID)";
+            return con.Query<Invoice>(sql, new { BudgetID = budgetID });
+        }
+
         public Invoice GetInvoice(int id, IDbConnection con, IDbTransaction tran)
         {
             string sql = selectSql + " and i.ID=@ID";

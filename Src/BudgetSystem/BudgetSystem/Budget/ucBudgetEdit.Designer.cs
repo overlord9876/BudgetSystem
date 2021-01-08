@@ -1400,7 +1400,7 @@
             // 
             this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand7.Caption = "加工";
+            this.gridBand7.Caption = "加工/收购价";
             this.gridBand7.Columns.Add(this.gcProcessCost);
             this.gridBand7.Name = "gridBand7";
             this.gridBand7.Width = 58;

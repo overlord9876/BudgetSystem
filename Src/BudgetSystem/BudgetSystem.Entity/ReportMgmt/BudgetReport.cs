@@ -546,11 +546,12 @@ namespace BudgetSystem.Entity
         {
             get
             {
-                if (ExchangeRate != 0)
+                if (BudgetBillList != null && IMTList != null)
                 {
-                    return Math.Round(TotalBudgetBill / (decimal)ExchangeRate, 2);
+                    var typeList = IMTList.Where(o => o.Type == IMType.暂收款);
+                    return BudgetBillList.Where(o => !typeList.Any(t => t.Name == o.NatureOfMoney)).Sum(o => o.USD);
                 }
-                else { return 0; }
+                return 0;
             }
         }
 

@@ -49,7 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountAdjustmentDal.cs" />
     <Compile Include="DalBase.cs" />
+    <Compile Include="ExchageRateUtil.cs" />
     <Compile Include="FileDal.cs" />
     <Compile Include="ModifyMarkDal.cs" />
     <Compile Include="ReceiptManagementDal.cs" />

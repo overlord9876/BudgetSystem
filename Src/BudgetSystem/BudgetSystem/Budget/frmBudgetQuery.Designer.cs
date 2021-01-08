@@ -45,6 +45,7 @@
             this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSalesman = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDepartmentDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +54,6 @@
             this.gcArchiveApplyDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcArchiveDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.gcSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rilueTradeNature)).BeginInit();
@@ -62,10 +62,10 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
@@ -259,6 +259,14 @@
             this.gcSalesman.VisibleIndex = 13;
             this.gcSalesman.Width = 80;
             // 
+            // gcSupplier
+            // 
+            this.gcSupplier.Caption = "合格供应商";
+            this.gcSupplier.FieldName = "QualifiedSupplier";
+            this.gcSupplier.Name = "gcSupplier";
+            this.gcSupplier.Visible = true;
+            this.gcSupplier.VisibleIndex = 14;
+            // 
             // gcDepartmentDesc
             // 
             this.gcDepartmentDesc.Caption = "业务员所在部门";
@@ -333,21 +341,13 @@
             this.saveFileDialog1.Filter = "Excel|*.xlsx|Excel2003|*.xls";
             this.saveFileDialog1.Title = "保存";
             // 
-            // gcSupplier
-            // 
-            this.gcSupplier.Caption = "合格供应商";
-            this.gcSupplier.FieldName = "QualifiedSupplier";
-            this.gcSupplier.Name = "gcSupplier";
-            this.gcSupplier.Visible = true;
-            this.gcSupplier.VisibleIndex = 14;
-            // 
             // frmBudgetQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1205, 537);
             this.Controls.Add(this.gridBudget);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "frmBudgetQuery";
             this.Text = "预算单查询";
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();

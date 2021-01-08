@@ -53,8 +53,6 @@ namespace BudgetSystem
         /// </summary>
         internal const string SuperManagerRoleCode = "Default";
 
-
-
         public static string ToNameString(this List<Customer> customers)
         {
             if (customers != null && customers.Any())

@@ -166,7 +166,7 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" bs.Cus_ID in (SELECT ID from customer where `Name` like @Customer)");
                     dp.Add("Customer", string.Format("%{0}%", condition.Customer), null, null, null);
                 }
-                if (condition.ReceiptDateBegin != DateTime.MinValue&&condition.ReceiptDateEnd != DateTime.MinValue)
+                if (condition.ReceiptDateBegin != DateTime.MinValue && condition.ReceiptDateEnd != DateTime.MinValue)
                 {
                     strConditionList.Add(" bs.ReceiptDate BETWEEN @ReceiptDateBegin AND @ReceiptDateEnd");
                     dp.Add("ReceiptDateBegin", condition.ReceiptDateBegin.ToString("yyyy-MM-dd HH:mm:ss"), null, null, null);
@@ -217,6 +217,20 @@ namespace BudgetSystem.Dal
             return con.Query<BankSlip>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), BSID = @bsID }, tran).SingleOrDefault();
         }
 
+        public BudgetBill GetBudgetBillBybbId(int bbID, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select bb.*,u.RealName as OperatorRealName,c.Name as Customer,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
+                                        From `BudgetBill`  bb 
+                                        LEFT JOIN budget b on bb.BudgetID=b.ID
+                                        LEFT JOIN Customer c on bb.Cus_ID=c.ID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN `user` u on bb.Operator=u.UserName
+										LEFT JOIN department d on bb.DeptID=d.`ID`
+                                        Where bb.`ID` = @BBID";
+
+            return con.Query<BudgetBill>(selectSql, new { DateItemType = EnumFlowDataType.收款单.ToString(), BBID = bbID }, tran).SingleOrDefault();
+        }
+
         public bool IsReceipt(int budgetId, int customerId, IDbConnection con)
         {
             string selectSql = string.Format(@"SELECT count(1) from budgetbill WHERE Cus_ID={0} and BudgetID={1};", customerId, budgetId);
@@ -250,7 +264,21 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
-                                Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0";
+                                Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0 AND bb.Confirmed=1";
+            return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
+        }
+
+        public IEnumerable<BudgetBill> GetBudgetBillListWithOutAdjustmentByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
+                                        From `BudgetBill`  bb 
+                                        LEFT JOIN budget b on bb.BudgetID=b.ID
+                                        LEFT JOIN Customer c on bb.Cus_ID=c.ID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
+										LEFT JOIN department d on bb.DeptID=d.`ID`
+                                Where bb.`BudgetID` =@BudgetID AND bb.IsDelete=0 AND bb.Confirmed=1
+						AND bb.ID not in (select RelationID from reciptaccountadjustment where BudgetID=@BudgetID);";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
 

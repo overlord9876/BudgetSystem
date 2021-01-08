@@ -43,6 +43,16 @@ namespace BudgetSystem.Bll
 
         }
 
+        public BudgetBill GetBudgetBillBybbId(int bbID)
+        {
+            var lst = this.Query<BudgetBill>((con) =>
+            {
+                var uList = dal.GetBudgetBillBybbId(bbID, con, null);
+                return uList;
+            });
+            return lst;
+        }
+
         public List<BudgetBill> GetBudgetBillListByBankSlipID(int bsID)
         {
             var lst = this.Query<BudgetBill>((con) =>
@@ -58,6 +68,16 @@ namespace BudgetSystem.Bll
             var lst = this.Query<BudgetBill>((con) =>
             {
                 var uList = dal.GetBudgetBillListByBudgetId(budgetId, con, null);
+                return uList;
+            });
+            return lst.ToList();
+        }
+
+        public List<BudgetBill> GetBudgetBillListWithOutAdjustmentByBudgetId(int budgetId)
+        {
+            var lst = this.Query<BudgetBill>((con) =>
+            {
+                var uList = dal.GetBudgetBillListWithOutAdjustmentByBudgetId(budgetId, con, null);
                 return uList;
             });
             return lst.ToList();

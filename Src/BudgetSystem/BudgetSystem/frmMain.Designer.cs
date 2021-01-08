@@ -42,6 +42,7 @@
             this.btnCustomerQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnSupplierQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnInvoiceQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAccountAdjustmentQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnVoucherNotesQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnApprovalList = new DevExpress.XtraBars.BarButtonItem();
             this.btnMyOrder = new DevExpress.XtraBars.BarButtonItem();
@@ -61,6 +62,7 @@
             this.btnRecieptCapital = new DevExpress.XtraBars.BarButtonItem();
             this.btnPaymentCapital = new DevExpress.XtraBars.BarButtonItem();
             this.btnMyApprovalFlow = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAccountAdjustmentReport = new DevExpress.XtraBars.BarButtonItem();
             this.rpMain = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -103,6 +105,7 @@
             this.btnCustomerQuery,
             this.btnSupplierQuery,
             this.btnInvoiceQuery,
+            this.btnAccountAdjustmentQuery,
             this.btnVoucherNotesQuery,
             this.btnApprovalList,
             this.btnMyOrder,
@@ -121,10 +124,11 @@
             this.btnFinalAccount,
             this.btnRecieptCapital,
             this.btnPaymentCapital,
-            this.btnMyApprovalFlow});
+            this.btnMyApprovalFlow,
+            this.btnAccountAdjustmentReport});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ribbonControl1.MaxItemId = 50;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.ribbonControl1.MaxItemId = 51;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -135,7 +139,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1720, 169);
+            this.ribbonControl1.Size = new System.Drawing.Size(1766, 151);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -301,10 +305,20 @@
             this.btnInvoiceQuery.Tag = "InvoiceManagement";
             this.btnInvoiceQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvoiceQuery_ItemClick);
             // 
+            // btnAccountAdjustmentQuery
+            // 
+            this.btnAccountAdjustmentQuery.Caption = "调账管理";
+            this.btnAccountAdjustmentQuery.Id = 29;
+            this.btnAccountAdjustmentQuery.ImageIndex = 30;
+            this.btnAccountAdjustmentQuery.Name = "btnAccountAdjustmentQuery";
+            this.btnAccountAdjustmentQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnAccountAdjustmentQuery.Tag = "AccountAdjustmentManagement";
+            this.btnAccountAdjustmentQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnAccountAdjustmentQuery_ItemClick);
+            // 
             // btnVoucherNotesQuery
             // 
             this.btnVoucherNotesQuery.Caption = "报关单管理";
-            this.btnVoucherNotesQuery.Id = 29;
+            this.btnVoucherNotesQuery.Id = 30;
             this.btnVoucherNotesQuery.ImageIndex = 12;
             this.btnVoucherNotesQuery.Name = "btnVoucherNotesQuery";
             this.btnVoucherNotesQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
@@ -314,7 +328,7 @@
             // btnApprovalList
             // 
             this.btnApprovalList.Caption = "待审批单管理";
-            this.btnApprovalList.Id = 30;
+            this.btnApprovalList.Id = 31;
             this.btnApprovalList.ImageIndex = 47;
             this.btnApprovalList.Name = "btnApprovalList";
             this.btnApprovalList.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
@@ -324,7 +338,7 @@
             // btnMyOrder
             // 
             this.btnMyOrder.Caption = "我提交的单子";
-            this.btnMyOrder.Id = 31;
+            this.btnMyOrder.Id = 32;
             this.btnMyOrder.ImageIndex = 17;
             this.btnMyOrder.Name = "btnMyOrder";
             this.btnMyOrder.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
@@ -487,6 +501,16 @@
             this.btnMyApprovalFlow.Tag = "MyApprovalFlowManagement";
             this.btnMyApprovalFlow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMyApprovalFlow_ItemClick);
             // 
+            // btnAccountAdjustmentReport
+            // 
+            this.btnAccountAdjustmentReport.Caption = "调账管理";
+            this.btnAccountAdjustmentReport.Id = 50;
+            this.btnAccountAdjustmentReport.ImageIndex = 21;
+            this.btnAccountAdjustmentReport.Name = "btnAccountAdjustmentReport";
+            this.btnAccountAdjustmentReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnAccountAdjustmentReport.Tag = "AccountAdjustmentReport";
+            this.btnAccountAdjustmentReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAccountAdjustmentReport_ItemClick);
+            // 
             // rpMain
             // 
             this.rpMain.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -509,6 +533,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.btnInMoneyQuery);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnOutMoneyQuery);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnInvoiceQuery);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnAccountAdjustmentQuery);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnVoucherNotesQuery);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "收款管理";
@@ -530,6 +555,7 @@
             this.rpGroup.ItemLinks.Add(this.btnSalemenReport);
             this.rpGroup.ItemLinks.Add(this.btnDepartmentReport);
             this.rpGroup.ItemLinks.Add(this.btnCompanyReport);
+            this.rpGroup.ItemLinks.Add(this.btnAccountAdjustmentReport);
             this.rpGroup.ItemLinks.Add(this.btnRecieptCapital);
             this.rpGroup.ItemLinks.Add(this.btnPaymentCapital);
             this.rpGroup.Name = "rpGroup";
@@ -563,11 +589,11 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 874);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 761);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1720, 34);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1766, 31);
             // 
             // documentManager1
             // 
@@ -617,14 +643,14 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1720, 908);
+            this.ClientSize = new System.Drawing.Size(1766, 792);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -669,6 +695,7 @@
         private DevExpress.XtraBars.BarButtonItem btnOutMoneyAdd;
         private DevExpress.XtraBars.BarButtonItem btnInMoneyAdd;
         private DevExpress.XtraBars.BarButtonItem btnInvoiceQuery;
+        private DevExpress.XtraBars.BarButtonItem btnAccountAdjustmentQuery;
         private DevExpress.XtraBars.BarButtonItem btnVoucherNotesQuery;
         private DevExpress.XtraBars.BarButtonItem btnApprovalList;
         private DevExpress.XtraBars.BarButtonItem btnMyOrder;
@@ -690,6 +717,7 @@
         private DevExpress.XtraBars.BarButtonItem btnPaymentCapital;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.BarButtonItem btnMyApprovalFlow;
+        private DevExpress.XtraBars.BarButtonItem btnAccountAdjustmentReport;
     }
 }
 
