@@ -198,8 +198,8 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, List<UseMoneyType> typeList, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT s.`Name`,sum(pn.CNY) as TotalCNY,SUM(pn.ExchangeRate)/COUNT(1) as ExchangeRate, sum(pn.OriginalCoin) as TotalOriginalCoin from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
-where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
+            string selectSql = string.Format(@"SELECT s.ID,s.`Name`,pn.CNY,pn.ExchangeRate,pn.Currency, pn.OriginalCoin,DATE_FORMAT(pn.PaymentDate, '%Y-%m-%d') as PaymentDate from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
+where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
@@ -220,8 +220,7 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
                 dp.Add("BudgetID", condition.ID, null, null, null);
             }
 
-            selectSql += " GROUP BY s.`Name`;";
-            IEnumerable<SupplierReport> result = con.Query<SupplierReport>(selectSql, dp, tran);
+            var result = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
 
             selectSql = string.Format(@"select i.* from Invoice i
                         WHERE i.FinanceImportDate BETWEEN @BeginTime AND @EndTime ");
@@ -253,16 +252,39 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime ");
             var paymentNodes = con.Query<PaymentNotes>(selectPaymentNotesSql, dp, tran);
 
             invoiceList.AddRange(PaymentToInvoice(paymentNodes.ToList()));
-
+            List<SupplierReport> reports = new List<SupplierReport>();
             if (result != null)
             {
-                foreach (SupplierReport report in result)
+                CommonDal cd = new CommonDal();
+                var dateExchanges = cd.GetDateExchanges(con);
+                result.ToList().ForEach(o => { o.ResetExchangeRate(dateExchanges); });
+                var suppliers = result.Select(o => o.ID).Distinct();
+                decimal exchangeRate = 0;
+                decimal totalCNY = 0;
+                decimal totalUSD = 0;
+                string supplierName = string.Empty;
+                foreach (var sup in suppliers)
                 {
-                    report.InvoiceList = invoiceList.Where(o => report.Name.Equals(o.SupplierName)).ToList();
+                    var sups = result.Where(o => o.ID == sup);
+
+                    exchangeRate = Math.Round(sups.Sum(o => o.ExchangeRate) / sups.Count(), 6);
+                    totalCNY = sups.Sum(o => o.CNY);
+                    totalUSD = sups.Sum(o => o.OriginalCoin);
+                    supplierName = sups.ElementAt(0).Name;
+                    SupplierReport supplier = new SupplierReport()
+                    {
+                        Name = supplierName,
+                        ID = sup,
+                        ExchangeRate = exchangeRate,
+                        TotalCNY = totalCNY,
+                        TotalOriginalCoin = totalUSD,
+                        InvoiceList = invoiceList.Where(o => supplierName.Equals(o.SupplierName)).ToList()
+                    };
+                    reports.Add(supplier);
                 }
             }
 
-            return result;
+            return reports;
         }
 
         public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)

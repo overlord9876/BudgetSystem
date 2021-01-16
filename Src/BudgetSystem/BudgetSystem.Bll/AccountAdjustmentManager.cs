@@ -58,6 +58,22 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 获取调入详情信息。这里关联的合同号是调出主表的合同号。
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <returns></returns>
+        public IEnumerable<AccountAdjustmentDetail> GetAccountAdjustmentsDetailByBudgetId(int budgetId)
+        {
+            var lst = this.Query<AccountAdjustmentDetail>((con) =>
+            {
+                var uList = dal.GetAccountAdjustmentsDetailByBudgetId(budgetId, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        /// <summary>
         /// 获取调账报表
         /// </summary>
         /// <param name="budgetId"></param>

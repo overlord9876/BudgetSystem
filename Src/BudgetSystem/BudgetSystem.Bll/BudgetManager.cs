@@ -313,11 +313,12 @@ namespace BudgetSystem.Bll
                 var arList = rmDal.GetBudgetBillListByBudgetId(budgetId, con, null);
                 var pmList = pnd.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
                 var adjustmentList = aaDal.GetBalanceAccountAdjustmentByBudgetId(budgetId, con, includInvoice: false);
+                var detailList = aaDal.GetAccountAdjustmentsDetailByBudgetId(budgetId, con, includInvoice: false);
                 var adjustmentDetailList = aaDal.GetBalanceAccountAdjustmentDetailByBudgetId(budgetId, con, includInvoice: false);
 
                 var abList = arList.ToAccountBillList();
                 abList.AddRange(pmList.ToAccountBillList());
-                abList.AddRange(adjustmentList.ToAccountBillList());
+                abList.AddRange(adjustmentList.ToAccountBillList(detailList));
                 abList.AddRange(adjustmentDetailList.ToAccountBillList());
                 return abList.OrderBy(o => o.CreateDate);
             });

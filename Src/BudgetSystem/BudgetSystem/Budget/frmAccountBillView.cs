@@ -26,6 +26,8 @@ namespace BudgetSystem
         {
             InitializeComponent();
             this.gvAccountBill.RowCellStyle += GvAccountBill_RowCellStyle;
+            this.gcIsPayment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.gcIsPayment.DisplayFormat.Format = new MyExamFormat();
         }
 
         private void GvAccountBill_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -90,11 +92,31 @@ namespace BudgetSystem
             this.gcAccountBill.RefreshDataSource();
             this.gvAccountBill.BestFitColumns();
             this.lblBudgetNO.Text = CurrentBudget.ContractNO;
-
-            this.textEdit_Number1.EditValue = dataSource.Where(o => o.IsPayment).Sum(o => o.PaymentMoney);
-            this.textEdit_Number2.EditValue = dataSource.Where(o => !o.IsPayment).Sum(o => o.RecieptMoney);
+            int width = layoutControlItem3.Width - lciTitle.Width;
+            this.esiLeft.Width = width / 2;
+            this.esiRight.Width = this.esiLeft.Width - lciBudget.Width;
+            this.textEdit_Number1.EditValue = dataSource.Where(o => true.ToString().Equals(o.IsPayment)).Sum(o => o.PaymentMoney);
+            this.textEdit_Number2.EditValue = dataSource.Where(o => false.ToString().Equals(o.IsPayment)).Sum(o => o.USD);
+            this.textEdit_Number4.EditValue = dataSource.Where(o => false.ToString().Equals(o.IsPayment)).Sum(o => o.CNY);
             this.textEdit_Number3.EditValue = dataSource.Sum(o => o.CNY);
         }
 
+    }
+    public class MyExamFormat : IFormatProvider, ICustomFormatter
+    {
+        public string Format(string format, object arg, IFormatProvider formatProvider)
+        {
+            bool.TryParse(arg?.ToString(), out bool result);
+            return result ? "付款" : "收款";
+        }
+
+        public object GetFormat(Type formatType)
+        {
+            if (formatType == typeof(ICustomFormatter))
+            {
+                return this;
+            }
+            else return null;
+        }
     }
 }

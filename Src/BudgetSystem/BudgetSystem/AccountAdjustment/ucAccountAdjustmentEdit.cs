@@ -453,7 +453,7 @@ namespace BudgetSystem.InMoney
                 reportList.Insert(index, this.reportHelper.CurrentBudgetReport);
             }
             this.gcDetail.DataSource = reportList;
-            //this.gvDetail.BestFitColumns();
+            this.gvDetail.BestFitColumns();
             this.gvDetail.RefreshData();
             string message = string.Empty;
             if ((this.reportHelper.Balance - currentDetail.CNY) < 0)
@@ -547,7 +547,7 @@ namespace BudgetSystem.InMoney
                     {
                         this.gcDetail.DataSource = new BindingList<BudgetSingleReport>(reportList.Where(o => o.BudgetId != this.oldSelectedBudget.ID).ToList());
 
-                        //this.gvDetail.BestFitColumns();
+                        this.gvDetail.BestFitColumns();
                     }
                 }
             }
@@ -858,7 +858,7 @@ namespace BudgetSystem.InMoney
                         }
                     }
                     this.gcDetail.DataSource = reportList;
-                    //this.gvDetail.BestFitColumns();
+                    this.gvDetail.BestFitColumns();
                 }
 
                 if (AdjustmentType == AdjustmentType.付款)
@@ -1072,7 +1072,7 @@ namespace BudgetSystem.InMoney
                     layoutControlItem12.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
                 this.gcDetail.DataSource = new BindingList<BudgetSingleReport>(reportList);
-                //this.gvDetail.BestFitColumns();
+                this.gvDetail.BestFitColumns();
                 this.gvDetail.RefreshData();
             }
         }
@@ -1097,17 +1097,7 @@ namespace BudgetSystem.InMoney
             {
                 return;
             }
-            //拆收汇时计算。
-            var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(this.currentBudget.ID).ToList();
 
-            var receiptList = arm.GetBudgetBillListByBudgetId(this.currentBudget.ID);
-
-            var accountAdjustmentDetailList = aamManager.GetBalanceAccountAdjustmentDetailByBudgetId(this.currentBudget.ID);
-            var accountAdjustmentList = aamManager.GetBalanceAccountAdjustmentByBudgetId(this.currentBudget.ID);
-            if (accountAdjustmentList != null && _currentAdjustment != null)
-            {
-                accountAdjustmentList.RemoveAll(o => o.Type == AdjustmentType.收款 && o.ID.Equals(this._currentAdjustment.ID));
-            }
             SingleBudgetReportHelper helper = new SingleBudgetReportHelper(this.imTypeList, useMoneyTypeList);
             helper.LoadData(this.currentBudget, this.Adjustment, null);
 

@@ -513,16 +513,16 @@ namespace BudgetSystem.Entity
                 TaxPayment += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑退税。
                 PaymentMoneyAmount += accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AlreadySplitCNY);//拆出去的金额。
                 TotalTaxPayment += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑退税。
-                IgnoreTransportationExpensesPaymentMoneyAmount = (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑运杂费。
-                TaxRefund = (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption)));//TODO:拆分要考虑退税额。
+                IgnoreTransportationExpensesPaymentMoneyAmount += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑运杂费。
+                TaxRefund += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption)));//TODO:拆分要考虑退税额。
             }
             if (accountAdjustmentDetails != null)
             {
                 TaxPayment += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.CNY);//TODO:拆分要考虑退税。
                 PaymentMoneyAmount += (0 - accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.CNY));//拆进来的金额
                 TotalTaxPayment += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.CNY);//TODO:拆分要考虑退税。
-                IgnoreTransportationExpensesPaymentMoneyAmount = accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);//TODO:拆分要考虑运杂费。
-                TaxRefund = accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption));//TODO:拆分要考虑退税额。
+                IgnoreTransportationExpensesPaymentMoneyAmount += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);//TODO:拆分要考虑运杂费。
+                TaxRefund += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption));//TODO:拆分要考虑退税额。
             }
         }
 

@@ -73,4 +73,28 @@ namespace BudgetSystem.Entity
         }
 
     }
+
+    public class SupplierReportItem
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Currency { get; set; }
+        public decimal ExchangeRate { get; set; }
+        public decimal OriginalCoin { get; set; }
+        public decimal CNY { get; set; }
+        public string PaymentDate { get; set; }
+
+        public void ResetExchangeRate(IEnumerable<DateExchangeRate> dateExchangeRates)
+        {
+            if (!"美元".Equals(Currency))
+            {
+                var exchangeRateItem = dateExchangeRates?.FirstOrDefault(o => o.date == PaymentDate);
+                if (exchangeRateItem != null)
+                {
+                    ExchangeRate = exchangeRateItem.ExchangeRate;
+                    OriginalCoin = Math.Round(CNY / exchangeRateItem.ExchangeRate, 2);
+                }
+            }
+        }
+    }
 }

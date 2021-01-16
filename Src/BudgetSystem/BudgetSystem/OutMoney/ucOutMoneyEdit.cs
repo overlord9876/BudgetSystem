@@ -363,7 +363,7 @@ namespace BudgetSystem.OutMoney
             else
             {
                 CheckUsage(umt.Name);
-                var ignoreUmtList = umtList.Where(ut => ut.Type == PaymentType.运杂费 ||/* ut.Type == PaymentType.佣金 ||*/ ut.Type == PaymentType.暂付款);
+                var ignoreUmtList = umtList.Where(ut => ut.Type == PaymentType.运杂费 || ut.Type == PaymentType.佣金 || ut.Type == PaymentType.暂付款);
                 if (!ignoreUmtList.Any(o => o.Name.Equals(umt.Name)) && !dxErrorProvider1.HasErrors)
                 {
                     if (txtAfterPaymentBalance.Value < 0)
@@ -607,7 +607,7 @@ namespace BudgetSystem.OutMoney
                 //    return;
                 //}
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID).ToList();
-
+                dteValidity.EditValue = currentBudget.Validity.Value;
                 //过滤当前自己的单据
                 if (CurrentPaymentNotes != null)
                 {

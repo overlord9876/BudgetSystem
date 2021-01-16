@@ -63,7 +63,6 @@ namespace BudgetSystem.Bll
              });
         }
 
-
         public Flow GetFlowWithDetial(string name, int version)
         {
             return this.Query<Flow>((con) =>
@@ -78,12 +77,20 @@ namespace BudgetSystem.Bll
         {
             var lst = this.Query<FlowNode>((con) =>
             {
-
                 var uList = dal.GetFlowDetial(name, version, con, null);
                 return uList;
-
             });
             return lst.ToList();
+        }
+
+        public List<FlowNode> GetFlowDetail(EnumFlowNames name)
+        {
+            var lst = this.Query<FlowNode>((con) =>
+            {
+                var uList = dal.GetFlowDetial(name, con, null);
+                return uList;
+            });
+            return lst?.ToList();
         }
 
         public FlowNode GetFlowNode(int runPointID)

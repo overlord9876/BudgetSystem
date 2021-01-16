@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace BudgetSystem.Entity
 {
@@ -37,7 +38,7 @@ namespace BudgetSystem.Entity
         /// <summary>
         /// 是否为付款，否则为收款。
         /// </summary>
-        public bool IsPayment { get; set; }
+        public string IsPayment { get; set; }
 
         /// <summary>
         /// 折合美元。
@@ -144,12 +145,13 @@ namespace BudgetSystem.Entity
             return returnResult;
         }
 
-        public static List<AccountBill> ToAccountBillList(this IEnumerable<AccountAdjustment> adjustments)
+        public static List<AccountBill> ToAccountBillList(this IEnumerable<AccountAdjustment> adjustments, IEnumerable<AccountAdjustmentDetail> detailList)
         {
             List<AccountBill> returnResult = new List<AccountBill>();
             foreach (AccountAdjustment adjustment in adjustments)
             {
-                returnResult.Add(adjustment.ToToAccountBill());
+                var item = adjustment.ToToAccountBill(detailList);
+                if (item != null) { returnResult.Add(item); }
             }
             return returnResult;
         }
@@ -190,7 +192,7 @@ namespace BudgetSystem.Entity
                 CNY = receipt.CNY,
                 USD = receipt.OriginalCoin,
                 IsUSD = isUSD,
-                IsPayment = false,
+                IsPayment = false.ToString(),
                 ExchangeRate = receipt.ExchangeRate,
                 RecieptMoney = receipt.OriginalCoin,
                 Company = receipt.Remitter,
@@ -215,14 +217,14 @@ namespace BudgetSystem.Entity
                 CNY = pn.CNY * -1,
                 USD = pn.OriginalCoin,
                 ExchangeRate = (decimal)pn.ExchangeRate,
-                IsPayment = true,
+                IsPayment = true.ToString(),
                 IsDrawback = pn.IsDrawback,
                 RecieptMoney = Decimal.Zero,
                 Company = pn.SupplierName
             };
         }
 
-        public static AccountBill ToToAccountBill(this AccountAdjustment adjustment)
+        public static AccountBill ToToAccountBill(this AccountAdjustment adjustment, IEnumerable<AccountAdjustmentDetail> detailList)
         {
             bool isUSD = false;
             decimal paymentMoney = 0;
@@ -230,8 +232,14 @@ namespace BudgetSystem.Entity
             decimal recieptMoney = 0;
             decimal USD = 0;
             bool IsPayment = false;
+            string name = string.Empty;
+            var currentDetails = detailList.Where(o => o.PID == adjustment.ID);
+            if (currentDetails == null || !currentDetails.Any()) { return null; }
+            string priex = detailList.Count() > 0 ? "分别" : "";
+            string contracts = string.Join("、", currentDetails.Select(o => $"{o.ContractNO}合同").ToArray());
             if (adjustment.Type == AdjustmentType.付款)
             {
+                name = "供应商";
                 isUSD = adjustment.Currency == "美元";
                 CNY = adjustment.AlreadySplitCNY;
                 paymentMoney = adjustment.AlreadySplitOriginalCoin * -1;
@@ -240,12 +248,13 @@ namespace BudgetSystem.Entity
             }
             else if (adjustment.Type == AdjustmentType.收款)
             {
+                name = "客户";
                 isUSD = adjustment.Currency == "USD";
                 CNY = adjustment.AlreadySplitCNY * -1;
                 recieptMoney = adjustment.AlreadySplitOriginalCoin * -1;
                 USD = adjustment.AlreadySplitOriginalCoin * -1;
             }
-            string preix = adjustment.Type == AdjustmentType.收款 ? "客户" : "供应商";
+
             return new AccountBill()
             {
                 Date = adjustment.Date,
@@ -258,11 +267,11 @@ namespace BudgetSystem.Entity
                 CNY = CNY,
                 IsUSD = isUSD,
                 USD = USD,
-                IsPayment = IsPayment,
+                IsPayment = IsPayment.ToString(),
                 IsDrawback = adjustment.IsDrawback,
                 RecieptMoney = recieptMoney,
                 ExchangeRate = adjustment.ExchangeRate,
-                Company = $"{adjustment.Type.ToString()}调出，{preix}【{adjustment.Name}】",
+                Company = $"{adjustment.Type.ToString()}{priex}调出至{contracts},{name}【{adjustment.Name}】",
                 AdjustmentType = (int)adjustment.Type + 1
             };
         }
@@ -275,8 +284,10 @@ namespace BudgetSystem.Entity
             decimal recieptMoney = 0;
             decimal USD = 0;
             bool IsPayment = false;
+            string name = string.Empty;
             if (adjustmentDetail.Type == AdjustmentType.付款)
             {
+                name = "供应商";
                 isUSD = adjustmentDetail.Currency == "美元";
                 CNY = adjustmentDetail.CNY * -1;
                 USD = adjustmentDetail.OriginalCoin * -1;
@@ -285,6 +296,7 @@ namespace BudgetSystem.Entity
             }
             else if (adjustmentDetail.Type == AdjustmentType.收款)
             {
+                name = "客户";
                 isUSD = adjustmentDetail.Currency == "USD";
                 CNY = adjustmentDetail.CNY;
                 recieptMoney = adjustmentDetail.OriginalCoin;
@@ -298,14 +310,15 @@ namespace BudgetSystem.Entity
                 Currency = adjustmentDetail.Currency,
                 IsUSD = isUSD,
                 USD = USD,
-                IsPayment = IsPayment,
-                VoucherNo = adjustmentDetail.OperatorRealName,
+                BudgetNO = adjustmentDetail.MainContractNO,
+                IsPayment = IsPayment.ToString(),
+                VoucherNo = adjustmentDetail.VoucherNo,
                 MoneyUsed = adjustmentDetail.MoneyUsed,
                 CNY = CNY,
                 IsDrawback = adjustmentDetail.IsDrawback,
                 RecieptMoney = recieptMoney,
                 ExchangeRate = adjustmentDetail.ExchangeRate,
-                Company = $"由{adjustmentDetail.ContractNO}调入{adjustmentDetail.Type.ToString()}",
+                Company = $"由{adjustmentDetail.ContractNO}{adjustmentDetail.Type.ToString()}调入至此合同，供应商【{adjustmentDetail.Name}】",
                 AdjustmentType = ((int)adjustmentDetail.Type + 1) * 10
 
             };

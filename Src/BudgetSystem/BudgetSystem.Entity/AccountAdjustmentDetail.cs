@@ -30,6 +30,11 @@ namespace BudgetSystem.Entity
         public int BudgetID { get; set; }
 
         /// <summary>
+        /// 主合同号。
+        /// </summary>
+        public string MainContractNO { get; set; }
+
+        /// <summary>
         /// 合同号。
         /// </summary>
         public string ContractNO { get; set; }
@@ -163,6 +168,8 @@ namespace BudgetSystem.Entity
         }
 
         public DateTime Date { get; set; }
+
+        public string VoucherNo { get; set; }
     }
 
 }

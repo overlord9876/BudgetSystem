@@ -523,11 +523,11 @@ namespace BudgetSystem
             AccountAdjustment AccountAdjustment = this.gvAccountAdjustment.GetRow(this.gvAccountAdjustment.FocusedRowHandle) as AccountAdjustment;
             if (AccountAdjustment != null)
             {
-                frmAccountAdjustmentEdit form = new frmAccountAdjustmentEdit();
+                frmAccountAdjustmentPrint form = new frmAccountAdjustmentPrint();
                 form.WorkModel = EditFormWorkModels.Print;
-                form.SetAdjustmentType(AccountAdjustment.Type);
-                form.CurrentAccountAdjustment = AccountAdjustment;
+                form.BindData(AccountAdjustment.ID, AccountAdjustment.Type);
                 form.PrintItem();
+                //form.ShowDialog();
             }
             else
             {

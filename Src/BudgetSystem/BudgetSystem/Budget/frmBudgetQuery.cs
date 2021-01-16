@@ -62,7 +62,7 @@ namespace BudgetSystem
             {
                 DateTime validity = budget.Validity ?? DateTime.MinValue;
                 int days = (datetimeNow - validity).Days;
-                if (days > 0)
+                if (days > 0 & budget.EnumState != EnumBudgetState.已结束)
                 {
                     if (days > 30)
                     {
@@ -83,6 +83,29 @@ namespace BudgetSystem
             {
                 DateTime validity = budget.Validity ?? DateTime.MinValue;
                 int days = (datetimeNow - validity).Days;
+                if (budget.EnumState == EnumBudgetState.已结束)
+                {
+                    e.Appearance.ForeColor = Color.Green;//改变字体颜色
+                    return;
+                }
+                else if (budget.EnumState == EnumBudgetState.财务归档征求)
+                {
+                    e.Appearance.ForeColor = Color.BlueViolet;//改变字体颜色
+                    if (days > 30)
+                    {
+                        e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                    }
+                    return;
+                }
+                //else if (budget.EnumState == EnumBudgetState.驳回归档征求)
+                //{
+                //    e.Appearance.ForeColor = Color.YellowGreen;//改变字体颜色
+                //    if (days > 30)
+                //    {
+                //        e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                //    }
+                //    return;
+                //}
                 if (days > 0)
                 {
                     e.Appearance.ForeColor = Color.Red;//改变字体颜色
@@ -249,7 +272,7 @@ namespace BudgetSystem
             }
             else if (COMMONQUERY_All.Equals(queryName))
             {
-                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.进行中 | (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
+                BudgetQueryCondition condition = new BudgetQueryCondition() { State = (int)EnumBudgetState.进行中 | (int)EnumBudgetState.已结束 | (int)EnumBudgetState.财务归档征求 | (int)EnumBudgetState.驳回归档征求 };
                 LoadData(condition);
             }
         }

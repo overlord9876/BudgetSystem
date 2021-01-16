@@ -168,20 +168,68 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<AccountAdjustmentDetail> GetBalanceAccountAdjustmentDetailByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null, bool includInvoice = true)
         {
-            string selectRecSql = @"SELECT pad.*,b.ContractNO,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName from paymentaccountadjustmentdetail pad
-									JOIN budget b on b.id=pad.BudgetID
+            string selectRecSql = @"SELECT pad.*,m.ContractNO as MainContractNO,b.ContractNO,s.`Name`,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo from paymentaccountadjustmentdetail pad
+                                    JOIN paymentaccountadjustment pa on pad.PID=pa.ID
+									JOIN budget b on b.id=pa.BudgetID
+									JOIN budget m on m.id=pad.BudgetID
 	                                JOIN paymentnotes pn on pad.RelationID=pn.ID 
+									JOIN supplier s on s.id = pn.SupplierID
 	                                JOIN `user` u on pad.Operator=u.UserName
 	                                WHERE pad.BudgetID=@BudgetID AND pad.IsDelete=0;";
             var recItems = con.Query<AccountAdjustmentDetail>(selectRecSql, new { BudgetID = budgetId }, tran).ToList();
 
-            string selectPaySql = @"SELECT rad.*,b.ContractNO,bs.NatureOfMoney as MoneyUsed,bs.ExchangeRate,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName 
+            string selectPaySql = @"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,c.`Name`,bs.NatureOfMoney as MoneyUsed,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName,bs.VoucherNo  
+                                    FROM reciptaccountadjustmentdetail rad
+									JOIN reciptaccountadjustment ra on rad.PID=ra.ID
+									JOIN budget b on b.id=ra.BudgetID
+									JOIN budget m on m.id=rad.BudgetID
+                                    JOIN budgetbill bb on rad.RelationID=bb.ID
+                                    JOIN bankslip bs on bb.BSID =bs.BSID
+									JOIN customer c on bs.Cus_ID=c.id
+                                    JOIN `user` u on rad.Operator=u.UserName
+                                    WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+            var payItems = con.Query<AccountAdjustmentDetail>(selectPaySql, new { BudgetID = budgetId }, tran);
+            recItems.AddRange(payItems);
+            if (includInvoice)
+            {
+                string selectInvoiceSql = @"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,i.TaxAmount,u.RealName as OperatorRealName,i.SupplierName as `Name`
+                                        FROM invoiceaccountadjustmentdetail rad
+										JOIN invoiceaccountadjustment ia on rad.PID=ia.ID
+									    JOIN budget b on b.id=ia.BudgetID
+									    JOIN budget m on m.id=ia.BudgetID
+                                        JOIN invoice i on rad.RelationID=i.ID
+                                        JOIN `user` u on rad.Operator=u.UserName
+                                        WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+                var invoiceItems = con.Query<AccountAdjustmentDetail>(selectInvoiceSql, new { BudgetID = budgetId }, tran);
+                recItems.AddRange(invoiceItems);
+            }
+            return recItems;
+        }
+
+        /// <summary>
+        /// 获取调入详情信息。这里关联的合同号是调出主表的合同号。
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <param name="includInvoice"></param>
+        /// <returns></returns>
+        public IEnumerable<AccountAdjustmentDetail> GetAccountAdjustmentsDetailByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null, bool includInvoice = true)
+        {
+            string selectRecSql = @"SELECT pad.*,b.ContractNO,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo from paymentaccountadjustmentdetail pad
+									JOIN budget b on b.id=pad.BudgetID
+	                                JOIN paymentnotes pn on pad.RelationID=pn.ID 
+	                                JOIN `user` u on pad.Operator=u.UserName
+										WHERE pad.PID IN (SELECT ID from paymentaccountadjustment WHERE BudgetID=@BudgetID) AND pad.IsDelete=0;";
+            var recItems = con.Query<AccountAdjustmentDetail>(selectRecSql, new { BudgetID = budgetId }, tran).ToList();
+
+            string selectPaySql = @"SELECT rad.*,b.ContractNO,bs.NatureOfMoney as MoneyUsed,bs.ExchangeRate,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName,bs.VoucherNo 
                                     FROM reciptaccountadjustmentdetail rad
 									JOIN budget b on b.id=rad.BudgetID
                                     JOIN budgetbill bb on rad.RelationID=bb.ID
                                     JOIN bankslip bs on bb.BSID =bs.BSID																		
                                     JOIN `user` u on rad.Operator=u.UserName
-                                    WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+									WHERE rad.PID IN (SELECT ID from reciptaccountadjustment WHERE BudgetID=@BudgetID) AND rad.IsDelete=0;";
             var payItems = con.Query<AccountAdjustmentDetail>(selectPaySql, new { BudgetID = budgetId }, tran);
             recItems.AddRange(payItems);
             if (includInvoice)
@@ -191,7 +239,7 @@ namespace BudgetSystem.Dal
 									    JOIN budget b on b.id=rad.BudgetID
                                         JOIN invoice i on rad.RelationID=i.ID
                                         JOIN `user` u on rad.Operator=u.UserName
-                                        WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+										WHERE rad.PID IN (SELECT ID from invoiceaccountadjustment WHERE BudgetID=@BudgetID) AND rad.IsDelete=0;";
                 var invoiceItems = con.Query<AccountAdjustmentDetail>(selectInvoiceSql, new { BudgetID = budgetId }, tran);
                 recItems.AddRange(invoiceItems);
             }

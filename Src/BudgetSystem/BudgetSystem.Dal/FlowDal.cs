@@ -44,11 +44,19 @@ namespace BudgetSystem.Dal
             return con.Query<Flow>(selectSql, new { Name = name, VersionNumber = version }, tran).SingleOrDefault();
         }
 
-
         public IEnumerable<FlowNode> GetFlowDetial(string name, int version, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber ORDER BY OrderNo";
             return con.Query<FlowNode>(selectSql, new { Name = name, VersionNumber = version }, tran);
+        }
+
+        public IEnumerable<FlowNode> GetFlowDetial(EnumFlowNames name, IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = "SELECT * from Flow WHERE `Name`= @Name and IsEnabled=1;";
+            var flow = con.Query<Flow>(selectSql, new { Name = name.ToString() }, tran).FirstOrDefault();
+            if (flow == null) { return null; }
+            selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber ORDER BY OrderNo";
+            return con.Query<FlowNode>(selectSql, new { Name = name.ToString(), VersionNumber = flow.VersionNumber }, tran);
         }
 
         public FlowNode GetFlowNode(string name, int version, int order, IDbConnection con, IDbTransaction tran)

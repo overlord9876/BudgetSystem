@@ -405,6 +405,12 @@
     <Compile Include="Option\ucInMoneyTypeOptionEdit.Designer.cs">
       <DependentUpon>ucInMoneyTypeOptionEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountAdjustment\frmAccountAdjustmentPrint.Designer.cs">
+      <DependentUpon>frmAccountAdjustmentPrint.cs</DependentUpon>
+    </Compile>
     <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -914,6 +920,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Option\ucInMoneyTypeOptionEdit.resx">
       <DependentUpon>ucInMoneyTypeOptionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountAdjustment\frmAccountAdjustmentPrint.resx">
+      <DependentUpon>frmAccountAdjustmentPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
