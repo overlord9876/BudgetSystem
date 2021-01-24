@@ -86,18 +86,20 @@ namespace BudgetSystem.Dal
         public bool CheckName(string name, int id, IDbConnection con)
         {
             string selectSql = @"SELECT  id FROM `customer`  WHERE ID<>@ID and `Name`=@Name";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", id));
-            command.Parameters.Add(new MySqlParameter("Name", name));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", id));
+                command.Parameters.Add(new MySqlParameter("Name", name));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -119,48 +121,58 @@ namespace BudgetSystem.Dal
 
         public bool IsUsed(Customer customer, IDbConnection con, IDbTransaction tran = null)
         {
+            IDbCommand command = null;
+            object obj = null;
             string selectSql = @"SELECT Cus_ID from budgetcustomers where Cus_ID=@ID;";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (command = con.CreateCommand())
             {
-                return true;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
             }
 
             selectSql = @"SELECT CustomerID from Budget WHERE CustomerID=@ID;";
-            command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
-            obj = command.ExecuteScalar();
-            if (obj != null)
+            using (command = con.CreateCommand())
             {
-                return true;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
             }
 
             selectSql = @"SELECT Cus_ID from BudgetBill where Cus_ID=@ID;";
-            command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
-            obj = command.ExecuteScalar();
-            if (obj != null)
+            using (command = con.CreateCommand())
             {
-                return true;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
             }
 
             selectSql = @"SELECT Cus_ID from BankSlip where Cus_ID=@ID;";
-            command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", customer.ID));
-            obj = command.ExecuteScalar();
-            if (obj != null)
+            using (command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", customer.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

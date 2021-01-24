@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.ucAccountAdjustmentEdit1 = new BudgetSystem.InMoney.ucAccountAdjustmentEdit();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
@@ -38,7 +37,7 @@
             this.lcCancel = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSure = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -56,11 +55,10 @@
             this.layoutControl1.Controls.Add(this.btnCancel);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(911, 202, 516, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1554, 847);
+            this.layoutControl1.Size = new System.Drawing.Size(1617, 795);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -68,16 +66,15 @@
             // 
             this.ucAccountAdjustmentEdit1.AdjustmentType = BudgetSystem.Entity.AdjustmentType.收款;
             this.ucAccountAdjustmentEdit1.Location = new System.Drawing.Point(2, 2);
-            this.ucAccountAdjustmentEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ucAccountAdjustmentEdit1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ucAccountAdjustmentEdit1.Name = "ucAccountAdjustmentEdit1";
-            this.ucAccountAdjustmentEdit1.Size = new System.Drawing.Size(1550, 803);
+            this.ucAccountAdjustmentEdit1.Size = new System.Drawing.Size(1613, 751);
             this.ucAccountAdjustmentEdit1.TabIndex = 8;
             this.ucAccountAdjustmentEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(1300, 809);
-            this.btnSure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSure.Location = new System.Drawing.Point(1363, 757);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(124, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -88,8 +85,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1428, 809);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Location = new System.Drawing.Point(1491, 757);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -109,7 +105,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1554, 847);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1617, 795);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -117,9 +113,9 @@
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
             this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 711);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 755);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(1287, 40);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(1361, 40);
             this.emptySpaceItem3.Text = "emptySpaceItem3";
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -127,7 +123,7 @@
             // 
             this.lcCancel.Control = this.btnCancel;
             this.lcCancel.CustomizationFormText = "lcCancel";
-            this.lcCancel.Location = new System.Drawing.Point(1426, 807);
+            this.lcCancel.Location = new System.Drawing.Point(1489, 755);
             this.lcCancel.MaxSize = new System.Drawing.Size(128, 40);
             this.lcCancel.MinSize = new System.Drawing.Size(128, 40);
             this.lcCancel.Name = "lcCancel";
@@ -142,7 +138,7 @@
             // 
             this.lcSure.Control = this.btnSure;
             this.lcSure.CustomizationFormText = "lcSure";
-            this.lcSure.Location = new System.Drawing.Point(1298, 807);
+            this.lcSure.Location = new System.Drawing.Point(1361, 755);
             this.lcSure.MaxSize = new System.Drawing.Size(128, 40);
             this.lcSure.MinSize = new System.Drawing.Size(128, 40);
             this.lcSure.Name = "lcSure";
@@ -159,7 +155,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1554, 807);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1617, 755);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -172,12 +168,12 @@
             // frmAccountAdjustmentEdit
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1554, 847);
+            this.ClientSize = new System.Drawing.Size(1617, 795);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "frmAccountAdjustmentEdit";
             this.Text = "调账信息编辑";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

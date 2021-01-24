@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetSystem", "BudgetSystem\BudgetSystem.csproj", "{5540BE5E-7F58-46C7-A5F4-EF756CAF7A20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetSystem.Util", "BudgetSystem.Util\BudgetSystem.Util.csproj", "{4BDAACB8-C70B-470D-BE3C-C95EE42F9ECE}"
@@ -41,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚�
 		2019-06-15升级脚本.sql = 2019-06-15升级脚本.sql
 		2019-07-10升级脚本.sql = 2019-07-10升级脚本.sql
 		2019-08-05升级脚本.sql = 2019-08-05升级脚本.sql
+		2021-01-18升级脚本.sql = 2021-01-18升级脚本.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpgradeTool", "UpgradeTool\UpgradeTool.csproj", "{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}"
@@ -148,5 +151,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E54B49E5-9B4D-4BE5-8AC7-416D2D2628E6}
 	EndGlobalSection
 EndGlobal

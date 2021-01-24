@@ -87,6 +87,7 @@ namespace BudgetSystem
                 gbProfitMargin.Caption = reportHelper.ProfitMargin.ToString();//"利润差值"实际利润-销售利润(Profit-SalesProfit)
 
                 this.gcReport.DataSource = reportHelper.DataTable;
+                //this.advBandedGridView.BestFitColumns();
             }
         }
 

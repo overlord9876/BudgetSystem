@@ -38,6 +38,11 @@ namespace BudgetSystem.Entity
         public int FlowInstanceID { get; set; }
 
         /// <summary>
+        /// 流程结束时间。
+        /// </summary>
+        public DateTime CloseDateTime { get; set; }
+
+        /// <summary>
         /// 流程名称
         /// </summary>
         public string FlowName { get; set; }

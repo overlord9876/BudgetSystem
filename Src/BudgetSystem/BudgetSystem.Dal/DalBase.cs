@@ -26,30 +26,34 @@ namespace BudgetSystem.Dal
         {
             string selectSql = string.Format(@"select {0} from {1} where {2}=@ID", ModifyDateTimeColumnName, tableName, PKColumnName);
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter paramter = command.CreateParameter();
-            paramter.DbType = DbType.Int32;
-            paramter.ParameterName = "ID";
-            paramter.Value = id;
-            command.Parameters.Add(paramter);
-            object obj = command.ExecuteScalar();
-            DateTime versionNumber = DateTime.MinValue.AddDays(1);
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                DateTime.TryParse(obj.ToString(), out versionNumber);
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter paramter = command.CreateParameter();
+                paramter.DbType = DbType.Int32;
+                paramter.ParameterName = "ID";
+                paramter.Value = id;
+                command.Parameters.Add(paramter);
+                object obj = command.ExecuteScalar();
+                DateTime versionNumber = DateTime.MinValue.AddDays(1);
+                if (obj != null)
+                {
+                    DateTime.TryParse(obj.ToString(), out versionNumber);
+                }
+                return versionNumber;
             }
-            return versionNumber;
         }
 
         public DateTime GetDateTimeNow(IDbConnection con)
         {
             string selectSql = "SELECT NOW();";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            object obj = command.ExecuteScalar();
-            return Convert.ToDateTime(obj);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                object obj = command.ExecuteScalar();
+                return Convert.ToDateTime(obj);
+            }
         }
     }
 }

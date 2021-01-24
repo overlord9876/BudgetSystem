@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BudgetSystem.Entity;
 using DevExpress.XtraEditors;
+using System.IO;
 
 namespace BudgetSystem
 {
@@ -29,7 +30,10 @@ namespace BudgetSystem
             this.gvCountry.InvalidRowException += gvCountry_InvalidRowException;
             this.riHyperLinkEditDelete.Click += riHyperLinkEditDelete_Click;
             this.riHyperLinkEditDelete.CustomDisplayText += riHyperLinkEditDelete_CustomDisplayText;
+            this.KeyDown += UcCountryOptionEdit_KeyDown;
+            this.gvCountry.KeyDown += GvCountry_KeyDown;
         }
+
         protected override void BindingOption()
         {
             if (!AllowEdit)
@@ -49,6 +53,81 @@ namespace BudgetSystem
             this.gridCountry.DataSource = dataSource;
             this.gridCountry.RefreshDataSource();
         }
+
+        private void GvCountry_KeyDown(object sender, KeyEventArgs e)
+        {
+            UcCountryOptionEdit_KeyDown(sender, e);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.I && e.Control)
+            {
+                List<string> brCountryList = new List<string>();
+                using (FileDialog fileDialog = new OpenFileDialog())
+                {
+                    fileDialog.Filter = "*.txt";
+                    if (fileDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        var dataSource = this.gridCountry.DataSource as BindingList<Country>;
+                        string brCountry = string.Empty;
+                        string content = File.ReadAllText(fileDialog.FileName, Encoding.UTF8);
+                        var lines = content.Split(new string[] { @"\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var line in lines)
+                        {
+                            var items = line.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (items.Length > 1)
+                            {
+                                brCountry = items[1];
+                                var countryList = dataSource.Where(o => o.Name == brCountry);
+                                foreach (var c in countryList)
+                                {
+                                    c.IsBR = true;
+                                }
+                                if (!brCountry.Any())
+                                    brCountryList.Add(brCountry);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void UcCountryOptionEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.I && e.Control)
+            {
+                List<string> brCountryList = new List<string>();
+                using (FileDialog fileDialog = new OpenFileDialog())
+                {
+                    if (fileDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        var dataSource = this.gridCountry.DataSource as BindingList<Country>;
+                        string brCountry = string.Empty;
+                        string content = File.ReadAllText(fileDialog.FileName, Encoding.UTF8);
+                        var lines = content.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var line in lines)
+                        {
+                            var items = line.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (items.Length > 1)
+                            {
+                                brCountry = items[1];
+                                var countryList = dataSource.Where(o => o.Name == brCountry);
+                                foreach (var c in countryList)
+                                {
+                                    c.IsBR = true;
+                                }
+                                if (!brCountry.Any())
+                                    brCountryList.Add(brCountry);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+
         public override bool Save()
         {
             this.gvCountry.CloseEditor();

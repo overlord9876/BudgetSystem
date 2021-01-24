@@ -53,7 +53,7 @@ namespace BudgetSystem.Entity
             {
                 if (DeclarationformList != null)
                 {
-                    return DeclarationformList.Sum(o => o.ExportAmount);
+                    return DeclarationformList.Sum(o => o.CNYOffshoreTotalPrice);
                 }
                 else
                 {

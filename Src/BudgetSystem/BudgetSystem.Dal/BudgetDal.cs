@@ -348,18 +348,20 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
         {
             string selectSql = @"SELECT  b.id FROM `Budget` b  
                                     WHERE ID<>@ID and ContractNO=@ContractNO";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -376,13 +378,15 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
             int budgetId = -1;
             string selectSql = @"SELECT  b.id FROM `Budget` b  
                                     WHERE ContractNO=@ContractNO";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                budgetId = (int)obj;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ContractNO", contractNo));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    budgetId = (int)obj;
+                }
             }
             return budgetId;
         }

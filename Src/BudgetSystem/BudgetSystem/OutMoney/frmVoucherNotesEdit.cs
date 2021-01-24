@@ -69,12 +69,12 @@ namespace BudgetSystem
             }
 
             this.txtNO.EditValue = CurrentDeclarationform.NO;
-            this.txtExportAmount.EditValue = CurrentDeclarationform.ExportAmount;
+            //this.txtExportAmount.EditValue = CurrentDeclarationform.ExportAmount;
             this.txtExportDate.EditValue = CurrentDeclarationform.ExportDate;
             this.textEdit5.EditValue = CurrentDeclarationform.CreateDate;
             this.textEdit6.EditValue = CurrentDeclarationform.CreateUser;
             this.cboCurrency.EditValue = CurrentDeclarationform.Currency;
-            this.chkIsReport.EditValue = CurrentDeclarationform.IsReport;
+            //this.chkIsReport.EditValue = CurrentDeclarationform.IsReport;
 
         }
 
@@ -108,12 +108,12 @@ namespace BudgetSystem
             this.CurrentDeclarationform.ContractNO = (this.cboBudget.EditValue as Budget).ContractNO;
 
             CurrentDeclarationform.NO = this.txtNO.Text;
-            CurrentDeclarationform.ExportAmount = this.txtExportAmount.Value;
+            //CurrentDeclarationform.ExportAmount = this.txtExportAmount.Value;
             CurrentDeclarationform.ExportDate = DateTime.Parse(this.txtExportDate.EditValue.ToString());
             CurrentDeclarationform.CreateDate = DateTime.Parse(this.textEdit5.EditValue.ToString());
             CurrentDeclarationform.CreateUser = this.textEdit6.Text;
             CurrentDeclarationform.Currency = this.cboCurrency.EditValue.ToString();
-            CurrentDeclarationform.IsReport = this.chkIsReport.Checked;
+            //CurrentDeclarationform.IsReport = this.chkIsReport.Checked;
 
 
         }

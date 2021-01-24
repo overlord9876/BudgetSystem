@@ -29,6 +29,7 @@ namespace BudgetSystem.InMoney
         private void RegisterEventHandler()
         {
             this.Load += new System.EventHandler(this.frmDeclarationformImport_Load);
+            this.btnExport.Click += BtnExport_Click;
             this.btnSure.Click += new System.EventHandler(this.btnSure_Click);
             this.btnCancel.Click += new EventHandler(btnCancel_Click);
             this.gvDeclarationform.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(gvDeclarationform_InvalidRowException);
@@ -50,7 +51,7 @@ namespace BudgetSystem.InMoney
                 string message = string.Empty;
                 List<string> columns = null;
 
-                columns = new List<string> { "合同号", "报关单号", "报关币种", "出口金额", "出口日期" };
+                columns = new List<string> { "海关编号", "合同号", "出口日期", "境外收发货人企业名称英文", "监管方式", "指运港", "成交方式", "贸易国别地区", "商品编号", "商品名称", "规格型号", "成交数量", "成交计量单位", "单价", "总价", "币制", "最终目的国地区", "境内货源地", "离岸价", "美元离岸价", "人民币离岸价" };
                 DataTable dt = ExcelHelper.ReadExcelToDataTable(openFileDialog1.FileName, out message, string.Empty, columns);
                 if (!string.IsNullOrEmpty(message))
                 {
@@ -64,13 +65,31 @@ namespace BudgetSystem.InMoney
                 foreach (DataRow row in dt.Rows)
                 {
                     df = new Declarationform();
+                    df.NO = DataRowConvertHelper.GetStringValue(row, "海关编号").Trim();
                     df.ContractNO = DataRowConvertHelper.GetStringValue(row, "合同号").Trim();
-                    df.NO = DataRowConvertHelper.GetStringValue(row, "报关单号").Trim();
-                    df.Currency = DataRowConvertHelper.GetStringValue(row, "报关币种").Trim();
-                    df.ExportAmount = DataRowConvertHelper.GetDecimalValue(row, "出口金额");
                     df.ExportDate = DataRowConvertHelper.GetDateTimeValue(row, "出口日期");
+                    df.Overseas = DataRowConvertHelper.GetStringValue(row, "境外收发货人企业名称英文").Trim();
+                    df.TradeMode = DataRowConvertHelper.GetStringValue(row, "监管方式");
+                    df.Port = DataRowConvertHelper.GetStringValue(row, "指运港").Trim();
+                    df.Currency = DataRowConvertHelper.GetStringValue(row, "币制");
+                    df.PriceClause = DataRowConvertHelper.GetStringValue(row, "成交方式");
+                    df.Country = DataRowConvertHelper.GetStringValue(row, "贸易国别地区");
+                    df.ProdNumber = DataRowConvertHelper.GetStringValue(row, "商品编号");
+                    df.ProdName = DataRowConvertHelper.GetStringValue(row, "商品名称");
+                    df.Model = DataRowConvertHelper.GetStringValue(row, "规格型号");
+                    df.DealCount = DataRowConvertHelper.GetDoubleValue(row, "成交数量");
+                    df.DealUnit = DataRowConvertHelper.GetStringValue(row, "成交计量单位");
+                    df.Price = DataRowConvertHelper.GetDecimalValue(row, "单价");
+                    df.TotalPrice = DataRowConvertHelper.GetDecimalValue(row, "总价");
+                    df.FinalCountry = DataRowConvertHelper.GetStringValue(row, "最终目的国地区");
+                    df.DomesticSource = DataRowConvertHelper.GetStringValue(row, "境内货源地");
+                    df.OffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "离岸价");
+                    df.USDOffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "美元离岸价");
+                    df.CNYOffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "人民币离岸价");
                     df.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                     df.CreateDate = datetimeNow;
+                    df.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+                    df.UpdateDate = datetimeNow;
                     list.Add(df);
                 }
 
@@ -112,14 +131,34 @@ namespace BudgetSystem.InMoney
             List<Declarationform> list = (gcDeclarationform.DataSource as BindingList<Declarationform>).ToList();
             if (list != null)
             {
-                if (list.Exists(i => !string.IsNullOrEmpty(i.Message)))
+                var warningList = list.Where(i => !string.IsNullOrEmpty(i.Message));
+                if (warningList.Any() && !chkIgnore.Checked)
                 {
                     XtraMessageBox.Show("存在不合法数据，不能导入");
                     return;
                 }
-                dm.ImportDeclarationform(list);
+                var importList = list.Where(i => string.IsNullOrEmpty(i.Message)).ToList();
+                if (importList.Any())
+                {
+                    dm.ImportDeclarationform(importList);
+                    list.RemoveAll(i => string.IsNullOrEmpty(i.Message));
+                }
+                gcDeclarationform.DataSource = new BindingList<Declarationform>(list);
+                if (list.Any()) { return; }
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
+        }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "选择保存路径";
+            saveFileDialog1.Filter = "excel文件|*.xls";
+            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+            this.gvDeclarationform.ExportToXls(saveFileDialog1.FileName);
+            XtraMessageBox.Show("导出成功。");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -145,14 +184,14 @@ namespace BudgetSystem.InMoney
                 e.Valid = false;
                 return;
             }
-            else if (list.Count(i => i.NO == df.NO) > 1)
+            else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice) > 1)
             {
                 e.ErrorText = "报关单号存在重复";
                 df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }
-            else if (dm.CheckNumber(df.NO))
+            else if (dm.CheckNumber(df.NO, df.DealCount, df.TotalPrice))
             {
                 e.ErrorText = "报关单号存在重复";
                 df.Message = e.ErrorText;
@@ -178,13 +217,13 @@ namespace BudgetSystem.InMoney
                 e.Valid = false;
                 return;
             }
-            if (df.ExportAmount <= 0)
-            {
-                e.ErrorText = "出口金额应大于0";
-                df.Message = e.ErrorText;
-                e.Valid = false;
-                return;
-            }
+            //if (df.ExportAmount <= 0)
+            //{
+            //    e.ErrorText = "出口金额应大于0";
+            //    df.Message = e.ErrorText;
+            //    e.Valid = false;
+            //    return;
+            //}
 
         }
 

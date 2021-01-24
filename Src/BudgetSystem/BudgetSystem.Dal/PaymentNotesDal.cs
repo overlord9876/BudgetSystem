@@ -236,43 +236,47 @@ namespace BudgetSystem.Dal
 INNER JOIN Supplier s on pn.SupplierID=s.ID and s.SupplierType=1 and s.ID=@SupplierID
  where BudgetID=50;";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter budgetIDParamter = command.CreateParameter();
-            budgetIDParamter.DbType = DbType.Int32;
-            budgetIDParamter.ParameterName = "BudgetID";
-            budgetIDParamter.Value = budgetId;
-            command.Parameters.Add(budgetIDParamter);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter budgetIDParamter = command.CreateParameter();
+                budgetIDParamter.DbType = DbType.Int32;
+                budgetIDParamter.ParameterName = "BudgetID";
+                budgetIDParamter.Value = budgetId;
+                command.Parameters.Add(budgetIDParamter);
 
-            IDbDataParameter supplierIDParamter = command.CreateParameter();
-            supplierIDParamter.DbType = DbType.Int32;
-            supplierIDParamter.ParameterName = "SupplierID";
-            supplierIDParamter.Value = budgetId;
-            command.Parameters.Add(supplierIDParamter);
-            object obj = command.ExecuteScalar();
-            decimal totalPaymentAmount = 0;
-            decimal.TryParse(obj.ToString(), out totalPaymentAmount);
-            return totalPaymentAmount;
+                IDbDataParameter supplierIDParamter = command.CreateParameter();
+                supplierIDParamter.DbType = DbType.Int32;
+                supplierIDParamter.ParameterName = "SupplierID";
+                supplierIDParamter.Value = budgetId;
+                command.Parameters.Add(supplierIDParamter);
+                object obj = command.ExecuteScalar();
+                decimal totalPaymentAmount = 0;
+                decimal.TryParse(obj.ToString(), out totalPaymentAmount);
+                return totalPaymentAmount;
+            }
         }
 
         public bool ExistsPaymentMoneyUsed(string moneyUsed, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"SELECT COUNT(ID) from PaymentNotes WHERE moneyused=@moneyused;";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter budgetIDParamter = command.CreateParameter();
-            budgetIDParamter.DbType = DbType.String;
-            budgetIDParamter.ParameterName = "moneyused";
-            budgetIDParamter.Value = moneyUsed;
-            command.Parameters.Add(budgetIDParamter);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter budgetIDParamter = command.CreateParameter();
+                budgetIDParamter.DbType = DbType.String;
+                budgetIDParamter.ParameterName = "moneyused";
+                budgetIDParamter.Value = moneyUsed;
+                command.Parameters.Add(budgetIDParamter);
 
-            object obj = command.ExecuteScalar();
-            int count = 0;
-            int.TryParse(obj.ToString(), out count);
-            return count > 0;
+                object obj = command.ExecuteScalar();
+                int count = 0;
+                int.TryParse(obj.ToString(), out count);
+                return count > 0;
+            }
         }
 
         /// <summary>
@@ -286,17 +290,19 @@ INNER JOIN Supplier s on pn.SupplierID=s.ID and s.SupplierType=1 and s.ID=@Suppl
         {
             string sql = @"SELECT  id FROM `PaymentNotes`  
                                     WHERE  `BudgetID`=@BudgetID";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = sql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetID));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = sql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetID));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

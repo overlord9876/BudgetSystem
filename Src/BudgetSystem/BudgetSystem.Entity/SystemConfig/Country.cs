@@ -17,6 +17,7 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
         /// <summary>
         /// 名称
         /// </summary>
@@ -25,6 +26,7 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
         /// <summary>
         /// 英文名称
         /// </summary>
@@ -33,5 +35,10 @@ namespace BudgetSystem.Entity
             get;
             set;
         }
+
+        /// <summary>
+        /// 是否一带一路。
+        /// </summary>
+        public bool IsBR { get; set; }
     }
 }

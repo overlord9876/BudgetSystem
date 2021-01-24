@@ -129,18 +129,20 @@ namespace BudgetSystem.Dal
         {
             string sql = @"SELECT  id FROM `Invoice`  
                                     WHERE ID<>@ID and Number=@Number";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = sql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Number", number));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = sql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Number", number));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -155,17 +157,19 @@ namespace BudgetSystem.Dal
         {
             string sql = @"SELECT  id FROM `Invoice`  
                                     WHERE  `BudgetID`=@BudgetID";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = sql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetId));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = sql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("BudgetID", budgetId));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

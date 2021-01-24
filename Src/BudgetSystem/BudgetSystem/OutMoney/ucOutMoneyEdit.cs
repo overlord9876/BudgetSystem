@@ -63,7 +63,9 @@ namespace BudgetSystem.OutMoney
             CommonControl.LookUpEditHelper.FillRepositoryItemLookUpEditByEnum_IntValue(this.rilueSupplierType, typeof(EnumSupplierType));
             this.riLinkDelete.Click += new EventHandler(riLinkDelete_Click);
             this.riLinkDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
-
+            this.btnSingleBudgetFinalAccount.Click += btnSingleBudgetFinalAccount_Click;
+            this.btnShowBudgetHistory.Click += btnShowBudgetHistory_Click;
+            this.btn_budgetView.Click += btn_budgetView_Click;
             this.cboBudget.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             this.cboSupplier.Properties.PopupFormSize = new Size(this.Width / 2, 300);
             this.txtApplicant.EditValue = RunInfo.Instance.CurrentUser;

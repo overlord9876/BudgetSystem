@@ -67,6 +67,9 @@
             this.gvBudget = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCommission = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPremium = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCustomerDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcTotalAmount = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -86,13 +89,10 @@
             this.gcTradeNature = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rilueTradeNature = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcAdvancePayment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.ucBudgetEdit1 = new BudgetSystem.ucBudgetEdit();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.gcCommission = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcPremium = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvOutProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvInProduct)).BeginInit();
@@ -188,7 +188,7 @@
             // gridBudget
             // 
             this.gridBudget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridBudget.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             gridLevelNode1.LevelTemplate = this.gvOutProduct;
             gridLevelNode1.RelationName = "OutProductList";
             gridLevelNode2.LevelTemplate = this.bgvInProduct;
@@ -198,11 +198,11 @@
             gridLevelNode2});
             this.gridBudget.Location = new System.Drawing.Point(0, 0);
             this.gridBudget.MainView = this.gvBudget;
-            this.gridBudget.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridBudget.Name = "gridBudget";
             this.gridBudget.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rilueTradeNature});
-            this.gridBudget.Size = new System.Drawing.Size(884, 673);
+            this.gridBudget.Size = new System.Drawing.Size(1181, 844);
             this.gridBudget.TabIndex = 1;
             this.gridBudget.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bgvInProduct,
@@ -490,6 +490,31 @@
             this.gcUpdateDate.VisibleIndex = 1;
             this.gcUpdateDate.Width = 110;
             // 
+            // gcCommission
+            // 
+            this.gcCommission.Caption = "佣金";
+            this.gcCommission.FieldName = "Commission";
+            this.gcCommission.Name = "gcCommission";
+            this.gcCommission.Visible = true;
+            this.gcCommission.VisibleIndex = 2;
+            // 
+            // gcPremium
+            // 
+            this.gcPremium.Caption = "运杂费";
+            this.gcPremium.FieldName = "Premium";
+            this.gcPremium.Name = "gcPremium";
+            this.gcPremium.Visible = true;
+            this.gcPremium.VisibleIndex = 3;
+            // 
+            // gcAdvancePayment
+            // 
+            this.gcAdvancePayment.Caption = "预付金额";
+            this.gcAdvancePayment.FieldName = "AdvancePayment";
+            this.gcAdvancePayment.Name = "gcAdvancePayment";
+            this.gcAdvancePayment.Visible = true;
+            this.gcAdvancePayment.VisibleIndex = 4;
+            this.gcAdvancePayment.Width = 70;
+            // 
             // gcCustomerName
             // 
             this.gcCustomerName.Caption = "主买方";
@@ -653,23 +678,14 @@
             this.gcPort.VisibleIndex = 17;
             this.gcPort.Width = 72;
             // 
-            // gcAdvancePayment
-            // 
-            this.gcAdvancePayment.Caption = "预付金额";
-            this.gcAdvancePayment.FieldName = "AdvancePayment";
-            this.gcAdvancePayment.Name = "gcAdvancePayment";
-            this.gcAdvancePayment.Visible = true;
-            this.gcAdvancePayment.VisibleIndex = 4;
-            this.gcAdvancePayment.Width = 70;
-            // 
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(890, 700);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1180, 932);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -678,53 +694,37 @@
             // xtraTabPage1
             // 
             this.xtraTabPage1.Controls.Add(this.ucBudgetEdit1);
-            this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(884, 673);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1174, 901);
             this.xtraTabPage1.Text = "预算单";
             // 
             // ucBudgetEdit1
             // 
             this.ucBudgetEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetEdit1.Location = new System.Drawing.Point(0, 0);
-            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ucBudgetEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucBudgetEdit1.Name = "ucBudgetEdit1";
-            this.ucBudgetEdit1.Size = new System.Drawing.Size(884, 673);
+            this.ucBudgetEdit1.Size = new System.Drawing.Size(1174, 901);
             this.ucBudgetEdit1.TabIndex = 0;
             this.ucBudgetEdit1.WorkModel = BudgetSystem.EditFormWorkModels.Default;
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.gridBudget);
-            this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(884, 673);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1181, 844);
             this.xtraTabPage2.Text = "修改历史";
-            // 
-            // gcCommission
-            // 
-            this.gcCommission.Caption = "佣金";
-            this.gcCommission.FieldName = "Commission";
-            this.gcCommission.Name = "gcCommission";
-            this.gcCommission.Visible = true;
-            this.gcCommission.VisibleIndex = 2;
-            // 
-            // gcPremium
-            // 
-            this.gcPremium.Caption = "运杂费";
-            this.gcPremium.FieldName = "Premium";
-            this.gcPremium.Name = "gcPremium";
-            this.gcPremium.Visible = true;
-            this.gcPremium.VisibleIndex = 3;
             // 
             // ucBudgetDetailView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ucBudgetDetailView";
-            this.Size = new System.Drawing.Size(890, 700);
+            this.Size = new System.Drawing.Size(1180, 932);
             ((System.ComponentModel.ISupportInitialize)(this.gvOutProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBudget)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvInProduct)).EndInit();

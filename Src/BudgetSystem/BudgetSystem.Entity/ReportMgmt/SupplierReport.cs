@@ -84,6 +84,8 @@ namespace BudgetSystem.Entity
         public decimal CNY { get; set; }
         public string PaymentDate { get; set; }
 
+        public bool IsCustomer { get; set; }
+
         public void ResetExchangeRate(IEnumerable<DateExchangeRate> dateExchangeRates)
         {
             if (!"美元".Equals(Currency))

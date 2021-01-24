@@ -198,31 +198,19 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<SupplierReport> GetSupplierReportList(BudgetQueryCondition condition, List<UseMoneyType> typeList, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT s.ID,s.`Name`,pn.CNY,pn.ExchangeRate,pn.Currency, pn.OriginalCoin,DATE_FORMAT(pn.PaymentDate, '%Y-%m-%d') as PaymentDate from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
-where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
+            var result = SupplierReports(condition, con);
+            if (result.Count > 0)
+            {
+                //与供应商名称相同的客户是供应商退款使用。
+                string customName = string.Join(",", result.Select(o => $"{o.Name}").Distinct().ToArray());
+
+                result.AddRange(CustomReports(condition, customName, con));
+            }
+
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);
-            if (!string.IsNullOrEmpty(condition.Salesman))
-            {
-                selectSql += " AND Applicant=@Applicant ";
-                dp.Add("Applicant", condition.Salesman, null, null, null);
-            }
-
-            else if (condition.DeptID >= 0)
-            {
-                selectSql += "  AND Applicant in (SELECT UserName from `user` where DeptID=@DeptID) ";
-                dp.Add("DeptID", condition.DeptID, null, null, null);
-            }
-            if (condition.ID > 0)
-            {
-                selectSql += " AND pn.BudgetID=@BudgetID AND EXISTS(SELECT 1 FROM BudgetSuppliers WHERE Sup_ID=s.ID and ID=@BudgetID) ";
-                dp.Add("BudgetID", condition.ID, null, null, null);
-            }
-
-            var result = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
-
-            selectSql = string.Format(@"select i.* from Invoice i
+            string selectSql = string.Format(@"select i.* from Invoice i
                         WHERE i.FinanceImportDate BETWEEN @BeginTime AND @EndTime ");
             if (condition.ID > 0)
             {
@@ -258,14 +246,14 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
                 CommonDal cd = new CommonDal();
                 var dateExchanges = cd.GetDateExchanges(con);
                 result.ToList().ForEach(o => { o.ResetExchangeRate(dateExchanges); });
-                var suppliers = result.Select(o => o.ID).Distinct();
+                var suppliers = result.Select(o => o.Name).Distinct();
                 decimal exchangeRate = 0;
                 decimal totalCNY = 0;
                 decimal totalUSD = 0;
                 string supplierName = string.Empty;
                 foreach (var sup in suppliers)
                 {
-                    var sups = result.Where(o => o.ID == sup);
+                    var sups = result.Where(o => o.Name == sup);
 
                     exchangeRate = Math.Round(sups.Sum(o => o.ExchangeRate) / sups.Count(), 6);
                     totalCNY = sups.Sum(o => o.CNY);
@@ -274,7 +262,7 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
                     SupplierReport supplier = new SupplierReport()
                     {
                         Name = supplierName,
-                        ID = sup,
+                        ID = sups.ElementAt(0).ID,
                         ExchangeRate = exchangeRate,
                         TotalCNY = totalCNY,
                         TotalOriginalCoin = totalUSD,
@@ -285,6 +273,217 @@ where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
             }
 
             return reports;
+        }
+
+        private List<SupplierReportItem> SupplierReports(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
+        {
+            #region 供应商付款信息
+
+            string selectSql = string.Format(@"SELECT s.ID,s.`Name`,pn.CNY,pn.ExchangeRate,pn.Currency, pn.OriginalCoin,DATE_FORMAT(pn.PaymentDate, '%Y-%m-%d') as PaymentDate from PaymentNotes pn join Supplier s on pn.SupplierID=s.ID 
+where pn.CommitTime BETWEEN @BeginTime AND @EndTime");
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND pn.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@UserName) ";
+                dp.Add("UserName", condition.Salesman, null, null, null);
+            }
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " AND pn.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID) ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            if (condition.ID > 0)
+            {
+                selectSql += " AND pn.BudgetID=@BudgetID "; //AND EXISTS(SELECT 1 FROM BudgetSuppliers WHERE Sup_ID = s.ID and ID = @BudgetID) 
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+
+            var result = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+
+            #endregion
+
+            #region 供应商付款调出信息
+
+            selectSql = string.Format(@"SELECT s.ID,s.`Name`,pa.AlreadySplitCNY as CNY,pa.AlreadySplitOriginalCoin as OriginalCoin,pn.ExchangeRate,DATE_FORMAT(pn.PaymentDate, '%Y-%m-%d') as PaymentDate FROM paymentaccountadjustment pa JOIN PaymentNotes pn on pa.RelationID=pn.ID join Supplier s on pn.SupplierID=s.ID 
+WHERE  pn.PaymentDate BETWEEN @BeginTime AND @EndTime ");
+            dp = new DynamicParameters();
+
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND pa.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@UserName) ";
+                dp.Add("UserName", condition.Salesman, null, null, null);
+            }
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " AND pa.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID) ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            if (condition.ID > 0)
+            {
+                selectSql += " AND pa.BudgetID=@BudgetID "; //AND EXISTS(SELECT 1 FROM BudgetSuppliers WHERE Sup_ID = s.ID and ID = @BudgetID) 
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+
+            var adjustsmentPayments = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+            adjustsmentPayments.ForEach(o =>
+            {
+                o.OriginalCoin = o.OriginalCoin * -1;
+                o.CNY = o.CNY * -1;
+            });
+            result.AddRange(adjustsmentPayments);
+
+            #endregion
+
+            #region 供应商付款调入信息
+
+            selectSql = string.Format(@"SELECT s.ID,s.`Name`,pad.CNY,pad.OriginalCoin,pn.ExchangeRate,DATE_FORMAT(pn.PaymentDate, '%Y-%m-%d') as PaymentDate FROM paymentaccountadjustmentdetail pad JOIN PaymentNotes pn on pad.RelationID=pn.ID join Supplier s on pn.SupplierID=s.ID 
+WHERE  pn.PaymentDate BETWEEN @BeginTime AND @EndTime ");
+            dp = new DynamicParameters();
+
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND pad.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@UserName) ";
+                dp.Add("UserName", condition.Salesman, null, null, null);
+            }
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " AND pad.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID) ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            if (condition.ID > 0)
+            {
+                selectSql += " AND pad.BudgetID=@BudgetID "; //AND EXISTS(SELECT 1 FROM BudgetSuppliers WHERE Sup_ID = s.ID and ID = @BudgetID) 
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+
+            var adjustsmentDetailPayments = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+
+            result.AddRange(adjustsmentDetailPayments);
+
+            #endregion
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取付款退回（客户收款的客户名称与供应商一致，视为暂收款退回）
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <param name="customNames"></param>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <returns></returns>
+        private List<SupplierReportItem> CustomReports(BudgetQueryCondition condition, string customNames, IDbConnection con, IDbTransaction tran = null)
+        {
+            #region 客户收款信息（与供应商名称相同视为付款退回）
+
+            string selectSql = string.Format(@"SELECT c.ID,c.`Name`,bb.CNY,bb.OriginalCoin,bs.ExchangeRate,DATE_FORMAT(bs.ReceiptDate, '%Y-%m-%d') as PaymentDate FROM budgetbill bb JOIN bankslip bs on bb.BSID=bs.BSID JOIN customer c on bs.Cus_ID=c.ID
+WHERE FIND_IN_SET(c.`Name`,@Names) AND bs.ReceiptDate BETWEEN @BeginTime AND @EndTime ");
+            DynamicParameters dp = new DynamicParameters();
+            dp.Add("Names", customNames, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (condition.ID > 0)
+            {
+                selectSql += " AND bb.BudgetID=@BudgetID ";
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " bb.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where b.Salesman=@Salesman); ";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
+
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " bb.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID); ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            var result = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+            result.ForEach(o =>
+            {
+                o.IsCustomer = true;
+                o.CNY = o.CNY * -1;
+                o.CNY = o.OriginalCoin * -1;
+            });
+
+            #endregion
+
+            #region 供应商退款退回调出。
+
+            selectSql = string.Format(@"SELECT c.ID,c.`Name`,ra.AlreadySplitCNY CNY,ra.AlreadySplitOriginalCoin OriginalCoin,bs.ExchangeRate,DATE_FORMAT(bs.ReceiptDate, '%Y-%m-%d') as PaymentDate FROM reciptaccountadjustment ra JOIN  budgetbill bb on ra.RelationID=bb.ID JOIN bankslip bs on bb.BSID=bs.BSID JOIN customer c on bs.Cus_ID=c.ID
+WHERE  FIND_IN_SET(c.`Name`,@Names) AND bs.ReceiptDate BETWEEN @BeginTime AND @EndTime ");
+            dp = new DynamicParameters();
+            dp.Add("Names", customNames, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (condition.ID > 0)
+            {
+                selectSql += " AND ra.BudgetID=@BudgetID ";
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " ra.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where b.Salesman=@Salesman); ";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
+
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " ra.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID); ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            var adjustmentBB = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+            adjustmentBB.ForEach(o =>
+            {
+                o.IsCustomer = true;
+            });
+            result.AddRange(adjustmentBB);
+
+            #endregion
+
+            #region 供应商退款退回调入。
+
+            selectSql = string.Format(@"SELECT c.ID,c.`Name`,rad.CNY,rad.OriginalCoin,bs.ExchangeRate,DATE_FORMAT(bs.ReceiptDate, '%Y-%m-%d') as PaymentDate FROM reciptaccountadjustmentdetail rad JOIN  budgetbill bb on rad.RelationID=bb.ID JOIN bankslip bs on bb.BSID=bs.BSID JOIN customer c on bs.Cus_ID=c.ID
+WHERE  FIND_IN_SET(c.`Name`,@Names) AND bs.ReceiptDate BETWEEN @BeginTime AND @EndTime ");
+            dp = new DynamicParameters();
+            dp.Add("Names", customNames, null, null, null);
+            dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
+            dp.Add("EndTime", condition.EndTimestamp, null, null, null);
+            if (condition.ID > 0)
+            {
+                selectSql += " AND rad.BudgetID=@BudgetID ";
+                dp.Add("BudgetID", condition.ID, null, null, null);
+            }
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " rad.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where b.Salesman=@Salesman); ";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
+
+            else if (condition.DeptID >= 0)
+            {
+                selectSql += " rad.BudgetID in (SELECT DISTINCT b.ID from `user` u JOIN budget b on u.UserName=b.Salesman where u.DeptID=@DeptID); ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
+            var adjustmentDetailBB = con.Query<SupplierReportItem>(selectSql, dp, tran).ToList();
+            adjustmentDetailBB.ForEach(o =>
+            {
+                o.CNY = o.CNY * -1;
+                o.CNY = o.OriginalCoin * -1;
+                o.IsCustomer = true;
+            });
+            result.AddRange(adjustmentDetailBB);
+
+            #endregion
+
+            return result;
         }
 
         public IEnumerable<CustomerReport> GetCustomerReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
@@ -321,7 +520,7 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime;");
                 {
                     foreach (CustomerReport report in result)
                     {
-                        report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
+                        //report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
                     }
                 }
             }
@@ -365,7 +564,7 @@ where d.CreateDate BETWEEN @BeginTime AND @EndTime ");
                 {
                     foreach (CustomerReport report in result)
                     {
-                        report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
+                        //report.DeclarationformList = customerReportList.Where(o => o.Name.Equals(report.Name)).ToList();
                     }
                 }
             }

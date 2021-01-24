@@ -8,16 +8,25 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.Entity;
 
 namespace BudgetSystem
 {
     public partial class frmInMoneyQueryConditionEditor : frmInMoneyQueryConditionEditorTransit
     {
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
         public frmInMoneyQueryConditionEditor()
         {
             InitializeComponent();
             this.txtState.Properties.Items.AddRange(Enum.GetNames(typeof(QueryReceiptState)).Select(o => o.Trim()).ToArray());
             this.txtState.SelectedIndex = 0;
+
+            var condition = new BudgetQueryCondition();
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+
+            List<Budget> budgetList = bm.GetAllBudget(condition);
+            this.cboBudget.Properties.DataSource = budgetList;
+
         }
 
 
@@ -46,7 +55,10 @@ namespace BudgetSystem
             }
             c.State = (QueryReceiptState)Enum.Parse(typeof(QueryReceiptState), txtState.EditValue.ToString());
             c.VoucherNo = this.txtVoucherNo.Text;
-            c.BudgetNO = this.txtBudgetNO.Text;
+            if (cboBudget.EditValue is Budget)
+            {
+                c.BudgetId = (this.cboBudget.EditValue as Budget).ID;
+            }
             this.QueryCondition = c;
             return true;
 

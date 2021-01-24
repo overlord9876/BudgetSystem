@@ -9,12 +9,19 @@ using DevExpress.XtraEditors;
 using BudgetSystem.Entity;
 using BudgetSystem.Bll;
 using BudgetSystem.InMoney;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem
 {
     public partial class frmVoucherNotesQuery : frmBaseQueryForm
     {
         DeclarationformManager dm = new DeclarationformManager();
+        CommonManager cm = new CommonManager();
+
+        const string COMMONQUERY_ALL = "所有报关单";
+        const string THE_SAME_DAY = "当天报关单";
+        const string THE_SAME_MONTH = "当月报关单";
+        const string THE_SAME_YEAR = "当年审报关单";
 
         public frmVoucherNotesQuery()
         {
@@ -31,17 +38,59 @@ namespace BudgetSystem
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除报关单"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看报关单"));
 
+            this.RegeditQueryOperate<VoucherNotesQueryCondition>(true, new List<string> { COMMONQUERY_ALL, THE_SAME_DAY, THE_SAME_MONTH, THE_SAME_YEAR }, "报关单查询");
+
+            this.RegeditPrintOperate();
+
             this.ModelOperatePageName = "报关单管理";
         }
 
         public override void RefreshData()
         {
-            this.gcDeclarationform.DataSource = dm.GetAllDeclarationform();
+            LoadData();
+        }
+
+        public override void LoadData()
+        {
+            DoCommonQuery(THE_SAME_MONTH);
+        }
+
+        public void LoadData(VoucherNotesQueryCondition condition)
+        {
+            this.gcDeclarationform.DataSource = dm.GetAllDeclarationform(condition);
             this.gcDeclarationform.RefreshDataSource();
+            this.gvDeclarationform.BestFitColumns();
+        }
+
+        protected override void DoCommonQuery(string queryName)
+        {
+            VoucherNotesQueryCondition condition = new VoucherNotesQueryCondition();
+
+            if (THE_SAME_DAY.Equals(queryName))
+            {
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                condition.ExportBeginDate = new DateTime(datetimeNow.Year, datetimeNow.Month, datetimeNow.Day, 0, 0, 0);
+                condition.ExportEndDate = condition.ExportBeginDate.AddDays(1).AddSeconds(-1);
+            }
+            else if (THE_SAME_MONTH.Equals(queryName))
+            {
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                condition.ExportBeginDate = new DateTime(datetimeNow.Year, datetimeNow.Month, 1, 0, 0, 0);
+                condition.ExportEndDate = condition.ExportBeginDate.AddMonths(1).AddSeconds(-1);
+            }
+            else if (THE_SAME_YEAR.Equals(queryName))
+            {
+                DateTime datetimeNow = cm.GetDateTimeNow();
+                condition.ExportBeginDate = new DateTime(datetimeNow.Year, 1, 1, 0, 0, 0);
+                condition.ExportEndDate = condition.ExportBeginDate.AddYears(1).AddSeconds(-1);
+            }
+
+            LoadData(condition);
         }
 
         public override void OperateHandled(ModelOperate operate, ModeOperateEventArgs e)
         {
+            base.OperateHandled(operate, e);
 
             if (operate.Operate == OperateTypes.ImportData.ToString())
             {
@@ -71,8 +120,22 @@ namespace BudgetSystem
             }
             else
             {
-                XtraMessageBox.Show("未定义的操作1");
+
             }
+        }
+
+        protected override void DoConditionQuery(BaseQueryCondition condition)
+        {
+            VoucherNotesQueryCondition vnCondition = condition as VoucherNotesQueryCondition;
+
+            LoadData(vnCondition);
+        }
+
+        protected override QueryConditionEditorForm CreateConditionEditorForm()
+        {
+            frmVoucherNotesQueryConditionEditor form = new frmVoucherNotesQueryConditionEditor();
+            form.QueryName = this.GetType().ToString();
+            return form;
         }
 
         private void NewDeclaration()

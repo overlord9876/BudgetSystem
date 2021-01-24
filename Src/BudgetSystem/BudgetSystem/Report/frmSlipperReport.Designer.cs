@@ -269,7 +269,7 @@
             this.ClientSize = new System.Drawing.Size(1759, 811);
             this.Name = "frmSlipperReport";
             this.Text = "供应商管理";
-            this.Load += new System.EventHandler(this.frmTestReport1_Load);
+            this.Load += new System.EventHandler(this.frmSlipperReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();

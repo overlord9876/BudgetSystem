@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +53,7 @@
     <Compile Include="QueryCondition\AccountAdjustmentQueryCondition.cs" />
     <Compile Include="QueryCondition\InvoiceQueryCondition.cs" />
     <Compile Include="QueryCondition\ApprovalFlowQueryCondition.cs" />
+    <Compile Include="QueryCondition\VoucherNotesQueryCondition.cs" />
     <Compile Include="ReportMgmt\RecieptCapital.cs" />
     <Compile Include="ReportMgmt\AccountAdjustmentReport.cs" />
     <Compile Include="StringUtil.cs" />

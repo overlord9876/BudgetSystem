@@ -109,27 +109,33 @@ namespace BudgetSystem.Dal
         public bool IsUsed(Supplier suppplier, IDbConnection con, IDbTransaction tran = null)
         {
             string selectSql = @"SELECT SupplierID from PaymentNotes where SupplierID=@ID;";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            IDbCommand command = null;
+            object obj = null;
+            using (command = con.CreateCommand())
             {
-                return true;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
             }
 
             selectSql = @"SELECT Sup_ID from BudgetSuppliers WHERE Sup_ID=@ID;";
-            command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
-            obj = command.ExecuteScalar();
-            if (obj != null)
+            using (command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySqlParameter("ID", suppplier.ID));
+                obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -235,18 +241,20 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"SELECT  s.id FROM `Supplier` s 
                                     WHERE ID<>@ID and `Name`=@Name";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -259,17 +267,19 @@ namespace BudgetSystem.Dal
         public bool CheckExistsByName(string name, IDbConnection con)
         {
             string selectSql = @"SELECT  id FROM `Supplier` where `Name`=@Name";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

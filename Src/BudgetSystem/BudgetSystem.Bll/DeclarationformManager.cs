@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BudgetSystem.Entity;
 using System.Linq;
+using BudgetSystem.Entity.QueryCondition;
 
 namespace BudgetSystem.Bll
 {
@@ -12,12 +13,12 @@ namespace BudgetSystem.Bll
         Dal.BudgetDal budgetDal = new Dal.BudgetDal();
 
 
-        public List<Declarationform> GetAllDeclarationform()
+        public List<Declarationform> GetAllDeclarationform(VoucherNotesQueryCondition condition)
         {
             var lst = this.Query<Declarationform>((con) =>
             {
 
-                var uList = dal.GetAllDeclarationform(con, null);
+                var uList = dal.GetAllDeclarationform(condition, con, null);
                 return uList;
             });
             return lst.ToList();
@@ -53,11 +54,11 @@ namespace BudgetSystem.Bll
             });
         }
 
-        public bool CheckNumber(string NO)
+        public bool CheckNumber(string NO, double dealCount, decimal totalPrice)
         {
             return this.ExecuteWithoutTransaction<bool>((con) =>
                {
-                   return dal.CheckNumber(0, NO, con, null);
+                   return dal.CheckNumber(0, NO, dealCount, totalPrice, con, null);
                });
         }
 
@@ -77,21 +78,21 @@ namespace BudgetSystem.Bll
         public bool CheckImportData(List<Declarationform> list)
         {
             bool result = true;
-            this.ExecuteWithoutTransaction((con) =>
+            foreach (Declarationform df in list)
             {
-                foreach (Declarationform df in list)
+                this.ExecuteWithoutTransaction((con) =>
                 {
                     if (string.IsNullOrEmpty(df.NO.Trim()))
                     {
                         df.Message += "报关单号不能为空;";
                         result = false;
                     }
-                    else if (list.Count(i => i.NO == df.NO) > 1)
+                    else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice) > 1)
                     {
                         df.Message += "导入报关单号存在重复;";
                         result = false;
                     }
-                    else if (dal.CheckNumber(0, df.NO.Trim(), con, null))
+                    else if (dal.CheckNumber(0, df.NO.Trim(), df.DealCount, df.TotalPrice, con, null))
                     {
                         df.Message += "报关单号已导入，不允许重复导入;";
                         result = false;
@@ -115,9 +116,25 @@ namespace BudgetSystem.Bll
                             df.BudgetID = budgetId;
                         }
                     }
-                    if (df.ExportAmount <= 0)
+
+                    if (string.IsNullOrEmpty(df.Country.Trim()))
                     {
-                        df.Message += "出口金额应大于0;";
+                        df.Message += "贸易国别地区不能为空";
+                        result = false;
+                    }
+                    if (string.IsNullOrEmpty(df.Currency.Trim()))
+                    {
+                        df.Message += "报关币种不能为空";
+                        result = false;
+                    }
+                    if (string.IsNullOrEmpty(df.Currency.Trim()))
+                    {
+                        df.Message += "报关币种不能为空";
+                        result = false;
+                    }
+                    if (string.IsNullOrEmpty(df.Currency.Trim()))
+                    {
+                        df.Message += "报关币种不能为空";
                         result = false;
                     }
                     if (string.IsNullOrEmpty(df.Currency.Trim()))
@@ -130,23 +147,23 @@ namespace BudgetSystem.Bll
                     //    df.Message += "汇率应大于0;";
                     //    result = false;
                     //}
-                }
-
-            });
+                });
+            }
             return result;
         }
 
         public int ImportDeclarationform(List<Declarationform> declarationformList)
         {
-            return this.ExecuteWithTransaction<int>((con, tran) =>
+            foreach (Declarationform df in declarationformList)
             {
-                int id = 0;
-                foreach (Declarationform df in declarationformList)
-                {
-                    id = dal.AddDeclarationform(df, con, tran);
-                }
-                return id;
-            });
+                this.ExecuteWithTransaction<int>((con, tran) =>
+               {
+                   int id = 0;
+                   id = dal.AddDeclarationform(df, con, tran);
+                   return id;
+               });
+            }
+            return 1;
         }
 
         public void AddDeclarationformList(List<Declarationform> declarationformList)

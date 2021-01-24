@@ -20,7 +20,6 @@ namespace BudgetSystem.Report
     public partial class frmSlipperReport : Base.frmBaseCommonReportForm
     {
         private ReportManager um = new ReportManager();
-        private CustomerManager cm = new CustomerManager();
         private BudgetManager bm = new BudgetManager();
 
         public frmSlipperReport()
@@ -59,7 +58,7 @@ namespace BudgetSystem.Report
             base.OperateHandled(operate, e);
         }
 
-        private void frmTestReport1_Load(object sender, EventArgs e)
+        private void frmSlipperReport_Load(object sender, EventArgs e)
         {
             if (this.Module == BusinessModules.SlipperReport)
             {

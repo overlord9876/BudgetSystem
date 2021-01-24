@@ -8,7 +8,7 @@ namespace BudgetSystem.Entity.QueryCondition
     {
         public string Customer { get; set; }
         public string VoucherNo { get; set; }
-        public string BudgetNO { get; set; }
+        public int BudgetId { get; set; }
         public DateTime ReceiptDateBegin { get; set; }
         public DateTime ReceiptDateEnd { get; set; }
         public QueryReceiptState State { get; set; }

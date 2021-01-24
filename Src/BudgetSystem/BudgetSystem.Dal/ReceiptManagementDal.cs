@@ -156,10 +156,10 @@ namespace BudgetSystem.Dal
                     strConditionList.Add(" bs.VoucherNo like @VoucherNo ");
                     dp.Add("VoucherNo", string.Format("%{0}%", condition.VoucherNo), null, null, null);
                 }
-                if (!string.IsNullOrEmpty(condition.BudgetNO))
+                if (condition.BudgetId > 0)
                 {
-                    strConditionList.Add(" bs.VoucherNo like @BudgetNO ");
-                    dp.Add("BudgetNO", string.Format("%{0}%", condition.BudgetNO), null, null, null);
+                    strConditionList.Add("  bs.BSID IN (SELECT BSID from budgetbill WHERE BudgetID=@BudgetID) ");
+                    dp.Add("BudgetID", condition.BudgetId, null, null, null);
                 }
                 if (!string.IsNullOrEmpty(condition.Customer))
                 {
@@ -264,7 +264,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
-                                Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0 AND bb.Confirmed=1";
+                                Where bb.`BudgetID` = @BudgetID AND bb.IsDelete=0 AND  bs.State=2";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
 
@@ -277,7 +277,7 @@ namespace BudgetSystem.Dal
                                         LEFT JOIN bankslip bs on bb.BSID=bs.BSID
 										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
 										LEFT JOIN department d on bb.DeptID=d.`ID`
-                                Where bb.`BudgetID` =@BudgetID AND bb.IsDelete=0 AND bb.Confirmed=1
+                                Where bb.`BudgetID` =@BudgetID AND bb.IsDelete=0 AND bs.State=2
 						AND bb.ID not in (select RelationID from reciptaccountadjustment where BudgetID=@BudgetID);";
             return con.Query<BudgetBill>(selectSql, new { BudgetID = budgetId }, tran);
         }
@@ -345,18 +345,20 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"Select COUNT(CNY) From `BudgetBill` WHERE BudgetID=@BudgetID AND IsDelete=0 AND Confirmed=1";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter paramter = command.CreateParameter();
-            paramter.DbType = DbType.Int32;
-            paramter.ParameterName = "BudgetID";
-            paramter.Value = budgetId;
-            command.Parameters.Add(paramter);
-            object obj = command.ExecuteScalar();
-            decimal totalAmount = 0;
-            decimal.TryParse(obj.ToString(), out totalAmount);
-            return totalAmount;
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter paramter = command.CreateParameter();
+                paramter.DbType = DbType.Int32;
+                paramter.ParameterName = "BudgetID";
+                paramter.Value = budgetId;
+                command.Parameters.Add(paramter);
+                object obj = command.ExecuteScalar();
+                decimal totalAmount = 0;
+                decimal.TryParse(obj.ToString(), out totalAmount);
+                return totalAmount;
+            }
         }
 
         /// <summary>
@@ -370,18 +372,20 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"Select COUNT(OriginalCoin) From `BudgetBill` WHERE BudgetID=@BudgetID AND IsDelete=0 AND Confirmed=1";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter paramter = command.CreateParameter();
-            paramter.DbType = DbType.Int32;
-            paramter.ParameterName = "BudgetID";
-            paramter.Value = budgetId;
-            command.Parameters.Add(paramter);
-            object obj = command.ExecuteScalar();
-            decimal totalAmount = 0;
-            decimal.TryParse(obj.ToString(), out totalAmount);
-            return totalAmount;
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter paramter = command.CreateParameter();
+                paramter.DbType = DbType.Int32;
+                paramter.ParameterName = "BudgetID";
+                paramter.Value = budgetId;
+                command.Parameters.Add(paramter);
+                object obj = command.ExecuteScalar();
+                decimal totalAmount = 0;
+                decimal.TryParse(obj.ToString(), out totalAmount);
+                return totalAmount;
+            }
         }
 
         /// <summary>
@@ -395,37 +399,41 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"Select COUNT(CNY) From `BudgetBill` WHERE BSID=@BSID AND IsDelete=0 AND Confirmed=1";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter paramter = command.CreateParameter();
-            paramter.DbType = DbType.Int32;
-            paramter.ParameterName = "BSID";
-            paramter.Value = sourceId;
-            command.Parameters.Add(paramter);
-            object obj = command.ExecuteScalar();
-            decimal totalAmount = 0;
-            decimal.TryParse(obj.ToString(), out totalAmount);
-            return totalAmount;
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter paramter = command.CreateParameter();
+                paramter.DbType = DbType.Int32;
+                paramter.ParameterName = "BSID";
+                paramter.Value = sourceId;
+                command.Parameters.Add(paramter);
+                object obj = command.ExecuteScalar();
+                decimal totalAmount = 0;
+                decimal.TryParse(obj.ToString(), out totalAmount);
+                return totalAmount;
+            }
         }
 
         public bool ExistsTypeName(string typeName, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = @"SELECT COUNT(BSID) from bankslip WHERE NatureOfMoney=@NatureOfMoney;";
 
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            IDbDataParameter budgetIDParamter = command.CreateParameter();
-            budgetIDParamter.DbType = DbType.String;
-            budgetIDParamter.ParameterName = "NatureOfMoney";
-            budgetIDParamter.Value = typeName;
-            command.Parameters.Add(budgetIDParamter);
+            using (IDbCommand command = con.CreateCommand())
+            {
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                IDbDataParameter budgetIDParamter = command.CreateParameter();
+                budgetIDParamter.DbType = DbType.String;
+                budgetIDParamter.ParameterName = "NatureOfMoney";
+                budgetIDParamter.Value = typeName;
+                command.Parameters.Add(budgetIDParamter);
 
-            object obj = command.ExecuteScalar();
-            int count = 0;
-            int.TryParse(obj.ToString(), out count);
-            return count > 0;
+                object obj = command.ExecuteScalar();
+                int count = 0;
+                int.TryParse(obj.ToString(), out count);
+                return count > 0;
+            }
         }
     }
 }

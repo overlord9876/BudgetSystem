@@ -212,8 +212,8 @@
             // 
             // gcCreateDate
             // 
-            this.gcCreateDate.Caption = "录入时间";
-            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Caption = "审批结束时间";
+            this.gcCreateDate.FieldName = "Date";
             this.gcCreateDate.Name = "gcCreateDate";
             // 
             // gcSignDate
@@ -295,7 +295,7 @@
 
         #endregion
 
-        private DevExpress.XtraBars.BarEditItem beiContractNO; 
+        private DevExpress.XtraBars.BarEditItem beiContractNO;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
         private DevExpress.XtraGrid.Columns.GridColumn gcState;

@@ -98,6 +98,7 @@ namespace BudgetSystem
         private AccountAdjustment accountAdjustment = null;
         private AccountAdjustmentDetail adjustmentDetail = null;
 
+        private List<string> supplierList = new List<string>();
         public BudgetSingleReport CurrentBudgetReport { get; private set; }
 
         public SingleBudgetReportHelper(List<InMoneyType> _inMoneyTypeList = null, List<UseMoneyType> _useMoneyTypeList = null, List<DateExchangeRate> dateExchangeRates = null)
@@ -126,6 +127,7 @@ namespace BudgetSystem
             this.adjustmentDetail = adjustmentDetail;
             this.CurrentBudget = budget;
             this.DataTable = CreateDataTable();
+            this.supplierList.Clear();
             DataRow row = null;
 
             var dfList = new DeclarationformManager().GetDeclarationformByBudgetID(budget.ID);
@@ -138,35 +140,10 @@ namespace BudgetSystem
             {
                 row = this.DataTable.NewRow();
                 row["Date"] = df.ExportDate;
-                row["ExportAmount"] = df.ExportAmount;
-                if (budget.ExchangeRate != 0 && originalExchangeRate != 0)
-                {
-                    //折算成美元=报关原币*预算表原币汇率/预算表美元汇率  
-                    row["USAExportAmount"] = Math.Round(df.ExportAmount * originalExchangeRate / (decimal)budget.ExchangeRate, 2);
-                }
-                this.DataTable.Rows.Add(row);
-            }
+                row["CNYOffshoreTotalPrice"] = df.CNYOffshoreTotalPrice;
 
-            //实际收款单表+银行流水表
-            var billData = new ReceiptMgmtManager().GetBudgetBillListByBudgetId(budget.ID);
-            foreach (var bill in billData)
-            {
-                row = this.DataTable.NewRow();
-                row["Date"] = bill.ReceiptDate;
-                row["BillOriginalCoin"] = bill.OriginalCoin;
-                row["BillCNY"] = bill.CNY;
-                if (bill.Currency == "USD")
-                {
-                    exchangeRate = bill.ExchangeRate;
-                    row["BillUSD"] = bill.OriginalCoin;
-                }
-                else
-                {
-                    exchangeRate = ExchageRateUtil.GetExchageRate(bill.ReceiptDate, dateExchangeRates, (Decimal)budget.ExchangeRate);
-                    row["BillUSD"] = Math.Round(bill.CNY / exchangeRate, 2);
-                }
-                row["BillExchangeRate"] = exchangeRate;
-                row["BillRemitter"] = bill.Remitter;
+                //折算成美元=报关原币*预算表原币汇率/预算表美元汇率  
+                row["USDOffshoreTotalPrice"] = df.USDOffshoreTotalPrice;
                 this.DataTable.Rows.Add(row);
             }
 
@@ -181,59 +158,8 @@ namespace BudgetSystem
             {
                 detailList = detailList.Where(o => !o.ID.Equals(adjustmentDetail.ID)).ToList();
             }
-            var reduceBillList = accountList.Where(o => o.Type == AdjustmentType.收款);
             string preix = string.Empty;
             string contracts = string.Empty;
-            //收款(调账)调出,则需要减去相应金额。
-            foreach (var reduceBill in reduceBillList)
-            {
-                row = this.DataTable.NewRow();
-                row["Date"] = reduceBill.CreateDate;
-                row["BillOriginalCoin"] = reduceBill.AlreadySplitOriginalCoin * -1;
-                row["BillCNY"] = reduceBill.AlreadySplitCNY * -1;
-                if (reduceBill.Currency == "USD")
-                {
-                    exchangeRate = reduceBill.ExchangeRate;
-                    row["BillUSD"] = reduceBill.AlreadySplitOriginalCoin * -1;
-                }
-                else
-                {
-                    exchangeRate = ExchageRateUtil.GetExchageRate(reduceBill.Date, dateExchangeRates, (Decimal)budget.ExchangeRate);
-                    row["BillUSD"] = Math.Round(reduceBill.AlreadySplitCNY / exchangeRate, 2) * -1;
-                }
-                row["BillExchangeRate"] = exchangeRate;
-                var details = adjustDetailList?.Where(o => o.PID == reduceBill.ID && o.Type == reduceBill.Type);
-                preix = details.Count() > 1 ? "分别" : "";
-                contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
-                row["BillRemitter"] = $"收款由此合同{preix}调入至{contracts}";
-                row["AdjustmentType"] = (int)AdjustmentType.收款 + 1;
-                this.DataTable.Rows.Add(row);
-            }
-
-            var plusBillList = detailList.Where(o => o.Type == AdjustmentType.收款);
-            //收款(调账)调入，则许哟啊加上相应金额
-            foreach (var plusBill in plusBillList)
-            {
-                row = this.DataTable.NewRow();
-                row["Date"] = plusBill.OperatorDate;
-                row["BillOriginalCoin"] = plusBill.OriginalCoin;
-                if (plusBill.Currency == "USD")
-                {
-                    exchangeRate = plusBill.ExchangeRate;
-                    row["BillUSD"] = plusBill.OriginalCoin;
-                }
-                else
-                {
-                    exchangeRate = ExchageRateUtil.GetExchageRate(plusBill.Date, dateExchangeRates, (Decimal)budget.ExchangeRate);
-                    row["BillUSD"] = Math.Round(plusBill.CNY / exchangeRate, 2);
-                }
-                row["BillCNY"] = plusBill.CNY;
-                row["BillExchangeRate"] = exchangeRate;
-                row["BillRemitter"] = $"收款由【{plusBill.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
-                row["AdjustmentType"] = ((int)AdjustmentType.收款 + 1) * 10;
-                this.DataTable.Rows.Add(row);
-            }
-
             //付款单表
             var pnData = new PaymentNotesManager().GetTotalIsApprovaledAmountPaymentMoneyByBudgetId(budget.ID);
             foreach (PaymentNotes pn in pnData)
@@ -273,6 +199,7 @@ namespace BudgetSystem
                 }
                 row["TaxRebateRate"] = Math.Round(pn.TaxRebateRate / 100, 2);
                 row["SupplierName"] = pn.SupplierName;
+                supplierList.Add(pn.SupplierName);
                 //if (pn.HasInvoice)//如果付款中已经提交发票，则这部分钱是为发票内容。
                 //{
                 //    row = dt.NewRow();
@@ -331,6 +258,7 @@ namespace BudgetSystem
                 preix = details.Count() > 1 ? "分别" : "";
                 contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
                 row["SupplierName"] = $"付款由此合同{preix}调入至{contracts}";
+                supplierList.Add(pn.Name);
                 row["AdjustmentType"] = (int)AdjustmentType.付款 + 1;
             }
 
@@ -375,6 +303,113 @@ namespace BudgetSystem
                 row["TaxRebateRate"] = Math.Round(pn.TaxRebateRate / 100, 2);
                 row["SupplierName"] = $"付款由【{pn.ContractNO}】合同调入至此合同，供应商【{pn.Name}】";
                 row["AdjustmentType"] = ((int)AdjustmentType.付款 + 1) * 10;
+                supplierList.Add(pn.Name);
+            }
+
+            //实际收款单表+银行流水表
+            var billData = new ReceiptMgmtManager().GetBudgetBillListByBudgetId(budget.ID);
+            foreach (var bill in billData)
+            {
+                row = this.DataTable.NewRow();
+                row["Date"] = bill.ReceiptDate;
+                row["BillOriginalCoin"] = bill.OriginalCoin;
+                row["BillCNY"] = bill.CNY;
+                if (bill.Currency == "USD")
+                {
+                    exchangeRate = bill.ExchangeRate;
+                    row["BillUSD"] = bill.OriginalCoin;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(bill.ReceiptDate, dateExchangeRates, (Decimal)budget.ExchangeRate);
+                    row["BillUSD"] = Math.Round(bill.CNY / exchangeRate, 2);
+                }
+                row["BillExchangeRate"] = exchangeRate;
+                if (supplierList.Any(s => s == bill.Customer))
+                {
+                    row["BillRemitter"] = $"【暂付退回】{bill.Customer}";
+                    row["IsSupplier"] = true;
+                }
+                else if (supplierList.Any(s => s == bill.Remitter))
+                {
+                    row["BillRemitter"] = $"【暂付退回】{bill.Remitter}";
+                    row["IsSupplier"] = true;
+                }
+                else
+                {
+                    row["BillRemitter"] = $"{bill.Remitter}";
+                    row["IsSupplier"] = false;
+                }
+                this.DataTable.Rows.Add(row);
+            }
+
+            var reduceBillList = accountList.Where(o => o.Type == AdjustmentType.收款);
+            //收款(调账)调出,则需要减去相应金额。
+            foreach (var reduceBill in reduceBillList)
+            {
+                row = this.DataTable.NewRow();
+                row["Date"] = reduceBill.CreateDate;
+                row["BillOriginalCoin"] = reduceBill.AlreadySplitOriginalCoin * -1;
+                row["BillCNY"] = reduceBill.AlreadySplitCNY * -1;
+                if (reduceBill.Currency == "USD")
+                {
+                    exchangeRate = reduceBill.ExchangeRate;
+                    row["BillUSD"] = reduceBill.AlreadySplitOriginalCoin * -1;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(reduceBill.Date, dateExchangeRates, (Decimal)budget.ExchangeRate);
+                    row["BillUSD"] = Math.Round(reduceBill.AlreadySplitCNY / exchangeRate, 2) * -1;
+                }
+                row["BillExchangeRate"] = exchangeRate;
+                var details = adjustDetailList?.Where(o => o.PID == reduceBill.ID && o.Type == reduceBill.Type);
+                preix = details.Count() > 1 ? "分别" : "";
+                contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
+                row["AdjustmentType"] = (int)AdjustmentType.收款 + 1;
+                if (supplierList.Any(s => s == reduceBill.Name))
+                {
+                    row["BillRemitter"] = $"【暂付退回】收款由此合同{preix}调入至{contracts}";
+                    row["IsSupplier"] = true;
+                }
+                else
+                {
+                    row["BillRemitter"] = $"收款由此合同{preix}调入至{contracts}";
+                    row["IsSupplier"] = false;
+                }
+                this.DataTable.Rows.Add(row);
+            }
+
+            var plusBillList = detailList.Where(o => o.Type == AdjustmentType.收款);
+            //收款(调账)调入，则许哟啊加上相应金额
+            foreach (var plusBill in plusBillList)
+            {
+                row = this.DataTable.NewRow();
+                row["Date"] = plusBill.OperatorDate;
+                row["BillOriginalCoin"] = plusBill.OriginalCoin;
+                if (plusBill.Currency == "USD")
+                {
+                    exchangeRate = plusBill.ExchangeRate;
+                    row["BillUSD"] = plusBill.OriginalCoin;
+                }
+                else
+                {
+                    exchangeRate = ExchageRateUtil.GetExchageRate(plusBill.Date, dateExchangeRates, (Decimal)budget.ExchangeRate);
+                    row["BillUSD"] = Math.Round(plusBill.CNY / exchangeRate, 2);
+                }
+                row["BillCNY"] = plusBill.CNY;
+                row["BillExchangeRate"] = exchangeRate;
+                if (supplierList.Any(s => s == plusBill.Name))
+                {
+                    row["BillRemitter"] = $"【暂付退回】收款由【{plusBill.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
+                    row["IsSupplier"] = true;
+                }
+                else
+                {
+                    row["BillRemitter"] = $"收款由【{plusBill.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
+                    row["IsSupplier"] = false;
+                }
+                row["AdjustmentType"] = ((int)AdjustmentType.收款 + 1) * 10;
+                this.DataTable.Rows.Add(row);
             }
 
             //发票表
@@ -449,7 +484,9 @@ namespace BudgetSystem
             DataRow row;
             decimal originalCoinAmount = 0;//应收原币
             decimal AllTotalAmount = 0;//应收款，即发票金额
+            decimal TotalBillCNY = 0;//实收人民币金额总计
             decimal BillCNY = 0;//实收人民币金额
+            decimal BackCNY = 0;//暂付退回，即客户名与供应商同名的收款
             decimal BillOriginalCoin = 0;//实收原币金额。
             decimal totalPaymentCNY = 0;//已付金额
             decimal needPayment = 0;//已收发票
@@ -475,7 +512,12 @@ namespace BudgetSystem
                 feedMoneyAmount += GetDecimal(row, "FeedMoney");
                 commissionAmount += GetDecimal(row, "ICommission");
                 BillOriginalCoin = BillOriginalCoin + GetDecimal(row, "BillUSD");//2021-01-07由BillOriginalCoin改为BillUSD，是以原币改为美元合计。
-                BillCNY = BillCNY + GetDecimal(row, "BillCNY");
+                BillCNY = GetDecimal(row, "BillCNY");
+                if (GetBool(row, "IsSupplier"))
+                {
+                    BackCNY += BillCNY;
+                }
+                TotalBillCNY = TotalBillCNY + BillCNY;
                 //销售成本=已收供方发票/(1+退税率)=Payment/(1+TaxRebateRate)
                 if (!row.IsNull("Payment"))
                 {
@@ -543,9 +585,9 @@ namespace BudgetSystem
             this.OriginalCoinAmount = originalCoinAmount;
             this.CNYAmount = AllTotalAmount;
 
-            this.ReceivableOriginalCoin = Math.Round((AllTotalAmount - BillCNY) / exchangeRate, 2);//应收原币余额
-            this.ReceivableCNY = AllTotalAmount - BillCNY;//应收人民币余额
-            this.BalancePayable = needPayment - totalPaymentCNY; //应付余额=已收供方发票-已付供方货款
+            this.ReceivableOriginalCoin = Math.Round((AllTotalAmount - TotalBillCNY) / exchangeRate, 2);//应收原币余额
+            this.ReceivableCNY = AllTotalAmount - TotalBillCNY;//应收人民币余额
+            this.BalancePayable = needPayment - totalPaymentCNY + BackCNY; //应付余额=已收供方发票-已付供方货款+（与供应商同名收款，暂付退回）
             this.ProfitMargin = totalProfit - totalSalesProfit;//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             this.Profit = totalProfit;
             this.SalesProfit = totalSalesProfit;
@@ -556,7 +598,8 @@ namespace BudgetSystem
             decimal originalCoinAmountAfter = originalCoinAmount;//应收原币
             decimal AllTotalAmountAfter = AllTotalAmount;//应收款，即发票金额
             decimal BillOriginalCoinAfter = BillOriginalCoin;//实收原币金额。
-            decimal BillCNYAfter = BillCNY;//实收人民币金额
+            decimal TotalBillCNYAfter = TotalBillCNY;//实收人民币金额总计
+            decimal BackCNYAfter = BackCNY;//暂付退回，即客户名与供应商同名的收款
             decimal totalPaymentCNYAfter = totalPaymentCNY;//已付金额
             decimal needPaymentAfter = needPayment;//已收发票
             decimal totalProfitAfter = totalProfit;//总实际利润
@@ -572,8 +615,11 @@ namespace BudgetSystem
             if (accountAdjustment?.Type == AdjustmentType.收款)
             {
                 BillOriginalCoinAfter += (0 - accountAdjustment.AlreadySplitOriginalCoin);//已收金额，如果调出应当减去金额。
-                BillCNYAfter += (0 - accountAdjustment.AlreadySplitCNY);// 已收金额，如果调出应当减去金额。
-
+                TotalBillCNYAfter += (0 - accountAdjustment.AlreadySplitCNY);// 已收金额，如果调出应当减去金额。
+                if (supplierList.Any(o => o == accountAdjustment.Name))
+                {
+                    BackCNYAfter += (0 - accountAdjustment.AlreadySplitCNY);
+                }
             }
             else if (accountAdjustment?.Type == AdjustmentType.付款)
             {
@@ -635,12 +681,22 @@ namespace BudgetSystem
                 if (!adjustmentDetail.IsDelete)
                 {
                     BillOriginalCoinAfter += adjustmentDetail.OriginalCoin;//已收金额，如果调入应当加金额。
-                    BillCNYAfter += adjustmentDetail.CNY;// 已收金额，如果调进来应当加上金额。
+                    TotalBillCNYAfter += adjustmentDetail.CNY;// 已收金额，如果调进来应当加上金额。
+
+                    if (supplierList.Any(o => o == adjustmentDetail.Name))
+                    {
+                        BackCNYAfter += adjustmentDetail.CNY;
+                    }
                 }
                 else//如果是删除，则需取反
                 {
                     BillOriginalCoinAfter += (0 - adjustmentDetail.OriginalCoin);
-                    BillCNYAfter += (0 - adjustmentDetail.CNY);
+                    TotalBillCNYAfter += (0 - adjustmentDetail.CNY);
+
+                    if (supplierList.Any(o => o == adjustmentDetail.Name))
+                    {
+                        BackCNYAfter += (0 - adjustmentDetail.CNY);
+                    }
                 }
 
             }
@@ -763,9 +819,9 @@ namespace BudgetSystem
             this.CNYAmountAfter = AllTotalAmountAfter;//应收原币
             this.OriginalCoinAmountAfter = originalCoinAmountAfter;//应收原币
 
-            this.ReceivableOriginalCoinAfter = Math.Round((AllTotalAmountAfter - BillCNYAfter) / exchangeRate, 2);//应收原币余额
-            this.ReceivableCNYAfter = AllTotalAmountAfter - BillCNYAfter;//应收人民币
-            this.BalancePayableAfter = needPaymentAfter - totalPaymentCNYAfter; //应付余额=已收供方发票-已付供方货款
+            this.ReceivableOriginalCoinAfter = Math.Round((AllTotalAmountAfter - TotalBillCNYAfter) / exchangeRate, 2);//应收原币余额
+            this.ReceivableCNYAfter = AllTotalAmountAfter - TotalBillCNYAfter;//应收人民币
+            this.BalancePayableAfter = needPaymentAfter - totalPaymentCNYAfter + BackCNYAfter; //应付余额=已收供方发票-已付供方货款
             this.ProfitMarginAfter = totalProfitAfter - totalSalesProfitAfter;//"利润差值"实际利润-销售利润(Profit-SalesProfit)
             this.ProfitAfter = totalProfitAfter;
             this.SalesProfitAfter = totalSalesProfitAfter;
@@ -775,7 +831,7 @@ namespace BudgetSystem
                 BudgetId = this.CurrentBudget.ID,
                 ContractNO = this.CurrentBudget.ContractNO,
                 BillOriginalCoin = BillOriginalCoin,
-                BillCNY = BillCNY,
+                BillCNY = TotalBillCNY,
                 SalesProfit = this.SalesProfit,
                 Profit = this.Profit,
                 BalancePayable = needPayment,
@@ -789,7 +845,7 @@ namespace BudgetSystem
                 PaymentOriginalCoinAfter = Math.Round(totalPaymentCNYAfter / exchangeRate, 2),
 
                 BillOriginalCoinAfter = BillOriginalCoinAfter,
-                BillCNYAfter = BillCNYAfter,
+                BillCNYAfter = TotalBillCNYAfter,
                 SalesProfitAfter = this.SalesProfitAfter,
                 ProfitAfter = this.ProfitAfter,
                 BalancePayableAfter = needPaymentAfter,
@@ -825,14 +881,26 @@ namespace BudgetSystem
             }
         }
 
+        private bool GetBool(DataRow row, string column, bool defaultValue = false)
+        {
+            if (row.IsNull(column))
+            {
+                return defaultValue;
+            }
+            else
+            {
+                return (bool)row[column];
+            }
+        }
+
         private DataTable CreateDataTable()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("AdjustmentType", typeof(int));//是否调账
             dt.Columns.Add("Date", typeof(DateTime));//日期
             //报关单表
-            dt.Columns.Add("ExportAmount", typeof(decimal));//报关原币（出口金额）
-            dt.Columns.Add("USAExportAmount", typeof(decimal));//报关原币折算美元
+            dt.Columns.Add("CNYOffshoreTotalPrice", typeof(decimal));//报关原币（出口金额）
+            dt.Columns.Add("USDOffshoreTotalPrice", typeof(decimal));//报关原币折算美元
 
             //实际收款单表+银行流水表
             dt.Columns.Add("BillOriginalCoin", typeof(decimal));//实收原币
@@ -840,6 +908,7 @@ namespace BudgetSystem
             dt.Columns.Add("BillCNY", typeof(decimal));//实收人民币
             dt.Columns.Add("BillExchangeRate", typeof(decimal));//实收汇率
             dt.Columns.Add("BillRemitter", typeof(string));//付款公司
+            dt.Columns.Add("IsSupplier", typeof(bool));//是否为供应商，付款公司与供应商相同，则认为是供应商暂付暂收。
             //付款单表
             dt.Columns.Add("PaymentOriginalCoin", typeof(decimal));//已付原币金额
             dt.Columns.Add("PaymentUSD", typeof(decimal));//已付原币金额（暂未使用）

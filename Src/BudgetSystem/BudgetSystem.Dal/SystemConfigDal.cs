@@ -14,18 +14,20 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"SELECT  `Value` FROM SystemConfig  
                                     WHERE Name = @Name";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Transaction = tran;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return obj.ToString();
-            }
-            else
-            {
-                return null;
+                command.CommandText = selectSql;
+                command.Transaction = tran;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Name", name));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return obj.ToString();
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         public void InsertOrModifySystemConfig(string name, string value, IDbConnection con, IDbTransaction tran = null)

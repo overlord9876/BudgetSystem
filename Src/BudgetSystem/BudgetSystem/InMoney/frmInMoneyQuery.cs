@@ -428,7 +428,7 @@ namespace BudgetSystem.InMoney
             }
             this.gcInMoney.DataSource = bsList;
 
-            this.gvInMoney.BestFitColumns();
+            //this.gvInMoney.BestFitColumns();
         }
 
         protected override void InitGridViewAction()

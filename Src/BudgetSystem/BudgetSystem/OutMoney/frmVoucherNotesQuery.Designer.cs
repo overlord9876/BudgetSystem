@@ -30,15 +30,31 @@
         {
             this.gcDeclarationform = new DevExpress.XtraGrid.GridControl();
             this.gvDeclarationform = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcExportDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOverseas = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTradeMode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPort = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPriceClause = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCountry = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProdNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcProdName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDealCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDealUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcFinalCountry = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcDomesticSource = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcOffshoreTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUSDOffshoreTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCNYOffshoreTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUpdateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDeclarationform)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +67,7 @@
             this.gcDeclarationform.MainView = this.gvDeclarationform;
             this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gcDeclarationform.Name = "gcDeclarationform";
-            this.gcDeclarationform.Size = new System.Drawing.Size(1147, 723);
+            this.gcDeclarationform.Size = new System.Drawing.Size(1704, 805);
             this.gcDeclarationform.TabIndex = 1;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -59,100 +75,278 @@
             // gvDeclarationform
             // 
             this.gvDeclarationform.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn3,
-            this.gridColumn1,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn10,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn2,
-            this.gridColumn6});
+            this.gcNO,
+            this.gcContractNO,
+            this.gcExportDate,
+            this.gcOverseas,
+            this.gcTradeMode,
+            this.gcPort,
+            this.gcCurrency,
+            this.gcPriceClause,
+            this.gcCountry,
+            this.gcProdNumber,
+            this.gcProdName,
+            this.gcModel,
+            this.gcDealCount,
+            this.gcDealUnit,
+            this.gcPrice,
+            this.gcTotalPrice,
+            this.gcFinalCountry,
+            this.gcDomesticSource,
+            this.gcOffshoreTotalPrice,
+            this.gcUSDOffshoreTotalPrice,
+            this.gcCNYOffshoreTotalPrice,
+            this.gcCreateUserRealName,
+            this.gcCreateDate,
+            this.gcUpdateUserRealName,
+            this.gcUpdateDate});
             this.gvDeclarationform.GridControl = this.gcDeclarationform;
             this.gvDeclarationform.Name = "gvDeclarationform";
             this.gvDeclarationform.OptionsBehavior.Editable = false;
+            this.gvDeclarationform.OptionsView.ColumnAutoWidth = false;
+            this.gvDeclarationform.OptionsView.ShowFooter = true;
             this.gvDeclarationform.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn3
+            // gcNO
             // 
-            this.gridColumn3.Caption = "合同号";
-            this.gridColumn3.FieldName = "ContractNO";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gcNO.Caption = "海关编号";
+            this.gcNO.FieldName = "NO";
+            this.gcNO.Name = "gcNO";
+            this.gcNO.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "NO", "合计：{0:d}")});
+            this.gcNO.Visible = true;
+            this.gcNO.VisibleIndex = 0;
+            this.gcNO.Width = 121;
             // 
-            // gridColumn1
+            // gcContractNO
             // 
-            this.gridColumn1.Caption = "报关单号";
-            this.gridColumn1.FieldName = "NO";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gcContractNO.Caption = "合同号";
+            this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.Name = "gcContractNO";
+            this.gcContractNO.Visible = true;
+            this.gcContractNO.VisibleIndex = 1;
+            this.gcContractNO.Width = 62;
             // 
-            // gridColumn4
+            // gcExportDate
             // 
-            this.gridColumn4.Caption = "报关币种";
-            this.gridColumn4.FieldName = "Currency";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
+            this.gcExportDate.Caption = "出口日期";
+            this.gcExportDate.DisplayFormat.FormatString = "d";
+            this.gcExportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcExportDate.FieldName = "ExportDate";
+            this.gcExportDate.Name = "gcExportDate";
+            this.gcExportDate.Visible = true;
+            this.gcExportDate.VisibleIndex = 2;
+            this.gcExportDate.Width = 62;
             // 
-            // gridColumn5
+            // gcOverseas
             // 
-            this.gridColumn5.Caption = "出口金额";
-            this.gridColumn5.FieldName = "ExportAmount";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
+            this.gcOverseas.Caption = "境外收发货人企业名称英文";
+            this.gcOverseas.FieldName = "Overseas";
+            this.gcOverseas.Name = "gcOverseas";
+            this.gcOverseas.Visible = true;
+            this.gcOverseas.VisibleIndex = 3;
+            this.gcOverseas.Width = 62;
             // 
-            // gridColumn10
+            // gcTradeMode
             // 
-            this.gridColumn10.Caption = "汇率";
-            this.gridColumn10.FieldName = "ExchangeRate";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
+            this.gcTradeMode.Caption = "监管方式";
+            this.gcTradeMode.FieldName = "TradeMode";
+            this.gcTradeMode.Name = "gcTradeMode";
+            this.gcTradeMode.Visible = true;
+            this.gcTradeMode.VisibleIndex = 4;
+            this.gcTradeMode.Width = 62;
             // 
-            // gridColumn7
+            // gcPort
             // 
-            this.gridColumn7.Caption = "出口日期";
-            this.gridColumn7.FieldName = "ExportDate";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 5;
+            this.gcPort.Caption = "指运港";
+            this.gcPort.FieldName = "Port";
+            this.gcPort.Name = "gcPort";
+            this.gcPort.Visible = true;
+            this.gcPort.VisibleIndex = 5;
+            this.gcPort.Width = 62;
             // 
-            // gridColumn8
+            // gcCurrency
             // 
-            this.gridColumn8.Caption = "合同号";
-            this.gridColumn8.FieldName = "ContractNO";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
+            this.gcCurrency.Caption = "币制";
+            this.gcCurrency.FieldName = "Currency";
+            this.gcCurrency.Name = "gcCurrency";
+            this.gcCurrency.Visible = true;
+            this.gcCurrency.VisibleIndex = 6;
+            this.gcCurrency.Width = 62;
             // 
-            // gridColumn2
+            // gcPriceClause
             // 
-            this.gridColumn2.Caption = "录入人";
-            this.gridColumn2.FieldName = "CreateUserRealName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 7;
+            this.gcPriceClause.Caption = "成交方式";
+            this.gcPriceClause.FieldName = "PriceClause";
+            this.gcPriceClause.Name = "gcPriceClause";
+            this.gcPriceClause.Visible = true;
+            this.gcPriceClause.VisibleIndex = 7;
+            this.gcPriceClause.Width = 62;
             // 
-            // gridColumn6
+            // gcCountry
             // 
-            this.gridColumn6.Caption = "录入时间";
-            this.gridColumn6.DisplayFormat.FormatString = "g";
-            this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn6.FieldName = "CreateDate";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
-            this.gridColumn6.Width = 120;
+            this.gcCountry.Caption = "贸易国别地区";
+            this.gcCountry.FieldName = "Country";
+            this.gcCountry.Name = "gcCountry";
+            this.gcCountry.Visible = true;
+            this.gcCountry.VisibleIndex = 8;
+            this.gcCountry.Width = 101;
+            // 
+            // gcProdNumber
+            // 
+            this.gcProdNumber.Caption = "商品编号";
+            this.gcProdNumber.FieldName = "ProdNumber";
+            this.gcProdNumber.Name = "gcProdNumber";
+            this.gcProdNumber.Visible = true;
+            this.gcProdNumber.VisibleIndex = 9;
+            this.gcProdNumber.Width = 62;
+            // 
+            // gcProdName
+            // 
+            this.gcProdName.Caption = "商品名称";
+            this.gcProdName.FieldName = "ProdName";
+            this.gcProdName.Name = "gcProdName";
+            this.gcProdName.Visible = true;
+            this.gcProdName.VisibleIndex = 10;
+            this.gcProdName.Width = 62;
+            // 
+            // gcModel
+            // 
+            this.gcModel.Caption = "规格型号";
+            this.gcModel.FieldName = "Model";
+            this.gcModel.Name = "gcModel";
+            this.gcModel.Visible = true;
+            this.gcModel.VisibleIndex = 11;
+            this.gcModel.Width = 62;
+            // 
+            // gcDealCount
+            // 
+            this.gcDealCount.Caption = "成交数量";
+            this.gcDealCount.FieldName = "DealCount";
+            this.gcDealCount.Name = "gcDealCount";
+            this.gcDealCount.Visible = true;
+            this.gcDealCount.VisibleIndex = 12;
+            this.gcDealCount.Width = 62;
+            // 
+            // gcDealUnit
+            // 
+            this.gcDealUnit.Caption = "成交计量单位";
+            this.gcDealUnit.FieldName = "DealUnit";
+            this.gcDealUnit.Name = "gcDealUnit";
+            this.gcDealUnit.Visible = true;
+            this.gcDealUnit.VisibleIndex = 13;
+            this.gcDealUnit.Width = 62;
+            // 
+            // gcPrice
+            // 
+            this.gcPrice.Caption = "单价";
+            this.gcPrice.FieldName = "Price";
+            this.gcPrice.Name = "gcPrice";
+            this.gcPrice.Visible = true;
+            this.gcPrice.VisibleIndex = 14;
+            this.gcPrice.Width = 62;
+            // 
+            // gcTotalPrice
+            // 
+            this.gcTotalPrice.Caption = "总价";
+            this.gcTotalPrice.FieldName = "TotalPrice";
+            this.gcTotalPrice.Name = "gcTotalPrice";
+            this.gcTotalPrice.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcTotalPrice.Visible = true;
+            this.gcTotalPrice.VisibleIndex = 15;
+            this.gcTotalPrice.Width = 62;
+            // 
+            // gcFinalCountry
+            // 
+            this.gcFinalCountry.Caption = "最终目的国地区";
+            this.gcFinalCountry.FieldName = "FinalCountry";
+            this.gcFinalCountry.Name = "gcFinalCountry";
+            this.gcFinalCountry.Visible = true;
+            this.gcFinalCountry.VisibleIndex = 16;
+            this.gcFinalCountry.Width = 62;
+            // 
+            // gcDomesticSource
+            // 
+            this.gcDomesticSource.Caption = "境内货源地";
+            this.gcDomesticSource.FieldName = "DomesticSource";
+            this.gcDomesticSource.Name = "gcDomesticSource";
+            this.gcDomesticSource.Visible = true;
+            this.gcDomesticSource.VisibleIndex = 17;
+            this.gcDomesticSource.Width = 62;
+            // 
+            // gcOffshoreTotalPrice
+            // 
+            this.gcOffshoreTotalPrice.Caption = "离岸价";
+            this.gcOffshoreTotalPrice.FieldName = "OffshoreTotalPrice";
+            this.gcOffshoreTotalPrice.Name = "gcOffshoreTotalPrice";
+            this.gcOffshoreTotalPrice.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcOffshoreTotalPrice.Visible = true;
+            this.gcOffshoreTotalPrice.VisibleIndex = 18;
+            this.gcOffshoreTotalPrice.Width = 62;
+            // 
+            // gcUSDOffshoreTotalPrice
+            // 
+            this.gcUSDOffshoreTotalPrice.Caption = "美元离岸价";
+            this.gcUSDOffshoreTotalPrice.FieldName = "USDOffshoreTotalPrice";
+            this.gcUSDOffshoreTotalPrice.Name = "gcUSDOffshoreTotalPrice";
+            this.gcUSDOffshoreTotalPrice.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcUSDOffshoreTotalPrice.Visible = true;
+            this.gcUSDOffshoreTotalPrice.VisibleIndex = 19;
+            this.gcUSDOffshoreTotalPrice.Width = 62;
+            // 
+            // gcCNYOffshoreTotalPrice
+            // 
+            this.gcCNYOffshoreTotalPrice.Caption = "人民币离岸价";
+            this.gcCNYOffshoreTotalPrice.FieldName = "CNYOffshoreTotalPrice";
+            this.gcCNYOffshoreTotalPrice.Name = "gcCNYOffshoreTotalPrice";
+            this.gcCNYOffshoreTotalPrice.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.gcCNYOffshoreTotalPrice.Visible = true;
+            this.gcCNYOffshoreTotalPrice.VisibleIndex = 20;
+            this.gcCNYOffshoreTotalPrice.Width = 62;
+            // 
+            // gcCreateUserRealName
+            // 
+            this.gcCreateUserRealName.Caption = "录入人";
+            this.gcCreateUserRealName.FieldName = "CreateUserRealName";
+            this.gcCreateUserRealName.Name = "gcCreateUserRealName";
+            this.gcCreateUserRealName.Visible = true;
+            this.gcCreateUserRealName.VisibleIndex = 21;
+            this.gcCreateUserRealName.Width = 62;
+            // 
+            // gcCreateDate
+            // 
+            this.gcCreateDate.Caption = "录入时间";
+            this.gcCreateDate.DisplayFormat.FormatString = "d";
+            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 22;
+            this.gcCreateDate.Width = 62;
+            // 
+            // gcUpdateUserRealName
+            // 
+            this.gcUpdateUserRealName.Caption = "修改人";
+            this.gcUpdateUserRealName.FieldName = "UpdateUserRealName";
+            this.gcUpdateUserRealName.Name = "gcUpdateUserRealName";
+            this.gcUpdateUserRealName.Width = 62;
+            // 
+            // gcUpdateDate
+            // 
+            this.gcUpdateDate.Caption = "修改时间";
+            this.gcUpdateDate.FieldName = "UpdateDate";
+            this.gcUpdateDate.Name = "gcUpdateDate";
+            this.gcUpdateDate.Width = 100;
             // 
             // frmVoucherNotesQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 723);
+            this.ClientSize = new System.Drawing.Size(1704, 805);
             this.Controls.Add(this.gcDeclarationform);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmVoucherNotesQuery";
@@ -167,14 +361,30 @@
 
         private DevExpress.XtraGrid.GridControl gcDeclarationform;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDeclarationform;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gcNO;
+        private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
+        private DevExpress.XtraGrid.Columns.GridColumn gcExportDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcOverseas;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPort;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCurrency;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPriceClause;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCountry;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTradeMode;
+        private DevExpress.XtraGrid.Columns.GridColumn gcProdNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn gcProdName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcModel;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDealCount;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDealUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcFinalCountry;
+        private DevExpress.XtraGrid.Columns.GridColumn gcDomesticSource;
+        private DevExpress.XtraGrid.Columns.GridColumn gcOffshoreTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcUSDOffshoreTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCNYOffshoreTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateUserRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcUpdateUserRealName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcUpdateDate;
     }
 }

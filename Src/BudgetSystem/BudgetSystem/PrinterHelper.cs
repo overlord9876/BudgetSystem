@@ -32,17 +32,22 @@ namespace BudgetSystem
             printableComponentLink.Component = printControl;
             // Set the paper orientation to Landscape.
             printableComponentLink.Landscape = isPrintLandscape;
-            printableComponentLink.PaperKind = paperKind;
             if (paperKind == PaperKind.Custom)
             {
                 printableComponentLink.PaperKind = PaperKind.Custom;
-                printableComponentLink.CustomPaperSize = new System.Drawing.Size((int)(210 * 100 / 25.4), (int)(139.8 * 100 / 25.4 ));
+                printableComponentLink.CustomPaperSize = new System.Drawing.Size((int)(210 * 100 / 25.4), (int)(139.8 * 100 / 25.4));
 
                 printableComponentLink.Margins = new System.Drawing.Printing.Margins(50, 10, 10, 10);
             }
             else
             {
-                printableComponentLink.Margins = new System.Drawing.Printing.Margins(10, 10, 10, 10);
+                printableComponentLink.PaperKind = paperKind;
+                printableComponentLink.PaperName = "A4";
+                printableComponentLink.Margins = new System.Drawing.Printing.Margins(10, 10, 100, 10);
+                var conttrol = (printControl as DevExpress.XtraLayout.LayoutControl);
+                conttrol.Size = new System.Drawing.Size(1200, 1700);
+                printableComponentLink.Component = conttrol;
+                printableComponentLink.SkipArea = BrickModifier.MarginalFooter;
             }
             if (isShowPreview)
             {
@@ -50,7 +55,7 @@ namespace BudgetSystem
             }
             else
             {
-                printableComponentLink.Print("");
+                printableComponentLink.PrintDlg();
             }
             //  printableComponentLink.ShowPreview(new UserLookAndFeel(printControl) { UseDefaultLookAndFeel=false, SkinName = "Whileprint" });
         }

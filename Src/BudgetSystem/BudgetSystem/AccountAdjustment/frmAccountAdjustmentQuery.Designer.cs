@@ -197,10 +197,10 @@
             // 
             // gcCreateDate
             // 
-            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.Caption = "流程审批结束时间";
             this.gcCreateDate.DisplayFormat.FormatString = "g";
             this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.FieldName = "CloseDateTime";
             this.gcCreateDate.Name = "gcCreateDate";
             this.gcCreateDate.Visible = true;
             this.gcCreateDate.VisibleIndex = 13;

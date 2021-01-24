@@ -32,14 +32,14 @@ namespace BudgetSystem
 
             SetLayoutControlStyle();
             InitData();
-            this.textEdit5.Properties.ReadOnly = true;
-            this.textEdit6.Properties.ReadOnly = true;
+            this.txtCreateDate.Properties.ReadOnly = true;
+            this.txtCreateUser.Properties.ReadOnly = true;
             if (this.WorkModel == EditFormWorkModels.New)
             {
                 this.Text = "新增报关单信息";
 
-                this.textEdit5.EditValue = datetimeNow;
-                this.textEdit6.Text = RunInfo.Instance.CurrentUser.UserName;
+                this.txtCreateDate.EditValue = datetimeNow;
+                this.txtCreateUser.Text = RunInfo.Instance.CurrentUser.UserName;
             }
             else if (this.WorkModel == EditFormWorkModels.Modify)
             {
@@ -50,12 +50,7 @@ namespace BudgetSystem
             {
                 this.Text = "查看报关单信息";
                 BindDeclarationform(this.CurrentDeclarationform.ID);
-                this.cboBudget.Properties.ReadOnly = true;
-
-                this.txtNO.Properties.ReadOnly = true;
-                this.txtExportAmount.Properties.ReadOnly = true;
-                this.txtExportDate.Properties.ReadOnly = true;
-                this.cboCurrency.Properties.ReadOnly = true;
+                SetReadOnly();
             }
         }
 
@@ -65,16 +60,34 @@ namespace BudgetSystem
             List<Budget> budgetList = (List<Budget>)this.cboBudget.Properties.DataSource;
             if (budgetList != null)
             {
-                this.cboBudget.EditValue = budgetList.Find(o => o.ID== CurrentDeclarationform.BudgetID);
+                this.cboBudget.EditValue = budgetList.Find(o => o.ID == CurrentDeclarationform.BudgetID);
             }
 
             this.txtNO.EditValue = CurrentDeclarationform.NO;
-            this.txtExportAmount.EditValue = CurrentDeclarationform.ExportAmount;
             this.txtExportDate.EditValue = CurrentDeclarationform.ExportDate;
-            this.txtExchangeRate.EditValue = CurrentDeclarationform.ExchangeRate;
-            this.textEdit5.EditValue = CurrentDeclarationform.CreateDate;
-            this.textEdit6.EditValue = CurrentDeclarationform.CreateUser;
-            this.cboCurrency.Text = CurrentDeclarationform.Currency;
+            this.txtOverseas.EditValue = CurrentDeclarationform.Overseas;
+            this.txtTradeMode.EditValue = CurrentDeclarationform.TradeMode;
+            this.txtPort.EditValue = CurrentDeclarationform.Port;
+            this.cboCurrency.EditValue = CurrentDeclarationform.Currency;
+            this.txtPriceClause.EditValue = CurrentDeclarationform.PriceClause;
+            this.txtCountry.EditValue = CurrentDeclarationform.Country;
+            this.txtProdNumber.EditValue = CurrentDeclarationform.ProdNumber;
+            this.txtProdName.EditValue = CurrentDeclarationform.ProdName;
+            this.txtModel.EditValue = CurrentDeclarationform.Model;
+            this.txtDealCount.EditValue = CurrentDeclarationform.DealCount;
+            this.txtDealUnit.EditValue = CurrentDeclarationform.DealUnit;
+            this.txtPrice.EditValue = CurrentDeclarationform.Price;
+            this.txtTotalPrice.EditValue = CurrentDeclarationform.TotalPrice;
+            this.txtFinalCountry.EditValue = CurrentDeclarationform.FinalCountry;
+            this.txtDomesticSource.EditValue = CurrentDeclarationform.DomesticSource;
+            this.txtOffshoreTotalPrice.EditValue = CurrentDeclarationform.OffshoreTotalPrice;
+            this.txtUSDOffshoreTotalPrice.EditValue = CurrentDeclarationform.USDOffshoreTotalPrice;
+            this.txtCNYOffshoreTotalPrice.EditValue = CurrentDeclarationform.CNYOffshoreTotalPrice;
+            this.txtUpdateUser.EditValue = CurrentDeclarationform.UpdateUserRealName;
+            this.txtUpdateDate.EditValue = CurrentDeclarationform.UpdateDate;
+            this.txtCreateDate.EditValue = CurrentDeclarationform.CreateDate;
+            this.txtCreateUser.EditValue = CurrentDeclarationform.CreateUserRealName;
+            this.cboCurrency.EditValue = CurrentDeclarationform.Currency;
         }
 
         private void CheckInputData()
@@ -83,7 +96,7 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtNO, "请输入报关单号");
             }
-            else if (dm.CheckNumber(this.txtNO.Text.Trim()))
+            else if (dm.CheckNumber(this.txtNO.Text.Trim(), (double)this.txtDealCount.Value, this.txtTotalPrice.Value))
             {
                 this.dxErrorProvider1.SetError(this.txtNO, "报关单号存在重复");
             }
@@ -92,13 +105,9 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.cboCurrency, "请选择报关币种");
             }
-            if (this.txtExportAmount.Value <= 0)
+            if (this.txtOffshoreTotalPrice.Value <= 0)
             {
-                this.dxErrorProvider1.SetError(this.txtExportAmount, "请输入出口金额");
-            }
-            if (this.txtExchangeRate.Value <= 0)
-            {
-                this.dxErrorProvider1.SetError(this.txtExchangeRate, "请输入汇率");
+                this.dxErrorProvider1.SetError(this.txtOffshoreTotalPrice, "请输入出口金额");
             }
             if (!(this.cboBudget.EditValue is Budget))
             {
@@ -116,21 +125,38 @@ namespace BudgetSystem
         private void FillData()
         {
 
-            if (CurrentDeclarationform == null)
+            if (this.CurrentDeclarationform == null)
             {
-                CurrentDeclarationform = new Declarationform();
+                this.CurrentDeclarationform = new Declarationform();
+                this.CurrentDeclarationform.CreateDate = datetimeNow;
+                this.CurrentDeclarationform.CreateUser = RunInfo.Instance.CurrentUser.UserName;
+                this.CurrentDeclarationform.CreateUserRealName = RunInfo.Instance.CurrentUser.RealName;
             }
             this.CurrentDeclarationform.ContractNO = (this.cboBudget.EditValue as Budget).ContractNO;
-
-            CurrentDeclarationform.NO = this.txtNO.Text;
-            CurrentDeclarationform.ExportAmount = this.txtExportAmount.Value;
-            CurrentDeclarationform.ExchangeRate = this.txtExchangeRate.FloatValue;
-            CurrentDeclarationform.ExportDate = DateTime.Parse(this.txtExportDate.EditValue.ToString());
-            CurrentDeclarationform.CreateDate = DateTime.Parse(this.textEdit5.EditValue.ToString());
-            CurrentDeclarationform.CreateUser = this.textEdit6.Text;
-            CurrentDeclarationform.Currency = this.cboCurrency.EditValue.ToString();
-            CurrentDeclarationform.BudgetID = (this.cboBudget.EditValue as Budget).ID;
-
+            this.CurrentDeclarationform.NO = this.txtNO.Text;
+            this.CurrentDeclarationform.BudgetID = (this.cboBudget.EditValue as Budget).ID;
+            this.CurrentDeclarationform.ExportDate = DateTime.Parse(this.txtExportDate.EditValue.ToString());
+            this.CurrentDeclarationform.Overseas = this.txtOverseas.Text;
+            this.CurrentDeclarationform.TradeMode = this.txtTradeMode.Text;
+            this.CurrentDeclarationform.Port = this.txtPort.Text;
+            this.CurrentDeclarationform.Currency = this.cboCurrency.EditValue.ToString();
+            this.CurrentDeclarationform.PriceClause = this.txtPriceClause.Text;
+            this.CurrentDeclarationform.Country = this.txtCountry.Text;
+            this.CurrentDeclarationform.ProdNumber = this.txtProdNumber.Text;
+            this.CurrentDeclarationform.ProdName = this.txtProdName.Text;
+            this.CurrentDeclarationform.Model = this.txtModel.Text;
+            this.CurrentDeclarationform.DealCount = (double)this.txtDealCount.Value;
+            this.CurrentDeclarationform.DealUnit = this.txtDealUnit.Text;
+            this.CurrentDeclarationform.Price = this.txtPrice.Value;
+            this.CurrentDeclarationform.TotalPrice = this.txtTotalPrice.Value;
+            this.CurrentDeclarationform.FinalCountry = this.txtFinalCountry.Text;
+            this.CurrentDeclarationform.DomesticSource = this.txtDomesticSource.Text;
+            this.CurrentDeclarationform.OffshoreTotalPrice = this.txtOffshoreTotalPrice.Value;
+            this.CurrentDeclarationform.USDOffshoreTotalPrice = this.txtUSDOffshoreTotalPrice.Value;
+            this.CurrentDeclarationform.CNYOffshoreTotalPrice = this.txtCNYOffshoreTotalPrice.Value;
+            this.CurrentDeclarationform.UpdateDate = datetimeNow;
+            this.CurrentDeclarationform.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
+            this.CurrentDeclarationform.UpdateUserRealName = RunInfo.Instance.CurrentUser.RealName;
 
         }
 
@@ -147,6 +173,17 @@ namespace BudgetSystem
                 }
             }
 
+        }
+
+        private void SetReadOnly()
+        {
+            foreach (var control in this.layoutControl1.Controls)
+            {
+                if (control is BaseEdit)
+                {
+                    (control as BaseEdit).Properties.ReadOnly = true;
+                }
+            }
         }
 
         private void btnSure_Click(object sender, EventArgs e)

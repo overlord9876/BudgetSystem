@@ -101,7 +101,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("收汇调入(￥）", "BillCNYIn", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("交单调出(￥）", "InvoiceCNYOut", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("交单调入(￥）", "InvoiceCNYIn", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("录入日期", "Date");
+            base.CreateGridColumn("审批结束时间", "Date");
 
             base.CreatePivotGridField("部门", "DeptCode");
             base.CreatePivotGridField("合同编号", "ContractNO");
@@ -111,7 +111,7 @@ namespace BudgetSystem.Report
             base.CreatePivotGridField("收汇调入(￥）", "BillCNYIn", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
             base.CreatePivotGridField("交单调出(￥）", "InvoiceCNYOut", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
             base.CreatePivotGridField("交单调入(￥）", "InvoiceCNYIn", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("录入日期", "Date", valueFormatType: FormatType.DateTime, valueFormatString: "D");
+            base.CreatePivotGridField("审批结束时间", "Date", valueFormatType: FormatType.DateTime, valueFormatString: "D");
             base.CreatePivotGridDefaultRowField();
         }
     }

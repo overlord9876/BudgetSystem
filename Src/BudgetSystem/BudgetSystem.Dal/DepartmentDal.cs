@@ -44,18 +44,20 @@ namespace BudgetSystem.Dal
         {
             string selectSql = @"SELECT  b.id FROM `Department` b  
                                     WHERE ID<>@ID and Code=@Code";
-            IDbCommand command = con.CreateCommand();
-            command.CommandText = selectSql;
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
-            command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Code", code));
-            object obj = command.ExecuteScalar();
-            if (obj != null)
+            using (IDbCommand command = con.CreateCommand())
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                command.CommandText = selectSql;
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ID", id));
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Code", code));
+                object obj = command.ExecuteScalar();
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

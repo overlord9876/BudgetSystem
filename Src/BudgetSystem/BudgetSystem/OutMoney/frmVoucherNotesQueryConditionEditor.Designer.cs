@@ -1,6 +1,6 @@
 ﻿namespace BudgetSystem
 {
-    partial class frmInMoneyQueryConditionEditor
+    partial class frmVoucherNotesQueryConditionEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,10 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.deReceiptDateEnd = new DevExpress.XtraEditors.DateEdit();
-            this.deReceiptDateBegin = new DevExpress.XtraEditors.DateEdit();
-            this.txtCustomer = new DevExpress.XtraEditors.TextEdit();
+            this.deDateEnd = new DevExpress.XtraEditors.DateEdit();
+            this.deDateBegin = new DevExpress.XtraEditors.DateEdit();
+            this.txtTradeMode = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherNo = new DevExpress.XtraEditors.TextEdit();
-            this.txtState = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.cboBudget = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,27 +49,34 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtFinalCountry = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panMain)).BeginInit();
             this.panMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateEnd.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateEnd.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateBegin.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateBegin.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTradeMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtState.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinalCountry.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panMain
@@ -85,161 +85,70 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.cboBudget);
-            this.layoutControl1.Controls.Add(this.deReceiptDateEnd);
-            this.layoutControl1.Controls.Add(this.deReceiptDateBegin);
-            this.layoutControl1.Controls.Add(this.txtCustomer);
+            this.layoutControl1.Controls.Add(this.deDateEnd);
+            this.layoutControl1.Controls.Add(this.deDateBegin);
+            this.layoutControl1.Controls.Add(this.txtTradeMode);
             this.layoutControl1.Controls.Add(this.txtVoucherNo);
-            this.layoutControl1.Controls.Add(this.txtState);
+            this.layoutControl1.Controls.Add(this.cboBudget);
+            this.layoutControl1.Controls.Add(this.txtFinalCountry);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(520, 226, 803, 556);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(623, 284);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // deReceiptDateEnd
+            // deDateEnd
             // 
-            this.deReceiptDateEnd.EditValue = null;
-            this.deReceiptDateEnd.Location = new System.Drawing.Point(425, 112);
-            this.deReceiptDateEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.deReceiptDateEnd.Name = "deReceiptDateEnd";
-            this.deReceiptDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateEnd.EditValue = null;
+            this.deDateEnd.Location = new System.Drawing.Point(401, 112);
+            this.deDateEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deDateEnd.Name = "deDateEnd";
+            this.deDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deReceiptDateEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deReceiptDateEnd.Size = new System.Drawing.Size(186, 21);
-            this.deReceiptDateEnd.StyleController = this.layoutControl1;
-            this.deReceiptDateEnd.TabIndex = 9;
+            this.deDateEnd.Size = new System.Drawing.Size(210, 21);
+            this.deDateEnd.StyleController = this.layoutControl1;
+            this.deDateEnd.TabIndex = 11;
             // 
-            // deReceiptDateBegin
+            // deDateBegin
             // 
-            this.deReceiptDateBegin.EditValue = null;
-            this.deReceiptDateBegin.Location = new System.Drawing.Point(123, 112);
-            this.deReceiptDateBegin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.deReceiptDateBegin.Name = "deReceiptDateBegin";
-            this.deReceiptDateBegin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateBegin.EditValue = null;
+            this.deDateBegin.Location = new System.Drawing.Point(99, 112);
+            this.deDateBegin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deDateBegin.Name = "deDateBegin";
+            this.deDateBegin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deReceiptDateBegin.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateBegin.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deReceiptDateBegin.Size = new System.Drawing.Size(187, 21);
-            this.deReceiptDateBegin.StyleController = this.layoutControl1;
-            this.deReceiptDateBegin.TabIndex = 8;
+            this.deDateBegin.Size = new System.Drawing.Size(211, 21);
+            this.deDateBegin.StyleController = this.layoutControl1;
+            this.deDateBegin.TabIndex = 10;
             // 
-            // txtCustomer
+            // txtTradeMode
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(123, 62);
-            this.txtCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(488, 21);
-            this.txtCustomer.StyleController = this.layoutControl1;
-            this.txtCustomer.TabIndex = 7;
+            this.txtTradeMode.Location = new System.Drawing.Point(99, 37);
+            this.txtTradeMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTradeMode.Name = "txtTradeMode";
+            this.txtTradeMode.Size = new System.Drawing.Size(512, 21);
+            this.txtTradeMode.StyleController = this.layoutControl1;
+            this.txtTradeMode.TabIndex = 4;
             // 
             // txtVoucherNo
             // 
-            this.txtVoucherNo.Location = new System.Drawing.Point(123, 12);
+            this.txtVoucherNo.Location = new System.Drawing.Point(99, 87);
             this.txtVoucherNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoucherNo.Name = "txtVoucherNo";
-            this.txtVoucherNo.Size = new System.Drawing.Size(488, 21);
+            this.txtVoucherNo.Size = new System.Drawing.Size(512, 21);
             this.txtVoucherNo.StyleController = this.layoutControl1;
             this.txtVoucherNo.TabIndex = 6;
             // 
-            // txtState
-            // 
-            this.txtState.Location = new System.Drawing.Point(123, 87);
-            this.txtState.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtState.Name = "txtState";
-            this.txtState.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtState.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txtState.Size = new System.Drawing.Size(488, 21);
-            this.txtState.StyleController = this.layoutControl1;
-            this.txtState.TabIndex = 10;
-            // 
-            // layoutControlGroup1
-            // 
-            this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3,
-            this.layoutControlItem1,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6,
-            this.layoutControlItem7});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(623, 284);
-            this.layoutControlGroup1.Text = "layoutControlGroup1";
-            this.layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem3.Control = this.txtVoucherNo;
-            this.layoutControlItem3.CustomizationFormText = "银行凭证号：";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(603, 25);
-            this.layoutControlItem3.Text = "银行凭证号：";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(108, 14);
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem1.Control = this.txtCustomer;
-            this.layoutControlItem1.CustomizationFormText = "客户名称:";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 50);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(603, 25);
-            this.layoutControlItem1.Text = "客户名称:";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(108, 14);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem4.Control = this.deReceiptDateBegin;
-            this.layoutControlItem4.CustomizationFormText = "收款日期（开始）：";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 100);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(302, 164);
-            this.layoutControlItem4.Text = "收款日期（开始）：";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(108, 14);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem5.Control = this.deReceiptDateEnd;
-            this.layoutControlItem5.CustomizationFormText = "收款日期（截止）：";
-            this.layoutControlItem5.Location = new System.Drawing.Point(302, 100);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(301, 164);
-            this.layoutControlItem5.Text = "收款日期（截止）：";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(108, 14);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem6.Control = this.txtState;
-            this.layoutControlItem6.CustomizationFormText = "状态：";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 75);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(603, 25);
-            this.layoutControlItem6.Text = "状态：";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(108, 14);
-            // 
             // cboBudget
             // 
-            this.cboBudget.Location = new System.Drawing.Point(123, 37);
+            this.cboBudget.Location = new System.Drawing.Point(99, 12);
             this.cboBudget.Margin = new System.Windows.Forms.Padding(2);
             this.cboBudget.Name = "cboBudget";
             this.cboBudget.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -247,9 +156,9 @@
             this.cboBudget.Properties.NullText = "";
             this.cboBudget.Properties.PopupSizeable = false;
             this.cboBudget.Properties.View = this.searchLookUpEdit1View;
-            this.cboBudget.Size = new System.Drawing.Size(488, 21);
+            this.cboBudget.Size = new System.Drawing.Size(512, 21);
             this.cboBudget.StyleController = this.layoutControl1;
-            this.cboBudget.TabIndex = 13;
+            this.cboBudget.TabIndex = 12;
             // 
             // searchLookUpEdit1View
             // 
@@ -375,44 +284,139 @@
             this.gridColumn14.FieldName = "Profit";
             this.gridColumn14.Name = "gridColumn14";
             // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem6,
+            this.layoutControlItem7,
+            this.layoutControlItem8});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(623, 284);
+            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem1.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem1.Control = this.txtTradeMode;
+            this.layoutControlItem1.CustomizationFormText = "客户名称：";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(603, 25);
+            this.layoutControlItem1.Text = "贸易方式：";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(84, 14);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem2.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem2.Control = this.txtFinalCountry;
+            this.layoutControlItem2.CustomizationFormText = "合同号：";
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(603, 25);
+            this.layoutControlItem2.Text = "目的地囯地区：";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(84, 14);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem3.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem3.Control = this.txtVoucherNo;
+            this.layoutControlItem3.CustomizationFormText = "付款单号：";
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 75);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(603, 25);
+            this.layoutControlItem3.Text = "付款单号：";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(84, 14);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem6.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem6.Control = this.deDateBegin;
+            this.layoutControlItem6.CustomizationFormText = "开始时间：";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 100);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(302, 164);
+            this.layoutControlItem6.Text = "开始时间：";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(84, 14);
+            // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem7.Control = this.cboBudget;
-            this.layoutControlItem7.CustomizationFormText = "合同号：";
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem7.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem7.Control = this.deDateEnd;
+            this.layoutControlItem7.CustomizationFormText = "结束时间：";
+            this.layoutControlItem7.Location = new System.Drawing.Point(302, 100);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(603, 25);
-            this.layoutControlItem7.Text = "合同号：";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(108, 14);
+            this.layoutControlItem7.Size = new System.Drawing.Size(301, 164);
+            this.layoutControlItem7.Text = "结束时间：";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(84, 14);
             // 
-            // frmInMoneyQueryConditionEditor
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem8.Control = this.cboBudget;
+            this.layoutControlItem8.CustomizationFormText = "合同号：";
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(603, 25);
+            this.layoutControlItem8.Text = "合同号：";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(84, 14);
+            // 
+            // txtFinalCountry
+            // 
+            this.txtFinalCountry.Location = new System.Drawing.Point(99, 62);
+            this.txtFinalCountry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtFinalCountry.Name = "txtFinalCountry";
+            this.txtFinalCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtFinalCountry.Size = new System.Drawing.Size(512, 21);
+            this.txtFinalCountry.StyleController = this.layoutControl1;
+            this.txtFinalCountry.TabIndex = 5;
+            // 
+            // frmVoucherNotesQueryConditionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 322);
-            this.Name = "frmInMoneyQueryConditionEditor";
+            this.Margin = new System.Windows.Forms.Padding(3);
+            this.Name = "frmVoucherNotesQueryConditionEditor";
             ((System.ComponentModel.ISupportInitialize)(this.panMain)).EndInit();
             this.panMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateEnd.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deReceiptDateBegin.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateEnd.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateEnd.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateBegin.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateBegin.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTradeMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtState.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBudget.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinalCountry.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,16 +425,16 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraEditors.TextEdit txtTradeMode;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.TextEdit txtVoucherNo;
-        private DevExpress.XtraEditors.TextEdit txtCustomer;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraEditors.DateEdit deReceiptDateBegin;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraEditors.DateEdit deReceiptDateEnd;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.DateEdit deDateEnd;
+        private DevExpress.XtraEditors.DateEdit deDateBegin;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraEditors.ComboBoxEdit txtState;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraEditors.SearchLookUpEdit cboBudget;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -447,6 +451,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit txtFinalCountry;
     }
 }

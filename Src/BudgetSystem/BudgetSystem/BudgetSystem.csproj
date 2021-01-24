@@ -411,6 +411,12 @@
     <Compile Include="AccountAdjustment\frmAccountAdjustmentPrint.Designer.cs">
       <DependentUpon>frmAccountAdjustmentPrint.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesQueryConditionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutMoney\frmVoucherNotesQueryConditionEditor.Designer.cs">
+      <DependentUpon>frmVoucherNotesQueryConditionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="OutMoney\frmOutMoneyQueryConditionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -923,6 +929,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AccountAdjustment\frmAccountAdjustmentPrint.resx">
       <DependentUpon>frmAccountAdjustmentPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutMoney\frmVoucherNotesQueryConditionEditor.resx">
+      <DependentUpon>frmVoucherNotesQueryConditionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutMoney\frmOutMoneyQueryConditionEditor.resx">
       <DependentUpon>frmOutMoneyQueryConditionEditor.cs</DependentUpon>
