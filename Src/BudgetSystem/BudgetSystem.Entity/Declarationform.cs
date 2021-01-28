@@ -130,6 +130,24 @@ namespace BudgetSystem.Entity
         public string CreateUser { get; set; }
 
         /// <summary>
+        /// 业务员所在部门
+        /// </summary>
+        public string DepartmentCode { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 部门描述
+        /// </summary>
+        public string DepartmentDesc
+        {
+            get { return this.DepartmentCode + this.DepartmentName; }
+        }
+        
+        /// <summary>
         /// 录入人姓名
         /// </summary>
         public string CreateUserRealName { get; set; }

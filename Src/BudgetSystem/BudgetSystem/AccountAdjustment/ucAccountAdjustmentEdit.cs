@@ -22,6 +22,7 @@ namespace BudgetSystem.InMoney
         private SingleBudgetReportHelper reportHelper;
         private decimal valueAddedTaxRate;
         private ReceiptMgmtManager arm = new ReceiptMgmtManager();
+        private Bll.UserManager um = new UserManager();
         private InvoiceManager im = new InvoiceManager();
         private Bll.BudgetManager bm = new Bll.BudgetManager();
         private SystemConfigManager scm = new SystemConfigManager();
@@ -39,6 +40,7 @@ namespace BudgetSystem.InMoney
         private BudgetBill currentBudgetBill;
         private Invoice currentInvoice;
         private List<Budget> budgetList;
+        private List<Budget> detailBudgetList;
 
         private EditFormWorkModels _workModel;
 
@@ -201,8 +203,29 @@ namespace BudgetSystem.InMoney
                         this.currentBudgetBill = arm.GetBudgetBillBybbId(accountAdjustment.RelationID);
                     }
                 }
+                if (details != null)
+                {
+                    if (detailBudgetList == null)
+                    {
+                        detailBudgetList = new List<Budget>();
+                    }
+                    foreach (var detail in details)
+                    {
+                        var budget = bm.GetBudget(detail.BudgetID);
+                        if (budget != null)
+                        {
+                            detailBudgetList.Add(budget);
+                        }
+                    }
+                }
             }
             BindAccountAdjustment(accountAdjustment, details);
+            //if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print && accountAdjustment != null)
+            //{
+            //    var users = um.GetAllEnabledUser();
+            //    var user = users?.FirstOrDefault(o => o.UserName == accountAdjustment.CreateUser);
+            //    txtDescription.Text = frmAccountAdjustmentPrint.GeneraorMessage(accountAdjustment, details, user, true) + "\r\n" + accountAdjustment.Remark;
+            //}
         }
 
         public void FillData()
@@ -395,6 +418,7 @@ namespace BudgetSystem.InMoney
 
         private void SetReadOnly()
         {
+            layoutControl1.AutoScroll = true;
             foreach (var control in this.layoutControl1.Controls)
             {
                 if (control is BaseEdit)
@@ -1071,6 +1095,10 @@ namespace BudgetSystem.InMoney
                     lblMessage.Text = message;
                     layoutControlItem12.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
+                else
+                {
+                    layoutControlItem12.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
                 this.gcDetail.DataSource = new BindingList<BudgetSingleReport>(reportList);
                 this.gvDetail.BestFitColumns();
                 this.gvDetail.RefreshData();
@@ -1222,6 +1250,11 @@ namespace BudgetSystem.InMoney
 
         private void BindingSelectedBudget()
         {
+            if (WorkModel == EditFormWorkModels.View || WorkModel == EditFormWorkModels.Print)
+            {
+                this.gridBudget.DataSource = detailBudgetList;
+                return;
+            }
             AdjustmentType type = (AdjustmentType)Enum.Parse(typeof(AdjustmentType), this.cboType.Text, true);
             if (type == AdjustmentType.付款)
             {
@@ -1241,7 +1274,8 @@ namespace BudgetSystem.InMoney
                 BudgetBill bb = cboBudgetBill.EditValue as BudgetBill;
                 if (bb != null)
                 {
-                    this.gridBudget.DataSource = bm.GetBudgetListByCustomerId(bb.Cus_ID).Where(o => o.ID != bb.BudgetID).ToList();
+                    string customerIds = $"{bb.Cus_ID},{bb.CustomerID}";
+                    this.gridBudget.DataSource = bm.GetBudgetListByCustomerId(customerIds).Where(o => o.ID != bb.BudgetID).ToList();
                 }
                 else
                 {

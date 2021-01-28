@@ -13,10 +13,12 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<Declarationform> GetAllDeclarationform(VoucherNotesQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select d.*,b.ContractNO ,u.RealName as CreateUserRealName
+            string selectSql = @"Select d.*,b.ContractNO ,u.RealName as CreateUserRealName,dp.`Code` as DepartmentCode,dp.`Name` as DepartmentName
                                 From `Declarationform` d 
                                 INNER JOIN budget b on d.BudgetID=b.ID
-                                INNER JOIN `user` u on d.CreateUser=u.UserName WHERE d.ID>=0 ";
+                                INNER JOIN `user` u on d.CreateUser=u.UserName 
+								JOIN department dp on u.DeptID=dp.ID
+								WHERE d.ID>=0 ";
             DynamicParameters dp = new DynamicParameters();
             if (condition.ExportBeginDate != DateTime.MinValue && condition.ExportEndDate != DateTime.MinValue)
             {

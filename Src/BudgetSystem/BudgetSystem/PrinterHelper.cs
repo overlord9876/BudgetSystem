@@ -6,12 +6,13 @@ using DevExpress.XtraPrinting;
 using DevExpress.XtraGrid;
 using DevExpress.LookAndFeel;
 using System.Drawing.Printing;
+using System.Drawing;
 
 namespace BudgetSystem
 {
     public class PrinterHelper
     {
-        public static void PrintControl(bool isPrintLandscape, IPrintable printControl, bool isShowPreview = true, PaperKind paperKind = PaperKind.A4)
+        public static void PrintControl(bool isPrintLandscape, IPrintable printControl, Size customPaperSize, bool isShowPreview = true, PaperKind paperKind = PaperKind.A4, Margins margins = null)
         {
             //if (printControl is ISupportLookAndFeel)
             //{
@@ -23,31 +24,35 @@ namespace BudgetSystem
             PrintingSystem printingSystem = new PrintingSystem();
             //printingSystem.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.A4;
             PrintableComponentLink printableComponentLink = new PrintableComponentLink();
-
-
-
+            if (margins == null)
+            {
+                margins = new System.Drawing.Printing.Margins(10, 10, 10, 10);
+            }
             // Add the link to the printing system's collection of links.
             printingSystem.Links.AddRange(new object[] { printableComponentLink });
             // Assign a control to be printed by this link.
             printableComponentLink.Component = printControl;
+
             // Set the paper orientation to Landscape.
             printableComponentLink.Landscape = isPrintLandscape;
             if (paperKind == PaperKind.Custom)
             {
                 printableComponentLink.PaperKind = PaperKind.Custom;
-                printableComponentLink.CustomPaperSize = new System.Drawing.Size((int)(210 * 100 / 25.4), (int)(139.8 * 100 / 25.4));
+                printableComponentLink.CustomPaperSize = customPaperSize;
 
-                printableComponentLink.Margins = new System.Drawing.Printing.Margins(50, 10, 10, 10);
+                printableComponentLink.Margins = margins;
             }
             else
             {
                 printableComponentLink.PaperKind = paperKind;
-                printableComponentLink.PaperName = "A4";
-                printableComponentLink.Margins = new System.Drawing.Printing.Margins(10, 10, 100, 10);
-                var conttrol = (printControl as DevExpress.XtraLayout.LayoutControl);
-                conttrol.Size = new System.Drawing.Size(1200, 1700);
-                printableComponentLink.Component = conttrol;
-                printableComponentLink.SkipArea = BrickModifier.MarginalFooter;
+                if (customPaperSize != Size.Empty)
+                    printableComponentLink.CustomPaperSize = customPaperSize;
+                //printableComponentLink.PaperName = paperKind.;
+                printableComponentLink.Margins = margins;
+                //var conttrol = (printControl as DevExpress.XtraLayout.LayoutControl);
+                //conttrol.Size = new System.Drawing.Size(1200, 1700);
+                printableComponentLink.Component = printControl;
+                //printableComponentLink.SkipArea = BrickModifier.MarginalFooter;
             }
             if (isShowPreview)
             {
@@ -55,7 +60,7 @@ namespace BudgetSystem
             }
             else
             {
-                printableComponentLink.PrintDlg();
+                printableComponentLink.Print("");
             }
             //  printableComponentLink.ShowPreview(new UserLookAndFeel(printControl) { UseDefaultLookAndFeel=false, SkinName = "Whileprint" });
         }

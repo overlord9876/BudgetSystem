@@ -156,7 +156,7 @@ namespace BudgetSystem.OutMoney
         {
             //this.Height -= 50;
             this.labelControl1.Focus();
-            PrinterHelper.PrintControl(false, this.layoutControl2, false, System.Drawing.Printing.PaperKind.Custom);
+            PrinterHelper.PrintControl(false, this.layoutControl2, new System.Drawing.Size((int)(210 * 100 / 25.4), (int)(139.8 * 100 / 25.4)), false, System.Drawing.Printing.PaperKind.Custom, new System.Drawing.Printing.Margins(50, 10, 10, 10));
         }
     }
 }

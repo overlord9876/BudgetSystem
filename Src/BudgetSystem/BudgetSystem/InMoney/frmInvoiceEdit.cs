@@ -248,7 +248,7 @@ namespace BudgetSystem.InMoney
         public override void PrintData()
         {
             this.Height -= 50;
-            PrinterHelper.PrintControl(true, this.layoutControl1);
+            PrinterHelper.PrintControl(true, this.layoutControl1, Size.Empty);
         }
     }
 }

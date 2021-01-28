@@ -38,6 +38,7 @@ namespace BudgetSystem.Entity
         DepartmentReport,
         CompanyReport,
         AccountAdjustmentReport,
+        DeclarationformReport,
         FinalAccount
     }
 }

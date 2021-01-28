@@ -78,17 +78,17 @@
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(105, 41);
+            this.textEdit2.Location = new System.Drawing.Point(87, 37);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(168, 25);
+            this.textEdit2.Size = new System.Drawing.Size(186, 21);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(105, 12);
+            this.textEdit1.Location = new System.Drawing.Point(87, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(168, 25);
+            this.textEdit1.Size = new System.Drawing.Size(186, 21);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -112,32 +112,32 @@
             this.layoutControlItem1.CustomizationFormText = "客户名称：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(265, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(265, 25);
             this.layoutControlItem1.Text = "客户名称：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit2;
             this.layoutControlItem2.CustomizationFormText = "国家或地区：";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(265, 414);
+            this.layoutControlItem2.Size = new System.Drawing.Size(265, 418);
             this.layoutControlItem2.Text = "国家或地区：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(90, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
             // 
             // gdFlow
             // 
             this.gdFlow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdFlow.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdFlow.Location = new System.Drawing.Point(0, 0);
             this.gdFlow.MainView = this.gvFlow;
-            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gdFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gdFlow.Name = "gdFlow";
             this.gdFlow.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
             this.repositoryItemImageComboBox1});
-            this.gdFlow.Size = new System.Drawing.Size(1006, 564);
+            this.gdFlow.Size = new System.Drawing.Size(880, 439);
             this.gdFlow.TabIndex = 2;
             this.gdFlow.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFlow});
@@ -160,6 +160,7 @@
             this.gvFlow.GridControl = this.gdFlow;
             this.gvFlow.Name = "gvFlow";
             this.gvFlow.OptionsBehavior.Editable = false;
+            this.gvFlow.OptionsSelection.MultiSelect = true;
             this.gvFlow.OptionsView.ShowGroupPanel = false;
             this.gvFlow.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gcNodeApproveDate, DevExpress.Data.ColumnSortOrder.Descending)});
@@ -290,11 +291,10 @@
             // 
             // frmMyApprovalFlowListQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 564);
+            this.ClientSize = new System.Drawing.Size(880, 439);
             this.Controls.Add(this.gdFlow);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMyApprovalFlowListQuery";
             this.Text = "我审批的流程";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

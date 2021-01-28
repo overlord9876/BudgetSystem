@@ -122,7 +122,7 @@ namespace BudgetSystem
             }
             //this.Height = SH;
             //this.Height += 100;
-            PrinterHelper.PrintControl(true, this.layoutControl1);
+            PrinterHelper.PrintControl(true, this.layoutControl1, new Size());
         }
     }
 }

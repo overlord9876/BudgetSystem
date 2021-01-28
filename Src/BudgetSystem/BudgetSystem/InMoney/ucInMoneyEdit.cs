@@ -786,6 +786,10 @@ namespace BudgetSystem.InMoney
                 {
                     receiptList.Add(budgetBill);
                 }
+                else if (budgetBill.OperatorModel == DataOperatorModel.Modify)
+                {
+                    receiptList.Add(budgetBill);
+                }
             }
 
             OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList);

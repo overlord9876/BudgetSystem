@@ -236,7 +236,7 @@ namespace BudgetSystem.Report
         {
             this.Height -= 50;
             this.labelControl1.Focus();
-            PrinterHelper.PrintControl(true, this.layoutControl2, true);
+            PrinterHelper.PrintControl(true, this.layoutControl2, Size.Empty, true);
         }
     }
 }

@@ -118,7 +118,7 @@ namespace BudgetSystem
             }
             else if (operate.Operate == OperateTypes.PrintList.ToString())
             {
-                PrinterHelper.PrintControl(this.isPrintLandscape, this.GetPrintView().GridControl);
+                PrinterHelper.PrintControl(this.isPrintLandscape, this.GetPrintView().GridControl, Size.Empty);
 
             }
             else if (operate.Operate == OperateTypes.Print.ToString())
@@ -221,7 +221,7 @@ namespace BudgetSystem
             return this.gridViewList;
         }
 
-        private void GetGridViews(ref  List<GridView> list, Control control)
+        private void GetGridViews(ref List<GridView> list, Control control)
         {
             if (control is GridControl)
             {
@@ -274,7 +274,7 @@ namespace BudgetSystem
                 this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.QueryManager));
             }
         }
-        
+
         protected void RegeditPrintOperate(bool isPrintLandscape = true, bool supposePrintItem = true, GridView printListGridView = null)
         {
             this.isPrintLandscape = isPrintLandscape;

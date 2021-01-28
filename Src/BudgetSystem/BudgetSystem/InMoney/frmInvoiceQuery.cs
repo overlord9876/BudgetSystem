@@ -497,7 +497,7 @@ namespace BudgetSystem.InMoney
 
         private void btn_Print_ItemClick(object sender, ItemClickEventArgs e)
         {
-            PrinterHelper.PrintControl(true, this.gridInvoice, false, System.Drawing.Printing.PaperKind.A4);
+            PrinterHelper.PrintControl(true, this.gridInvoice, Size.Empty, false, System.Drawing.Printing.PaperKind.A4);
         }
 
         private void btnExportExcel_ItemClick(object sender, ItemClickEventArgs e)

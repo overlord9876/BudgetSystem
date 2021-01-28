@@ -131,6 +131,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.None,"我审批的流程",2400),
                         new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.ConfirmOrRevoke,"我审批的流程-撤回付款审批",2410),
                         new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.View,"我审批的流程-查看",2420),
+                        new Permisson(BusinessModules.MyApprovalFlowManagement, OperateTypes.Print,"我审批的流程-打印",2425),
 
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.None,"我提交的流程",600),
                         new Permisson(BusinessModules.MySubmitFlowManagement, OperateTypes.ConfirmOrRevoke,"我提交的流程-确认/撤回",610),
@@ -231,6 +232,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.CustomerReport,OperateTypes.None,"客户管理",1900),
                         new Permisson(BusinessModules.SlipperReport,OperateTypes.None,"供应商管理",2000),
                         new Permisson(BusinessModules.AccountAdjustmentReport,OperateTypes.None,"调账管理",2002),
+                        new Permisson(BusinessModules.DeclarationformReport,OperateTypes.None,"报关单管理",2003),
                         new Permisson(BusinessModules.FinalAccount,OperateTypes.None,"决算管理",2100),
                         new Permisson(BusinessModules.RecieptCapital,OperateTypes.None,"资金管理（收汇）",2200),
                         new Permisson(BusinessModules.PaymentCapital,OperateTypes.None,"资金管理（付款）",2300),

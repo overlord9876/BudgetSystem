@@ -201,6 +201,20 @@ namespace BudgetSystem.Bll
             });
         }
 
+        public bool OperationNextRunPoint()
+        {
+            return this.ExecuteWithTransaction<bool>((con, tran) =>
+             {
+                 var list = dal.GetNeedOperationNextRunPoint(con, tran);
+                 foreach (var item in list)
+                 {
+                     ToNextRunPoint(item.FlowName, item.FlowVersionNumber, item.InstanceID, item, item.CreateUser, out int nextRunPointId, con, tran);
+                 }
+                 return true;
+             });
+
+        }
+
         /// <summary>
         /// 指向下一个运行点
         /// </summary>

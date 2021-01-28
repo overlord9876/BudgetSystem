@@ -270,7 +270,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListWithOutAdjustmentByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.ID as CustomerID,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID

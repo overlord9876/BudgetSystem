@@ -468,6 +468,25 @@ namespace BudgetSystem
             ShowForm(form);
         }
 
+        private void btnDeclarationformReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //Bll.FlowManager flow = new Bll.FlowManager();
+            //flow.OperationNextRunPoint();
+            //return;
+            BudgetSystem.Report.frmDeclarationformReport form = GetExistForm<BudgetSystem.Report.frmDeclarationformReport>(BudgetSystem.Entity.BusinessModules.DeclarationformReport);
+            if (form == null)
+            {
+                form = new BudgetSystem.Report.frmDeclarationformReport();
+                form.RefreshData();
+            }
+            else
+            {
+                FormActivited(form);
+            }
+            form.Module = Entity.BusinessModules.DeclarationformReport;
+            ShowForm(form);
+        }
+
         private void btnPaymentCapital_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             BudgetSystem.Report.frmPaymentReport form = GetExistForm<BudgetSystem.Report.frmPaymentReport>(BudgetSystem.Entity.BusinessModules.PaymentCapital);
@@ -525,5 +544,6 @@ namespace BudgetSystem
 
 
         }
+
     }
 }

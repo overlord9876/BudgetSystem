@@ -388,7 +388,7 @@ namespace BudgetSystem.WorkSpace
 
         private void btnAcceptAndPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            PrinterHelper.PrintControl(false, this.layoutControl1);
+            PrinterHelper.PrintControl(false, this.layoutControl1, Size.Empty);
             btnAccept_Click(null, null);
         }
     }

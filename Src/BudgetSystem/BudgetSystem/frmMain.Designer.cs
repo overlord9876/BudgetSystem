@@ -78,6 +78,7 @@
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnOutMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnInMoneyAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDeclarationformReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
@@ -125,10 +126,11 @@
             this.btnRecieptCapital,
             this.btnPaymentCapital,
             this.btnMyApprovalFlow,
-            this.btnAccountAdjustmentReport});
+            this.btnAccountAdjustmentReport,
+            this.btnDeclarationformReport});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.ribbonControl1.MaxItemId = 51;
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonControl1.MaxItemId = 52;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnModifyPassword);
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnRefresh);
@@ -139,7 +141,7 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(1766, 151);
+            this.ribbonControl1.Size = new System.Drawing.Size(1932, 169);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             // 
@@ -556,6 +558,7 @@
             this.rpGroup.ItemLinks.Add(this.btnDepartmentReport);
             this.rpGroup.ItemLinks.Add(this.btnCompanyReport);
             this.rpGroup.ItemLinks.Add(this.btnAccountAdjustmentReport);
+            this.rpGroup.ItemLinks.Add(this.btnDeclarationformReport);
             this.rpGroup.ItemLinks.Add(this.btnRecieptCapital);
             this.rpGroup.ItemLinks.Add(this.btnPaymentCapital);
             this.rpGroup.Name = "rpGroup";
@@ -589,11 +592,11 @@
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.bsiLoginInfo);
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 761);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 984);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1766, 31);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1932, 34);
             // 
             // documentManager1
             // 
@@ -641,16 +644,26 @@
             this.btnInMoneyAdd.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnInMoneyAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInMoneyAdd_ItemClick);
             // 
+            // btnDeclarationformReport
+            // 
+            this.btnDeclarationformReport.Caption = "报关单管理";
+            this.btnDeclarationformReport.Id = 51;
+            this.btnDeclarationformReport.ImageIndex = 21;
+            this.btnDeclarationformReport.Name = "btnDeclarationformReport";
+            this.btnDeclarationformReport.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnDeclarationformReport.Tag = "DeclarationformReport";
+            this.btnDeclarationformReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeclarationformReport_ItemClick);
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1766, 792);
+            this.ClientSize = new System.Drawing.Size(1932, 1018);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -718,6 +731,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.BarButtonItem btnMyApprovalFlow;
         private DevExpress.XtraBars.BarButtonItem btnAccountAdjustmentReport;
+        private DevExpress.XtraBars.BarButtonItem btnDeclarationformReport;
     }
 }
 

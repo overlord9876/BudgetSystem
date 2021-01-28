@@ -210,7 +210,7 @@ namespace BudgetSystem.InMoney
             try
             {
                 this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                PrinterHelper.PrintControl(true, this.layoutControl1);
+                PrinterHelper.PrintControl(true, this.layoutControl1, new System.Drawing.Size((int)(297 * 100 / 25.4), (int)(210 * 100 / 25.4)), isShowPreview: false, paperKind: System.Drawing.Printing.PaperKind.Custom);
             }
             finally
             {
@@ -230,7 +230,7 @@ namespace BudgetSystem.InMoney
                 int h = count - 5;
                 this.Height += h * 50;
             }
-            PrinterHelper.PrintControl(true, this.layoutControl1);
+            PrinterHelper.PrintControl(true, this.layoutControl1, Size.Empty);
         }
 
     }

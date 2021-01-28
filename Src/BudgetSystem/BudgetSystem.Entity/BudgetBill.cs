@@ -27,9 +27,14 @@ namespace BudgetSystem.Entity
         public Budget RelationBudget { get; set; }
 
         /// <summary>
-        /// 客户ID
+        /// 合同主客户ID
         /// </summary>
         public int Cus_ID { get; set; }
+
+        /// <summary>
+        /// 收款客户ID
+        /// </summary>
+        public int CustomerID { get; set; }
 
         /// <summary>
         /// 客户对象

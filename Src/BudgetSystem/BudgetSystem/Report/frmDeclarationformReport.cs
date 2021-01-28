@@ -17,17 +17,17 @@ namespace BudgetSystem.Report
     /// <summary>
     /// 调账报表共用窗体。
     /// </summary>
-    public partial class frmAccountAdjustmentReport : Base.frmBaseCommonReportForm
+    public partial class frmDeclarationformReport : Base.frmBaseCommonReportForm
     {
-        private AccountAdjustmentManager aam = new AccountAdjustmentManager();
+        private DeclarationformManager dfm = new DeclarationformManager();
         //private BudgetManager bm = new BudgetManager();
 
-        public frmAccountAdjustmentReport()
+        public frmDeclarationformReport()
             : base()
         {
             InitializeComponent();
 
-            this.Module = BusinessModules.AccountAdjustmentReport;
+            this.Module = BusinessModules.DeclarationformReport;
             //这两行代码在Designer中时，修改窗体后容易自动删除
             //this.barManager1.Items.Add(this.beiContractNO);
             //this.pivotViewBar.LinksPersistInfo.Insert(3, new DevExpress.XtraBars.LinkPersistInfo(this.beiContractNO));
@@ -60,7 +60,7 @@ namespace BudgetSystem.Report
 
         private void frmAccountAdjustmentReport_Load(object sender, EventArgs e)
         {
-            this.Text = "调账管理";
+            this.Text = "报关单管理";
             InitCustomerReportGrid();
 
             InitShowStyle();
@@ -84,7 +84,10 @@ namespace BudgetSystem.Report
             //    Budget budget = this.beiContractNO.EditValue as Budget;
             //    condition.ID = budget != null ? budget.ID : 0;
             //}
-            var lst = aam.GetAccountAdjustmentReportList(condition);
+            VoucherNotesQueryCondition queryCondition = new VoucherNotesQueryCondition();
+            queryCondition.ExportBeginDate = condition.BeginTimestamp;
+            queryCondition.ExportEndDate = condition.EndTimestamp;
+            var lst = dfm.GetAllDeclarationform(queryCondition);
             this.pivotGridControl.DataSource = lst;
             this.gridControl.DataSource = lst;
             base.gridView.BestFitColumns();
@@ -93,25 +96,19 @@ namespace BudgetSystem.Report
         private void InitCustomerReportGrid()
         {
             base.ClearColumns();
-            base.CreateGridColumn("部门", "DeptCode", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DeptCode", "合计：{0:d}"));
+            base.CreateGridColumn("部门", "DepartmentDesc", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DepartmentDesc", "合计：{0:d}"));
             base.CreateGridColumn("合同编号", "ContractNO", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ContractNO", "合计：{0:d}"));
-            base.CreateGridColumn("付款调出(￥）", "PaymentCNYOut", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("付款调入(￥）", "PaymentCNYIn", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("收汇调出(￥）", "BillCNYOut", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("收汇调入(￥）", "BillCNYIn", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("交单调出(￥）", "InvoiceCNYOut", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("交单调入(￥）", "InvoiceCNYIn", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
-            base.CreateGridColumn("审批结束时间", "Date");
+            base.CreateGridColumn("总价", "TotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("离岸价", "OffshoreTotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("美元离岸价($）", "USDOffshoreTotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
+            base.CreateGridColumn("人民币离岸价(￥）", "CNYOffshoreTotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
 
-            base.CreatePivotGridField("部门", "DeptCode");
+            base.CreatePivotGridField("部门", "DepartmentDesc");
             base.CreatePivotGridField("合同编号", "ContractNO");
-            base.CreatePivotGridField("付款调出(￥）", "PaymentCNYOut", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("付款调入(￥）", "PaymentCNYIn", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("收汇调出(￥）", "BillCNYOut", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("收汇调入(￥）", "BillCNYIn", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("交单调出(￥）", "InvoiceCNYOut", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("交单调入(￥）", "InvoiceCNYIn", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
-            base.CreatePivotGridField("审批结束时间", "Date", valueFormatType: FormatType.DateTime, valueFormatString: "D");
+            base.CreatePivotGridField("总价", "TotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
+            base.CreatePivotGridField("离岸价", "OffshoreTotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
+            base.CreatePivotGridField("美元离岸价($）", "USDOffshoreTotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyDollarFormat());
+            base.CreatePivotGridField("人民币离岸价(￥）", "CNYOffshoreTotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyCNYFormat());
             base.CreatePivotGridDefaultRowField();
         }
     }

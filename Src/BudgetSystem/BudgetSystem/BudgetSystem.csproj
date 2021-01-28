@@ -22,6 +22,7 @@
     <DefineConstants>TRACE;DEBUG;IgnorePermission2,NUseDeploy</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -437,6 +438,12 @@
     </Compile>
     <Compile Include="PrinterHelper.cs" />
     <Compile Include="Report\FormatUtil.cs" />
+    <Compile Include="Report\frmDeclarationformReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmDeclarationformReport.Designer.cs">
+      <DependentUpon>frmDeclarationformReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmBudgetReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -942,6 +949,9 @@
     <EmbeddedResource Include="OutMoney\frmPaymentCalcEditBankup.resx">
       <DependentUpon>frmPaymentCalcEditBankup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmDeclarationformReport.resx">
+      <DependentUpon>frmDeclarationformReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBudgetReport.resx">
       <DependentUpon>frmBudgetReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -1166,6 +1176,9 @@
     <EmbeddedResource Include="DepartmentManage\frmDepartmentEdit_New.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Report\DeclarationformReport.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Report\AccountAdjustmentReport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

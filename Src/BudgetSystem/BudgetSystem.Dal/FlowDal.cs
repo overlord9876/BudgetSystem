@@ -59,6 +59,16 @@ namespace BudgetSystem.Dal
             return con.Query<FlowNode>(selectSql, new { Name = name.ToString(), VersionNumber = flow.VersionNumber }, tran);
         }
 
+        public List<FlowRunPoint> GetNeedOperationNextRunPoint(IDbConnection con, IDbTransaction tran)
+        {
+            string selectSql = @"SELECT frp.*,fi.FlowVersionNumber,fi.CreateUser,fi.FlowName from flowrunpoint frp join flowinstance fi on frp.InstanceID=fi.id WHERE frp.InstanceID in (
+SELECT InstanceID FROM flowrunpoint WHERE InstanceID in (
+SELECT ID from flowinstance WHERE DateItemType='付款单' AND DateItemID in (
+SELECT ID from paymentnotes WHERE PaymentDate BETWEEN '2021-01-24' and '2021-01-26')  AND IsClosed=0)
+GROUP BY InstanceID) AND NodeOrderNo=3;";
+            return con.Query<FlowRunPoint>(selectSql, null, tran).ToList();
+        }
+
         public FlowNode GetFlowNode(string name, int version, int order, IDbConnection con, IDbTransaction tran)
         {
             string selectSql = "Select `ID`,`Name`,`VersionNumber`,`OrderNo`,`NodeConfig`,`NodeValue`,`NodeValueRemark`,`NodeExtEvent`,`IsStartNode` From `FlowNode` Where`Name` = @Name and `VersionNumber` = @VersionNumber and @OrderNo=OrderNo";

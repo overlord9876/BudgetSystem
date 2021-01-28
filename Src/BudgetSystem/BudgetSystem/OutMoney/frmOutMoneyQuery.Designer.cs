@@ -50,6 +50,7 @@
             this.gcIsDrawback = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcHasInvoice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcPayingBank = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcOutMoney)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvOutMoney)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +87,7 @@
             this.gcDepartmentCode,
             this.gcMoneyUsed,
             this.gcRepayLoanText,
+            this.gcPayingBank,
             this.gcExpectedReturnDate,
             this.gcIsDrawback,
             this.gcHasInvoice,
@@ -258,6 +260,14 @@
             this.gcPaymentMethod.FieldName = "PaymentMethod";
             this.gcPaymentMethod.Name = "gcPaymentMethod";
             // 
+            // gcPayingBank
+            // 
+            this.gcPayingBank.Caption = "付款银行";
+            this.gcPayingBank.FieldName = "PayingBank";
+            this.gcPayingBank.Name = "gcPayingBank";
+            this.gcPayingBank.Visible = true;
+            this.gcPayingBank.VisibleIndex = 12;
+            // 
             // frmOutMoneyQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -297,5 +307,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcEnumFlowState;
         private DevExpress.XtraGrid.Columns.GridColumn gcRepayLoanText;
         private DevExpress.XtraGrid.Columns.GridColumn gcType;
+        private DevExpress.XtraGrid.Columns.GridColumn gcPayingBank;
     }
 }

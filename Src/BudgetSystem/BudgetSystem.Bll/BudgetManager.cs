@@ -39,7 +39,7 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public List<Budget> GetBudgetListByCustomerId(int customerId)
+        public List<Budget> GetBudgetListByCustomerId(string customerId)
         {
             var lst = this.Query<Budget>((con) =>
             {

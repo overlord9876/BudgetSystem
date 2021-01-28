@@ -11,6 +11,7 @@ using System.Linq;
 using BudgetSystem.Entity;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity.QueryCondition;
+using BudgetSystem.OutMoney;
 
 namespace BudgetSystem.WorkSpace
 {
@@ -39,11 +40,12 @@ namespace BudgetSystem.WorkSpace
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ConfirmOrRevoke, "撤回付款审批"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Print));
 
-            this.RegeditQueryOperate<ApprovalFlowQueryCondition>(true, new List<string> 
+            this.RegeditQueryOperate<ApprovalFlowQueryCondition>(true, new List<string>
                                                                             { COMMONQUERY_DAY,
                                                                               COMMONQUERY_WEEK,
-                                                                              COMMONQUERY_MONTH,     
+                                                                              COMMONQUERY_MONTH,
                                                                               COMMONQUERY_YEAR,
                                                                               COMMONQUERY_ALL}, "审批的单子查询");
             this.ModelOperatePageName = "我审批的流程";
@@ -60,6 +62,10 @@ namespace BudgetSystem.WorkSpace
             {
                 ViewFlowData();
             }
+            else if (operate.Operate == OperateTypes.Print.ToString())
+            {
+                PrintRowItem();
+            }
         }
 
         private void ViewFlowData()
@@ -74,6 +80,32 @@ namespace BudgetSystem.WorkSpace
                     if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
                         this.RefreshData();
+                    }
+                }
+            }
+        }
+
+        private void PrintRowItem()
+        {
+            if (this.gvFlow.SelectedRowsCount > 0)
+            {
+                foreach (var rowIndex in this.gvFlow.GetSelectedRows())
+                {
+                    FlowItem item = this.gvFlow.GetRow(rowIndex) as FlowItem;
+                    if (item != null)
+                    {
+                        if (item.DateItemType == EnumFlowDataType.付款单.ToString())
+                        {
+                            PaymentNotesManager pnm = new PaymentNotesManager();
+                            var currentItem = pnm.GetPaymentNoteById(item.DateItemID);
+                            if (currentItem != null)
+                            {
+                                frmOutMoneyPrint form = new frmOutMoneyPrint();
+                                form.WorkModel = EditFormWorkModels.View;
+                                form.CurrentPaymentNotes = currentItem;
+                                form.PrintItem();
+                            }
+                        }
                     }
                 }
             }

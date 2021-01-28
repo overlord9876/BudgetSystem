@@ -100,5 +100,8 @@ namespace BudgetSystem.Entity
         /// 关闭原因。
         /// </summary>
         public string CloseReason { get; set; }
+
+        public int FlowVersionNumber { get; set; }
+        public string CreateUser { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace BudgetSystem.InMoney
             this.gridInvoice.DataSource = dataSource;
             this.Visible = false;
             this.Show();
-            PrinterHelper.PrintControl(true, this.gridInvoice);
+            PrinterHelper.PrintControl(true, this.gridInvoice, Size.Empty);
             this.Close();
         }
         
