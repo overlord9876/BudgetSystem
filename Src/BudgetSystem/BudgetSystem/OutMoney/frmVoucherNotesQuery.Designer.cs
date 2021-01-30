@@ -62,12 +62,12 @@
             // gcDeclarationform
             // 
             this.gcDeclarationform.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gcDeclarationform.Location = new System.Drawing.Point(0, 0);
             this.gcDeclarationform.MainView = this.gvDeclarationform;
-            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2);
             this.gcDeclarationform.Name = "gcDeclarationform";
-            this.gcDeclarationform.Size = new System.Drawing.Size(1704, 805);
+            this.gcDeclarationform.Size = new System.Drawing.Size(1491, 626);
             this.gcDeclarationform.TabIndex = 1;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -76,8 +76,8 @@
             // 
             this.gvDeclarationform.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gcNO,
-            this.gcContractNO,
             this.gcExportDate,
+            this.gcContractNO,
             this.gcOverseas,
             this.gcTradeMode,
             this.gcPort,
@@ -103,6 +103,7 @@
             this.gvDeclarationform.GridControl = this.gcDeclarationform;
             this.gvDeclarationform.Name = "gvDeclarationform";
             this.gvDeclarationform.OptionsBehavior.Editable = false;
+            this.gvDeclarationform.OptionsSelection.MultiSelect = true;
             this.gvDeclarationform.OptionsView.ColumnAutoWidth = false;
             this.gvDeclarationform.OptionsView.ShowFooter = true;
             this.gvDeclarationform.OptionsView.ShowGroupPanel = false;
@@ -111,6 +112,7 @@
             // 
             this.gcNO.Caption = "海关编号";
             this.gcNO.FieldName = "NO";
+            this.gcNO.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gcNO.Name = "gcNO";
             this.gcNO.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "NO", "合计：{0:d}")});
@@ -122,9 +124,10 @@
             // 
             this.gcContractNO.Caption = "合同号";
             this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
-            this.gcContractNO.VisibleIndex = 1;
+            this.gcContractNO.VisibleIndex = 2;
             this.gcContractNO.Width = 62;
             // 
             // gcExportDate
@@ -133,9 +136,10 @@
             this.gcExportDate.DisplayFormat.FormatString = "d";
             this.gcExportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gcExportDate.FieldName = "ExportDate";
+            this.gcExportDate.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gcExportDate.Name = "gcExportDate";
             this.gcExportDate.Visible = true;
-            this.gcExportDate.VisibleIndex = 2;
+            this.gcExportDate.VisibleIndex = 1;
             this.gcExportDate.Width = 62;
             // 
             // gcOverseas
@@ -344,11 +348,10 @@
             // 
             // frmVoucherNotesQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1704, 805);
+            this.ClientSize = new System.Drawing.Size(1491, 626);
             this.Controls.Add(this.gcDeclarationform);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "frmVoucherNotesQuery";
             this.Text = "报关单管理";
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();

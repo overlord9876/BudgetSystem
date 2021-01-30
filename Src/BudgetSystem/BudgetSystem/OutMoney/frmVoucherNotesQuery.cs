@@ -182,17 +182,25 @@ namespace BudgetSystem
 
         private void DeleteDeclarationform()
         {
-            Declarationform selectedItem = this.gvDeclarationform.GetRow(this.gvDeclarationform.FocusedRowHandle) as Declarationform;
-            if (selectedItem == null)
+            var selectedRows = this.gvDeclarationform.GetSelectedRows();
+
+            if (selectedRows.Length <= 0)
             {
                 XtraMessageBox.Show("请选择需要删除的项");
                 return;
             }
             if (XtraMessageBox.Show("确认删除吗？", "删除提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                dm.DeleteDeclarationformById(selectedItem.ID);
+                Declarationform selectedItem = null;
+                foreach (var rowIndex in selectedRows)
+                {
+                    selectedItem = this.gvDeclarationform.GetRow(rowIndex) as Declarationform;
+                    if (selectedItem != null)
+                        dm.DeleteDeclarationformById(selectedItem.ID);
+                }
+                this.gvDeclarationform.DeleteSelectedRows();
+                this.gvDeclarationform.SelectRow(0);
                 XtraMessageBox.Show("删除成功。");
-                this.gvDeclarationform.DeleteRow(this.gvDeclarationform.FocusedRowHandle);
             }
 
         }

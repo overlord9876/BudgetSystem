@@ -189,7 +189,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<Declarationform> GetDeclarationformList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectSql = string.Format(@"SELECT * FROM Declarationform  where CreateDate BETWEEN @BeginTime and @EndTime;");
+            string selectSql = string.Format(@"SELECT * FROM Declarationform  where ExportDate BETWEEN @BeginTime and @EndTime;");
             DynamicParameters dp = new DynamicParameters();
             dp.Add("BeginTime", condition.BeginTimestamp, null, null, null);
             dp.Add("EndTime", condition.EndTimestamp, null, null, null);

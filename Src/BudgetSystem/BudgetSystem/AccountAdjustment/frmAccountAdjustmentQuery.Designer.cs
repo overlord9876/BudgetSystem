@@ -41,8 +41,9 @@
             this.gcCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcSplitCNY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcAlreadySplitCNYMoney = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCreateRealUserName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCloseDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
@@ -50,7 +51,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridAccountAdjustment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountAdjustment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -92,6 +93,7 @@
             this.gcCreateUser,
             this.gcCreateRealUserName,
             this.gcCreateDate,
+            this.gcCloseDateTime,
             this.gcRemark});
             this.gvAccountAdjustment.GridControl = this.gridAccountAdjustment;
             this.gvAccountAdjustment.Name = "gvAccountAdjustment";
@@ -103,6 +105,7 @@
             // 
             this.gcCode.Caption = "编号";
             this.gcCode.FieldName = "Code";
+            this.gcCode.MinWidth = 75;
             this.gcCode.Name = "gcCode";
             this.gcCode.Visible = true;
             this.gcCode.VisibleIndex = 0;
@@ -119,6 +122,7 @@
             // 
             this.gcContractNO.Caption = "关联合同";
             this.gcContractNO.FieldName = "ContractNO";
+            this.gcContractNO.MinWidth = 60;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 2;
@@ -187,23 +191,29 @@
             this.gcAlreadySplitCNYMoney.Visible = true;
             this.gcAlreadySplitCNYMoney.VisibleIndex = 10;
             // 
+            // gcCreateUser
+            // 
+            this.gcCreateUser.Caption = "创建人";
+            this.gcCreateUser.FieldName = "CreateUser";
+            this.gcCreateUser.Name = "gcCreateUser";
+            // 
             // gcCreateRealUserName
             // 
             this.gcCreateRealUserName.Caption = "创建人姓名";
             this.gcCreateRealUserName.FieldName = "CreateRealUserName";
             this.gcCreateRealUserName.Name = "gcCreateRealUserName";
             this.gcCreateRealUserName.Visible = true;
-            this.gcCreateRealUserName.VisibleIndex = 12;
+            this.gcCreateRealUserName.VisibleIndex = 11;
             // 
-            // gcCreateDate
+            // gcCloseDateTime
             // 
-            this.gcCreateDate.Caption = "流程审批结束时间";
-            this.gcCreateDate.DisplayFormat.FormatString = "g";
-            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gcCreateDate.FieldName = "CloseDateTime";
-            this.gcCreateDate.Name = "gcCreateDate";
-            this.gcCreateDate.Visible = true;
-            this.gcCreateDate.VisibleIndex = 13;
+            this.gcCloseDateTime.Caption = "流程审批结束时间";
+            this.gcCloseDateTime.DisplayFormat.FormatString = "g";
+            this.gcCloseDateTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gcCloseDateTime.FieldName = "CloseDateTime";
+            this.gcCloseDateTime.Name = "gcCloseDateTime";
+            this.gcCloseDateTime.Visible = true;
+            this.gcCloseDateTime.VisibleIndex = 13;
             // 
             // gcRemark
             // 
@@ -275,13 +285,15 @@
             this.layoutControlItem2.Text = "国家或地区：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // gcCreateUser
+            // gcCreateDate
             // 
-            this.gcCreateUser.Caption = "创建人";
-            this.gcCreateUser.FieldName = "CreateUser";
-            this.gcCreateUser.Name = "gcCreateUser";
-            this.gcCreateUser.Visible = true;
-            this.gcCreateUser.VisibleIndex = 11;
+            this.gcCreateDate.Caption = "创建时间";
+            this.gcCreateDate.FieldName = "CreateDate";
+            this.gcCreateDate.Name = "gcCreateDate";
+            this.gcCreateDate.Visible = true;
+            this.gcCreateDate.VisibleIndex = 12;
+            this.gcCreateDate.DisplayFormat.FormatString = "g";
+            this.gcCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             // 
             // frmAccountAdjustmentQuery
             // 
@@ -310,7 +322,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvAccountAdjustment;
         private DevExpress.XtraGrid.Columns.GridColumn gcContractNO;
         private DevExpress.XtraGrid.Columns.GridColumn gcRemark;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCloseDateTime;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateRealUserName;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
@@ -329,5 +341,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcFlowState;
         private DevExpress.XtraGrid.Columns.GridColumn gcEnumRole;
         private DevExpress.XtraGrid.Columns.GridColumn gcCreateUser;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCreateDate;
     }
 }
