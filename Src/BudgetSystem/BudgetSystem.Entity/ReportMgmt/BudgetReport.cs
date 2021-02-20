@@ -567,7 +567,7 @@ namespace BudgetSystem.Entity
                     {
                         originalExchangeRate = OutProductList[0].ExchangeRate;
                     }
-                    return DeclarationformList.Sum(o => o.CNYOffshoreTotalPrice);
+                    return DeclarationformList.Sum(o => o.USDOffshoreTotalPrice);
                 }
                 else { return 0; }
             }

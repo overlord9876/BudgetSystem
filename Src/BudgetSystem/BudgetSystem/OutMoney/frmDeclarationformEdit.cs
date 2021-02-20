@@ -24,7 +24,7 @@ namespace BudgetSystem
         {
             InitializeComponent();
             datetimeNow = cm.GetDateTimeNow();
-            txtExportDate.EditValue = datetimeNow;
+            txtCreateDate.EditValue = datetimeNow;
         }
 
         private void frmDeclarationformEdit_Load(object sender, EventArgs e)
@@ -96,10 +96,10 @@ namespace BudgetSystem
             {
                 this.dxErrorProvider1.SetError(this.txtNO, "请输入报关单号");
             }
-            else if (dm.CheckNumber(this.txtNO.Text.Trim(), (double)this.txtDealCount.Value, this.txtTotalPrice.Value))
-            {
-                this.dxErrorProvider1.SetError(this.txtNO, "报关单号存在重复");
-            }
+            //else if (dm.CheckNumber(this.txtNO.Text.Trim(), (double)this.txtDealCount.Value, this.txtTotalPrice.Value))
+            //{
+            //    this.dxErrorProvider1.SetError(this.txtNO, "报关单号存在重复");
+            //}
 
             if (this.cboCurrency.EditValue == null)
             {

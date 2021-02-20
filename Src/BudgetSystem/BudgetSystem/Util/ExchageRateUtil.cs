@@ -15,6 +15,10 @@ namespace BudgetSystem
             {
                 return defaultExchage;
             }
+            if (date == DateTime.MinValue)
+            {
+                return defaultExchage;
+            }
             DateExchangeRate item = exchanges.Find(o => o.date == date.ToString("yyyy-MM-dd"));
             if (item != null) { return item.ExchangeRate; }
             DateTime lastDate = DateTime.Parse(lastExchange.date);

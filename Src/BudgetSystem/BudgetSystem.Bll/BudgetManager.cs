@@ -320,7 +320,7 @@ namespace BudgetSystem.Bll
                 abList.AddRange(pmList.ToAccountBillList());
                 abList.AddRange(adjustmentList.ToAccountBillList(detailList));
                 abList.AddRange(adjustmentDetailList.ToAccountBillList());
-                return abList.OrderBy(o => o.CreateDate);
+                return abList.OrderBy(o => o.Date);
             });
             return lst.ToList();
         }

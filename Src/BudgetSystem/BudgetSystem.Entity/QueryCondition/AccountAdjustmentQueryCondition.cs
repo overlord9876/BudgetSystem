@@ -24,8 +24,20 @@ namespace BudgetSystem.Entity.QueryCondition
         /// </summary>
         public string CreateUser { get; set; }
 
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        public DateTime BeginDate { get; set; }
+
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        public DateTime EndTime { get; set; }
+
         public AccountAdjustmentQueryCondition()
         {
+            BeginDate = DateTime.MinValue;
+            EndTime = DateTime.MinValue;
         }
     }
 }

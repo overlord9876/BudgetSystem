@@ -184,14 +184,14 @@ namespace BudgetSystem.InMoney
                 e.Valid = false;
                 return;
             }
-            else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice) > 1)
+            else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice && df.Model == i.Model) > 1)
             {
                 e.ErrorText = "报关单号存在重复";
                 df.Message = e.ErrorText;
                 e.Valid = false;
                 return;
             }
-            else if (dm.CheckNumber(df.NO, df.DealCount, df.TotalPrice))
+            else if (dm.CheckNumber(df.NO, df.DealCount, df.TotalPrice, df.Model))
             {
                 e.ErrorText = "报关单号存在重复";
                 df.Message = e.ErrorText;

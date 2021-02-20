@@ -17,7 +17,6 @@ namespace BudgetSystem.Bll
         {
             var lst = this.Query<Declarationform>((con) =>
             {
-
                 var uList = dal.GetAllDeclarationform(condition, con, null);
                 return uList;
             });
@@ -38,7 +37,6 @@ namespace BudgetSystem.Bll
         {
             var lst = this.Query<Declarationform>((con) =>
             {
-
                 var uList = dal.GetDeclarationformByID(id, con, null);
                 return uList;
             });
@@ -54,11 +52,11 @@ namespace BudgetSystem.Bll
             });
         }
 
-        public bool CheckNumber(string NO, double dealCount, decimal totalPrice)
+        public bool CheckNumber(string NO, double dealCount, decimal totalPrice, string model)
         {
             return this.ExecuteWithoutTransaction<bool>((con) =>
                {
-                   return dal.CheckNumber(0, NO, dealCount, totalPrice, con, null);
+                   return dal.CheckNumber(0, NO, dealCount, totalPrice, model, con, null);
                });
         }
 
@@ -87,12 +85,12 @@ namespace BudgetSystem.Bll
                         df.Message += "报关单号不能为空;";
                         result = false;
                     }
-                    else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice) > 1)
+                    else if (list.Count(i => i.NO == df.NO && df.DealCount == i.DealCount && df.TotalPrice == i.TotalPrice && df.Model == i.Model) > 1)
                     {
                         df.Message += "导入报关单号存在重复;";
                         result = false;
                     }
-                    else if (dal.CheckNumber(0, df.NO.Trim(), df.DealCount, df.TotalPrice, con, null))
+                    else if (dal.CheckNumber(0, df.NO.Trim(), df.DealCount, df.TotalPrice, df.Model, con, null))
                     {
                         df.Message += "报关单号已导入，不允许重复导入;";
                         result = false;

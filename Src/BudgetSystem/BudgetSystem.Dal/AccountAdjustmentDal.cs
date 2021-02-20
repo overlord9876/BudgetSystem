@@ -82,6 +82,12 @@ namespace BudgetSystem.Dal
                     selectRecSql += " and b.DeptID=@DeptID ";
                     dp.Add("DeptID", condition.DeptID, null, null, null);
                 }
+                if (condition.BeginDate != DateTime.MinValue && condition.EndTime != DateTime.MinValue)
+                {
+                    selectRecSql += " AND ra.CreateDate BETWEEN @BeginDate AND @EndTime ";
+                    dp.Add("BeginDate", condition.BeginDate, null, null, null);
+                    dp.Add("EndTime", condition.EndTime, null, null, null);
+                }
             }
 
             var recItems = con.Query<AccountAdjustment>(selectRecSql, dp, tran).ToList();
@@ -106,6 +112,12 @@ namespace BudgetSystem.Dal
                     selectPaySql += " and b.DeptID=@DeptID ";
                     dp.Add("DeptID", condition.DeptID, null, null, null);
                 }
+                if (condition.BeginDate != DateTime.MinValue && condition.EndTime != DateTime.MinValue)
+                {
+                    selectPaySql += " AND ra.CreateDate BETWEEN @BeginDate AND @EndTime ";
+                    dp.Add("BeginDate", condition.BeginDate, null, null, null);
+                    dp.Add("EndTime", condition.EndTime, null, null, null);
+                }
             }
 
             var payItems = con.Query<AccountAdjustment>(selectPaySql, dp, tran);
@@ -129,6 +141,12 @@ namespace BudgetSystem.Dal
                     selectInvoiceSql += " and b.DeptID=@DeptID ";
                     dp.Add("DeptID", condition.DeptID, null, null, null);
                 }
+                if (condition.BeginDate != DateTime.MinValue && condition.EndTime != DateTime.MinValue)
+                {
+                    selectInvoiceSql += " AND ra.CreateDate BETWEEN @BeginDate AND @EndTime ";
+                    dp.Add("BeginDate", condition.BeginDate, null, null, null);
+                    dp.Add("EndTime", condition.EndTime, null, null, null);
+                }
             }
             var invoiceItems = con.Query<AccountAdjustment>(selectInvoiceSql, dp, tran);
             recItems.AddRange(invoiceItems);
@@ -137,18 +155,20 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<AccountAdjustment> GetBalanceAccountAdjustmentByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null, bool includInvoice = true)
         {
-            string selectRecSql = @"SELECT ra.*,b.ContractNO,bb.OriginalCoin,bs.ReceiptDate as Date, bb.CNY,bs.VoucherNo,c.`Name`,bs.NatureOfMoney as MoneyUsed
+            string selectRecSql = $@"SELECT ra.*,b.ContractNO,bb.OriginalCoin,bs.ReceiptDate as Date, bb.CNY,bs.VoucherNo,c.`Name`,bs.NatureOfMoney as MoneyUsed
                                 FROM ReciptAccountAdjustment ra JOIN budget b on ra.BudgetID=b.ID
                                 JOIN budgetbill bb on ra.RelationID=bb.ID
                                 JOIN bankslip bs on bb.BSID =bs.BSID 
 								JOIN customer c on bb.Cus_ID=c.ID
+                                JOIN FlowInstance f on ra.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
 								WHERE ra.BudgetID=@BudgetID;";
             var recItems = con.Query<AccountAdjustment>(selectRecSql, new { BudgetID = budgetId }, tran).ToList();
 
-            string selectPaySql = @"SELECT ra.*,b.ContractNO,pn.OriginalCoin,pn.CNY,pn.PaymentDate as Date,pn.VoucherNo,s.`Name`,pn.MoneyUsed,pn.IsDrawback,pn.TaxRebateRate
+            string selectPaySql = $@"SELECT ra.*,b.ContractNO,pn.OriginalCoin,pn.CNY,pn.PaymentDate as Date,pn.VoucherNo,s.`Name`,pn.MoneyUsed,pn.IsDrawback,pn.TaxRebateRate
                                 from PaymentAccountAdjustment ra JOIN budget b on ra.BudgetID=b.ID
                                 JOIN paymentnotes pn on ra.RelationID=pn.ID
 								JOIN supplier s on pn.SupplierID=s.ID
+								JOIN FlowInstance f on ra.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
 								WHERE ra.BudgetID=@BudgetID;";
 
             var payItems = con.Query<AccountAdjustment>(selectPaySql, new { BudgetID = budgetId }, tran);
@@ -156,10 +176,11 @@ namespace BudgetSystem.Dal
 
             if (includInvoice)
             {
-                string selectInvoiceSql = @"SELECT ia.*,b.ContractNO,i.OriginalCoin,i.ExchangeRate,i.Number as VoucherNo,i.SupplierName as `Name`,i.TaxAmount,i.FeedMoney,i.Payment,i.TaxAmount
+                string selectInvoiceSql = $@"SELECT ia.*,b.ContractNO,i.OriginalCoin,i.ExchangeRate,i.Number as VoucherNo,i.SupplierName as `Name`,i.TaxAmount,i.FeedMoney,i.Payment,i.TaxAmount
                                 from invoiceaccountadjustment ia JOIN budget b on ia.BudgetID=b.ID
                                 JOIN invoice i on ia.RelationID=i.ID
-																where ia.BudgetID=@BudgetID;";
+								JOIN FlowInstance f on ia.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+								where ia.BudgetID=@BudgetID;";
                 var invoiceItems = con.Query<AccountAdjustment>(selectInvoiceSql, new { BudgetID = budgetId }, tran);
                 recItems.AddRange(invoiceItems);
             }
@@ -168,17 +189,18 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<AccountAdjustmentDetail> GetBalanceAccountAdjustmentDetailByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null, bool includInvoice = true)
         {
-            string selectRecSql = @"SELECT pad.*,m.ContractNO as MainContractNO,b.ContractNO,s.`Name`,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo from paymentaccountadjustmentdetail pad
-                                    JOIN paymentaccountadjustment pa on pad.PID=pa.ID
-									JOIN budget b on b.id=pa.BudgetID
-									JOIN budget m on m.id=pad.BudgetID
-	                                JOIN paymentnotes pn on pad.RelationID=pn.ID 
-									JOIN supplier s on s.id = pn.SupplierID
-	                                JOIN `user` u on pad.Operator=u.UserName
-	                                WHERE pad.BudgetID=@BudgetID AND pad.IsDelete=0;";
+            string selectRecSql = $@"SELECT pad.*,m.ContractNO as MainContractNO,b.ContractNO,s.`Name`,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo from paymentaccountadjustmentdetail pad
+						JOIN paymentaccountadjustment pa on pad.PID=pa.ID
+						JOIN budget b on b.id=pa.BudgetID
+						JOIN budget m on m.id=pad.BudgetID
+						JOIN paymentnotes pn on pad.RelationID=pn.ID 
+						JOIN supplier s on s.id = pn.SupplierID
+						JOIN `user` u on pad.Operator=u.UserName
+						JOIN FlowInstance f on pad.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+						WHERE pad.BudgetID=@BudgetID AND pad.IsDelete=0;";
             var recItems = con.Query<AccountAdjustmentDetail>(selectRecSql, new { BudgetID = budgetId }, tran).ToList();
 
-            string selectPaySql = @"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,c.`Name`,bs.NatureOfMoney as MoneyUsed,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName,bs.VoucherNo  
+            string selectPaySql = $@"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,c.`Name`,bs.NatureOfMoney as MoneyUsed,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName,bs.VoucherNo  
                                     FROM reciptaccountadjustmentdetail rad
 									JOIN reciptaccountadjustment ra on rad.PID=ra.ID
 									JOIN budget b on b.id=ra.BudgetID
@@ -187,19 +209,21 @@ namespace BudgetSystem.Dal
                                     JOIN bankslip bs on bb.BSID =bs.BSID
 									JOIN customer c on bs.Cus_ID=c.id
                                     JOIN `user` u on rad.Operator=u.UserName
-                                    WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+                                    JOIN FlowInstance f on rad.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+						            WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
             var payItems = con.Query<AccountAdjustmentDetail>(selectPaySql, new { BudgetID = budgetId }, tran);
             recItems.AddRange(payItems);
             if (includInvoice)
             {
-                string selectInvoiceSql = @"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,i.TaxAmount,u.RealName as OperatorRealName,i.SupplierName as `Name`
+                string selectInvoiceSql = $@"SELECT rad.*,m.ContractNO as MainContractNO,b.ContractNO,i.TaxAmount,u.RealName as OperatorRealName,i.SupplierName as `Name`
                                         FROM invoiceaccountadjustmentdetail rad
 										JOIN invoiceaccountadjustment ia on rad.PID=ia.ID
 									    JOIN budget b on b.id=ia.BudgetID
 									    JOIN budget m on m.id=ia.BudgetID
                                         JOIN invoice i on rad.RelationID=i.ID
                                         JOIN `user` u on rad.Operator=u.UserName
-                                        WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
+                                        JOIN FlowInstance f on rad.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+						                WHERE rad.BudgetID=@BudgetID AND rad.IsDelete=0;";
                 var invoiceItems = con.Query<AccountAdjustmentDetail>(selectInvoiceSql, new { BudgetID = budgetId }, tran);
                 recItems.AddRange(invoiceItems);
             }
@@ -216,12 +240,13 @@ namespace BudgetSystem.Dal
         /// <returns></returns>
         public IEnumerable<AccountAdjustmentDetail> GetAccountAdjustmentsDetailByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null, bool includInvoice = true)
         {
-            string selectRecSql = @"SELECT pad.*,b.ContractNO,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo,s.`Name` from paymentaccountadjustmentdetail pad
+            string selectRecSql = $@"SELECT pad.*,b.ContractNO,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,pn.Currency,pn.PaymentDate as Date,u.RealName as OperatorRealName,pn.VoucherNo,s.`Name` from paymentaccountadjustmentdetail pad
 									JOIN budget b on b.id=pad.BudgetID
 	                                JOIN paymentnotes pn on pad.RelationID=pn.ID 
 	                                JOIN `user` u on pad.Operator=u.UserName
 									JOIN supplier s on pn.SupplierID=s.ID
-										WHERE pad.PID IN (SELECT ID from paymentaccountadjustment WHERE BudgetID=@BudgetID) AND pad.IsDelete=0;";
+									WHERE pad.PID IN (SELECT pa.ID from paymentaccountadjustment pa JOIN FlowInstance f on pa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+WHERE pa.BudgetID=@BudgetID) AND pad.IsDelete=0;";
             var recItems = con.Query<AccountAdjustmentDetail>(selectRecSql, new { BudgetID = budgetId }, tran).ToList();
 
             string selectPaySql = @"SELECT rad.*,b.ContractNO,bs.NatureOfMoney as MoneyUsed,bs.ExchangeRate,bs.Currency,bs.ReceiptDate as Date,u.RealName as OperatorRealName,bs.VoucherNo,c.`Name` 
@@ -231,7 +256,8 @@ namespace BudgetSystem.Dal
                                     JOIN bankslip bs on bb.BSID =bs.BSID
 									JOIN customer c on bs.Cus_ID=c.ID
                                     JOIN `user` u on rad.Operator=u.UserName
-									WHERE rad.PID IN (SELECT ID from reciptaccountadjustment WHERE BudgetID=@BudgetID) AND rad.IsDelete=0;";
+									WHERE rad.PID IN (SELECT pa.ID from reciptaccountadjustment pa JOIN FlowInstance f on pa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+WHERE pa.BudgetID=@BudgetID) AND rad.IsDelete=0;";
             var payItems = con.Query<AccountAdjustmentDetail>(selectPaySql, new { BudgetID = budgetId }, tran);
             recItems.AddRange(payItems);
             if (includInvoice)
@@ -241,7 +267,8 @@ namespace BudgetSystem.Dal
 									    JOIN budget b on b.id=rad.BudgetID
                                         JOIN invoice i on rad.RelationID=i.ID
                                         JOIN `user` u on rad.Operator=u.UserName
-										WHERE rad.PID IN (SELECT ID from invoiceaccountadjustment WHERE BudgetID=@BudgetID) AND rad.IsDelete=0;";
+										WHERE rad.PID IN (SELECT pa.ID from invoiceaccountadjustment pa JOIN FlowInstance f on pa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1
+WHERE pa.BudgetID=@BudgetID) AND rad.IsDelete=0;";
                 var invoiceItems = con.Query<AccountAdjustmentDetail>(selectInvoiceSql, new { BudgetID = budgetId }, tran);
                 recItems.AddRange(invoiceItems);
             }
@@ -250,7 +277,7 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<AccountAdjustmentReport> GetAccountAdjustmentReportList(BudgetQueryCondition condition, IDbConnection con, IDbTransaction tran = null)
         {
-            string selectPaymentSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,paa.AlreadySplitCNY as PaymentCNYOut,f.CloseDateTime as Date from paymentaccountadjustment paa JOIN budget b on paa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on paa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1 ";
+            string selectPaymentSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,paa.AlreadySplitCNY as PaymentCNYOut,f.CloseDateTime as Date from paymentaccountadjustment paa JOIN budget b on paa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on paa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1  AND f.IsClosed=1 AND f.ApproveResult=1 ";
             DynamicParameters dp = new DynamicParameters();
             if (condition != null)
             {
@@ -260,7 +287,7 @@ namespace BudgetSystem.Dal
             }
             var payItems = con.Query<AccountAdjustmentReport>(selectPaymentSql, dp, tran).ToList();
 
-            string selectPayDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-pad.CNY) as PaymentCNYIn,f.CloseDateTime as Date from paymentaccountadjustmentDetail pad JOIN budget b on pad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN paymentaccountadjustment pa on pa.ID=pad.PID  JOIN FlowInstance f on pa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1";
+            string selectPayDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-pad.CNY) as PaymentCNYIn,f.CloseDateTime as Date from paymentaccountadjustmentDetail pad JOIN budget b on pad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN paymentaccountadjustment pa on pa.ID=pad.PID  JOIN FlowInstance f on pa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.付款调账}' AND f.IsRecent=1  AND f.IsClosed=1 AND f.ApproveResult=1 ";
             dp = new DynamicParameters();
             if (condition != null)
             {
@@ -271,7 +298,7 @@ namespace BudgetSystem.Dal
             var payDetailItems = con.Query<AccountAdjustmentReport>(selectPayDetailSql, dp, tran);
             payItems.AddRange(payDetailItems);
 
-            string selectRecieptSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,raa.AlreadySplitCNY as BillCNYOut,f.CloseDateTime as Date from reciptaccountadjustment raa JOIN budget b on raa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on raa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1";
+            string selectRecieptSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,raa.AlreadySplitCNY as BillCNYOut,f.CloseDateTime as Date from reciptaccountadjustment raa JOIN budget b on raa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on raa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1  AND f.IsClosed=1 AND f.ApproveResult=1 ";
             dp = new DynamicParameters();
             if (condition != null)
             {
@@ -282,7 +309,7 @@ namespace BudgetSystem.Dal
             var recieptList = con.Query<AccountAdjustmentReport>(selectRecieptSql, dp, tran).ToList();
             payItems.AddRange(recieptList);
 
-            string selectRecieptDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-rad.CNY) as BillCNYIn,rad.OperatorDate as Date  from reciptaccountadjustmentDetail rad JOIN budget b on rad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN reciptaccountadjustment ra on ra.ID=rad.PID  JOIN FlowInstance f on ra.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1";
+            string selectRecieptDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-rad.CNY) as BillCNYIn,rad.OperatorDate as Date  from reciptaccountadjustmentDetail rad JOIN budget b on rad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN reciptaccountadjustment ra on ra.ID=rad.PID  JOIN FlowInstance f on ra.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.收款调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1 ";
             dp = new DynamicParameters();
             if (condition != null)
             {
@@ -293,7 +320,7 @@ namespace BudgetSystem.Dal
             var recieptDetailList = con.Query<AccountAdjustmentReport>(selectRecieptDetailSql, dp, tran);
             payItems.AddRange(recieptDetailList);
 
-            string selectInvoiceSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,iaa.AlreadySplitCNY as InvoiceCNYOut,f.CloseDateTime as Date  from invoiceaccountadjustment iaa JOIN budget b on iaa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on iaa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1";
+            string selectInvoiceSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,iaa.AlreadySplitCNY as InvoiceCNYOut,f.CloseDateTime as Date  from invoiceaccountadjustment iaa JOIN budget b on iaa.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN FlowInstance f on iaa.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1 ";
             dp = new DynamicParameters();
             if (condition != null)
             {
@@ -304,7 +331,7 @@ namespace BudgetSystem.Dal
             var invoiceItems = con.Query<AccountAdjustmentReport>(selectInvoiceSql, dp, tran).ToList();
             payItems.AddRange(invoiceItems);
 
-            string selectInvoiceDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-iad.CNY) as InvoiceCNYIn,iad.OperatorDate as Date  from invoiceaccountadjustmentDetail iad JOIN budget b on iad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN invoiceaccountadjustment ia on ia.ID=iad.PID  JOIN FlowInstance f on ia.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1";
+            string selectInvoiceDetailSql = $@"SELECT b.ContractNO,CONCAT(d.`Code`,d.`Name`) as DeptCode,(0-iad.CNY) as InvoiceCNYIn,iad.OperatorDate as Date  from invoiceaccountadjustmentDetail iad JOIN budget b on iad.BudgetID=b.ID JOIN department d on b.DeptID=d.ID JOIN invoiceaccountadjustment ia on ia.ID=iad.PID  JOIN FlowInstance f on ia.ID=f.DateItemID AND f.DateItemType='{EnumFlowDataType.交单调账}' AND f.IsRecent=1 AND f.IsClosed=1 AND f.ApproveResult=1 ";
             dp = new DynamicParameters();
             if (condition != null)
             {

@@ -87,6 +87,7 @@ namespace BudgetSystem.Report
             VoucherNotesQueryCondition queryCondition = new VoucherNotesQueryCondition();
             queryCondition.ExportBeginDate = condition.BeginTimestamp;
             queryCondition.ExportEndDate = condition.EndTimestamp;
+            queryCondition = RunInfo.Instance.GetConditionByCurrentUser(queryCondition) as VoucherNotesQueryCondition;
             var lst = dfm.GetAllDeclarationform(queryCondition);
             this.pivotGridControl.DataSource = lst;
             this.gridControl.DataSource = lst;
@@ -97,6 +98,7 @@ namespace BudgetSystem.Report
         {
             base.ClearColumns();
             base.CreateGridColumn("部门", "DepartmentDesc", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DepartmentDesc", "合计：{0:d}"));
+            base.CreateGridColumn("业务员", "Salesman", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "Salesman", "合计：{0:d}"));
             base.CreateGridColumn("合同编号", "ContractNO", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ContractNO", "合计：{0:d}"));
             base.CreateGridColumn("总价", "TotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
             base.CreateGridColumn("离岸价", "OffshoreTotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
@@ -104,6 +106,7 @@ namespace BudgetSystem.Report
             base.CreateGridColumn("人民币离岸价(￥）", "CNYOffshoreTotalPrice", summaryItem: new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum));
 
             base.CreatePivotGridField("部门", "DepartmentDesc");
+            base.CreatePivotGridField("业务员", "Salesman");
             base.CreatePivotGridField("合同编号", "ContractNO");
             base.CreatePivotGridField("总价", "TotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());
             base.CreatePivotGridField("离岸价", "OffshoreTotalPrice", valueFormatType: FormatType.Custom, formatProvider: new MyDecimalFormat());

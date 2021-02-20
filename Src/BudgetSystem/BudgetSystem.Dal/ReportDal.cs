@@ -23,7 +23,7 @@ namespace BudgetSystem.Dal
                                 UNION
                                 select DISTINCT BudgetID from Invoice where {0} BETWEEN @BeginTime and @EndTime
                                 UNION
-                                select DISTINCT BudgetID from Declarationform  where CreateDate BETWEEN @BeginTime and @EndTime
+                                select DISTINCT BudgetID from Declarationform  where ExportDate BETWEEN @BeginTime and @EndTime
                                 UNION
                                 select DISTINCT BudgetID from BudgetBill bb inner JOIN BankSlip bs on bb.BSID=bs.BSID where bs.CreateTimestamp BETWEEN @BeginTime and @EndTime) and b.ID<>0 ", condition.ViewMode == InvoiceViewMode.财务交单 ? "FinanceImportDate" : "ImportDate");//OR b.SignDate BETWEEN @BeginTime and @EndTime");
 

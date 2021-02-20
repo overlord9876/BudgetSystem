@@ -10,6 +10,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using BudgetSystem.Entity;
 using BudgetSystem.Entity.QueryCondition;
 using BudgetSystem.WorkSpace;
+using DevExpress.XtraBars;
 
 namespace BudgetSystem
 {
@@ -17,12 +18,54 @@ namespace BudgetSystem
     {
         private Bll.AccountAdjustmentManager aam = new Bll.AccountAdjustmentManager();
         private Bll.FlowManager fm = new Bll.FlowManager();
+        private DateTime datetimeNow = DateTime.MinValue;
+        private Bll.CommonManager cm = new Bll.CommonManager();
+        private Bll.BudgetManager bm = new Bll.BudgetManager();
         private const string COMMONQUERY_MYCREATE = "我创建的";
         AccountAdjustmentQueryCondition currentCondition = null;
         public frmAccountAdjustmentQuery()
         {
             InitializeComponent();
             this.Module = BusinessModules.AccountAdjustmentManagement;
+
+            datetimeNow = cm.GetDateTimeNow();
+            int year = datetimeNow.Year - 2;
+            for (int index = 0; index < 52; index++)
+            {
+                cboYears.Items.Add((year + index));
+            }
+            this.cboSelectYear.EditValue = datetimeNow.Year;
+
+            this.deStartDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+            DateTime nextMonth = new DateTime(datetimeNow.Year, datetimeNow.Month, 1);
+            this.deEndDate.EditValue = new DateTime(datetimeNow.Year, datetimeNow.Month, nextMonth.AddMonths(1).AddDays(-1).Day);
+
+            BudgetQueryCondition condition = new BudgetQueryCondition();
+            condition = RunInfo.Instance.GetConditionByCurrentUser(condition) as BudgetQueryCondition;
+            List<Budget> budgetList = bm.GetAllBudget(condition);
+            this.repositoryItemGridLookUpEdit1.DataSource = budgetList;
+
+            RegisterEventHandler();
+        }
+
+        private void RegisterEventHandler()
+        {
+            this.btnJanuary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJanuary_ItemClick);
+            this.btnFebruary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFebruary_ItemClick);
+            this.btnMarch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMarch_ItemClick);
+            this.btnApril.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApril_ItemClick);
+            this.btnMay.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMay_ItemClick);
+            this.btnJune.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJune_ItemClick);
+            this.btnJuly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnJuly_ItemClick);
+            this.btnAugust.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAugust_ItemClick);
+            this.btnSeptember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSeptember_ItemClick);
+            this.btnOctober.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOctober_ItemClick);
+            this.btnNovember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNovember_ItemClick);
+            this.btnDecember.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDecember_ItemClick);
+            this.btnSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearch_ItemClick);
+            this.btn_Print.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_Print_ItemClick);
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            this.cboSelectYear.EditValueChanged += cboSelectYear_EditValueChanged;
         }
 
         protected override void InitModelOperate()
@@ -496,6 +539,12 @@ namespace BudgetSystem
             {
                 condition = new AccountAdjustmentQueryCondition();
             }
+            DateTime startTime = (DateTime)deStartDate.EditValue;
+            startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, 0, 0, 0);
+            DateTime endTime = (DateTime)deEndDate.EditValue;
+            endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, 0, 0, 0).AddDays(1).AddSeconds(-1);
+            condition.BeginDate = startTime;
+            condition.EndTime = endTime;
             var conditionNew = RunInfo.Instance.GetConditionByCurrentUser(condition) as AccountAdjustmentQueryCondition;
             var list = aam.GetAllAccountAdjustment(conditionNew);
             this.gridAccountAdjustment.DataSource = list;
@@ -548,6 +597,115 @@ namespace BudgetSystem
             }
             return true;
         }
+
+        #region Search
+
+        private void btnJanuary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(1);
+        }
+
+        private void btnFebruary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(2);
+        }
+
+        private void btnMarch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(3);
+        }
+
+        private void btnApril_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(4);
+        }
+
+        private void btnMay_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(5);
+        }
+
+        private void btnJune_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(6);
+        }
+
+        private void btnJuly_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(7);
+        }
+
+        private void btnAugust_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(8);
+        }
+
+        private void btnSeptember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(9);
+        }
+
+        private void btnOctober_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(10);
+        }
+
+        private void btnNovember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(11);
+        }
+
+        private void btnDecember_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangedMonth(12);
+        }
+
+        private void cboSelectYear_EditValueChanged(object sender, EventArgs e)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            deStartDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0);
+            deEndDate.EditValue = new DateTime(year, 1, 1, 0, 0, 0).AddYears(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void barSelectedMode_EditValueChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void ChangedMonth(int month)
+        {
+            int year = (int)cboSelectYear.EditValue;
+            DateTime beginDate = new DateTime(year, month, 1, 0, 0, 0);
+            deStartDate.EditValue = beginDate;
+            deEndDate.EditValue = beginDate.AddMonths(1).AddMinutes(-1);
+            LoadData();
+        }
+
+        private void btnSearch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btn_Print_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            PrinterHelper.PrintControl(true, this.gridAccountAdjustment, Size.Empty, false, System.Drawing.Printing.PaperKind.A4);
+        }
+
+        private void btnExportExcel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (FileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Title = "选择保存路径";
+                dialog.Filter = "excel文件|*.xls";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.gvAccountAdjustment.ExportToXls(dialog.FileName);
+                }
+            }
+        }
+
+        #endregion
 
     }
 }

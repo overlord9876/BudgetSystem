@@ -13,11 +13,12 @@ namespace BudgetSystem.Dal
     {
         public IEnumerable<Declarationform> GetAllDeclarationform(VoucherNotesQueryCondition condition, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select d.*,b.ContractNO ,u.RealName as CreateUserRealName,dp.`Code` as DepartmentCode,dp.`Name` as DepartmentName
+            string selectSql = @"Select d.*,b.ContractNO ,u1.RealName as CreateUserRealName,u.RealName as Salesman,dp.`Code` as DepartmentCode,dp.`Name` as DepartmentName
                                 From `Declarationform` d 
                                 INNER JOIN budget b on d.BudgetID=b.ID
-                                INNER JOIN `user` u on d.CreateUser=u.UserName 
-								JOIN department dp on u.DeptID=dp.ID
+                                INNER JOIN `user` u on b.Salesman=u.UserName 
+                                INNER JOIN `user` u1 on d.CreateUser=u1.UserName 
+								JOIN department dp on b.DeptID=dp.ID
 								WHERE d.ID>=0 ";
             DynamicParameters dp = new DynamicParameters();
             if (condition.ExportBeginDate != DateTime.MinValue && condition.ExportEndDate != DateTime.MinValue)
@@ -41,12 +42,23 @@ namespace BudgetSystem.Dal
                 selectSql += "AND FIND_IN_SET(d.FinalCountry , @FinalCountry) ";
                 dp.Add("FinalCountry", condition.FinalCountry, null, null, null);
             }
+            if (!string.IsNullOrEmpty(condition.Salesman))
+            {
+                selectSql += " AND b.Salesman=@Salesman ";
+                dp.Add("Salesman", condition.Salesman, null, null, null);
+            }
+            if (condition.DeptID >= 0)
+            {
+                selectSql += " AND b.DeptID=@DeptID ";
+                dp.Add("DeptID", condition.DeptID, null, null, null);
+            }
             return con.Query<Declarationform>(selectSql, dp, tran);
         }
 
         public Declarationform GetDeclarationformByID(int id, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = "Select * From `Declarationform` Where `ID` = @ID";
+            string selectSql = @"Select *,u.RealName as CreateUserRealName,u1.RealName as UpdateUserRealName From `Declarationform` d JOIN `user` u on d.CreateUser=u.UserName JOIN `user` u1 on u1.UserName=d.UpdateUser
+Where d.`ID` = @ID";
             return con.Query<Declarationform>(selectSql, new { ID = id }, tran).SingleOrDefault();
         }
 
@@ -76,12 +88,13 @@ namespace BudgetSystem.Dal
         /// <param name="NO"></param>
         /// <param name="dealCount"></param>
         /// <param name="totalPrice"></param>
+        /// <param name="Model"></param>
         /// <param name="con"></param>
         /// <param name="tran"></param>
         /// <returns></returns>
-        public bool CheckNumber(int id, string NO, double dealCount, decimal totalPrice, IDbConnection con, IDbTransaction tran)
+        public bool CheckNumber(int id, string NO, double dealCount, decimal totalPrice, string model, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"SELECT  ID FROM `Declarationform`  WHERE ID<>@ID and `NO`=@NO and dealCount=@dealCount AND totalPrice=@totalPrice";
+            string sql = @"SELECT  ID FROM `Declarationform`  WHERE ID<>@ID and `NO`=@NO and dealCount=@dealCount AND totalPrice=@totalPrice and Model=@Model";
             using (IDbCommand command = con.CreateCommand())
             {
                 command.CommandText = sql;
@@ -89,6 +102,7 @@ namespace BudgetSystem.Dal
                 command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("NO", NO));
                 command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("dealCount", dealCount));
                 command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("totalPrice", totalPrice));
+                command.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Model", model));
                 object obj = command.ExecuteScalar();
                 if (obj != null)
                 {

@@ -196,6 +196,7 @@ namespace BudgetSystem.Entity
 
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.None,"报关单管理模块",1100),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.New, "报关单管理-新增报关单",1110),
+                        new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.Modify, "报关单管理-修改报关单",1115),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.ImportData, "报关单管理-导入报关单",1120),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.Delete, "报关单管理-删除报关单",1130),
                         new Permisson(BusinessModules.VoucherNotesManagement,OperateTypes.View, "报关单管理-查看报关单",1140),
