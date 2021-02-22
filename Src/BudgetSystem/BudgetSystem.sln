@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "升级脚本", "升级脚�
 		2019-07-10升级脚本.sql = 2019-07-10升级脚本.sql
 		2019-08-05升级脚本.sql = 2019-08-05升级脚本.sql
 		2021-01-18升级脚本.sql = 2021-01-18升级脚本.sql
+		2021-02-22升级脚本.sql = 2021-02-22升级脚本.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpgradeTool", "UpgradeTool\UpgradeTool.csproj", "{EBEB8DE1-0AC8-47BE-83E0-F63F6AFDCED2}"
