@@ -181,7 +181,7 @@ namespace BudgetSystem.Bll
                 if (nextRunPointId > 0)
                 {
                     //更新第一个运行点结果，即填写发起人备注、
-                    dal.UpdateFlowRunPointApproveInfo(nextRunPointId, true, description, con, tran);
+                    dal.UpdateFlowRunPointApproveInfo(nextRunPointId, true, description, currentUser, con, tran);
                 }
 
                 //获取运行点
@@ -262,6 +262,10 @@ namespace BudgetSystem.Bll
                     nextApprove = nextNode.NodeValue;
                 }
             }
+            else if (nextNode.NodeConfig == 4)
+            {
+                nextApprove = nextNode.NodeValue;
+            }
             else
             {
                 string departMentCode;
@@ -311,7 +315,7 @@ namespace BudgetSystem.Bll
         /// 3 此节点已经审批过了
         /// 4 创建运行点时失败，用户部门未配置。
         /// </returns>
-        public FlowRunState SubmitFlow(int runPointID, bool approveResult, string approveRemark)
+        public FlowRunState SubmitFlow(int runPointID, bool approveResult, string approveRemark, string userName)
         {
             return this.ExecuteWithTransaction<FlowRunState>((con, tran) =>
             {
@@ -325,7 +329,7 @@ namespace BudgetSystem.Bll
                 }
 
                 //更新当前运行点状态、
-                dal.UpdateFlowRunPointApproveInfo(runPointID, approveResult, approveRemark, con, tran);
+                dal.UpdateFlowRunPointApproveInfo(runPointID, approveResult, approveRemark, userName, con, tran);
 
                 if (approveResult == false)
                 {
@@ -505,8 +509,17 @@ namespace BudgetSystem.Bll
         {
             return this.Query<FlowItem>((con) =>
             {
-
                 var fList = dal.GetPendingFlowByUser(userName, con, null);
+
+                //var users = userDal.GetAllEnabledUser(con, null);
+                //foreach (var f in fList)
+                //{
+                //    if (string.IsNullOrEmpty(f.NextUserRealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                //    {
+                //        var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                //        f.NextUserRealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                //    }
+                //}
                 return fList;
 
             }).ToList();
@@ -520,8 +533,17 @@ namespace BudgetSystem.Bll
         {
             return this.Query<FlowItem>((con) =>
             {
-
                 var fList = dal.GetUnConfirmFlowByUser(userName, con, null);
+
+                var users = userDal.GetAllEnabledUser(con, null);
+                foreach (var f in fList)
+                {
+                    if (string.IsNullOrEmpty(f.NextUserRealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                    {
+                        var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                        f.NextUserRealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                    }
+                }
                 return fList;
 
             }).ToList();
@@ -536,6 +558,15 @@ namespace BudgetSystem.Bll
             return this.Query<FlowItem>((con) =>
             {
                 var fList = dal.GetAprrovalFlowByCondition(condition, con);
+                var users = userDal.GetAllEnabledUser(con, null);
+                foreach (var f in fList)
+                {
+                    if (string.IsNullOrEmpty(f.NextUserRealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                    {
+                        var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                        f.NextUserRealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                    }
+                }
                 return fList;
 
             }).ToList();
@@ -545,8 +576,17 @@ namespace BudgetSystem.Bll
         {
             return this.Query<FlowRunPoint>((con) =>
             {
-
                 var fList = dal.GetFlowRunPointsByInstance(instanceID, con, null);
+
+                var users = userDal.GetAllEnabledUser(con, null);
+                foreach (var f in fList)
+                {
+                    if (string.IsNullOrEmpty(f.RealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                    {
+                        var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                        f.RealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                    }
+                }
                 return fList;
 
             }).ToList();
@@ -555,14 +595,25 @@ namespace BudgetSystem.Bll
 
         public List<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType)
         {
-            return this.Query<FlowRunPoint>((con) =>
-            {
+            var flowRunPoints = this.Query<FlowRunPoint>((con) =>
+             {
 
-                var fList = dal.GetFlowRunPointsByData(dataID, dataType, con, null);
-                return fList;
+                 var fList = dal.GetFlowRunPointsByData(dataID, dataType, con, null);
 
-            }).ToList();
+                 var users = userDal.GetAllEnabledUser(con, null);
+                 foreach (var f in fList)
+                 {
+                     if (string.IsNullOrEmpty(f.RealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                     {
+                         var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                         f.RealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                     }
+                 }
+                 return fList;
 
+             }).ToList();
+
+            return flowRunPoints;
         }
 
         public List<FlowRunPoint> GetIsRecentFlowRunPointsByData(int dataID, string dataType)
@@ -571,6 +622,16 @@ namespace BudgetSystem.Bll
             {
 
                 var fList = dal.GetIsRecentFlowRunPointsByData(dataID, dataType, con, null);
+
+                var users = userDal.GetAllEnabledUser(con, null);
+                foreach (var f in fList)
+                {
+                    if (string.IsNullOrEmpty(f.RealName) && !string.IsNullOrEmpty(f.NodeApproveUser))
+                    {
+                        var userNameArray = f.NodeApproveUser.Split(new char[] { ',' });
+                        f.RealName = string.Join(",", users.Where(o => userNameArray.Contains(o.UserName)).Select(o => o.RealName).ToArray());
+                    }
+                }
                 return fList;
 
             }).ToList();

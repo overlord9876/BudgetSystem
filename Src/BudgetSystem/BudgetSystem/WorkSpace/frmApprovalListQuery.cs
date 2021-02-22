@@ -103,7 +103,7 @@ namespace BudgetSystem.WorkSpace
                             XtraMessageBox.Show("当前数据已经不存在。");
                             return;
                         }
-                        FlowRunState state = pnm.Payemenent(currentItem, item.RunPointID);
+                        FlowRunState state = pnm.Payemenent(currentItem, item.RunPointID, RunInfo.Instance.CurrentUser.UserName);
                         string info;
                         if (state.Translate(out info))
                         {

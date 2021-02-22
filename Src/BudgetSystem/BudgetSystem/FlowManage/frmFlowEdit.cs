@@ -16,6 +16,7 @@ namespace BudgetSystem.FlowManage
         public frmFlowEdit()
         {
             InitializeComponent();
+            //this.repositoryItemPopupContainerEdit1.PopupControl = popupContainerControl1;
         }
 
 
@@ -51,8 +52,11 @@ namespace BudgetSystem.FlowManage
                 SetLayoutControlStyle(EditFormWorkModels.Modify);
                 this.txtName.Properties.ReadOnly = true;
                 this.Text = "修改流程配置";
+                var selectedUsers = userList.Where(u => u.State == true);
 
-                this.cboNodeUser.Properties.Items.AddRange(userList.Where(u => u.State == true).ToList());
+                this.cboNodeUser.Properties.Items.AddRange(selectedUsers.ToList());
+
+                this.cboNodeUsers.Properties.Items.AddRange(selectedUsers.Where(o => o.UserName != FlowConst.FlowCreateUser && o.RealName != FlowConst.FlowCreateUserDisplayName).ToArray());
 
                 this.cboNodeDepartment.Properties.Items.AddRange(departmentList);
 
@@ -107,6 +111,11 @@ namespace BudgetSystem.FlowManage
                 if (node.NodeConfig == 0)
                 {
                     node.NodeValueDisplayValue = userList.Single(s => s.UserName == node.NodeValue).ToString();
+                }
+                else if (node.NodeConfig == 4)
+                {
+                    var users = node.NodeValue.Split(new char[] { ',' });
+                    node.NodeValueDisplayValue = string.Join(",", userList.Where(o => users.Contains(o.UserName)).Select(o => o.ToString()).ToArray());
                 }
                 else
                 {
@@ -214,6 +223,15 @@ namespace BudgetSystem.FlowManage
                     this.tabControl.SelectedTabPage = tpUser;
                     this.cboNodeUser.SelectedItem = userList.SingleOrDefault(u => u.UserName == node.NodeValue);
                     this.cboNodeDepartment.SelectedItem = null;
+                    this.cboNodeUsers.EditValue = null;
+                }
+                else if (node.NodeConfig == 4)
+                {
+                    this.tabControl.SelectedTabPage = tpUsers;
+                    var users = node.NodeValue.Split(new char[] { ',' });
+                    this.cboNodeUsers.EditValue = string.Join(",", userList.Where(o => users.Contains(o.UserName)).Select(o => o.ToString()).ToArray());
+                    this.cboNodeDepartment.SelectedItem = null;
+                    this.cboNodeUser.SelectedItem = null;
                 }
                 else
                 {
@@ -221,6 +239,7 @@ namespace BudgetSystem.FlowManage
                     this.cboNodeDepartment.SelectedItem = departmentList.SingleOrDefault(d => d.ID.ToString() == node.NodeValue || d.Code.ToString() == node.NodeValue);
                     this.rgNodeDepartmentUserType.EditValue = node.NodeConfig;
                     this.cboNodeUser.SelectedItem = null;
+                    this.cboNodeUsers.EditValue = null;
                 }
 
             }
@@ -280,9 +299,25 @@ namespace BudgetSystem.FlowManage
                 }
                 node.NodeValueDisplayValue = this.cboNodeDepartment.SelectedItem.ToString();
             }
-
-
-
+            else
+            {
+                if (this.cboNodeUsers.EditValue == null)
+                {
+                    this.dxErrorProvider1.SetError(this.cboNodeUsers, "请选择多人协同审批人");
+                    return;
+                }
+                List<User> users = new List<User>();
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in this.cboNodeUsers.Properties.GetItems())
+                {
+                    if (item.CheckState == CheckState.Checked)
+                    {
+                        users.Add(item.Value as User);
+                    }
+                }
+                node.NodeConfig = 4;
+                node.NodeValue = string.Join(",", users.Select(o => o.UserName).ToArray());
+                node.NodeValueDisplayValue = string.Join(",", users.Select(o => o.ToString()).ToArray());
+            }
         }
 
         private void cboVersion_SelectedIndexChanged(object sender, EventArgs e)

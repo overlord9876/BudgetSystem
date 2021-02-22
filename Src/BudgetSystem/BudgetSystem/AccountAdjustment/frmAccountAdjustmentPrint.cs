@@ -131,19 +131,19 @@ namespace BudgetSystem
                         }
                         else if (flowNodes[0].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode1.Text = point.RealName;
+                            txtFlowNode1.Text = point.NodeActApproveRealName;
                         }
                         else if (flowNodes[1].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode2.Text = point.RealName;
+                            txtFlowNode2.Text = point.NodeActApproveRealName;
                         }
                         else if (flowNodes[2].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode3.Text = point.RealName;
+                            txtFlowNode3.Text = point.NodeActApproveRealName;
                         }
                         else if (flowNodes[3].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode4.Text = point.RealName;
+                            txtFlowNode4.Text = point.NodeActApproveRealName;
                         }
                     }
                 }
@@ -163,11 +163,11 @@ namespace BudgetSystem
                         }
                         else if (flowNodes[0].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode1.Text = point.RealName;
+                            txtFlowNode1.Text = point.NodeActApproveRealName;
                         }
                         else if (flowNodes[1].NodeValueRemark == point.NodeValueRemark)
                         {
-                            txtFlowNode2.Text = point.RealName;
+                            txtFlowNode2.Text = point.NodeActApproveRealName;
                         }
                     }
                 }

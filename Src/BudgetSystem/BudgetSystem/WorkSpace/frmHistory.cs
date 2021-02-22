@@ -45,13 +45,13 @@ namespace BudgetSystem.WorkSpace
                 this.txtCreateUserRealName.Text = this.FlowItem.CreateUserRealName;
                 this.dtCrateDate.EditValue = this.FlowItem.CreateDate;
                 if (this.FlowItem.IsClosed)
-                { 
-                    this.txtCloseReason.Text=this.FlowItem.CloseReason;
-                    this.dtEndDate.EditValue=this.FlowItem.CloseDateTime;
+                {
+                    this.txtCloseReason.Text = this.FlowItem.CloseReason;
+                    this.dtEndDate.EditValue = this.FlowItem.CloseDateTime;
                     this.txtResult.Text = this.FlowItem.InstanceStateWithEmptyState;
                 }
                 //显示所有运行点
-                List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID,FlowItem.DateItemType).ToList();
+                List<FlowRunPoint> points = fm.GetFlowRunPointsByData(FlowItem.DateItemID, FlowItem.DateItemType).ToList();
                 //显示当前运行点。
                 //List<FlowRunPoint> points = fm.GetFlowRunPointsByInstance(FlowItem.ID).ToList();
 
@@ -61,6 +61,7 @@ namespace BudgetSystem.WorkSpace
                 }
 
                 this.gdApproveList.DataSource = points;
+                this.gvApproveList.BestFitColumns();
             }
             else
             {

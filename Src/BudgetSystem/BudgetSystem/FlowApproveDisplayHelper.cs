@@ -25,7 +25,7 @@ namespace BudgetSystem
 
         public static string GetRunPointFlowNodeApproveResultWithStateDisplayName(List<FlowRunPoint> runPoints)
         {
-            return string.Join("\r\n", runPoints.Select(o => string.Format("{0}|{1}【{2}】{3}【{4}】{5}", o.NodeApproveDate.ToString("yyyy-MM-dd hh:mm:ss"), o.NodeValueRemark, o.RealName, GetFlowStateDisplayName(o), o.FlowName, o.NodeApproveRemark)).ToArray());
+            return string.Join("\r\n", runPoints.Select(o => string.Format("{0}|{1}【{2}】{3}【{4}】{5}", o.NodeApproveDate.ToString("yyyy-MM-dd hh:mm:ss"), o.NodeValueRemark, o.NodeActApproveRealName, GetFlowStateDisplayName(o), o.FlowName, o.NodeApproveRemark)).ToArray());
             //return string.Join("\r\n", runPoints.Select(o => string.Format("{0}{1}【{2}】{3}", o.NodeApproveDate.ToString("yyyy-MM-dd hh:mm:ss"), o.NodeValueRemark, o.RealName, FlowApproveDisplayHelper.GetRunPointFlowNodeApproveResultWithStateDisplayName(o))).ToArray());
         }
 

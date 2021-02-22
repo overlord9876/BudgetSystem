@@ -30,9 +30,19 @@ namespace BudgetSystem.Entity
         public int InstanceID { get; set; }
 
         /// <summary>
-        /// 实际审批人
+        /// 参与审批人
         /// </summary>
         public string NodeApproveUser { get; set; }
+
+        /// <summary>
+        /// 实际审批人
+        /// </summary>
+        public string NodeActApproveUser { get; set; }
+
+        /// <summary>
+        /// 实际审批人姓名
+        /// </summary>
+        public string NodeActApproveRealName { get; set; }
 
         /// <summary>
         /// 节点审批结果

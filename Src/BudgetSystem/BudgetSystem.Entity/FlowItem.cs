@@ -25,6 +25,11 @@ namespace BudgetSystem.Entity
             set;
         }
 
+        /// <summary>
+        /// 下一审批人真实姓名。
+        /// </summary>
+        public string NodeApproveUser { get; set; }
+
         public int RunPointID
         {
             get;

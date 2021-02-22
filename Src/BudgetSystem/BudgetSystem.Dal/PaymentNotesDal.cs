@@ -75,7 +75,7 @@ namespace BudgetSystem.Dal
                     string approveCondition = string.Empty;
                     if (!string.IsNullOrEmpty(condition.ApproveUser))
                     {
-                        approveCondition = string.Format(" NodeApproveUser=@NodeApproveUser and ");
+                        approveCondition = string.Format(" FIND_IN_SET(@NodeApproveUser,NodeApproveUser) and ");
                         dp.Add("NodeApproveUser", condition.ApproveUser, null, null, null);
                     }
                     selectSql += string.Format(" and f.ID in (SELECT InstanceID from flowrunpoint where {0} NodeApproveDate BETWEEN @BeginDate and @EndDate)", approveCondition);

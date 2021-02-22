@@ -27,7 +27,7 @@ namespace BudgetSystem.Bll
             return lst.ToList();
         }
 
-        public FlowRunState Payemenent(PaymentNotes paymentNode, int runPointId)
+        public FlowRunState Payemenent(PaymentNotes paymentNode, int runPointId, string userName)
         {
             paymentNode.PaymentDate = cm.GetDateTimeNow();
             this.ExecuteWithTransaction((con, tran) =>
@@ -35,7 +35,7 @@ namespace BudgetSystem.Bll
                      dal.ModifyPayementNodeDate(paymentNode, con, tran);
                  });
 
-            return fm.SubmitFlow(runPointId, true, "出纳打印付款单");
+            return fm.SubmitFlow(runPointId, true, "出纳打印付款单", userName);
         }
 
         /// <summary>

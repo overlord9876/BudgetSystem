@@ -183,10 +183,10 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
             return con.Query<FlowRunPoint>(selectSql, new { ID = runPointID }, tran).SingleOrDefault();
         }
 
-        public void UpdateFlowRunPointApproveInfo(int runPointID, bool result, string remark, IDbConnection con, IDbTransaction tran)
+        public void UpdateFlowRunPointApproveInfo(int runPointID, bool result, string remark, string userName, IDbConnection con, IDbTransaction tran)
         {
-            string updateSql = "Update `FlowRunPoint` Set `NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = 1,`NodeApproveDate` = now() Where `ID` = @ID";
-            con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark = remark }, tran);
+            string updateSql = "Update `FlowRunPoint` Set `NodeApproveResult` = @NodeApproveResult,`NodeApproveRemark` = @NodeApproveRemark,`State` = 1,`NodeApproveDate` = now(),NodeActApproveUser=@NodeApproveUser Where `ID` = @ID";
+            con.Execute(updateSql, new { ID = runPointID, NodeApproveResult = result, NodeApproveRemark = remark, NodeApproveUser = userName }, tran);
         }
 
 
@@ -196,7 +196,7 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
                         from FlowRunpoint t1 
                         left join FlowInstance t2 on t1.InstanceID = t2.ID
                         left join `User` t3 on t2.CreateUser= t3.UserName
-                        where t1.NodeApproveUser=@NodeApproveUser and t1.State=0 and t2.IsClosed=0";
+                        where FIND_IN_SET(@NodeApproveUser,t1.NodeApproveUser) and t1.State=0 and t2.IsClosed=0";
 
 
             return con.Query<FlowItem>(sql, new { NodeApproveUser = userName }, tran);
@@ -219,7 +219,7 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
             //                        Left join `User` t2 on t1.CreateUser = t2.UserName
             //                        Where t1.`CreateUser` = @CreateUser and IsCreateUserConfirm=0";
 
-            string sql = @"select t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName,t2.Description
+            string sql = @"select t1.NodeApproveUser,t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName,t2.Description
                             from FlowRunpoint t1 
                             left join FlowInstance t2 on t1.InstanceID = t2.ID
                             left join `User` t3 on t2.CreateUser= t3.UserName
@@ -228,7 +228,7 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
 
                             UNION  ALL
 
-                            Select t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.`DateItemText`,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName,'' as NextUserRealName,t1.Description
+                            Select '' as NodeApproveUser,t1.`ID`,t1.`FlowName`,t1.`FlowVersionNumber`,t1.`DateItemID`,t1.`DateItemText`,t1.`DateItemType`,t1.`CreateDate`,t1.`CreateUser`,t1.`ApproveResult`,t1.`IsClosed`,t1.`CloseReason`,t1.`CloseDateTime`,t1.`IsCreateUserConfirm`,`ConfirmDateTime` ,t2.RealName as CreateUserRealName,'' as NextUserRealName,t1.Description
                             From `FlowInstance` t1
                             Left join `User` t2 on t1.CreateUser = t2.UserName
                             Where t1.`CreateUser` = @CreateUser and IsCreateUserConfirm=0 and IsClosed = 1";
@@ -237,7 +237,7 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
 
         public IEnumerable<FlowItem> GetAprrovalFlowByCondition(ApprovalFlowQueryCondition condition, IDbConnection con)
         {
-            string sql = @"SELECT t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t1.NodeApproveDate,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName,t2.Description
+            string sql = @"SELECT t1.NodeApproveUser,t2.`ID`,t2.`FlowName`,t2.`FlowVersionNumber`,t1.NodeApproveDate,t2.`DateItemID`,t2.`DateItemText`,t2.`DateItemType`,t2.`CreateDate`,t2.`CreateUser`,t2.`ApproveResult`,t2.`IsClosed`,t2.`CloseReason`,t2.`CloseDateTime`,t2.`IsCreateUserConfirm`,`ConfirmDateTime` ,t3.RealName as CreateUserRealName,t4.RealName as NextUserRealName,t2.Description 
                             FROM FlowRunpoint t1
                             LEFT JOIN FlowInstance t2 on t1.InstanceID = t2.ID
                             LEFT JOIN `User` t3 on t2.CreateUser= t3.UserName
@@ -246,7 +246,8 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
             DynamicParameters dp = new DynamicParameters();
             if (condition != null)
             {
-                sql += " AND NodeApproveUser=@NodeApproveUser ";
+                //sql += " AND NodeActApproveUser=@NodeApproveUser ";
+                sql += " AND  FIND_IN_SET(@NodeApproveUser,t1.NodeActApproveUser) ";
                 dp.Add("NodeApproveUser", condition.CurrentUer, DbType.String, ParameterDirection.Input, null);
                 if (!condition.BeginTimestamp.Equals(condition.EndTimestamp))
                 {
@@ -260,10 +261,11 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName
+            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,u1.RealName as NodeActApproveRealName 
                     From `FlowRunPoint` frp
 										LEFT JOIN flownode fn on frp.NodeID=fn.ID
 										LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
+						                LEFT JOIN `user` u1 on frp.NodeActApproveUser=u1.UserName
                     Where`InstanceID` = @InstanceID
                     ORDER BY NodeOrderNo";
             return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
@@ -277,7 +279,7 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
 
         public bool ModifyCurrentUserRunPoint(int runPointID, string nodeApproveUser, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Update FlowRunPoint set  NodeApproveResult=null,NodeApproveRemark=NULL,State=0,RunPointCreateDate=NOW(),NodeApproveDate=NULL where ID=@ID AND NodeApproveUser=@NodeApproveUser;";
+            string sql = @"Update FlowRunPoint set  NodeApproveResult=null,NodeApproveRemark=NULL,State=0,NodeActApproveUser=NULL,RunPointCreateDate=NOW(),NodeApproveDate=NULL where ID=@ID AND FIND_IN_SET(@NodeApproveUser,NodeApproveUser);";
             return con.Execute(sql, new { ID = runPointID, NodeApproveUser = nodeApproveUser }, tran) > 0;
         }
 
@@ -290,25 +292,27 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
 
         public IEnumerable<FlowRunPoint> GetFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,t1.FlowName,t1.CloseReason
+            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,t1.FlowName,t1.CloseReason,u1.RealName as NodeActApproveRealName 
                     From `FlowInstance` t1  
 						LEFT JOIN `FlowRunPoint` frp on t1.ID = frp.InstanceID 
 						LEFT JOIN flownode fn on frp.NodeID=fn.ID
 						LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
+						LEFT JOIN `user` u1 on frp.NodeActApproveUser=u1.UserName
                         Where t1.`DateItemID` = @DateItemID and t1.DateItemType=@DateItemType
-                        ORDER BY  t1.IsRecent,frp.NodeOrderNo";
+                        ORDER BY  frp.ID";/*t1.IsRecent,frp.NodeOrderNo*/
             return con.Query<FlowRunPoint>(sql, new { DateItemID = dataID, DateItemType = dataType }, tran);
         }
 
         public IEnumerable<FlowRunPoint> GetIsRecentFlowRunPointsByData(int dataID, string dataType, IDbConnection con, IDbTransaction tran)
         {
-            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName
+            string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,u1.RealName as NodeActApproveRealName 
                     From `FlowInstance` t1  
 						LEFT JOIN `FlowRunPoint` frp on t1.ID = frp.InstanceID 
 						LEFT JOIN flownode fn on frp.NodeID=fn.ID
 						LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
+						LEFT JOIN `user` u1 on frp.NodeActApproveUser=u1.UserName
                         Where t1.`DateItemID` = @DateItemID and t1.DateItemType=@DateItemType  AND IsRecent=1
-                        ORDER BY  t1.IsRecent,frp.NodeOrderNo";
+                        ORDER BY  frp.ID"; /*t1.IsRecent,frp.NodeOrderNo*/
             return con.Query<FlowRunPoint>(sql, new { DateItemID = dataID, DateItemType = dataType }, tran);
         }
     }

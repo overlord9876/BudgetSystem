@@ -56,6 +56,7 @@
             this.cboNodeDepartment = new DevExpress.XtraEditors.ComboBoxEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnSureNodeValue = new DevExpress.XtraEditors.SimpleButton();
+            this.gcExtEvent = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -75,7 +76,9 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.gcExtEvent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tpUsers = new DevExpress.XtraTab.XtraTabPage();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.cboNodeUsers = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtUpdateDate.Properties.VistaTimeProperties)).BeginInit();
@@ -116,6 +119,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            this.tpUsers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNodeUsers.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcNodeValueRemark
@@ -314,10 +319,10 @@
             // 
             this.popupContainerControl1.Controls.Add(this.tabControl);
             this.popupContainerControl1.Controls.Add(this.panelControl1);
-            this.popupContainerControl1.Location = new System.Drawing.Point(391, 398);
+            this.popupContainerControl1.Location = new System.Drawing.Point(309, 289);
             this.popupContainerControl1.Margin = new System.Windows.Forms.Padding(2);
             this.popupContainerControl1.Name = "popupContainerControl1";
-            this.popupContainerControl1.Size = new System.Drawing.Size(388, 193);
+            this.popupContainerControl1.Size = new System.Drawing.Size(470, 302);
             this.popupContainerControl1.TabIndex = 11;
             // 
             // tabControl
@@ -327,11 +332,12 @@
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabPage = this.tpUser;
-            this.tabControl.Size = new System.Drawing.Size(388, 152);
+            this.tabControl.Size = new System.Drawing.Size(470, 261);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tpUser,
-            this.tpDepartment});
+            this.tpDepartment,
+            this.tpUsers});
             // 
             // tpUser
             // 
@@ -339,7 +345,7 @@
             this.tpUser.Controls.Add(this.cboNodeUser);
             this.tpUser.Margin = new System.Windows.Forms.Padding(2);
             this.tpUser.Name = "tpUser";
-            this.tpUser.Size = new System.Drawing.Size(382, 121);
+            this.tpUser.Size = new System.Drawing.Size(605, 220);
             this.tpUser.Text = "指定人员";
             // 
             // labelControl1
@@ -369,7 +375,7 @@
             this.tpDepartment.Controls.Add(this.cboNodeDepartment);
             this.tpDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.tpDepartment.Name = "tpDepartment";
-            this.tpDepartment.Size = new System.Drawing.Size(382, 121);
+            this.tpDepartment.Size = new System.Drawing.Size(464, 230);
             this.tpDepartment.Text = "指定部门";
             // 
             // rgNodeDepartmentUserType
@@ -409,22 +415,30 @@
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.btnSureNodeValue);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 152);
+            this.panelControl1.Location = new System.Drawing.Point(0, 261);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(388, 41);
+            this.panelControl1.Size = new System.Drawing.Size(470, 41);
             this.panelControl1.TabIndex = 1;
             // 
             // btnSureNodeValue
             // 
             this.btnSureNodeValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSureNodeValue.Location = new System.Drawing.Point(293, 4);
+            this.btnSureNodeValue.Location = new System.Drawing.Point(375, 4);
             this.btnSureNodeValue.Margin = new System.Windows.Forms.Padding(2);
             this.btnSureNodeValue.Name = "btnSureNodeValue";
             this.btnSureNodeValue.Size = new System.Drawing.Size(83, 33);
             this.btnSureNodeValue.TabIndex = 2;
             this.btnSureNodeValue.Text = "确定";
             this.btnSureNodeValue.Click += new System.EventHandler(this.btnSureNodeValue_Click);
+            // 
+            // gcExtEvent
+            // 
+            this.gcExtEvent.Caption = "扩展事件";
+            this.gcExtEvent.FieldName = "NodeExtEvent";
+            this.gcExtEvent.Name = "gcExtEvent";
+            this.gcExtEvent.Visible = true;
+            this.gcExtEvent.VisibleIndex = 3;
             // 
             // txtName
             // 
@@ -641,13 +655,32 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
-            // gcExtEvent
+            // tpUsers
             // 
-            this.gcExtEvent.Caption = "扩展事件";
-            this.gcExtEvent.FieldName = "NodeExtEvent";
-            this.gcExtEvent.Name = "gcExtEvent";
-            this.gcExtEvent.Visible = true;
-            this.gcExtEvent.VisibleIndex = 3;
+            this.tpUsers.Controls.Add(this.labelControl3);
+            this.tpUsers.Controls.Add(this.cboNodeUsers);
+            this.tpUsers.Name = "tpUsers";
+            this.tpUsers.Size = new System.Drawing.Size(464, 230);
+            this.tpUsers.Text = "指定多人员协同审批";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(18, 37);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(60, 18);
+            this.labelControl3.TabIndex = 5;
+            this.labelControl3.Text = "审批人：";
+            // 
+            // cboNodeUsers
+            // 
+            this.cboNodeUsers.Location = new System.Drawing.Point(91, 34);
+            this.cboNodeUsers.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.cboNodeUsers.Name = "cboNodeUsers";
+            this.cboNodeUsers.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNodeUsers.Size = new System.Drawing.Size(273, 25);
+            this.cboNodeUsers.TabIndex = 4;
             // 
             // frmFlowEdit
             // 
@@ -703,6 +736,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            this.tpUsers.ResumeLayout(false);
+            this.tpUsers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNodeUsers.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -756,6 +792,8 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraGrid.Columns.GridColumn gcExtEvent;
-
+        private DevExpress.XtraTab.XtraTabPage tpUsers;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit cboNodeUsers;
     }
 }

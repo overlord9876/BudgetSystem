@@ -177,7 +177,7 @@ namespace BudgetSystem.WorkSpace
             result = eventResult.Value;
 
             string rmarkMessage = GetApprovalRemark(result, this.txtMyInfo.Text.Trim());
-            FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, rmarkMessage);
+            FlowRunState state = fm.SubmitFlow(this.FlowItem.RunPointID, result, rmarkMessage, RunInfo.Instance.CurrentUser.UserName);
             string info;
             if (state.Translate(out info))
             {
@@ -208,7 +208,7 @@ namespace BudgetSystem.WorkSpace
 
             foreach (FlowItem item in selectedItems)
             {
-                FlowRunState state = fm.SubmitFlow(item.RunPointID, result, myInfo);
+                FlowRunState state = fm.SubmitFlow(item.RunPointID, result, myInfo, RunInfo.Instance.CurrentUser.UserName);
                 if (!state.Translate(out info))
                 {
                     idList.Remove(item.ID);

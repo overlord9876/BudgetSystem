@@ -127,7 +127,7 @@ namespace BudgetSystem.OutMoney
                     if (frp.State)
                     {
                         FlowApproveDisplayHelper.SetRunPointFlowNodeApproveResultWithStateDisplayName(frp, string.Empty);
-                        applyList += string.Format("{0}-{1}【{2}】", frp.NodeValueRemark, frp.NodeApproveUser, frp.RealName);
+                        applyList += string.Format("{0}-{1}【{2}】", frp.NodeValueRemark, frp.NodeActApproveUser, frp.NodeActApproveRealName);
                         if (index < points.Count - 1)
                         {
                             applyList += "-->";
