@@ -182,15 +182,24 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
 
         public IEnumerable<Budget> GetBudgetListByCustomerId(string customerId, IDbConnection con, IDbTransaction tran = null)
         {
+            //   string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
+            //                                             IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
+            //                        FROM `Budget` b
+            //                        LEFT JOIN `User` u ON b.Salesman=u.UserName 
+            //                        LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
+            //                        LEFT JOIN `Department` d ON b.DeptID=d.ID
+            //                        LEFT JOIN `Customer` c ON b.CustomerID=c.ID
+            //LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+            //                        WHERE b.ID<>0 and b.State<4 and (FIND_IN_SET(B.CustomerID,@CustomerID) or B.ID in (SELECT Bud_ID from budgetcustomers where FIND_IN_SET(cus_ID,@CustomerID)))";
             string selectSql = @"SELECT b.*,u.RealName AS SalesmanName,d.`Code` AS Department,d.`Name` AS DepartmentName,c.`Name` AS CustomerName,c.Country AS CustomerCountry,c.`Code` as CustomerCode,
-                                                      IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
-                                 FROM `Budget` b
-                                 LEFT JOIN `User` u ON b.Salesman=u.UserName 
-                                 LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
-                                 LEFT JOIN `Department` d ON b.DeptID=d.ID
-                                 LEFT JOIN `Customer` c ON b.CustomerID=c.ID
-								 LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
-                                 WHERE b.ID<>0 and b.State<4 and (FIND_IN_SET(B.CustomerID,@CustomerID) or B.ID in (SELECT Bud_ID from budgetcustomers where FIND_IN_SET(cus_ID,@CustomerID)))";
+                                                         IFNULL((f.ApproveResult+f.IsClosed),-1) FlowState,f.ID AS FlowInstanceID,f.FlowName,u2.RealName AS UpdateUserName                                               
+                                    FROM `Budget` b
+                                    LEFT JOIN `User` u ON b.Salesman=u.UserName 
+                                    LEFT JOIN `User` u2 ON b.UpdateUser=u2.UserName 
+                                    LEFT JOIN `Department` d ON b.DeptID=d.ID
+                                    LEFT JOIN `Customer` c ON b.CustomerID=c.ID
+            LEFT JOIN `FlowInstance` f ON f.DateItemID=b.id AND f.DateItemType=@DateItemType AND f.IsRecent=1
+                                    WHERE b.ID<>0 and b.State<4 and FIND_IN_SET(B.CustomerID,@CustomerID)";
 
             return con.Query<Budget>(selectSql, new { CustomerID = customerId, DateItemType = EnumFlowDataType.预算单.ToString() }, tran);
         }
@@ -248,6 +257,19 @@ where bs.ID in ({1})", EnumFlowDataType.供应商.ToString(), budgetIds), null, 
             return con.Query<Budget>(selectSql, new { Salesman = userName }, tran);
         }
 
+        public CustomerExtension GetCustomerByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran = null)
+        {
+            string mainCustomerSql = @"SELECT c.ID,c.`Name`,c.Country from budget b JOIN customer c on b.CustomerID=c.ID WHERE b.ID=@ID;";
+            var mainCustomer = con.Query<Customer>(mainCustomerSql, new { ID = budgetId }, tran).FirstOrDefault();
+
+            string customerSql = @"SELECT c.ID,c.`Name`,c.Country FROM  Customer c INNER JOIN BudgetCustomers bc ON c.ID=bc.Cus_ID WHERE bc.Bud_ID=@ID;";
+            var customers = con.Query<Customer>(customerSql, new { ID = budgetId }, tran);
+
+            CustomerExtension extension = new CustomerExtension();
+            extension.MainCustomer = mainCustomer?.Name;
+            extension.Customers = string.Join("、", customers.Select(o => o.Name).ToArray());
+            return extension;
+        }
 
         public int AddBudget(Budget budget, IDbConnection con, IDbTransaction tran = null)
         {

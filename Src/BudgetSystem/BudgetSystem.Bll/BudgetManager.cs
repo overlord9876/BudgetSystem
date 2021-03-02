@@ -412,5 +412,12 @@ namespace BudgetSystem.Bll
             return message;
         }
 
+        public CustomerExtension GetCustomerByBudgetId(int budgetId)
+        {
+            return this.Query<CustomerExtension>((con) =>
+            {
+                return dal.GetCustomerByBudgetId(budgetId, con, null);
+            });
+        }
     }
 }

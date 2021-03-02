@@ -18,6 +18,7 @@ namespace BudgetSystem.OutMoney
     {
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private BudgetManager bm = new BudgetManager();
+        private Bll.AccountAdjustmentManager aam = new AccountAdjustmentManager();
         public OutMoneyCaculator Caculator { get; set; }
         public List<Budget> BudgetList { get; set; }
         private List<UseMoneyType> useMoneTypeList;
@@ -298,7 +299,11 @@ namespace BudgetSystem.OutMoney
                 decimal valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
                 var receiptList = rm.GetBudgetBillListByBudgetId(selectedBudget.ID);
-                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList);
+
+                var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(selectedBudget.ID);
+                var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(selectedBudget.ID);
+
+                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList, aaList, aadList);
 
                 InitBudgetMoneyDetail();
             }

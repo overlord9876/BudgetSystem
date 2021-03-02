@@ -27,6 +27,7 @@ namespace BudgetSystem.OutMoney
         UserManager um = new UserManager();
         PaymentNotesManager pnm = new PaymentNotesManager();
         ReceiptMgmtManager rm = new ReceiptMgmtManager();
+        private Bll.AccountAdjustmentManager aam = new AccountAdjustmentManager();
         private EditFormWorkModels _workModel;
         private PaymentNotes _paymentNote;
         private List<UseMoneyType> umtList;
@@ -365,7 +366,7 @@ namespace BudgetSystem.OutMoney
             else
             {
                 CheckUsage(umt.Name);
-                var ignoreUmtList = umtList.Where(ut => ut.Type == PaymentType.运杂费 || ut.Type == PaymentType.佣金 || ut.Type == PaymentType.暂付款);
+                var ignoreUmtList = umtList.Where(ut => ut.Type == PaymentType.运杂费 /*|| ut.Type == PaymentType.佣金*/ || ut.Type == PaymentType.暂付款);
                 if (!ignoreUmtList.Any(o => o.Name.Equals(umt.Name)) && !dxErrorProvider1.HasErrors)
                 {
                     if (txtAfterPaymentBalance.Value < 0)
@@ -623,7 +624,10 @@ namespace BudgetSystem.OutMoney
                 budgetSupplierList.AddRange(supplierList.Where(o => !budgetSupplierList.Exists(bs => o.ID.Equals(bs.ID))));
                 this.cboSupplier.Properties.DataSource = budgetSupplierList;
 
-                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, umtList, imtList);
+                var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(currentBudget.ID);
+                var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(currentBudget.ID);
+
+                caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, umtList, imtList, aaList, aadList);
 
                 InitTaxRebateRateList(currentBudget.InProductDetail);
 

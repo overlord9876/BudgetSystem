@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.chkAll = new DevExpress.XtraEditors.CheckEdit();
+            this.btnDeleteAll = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.chkIgnore = new DevExpress.XtraEditors.CheckEdit();
             this.gcDeclarationform = new DevExpress.XtraGrid.GridControl();
             this.gvDeclarationform = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gcMessage = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,7 +62,7 @@
             this.gcUpdateUserRealName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcUpdateDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcDelete = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.riLinkDelete = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSure = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -66,34 +70,39 @@
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ritxtOriginalCoin = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.gcContractNO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.chkIgnore = new DevExpress.XtraEditors.CheckEdit();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAll.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIgnore.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDeclarationform)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.riLinkDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkIgnore.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.chkAll);
+            this.layoutControl1.Controls.Add(this.btnDeleteAll);
             this.layoutControl1.Controls.Add(this.btnExport);
             this.layoutControl1.Controls.Add(this.chkIgnore);
             this.layoutControl1.Controls.Add(this.gcDeclarationform);
@@ -101,23 +110,73 @@
             this.layoutControl1.Controls.Add(this.btnSure);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(745, 134, 458, 563);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1466, 550);
+            this.layoutControl1.Size = new System.Drawing.Size(1283, 428);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // chkAll
+            // 
+            this.chkAll.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkAll.EditValue = true;
+            this.chkAll.Location = new System.Drawing.Point(12, 380);
+            this.chkAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkAll.Name = "chkAll";
+            this.chkAll.Properties.Caption = "全选";
+            this.chkAll.Size = new System.Drawing.Size(505, 19);
+            this.chkAll.StyleController = this.layoutControl1;
+            this.chkAll.TabIndex = 69;
+            // 
+            // btnDeleteAll
+            // 
+            this.btnDeleteAll.Location = new System.Drawing.Point(875, 380);
+            this.btnDeleteAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeleteAll.Name = "btnDeleteAll";
+            this.btnDeleteAll.Size = new System.Drawing.Size(56, 36);
+            this.btnDeleteAll.StyleController = this.layoutControl1;
+            this.btnDeleteAll.TabIndex = 68;
+            this.btnDeleteAll.Text = "删除所有";
+            this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(935, 380);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(56, 36);
+            this.btnExport.StyleController = this.layoutControl1;
+            this.btnExport.TabIndex = 67;
+            this.btnExport.Text = "导出";
+            // 
+            // chkIgnore
+            // 
+            this.chkIgnore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkIgnore.EditValue = true;
+            this.chkIgnore.Location = new System.Drawing.Point(521, 380);
+            this.chkIgnore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkIgnore.Name = "chkIgnore";
+            this.chkIgnore.Properties.Caption = "忽略不合规数据";
+            this.chkIgnore.Size = new System.Drawing.Size(350, 19);
+            this.chkIgnore.StyleController = this.layoutControl1;
+            this.chkIgnore.TabIndex = 66;
+            // 
             // gcDeclarationform
             // 
-            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gcDeclarationform.Location = new System.Drawing.Point(12, 12);
             this.gcDeclarationform.MainView = this.gvDeclarationform;
-            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gcDeclarationform.Margin = new System.Windows.Forms.Padding(2);
             this.gcDeclarationform.Name = "gcDeclarationform";
             this.gcDeclarationform.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.riLinkDelete});
-            this.gcDeclarationform.Size = new System.Drawing.Size(1442, 486);
+            this.repositoryItemHyperLinkEdit1});
+            this.gcDeclarationform.Size = new System.Drawing.Size(1259, 364);
             this.gcDeclarationform.TabIndex = 2;
             this.gcDeclarationform.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDeclarationform});
@@ -156,6 +215,7 @@
             this.gvDeclarationform.Name = "gvDeclarationform";
             this.gvDeclarationform.OptionsDetail.EnableMasterViewMode = false;
             this.gvDeclarationform.OptionsDetail.ShowDetailTabs = false;
+            this.gvDeclarationform.OptionsSelection.MultiSelect = true;
             this.gvDeclarationform.OptionsView.ColumnAutoWidth = false;
             this.gvDeclarationform.OptionsView.ShowFooter = true;
             this.gvDeclarationform.OptionsView.ShowGroupPanel = false;
@@ -393,7 +453,7 @@
             // gcDelete
             // 
             this.gcDelete.Caption = "操作";
-            this.gcDelete.ColumnEdit = this.riLinkDelete;
+            this.gcDelete.ColumnEdit = this.repositoryItemHyperLinkEdit1;
             this.gcDelete.Name = "gcDelete";
             this.gcDelete.OptionsColumn.AllowEdit = false;
             this.gcDelete.Visible = true;
@@ -401,13 +461,14 @@
             // 
             // repositoryItemHyperLinkEdit1
             // 
-            this.riLinkDelete.AutoHeight = false;
-            this.riLinkDelete.Name = "repositoryItemHyperLinkEdit1";
+            this.repositoryItemHyperLinkEdit1.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1318, 502);
+            this.btnCancel.Location = new System.Drawing.Point(1135, 380);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(136, 36);
             this.btnCancel.StyleController = this.layoutControl1;
@@ -416,7 +477,8 @@
             // 
             // btnSure
             // 
-            this.btnSure.Location = new System.Drawing.Point(1178, 502);
+            this.btnSure.Location = new System.Drawing.Point(995, 380);
+            this.btnSure.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSure.Name = "btnSure";
             this.btnSure.Size = new System.Drawing.Size(136, 36);
             this.btnSure.StyleController = this.layoutControl1;
@@ -434,10 +496,12 @@
             this.layoutControlItem19,
             this.layoutControlItem1,
             this.layoutControlItem3,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem4,
+            this.layoutControlItem5});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1466, 550);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1283, 428);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -445,9 +509,9 @@
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 490);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 391);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(583, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(509, 17);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -455,7 +519,7 @@
             // 
             this.layoutControlItem18.Control = this.btnSure;
             this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
-            this.layoutControlItem18.Location = new System.Drawing.Point(1166, 490);
+            this.layoutControlItem18.Location = new System.Drawing.Point(983, 368);
             this.layoutControlItem18.MaxSize = new System.Drawing.Size(140, 40);
             this.layoutControlItem18.MinSize = new System.Drawing.Size(140, 40);
             this.layoutControlItem18.Name = "layoutControlItem18";
@@ -470,7 +534,7 @@
             // 
             this.layoutControlItem19.Control = this.btnCancel;
             this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
-            this.layoutControlItem19.Location = new System.Drawing.Point(1306, 490);
+            this.layoutControlItem19.Location = new System.Drawing.Point(1123, 368);
             this.layoutControlItem19.MaxSize = new System.Drawing.Size(140, 40);
             this.layoutControlItem19.MinSize = new System.Drawing.Size(140, 40);
             this.layoutControlItem19.Name = "layoutControlItem19";
@@ -487,11 +551,73 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1446, 490);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1263, 368);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.layoutControlItem3.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.layoutControlItem3.Control = this.chkIgnore;
+            this.layoutControlItem3.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
+            this.layoutControlItem3.Location = new System.Drawing.Point(509, 368);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(0, 40);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(132, 40);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(354, 40);
+            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem3.Text = "layoutControlItem3";
+            this.layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextToControlDistance = 0;
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.btnExport;
+            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem2.Location = new System.Drawing.Point(923, 368);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(60, 40);
+            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextToControlDistance = 0;
+            this.layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnDeleteAll;
+            this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
+            this.layoutControlItem4.Location = new System.Drawing.Point(863, 368);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem4.Text = "layoutControlItem4";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextToControlDistance = 0;
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.chkAll;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 368);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(509, 23);
+            this.layoutControlItem5.Text = "layoutControlItem5";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextToControlDistance = 0;
+            this.layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem32
             // 
@@ -526,64 +652,6 @@
             this.gcContractNO.VisibleIndex = 1;
             this.gcContractNO.Width = 85;
             // 
-            // chkIgnore
-            // 
-            this.chkIgnore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkIgnore.EditValue = true;
-            this.chkIgnore.Location = new System.Drawing.Point(595, 502);
-            this.chkIgnore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chkIgnore.Name = "chkIgnore";
-            this.chkIgnore.Properties.Caption = "忽略不合规数据";
-            this.chkIgnore.Size = new System.Drawing.Size(421, 23);
-            this.chkIgnore.StyleController = this.layoutControl1;
-            this.chkIgnore.TabIndex = 66;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.layoutControlItem3.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.layoutControlItem3.Control = this.chkIgnore;
-            this.layoutControlItem3.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(583, 490);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(0, 40);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(132, 40);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(425, 40);
-            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem3.Text = "layoutControlItem3";
-            this.layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextToControlDistance = 0;
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(1020, 502);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(154, 36);
-            this.btnExport.StyleController = this.layoutControl1;
-            this.btnExport.TabIndex = 67;
-            this.btnExport.Text = "导出";
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.btnExport;
-            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(1008, 490);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 40);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(45, 40);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(158, 40);
-            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem2.Text = "layoutControlItem2";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextToControlDistance = 0;
-            this.layoutControlItem2.TextVisible = false;
-            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "\"Excel2003|*.xls\"";
@@ -591,29 +659,32 @@
             // frmDeclarationformImport
             // 
             this.AcceptButton = this.btnSure;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1466, 550);
+            this.ClientSize = new System.Drawing.Size(1283, 428);
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(3);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmDeclarationformImport";
             this.Text = "导入报关单信息";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkAll.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIgnore.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeclarationform)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDeclarationform)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.riLinkDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkIgnore.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ritxtOriginalCoin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -661,11 +732,15 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gcMessage;
         private DevExpress.XtraGrid.Columns.GridColumn gcDelete;
-        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit riLinkDelete;
         private DevExpress.XtraEditors.CheckEdit chkIgnore;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteAll;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.CheckEdit chkAll;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }

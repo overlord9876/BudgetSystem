@@ -9,6 +9,7 @@ namespace BudgetSystem.Bll
 {
     public class PaymentNotesManager : BaseManager
     {
+        AccountAdjustmentManager aam = new AccountAdjustmentManager();
         CommonManager cm = new CommonManager();
         Dal.PaymentNotesDal dal = new Dal.PaymentNotesDal();
         Bll.FlowManager fm = new FlowManager();
@@ -125,7 +126,11 @@ namespace BudgetSystem.Bll
                     var paymentNotes = GetTotalAmountPaymentMoneyByBudgetId(currentBudget.ID);
 
                     var pnList = paymentNotes.Where(o => !o.ID.Equals(lst.ID)).ToList<PaymentNotes>();
-                    var caculator = new OutMoneyCaculator(currentBudget, pnList, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList);
+
+                    var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(currentBudget.ID);
+                    var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(currentBudget.ID);
+
+                    var caculator = new OutMoneyCaculator(currentBudget, pnList, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList, aaList, aadList);
 
 
                     caculator.ApplyForPayment(lst.CNY, (decimal)lst.TaxRebateRate, lst.IsDrawback);

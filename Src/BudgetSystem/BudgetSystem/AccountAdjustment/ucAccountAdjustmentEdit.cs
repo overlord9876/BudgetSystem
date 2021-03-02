@@ -1274,7 +1274,7 @@ namespace BudgetSystem.InMoney
                 BudgetBill bb = cboBudgetBill.EditValue as BudgetBill;
                 if (bb != null)
                 {
-                    string customerIds = $"{bb.Cus_ID},{bb.CustomerID}";
+                    string customerIds = $"{bb.Cus_ID}";
                     this.gridBudget.DataSource = bm.GetBudgetListByCustomerId(customerIds).Where(o => o.ID != bb.BudgetID).ToList();
                 }
                 else

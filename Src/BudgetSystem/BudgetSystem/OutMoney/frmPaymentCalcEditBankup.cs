@@ -16,6 +16,7 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmPaymentCalcEditBankup : frmBaseDialogForm
     {
+        private Bll.AccountAdjustmentManager aam = new AccountAdjustmentManager();
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         private BudgetManager bm = new BudgetManager();
         public OutMoneyCaculator Caculator { get; set; }
@@ -296,7 +297,11 @@ namespace BudgetSystem.OutMoney
                 decimal valueAddedTaxRate = scm.GetSystemConfigValue<decimal>(EnumSystemConfigNames.增值税税率.ToString());
                 var paymentNotes = pnm.GetTotalAmountPaymentMoneyByBudgetId(selectedBudget.ID);
                 var receiptList = rm.GetBudgetBillListByBudgetId(selectedBudget.ID);
-                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList);
+
+                var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(selectedBudget.ID);
+                var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(selectedBudget.ID);
+
+                Caculator = new OutMoneyCaculator(selectedBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneTypeList, inMoneTypeList, aaList, aadList);
 
                 InitBudgetMoneyDetail();
             }

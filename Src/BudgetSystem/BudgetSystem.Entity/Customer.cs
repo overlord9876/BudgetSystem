@@ -49,7 +49,7 @@ namespace BudgetSystem.Entity
         /// 可用状态
         /// </summary>
         public bool State { get; set; }
-      
+
         /// <summary>
         /// 客户编号
         /// </summary>
@@ -58,7 +58,7 @@ namespace BudgetSystem.Entity
         /// 联系方式
         /// </summary>
         public string Email { get; set; }
-        
+
         /// <summary>
         /// 联系人
         /// </summary>
@@ -92,4 +92,10 @@ namespace BudgetSystem.Entity
         }
     }
 
+    public class CustomerExtension
+    {
+        public string MainCustomer { get; set; }
+
+        public string Customers { get; set; }
+    }
 }

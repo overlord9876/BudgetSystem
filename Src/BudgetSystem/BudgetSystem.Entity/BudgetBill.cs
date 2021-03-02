@@ -31,15 +31,20 @@ namespace BudgetSystem.Entity
         /// </summary>
         public int Cus_ID { get; set; }
 
-        /// <summary>
-        /// 收款客户ID
-        /// </summary>
-        public int CustomerID { get; set; }
+        ///// <summary>
+        ///// 收款客户ID
+        ///// </summary>
+        //public int CustomerID { get; set; }
 
         /// <summary>
         /// 客户对象
         /// </summary>
         public string Customer { get; set; }
+
+        ///// <summary>
+        ///// 主客户
+        ///// </summary>
+        //public string MainCustomer { get; set; }
 
         /// <summary>
         /// 入帐单ID

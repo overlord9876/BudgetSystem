@@ -243,7 +243,7 @@ namespace BudgetSystem.Entity
             decimal commissionTotal = _paymentList.Where(o => CommissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
 
             //调出付款金额为佣金类型，则佣金总额减去相应金额
-            commissionTotal += (0 - this.accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && CommissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));
+            commissionTotal -= this.accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && CommissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY);
 
             //调入付款金额为佣金类型，则佣金总额加上相应金额
             commissionTotal += this.accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && CommissionType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
@@ -258,7 +258,7 @@ namespace BudgetSystem.Entity
             var premiumType = useMoneyTypeList.Where(um => um.Type == PaymentType.运杂费);
             decimal premiumTotal = _paymentList.Where(o => premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
             //调出付款金额为运杂费类型，则运杂费总额减去相应金额
-            premiumTotal += (0 - this.accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));
+            premiumTotal -= this.accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY);
 
             //调入付款金额为运杂费类型，则运杂费总额加上相应金额
             premiumTotal += this.accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && premiumType.Any(i => i.Name == o.MoneyUsed)).Sum(o => o.CNY);
@@ -452,7 +452,7 @@ namespace BudgetSystem.Entity
         public decimal GetUsagePayMoney(string usageName)
         {
             var payMoney = this._paymentList.Where(o => o.MoneyUsed == usageName).Sum(o => o.CNY);
-            payMoney += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.MoneyUsed == usageName).Sum(o => o.AlreadySplitCNY));//调账出去的金额。
+            payMoney -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.MoneyUsed == usageName).Sum(o => o.AlreadySplitCNY);//调账出去的金额。
             payMoney += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && o.MoneyUsed == usageName).Sum(o => o.CNY);//调账紧来的金额。
             return payMoney;
         }
@@ -461,7 +461,7 @@ namespace BudgetSystem.Entity
         {
             var payMoney = this._paymentList.Where(o => usageNames.Contains(o.MoneyUsed)).Sum(o => o.CNY);
 
-            payMoney += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 & usageNames.Contains(o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));//调账出去的金额。
+            payMoney -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款 & usageNames.Contains(o.MoneyUsed)).Sum(o => o.AlreadySplitCNY);//调账出去的金额。
             payMoney += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && usageNames.Contains(o.MoneyUsed)).Sum(o => o.CNY);//调账紧来的金额。
             return payMoney;
         }
@@ -510,16 +510,16 @@ namespace BudgetSystem.Entity
             TaxRefund = _paymentList.Sum(o => o.AmountOfTaxRebate());//TODO:拆分要考虑退税额。
             if (accountAdjustments != null)
             {
-                TaxPayment += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑退税。
-                PaymentMoneyAmount += accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AlreadySplitCNY);//拆出去的金额。
-                TotalTaxPayment += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑退税。
-                IgnoreTransportationExpensesPaymentMoneyAmount += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY));//TODO:拆分要考虑运杂费。
-                TaxRefund += (0 - accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption)));//TODO:拆分要考虑退税额。
+                TaxPayment -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY);//TODO:拆分要考虑退税。
+                PaymentMoneyAmount -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AlreadySplitCNY);//拆出去的金额。
+                TotalTaxPayment -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.AlreadySplitCNY);//TODO:拆分要考虑退税。
+                IgnoreTransportationExpensesPaymentMoneyAmount -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.AlreadySplitCNY);//TODO:拆分要考虑运杂费。
+                TaxRefund -= accountAdjustments.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption));//TODO:拆分要考虑退税额。
             }
             if (accountAdjustmentDetails != null)
             {
                 TaxPayment += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.CNY);//TODO:拆分要考虑退税。
-                PaymentMoneyAmount += (0 - accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.CNY));//拆进来的金额
+                PaymentMoneyAmount += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.CNY);//拆进来的金额
                 TotalTaxPayment += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && o.IsDrawback).Sum(o => o.CNY);//TODO:拆分要考虑退税。
                 IgnoreTransportationExpensesPaymentMoneyAmount += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款 && !umtTypeList.Any(t => t.Name == o.MoneyUsed)).Sum(o => o.CNY);//TODO:拆分要考虑运杂费。
                 TaxRefund += accountAdjustmentDetails.Where(o => o.Type == AdjustmentType.付款).Sum(o => o.AmountOfTaxRebate(vatOption));//TODO:拆分要考虑退税额。

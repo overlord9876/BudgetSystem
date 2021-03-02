@@ -223,7 +223,7 @@ namespace BudgetSystem.Dal
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
-                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID										
 										LEFT JOIN `user` u on bb.Operator=u.UserName
 										LEFT JOIN department d on bb.DeptID=d.`ID`
                                         Where bb.`ID` = @BBID";
@@ -270,12 +270,11 @@ namespace BudgetSystem.Dal
 
         public IEnumerable<BudgetBill> GetBudgetBillListWithOutAdjustmentByBudgetId(int budgetId, IDbConnection con, IDbTransaction tran)
         {
-            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,cc.ID as CustomerID,cc.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
+            string selectSql = @"Select bb.*,b.ContractNO,bs.Currency,bs.BankName,bs.ExchangeRate,bs.ReceiptDate,c.Name as Remitter,c.`Name` as Customer,bs.VoucherNo,bs.PaymentMethod,bs.NatureOfMoney,d.`Name` as DepartmentName
                                         From `BudgetBill`  bb 
                                         LEFT JOIN budget b on bb.BudgetID=b.ID
                                         LEFT JOIN Customer c on bb.Cus_ID=c.ID
-                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID
-										LEFT JOIN customer cc on bs.Cus_ID=cc.ID
+                                        LEFT JOIN bankslip bs on bb.BSID=bs.BSID										
 										LEFT JOIN department d on bb.DeptID=d.`ID`
                                 Where bb.`BudgetID` =@BudgetID AND bb.IsDelete=0 AND bs.State=2
 						AND bb.ID not in (select RelationID from reciptaccountadjustment where BudgetID=@BudgetID);";

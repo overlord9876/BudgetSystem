@@ -29,6 +29,7 @@ namespace BudgetSystem.InMoney
         private BankSlip _currentBankSlip;
         private List<InMoneyType> imTypeList;
         private List<UseMoneyType> useMoneyTypeList;
+        private Bll.AccountAdjustmentManager aam = new AccountAdjustmentManager();
 
         public decimal NotSplitCNYMoney { get; private set; }
 
@@ -792,7 +793,10 @@ namespace BudgetSystem.InMoney
                 }
             }
 
-            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList);
+            var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(currentBudget.ID);
+            var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(currentBudget.ID);
+
+            OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList, aaList, aadList);
 
             caculator.ApplyForPayment(0, 1, false);
             //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
@@ -861,7 +865,10 @@ namespace BudgetSystem.InMoney
                         removedReceiptList = receiptList.Where(o => o.ID != budgetBill.ID);
                     }
 
-                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList);
+                    var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(currentBudget.ID);
+                    var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(currentBudget.ID);
+
+                    OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, removedReceiptList, valueAddedTaxRate, useMoneyTypeList, imTypeList, aaList, aadList);
                     caculator.ApplyForPayment(0, 1, false);
                     //TODO:这里是否需要考虑预算单上有预付款但是没有预付款申请记录的情况
                     if (caculator.Balance + currentBudget.AdvancePayment < 0)

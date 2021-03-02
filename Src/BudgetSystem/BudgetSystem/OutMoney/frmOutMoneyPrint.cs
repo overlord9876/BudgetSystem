@@ -15,6 +15,7 @@ namespace BudgetSystem.OutMoney
 {
     public partial class frmOutMoneyPrint : frmBaseDialogForm
     {
+        private Bll.AccountAdjustmentManager aam = new AccountAdjustmentManager();
         private Bll.SystemConfigManager scm = new Bll.SystemConfigManager();
         CommonManager cm = new CommonManager();
         Bll.FlowManager fm = new FlowManager();
@@ -54,9 +55,12 @@ namespace BudgetSystem.OutMoney
 
                 Supplier supplier = sm.GetSupplier(CurrentPaymentNotes.SupplierID);
 
+                var aaList = aam.GetBalanceAccountAdjustmentByBudgetId(currentBudget.ID);
+                var aadList = aam.GetBalanceAccountAdjustmentDetailByBudgetId(currentBudget.ID);
+
                 var useMoneTypeList = scm.GetSystemConfigValue<List<UseMoneyType>>(EnumSystemConfigNames.用款类型.ToString());
                 var inMoneTypeList = scm.GetSystemConfigValue<List<InMoneyType>>(EnumSystemConfigNames.收款类型.ToString());
-                OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, CurrentPaymentNotes.VatOption, useMoneTypeList, inMoneTypeList);
+                OutMoneyCaculator caculator = new OutMoneyCaculator(currentBudget, paymentNotes, receiptList, CurrentPaymentNotes.VatOption, useMoneTypeList, inMoneTypeList, aaList, aadList);
 
                 caculator.ApplyForPayment(this.CurrentPaymentNotes.CNY, (decimal)this.CurrentPaymentNotes.TaxRebateRate, this.CurrentPaymentNotes.IsDrawback);
 

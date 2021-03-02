@@ -211,5 +211,6 @@ namespace BudgetSystem.Entity
         /// 验证消息
         /// </summary>
         public string Message { get; set; }
+
     }
 }

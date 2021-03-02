@@ -173,7 +173,7 @@ namespace BudgetSystem
                 }
             }
 
-            txtApplyList.Text += GeneraorMessage(adjustment, adjustmentDetail, user);
+            txtApplyList.Text += GeneraorMessage2(adjustment, adjustmentDetail, user);
             txtApplyList.Text += "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
 
             foreach (var control in this.layoutControl1.Controls)
@@ -232,6 +232,90 @@ namespace BudgetSystem
             return result;
         }
 
+        public static string GeneraorMessage2(AccountAdjustment adjustment, List<AccountAdjustmentDetail> adjustmentDetail, User user, bool isMark = false)
+        {
+            Bll.BudgetManager bm = new BudgetManager();
+            Bll.PaymentNotesManager pnm = new PaymentNotesManager();
+            ReceiptMgmtManager rmm = new ReceiptMgmtManager();
+            InvoiceManager im = new InvoiceManager();
+
+            string result = string.Empty;
+            string date = adjustment.Date.ToString("yyyy年MM月dd日");
+            string type = adjustment.Type == AdjustmentType.付款 ? "付给" : "收到";
+            string message = $"由于客户的原因，先申请{adjustment.Type}调账：\r\n";
+
+            var CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
+
+            message += $"调出：从合同【{adjustment.ContractNO}】主买方【{CustomerExtension.MainCustomer}】备注买方【{CustomerExtension.Customers}】";
+            if (adjustment.Type == AdjustmentType.付款)
+            {
+                var payment = pnm.GetPaymentNoteById(adjustment.RelationID);
+
+                message += $"原付款时间【{payment.PaymentDate}】,原付款金额【{payment.CNY}】，付款单号【{payment.VoucherNo}】，供应商名称【{payment.SupplierName}】，用款类型【{payment.MoneyUsed}】";
+
+                int index = 0;
+                foreach (var detail in adjustmentDetail)
+                {
+                    index++;
+                    CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
+                    message += "\r\n\r\n";
+                    message += $"调入（{index}）调整到合同【{detail.ContractNO}】，买方【{CustomerExtension.MainCustomer}】备注买方【{CustomerExtension.Customers}】\r\n";
+                    message += $"调账时间【{detail.OperatorDate}】，{adjustment.Type}调账金额【{detail.CNY}】调账编号【{adjustment.Code}】，供应商名称【{payment.SupplierName}】，用款类型【{payment.MoneyUsed}】\r\n";
+                }
+            }
+            else if (adjustment.Type == AdjustmentType.收款)
+            {
+                var budgetBill = rmm.GetBudgetBillBybbId(adjustment.RelationID);
+                message += $"原收款时间【{budgetBill.ReceiptDate}】,原收款金额【{budgetBill.CNY}】,银行凭证号【{budgetBill.VoucherNo}】，付款单位【{budgetBill.Customer}】，款项性质【{budgetBill.NatureOfMoney}】";
+                int index = 0;
+                foreach (var detail in adjustmentDetail)
+                {
+                    index++;
+                    CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
+                    message += "\r\n\r\n";
+                    message += $"调整到合同【{detail.ContractNO}】，买方【{CustomerExtension.MainCustomer}】备注买方【{CustomerExtension.Customers}】\r\n";
+                    message += $"调账时间【{detail.OperatorDate}】，{adjustment.Type}收款调账金额【{detail.CNY}】调账编号【{adjustment.Code}】，付款单位【{budgetBill.Customer}】，款项性质【{budgetBill.NatureOfMoney}】\r\n";
+                }
+            }
+            else
+            {
+                var invoice = im.GetInvoice(adjustment.RelationID);
+                message += $"原交单时间【{invoice.FinanceImportDate}】,发票原币金额【{invoice.OriginalCoin}】,发票人民币金额【{invoice.CNY}】，销方名称【{invoice.SupplierName}】，币种[USD]，汇率【{invoice.ExchangeRate}】";
+                int index = 0;
+                foreach (var detail in adjustmentDetail)
+                {
+                    index++;
+                    CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
+                    message += "\r\n\r\n";
+                    message += $"调整到合同【{detail.ContractNO}】，买方【{CustomerExtension.MainCustomer}】备注买方【{CustomerExtension.Customers}】\r\n";
+                    message += $"调账时间【{detail.OperatorDate}】，{adjustment.Type}调账原币金额【{detail.OriginalCoin}】调账人民币金额【{detail.CNY}】，调账销方名称【{invoice.SupplierName}】，币种[USD]，汇率【{invoice.ExchangeRate}】\r\n";
+                }
+            }
+            if (!isMark)
+            {
+                result = "调账申请理由：\r\n\r\n\r\n";
+                result += "\t";
+            }
+            result += message;
+            if (!isMark)
+            {
+                result += "\r\n";
+            }
+            result += "\r\n\t";
+            result += "以上麻烦操作，谢谢。";
+            if (!isMark)
+            {
+                result += "\r\n\r\n";
+            }
+            result += "\r\n\t\t\t\t\t    " + user?.DepartmentName ?? "";
+            if (!isMark)
+            {
+                result += "\r\n";
+            }
+            result += "\r\n\t\t\t\t\t" + adjustment?.CreateDate.ToString("yyyy年MM月dd日") ?? "";
+
+            return result;
+        }
         public override void PrintData()
         {
             this.labelControl1.Focus();

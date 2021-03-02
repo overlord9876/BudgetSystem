@@ -34,8 +34,8 @@ namespace BudgetSystem.InMoney
             this.btnCancel.Click += new EventHandler(btnCancel_Click);
             this.gvDeclarationform.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(gvDeclarationform_InvalidRowException);
             this.gvDeclarationform.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(gvDeclarationform_ValidateRow);
-            this.riLinkDelete.Click += new EventHandler(riLinkDelete_Click);
-            this.riLinkDelete.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
+            this.repositoryItemHyperLinkEdit1.Click += new EventHandler(riLinkDelete_Click);
+            this.repositoryItemHyperLinkEdit1.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(riLinkDelete_CustomDisplayText);
         }
 
         private bool ReadData()
@@ -247,7 +247,9 @@ namespace BudgetSystem.InMoney
             e.DisplayText = "删除";
         }
 
-
-
+        private void btnDeleteAll_Click(object sender, EventArgs e)
+        {
+            this.gvDeclarationform.DeleteSelectedRows();
+        }
     }
 }
