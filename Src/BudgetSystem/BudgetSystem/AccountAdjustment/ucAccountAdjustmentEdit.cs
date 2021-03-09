@@ -301,7 +301,17 @@ namespace BudgetSystem.InMoney
                     this.txtCode.Text = this.Adjustment.Code;
                     this.deCreateTimestamp.EditValue = Adjustment.CreateDate;
                     this.txtCreateUser.Text = string.Format("[{0}]-[{1}]", Adjustment.CreateUser, Adjustment.CreateRealUserName);
-                    this.txtDescription.Text = Adjustment.Remark;
+                    if (this.WorkModel == EditFormWorkModels.Modify)
+                    {
+                        this.txtDescription.Text = Adjustment.Remark;
+                    }
+                    else
+                    {
+                        var users = um.GetAllEnabledUser();
+                        var user = users?.FirstOrDefault(o => o.UserName == Adjustment.CreateUser);
+                        this.txtDescription.Text = frmAccountAdjustmentPrint.GeneraorMessage2(Adjustment, details, user, true);
+                        this.txtDescription.Text += Adjustment.Remark;
+                    }
                     this.txtAlreadySplitOriginalCoin.EditValue = this.Adjustment.AlreadySplitOriginalCoin;
                     this.txtAlreadySplitCNYMoney.EditValue = this.Adjustment.AlreadySplitCNY;
                     this.AdjustmentDetail = details;

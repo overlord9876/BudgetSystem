@@ -89,7 +89,6 @@
             this.deStartDate = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.deEndDate = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnSearch = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Print = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
@@ -99,6 +98,7 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridAccountAdjustment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountAdjustment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -114,8 +114,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // gridAccountAdjustment
@@ -160,15 +160,17 @@
             // 
             this.gcCode.Caption = "编号";
             this.gcCode.FieldName = "Code";
-            this.gcCode.MinWidth = 75;
+            this.gcCode.MinWidth = 100;
             this.gcCode.Name = "gcCode";
             this.gcCode.Visible = true;
             this.gcCode.VisibleIndex = 0;
+            this.gcCode.Width = 100;
             // 
             // gcType
             // 
             this.gcType.Caption = "调账类型";
             this.gcType.FieldName = "Type";
+            this.gcType.MinWidth = 60;
             this.gcType.Name = "gcType";
             this.gcType.Visible = true;
             this.gcType.VisibleIndex = 1;
@@ -177,10 +179,11 @@
             // 
             this.gcContractNO.Caption = "关联合同";
             this.gcContractNO.FieldName = "ContractNO";
-            this.gcContractNO.MinWidth = 60;
+            this.gcContractNO.MinWidth = 80;
             this.gcContractNO.Name = "gcContractNO";
             this.gcContractNO.Visible = true;
             this.gcContractNO.VisibleIndex = 2;
+            this.gcContractNO.Width = 80;
             // 
             // gcName
             // 
@@ -284,6 +287,7 @@
             // 
             this.gcRemark.Caption = "备注";
             this.gcRemark.FieldName = "Remark";
+            this.gcRemark.MaxWidth = 80;
             this.gcRemark.Name = "gcRemark";
             this.gcRemark.Visible = true;
             this.gcRemark.VisibleIndex = 14;
@@ -679,14 +683,6 @@
             this.deEndDate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.deEndDate.Width = 100;
             // 
-            // repositoryItemComboBox2
-            // 
-            this.repositoryItemComboBox2.AutoHeight = false;
-            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
-            this.repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            // 
             // btnSearch
             // 
             this.btnSearch.Caption = "查询";
@@ -749,6 +745,14 @@
             "T/T和L/C 收汇"});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
+            this.repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // frmAccountAdjustmentQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -777,8 +781,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             this.ResumeLayout(false);
 
         }

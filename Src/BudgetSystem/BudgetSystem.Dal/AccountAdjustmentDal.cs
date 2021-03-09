@@ -355,8 +355,9 @@ WHERE pa.BudgetID=@BudgetID) AND rad.IsDelete=0;";
         {
             if (atType == AdjustmentType.付款)
             {
-                string selectRecSql = @"SELECT pad.*,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,u.RealName as OperatorRealName from paymentaccountadjustmentdetail pad
-	                                    join paymentnotes pn on pad.RelationID=pn.ID 
+                string selectRecSql = @"SELECT pad.*,pn.IsDrawback,pn.MoneyUsed,pn.TaxRebateRate,u.RealName as OperatorRealName,b.ContractNO from paymentaccountadjustmentdetail pad
+										JOIN paymentnotes pn on pad.RelationID=pn.ID 
+										JOIN budget b on pad.BudgetID=b.Id
 	                                    JOIN `user` u on pad.Operator=u.UserName
 	                                    WHERE pad.PID=@PID;";
                 return con.Query<AccountAdjustmentDetail>(selectRecSql, new { PID = id }, tran).ToList();
@@ -364,9 +365,10 @@ WHERE pa.BudgetID=@BudgetID) AND rad.IsDelete=0;";
 
             if (atType == AdjustmentType.收款)
             {
-                string selectPaySql = @"SELECT rad.*,bs.NatureOfMoney as MoneyUsed,u.RealName as OperatorRealName from reciptaccountadjustmentdetail rad
+                string selectPaySql = @"SELECT rad.*,bs.NatureOfMoney as MoneyUsed,u.RealName as OperatorRealName,b.ContractNO from reciptaccountadjustmentdetail rad
                                         JOIN budgetbill bb on rad.RelationID=bb.ID
                                         JOIN bankslip bs on bb.BSID =bs.BSID 
+										JOIN budget b on rad.BudgetID=b.Id
                                         JOIN `user` u on rad.Operator=u.UserName
                                         WHERE rad.PID=@PID;";
 
@@ -375,9 +377,10 @@ WHERE pa.BudgetID=@BudgetID) AND rad.IsDelete=0;";
 
             if (atType == AdjustmentType.交单)
             {
-                string selectInvoiceSql = @"SELECT rad.*,i.ExchangeRate,i.FeedMoney,i.Payment,i.TaxAmount,u.RealName as OperatorRealName from invoiceaccountadjustmentdetail rad
+                string selectInvoiceSql = @"SELECT rad.*,i.ExchangeRate,i.FeedMoney,i.Payment,i.TaxAmount,u.RealName as OperatorRealName,b.ContractNO from invoiceaccountadjustmentdetail rad
                                             JOIN invoice i on rad.RelationID=i.ID
                                             JOIN `user` u on rad.Operator=u.UserName
+										    JOIN budget b on rad.BudgetID=b.Id
                                             WHERE rad.PID=@PID ;";
 
                 return con.Query<AccountAdjustmentDetail>(selectInvoiceSql, new { PID = id }, tran);

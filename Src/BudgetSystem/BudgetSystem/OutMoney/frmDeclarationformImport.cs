@@ -86,6 +86,10 @@ namespace BudgetSystem.InMoney
                     df.OffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "离岸价");
                     df.USDOffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "美元离岸价");
                     df.CNYOffshoreTotalPrice = DataRowConvertHelper.GetDecimalValue(row, "人民币离岸价");
+                    if (df.ExportDate == DateTime.MinValue)
+                    {
+                        df.Message = "出口时间不能为空。";
+                    }
                     df.CreateUser = RunInfo.Instance.CurrentUser.UserName;
                     df.CreateDate = datetimeNow;
                     df.UpdateUser = RunInfo.Instance.CurrentUser.UserName;
@@ -141,7 +145,9 @@ namespace BudgetSystem.InMoney
                 if (importList.Any())
                 {
                     dm.ImportDeclarationform(importList);
+                    int rowCount = importList.Count;
                     list.RemoveAll(i => string.IsNullOrEmpty(i.Message));
+                    XtraMessageBox.Show($"成功导入{rowCount}条数据。");
                 }
                 gcDeclarationform.DataSource = new BindingList<Declarationform>(list);
                 if (list.Any()) { return; }
