@@ -408,7 +408,9 @@ namespace BudgetSystem.Bll
                 if (instance.IsClosed)
                 {
                     var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
-                    if (runPoints.ElementAt(runPoints.Count() - 1).NodeApproveUser != approvalUser)
+                    var approveUsers = runPoints.ElementAt(runPoints.Count() - 1).NodeApproveUser;
+                    var nodeApproveUsers = approveUsers.Split(new char[] { ',' }).Select(o => o.Trim());
+                    if (!nodeApproveUsers.Contains(approvalUser))
                     {
                         return FlowRunState.最后一个审批不是当前用户;
                     }
@@ -421,13 +423,15 @@ namespace BudgetSystem.Bll
                 if (checkFlowNotApproved)
                 {
                     var runPoints = dal.GetFlowRunPointsByInstance(instanceID, con, tran);
-                    if (runPoints.ElementAt(runPoints.Count() - 2).NodeApproveUser != approvalUser)
+                    var approveUsers = runPoints.ElementAt(runPoints.Count() - 2).NodeApproveUser;
+                    var nodeApproveUsers = approveUsers.Split(new char[] { ',' }).Select(o => o.Trim());
+                    if (!nodeApproveUsers.Contains(approvalUser))
                     {
                         return FlowRunState.最后一个审批不是当前用户;
                     }
                     dal.DeleteLastRunPointById(runPoints.ElementAt(runPoints.Count() - 1).ID, con, tran);
                     var runPoint = runPoints.ElementAt(runPoints.Count() - 2);
-                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeApproveUser, con, tran);
+                    dal.ModifyCurrentUserRunPoint(runPoint.ID, runPoint.NodeActApproveUser, con, tran);
                 }
 
                 return FlowRunState.撤回成功;

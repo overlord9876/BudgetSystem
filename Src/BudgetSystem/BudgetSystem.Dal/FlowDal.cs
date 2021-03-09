@@ -271,6 +271,18 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
             return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
         }
 
+        //public IEnumerable<FlowRunPoint> GetApproveFlowRunPointsByInstance(int instanceID, IDbConnection con, IDbTransaction tran)
+        //{
+        //    string sql = @"Select frp.*,fn.NodeExtEvent,fn.NodeValueRemark,u.RealName,u1.RealName as NodeActApproveRealName 
+        //            From `FlowRunPoint` frp
+								//		LEFT JOIN flownode fn on frp.NodeID=fn.ID
+								//		LEFT JOIN `user` u on frp.NodeApproveUser=u.UserName
+						  //              LEFT JOIN `user` u1 on frp.NodeActApproveUser=u1.UserName
+        //            Where`InstanceID` = @InstanceID AND frp.State=1
+        //            ORDER BY NodeOrderNo";
+        //    return con.Query<FlowRunPoint>(sql, new { InstanceID = instanceID }, tran);
+        //}
+
         public bool DeleteLastRunPointById(int runPointID, IDbConnection con, IDbTransaction tran)
         {
             string sql = @"DELETE FROM FlowRunPoint where ID=@ID";
@@ -280,7 +292,8 @@ GROUP BY InstanceID) AND NodeOrderNo=3;";
         public bool ModifyCurrentUserRunPoint(int runPointID, string nodeApproveUser, IDbConnection con, IDbTransaction tran)
         {
             string sql = @"Update FlowRunPoint set  NodeApproveResult=null,NodeApproveRemark=NULL,State=0,NodeActApproveUser=NULL,RunPointCreateDate=NOW(),NodeApproveDate=NULL where ID=@ID AND FIND_IN_SET(@NodeApproveUser,NodeApproveUser);";
-            return con.Execute(sql, new { ID = runPointID, NodeApproveUser = nodeApproveUser }, tran) > 0;
+            int rowCount = con.Execute(sql, new { ID = runPointID, NodeApproveUser = nodeApproveUser }, tran);
+            return rowCount > 0;
         }
 
         public void RevokePaymentFlowClosedInstance(int instanceID, IDbConnection con, IDbTransaction tran)
