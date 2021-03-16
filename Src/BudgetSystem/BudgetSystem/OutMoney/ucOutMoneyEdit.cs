@@ -439,8 +439,11 @@ namespace BudgetSystem.OutMoney
 
         private void CalcCNY()
         {
+            this.txtCNY.EditValueChanged -= txtCNY_EditValueChanged;
             this.txtCNY.EditValue = this.txtExchangeRate.Value * this.txtOriginalCoin.Value;
+            this.txtCNY.EditValueChanged += txtCNY_EditValueChanged;
         }
+
 
         private void InitTaxRebateRateList(string inProductDetail)
         {
@@ -763,6 +766,9 @@ namespace BudgetSystem.OutMoney
 
         private void txtCNY_EditValueChanged(object sender, EventArgs e)
         {
+            txtOriginalCoin.EditValueChanged -= txtOriginalCoin_EditValueChanged;
+            txtOriginalCoin.EditValue = Math.Round(txtCNY.Value / txtExchangeRate.Value, 2);
+            txtOriginalCoin.EditValueChanged += txtOriginalCoin_EditValueChanged;
             CalcPaymentTaxRebate();
         }
 
