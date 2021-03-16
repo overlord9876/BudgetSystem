@@ -152,11 +152,12 @@ namespace BudgetSystem
             {
                 accountList = accountList.Where(o => !o.ID.Equals(accountAdjustment.ID)).ToList();
             }
-            var detailList = new AccountAdjustmentManager().GetBalanceAccountAdjustmentDetailByBudgetId(budget.ID);
+            var detailRelationAccountList = new AccountAdjustmentManager().GetAdjustmentsByDetailBudgetId(budget.ID);
+            var detailList = new AccountAdjustmentManager().GetAccountAdjustmentsDetailsByBudgetId(budget.ID);
             var adjustDetailList = new AccountAdjustmentManager().GetAccountAdjustmentsDetailByBudgetId(budget.ID);
             if (adjustmentDetail != null)
             {
-                detailList = detailList.Where(o => !o.ID.Equals(adjustmentDetail.ID)).ToList();
+                adjustDetailList = adjustDetailList.Where(o => !o.ID.Equals(adjustmentDetail.ID)).ToList();
             }
             string preix = string.Empty;
             string contracts = string.Empty;
@@ -262,7 +263,7 @@ namespace BudgetSystem
                     row["CNY"] = (0 - pn.AlreadySplitCNY);
                 }
                 row["TaxRebateRate"] = Math.Round(pn.TaxRebateRate / 100, 2);
-                var details = adjustDetailList?.Where(o => o.PID == pn.ID && o.Type == pn.Type);
+                var details = detailList?.Where(o => o.PID == pn.ID && o.Type == pn.Type);
                 preix = details.Count() > 1 ? "分别" : "";
                 contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
                 row["SupplierName"] = $"付款由此合同{preix}调入至{contracts}";
@@ -271,7 +272,7 @@ namespace BudgetSystem
             }
 
             //付款单表(调账)调出
-            var plusPNData = detailList.Where(o => o.Type == AdjustmentType.付款);
+            var plusPNData = adjustDetailList.Where(o => o.Type == AdjustmentType.付款);
             foreach (var pn in plusPNData)
             {
                 row = this.DataTable.NewRow();
@@ -312,8 +313,9 @@ namespace BudgetSystem
                 {
                     row["CNY"] = pn.CNY;
                 }
+
                 row["TaxRebateRate"] = Math.Round(pn.TaxRebateRate / 100, 2);
-                row["SupplierName"] = $"付款由【{pn.ContractNO}】合同调入至此合同，供应商【{pn.Name}】";
+                row["SupplierName"] = $"付款由【{ detailRelationAccountList?.Find(o => o.ID == pn.PID)?.ContractNO}】合同调入至此合同，供应商【{pn.Name}】";
                 row["AdjustmentType"] = ((int)AdjustmentType.付款 + 1) * 10;
                 supplierList.Add(pn.Name);
             }
@@ -374,7 +376,7 @@ namespace BudgetSystem
                     row["BillUSD"] = Math.Round(reduceBill.AlreadySplitCNY / exchangeRate, 2) * -1;
                 }
                 row["BillExchangeRate"] = exchangeRate;
-                var details = adjustDetailList?.Where(o => o.PID == reduceBill.ID && o.Type == reduceBill.Type);
+                var details = detailList?.Where(o => o.PID == reduceBill.ID && o.Type == reduceBill.Type);
                 preix = details.Count() > 1 ? "分别" : "";
                 contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
                 row["AdjustmentType"] = (int)AdjustmentType.收款 + 1;
@@ -391,7 +393,7 @@ namespace BudgetSystem
                 this.DataTable.Rows.Add(row);
             }
 
-            var plusBillList = detailList.Where(o => o.Type == AdjustmentType.收款);
+            var plusBillList = adjustDetailList.Where(o => o.Type == AdjustmentType.收款);
             //收款(调账)调入，则需要加上相应金额
             foreach (var plusBill in plusBillList)
             {
@@ -412,12 +414,12 @@ namespace BudgetSystem
                 row["BillExchangeRate"] = exchangeRate;
                 if (supplierList.Any(s => s == plusBill.Name))
                 {
-                    row["BillRemitter"] = $"【暂付退回】收款由【{plusBill.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
+                    row["BillRemitter"] = $"【暂付退回】收款由【{detailRelationAccountList?.Find(o => o.ID == plusBill.PID)?.ContractNO}】合同调入至此合同，付款商【{plusBill.Name}】";
                     row["IsSupplier"] = true;
                 }
                 else
                 {
-                    row["BillRemitter"] = $"收款由【{plusBill.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
+                    row["BillRemitter"] = $"收款由【{detailRelationAccountList?.Find(o => o.ID == plusBill.PID)?.ContractNO }】合同调入至此合同，付款商【{plusBill.Name}】";
                     row["IsSupplier"] = false;
                 }
                 row["AdjustmentType"] = ((int)AdjustmentType.收款 + 1) * 10;
@@ -459,7 +461,7 @@ namespace BudgetSystem
                 row["ExchangeRate"] = invoice.ExchangeRate;
                 row["Payment"] = (0 - invoice.Payment) + (0 - invoice.TaxAmount);
                 row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
-                var details = adjustDetailList?.Where(o => o.PID == invoice.ID && o.Type == invoice.Type);
+                var details = detailList?.Where(o => o.PID == invoice.ID && o.Type == invoice.Type);
                 preix = details.Count() > 1 ? "分别" : "";
                 contracts = string.Join("、", details.Select(o => $"{o.ContractNO}合同").ToArray());
                 row["SupplierName"] = $"发票由此合同{preix}调入至{contracts}";
@@ -469,7 +471,7 @@ namespace BudgetSystem
             }
 
             //付款单表(调账)调入，则加上相应金额。
-            var plusInvoiceData = detailList.Where(o => o.Type == AdjustmentType.交单);
+            var plusInvoiceData = adjustDetailList.Where(o => o.Type == AdjustmentType.交单);
             foreach (var invoice in plusInvoiceData)
             {
                 row = this.DataTable.NewRow();
@@ -478,7 +480,7 @@ namespace BudgetSystem
                 row["ExchangeRate"] = invoice.ExchangeRate;
                 row["Payment"] = invoice.Payment + invoice.Amount;
                 row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
-                row["SupplierName"] = $"交单由【{invoice.ContractNO}】合同调入至此合同，供应商【{invoice.Name}】";
+                row["SupplierName"] = $"交单由【{detailRelationAccountList?.Find(o => o.ID == invoice.PID)?.ContractNO}】合同调入至此合同，供应商【{invoice.Name}】";
                 row["FeedMoney"] = invoice.FeedMoney;
                 row["AdjustmentType"] = ((int)AdjustmentType.交单 + 1) * 10;
                 this.DataTable.Rows.Add(row);

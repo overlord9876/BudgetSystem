@@ -42,6 +42,22 @@ namespace BudgetSystem.Bll
         }
 
         /// <summary>
+        /// 根据调入的预算单号，查找调出列表。
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <returns></returns>
+        public List<AccountAdjustment> GetAdjustmentsByDetailBudgetId(int budgetId)
+        {
+            var lst = this.Query<AccountAdjustment>((con) =>
+            {
+                var uList = dal.GetAdjustmentsByDetailBudgetId(budgetId, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        /// <summary>
         /// 根据预算单ID获取余额信息。
         /// </summary>
         /// <param name="budgetId"></param>
@@ -67,6 +83,22 @@ namespace BudgetSystem.Bll
             var lst = this.Query<AccountAdjustmentDetail>((con) =>
             {
                 var uList = dal.GetAccountAdjustmentsDetailByBudgetId(budgetId, con, null);
+                return uList;
+
+            });
+            return lst.ToList();
+        }
+
+        /// <summary>
+        /// 获取调入详情信息。这里关联的合同号是调出主表的合同号。
+        /// </summary>
+        /// <param name="budgetId"></param>
+        /// <returns></returns>
+        public IEnumerable<AccountAdjustmentDetail> GetAccountAdjustmentsDetailsByBudgetId(int budgetId)
+        {
+            var lst = this.Query<AccountAdjustmentDetail>((con) =>
+            {
+                var uList = dal.GetAccountAdjustmentsDetailsByBudgetId(budgetId, con, null);
                 return uList;
 
             });
