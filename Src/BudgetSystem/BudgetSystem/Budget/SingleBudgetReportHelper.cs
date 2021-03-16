@@ -193,6 +193,10 @@ namespace BudgetSystem
                 {
                     row["DirectCosts"] = pn.CNY;
                 }
+                else if (useMoneyTypeList.Where(o => o.Type == PaymentType.进料款).Any(o => o.Name == pn.MoneyUsed))
+                {
+                    row["PlanFeedMoney"] = pn.CNY;
+                }
                 else
                 {
                     row["CNY"] = pn.CNY;
@@ -245,6 +249,10 @@ namespace BudgetSystem
                 {
                     row["Commission"] = (0 - pn.AlreadySplitCNY);
                 }
+                else if (useMoneyTypeList.Where(o => o.Type == PaymentType.进料款).Any(o => o.Name == pn.MoneyUsed))
+                {
+                    row["PlanFeedMoney"] = (0 - pn.AlreadySplitCNY);
+                }
                 else if (useMoneyTypeList.Where(o => o.Type == PaymentType.直接费用).Any(o => o.Name == pn.MoneyUsed))
                 {
                     row["DirectCosts"] = (0 - pn.AlreadySplitCNY);
@@ -291,6 +299,10 @@ namespace BudgetSystem
                 else if (useMoneyTypeList.Where(o => o.Type == PaymentType.佣金).Any(o => o.Name == pn.MoneyUsed))
                 {
                     row["Commission"] = pn.CNY;
+                }
+                else if (useMoneyTypeList.Where(o => o.Type == PaymentType.进料款).Any(o => o.Name == pn.MoneyUsed))
+                {
+                    row["PlanFeedMoney"] = pn.CNY;
                 }
                 else if (useMoneyTypeList.Where(o => o.Type == PaymentType.直接费用).Any(o => o.Name == pn.MoneyUsed))
                 {
@@ -380,7 +392,7 @@ namespace BudgetSystem
             }
 
             var plusBillList = detailList.Where(o => o.Type == AdjustmentType.收款);
-            //收款(调账)调入，则许哟啊加上相应金额
+            //收款(调账)调入，则需要加上相应金额
             foreach (var plusBill in plusBillList)
             {
                 row = this.DataTable.NewRow();
@@ -427,6 +439,7 @@ namespace BudgetSystem
                 }
                 row["OriginalCoin"] = invoice.OriginalCoin;
                 row["ExchangeRate"] = invoice.ExchangeRate;
+                row["PlanCommission"] = invoice.Commission;
                 row["ICommission"] = invoice.Commission;
                 row["Payment"] = invoice.Payment + invoice.TaxAmount;
                 row["TaxRebateRate"] = invoice.TaxRebateRate / 100;
@@ -547,6 +560,13 @@ namespace BudgetSystem
                                         - DirectCosts
                                         - GetDecimal(row, "FeedMoney");
                 row["SalesProfit"] = salesProfit;
+                var planSalesProfit = GetDecimal(row, "TotalAmount")
+                                    - GetDecimal(row, "CostOfSales")
+                                    - GetDecimal(row, "Premium")
+                                    - GetDecimal(row, "PlanCommission")
+                                    - DirectCosts
+                                    - GetDecimal(row, "PlanFeedMoney");
+                row["planSalesProfit"] = planSalesProfit;
 
                 totalSalesProfit += salesProfit;
 
@@ -918,6 +938,7 @@ namespace BudgetSystem
             dt.Columns.Add("Premium", typeof(decimal));//运杂费
             dt.Columns.Add("PremiumConst", typeof(decimal));//运杂费(去税金额)
             dt.Columns.Add("Commission", typeof(decimal));//佣金
+            dt.Columns.Add("PlanCommission", typeof(decimal));//计划佣金
             dt.Columns.Add("DirectCosts", typeof(decimal));//直接费用 
             //发票表 
             dt.Columns.Add("OriginalCoin", typeof(decimal));//应收原币
@@ -927,11 +948,13 @@ namespace BudgetSystem
             dt.Columns.Add("TaxRebateRate", typeof(decimal));//退税率
             dt.Columns.Add("SupplierName", typeof(string));//供货方名称
             dt.Columns.Add("FeedMoney", typeof(decimal));//进料款
+            dt.Columns.Add("PlanFeedMoney", typeof(decimal));//计划进料款
 
             //公式列
             dt.Columns.Add("TotalAmount", typeof(decimal));//  应收人民币=OriginalCoin*ExchangeRate
             dt.Columns.Add("CostOfSales", typeof(decimal));//  销售成本=已收供方发票/(1+退税率0)=Payment/(1+TaxRebateRate)
             dt.Columns.Add("SalesProfit", typeof(decimal));//  销售利润=应收人民币-销售成本-运杂费-佣金-直接费用-进料款
+            dt.Columns.Add("PlanSalesProfit", typeof(decimal));//  计划利润=
             dt.Columns.Add("Profit", typeof(decimal));// 实际利润=实收人民币-已付货款-运杂费-佣金-直接费用+已付货款/(1+扣除利息后实际利润)*退税率
             dt.Columns.Add("Balance", typeof(decimal));// 收支余
             dt.Columns.Add("TaxRebate", typeof(decimal));//出口退税额=已收供方发票-销售成本
