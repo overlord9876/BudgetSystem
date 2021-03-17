@@ -246,12 +246,19 @@ namespace BudgetSystem
             message = $"由于客户的原因，现申请{adjustment.Type}调账：\r\n";
 
             var CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
-
+            string appendLine = "，";
+            if (!isMark)
+            {
+                appendLine = "\r\n\t";
+            }
             if (adjustment.Type == AdjustmentType.付款)
             {
                 var payment = pnm.GetPaymentNoteById(adjustment.RelationID);
-
-                message += $"调出：从合同【{adjustment.ContractNO}】原付款时间【{payment.PaymentDate}】,付款单号【{payment.VoucherNo}】，原付款金额【{payment.CNY}】，供应商名称【{payment.SupplierName}】，用款类型【{payment.MoneyUsed}】";
+                if (!isMark)
+                {
+                    message += "\t";
+                }
+                message += $"调出：从合同【{adjustment.ContractNO}】{appendLine}原付款时间【{payment.PaymentDate}】{appendLine}付款单号【{payment.VoucherNo}】{appendLine}原付款金额【{payment.CNY}】{appendLine}现调出付款金额【{adjustment.AlreadySplitCNY}】{appendLine}供应商名称【{payment.SupplierName}】{appendLine}用款类型【{payment.MoneyUsed}】";
                 message += "\r\n";
                 int index = 0;
                 foreach (var detail in adjustmentDetail)
@@ -259,15 +266,26 @@ namespace BudgetSystem
                     index++;
                     CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
                     message += "\r\n";
-                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】，现调账金额【{detail.CNY}】，供应商名称【{payment.SupplierName}】，用款类型【{payment.MoneyUsed}】\r\n";
+                    if (!isMark)
+                    {
+                        message += "\t";
+                    }
+                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】{appendLine}现调账金额【{detail.CNY}】{appendLine}供应商名称【{payment.SupplierName}】{appendLine}用款类型【{payment.MoneyUsed}】\r\n";
                 }
             }
             else if (adjustment.Type == AdjustmentType.收款)
             {
-                message += $"调出：从合同【{adjustment.ContractNO}】买方【{CustomerExtension.MainCustomer}】备注买方【{CustomerExtension.Customers}】";
-
+                if (!isMark)
+                {
+                    message += "\t";
+                }
+                message += $"调出：从合同【{adjustment.ContractNO}】{appendLine}买方【{CustomerExtension.MainCustomer}】{appendLine}备注买方【{CustomerExtension.Customers}】\r\n";
+                if (!isMark)
+                {
+                    message += "\t";
+                }
                 var budgetBill = rmm.GetBudgetBillBybbId(adjustment.RelationID);
-                message += $"原收款时间【{budgetBill.ReceiptDate}】,原收款金额【{budgetBill.CNY}】,银行凭证号【{budgetBill.VoucherNo}】，款项性质【{budgetBill.NatureOfMoney}】";
+                message += $"原收款时间【{budgetBill.ReceiptDate}】{appendLine}原收款金额【{budgetBill.CNY}】{appendLine}银行凭证号【{budgetBill.VoucherNo}】{appendLine}款项性质【{budgetBill.NatureOfMoney}】";
                 message += "\r\n";
                 int index = 0;
                 foreach (var detail in adjustmentDetail)
@@ -275,14 +293,26 @@ namespace BudgetSystem
                     index++;
                     CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
                     message += "\r\n";
-                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】，买方【{CustomerExtension.MainCustomer}】付款公司【{CustomerExtension.Customers}】\r\n";
-                    message += $"现调账金额【{detail.CNY}】款项性质【{budgetBill.NatureOfMoney}】\r\n";
+                    if (!isMark)
+                    {
+                        message += "\t";
+                    }
+                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】{appendLine}买方【{CustomerExtension.MainCustomer}】{appendLine}付款公司【{CustomerExtension.Customers}】\r\n";
+                    if (!isMark)
+                    {
+                        message += "\t";
+                    }
+                    message += $"现调账金额【{detail.CNY}】{appendLine}款项性质【{budgetBill.NatureOfMoney}】\r\n";
                 }
             }
             else
             {
                 var invoice = im.GetInvoice(adjustment.RelationID);
-                message += $"调出：从合同【{adjustment.ContractNO}】，原交单时间【{invoice.FinanceImportDate}】,发票原币金额【{invoice.OriginalCoin}】,发票人民币金额【{invoice.CNY}】，销方名称【{invoice.SupplierName}】，币种[USD]，汇率【{invoice.ExchangeRate}】";
+                if (!isMark)
+                {
+                    message += "\t";
+                }
+                message += $"调出：从合同【{adjustment.ContractNO}】{appendLine}原交单时间【{invoice.FinanceImportDate}】{appendLine}发票原币金额【{invoice.OriginalCoin}】{appendLine}发票人民币金额【{invoice.CNY}】{appendLine}销方名称【{invoice.SupplierName}】{appendLine}币种[USD]{appendLine}汇率【{invoice.ExchangeRate}】";
                 message += "\r\n";
                 int index = 0;
                 foreach (var detail in adjustmentDetail)
@@ -290,7 +320,11 @@ namespace BudgetSystem
                     index++;
                     CustomerExtension = bm.GetCustomerByBudgetId(adjustment.BudgetID);
                     message += "\r\n";
-                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】,调账发票原币金额【{detail.OriginalCoin}】调账发票人民币金额【{detail.CNY}】，销方名称【{invoice.SupplierName}】，币种[USD]，汇率【{invoice.ExchangeRate}】\r\n";
+                    if (!isMark)
+                    {
+                        message += "\t";
+                    }
+                    message += $"调入（{index}）调整进入合同【{detail.ContractNO}】{appendLine}调账发票原币金额【{detail.OriginalCoin}】{appendLine}调账发票人民币金额【{detail.CNY}】{appendLine}销方名称【{invoice.SupplierName}】{appendLine}币种[USD]{appendLine}汇率【{invoice.ExchangeRate}】\r\n";
                 }
             }
             if (!isMark)
@@ -302,14 +336,16 @@ namespace BudgetSystem
             if (!isMark)
             {
                 result += "\r\n";
+
+                result += "\r\n\t";
+                result += "以上麻烦操作，谢谢。";
             }
-            result += "\r\n\t";
-            result += "以上麻烦操作，谢谢。";
             if (!isMark)
             {
                 result += "\r\n\r\n";
+
+                result += "\r\n\t\t\t\t\t    " + user?.DepartmentName ?? "";
             }
-            result += "\r\n\t\t\t\t\t    " + user?.DepartmentName ?? "";
             if (!isMark)
             {
                 result += "\r\n";
