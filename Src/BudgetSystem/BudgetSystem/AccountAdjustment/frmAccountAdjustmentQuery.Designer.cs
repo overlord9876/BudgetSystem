@@ -158,7 +158,7 @@
             // 
             // gcCode
             // 
-            this.gcCode.Caption = "编号";
+            this.gcCode.Caption = "调账编号";
             this.gcCode.FieldName = "Code";
             this.gcCode.MinWidth = 100;
             this.gcCode.Name = "gcCode";

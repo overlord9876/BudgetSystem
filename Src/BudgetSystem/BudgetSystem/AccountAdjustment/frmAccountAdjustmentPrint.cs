@@ -62,12 +62,13 @@ namespace BudgetSystem
             lcilciFlowNode4.Width = width + 20;
             lcitxtFlowNode4.Width = width;
 
-            var topWidth = (this.layoutControl1.Width - this.layoutControlGroup1.Padding.Left - this.layoutControlGroup1.Padding.Right) / 4;
+            var topWidth = (this.layoutControl1.Width - this.layoutControlGroup1.Padding.Left - this.layoutControlGroup1.Padding.Right) / 5;
             width = width - 2;
             lciDepartment.Width = topWidth;
             lcitxtDepartment.Width = topWidth;
             lciBudget.Width = topWidth;
             lcitxtBudget.Width = topWidth;
+            lciAANO.Width = topWidth;
         }
 
         public void BindData(int id, AdjustmentType atType)
@@ -101,6 +102,7 @@ namespace BudgetSystem
             var adjustmentDetail = aamManager.GetAccountAdjustmentDetailByTypeId(this.ID, AdjustmentType);
 
             txtBudget.Text = adjustment.ContractNO;
+            txtAANO.Text = adjustment.Code;
 
 
             lciFlowNode1.Text = "";

@@ -762,6 +762,7 @@ namespace BudgetSystem.OutMoney
         private void txtOriginalCoin_EditValueChanged(object sender, EventArgs e)
         {
             CalcCNY();
+            CalcPaymentTaxRebate();
         }
 
         private void txtCNY_EditValueChanged(object sender, EventArgs e)

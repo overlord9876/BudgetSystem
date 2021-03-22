@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtAANO = new DevExpress.XtraEditors.TextEdit();
             this.lciFlowNode4 = new DevExpress.XtraEditors.TextEdit();
             this.txtFlowNode4 = new DevExpress.XtraEditors.TextEdit();
             this.txtFlowNode2 = new DevExpress.XtraEditors.TextEdit();
@@ -69,6 +70,7 @@
             this.lcitxtFlowNode3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcitxtFlowNode4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcilciFlowNode4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciAANO = new DevExpress.XtraLayout.LayoutControlItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -76,6 +78,7 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAANO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciFlowNode4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNode4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNode2.Properties)).BeginInit();
@@ -110,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcitxtFlowNode3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcitxtFlowNode4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcilciFlowNode4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciAANO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
@@ -121,6 +125,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtAANO);
             this.layoutControl1.Controls.Add(this.lciFlowNode4);
             this.layoutControl1.Controls.Add(this.txtFlowNode4);
             this.layoutControl1.Controls.Add(this.txtFlowNode2);
@@ -143,17 +148,37 @@
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 2);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(506, 356, 678, 586);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(838, 481, 678, 586);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(980, 615);
+            this.layoutControl1.Size = new System.Drawing.Size(975, 908);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txtAANO
+            // 
+            this.txtAANO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAANO.EditValue = "";
+            this.txtAANO.Location = new System.Drawing.Point(827, 266);
+            this.txtAANO.Margin = new System.Windows.Forms.Padding(0);
+            this.txtAANO.MaximumSize = new System.Drawing.Size(0, 45);
+            this.txtAANO.MinimumSize = new System.Drawing.Size(0, 45);
+            this.txtAANO.Name = "txtAANO";
+            this.txtAANO.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            this.txtAANO.Properties.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.txtAANO.Properties.Appearance.Options.UseBackColor = true;
+            this.txtAANO.Properties.Appearance.Options.UseFont = true;
+            this.txtAANO.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtAANO.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.txtAANO.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.txtAANO.Size = new System.Drawing.Size(87, 37);
+            this.txtAANO.StyleController = this.layoutControl1;
+            this.txtAANO.TabIndex = 53;
             // 
             // lciFlowNode4
             // 
             this.lciFlowNode4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lciFlowNode4.EditValue = "";
-            this.lciFlowNode4.Location = new System.Drawing.Point(803, 810);
+            this.lciFlowNode4.Location = new System.Drawing.Point(813, 861);
             this.lciFlowNode4.Margin = new System.Windows.Forms.Padding(0);
             this.lciFlowNode4.MaximumSize = new System.Drawing.Size(0, 45);
             this.lciFlowNode4.MinimumSize = new System.Drawing.Size(0, 45);
@@ -165,7 +190,7 @@
             this.lciFlowNode4.Properties.Appearance.Options.UseTextOptions = true;
             this.lciFlowNode4.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lciFlowNode4.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lciFlowNode4.Size = new System.Drawing.Size(50, 45);
+            this.lciFlowNode4.Size = new System.Drawing.Size(51, 45);
             this.lciFlowNode4.StyleController = this.layoutControl1;
             this.lciFlowNode4.TabIndex = 52;
             // 
@@ -173,7 +198,7 @@
             // 
             this.txtFlowNode4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFlowNode4.EditValue = "";
-            this.txtFlowNode4.Location = new System.Drawing.Point(852, 810);
+            this.txtFlowNode4.Location = new System.Drawing.Point(863, 861);
             this.txtFlowNode4.Margin = new System.Windows.Forms.Padding(0);
             this.txtFlowNode4.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtFlowNode4.MinimumSize = new System.Drawing.Size(0, 45);
@@ -185,7 +210,7 @@
             this.txtFlowNode4.Properties.Appearance.Options.UseTextOptions = true;
             this.txtFlowNode4.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtFlowNode4.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtFlowNode4.Size = new System.Drawing.Size(50, 45);
+            this.txtFlowNode4.Size = new System.Drawing.Size(51, 45);
             this.txtFlowNode4.StyleController = this.layoutControl1;
             this.txtFlowNode4.TabIndex = 50;
             // 
@@ -193,7 +218,7 @@
             // 
             this.txtFlowNode2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFlowNode2.EditValue = "";
-            this.txtFlowNode2.Location = new System.Drawing.Point(508, 810);
+            this.txtFlowNode2.Location = new System.Drawing.Point(515, 861);
             this.txtFlowNode2.Margin = new System.Windows.Forms.Padding(0);
             this.txtFlowNode2.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtFlowNode2.MinimumSize = new System.Drawing.Size(0, 45);
@@ -205,7 +230,7 @@
             this.txtFlowNode2.Properties.Appearance.Options.UseTextOptions = true;
             this.txtFlowNode2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtFlowNode2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtFlowNode2.Size = new System.Drawing.Size(103, 34);
+            this.txtFlowNode2.Size = new System.Drawing.Size(104, 45);
             this.txtFlowNode2.StyleController = this.layoutControl1;
             this.txtFlowNode2.TabIndex = 48;
             // 
@@ -213,7 +238,7 @@
             // 
             this.txtFlowNode3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFlowNode3.EditValue = "";
-            this.txtFlowNode3.Location = new System.Drawing.Point(708, 810);
+            this.txtFlowNode3.Location = new System.Drawing.Point(717, 861);
             this.txtFlowNode3.Margin = new System.Windows.Forms.Padding(0);
             this.txtFlowNode3.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtFlowNode3.MinimumSize = new System.Drawing.Size(0, 45);
@@ -225,7 +250,7 @@
             this.txtFlowNode3.Properties.Appearance.Options.UseTextOptions = true;
             this.txtFlowNode3.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtFlowNode3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtFlowNode3.Size = new System.Drawing.Size(96, 45);
+            this.txtFlowNode3.Size = new System.Drawing.Size(97, 45);
             this.txtFlowNode3.StyleController = this.layoutControl1;
             this.txtFlowNode3.TabIndex = 49;
             // 
@@ -233,7 +258,7 @@
             // 
             this.lciFlowNode2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lciFlowNode2.EditValue = "";
-            this.lciFlowNode2.Location = new System.Drawing.Point(396, 810);
+            this.lciFlowNode2.Location = new System.Drawing.Point(401, 861);
             this.lciFlowNode2.Margin = new System.Windows.Forms.Padding(0);
             this.lciFlowNode2.MaximumSize = new System.Drawing.Size(0, 45);
             this.lciFlowNode2.MinimumSize = new System.Drawing.Size(0, 45);
@@ -245,7 +270,7 @@
             this.lciFlowNode2.Properties.Appearance.Options.UseTextOptions = true;
             this.lciFlowNode2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lciFlowNode2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lciFlowNode2.Size = new System.Drawing.Size(113, 34);
+            this.lciFlowNode2.Size = new System.Drawing.Size(115, 45);
             this.lciFlowNode2.StyleController = this.layoutControl1;
             this.lciFlowNode2.TabIndex = 48;
             // 
@@ -253,7 +278,7 @@
             // 
             this.txtFlowNode1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFlowNode1.EditValue = "";
-            this.txtFlowNode1.Location = new System.Drawing.Point(284, 810);
+            this.txtFlowNode1.Location = new System.Drawing.Point(287, 861);
             this.txtFlowNode1.Margin = new System.Windows.Forms.Padding(0);
             this.txtFlowNode1.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtFlowNode1.MinimumSize = new System.Drawing.Size(0, 45);
@@ -265,7 +290,7 @@
             this.txtFlowNode1.Properties.Appearance.Options.UseTextOptions = true;
             this.txtFlowNode1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtFlowNode1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtFlowNode1.Size = new System.Drawing.Size(113, 34);
+            this.txtFlowNode1.Size = new System.Drawing.Size(115, 45);
             this.txtFlowNode1.StyleController = this.layoutControl1;
             this.txtFlowNode1.TabIndex = 47;
             // 
@@ -273,7 +298,7 @@
             // 
             this.lciFlowNode3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lciFlowNode3.EditValue = "";
-            this.lciFlowNode3.Location = new System.Drawing.Point(610, 810);
+            this.lciFlowNode3.Location = new System.Drawing.Point(618, 861);
             this.lciFlowNode3.Margin = new System.Windows.Forms.Padding(0);
             this.lciFlowNode3.MaximumSize = new System.Drawing.Size(0, 45);
             this.lciFlowNode3.MinimumSize = new System.Drawing.Size(0, 45);
@@ -285,7 +310,7 @@
             this.lciFlowNode3.Properties.Appearance.Options.UseTextOptions = true;
             this.lciFlowNode3.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lciFlowNode3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lciFlowNode3.Size = new System.Drawing.Size(99, 45);
+            this.lciFlowNode3.Size = new System.Drawing.Size(100, 45);
             this.lciFlowNode3.StyleController = this.layoutControl1;
             this.lciFlowNode3.TabIndex = 49;
             // 
@@ -293,7 +318,7 @@
             // 
             this.lciFlowNode1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lciFlowNode1.EditValue = "部门";
-            this.lciFlowNode1.Location = new System.Drawing.Point(61, 810);
+            this.lciFlowNode1.Location = new System.Drawing.Point(61, 861);
             this.lciFlowNode1.Margin = new System.Windows.Forms.Padding(0);
             this.lciFlowNode1.MaximumSize = new System.Drawing.Size(0, 45);
             this.lciFlowNode1.MinimumSize = new System.Drawing.Size(0, 45);
@@ -305,7 +330,7 @@
             this.lciFlowNode1.Properties.Appearance.Options.UseTextOptions = true;
             this.lciFlowNode1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lciFlowNode1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lciFlowNode1.Size = new System.Drawing.Size(224, 34);
+            this.lciFlowNode1.Size = new System.Drawing.Size(227, 45);
             this.lciFlowNode1.StyleController = this.layoutControl1;
             this.lciFlowNode1.TabIndex = 47;
             // 
@@ -313,7 +338,7 @@
             // 
             this.txtBudget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBudget.EditValue = "";
-            this.txtBudget.Location = new System.Drawing.Point(732, 266);
+            this.txtBudget.Location = new System.Drawing.Point(741, 266);
             this.txtBudget.Margin = new System.Windows.Forms.Padding(0);
             this.txtBudget.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtBudget.MinimumSize = new System.Drawing.Size(0, 45);
@@ -325,7 +350,7 @@
             this.txtBudget.Properties.Appearance.Options.UseTextOptions = true;
             this.txtBudget.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtBudget.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtBudget.Size = new System.Drawing.Size(170, 45);
+            this.txtBudget.Size = new System.Drawing.Size(87, 37);
             this.txtBudget.StyleController = this.layoutControl1;
             this.txtBudget.TabIndex = 18;
             // 
@@ -348,7 +373,7 @@
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Bold);
             this.labelControl5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl5.Location = new System.Drawing.Point(768, 103);
+            this.labelControl5.Location = new System.Drawing.Point(780, 103);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(132, 24);
             this.labelControl5.StyleController = this.layoutControl1;
@@ -369,7 +394,7 @@
             this.txtApplyList.Properties.Appearance.Options.UseForeColor = true;
             this.txtApplyList.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.txtApplyList.Properties.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtApplyList.Size = new System.Drawing.Size(841, 501);
+            this.txtApplyList.Size = new System.Drawing.Size(853, 552);
             this.txtApplyList.StyleController = this.layoutControl1;
             this.txtApplyList.TabIndex = 35;
             // 
@@ -377,7 +402,7 @@
             // 
             this.textEdit2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit2.EditValue = "合同编号";
-            this.textEdit2.Location = new System.Drawing.Point(509, 266);
+            this.textEdit2.Location = new System.Drawing.Point(515, 266);
             this.textEdit2.Margin = new System.Windows.Forms.Padding(0);
             this.textEdit2.MaximumSize = new System.Drawing.Size(0, 45);
             this.textEdit2.MinimumSize = new System.Drawing.Size(0, 45);
@@ -389,7 +414,7 @@
             this.textEdit2.Properties.Appearance.Options.UseTextOptions = true;
             this.textEdit2.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.textEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.textEdit2.Size = new System.Drawing.Size(224, 37);
+            this.textEdit2.Size = new System.Drawing.Size(227, 37);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 18;
             // 
@@ -400,7 +425,7 @@
             this.labelControl4.Location = new System.Drawing.Point(181, 103);
             this.labelControl4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(583, 56);
+            this.labelControl4.Size = new System.Drawing.Size(595, 56);
             this.labelControl4.StyleController = this.layoutControl1;
             this.labelControl4.TabIndex = 35;
             this.labelControl4.Text = "上海服装集团进出口有限公司";
@@ -425,7 +450,7 @@
             this.textEdit1.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.textEdit1.Properties.AppearanceReadOnly.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.textEdit1.Size = new System.Drawing.Size(224, 37);
+            this.textEdit1.Size = new System.Drawing.Size(227, 37);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 16;
             // 
@@ -433,7 +458,7 @@
             // 
             this.txtDept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDept.EditValue = "";
-            this.txtDept.Location = new System.Drawing.Point(284, 266);
+            this.txtDept.Location = new System.Drawing.Point(287, 266);
             this.txtDept.Margin = new System.Windows.Forms.Padding(0);
             this.txtDept.MaximumSize = new System.Drawing.Size(0, 45);
             this.txtDept.MinimumSize = new System.Drawing.Size(0, 45);
@@ -445,7 +470,7 @@
             this.txtDept.Properties.Appearance.Options.UseTextOptions = true;
             this.txtDept.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txtDept.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.txtDept.Size = new System.Drawing.Size(226, 37);
+            this.txtDept.Size = new System.Drawing.Size(229, 37);
             this.txtDept.StyleController = this.layoutControl1;
             this.txtDept.TabIndex = 16;
             // 
@@ -454,10 +479,10 @@
             this.labelControl3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
             this.labelControl3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl3.Location = new System.Drawing.Point(482, 163);
+            this.labelControl3.Location = new System.Drawing.Point(488, 163);
             this.labelControl3.Margin = new System.Windows.Forms.Padding(0);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(418, 41);
+            this.labelControl3.Size = new System.Drawing.Size(424, 41);
             this.labelControl3.StyleController = this.layoutControl1;
             this.labelControl3.TabIndex = 6;
             this.labelControl3.Text = "记录编号：QR-202-15";
@@ -468,7 +493,7 @@
             this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelControl2.Location = new System.Drawing.Point(63, 163);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(415, 41);
+            this.labelControl2.Size = new System.Drawing.Size(421, 41);
             this.labelControl2.StyleController = this.layoutControl1;
             this.labelControl2.TabIndex = 5;
             this.labelControl2.Text = "版本/修改状态：C/0";
@@ -479,7 +504,7 @@
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold);
             this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl1.Location = new System.Drawing.Point(71, 208);
+            this.labelControl1.Location = new System.Drawing.Point(77, 208);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(820, 46);
             this.labelControl1.StyleController = this.layoutControl1;
@@ -510,11 +535,12 @@
             this.lcitxtFlowNode2,
             this.lcitxtFlowNode3,
             this.lcitxtFlowNode4,
-            this.lcilciFlowNode4});
+            this.lcilciFlowNode4,
+            this.lciAANO});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(60, 60, 100, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(963, 857);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(975, 908);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -523,11 +549,11 @@
             this.layoutControlItem3.Control = this.labelControl3;
             this.layoutControlItem3.ControlAlignment = System.Drawing.ContentAlignment.TopRight;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(419, 60);
+            this.layoutControlItem3.Location = new System.Drawing.Point(425, 60);
             this.layoutControlItem3.MaxSize = new System.Drawing.Size(0, 45);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(74, 45);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(422, 45);
+            this.layoutControlItem3.Size = new System.Drawing.Size(428, 45);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -546,7 +572,7 @@
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(200, 0);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(200, 10);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(841, 10);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(853, 10);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -559,7 +585,7 @@
             this.layoutControlItem24.MaxSize = new System.Drawing.Size(0, 60);
             this.layoutControlItem24.MinSize = new System.Drawing.Size(448, 60);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(587, 60);
+            this.layoutControlItem24.Size = new System.Drawing.Size(599, 60);
             this.layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem24.Text = "layoutControlItem24";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(0, 0);
@@ -571,7 +597,7 @@
             this.layoutControlItem25.Control = this.labelControl5;
             this.layoutControlItem25.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem25.CustomizationFormText = "layoutControlItem25";
-            this.layoutControlItem25.Location = new System.Drawing.Point(705, 0);
+            this.layoutControlItem25.Location = new System.Drawing.Point(717, 0);
             this.layoutControlItem25.Name = "layoutControlItem25";
             this.layoutControlItem25.Size = new System.Drawing.Size(136, 60);
             this.layoutControlItem25.Text = "layoutControlItem25";
@@ -588,7 +614,7 @@
             this.layoutControlItem1.MaxSize = new System.Drawing.Size(824, 50);
             this.layoutControlItem1.MinSize = new System.Drawing.Size(100, 50);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(841, 50);
+            this.layoutControlItem1.Size = new System.Drawing.Size(853, 50);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -604,7 +630,7 @@
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(824, 45);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(74, 45);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(419, 45);
+            this.layoutControlItem2.Size = new System.Drawing.Size(425, 45);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -632,7 +658,7 @@
             this.lciDepartment.MinSize = new System.Drawing.Size(50, 45);
             this.lciDepartment.Name = "lciDepartment";
             this.lciDepartment.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.lciDepartment.Size = new System.Drawing.Size(224, 45);
+            this.lciDepartment.Size = new System.Drawing.Size(227, 45);
             this.lciDepartment.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciDepartment.Text = "lciDepartment";
             this.lciDepartment.TextSize = new System.Drawing.Size(0, 0);
@@ -643,12 +669,12 @@
             // 
             this.lciBudget.Control = this.textEdit2;
             this.lciBudget.CustomizationFormText = "layoutControlItem7";
-            this.lciBudget.Location = new System.Drawing.Point(449, 165);
+            this.lciBudget.Location = new System.Drawing.Point(455, 165);
             this.lciBudget.MaxSize = new System.Drawing.Size(0, 45);
             this.lciBudget.MinSize = new System.Drawing.Size(49, 45);
             this.lciBudget.Name = "lciBudget";
             this.lciBudget.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, 0, 0);
-            this.lciBudget.Size = new System.Drawing.Size(223, 45);
+            this.lciBudget.Size = new System.Drawing.Size(226, 45);
             this.lciBudget.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciBudget.Text = "lciBudget";
             this.lciBudget.TextSize = new System.Drawing.Size(0, 0);
@@ -659,12 +685,12 @@
             // 
             this.lcitxtDepartment.Control = this.txtDept;
             this.lcitxtDepartment.CustomizationFormText = "layoutControlItem8";
-            this.lcitxtDepartment.Location = new System.Drawing.Point(224, 165);
+            this.lcitxtDepartment.Location = new System.Drawing.Point(227, 165);
             this.lcitxtDepartment.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtDepartment.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtDepartment.Name = "lcitxtDepartment";
             this.lcitxtDepartment.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, 0, 0);
-            this.lcitxtDepartment.Size = new System.Drawing.Size(225, 45);
+            this.lcitxtDepartment.Size = new System.Drawing.Size(228, 45);
             this.lcitxtDepartment.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtDepartment.Text = "lcitxtDepartment";
             this.lcitxtDepartment.TextSize = new System.Drawing.Size(0, 0);
@@ -675,12 +701,12 @@
             // 
             this.lcitxtBudget.Control = this.txtBudget;
             this.lcitxtBudget.CustomizationFormText = "layoutControlItem10";
-            this.lcitxtBudget.Location = new System.Drawing.Point(672, 165);
+            this.lcitxtBudget.Location = new System.Drawing.Point(681, 165);
             this.lcitxtBudget.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtBudget.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtBudget.Name = "lcitxtBudget";
             this.lcitxtBudget.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, 0, 0);
-            this.lcitxtBudget.Size = new System.Drawing.Size(169, 45);
+            this.lcitxtBudget.Size = new System.Drawing.Size(86, 45);
             this.lcitxtBudget.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtBudget.Text = "lcitxtBudget";
             this.lcitxtBudget.TextSize = new System.Drawing.Size(0, 0);
@@ -695,7 +721,7 @@
             this.lciApplyList.MinSize = new System.Drawing.Size(10, 500);
             this.lciApplyList.Name = "lciApplyList";
             this.lciApplyList.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, -1, 0);
-            this.lciApplyList.Size = new System.Drawing.Size(841, 500);
+            this.lciApplyList.Size = new System.Drawing.Size(853, 551);
             this.lciApplyList.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciApplyList.Text = "审批内容";
             this.lciApplyList.TextSize = new System.Drawing.Size(0, 0);
@@ -706,12 +732,12 @@
             // 
             this.lcilciFlowNode1.Control = this.lciFlowNode1;
             this.lcilciFlowNode1.CustomizationFormText = "layoutControlItem12";
-            this.lcilciFlowNode1.Location = new System.Drawing.Point(0, 710);
+            this.lcilciFlowNode1.Location = new System.Drawing.Point(0, 761);
             this.lcilciFlowNode1.MaxSize = new System.Drawing.Size(0, 45);
             this.lcilciFlowNode1.MinSize = new System.Drawing.Size(50, 45);
             this.lcilciFlowNode1.Name = "lcilciFlowNode1";
             this.lcilciFlowNode1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, -1, 0);
-            this.lcilciFlowNode1.Size = new System.Drawing.Size(224, 45);
+            this.lcilciFlowNode1.Size = new System.Drawing.Size(227, 45);
             this.lcilciFlowNode1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcilciFlowNode1.Text = "lcilciFlowNode1";
             this.lcilciFlowNode1.TextSize = new System.Drawing.Size(0, 0);
@@ -722,12 +748,12 @@
             // 
             this.lcilciFlowNode3.Control = this.lciFlowNode3;
             this.lcilciFlowNode3.CustomizationFormText = "layoutControlItem13";
-            this.lcilciFlowNode3.Location = new System.Drawing.Point(550, 710);
+            this.lcilciFlowNode3.Location = new System.Drawing.Point(558, 761);
             this.lcilciFlowNode3.MaxSize = new System.Drawing.Size(0, 45);
             this.lcilciFlowNode3.MinSize = new System.Drawing.Size(49, 45);
             this.lcilciFlowNode3.Name = "lcilciFlowNode3";
             this.lcilciFlowNode3.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcilciFlowNode3.Size = new System.Drawing.Size(98, 45);
+            this.lcilciFlowNode3.Size = new System.Drawing.Size(99, 45);
             this.lcilciFlowNode3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcilciFlowNode3.Text = "lcilciFlowNode3";
             this.lcilciFlowNode3.TextSize = new System.Drawing.Size(0, 0);
@@ -738,12 +764,12 @@
             // 
             this.lcitxtFlowNode1.Control = this.txtFlowNode1;
             this.lcitxtFlowNode1.CustomizationFormText = "layoutControlItem14";
-            this.lcitxtFlowNode1.Location = new System.Drawing.Point(224, 710);
+            this.lcitxtFlowNode1.Location = new System.Drawing.Point(227, 761);
             this.lcitxtFlowNode1.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtFlowNode1.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtFlowNode1.Name = "lcitxtFlowNode1";
             this.lcitxtFlowNode1.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcitxtFlowNode1.Size = new System.Drawing.Size(112, 45);
+            this.lcitxtFlowNode1.Size = new System.Drawing.Size(114, 45);
             this.lcitxtFlowNode1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtFlowNode1.Text = "lcitxtFlowNode1";
             this.lcitxtFlowNode1.TextSize = new System.Drawing.Size(0, 0);
@@ -754,12 +780,12 @@
             // 
             this.lcilciFlowNode2.Control = this.lciFlowNode2;
             this.lcilciFlowNode2.CustomizationFormText = "layoutControlItem15";
-            this.lcilciFlowNode2.Location = new System.Drawing.Point(336, 710);
+            this.lcilciFlowNode2.Location = new System.Drawing.Point(341, 761);
             this.lcilciFlowNode2.MaxSize = new System.Drawing.Size(0, 45);
             this.lcilciFlowNode2.MinSize = new System.Drawing.Size(49, 45);
             this.lcilciFlowNode2.Name = "lcilciFlowNode2";
             this.lcilciFlowNode2.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcilciFlowNode2.Size = new System.Drawing.Size(112, 45);
+            this.lcilciFlowNode2.Size = new System.Drawing.Size(114, 45);
             this.lcilciFlowNode2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcilciFlowNode2.Text = "lcilciFlowNode2";
             this.lcilciFlowNode2.TextSize = new System.Drawing.Size(0, 0);
@@ -770,12 +796,12 @@
             // 
             this.lcitxtFlowNode2.Control = this.txtFlowNode2;
             this.lcitxtFlowNode2.CustomizationFormText = "layoutControlItem16";
-            this.lcitxtFlowNode2.Location = new System.Drawing.Point(448, 710);
+            this.lcitxtFlowNode2.Location = new System.Drawing.Point(455, 761);
             this.lcitxtFlowNode2.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtFlowNode2.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtFlowNode2.Name = "lcitxtFlowNode2";
             this.lcitxtFlowNode2.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcitxtFlowNode2.Size = new System.Drawing.Size(102, 45);
+            this.lcitxtFlowNode2.Size = new System.Drawing.Size(103, 45);
             this.lcitxtFlowNode2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtFlowNode2.Text = "lcitxtFlowNode2";
             this.lcitxtFlowNode2.TextSize = new System.Drawing.Size(0, 0);
@@ -786,12 +812,12 @@
             // 
             this.lcitxtFlowNode3.Control = this.txtFlowNode3;
             this.lcitxtFlowNode3.CustomizationFormText = "layoutControlItem17";
-            this.lcitxtFlowNode3.Location = new System.Drawing.Point(648, 710);
+            this.lcitxtFlowNode3.Location = new System.Drawing.Point(657, 761);
             this.lcitxtFlowNode3.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtFlowNode3.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtFlowNode3.Name = "lcitxtFlowNode3";
             this.lcitxtFlowNode3.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcitxtFlowNode3.Size = new System.Drawing.Size(95, 45);
+            this.lcitxtFlowNode3.Size = new System.Drawing.Size(96, 45);
             this.lcitxtFlowNode3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtFlowNode3.Text = "lcitxtFlowNode3";
             this.lcitxtFlowNode3.TextSize = new System.Drawing.Size(0, 0);
@@ -802,12 +828,12 @@
             // 
             this.lcitxtFlowNode4.Control = this.txtFlowNode4;
             this.lcitxtFlowNode4.CustomizationFormText = "layoutControlItem18";
-            this.lcitxtFlowNode4.Location = new System.Drawing.Point(792, 710);
+            this.lcitxtFlowNode4.Location = new System.Drawing.Point(803, 761);
             this.lcitxtFlowNode4.MaxSize = new System.Drawing.Size(0, 45);
             this.lcitxtFlowNode4.MinSize = new System.Drawing.Size(49, 45);
             this.lcitxtFlowNode4.Name = "lcitxtFlowNode4";
             this.lcitxtFlowNode4.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcitxtFlowNode4.Size = new System.Drawing.Size(49, 45);
+            this.lcitxtFlowNode4.Size = new System.Drawing.Size(50, 45);
             this.lcitxtFlowNode4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcitxtFlowNode4.Text = "lcitxtFlowNode4";
             this.lcitxtFlowNode4.TextSize = new System.Drawing.Size(0, 0);
@@ -818,17 +844,33 @@
             // 
             this.lcilciFlowNode4.Control = this.lciFlowNode4;
             this.lcilciFlowNode4.CustomizationFormText = "layoutControlItem9";
-            this.lcilciFlowNode4.Location = new System.Drawing.Point(743, 710);
+            this.lcilciFlowNode4.Location = new System.Drawing.Point(753, 761);
             this.lcilciFlowNode4.MaxSize = new System.Drawing.Size(0, 45);
             this.lcilciFlowNode4.MinSize = new System.Drawing.Size(49, 45);
             this.lcilciFlowNode4.Name = "lcilciFlowNode4";
             this.lcilciFlowNode4.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, -1, 0);
-            this.lcilciFlowNode4.Size = new System.Drawing.Size(49, 45);
+            this.lcilciFlowNode4.Size = new System.Drawing.Size(50, 45);
             this.lcilciFlowNode4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcilciFlowNode4.Text = "lcilciFlowNode4";
             this.lcilciFlowNode4.TextSize = new System.Drawing.Size(0, 0);
             this.lcilciFlowNode4.TextToControlDistance = 0;
             this.lcilciFlowNode4.TextVisible = false;
+            // 
+            // lciAANO
+            // 
+            this.lciAANO.Control = this.txtAANO;
+            this.lciAANO.CustomizationFormText = "lciAANO";
+            this.lciAANO.Location = new System.Drawing.Point(767, 165);
+            this.lciAANO.MaxSize = new System.Drawing.Size(0, 45);
+            this.lciAANO.MinSize = new System.Drawing.Size(49, 45);
+            this.lciAANO.Name = "lciAANO";
+            this.lciAANO.Padding = new DevExpress.XtraLayout.Utils.Padding(-1, 0, 0, 0);
+            this.lciAANO.Size = new System.Drawing.Size(86, 45);
+            this.lciAANO.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lciAANO.Text = "lciAANO";
+            this.lciAANO.TextSize = new System.Drawing.Size(0, 0);
+            this.lciAANO.TextToControlDistance = 0;
+            this.lciAANO.TextVisible = false;
             // 
             // panelControl1
             // 
@@ -836,7 +878,7 @@
             this.panelControl1.Location = new System.Drawing.Point(2, 2);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(984, 619);
+            this.panelControl1.Size = new System.Drawing.Size(979, 912);
             this.panelControl1.TabIndex = 3;
             // 
             // layoutControl2
@@ -847,7 +889,7 @@
             this.layoutControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(988, 623);
+            this.layoutControl2.Size = new System.Drawing.Size(983, 916);
             this.layoutControl2.TabIndex = 4;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -861,7 +903,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(988, 623);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(983, 916);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -871,7 +913,7 @@
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(988, 623);
+            this.layoutControlItem4.Size = new System.Drawing.Size(983, 916);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -897,15 +939,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 623);
+            this.ClientSize = new System.Drawing.Size(983, 916);
             this.Controls.Add(this.layoutControl2);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.MinimumSize = new System.Drawing.Size(0, 500);
             this.Name = "frmAccountAdjustmentPrint";
             this.Text = "调账打印";
             this.Load += new System.EventHandler(this.frmAccountAdjustmentPrint_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtAANO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciFlowNode4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNode4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNode2.Properties)).EndInit();
@@ -940,6 +983,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcitxtFlowNode3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcitxtFlowNode4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcilciFlowNode4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciAANO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
@@ -999,5 +1043,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lcitxtFlowNode3;
         private DevExpress.XtraLayout.LayoutControlItem lcitxtFlowNode4;
         private DevExpress.XtraLayout.LayoutControlItem lcilciFlowNode4;
+        private DevExpress.XtraEditors.TextEdit txtAANO;
+        private DevExpress.XtraLayout.LayoutControlItem lciAANO;
     }
 }
