@@ -159,6 +159,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.RejectedAccount,"预算单管理-驳回归档征求",794),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.FinancialArchiveApply,"预算单管理-财务归档征求",795),
                         new Permisson(BusinessModules.BuggetManagement,OperateTypes.Archive,"预算单管理-归档",796),
+                        new Permisson(BusinessModules.BuggetManagement,OperateTypes.ActiveBudget,"预算单管理-归档激活",797),
 
 
                         new Permisson(BusinessModules.InMoneyManagement,OperateTypes.None,"收款管理模块",800),

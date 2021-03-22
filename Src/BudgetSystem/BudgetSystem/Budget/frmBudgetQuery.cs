@@ -131,6 +131,7 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.FinancialArchiveApply, "财务归档征求"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Archive, "归档"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ActiveBudget, "归档激活"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.RejectedAccount, "驳回归档征求"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ConfirmOrRevoke, "退回修改"));
 
@@ -218,6 +219,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Archive.ToString())
             {
                 Archive();
+            }
+            else if (operate.Operate == OperateTypes.ActiveBudget.ToString())
+            {
+                ActiveBudget();
             }
             else if (operate.Operate == OperateTypes.FinalAccount.ToString())
             {
@@ -804,6 +809,47 @@ namespace BudgetSystem
                     return;
                 }
                 string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.已结束);
+                if (string.IsNullOrEmpty(message))
+                {
+                    XtraMessageBox.Show("归档成功。");
+                    LoadData();
+                }
+                else
+                {
+                    XtraMessageBox.Show(message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择需要归档的项");
+            }
+        }
+
+        /// <summary>
+        /// 归档激活
+        /// </summary>
+        private void ActiveBudget()
+        {
+            if (this.gvBudget.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要归档激活的项");
+                return;
+            }
+            Budget budget = this.gvBudget.GetRow(this.gvBudget.FocusedRowHandle) as Budget;
+            if (budget != null)
+            {
+                budget = bm.GetBudget(budget.ID);
+                if (budget == null)
+                {
+                    XtraMessageBox.Show("您选择的项已经不存在");
+                    return;
+                }
+                if (budget.EnumState != EnumBudgetState.已结束)
+                {
+                    XtraMessageBox.Show(string.Format("{0}状态的预算单不允许归档激活。", budget.StringState));
+                    return;
+                }
+                string message = bm.ModifyBudgetState(budget.ID, EnumBudgetState.归档复活);
                 if (string.IsNullOrEmpty(message))
                 {
                     XtraMessageBox.Show("归档成功。");

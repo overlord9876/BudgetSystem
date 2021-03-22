@@ -105,7 +105,7 @@ namespace BudgetSystem
                 text = "审批";
                 group = "操作";
                 imageIndex = 2;
-            }   
+            }
             else if (operate == OperateTypes.BatchApprove)
             {
                 text = "批量审批";
@@ -255,6 +255,12 @@ namespace BudgetSystem
                 text = "归档";
                 group = "操作";
                 imageIndex = 28;
+            }
+            else if (operate == OperateTypes.ActiveBudget)
+            {
+                text = "归档激活";
+                group = "操作";
+                imageIndex = 60;
             }
             else if (operate == OperateTypes.FinalAccount)
             {

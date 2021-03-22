@@ -122,6 +122,10 @@ namespace BudgetSystem.Entity
         /// </summary>
         Archive,
         /// <summary>
+        /// 激活预算单
+        /// </summary>
+        ActiveBudget,
+        /// <summary>
         /// 单一合同决算
         /// </summary>
         FinalAccount,

@@ -74,7 +74,7 @@ namespace BudgetSystem
                             b.ContractNO = contractNo;
                             b.Message = "合同号不存在";
                         }
-                        else if (b.EnumState != EnumBudgetState.进行中 && b.EnumState != EnumBudgetState.驳回归档征求)
+                        else if (b.EnumState != EnumBudgetState.进行中 && b.EnumState != EnumBudgetState.驳回归档征求 && b.EnumState != EnumBudgetState.归档复活)
                         {
                             b.Message = string.Format("{0}状态的预算单不允许财务归档征求。", b.EnumState);
                         }
@@ -177,7 +177,7 @@ namespace BudgetSystem
                 e.Valid = false;
                 return;
             }
-            else if (budget.EnumState != EnumBudgetState.进行中 && budget.EnumState != EnumBudgetState.驳回归档征求)
+            else if (budget.EnumState != EnumBudgetState.进行中 && budget.EnumState != EnumBudgetState.驳回归档征求 && budget.EnumState != EnumBudgetState.归档复活)
             {
                 e.ErrorText = string.Format("{0}状态的预算单不允许财务归档征求。", budget.EnumState);
                 df.Message = e.ErrorText;
