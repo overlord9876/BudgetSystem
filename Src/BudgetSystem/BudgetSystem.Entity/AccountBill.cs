@@ -156,12 +156,12 @@ namespace BudgetSystem.Entity
             return returnResult;
         }
 
-        public static List<AccountBill> ToAccountBillList(this IEnumerable<AccountAdjustmentDetail> adjustmentDetails)
+        public static List<AccountBill> ToAccountBillList(this IEnumerable<AccountAdjustmentDetail> adjustmentDetails, IEnumerable<AccountAdjustment> detailRelationAccountList)
         {
             List<AccountBill> returnResult = new List<AccountBill>();
             foreach (AccountAdjustmentDetail adjustmentDetail in adjustmentDetails)
             {
-                returnResult.Add(adjustmentDetail.ToToAccountBill());
+                returnResult.Add(adjustmentDetail.ToToAccountBill(detailRelationAccountList));
             }
             return returnResult;
         }
@@ -233,7 +233,7 @@ namespace BudgetSystem.Entity
             decimal USD = 0;
             bool IsPayment = false;
             string name = string.Empty;
-            var currentDetails = detailList.Where(o => o.PID == adjustment.ID);
+            var currentDetails = detailList?.Where(o => o.PID == adjustment.ID && o.Type == adjustment.Type);
             if (currentDetails == null || !currentDetails.Any()) { return null; }
             string priex = detailList.Count() > 0 ? "分别" : "";
             string contracts = string.Join("、", currentDetails.Select(o => $"{o.ContractNO}合同").ToArray());
@@ -254,7 +254,6 @@ namespace BudgetSystem.Entity
                 recieptMoney = adjustment.AlreadySplitOriginalCoin * -1;
                 USD = adjustment.AlreadySplitOriginalCoin * -1;
             }
-
             return new AccountBill()
             {
                 Date = adjustment.Date,
@@ -276,7 +275,7 @@ namespace BudgetSystem.Entity
             };
         }
 
-        public static AccountBill ToToAccountBill(this AccountAdjustmentDetail adjustmentDetail)
+        public static AccountBill ToToAccountBill(this AccountAdjustmentDetail adjustmentDetail, IEnumerable<AccountAdjustment> detailRelationAccountList)
         {
             bool isUSD = false;
             decimal paymentMoney = 0;
@@ -285,6 +284,7 @@ namespace BudgetSystem.Entity
             decimal USD = 0;
             bool IsPayment = false;
             string name = string.Empty;
+            string Company = string.Empty;
             if (adjustmentDetail.Type == AdjustmentType.付款)
             {
                 name = "供应商";
@@ -293,9 +293,11 @@ namespace BudgetSystem.Entity
                 USD = adjustmentDetail.OriginalCoin * -1;
                 paymentMoney = adjustmentDetail.OriginalCoin;
                 IsPayment = true;
+                Company = $"付款由【{ detailRelationAccountList.FirstOrDefault(o => o.ID == adjustmentDetail.PID)?.ContractNO}】合同调入至此合同，供应商【{adjustmentDetail.Name}】";
             }
             else if (adjustmentDetail.Type == AdjustmentType.收款)
             {
+                Company = $"收款由【{detailRelationAccountList.FirstOrDefault(o => o.ID == adjustmentDetail.PID)?.ContractNO}】合同调入至此合同，付款商【{adjustmentDetail.Name}】";
                 name = "客户";
                 isUSD = adjustmentDetail.Currency == "USD";
                 CNY = adjustmentDetail.CNY;
@@ -318,7 +320,7 @@ namespace BudgetSystem.Entity
                 IsDrawback = adjustmentDetail.IsDrawback,
                 RecieptMoney = recieptMoney,
                 ExchangeRate = adjustmentDetail.ExchangeRate,
-                Company = $"由{adjustmentDetail.ContractNO}{adjustmentDetail.Type.ToString()}调入至此合同，供应商【{adjustmentDetail.Name}】",
+                Company = Company,
                 AdjustmentType = ((int)adjustmentDetail.Type + 1) * 10
 
             };

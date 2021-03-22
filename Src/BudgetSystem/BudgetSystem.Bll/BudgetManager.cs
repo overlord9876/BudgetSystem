@@ -187,7 +187,7 @@ namespace BudgetSystem.Bll
             }
             else if (budge.EnumFlowState == EnumDataFlowState.审批中)
             {
-                return string.Format("{0}中的数据不能重新启动流程", EnumDataFlowState.审批中);
+                return string.Format("{0}的数据不能重新启动流程", EnumDataFlowState.审批中);
             }
             else if (!budge.Salesman.Equals(currentUser))
             {
@@ -312,14 +312,17 @@ namespace BudgetSystem.Bll
             {
                 var arList = rmDal.GetBudgetBillListByBudgetId(budgetId, con, null);
                 var pmList = pnd.GetTotalAmountPaymentMoneyByBudgetId(budgetId, con, null);
+
                 var adjustmentList = aaDal.GetBalanceAccountAdjustmentByBudgetId(budgetId, con, includInvoice: false);
-                var detailList = aaDal.GetAccountAdjustmentsDetailByBudgetId(budgetId, con, includInvoice: false);
-                var adjustmentDetailList = aaDal.GetBalanceAccountAdjustmentDetailByBudgetId(budgetId, con, includInvoice: false);
+
+                var detailRelationAccountList = aaDal.GetAdjustmentsByDetailBudgetId(budgetId, con, includInvoice: false);
+                var detailList = aaDal.GetAccountAdjustmentsDetailsByBudgetId(budgetId, con, null, includInvoice: false);
+                var adjustDetailList = aaDal.GetAccountAdjustmentsDetailByBudgetId(budgetId, con, null, includInvoice: false);
 
                 var abList = arList.ToAccountBillList();
                 abList.AddRange(pmList.ToAccountBillList());
                 abList.AddRange(adjustmentList.ToAccountBillList(detailList));
-                abList.AddRange(adjustmentDetailList.ToAccountBillList());
+                abList.AddRange(adjustDetailList.ToAccountBillList(detailRelationAccountList));
                 return abList.OrderBy(o => o.Date);
             });
             return lst.ToList();

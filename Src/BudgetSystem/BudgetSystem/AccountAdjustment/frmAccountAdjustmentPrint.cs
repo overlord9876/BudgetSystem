@@ -62,13 +62,14 @@ namespace BudgetSystem
             lcilciFlowNode4.Width = width + 20;
             lcitxtFlowNode4.Width = width;
 
-            var topWidth = (this.layoutControl1.Width - this.layoutControlGroup1.Padding.Left - this.layoutControlGroup1.Padding.Right) / 5;
+            var topWidth = (this.layoutControl1.Width - this.layoutControlGroup1.Padding.Left - this.layoutControlGroup1.Padding.Right) / 6;
             width = width - 2;
-            lciDepartment.Width = topWidth;
-            lcitxtDepartment.Width = topWidth;
-            lciBudget.Width = topWidth;
-            lcitxtBudget.Width = topWidth;
-            lciAANO.Width = topWidth;
+            lciDepartment.Width = topWidth - 40;
+            lcitxtDepartment.Width = topWidth - 20;
+            lciBudget.Width = topWidth - 20;
+            lcitxtBudget.Width = topWidth + 20;
+            lciAANOTip.Width = topWidth - 20;
+            lciAANO.Width = topWidth + 80;
         }
 
         public void BindData(int id, AdjustmentType atType)

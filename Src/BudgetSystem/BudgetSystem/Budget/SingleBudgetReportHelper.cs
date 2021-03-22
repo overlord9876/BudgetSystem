@@ -470,7 +470,7 @@ namespace BudgetSystem
                 this.DataTable.Rows.Add(row);
             }
 
-            //付款单表(调账)调入，则加上相应金额。
+            //交单表(调账)调入，则加上相应金额。
             var plusInvoiceData = adjustDetailList.Where(o => o.Type == AdjustmentType.交单);
             foreach (var invoice in plusInvoiceData)
             {
