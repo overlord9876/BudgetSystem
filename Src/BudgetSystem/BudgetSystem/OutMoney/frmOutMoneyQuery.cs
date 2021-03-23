@@ -71,6 +71,7 @@ namespace BudgetSystem
 
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.New, "付款申请"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Modify, "修改付款"));
+            this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.ModifyEx, "财务修改付款"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.Delete, "删除付款"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.SubmitApply, "提交付款申请"));
             this.ModelOperateRegistry.Add(ModelOperateHelper.GetOperate(OperateTypes.View, "查看详情"));
@@ -96,6 +97,10 @@ namespace BudgetSystem
             else if (operate.Operate == OperateTypes.Modify.ToString())
             {
                 ModifyPaymentNote();
+            }
+            else if (operate.Operate == OperateTypes.ModifyEx.ToString())
+            {
+                ModifyPaymentNoteEx();
             }
             else if (operate.Operate == OperateTypes.View.ToString())
             {
@@ -240,9 +245,36 @@ namespace BudgetSystem
                 XtraMessageBox.Show(string.Format("{0}付款单{1}不能修改信息。", currentRowPaymentNote.VoucherNo, currentRowPaymentNote.EnumFlowState.ToString()));
                 return;
             }
-
             frmOutMoneyEdit form = new frmOutMoneyEdit();
             form.WorkModel = EditFormWorkModels.Modify;
+            form.CurrentPaymentNotes = currentRowPaymentNote;
+            form.ShowDialog(this);
+
+            LoadData();
+        }
+
+        private void ModifyPaymentNoteEx()
+        {
+            if (this.gvOutMoney.FocusedRowHandle < 0)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+            PaymentNotes currentRowPaymentNote = this.gvOutMoney.GetRow(this.gvOutMoney.FocusedRowHandle) as PaymentNotes;
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("请选择需要修改的项");
+                return;
+            }
+
+            currentRowPaymentNote = pnm.GetPaymentNoteById(currentRowPaymentNote.ID);
+            if (currentRowPaymentNote == null)
+            {
+                XtraMessageBox.Show("您选择的项已经不存在，请刷新后重试。");
+                return;
+            }
+            frmOutMoneyEdit form = new frmOutMoneyEdit();
+            form.WorkModel = EditFormWorkModels.FinancialModify;
             form.CurrentPaymentNotes = currentRowPaymentNote;
             form.ShowDialog(this);
 

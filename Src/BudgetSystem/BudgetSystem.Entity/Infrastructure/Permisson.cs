@@ -176,6 +176,7 @@ namespace BudgetSystem.Entity
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.None,"付款管理模块",900),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.New, "付款管理-付款申请",910),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Modify, "付款管理-修改付款",920),
+                        new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.ModifyEx, "付款管理-财务修改付款",925),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.Delete, "付款管理-删除付款",930),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.ViewMoneyDetail, "付款管理-用款查询",940),
                         new Permisson(BusinessModules.OutMoneyManagement,OperateTypes.SubmitApply, "付款管理-提交付款申请",950),

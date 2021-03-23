@@ -17,5 +17,9 @@ namespace BudgetSystem
         SplitToBudget,
         Print,
         Review,
+        /// <summary>
+        /// 财务修改
+        /// </summary>
+        FinancialModify,
     }
 }

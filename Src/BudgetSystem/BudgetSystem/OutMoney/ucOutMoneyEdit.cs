@@ -107,6 +107,20 @@ namespace BudgetSystem.OutMoney
                     }
                 }
             }
+            else if (this.WorkModel == EditFormWorkModels.FinancialModify)
+            {
+                foreach (var control in this.layoutControl1.Controls)
+                {
+                    if (control == cboMoneyUsed || control == chkIsDrawback || control == txtTaxRebateRate)//2021-03-23允许财务随时修改【用款类型，是否退税，退税率】
+                    {
+                        continue;
+                    }
+                    if (control is BaseEdit)
+                    {
+                        (control as BaseEdit).Properties.ReadOnly = true;
+                    }
+                }
+            }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 SetReadOnly();
@@ -137,7 +151,7 @@ namespace BudgetSystem.OutMoney
                 XtraMessageBox.Show("单据已经不存在。");
                 return;
             }
-            if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print || this.WorkModel == EditFormWorkModels.Custom)
+            if (this.WorkModel == EditFormWorkModels.View || this.WorkModel == EditFormWorkModels.Print || this.WorkModel == EditFormWorkModels.Custom || this.WorkModel == EditFormWorkModels.FinancialModify)
             {
                 if (budgetList == null)
                 {
@@ -780,6 +794,10 @@ namespace BudgetSystem.OutMoney
 
         private void chkIsDrawback_CheckedChanged(object sender, EventArgs e)
         {
+            if (!this.chkIsDrawback.Checked)
+            {
+                this.txtTaxRebateRate.EditValue = 0;
+            }
             CalcPaymentTaxRebate();
         }
 

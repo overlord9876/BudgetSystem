@@ -44,6 +44,11 @@ namespace BudgetSystem.OutMoney
             {
                 this.Text = "编辑付款信息";
             }
+            else if (this.WorkModel == EditFormWorkModels.FinancialModify)
+            {
+                this.Text = "财务编辑付款信息";
+                this.lciCommit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
             else if (this.WorkModel == EditFormWorkModels.View)
             {
                 this.Text = "查看付款信息";
